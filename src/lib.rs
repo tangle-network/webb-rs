@@ -1,9 +1,8 @@
 #![deny(unsafe_code)]
 
-#[cfg(test)]
-mod tests {
-    #[test]
-    fn it_works() {
-        assert_eq!(2 + 2, 4);
-    }
-}
+#[cfg(feature = "evm-runtime")]
+pub mod evm;
+#[cfg(feature = "substrate-runtime")]
+pub mod pallet;
+#[cfg(feature = "substrate-runtime")]
+pub mod substrate;

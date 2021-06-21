@@ -2,7 +2,38 @@
 name = "webb"
 version = "0.1.0"
 edition = "2018"
-
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+authors = [
+   "Webb Developers <devs@webb.tools>",
+   "Shady Khalifa <shekohex@gmail.com>"
+]
 
 [dependencies]
+# Substrate crates.
+codec = { package = "parity-scale-codec", version = "2.0.0", features = ["derive", "full"], optional = true }
+ethereum-types = { version = "0.11", default-features = false, features = ["codec"], optional = true }
+frame-support = { version = "3.0.0", default-features = false, optional = true }
+
+async-trait = "0.1"
+
+[dependencies.subxt]
+git = "https://github.com/paritytech/substrate-subxt.git"
+version = "0.15.0"
+rev = "08a3e65" # https://github.com/paritytech/substrate-subxt/commit/08a3e65
+package = "substrate-subxt"
+optional = true
+
+[dev-dependencies]
+tokio = { version = "^1", features = ["macros", "rt"] }
+sp-keyring = "3.0.0"
+
+[features]
+default = ["substrate-runtime", "evm-runtime"]
+substrate-runtime = [
+    "subxt",
+    "codec",
+    "ethereum-types",
+    "frame-support",
+]
+evm-runtime = []
+integration-tests = []
+
