@@ -15,6 +15,9 @@ frame-support = { version = "3.0.0", default-features = false, optional = true }
 
 async-trait = "0.1"
 
+# EVM crates.
+ethers = { version = "0.2.2", default-features = false, features = ["abigen"], optional = true }
+
 [dependencies.subxt]
 git = "https://github.com/paritytech/substrate-subxt.git"
 version = "0.15.0"
@@ -34,6 +37,6 @@ substrate-runtime = [
     "ethereum-types",
     "frame-support",
 ]
-evm-runtime = []
+evm-runtime = ["ethers", "ethereum-types"]
 integration-tests = []
 

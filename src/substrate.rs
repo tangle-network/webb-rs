@@ -35,73 +35,138 @@ pub type Index = u32;
 /// A hash of some data used by the chain.
 pub type Hash = sp_core::H256;
 
-/// Webb Runtime with `mixer` pallet.
-#[derive(Debug, Clone, Eq, PartialEq)]
-pub struct WebbRuntime;
+/// a macro to define runtimes instead of writing them manually.
+/// See how to use it below.
+macro_rules! define_runtime {
+    (
+        $(#[$outer:meta])*
+        name: $name:ident,
+        types: {
+            TreeId: $tree_id: ty,
+            KeyId: $key_id: ty,
+            ScalarData: $scalar_data: ty,
+            Nullifier: $nullifier: ty,
+            Commitment: $commitment: ty,
+            CurrencyId: $currency_id: ty,
+            Amount: $amount: ty,
+            $($k:ty : $v:tt),*
+        }
+    ) => {
+        $(#[$outer])*
+        #[derive(Debug, Copy, Clone, Eq, PartialEq)]
+        pub struct $name;
 
-impl subxt::Runtime for WebbRuntime {
-    type Extra = DefaultExtra<Self>;
-    type Signature = Signature;
+        impl subxt::Runtime for $name {
+            type Extra = DefaultExtra<Self>;
+            type Signature = Signature;
 
-    fn register_type_sizes(event_type_registry: &mut EventTypeRegistry<Self>) {
-        event_type_registry.with_system();
-        event_type_registry.with_balances();
-        subxt::register_default_type_sizes(event_type_registry);
-        event_type_registry.register_type_size::<Balance>("BalanceOf<T>");
-        event_type_registry.register_type_size::<pallet::TreeId>("TreeId");
-        event_type_registry.register_type_size::<pallet::KeyId>("KeyId");
-        event_type_registry
-            .register_type_size::<pallet::ScalarData>("ScalarData");
-        event_type_registry
-            .register_type_size::<pallet::Nullifier>("Nullifier");
-        event_type_registry
-            .register_type_size::<pallet::Commitment>("Commitment");
-        // ORML stuff
-        event_type_registry.register_type_size::<Balance>("T::Balance");
-        event_type_registry.register_type_size::<AccountId>("T::AccountId");
-        event_type_registry
-            .register_type_size::<pallet::CurrencyId>("T::CurrencyId");
-        event_type_registry
-            .register_type_size::<pallet::CurrencyId>("CurrencyIdOf<T>");
-        event_type_registry.register_type_size::<pallet::Amount>("Amount");
-        event_type_registry.register_type_size::<pallet::Amount>("AmountOf<T>");
-        event_type_registry
-            .register_type_size::<pallet::BlockLength>("BlockLength");
-        // EVM Stuff
-        event_type_registry.register_type_size::<ethereum_types::H160>("H160");
-        event_type_registry.register_type_size::<ethereum_types::H256>("H256");
-        event_type_registry.register_type_size::<ethereum_types::U256>("U256");
-        event_type_registry.register_type_size::<Vec<u8>>("Log");
-        event_type_registry.register_type_size::<i64>("ExitReason");
+            fn register_type_sizes(
+                event_type_registry: &mut EventTypeRegistry<Self>,
+            ) {
+                subxt::register_default_type_sizes(event_type_registry);
+                event_type_registry.with_system();
+                event_type_registry.with_balances();
+                event_type_registry
+                    .register_type_size::<Balance>("BalanceOf<T>");
+                event_type_registry
+                    .register_type_size::<$tree_id>("TreeId");
+                event_type_registry
+                    .register_type_size::<$key_id>("KeyId");
+                event_type_registry
+                    .register_type_size::<$scalar_data>("ScalarData");
+                event_type_registry
+                    .register_type_size::<$nullifier>("Nullifier");
+                event_type_registry
+                    .register_type_size::<$commitment>("Commitment");
+                // ORML stuff
+                event_type_registry.register_type_size::<Balance>("T::Balance");
+                event_type_registry
+                    .register_type_size::<AccountId>("T::AccountId");
+                event_type_registry
+                    .register_type_size::<pallet::CurrencyId>("T::CurrencyId");
+                event_type_registry.register_type_size::<$currency_id>(
+                    "CurrencyIdOf<T>",
+                );
+                event_type_registry
+                    .register_type_size::<$amount>("Amount");
+                event_type_registry
+                    .register_type_size::<$amount>("AmountOf<T>");
+                event_type_registry
+                    .register_type_size::<pallet::BlockLength>("BlockLength");
+                // EVM Stuff
+                event_type_registry
+                    .register_type_size::<ethereum_types::H160>("H160");
+                event_type_registry
+                    .register_type_size::<ethereum_types::H256>("H256");
+                event_type_registry
+                    .register_type_size::<ethereum_types::U256>("U256");
+                event_type_registry.register_type_size::<Vec<u8>>("Log");
+                event_type_registry.register_type_size::<i64>("ExitReason");
+                // add any new types defined by the caller.
+                $(
+                    event_type_registry.register_type_size::<$v>(stringify!($k));
+                ),*
+            }
+        }
+
+        impl System for $name {
+            type AccountData = AccountData<BalanceOf<Self>>;
+            type AccountId = AccountId;
+            type Address = AccountId;
+            type BlockNumber = u32;
+            type Extrinsic = OpaqueExtrinsic;
+            type Hash = Hash;
+            type Hashing = BlakeTwo256;
+            type Header = Header<Self::BlockNumber, BlakeTwo256>;
+            type Index = Index;
+        }
+
+        impl Balances for $name {
+            type Balance = Balance;
+        }
+
+        impl pallet::mixer::Mixer for $name {
+            type Commitment = $commitment;
+            type CurrencyId = $currency_id;
+            type Nullifier = $nullifier;
+            type ScalarData = $scalar_data;
+        }
+
+        impl pallet::merkle::Merkle for $name {
+            type TreeId = $tree_id;
+            type KeyId = $key_id;
+        }
+    };
+}
+
+define_runtime! {
+    /// Webb Runtime targets `anon` node.
+    name: WebbRuntime,
+    types: {
+        TreeId: pallet::TreeId,
+        KeyId: pallet::KeyId,
+        ScalarData: pallet::ScalarData,
+        Nullifier: pallet::Nullifier,
+        Commitment: pallet::Commitment,
+        CurrencyId: pallet::CurrencyId,
+        Amount: pallet::Amount,
     }
 }
 
-impl System for WebbRuntime {
-    type AccountData = AccountData<BalanceOf<Self>>;
-    type AccountId = AccountId;
-    type Address = AccountId;
-    type BlockNumber = u32;
-    type Extrinsic = OpaqueExtrinsic;
-    type Hash = Hash;
-    type Hashing = BlakeTwo256;
-    type Header = Header<Self::BlockNumber, BlakeTwo256>;
-    type Index = Index;
-}
-
-impl Balances for WebbRuntime {
-    type Balance = Balance;
-}
-
-impl pallet::mixer::Mixer for WebbRuntime {
-    type Commitment = pallet::Commitment;
-    type CurrencyId = pallet::CurrencyId;
-    type Nullifier = pallet::Nullifier;
-    type ScalarData = pallet::ScalarData;
-}
-
-impl pallet::merkle::Merkle for WebbRuntime {
-    type TreeId = pallet::TreeId;
-    type KeyId = pallet::KeyId;
+define_runtime! {
+    /// Runtime Definitions for Hedgeware node.
+    name: HedgewareRuntime,
+    types: {
+        TreeId: pallet::TreeId,
+        KeyId: pallet::KeyId,
+        ScalarData: pallet::ScalarData,
+        Nullifier: pallet::Nullifier,
+        Commitment: pallet::Commitment,
+        CurrencyId: pallet::CurrencyId,
+        Amount: pallet::Amount,
+        // you can add more types like so:
+        Test: u32
+    }
 }
 
 #[cfg(all(test, feature = "integration-tests"))]
