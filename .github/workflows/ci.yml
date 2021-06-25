@@ -134,7 +134,7 @@ jobs:
             ~/.cargo/bin
             target
           key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}-${{ matrix.target }}
-      - run: sudo apt install libssl-dev
+      - run: sudo apt install libssl-dev pkg-config
       - name: Download Cross
         uses: actions/download-artifact@v1
         with:
