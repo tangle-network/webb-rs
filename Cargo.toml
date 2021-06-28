@@ -27,6 +27,7 @@ async-trait = "0.1"
 
 # EVM crates.
 ethers = { version = "0.2.2", default-features = false, features = ["abigen"], optional = true }
+serde_json = { version = "1", optional = true }
 
 [dependencies.subxt]
 git = "https://github.com/paritytech/substrate-subxt.git"
@@ -47,6 +48,6 @@ substrate-runtime = [
     "ethereum-types",
     "frame-support",
 ]
-evm-runtime = ["ethers", "ethereum-types"]
+evm-runtime = ["ethers", "ethereum-types", "serde_json"]
 integration-tests = []
 
