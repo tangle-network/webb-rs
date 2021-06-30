@@ -1,21 +1,16 @@
-use ethers::prelude::*;
-
-// Generate the type-safe contract bindings by providing the ABI
-// definition in human readable format
-abigen!(AnchorContract, "contracts/Anchor.json");
-
 pub use ethereum_types;
 pub use ethers;
-pub use AnchorContract;
 
 #[cfg(all(test, feature = "integration-tests"))]
 mod tests {
+    use ethers::prelude::*;
     use std::convert::TryFrom;
     use std::str::FromStr;
     use std::sync::Arc;
     use std::time::Duration;
 
     use super::*;
+    use crate::contracts::anchor::AnchorContract;
 
     type DynError = Box<dyn std::error::Error + Sync + Send + 'static>;
 

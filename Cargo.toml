@@ -16,6 +16,7 @@ homepage = "https://www.webb.tools"
 description = "Webb SDK"
 keywords = ["webb", "sdk", "blockchain", "webb-tools"]
 include = ["Cargo.toml", "src/**/*.rs", "README.md", "LICENSE"]
+build = "build.rs"
 
 [dependencies]
 # Substrate crates.
@@ -39,6 +40,9 @@ optional = true
 [dev-dependencies]
 tokio = { version = "^1", features = ["macros", "rt"] }
 sp-keyring = "3.0.0"
+
+[build-dependencies]
+ethers = { version = "0.2.2", default-features = false, features = ["abigen"] }
 
 [features]
 default = ["substrate-runtime", "evm-runtime"]
