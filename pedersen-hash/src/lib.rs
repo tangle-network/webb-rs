@@ -1,5 +1,27 @@
+use std::convert::TryInto;
+
+use ark_crypto_primitives::crh::{
+    injective_map::{PedersenCRHCompressor, TECompressor},
+    pedersen, CRH,
+};
+use ark_ed_on_bn254::EdwardsProjective;
+use ark_ff::{fields::PrimeField, BigInteger};
+
+pub type PedersenHasher =
+    PedersenCRHCompressor<EdwardsProjective, TECompressor, PedersenWindow>;
+
+#[derive(Clone, PartialEq, Eq, Hash)]
+pub struct PedersenWindow;
+
+impl pedersen::Window for PedersenWindow {
+    const WINDOW_SIZE: usize = 4;
+    const NUM_WINDOWS: usize = 64;
+}
+
 pub fn hash(data: &[u8]) -> [u8; 32] {
-    Default::default()
+    let crh_params = PedersenHasher::setup(&mut rand::rngs::OsRng).unwrap();
+    let result = PedersenHasher::evaluate(&crh_params, data).unwrap();
+    result.into_repr().to_bytes_le().try_into().unwrap()
 }
 
 #[cfg(test)]
