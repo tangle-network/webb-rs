@@ -48,11 +48,6 @@ jobs:
             ~/.cargo/bin
             target
           key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}-${{ matrix.target }}
-      - name: Use Node.js 14.x
-        uses: actions/setup-node@v1
-        with:
-          node-version: 14.x
-      - run: cd pedersen-hash/scripts && yarn
       - run: ci/set_rust_version.bash ${{ matrix.channel }} ${{ matrix.target }}
         shell: bash
       - run: ci/build.bash cargo ${{ matrix.target }}
@@ -96,11 +91,6 @@ jobs:
           name: cross-apple-darwin
           path: /usr/local/bin/
       - run: chmod +x /usr/local/bin/cross
-      - name: Use Node.js 14.x
-        uses: actions/setup-node@v1
-        with:
-          node-version: 14.x
-      - run: cd pedersen-hash/scripts && yarn
       - run: ci/set_rust_version.bash ${{ matrix.channel }} ${{ matrix.target }}
       - run: ci/build.bash cross ${{ matrix.target }}
         # Only test on macOS platforms since we can't simulate the others.
@@ -141,11 +131,6 @@ jobs:
           name: cross-linux-musl
           path: /tmp/
       - run: chmod +x /tmp/cross
-      - name: Use Node.js 14.x
-        uses: actions/setup-node@v1
-        with:
-          node-version: 14.x
-      - run: cd pedersen-hash/scripts && yarn
       - run: ci/set_rust_version.bash ${{ matrix.channel }} ${{ matrix.target }}
       - run: ci/build.bash /tmp/cross ${{ matrix.target }}
         # These targets have issues with being tested so they are disabled
