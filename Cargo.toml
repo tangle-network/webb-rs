@@ -25,10 +25,12 @@ ethereum-types = { version = "0.11", default-features = false, features = ["code
 frame-support = { version = "3.0.0", default-features = false, optional = true }
 
 async-trait = "0.1"
+rand = { version = "0.8", default-features = false, features = ["getrandom"] }
 
 # EVM crates.
-ethers = { version = "0.2.2", default-features = false, features = ["abigen"], optional = true }
+ethers = { version = "0.2.2", default-features = false, optional = true }
 serde_json = { version = "1", optional = true }
+pedersen = { version = "0.1", package = "pedersen-hash", path = "pedersen-hash", optional = true }
 
 [dependencies.subxt]
 git = "https://github.com/paritytech/substrate-subxt.git"
@@ -52,6 +54,6 @@ substrate-runtime = [
     "ethereum-types",
     "frame-support",
 ]
-evm-runtime = ["ethers", "ethereum-types", "serde_json"]
+evm-runtime = ["ethers", "ethereum-types", "serde_json", "pedersen"]
 integration-tests = []
 

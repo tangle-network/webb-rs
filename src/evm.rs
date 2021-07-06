@@ -1,5 +1,45 @@
+use std::convert::TryInto;
+
+use ethereum_types::H256;
+use rand::Rng;
+
 pub use ethereum_types;
 pub use ethers;
+
+pub type H248 = [u8; 31];
+
+#[derive(Debug, Clone, Copy)]
+pub struct Deposit {
+    pub preimage: [u8; 62],
+    pub commitment: H256,
+    pub nullifier_hash: H256,
+    pub secret: H248,
+    pub nullifier: H248,
+}
+
+impl Deposit {
+    pub fn generate<R: Rng>(rng: &mut R) -> Deposit {
+        let mut preimage: [u8; 62] = [0; 62];
+        rng.fill(&mut preimage[..]);
+        let nullifier: H248 = preimage[0..31]
+            .try_into()
+            .expect("31 bytes is already there.");
+        let secret: H248 = preimage[31..62]
+            .try_into()
+            .expect("31 bytes is already there.");
+        let commitment =
+            H256::from(pedersen::hash(&preimage).expect("32 bytes"));
+        let nullifier_hash =
+            H256::from(pedersen::hash(&nullifier).expect("32 bytes"));
+        Deposit {
+            preimage,
+            commitment,
+            nullifier_hash,
+            secret,
+            nullifier,
+        }
+    }
+}
 
 #[cfg(all(test, feature = "integration-tests"))]
 mod tests {
