@@ -26,6 +26,8 @@ frame-support = { version = "3.0.0", default-features = false, optional = true }
 
 async-trait = "0.1"
 rand = { version = "0.8", default-features = false, features = ["getrandom"] }
+thiserror = "^1"
+hex = { version = "0.4", default-features = false }
 
 # EVM crates.
 ethers = { version = "0.2.2", default-features = false, optional = true }
