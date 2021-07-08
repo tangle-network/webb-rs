@@ -56,7 +56,7 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: 14.x
-      - run: yarn global add ganache-cli
+      - run: npm install -g ganache-cli
         shell: bash
       - run: ci/test.bash cargo ${{ matrix.target }}
         shell: bash
@@ -101,7 +101,7 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: 14.x
-      - run: yarn global add ganache-cli
+      - run: npm install -g ganache-cli
       - run: ci/set_rust_version.bash ${{ matrix.channel }} ${{ matrix.target }}
       - run: ci/build.bash cross ${{ matrix.target }}
       - run: cargo test --all --features integration-tests -- --nocapture
@@ -145,7 +145,7 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: 14.x
-      - run: yarn global add ganache-cli
+      - run: npm install -g ganache-cli
       - run: ci/set_rust_version.bash ${{ matrix.channel }} ${{ matrix.target }}
       - run: ci/build.bash /tmp/cross ${{ matrix.target }}
         # These targets have issues with being tested so they are disabled
