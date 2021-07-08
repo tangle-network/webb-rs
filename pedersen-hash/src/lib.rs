@@ -15,9 +15,11 @@ pub type PedersenHasher =
 #[derive(Clone, PartialEq, Eq, Hash)]
 pub struct PedersenWindow;
 
+const MAX_INPUT_SIZE: usize = 64;
+
 impl pedersen::Window for PedersenWindow {
     const WINDOW_SIZE: usize = 4;
-    const NUM_WINDOWS: usize = 128;
+    const NUM_WINDOWS: usize = (8 * MAX_INPUT_SIZE) / Self::WINDOW_SIZE;
 }
 
 pub fn hash(data: &[u8]) -> Result<[u8; 32], Error> {
@@ -27,7 +29,7 @@ pub fn hash(data: &[u8]) -> Result<[u8; 32], Error> {
     let result = PedersenHasher::evaluate(&crh_params, data)?;
     let hash = result
         .into_repr()
-        .to_bytes_le()
+        .to_bytes_be() // always use big-endian for bignumbers!!
         .try_into()
         .expect("Hash is always 32 bytes!");
     Ok(hash)
@@ -42,7 +44,7 @@ mod tests {
         let data = b"Pedersen";
         let out = hash(data).unwrap();
         let actual =
-            "ad92702fabf2ef92930e51b6b6f40de4c006b7ed129ed84811956c98b3c09302";
+            "0293c0b3986c951148d89e12edb706c0e40df4b6b6510e9392eff2ab2f7092ad";
         assert_eq!(hex::encode(out), actual);
     }
 }

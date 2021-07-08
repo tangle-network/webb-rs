@@ -35,6 +35,7 @@ jobs:
     # one of the install-cross jobs has started, so this makes sure all
     # artifacts are downloaded first.
     needs: install-cross
+    if: ${{ false }} # diable windows
     steps:
       - uses: actions/checkout@v2
         with:
@@ -51,6 +52,11 @@ jobs:
       - run: ci/set_rust_version.bash ${{ matrix.channel }} ${{ matrix.target }}
         shell: bash
       - run: ci/build.bash cargo ${{ matrix.target }}
+      - name: Use Node.js 14.x
+        uses: actions/setup-node@v1
+        with:
+          node-version: 14.x
+      - run: npm install -g ganache-cli
         shell: bash
       - run: ci/test.bash cargo ${{ matrix.target }}
         shell: bash
@@ -91,10 +97,14 @@ jobs:
           name: cross-apple-darwin
           path: /usr/local/bin/
       - run: chmod +x /usr/local/bin/cross
+      - name: Use Node.js 14.x
+        uses: actions/setup-node@v1
+        with:
+          node-version: 14.x
+      - run: npm install -g ganache-cli
       - run: ci/set_rust_version.bash ${{ matrix.channel }} ${{ matrix.target }}
       - run: ci/build.bash cross ${{ matrix.target }}
-        # Only test on macOS platforms since we can't simulate the others.
-      - run: ci/test.bash cross ${{ matrix.target }}
+      - run: cargo test --all --features integration-tests -- --nocapture
         if: matrix.target == 'x86_64-apple-darwin'
 
     strategy:
@@ -131,6 +141,11 @@ jobs:
           name: cross-linux-musl
           path: /tmp/
       - run: chmod +x /tmp/cross
+      - name: Use Node.js 14.x
+        uses: actions/setup-node@v1
+        with:
+          node-version: 14.x
+      - run: npm install -g ganache-cli
       - run: ci/set_rust_version.bash ${{ matrix.channel }} ${{ matrix.target }}
       - run: ci/build.bash /tmp/cross ${{ matrix.target }}
         # These targets have issues with being tested so they are disabled
@@ -143,6 +158,9 @@ jobs:
           !contains(matrix.target, 'solaris') &&
           matrix.target != 'armv5te-unknown-linux-musleabi' &&
           matrix.target != 'sparc64-unknown-linux-gnu'
+      - run: cargo test --all --features integration-tests -- --nocapture
+        if: matrix.target == 'x86_64-unknown-linux-gnu'
+
 
     strategy:
       fail-fast: true
