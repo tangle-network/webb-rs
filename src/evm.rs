@@ -22,10 +22,10 @@ pub struct Deposit {
 
 impl Deposit {
     fn from_preimage(preimage: Preimage) -> Deposit {
-        let nullifier: H248 = preimage[0..31]
+        let nullifier: H248 = preimage[..31]
             .try_into()
             .expect("31 bytes is already there.");
-        let secret: H248 = preimage[31..62]
+        let secret: H248 = preimage[31..]
             .try_into()
             .expect("31 bytes is already there.");
         let commitment =
@@ -164,6 +164,7 @@ mod tests {
     use ethers::abi::Tokenizable;
     use ethers::prelude::*;
     use ethers::utils::{Ganache, GanacheInstance};
+    use rand::SeedableRng;
 
     use std::convert::TryFrom;
     use std::fs;
@@ -235,10 +236,7 @@ mod tests {
         Ok(native_anchor_instance.address())
     }
 
-    /// Launches a [crate::utils::GanacheInstance]
-    ///
-    /// Same as [crate::utils::Ganache::spawn] but async
-    pub async fn launch_ganache() -> GanacheInstance {
+    async fn launch_ganache() -> GanacheInstance {
         tokio::task::spawn_blocking(|| Ganache::new().spawn())
             .await
             .unwrap()
@@ -257,7 +255,7 @@ mod tests {
             deploy_anchor_contract(client.clone()).await?;
         let contract =
             AnchorContract::new(anchor_contract_address, client.clone());
-        let mut rng = rand::rngs::OsRng::default();
+        let mut rng = rand::rngs::StdRng::from_seed([0u8; 32]);
         let note = Note::builder()
             .with_chain_id(1337u64)
             .with_amount(1u64)
@@ -269,8 +267,8 @@ mod tests {
             .deposit(deposit.commitment.into())
             .value(ethers::utils::parse_ether(note.amount)?);
         let result = tx.send().await?;
-        let receipt = dbg!(result).await?;
-        dbg!(receipt);
+        let receipt = result.await?;
+        println!("Tx: {:?}", receipt.transaction_hash);
         Ok(())
     }
 }

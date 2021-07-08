@@ -190,6 +190,7 @@ mod tests {
             .unwrap()
     }
 
+    #[ignore = "substrate still WIP"]
     #[tokio::test]
     async fn get_all_mixers() {
         let client = get_client().await;
@@ -208,6 +209,7 @@ mod tests {
         assert!(!ids.is_empty());
     }
 
+    #[ignore = "substrate still WIP"]
     #[tokio::test]
     async fn deposit() {
         let client = get_client().await;
