@@ -43,6 +43,7 @@ optional = true
 
 [dev-dependencies]
 tokio = { version = "^1", features = ["macros", "rt"] }
+anyhow = "^1"
 sp-keyring = "3.0.0"
 
 [build-dependencies]
