@@ -35,6 +35,7 @@ jobs:
     # one of the install-cross jobs has started, so this makes sure all
     # artifacts are downloaded first.
     needs: install-cross
+    if: ${{ false }} # diable windows
     steps:
       - uses: actions/checkout@v2
         with:
