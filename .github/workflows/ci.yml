@@ -52,6 +52,11 @@ jobs:
       - run: ci/set_rust_version.bash ${{ matrix.channel }} ${{ matrix.target }}
         shell: bash
       - run: ci/build.bash cargo ${{ matrix.target }}
+      - name: Use Node.js 14.x
+        uses: actions/setup-node@v1
+        with:
+          node-version: 14.x
+      - run: yarn global add ganache-cli
         shell: bash
       - run: ci/test.bash cargo ${{ matrix.target }}
         shell: bash
