@@ -1,0 +1,12 @@
+[package]
+name = "mimcsponge"
+version = "0.1.0"
+edition = "2018"
+
+[dependencies]
+ark-ff = { version = "^0.3.0", default-features = true }
+ark-ed-on-bn254 = { version = "^0.3.0", default-features = false }
+tiny-keccak = { version = "^2.0", features = ["keccak"] }
+
+[dev-dependencies]
+hex = { version = "0.4", default-features = false }
