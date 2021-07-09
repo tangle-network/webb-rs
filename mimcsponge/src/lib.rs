@@ -235,7 +235,7 @@ fn mimc<F: Field>(mut xl: F, mut xr: F, constants: &[F]) -> F {
         let mut tmp1 = xl;
         tmp1.add_assign(&constants[i]);
         let mut tmp2 = tmp1;
-        tmp2 = tmp2.pow(&[5]);
+        tmp2.square_in_place();
         tmp2.mul_assign(&tmp1);
         tmp2.add_assign(&xr);
         xr = xl;
