@@ -1,5 +1,5 @@
 [workspace]
-members = [".", "pedersen-hash"]
+members = [".", "pedersen-hash", "mimcsponge"]
 
 [package]
 name = "webb"
@@ -15,7 +15,7 @@ documentation = "https://docs.rs/webb-rs"
 homepage = "https://www.webb.tools"
 description = "Webb SDK"
 keywords = ["webb", "sdk", "blockchain", "webb-tools"]
-include = ["Cargo.toml", "src/**/*.rs", "README.md", "LICENSE"]
+include = ["Cargo.toml", "contracts/", "src/**/*.rs", "README.md", "LICENSE"]
 build = "build.rs"
 
 [dependencies]
@@ -53,6 +53,8 @@ sp-keyring = "3.0.0"
 
 [build-dependencies]
 ethers = { version = "0.2.2", default-features = false, features = ["abigen"] }
+serde_json = "1"
+tempfile = "3.2"
 
 [features]
 default = ["substrate-runtime", "evm-runtime"]

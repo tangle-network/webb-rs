@@ -6,9 +6,9 @@ use subxt::sp_runtime::{MultiSignature, OpaqueExtrinsic};
 use subxt::system::*;
 use subxt::{sp_core, EventTypeRegistry};
 
-use crate::pallet;
-
 pub use subxt;
+
+pub mod pallet;
 
 /// an easy way to extract the balance type from `T`
 pub type BalanceOf<T> = <T as Balances>::Balance;
@@ -172,9 +172,9 @@ define_runtime! {
 #[cfg(all(test, feature = "integration-tests"))]
 mod tests {
     use super::*;
-    use crate::pallet::merkle::*;
-    use crate::pallet::mixer::*;
-    use crate::pallet::ScalarData;
+    use pallet::merkle::*;
+    use pallet::mixer::*;
+    use pallet::ScalarData;
     use sp_keyring::AccountKeyring;
     use subxt::PairSigner;
 
