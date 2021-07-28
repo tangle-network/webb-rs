@@ -16,7 +16,7 @@ fn main() -> Result<(), Box<dyn Error>> {
     let mut anchor_abi_file = NamedTempFile::new()?;
     anchor_abi_file.write_all(&anchor_abi)?;
     Abigen::new("AnchorContract", anchor_abi_file.path().to_string_lossy())?
-        .rustfmt(true)
+        .rustfmt(false) // don't use rustfmt for now.
         .generate()?
         .write_to_file("src/evm/contract/anchor.rs")?;
     Ok(())
