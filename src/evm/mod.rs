@@ -110,7 +110,7 @@ mod tests {
             .deposit(deposit.commitment.into())
             .value(ethers::utils::parse_ether(note.amount)?);
         let result = tx.send().await?;
-        let receipt = result.await?;
+        let receipt = result.await?.unwrap();
         println!("Tx: {:?}", receipt.transaction_hash);
         Ok(())
     }

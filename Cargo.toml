@@ -1,5 +1,5 @@
 [workspace]
-members = [".", "pedersen-hash", "mimcsponge"]
+members = [".", "pedersen-hash"]
 
 [package]
 name = "webb"
@@ -26,18 +26,12 @@ frame-support = { version = "3.0.0", default-features = false, optional = true }
 
 async-trait = "0.1"
 rand = { version = "0.8", default-features = false, features = ["getrandom"] }
-thiserror = "^1"
+thiserror = "1.0.26"
 hex = { version = "0.4", default-features = false }
 
 # EVM crates.
-ethers = { version = "0.2.2", default-features = false, optional = true }
 serde_json = { version = "1", optional = true }
 pedersen = { version = "0.1", package = "pedersen-hash", path = "pedersen-hash", optional = true }
-
-# just to make it compile on linux where the openssl is not available.
-# until ethers-rs solve this issue: https://github.com/gakonst/ethers-rs/issues/325
-# and publish a new version to crates.io
-native-tls = { version = "^0.2", features = ["vendored"], optional = true }
 
 [dependencies.subxt]
 git = "https://github.com/paritytech/substrate-subxt.git"
@@ -46,15 +40,27 @@ rev = "08a3e65" # https://github.com/paritytech/substrate-subxt/commit/08a3e65
 package = "substrate-subxt"
 optional = true
 
+[dependencies.ethers]
+git = "https://github.com/gakonst/ethers-rs"
+rev = "e7f603f"
+optional = true
+default-features = false
+
 [dev-dependencies]
 tokio = { version = "^1", features = ["macros", "rt"] }
 anyhow = "^1"
 sp-keyring = "3.0.0"
 
 [build-dependencies]
-ethers = { version = "0.2.2", default-features = false, features = ["abigen"] }
 serde_json = "1"
 tempfile = "3.2"
+
+[build-dependencies.ethers]
+git = "https://github.com/gakonst/ethers-rs"
+rev = "e7f603f"
+optional = true
+default-features = false
+
 
 [features]
 default = ["substrate-runtime", "evm-runtime"]
@@ -65,7 +71,6 @@ substrate-runtime = [
     "frame-support",
 ]
 evm-runtime = [
-    "native-tls",
     "ethers",
     "ethereum-types",
     "serde_json",
