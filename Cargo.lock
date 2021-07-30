@@ -305,9 +305,9 @@ checksum = "be4dc07131ffa69b8072d35f5007352af944213cde02545e2103680baed38fcd"
 
 [[package]]
 name = "async-trait"
-version = "0.1.50"
+version = "0.1.51"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "0b98e84bbb4cbcdd97da190ba0c58a1bb0de2c1fdf67d159e192ed766aeca722"
+checksum = "44318e776df68115a881de9a8fd1b9e53368d7a4a5ce4cc48517da3393233a5e"
 dependencies = [
  "proc-macro2",
  "quote",
@@ -980,7 +980,7 @@ dependencies = [
 [[package]]
 name = "ethers"
 version = "0.4.0"
-source = "git+https://github.com/gakonst/ethers-rs?rev=e7f603f#e7f603f69ca68e89d98c9583bf08fb715a2a00b5"
+source = "git+https://github.com/gakonst/ethers-rs?rev=9fc142c#9fc142ca615123ace787fbb8c1c65a5718b60f77"
 dependencies = [
  "ethers-contract",
  "ethers-core",
@@ -992,7 +992,7 @@ dependencies = [
 [[package]]
 name = "ethers-contract"
 version = "0.4.0"
-source = "git+https://github.com/gakonst/ethers-rs?rev=e7f603f#e7f603f69ca68e89d98c9583bf08fb715a2a00b5"
+source = "git+https://github.com/gakonst/ethers-rs?rev=9fc142c#9fc142ca615123ace787fbb8c1c65a5718b60f77"
 dependencies = [
  "ethers-contract-abigen",
  "ethers-contract-derive",
@@ -1010,7 +1010,7 @@ dependencies = [
 [[package]]
 name = "ethers-contract-abigen"
 version = "0.4.0"
-source = "git+https://github.com/gakonst/ethers-rs?rev=e7f603f#e7f603f69ca68e89d98c9583bf08fb715a2a00b5"
+source = "git+https://github.com/gakonst/ethers-rs?rev=9fc142c#9fc142ca615123ace787fbb8c1c65a5718b60f77"
 dependencies = [
  "Inflector",
  "anyhow",
@@ -1027,7 +1027,7 @@ dependencies = [
 [[package]]
 name = "ethers-contract-derive"
 version = "0.4.0"
-source = "git+https://github.com/gakonst/ethers-rs?rev=e7f603f#e7f603f69ca68e89d98c9583bf08fb715a2a00b5"
+source = "git+https://github.com/gakonst/ethers-rs?rev=9fc142c#9fc142ca615123ace787fbb8c1c65a5718b60f77"
 dependencies = [
  "ethers-contract-abigen",
  "ethers-core",
@@ -1041,7 +1041,7 @@ dependencies = [
 [[package]]
 name = "ethers-core"
 version = "0.4.0"
-source = "git+https://github.com/gakonst/ethers-rs?rev=e7f603f#e7f603f69ca68e89d98c9583bf08fb715a2a00b5"
+source = "git+https://github.com/gakonst/ethers-rs?rev=9fc142c#9fc142ca615123ace787fbb8c1c65a5718b60f77"
 dependencies = [
  "arrayvec 0.7.1",
  "bytes",
@@ -1066,7 +1066,7 @@ dependencies = [
 [[package]]
 name = "ethers-middleware"
 version = "0.4.0"
-source = "git+https://github.com/gakonst/ethers-rs?rev=e7f603f#e7f603f69ca68e89d98c9583bf08fb715a2a00b5"
+source = "git+https://github.com/gakonst/ethers-rs?rev=9fc142c#9fc142ca615123ace787fbb8c1c65a5718b60f77"
 dependencies = [
  "async-trait",
  "ethers-contract",
@@ -1088,7 +1088,7 @@ dependencies = [
 [[package]]
 name = "ethers-providers"
 version = "0.4.0"
-source = "git+https://github.com/gakonst/ethers-rs?rev=e7f603f#e7f603f69ca68e89d98c9583bf08fb715a2a00b5"
+source = "git+https://github.com/gakonst/ethers-rs?rev=9fc142c#9fc142ca615123ace787fbb8c1c65a5718b60f77"
 dependencies = [
  "async-trait",
  "auto_impl",
@@ -1115,7 +1115,7 @@ dependencies = [
 [[package]]
 name = "ethers-signers"
 version = "0.4.0"
-source = "git+https://github.com/gakonst/ethers-rs?rev=e7f603f#e7f603f69ca68e89d98c9583bf08fb715a2a00b5"
+source = "git+https://github.com/gakonst/ethers-rs?rev=9fc142c#9fc142ca615123ace787fbb8c1c65a5718b60f77"
 dependencies = [
  "async-trait",
  "coins-bip32",
@@ -3107,9 +3107,9 @@ dependencies = [
 
 [[package]]
 name = "serde_json"
-version = "1.0.64"
+version = "1.0.66"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "799e97dc9fdae36a5c8b8f2cae9ce2ee9fdce2058c57a93e6099d919fd982f79"
+checksum = "336b10da19a12ad094b59d870ebde26a45402e5b470add4b5fd03c5048a32127"
 dependencies = [
  "itoa",
  "ryu",
@@ -3223,9 +3223,9 @@ checksum = "fe0f37c9e8f3c5a4a66ad655a93c74daac4ad00c441533bf5c6e7990bb42604e"
 
 [[package]]
 name = "socket2"
-version = "0.4.0"
+version = "0.4.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "9e3dfc207c526015c632472a77be09cf1b6e46866581aecae5cc38fb4235dea2"
+checksum = "765f090f0e423d2b55843402a07915add955e7d60657db13707a159727326cad"
 dependencies = [
  "libc",
  "winapi",
