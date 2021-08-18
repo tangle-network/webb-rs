@@ -42,7 +42,7 @@ optional = true
 
 [dependencies.ethers]
 git = "https://github.com/gakonst/ethers-rs"
-rev = "9fc142c"
+rev = "621882053c8cb1c1d98074e9921bf6e997bbd58a"
 optional = true
 default-features = false
 
@@ -57,7 +57,7 @@ tempfile = "3.2"
 
 [build-dependencies.ethers]
 git = "https://github.com/gakonst/ethers-rs"
-rev = "9fc142c"
+rev = "621882053c8cb1c1d98074e9921bf6e997bbd58a"
 optional = true
 default-features = false
 
