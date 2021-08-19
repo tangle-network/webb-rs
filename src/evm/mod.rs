@@ -91,7 +91,7 @@ mod tests {
         let provider = Provider::<Http>::try_from(ganache.endpoint())?
             .interval(Duration::from_millis(10u64));
         let key = ganache.keys().first().cloned().unwrap();
-        let wallet = LocalWallet::from(key).set_chain_id(1337u64);
+        let wallet = LocalWallet::from(key);
         let client = SignerMiddleware::new(provider, wallet);
         let client = Arc::new(client);
         let anchor_contract_address =
