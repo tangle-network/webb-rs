@@ -32,6 +32,9 @@ hex = { version = "0.4", default-features = false }
 # EVM crates.
 serde_json = { version = "1", optional = true }
 pedersen = { version = "0.1", package = "pedersen-hash", path = "pedersen-hash", optional = true }
+# just to make it compile on Linux where the OpenSSL is not available.
+# So, we just use the vendored one.
+native-tls = { version = "^0.2", features = ["vendored"] }
 
 [dependencies.subxt]
 git = "https://github.com/paritytech/substrate-subxt.git"
