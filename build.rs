@@ -10,6 +10,9 @@ fn parse_and_write_abigen(
     out: &str,
     contract_name: &str,
 ) -> Result<(), Box<dyn Error>> {
+    println!("cargo:rerun-if-changed={}", path);
+    println!("cargo:rerun-if-changed={}", out);
+
     let contract_file = std::fs::read_to_string(path)?;
     let raw: serde_json::Value = serde_json::from_str(&contract_file)?;
     let abi = serde_json::to_vec(&raw["abi"])?;
@@ -63,21 +66,6 @@ fn build_gov_bravo() -> Result<(), Box<dyn Error>> {
 }
 
 fn main() -> Result<(), Box<dyn Error>> {
-    println!("cargo:rerun-if-changed=contracts/tornado/Anchor.json");
-    println!("cargo:rerun-if-changed=src/evm/contract/tornado/anchor.rs");
-
-    println!("cargo:rerun-if-changed=contracts/darkwebb/Anchor2.json");
-    println!("cargo:rerun-if-changed=src/evm/contract/darkwebb/anchor2.rs");
-
-    println!("cargo:rerun-if-changed=contracts/darkwebb/WEBBAnchor2.json");
-    println!("cargo:rerun-if-changed=src/evm/contract/darkwebb/WEBBanchor2.rs");
-
-    println!("cargo:rerun-if-changed=contracts/darkwebb/Bridge.json");
-    println!("cargo:rerun-if-changed=src/evm/contract/darkwebb/bridge.rs");
-
-    println!("cargo:rerun-if-changed=contracts/darkwebb/GovernanceBravoDelegate.json");
-    println!("cargo:rerun-if-changed=src/evm/contract/darkwebb/governance_bravo_delegate.rs");
-
     build_tornado_anchor()?;
     build_darkwebb_anchor()?;
     build_darkwebb_webb_anchor()?;
