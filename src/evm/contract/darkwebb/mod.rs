@@ -6,4 +6,4 @@ pub mod governance_bravo_delegate;
 pub use anchor2::*;
 pub use bridge::*;
 pub use governance_bravo_delegate::*;
-pub use WEBBanchor2::*;
+pub use webb_anchor2::*;
