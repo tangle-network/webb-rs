@@ -41,7 +41,7 @@ fn build_darkwebb_anchor() -> Result<(), Box<dyn Error>> {
 fn build_darkwebb_webb_anchor() -> Result<(), Box<dyn Error>> {
     parse_and_write_abigen(
         "contracts/darkwebb/WEBBAnchor2.json",
-        "src/evm/contract/darkwebb/WEBBanchor2.rs",
+        "src/evm/contract/darkwebb/webb_anchor2.rs",
         "WEBBAnchor2Contract",
     )
 }
