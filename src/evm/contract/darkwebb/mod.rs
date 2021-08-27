@@ -1,4 +1,4 @@
-pub mod WEBBanchor2;
+pub mod webb_anchor2;
 pub mod anchor2;
 pub mod bridge;
 pub mod governance_bravo_delegate;
