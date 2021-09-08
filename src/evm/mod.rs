@@ -19,7 +19,7 @@ mod tests {
     use ethers::utils::{Ganache, GanacheInstance};
     use rand::SeedableRng;
 
-    use super::contract::anchor::AnchorContract;
+    use super::contract::tornado::anchor::AnchorContract;
     use super::note::{Deposit, Note};
 
     fn create_contract_factory<P: Into<PathBuf>, M: Middleware>(
@@ -40,13 +40,13 @@ mod tests {
         client: Arc<M>,
     ) -> anyhow::Result<Address> {
         let hasher_factory =
-            create_contract_factory("contracts/Hasher.json", client.clone())
+            create_contract_factory("contracts/tornado/Hasher.json", client.clone())
                 .context("create hasher factory")?;
         let verifier_factory =
-            create_contract_factory("contracts/Verifier.json", client.clone())
+            create_contract_factory("contracts/tornado/Verifier.json", client.clone())
                 .context("create verifier factory")?;
         let native_anchor_factory = create_contract_factory(
-            "contracts/NativeAnchor.json",
+            "contracts/tornado/NativeAnchor.json",
             client.clone(),
         )
         .context("create native anchor factory")?;
