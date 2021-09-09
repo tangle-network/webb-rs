@@ -2550,17 +2550,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "pedersen-hash"
-version = "0.1.0"
-dependencies = [
- "ark-crypto-primitives",
- "ark-ed-on-bn254",
- "ark-ff",
- "hex",
- "rand_chacha 0.3.1",
-]
-
-[[package]]
 name = "percent-encoding"
 version = "2.1.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -4616,7 +4605,6 @@ dependencies = [
  "hex",
  "native-tls",
  "parity-scale-codec",
- "pedersen-hash",
  "rand 0.8.4",
  "serde_json",
  "sp-keyring",
@@ -4624,6 +4612,18 @@ dependencies = [
  "tempfile",
  "thiserror",
  "tokio",
+ "webb-pedersen-hash",
+]
+
+[[package]]
+name = "webb-pedersen-hash"
+version = "0.1.0"
+dependencies = [
+ "ark-crypto-primitives",
+ "ark-ed-on-bn254",
+ "ark-ff",
+ "hex",
+ "rand_chacha 0.3.1",
 ]
 
 [[package]]

@@ -1,7 +1,17 @@
 [package]
-name = "pedersen-hash"
+name = "webb-pedersen-hash"
 version = "0.1.0"
 edition = "2018"
+authors = [
+   "Webb Developers <devs@webb.tools>",
+   "Shady Khalifa <shekohex@gmail.com>"
+]
+license = "GPL-3.0"
+repository = "https://github.com/webb-tools/webb-rs"
+documentation = "https://docs.rs/webb-pedersen-hash"
+homepage = "https://www.webb.tools"
+description = "Webb Pedersen Hasher"
+keywords = ["webb", "pedersen", "hash", "sdk", "blockchain", "webb-tools"]
 
 [dependencies]
 ark-ff = { version = "^0.3.0", default-features = true }
