@@ -15,7 +15,7 @@ documentation = "https://docs.rs/webb"
 homepage = "https://www.webb.tools"
 description = "Webb SDK"
 keywords = ["webb", "sdk", "blockchain", "webb-tools"]
-include = ["Cargo.toml", "contracts/", "src/**/*.rs", "README.md", "LICENSE"]
+include = ["Cargo.toml", "contracts/", "src/**/*.rs", "build.rs", "README.md", "LICENSE"]
 build = "build.rs"
 
 [dependencies]
