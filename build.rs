@@ -10,8 +10,8 @@ fn parse_and_write_abigen(
     out: &str,
     contract_name: &str,
 ) -> Result<(), Box<dyn Error>> {
-    println!("cargo:rerun-if-changed={}", path);
-    println!("cargo:rerun-if-changed={}", out);
+    println!("cargo:rerun-if-changed=./{}", path);
+    println!("cargo:rerun-if-changed=./{}", out);
 
     let contract_file = std::fs::read_to_string(path)?;
     let raw: serde_json::Value = serde_json::from_str(&contract_file)?;
