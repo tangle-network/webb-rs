@@ -39,12 +39,16 @@ mod tests {
     async fn deploy_anchor_contract<M: Middleware + 'static>(
         client: Arc<M>,
     ) -> anyhow::Result<Address> {
-        let hasher_factory =
-            create_contract_factory("contracts/tornado/Hasher.json", client.clone())
-                .context("create hasher factory")?;
-        let verifier_factory =
-            create_contract_factory("contracts/tornado/Verifier.json", client.clone())
-                .context("create verifier factory")?;
+        let hasher_factory = create_contract_factory(
+            "contracts/tornado/Hasher.json",
+            client.clone(),
+        )
+        .context("create hasher factory")?;
+        let verifier_factory = create_contract_factory(
+            "contracts/tornado/Verifier.json",
+            client.clone(),
+        )
+        .context("create verifier factory")?;
         let native_anchor_factory = create_contract_factory(
             "contracts/tornado/NativeAnchor.json",
             client.clone(),
