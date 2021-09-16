@@ -607,9 +607,7 @@ mod webbanchor2contract_mod {
                 ));
             }
             if let Ok(decoded) = EdgeUpdateFilter::from_token(token.clone()) {
-                return Ok(WEBBAnchor2ContractEvents::EdgeUpdateFilter(
-                    decoded,
-                ));
+                return Ok(WEBBAnchor2ContractEvents::EdgeUpdateFilter(decoded));
             }
             if let Ok(decoded) =
                 RootHistoryRecordedFilter::from_token(token.clone())
@@ -628,9 +626,7 @@ mod webbanchor2contract_mod {
                 ));
             }
             if let Ok(decoded) = WithdrawalFilter::from_token(token.clone()) {
-                return Ok(WEBBAnchor2ContractEvents::WithdrawalFilter(
-                    decoded,
-                ));
+                return Ok(WEBBAnchor2ContractEvents::WithdrawalFilter(decoded));
             }
             Err(ethers::core::abi::InvalidOutputType(
                 "Failed to decode all event variants".to_string(),
@@ -676,9 +672,7 @@ mod webbanchor2contract_mod {
                 ));
             }
             if let Ok(decoded) = EdgeUpdateFilter::decode_log(log) {
-                return Ok(WEBBAnchor2ContractEvents::EdgeUpdateFilter(
-                    decoded,
-                ));
+                return Ok(WEBBAnchor2ContractEvents::EdgeUpdateFilter(decoded));
             }
             if let Ok(decoded) = RootHistoryRecordedFilter::decode_log(log) {
                 return Ok(
@@ -693,9 +687,7 @@ mod webbanchor2contract_mod {
                 ));
             }
             if let Ok(decoded) = WithdrawalFilter::decode_log(log) {
-                return Ok(WEBBAnchor2ContractEvents::WithdrawalFilter(
-                    decoded,
-                ));
+                return Ok(WEBBAnchor2ContractEvents::WithdrawalFilter(decoded));
             }
             Err(ethers::core::abi::Error::InvalidData)
         }

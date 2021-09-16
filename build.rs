@@ -66,10 +66,14 @@ fn build_gov_bravo() -> Result<(), Box<dyn Error>> {
 }
 
 fn main() -> Result<(), Box<dyn Error>> {
-    build_tornado_anchor()?;
-    build_darkwebb_anchor()?;
-    build_darkwebb_webb_anchor()?;
-    build_darkwebb_bridge()?;
-    build_gov_bravo()?;
+    let generate_contracts_enabled =
+        std::env::var_os("CARGO_FEATURE_GENERATE_CONTRACTS").is_some();
+    if generate_contracts_enabled {
+        build_tornado_anchor()?;
+        build_darkwebb_anchor()?;
+        build_darkwebb_webb_anchor()?;
+        build_darkwebb_bridge()?;
+        build_gov_bravo()?;
+    }
     Ok(())
 }
