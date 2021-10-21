@@ -35,9 +35,9 @@ fn build_tornado_anchor() -> Result<(), Box<dyn Error>> {
 
 fn build_darkwebb_anchor() -> Result<(), Box<dyn Error>> {
     parse_and_write_abigen(
-        "contracts/darkwebb/Anchor2.json",
-        "src/evm/contract/darkwebb/anchor2.rs",
-        "Anchor2Contract",
+        "contracts/darkwebb/Anchor.json",
+        "src/evm/contract/darkwebb/anchor.rs",
+        "AnchorContract",
     )
 }
 
