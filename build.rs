@@ -27,9 +27,9 @@ fn parse_and_write_abigen(
 
 fn build_tornado_anchor() -> Result<(), Box<dyn Error>> {
     parse_and_write_abigen(
-        "contracts/tornado/Anchor.json",
-        "src/evm/contract/tornado/anchor.rs",
-        "AnchorContract",
+        "contracts/tornado/Tornado.json",
+        "src/evm/contract/tornado/tornado.rs",
+        "TornadoContract",
     )
 }
 
