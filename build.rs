@@ -41,6 +41,14 @@ fn build_darkwebb_anchor() -> Result<(), Box<dyn Error>> {
     )
 }
 
+fn build_darkwebb_anchor_proxy() -> Result<(), Box<dyn Error>> {
+    parse_and_write_abigen(
+        "contracts/darkwebb/AnchorProxy.json",
+        "src/evm/contract/darkwebb/anchor_proxy.rs",
+        "AnchorProxyContract",
+    )
+}
+
 fn build_darkwebb_webb_anchor() -> Result<(), Box<dyn Error>> {
     parse_and_write_abigen(
         "contracts/darkwebb/WEBBAnchor2.json",
@@ -67,10 +75,12 @@ fn build_gov_bravo() -> Result<(), Box<dyn Error>> {
 
 fn main() -> Result<(), Box<dyn Error>> {
     let generate_contracts_enabled =
-        std::env::var_os("CARGO_FEATURE_GENERATE_CONTRACTS").is_some();
+        // std::env::var_os("CARGO_FEATURE_GENERATE_CONTRACTS").is_some();
+        true;
     if generate_contracts_enabled {
         build_tornado_anchor()?;
         build_darkwebb_anchor()?;
+        build_darkwebb_anchor_proxy()?;
         build_darkwebb_webb_anchor()?;
         build_darkwebb_bridge()?;
         build_gov_bravo()?;
