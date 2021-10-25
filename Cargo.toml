@@ -3,7 +3,7 @@ members = [".", "pedersen-hash"]
 
 [package]
 name = "webb"
-version = "0.2.3"
+version = "0.2.4"
 edition = "2018"
 authors = [
    "Webb Developers <devs@webb.tools>",
