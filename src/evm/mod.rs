@@ -19,7 +19,7 @@ mod tests {
     use ethers::utils::{Ganache, GanacheInstance};
     use rand::SeedableRng;
 
-    use super::contract::tornado::anchor::AnchorContract;
+    use super::contract::tornado::tornado::TornadoContract;
     use super::note::{Deposit, Note};
 
     fn create_contract_factory<P: Into<PathBuf>, M: Middleware>(
@@ -101,7 +101,7 @@ mod tests {
         let anchor_contract_address =
             deploy_anchor_contract(client.clone()).await?;
         let contract =
-            AnchorContract::new(anchor_contract_address, client.clone());
+            TornadoContract::new(anchor_contract_address, client.clone());
         let mut rng = rand::rngs::StdRng::from_seed([0u8; 32]);
         let note = Note::builder()
             .with_chain_id(1337u64)
