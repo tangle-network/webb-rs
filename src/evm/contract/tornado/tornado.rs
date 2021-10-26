@@ -1,6 +1,6 @@
-pub use anchorcontract_mod::*;
+pub use tornadocontract_mod::*;
 #[allow(clippy::too_many_arguments)]
-mod anchorcontract_mod {
+mod tornadocontract_mod {
     #![allow(clippy::enum_variant_names)]
     #![allow(dead_code)]
     #![allow(unused_imports)]
@@ -13,29 +13,29 @@ mod anchorcontract_mod {
         types::*,
     };
     use ethers::providers::Middleware;
-    #[doc = "AnchorContract was auto-generated with ethers-rs Abigen. More information at: https://github.com/gakonst/ethers-rs"]
+    #[doc = "TornadoContract was auto-generated with ethers-rs Abigen. More information at: https://github.com/gakonst/ethers-rs"]
     use std::sync::Arc;
-    pub static ANCHORCONTRACT_ABI: ethers::contract::Lazy<
+    pub static TORNADOCONTRACT_ABI: ethers::contract::Lazy<
         ethers::core::abi::Abi,
     > = ethers::contract::Lazy::new(|| {
         serde_json :: from_str ("[{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"bytes32\",\"name\":\"commitment\",\"type\":\"bytes32\"},{\"indexed\":false,\"internalType\":\"uint32\",\"name\":\"leafIndex\",\"type\":\"uint32\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"timestamp\",\"type\":\"uint256\"}],\"name\":\"Deposit\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"bytes32\",\"name\":\"nullifierHash\",\"type\":\"bytes32\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"relayer\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"fee\",\"type\":\"uint256\"}],\"name\":\"Withdrawal\",\"type\":\"event\"},{\"inputs\":[],\"name\":\"FIELD_SIZE\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"ROOT_HISTORY_SIZE\",\"outputs\":[{\"internalType\":\"uint32\",\"name\":\"\",\"type\":\"uint32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"ZERO_VALUE\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"name\":\"commitments\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"currentRootIndex\",\"outputs\":[{\"internalType\":\"uint32\",\"name\":\"\",\"type\":\"uint32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"denomination\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"name\":\"filledSubtrees\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getLastRoot\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"contract IHasher\",\"name\":\"_hasher\",\"type\":\"address\"},{\"internalType\":\"bytes32\",\"name\":\"_left\",\"type\":\"bytes32\"},{\"internalType\":\"bytes32\",\"name\":\"_right\",\"type\":\"bytes32\"}],\"name\":\"hashLeftRight\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"stateMutability\":\"pure\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"hasher\",\"outputs\":[{\"internalType\":\"contract IHasher\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"_root\",\"type\":\"bytes32\"}],\"name\":\"isKnownRoot\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"levels\",\"outputs\":[{\"internalType\":\"uint32\",\"name\":\"\",\"type\":\"uint32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"nextIndex\",\"outputs\":[{\"internalType\":\"uint32\",\"name\":\"\",\"type\":\"uint32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"name\":\"nullifierHashes\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"name\":\"roots\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"verifier\",\"outputs\":[{\"internalType\":\"contract IVerifier\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"i\",\"type\":\"uint256\"}],\"name\":\"zeros\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"stateMutability\":\"pure\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"_commitment\",\"type\":\"bytes32\"}],\"name\":\"deposit\",\"outputs\":[],\"stateMutability\":\"payable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes\",\"name\":\"_proof\",\"type\":\"bytes\"},{\"internalType\":\"bytes32\",\"name\":\"_root\",\"type\":\"bytes32\"},{\"internalType\":\"bytes32\",\"name\":\"_nullifierHash\",\"type\":\"bytes32\"},{\"internalType\":\"address payable\",\"name\":\"_recipient\",\"type\":\"address\"},{\"internalType\":\"address payable\",\"name\":\"_relayer\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"_fee\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"_refund\",\"type\":\"uint256\"}],\"name\":\"withdraw\",\"outputs\":[],\"stateMutability\":\"payable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"_nullifierHash\",\"type\":\"bytes32\"}],\"name\":\"isSpent\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32[]\",\"name\":\"_nullifierHashes\",\"type\":\"bytes32[]\"}],\"name\":\"isSpentArray\",\"outputs\":[{\"internalType\":\"bool[]\",\"name\":\"spent\",\"type\":\"bool[]\"}],\"stateMutability\":\"view\",\"type\":\"function\"}]") . expect ("invalid abi")
     });
     #[derive(Clone)]
-    pub struct AnchorContract<M>(ethers::contract::Contract<M>);
-    impl<M> std::ops::Deref for AnchorContract<M> {
+    pub struct TornadoContract<M>(ethers::contract::Contract<M>);
+    impl<M> std::ops::Deref for TornadoContract<M> {
         type Target = ethers::contract::Contract<M>;
         fn deref(&self) -> &Self::Target {
             &self.0
         }
     }
-    impl<M: ethers::providers::Middleware> std::fmt::Debug for AnchorContract<M> {
+    impl<M: ethers::providers::Middleware> std::fmt::Debug for TornadoContract<M> {
         fn fmt(&self, f: &mut std::fmt::Formatter) -> std::fmt::Result {
-            f.debug_tuple(stringify!(AnchorContract))
+            f.debug_tuple(stringify!(TornadoContract))
                 .field(&self.address())
                 .finish()
         }
     }
-    impl<'a, M: ethers::providers::Middleware> AnchorContract<M> {
+    impl<'a, M: ethers::providers::Middleware> TornadoContract<M> {
         #[doc = r" Creates a new contract instance with the specified `ethers`"]
         #[doc = r" client at the given `Address`. The contract derefs to a `ethers::Contract`"]
         #[doc = r" object"]
@@ -45,7 +45,7 @@ mod anchorcontract_mod {
         ) -> Self {
             let contract = ethers::contract::Contract::new(
                 address.into(),
-                ANCHORCONTRACT_ABI.clone(),
+                TORNADOCONTRACT_ABI.clone(),
                 client,
             );
             Self(contract)
@@ -278,7 +278,7 @@ mod anchorcontract_mod {
         #[doc = r" Returns an [`Event`](#ethers_contract::builders::Event) builder for all events of this contract"]
         pub fn events(
             &self,
-        ) -> ethers::contract::builders::Event<M, AnchorContractEvents>
+        ) -> ethers::contract::builders::Event<M, TornadoContractEvents>
         {
             self.0.event_with_filter(Default::default())
         }
@@ -308,11 +308,11 @@ mod anchorcontract_mod {
         pub fee: ethers::core::types::U256,
     }
     #[derive(Debug, Clone, PartialEq, Eq)]
-    pub enum AnchorContractEvents {
+    pub enum TornadoContractEvents {
         DepositFilter(DepositFilter),
         WithdrawalFilter(WithdrawalFilter),
     }
-    impl ethers::core::abi::Tokenizable for AnchorContractEvents {
+    impl ethers::core::abi::Tokenizable for TornadoContractEvents {
         fn from_token(
             token: ethers::core::abi::Token,
         ) -> Result<Self, ethers::core::abi::InvalidOutputType>
@@ -320,10 +320,10 @@ mod anchorcontract_mod {
             Self: Sized,
         {
             if let Ok(decoded) = DepositFilter::from_token(token.clone()) {
-                return Ok(AnchorContractEvents::DepositFilter(decoded));
+                return Ok(TornadoContractEvents::DepositFilter(decoded));
             }
             if let Ok(decoded) = WithdrawalFilter::from_token(token.clone()) {
-                return Ok(AnchorContractEvents::WithdrawalFilter(decoded));
+                return Ok(TornadoContractEvents::WithdrawalFilter(decoded));
             }
             Err(ethers::core::abi::InvalidOutputType(
                 "Failed to decode all event variants".to_string(),
@@ -331,17 +331,17 @@ mod anchorcontract_mod {
         }
         fn into_token(self) -> ethers::core::abi::Token {
             match self {
-                AnchorContractEvents::DepositFilter(element) => {
+                TornadoContractEvents::DepositFilter(element) => {
                     element.into_token()
                 }
-                AnchorContractEvents::WithdrawalFilter(element) => {
+                TornadoContractEvents::WithdrawalFilter(element) => {
                     element.into_token()
                 }
             }
         }
     }
-    impl ethers::core::abi::TokenizableItem for AnchorContractEvents {}
-    impl ethers::contract::EthLogDecode for AnchorContractEvents {
+    impl ethers::core::abi::TokenizableItem for TornadoContractEvents {}
+    impl ethers::contract::EthLogDecode for TornadoContractEvents {
         fn decode_log(
             log: &ethers::core::abi::RawLog,
         ) -> Result<Self, ethers::core::abi::Error>
@@ -349,10 +349,10 @@ mod anchorcontract_mod {
             Self: Sized,
         {
             if let Ok(decoded) = DepositFilter::decode_log(log) {
-                return Ok(AnchorContractEvents::DepositFilter(decoded));
+                return Ok(TornadoContractEvents::DepositFilter(decoded));
             }
             if let Ok(decoded) = WithdrawalFilter::decode_log(log) {
-                return Ok(AnchorContractEvents::WithdrawalFilter(decoded));
+                return Ok(TornadoContractEvents::WithdrawalFilter(decoded));
             }
             Err(ethers::core::abi::Error::InvalidData)
         }

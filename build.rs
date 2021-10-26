@@ -27,25 +27,25 @@ fn parse_and_write_abigen(
 
 fn build_tornado_anchor() -> Result<(), Box<dyn Error>> {
     parse_and_write_abigen(
-        "contracts/tornado/Anchor.json",
-        "src/evm/contract/tornado/anchor.rs",
-        "AnchorContract",
+        "contracts/tornado/Tornado.json",
+        "src/evm/contract/tornado/tornado.rs",
+        "TornadoContract",
     )
 }
 
 fn build_darkwebb_anchor() -> Result<(), Box<dyn Error>> {
     parse_and_write_abigen(
-        "contracts/darkwebb/Anchor2.json",
-        "src/evm/contract/darkwebb/anchor2.rs",
-        "Anchor2Contract",
+        "contracts/darkwebb/Anchor.json",
+        "src/evm/contract/darkwebb/anchor.rs",
+        "AnchorContract",
     )
 }
 
-fn build_darkwebb_webb_anchor() -> Result<(), Box<dyn Error>> {
+fn build_darkwebb_anchor_proxy() -> Result<(), Box<dyn Error>> {
     parse_and_write_abigen(
-        "contracts/darkwebb/WEBBAnchor2.json",
-        "src/evm/contract/darkwebb/webb_anchor2.rs",
-        "WEBBAnchor2Contract",
+        "contracts/darkwebb/AnchorProxy.json",
+        "src/evm/contract/darkwebb/anchor_proxy.rs",
+        "AnchorProxyContract",
     )
 }
 
@@ -57,23 +57,14 @@ fn build_darkwebb_bridge() -> Result<(), Box<dyn Error>> {
     )
 }
 
-fn build_gov_bravo() -> Result<(), Box<dyn Error>> {
-    parse_and_write_abigen(
-        "contracts/darkwebb/GovernanceBravoDelegate.json",
-        "src/evm/contract/darkwebb/governance_bravo_delegate.rs",
-        "GovernanceBravoDelegateContract",
-    )
-}
-
 fn main() -> Result<(), Box<dyn Error>> {
     let generate_contracts_enabled =
         std::env::var_os("CARGO_FEATURE_GENERATE_CONTRACTS").is_some();
     if generate_contracts_enabled {
         build_tornado_anchor()?;
         build_darkwebb_anchor()?;
-        build_darkwebb_webb_anchor()?;
+        build_darkwebb_anchor_proxy()?;
         build_darkwebb_bridge()?;
-        build_gov_bravo()?;
     }
     Ok(())
 }
