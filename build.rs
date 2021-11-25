@@ -25,10 +25,10 @@ fn parse_and_write_abigen(
     Ok(())
 }
 
-fn build_tornado_anchor() -> Result<(), Box<dyn Error>> {
+fn build_tornado_contract() -> Result<(), Box<dyn Error>> {
     parse_and_write_abigen(
         "contracts/tornado/Tornado.json",
-        "src/evm/contract/tornado/tornado.rs",
+        "src/evm/contract/tornado/contract.rs",
         "TornadoContract",
     )
 }
@@ -61,7 +61,7 @@ fn main() -> Result<(), Box<dyn Error>> {
     let generate_contracts_enabled =
         std::env::var_os("CARGO_FEATURE_GENERATE_CONTRACTS").is_some();
     if generate_contracts_enabled {
-        build_tornado_anchor()?;
+        build_tornado_contract()?;
         build_darkwebb_anchor()?;
         build_darkwebb_anchor_proxy()?;
         build_darkwebb_bridge()?;

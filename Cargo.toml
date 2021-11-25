@@ -20,16 +20,13 @@ build = "build.rs"
 
 [dependencies]
 # Substrate crates.
-codec = { package = "parity-scale-codec", version = "2.0.0", features = ["derive", "full"], optional = true }
-ethereum-types = { version = "0.11", default-features = false, features = ["codec"], optional = true }
-frame-support = { version = "3.0.0", default-features = false, optional = true }
-ethers = { version = "0.5.1", default-features = false, features = ["legacy"], optional = true }
 async-trait = "0.1"
 rand = { version = "0.8", default-features = false, features = ["getrandom"] }
 thiserror = "1.0.26"
 hex = { version = "0.4", default-features = false }
 
 # EVM crates.
+ethers = { version = "0.6.0", default-features = false, features = ["legacy"], optional = true }
 serde_json = { version = "1", optional = true }
 pedersen = { version = "0.1", package = "webb-pedersen-hash", path = "pedersen-hash", optional = true }
 # just to make it compile on Linux where the OpenSSL is not available.
@@ -37,33 +34,26 @@ pedersen = { version = "0.1", package = "webb-pedersen-hash", path = "pedersen-h
 native-tls = { version = "^0.2", features = ["vendored"] }
 
 [dependencies.subxt]
-git = "https://github.com/paritytech/substrate-subxt.git"
+git = "https://github.com/paritytech/subxt.git"
 version = "0.15.0"
-rev = "08a3e65" # https://github.com/paritytech/substrate-subxt/commit/08a3e65
-package = "substrate-subxt"
+rev = "a701d80e" # https://github.com/paritytech/subxt/commit/a701d80e
 optional = true
 
 [dev-dependencies]
 tokio = { version = "^1", features = ["macros", "rt"] }
 anyhow = "^1"
-sp-keyring = "3.0.0"
+sp-keyring = { package = "sp-keyring", git = "https://github.com/paritytech/substrate/", branch = "master" }
 
 [build-dependencies]
 serde_json = "1"
 tempfile = "3.2"
-ethers = { version = "0.5.1", default-features = false, features = ["legacy"], optional = true }
+ethers = { version = "0.6.0", default-features = false, features = ["legacy"], optional = true }
 
 [features]
 default = ["substrate-runtime", "evm-runtime"]
-substrate-runtime = [
-    "subxt",
-    "codec",
-    "ethereum-types",
-    "frame-support",
-]
+substrate-runtime = ["subxt"]
 evm-runtime = [
     "ethers",
-    "ethereum-types",
     "serde_json",
     "pedersen"
 ]

@@ -1,8 +1,6 @@
-pub use ethereum_types;
 pub use ethers;
 
 pub mod contract;
-pub mod merkle_tree;
 pub mod note;
 
 #[cfg(all(test, feature = "integration-tests"))]
