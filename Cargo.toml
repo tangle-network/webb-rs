@@ -3,7 +3,7 @@ members = [".", "pedersen-hash"]
 
 [package]
 name = "webb"
-version = "0.2.4"
+version = "0.2.5"
 edition = "2018"
 authors = [
    "Webb Developers <devs@webb.tools>",
@@ -15,7 +15,7 @@ documentation = "https://docs.rs/webb"
 homepage = "https://www.webb.tools"
 description = "Webb SDK"
 keywords = ["webb", "sdk", "blockchain", "webb-tools"]
-include = ["Cargo.toml", "contracts/", "src/**/*.rs", "build.rs", "README.md", "LICENSE"]
+include = ["Cargo.toml", "contracts/", "metadata/", "src/**/*.rs", "build.rs", "README.md", "LICENSE"]
 build = "build.rs"
 
 [dependencies]
@@ -61,13 +61,17 @@ optional = true
 
 [features]
 default = ["substrate-runtime", "evm-runtime"]
+# Main features.
 substrate-runtime = ["subxt", "scale"]
 evm-runtime = [
     "ethers",
     "serde_json",
     "pedersen"
 ]
+
+# Tests
 integration-tests = []
+# Build
 generate-contracts = ["evm-runtime"]
 generate-substrate = ["subxt-codegen", "syn", "frame-metadata", "scale"]
 
