@@ -1,2 +1,2 @@
-pub mod tornado;
-pub use tornado::*;
+pub mod contract;
+pub use contract::*;

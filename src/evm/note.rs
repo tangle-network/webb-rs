@@ -2,7 +2,7 @@ use std::convert::TryInto;
 use std::fmt;
 use std::str::FromStr;
 
-use ethereum_types::H256;
+use ethers::core::types::H256;
 use rand::Rng;
 
 type H248 = [u8; 31];
