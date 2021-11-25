@@ -5,8 +5,3 @@
 )]
 
 pub mod dkg_runtime;
-
-#[cfg(all(test, feature = "integration-tests"))]
-mod tests {
-    use super::*;
-}
