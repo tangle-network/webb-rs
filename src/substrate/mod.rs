@@ -5,3 +5,6 @@
 )]
 
 pub mod dkg_runtime;
+
+pub use scale;
+pub use subxt;
