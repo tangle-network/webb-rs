@@ -97,6 +97,13 @@ mod substrate {
             "src/substrate/dkg_runtime.rs",
         )
     }
+
+    pub fn generate_protocol_substrate_runtime() -> Result<(), Box<dyn Error>> {
+        parse_and_generate_runtime(
+            "metadata/protocol-substrate-runtime.scale",
+            "src/substrate/protocol_substrate_runtime.rs",
+        )
+    }
 }
 
 fn main() -> Result<(), Box<dyn Error>> {
@@ -110,6 +117,7 @@ fn main() -> Result<(), Box<dyn Error>> {
     #[cfg(feature = "generate-substrate")]
     {
         substrate::generate_dkg_runtime()?;
+        substrate::generate_protocol_substrate_runtime()?;
     }
     Ok(())
 }
