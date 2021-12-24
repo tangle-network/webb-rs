@@ -724,11 +724,9 @@ mod bridgecontract_mod {
             }
             if let Ok(decoded) = RelayerThresholdChangedFilter::decode_log(log)
             {
-                return Ok(
-                    BridgeContractEvents::RelayerThresholdChangedFilter(
-                        decoded,
-                    ),
-                );
+                return Ok(BridgeContractEvents::RelayerThresholdChangedFilter(
+                    decoded,
+                ));
             }
             if let Ok(decoded) = RoleGrantedFilter::decode_log(log) {
                 return Ok(BridgeContractEvents::RoleGrantedFilter(decoded));

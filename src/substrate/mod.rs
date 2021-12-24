@@ -1,6 +1,7 @@
 #![allow(
     clippy::just_underscores_and_digits,
     clippy::type_complexity,
+    clippy::too_many_arguments,
     clippy::module_inception
 )]
 
