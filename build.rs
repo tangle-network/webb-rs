@@ -37,26 +37,27 @@ mod evm {
         )
     }
 
-    pub fn build_darkwebb_anchor() -> Result<(), Box<dyn Error>> {
+    pub fn build_protocol_solidity_anchor() -> Result<(), Box<dyn Error>> {
         parse_and_write_abigen(
-            "contracts/darkwebb/Anchor.json",
-            "src/evm/contract/darkwebb/anchor.rs",
+            "contracts/protocol-solidity/Anchor.json",
+            "src/evm/contract/protocol_solidity/anchor.rs",
             "AnchorContract",
         )
     }
 
-    pub fn build_darkwebb_anchor_proxy() -> Result<(), Box<dyn Error>> {
+    pub fn build_protocol_solidity_anchor_proxy() -> Result<(), Box<dyn Error>>
+    {
         parse_and_write_abigen(
-            "contracts/darkwebb/AnchorProxy.json",
-            "src/evm/contract/darkwebb/anchor_proxy.rs",
+            "contracts/protocol-solidity/AnchorProxy.json",
+            "src/evm/contract/protocol_solidity/anchor_proxy.rs",
             "AnchorProxyContract",
         )
     }
 
-    pub fn build_darkwebb_bridge() -> Result<(), Box<dyn Error>> {
+    pub fn build_protocol_solidity_bridge() -> Result<(), Box<dyn Error>> {
         parse_and_write_abigen(
-            "contracts/darkwebb/Bridge.json",
-            "src/evm/contract/darkwebb/bridge.rs",
+            "contracts/protocol-solidity/Bridge.json",
+            "src/evm/contract/protocol_solidity/bridge.rs",
             "BridgeContract",
         )
     }
@@ -110,9 +111,9 @@ fn main() -> Result<(), Box<dyn Error>> {
     #[cfg(feature = "generate-contracts")]
     {
         evm::build_tornado_contract()?;
-        evm::build_darkwebb_anchor()?;
-        evm::build_darkwebb_anchor_proxy()?;
-        evm::build_darkwebb_bridge()?;
+        evm::build_protocol_solidity_anchor()?;
+        evm::build_protocol_solidity_anchor_proxy()?;
+        evm::build_protocol_solidity_bridge()?;
     }
     #[cfg(feature = "generate-substrate")]
     {
