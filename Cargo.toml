@@ -37,7 +37,7 @@ native-tls = { version = "^0.2", features = ["vendored"] }
 [dependencies.subxt]
 git = "https://github.com/paritytech/subxt.git"
 version = "0.15.0"
-rev = "a701d80e" # https://github.com/paritytech/subxt/commit/a701d80e
+rev = "7aac7dfec" # https://github.com/paritytech/subxt/commit/7aac7dfec
 optional = true
 
 [dev-dependencies]
@@ -56,7 +56,7 @@ frame-metadata = { version = "14.0.0", features = ["v14", "std"], optional = tru
 [build-dependencies.subxt-codegen]
 git = "https://github.com/paritytech/subxt.git"
 version = "0.2.0"
-rev = "a701d80e" # https://github.com/paritytech/subxt/commit/a701d80e
+rev = "7aac7dfec" # https://github.com/paritytech/subxt/commit/7aac7dfec
 optional = true
 
 [features]

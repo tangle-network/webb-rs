@@ -206,7 +206,7 @@ pub mod api {
                 pub fn fill_block(
                     &self,
                     ratio: runtime_types::sp_arithmetic::per_things::Perbill,
-                ) -> ::subxt::SubmittableExtrinsic<T, FillBlock>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, FillBlock>
                 {
                     let call = FillBlock { ratio };
                     ::subxt::SubmittableExtrinsic::new(self.client, call)
@@ -214,14 +214,15 @@ pub mod api {
                 pub fn remark(
                     &self,
                     remark: ::std::vec::Vec<::core::primitive::u8>,
-                ) -> ::subxt::SubmittableExtrinsic<T, Remark> {
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, Remark>
+                {
                     let call = Remark { remark };
                     ::subxt::SubmittableExtrinsic::new(self.client, call)
                 }
                 pub fn set_heap_pages(
                     &self,
                     pages: ::core::primitive::u64,
-                ) -> ::subxt::SubmittableExtrinsic<T, SetHeapPages>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, SetHeapPages>
                 {
                     let call = SetHeapPages { pages };
                     ::subxt::SubmittableExtrinsic::new(self.client, call)
@@ -229,14 +230,15 @@ pub mod api {
                 pub fn set_code(
                     &self,
                     code: ::std::vec::Vec<::core::primitive::u8>,
-                ) -> ::subxt::SubmittableExtrinsic<T, SetCode> {
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, SetCode>
+                {
                     let call = SetCode { code };
                     ::subxt::SubmittableExtrinsic::new(self.client, call)
                 }
                 pub fn set_code_without_checks(
                     &self,
                     code: ::std::vec::Vec<::core::primitive::u8>,
-                ) -> ::subxt::SubmittableExtrinsic<T, SetCodeWithoutChecks>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, SetCodeWithoutChecks>
                 {
                     let call = SetCodeWithoutChecks { code };
                     ::subxt::SubmittableExtrinsic::new(self.client, call)
@@ -244,7 +246,7 @@ pub mod api {
                 pub fn set_changes_trie_config(
                     &self,
                     changes_trie_config : :: core :: option :: Option < runtime_types :: sp_core :: changes_trie :: ChangesTrieConfiguration >,
-                ) -> ::subxt::SubmittableExtrinsic<T, SetChangesTrieConfig>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, SetChangesTrieConfig>
                 {
                     let call = SetChangesTrieConfig {
                         changes_trie_config,
@@ -257,7 +259,7 @@ pub mod api {
                         ::std::vec::Vec<::core::primitive::u8>,
                         ::std::vec::Vec<::core::primitive::u8>,
                     )>,
-                ) -> ::subxt::SubmittableExtrinsic<T, SetStorage>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, SetStorage>
                 {
                     let call = SetStorage { items };
                     ::subxt::SubmittableExtrinsic::new(self.client, call)
@@ -267,7 +269,7 @@ pub mod api {
                     keys: ::std::vec::Vec<
                         ::std::vec::Vec<::core::primitive::u8>,
                     >,
-                ) -> ::subxt::SubmittableExtrinsic<T, KillStorage>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, KillStorage>
                 {
                     let call = KillStorage { keys };
                     ::subxt::SubmittableExtrinsic::new(self.client, call)
@@ -276,7 +278,7 @@ pub mod api {
                     &self,
                     prefix: ::std::vec::Vec<::core::primitive::u8>,
                     subkeys: ::core::primitive::u32,
-                ) -> ::subxt::SubmittableExtrinsic<T, KillPrefix>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, KillPrefix>
                 {
                     let call = KillPrefix { prefix, subkeys };
                     ::subxt::SubmittableExtrinsic::new(self.client, call)
@@ -284,7 +286,7 @@ pub mod api {
                 pub fn remark_with_event(
                     &self,
                     remark: ::std::vec::Vec<::core::primitive::u8>,
-                ) -> ::subxt::SubmittableExtrinsic<T, RemarkWithEvent>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, RemarkWithEvent>
                 {
                     let call = RemarkWithEvent { remark };
                     ::subxt::SubmittableExtrinsic::new(self.client, call)
@@ -829,7 +831,7 @@ pub mod api {
                 pub fn set(
                     &self,
                     now: ::core::primitive::u64,
-                ) -> ::subxt::SubmittableExtrinsic<T, Set> {
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, Set> {
                     let call = Set { now };
                     ::subxt::SubmittableExtrinsic::new(self.client, call)
                 }
@@ -950,7 +952,7 @@ pub mod api {
                     &self,
                     equivocation_proof : runtime_types :: sp_consensus_slots :: EquivocationProof < runtime_types :: sp_runtime :: generic :: header :: Header < :: core :: primitive :: u32 , runtime_types :: sp_runtime :: traits :: BlakeTwo256 > , runtime_types :: sp_consensus_babe :: app :: Public >,
                     key_owner_proof: runtime_types::sp_session::MembershipProof,
-                ) -> ::subxt::SubmittableExtrinsic<T, ReportEquivocation>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, ReportEquivocation>
                 {
                     let call = ReportEquivocation {
                         equivocation_proof,
@@ -962,8 +964,11 @@ pub mod api {
                     &self,
                     equivocation_proof : runtime_types :: sp_consensus_slots :: EquivocationProof < runtime_types :: sp_runtime :: generic :: header :: Header < :: core :: primitive :: u32 , runtime_types :: sp_runtime :: traits :: BlakeTwo256 > , runtime_types :: sp_consensus_babe :: app :: Public >,
                     key_owner_proof: runtime_types::sp_session::MembershipProof,
-                ) -> ::subxt::SubmittableExtrinsic<T, ReportEquivocationUnsigned>
-                {
+                ) -> ::subxt::SubmittableExtrinsic<
+                    'a,
+                    T,
+                    ReportEquivocationUnsigned,
+                > {
                     let call = ReportEquivocationUnsigned {
                         equivocation_proof,
                         key_owner_proof,
@@ -973,7 +978,7 @@ pub mod api {
                 pub fn plan_config_change(
                     &self,
                     config : runtime_types :: sp_consensus_babe :: digests :: NextConfigDescriptor,
-                ) -> ::subxt::SubmittableExtrinsic<T, PlanConfigChange>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, PlanConfigChange>
                 {
                     let call = PlanConfigChange { config };
                     ::subxt::SubmittableExtrinsic::new(self.client, call)
@@ -1316,7 +1321,7 @@ pub mod api {
                             runtime_types::sp_runtime::traits::BlakeTwo256,
                         >,
                     >,
-                ) -> ::subxt::SubmittableExtrinsic<T, SetUncles>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, SetUncles>
                 {
                     let call = SetUncles { new_uncles };
                     ::subxt::SubmittableExtrinsic::new(self.client, call)
@@ -1479,7 +1484,8 @@ pub mod api {
                 pub fn claim(
                     &self,
                     index: ::core::primitive::u32,
-                ) -> ::subxt::SubmittableExtrinsic<T, Claim> {
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, Claim>
+                {
                     let call = Claim { index };
                     ::subxt::SubmittableExtrinsic::new(self.client, call)
                 }
@@ -1487,7 +1493,7 @@ pub mod api {
                     &self,
                     new: ::subxt::sp_core::crypto::AccountId32,
                     index: ::core::primitive::u32,
-                ) -> ::subxt::SubmittableExtrinsic<T, Transfer>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, Transfer>
                 {
                     let call = Transfer { new, index };
                     ::subxt::SubmittableExtrinsic::new(self.client, call)
@@ -1495,7 +1501,8 @@ pub mod api {
                 pub fn free(
                     &self,
                     index: ::core::primitive::u32,
-                ) -> ::subxt::SubmittableExtrinsic<T, Free> {
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, Free>
+                {
                     let call = Free { index };
                     ::subxt::SubmittableExtrinsic::new(self.client, call)
                 }
@@ -1504,7 +1511,7 @@ pub mod api {
                     new: ::subxt::sp_core::crypto::AccountId32,
                     index: ::core::primitive::u32,
                     freeze: ::core::primitive::bool,
-                ) -> ::subxt::SubmittableExtrinsic<T, ForceTransfer>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, ForceTransfer>
                 {
                     let call = ForceTransfer { new, index, freeze };
                     ::subxt::SubmittableExtrinsic::new(self.client, call)
@@ -1512,7 +1519,8 @@ pub mod api {
                 pub fn freeze(
                     &self,
                     index: ::core::primitive::u32,
-                ) -> ::subxt::SubmittableExtrinsic<T, Freeze> {
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, Freeze>
+                {
                     let call = Freeze { index };
                     ::subxt::SubmittableExtrinsic::new(self.client, call)
                 }
@@ -1724,7 +1732,7 @@ pub mod api {
                         ::core::primitive::u32,
                     >,
                     value: ::core::primitive::u128,
-                ) -> ::subxt::SubmittableExtrinsic<T, Transfer>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, Transfer>
                 {
                     let call = Transfer { dest, value };
                     ::subxt::SubmittableExtrinsic::new(self.client, call)
@@ -1737,7 +1745,7 @@ pub mod api {
                     >,
                     new_free: ::core::primitive::u128,
                     new_reserved: ::core::primitive::u128,
-                ) -> ::subxt::SubmittableExtrinsic<T, SetBalance>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, SetBalance>
                 {
                     let call = SetBalance {
                         who,
@@ -1757,7 +1765,7 @@ pub mod api {
                         ::core::primitive::u32,
                     >,
                     value: ::core::primitive::u128,
-                ) -> ::subxt::SubmittableExtrinsic<T, ForceTransfer>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, ForceTransfer>
                 {
                     let call = ForceTransfer {
                         source,
@@ -1773,7 +1781,7 @@ pub mod api {
                         ::core::primitive::u32,
                     >,
                     value: ::core::primitive::u128,
-                ) -> ::subxt::SubmittableExtrinsic<T, TransferKeepAlive>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, TransferKeepAlive>
                 {
                     let call = TransferKeepAlive { dest, value };
                     ::subxt::SubmittableExtrinsic::new(self.client, call)
@@ -1785,7 +1793,7 @@ pub mod api {
                         ::core::primitive::u32,
                     >,
                     keep_alive: ::core::primitive::bool,
-                ) -> ::subxt::SubmittableExtrinsic<T, TransferAll>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, TransferAll>
                 {
                     let call = TransferAll { dest, keep_alive };
                     ::subxt::SubmittableExtrinsic::new(self.client, call)
@@ -1797,7 +1805,7 @@ pub mod api {
                         ::core::primitive::u32,
                     >,
                     amount: ::core::primitive::u128,
-                ) -> ::subxt::SubmittableExtrinsic<T, ForceUnreserve>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, ForceUnreserve>
                 {
                     let call = ForceUnreserve { who, amount };
                     ::subxt::SubmittableExtrinsic::new(self.client, call)
@@ -2174,7 +2182,7 @@ pub mod api {
                     &self,
                     raw_solution : runtime_types :: pallet_election_provider_multi_phase :: RawSolution < runtime_types :: darkwebb_standalone_runtime :: NposSolution16 >,
                     witness : runtime_types :: pallet_election_provider_multi_phase :: SolutionOrSnapshotSize,
-                ) -> ::subxt::SubmittableExtrinsic<T, SubmitUnsigned>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, SubmitUnsigned>
                 {
                     let call = SubmitUnsigned {
                         raw_solution,
@@ -2187,8 +2195,11 @@ pub mod api {
                     maybe_next_score: ::core::option::Option<
                         [::core::primitive::u128; 3usize],
                     >,
-                ) -> ::subxt::SubmittableExtrinsic<T, SetMinimumUntrustedScore>
-                {
+                ) -> ::subxt::SubmittableExtrinsic<
+                    'a,
+                    T,
+                    SetMinimumUntrustedScore,
+                > {
                     let call = SetMinimumUntrustedScore { maybe_next_score };
                     ::subxt::SubmittableExtrinsic::new(self.client, call)
                 }
@@ -2200,8 +2211,11 @@ pub mod api {
                             ::subxt::sp_core::crypto::AccountId32,
                         >,
                     )>,
-                ) -> ::subxt::SubmittableExtrinsic<T, SetEmergencyElectionResult>
-                {
+                ) -> ::subxt::SubmittableExtrinsic<
+                    'a,
+                    T,
+                    SetEmergencyElectionResult,
+                > {
                     let call = SetEmergencyElectionResult { supports };
                     ::subxt::SubmittableExtrinsic::new(self.client, call)
                 }
@@ -2209,7 +2223,8 @@ pub mod api {
                     &self,
                     raw_solution : runtime_types :: pallet_election_provider_multi_phase :: RawSolution < runtime_types :: darkwebb_standalone_runtime :: NposSolution16 >,
                     num_signed_submissions: ::core::primitive::u32,
-                ) -> ::subxt::SubmittableExtrinsic<T, Submit> {
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, Submit>
+                {
                     let call = Submit {
                         raw_solution,
                         num_signed_submissions,
@@ -2776,7 +2791,8 @@ pub mod api {
                     payee: runtime_types::pallet_staking::RewardDestination<
                         ::subxt::sp_core::crypto::AccountId32,
                     >,
-                ) -> ::subxt::SubmittableExtrinsic<T, Bond> {
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, Bond>
+                {
                     let call = Bond {
                         controller,
                         value,
@@ -2787,7 +2803,7 @@ pub mod api {
                 pub fn bond_extra(
                     &self,
                     max_additional: ::core::primitive::u128,
-                ) -> ::subxt::SubmittableExtrinsic<T, BondExtra>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, BondExtra>
                 {
                     let call = BondExtra { max_additional };
                     ::subxt::SubmittableExtrinsic::new(self.client, call)
@@ -2795,14 +2811,15 @@ pub mod api {
                 pub fn unbond(
                     &self,
                     value: ::core::primitive::u128,
-                ) -> ::subxt::SubmittableExtrinsic<T, Unbond> {
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, Unbond>
+                {
                     let call = Unbond { value };
                     ::subxt::SubmittableExtrinsic::new(self.client, call)
                 }
                 pub fn withdraw_unbonded(
                     &self,
                     num_slashing_spans: ::core::primitive::u32,
-                ) -> ::subxt::SubmittableExtrinsic<T, WithdrawUnbonded>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, WithdrawUnbonded>
                 {
                     let call = WithdrawUnbonded { num_slashing_spans };
                     ::subxt::SubmittableExtrinsic::new(self.client, call)
@@ -2810,7 +2827,7 @@ pub mod api {
                 pub fn validate(
                     &self,
                     prefs: runtime_types::pallet_staking::ValidatorPrefs,
-                ) -> ::subxt::SubmittableExtrinsic<T, Validate>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, Validate>
                 {
                     let call = Validate { prefs };
                     ::subxt::SubmittableExtrinsic::new(self.client, call)
@@ -2823,12 +2840,15 @@ pub mod api {
                             ::core::primitive::u32,
                         >,
                     >,
-                ) -> ::subxt::SubmittableExtrinsic<T, Nominate>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, Nominate>
                 {
                     let call = Nominate { targets };
                     ::subxt::SubmittableExtrinsic::new(self.client, call)
                 }
-                pub fn chill(&self) -> ::subxt::SubmittableExtrinsic<T, Chill> {
+                pub fn chill(
+                    &self,
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, Chill>
+                {
                     let call = Chill {};
                     ::subxt::SubmittableExtrinsic::new(self.client, call)
                 }
@@ -2837,7 +2857,7 @@ pub mod api {
                     payee: runtime_types::pallet_staking::RewardDestination<
                         ::subxt::sp_core::crypto::AccountId32,
                     >,
-                ) -> ::subxt::SubmittableExtrinsic<T, SetPayee>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, SetPayee>
                 {
                     let call = SetPayee { payee };
                     ::subxt::SubmittableExtrinsic::new(self.client, call)
@@ -2848,7 +2868,7 @@ pub mod api {
                         ::subxt::sp_core::crypto::AccountId32,
                         ::core::primitive::u32,
                     >,
-                ) -> ::subxt::SubmittableExtrinsic<T, SetController>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, SetController>
                 {
                     let call = SetController { controller };
                     ::subxt::SubmittableExtrinsic::new(self.client, call)
@@ -2856,7 +2876,7 @@ pub mod api {
                 pub fn set_validator_count(
                     &self,
                     new: ::core::primitive::u32,
-                ) -> ::subxt::SubmittableExtrinsic<T, SetValidatorCount>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, SetValidatorCount>
                 {
                     let call = SetValidatorCount { new };
                     ::subxt::SubmittableExtrinsic::new(self.client, call)
@@ -2864,7 +2884,7 @@ pub mod api {
                 pub fn increase_validator_count(
                     &self,
                     additional: ::core::primitive::u32,
-                ) -> ::subxt::SubmittableExtrinsic<T, IncreaseValidatorCount>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, IncreaseValidatorCount>
                 {
                     let call = IncreaseValidatorCount { additional };
                     ::subxt::SubmittableExtrinsic::new(self.client, call)
@@ -2872,21 +2892,21 @@ pub mod api {
                 pub fn scale_validator_count(
                     &self,
                     factor: runtime_types::sp_arithmetic::per_things::Percent,
-                ) -> ::subxt::SubmittableExtrinsic<T, ScaleValidatorCount>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, ScaleValidatorCount>
                 {
                     let call = ScaleValidatorCount { factor };
                     ::subxt::SubmittableExtrinsic::new(self.client, call)
                 }
                 pub fn force_no_eras(
                     &self,
-                ) -> ::subxt::SubmittableExtrinsic<T, ForceNoEras>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, ForceNoEras>
                 {
                     let call = ForceNoEras {};
                     ::subxt::SubmittableExtrinsic::new(self.client, call)
                 }
                 pub fn force_new_era(
                     &self,
-                ) -> ::subxt::SubmittableExtrinsic<T, ForceNewEra>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, ForceNewEra>
                 {
                     let call = ForceNewEra {};
                     ::subxt::SubmittableExtrinsic::new(self.client, call)
@@ -2896,7 +2916,7 @@ pub mod api {
                     invulnerables: ::std::vec::Vec<
                         ::subxt::sp_core::crypto::AccountId32,
                     >,
-                ) -> ::subxt::SubmittableExtrinsic<T, SetInvulnerables>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, SetInvulnerables>
                 {
                     let call = SetInvulnerables { invulnerables };
                     ::subxt::SubmittableExtrinsic::new(self.client, call)
@@ -2905,7 +2925,7 @@ pub mod api {
                     &self,
                     stash: ::subxt::sp_core::crypto::AccountId32,
                     num_slashing_spans: ::core::primitive::u32,
-                ) -> ::subxt::SubmittableExtrinsic<T, ForceUnstake>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, ForceUnstake>
                 {
                     let call = ForceUnstake {
                         stash,
@@ -2915,7 +2935,7 @@ pub mod api {
                 }
                 pub fn force_new_era_always(
                     &self,
-                ) -> ::subxt::SubmittableExtrinsic<T, ForceNewEraAlways>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, ForceNewEraAlways>
                 {
                     let call = ForceNewEraAlways {};
                     ::subxt::SubmittableExtrinsic::new(self.client, call)
@@ -2924,7 +2944,7 @@ pub mod api {
                     &self,
                     era: ::core::primitive::u32,
                     slash_indices: ::std::vec::Vec<::core::primitive::u32>,
-                ) -> ::subxt::SubmittableExtrinsic<T, CancelDeferredSlash>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, CancelDeferredSlash>
                 {
                     let call = CancelDeferredSlash { era, slash_indices };
                     ::subxt::SubmittableExtrinsic::new(self.client, call)
@@ -2933,7 +2953,7 @@ pub mod api {
                     &self,
                     validator_stash: ::subxt::sp_core::crypto::AccountId32,
                     era: ::core::primitive::u32,
-                ) -> ::subxt::SubmittableExtrinsic<T, PayoutStakers>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, PayoutStakers>
                 {
                     let call = PayoutStakers {
                         validator_stash,
@@ -2944,7 +2964,8 @@ pub mod api {
                 pub fn rebond(
                     &self,
                     value: ::core::primitive::u128,
-                ) -> ::subxt::SubmittableExtrinsic<T, Rebond> {
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, Rebond>
+                {
                     let call = Rebond { value };
                     ::subxt::SubmittableExtrinsic::new(self.client, call)
                 }
@@ -2952,7 +2973,7 @@ pub mod api {
                     &self,
                     new_history_depth: ::core::primitive::u32,
                     era_items_deleted: ::core::primitive::u32,
-                ) -> ::subxt::SubmittableExtrinsic<T, SetHistoryDepth>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, SetHistoryDepth>
                 {
                     let call = SetHistoryDepth {
                         new_history_depth,
@@ -2964,7 +2985,7 @@ pub mod api {
                     &self,
                     stash: ::subxt::sp_core::crypto::AccountId32,
                     num_slashing_spans: ::core::primitive::u32,
-                ) -> ::subxt::SubmittableExtrinsic<T, ReapStash>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, ReapStash>
                 {
                     let call = ReapStash {
                         stash,
@@ -2980,7 +3001,8 @@ pub mod api {
                             ::core::primitive::u32,
                         >,
                     >,
-                ) -> ::subxt::SubmittableExtrinsic<T, Kick> {
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, Kick>
+                {
                     let call = Kick { who };
                     ::subxt::SubmittableExtrinsic::new(self.client, call)
                 }
@@ -2997,7 +3019,7 @@ pub mod api {
                     threshold: ::core::option::Option<
                         runtime_types::sp_arithmetic::per_things::Percent,
                     >,
-                ) -> ::subxt::SubmittableExtrinsic<T, SetStakingLimits>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, SetStakingLimits>
                 {
                     let call = SetStakingLimits {
                         min_nominator_bond,
@@ -3011,7 +3033,7 @@ pub mod api {
                 pub fn chill_other(
                     &self,
                     controller: ::subxt::sp_core::crypto::AccountId32,
-                ) -> ::subxt::SubmittableExtrinsic<T, ChillOther>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, ChillOther>
                 {
                     let call = ChillOther { controller };
                     ::subxt::SubmittableExtrinsic::new(self.client, call)
@@ -4294,13 +4316,14 @@ pub mod api {
                     &self,
                     keys : runtime_types :: darkwebb_standalone_runtime :: SessionKeys,
                     proof: ::std::vec::Vec<::core::primitive::u8>,
-                ) -> ::subxt::SubmittableExtrinsic<T, SetKeys> {
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, SetKeys>
+                {
                     let call = SetKeys { keys, proof };
                     ::subxt::SubmittableExtrinsic::new(self.client, call)
                 }
                 pub fn purge_keys(
                     &self,
-                ) -> ::subxt::SubmittableExtrinsic<T, PurgeKeys>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, PurgeKeys>
                 {
                     let call = PurgeKeys {};
                     ::subxt::SubmittableExtrinsic::new(self.client, call)
@@ -4800,7 +4823,8 @@ pub mod api {
                     &self,
                     proposal_hash: ::subxt::sp_core::H256,
                     value: ::core::primitive::u128,
-                ) -> ::subxt::SubmittableExtrinsic<T, Propose> {
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, Propose>
+                {
                     let call = Propose {
                         proposal_hash,
                         value,
@@ -4811,7 +4835,8 @@ pub mod api {
                     &self,
                     proposal: ::core::primitive::u32,
                     seconds_upper_bound: ::core::primitive::u32,
-                ) -> ::subxt::SubmittableExtrinsic<T, Second> {
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, Second>
+                {
                     let call = Second {
                         proposal,
                         seconds_upper_bound,
@@ -4824,14 +4849,15 @@ pub mod api {
                     vote: runtime_types::pallet_democracy::vote::AccountVote<
                         ::core::primitive::u128,
                     >,
-                ) -> ::subxt::SubmittableExtrinsic<T, Vote> {
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, Vote>
+                {
                     let call = Vote { ref_index, vote };
                     ::subxt::SubmittableExtrinsic::new(self.client, call)
                 }
                 pub fn emergency_cancel(
                     &self,
                     ref_index: ::core::primitive::u32,
-                ) -> ::subxt::SubmittableExtrinsic<T, EmergencyCancel>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, EmergencyCancel>
                 {
                     let call = EmergencyCancel { ref_index };
                     ::subxt::SubmittableExtrinsic::new(self.client, call)
@@ -4839,7 +4865,7 @@ pub mod api {
                 pub fn external_propose(
                     &self,
                     proposal_hash: ::subxt::sp_core::H256,
-                ) -> ::subxt::SubmittableExtrinsic<T, ExternalPropose>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, ExternalPropose>
                 {
                     let call = ExternalPropose { proposal_hash };
                     ::subxt::SubmittableExtrinsic::new(self.client, call)
@@ -4847,7 +4873,7 @@ pub mod api {
                 pub fn external_propose_majority(
                     &self,
                     proposal_hash: ::subxt::sp_core::H256,
-                ) -> ::subxt::SubmittableExtrinsic<T, ExternalProposeMajority>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, ExternalProposeMajority>
                 {
                     let call = ExternalProposeMajority { proposal_hash };
                     ::subxt::SubmittableExtrinsic::new(self.client, call)
@@ -4855,7 +4881,7 @@ pub mod api {
                 pub fn external_propose_default(
                     &self,
                     proposal_hash: ::subxt::sp_core::H256,
-                ) -> ::subxt::SubmittableExtrinsic<T, ExternalProposeDefault>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, ExternalProposeDefault>
                 {
                     let call = ExternalProposeDefault { proposal_hash };
                     ::subxt::SubmittableExtrinsic::new(self.client, call)
@@ -4865,7 +4891,7 @@ pub mod api {
                     proposal_hash: ::subxt::sp_core::H256,
                     voting_period: ::core::primitive::u32,
                     delay: ::core::primitive::u32,
-                ) -> ::subxt::SubmittableExtrinsic<T, FastTrack>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, FastTrack>
                 {
                     let call = FastTrack {
                         proposal_hash,
@@ -4877,7 +4903,7 @@ pub mod api {
                 pub fn veto_external(
                     &self,
                     proposal_hash: ::subxt::sp_core::H256,
-                ) -> ::subxt::SubmittableExtrinsic<T, VetoExternal>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, VetoExternal>
                 {
                     let call = VetoExternal { proposal_hash };
                     ::subxt::SubmittableExtrinsic::new(self.client, call)
@@ -4885,7 +4911,7 @@ pub mod api {
                 pub fn cancel_referendum(
                     &self,
                     ref_index: ::core::primitive::u32,
-                ) -> ::subxt::SubmittableExtrinsic<T, CancelReferendum>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, CancelReferendum>
                 {
                     let call = CancelReferendum { ref_index };
                     ::subxt::SubmittableExtrinsic::new(self.client, call)
@@ -4893,7 +4919,7 @@ pub mod api {
                 pub fn cancel_queued(
                     &self,
                     which: ::core::primitive::u32,
-                ) -> ::subxt::SubmittableExtrinsic<T, CancelQueued>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, CancelQueued>
                 {
                     let call = CancelQueued { which };
                     ::subxt::SubmittableExtrinsic::new(self.client, call)
@@ -4903,7 +4929,7 @@ pub mod api {
                     to: ::subxt::sp_core::crypto::AccountId32,
                     conviction : runtime_types :: pallet_democracy :: conviction :: Conviction,
                     balance: ::core::primitive::u128,
-                ) -> ::subxt::SubmittableExtrinsic<T, Delegate>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, Delegate>
                 {
                     let call = Delegate {
                         to,
@@ -4914,14 +4940,14 @@ pub mod api {
                 }
                 pub fn undelegate(
                     &self,
-                ) -> ::subxt::SubmittableExtrinsic<T, Undelegate>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, Undelegate>
                 {
                     let call = Undelegate {};
                     ::subxt::SubmittableExtrinsic::new(self.client, call)
                 }
                 pub fn clear_public_proposals(
                     &self,
-                ) -> ::subxt::SubmittableExtrinsic<T, ClearPublicProposals>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, ClearPublicProposals>
                 {
                     let call = ClearPublicProposals {};
                     ::subxt::SubmittableExtrinsic::new(self.client, call)
@@ -4929,7 +4955,7 @@ pub mod api {
                 pub fn note_preimage(
                     &self,
                     encoded_proposal: ::std::vec::Vec<::core::primitive::u8>,
-                ) -> ::subxt::SubmittableExtrinsic<T, NotePreimage>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, NotePreimage>
                 {
                     let call = NotePreimage { encoded_proposal };
                     ::subxt::SubmittableExtrinsic::new(self.client, call)
@@ -4937,7 +4963,7 @@ pub mod api {
                 pub fn note_preimage_operational(
                     &self,
                     encoded_proposal: ::std::vec::Vec<::core::primitive::u8>,
-                ) -> ::subxt::SubmittableExtrinsic<T, NotePreimageOperational>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, NotePreimageOperational>
                 {
                     let call = NotePreimageOperational { encoded_proposal };
                     ::subxt::SubmittableExtrinsic::new(self.client, call)
@@ -4945,7 +4971,7 @@ pub mod api {
                 pub fn note_imminent_preimage(
                     &self,
                     encoded_proposal: ::std::vec::Vec<::core::primitive::u8>,
-                ) -> ::subxt::SubmittableExtrinsic<T, NoteImminentPreimage>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, NoteImminentPreimage>
                 {
                     let call = NoteImminentPreimage { encoded_proposal };
                     ::subxt::SubmittableExtrinsic::new(self.client, call)
@@ -4954,6 +4980,7 @@ pub mod api {
                     &self,
                     encoded_proposal: ::std::vec::Vec<::core::primitive::u8>,
                 ) -> ::subxt::SubmittableExtrinsic<
+                    'a,
                     T,
                     NoteImminentPreimageOperational,
                 > {
@@ -4965,7 +4992,7 @@ pub mod api {
                     &self,
                     proposal_hash: ::subxt::sp_core::H256,
                     proposal_len_upper_bound: ::core::primitive::u32,
-                ) -> ::subxt::SubmittableExtrinsic<T, ReapPreimage>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, ReapPreimage>
                 {
                     let call = ReapPreimage {
                         proposal_hash,
@@ -4976,14 +5003,15 @@ pub mod api {
                 pub fn unlock(
                     &self,
                     target: ::subxt::sp_core::crypto::AccountId32,
-                ) -> ::subxt::SubmittableExtrinsic<T, Unlock> {
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, Unlock>
+                {
                     let call = Unlock { target };
                     ::subxt::SubmittableExtrinsic::new(self.client, call)
                 }
                 pub fn remove_vote(
                     &self,
                     index: ::core::primitive::u32,
-                ) -> ::subxt::SubmittableExtrinsic<T, RemoveVote>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, RemoveVote>
                 {
                     let call = RemoveVote { index };
                     ::subxt::SubmittableExtrinsic::new(self.client, call)
@@ -4992,7 +5020,7 @@ pub mod api {
                     &self,
                     target: ::subxt::sp_core::crypto::AccountId32,
                     index: ::core::primitive::u32,
-                ) -> ::subxt::SubmittableExtrinsic<T, RemoveOtherVote>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, RemoveOtherVote>
                 {
                     let call = RemoveOtherVote { target, index };
                     ::subxt::SubmittableExtrinsic::new(self.client, call)
@@ -5001,7 +5029,7 @@ pub mod api {
                     &self,
                     proposal_hash: ::subxt::sp_core::H256,
                     index: ::core::primitive::u32,
-                ) -> ::subxt::SubmittableExtrinsic<T, EnactProposal>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, EnactProposal>
                 {
                     let call = EnactProposal {
                         proposal_hash,
@@ -5015,7 +5043,7 @@ pub mod api {
                     maybe_ref_index: ::core::option::Option<
                         ::core::primitive::u32,
                     >,
-                ) -> ::subxt::SubmittableExtrinsic<T, Blacklist>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, Blacklist>
                 {
                     let call = Blacklist {
                         proposal_hash,
@@ -5026,7 +5054,7 @@ pub mod api {
                 pub fn cancel_proposal(
                     &self,
                     prop_index: ::core::primitive::u32,
-                ) -> ::subxt::SubmittableExtrinsic<T, CancelProposal>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, CancelProposal>
                 {
                     let call = CancelProposal { prop_index };
                     ::subxt::SubmittableExtrinsic::new(self.client, call)
@@ -5745,7 +5773,7 @@ pub mod api {
                         ::subxt::sp_core::crypto::AccountId32,
                     >,
                     old_count: ::core::primitive::u32,
-                ) -> ::subxt::SubmittableExtrinsic<T, SetMembers>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, SetMembers>
                 {
                     let call = SetMembers {
                         new_members,
@@ -5758,7 +5786,8 @@ pub mod api {
                     &self,
                     proposal: runtime_types::darkwebb_standalone_runtime::Call,
                     length_bound: ::core::primitive::u32,
-                ) -> ::subxt::SubmittableExtrinsic<T, Execute> {
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, Execute>
+                {
                     let call = Execute {
                         proposal,
                         length_bound,
@@ -5770,7 +5799,8 @@ pub mod api {
                     threshold: ::core::primitive::u32,
                     proposal: runtime_types::darkwebb_standalone_runtime::Call,
                     length_bound: ::core::primitive::u32,
-                ) -> ::subxt::SubmittableExtrinsic<T, Propose> {
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, Propose>
+                {
                     let call = Propose {
                         threshold,
                         proposal,
@@ -5783,7 +5813,8 @@ pub mod api {
                     proposal: ::subxt::sp_core::H256,
                     index: ::core::primitive::u32,
                     approve: ::core::primitive::bool,
-                ) -> ::subxt::SubmittableExtrinsic<T, Vote> {
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, Vote>
+                {
                     let call = Vote {
                         proposal,
                         index,
@@ -5797,7 +5828,8 @@ pub mod api {
                     index: ::core::primitive::u32,
                     proposal_weight_bound: ::core::primitive::u64,
                     length_bound: ::core::primitive::u32,
-                ) -> ::subxt::SubmittableExtrinsic<T, Close> {
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, Close>
+                {
                     let call = Close {
                         proposal_hash,
                         index,
@@ -5809,7 +5841,7 @@ pub mod api {
                 pub fn disapprove_proposal(
                     &self,
                     proposal_hash: ::subxt::sp_core::H256,
-                ) -> ::subxt::SubmittableExtrinsic<T, DisapproveProposal>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, DisapproveProposal>
                 {
                     let call = DisapproveProposal { proposal_hash };
                     ::subxt::SubmittableExtrinsic::new(self.client, call)
@@ -6156,13 +6188,14 @@ pub mod api {
                         ::subxt::sp_core::crypto::AccountId32,
                     >,
                     value: ::core::primitive::u128,
-                ) -> ::subxt::SubmittableExtrinsic<T, Vote> {
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, Vote>
+                {
                     let call = Vote { votes, value };
                     ::subxt::SubmittableExtrinsic::new(self.client, call)
                 }
                 pub fn remove_voter(
                     &self,
-                ) -> ::subxt::SubmittableExtrinsic<T, RemoveVoter>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, RemoveVoter>
                 {
                     let call = RemoveVoter {};
                     ::subxt::SubmittableExtrinsic::new(self.client, call)
@@ -6170,7 +6203,7 @@ pub mod api {
                 pub fn submit_candidacy(
                     &self,
                     candidate_count: ::core::primitive::u32,
-                ) -> ::subxt::SubmittableExtrinsic<T, SubmitCandidacy>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, SubmitCandidacy>
                 {
                     let call = SubmitCandidacy { candidate_count };
                     ::subxt::SubmittableExtrinsic::new(self.client, call)
@@ -6178,7 +6211,7 @@ pub mod api {
                 pub fn renounce_candidacy(
                     &self,
                     renouncing : runtime_types :: pallet_elections_phragmen :: Renouncing,
-                ) -> ::subxt::SubmittableExtrinsic<T, RenounceCandidacy>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, RenounceCandidacy>
                 {
                     let call = RenounceCandidacy { renouncing };
                     ::subxt::SubmittableExtrinsic::new(self.client, call)
@@ -6190,7 +6223,7 @@ pub mod api {
                         ::core::primitive::u32,
                     >,
                     has_replacement: ::core::primitive::bool,
-                ) -> ::subxt::SubmittableExtrinsic<T, RemoveMember>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, RemoveMember>
                 {
                     let call = RemoveMember {
                         who,
@@ -6202,7 +6235,7 @@ pub mod api {
                     &self,
                     num_voters: ::core::primitive::u32,
                     num_defunct: ::core::primitive::u32,
-                ) -> ::subxt::SubmittableExtrinsic<T, CleanDefunctVoters>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, CleanDefunctVoters>
                 {
                     let call = CleanDefunctVoters {
                         num_voters,
@@ -6500,7 +6533,7 @@ pub mod api {
                     &self,
                     equivocation_proof : runtime_types :: sp_finality_grandpa :: EquivocationProof < :: subxt :: sp_core :: H256 , :: core :: primitive :: u32 >,
                     key_owner_proof: runtime_types::sp_session::MembershipProof,
-                ) -> ::subxt::SubmittableExtrinsic<T, ReportEquivocation>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, ReportEquivocation>
                 {
                     let call = ReportEquivocation {
                         equivocation_proof,
@@ -6512,8 +6545,11 @@ pub mod api {
                     &self,
                     equivocation_proof : runtime_types :: sp_finality_grandpa :: EquivocationProof < :: subxt :: sp_core :: H256 , :: core :: primitive :: u32 >,
                     key_owner_proof: runtime_types::sp_session::MembershipProof,
-                ) -> ::subxt::SubmittableExtrinsic<T, ReportEquivocationUnsigned>
-                {
+                ) -> ::subxt::SubmittableExtrinsic<
+                    'a,
+                    T,
+                    ReportEquivocationUnsigned,
+                > {
                     let call = ReportEquivocationUnsigned {
                         equivocation_proof,
                         key_owner_proof,
@@ -6524,7 +6560,7 @@ pub mod api {
                     &self,
                     delay: ::core::primitive::u32,
                     best_finalized_block_number: ::core::primitive::u32,
-                ) -> ::subxt::SubmittableExtrinsic<T, NoteStalled>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, NoteStalled>
                 {
                     let call = NoteStalled {
                         delay,
@@ -6782,7 +6818,7 @@ pub mod api {
                         ::subxt::sp_core::crypto::AccountId32,
                         ::core::primitive::u32,
                     >,
-                ) -> ::subxt::SubmittableExtrinsic<T, ProposeSpend>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, ProposeSpend>
                 {
                     let call = ProposeSpend { value, beneficiary };
                     ::subxt::SubmittableExtrinsic::new(self.client, call)
@@ -6790,7 +6826,7 @@ pub mod api {
                 pub fn reject_proposal(
                     &self,
                     proposal_id: ::core::primitive::u32,
-                ) -> ::subxt::SubmittableExtrinsic<T, RejectProposal>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, RejectProposal>
                 {
                     let call = RejectProposal { proposal_id };
                     ::subxt::SubmittableExtrinsic::new(self.client, call)
@@ -6798,7 +6834,7 @@ pub mod api {
                 pub fn approve_proposal(
                     &self,
                     proposal_id: ::core::primitive::u32,
-                ) -> ::subxt::SubmittableExtrinsic<T, ApproveProposal>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, ApproveProposal>
                 {
                     let call = ApproveProposal { proposal_id };
                     ::subxt::SubmittableExtrinsic::new(self.client, call)
@@ -7026,7 +7062,8 @@ pub mod api {
                     calls: ::std::vec::Vec<
                         runtime_types::darkwebb_standalone_runtime::Call,
                     >,
-                ) -> ::subxt::SubmittableExtrinsic<T, Batch> {
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, Batch>
+                {
                     let call = Batch { calls };
                     ::subxt::SubmittableExtrinsic::new(self.client, call)
                 }
@@ -7034,7 +7071,7 @@ pub mod api {
                     &self,
                     index: ::core::primitive::u16,
                     call: runtime_types::darkwebb_standalone_runtime::Call,
-                ) -> ::subxt::SubmittableExtrinsic<T, AsDerivative>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, AsDerivative>
                 {
                     let call = AsDerivative { index, call };
                     ::subxt::SubmittableExtrinsic::new(self.client, call)
@@ -7044,7 +7081,7 @@ pub mod api {
                     calls: ::std::vec::Vec<
                         runtime_types::darkwebb_standalone_runtime::Call,
                     >,
-                ) -> ::subxt::SubmittableExtrinsic<T, BatchAll>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, BatchAll>
                 {
                     let call = BatchAll { calls };
                     ::subxt::SubmittableExtrinsic::new(self.client, call)
@@ -7053,7 +7090,7 @@ pub mod api {
                     &self,
                     as_origin : runtime_types :: darkwebb_standalone_runtime :: OriginCaller,
                     call: runtime_types::darkwebb_standalone_runtime::Call,
-                ) -> ::subxt::SubmittableExtrinsic<T, DispatchAs>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, DispatchAs>
                 {
                     let call = DispatchAs { as_origin, call };
                     ::subxt::SubmittableExtrinsic::new(self.client, call)
@@ -7197,7 +7234,7 @@ pub mod api {
                         ::subxt::sp_core::crypto::AccountId32,
                     >,
                     call: runtime_types::darkwebb_standalone_runtime::Call,
-                ) -> ::subxt::SubmittableExtrinsic<T, AsMultiThreshold1>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, AsMultiThreshold1>
                 {
                     let call = AsMultiThreshold1 {
                         other_signatories,
@@ -7221,7 +7258,8 @@ pub mod api {
                     >,
                     store_call: ::core::primitive::bool,
                     max_weight: ::core::primitive::u64,
-                ) -> ::subxt::SubmittableExtrinsic<T, AsMulti> {
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, AsMulti>
+                {
                     let call = AsMulti {
                         threshold,
                         other_signatories,
@@ -7245,7 +7283,7 @@ pub mod api {
                     >,
                     call_hash: [::core::primitive::u8; 32usize],
                     max_weight: ::core::primitive::u64,
-                ) -> ::subxt::SubmittableExtrinsic<T, ApproveAsMulti>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, ApproveAsMulti>
                 {
                     let call = ApproveAsMulti {
                         threshold,
@@ -7266,7 +7304,7 @@ pub mod api {
                         ::core::primitive::u32,
                     >,
                     call_hash: [::core::primitive::u8; 32usize],
-                ) -> ::subxt::SubmittableExtrinsic<T, CancelAsMulti>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, CancelAsMulti>
                 {
                     let call = CancelAsMulti {
                         threshold,
@@ -7566,7 +7604,7 @@ pub mod api {
                     )>,
                     priority: ::core::primitive::u8,
                     call: runtime_types::darkwebb_standalone_runtime::Call,
-                ) -> ::subxt::SubmittableExtrinsic<T, Schedule>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, Schedule>
                 {
                     let call = Schedule {
                         when,
@@ -7580,7 +7618,8 @@ pub mod api {
                     &self,
                     when: ::core::primitive::u32,
                     index: ::core::primitive::u32,
-                ) -> ::subxt::SubmittableExtrinsic<T, Cancel> {
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, Cancel>
+                {
                     let call = Cancel { when, index };
                     ::subxt::SubmittableExtrinsic::new(self.client, call)
                 }
@@ -7594,7 +7633,7 @@ pub mod api {
                     )>,
                     priority: ::core::primitive::u8,
                     call: runtime_types::darkwebb_standalone_runtime::Call,
-                ) -> ::subxt::SubmittableExtrinsic<T, ScheduleNamed>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, ScheduleNamed>
                 {
                     let call = ScheduleNamed {
                         id,
@@ -7608,7 +7647,7 @@ pub mod api {
                 pub fn cancel_named(
                     &self,
                     id: ::std::vec::Vec<::core::primitive::u8>,
-                ) -> ::subxt::SubmittableExtrinsic<T, CancelNamed>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, CancelNamed>
                 {
                     let call = CancelNamed { id };
                     ::subxt::SubmittableExtrinsic::new(self.client, call)
@@ -7622,7 +7661,7 @@ pub mod api {
                     )>,
                     priority: ::core::primitive::u8,
                     call: runtime_types::darkwebb_standalone_runtime::Call,
-                ) -> ::subxt::SubmittableExtrinsic<T, ScheduleAfter>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, ScheduleAfter>
                 {
                     let call = ScheduleAfter {
                         after,
@@ -7642,7 +7681,7 @@ pub mod api {
                     )>,
                     priority: ::core::primitive::u8,
                     call: runtime_types::darkwebb_standalone_runtime::Call,
-                ) -> ::subxt::SubmittableExtrinsic<T, ScheduleNamedAfter>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, ScheduleNamedAfter>
                 {
                     let call = ScheduleNamedAfter {
                         id,
@@ -7942,7 +7981,8 @@ pub mod api {
                         runtime_types::darkwebb_standalone_runtime::ProxyType,
                     >,
                     call: runtime_types::darkwebb_standalone_runtime::Call,
-                ) -> ::subxt::SubmittableExtrinsic<T, Proxy> {
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, Proxy>
+                {
                     let call = Proxy {
                         real,
                         force_proxy_type,
@@ -7955,7 +7995,7 @@ pub mod api {
                     delegate: ::subxt::sp_core::crypto::AccountId32,
                     proxy_type : runtime_types :: darkwebb_standalone_runtime :: ProxyType,
                     delay: ::core::primitive::u32,
-                ) -> ::subxt::SubmittableExtrinsic<T, AddProxy>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, AddProxy>
                 {
                     let call = AddProxy {
                         delegate,
@@ -7969,7 +8009,7 @@ pub mod api {
                     delegate: ::subxt::sp_core::crypto::AccountId32,
                     proxy_type : runtime_types :: darkwebb_standalone_runtime :: ProxyType,
                     delay: ::core::primitive::u32,
-                ) -> ::subxt::SubmittableExtrinsic<T, RemoveProxy>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, RemoveProxy>
                 {
                     let call = RemoveProxy {
                         delegate,
@@ -7980,7 +8020,7 @@ pub mod api {
                 }
                 pub fn remove_proxies(
                     &self,
-                ) -> ::subxt::SubmittableExtrinsic<T, RemoveProxies>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, RemoveProxies>
                 {
                     let call = RemoveProxies {};
                     ::subxt::SubmittableExtrinsic::new(self.client, call)
@@ -7990,7 +8030,7 @@ pub mod api {
                     proxy_type : runtime_types :: darkwebb_standalone_runtime :: ProxyType,
                     delay: ::core::primitive::u32,
                     index: ::core::primitive::u16,
-                ) -> ::subxt::SubmittableExtrinsic<T, Anonymous>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, Anonymous>
                 {
                     let call = Anonymous {
                         proxy_type,
@@ -8006,7 +8046,7 @@ pub mod api {
                     index: ::core::primitive::u16,
                     height: ::core::primitive::u32,
                     ext_index: ::core::primitive::u32,
-                ) -> ::subxt::SubmittableExtrinsic<T, KillAnonymous>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, KillAnonymous>
                 {
                     let call = KillAnonymous {
                         spawner,
@@ -8021,7 +8061,7 @@ pub mod api {
                     &self,
                     real: ::subxt::sp_core::crypto::AccountId32,
                     call_hash: ::subxt::sp_core::H256,
-                ) -> ::subxt::SubmittableExtrinsic<T, Announce>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, Announce>
                 {
                     let call = Announce { real, call_hash };
                     ::subxt::SubmittableExtrinsic::new(self.client, call)
@@ -8030,7 +8070,7 @@ pub mod api {
                     &self,
                     real: ::subxt::sp_core::crypto::AccountId32,
                     call_hash: ::subxt::sp_core::H256,
-                ) -> ::subxt::SubmittableExtrinsic<T, RemoveAnnouncement>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, RemoveAnnouncement>
                 {
                     let call = RemoveAnnouncement { real, call_hash };
                     ::subxt::SubmittableExtrinsic::new(self.client, call)
@@ -8039,7 +8079,7 @@ pub mod api {
                     &self,
                     delegate: ::subxt::sp_core::crypto::AccountId32,
                     call_hash: ::subxt::sp_core::H256,
-                ) -> ::subxt::SubmittableExtrinsic<T, RejectAnnouncement>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, RejectAnnouncement>
                 {
                     let call = RejectAnnouncement {
                         delegate,
@@ -8055,7 +8095,7 @@ pub mod api {
                         runtime_types::darkwebb_standalone_runtime::ProxyType,
                     >,
                     call: runtime_types::darkwebb_standalone_runtime::Call,
-                ) -> ::subxt::SubmittableExtrinsic<T, ProxyAnnounced>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, ProxyAnnounced>
                 {
                     let call = ProxyAnnounced {
                         delegate,
@@ -8591,7 +8631,8 @@ pub mod api {
                         ::core::primitive::u32,
                     >,
                     min_balance: ::core::primitive::u128,
-                ) -> ::subxt::SubmittableExtrinsic<T, Create> {
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, Create>
+                {
                     let call = Create {
                         id,
                         admin,
@@ -8608,7 +8649,7 @@ pub mod api {
                     >,
                     is_sufficient: ::core::primitive::bool,
                     min_balance: ::core::primitive::u128,
-                ) -> ::subxt::SubmittableExtrinsic<T, ForceCreate>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, ForceCreate>
                 {
                     let call = ForceCreate {
                         id,
@@ -8622,7 +8663,8 @@ pub mod api {
                     &self,
                     id: ::core::primitive::u32,
                     witness : runtime_types :: pallet_assets :: types :: DestroyWitness,
-                ) -> ::subxt::SubmittableExtrinsic<T, Destroy> {
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, Destroy>
+                {
                     let call = Destroy { id, witness };
                     ::subxt::SubmittableExtrinsic::new(self.client, call)
                 }
@@ -8634,7 +8676,8 @@ pub mod api {
                         ::core::primitive::u32,
                     >,
                     amount: ::core::primitive::u128,
-                ) -> ::subxt::SubmittableExtrinsic<T, Mint> {
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, Mint>
+                {
                     let call = Mint {
                         id,
                         beneficiary,
@@ -8650,7 +8693,8 @@ pub mod api {
                         ::core::primitive::u32,
                     >,
                     amount: ::core::primitive::u128,
-                ) -> ::subxt::SubmittableExtrinsic<T, Burn> {
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, Burn>
+                {
                     let call = Burn { id, who, amount };
                     ::subxt::SubmittableExtrinsic::new(self.client, call)
                 }
@@ -8662,7 +8706,7 @@ pub mod api {
                         ::core::primitive::u32,
                     >,
                     amount: ::core::primitive::u128,
-                ) -> ::subxt::SubmittableExtrinsic<T, Transfer>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, Transfer>
                 {
                     let call = Transfer { id, target, amount };
                     ::subxt::SubmittableExtrinsic::new(self.client, call)
@@ -8675,7 +8719,7 @@ pub mod api {
                         ::core::primitive::u32,
                     >,
                     amount: ::core::primitive::u128,
-                ) -> ::subxt::SubmittableExtrinsic<T, TransferKeepAlive>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, TransferKeepAlive>
                 {
                     let call = TransferKeepAlive { id, target, amount };
                     ::subxt::SubmittableExtrinsic::new(self.client, call)
@@ -8692,7 +8736,7 @@ pub mod api {
                         ::core::primitive::u32,
                     >,
                     amount: ::core::primitive::u128,
-                ) -> ::subxt::SubmittableExtrinsic<T, ForceTransfer>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, ForceTransfer>
                 {
                     let call = ForceTransfer {
                         id,
@@ -8709,7 +8753,8 @@ pub mod api {
                         ::subxt::sp_core::crypto::AccountId32,
                         ::core::primitive::u32,
                     >,
-                ) -> ::subxt::SubmittableExtrinsic<T, Freeze> {
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, Freeze>
+                {
                     let call = Freeze { id, who };
                     ::subxt::SubmittableExtrinsic::new(self.client, call)
                 }
@@ -8720,14 +8765,15 @@ pub mod api {
                         ::subxt::sp_core::crypto::AccountId32,
                         ::core::primitive::u32,
                     >,
-                ) -> ::subxt::SubmittableExtrinsic<T, Thaw> {
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, Thaw>
+                {
                     let call = Thaw { id, who };
                     ::subxt::SubmittableExtrinsic::new(self.client, call)
                 }
                 pub fn freeze_asset(
                     &self,
                     id: ::core::primitive::u32,
-                ) -> ::subxt::SubmittableExtrinsic<T, FreezeAsset>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, FreezeAsset>
                 {
                     let call = FreezeAsset { id };
                     ::subxt::SubmittableExtrinsic::new(self.client, call)
@@ -8735,7 +8781,7 @@ pub mod api {
                 pub fn thaw_asset(
                     &self,
                     id: ::core::primitive::u32,
-                ) -> ::subxt::SubmittableExtrinsic<T, ThawAsset>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, ThawAsset>
                 {
                     let call = ThawAsset { id };
                     ::subxt::SubmittableExtrinsic::new(self.client, call)
@@ -8747,7 +8793,7 @@ pub mod api {
                         ::subxt::sp_core::crypto::AccountId32,
                         ::core::primitive::u32,
                     >,
-                ) -> ::subxt::SubmittableExtrinsic<T, TransferOwnership>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, TransferOwnership>
                 {
                     let call = TransferOwnership { id, owner };
                     ::subxt::SubmittableExtrinsic::new(self.client, call)
@@ -8767,7 +8813,8 @@ pub mod api {
                         ::subxt::sp_core::crypto::AccountId32,
                         ::core::primitive::u32,
                     >,
-                ) -> ::subxt::SubmittableExtrinsic<T, SetTeam> {
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, SetTeam>
+                {
                     let call = SetTeam {
                         id,
                         issuer,
@@ -8782,7 +8829,7 @@ pub mod api {
                     name: ::std::vec::Vec<::core::primitive::u8>,
                     symbol: ::std::vec::Vec<::core::primitive::u8>,
                     decimals: ::core::primitive::u8,
-                ) -> ::subxt::SubmittableExtrinsic<T, SetMetadata>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, SetMetadata>
                 {
                     let call = SetMetadata {
                         id,
@@ -8795,7 +8842,7 @@ pub mod api {
                 pub fn clear_metadata(
                     &self,
                     id: ::core::primitive::u32,
-                ) -> ::subxt::SubmittableExtrinsic<T, ClearMetadata>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, ClearMetadata>
                 {
                     let call = ClearMetadata { id };
                     ::subxt::SubmittableExtrinsic::new(self.client, call)
@@ -8807,7 +8854,7 @@ pub mod api {
                     symbol: ::std::vec::Vec<::core::primitive::u8>,
                     decimals: ::core::primitive::u8,
                     is_frozen: ::core::primitive::bool,
-                ) -> ::subxt::SubmittableExtrinsic<T, ForceSetMetadata>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, ForceSetMetadata>
                 {
                     let call = ForceSetMetadata {
                         id,
@@ -8821,7 +8868,7 @@ pub mod api {
                 pub fn force_clear_metadata(
                     &self,
                     id: ::core::primitive::u32,
-                ) -> ::subxt::SubmittableExtrinsic<T, ForceClearMetadata>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, ForceClearMetadata>
                 {
                     let call = ForceClearMetadata { id };
                     ::subxt::SubmittableExtrinsic::new(self.client, call)
@@ -8848,7 +8895,7 @@ pub mod api {
                     min_balance: ::core::primitive::u128,
                     is_sufficient: ::core::primitive::bool,
                     is_frozen: ::core::primitive::bool,
-                ) -> ::subxt::SubmittableExtrinsic<T, ForceAssetStatus>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, ForceAssetStatus>
                 {
                     let call = ForceAssetStatus {
                         id,
@@ -8870,7 +8917,7 @@ pub mod api {
                         ::core::primitive::u32,
                     >,
                     amount: ::core::primitive::u128,
-                ) -> ::subxt::SubmittableExtrinsic<T, ApproveTransfer>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, ApproveTransfer>
                 {
                     let call = ApproveTransfer {
                         id,
@@ -8886,7 +8933,7 @@ pub mod api {
                         ::subxt::sp_core::crypto::AccountId32,
                         ::core::primitive::u32,
                     >,
-                ) -> ::subxt::SubmittableExtrinsic<T, CancelApproval>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, CancelApproval>
                 {
                     let call = CancelApproval { id, delegate };
                     ::subxt::SubmittableExtrinsic::new(self.client, call)
@@ -8902,7 +8949,7 @@ pub mod api {
                         ::subxt::sp_core::crypto::AccountId32,
                         ::core::primitive::u32,
                     >,
-                ) -> ::subxt::SubmittableExtrinsic<T, ForceCancelApproval>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, ForceCancelApproval>
                 {
                     let call = ForceCancelApproval {
                         id,
@@ -8923,7 +8970,7 @@ pub mod api {
                         ::core::primitive::u32,
                     >,
                     amount: ::core::primitive::u128,
-                ) -> ::subxt::SubmittableExtrinsic<T, TransferApproved>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, TransferApproved>
                 {
                     let call = TransferApproved {
                         id,
@@ -9392,7 +9439,8 @@ pub mod api {
                 pub fn sudo(
                     &self,
                     call: runtime_types::darkwebb_standalone_runtime::Call,
-                ) -> ::subxt::SubmittableExtrinsic<T, Sudo> {
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, Sudo>
+                {
                     let call = Sudo { call };
                     ::subxt::SubmittableExtrinsic::new(self.client, call)
                 }
@@ -9400,7 +9448,7 @@ pub mod api {
                     &self,
                     call: runtime_types::darkwebb_standalone_runtime::Call,
                     weight: ::core::primitive::u64,
-                ) -> ::subxt::SubmittableExtrinsic<T, SudoUncheckedWeight>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, SudoUncheckedWeight>
                 {
                     let call = SudoUncheckedWeight { call, weight };
                     ::subxt::SubmittableExtrinsic::new(self.client, call)
@@ -9411,7 +9459,8 @@ pub mod api {
                         ::subxt::sp_core::crypto::AccountId32,
                         ::core::primitive::u32,
                     >,
-                ) -> ::subxt::SubmittableExtrinsic<T, SetKey> {
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, SetKey>
+                {
                     let call = SetKey { new };
                     ::subxt::SubmittableExtrinsic::new(self.client, call)
                 }
@@ -9422,7 +9471,8 @@ pub mod api {
                         ::core::primitive::u32,
                     >,
                     call: runtime_types::darkwebb_standalone_runtime::Call,
-                ) -> ::subxt::SubmittableExtrinsic<T, SudoAs> {
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, SudoAs>
+                {
                     let call = SudoAs { who, call };
                     ::subxt::SubmittableExtrinsic::new(self.client, call)
                 }
@@ -9528,7 +9578,7 @@ pub mod api {
                         ::core::primitive::u32,
                     >,
                     signature : runtime_types :: pallet_im_online :: sr25519 :: app_sr25519 :: Signature,
-                ) -> ::subxt::SubmittableExtrinsic<T, Heartbeat>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, Heartbeat>
                 {
                     let call = Heartbeat {
                         heartbeat,
@@ -9989,7 +10039,7 @@ pub mod api {
                     &self,
                     value: ::core::primitive::u128,
                     description: ::std::vec::Vec<::core::primitive::u8>,
-                ) -> ::subxt::SubmittableExtrinsic<T, ProposeBounty>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, ProposeBounty>
                 {
                     let call = ProposeBounty { value, description };
                     ::subxt::SubmittableExtrinsic::new(self.client, call)
@@ -9997,7 +10047,7 @@ pub mod api {
                 pub fn approve_bounty(
                     &self,
                     bounty_id: ::core::primitive::u32,
-                ) -> ::subxt::SubmittableExtrinsic<T, ApproveBounty>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, ApproveBounty>
                 {
                     let call = ApproveBounty { bounty_id };
                     ::subxt::SubmittableExtrinsic::new(self.client, call)
@@ -10010,7 +10060,7 @@ pub mod api {
                         ::core::primitive::u32,
                     >,
                     fee: ::core::primitive::u128,
-                ) -> ::subxt::SubmittableExtrinsic<T, ProposeCurator>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, ProposeCurator>
                 {
                     let call = ProposeCurator {
                         bounty_id,
@@ -10022,7 +10072,7 @@ pub mod api {
                 pub fn unassign_curator(
                     &self,
                     bounty_id: ::core::primitive::u32,
-                ) -> ::subxt::SubmittableExtrinsic<T, UnassignCurator>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, UnassignCurator>
                 {
                     let call = UnassignCurator { bounty_id };
                     ::subxt::SubmittableExtrinsic::new(self.client, call)
@@ -10030,7 +10080,7 @@ pub mod api {
                 pub fn accept_curator(
                     &self,
                     bounty_id: ::core::primitive::u32,
-                ) -> ::subxt::SubmittableExtrinsic<T, AcceptCurator>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, AcceptCurator>
                 {
                     let call = AcceptCurator { bounty_id };
                     ::subxt::SubmittableExtrinsic::new(self.client, call)
@@ -10042,7 +10092,7 @@ pub mod api {
                         ::subxt::sp_core::crypto::AccountId32,
                         ::core::primitive::u32,
                     >,
-                ) -> ::subxt::SubmittableExtrinsic<T, AwardBounty>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, AwardBounty>
                 {
                     let call = AwardBounty {
                         bounty_id,
@@ -10053,7 +10103,7 @@ pub mod api {
                 pub fn claim_bounty(
                     &self,
                     bounty_id: ::core::primitive::u32,
-                ) -> ::subxt::SubmittableExtrinsic<T, ClaimBounty>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, ClaimBounty>
                 {
                     let call = ClaimBounty { bounty_id };
                     ::subxt::SubmittableExtrinsic::new(self.client, call)
@@ -10061,7 +10111,7 @@ pub mod api {
                 pub fn close_bounty(
                     &self,
                     bounty_id: ::core::primitive::u32,
-                ) -> ::subxt::SubmittableExtrinsic<T, CloseBounty>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, CloseBounty>
                 {
                     let call = CloseBounty { bounty_id };
                     ::subxt::SubmittableExtrinsic::new(self.client, call)
@@ -10070,7 +10120,7 @@ pub mod api {
                     &self,
                     bounty_id: ::core::primitive::u32,
                     remark: ::std::vec::Vec<::core::primitive::u8>,
-                ) -> ::subxt::SubmittableExtrinsic<T, ExtendBountyExpiry>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, ExtendBountyExpiry>
                 {
                     let call = ExtendBountyExpiry { bounty_id, remark };
                     ::subxt::SubmittableExtrinsic::new(self.client, call)
@@ -10307,7 +10357,8 @@ pub mod api {
                 pub fn rebag(
                     &self,
                     dislocated: ::subxt::sp_core::crypto::AccountId32,
-                ) -> ::subxt::SubmittableExtrinsic<T, Rebag> {
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, Rebag>
+                {
                     let call = Rebag { dislocated };
                     ::subxt::SubmittableExtrinsic::new(self.client, call)
                 }
@@ -10492,7 +10543,7 @@ pub mod api {
                 pub fn set_parameters(
                     &self,
                     parameters: ::std::vec::Vec<::core::primitive::u8>,
-                ) -> ::subxt::SubmittableExtrinsic<T, SetParameters>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, SetParameters>
                 {
                     let call = SetParameters { parameters };
                     ::subxt::SubmittableExtrinsic::new(self.client, call)
@@ -10500,7 +10551,7 @@ pub mod api {
                 pub fn set_maintainer(
                     &self,
                     new_maintainer: ::subxt::sp_core::crypto::AccountId32,
-                ) -> ::subxt::SubmittableExtrinsic<T, SetMaintainer>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, SetMaintainer>
                 {
                     let call = SetMaintainer { new_maintainer };
                     ::subxt::SubmittableExtrinsic::new(self.client, call)
@@ -10508,7 +10559,7 @@ pub mod api {
                 pub fn force_set_parameters(
                     &self,
                     parameters: ::std::vec::Vec<::core::primitive::u8>,
-                ) -> ::subxt::SubmittableExtrinsic<T, ForceSetParameters>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, ForceSetParameters>
                 {
                     let call = ForceSetParameters { parameters };
                     ::subxt::SubmittableExtrinsic::new(self.client, call)
@@ -10516,7 +10567,7 @@ pub mod api {
                 pub fn force_set_maintainer(
                     &self,
                     new_maintainer: ::subxt::sp_core::crypto::AccountId32,
-                ) -> ::subxt::SubmittableExtrinsic<T, ForceSetMaintainer>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, ForceSetMaintainer>
                 {
                     let call = ForceSetMaintainer { new_maintainer };
                     ::subxt::SubmittableExtrinsic::new(self.client, call)
@@ -10676,7 +10727,7 @@ pub mod api {
                 pub fn set_parameters(
                     &self,
                     parameters: ::std::vec::Vec<::core::primitive::u8>,
-                ) -> ::subxt::SubmittableExtrinsic<T, SetParameters>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, SetParameters>
                 {
                     let call = SetParameters { parameters };
                     ::subxt::SubmittableExtrinsic::new(self.client, call)
@@ -10684,7 +10735,7 @@ pub mod api {
                 pub fn set_maintainer(
                     &self,
                     new_maintainer: ::subxt::sp_core::crypto::AccountId32,
-                ) -> ::subxt::SubmittableExtrinsic<T, SetMaintainer>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, SetMaintainer>
                 {
                     let call = SetMaintainer { new_maintainer };
                     ::subxt::SubmittableExtrinsic::new(self.client, call)
@@ -10692,7 +10743,7 @@ pub mod api {
                 pub fn force_set_parameters(
                     &self,
                     parameters: ::std::vec::Vec<::core::primitive::u8>,
-                ) -> ::subxt::SubmittableExtrinsic<T, ForceSetParameters>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, ForceSetParameters>
                 {
                     let call = ForceSetParameters { parameters };
                     ::subxt::SubmittableExtrinsic::new(self.client, call)
@@ -10700,7 +10751,7 @@ pub mod api {
                 pub fn force_set_maintainer(
                     &self,
                     new_maintainer: ::subxt::sp_core::crypto::AccountId32,
-                ) -> ::subxt::SubmittableExtrinsic<T, ForceSetMaintainer>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, ForceSetMaintainer>
                 {
                     let call = ForceSetMaintainer { new_maintainer };
                     ::subxt::SubmittableExtrinsic::new(self.client, call)
@@ -10899,7 +10950,7 @@ pub mod api {
                     name: ::std::vec::Vec<::core::primitive::u8>,
                     asset_type : runtime_types :: pallet_asset_registry :: types :: AssetType < :: core :: primitive :: u32 >,
                     existential_deposit: ::core::primitive::u128,
-                ) -> ::subxt::SubmittableExtrinsic<T, Register>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, Register>
                 {
                     let call = Register {
                         name,
@@ -10916,7 +10967,8 @@ pub mod api {
                     existential_deposit: ::core::option::Option<
                         ::core::primitive::u128,
                     >,
-                ) -> ::subxt::SubmittableExtrinsic<T, Update> {
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, Update>
+                {
                     let call = Update {
                         asset_id,
                         name,
@@ -10930,7 +10982,7 @@ pub mod api {
                     asset_id: ::core::primitive::u32,
                     symbol: ::std::vec::Vec<::core::primitive::u8>,
                     decimals: ::core::primitive::u8,
-                ) -> ::subxt::SubmittableExtrinsic<T, SetMetadata>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, SetMetadata>
                 {
                     let call = SetMetadata {
                         asset_id,
@@ -10943,7 +10995,7 @@ pub mod api {
                     &self,
                     asset_id: ::core::primitive::u32,
                     location: (),
-                ) -> ::subxt::SubmittableExtrinsic<T, SetLocation>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, SetLocation>
                 {
                     let call = SetLocation { asset_id, location };
                     ::subxt::SubmittableExtrinsic::new(self.client, call)
@@ -10952,7 +11004,7 @@ pub mod api {
                     &self,
                     pool: ::std::vec::Vec<::core::primitive::u8>,
                     asset_id: ::core::primitive::u32,
-                ) -> ::subxt::SubmittableExtrinsic<T, AddAssetToPool>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, AddAssetToPool>
                 {
                     let call = AddAssetToPool { pool, asset_id };
                     ::subxt::SubmittableExtrinsic::new(self.client, call)
@@ -10961,7 +11013,7 @@ pub mod api {
                     &self,
                     pool: ::std::vec::Vec<::core::primitive::u8>,
                     asset_id: ::core::primitive::u32,
-                ) -> ::subxt::SubmittableExtrinsic<T, DeleteAssetFromPool>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, DeleteAssetFromPool>
                 {
                     let call = DeleteAssetFromPool { pool, asset_id };
                     ::subxt::SubmittableExtrinsic::new(self.client, call)
@@ -11257,7 +11309,7 @@ pub mod api {
                     >,
                     currency_id: ::core::primitive::u32,
                     amount: ::core::primitive::u128,
-                ) -> ::subxt::SubmittableExtrinsic<T, Transfer>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, Transfer>
                 {
                     let call = Transfer {
                         dest,
@@ -11273,7 +11325,7 @@ pub mod api {
                         ::core::primitive::u32,
                     >,
                     amount: ::core::primitive::u128,
-                ) -> ::subxt::SubmittableExtrinsic<T, TransferNativeCurrency>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, TransferNativeCurrency>
                 {
                     let call = TransferNativeCurrency { dest, amount };
                     ::subxt::SubmittableExtrinsic::new(self.client, call)
@@ -11286,7 +11338,7 @@ pub mod api {
                     >,
                     currency_id: ::core::primitive::u32,
                     amount: ::core::primitive::i128,
-                ) -> ::subxt::SubmittableExtrinsic<T, UpdateBalance>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, UpdateBalance>
                 {
                     let call = UpdateBalance {
                         who,
@@ -11461,7 +11513,7 @@ pub mod api {
                     >,
                     currency_id: ::core::primitive::u32,
                     amount: ::core::primitive::u128,
-                ) -> ::subxt::SubmittableExtrinsic<T, Transfer>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, Transfer>
                 {
                     let call = Transfer {
                         dest,
@@ -11478,7 +11530,7 @@ pub mod api {
                     >,
                     currency_id: ::core::primitive::u32,
                     keep_alive: ::core::primitive::bool,
-                ) -> ::subxt::SubmittableExtrinsic<T, TransferAll>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, TransferAll>
                 {
                     let call = TransferAll {
                         dest,
@@ -11495,7 +11547,7 @@ pub mod api {
                     >,
                     currency_id: ::core::primitive::u32,
                     amount: ::core::primitive::u128,
-                ) -> ::subxt::SubmittableExtrinsic<T, TransferKeepAlive>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, TransferKeepAlive>
                 {
                     let call = TransferKeepAlive {
                         dest,
@@ -11516,7 +11568,7 @@ pub mod api {
                     >,
                     currency_id: ::core::primitive::u32,
                     amount: ::core::primitive::u128,
-                ) -> ::subxt::SubmittableExtrinsic<T, ForceTransfer>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, ForceTransfer>
                 {
                     let call = ForceTransfer {
                         source,
@@ -11535,7 +11587,7 @@ pub mod api {
                     currency_id: ::core::primitive::u32,
                     new_free: ::core::primitive::u128,
                     new_reserved: ::core::primitive::u128,
-                ) -> ::subxt::SubmittableExtrinsic<T, SetBalance>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, SetBalance>
                 {
                     let call = SetBalance {
                         who,
@@ -11806,7 +11858,7 @@ pub mod api {
                 pub fn set_wrapping_fee(
                     &self,
                     fee: ::core::primitive::u128,
-                ) -> ::subxt::SubmittableExtrinsic<T, SetWrappingFee>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, SetWrappingFee>
                 {
                     let call = SetWrappingFee { fee };
                     ::subxt::SubmittableExtrinsic::new(self.client, call)
@@ -11817,7 +11869,8 @@ pub mod api {
                     into_pool_share_id: ::core::primitive::u32,
                     amount: ::core::primitive::u128,
                     recipient: ::subxt::sp_core::crypto::AccountId32,
-                ) -> ::subxt::SubmittableExtrinsic<T, Wrap> {
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, Wrap>
+                {
                     let call = Wrap {
                         from_asset_id,
                         into_pool_share_id,
@@ -11832,7 +11885,8 @@ pub mod api {
                     into_asset_id: ::core::primitive::u32,
                     amount: ::core::primitive::u128,
                     recipient: ::subxt::sp_core::crypto::AccountId32,
-                ) -> ::subxt::SubmittableExtrinsic<T, Unwrap> {
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, Unwrap>
+                {
                     let call = Unwrap {
                         from_pool_share_id,
                         into_asset_id,
@@ -11974,7 +12028,7 @@ pub mod api {
                 pub fn set_parameters(
                     &self,
                     parameters: ::std::vec::Vec<::core::primitive::u8>,
-                ) -> ::subxt::SubmittableExtrinsic<T, SetParameters>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, SetParameters>
                 {
                     let call = SetParameters { parameters };
                     ::subxt::SubmittableExtrinsic::new(self.client, call)
@@ -11982,7 +12036,7 @@ pub mod api {
                 pub fn set_maintainer(
                     &self,
                     new_maintainer: ::subxt::sp_core::crypto::AccountId32,
-                ) -> ::subxt::SubmittableExtrinsic<T, SetMaintainer>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, SetMaintainer>
                 {
                     let call = SetMaintainer { new_maintainer };
                     ::subxt::SubmittableExtrinsic::new(self.client, call)
@@ -11990,7 +12044,7 @@ pub mod api {
                 pub fn force_set_parameters(
                     &self,
                     parameters: ::std::vec::Vec<::core::primitive::u8>,
-                ) -> ::subxt::SubmittableExtrinsic<T, ForceSetParameters>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, ForceSetParameters>
                 {
                     let call = ForceSetParameters { parameters };
                     ::subxt::SubmittableExtrinsic::new(self.client, call)
@@ -11998,7 +12052,7 @@ pub mod api {
                 pub fn force_set_maintainer(
                     &self,
                     new_maintainer: ::subxt::sp_core::crypto::AccountId32,
-                ) -> ::subxt::SubmittableExtrinsic<T, ForceSetMaintainer>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, ForceSetMaintainer>
                 {
                     let call = ForceSetMaintainer { new_maintainer };
                     ::subxt::SubmittableExtrinsic::new(self.client, call)
@@ -12158,7 +12212,7 @@ pub mod api {
                 pub fn set_parameters(
                     &self,
                     parameters: ::std::vec::Vec<::core::primitive::u8>,
-                ) -> ::subxt::SubmittableExtrinsic<T, SetParameters>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, SetParameters>
                 {
                     let call = SetParameters { parameters };
                     ::subxt::SubmittableExtrinsic::new(self.client, call)
@@ -12166,7 +12220,7 @@ pub mod api {
                 pub fn set_maintainer(
                     &self,
                     new_maintainer: ::subxt::sp_core::crypto::AccountId32,
-                ) -> ::subxt::SubmittableExtrinsic<T, SetMaintainer>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, SetMaintainer>
                 {
                     let call = SetMaintainer { new_maintainer };
                     ::subxt::SubmittableExtrinsic::new(self.client, call)
@@ -12174,7 +12228,7 @@ pub mod api {
                 pub fn force_set_parameters(
                     &self,
                     parameters: ::std::vec::Vec<::core::primitive::u8>,
-                ) -> ::subxt::SubmittableExtrinsic<T, ForceSetParameters>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, ForceSetParameters>
                 {
                     let call = ForceSetParameters { parameters };
                     ::subxt::SubmittableExtrinsic::new(self.client, call)
@@ -12182,7 +12236,7 @@ pub mod api {
                 pub fn force_set_maintainer(
                     &self,
                     new_maintainer: ::subxt::sp_core::crypto::AccountId32,
-                ) -> ::subxt::SubmittableExtrinsic<T, ForceSetMaintainer>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, ForceSetMaintainer>
                 {
                     let call = ForceSetMaintainer { new_maintainer };
                     ::subxt::SubmittableExtrinsic::new(self.client, call)
@@ -12355,7 +12409,8 @@ pub mod api {
                 pub fn create(
                     &self,
                     depth: ::core::primitive::u8,
-                ) -> ::subxt::SubmittableExtrinsic<T, Create> {
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, Create>
+                {
                     let call = Create { depth };
                     ::subxt::SubmittableExtrinsic::new(self.client, call)
                 }
@@ -12363,14 +12418,15 @@ pub mod api {
                     &self,
                     tree_id: ::core::primitive::u32,
                     leaf: runtime_types::darkwebb_standalone_runtime::Element,
-                ) -> ::subxt::SubmittableExtrinsic<T, Insert> {
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, Insert>
+                {
                     let call = Insert { tree_id, leaf };
                     ::subxt::SubmittableExtrinsic::new(self.client, call)
                 }
                 pub fn set_maintainer(
                     &self,
                     new_maintainer: ::subxt::sp_core::crypto::AccountId32,
-                ) -> ::subxt::SubmittableExtrinsic<T, SetMaintainer>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, SetMaintainer>
                 {
                     let call = SetMaintainer { new_maintainer };
                     ::subxt::SubmittableExtrinsic::new(self.client, call)
@@ -12378,7 +12434,7 @@ pub mod api {
                 pub fn force_set_maintainer(
                     &self,
                     new_maintainer: ::subxt::sp_core::crypto::AccountId32,
-                ) -> ::subxt::SubmittableExtrinsic<T, ForceSetMaintainer>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, ForceSetMaintainer>
                 {
                     let call = ForceSetMaintainer { new_maintainer };
                     ::subxt::SubmittableExtrinsic::new(self.client, call)
@@ -12388,7 +12444,7 @@ pub mod api {
                     default_hashes: ::std::vec::Vec<
                         runtime_types::darkwebb_standalone_runtime::Element,
                     >,
-                ) -> ::subxt::SubmittableExtrinsic<T, ForceSetDefaultHashes>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, ForceSetDefaultHashes>
                 {
                     let call = ForceSetDefaultHashes { default_hashes };
                     ::subxt::SubmittableExtrinsic::new(self.client, call)
@@ -12774,7 +12830,8 @@ pub mod api {
                 pub fn create(
                     &self,
                     depth: ::core::primitive::u8,
-                ) -> ::subxt::SubmittableExtrinsic<T, Create> {
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, Create>
+                {
                     let call = Create { depth };
                     ::subxt::SubmittableExtrinsic::new(self.client, call)
                 }
@@ -12782,14 +12839,15 @@ pub mod api {
                     &self,
                     tree_id: ::core::primitive::u32,
                     leaf: runtime_types::darkwebb_standalone_runtime::Element,
-                ) -> ::subxt::SubmittableExtrinsic<T, Insert> {
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, Insert>
+                {
                     let call = Insert { tree_id, leaf };
                     ::subxt::SubmittableExtrinsic::new(self.client, call)
                 }
                 pub fn set_maintainer(
                     &self,
                     new_maintainer: ::subxt::sp_core::crypto::AccountId32,
-                ) -> ::subxt::SubmittableExtrinsic<T, SetMaintainer>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, SetMaintainer>
                 {
                     let call = SetMaintainer { new_maintainer };
                     ::subxt::SubmittableExtrinsic::new(self.client, call)
@@ -12797,7 +12855,7 @@ pub mod api {
                 pub fn force_set_maintainer(
                     &self,
                     new_maintainer: ::subxt::sp_core::crypto::AccountId32,
-                ) -> ::subxt::SubmittableExtrinsic<T, ForceSetMaintainer>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, ForceSetMaintainer>
                 {
                     let call = ForceSetMaintainer { new_maintainer };
                     ::subxt::SubmittableExtrinsic::new(self.client, call)
@@ -12807,7 +12865,7 @@ pub mod api {
                     default_hashes: ::std::vec::Vec<
                         runtime_types::darkwebb_standalone_runtime::Element,
                     >,
-                ) -> ::subxt::SubmittableExtrinsic<T, ForceSetDefaultHashes>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, ForceSetDefaultHashes>
                 {
                     let call = ForceSetDefaultHashes { default_hashes };
                     ::subxt::SubmittableExtrinsic::new(self.client, call)
@@ -13172,14 +13230,15 @@ pub mod api {
                     &self,
                     max_edges: ::core::primitive::u32,
                     depth: ::core::primitive::u8,
-                ) -> ::subxt::SubmittableExtrinsic<T, Create> {
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, Create>
+                {
                     let call = Create { max_edges, depth };
                     ::subxt::SubmittableExtrinsic::new(self.client, call)
                 }
                 pub fn set_maintainer(
                     &self,
                     new_maintainer: ::subxt::sp_core::crypto::AccountId32,
-                ) -> ::subxt::SubmittableExtrinsic<T, SetMaintainer>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, SetMaintainer>
                 {
                     let call = SetMaintainer { new_maintainer };
                     ::subxt::SubmittableExtrinsic::new(self.client, call)
@@ -13187,7 +13246,7 @@ pub mod api {
                 pub fn force_set_maintainer(
                     &self,
                     new_maintainer: ::subxt::sp_core::crypto::AccountId32,
-                ) -> ::subxt::SubmittableExtrinsic<T, ForceSetMaintainer>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, ForceSetMaintainer>
                 {
                     let call = ForceSetMaintainer { new_maintainer };
                     ::subxt::SubmittableExtrinsic::new(self.client, call)
@@ -13505,14 +13564,15 @@ pub mod api {
                     &self,
                     max_edges: ::core::primitive::u32,
                     depth: ::core::primitive::u8,
-                ) -> ::subxt::SubmittableExtrinsic<T, Create> {
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, Create>
+                {
                     let call = Create { max_edges, depth };
                     ::subxt::SubmittableExtrinsic::new(self.client, call)
                 }
                 pub fn set_maintainer(
                     &self,
                     new_maintainer: ::subxt::sp_core::crypto::AccountId32,
-                ) -> ::subxt::SubmittableExtrinsic<T, SetMaintainer>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, SetMaintainer>
                 {
                     let call = SetMaintainer { new_maintainer };
                     ::subxt::SubmittableExtrinsic::new(self.client, call)
@@ -13520,7 +13580,7 @@ pub mod api {
                 pub fn force_set_maintainer(
                     &self,
                     new_maintainer: ::subxt::sp_core::crypto::AccountId32,
-                ) -> ::subxt::SubmittableExtrinsic<T, ForceSetMaintainer>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, ForceSetMaintainer>
                 {
                     let call = ForceSetMaintainer { new_maintainer };
                     ::subxt::SubmittableExtrinsic::new(self.client, call)
@@ -13869,7 +13929,8 @@ pub mod api {
                     deposit_size: ::core::primitive::u128,
                     depth: ::core::primitive::u8,
                     asset: ::core::primitive::u32,
-                ) -> ::subxt::SubmittableExtrinsic<T, Create> {
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, Create>
+                {
                     let call = Create {
                         deposit_size,
                         depth,
@@ -13880,7 +13941,7 @@ pub mod api {
                 pub fn set_maintainer(
                     &self,
                     new_maintainer: ::subxt::sp_core::crypto::AccountId32,
-                ) -> ::subxt::SubmittableExtrinsic<T, SetMaintainer>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, SetMaintainer>
                 {
                     let call = SetMaintainer { new_maintainer };
                     ::subxt::SubmittableExtrinsic::new(self.client, call)
@@ -13888,7 +13949,7 @@ pub mod api {
                 pub fn force_set_maintainer(
                     &self,
                     new_maintainer: ::subxt::sp_core::crypto::AccountId32,
-                ) -> ::subxt::SubmittableExtrinsic<T, ForceSetMaintainer>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, ForceSetMaintainer>
                 {
                     let call = ForceSetMaintainer { new_maintainer };
                     ::subxt::SubmittableExtrinsic::new(self.client, call)
@@ -13897,7 +13958,8 @@ pub mod api {
                     &self,
                     tree_id: ::core::primitive::u32,
                     leaf: runtime_types::darkwebb_standalone_runtime::Element,
-                ) -> ::subxt::SubmittableExtrinsic<T, Deposit> {
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, Deposit>
+                {
                     let call = Deposit { tree_id, leaf };
                     ::subxt::SubmittableExtrinsic::new(self.client, call)
                 }
@@ -13911,7 +13973,7 @@ pub mod api {
                     relayer: ::subxt::sp_core::crypto::AccountId32,
                     fee: ::core::primitive::u128,
                     refund: ::core::primitive::u128,
-                ) -> ::subxt::SubmittableExtrinsic<T, Withdraw>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, Withdraw>
                 {
                     let call = Withdraw {
                         id,
@@ -14154,7 +14216,8 @@ pub mod api {
                     deposit_size: ::core::primitive::u128,
                     depth: ::core::primitive::u8,
                     asset: ::core::primitive::u32,
-                ) -> ::subxt::SubmittableExtrinsic<T, Create> {
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, Create>
+                {
                     let call = Create {
                         deposit_size,
                         depth,
@@ -14165,7 +14228,7 @@ pub mod api {
                 pub fn set_maintainer(
                     &self,
                     new_maintainer: ::subxt::sp_core::crypto::AccountId32,
-                ) -> ::subxt::SubmittableExtrinsic<T, SetMaintainer>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, SetMaintainer>
                 {
                     let call = SetMaintainer { new_maintainer };
                     ::subxt::SubmittableExtrinsic::new(self.client, call)
@@ -14173,7 +14236,7 @@ pub mod api {
                 pub fn force_set_maintainer(
                     &self,
                     new_maintainer: ::subxt::sp_core::crypto::AccountId32,
-                ) -> ::subxt::SubmittableExtrinsic<T, ForceSetMaintainer>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, ForceSetMaintainer>
                 {
                     let call = ForceSetMaintainer { new_maintainer };
                     ::subxt::SubmittableExtrinsic::new(self.client, call)
@@ -14182,7 +14245,8 @@ pub mod api {
                     &self,
                     tree_id: ::core::primitive::u32,
                     leaf: runtime_types::darkwebb_standalone_runtime::Element,
-                ) -> ::subxt::SubmittableExtrinsic<T, Deposit> {
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, Deposit>
+                {
                     let call = Deposit { tree_id, leaf };
                     ::subxt::SubmittableExtrinsic::new(self.client, call)
                 }
@@ -14196,7 +14260,7 @@ pub mod api {
                     relayer: ::subxt::sp_core::crypto::AccountId32,
                     fee: ::core::primitive::u128,
                     refund: ::core::primitive::u128,
-                ) -> ::subxt::SubmittableExtrinsic<T, Withdraw>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, Withdraw>
                 {
                     let call = Withdraw {
                         id,
@@ -14438,7 +14502,8 @@ pub mod api {
                     max_edges: ::core::primitive::u32,
                     depth: ::core::primitive::u8,
                     asset: ::core::primitive::u32,
-                ) -> ::subxt::SubmittableExtrinsic<T, Create> {
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, Create>
+                {
                     let call = Create {
                         deposit_size,
                         max_edges,
@@ -14451,7 +14516,8 @@ pub mod api {
                     &self,
                     tree_id: ::core::primitive::u32,
                     leaf: runtime_types::darkwebb_standalone_runtime::Element,
-                ) -> ::subxt::SubmittableExtrinsic<T, Deposit> {
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, Deposit>
+                {
                     let call = Deposit { tree_id, leaf };
                     ::subxt::SubmittableExtrinsic::new(self.client, call)
                 }
@@ -14460,6 +14526,7 @@ pub mod api {
                     tree_id: ::core::primitive::u32,
                     leaf: runtime_types::darkwebb_standalone_runtime::Element,
                 ) -> ::subxt::SubmittableExtrinsic<
+                    'a,
                     T,
                     DepositAndUpdateLinkedAnchors,
                 > {
@@ -14480,7 +14547,7 @@ pub mod api {
                     fee: ::core::primitive::u128,
                     refund: ::core::primitive::u128,
                     commitment : runtime_types :: darkwebb_standalone_runtime :: Element,
-                ) -> ::subxt::SubmittableExtrinsic<T, Withdraw>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, Withdraw>
                 {
                     let call = Withdraw {
                         id,
@@ -14730,7 +14797,8 @@ pub mod api {
                     max_edges: ::core::primitive::u32,
                     depth: ::core::primitive::u8,
                     asset: ::core::primitive::u32,
-                ) -> ::subxt::SubmittableExtrinsic<T, Create> {
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, Create>
+                {
                     let call = Create {
                         deposit_size,
                         max_edges,
@@ -14743,7 +14811,8 @@ pub mod api {
                     &self,
                     tree_id: ::core::primitive::u32,
                     leaf: runtime_types::darkwebb_standalone_runtime::Element,
-                ) -> ::subxt::SubmittableExtrinsic<T, Deposit> {
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, Deposit>
+                {
                     let call = Deposit { tree_id, leaf };
                     ::subxt::SubmittableExtrinsic::new(self.client, call)
                 }
@@ -14752,6 +14821,7 @@ pub mod api {
                     tree_id: ::core::primitive::u32,
                     leaf: runtime_types::darkwebb_standalone_runtime::Element,
                 ) -> ::subxt::SubmittableExtrinsic<
+                    'a,
                     T,
                     DepositAndUpdateLinkedAnchors,
                 > {
@@ -14772,7 +14842,7 @@ pub mod api {
                     fee: ::core::primitive::u128,
                     refund: ::core::primitive::u128,
                     commitment : runtime_types :: darkwebb_standalone_runtime :: Element,
-                ) -> ::subxt::SubmittableExtrinsic<T, Withdraw>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, Withdraw>
                 {
                     let call = Withdraw {
                         id,
@@ -14996,8 +15066,11 @@ pub mod api {
                     max_edges: ::core::primitive::u32,
                     tree_depth: ::core::primitive::u8,
                     asset: ::core::primitive::u32,
-                ) -> ::subxt::SubmittableExtrinsic<T, ExecuteAnchorCreateProposal>
-                {
+                ) -> ::subxt::SubmittableExtrinsic<
+                    'a,
+                    T,
+                    ExecuteAnchorCreateProposal,
+                > {
                     let call = ExecuteAnchorCreateProposal {
                         deposit_size,
                         src_chain_id,
@@ -15012,8 +15085,11 @@ pub mod api {
                     &self,
                     r_id: [::core::primitive::u8; 32usize],
                     anchor_metadata : runtime_types :: pallet_linkable_tree :: types :: EdgeMetadata < :: core :: primitive :: u32 , runtime_types :: darkwebb_standalone_runtime :: Element , :: core :: primitive :: u32 >,
-                ) -> ::subxt::SubmittableExtrinsic<T, ExecuteAnchorUpdateProposal>
-                {
+                ) -> ::subxt::SubmittableExtrinsic<
+                    'a,
+                    T,
+                    ExecuteAnchorUpdateProposal,
+                > {
                     let call = ExecuteAnchorUpdateProposal {
                         r_id,
                         anchor_metadata,
@@ -15241,8 +15317,11 @@ pub mod api {
                     max_edges: ::core::primitive::u32,
                     tree_depth: ::core::primitive::u8,
                     asset: ::core::primitive::u32,
-                ) -> ::subxt::SubmittableExtrinsic<T, ExecuteAnchorCreateProposal>
-                {
+                ) -> ::subxt::SubmittableExtrinsic<
+                    'a,
+                    T,
+                    ExecuteAnchorCreateProposal,
+                > {
                     let call = ExecuteAnchorCreateProposal {
                         deposit_size,
                         src_chain_id,
@@ -15257,8 +15336,11 @@ pub mod api {
                     &self,
                     r_id: [::core::primitive::u8; 32usize],
                     anchor_metadata : runtime_types :: pallet_linkable_tree :: types :: EdgeMetadata < :: core :: primitive :: u32 , runtime_types :: darkwebb_standalone_runtime :: Element , :: core :: primitive :: u32 >,
-                ) -> ::subxt::SubmittableExtrinsic<T, ExecuteAnchorUpdateProposal>
-                {
+                ) -> ::subxt::SubmittableExtrinsic<
+                    'a,
+                    T,
+                    ExecuteAnchorUpdateProposal,
+                > {
                     let call = ExecuteAnchorUpdateProposal {
                         r_id,
                         anchor_metadata,
@@ -15569,7 +15651,7 @@ pub mod api {
                 pub fn set_maintainer(
                     &self,
                     new_maintainer: ::subxt::sp_core::crypto::AccountId32,
-                ) -> ::subxt::SubmittableExtrinsic<T, SetMaintainer>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, SetMaintainer>
                 {
                     let call = SetMaintainer { new_maintainer };
                     ::subxt::SubmittableExtrinsic::new(self.client, call)
@@ -15577,7 +15659,7 @@ pub mod api {
                 pub fn force_set_maintainer(
                     &self,
                     new_maintainer: ::subxt::sp_core::crypto::AccountId32,
-                ) -> ::subxt::SubmittableExtrinsic<T, ForceSetMaintainer>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, ForceSetMaintainer>
                 {
                     let call = ForceSetMaintainer { new_maintainer };
                     ::subxt::SubmittableExtrinsic::new(self.client, call)
@@ -15585,7 +15667,7 @@ pub mod api {
                 pub fn set_threshold(
                     &self,
                     threshold: ::core::primitive::u32,
-                ) -> ::subxt::SubmittableExtrinsic<T, SetThreshold>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, SetThreshold>
                 {
                     let call = SetThreshold { threshold };
                     ::subxt::SubmittableExtrinsic::new(self.client, call)
@@ -15594,7 +15676,7 @@ pub mod api {
                     &self,
                     id: [::core::primitive::u8; 32usize],
                     method: ::std::vec::Vec<::core::primitive::u8>,
-                ) -> ::subxt::SubmittableExtrinsic<T, SetResource>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, SetResource>
                 {
                     let call = SetResource { id, method };
                     ::subxt::SubmittableExtrinsic::new(self.client, call)
@@ -15602,7 +15684,7 @@ pub mod api {
                 pub fn remove_resource(
                     &self,
                     id: [::core::primitive::u8; 32usize],
-                ) -> ::subxt::SubmittableExtrinsic<T, RemoveResource>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, RemoveResource>
                 {
                     let call = RemoveResource { id };
                     ::subxt::SubmittableExtrinsic::new(self.client, call)
@@ -15610,7 +15692,7 @@ pub mod api {
                 pub fn whitelist_chain(
                     &self,
                     id: ::core::primitive::u32,
-                ) -> ::subxt::SubmittableExtrinsic<T, WhitelistChain>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, WhitelistChain>
                 {
                     let call = WhitelistChain { id };
                     ::subxt::SubmittableExtrinsic::new(self.client, call)
@@ -15618,7 +15700,7 @@ pub mod api {
                 pub fn add_relayer(
                     &self,
                     v: ::subxt::sp_core::crypto::AccountId32,
-                ) -> ::subxt::SubmittableExtrinsic<T, AddRelayer>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, AddRelayer>
                 {
                     let call = AddRelayer { v };
                     ::subxt::SubmittableExtrinsic::new(self.client, call)
@@ -15626,7 +15708,7 @@ pub mod api {
                 pub fn remove_relayer(
                     &self,
                     v: ::subxt::sp_core::crypto::AccountId32,
-                ) -> ::subxt::SubmittableExtrinsic<T, RemoveRelayer>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, RemoveRelayer>
                 {
                     let call = RemoveRelayer { v };
                     ::subxt::SubmittableExtrinsic::new(self.client, call)
@@ -15637,7 +15719,7 @@ pub mod api {
                     src_id: ::core::primitive::u32,
                     r_id: [::core::primitive::u8; 32usize],
                     call: runtime_types::darkwebb_standalone_runtime::Call,
-                ) -> ::subxt::SubmittableExtrinsic<T, AcknowledgeProposal>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, AcknowledgeProposal>
                 {
                     let call = AcknowledgeProposal {
                         nonce,
@@ -15653,7 +15735,7 @@ pub mod api {
                     src_id: ::core::primitive::u32,
                     r_id: [::core::primitive::u8; 32usize],
                     call: runtime_types::darkwebb_standalone_runtime::Call,
-                ) -> ::subxt::SubmittableExtrinsic<T, RejectProposal>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, RejectProposal>
                 {
                     let call = RejectProposal {
                         nonce,
@@ -15668,7 +15750,7 @@ pub mod api {
                     nonce: ::core::primitive::u64,
                     src_id: ::core::primitive::u32,
                     prop: runtime_types::darkwebb_standalone_runtime::Call,
-                ) -> ::subxt::SubmittableExtrinsic<T, EvalVoteState>
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, EvalVoteState>
                 {
                     let call = EvalVoteState {
                         nonce,
@@ -16298,14 +16380,14 @@ pub mod api {
                         :: subxt :: codec :: Encode, :: subxt :: codec :: Decode,
                     )]
                     pub struct WrapperKeepOpaque<_0>(
-                        ::core::primitive::u32,
+                        #[codec(compact)] ::core::primitive::u32,
                         pub _0,
                     );
                     #[derive(
                         :: subxt :: codec :: Encode, :: subxt :: codec :: Decode,
                     )]
                     pub struct WrapperOpaque<_0>(
-                        ::core::primitive::u32,
+                        #[codec(compact)] ::core::primitive::u32,
                         pub _0,
                     );
                 }
@@ -16413,7 +16495,9 @@ pub mod api {
                     #[derive(
                         :: subxt :: codec :: Encode, :: subxt :: codec :: Decode,
                     )]
-                    pub struct CheckNonce(pub ::core::primitive::u32);
+                    pub struct CheckNonce(
+                        #[codec(compact)] pub ::core::primitive::u32,
+                    );
                 }
                 pub mod check_spec_version {
                     use super::runtime_types;
@@ -18578,7 +18662,7 @@ pub mod api {
                 #[codec(index = 1)]
                 RunnerUp,
                 #[codec(index = 2)]
-                Candidate(::core::primitive::u32),
+                Candidate(#[codec(compact)] ::core::primitive::u32),
             }
             #[derive(
                 :: subxt :: codec :: Encode, :: subxt :: codec :: Decode,
@@ -19904,7 +19988,9 @@ pub mod api {
             #[derive(
                 :: subxt :: codec :: Encode, :: subxt :: codec :: Decode,
             )]
-            pub struct ChargeTransactionPayment(pub ::core::primitive::u128);
+            pub struct ChargeTransactionPayment(
+                #[codec(compact)] pub ::core::primitive::u128,
+            );
             #[derive(
                 :: subxt :: codec :: Encode, :: subxt :: codec :: Decode,
             )]
@@ -20915,7 +21001,7 @@ pub mod api {
                     #[codec(index = 0)]
                     Id(_0),
                     #[codec(index = 1)]
-                    Index(_1),
+                    Index(#[codec(compact)] _1),
                     #[codec(index = 2)]
                     Raw(::std::vec::Vec<::core::primitive::u8>),
                     #[codec(index = 3)]
