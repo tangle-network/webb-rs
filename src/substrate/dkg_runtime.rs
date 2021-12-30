@@ -8129,7 +8129,6 @@ pub mod api {
                     ::core::primitive::u32,
                 )>,
                 pub transaction_version: ::core::primitive::u32,
-                pub state_version: ::core::primitive::u8,
             }
         }
     }
