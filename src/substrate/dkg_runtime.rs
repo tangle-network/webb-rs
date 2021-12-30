@@ -1774,7 +1774,9 @@ pub mod api {
                 :: subxt :: codec :: Encode, :: subxt :: codec :: Decode,
             )]
             pub struct KeyChanged {
-                pub new_sudoer: ::subxt::sp_core::crypto::AccountId32,
+                pub old_sudoer: ::core::option::Option<
+                    ::subxt::sp_core::crypto::AccountId32,
+                >,
             }
             impl ::subxt::Event for KeyChanged {
                 const PALLET: &'static str = "Sudo";
@@ -1816,11 +1818,13 @@ pub mod api {
                     &self,
                     hash: ::core::option::Option<T::Hash>,
                 ) -> ::core::result::Result<
-                    ::subxt::sp_core::crypto::AccountId32,
+                    ::core::option::Option<
+                        ::subxt::sp_core::crypto::AccountId32,
+                    >,
                     ::subxt::Error,
                 > {
                     let entry = Key;
-                    self.client.storage().fetch_or_default(&entry, hash).await
+                    self.client.storage().fetch(&entry, hash).await
                 }
             }
         }
@@ -2162,9 +2166,9 @@ pub mod api {
                 }                pub async fn signed_submission_indices (& self , hash : :: core :: option :: Option < T :: Hash > ,) -> :: core :: result :: Result < runtime_types :: frame_support :: storage :: bounded_btree_map :: BoundedBTreeMap < [:: core :: primitive :: u128 ; 3usize] , :: core :: primitive :: u32 > , :: subxt :: Error >{
                     let entry = SignedSubmissionIndices;
                     self.client.storage().fetch_or_default(&entry, hash).await
-                }                pub async fn signed_submissions_map (& self , _0 : :: core :: primitive :: u32 , hash : :: core :: option :: Option < T :: Hash > ,) -> :: core :: result :: Result < runtime_types :: pallet_election_provider_multi_phase :: signed :: SignedSubmission < :: subxt :: sp_core :: crypto :: AccountId32 , :: core :: primitive :: u128 , runtime_types :: dkg_standalone_runtime :: NposSolution16 > , :: subxt :: Error >{
+                }                pub async fn signed_submissions_map (& self , _0 : :: core :: primitive :: u32 , hash : :: core :: option :: Option < T :: Hash > ,) -> :: core :: result :: Result < :: core :: option :: Option < runtime_types :: pallet_election_provider_multi_phase :: signed :: SignedSubmission < :: subxt :: sp_core :: crypto :: AccountId32 , :: core :: primitive :: u128 , runtime_types :: dkg_standalone_runtime :: NposSolution16 > > , :: subxt :: Error >{
                     let entry = SignedSubmissionsMap(_0);
-                    self.client.storage().fetch_or_default(&entry, hash).await
+                    self.client.storage().fetch(&entry, hash).await
                 }
                 pub async fn signed_submissions_map_iter(
                     &self,
@@ -5023,7 +5027,9 @@ pub mod api {
                 :: subxt :: codec :: Encode, :: subxt :: codec :: Decode,
             )]
             pub struct MaintainerSet {
-                pub old_maintainer: ::subxt::sp_core::crypto::AccountId32,
+                pub old_maintainer: ::core::option::Option<
+                    ::subxt::sp_core::crypto::AccountId32,
+                >,
                 pub new_maintainer: ::subxt::sp_core::crypto::AccountId32,
             }
             impl ::subxt::Event for MaintainerSet {
@@ -5275,11 +5281,13 @@ pub mod api {
                     &self,
                     hash: ::core::option::Option<T::Hash>,
                 ) -> ::core::result::Result<
-                    ::subxt::sp_core::crypto::AccountId32,
+                    ::core::option::Option<
+                        ::subxt::sp_core::crypto::AccountId32,
+                    >,
                     ::subxt::Error,
                 > {
                     let entry = Maintainer;
-                    self.client.storage().fetch_or_default(&entry, hash).await
+                    self.client.storage().fetch(&entry, hash).await
                 }
                 pub async fn chain_nonces(
                     &self,
@@ -5493,10 +5501,18 @@ pub mod api {
             #[derive(
                 :: subxt :: codec :: Encode, :: subxt :: codec :: Decode,
             )]
-            pub struct SubmitSignedProposal { pub prop : runtime_types :: dkg_runtime_primitives :: proposal :: ProposalType }
-            impl ::subxt::Call for SubmitSignedProposal {
+            pub struct SubmitSignedProposals { pub props : :: std :: vec :: Vec < runtime_types :: dkg_runtime_primitives :: proposal :: ProposalType > }
+            impl ::subxt::Call for SubmitSignedProposals {
                 const PALLET: &'static str = "DKGProposalHandler";
-                const FUNCTION: &'static str = "submit_signed_proposal";
+                const FUNCTION: &'static str = "submit_signed_proposals";
+            }
+            #[derive(
+                :: subxt :: codec :: Encode, :: subxt :: codec :: Decode,
+            )]
+            pub struct ForceSubmitUnsignedProposal { pub prop : runtime_types :: dkg_runtime_primitives :: proposal :: ProposalType }
+            impl ::subxt::Call for ForceSubmitUnsignedProposal {
+                const PALLET: &'static str = "DKGProposalHandler";
+                const FUNCTION: &'static str = "force_submit_unsigned_proposal";
             }
             pub struct TransactionApi<
                 'a,
@@ -5511,12 +5527,23 @@ pub mod api {
                 pub fn new(client: &'a ::subxt::Client<T>) -> Self {
                     Self { client }
                 }
-                pub fn submit_signed_proposal(
+                pub fn submit_signed_proposals(
+                    &self,
+                    props : :: std :: vec :: Vec < runtime_types :: dkg_runtime_primitives :: proposal :: ProposalType >,
+                ) -> ::subxt::SubmittableExtrinsic<'a, T, SubmitSignedProposals>
+                {
+                    let call = SubmitSignedProposals { props };
+                    ::subxt::SubmittableExtrinsic::new(self.client, call)
+                }
+                pub fn force_submit_unsigned_proposal(
                     &self,
                     prop : runtime_types :: dkg_runtime_primitives :: proposal :: ProposalType,
-                ) -> ::subxt::SubmittableExtrinsic<'a, T, SubmitSignedProposal>
-                {
-                    let call = SubmitSignedProposal { prop };
+                ) -> ::subxt::SubmittableExtrinsic<
+                    'a,
+                    T,
+                    ForceSubmitUnsignedProposal,
+                > {
+                    let call = ForceSubmitUnsignedProposal { prop };
                     ::subxt::SubmittableExtrinsic::new(self.client, call)
                 }
             }
@@ -5532,6 +5559,14 @@ pub mod api {
             impl ::subxt::Event for ProposalAdded {
                 const PALLET: &'static str = "DKGProposalHandler";
                 const EVENT: &'static str = "ProposalAdded";
+            }
+            #[derive(
+                :: subxt :: codec :: Encode, :: subxt :: codec :: Decode,
+            )]
+            pub struct ProposalSigned { pub chain_id : :: core :: primitive :: u32 , pub key : runtime_types :: dkg_runtime_primitives :: proposal :: DKGPayloadKey , pub data : :: std :: vec :: Vec < :: core :: primitive :: u8 > , pub signature : :: std :: vec :: Vec < :: core :: primitive :: u8 > }
+            impl ::subxt::Event for ProposalSigned {
+                const PALLET: &'static str = "DKGProposalHandler";
+                const EVENT: &'static str = "ProposalSigned";
             }
         }
         pub mod storage {
@@ -5672,6 +5707,14 @@ pub mod api {
                     RefreshVote(::core::primitive::u64),
                     #[codec(index = 2)]
                     AnchorUpdateProposal(::core::primitive::u64),
+                    #[codec(index = 3)]
+                    TokenAddProposal(::core::primitive::u64),
+                    #[codec(index = 4)]
+                    TokenRemoveProposal(::core::primitive::u64),
+                    #[codec(index = 5)]
+                    WrappingFeeUpdateProposal(::core::primitive::u64),
+                    #[codec(index = 6)]
+                    ResourceIdUpdateProposal(::core::primitive::u64),
                 }
                 #[derive(
                     :: subxt :: codec :: Encode, :: subxt :: codec :: Decode,
@@ -5692,6 +5735,42 @@ pub mod api {
                     },
                     #[codec(index = 3)]
                     AnchorUpdateSigned {
+                        data: ::std::vec::Vec<::core::primitive::u8>,
+                        signature: ::std::vec::Vec<::core::primitive::u8>,
+                    },
+                    #[codec(index = 4)]
+                    TokenAdd {
+                        data: ::std::vec::Vec<::core::primitive::u8>,
+                    },
+                    #[codec(index = 5)]
+                    TokenAddSigned {
+                        data: ::std::vec::Vec<::core::primitive::u8>,
+                        signature: ::std::vec::Vec<::core::primitive::u8>,
+                    },
+                    #[codec(index = 6)]
+                    TokenRemove {
+                        data: ::std::vec::Vec<::core::primitive::u8>,
+                    },
+                    #[codec(index = 7)]
+                    TokenRemoveSigned {
+                        data: ::std::vec::Vec<::core::primitive::u8>,
+                        signature: ::std::vec::Vec<::core::primitive::u8>,
+                    },
+                    #[codec(index = 8)]
+                    WrappingFeeUpdate {
+                        data: ::std::vec::Vec<::core::primitive::u8>,
+                    },
+                    #[codec(index = 9)]
+                    WrappingFeeUpdateSigned {
+                        data: ::std::vec::Vec<::core::primitive::u8>,
+                        signature: ::std::vec::Vec<::core::primitive::u8>,
+                    },
+                    #[codec(index = 10)]
+                    ResourceIdUpdate {
+                        data: ::std::vec::Vec<::core::primitive::u8>,
+                    },
+                    #[codec(index = 11)]
+                    ResourceIdUpdateSigned {
                         data: ::std::vec::Vec<::core::primitive::u8>,
                         signature: ::std::vec::Vec<::core::primitive::u8>,
                     },
@@ -6408,7 +6487,7 @@ pub mod api {
                     :: subxt :: codec :: Encode, :: subxt :: codec :: Decode,
                 )]
                 pub enum Call {
-                    # [codec (index = 0)] submit_signed_proposal { prop : runtime_types :: dkg_runtime_primitives :: proposal :: ProposalType , } , }
+                    # [codec (index = 0)] submit_signed_proposals { props : :: std :: vec :: Vec < runtime_types :: dkg_runtime_primitives :: proposal :: ProposalType > , } , # [codec (index = 1)] force_submit_unsigned_proposal { prop : runtime_types :: dkg_runtime_primitives :: proposal :: ProposalType , } , }
                 #[derive(
                     :: subxt :: codec :: Encode, :: subxt :: codec :: Decode,
                 )]
@@ -6427,12 +6506,14 @@ pub mod api {
                     ProposalAlreadyExists,
                     #[codec(index = 6)]
                     ChainIdInvalid,
+                    #[codec(index = 7)]
+                    ProposalsLengthOverflow,
                 }
                 #[derive(
                     :: subxt :: codec :: Encode, :: subxt :: codec :: Decode,
                 )]
                 pub enum Event {
-                    # [codec (index = 0)] ProposalAdded (:: subxt :: sp_core :: crypto :: AccountId32 , runtime_types :: dkg_runtime_primitives :: proposal :: ProposalType ,) , }
+                    # [codec (index = 0)] ProposalAdded (:: subxt :: sp_core :: crypto :: AccountId32 , runtime_types :: dkg_runtime_primitives :: proposal :: ProposalType ,) , # [codec (index = 1)] ProposalSigned { chain_id : :: core :: primitive :: u32 , key : runtime_types :: dkg_runtime_primitives :: proposal :: DKGPayloadKey , data : :: std :: vec :: Vec < :: core :: primitive :: u8 > , signature : :: std :: vec :: Vec < :: core :: primitive :: u8 > , } , }
             }
         }
         pub mod pallet_dkg_proposals {
@@ -6536,7 +6617,9 @@ pub mod api {
                 pub enum Event {
                     #[codec(index = 0)]
                     MaintainerSet {
-                        old_maintainer: ::subxt::sp_core::crypto::AccountId32,
+                        old_maintainer: ::core::option::Option<
+                            ::subxt::sp_core::crypto::AccountId32,
+                        >,
                         new_maintainer: ::subxt::sp_core::crypto::AccountId32,
                     },
                     #[codec(index = 1)]
@@ -7153,7 +7236,9 @@ pub mod api {
                     },
                     #[codec(index = 1)]
                     KeyChanged {
-                        new_sudoer: ::subxt::sp_core::crypto::AccountId32,
+                        old_sudoer: ::core::option::Option<
+                            ::subxt::sp_core::crypto::AccountId32,
+                        >,
                     },
                     #[codec(index = 2)]
                     SudoAsDone {
@@ -7991,8 +8076,10 @@ pub mod api {
                 #[codec(index = 5)]
                 NoProviders,
                 #[codec(index = 6)]
-                Token(runtime_types::sp_runtime::TokenError),
+                TooManyConsumers,
                 #[codec(index = 7)]
+                Token(runtime_types::sp_runtime::TokenError),
+                #[codec(index = 8)]
                 Arithmetic(runtime_types::sp_runtime::ArithmeticError),
             }
             #[derive(
