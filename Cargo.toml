@@ -4,7 +4,7 @@ members = [".", "pedersen-hash"]
 [package]
 name = "webb"
 version = "0.2.5"
-edition = "2018"
+edition = "2021"
 authors = [
    "Webb Developers <devs@webb.tools>",
    "Shady Khalifa <shekohex@gmail.com>"
