@@ -86,8 +86,18 @@ mod substrate {
         let item_mod = syn::parse_quote!(
             pub mod api {}
         );
+        let mut generated_type_derives =
+            subxt_codegen::GeneratedTypeDerives::default();
+        generated_type_derives.append(
+            vec![
+                syn::parse_quote!(Debug),
+                syn::parse_quote!(Eq),
+                syn::parse_quote!(PartialEq),
+            ]
+            .into_iter(),
+        );
         let runtime_api =
-            generator.generate_runtime(item_mod, Default::default());
+            generator.generate_runtime(item_mod, generated_type_derives);
         std::fs::write(out, runtime_api.to_string())?;
         Ok(())
     }
@@ -107,6 +117,14 @@ mod substrate {
     }
 }
 
+#[cfg(any(feature = "generate-substrate", feature = "generate-contracts"))]
+fn run_cargo_fmt() -> Result<(), Box<dyn Error>> {
+    // Run rustfmt on all files in the `src` directory.
+    let mut cmd = std::process::Command::new("cargo");
+    cmd.arg("fmt").status()?;
+    Ok(())
+}
+
 fn main() -> Result<(), Box<dyn Error>> {
     #[cfg(feature = "generate-contracts")]
     {
@@ -114,11 +132,13 @@ fn main() -> Result<(), Box<dyn Error>> {
         evm::build_protocol_solidity_anchor()?;
         evm::build_protocol_solidity_anchor_proxy()?;
         evm::build_protocol_solidity_bridge()?;
+        run_cargo_fmt()?;
     }
     #[cfg(feature = "generate-substrate")]
     {
         substrate::generate_dkg_runtime()?;
         substrate::generate_protocol_substrate_runtime()?;
+        run_cargo_fmt()?;
     }
     Ok(())
 }
