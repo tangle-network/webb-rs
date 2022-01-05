@@ -1,6 +1,6 @@
-pub use anchorcontract_mod::*;
+pub use fixeddepositanchorcontract_mod::*;
 #[allow(clippy::too_many_arguments)]
-mod anchorcontract_mod {
+mod fixeddepositanchorcontract_mod {
     #![allow(clippy::enum_variant_names)]
     #![allow(dead_code)]
     #![allow(clippy::type_complexity)]
@@ -14,29 +14,31 @@ mod anchorcontract_mod {
         types::*,
     };
     use ethers::providers::Middleware;
-    #[doc = "AnchorContract was auto-generated with ethers-rs Abigen. More information at: https://github.com/gakonst/ethers-rs"]
+    #[doc = "FixedDepositAnchorContract was auto-generated with ethers-rs Abigen. More information at: https://github.com/gakonst/ethers-rs"]
     use std::sync::Arc;
-    pub static ANCHORCONTRACT_ABI: ethers::contract::Lazy<
+    pub static FIXEDDEPOSITANCHORCONTRACT_ABI: ethers::contract::Lazy<
         ethers::core::abi::Abi,
     > = ethers::contract::Lazy::new(|| {
-        serde_json :: from_str ("[{\"inputs\":[{\"internalType\":\"contract IVerifier\",\"name\":\"_verifier\",\"type\":\"address\"},{\"internalType\":\"contract IPoseidonT3\",\"name\":\"_hasher\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"_denomination\",\"type\":\"uint256\"},{\"internalType\":\"uint32\",\"name\":\"_merkleTreeHeight\",\"type\":\"uint32\"},{\"internalType\":\"contract ITokenWrapper\",\"name\":\"_token\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"_bridge\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"_admin\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"_handler\",\"type\":\"address\"},{\"internalType\":\"uint8\",\"name\":\"_maxEdges\",\"type\":\"uint8\"}],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"bytes32\",\"name\":\"commitment\",\"type\":\"bytes32\"},{\"indexed\":false,\"internalType\":\"uint32\",\"name\":\"leafIndex\",\"type\":\"uint32\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"timestamp\",\"type\":\"uint256\"}],\"name\":\"Deposit\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"chainID\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"latestLeafIndex\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"bytes32\",\"name\":\"merkleRoot\",\"type\":\"bytes32\"}],\"name\":\"EdgeAddition\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"chainID\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"latestLeafIndex\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"bytes32\",\"name\":\"merkleRoot\",\"type\":\"bytes32\"}],\"name\":\"EdgeUpdate\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"bytes32\",\"name\":\"commitment\",\"type\":\"bytes32\"},{\"indexed\":false,\"internalType\":\"bytes32\",\"name\":\"nullifierHash\",\"type\":\"bytes32\"},{\"indexed\":false,\"internalType\":\"uint32\",\"name\":\"insertedIndex\",\"type\":\"uint32\"}],\"name\":\"Refresh\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"bytes32\",\"name\":\"nullifierHash\",\"type\":\"bytes32\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"relayer\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"fee\",\"type\":\"uint256\"}],\"name\":\"Withdrawal\",\"type\":\"event\"},{\"inputs\":[],\"name\":\"FIELD_SIZE\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"ROOT_HISTORY_SIZE\",\"outputs\":[{\"internalType\":\"uint32\",\"name\":\"\",\"type\":\"uint32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"ZERO_VALUE\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"sourceChainID\",\"type\":\"uint256\"},{\"internalType\":\"bytes32\",\"name\":\"root\",\"type\":\"bytes32\"},{\"internalType\":\"uint256\",\"name\":\"leafIndex\",\"type\":\"uint256\"}],\"name\":\"addEdge\",\"outputs\":[],\"stateMutability\":\"payable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"admin\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"bridge\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"name\":\"commitments\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"name\":\"currentNeighborRootIndex\",\"outputs\":[{\"internalType\":\"uint32\",\"name\":\"\",\"type\":\"uint32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"currentRootIndex\",\"outputs\":[{\"internalType\":\"uint32\",\"name\":\"\",\"type\":\"uint32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"denomination\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"_commitment\",\"type\":\"bytes32\"}],\"name\":\"deposit\",\"outputs\":[],\"stateMutability\":\"payable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"name\":\"edgeExistsForChain\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"name\":\"edgeIndex\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"name\":\"edgeList\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"chainID\",\"type\":\"uint256\"},{\"internalType\":\"bytes32\",\"name\":\"root\",\"type\":\"bytes32\"},{\"internalType\":\"uint256\",\"name\":\"latestLeafIndex\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"name\":\"filledSubtrees\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getDenomination\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getLastRoot\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getLatestNeighborRoots\",\"outputs\":[{\"internalType\":\"bytes32[]\",\"name\":\"roots\",\"type\":\"bytes32[]\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getToken\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"handler\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_chainID\",\"type\":\"uint256\"}],\"name\":\"hasEdge\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"contract IPoseidonT3\",\"name\":\"_hasher\",\"type\":\"address\"},{\"internalType\":\"bytes32\",\"name\":\"_left\",\"type\":\"bytes32\"},{\"internalType\":\"bytes32\",\"name\":\"_right\",\"type\":\"bytes32\"}],\"name\":\"hashLeftRight\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"stateMutability\":\"pure\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"hasher\",\"outputs\":[{\"internalType\":\"contract IPoseidonT3\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"neighborChainID\",\"type\":\"uint256\"},{\"internalType\":\"bytes32\",\"name\":\"_root\",\"type\":\"bytes32\"}],\"name\":\"isKnownNeighborRoot\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"_root\",\"type\":\"bytes32\"}],\"name\":\"isKnownRoot\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"_nullifierHash\",\"type\":\"bytes32\"}],\"name\":\"isSpent\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32[]\",\"name\":\"_nullifierHashes\",\"type\":\"bytes32[]\"}],\"name\":\"isSpentArray\",\"outputs\":[{\"internalType\":\"bool[]\",\"name\":\"spent\",\"type\":\"bool[]\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32[]\",\"name\":\"roots\",\"type\":\"bytes32[]\"}],\"name\":\"isValidRoots\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"levels\",\"outputs\":[{\"internalType\":\"uint32\",\"name\":\"\",\"type\":\"uint32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"maxEdges\",\"outputs\":[{\"internalType\":\"uint8\",\"name\":\"\",\"type\":\"uint8\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"},{\"internalType\":\"uint32\",\"name\":\"\",\"type\":\"uint32\"}],\"name\":\"neighborRoots\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"nextIndex\",\"outputs\":[{\"internalType\":\"uint32\",\"name\":\"\",\"type\":\"uint32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"name\":\"nullifierHashes\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"name\":\"roots\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_bridge\",\"type\":\"address\"}],\"name\":\"setBridge\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_handler\",\"type\":\"address\"}],\"name\":\"setHandler\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"token\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256[8]\",\"name\":\"_proof\",\"type\":\"uint256[8]\"}],\"name\":\"unpackProof\",\"outputs\":[{\"internalType\":\"uint256[2]\",\"name\":\"\",\"type\":\"uint256[2]\"},{\"internalType\":\"uint256[2][2]\",\"name\":\"\",\"type\":\"uint256[2][2]\"},{\"internalType\":\"uint256[2]\",\"name\":\"\",\"type\":\"uint256[2]\"}],\"stateMutability\":\"pure\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"tokenAddress\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"unwrapIntoNative\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"tokenAddress\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"unwrapIntoToken\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"sourceChainID\",\"type\":\"uint256\"},{\"internalType\":\"bytes32\",\"name\":\"root\",\"type\":\"bytes32\"},{\"internalType\":\"uint256\",\"name\":\"leafIndex\",\"type\":\"uint256\"}],\"name\":\"updateEdge\",\"outputs\":[],\"stateMutability\":\"payable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"verifier\",\"outputs\":[{\"internalType\":\"contract IVerifier\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes\",\"name\":\"_proof\",\"type\":\"bytes\"},{\"components\":[{\"internalType\":\"bytes\",\"name\":\"_roots\",\"type\":\"bytes\"},{\"internalType\":\"bytes32\",\"name\":\"_nullifierHash\",\"type\":\"bytes32\"},{\"internalType\":\"bytes32\",\"name\":\"_refreshCommitment\",\"type\":\"bytes32\"},{\"internalType\":\"address payable\",\"name\":\"_recipient\",\"type\":\"address\"},{\"internalType\":\"address payable\",\"name\":\"_relayer\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"_fee\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"_refund\",\"type\":\"uint256\"}],\"internalType\":\"struct IAnchor.PublicInputs\",\"name\":\"_publicInputs\",\"type\":\"tuple\"}],\"name\":\"withdraw\",\"outputs\":[],\"stateMutability\":\"payable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes\",\"name\":\"_proof\",\"type\":\"bytes\"},{\"components\":[{\"internalType\":\"bytes\",\"name\":\"_roots\",\"type\":\"bytes\"},{\"internalType\":\"bytes32\",\"name\":\"_nullifierHash\",\"type\":\"bytes32\"},{\"internalType\":\"bytes32\",\"name\":\"_refreshCommitment\",\"type\":\"bytes32\"},{\"internalType\":\"address payable\",\"name\":\"_recipient\",\"type\":\"address\"},{\"internalType\":\"address payable\",\"name\":\"_relayer\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"_fee\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"_refund\",\"type\":\"uint256\"}],\"internalType\":\"struct IAnchor.PublicInputs\",\"name\":\"_publicInputs\",\"type\":\"tuple\"},{\"internalType\":\"address\",\"name\":\"tokenAddress\",\"type\":\"address\"}],\"name\":\"withdrawAndUnwrap\",\"outputs\":[],\"stateMutability\":\"payable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"tokenAddress\",\"type\":\"address\"},{\"internalType\":\"bytes32\",\"name\":\"_commitment\",\"type\":\"bytes32\"}],\"name\":\"wrapAndDeposit\",\"outputs\":[],\"stateMutability\":\"payable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"wrapNative\",\"outputs\":[],\"stateMutability\":\"payable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"tokenAddress\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"wrapToken\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"i\",\"type\":\"uint256\"}],\"name\":\"zeros\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"stateMutability\":\"pure\",\"type\":\"function\"}]") . expect ("invalid abi")
+        serde_json :: from_str ("[{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_handler\",\"type\":\"address\"},{\"internalType\":\"contract ITokenWrapper\",\"name\":\"_token\",\"type\":\"address\"},{\"internalType\":\"contract IAnchorVerifier\",\"name\":\"_verifier\",\"type\":\"address\"},{\"internalType\":\"contract IPoseidonT3\",\"name\":\"_hasher\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"_denomination\",\"type\":\"uint256\"},{\"internalType\":\"uint32\",\"name\":\"_merkleTreeHeight\",\"type\":\"uint32\"},{\"internalType\":\"uint8\",\"name\":\"_maxEdges\",\"type\":\"uint8\"}],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"sender\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"uint32\",\"name\":\"leafIndex\",\"type\":\"uint32\"},{\"indexed\":true,\"internalType\":\"bytes32\",\"name\":\"commitment\",\"type\":\"bytes32\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"timestamp\",\"type\":\"uint256\"}],\"name\":\"Deposit\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"chainID\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"latestLeafIndex\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"bytes32\",\"name\":\"merkleRoot\",\"type\":\"bytes32\"}],\"name\":\"EdgeAddition\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"chainID\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"latestLeafIndex\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"bytes32\",\"name\":\"merkleRoot\",\"type\":\"bytes32\"}],\"name\":\"EdgeUpdate\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"bytes32\",\"name\":\"commitment\",\"type\":\"bytes32\"},{\"indexed\":false,\"internalType\":\"uint32\",\"name\":\"leafIndex\",\"type\":\"uint32\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"timestamp\",\"type\":\"uint256\"}],\"name\":\"Insertion\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"bytes32\",\"name\":\"commitment\",\"type\":\"bytes32\"},{\"indexed\":false,\"internalType\":\"bytes32\",\"name\":\"nullifierHash\",\"type\":\"bytes32\"},{\"indexed\":false,\"internalType\":\"uint32\",\"name\":\"insertedIndex\",\"type\":\"uint32\"}],\"name\":\"Refresh\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"relayer\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"fee\",\"type\":\"uint256\"}],\"name\":\"Withdrawal\",\"type\":\"event\"},{\"inputs\":[],\"name\":\"FIELD_SIZE\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"ROOT_HISTORY_SIZE\",\"outputs\":[{\"internalType\":\"uint32\",\"name\":\"\",\"type\":\"uint32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"ZERO_VALUE\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"name\":\"commitments\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"name\":\"currentNeighborRootIndex\",\"outputs\":[{\"internalType\":\"uint32\",\"name\":\"\",\"type\":\"uint32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"currentRootIndex\",\"outputs\":[{\"internalType\":\"uint32\",\"name\":\"\",\"type\":\"uint32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"denomination\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"_commitment\",\"type\":\"bytes32\"}],\"name\":\"deposit\",\"outputs\":[],\"stateMutability\":\"payable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"name\":\"edgeExistsForChain\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"name\":\"edgeIndex\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"name\":\"edgeList\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"chainID\",\"type\":\"uint256\"},{\"internalType\":\"bytes32\",\"name\":\"root\",\"type\":\"bytes32\"},{\"internalType\":\"uint256\",\"name\":\"latestLeafIndex\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"name\":\"filledSubtrees\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getChainId\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getDenomination\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getLastRoot\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getLatestNeighborEdges\",\"outputs\":[{\"components\":[{\"internalType\":\"uint256\",\"name\":\"chainID\",\"type\":\"uint256\"},{\"internalType\":\"bytes32\",\"name\":\"root\",\"type\":\"bytes32\"},{\"internalType\":\"uint256\",\"name\":\"latestLeafIndex\",\"type\":\"uint256\"}],\"internalType\":\"struct LinkableTree.Edge[]\",\"name\":\"edges\",\"type\":\"tuple[]\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getLatestNeighborRoots\",\"outputs\":[{\"internalType\":\"bytes32[]\",\"name\":\"roots\",\"type\":\"bytes32[]\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getProposalNonce\",\"outputs\":[{\"internalType\":\"uint32\",\"name\":\"\",\"type\":\"uint32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getToken\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"handler\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_chainID\",\"type\":\"uint256\"}],\"name\":\"hasEdge\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"contract IPoseidonT3\",\"name\":\"_hasher\",\"type\":\"address\"},{\"internalType\":\"bytes32\",\"name\":\"_left\",\"type\":\"bytes32\"},{\"internalType\":\"bytes32\",\"name\":\"_right\",\"type\":\"bytes32\"}],\"name\":\"hashLeftRight\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"stateMutability\":\"pure\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"hasher\",\"outputs\":[{\"internalType\":\"contract IPoseidonT3\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"neighborChainID\",\"type\":\"uint256\"},{\"internalType\":\"bytes32\",\"name\":\"_root\",\"type\":\"bytes32\"}],\"name\":\"isKnownNeighborRoot\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"_root\",\"type\":\"bytes32\"}],\"name\":\"isKnownRoot\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"_nullifierHash\",\"type\":\"bytes32\"}],\"name\":\"isSpent\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32[]\",\"name\":\"_nullifierHashes\",\"type\":\"bytes32[]\"}],\"name\":\"isSpentArray\",\"outputs\":[{\"internalType\":\"bool[]\",\"name\":\"spent\",\"type\":\"bool[]\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32[]\",\"name\":\"roots\",\"type\":\"bytes32[]\"}],\"name\":\"isValidRoots\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"levels\",\"outputs\":[{\"internalType\":\"uint32\",\"name\":\"\",\"type\":\"uint32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"maxEdges\",\"outputs\":[{\"internalType\":\"uint8\",\"name\":\"\",\"type\":\"uint8\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"},{\"internalType\":\"uint32\",\"name\":\"\",\"type\":\"uint32\"}],\"name\":\"neighborRoots\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"nextIndex\",\"outputs\":[{\"internalType\":\"uint32\",\"name\":\"\",\"type\":\"uint32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"name\":\"nullifierHashes\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"name\":\"roots\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"newHandler\",\"type\":\"address\"},{\"internalType\":\"uint32\",\"name\":\"nonce\",\"type\":\"uint32\"}],\"name\":\"setHandler\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"newVerifier\",\"type\":\"address\"}],\"name\":\"setVerifier\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"token\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256[8]\",\"name\":\"_proof\",\"type\":\"uint256[8]\"}],\"name\":\"unpackProof\",\"outputs\":[{\"internalType\":\"uint256[2]\",\"name\":\"\",\"type\":\"uint256[2]\"},{\"internalType\":\"uint256[2][2]\",\"name\":\"\",\"type\":\"uint256[2][2]\"},{\"internalType\":\"uint256[2]\",\"name\":\"\",\"type\":\"uint256[2]\"}],\"stateMutability\":\"pure\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"tokenAddress\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"unwrapIntoNative\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"tokenAddress\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"unwrapIntoToken\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"sourceChainID\",\"type\":\"uint256\"},{\"internalType\":\"bytes32\",\"name\":\"root\",\"type\":\"bytes32\"},{\"internalType\":\"uint256\",\"name\":\"leafIndex\",\"type\":\"uint256\"}],\"name\":\"updateEdge\",\"outputs\":[],\"stateMutability\":\"payable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"verifier\",\"outputs\":[{\"internalType\":\"contract IAnchorVerifier\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes\",\"name\":\"_proof\",\"type\":\"bytes\"},{\"components\":[{\"internalType\":\"bytes\",\"name\":\"_roots\",\"type\":\"bytes\"},{\"internalType\":\"bytes32\",\"name\":\"_nullifierHash\",\"type\":\"bytes32\"},{\"internalType\":\"bytes32\",\"name\":\"_refreshCommitment\",\"type\":\"bytes32\"},{\"internalType\":\"address payable\",\"name\":\"_recipient\",\"type\":\"address\"},{\"internalType\":\"address payable\",\"name\":\"_relayer\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"_fee\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"_refund\",\"type\":\"uint256\"}],\"internalType\":\"struct IFixedDepositAnchor.PublicInputs\",\"name\":\"_publicInputs\",\"type\":\"tuple\"}],\"name\":\"withdraw\",\"outputs\":[],\"stateMutability\":\"payable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes\",\"name\":\"_proof\",\"type\":\"bytes\"},{\"components\":[{\"internalType\":\"bytes\",\"name\":\"_roots\",\"type\":\"bytes\"},{\"internalType\":\"bytes32\",\"name\":\"_nullifierHash\",\"type\":\"bytes32\"},{\"internalType\":\"bytes32\",\"name\":\"_refreshCommitment\",\"type\":\"bytes32\"},{\"internalType\":\"address payable\",\"name\":\"_recipient\",\"type\":\"address\"},{\"internalType\":\"address payable\",\"name\":\"_relayer\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"_fee\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"_refund\",\"type\":\"uint256\"}],\"internalType\":\"struct IFixedDepositAnchor.PublicInputs\",\"name\":\"_publicInputs\",\"type\":\"tuple\"},{\"internalType\":\"address\",\"name\":\"tokenAddress\",\"type\":\"address\"}],\"name\":\"withdrawAndUnwrap\",\"outputs\":[],\"stateMutability\":\"payable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"tokenAddress\",\"type\":\"address\"},{\"internalType\":\"bytes32\",\"name\":\"_commitment\",\"type\":\"bytes32\"}],\"name\":\"wrapAndDeposit\",\"outputs\":[],\"stateMutability\":\"payable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"wrapNative\",\"outputs\":[],\"stateMutability\":\"payable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"tokenAddress\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"wrapToken\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"i\",\"type\":\"uint256\"}],\"name\":\"zeros\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"stateMutability\":\"pure\",\"type\":\"function\"}]") . expect ("invalid abi")
     });
     #[derive(Clone)]
-    pub struct AnchorContract<M>(ethers::contract::Contract<M>);
-    impl<M> std::ops::Deref for AnchorContract<M> {
+    pub struct FixedDepositAnchorContract<M>(ethers::contract::Contract<M>);
+    impl<M> std::ops::Deref for FixedDepositAnchorContract<M> {
         type Target = ethers::contract::Contract<M>;
         fn deref(&self) -> &Self::Target {
             &self.0
         }
     }
-    impl<M: ethers::providers::Middleware> std::fmt::Debug for AnchorContract<M> {
+    impl<M: ethers::providers::Middleware> std::fmt::Debug
+        for FixedDepositAnchorContract<M>
+    {
         fn fmt(&self, f: &mut std::fmt::Formatter) -> std::fmt::Result {
-            f.debug_tuple(stringify!(AnchorContract))
+            f.debug_tuple(stringify!(FixedDepositAnchorContract))
                 .field(&self.address())
                 .finish()
         }
     }
-    impl<'a, M: ethers::providers::Middleware> AnchorContract<M> {
+    impl<'a, M: ethers::providers::Middleware> FixedDepositAnchorContract<M> {
         #[doc = r" Creates a new contract instance with the specified `ethers`"]
         #[doc = r" client at the given `Address`. The contract derefs to a `ethers::Contract`"]
         #[doc = r" object"]
@@ -46,7 +48,7 @@ mod anchorcontract_mod {
         ) -> Self {
             let contract = ethers::contract::Contract::new(
                 address.into(),
-                ANCHORCONTRACT_ABI.clone(),
+                FIXEDDEPOSITANCHORCONTRACT_ABI.clone(),
                 client,
             );
             Self(contract)
@@ -79,42 +81,6 @@ mod anchorcontract_mod {
         > {
             self.0
                 .method_hash([236, 115, 41, 89], ())
-                .expect("method not found (this should never happen)")
-        }
-        #[doc = "Calls the contract's `addEdge` (0x3b9e44de) function"]
-        pub fn add_edge(
-            &self,
-            source_chain_id: ethers::core::types::U256,
-            root: [u8; 32],
-            leaf_index: ethers::core::types::U256,
-        ) -> ethers::contract::builders::ContractCall<M, ()> {
-            self.0
-                .method_hash(
-                    [59, 158, 68, 222],
-                    (source_chain_id, root, leaf_index),
-                )
-                .expect("method not found (this should never happen)")
-        }
-        #[doc = "Calls the contract's `admin` (0xf851a440) function"]
-        pub fn admin(
-            &self,
-        ) -> ethers::contract::builders::ContractCall<
-            M,
-            ethers::core::types::Address,
-        > {
-            self.0
-                .method_hash([248, 81, 164, 64], ())
-                .expect("method not found (this should never happen)")
-        }
-        #[doc = "Calls the contract's `bridge` (0xe78cea92) function"]
-        pub fn bridge(
-            &self,
-        ) -> ethers::contract::builders::ContractCall<
-            M,
-            ethers::core::types::Address,
-        > {
-            self.0
-                .method_hash([231, 140, 234, 146], ())
                 .expect("method not found (this should never happen)")
         }
         #[doc = "Calls the contract's `commitments` (0x839df945) function"]
@@ -209,6 +175,17 @@ mod anchorcontract_mod {
                 .method_hash([241, 120, 228, 124], p0)
                 .expect("method not found (this should never happen)")
         }
+        #[doc = "Calls the contract's `getChainId` (0x3408e470) function"]
+        pub fn get_chain_id(
+            &self,
+        ) -> ethers::contract::builders::ContractCall<
+            M,
+            ethers::core::types::U256,
+        > {
+            self.0
+                .method_hash([52, 8, 228, 112], ())
+                .expect("method not found (this should never happen)")
+        }
         #[doc = "Calls the contract's `getDenomination` (0x1fc601c9) function"]
         pub fn get_denomination(
             &self,
@@ -228,13 +205,32 @@ mod anchorcontract_mod {
                 .method_hash([186, 112, 247, 87], ())
                 .expect("method not found (this should never happen)")
         }
+        #[doc = "Calls the contract's `getLatestNeighborEdges` (0x8c0d34d8) function"]
+        pub fn get_latest_neighbor_edges(
+            &self,
+        ) -> ethers::contract::builders::ContractCall<M, ::std::vec::Vec<Edge>>
+        {
+            self.0
+                .method_hash([140, 13, 52, 216], ())
+                .expect("method not found (this should never happen)")
+        }
         #[doc = "Calls the contract's `getLatestNeighborRoots` (0x1e627617) function"]
         pub fn get_latest_neighbor_roots(
             &self,
-        ) -> ethers::contract::builders::ContractCall<M, Vec<[u8; 32]>>
-        {
+        ) -> ethers::contract::builders::ContractCall<
+            M,
+            ::std::vec::Vec<[u8; 32]>,
+        > {
             self.0
                 .method_hash([30, 98, 118, 23], ())
+                .expect("method not found (this should never happen)")
+        }
+        #[doc = "Calls the contract's `getProposalNonce` (0x0b27fb9a) function"]
+        pub fn get_proposal_nonce(
+            &self,
+        ) -> ethers::contract::builders::ContractCall<M, u32> {
+            self.0
+                .method_hash([11, 39, 251, 154], ())
                 .expect("method not found (this should never happen)")
         }
         #[doc = "Calls the contract's `getToken` (0x21df0da7) function"]
@@ -322,7 +318,8 @@ mod anchorcontract_mod {
         pub fn is_spent_array(
             &self,
             nullifier_hashes: ::std::vec::Vec<[u8; 32]>,
-        ) -> ethers::contract::builders::ContractCall<M, Vec<bool>> {
+        ) -> ethers::contract::builders::ContractCall<M, ::std::vec::Vec<bool>>
+        {
             self.0
                 .method_hash([159, 161, 45, 11], nullifier_hashes)
                 .expect("method not found (this should never happen)")
@@ -388,22 +385,23 @@ mod anchorcontract_mod {
                 .method_hash([194, 180, 10, 228], p0)
                 .expect("method not found (this should never happen)")
         }
-        #[doc = "Calls the contract's `setBridge` (0x8dd14802) function"]
-        pub fn set_bridge(
-            &self,
-            bridge: ethers::core::types::Address,
-        ) -> ethers::contract::builders::ContractCall<M, ()> {
-            self.0
-                .method_hash([141, 209, 72, 2], bridge)
-                .expect("method not found (this should never happen)")
-        }
-        #[doc = "Calls the contract's `setHandler` (0xbac426d0) function"]
+        #[doc = "Calls the contract's `setHandler` (0x72c1ad03) function"]
         pub fn set_handler(
             &self,
-            handler: ethers::core::types::Address,
+            new_handler: ethers::core::types::Address,
+            nonce: u32,
         ) -> ethers::contract::builders::ContractCall<M, ()> {
             self.0
-                .method_hash([186, 196, 38, 208], handler)
+                .method_hash([114, 193, 173, 3], (new_handler, nonce))
+                .expect("method not found (this should never happen)")
+        }
+        #[doc = "Calls the contract's `setVerifier` (0x5437988d) function"]
+        pub fn set_verifier(
+            &self,
+            new_verifier: ethers::core::types::Address,
+        ) -> ethers::contract::builders::ContractCall<M, ()> {
+            self.0
+                .method_hash([84, 55, 152, 141], new_verifier)
                 .expect("method not found (this should never happen)")
         }
         #[doc = "Calls the contract's `token` (0xfc0c546a) function"]
@@ -424,9 +422,9 @@ mod anchorcontract_mod {
         ) -> ethers::contract::builders::ContractCall<
             M,
             (
-                [ethers::core::types::U256; 2],
-                [[ethers::core::types::U256; 2]; 2],
-                [ethers::core::types::U256; 2],
+                [ethers::core::types::U256; 2usize],
+                [[ethers::core::types::U256; 2usize]; 2usize],
+                [ethers::core::types::U256; 2usize],
             ),
         > {
             self.0
@@ -481,7 +479,7 @@ mod anchorcontract_mod {
         #[doc = "Calls the contract's `withdraw` (0xd0e8d34a) function"]
         pub fn withdraw(
             &self,
-            proof: Vec<u8>,
+            proof: ethers::core::types::Bytes,
             public_inputs: PublicInputs,
         ) -> ethers::contract::builders::ContractCall<M, ()> {
             self.0
@@ -491,7 +489,7 @@ mod anchorcontract_mod {
         #[doc = "Calls the contract's `withdrawAndUnwrap` (0xdf203aa7) function"]
         pub fn withdraw_and_unwrap(
             &self,
-            proof: Vec<u8>,
+            proof: ethers::core::types::Bytes,
             public_inputs: PublicInputs,
             token_address: ethers::core::types::Address,
         ) -> ethers::contract::builders::ContractCall<M, ()> {
@@ -557,6 +555,12 @@ mod anchorcontract_mod {
         ) -> ethers::contract::builders::Event<M, EdgeUpdateFilter> {
             self.0.event()
         }
+        #[doc = "Gets the contract's `Insertion` event"]
+        pub fn insertion_filter(
+            &self,
+        ) -> ethers::contract::builders::Event<M, InsertionFilter> {
+            self.0.event()
+        }
         #[doc = "Gets the contract's `Refresh` event"]
         pub fn refresh_filter(
             &self,
@@ -572,8 +576,10 @@ mod anchorcontract_mod {
         #[doc = r" Returns an [`Event`](#ethers_contract::builders::Event) builder for all events of this contract"]
         pub fn events(
             &self,
-        ) -> ethers::contract::builders::Event<M, AnchorContractEvents>
-        {
+        ) -> ethers::contract::builders::Event<
+            M,
+            FixedDepositAnchorContractEvents,
+        > {
             self.0.event_with_filter(Default::default())
         }
     }
@@ -586,11 +592,16 @@ mod anchorcontract_mod {
         ethers :: contract :: EthEvent,
         ethers :: contract :: EthDisplay,
     )]
-    #[ethevent(name = "Deposit", abi = "Deposit(bytes32,uint32,uint256)")]
+    #[ethevent(
+        name = "Deposit",
+        abi = "Deposit(address,uint32,bytes32,uint256)"
+    )]
     pub struct DepositFilter {
+        pub sender: ethers::core::types::Address,
+        #[ethevent(indexed)]
+        pub leaf_index: u32,
         #[ethevent(indexed)]
         pub commitment: [u8; 32],
-        pub leaf_index: u32,
         pub timestamp: ethers::core::types::U256,
     }
     #[derive(
@@ -638,6 +649,22 @@ mod anchorcontract_mod {
         ethers :: contract :: EthEvent,
         ethers :: contract :: EthDisplay,
     )]
+    #[ethevent(name = "Insertion", abi = "Insertion(bytes32,uint32,uint256)")]
+    pub struct InsertionFilter {
+        #[ethevent(indexed)]
+        pub commitment: [u8; 32],
+        pub leaf_index: u32,
+        pub timestamp: ethers::core::types::U256,
+    }
+    #[derive(
+        Clone,
+        Debug,
+        Default,
+        Eq,
+        PartialEq,
+        ethers :: contract :: EthEvent,
+        ethers :: contract :: EthDisplay,
+    )]
     #[ethevent(name = "Refresh", abi = "Refresh(bytes32,bytes32,uint32)")]
     pub struct RefreshFilter {
         #[ethevent(indexed)]
@@ -656,24 +683,24 @@ mod anchorcontract_mod {
     )]
     #[ethevent(
         name = "Withdrawal",
-        abi = "Withdrawal(address,bytes32,address,uint256)"
+        abi = "Withdrawal(address,address,uint256)"
     )]
     pub struct WithdrawalFilter {
         pub to: ethers::core::types::Address,
-        pub nullifier_hash: [u8; 32],
         #[ethevent(indexed)]
         pub relayer: ethers::core::types::Address,
         pub fee: ethers::core::types::U256,
     }
     #[derive(Debug, Clone, PartialEq, Eq, ethers :: contract :: EthAbiType)]
-    pub enum AnchorContractEvents {
+    pub enum FixedDepositAnchorContractEvents {
         DepositFilter(DepositFilter),
         EdgeAdditionFilter(EdgeAdditionFilter),
         EdgeUpdateFilter(EdgeUpdateFilter),
+        InsertionFilter(InsertionFilter),
         RefreshFilter(RefreshFilter),
         WithdrawalFilter(WithdrawalFilter),
     }
-    impl ethers::contract::EthLogDecode for AnchorContractEvents {
+    impl ethers::contract::EthLogDecode for FixedDepositAnchorContractEvents {
         fn decode_log(
             log: &ethers::core::abi::RawLog,
         ) -> Result<Self, ethers::core::abi::Error>
@@ -681,35 +708,59 @@ mod anchorcontract_mod {
             Self: Sized,
         {
             if let Ok(decoded) = DepositFilter::decode_log(log) {
-                return Ok(AnchorContractEvents::DepositFilter(decoded));
+                return Ok(FixedDepositAnchorContractEvents::DepositFilter(
+                    decoded,
+                ));
             }
             if let Ok(decoded) = EdgeAdditionFilter::decode_log(log) {
-                return Ok(AnchorContractEvents::EdgeAdditionFilter(decoded));
+                return Ok(
+                    FixedDepositAnchorContractEvents::EdgeAdditionFilter(
+                        decoded,
+                    ),
+                );
             }
             if let Ok(decoded) = EdgeUpdateFilter::decode_log(log) {
-                return Ok(AnchorContractEvents::EdgeUpdateFilter(decoded));
+                return Ok(FixedDepositAnchorContractEvents::EdgeUpdateFilter(
+                    decoded,
+                ));
+            }
+            if let Ok(decoded) = InsertionFilter::decode_log(log) {
+                return Ok(FixedDepositAnchorContractEvents::InsertionFilter(
+                    decoded,
+                ));
             }
             if let Ok(decoded) = RefreshFilter::decode_log(log) {
-                return Ok(AnchorContractEvents::RefreshFilter(decoded));
+                return Ok(FixedDepositAnchorContractEvents::RefreshFilter(
+                    decoded,
+                ));
             }
             if let Ok(decoded) = WithdrawalFilter::decode_log(log) {
-                return Ok(AnchorContractEvents::WithdrawalFilter(decoded));
+                return Ok(FixedDepositAnchorContractEvents::WithdrawalFilter(
+                    decoded,
+                ));
             }
             Err(ethers::core::abi::Error::InvalidData)
         }
     }
-    impl ::std::fmt::Display for AnchorContractEvents {
+    impl ::std::fmt::Display for FixedDepositAnchorContractEvents {
         fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
             match self {
-                AnchorContractEvents::DepositFilter(element) => element.fmt(f),
-                AnchorContractEvents::EdgeAdditionFilter(element) => {
+                FixedDepositAnchorContractEvents::DepositFilter(element) => {
                     element.fmt(f)
                 }
-                AnchorContractEvents::EdgeUpdateFilter(element) => {
+                FixedDepositAnchorContractEvents::EdgeAdditionFilter(
+                    element,
+                ) => element.fmt(f),
+                FixedDepositAnchorContractEvents::EdgeUpdateFilter(element) => {
                     element.fmt(f)
                 }
-                AnchorContractEvents::RefreshFilter(element) => element.fmt(f),
-                AnchorContractEvents::WithdrawalFilter(element) => {
+                FixedDepositAnchorContractEvents::InsertionFilter(element) => {
+                    element.fmt(f)
+                }
+                FixedDepositAnchorContractEvents::RefreshFilter(element) => {
+                    element.fmt(f)
+                }
+                FixedDepositAnchorContractEvents::WithdrawalFilter(element) => {
                     element.fmt(f)
                 }
             }
@@ -751,46 +802,6 @@ mod anchorcontract_mod {
     )]
     #[ethcall(name = "ZERO_VALUE", abi = "ZERO_VALUE()")]
     pub struct ZeroValueCall;
-    #[doc = "Container type for all input parameters for the `addEdge`function with signature `addEdge(uint256,bytes32,uint256)` and selector `[59, 158, 68, 222]`"]
-    #[derive(
-        Clone,
-        Debug,
-        Default,
-        Eq,
-        PartialEq,
-        ethers :: contract :: EthCall,
-        ethers :: contract :: EthDisplay,
-    )]
-    #[ethcall(name = "addEdge", abi = "addEdge(uint256,bytes32,uint256)")]
-    pub struct AddEdgeCall {
-        pub source_chain_id: ethers::core::types::U256,
-        pub root: [u8; 32],
-        pub leaf_index: ethers::core::types::U256,
-    }
-    #[doc = "Container type for all input parameters for the `admin`function with signature `admin()` and selector `[248, 81, 164, 64]`"]
-    #[derive(
-        Clone,
-        Debug,
-        Default,
-        Eq,
-        PartialEq,
-        ethers :: contract :: EthCall,
-        ethers :: contract :: EthDisplay,
-    )]
-    #[ethcall(name = "admin", abi = "admin()")]
-    pub struct AdminCall;
-    #[doc = "Container type for all input parameters for the `bridge`function with signature `bridge()` and selector `[231, 140, 234, 146]`"]
-    #[derive(
-        Clone,
-        Debug,
-        Default,
-        Eq,
-        PartialEq,
-        ethers :: contract :: EthCall,
-        ethers :: contract :: EthDisplay,
-    )]
-    #[ethcall(name = "bridge", abi = "bridge()")]
-    pub struct BridgeCall;
     #[doc = "Container type for all input parameters for the `commitments`function with signature `commitments(bytes32)` and selector `[131, 157, 249, 69]`"]
     #[derive(
         Clone,
@@ -904,6 +915,18 @@ mod anchorcontract_mod {
     )]
     #[ethcall(name = "filledSubtrees", abi = "filledSubtrees(uint256)")]
     pub struct FilledSubtreesCall(pub ethers::core::types::U256);
+    #[doc = "Container type for all input parameters for the `getChainId`function with signature `getChainId()` and selector `[52, 8, 228, 112]`"]
+    #[derive(
+        Clone,
+        Debug,
+        Default,
+        Eq,
+        PartialEq,
+        ethers :: contract :: EthCall,
+        ethers :: contract :: EthDisplay,
+    )]
+    #[ethcall(name = "getChainId", abi = "getChainId()")]
+    pub struct GetChainIdCall;
     #[doc = "Container type for all input parameters for the `getDenomination`function with signature `getDenomination()` and selector `[31, 198, 1, 201]`"]
     #[derive(
         Clone,
@@ -928,6 +951,21 @@ mod anchorcontract_mod {
     )]
     #[ethcall(name = "getLastRoot", abi = "getLastRoot()")]
     pub struct GetLastRootCall;
+    #[doc = "Container type for all input parameters for the `getLatestNeighborEdges`function with signature `getLatestNeighborEdges()` and selector `[140, 13, 52, 216]`"]
+    #[derive(
+        Clone,
+        Debug,
+        Default,
+        Eq,
+        PartialEq,
+        ethers :: contract :: EthCall,
+        ethers :: contract :: EthDisplay,
+    )]
+    #[ethcall(
+        name = "getLatestNeighborEdges",
+        abi = "getLatestNeighborEdges()"
+    )]
+    pub struct GetLatestNeighborEdgesCall;
     #[doc = "Container type for all input parameters for the `getLatestNeighborRoots`function with signature `getLatestNeighborRoots()` and selector `[30, 98, 118, 23]`"]
     #[derive(
         Clone,
@@ -943,6 +981,18 @@ mod anchorcontract_mod {
         abi = "getLatestNeighborRoots()"
     )]
     pub struct GetLatestNeighborRootsCall;
+    #[doc = "Container type for all input parameters for the `getProposalNonce`function with signature `getProposalNonce()` and selector `[11, 39, 251, 154]`"]
+    #[derive(
+        Clone,
+        Debug,
+        Default,
+        Eq,
+        PartialEq,
+        ethers :: contract :: EthCall,
+        ethers :: contract :: EthDisplay,
+    )]
+    #[ethcall(name = "getProposalNonce", abi = "getProposalNonce()")]
+    pub struct GetProposalNonceCall;
     #[doc = "Container type for all input parameters for the `getToken`function with signature `getToken()` and selector `[33, 223, 13, 167]`"]
     #[derive(
         Clone,
@@ -1158,7 +1208,7 @@ mod anchorcontract_mod {
     )]
     #[ethcall(name = "roots", abi = "roots(uint256)")]
     pub struct RootsCall(pub ethers::core::types::U256);
-    #[doc = "Container type for all input parameters for the `setBridge`function with signature `setBridge(address)` and selector `[141, 209, 72, 2]`"]
+    #[doc = "Container type for all input parameters for the `setHandler`function with signature `setHandler(address,uint32)` and selector `[114, 193, 173, 3]`"]
     #[derive(
         Clone,
         Debug,
@@ -1168,23 +1218,24 @@ mod anchorcontract_mod {
         ethers :: contract :: EthCall,
         ethers :: contract :: EthDisplay,
     )]
-    #[ethcall(name = "setBridge", abi = "setBridge(address)")]
-    pub struct SetBridgeCall {
-        pub bridge: ethers::core::types::Address,
-    }
-    #[doc = "Container type for all input parameters for the `setHandler`function with signature `setHandler(address)` and selector `[186, 196, 38, 208]`"]
-    #[derive(
-        Clone,
-        Debug,
-        Default,
-        Eq,
-        PartialEq,
-        ethers :: contract :: EthCall,
-        ethers :: contract :: EthDisplay,
-    )]
-    #[ethcall(name = "setHandler", abi = "setHandler(address)")]
+    #[ethcall(name = "setHandler", abi = "setHandler(address,uint32)")]
     pub struct SetHandlerCall {
-        pub handler: ethers::core::types::Address,
+        pub new_handler: ethers::core::types::Address,
+        pub nonce: u32,
+    }
+    #[doc = "Container type for all input parameters for the `setVerifier`function with signature `setVerifier(address)` and selector `[84, 55, 152, 141]`"]
+    #[derive(
+        Clone,
+        Debug,
+        Default,
+        Eq,
+        PartialEq,
+        ethers :: contract :: EthCall,
+        ethers :: contract :: EthDisplay,
+    )]
+    #[ethcall(name = "setVerifier", abi = "setVerifier(address)")]
+    pub struct SetVerifierCall {
+        pub new_verifier: ethers::core::types::Address,
     }
     #[doc = "Container type for all input parameters for the `token`function with signature `token()` and selector `[252, 12, 84, 106]`"]
     #[derive(
@@ -1291,7 +1342,7 @@ mod anchorcontract_mod {
         abi = "withdraw(bytes,(bytes,bytes32,bytes32,address,address,uint256,uint256))"
     )]
     pub struct WithdrawCall {
-        pub proof: Vec<u8>,
+        pub proof: ethers::core::types::Bytes,
         pub public_inputs: PublicInputs,
     }
     #[doc = "Container type for all input parameters for the `withdrawAndUnwrap`function with signature `withdrawAndUnwrap(bytes,(bytes,bytes32,bytes32,address,address,uint256,uint256),address)` and selector `[223, 32, 58, 167]`"]
@@ -1309,7 +1360,7 @@ mod anchorcontract_mod {
         abi = "withdrawAndUnwrap(bytes,(bytes,bytes32,bytes32,address,address,uint256,uint256),address)"
     )]
     pub struct WithdrawAndUnwrapCall {
-        pub proof: Vec<u8>,
+        pub proof: ethers::core::types::Bytes,
         pub public_inputs: PublicInputs,
         pub token_address: ethers::core::types::Address,
     }
@@ -1370,13 +1421,10 @@ mod anchorcontract_mod {
         pub i: ethers::core::types::U256,
     }
     #[derive(Debug, Clone, PartialEq, Eq, ethers :: contract :: EthAbiType)]
-    pub enum AnchorContractCalls {
+    pub enum FixedDepositAnchorContractCalls {
         FieldSize(FieldSizeCall),
         RootHistorySize(RootHistorySizeCall),
         ZeroValue(ZeroValueCall),
-        AddEdge(AddEdgeCall),
-        Admin(AdminCall),
-        Bridge(BridgeCall),
         Commitments(CommitmentsCall),
         CurrentNeighborRootIndex(CurrentNeighborRootIndexCall),
         CurrentRootIndex(CurrentRootIndexCall),
@@ -1386,9 +1434,12 @@ mod anchorcontract_mod {
         EdgeIndex(EdgeIndexCall),
         EdgeList(EdgeListCall),
         FilledSubtrees(FilledSubtreesCall),
+        GetChainId(GetChainIdCall),
         GetDenomination(GetDenominationCall),
         GetLastRoot(GetLastRootCall),
+        GetLatestNeighborEdges(GetLatestNeighborEdgesCall),
         GetLatestNeighborRoots(GetLatestNeighborRootsCall),
+        GetProposalNonce(GetProposalNonceCall),
         GetToken(GetTokenCall),
         Handler(HandlerCall),
         HasEdge(HasEdgeCall),
@@ -1405,8 +1456,8 @@ mod anchorcontract_mod {
         NextIndex(NextIndexCall),
         NullifierHashes(NullifierHashesCall),
         Roots(RootsCall),
-        SetBridge(SetBridgeCall),
         SetHandler(SetHandlerCall),
+        SetVerifier(SetVerifierCall),
         Token(TokenCall),
         UnpackProof(UnpackProofCall),
         UnwrapIntoNative(UnwrapIntoNativeCall),
@@ -1420,7 +1471,7 @@ mod anchorcontract_mod {
         WrapToken(WrapTokenCall),
         Zeros(ZerosCall),
     }
-    impl ethers::core::abi::AbiDecode for AnchorContractCalls {
+    impl ethers::core::abi::AbiDecode for FixedDepositAnchorContractCalls {
         fn decode(
             data: impl AsRef<[u8]>,
         ) -> Result<Self, ethers::core::abi::AbiError> {
@@ -1429,710 +1480,936 @@ mod anchorcontract_mod {
                     data.as_ref(),
                 )
             {
-                return Ok(AnchorContractCalls::FieldSize(decoded));
+                return Ok(FixedDepositAnchorContractCalls::FieldSize(decoded));
             }
             if let Ok(decoded) =
                 <RootHistorySizeCall as ethers::core::abi::AbiDecode>::decode(
                     data.as_ref(),
                 )
             {
-                return Ok(AnchorContractCalls::RootHistorySize(decoded));
+                return Ok(FixedDepositAnchorContractCalls::RootHistorySize(
+                    decoded,
+                ));
             }
             if let Ok(decoded) =
                 <ZeroValueCall as ethers::core::abi::AbiDecode>::decode(
                     data.as_ref(),
                 )
             {
-                return Ok(AnchorContractCalls::ZeroValue(decoded));
-            }
-            if let Ok(decoded) =
-                <AddEdgeCall as ethers::core::abi::AbiDecode>::decode(
-                    data.as_ref(),
-                )
-            {
-                return Ok(AnchorContractCalls::AddEdge(decoded));
-            }
-            if let Ok(decoded) =
-                <AdminCall as ethers::core::abi::AbiDecode>::decode(
-                    data.as_ref(),
-                )
-            {
-                return Ok(AnchorContractCalls::Admin(decoded));
-            }
-            if let Ok(decoded) =
-                <BridgeCall as ethers::core::abi::AbiDecode>::decode(
-                    data.as_ref(),
-                )
-            {
-                return Ok(AnchorContractCalls::Bridge(decoded));
+                return Ok(FixedDepositAnchorContractCalls::ZeroValue(decoded));
             }
             if let Ok(decoded) =
                 <CommitmentsCall as ethers::core::abi::AbiDecode>::decode(
                     data.as_ref(),
                 )
             {
-                return Ok(AnchorContractCalls::Commitments(decoded));
+                return Ok(FixedDepositAnchorContractCalls::Commitments(
+                    decoded,
+                ));
             }
-            if let Ok (decoded) = < CurrentNeighborRootIndexCall as ethers :: core :: abi :: AbiDecode > :: decode (data . as_ref ()) { return Ok (AnchorContractCalls :: CurrentNeighborRootIndex (decoded)) }
+            if let Ok (decoded) = < CurrentNeighborRootIndexCall as ethers :: core :: abi :: AbiDecode > :: decode (data . as_ref ()) { return Ok (FixedDepositAnchorContractCalls :: CurrentNeighborRootIndex (decoded)) }
             if let Ok(decoded) =
                 <CurrentRootIndexCall as ethers::core::abi::AbiDecode>::decode(
                     data.as_ref(),
                 )
             {
-                return Ok(AnchorContractCalls::CurrentRootIndex(decoded));
+                return Ok(FixedDepositAnchorContractCalls::CurrentRootIndex(
+                    decoded,
+                ));
             }
             if let Ok(decoded) =
                 <DenominationCall as ethers::core::abi::AbiDecode>::decode(
                     data.as_ref(),
                 )
             {
-                return Ok(AnchorContractCalls::Denomination(decoded));
+                return Ok(FixedDepositAnchorContractCalls::Denomination(
+                    decoded,
+                ));
             }
             if let Ok(decoded) =
                 <DepositCall as ethers::core::abi::AbiDecode>::decode(
                     data.as_ref(),
                 )
             {
-                return Ok(AnchorContractCalls::Deposit(decoded));
+                return Ok(FixedDepositAnchorContractCalls::Deposit(decoded));
             }
             if let Ok(decoded) =
                 <EdgeExistsForChainCall as ethers::core::abi::AbiDecode>::decode(
                     data.as_ref(),
                 )
             {
-                return Ok(AnchorContractCalls::EdgeExistsForChain(decoded));
+                return Ok(FixedDepositAnchorContractCalls::EdgeExistsForChain(
+                    decoded,
+                ));
             }
             if let Ok(decoded) =
                 <EdgeIndexCall as ethers::core::abi::AbiDecode>::decode(
                     data.as_ref(),
                 )
             {
-                return Ok(AnchorContractCalls::EdgeIndex(decoded));
+                return Ok(FixedDepositAnchorContractCalls::EdgeIndex(decoded));
             }
             if let Ok(decoded) =
                 <EdgeListCall as ethers::core::abi::AbiDecode>::decode(
                     data.as_ref(),
                 )
             {
-                return Ok(AnchorContractCalls::EdgeList(decoded));
+                return Ok(FixedDepositAnchorContractCalls::EdgeList(decoded));
             }
             if let Ok(decoded) =
                 <FilledSubtreesCall as ethers::core::abi::AbiDecode>::decode(
                     data.as_ref(),
                 )
             {
-                return Ok(AnchorContractCalls::FilledSubtrees(decoded));
+                return Ok(FixedDepositAnchorContractCalls::FilledSubtrees(
+                    decoded,
+                ));
+            }
+            if let Ok(decoded) =
+                <GetChainIdCall as ethers::core::abi::AbiDecode>::decode(
+                    data.as_ref(),
+                )
+            {
+                return Ok(FixedDepositAnchorContractCalls::GetChainId(decoded));
             }
             if let Ok(decoded) =
                 <GetDenominationCall as ethers::core::abi::AbiDecode>::decode(
                     data.as_ref(),
                 )
             {
-                return Ok(AnchorContractCalls::GetDenomination(decoded));
+                return Ok(FixedDepositAnchorContractCalls::GetDenomination(
+                    decoded,
+                ));
             }
             if let Ok(decoded) =
                 <GetLastRootCall as ethers::core::abi::AbiDecode>::decode(
                     data.as_ref(),
                 )
             {
-                return Ok(AnchorContractCalls::GetLastRoot(decoded));
+                return Ok(FixedDepositAnchorContractCalls::GetLastRoot(
+                    decoded,
+                ));
             }
-            if let Ok (decoded) = < GetLatestNeighborRootsCall as ethers :: core :: abi :: AbiDecode > :: decode (data . as_ref ()) { return Ok (AnchorContractCalls :: GetLatestNeighborRoots (decoded)) }
+            if let Ok (decoded) = < GetLatestNeighborEdgesCall as ethers :: core :: abi :: AbiDecode > :: decode (data . as_ref ()) { return Ok (FixedDepositAnchorContractCalls :: GetLatestNeighborEdges (decoded)) }
+            if let Ok (decoded) = < GetLatestNeighborRootsCall as ethers :: core :: abi :: AbiDecode > :: decode (data . as_ref ()) { return Ok (FixedDepositAnchorContractCalls :: GetLatestNeighborRoots (decoded)) }
+            if let Ok(decoded) =
+                <GetProposalNonceCall as ethers::core::abi::AbiDecode>::decode(
+                    data.as_ref(),
+                )
+            {
+                return Ok(FixedDepositAnchorContractCalls::GetProposalNonce(
+                    decoded,
+                ));
+            }
             if let Ok(decoded) =
                 <GetTokenCall as ethers::core::abi::AbiDecode>::decode(
                     data.as_ref(),
                 )
             {
-                return Ok(AnchorContractCalls::GetToken(decoded));
+                return Ok(FixedDepositAnchorContractCalls::GetToken(decoded));
             }
             if let Ok(decoded) =
                 <HandlerCall as ethers::core::abi::AbiDecode>::decode(
                     data.as_ref(),
                 )
             {
-                return Ok(AnchorContractCalls::Handler(decoded));
+                return Ok(FixedDepositAnchorContractCalls::Handler(decoded));
             }
             if let Ok(decoded) =
                 <HasEdgeCall as ethers::core::abi::AbiDecode>::decode(
                     data.as_ref(),
                 )
             {
-                return Ok(AnchorContractCalls::HasEdge(decoded));
+                return Ok(FixedDepositAnchorContractCalls::HasEdge(decoded));
             }
             if let Ok(decoded) =
                 <HashLeftRightCall as ethers::core::abi::AbiDecode>::decode(
                     data.as_ref(),
                 )
             {
-                return Ok(AnchorContractCalls::HashLeftRight(decoded));
+                return Ok(FixedDepositAnchorContractCalls::HashLeftRight(
+                    decoded,
+                ));
             }
             if let Ok(decoded) =
                 <HasherCall as ethers::core::abi::AbiDecode>::decode(
                     data.as_ref(),
                 )
             {
-                return Ok(AnchorContractCalls::Hasher(decoded));
+                return Ok(FixedDepositAnchorContractCalls::Hasher(decoded));
             }
-            if let Ok (decoded) = < IsKnownNeighborRootCall as ethers :: core :: abi :: AbiDecode > :: decode (data . as_ref ()) { return Ok (AnchorContractCalls :: IsKnownNeighborRoot (decoded)) }
+            if let Ok (decoded) = < IsKnownNeighborRootCall as ethers :: core :: abi :: AbiDecode > :: decode (data . as_ref ()) { return Ok (FixedDepositAnchorContractCalls :: IsKnownNeighborRoot (decoded)) }
             if let Ok(decoded) =
                 <IsKnownRootCall as ethers::core::abi::AbiDecode>::decode(
                     data.as_ref(),
                 )
             {
-                return Ok(AnchorContractCalls::IsKnownRoot(decoded));
+                return Ok(FixedDepositAnchorContractCalls::IsKnownRoot(
+                    decoded,
+                ));
             }
             if let Ok(decoded) =
                 <IsSpentCall as ethers::core::abi::AbiDecode>::decode(
                     data.as_ref(),
                 )
             {
-                return Ok(AnchorContractCalls::IsSpent(decoded));
+                return Ok(FixedDepositAnchorContractCalls::IsSpent(decoded));
             }
             if let Ok(decoded) =
                 <IsSpentArrayCall as ethers::core::abi::AbiDecode>::decode(
                     data.as_ref(),
                 )
             {
-                return Ok(AnchorContractCalls::IsSpentArray(decoded));
+                return Ok(FixedDepositAnchorContractCalls::IsSpentArray(
+                    decoded,
+                ));
             }
             if let Ok(decoded) =
                 <IsValidRootsCall as ethers::core::abi::AbiDecode>::decode(
                     data.as_ref(),
                 )
             {
-                return Ok(AnchorContractCalls::IsValidRoots(decoded));
+                return Ok(FixedDepositAnchorContractCalls::IsValidRoots(
+                    decoded,
+                ));
             }
             if let Ok(decoded) =
                 <LevelsCall as ethers::core::abi::AbiDecode>::decode(
                     data.as_ref(),
                 )
             {
-                return Ok(AnchorContractCalls::Levels(decoded));
+                return Ok(FixedDepositAnchorContractCalls::Levels(decoded));
             }
             if let Ok(decoded) =
                 <MaxEdgesCall as ethers::core::abi::AbiDecode>::decode(
                     data.as_ref(),
                 )
             {
-                return Ok(AnchorContractCalls::MaxEdges(decoded));
+                return Ok(FixedDepositAnchorContractCalls::MaxEdges(decoded));
             }
             if let Ok(decoded) =
                 <NeighborRootsCall as ethers::core::abi::AbiDecode>::decode(
                     data.as_ref(),
                 )
             {
-                return Ok(AnchorContractCalls::NeighborRoots(decoded));
+                return Ok(FixedDepositAnchorContractCalls::NeighborRoots(
+                    decoded,
+                ));
             }
             if let Ok(decoded) =
                 <NextIndexCall as ethers::core::abi::AbiDecode>::decode(
                     data.as_ref(),
                 )
             {
-                return Ok(AnchorContractCalls::NextIndex(decoded));
+                return Ok(FixedDepositAnchorContractCalls::NextIndex(decoded));
             }
             if let Ok(decoded) =
                 <NullifierHashesCall as ethers::core::abi::AbiDecode>::decode(
                     data.as_ref(),
                 )
             {
-                return Ok(AnchorContractCalls::NullifierHashes(decoded));
+                return Ok(FixedDepositAnchorContractCalls::NullifierHashes(
+                    decoded,
+                ));
             }
             if let Ok(decoded) =
                 <RootsCall as ethers::core::abi::AbiDecode>::decode(
                     data.as_ref(),
                 )
             {
-                return Ok(AnchorContractCalls::Roots(decoded));
-            }
-            if let Ok(decoded) =
-                <SetBridgeCall as ethers::core::abi::AbiDecode>::decode(
-                    data.as_ref(),
-                )
-            {
-                return Ok(AnchorContractCalls::SetBridge(decoded));
+                return Ok(FixedDepositAnchorContractCalls::Roots(decoded));
             }
             if let Ok(decoded) =
                 <SetHandlerCall as ethers::core::abi::AbiDecode>::decode(
                     data.as_ref(),
                 )
             {
-                return Ok(AnchorContractCalls::SetHandler(decoded));
+                return Ok(FixedDepositAnchorContractCalls::SetHandler(decoded));
+            }
+            if let Ok(decoded) =
+                <SetVerifierCall as ethers::core::abi::AbiDecode>::decode(
+                    data.as_ref(),
+                )
+            {
+                return Ok(FixedDepositAnchorContractCalls::SetVerifier(
+                    decoded,
+                ));
             }
             if let Ok(decoded) =
                 <TokenCall as ethers::core::abi::AbiDecode>::decode(
                     data.as_ref(),
                 )
             {
-                return Ok(AnchorContractCalls::Token(decoded));
+                return Ok(FixedDepositAnchorContractCalls::Token(decoded));
             }
             if let Ok(decoded) =
                 <UnpackProofCall as ethers::core::abi::AbiDecode>::decode(
                     data.as_ref(),
                 )
             {
-                return Ok(AnchorContractCalls::UnpackProof(decoded));
+                return Ok(FixedDepositAnchorContractCalls::UnpackProof(
+                    decoded,
+                ));
             }
             if let Ok(decoded) =
                 <UnwrapIntoNativeCall as ethers::core::abi::AbiDecode>::decode(
                     data.as_ref(),
                 )
             {
-                return Ok(AnchorContractCalls::UnwrapIntoNative(decoded));
+                return Ok(FixedDepositAnchorContractCalls::UnwrapIntoNative(
+                    decoded,
+                ));
             }
             if let Ok(decoded) =
                 <UnwrapIntoTokenCall as ethers::core::abi::AbiDecode>::decode(
                     data.as_ref(),
                 )
             {
-                return Ok(AnchorContractCalls::UnwrapIntoToken(decoded));
+                return Ok(FixedDepositAnchorContractCalls::UnwrapIntoToken(
+                    decoded,
+                ));
             }
             if let Ok(decoded) =
                 <UpdateEdgeCall as ethers::core::abi::AbiDecode>::decode(
                     data.as_ref(),
                 )
             {
-                return Ok(AnchorContractCalls::UpdateEdge(decoded));
+                return Ok(FixedDepositAnchorContractCalls::UpdateEdge(decoded));
             }
             if let Ok(decoded) =
                 <VerifierCall as ethers::core::abi::AbiDecode>::decode(
                     data.as_ref(),
                 )
             {
-                return Ok(AnchorContractCalls::Verifier(decoded));
+                return Ok(FixedDepositAnchorContractCalls::Verifier(decoded));
             }
             if let Ok(decoded) =
                 <WithdrawCall as ethers::core::abi::AbiDecode>::decode(
                     data.as_ref(),
                 )
             {
-                return Ok(AnchorContractCalls::Withdraw(decoded));
+                return Ok(FixedDepositAnchorContractCalls::Withdraw(decoded));
             }
             if let Ok(decoded) =
                 <WithdrawAndUnwrapCall as ethers::core::abi::AbiDecode>::decode(
                     data.as_ref(),
                 )
             {
-                return Ok(AnchorContractCalls::WithdrawAndUnwrap(decoded));
+                return Ok(FixedDepositAnchorContractCalls::WithdrawAndUnwrap(
+                    decoded,
+                ));
             }
             if let Ok(decoded) =
                 <WrapAndDepositCall as ethers::core::abi::AbiDecode>::decode(
                     data.as_ref(),
                 )
             {
-                return Ok(AnchorContractCalls::WrapAndDeposit(decoded));
+                return Ok(FixedDepositAnchorContractCalls::WrapAndDeposit(
+                    decoded,
+                ));
             }
             if let Ok(decoded) =
                 <WrapNativeCall as ethers::core::abi::AbiDecode>::decode(
                     data.as_ref(),
                 )
             {
-                return Ok(AnchorContractCalls::WrapNative(decoded));
+                return Ok(FixedDepositAnchorContractCalls::WrapNative(decoded));
             }
             if let Ok(decoded) =
                 <WrapTokenCall as ethers::core::abi::AbiDecode>::decode(
                     data.as_ref(),
                 )
             {
-                return Ok(AnchorContractCalls::WrapToken(decoded));
+                return Ok(FixedDepositAnchorContractCalls::WrapToken(decoded));
             }
             if let Ok(decoded) =
                 <ZerosCall as ethers::core::abi::AbiDecode>::decode(
                     data.as_ref(),
                 )
             {
-                return Ok(AnchorContractCalls::Zeros(decoded));
+                return Ok(FixedDepositAnchorContractCalls::Zeros(decoded));
             }
             Err(ethers::core::abi::Error::InvalidData.into())
         }
     }
-    impl ethers::core::abi::AbiEncode for AnchorContractCalls {
+    impl ethers::core::abi::AbiEncode for FixedDepositAnchorContractCalls {
         fn encode(self) -> Vec<u8> {
             match self {
-                AnchorContractCalls::FieldSize(element) => element.encode(),
-                AnchorContractCalls::RootHistorySize(element) => {
+                FixedDepositAnchorContractCalls::FieldSize(element) => {
                     element.encode()
                 }
-                AnchorContractCalls::ZeroValue(element) => element.encode(),
-                AnchorContractCalls::AddEdge(element) => element.encode(),
-                AnchorContractCalls::Admin(element) => element.encode(),
-                AnchorContractCalls::Bridge(element) => element.encode(),
-                AnchorContractCalls::Commitments(element) => element.encode(),
-                AnchorContractCalls::CurrentNeighborRootIndex(element) => {
+                FixedDepositAnchorContractCalls::RootHistorySize(element) => {
                     element.encode()
                 }
-                AnchorContractCalls::CurrentRootIndex(element) => {
+                FixedDepositAnchorContractCalls::ZeroValue(element) => {
                     element.encode()
                 }
-                AnchorContractCalls::Denomination(element) => element.encode(),
-                AnchorContractCalls::Deposit(element) => element.encode(),
-                AnchorContractCalls::EdgeExistsForChain(element) => {
+                FixedDepositAnchorContractCalls::Commitments(element) => {
                     element.encode()
                 }
-                AnchorContractCalls::EdgeIndex(element) => element.encode(),
-                AnchorContractCalls::EdgeList(element) => element.encode(),
-                AnchorContractCalls::FilledSubtrees(element) => {
+                FixedDepositAnchorContractCalls::CurrentNeighborRootIndex(
+                    element,
+                ) => element.encode(),
+                FixedDepositAnchorContractCalls::CurrentRootIndex(element) => {
                     element.encode()
                 }
-                AnchorContractCalls::GetDenomination(element) => {
+                FixedDepositAnchorContractCalls::Denomination(element) => {
                     element.encode()
                 }
-                AnchorContractCalls::GetLastRoot(element) => element.encode(),
-                AnchorContractCalls::GetLatestNeighborRoots(element) => {
+                FixedDepositAnchorContractCalls::Deposit(element) => {
                     element.encode()
                 }
-                AnchorContractCalls::GetToken(element) => element.encode(),
-                AnchorContractCalls::Handler(element) => element.encode(),
-                AnchorContractCalls::HasEdge(element) => element.encode(),
-                AnchorContractCalls::HashLeftRight(element) => element.encode(),
-                AnchorContractCalls::Hasher(element) => element.encode(),
-                AnchorContractCalls::IsKnownNeighborRoot(element) => {
+                FixedDepositAnchorContractCalls::EdgeExistsForChain(
+                    element,
+                ) => element.encode(),
+                FixedDepositAnchorContractCalls::EdgeIndex(element) => {
                     element.encode()
                 }
-                AnchorContractCalls::IsKnownRoot(element) => element.encode(),
-                AnchorContractCalls::IsSpent(element) => element.encode(),
-                AnchorContractCalls::IsSpentArray(element) => element.encode(),
-                AnchorContractCalls::IsValidRoots(element) => element.encode(),
-                AnchorContractCalls::Levels(element) => element.encode(),
-                AnchorContractCalls::MaxEdges(element) => element.encode(),
-                AnchorContractCalls::NeighborRoots(element) => element.encode(),
-                AnchorContractCalls::NextIndex(element) => element.encode(),
-                AnchorContractCalls::NullifierHashes(element) => {
+                FixedDepositAnchorContractCalls::EdgeList(element) => {
                     element.encode()
                 }
-                AnchorContractCalls::Roots(element) => element.encode(),
-                AnchorContractCalls::SetBridge(element) => element.encode(),
-                AnchorContractCalls::SetHandler(element) => element.encode(),
-                AnchorContractCalls::Token(element) => element.encode(),
-                AnchorContractCalls::UnpackProof(element) => element.encode(),
-                AnchorContractCalls::UnwrapIntoNative(element) => {
+                FixedDepositAnchorContractCalls::FilledSubtrees(element) => {
                     element.encode()
                 }
-                AnchorContractCalls::UnwrapIntoToken(element) => {
+                FixedDepositAnchorContractCalls::GetChainId(element) => {
                     element.encode()
                 }
-                AnchorContractCalls::UpdateEdge(element) => element.encode(),
-                AnchorContractCalls::Verifier(element) => element.encode(),
-                AnchorContractCalls::Withdraw(element) => element.encode(),
-                AnchorContractCalls::WithdrawAndUnwrap(element) => {
+                FixedDepositAnchorContractCalls::GetDenomination(element) => {
                     element.encode()
                 }
-                AnchorContractCalls::WrapAndDeposit(element) => {
+                FixedDepositAnchorContractCalls::GetLastRoot(element) => {
                     element.encode()
                 }
-                AnchorContractCalls::WrapNative(element) => element.encode(),
-                AnchorContractCalls::WrapToken(element) => element.encode(),
-                AnchorContractCalls::Zeros(element) => element.encode(),
+                FixedDepositAnchorContractCalls::GetLatestNeighborEdges(
+                    element,
+                ) => element.encode(),
+                FixedDepositAnchorContractCalls::GetLatestNeighborRoots(
+                    element,
+                ) => element.encode(),
+                FixedDepositAnchorContractCalls::GetProposalNonce(element) => {
+                    element.encode()
+                }
+                FixedDepositAnchorContractCalls::GetToken(element) => {
+                    element.encode()
+                }
+                FixedDepositAnchorContractCalls::Handler(element) => {
+                    element.encode()
+                }
+                FixedDepositAnchorContractCalls::HasEdge(element) => {
+                    element.encode()
+                }
+                FixedDepositAnchorContractCalls::HashLeftRight(element) => {
+                    element.encode()
+                }
+                FixedDepositAnchorContractCalls::Hasher(element) => {
+                    element.encode()
+                }
+                FixedDepositAnchorContractCalls::IsKnownNeighborRoot(
+                    element,
+                ) => element.encode(),
+                FixedDepositAnchorContractCalls::IsKnownRoot(element) => {
+                    element.encode()
+                }
+                FixedDepositAnchorContractCalls::IsSpent(element) => {
+                    element.encode()
+                }
+                FixedDepositAnchorContractCalls::IsSpentArray(element) => {
+                    element.encode()
+                }
+                FixedDepositAnchorContractCalls::IsValidRoots(element) => {
+                    element.encode()
+                }
+                FixedDepositAnchorContractCalls::Levels(element) => {
+                    element.encode()
+                }
+                FixedDepositAnchorContractCalls::MaxEdges(element) => {
+                    element.encode()
+                }
+                FixedDepositAnchorContractCalls::NeighborRoots(element) => {
+                    element.encode()
+                }
+                FixedDepositAnchorContractCalls::NextIndex(element) => {
+                    element.encode()
+                }
+                FixedDepositAnchorContractCalls::NullifierHashes(element) => {
+                    element.encode()
+                }
+                FixedDepositAnchorContractCalls::Roots(element) => {
+                    element.encode()
+                }
+                FixedDepositAnchorContractCalls::SetHandler(element) => {
+                    element.encode()
+                }
+                FixedDepositAnchorContractCalls::SetVerifier(element) => {
+                    element.encode()
+                }
+                FixedDepositAnchorContractCalls::Token(element) => {
+                    element.encode()
+                }
+                FixedDepositAnchorContractCalls::UnpackProof(element) => {
+                    element.encode()
+                }
+                FixedDepositAnchorContractCalls::UnwrapIntoNative(element) => {
+                    element.encode()
+                }
+                FixedDepositAnchorContractCalls::UnwrapIntoToken(element) => {
+                    element.encode()
+                }
+                FixedDepositAnchorContractCalls::UpdateEdge(element) => {
+                    element.encode()
+                }
+                FixedDepositAnchorContractCalls::Verifier(element) => {
+                    element.encode()
+                }
+                FixedDepositAnchorContractCalls::Withdraw(element) => {
+                    element.encode()
+                }
+                FixedDepositAnchorContractCalls::WithdrawAndUnwrap(element) => {
+                    element.encode()
+                }
+                FixedDepositAnchorContractCalls::WrapAndDeposit(element) => {
+                    element.encode()
+                }
+                FixedDepositAnchorContractCalls::WrapNative(element) => {
+                    element.encode()
+                }
+                FixedDepositAnchorContractCalls::WrapToken(element) => {
+                    element.encode()
+                }
+                FixedDepositAnchorContractCalls::Zeros(element) => {
+                    element.encode()
+                }
             }
         }
     }
-    impl ::std::fmt::Display for AnchorContractCalls {
+    impl ::std::fmt::Display for FixedDepositAnchorContractCalls {
         fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
             match self {
-                AnchorContractCalls::FieldSize(element) => element.fmt(f),
-                AnchorContractCalls::RootHistorySize(element) => element.fmt(f),
-                AnchorContractCalls::ZeroValue(element) => element.fmt(f),
-                AnchorContractCalls::AddEdge(element) => element.fmt(f),
-                AnchorContractCalls::Admin(element) => element.fmt(f),
-                AnchorContractCalls::Bridge(element) => element.fmt(f),
-                AnchorContractCalls::Commitments(element) => element.fmt(f),
-                AnchorContractCalls::CurrentNeighborRootIndex(element) => {
+                FixedDepositAnchorContractCalls::FieldSize(element) => {
                     element.fmt(f)
                 }
-                AnchorContractCalls::CurrentRootIndex(element) => {
+                FixedDepositAnchorContractCalls::RootHistorySize(element) => {
                     element.fmt(f)
                 }
-                AnchorContractCalls::Denomination(element) => element.fmt(f),
-                AnchorContractCalls::Deposit(element) => element.fmt(f),
-                AnchorContractCalls::EdgeExistsForChain(element) => {
+                FixedDepositAnchorContractCalls::ZeroValue(element) => {
                     element.fmt(f)
                 }
-                AnchorContractCalls::EdgeIndex(element) => element.fmt(f),
-                AnchorContractCalls::EdgeList(element) => element.fmt(f),
-                AnchorContractCalls::FilledSubtrees(element) => element.fmt(f),
-                AnchorContractCalls::GetDenomination(element) => element.fmt(f),
-                AnchorContractCalls::GetLastRoot(element) => element.fmt(f),
-                AnchorContractCalls::GetLatestNeighborRoots(element) => {
+                FixedDepositAnchorContractCalls::Commitments(element) => {
                     element.fmt(f)
                 }
-                AnchorContractCalls::GetToken(element) => element.fmt(f),
-                AnchorContractCalls::Handler(element) => element.fmt(f),
-                AnchorContractCalls::HasEdge(element) => element.fmt(f),
-                AnchorContractCalls::HashLeftRight(element) => element.fmt(f),
-                AnchorContractCalls::Hasher(element) => element.fmt(f),
-                AnchorContractCalls::IsKnownNeighborRoot(element) => {
+                FixedDepositAnchorContractCalls::CurrentNeighborRootIndex(
+                    element,
+                ) => element.fmt(f),
+                FixedDepositAnchorContractCalls::CurrentRootIndex(element) => {
                     element.fmt(f)
                 }
-                AnchorContractCalls::IsKnownRoot(element) => element.fmt(f),
-                AnchorContractCalls::IsSpent(element) => element.fmt(f),
-                AnchorContractCalls::IsSpentArray(element) => element.fmt(f),
-                AnchorContractCalls::IsValidRoots(element) => element.fmt(f),
-                AnchorContractCalls::Levels(element) => element.fmt(f),
-                AnchorContractCalls::MaxEdges(element) => element.fmt(f),
-                AnchorContractCalls::NeighborRoots(element) => element.fmt(f),
-                AnchorContractCalls::NextIndex(element) => element.fmt(f),
-                AnchorContractCalls::NullifierHashes(element) => element.fmt(f),
-                AnchorContractCalls::Roots(element) => element.fmt(f),
-                AnchorContractCalls::SetBridge(element) => element.fmt(f),
-                AnchorContractCalls::SetHandler(element) => element.fmt(f),
-                AnchorContractCalls::Token(element) => element.fmt(f),
-                AnchorContractCalls::UnpackProof(element) => element.fmt(f),
-                AnchorContractCalls::UnwrapIntoNative(element) => {
+                FixedDepositAnchorContractCalls::Denomination(element) => {
                     element.fmt(f)
                 }
-                AnchorContractCalls::UnwrapIntoToken(element) => element.fmt(f),
-                AnchorContractCalls::UpdateEdge(element) => element.fmt(f),
-                AnchorContractCalls::Verifier(element) => element.fmt(f),
-                AnchorContractCalls::Withdraw(element) => element.fmt(f),
-                AnchorContractCalls::WithdrawAndUnwrap(element) => {
+                FixedDepositAnchorContractCalls::Deposit(element) => {
                     element.fmt(f)
                 }
-                AnchorContractCalls::WrapAndDeposit(element) => element.fmt(f),
-                AnchorContractCalls::WrapNative(element) => element.fmt(f),
-                AnchorContractCalls::WrapToken(element) => element.fmt(f),
-                AnchorContractCalls::Zeros(element) => element.fmt(f),
+                FixedDepositAnchorContractCalls::EdgeExistsForChain(
+                    element,
+                ) => element.fmt(f),
+                FixedDepositAnchorContractCalls::EdgeIndex(element) => {
+                    element.fmt(f)
+                }
+                FixedDepositAnchorContractCalls::EdgeList(element) => {
+                    element.fmt(f)
+                }
+                FixedDepositAnchorContractCalls::FilledSubtrees(element) => {
+                    element.fmt(f)
+                }
+                FixedDepositAnchorContractCalls::GetChainId(element) => {
+                    element.fmt(f)
+                }
+                FixedDepositAnchorContractCalls::GetDenomination(element) => {
+                    element.fmt(f)
+                }
+                FixedDepositAnchorContractCalls::GetLastRoot(element) => {
+                    element.fmt(f)
+                }
+                FixedDepositAnchorContractCalls::GetLatestNeighborEdges(
+                    element,
+                ) => element.fmt(f),
+                FixedDepositAnchorContractCalls::GetLatestNeighborRoots(
+                    element,
+                ) => element.fmt(f),
+                FixedDepositAnchorContractCalls::GetProposalNonce(element) => {
+                    element.fmt(f)
+                }
+                FixedDepositAnchorContractCalls::GetToken(element) => {
+                    element.fmt(f)
+                }
+                FixedDepositAnchorContractCalls::Handler(element) => {
+                    element.fmt(f)
+                }
+                FixedDepositAnchorContractCalls::HasEdge(element) => {
+                    element.fmt(f)
+                }
+                FixedDepositAnchorContractCalls::HashLeftRight(element) => {
+                    element.fmt(f)
+                }
+                FixedDepositAnchorContractCalls::Hasher(element) => {
+                    element.fmt(f)
+                }
+                FixedDepositAnchorContractCalls::IsKnownNeighborRoot(
+                    element,
+                ) => element.fmt(f),
+                FixedDepositAnchorContractCalls::IsKnownRoot(element) => {
+                    element.fmt(f)
+                }
+                FixedDepositAnchorContractCalls::IsSpent(element) => {
+                    element.fmt(f)
+                }
+                FixedDepositAnchorContractCalls::IsSpentArray(element) => {
+                    element.fmt(f)
+                }
+                FixedDepositAnchorContractCalls::IsValidRoots(element) => {
+                    element.fmt(f)
+                }
+                FixedDepositAnchorContractCalls::Levels(element) => {
+                    element.fmt(f)
+                }
+                FixedDepositAnchorContractCalls::MaxEdges(element) => {
+                    element.fmt(f)
+                }
+                FixedDepositAnchorContractCalls::NeighborRoots(element) => {
+                    element.fmt(f)
+                }
+                FixedDepositAnchorContractCalls::NextIndex(element) => {
+                    element.fmt(f)
+                }
+                FixedDepositAnchorContractCalls::NullifierHashes(element) => {
+                    element.fmt(f)
+                }
+                FixedDepositAnchorContractCalls::Roots(element) => {
+                    element.fmt(f)
+                }
+                FixedDepositAnchorContractCalls::SetHandler(element) => {
+                    element.fmt(f)
+                }
+                FixedDepositAnchorContractCalls::SetVerifier(element) => {
+                    element.fmt(f)
+                }
+                FixedDepositAnchorContractCalls::Token(element) => {
+                    element.fmt(f)
+                }
+                FixedDepositAnchorContractCalls::UnpackProof(element) => {
+                    element.fmt(f)
+                }
+                FixedDepositAnchorContractCalls::UnwrapIntoNative(element) => {
+                    element.fmt(f)
+                }
+                FixedDepositAnchorContractCalls::UnwrapIntoToken(element) => {
+                    element.fmt(f)
+                }
+                FixedDepositAnchorContractCalls::UpdateEdge(element) => {
+                    element.fmt(f)
+                }
+                FixedDepositAnchorContractCalls::Verifier(element) => {
+                    element.fmt(f)
+                }
+                FixedDepositAnchorContractCalls::Withdraw(element) => {
+                    element.fmt(f)
+                }
+                FixedDepositAnchorContractCalls::WithdrawAndUnwrap(element) => {
+                    element.fmt(f)
+                }
+                FixedDepositAnchorContractCalls::WrapAndDeposit(element) => {
+                    element.fmt(f)
+                }
+                FixedDepositAnchorContractCalls::WrapNative(element) => {
+                    element.fmt(f)
+                }
+                FixedDepositAnchorContractCalls::WrapToken(element) => {
+                    element.fmt(f)
+                }
+                FixedDepositAnchorContractCalls::Zeros(element) => {
+                    element.fmt(f)
+                }
             }
         }
     }
-    impl ::std::convert::From<FieldSizeCall> for AnchorContractCalls {
+    impl ::std::convert::From<FieldSizeCall> for FixedDepositAnchorContractCalls {
         fn from(var: FieldSizeCall) -> Self {
-            AnchorContractCalls::FieldSize(var)
+            FixedDepositAnchorContractCalls::FieldSize(var)
         }
     }
-    impl ::std::convert::From<RootHistorySizeCall> for AnchorContractCalls {
+    impl ::std::convert::From<RootHistorySizeCall>
+        for FixedDepositAnchorContractCalls
+    {
         fn from(var: RootHistorySizeCall) -> Self {
-            AnchorContractCalls::RootHistorySize(var)
+            FixedDepositAnchorContractCalls::RootHistorySize(var)
         }
     }
-    impl ::std::convert::From<ZeroValueCall> for AnchorContractCalls {
+    impl ::std::convert::From<ZeroValueCall> for FixedDepositAnchorContractCalls {
         fn from(var: ZeroValueCall) -> Self {
-            AnchorContractCalls::ZeroValue(var)
+            FixedDepositAnchorContractCalls::ZeroValue(var)
         }
     }
-    impl ::std::convert::From<AddEdgeCall> for AnchorContractCalls {
-        fn from(var: AddEdgeCall) -> Self {
-            AnchorContractCalls::AddEdge(var)
-        }
-    }
-    impl ::std::convert::From<AdminCall> for AnchorContractCalls {
-        fn from(var: AdminCall) -> Self {
-            AnchorContractCalls::Admin(var)
-        }
-    }
-    impl ::std::convert::From<BridgeCall> for AnchorContractCalls {
-        fn from(var: BridgeCall) -> Self {
-            AnchorContractCalls::Bridge(var)
-        }
-    }
-    impl ::std::convert::From<CommitmentsCall> for AnchorContractCalls {
+    impl ::std::convert::From<CommitmentsCall> for FixedDepositAnchorContractCalls {
         fn from(var: CommitmentsCall) -> Self {
-            AnchorContractCalls::Commitments(var)
+            FixedDepositAnchorContractCalls::Commitments(var)
         }
     }
     impl ::std::convert::From<CurrentNeighborRootIndexCall>
-        for AnchorContractCalls
+        for FixedDepositAnchorContractCalls
     {
         fn from(var: CurrentNeighborRootIndexCall) -> Self {
-            AnchorContractCalls::CurrentNeighborRootIndex(var)
+            FixedDepositAnchorContractCalls::CurrentNeighborRootIndex(var)
         }
     }
-    impl ::std::convert::From<CurrentRootIndexCall> for AnchorContractCalls {
+    impl ::std::convert::From<CurrentRootIndexCall>
+        for FixedDepositAnchorContractCalls
+    {
         fn from(var: CurrentRootIndexCall) -> Self {
-            AnchorContractCalls::CurrentRootIndex(var)
+            FixedDepositAnchorContractCalls::CurrentRootIndex(var)
         }
     }
-    impl ::std::convert::From<DenominationCall> for AnchorContractCalls {
+    impl ::std::convert::From<DenominationCall>
+        for FixedDepositAnchorContractCalls
+    {
         fn from(var: DenominationCall) -> Self {
-            AnchorContractCalls::Denomination(var)
+            FixedDepositAnchorContractCalls::Denomination(var)
         }
     }
-    impl ::std::convert::From<DepositCall> for AnchorContractCalls {
+    impl ::std::convert::From<DepositCall> for FixedDepositAnchorContractCalls {
         fn from(var: DepositCall) -> Self {
-            AnchorContractCalls::Deposit(var)
+            FixedDepositAnchorContractCalls::Deposit(var)
         }
     }
-    impl ::std::convert::From<EdgeExistsForChainCall> for AnchorContractCalls {
+    impl ::std::convert::From<EdgeExistsForChainCall>
+        for FixedDepositAnchorContractCalls
+    {
         fn from(var: EdgeExistsForChainCall) -> Self {
-            AnchorContractCalls::EdgeExistsForChain(var)
+            FixedDepositAnchorContractCalls::EdgeExistsForChain(var)
         }
     }
-    impl ::std::convert::From<EdgeIndexCall> for AnchorContractCalls {
+    impl ::std::convert::From<EdgeIndexCall> for FixedDepositAnchorContractCalls {
         fn from(var: EdgeIndexCall) -> Self {
-            AnchorContractCalls::EdgeIndex(var)
+            FixedDepositAnchorContractCalls::EdgeIndex(var)
         }
     }
-    impl ::std::convert::From<EdgeListCall> for AnchorContractCalls {
+    impl ::std::convert::From<EdgeListCall> for FixedDepositAnchorContractCalls {
         fn from(var: EdgeListCall) -> Self {
-            AnchorContractCalls::EdgeList(var)
+            FixedDepositAnchorContractCalls::EdgeList(var)
         }
     }
-    impl ::std::convert::From<FilledSubtreesCall> for AnchorContractCalls {
+    impl ::std::convert::From<FilledSubtreesCall>
+        for FixedDepositAnchorContractCalls
+    {
         fn from(var: FilledSubtreesCall) -> Self {
-            AnchorContractCalls::FilledSubtrees(var)
+            FixedDepositAnchorContractCalls::FilledSubtrees(var)
         }
     }
-    impl ::std::convert::From<GetDenominationCall> for AnchorContractCalls {
+    impl ::std::convert::From<GetChainIdCall> for FixedDepositAnchorContractCalls {
+        fn from(var: GetChainIdCall) -> Self {
+            FixedDepositAnchorContractCalls::GetChainId(var)
+        }
+    }
+    impl ::std::convert::From<GetDenominationCall>
+        for FixedDepositAnchorContractCalls
+    {
         fn from(var: GetDenominationCall) -> Self {
-            AnchorContractCalls::GetDenomination(var)
+            FixedDepositAnchorContractCalls::GetDenomination(var)
         }
     }
-    impl ::std::convert::From<GetLastRootCall> for AnchorContractCalls {
+    impl ::std::convert::From<GetLastRootCall> for FixedDepositAnchorContractCalls {
         fn from(var: GetLastRootCall) -> Self {
-            AnchorContractCalls::GetLastRoot(var)
+            FixedDepositAnchorContractCalls::GetLastRoot(var)
         }
     }
-    impl ::std::convert::From<GetLatestNeighborRootsCall> for AnchorContractCalls {
+    impl ::std::convert::From<GetLatestNeighborEdgesCall>
+        for FixedDepositAnchorContractCalls
+    {
+        fn from(var: GetLatestNeighborEdgesCall) -> Self {
+            FixedDepositAnchorContractCalls::GetLatestNeighborEdges(var)
+        }
+    }
+    impl ::std::convert::From<GetLatestNeighborRootsCall>
+        for FixedDepositAnchorContractCalls
+    {
         fn from(var: GetLatestNeighborRootsCall) -> Self {
-            AnchorContractCalls::GetLatestNeighborRoots(var)
+            FixedDepositAnchorContractCalls::GetLatestNeighborRoots(var)
         }
     }
-    impl ::std::convert::From<GetTokenCall> for AnchorContractCalls {
+    impl ::std::convert::From<GetProposalNonceCall>
+        for FixedDepositAnchorContractCalls
+    {
+        fn from(var: GetProposalNonceCall) -> Self {
+            FixedDepositAnchorContractCalls::GetProposalNonce(var)
+        }
+    }
+    impl ::std::convert::From<GetTokenCall> for FixedDepositAnchorContractCalls {
         fn from(var: GetTokenCall) -> Self {
-            AnchorContractCalls::GetToken(var)
+            FixedDepositAnchorContractCalls::GetToken(var)
         }
     }
-    impl ::std::convert::From<HandlerCall> for AnchorContractCalls {
+    impl ::std::convert::From<HandlerCall> for FixedDepositAnchorContractCalls {
         fn from(var: HandlerCall) -> Self {
-            AnchorContractCalls::Handler(var)
+            FixedDepositAnchorContractCalls::Handler(var)
         }
     }
-    impl ::std::convert::From<HasEdgeCall> for AnchorContractCalls {
+    impl ::std::convert::From<HasEdgeCall> for FixedDepositAnchorContractCalls {
         fn from(var: HasEdgeCall) -> Self {
-            AnchorContractCalls::HasEdge(var)
+            FixedDepositAnchorContractCalls::HasEdge(var)
         }
     }
-    impl ::std::convert::From<HashLeftRightCall> for AnchorContractCalls {
+    impl ::std::convert::From<HashLeftRightCall>
+        for FixedDepositAnchorContractCalls
+    {
         fn from(var: HashLeftRightCall) -> Self {
-            AnchorContractCalls::HashLeftRight(var)
+            FixedDepositAnchorContractCalls::HashLeftRight(var)
         }
     }
-    impl ::std::convert::From<HasherCall> for AnchorContractCalls {
+    impl ::std::convert::From<HasherCall> for FixedDepositAnchorContractCalls {
         fn from(var: HasherCall) -> Self {
-            AnchorContractCalls::Hasher(var)
+            FixedDepositAnchorContractCalls::Hasher(var)
         }
     }
-    impl ::std::convert::From<IsKnownNeighborRootCall> for AnchorContractCalls {
+    impl ::std::convert::From<IsKnownNeighborRootCall>
+        for FixedDepositAnchorContractCalls
+    {
         fn from(var: IsKnownNeighborRootCall) -> Self {
-            AnchorContractCalls::IsKnownNeighborRoot(var)
+            FixedDepositAnchorContractCalls::IsKnownNeighborRoot(var)
         }
     }
-    impl ::std::convert::From<IsKnownRootCall> for AnchorContractCalls {
+    impl ::std::convert::From<IsKnownRootCall> for FixedDepositAnchorContractCalls {
         fn from(var: IsKnownRootCall) -> Self {
-            AnchorContractCalls::IsKnownRoot(var)
+            FixedDepositAnchorContractCalls::IsKnownRoot(var)
         }
     }
-    impl ::std::convert::From<IsSpentCall> for AnchorContractCalls {
+    impl ::std::convert::From<IsSpentCall> for FixedDepositAnchorContractCalls {
         fn from(var: IsSpentCall) -> Self {
-            AnchorContractCalls::IsSpent(var)
+            FixedDepositAnchorContractCalls::IsSpent(var)
         }
     }
-    impl ::std::convert::From<IsSpentArrayCall> for AnchorContractCalls {
+    impl ::std::convert::From<IsSpentArrayCall>
+        for FixedDepositAnchorContractCalls
+    {
         fn from(var: IsSpentArrayCall) -> Self {
-            AnchorContractCalls::IsSpentArray(var)
+            FixedDepositAnchorContractCalls::IsSpentArray(var)
         }
     }
-    impl ::std::convert::From<IsValidRootsCall> for AnchorContractCalls {
+    impl ::std::convert::From<IsValidRootsCall>
+        for FixedDepositAnchorContractCalls
+    {
         fn from(var: IsValidRootsCall) -> Self {
-            AnchorContractCalls::IsValidRoots(var)
+            FixedDepositAnchorContractCalls::IsValidRoots(var)
         }
     }
-    impl ::std::convert::From<LevelsCall> for AnchorContractCalls {
+    impl ::std::convert::From<LevelsCall> for FixedDepositAnchorContractCalls {
         fn from(var: LevelsCall) -> Self {
-            AnchorContractCalls::Levels(var)
+            FixedDepositAnchorContractCalls::Levels(var)
         }
     }
-    impl ::std::convert::From<MaxEdgesCall> for AnchorContractCalls {
+    impl ::std::convert::From<MaxEdgesCall> for FixedDepositAnchorContractCalls {
         fn from(var: MaxEdgesCall) -> Self {
-            AnchorContractCalls::MaxEdges(var)
+            FixedDepositAnchorContractCalls::MaxEdges(var)
         }
     }
-    impl ::std::convert::From<NeighborRootsCall> for AnchorContractCalls {
+    impl ::std::convert::From<NeighborRootsCall>
+        for FixedDepositAnchorContractCalls
+    {
         fn from(var: NeighborRootsCall) -> Self {
-            AnchorContractCalls::NeighborRoots(var)
+            FixedDepositAnchorContractCalls::NeighborRoots(var)
         }
     }
-    impl ::std::convert::From<NextIndexCall> for AnchorContractCalls {
+    impl ::std::convert::From<NextIndexCall> for FixedDepositAnchorContractCalls {
         fn from(var: NextIndexCall) -> Self {
-            AnchorContractCalls::NextIndex(var)
+            FixedDepositAnchorContractCalls::NextIndex(var)
         }
     }
-    impl ::std::convert::From<NullifierHashesCall> for AnchorContractCalls {
+    impl ::std::convert::From<NullifierHashesCall>
+        for FixedDepositAnchorContractCalls
+    {
         fn from(var: NullifierHashesCall) -> Self {
-            AnchorContractCalls::NullifierHashes(var)
+            FixedDepositAnchorContractCalls::NullifierHashes(var)
         }
     }
-    impl ::std::convert::From<RootsCall> for AnchorContractCalls {
+    impl ::std::convert::From<RootsCall> for FixedDepositAnchorContractCalls {
         fn from(var: RootsCall) -> Self {
-            AnchorContractCalls::Roots(var)
+            FixedDepositAnchorContractCalls::Roots(var)
         }
     }
-    impl ::std::convert::From<SetBridgeCall> for AnchorContractCalls {
-        fn from(var: SetBridgeCall) -> Self {
-            AnchorContractCalls::SetBridge(var)
-        }
-    }
-    impl ::std::convert::From<SetHandlerCall> for AnchorContractCalls {
+    impl ::std::convert::From<SetHandlerCall> for FixedDepositAnchorContractCalls {
         fn from(var: SetHandlerCall) -> Self {
-            AnchorContractCalls::SetHandler(var)
+            FixedDepositAnchorContractCalls::SetHandler(var)
         }
     }
-    impl ::std::convert::From<TokenCall> for AnchorContractCalls {
+    impl ::std::convert::From<SetVerifierCall> for FixedDepositAnchorContractCalls {
+        fn from(var: SetVerifierCall) -> Self {
+            FixedDepositAnchorContractCalls::SetVerifier(var)
+        }
+    }
+    impl ::std::convert::From<TokenCall> for FixedDepositAnchorContractCalls {
         fn from(var: TokenCall) -> Self {
-            AnchorContractCalls::Token(var)
+            FixedDepositAnchorContractCalls::Token(var)
         }
     }
-    impl ::std::convert::From<UnpackProofCall> for AnchorContractCalls {
+    impl ::std::convert::From<UnpackProofCall> for FixedDepositAnchorContractCalls {
         fn from(var: UnpackProofCall) -> Self {
-            AnchorContractCalls::UnpackProof(var)
+            FixedDepositAnchorContractCalls::UnpackProof(var)
         }
     }
-    impl ::std::convert::From<UnwrapIntoNativeCall> for AnchorContractCalls {
+    impl ::std::convert::From<UnwrapIntoNativeCall>
+        for FixedDepositAnchorContractCalls
+    {
         fn from(var: UnwrapIntoNativeCall) -> Self {
-            AnchorContractCalls::UnwrapIntoNative(var)
+            FixedDepositAnchorContractCalls::UnwrapIntoNative(var)
         }
     }
-    impl ::std::convert::From<UnwrapIntoTokenCall> for AnchorContractCalls {
+    impl ::std::convert::From<UnwrapIntoTokenCall>
+        for FixedDepositAnchorContractCalls
+    {
         fn from(var: UnwrapIntoTokenCall) -> Self {
-            AnchorContractCalls::UnwrapIntoToken(var)
+            FixedDepositAnchorContractCalls::UnwrapIntoToken(var)
         }
     }
-    impl ::std::convert::From<UpdateEdgeCall> for AnchorContractCalls {
+    impl ::std::convert::From<UpdateEdgeCall> for FixedDepositAnchorContractCalls {
         fn from(var: UpdateEdgeCall) -> Self {
-            AnchorContractCalls::UpdateEdge(var)
+            FixedDepositAnchorContractCalls::UpdateEdge(var)
         }
     }
-    impl ::std::convert::From<VerifierCall> for AnchorContractCalls {
+    impl ::std::convert::From<VerifierCall> for FixedDepositAnchorContractCalls {
         fn from(var: VerifierCall) -> Self {
-            AnchorContractCalls::Verifier(var)
+            FixedDepositAnchorContractCalls::Verifier(var)
         }
     }
-    impl ::std::convert::From<WithdrawCall> for AnchorContractCalls {
+    impl ::std::convert::From<WithdrawCall> for FixedDepositAnchorContractCalls {
         fn from(var: WithdrawCall) -> Self {
-            AnchorContractCalls::Withdraw(var)
+            FixedDepositAnchorContractCalls::Withdraw(var)
         }
     }
-    impl ::std::convert::From<WithdrawAndUnwrapCall> for AnchorContractCalls {
+    impl ::std::convert::From<WithdrawAndUnwrapCall>
+        for FixedDepositAnchorContractCalls
+    {
         fn from(var: WithdrawAndUnwrapCall) -> Self {
-            AnchorContractCalls::WithdrawAndUnwrap(var)
+            FixedDepositAnchorContractCalls::WithdrawAndUnwrap(var)
         }
     }
-    impl ::std::convert::From<WrapAndDepositCall> for AnchorContractCalls {
+    impl ::std::convert::From<WrapAndDepositCall>
+        for FixedDepositAnchorContractCalls
+    {
         fn from(var: WrapAndDepositCall) -> Self {
-            AnchorContractCalls::WrapAndDeposit(var)
+            FixedDepositAnchorContractCalls::WrapAndDeposit(var)
         }
     }
-    impl ::std::convert::From<WrapNativeCall> for AnchorContractCalls {
+    impl ::std::convert::From<WrapNativeCall> for FixedDepositAnchorContractCalls {
         fn from(var: WrapNativeCall) -> Self {
-            AnchorContractCalls::WrapNative(var)
+            FixedDepositAnchorContractCalls::WrapNative(var)
         }
     }
-    impl ::std::convert::From<WrapTokenCall> for AnchorContractCalls {
+    impl ::std::convert::From<WrapTokenCall> for FixedDepositAnchorContractCalls {
         fn from(var: WrapTokenCall) -> Self {
-            AnchorContractCalls::WrapToken(var)
+            FixedDepositAnchorContractCalls::WrapToken(var)
         }
     }
-    impl ::std::convert::From<ZerosCall> for AnchorContractCalls {
+    impl ::std::convert::From<ZerosCall> for FixedDepositAnchorContractCalls {
         fn from(var: ZerosCall) -> Self {
-            AnchorContractCalls::Zeros(var)
+            FixedDepositAnchorContractCalls::Zeros(var)
         }
     }
     #[doc = "`PublicInputs(bytes,bytes32,bytes32,address,address,uint256,uint256)`"]
@@ -2140,12 +2417,21 @@ mod anchorcontract_mod {
         Clone, Debug, Default, Eq, PartialEq, ethers :: contract :: EthAbiType,
     )]
     pub struct PublicInputs {
-        pub roots: Vec<u8>,
+        pub roots: ethers::core::types::Bytes,
         pub nullifier_hash: [u8; 32],
         pub refresh_commitment: [u8; 32],
         pub recipient: ethers::core::types::Address,
         pub relayer: ethers::core::types::Address,
         pub fee: ethers::core::types::U256,
         pub refund: ethers::core::types::U256,
+    }
+    #[doc = "`Edge(uint256,bytes32,uint256)`"]
+    #[derive(
+        Clone, Debug, Default, Eq, PartialEq, ethers :: contract :: EthAbiType,
+    )]
+    pub struct Edge {
+        pub chain_id: ethers::core::types::U256,
+        pub root: [u8; 32],
+        pub latest_leaf_index: ethers::core::types::U256,
     }
 }

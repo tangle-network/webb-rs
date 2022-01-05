@@ -179,7 +179,8 @@ mod tornadocontract_mod {
         pub fn is_spent_array(
             &self,
             nullifier_hashes: ::std::vec::Vec<[u8; 32]>,
-        ) -> ethers::contract::builders::ContractCall<M, Vec<bool>> {
+        ) -> ethers::contract::builders::ContractCall<M, ::std::vec::Vec<bool>>
+        {
             self.0
                 .method_hash([159, 161, 45, 11], nullifier_hashes)
                 .expect("method not found (this should never happen)")
@@ -232,7 +233,7 @@ mod tornadocontract_mod {
         #[doc = "Calls the contract's `withdraw` (0x21a0adb6) function"]
         pub fn withdraw(
             &self,
-            proof: Vec<u8>,
+            proof: ethers::core::types::Bytes,
             root: [u8; 32],
             nullifier_hash: [u8; 32],
             recipient: ethers::core::types::Address,
@@ -609,7 +610,7 @@ mod tornadocontract_mod {
         abi = "withdraw(bytes,bytes32,bytes32,address,address,uint256,uint256)"
     )]
     pub struct WithdrawCall {
-        pub proof: Vec<u8>,
+        pub proof: ethers::core::types::Bytes,
         pub root: [u8; 32],
         pub nullifier_hash: [u8; 32],
         pub recipient: ethers::core::types::Address,

@@ -19,7 +19,7 @@ mod anchorproxycontract_mod {
     pub static ANCHORPROXYCONTRACT_ABI: ethers::contract::Lazy<
         ethers::core::abi::Abi,
     > = ethers::contract::Lazy::new(|| {
-        serde_json :: from_str ("[{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_anchorTrees\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"_governance\",\"type\":\"address\"},{\"components\":[{\"internalType\":\"contract IAnchor\",\"name\":\"addr\",\"type\":\"address\"},{\"components\":[{\"internalType\":\"contract IERC20\",\"name\":\"token\",\"type\":\"address\"},{\"internalType\":\"enum AnchorProxy.InstanceState\",\"name\":\"state\",\"type\":\"uint8\"}],\"internalType\":\"struct AnchorProxy.Instance\",\"name\":\"instance\",\"type\":\"tuple\"}],\"internalType\":\"struct AnchorProxy.AnchorStruct[]\",\"name\":\"_instances\",\"type\":\"tuple[]\"}],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"contract IAnchor\",\"name\":\"anchor\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"bytes32\",\"name\":\"commitment\",\"type\":\"bytes32\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"timestamp\",\"type\":\"uint256\"}],\"name\":\"AnchorProxyDeposit\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"sender\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"bytes\",\"name\":\"encryptedNote\",\"type\":\"bytes\"}],\"name\":\"EncryptedNote\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"contract IAnchor\",\"name\":\"instance\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"enum AnchorProxy.InstanceState\",\"name\":\"state\",\"type\":\"uint8\"}],\"name\":\"InstanceStateUpdated\",\"type\":\"event\"},{\"inputs\":[],\"name\":\"anchorTrees\",\"outputs\":[{\"internalType\":\"contract IAnchorTrees\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes[]\",\"name\":\"_encryptedNotes\",\"type\":\"bytes[]\"}],\"name\":\"backupNotes\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"contract IAnchor\",\"name\":\"_anchor\",\"type\":\"address\"},{\"internalType\":\"bytes32\",\"name\":\"_commitment\",\"type\":\"bytes32\"},{\"internalType\":\"bytes\",\"name\":\"_encryptedNote\",\"type\":\"bytes\"}],\"name\":\"deposit\",\"outputs\":[],\"stateMutability\":\"payable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"governance\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"contract IAnchor\",\"name\":\"\",\"type\":\"address\"}],\"name\":\"instances\",\"outputs\":[{\"internalType\":\"contract IERC20\",\"name\":\"token\",\"type\":\"address\"},{\"internalType\":\"enum AnchorProxy.InstanceState\",\"name\":\"state\",\"type\":\"uint8\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"contract IAnchor\",\"name\":\"_anchor\",\"type\":\"address\"},{\"internalType\":\"bytes\",\"name\":\"_proof\",\"type\":\"bytes\"},{\"components\":[{\"internalType\":\"bytes\",\"name\":\"_roots\",\"type\":\"bytes\"},{\"internalType\":\"bytes32\",\"name\":\"_nullifierHash\",\"type\":\"bytes32\"},{\"internalType\":\"bytes32\",\"name\":\"_refreshCommitment\",\"type\":\"bytes32\"},{\"internalType\":\"address payable\",\"name\":\"_recipient\",\"type\":\"address\"},{\"internalType\":\"address payable\",\"name\":\"_relayer\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"_fee\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"_refund\",\"type\":\"uint256\"}],\"internalType\":\"struct IAnchor.PublicInputs\",\"name\":\"_publicInputs\",\"type\":\"tuple\"}],\"name\":\"withdraw\",\"outputs\":[],\"stateMutability\":\"payable\",\"type\":\"function\"}]") . expect ("invalid abi")
+        serde_json :: from_str ("[{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_anchorTrees\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"_governance\",\"type\":\"address\"},{\"components\":[{\"internalType\":\"contract IFixedDepositAnchor\",\"name\":\"addr\",\"type\":\"address\"},{\"components\":[{\"internalType\":\"contract IERC20\",\"name\":\"token\",\"type\":\"address\"},{\"internalType\":\"enum AnchorProxy.InstanceState\",\"name\":\"state\",\"type\":\"uint8\"}],\"internalType\":\"struct AnchorProxy.Instance\",\"name\":\"instance\",\"type\":\"tuple\"}],\"internalType\":\"struct AnchorProxy.AnchorStruct[]\",\"name\":\"_instances\",\"type\":\"tuple[]\"}],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"contract IFixedDepositAnchor\",\"name\":\"anchor\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"bytes32\",\"name\":\"commitment\",\"type\":\"bytes32\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"timestamp\",\"type\":\"uint256\"}],\"name\":\"AnchorProxyDeposit\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"sender\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"bytes\",\"name\":\"encryptedNote\",\"type\":\"bytes\"}],\"name\":\"EncryptedNote\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"contract IFixedDepositAnchor\",\"name\":\"instance\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"enum AnchorProxy.InstanceState\",\"name\":\"state\",\"type\":\"uint8\"}],\"name\":\"InstanceStateUpdated\",\"type\":\"event\"},{\"inputs\":[],\"name\":\"anchorTrees\",\"outputs\":[{\"internalType\":\"contract IAnchorTrees\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes[]\",\"name\":\"_encryptedNotes\",\"type\":\"bytes[]\"}],\"name\":\"backupNotes\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"contract IFixedDepositAnchor\",\"name\":\"_anchor\",\"type\":\"address\"},{\"internalType\":\"bytes32\",\"name\":\"_commitment\",\"type\":\"bytes32\"},{\"internalType\":\"bytes\",\"name\":\"_encryptedNote\",\"type\":\"bytes\"}],\"name\":\"deposit\",\"outputs\":[],\"stateMutability\":\"payable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"governance\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"contract IFixedDepositAnchor\",\"name\":\"\",\"type\":\"address\"}],\"name\":\"instances\",\"outputs\":[{\"internalType\":\"contract IERC20\",\"name\":\"token\",\"type\":\"address\"},{\"internalType\":\"enum AnchorProxy.InstanceState\",\"name\":\"state\",\"type\":\"uint8\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"contract IFixedDepositAnchor\",\"name\":\"_anchor\",\"type\":\"address\"},{\"internalType\":\"bytes\",\"name\":\"_proof\",\"type\":\"bytes\"},{\"components\":[{\"internalType\":\"bytes\",\"name\":\"_roots\",\"type\":\"bytes\"},{\"internalType\":\"bytes32\",\"name\":\"_nullifierHash\",\"type\":\"bytes32\"},{\"internalType\":\"bytes32\",\"name\":\"_refreshCommitment\",\"type\":\"bytes32\"},{\"internalType\":\"address payable\",\"name\":\"_recipient\",\"type\":\"address\"},{\"internalType\":\"address payable\",\"name\":\"_relayer\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"_fee\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"_refund\",\"type\":\"uint256\"}],\"internalType\":\"struct IFixedDepositAnchor.PublicInputs\",\"name\":\"_publicInputs\",\"type\":\"tuple\"}],\"name\":\"withdraw\",\"outputs\":[],\"stateMutability\":\"payable\",\"type\":\"function\"}]") . expect ("invalid abi")
     });
     #[derive(Clone)]
     pub struct AnchorProxyContract<M>(ethers::contract::Contract<M>);
@@ -67,7 +67,7 @@ mod anchorproxycontract_mod {
         #[doc = "Calls the contract's `backupNotes` (0x6485ba2a) function"]
         pub fn backup_notes(
             &self,
-            encrypted_notes: ::std::vec::Vec<Vec<u8>>,
+            encrypted_notes: ::std::vec::Vec<ethers::core::types::Bytes>,
         ) -> ethers::contract::builders::ContractCall<M, ()> {
             self.0
                 .method_hash([100, 133, 186, 42], encrypted_notes)
@@ -78,7 +78,7 @@ mod anchorproxycontract_mod {
             &self,
             anchor: ethers::core::types::Address,
             commitment: [u8; 32],
-            encrypted_note: Vec<u8>,
+            encrypted_note: ethers::core::types::Bytes,
         ) -> ethers::contract::builders::ContractCall<M, ()> {
             self.0
                 .method_hash(
@@ -114,7 +114,7 @@ mod anchorproxycontract_mod {
         pub fn withdraw(
             &self,
             anchor: ethers::core::types::Address,
-            proof: Vec<u8>,
+            proof: ethers::core::types::Bytes,
             public_inputs: PublicInputs,
         ) -> ethers::contract::builders::ContractCall<M, ()> {
             self.0
@@ -185,7 +185,7 @@ mod anchorproxycontract_mod {
     pub struct EncryptedNoteFilter {
         #[ethevent(indexed)]
         pub sender: ethers::core::types::Address,
-        pub encrypted_note: Vec<u8>,
+        pub encrypted_note: ethers::core::types::Bytes,
     }
     #[derive(
         Clone,
@@ -219,11 +219,9 @@ mod anchorproxycontract_mod {
             Self: Sized,
         {
             if let Ok(decoded) = AnchorProxyDepositFilter::decode_log(log) {
-                return Ok(
-                    AnchorProxyContractEvents::AnchorProxyDepositFilter(
-                        decoded,
-                    ),
-                );
+                return Ok(AnchorProxyContractEvents::AnchorProxyDepositFilter(
+                    decoded,
+                ));
             }
             if let Ok(decoded) = EncryptedNoteFilter::decode_log(log) {
                 return Ok(AnchorProxyContractEvents::EncryptedNoteFilter(
@@ -279,7 +277,7 @@ mod anchorproxycontract_mod {
     )]
     #[ethcall(name = "backupNotes", abi = "backupNotes(bytes[])")]
     pub struct BackupNotesCall {
-        pub encrypted_notes: ::std::vec::Vec<Vec<u8>>,
+        pub encrypted_notes: ::std::vec::Vec<ethers::core::types::Bytes>,
     }
     #[doc = "Container type for all input parameters for the `deposit`function with signature `deposit(address,bytes32,bytes)` and selector `[19, 217, 141, 19]`"]
     #[derive(
@@ -295,7 +293,7 @@ mod anchorproxycontract_mod {
     pub struct DepositCall {
         pub anchor: ethers::core::types::Address,
         pub commitment: [u8; 32],
-        pub encrypted_note: Vec<u8>,
+        pub encrypted_note: ethers::core::types::Bytes,
     }
     #[doc = "Container type for all input parameters for the `governance`function with signature `governance()` and selector `[90, 166, 230, 117]`"]
     #[derive(
@@ -337,7 +335,7 @@ mod anchorproxycontract_mod {
     )]
     pub struct WithdrawCall {
         pub anchor: ethers::core::types::Address,
-        pub proof: Vec<u8>,
+        pub proof: ethers::core::types::Bytes,
         pub public_inputs: PublicInputs,
     }
     #[derive(Debug, Clone, PartialEq, Eq, ethers :: contract :: EthAbiType)]
@@ -469,7 +467,7 @@ mod anchorproxycontract_mod {
         Clone, Debug, Default, Eq, PartialEq, ethers :: contract :: EthAbiType,
     )]
     pub struct PublicInputs {
-        pub roots: Vec<u8>,
+        pub roots: ethers::core::types::Bytes,
         pub nullifier_hash: [u8; 32],
         pub refresh_commitment: [u8; 32],
         pub recipient: ethers::core::types::Address,
