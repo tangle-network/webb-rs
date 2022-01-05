@@ -39,9 +39,9 @@ mod evm {
 
     pub fn build_protocol_solidity_anchor() -> Result<(), Box<dyn Error>> {
         parse_and_write_abigen(
-            "contracts/protocol-solidity/Anchor.json",
-            "src/evm/contract/protocol_solidity/anchor.rs",
-            "AnchorContract",
+            "contracts/protocol-solidity/FixedDepositAnchor.json",
+            "src/evm/contract/protocol_solidity/fixed_deposit_anchor.rs",
+            "FixedDepositAnchorContract",
         )
     }
 
