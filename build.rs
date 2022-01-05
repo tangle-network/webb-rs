@@ -45,6 +45,15 @@ mod evm {
         )
     }
 
+    pub fn build_protocol_solidity_anchor_handler() -> Result<(), Box<dyn Error>>
+    {
+        parse_and_write_abigen(
+            "contracts/protocol-solidity/AnchorHandler.json",
+            "src/evm/contract/protocol_solidity/anchor_handler.rs",
+            "AnchorHandlerContract",
+        )
+    }
+
     pub fn build_protocol_solidity_anchor_proxy() -> Result<(), Box<dyn Error>>
     {
         parse_and_write_abigen(
@@ -131,6 +140,7 @@ fn main() -> Result<(), Box<dyn Error>> {
         evm::build_tornado_contract()?;
         evm::build_protocol_solidity_anchor()?;
         evm::build_protocol_solidity_anchor_proxy()?;
+        evm::build_protocol_solidity_anchor_handler()?;
         evm::build_protocol_solidity_bridge()?;
         run_cargo_fmt()?;
     }
