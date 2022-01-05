@@ -70,6 +70,15 @@ mod evm {
             "BridgeContract",
         )
     }
+
+    pub fn build_protocol_solidity_signature_bridge(
+    ) -> Result<(), Box<dyn Error>> {
+        parse_and_write_abigen(
+            "contracts/protocol-solidity/SignatureBridge.json",
+            "src/evm/contract/protocol_solidity/signature_bridge.rs",
+            "SignatureBridgeContract",
+        )
+    }
 }
 
 #[cfg(feature = "generate-substrate")]
@@ -142,6 +151,7 @@ fn main() -> Result<(), Box<dyn Error>> {
         evm::build_protocol_solidity_anchor_proxy()?;
         evm::build_protocol_solidity_anchor_handler()?;
         evm::build_protocol_solidity_bridge()?;
+        evm::build_protocol_solidity_signature_bridge()?;
         run_cargo_fmt()?;
     }
     #[cfg(feature = "generate-substrate")]
