@@ -367,14 +367,18 @@ mod anchorhandlercontract_mod {
                     data.as_ref(),
                 )
             {
-                return Ok(AnchorHandlerContractCalls::ExecuteProposal(decoded));
+                return Ok(AnchorHandlerContractCalls::ExecuteProposal(
+                    decoded,
+                ));
             }
             if let Ok(decoded) =
                 <GetUpdateRecordCall as ethers::core::abi::AbiDecode>::decode(
                     data.as_ref(),
                 )
             {
-                return Ok(AnchorHandlerContractCalls::GetUpdateRecord(decoded));
+                return Ok(AnchorHandlerContractCalls::GetUpdateRecord(
+                    decoded,
+                ));
             }
             if let Ok(decoded) =
                 <MigrateBridgeCall as ethers::core::abi::AbiDecode>::decode(

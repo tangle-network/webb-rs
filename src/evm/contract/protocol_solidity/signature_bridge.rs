@@ -19,7 +19,7 @@ mod signaturebridgecontract_mod {
     pub static SIGNATUREBRIDGECONTRACT_ABI: ethers::contract::Lazy<
         ethers::core::abi::Abi,
     > = ethers::contract::Lazy::new(|| {
-        serde_json :: from_str ("[{\"inputs\":[{\"internalType\":\"address\",\"name\":\"initialGovernor\",\"type\":\"address\"}],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"previousOwner\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"newOwner\",\"type\":\"address\"}],\"name\":\"GovernanceOwnershipTransferred\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"}],\"name\":\"Paused\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"recovered\",\"type\":\"address\"}],\"name\":\"RecoveredAddress\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"}],\"name\":\"Unpaused\",\"type\":\"event\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"name\":\"_counts\",\"outputs\":[{\"internalType\":\"uint64\",\"name\":\"\",\"type\":\"uint64\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"name\":\"_resourceIDToHandlerAddress\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32[]\",\"name\":\"resourceIDs\",\"type\":\"bytes32[]\"},{\"internalType\":\"address\",\"name\":\"newBridge\",\"type\":\"address\"},{\"internalType\":\"bytes\",\"name\":\"sig\",\"type\":\"bytes\"}],\"name\":\"adminMigrateBridgeWithSignature\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"handlerAddress\",\"type\":\"address\"},{\"internalType\":\"bytes32\",\"name\":\"resourceID\",\"type\":\"bytes32\"},{\"internalType\":\"address\",\"name\":\"executionContextAddress\",\"type\":\"address\"},{\"internalType\":\"bytes\",\"name\":\"sig\",\"type\":\"bytes\"}],\"name\":\"adminSetResourceWithSignature\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes\",\"name\":\"pubkey\",\"type\":\"bytes\"}],\"name\":\"checkPubKey\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes\",\"name\":\"data\",\"type\":\"bytes\"},{\"internalType\":\"bytes\",\"name\":\"sig\",\"type\":\"bytes\"}],\"name\":\"executeProposalWithSignature\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getChainId\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"governor\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"isGovernor\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes\",\"name\":\"data\",\"type\":\"bytes\"},{\"internalType\":\"bytes\",\"name\":\"sig\",\"type\":\"bytes\"}],\"name\":\"isSignatureFromGovernor\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"paused\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes\",\"name\":\"data\",\"type\":\"bytes\"},{\"internalType\":\"bytes\",\"name\":\"sig\",\"type\":\"bytes\"}],\"name\":\"recover\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"refreshNonce\",\"outputs\":[{\"internalType\":\"uint32\",\"name\":\"\",\"type\":\"uint32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"renounceOwnership\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"newOwner\",\"type\":\"address\"},{\"internalType\":\"uint32\",\"name\":\"nonce\",\"type\":\"uint32\"}],\"name\":\"transferOwnership\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"newOwner\",\"type\":\"address\"},{\"internalType\":\"uint32\",\"name\":\"nonce\",\"type\":\"uint32\"},{\"internalType\":\"bytes\",\"name\":\"sig\",\"type\":\"bytes\"}],\"name\":\"transferOwnershipWithSignature\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes\",\"name\":\"publicKey\",\"type\":\"bytes\"},{\"internalType\":\"uint32\",\"name\":\"nonce\",\"type\":\"uint32\"},{\"internalType\":\"bytes\",\"name\":\"sig\",\"type\":\"bytes\"}],\"name\":\"transferOwnershipWithSignaturePubKey\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"hash\",\"type\":\"bytes32\"},{\"internalType\":\"uint8\",\"name\":\"v\",\"type\":\"uint8\"},{\"internalType\":\"bytes32\",\"name\":\"r\",\"type\":\"bytes32\"},{\"internalType\":\"bytes32\",\"name\":\"s\",\"type\":\"bytes32\"}],\"name\":\"verify\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"}]") . expect ("invalid abi")
+        serde_json :: from_str ("[{\"inputs\":[{\"internalType\":\"address\",\"name\":\"initialGovernor\",\"type\":\"address\"}],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"previousOwner\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"newOwner\",\"type\":\"address\"}],\"name\":\"GovernanceOwnershipTransferred\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"}],\"name\":\"Paused\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"recovered\",\"type\":\"address\"}],\"name\":\"RecoveredAddress\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"}],\"name\":\"Unpaused\",\"type\":\"event\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"name\":\"_counts\",\"outputs\":[{\"internalType\":\"uint64\",\"name\":\"\",\"type\":\"uint64\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"name\":\"_resourceIDToHandlerAddress\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32[]\",\"name\":\"resourceIDs\",\"type\":\"bytes32[]\"},{\"internalType\":\"address\",\"name\":\"newBridge\",\"type\":\"address\"},{\"internalType\":\"bytes\",\"name\":\"sig\",\"type\":\"bytes\"}],\"name\":\"adminMigrateBridgeWithSignature\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"handlerAddress\",\"type\":\"address\"},{\"internalType\":\"bytes32\",\"name\":\"resourceID\",\"type\":\"bytes32\"},{\"internalType\":\"address\",\"name\":\"executionContextAddress\",\"type\":\"address\"},{\"internalType\":\"bytes\",\"name\":\"sig\",\"type\":\"bytes\"}],\"name\":\"adminSetResourceWithSignature\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes\",\"name\":\"pubkey\",\"type\":\"bytes\"}],\"name\":\"checkPubKey\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes\",\"name\":\"data\",\"type\":\"bytes\"},{\"internalType\":\"bytes\",\"name\":\"sig\",\"type\":\"bytes\"}],\"name\":\"executeProposalWithSignature\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getChainId\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"governor\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"isGovernor\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes\",\"name\":\"data\",\"type\":\"bytes\"},{\"internalType\":\"bytes\",\"name\":\"sig\",\"type\":\"bytes\"}],\"name\":\"isSignatureFromGovernor\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"paused\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes\",\"name\":\"data\",\"type\":\"bytes\"},{\"internalType\":\"bytes\",\"name\":\"sig\",\"type\":\"bytes\"}],\"name\":\"recover\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"renounceOwnership\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"newOwner\",\"type\":\"address\"}],\"name\":\"transferOwnership\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"newOwner\",\"type\":\"address\"},{\"internalType\":\"bytes\",\"name\":\"sig\",\"type\":\"bytes\"}],\"name\":\"transferOwnershipWithSignature\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes\",\"name\":\"publicKey\",\"type\":\"bytes\"},{\"internalType\":\"bytes\",\"name\":\"sig\",\"type\":\"bytes\"}],\"name\":\"transferOwnershipWithSignaturePubKey\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"hash\",\"type\":\"bytes32\"},{\"internalType\":\"uint8\",\"name\":\"v\",\"type\":\"uint8\"},{\"internalType\":\"bytes32\",\"name\":\"r\",\"type\":\"bytes32\"},{\"internalType\":\"bytes32\",\"name\":\"s\",\"type\":\"bytes32\"}],\"name\":\"verify\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"}]") . expect ("invalid abi")
     });
     #[derive(Clone)]
     pub struct SignatureBridgeContract<M>(ethers::contract::Contract<M>);
@@ -185,14 +185,6 @@ mod signaturebridgecontract_mod {
                 .method_hash([30, 209, 61, 27], (data, sig))
                 .expect("method not found (this should never happen)")
         }
-        #[doc = "Calls the contract's `refreshNonce` (0x13cb01f9) function"]
-        pub fn refresh_nonce(
-            &self,
-        ) -> ethers::contract::builders::ContractCall<M, u32> {
-            self.0
-                .method_hash([19, 203, 1, 249], ())
-                .expect("method not found (this should never happen)")
-        }
         #[doc = "Calls the contract's `renounceOwnership` (0x715018a6) function"]
         pub fn renounce_ownership(
             &self,
@@ -201,36 +193,33 @@ mod signaturebridgecontract_mod {
                 .method_hash([113, 80, 24, 166], ())
                 .expect("method not found (this should never happen)")
         }
-        #[doc = "Calls the contract's `transferOwnership` (0xa6e94c91) function"]
+        #[doc = "Calls the contract's `transferOwnership` (0xf2fde38b) function"]
         pub fn transfer_ownership(
             &self,
             new_owner: ethers::core::types::Address,
-            nonce: u32,
         ) -> ethers::contract::builders::ContractCall<M, ()> {
             self.0
-                .method_hash([166, 233, 76, 145], (new_owner, nonce))
+                .method_hash([242, 253, 227, 139], new_owner)
                 .expect("method not found (this should never happen)")
         }
-        #[doc = "Calls the contract's `transferOwnershipWithSignature` (0x911005e7) function"]
+        #[doc = "Calls the contract's `transferOwnershipWithSignature` (0x0bf71175) function"]
         pub fn transfer_ownership_with_signature(
             &self,
             new_owner: ethers::core::types::Address,
-            nonce: u32,
             sig: ethers::core::types::Bytes,
         ) -> ethers::contract::builders::ContractCall<M, ()> {
             self.0
-                .method_hash([145, 16, 5, 231], (new_owner, nonce, sig))
+                .method_hash([11, 247, 17, 117], (new_owner, sig))
                 .expect("method not found (this should never happen)")
         }
-        #[doc = "Calls the contract's `transferOwnershipWithSignaturePubKey` (0x7296b5d8) function"]
+        #[doc = "Calls the contract's `transferOwnershipWithSignaturePubKey` (0x6aca1be3) function"]
         pub fn transfer_ownership_with_signature_pub_key(
             &self,
             public_key: ethers::core::types::Bytes,
-            nonce: u32,
             sig: ethers::core::types::Bytes,
         ) -> ethers::contract::builders::ContractCall<M, ()> {
             self.0
-                .method_hash([114, 150, 181, 216], (public_key, nonce, sig))
+                .method_hash([106, 202, 27, 227], (public_key, sig))
                 .expect("method not found (this should never happen)")
         }
         #[doc = "Calls the contract's `verify` (0xf1835db7) function"]
@@ -362,7 +351,9 @@ mod signaturebridgecontract_mod {
                 return Ok (SignatureBridgeContractEvents :: GovernanceOwnershipTransferredFilter (decoded));
             }
             if let Ok(decoded) = PausedFilter::decode_log(log) {
-                return Ok(SignatureBridgeContractEvents::PausedFilter(decoded));
+                return Ok(SignatureBridgeContractEvents::PausedFilter(
+                    decoded,
+                ));
             }
             if let Ok(decoded) = RecoveredAddressFilter::decode_log(log) {
                 return Ok(
@@ -563,18 +554,6 @@ mod signaturebridgecontract_mod {
         pub data: ethers::core::types::Bytes,
         pub sig: ethers::core::types::Bytes,
     }
-    #[doc = "Container type for all input parameters for the `refreshNonce`function with signature `refreshNonce()` and selector `[19, 203, 1, 249]`"]
-    #[derive(
-        Clone,
-        Debug,
-        Default,
-        Eq,
-        PartialEq,
-        ethers :: contract :: EthCall,
-        ethers :: contract :: EthDisplay,
-    )]
-    #[ethcall(name = "refreshNonce", abi = "refreshNonce()")]
-    pub struct RefreshNonceCall;
     #[doc = "Container type for all input parameters for the `renounceOwnership`function with signature `renounceOwnership()` and selector `[113, 80, 24, 166]`"]
     #[derive(
         Clone,
@@ -587,7 +566,7 @@ mod signaturebridgecontract_mod {
     )]
     #[ethcall(name = "renounceOwnership", abi = "renounceOwnership()")]
     pub struct RenounceOwnershipCall;
-    #[doc = "Container type for all input parameters for the `transferOwnership`function with signature `transferOwnership(address,uint32)` and selector `[166, 233, 76, 145]`"]
+    #[doc = "Container type for all input parameters for the `transferOwnership`function with signature `transferOwnership(address)` and selector `[242, 253, 227, 139]`"]
     #[derive(
         Clone,
         Debug,
@@ -597,15 +576,11 @@ mod signaturebridgecontract_mod {
         ethers :: contract :: EthCall,
         ethers :: contract :: EthDisplay,
     )]
-    #[ethcall(
-        name = "transferOwnership",
-        abi = "transferOwnership(address,uint32)"
-    )]
+    #[ethcall(name = "transferOwnership", abi = "transferOwnership(address)")]
     pub struct TransferOwnershipCall {
         pub new_owner: ethers::core::types::Address,
-        pub nonce: u32,
     }
-    #[doc = "Container type for all input parameters for the `transferOwnershipWithSignature`function with signature `transferOwnershipWithSignature(address,uint32,bytes)` and selector `[145, 16, 5, 231]`"]
+    #[doc = "Container type for all input parameters for the `transferOwnershipWithSignature`function with signature `transferOwnershipWithSignature(address,bytes)` and selector `[11, 247, 17, 117]`"]
     #[derive(
         Clone,
         Debug,
@@ -617,14 +592,13 @@ mod signaturebridgecontract_mod {
     )]
     #[ethcall(
         name = "transferOwnershipWithSignature",
-        abi = "transferOwnershipWithSignature(address,uint32,bytes)"
+        abi = "transferOwnershipWithSignature(address,bytes)"
     )]
     pub struct TransferOwnershipWithSignatureCall {
         pub new_owner: ethers::core::types::Address,
-        pub nonce: u32,
         pub sig: ethers::core::types::Bytes,
     }
-    #[doc = "Container type for all input parameters for the `transferOwnershipWithSignaturePubKey`function with signature `transferOwnershipWithSignaturePubKey(bytes,uint32,bytes)` and selector `[114, 150, 181, 216]`"]
+    #[doc = "Container type for all input parameters for the `transferOwnershipWithSignaturePubKey`function with signature `transferOwnershipWithSignaturePubKey(bytes,bytes)` and selector `[106, 202, 27, 227]`"]
     #[derive(
         Clone,
         Debug,
@@ -636,11 +610,10 @@ mod signaturebridgecontract_mod {
     )]
     #[ethcall(
         name = "transferOwnershipWithSignaturePubKey",
-        abi = "transferOwnershipWithSignaturePubKey(bytes,uint32,bytes)"
+        abi = "transferOwnershipWithSignaturePubKey(bytes,bytes)"
     )]
     pub struct TransferOwnershipWithSignaturePubKeyCall {
         pub public_key: ethers::core::types::Bytes,
-        pub nonce: u32,
         pub sig: ethers::core::types::Bytes,
     }
     #[doc = "Container type for all input parameters for the `verify`function with signature `verify(bytes32,uint8,bytes32,bytes32)` and selector `[241, 131, 93, 183]`"]
@@ -674,7 +647,6 @@ mod signaturebridgecontract_mod {
         IsSignatureFromGovernor(IsSignatureFromGovernorCall),
         Paused(PausedCall),
         Recover(RecoverCall),
-        RefreshNonce(RefreshNonceCall),
         RenounceOwnership(RenounceOwnershipCall),
         TransferOwnership(TransferOwnershipCall),
         TransferOwnershipWithSignature(TransferOwnershipWithSignatureCall),
@@ -742,13 +714,6 @@ mod signaturebridgecontract_mod {
                 return Ok(SignatureBridgeContractCalls::Recover(decoded));
             }
             if let Ok(decoded) =
-                <RefreshNonceCall as ethers::core::abi::AbiDecode>::decode(
-                    data.as_ref(),
-                )
-            {
-                return Ok(SignatureBridgeContractCalls::RefreshNonce(decoded));
-            }
-            if let Ok(decoded) =
                 <RenounceOwnershipCall as ethers::core::abi::AbiDecode>::decode(
                     data.as_ref(),
                 )
@@ -780,12 +745,12 @@ mod signaturebridgecontract_mod {
     }
     impl ethers::core::abi::AbiEncode for SignatureBridgeContractCalls {
         fn encode(self) -> Vec<u8> {
-            match self { SignatureBridgeContractCalls :: Counts (element) => element . encode () , SignatureBridgeContractCalls :: ResourceIDToHandlerAddress (element) => element . encode () , SignatureBridgeContractCalls :: AdminMigrateBridgeWithSignature (element) => element . encode () , SignatureBridgeContractCalls :: AdminSetResourceWithSignature (element) => element . encode () , SignatureBridgeContractCalls :: CheckPubKey (element) => element . encode () , SignatureBridgeContractCalls :: ExecuteProposalWithSignature (element) => element . encode () , SignatureBridgeContractCalls :: GetChainId (element) => element . encode () , SignatureBridgeContractCalls :: Governor (element) => element . encode () , SignatureBridgeContractCalls :: IsGovernor (element) => element . encode () , SignatureBridgeContractCalls :: IsSignatureFromGovernor (element) => element . encode () , SignatureBridgeContractCalls :: Paused (element) => element . encode () , SignatureBridgeContractCalls :: Recover (element) => element . encode () , SignatureBridgeContractCalls :: RefreshNonce (element) => element . encode () , SignatureBridgeContractCalls :: RenounceOwnership (element) => element . encode () , SignatureBridgeContractCalls :: TransferOwnership (element) => element . encode () , SignatureBridgeContractCalls :: TransferOwnershipWithSignature (element) => element . encode () , SignatureBridgeContractCalls :: TransferOwnershipWithSignaturePubKey (element) => element . encode () , SignatureBridgeContractCalls :: Verify (element) => element . encode () }
+            match self { SignatureBridgeContractCalls :: Counts (element) => element . encode () , SignatureBridgeContractCalls :: ResourceIDToHandlerAddress (element) => element . encode () , SignatureBridgeContractCalls :: AdminMigrateBridgeWithSignature (element) => element . encode () , SignatureBridgeContractCalls :: AdminSetResourceWithSignature (element) => element . encode () , SignatureBridgeContractCalls :: CheckPubKey (element) => element . encode () , SignatureBridgeContractCalls :: ExecuteProposalWithSignature (element) => element . encode () , SignatureBridgeContractCalls :: GetChainId (element) => element . encode () , SignatureBridgeContractCalls :: Governor (element) => element . encode () , SignatureBridgeContractCalls :: IsGovernor (element) => element . encode () , SignatureBridgeContractCalls :: IsSignatureFromGovernor (element) => element . encode () , SignatureBridgeContractCalls :: Paused (element) => element . encode () , SignatureBridgeContractCalls :: Recover (element) => element . encode () , SignatureBridgeContractCalls :: RenounceOwnership (element) => element . encode () , SignatureBridgeContractCalls :: TransferOwnership (element) => element . encode () , SignatureBridgeContractCalls :: TransferOwnershipWithSignature (element) => element . encode () , SignatureBridgeContractCalls :: TransferOwnershipWithSignaturePubKey (element) => element . encode () , SignatureBridgeContractCalls :: Verify (element) => element . encode () }
         }
     }
     impl ::std::fmt::Display for SignatureBridgeContractCalls {
         fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
-            match self { SignatureBridgeContractCalls :: Counts (element) => element . fmt (f) , SignatureBridgeContractCalls :: ResourceIDToHandlerAddress (element) => element . fmt (f) , SignatureBridgeContractCalls :: AdminMigrateBridgeWithSignature (element) => element . fmt (f) , SignatureBridgeContractCalls :: AdminSetResourceWithSignature (element) => element . fmt (f) , SignatureBridgeContractCalls :: CheckPubKey (element) => element . fmt (f) , SignatureBridgeContractCalls :: ExecuteProposalWithSignature (element) => element . fmt (f) , SignatureBridgeContractCalls :: GetChainId (element) => element . fmt (f) , SignatureBridgeContractCalls :: Governor (element) => element . fmt (f) , SignatureBridgeContractCalls :: IsGovernor (element) => element . fmt (f) , SignatureBridgeContractCalls :: IsSignatureFromGovernor (element) => element . fmt (f) , SignatureBridgeContractCalls :: Paused (element) => element . fmt (f) , SignatureBridgeContractCalls :: Recover (element) => element . fmt (f) , SignatureBridgeContractCalls :: RefreshNonce (element) => element . fmt (f) , SignatureBridgeContractCalls :: RenounceOwnership (element) => element . fmt (f) , SignatureBridgeContractCalls :: TransferOwnership (element) => element . fmt (f) , SignatureBridgeContractCalls :: TransferOwnershipWithSignature (element) => element . fmt (f) , SignatureBridgeContractCalls :: TransferOwnershipWithSignaturePubKey (element) => element . fmt (f) , SignatureBridgeContractCalls :: Verify (element) => element . fmt (f) }
+            match self { SignatureBridgeContractCalls :: Counts (element) => element . fmt (f) , SignatureBridgeContractCalls :: ResourceIDToHandlerAddress (element) => element . fmt (f) , SignatureBridgeContractCalls :: AdminMigrateBridgeWithSignature (element) => element . fmt (f) , SignatureBridgeContractCalls :: AdminSetResourceWithSignature (element) => element . fmt (f) , SignatureBridgeContractCalls :: CheckPubKey (element) => element . fmt (f) , SignatureBridgeContractCalls :: ExecuteProposalWithSignature (element) => element . fmt (f) , SignatureBridgeContractCalls :: GetChainId (element) => element . fmt (f) , SignatureBridgeContractCalls :: Governor (element) => element . fmt (f) , SignatureBridgeContractCalls :: IsGovernor (element) => element . fmt (f) , SignatureBridgeContractCalls :: IsSignatureFromGovernor (element) => element . fmt (f) , SignatureBridgeContractCalls :: Paused (element) => element . fmt (f) , SignatureBridgeContractCalls :: Recover (element) => element . fmt (f) , SignatureBridgeContractCalls :: RenounceOwnership (element) => element . fmt (f) , SignatureBridgeContractCalls :: TransferOwnership (element) => element . fmt (f) , SignatureBridgeContractCalls :: TransferOwnershipWithSignature (element) => element . fmt (f) , SignatureBridgeContractCalls :: TransferOwnershipWithSignaturePubKey (element) => element . fmt (f) , SignatureBridgeContractCalls :: Verify (element) => element . fmt (f) }
         }
     }
     impl ::std::convert::From<CountsCall> for SignatureBridgeContractCalls {
@@ -856,11 +821,6 @@ mod signaturebridgecontract_mod {
     impl ::std::convert::From<RecoverCall> for SignatureBridgeContractCalls {
         fn from(var: RecoverCall) -> Self {
             SignatureBridgeContractCalls::Recover(var)
-        }
-    }
-    impl ::std::convert::From<RefreshNonceCall> for SignatureBridgeContractCalls {
-        fn from(var: RefreshNonceCall) -> Self {
-            SignatureBridgeContractCalls::RefreshNonce(var)
         }
     }
     impl ::std::convert::From<RenounceOwnershipCall>
