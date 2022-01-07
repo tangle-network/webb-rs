@@ -5,31 +5,31 @@ mod fixeddepositanchorcontract_mod {
     #![allow(dead_code)]
     #![allow(clippy::type_complexity)]
     #![allow(unused_imports)]
-    use ethers::contract::{
+    use ethers_contract::{
         builders::{ContractCall, Event},
         Contract, Lazy,
     };
-    use ethers::core::{
+    use ethers_core::{
         abi::{Abi, Detokenize, InvalidOutputType, Token, Tokenizable},
         types::*,
     };
-    use ethers::providers::Middleware;
+    use ethers_providers::Middleware;
     #[doc = "FixedDepositAnchorContract was auto-generated with ethers-rs Abigen. More information at: https://github.com/gakonst/ethers-rs"]
     use std::sync::Arc;
-    pub static FIXEDDEPOSITANCHORCONTRACT_ABI: ethers::contract::Lazy<
-        ethers::core::abi::Abi,
-    > = ethers::contract::Lazy::new(|| {
-        serde_json :: from_str ("[{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_handler\",\"type\":\"address\"},{\"internalType\":\"contract ITokenWrapper\",\"name\":\"_token\",\"type\":\"address\"},{\"internalType\":\"contract IAnchorVerifier\",\"name\":\"_verifier\",\"type\":\"address\"},{\"internalType\":\"contract IPoseidonT3\",\"name\":\"_hasher\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"_denomination\",\"type\":\"uint256\"},{\"internalType\":\"uint32\",\"name\":\"_merkleTreeHeight\",\"type\":\"uint32\"},{\"internalType\":\"uint8\",\"name\":\"_maxEdges\",\"type\":\"uint8\"}],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"sender\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"uint32\",\"name\":\"leafIndex\",\"type\":\"uint32\"},{\"indexed\":true,\"internalType\":\"bytes32\",\"name\":\"commitment\",\"type\":\"bytes32\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"timestamp\",\"type\":\"uint256\"}],\"name\":\"Deposit\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"chainID\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"latestLeafIndex\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"bytes32\",\"name\":\"merkleRoot\",\"type\":\"bytes32\"}],\"name\":\"EdgeAddition\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"chainID\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"latestLeafIndex\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"bytes32\",\"name\":\"merkleRoot\",\"type\":\"bytes32\"}],\"name\":\"EdgeUpdate\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"bytes32\",\"name\":\"commitment\",\"type\":\"bytes32\"},{\"indexed\":false,\"internalType\":\"uint32\",\"name\":\"leafIndex\",\"type\":\"uint32\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"timestamp\",\"type\":\"uint256\"}],\"name\":\"Insertion\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"bytes32\",\"name\":\"commitment\",\"type\":\"bytes32\"},{\"indexed\":false,\"internalType\":\"bytes32\",\"name\":\"nullifierHash\",\"type\":\"bytes32\"},{\"indexed\":false,\"internalType\":\"uint32\",\"name\":\"insertedIndex\",\"type\":\"uint32\"}],\"name\":\"Refresh\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"relayer\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"fee\",\"type\":\"uint256\"}],\"name\":\"Withdrawal\",\"type\":\"event\"},{\"inputs\":[],\"name\":\"FIELD_SIZE\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"ROOT_HISTORY_SIZE\",\"outputs\":[{\"internalType\":\"uint32\",\"name\":\"\",\"type\":\"uint32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"ZERO_VALUE\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"name\":\"commitments\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"name\":\"currentNeighborRootIndex\",\"outputs\":[{\"internalType\":\"uint32\",\"name\":\"\",\"type\":\"uint32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"currentRootIndex\",\"outputs\":[{\"internalType\":\"uint32\",\"name\":\"\",\"type\":\"uint32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"denomination\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"_commitment\",\"type\":\"bytes32\"}],\"name\":\"deposit\",\"outputs\":[],\"stateMutability\":\"payable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"name\":\"edgeExistsForChain\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"name\":\"edgeIndex\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"name\":\"edgeList\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"chainID\",\"type\":\"uint256\"},{\"internalType\":\"bytes32\",\"name\":\"root\",\"type\":\"bytes32\"},{\"internalType\":\"uint256\",\"name\":\"latestLeafIndex\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"name\":\"filledSubtrees\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getChainId\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getDenomination\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getLastRoot\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getLatestNeighborEdges\",\"outputs\":[{\"components\":[{\"internalType\":\"uint256\",\"name\":\"chainID\",\"type\":\"uint256\"},{\"internalType\":\"bytes32\",\"name\":\"root\",\"type\":\"bytes32\"},{\"internalType\":\"uint256\",\"name\":\"latestLeafIndex\",\"type\":\"uint256\"}],\"internalType\":\"struct LinkableTree.Edge[]\",\"name\":\"edges\",\"type\":\"tuple[]\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getLatestNeighborRoots\",\"outputs\":[{\"internalType\":\"bytes32[]\",\"name\":\"roots\",\"type\":\"bytes32[]\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getProposalNonce\",\"outputs\":[{\"internalType\":\"uint32\",\"name\":\"\",\"type\":\"uint32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getToken\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"handler\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_chainID\",\"type\":\"uint256\"}],\"name\":\"hasEdge\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"contract IPoseidonT3\",\"name\":\"_hasher\",\"type\":\"address\"},{\"internalType\":\"bytes32\",\"name\":\"_left\",\"type\":\"bytes32\"},{\"internalType\":\"bytes32\",\"name\":\"_right\",\"type\":\"bytes32\"}],\"name\":\"hashLeftRight\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"stateMutability\":\"pure\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"hasher\",\"outputs\":[{\"internalType\":\"contract IPoseidonT3\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"neighborChainID\",\"type\":\"uint256\"},{\"internalType\":\"bytes32\",\"name\":\"_root\",\"type\":\"bytes32\"}],\"name\":\"isKnownNeighborRoot\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"_root\",\"type\":\"bytes32\"}],\"name\":\"isKnownRoot\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"_nullifierHash\",\"type\":\"bytes32\"}],\"name\":\"isSpent\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32[]\",\"name\":\"_nullifierHashes\",\"type\":\"bytes32[]\"}],\"name\":\"isSpentArray\",\"outputs\":[{\"internalType\":\"bool[]\",\"name\":\"spent\",\"type\":\"bool[]\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32[]\",\"name\":\"roots\",\"type\":\"bytes32[]\"}],\"name\":\"isValidRoots\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"levels\",\"outputs\":[{\"internalType\":\"uint32\",\"name\":\"\",\"type\":\"uint32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"maxEdges\",\"outputs\":[{\"internalType\":\"uint8\",\"name\":\"\",\"type\":\"uint8\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"},{\"internalType\":\"uint32\",\"name\":\"\",\"type\":\"uint32\"}],\"name\":\"neighborRoots\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"nextIndex\",\"outputs\":[{\"internalType\":\"uint32\",\"name\":\"\",\"type\":\"uint32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"name\":\"nullifierHashes\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"name\":\"roots\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"newHandler\",\"type\":\"address\"},{\"internalType\":\"uint32\",\"name\":\"nonce\",\"type\":\"uint32\"}],\"name\":\"setHandler\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"newVerifier\",\"type\":\"address\"}],\"name\":\"setVerifier\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"token\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256[8]\",\"name\":\"_proof\",\"type\":\"uint256[8]\"}],\"name\":\"unpackProof\",\"outputs\":[{\"internalType\":\"uint256[2]\",\"name\":\"\",\"type\":\"uint256[2]\"},{\"internalType\":\"uint256[2][2]\",\"name\":\"\",\"type\":\"uint256[2][2]\"},{\"internalType\":\"uint256[2]\",\"name\":\"\",\"type\":\"uint256[2]\"}],\"stateMutability\":\"pure\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"tokenAddress\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"unwrapIntoNative\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"tokenAddress\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"unwrapIntoToken\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"sourceChainID\",\"type\":\"uint256\"},{\"internalType\":\"bytes32\",\"name\":\"root\",\"type\":\"bytes32\"},{\"internalType\":\"uint256\",\"name\":\"leafIndex\",\"type\":\"uint256\"}],\"name\":\"updateEdge\",\"outputs\":[],\"stateMutability\":\"payable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"verifier\",\"outputs\":[{\"internalType\":\"contract IAnchorVerifier\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes\",\"name\":\"_proof\",\"type\":\"bytes\"},{\"components\":[{\"internalType\":\"bytes\",\"name\":\"_roots\",\"type\":\"bytes\"},{\"internalType\":\"bytes32\",\"name\":\"_nullifierHash\",\"type\":\"bytes32\"},{\"internalType\":\"bytes32\",\"name\":\"_refreshCommitment\",\"type\":\"bytes32\"},{\"internalType\":\"address payable\",\"name\":\"_recipient\",\"type\":\"address\"},{\"internalType\":\"address payable\",\"name\":\"_relayer\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"_fee\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"_refund\",\"type\":\"uint256\"}],\"internalType\":\"struct IFixedDepositAnchor.PublicInputs\",\"name\":\"_publicInputs\",\"type\":\"tuple\"}],\"name\":\"withdraw\",\"outputs\":[],\"stateMutability\":\"payable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes\",\"name\":\"_proof\",\"type\":\"bytes\"},{\"components\":[{\"internalType\":\"bytes\",\"name\":\"_roots\",\"type\":\"bytes\"},{\"internalType\":\"bytes32\",\"name\":\"_nullifierHash\",\"type\":\"bytes32\"},{\"internalType\":\"bytes32\",\"name\":\"_refreshCommitment\",\"type\":\"bytes32\"},{\"internalType\":\"address payable\",\"name\":\"_recipient\",\"type\":\"address\"},{\"internalType\":\"address payable\",\"name\":\"_relayer\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"_fee\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"_refund\",\"type\":\"uint256\"}],\"internalType\":\"struct IFixedDepositAnchor.PublicInputs\",\"name\":\"_publicInputs\",\"type\":\"tuple\"},{\"internalType\":\"address\",\"name\":\"tokenAddress\",\"type\":\"address\"}],\"name\":\"withdrawAndUnwrap\",\"outputs\":[],\"stateMutability\":\"payable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"tokenAddress\",\"type\":\"address\"},{\"internalType\":\"bytes32\",\"name\":\"_commitment\",\"type\":\"bytes32\"}],\"name\":\"wrapAndDeposit\",\"outputs\":[],\"stateMutability\":\"payable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"wrapNative\",\"outputs\":[],\"stateMutability\":\"payable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"tokenAddress\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"wrapToken\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"i\",\"type\":\"uint256\"}],\"name\":\"zeros\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"stateMutability\":\"pure\",\"type\":\"function\"}]") . expect ("invalid abi")
+    pub static FIXEDDEPOSITANCHORCONTRACT_ABI: ethers_contract::Lazy<
+        ethers_core::abi::Abi,
+    > = ethers_contract::Lazy::new(|| {
+        serde_json :: from_str ("[{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_handler\",\"type\":\"address\"},{\"internalType\":\"contract ITokenWrapper\",\"name\":\"_token\",\"type\":\"address\"},{\"internalType\":\"contract IAnchorVerifier\",\"name\":\"_verifier\",\"type\":\"address\"},{\"internalType\":\"contract IPoseidonT3\",\"name\":\"_hasher\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"_denomination\",\"type\":\"uint256\"},{\"internalType\":\"uint32\",\"name\":\"_merkleTreeHeight\",\"type\":\"uint32\"},{\"internalType\":\"uint8\",\"name\":\"_maxEdges\",\"type\":\"uint8\"}],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"sender\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"uint32\",\"name\":\"leafIndex\",\"type\":\"uint32\"},{\"indexed\":true,\"internalType\":\"bytes32\",\"name\":\"commitment\",\"type\":\"bytes32\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"timestamp\",\"type\":\"uint256\"}],\"name\":\"Deposit\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"chainID\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"latestLeafIndex\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"bytes32\",\"name\":\"merkleRoot\",\"type\":\"bytes32\"}],\"name\":\"EdgeAddition\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"chainID\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"latestLeafIndex\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"bytes32\",\"name\":\"merkleRoot\",\"type\":\"bytes32\"}],\"name\":\"EdgeUpdate\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"bytes32\",\"name\":\"commitment\",\"type\":\"bytes32\"},{\"indexed\":false,\"internalType\":\"uint32\",\"name\":\"leafIndex\",\"type\":\"uint32\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"timestamp\",\"type\":\"uint256\"}],\"name\":\"Insertion\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"bytes32\",\"name\":\"commitment\",\"type\":\"bytes32\"},{\"indexed\":false,\"internalType\":\"bytes32\",\"name\":\"nullifierHash\",\"type\":\"bytes32\"},{\"indexed\":false,\"internalType\":\"uint32\",\"name\":\"insertedIndex\",\"type\":\"uint32\"}],\"name\":\"Refresh\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"relayer\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"fee\",\"type\":\"uint256\"}],\"name\":\"Withdrawal\",\"type\":\"event\"},{\"inputs\":[],\"name\":\"FIELD_SIZE\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"ROOT_HISTORY_SIZE\",\"outputs\":[{\"internalType\":\"uint32\",\"name\":\"\",\"type\":\"uint32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"ZERO_VALUE\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"name\":\"commitments\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"name\":\"currentNeighborRootIndex\",\"outputs\":[{\"internalType\":\"uint32\",\"name\":\"\",\"type\":\"uint32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"currentRootIndex\",\"outputs\":[{\"internalType\":\"uint32\",\"name\":\"\",\"type\":\"uint32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"denomination\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"_commitment\",\"type\":\"bytes32\"}],\"name\":\"deposit\",\"outputs\":[],\"stateMutability\":\"payable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"name\":\"edgeExistsForChain\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"name\":\"edgeIndex\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"name\":\"edgeList\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"chainID\",\"type\":\"uint256\"},{\"internalType\":\"bytes32\",\"name\":\"root\",\"type\":\"bytes32\"},{\"internalType\":\"uint256\",\"name\":\"latestLeafIndex\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"name\":\"filledSubtrees\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getChainId\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getDenomination\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getLastRoot\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getLatestNeighborEdges\",\"outputs\":[{\"components\":[{\"internalType\":\"uint256\",\"name\":\"chainID\",\"type\":\"uint256\"},{\"internalType\":\"bytes32\",\"name\":\"root\",\"type\":\"bytes32\"},{\"internalType\":\"uint256\",\"name\":\"latestLeafIndex\",\"type\":\"uint256\"}],\"internalType\":\"struct LinkableTree.Edge[]\",\"name\":\"edges\",\"type\":\"tuple[]\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getLatestNeighborRoots\",\"outputs\":[{\"internalType\":\"bytes32[]\",\"name\":\"roots\",\"type\":\"bytes32[]\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getProposalNonce\",\"outputs\":[{\"internalType\":\"uint32\",\"name\":\"\",\"type\":\"uint32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getToken\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"handler\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_chainID\",\"type\":\"uint256\"}],\"name\":\"hasEdge\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"contract IPoseidonT3\",\"name\":\"_hasher\",\"type\":\"address\"},{\"internalType\":\"bytes32\",\"name\":\"_left\",\"type\":\"bytes32\"},{\"internalType\":\"bytes32\",\"name\":\"_right\",\"type\":\"bytes32\"}],\"name\":\"hashLeftRight\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"stateMutability\":\"pure\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"hasher\",\"outputs\":[{\"internalType\":\"contract IPoseidonT3\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"neighborChainID\",\"type\":\"uint256\"},{\"internalType\":\"bytes32\",\"name\":\"_root\",\"type\":\"bytes32\"}],\"name\":\"isKnownNeighborRoot\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"_root\",\"type\":\"bytes32\"}],\"name\":\"isKnownRoot\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"_nullifierHash\",\"type\":\"bytes32\"}],\"name\":\"isSpent\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32[]\",\"name\":\"_nullifierHashes\",\"type\":\"bytes32[]\"}],\"name\":\"isSpentArray\",\"outputs\":[{\"internalType\":\"bool[]\",\"name\":\"spent\",\"type\":\"bool[]\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32[]\",\"name\":\"roots\",\"type\":\"bytes32[]\"}],\"name\":\"isValidRoots\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"levels\",\"outputs\":[{\"internalType\":\"uint32\",\"name\":\"\",\"type\":\"uint32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"maxEdges\",\"outputs\":[{\"internalType\":\"uint8\",\"name\":\"\",\"type\":\"uint8\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"},{\"internalType\":\"uint32\",\"name\":\"\",\"type\":\"uint32\"}],\"name\":\"neighborRoots\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"nextIndex\",\"outputs\":[{\"internalType\":\"uint32\",\"name\":\"\",\"type\":\"uint32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"name\":\"nullifierHashes\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"name\":\"roots\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"newHandler\",\"type\":\"address\"},{\"internalType\":\"uint32\",\"name\":\"nonce\",\"type\":\"uint32\"}],\"name\":\"setHandler\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"newVerifier\",\"type\":\"address\"},{\"internalType\":\"uint32\",\"name\":\"nonce\",\"type\":\"uint32\"}],\"name\":\"setVerifier\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"token\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256[8]\",\"name\":\"_proof\",\"type\":\"uint256[8]\"}],\"name\":\"unpackProof\",\"outputs\":[{\"internalType\":\"uint256[2]\",\"name\":\"\",\"type\":\"uint256[2]\"},{\"internalType\":\"uint256[2][2]\",\"name\":\"\",\"type\":\"uint256[2][2]\"},{\"internalType\":\"uint256[2]\",\"name\":\"\",\"type\":\"uint256[2]\"}],\"stateMutability\":\"pure\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"tokenAddress\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"unwrapIntoNative\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"tokenAddress\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"unwrapIntoToken\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"sourceChainID\",\"type\":\"uint256\"},{\"internalType\":\"bytes32\",\"name\":\"root\",\"type\":\"bytes32\"},{\"internalType\":\"uint256\",\"name\":\"leafIndex\",\"type\":\"uint256\"}],\"name\":\"updateEdge\",\"outputs\":[],\"stateMutability\":\"payable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"verifier\",\"outputs\":[{\"internalType\":\"contract IAnchorVerifier\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes\",\"name\":\"_proof\",\"type\":\"bytes\"},{\"components\":[{\"internalType\":\"bytes\",\"name\":\"_roots\",\"type\":\"bytes\"},{\"internalType\":\"bytes32\",\"name\":\"_nullifierHash\",\"type\":\"bytes32\"},{\"internalType\":\"bytes32\",\"name\":\"_refreshCommitment\",\"type\":\"bytes32\"},{\"internalType\":\"address payable\",\"name\":\"_recipient\",\"type\":\"address\"},{\"internalType\":\"address payable\",\"name\":\"_relayer\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"_fee\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"_refund\",\"type\":\"uint256\"}],\"internalType\":\"struct IFixedDepositAnchor.PublicInputs\",\"name\":\"_publicInputs\",\"type\":\"tuple\"}],\"name\":\"withdraw\",\"outputs\":[],\"stateMutability\":\"payable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes\",\"name\":\"_proof\",\"type\":\"bytes\"},{\"components\":[{\"internalType\":\"bytes\",\"name\":\"_roots\",\"type\":\"bytes\"},{\"internalType\":\"bytes32\",\"name\":\"_nullifierHash\",\"type\":\"bytes32\"},{\"internalType\":\"bytes32\",\"name\":\"_refreshCommitment\",\"type\":\"bytes32\"},{\"internalType\":\"address payable\",\"name\":\"_recipient\",\"type\":\"address\"},{\"internalType\":\"address payable\",\"name\":\"_relayer\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"_fee\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"_refund\",\"type\":\"uint256\"}],\"internalType\":\"struct IFixedDepositAnchor.PublicInputs\",\"name\":\"_publicInputs\",\"type\":\"tuple\"},{\"internalType\":\"address\",\"name\":\"tokenAddress\",\"type\":\"address\"}],\"name\":\"withdrawAndUnwrap\",\"outputs\":[],\"stateMutability\":\"payable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"tokenAddress\",\"type\":\"address\"},{\"internalType\":\"bytes32\",\"name\":\"_commitment\",\"type\":\"bytes32\"}],\"name\":\"wrapAndDeposit\",\"outputs\":[],\"stateMutability\":\"payable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"wrapNative\",\"outputs\":[],\"stateMutability\":\"payable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"tokenAddress\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"wrapToken\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"i\",\"type\":\"uint256\"}],\"name\":\"zeros\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"stateMutability\":\"pure\",\"type\":\"function\"}]") . expect ("invalid abi")
     });
     #[derive(Clone)]
-    pub struct FixedDepositAnchorContract<M>(ethers::contract::Contract<M>);
+    pub struct FixedDepositAnchorContract<M>(ethers_contract::Contract<M>);
     impl<M> std::ops::Deref for FixedDepositAnchorContract<M> {
-        type Target = ethers::contract::Contract<M>;
+        type Target = ethers_contract::Contract<M>;
         fn deref(&self) -> &Self::Target {
             &self.0
         }
     }
-    impl<M: ethers::providers::Middleware> std::fmt::Debug
+    impl<M: ethers_providers::Middleware> std::fmt::Debug
         for FixedDepositAnchorContract<M>
     {
         fn fmt(&self, f: &mut std::fmt::Formatter) -> std::fmt::Result {
@@ -38,15 +38,15 @@ mod fixeddepositanchorcontract_mod {
                 .finish()
         }
     }
-    impl<'a, M: ethers::providers::Middleware> FixedDepositAnchorContract<M> {
+    impl<'a, M: ethers_providers::Middleware> FixedDepositAnchorContract<M> {
         #[doc = r" Creates a new contract instance with the specified `ethers`"]
         #[doc = r" client at the given `Address`. The contract derefs to a `ethers::Contract`"]
         #[doc = r" object"]
-        pub fn new<T: Into<ethers::core::types::Address>>(
+        pub fn new<T: Into<ethers_core::types::Address>>(
             address: T,
             client: ::std::sync::Arc<M>,
         ) -> Self {
-            let contract = ethers::contract::Contract::new(
+            let contract = ethers_contract::Contract::new(
                 address.into(),
                 FIXEDDEPOSITANCHORCONTRACT_ABI.clone(),
                 client,
@@ -56,10 +56,8 @@ mod fixeddepositanchorcontract_mod {
         #[doc = "Calls the contract's `FIELD_SIZE` (0x414a37ba) function"]
         pub fn field_size(
             &self,
-        ) -> ethers::contract::builders::ContractCall<
-            M,
-            ethers::core::types::U256,
-        > {
+        ) -> ethers_contract::builders::ContractCall<M, ethers_core::types::U256>
+        {
             self.0
                 .method_hash([65, 74, 55, 186], ())
                 .expect("method not found (this should never happen)")
@@ -67,7 +65,7 @@ mod fixeddepositanchorcontract_mod {
         #[doc = "Calls the contract's `ROOT_HISTORY_SIZE` (0xcd87a3b4) function"]
         pub fn root_history_size(
             &self,
-        ) -> ethers::contract::builders::ContractCall<M, u32> {
+        ) -> ethers_contract::builders::ContractCall<M, u32> {
             self.0
                 .method_hash([205, 135, 163, 180], ())
                 .expect("method not found (this should never happen)")
@@ -75,10 +73,8 @@ mod fixeddepositanchorcontract_mod {
         #[doc = "Calls the contract's `ZERO_VALUE` (0xec732959) function"]
         pub fn zero_value(
             &self,
-        ) -> ethers::contract::builders::ContractCall<
-            M,
-            ethers::core::types::U256,
-        > {
+        ) -> ethers_contract::builders::ContractCall<M, ethers_core::types::U256>
+        {
             self.0
                 .method_hash([236, 115, 41, 89], ())
                 .expect("method not found (this should never happen)")
@@ -87,7 +83,7 @@ mod fixeddepositanchorcontract_mod {
         pub fn commitments(
             &self,
             p0: [u8; 32],
-        ) -> ethers::contract::builders::ContractCall<M, bool> {
+        ) -> ethers_contract::builders::ContractCall<M, bool> {
             self.0
                 .method_hash([131, 157, 249, 69], p0)
                 .expect("method not found (this should never happen)")
@@ -95,8 +91,8 @@ mod fixeddepositanchorcontract_mod {
         #[doc = "Calls the contract's `currentNeighborRootIndex` (0x5d2d766c) function"]
         pub fn current_neighbor_root_index(
             &self,
-            p0: ethers::core::types::U256,
-        ) -> ethers::contract::builders::ContractCall<M, u32> {
+            p0: ethers_core::types::U256,
+        ) -> ethers_contract::builders::ContractCall<M, u32> {
             self.0
                 .method_hash([93, 45, 118, 108], p0)
                 .expect("method not found (this should never happen)")
@@ -104,7 +100,7 @@ mod fixeddepositanchorcontract_mod {
         #[doc = "Calls the contract's `currentRootIndex` (0x90eeb02b) function"]
         pub fn current_root_index(
             &self,
-        ) -> ethers::contract::builders::ContractCall<M, u32> {
+        ) -> ethers_contract::builders::ContractCall<M, u32> {
             self.0
                 .method_hash([144, 238, 176, 43], ())
                 .expect("method not found (this should never happen)")
@@ -112,10 +108,8 @@ mod fixeddepositanchorcontract_mod {
         #[doc = "Calls the contract's `denomination` (0x8bca6d16) function"]
         pub fn denomination(
             &self,
-        ) -> ethers::contract::builders::ContractCall<
-            M,
-            ethers::core::types::U256,
-        > {
+        ) -> ethers_contract::builders::ContractCall<M, ethers_core::types::U256>
+        {
             self.0
                 .method_hash([139, 202, 109, 22], ())
                 .expect("method not found (this should never happen)")
@@ -124,7 +118,7 @@ mod fixeddepositanchorcontract_mod {
         pub fn deposit(
             &self,
             commitment: [u8; 32],
-        ) -> ethers::contract::builders::ContractCall<M, ()> {
+        ) -> ethers_contract::builders::ContractCall<M, ()> {
             self.0
                 .method_hash([178, 20, 250, 165], commitment)
                 .expect("method not found (this should never happen)")
@@ -132,8 +126,8 @@ mod fixeddepositanchorcontract_mod {
         #[doc = "Calls the contract's `edgeExistsForChain` (0xfa731687) function"]
         pub fn edge_exists_for_chain(
             &self,
-            p0: ethers::core::types::U256,
-        ) -> ethers::contract::builders::ContractCall<M, bool> {
+            p0: ethers_core::types::U256,
+        ) -> ethers_contract::builders::ContractCall<M, bool> {
             self.0
                 .method_hash([250, 115, 22, 135], p0)
                 .expect("method not found (this should never happen)")
@@ -141,11 +135,9 @@ mod fixeddepositanchorcontract_mod {
         #[doc = "Calls the contract's `edgeIndex` (0xe70ea87c) function"]
         pub fn edge_index(
             &self,
-            p0: ethers::core::types::U256,
-        ) -> ethers::contract::builders::ContractCall<
-            M,
-            ethers::core::types::U256,
-        > {
+            p0: ethers_core::types::U256,
+        ) -> ethers_contract::builders::ContractCall<M, ethers_core::types::U256>
+        {
             self.0
                 .method_hash([231, 14, 168, 124], p0)
                 .expect("method not found (this should never happen)")
@@ -153,14 +145,10 @@ mod fixeddepositanchorcontract_mod {
         #[doc = "Calls the contract's `edgeList` (0xdbc916b8) function"]
         pub fn edge_list(
             &self,
-            p0: ethers::core::types::U256,
-        ) -> ethers::contract::builders::ContractCall<
+            p0: ethers_core::types::U256,
+        ) -> ethers_contract::builders::ContractCall<
             M,
-            (
-                ethers::core::types::U256,
-                [u8; 32],
-                ethers::core::types::U256,
-            ),
+            (ethers_core::types::U256, [u8; 32], ethers_core::types::U256),
         > {
             self.0
                 .method_hash([219, 201, 22, 184], p0)
@@ -169,8 +157,8 @@ mod fixeddepositanchorcontract_mod {
         #[doc = "Calls the contract's `filledSubtrees` (0xf178e47c) function"]
         pub fn filled_subtrees(
             &self,
-            p0: ethers::core::types::U256,
-        ) -> ethers::contract::builders::ContractCall<M, [u8; 32]> {
+            p0: ethers_core::types::U256,
+        ) -> ethers_contract::builders::ContractCall<M, [u8; 32]> {
             self.0
                 .method_hash([241, 120, 228, 124], p0)
                 .expect("method not found (this should never happen)")
@@ -178,10 +166,8 @@ mod fixeddepositanchorcontract_mod {
         #[doc = "Calls the contract's `getChainId` (0x3408e470) function"]
         pub fn get_chain_id(
             &self,
-        ) -> ethers::contract::builders::ContractCall<
-            M,
-            ethers::core::types::U256,
-        > {
+        ) -> ethers_contract::builders::ContractCall<M, ethers_core::types::U256>
+        {
             self.0
                 .method_hash([52, 8, 228, 112], ())
                 .expect("method not found (this should never happen)")
@@ -189,10 +175,8 @@ mod fixeddepositanchorcontract_mod {
         #[doc = "Calls the contract's `getDenomination` (0x1fc601c9) function"]
         pub fn get_denomination(
             &self,
-        ) -> ethers::contract::builders::ContractCall<
-            M,
-            ethers::core::types::U256,
-        > {
+        ) -> ethers_contract::builders::ContractCall<M, ethers_core::types::U256>
+        {
             self.0
                 .method_hash([31, 198, 1, 201], ())
                 .expect("method not found (this should never happen)")
@@ -200,7 +184,7 @@ mod fixeddepositanchorcontract_mod {
         #[doc = "Calls the contract's `getLastRoot` (0xba70f757) function"]
         pub fn get_last_root(
             &self,
-        ) -> ethers::contract::builders::ContractCall<M, [u8; 32]> {
+        ) -> ethers_contract::builders::ContractCall<M, [u8; 32]> {
             self.0
                 .method_hash([186, 112, 247, 87], ())
                 .expect("method not found (this should never happen)")
@@ -208,7 +192,7 @@ mod fixeddepositanchorcontract_mod {
         #[doc = "Calls the contract's `getLatestNeighborEdges` (0x8c0d34d8) function"]
         pub fn get_latest_neighbor_edges(
             &self,
-        ) -> ethers::contract::builders::ContractCall<M, ::std::vec::Vec<Edge>>
+        ) -> ethers_contract::builders::ContractCall<M, ::std::vec::Vec<Edge>>
         {
             self.0
                 .method_hash([140, 13, 52, 216], ())
@@ -217,10 +201,8 @@ mod fixeddepositanchorcontract_mod {
         #[doc = "Calls the contract's `getLatestNeighborRoots` (0x1e627617) function"]
         pub fn get_latest_neighbor_roots(
             &self,
-        ) -> ethers::contract::builders::ContractCall<
-            M,
-            ::std::vec::Vec<[u8; 32]>,
-        > {
+        ) -> ethers_contract::builders::ContractCall<M, ::std::vec::Vec<[u8; 32]>>
+        {
             self.0
                 .method_hash([30, 98, 118, 23], ())
                 .expect("method not found (this should never happen)")
@@ -228,7 +210,7 @@ mod fixeddepositanchorcontract_mod {
         #[doc = "Calls the contract's `getProposalNonce` (0x0b27fb9a) function"]
         pub fn get_proposal_nonce(
             &self,
-        ) -> ethers::contract::builders::ContractCall<M, u32> {
+        ) -> ethers_contract::builders::ContractCall<M, u32> {
             self.0
                 .method_hash([11, 39, 251, 154], ())
                 .expect("method not found (this should never happen)")
@@ -236,9 +218,9 @@ mod fixeddepositanchorcontract_mod {
         #[doc = "Calls the contract's `getToken` (0x21df0da7) function"]
         pub fn get_token(
             &self,
-        ) -> ethers::contract::builders::ContractCall<
+        ) -> ethers_contract::builders::ContractCall<
             M,
-            ethers::core::types::Address,
+            ethers_core::types::Address,
         > {
             self.0
                 .method_hash([33, 223, 13, 167], ())
@@ -247,9 +229,9 @@ mod fixeddepositanchorcontract_mod {
         #[doc = "Calls the contract's `handler` (0xc80916d4) function"]
         pub fn handler(
             &self,
-        ) -> ethers::contract::builders::ContractCall<
+        ) -> ethers_contract::builders::ContractCall<
             M,
-            ethers::core::types::Address,
+            ethers_core::types::Address,
         > {
             self.0
                 .method_hash([200, 9, 22, 212], ())
@@ -258,8 +240,8 @@ mod fixeddepositanchorcontract_mod {
         #[doc = "Calls the contract's `hasEdge` (0x92156311) function"]
         pub fn has_edge(
             &self,
-            chain_id: ethers::core::types::U256,
-        ) -> ethers::contract::builders::ContractCall<M, bool> {
+            chain_id: ethers_core::types::U256,
+        ) -> ethers_contract::builders::ContractCall<M, bool> {
             self.0
                 .method_hash([146, 21, 99, 17], chain_id)
                 .expect("method not found (this should never happen)")
@@ -267,10 +249,10 @@ mod fixeddepositanchorcontract_mod {
         #[doc = "Calls the contract's `hashLeftRight` (0x8ea3099e) function"]
         pub fn hash_left_right(
             &self,
-            hasher: ethers::core::types::Address,
+            hasher: ethers_core::types::Address,
             left: [u8; 32],
             right: [u8; 32],
-        ) -> ethers::contract::builders::ContractCall<M, [u8; 32]> {
+        ) -> ethers_contract::builders::ContractCall<M, [u8; 32]> {
             self.0
                 .method_hash([142, 163, 9, 158], (hasher, left, right))
                 .expect("method not found (this should never happen)")
@@ -278,9 +260,9 @@ mod fixeddepositanchorcontract_mod {
         #[doc = "Calls the contract's `hasher` (0xed33639f) function"]
         pub fn hasher(
             &self,
-        ) -> ethers::contract::builders::ContractCall<
+        ) -> ethers_contract::builders::ContractCall<
             M,
-            ethers::core::types::Address,
+            ethers_core::types::Address,
         > {
             self.0
                 .method_hash([237, 51, 99, 159], ())
@@ -289,9 +271,9 @@ mod fixeddepositanchorcontract_mod {
         #[doc = "Calls the contract's `isKnownNeighborRoot` (0x11e4dcb9) function"]
         pub fn is_known_neighbor_root(
             &self,
-            neighbor_chain_id: ethers::core::types::U256,
+            neighbor_chain_id: ethers_core::types::U256,
             root: [u8; 32],
-        ) -> ethers::contract::builders::ContractCall<M, bool> {
+        ) -> ethers_contract::builders::ContractCall<M, bool> {
             self.0
                 .method_hash([17, 228, 220, 185], (neighbor_chain_id, root))
                 .expect("method not found (this should never happen)")
@@ -300,7 +282,7 @@ mod fixeddepositanchorcontract_mod {
         pub fn is_known_root(
             &self,
             root: [u8; 32],
-        ) -> ethers::contract::builders::ContractCall<M, bool> {
+        ) -> ethers_contract::builders::ContractCall<M, bool> {
             self.0
                 .method_hash([109, 152, 51, 227], root)
                 .expect("method not found (this should never happen)")
@@ -309,7 +291,7 @@ mod fixeddepositanchorcontract_mod {
         pub fn is_spent(
             &self,
             nullifier_hash: [u8; 32],
-        ) -> ethers::contract::builders::ContractCall<M, bool> {
+        ) -> ethers_contract::builders::ContractCall<M, bool> {
             self.0
                 .method_hash([229, 40, 93, 204], nullifier_hash)
                 .expect("method not found (this should never happen)")
@@ -318,7 +300,7 @@ mod fixeddepositanchorcontract_mod {
         pub fn is_spent_array(
             &self,
             nullifier_hashes: ::std::vec::Vec<[u8; 32]>,
-        ) -> ethers::contract::builders::ContractCall<M, ::std::vec::Vec<bool>>
+        ) -> ethers_contract::builders::ContractCall<M, ::std::vec::Vec<bool>>
         {
             self.0
                 .method_hash([159, 161, 45, 11], nullifier_hashes)
@@ -328,7 +310,7 @@ mod fixeddepositanchorcontract_mod {
         pub fn is_valid_roots(
             &self,
             roots: ::std::vec::Vec<[u8; 32]>,
-        ) -> ethers::contract::builders::ContractCall<M, bool> {
+        ) -> ethers_contract::builders::ContractCall<M, bool> {
             self.0
                 .method_hash([97, 110, 9, 87], roots)
                 .expect("method not found (this should never happen)")
@@ -336,7 +318,7 @@ mod fixeddepositanchorcontract_mod {
         #[doc = "Calls the contract's `levels` (0x4ecf518b) function"]
         pub fn levels(
             &self,
-        ) -> ethers::contract::builders::ContractCall<M, u32> {
+        ) -> ethers_contract::builders::ContractCall<M, u32> {
             self.0
                 .method_hash([78, 207, 81, 139], ())
                 .expect("method not found (this should never happen)")
@@ -344,7 +326,7 @@ mod fixeddepositanchorcontract_mod {
         #[doc = "Calls the contract's `maxEdges` (0x71523c32) function"]
         pub fn max_edges(
             &self,
-        ) -> ethers::contract::builders::ContractCall<M, u8> {
+        ) -> ethers_contract::builders::ContractCall<M, u8> {
             self.0
                 .method_hash([113, 82, 60, 50], ())
                 .expect("method not found (this should never happen)")
@@ -352,9 +334,9 @@ mod fixeddepositanchorcontract_mod {
         #[doc = "Calls the contract's `neighborRoots` (0x43e7119f) function"]
         pub fn neighbor_roots(
             &self,
-            p0: ethers::core::types::U256,
+            p0: ethers_core::types::U256,
             p1: u32,
-        ) -> ethers::contract::builders::ContractCall<M, [u8; 32]> {
+        ) -> ethers_contract::builders::ContractCall<M, [u8; 32]> {
             self.0
                 .method_hash([67, 231, 17, 159], (p0, p1))
                 .expect("method not found (this should never happen)")
@@ -362,7 +344,7 @@ mod fixeddepositanchorcontract_mod {
         #[doc = "Calls the contract's `nextIndex` (0xfc7e9c6f) function"]
         pub fn next_index(
             &self,
-        ) -> ethers::contract::builders::ContractCall<M, u32> {
+        ) -> ethers_contract::builders::ContractCall<M, u32> {
             self.0
                 .method_hash([252, 126, 156, 111], ())
                 .expect("method not found (this should never happen)")
@@ -371,7 +353,7 @@ mod fixeddepositanchorcontract_mod {
         pub fn nullifier_hashes(
             &self,
             p0: [u8; 32],
-        ) -> ethers::contract::builders::ContractCall<M, bool> {
+        ) -> ethers_contract::builders::ContractCall<M, bool> {
             self.0
                 .method_hash([23, 204, 145, 92], p0)
                 .expect("method not found (this should never happen)")
@@ -379,8 +361,8 @@ mod fixeddepositanchorcontract_mod {
         #[doc = "Calls the contract's `roots` (0xc2b40ae4) function"]
         pub fn roots(
             &self,
-            p0: ethers::core::types::U256,
-        ) -> ethers::contract::builders::ContractCall<M, [u8; 32]> {
+            p0: ethers_core::types::U256,
+        ) -> ethers_contract::builders::ContractCall<M, [u8; 32]> {
             self.0
                 .method_hash([194, 180, 10, 228], p0)
                 .expect("method not found (this should never happen)")
@@ -388,28 +370,29 @@ mod fixeddepositanchorcontract_mod {
         #[doc = "Calls the contract's `setHandler` (0x72c1ad03) function"]
         pub fn set_handler(
             &self,
-            new_handler: ethers::core::types::Address,
+            new_handler: ethers_core::types::Address,
             nonce: u32,
-        ) -> ethers::contract::builders::ContractCall<M, ()> {
+        ) -> ethers_contract::builders::ContractCall<M, ()> {
             self.0
                 .method_hash([114, 193, 173, 3], (new_handler, nonce))
                 .expect("method not found (this should never happen)")
         }
-        #[doc = "Calls the contract's `setVerifier` (0x5437988d) function"]
+        #[doc = "Calls the contract's `setVerifier` (0xa0d192f5) function"]
         pub fn set_verifier(
             &self,
-            new_verifier: ethers::core::types::Address,
-        ) -> ethers::contract::builders::ContractCall<M, ()> {
+            new_verifier: ethers_core::types::Address,
+            nonce: u32,
+        ) -> ethers_contract::builders::ContractCall<M, ()> {
             self.0
-                .method_hash([84, 55, 152, 141], new_verifier)
+                .method_hash([160, 209, 146, 245], (new_verifier, nonce))
                 .expect("method not found (this should never happen)")
         }
         #[doc = "Calls the contract's `token` (0xfc0c546a) function"]
         pub fn token(
             &self,
-        ) -> ethers::contract::builders::ContractCall<
+        ) -> ethers_contract::builders::ContractCall<
             M,
-            ethers::core::types::Address,
+            ethers_core::types::Address,
         > {
             self.0
                 .method_hash([252, 12, 84, 106], ())
@@ -418,13 +401,13 @@ mod fixeddepositanchorcontract_mod {
         #[doc = "Calls the contract's `unpackProof` (0xf5ab0dd6) function"]
         pub fn unpack_proof(
             &self,
-            proof: [ethers::core::types::U256; 8usize],
-        ) -> ethers::contract::builders::ContractCall<
+            proof: [ethers_core::types::U256; 8usize],
+        ) -> ethers_contract::builders::ContractCall<
             M,
             (
-                [ethers::core::types::U256; 2usize],
-                [[ethers::core::types::U256; 2usize]; 2usize],
-                [ethers::core::types::U256; 2usize],
+                [ethers_core::types::U256; 2usize],
+                [[ethers_core::types::U256; 2usize]; 2usize],
+                [ethers_core::types::U256; 2usize],
             ),
         > {
             self.0
@@ -434,9 +417,9 @@ mod fixeddepositanchorcontract_mod {
         #[doc = "Calls the contract's `unwrapIntoNative` (0x9ff80063) function"]
         pub fn unwrap_into_native(
             &self,
-            token_address: ethers::core::types::Address,
-            amount: ethers::core::types::U256,
-        ) -> ethers::contract::builders::ContractCall<M, ()> {
+            token_address: ethers_core::types::Address,
+            amount: ethers_core::types::U256,
+        ) -> ethers_contract::builders::ContractCall<M, ()> {
             self.0
                 .method_hash([159, 248, 0, 99], (token_address, amount))
                 .expect("method not found (this should never happen)")
@@ -444,9 +427,9 @@ mod fixeddepositanchorcontract_mod {
         #[doc = "Calls the contract's `unwrapIntoToken` (0x4f401241) function"]
         pub fn unwrap_into_token(
             &self,
-            token_address: ethers::core::types::Address,
-            amount: ethers::core::types::U256,
-        ) -> ethers::contract::builders::ContractCall<M, ()> {
+            token_address: ethers_core::types::Address,
+            amount: ethers_core::types::U256,
+        ) -> ethers_contract::builders::ContractCall<M, ()> {
             self.0
                 .method_hash([79, 64, 18, 65], (token_address, amount))
                 .expect("method not found (this should never happen)")
@@ -454,10 +437,10 @@ mod fixeddepositanchorcontract_mod {
         #[doc = "Calls the contract's `updateEdge` (0x44347ba9) function"]
         pub fn update_edge(
             &self,
-            source_chain_id: ethers::core::types::U256,
+            source_chain_id: ethers_core::types::U256,
             root: [u8; 32],
-            leaf_index: ethers::core::types::U256,
-        ) -> ethers::contract::builders::ContractCall<M, ()> {
+            leaf_index: ethers_core::types::U256,
+        ) -> ethers_contract::builders::ContractCall<M, ()> {
             self.0
                 .method_hash(
                     [68, 52, 123, 169],
@@ -468,9 +451,9 @@ mod fixeddepositanchorcontract_mod {
         #[doc = "Calls the contract's `verifier` (0x2b7ac3f3) function"]
         pub fn verifier(
             &self,
-        ) -> ethers::contract::builders::ContractCall<
+        ) -> ethers_contract::builders::ContractCall<
             M,
-            ethers::core::types::Address,
+            ethers_core::types::Address,
         > {
             self.0
                 .method_hash([43, 122, 195, 243], ())
@@ -479,9 +462,9 @@ mod fixeddepositanchorcontract_mod {
         #[doc = "Calls the contract's `withdraw` (0xd0e8d34a) function"]
         pub fn withdraw(
             &self,
-            proof: ethers::core::types::Bytes,
+            proof: ethers_core::types::Bytes,
             public_inputs: PublicInputs,
-        ) -> ethers::contract::builders::ContractCall<M, ()> {
+        ) -> ethers_contract::builders::ContractCall<M, ()> {
             self.0
                 .method_hash([208, 232, 211, 74], (proof, public_inputs))
                 .expect("method not found (this should never happen)")
@@ -489,10 +472,10 @@ mod fixeddepositanchorcontract_mod {
         #[doc = "Calls the contract's `withdrawAndUnwrap` (0xdf203aa7) function"]
         pub fn withdraw_and_unwrap(
             &self,
-            proof: ethers::core::types::Bytes,
+            proof: ethers_core::types::Bytes,
             public_inputs: PublicInputs,
-            token_address: ethers::core::types::Address,
-        ) -> ethers::contract::builders::ContractCall<M, ()> {
+            token_address: ethers_core::types::Address,
+        ) -> ethers_contract::builders::ContractCall<M, ()> {
             self.0
                 .method_hash(
                     [223, 32, 58, 167],
@@ -503,9 +486,9 @@ mod fixeddepositanchorcontract_mod {
         #[doc = "Calls the contract's `wrapAndDeposit` (0xcd3a9550) function"]
         pub fn wrap_and_deposit(
             &self,
-            token_address: ethers::core::types::Address,
+            token_address: ethers_core::types::Address,
             commitment: [u8; 32],
-        ) -> ethers::contract::builders::ContractCall<M, ()> {
+        ) -> ethers_contract::builders::ContractCall<M, ()> {
             self.0
                 .method_hash([205, 58, 149, 80], (token_address, commitment))
                 .expect("method not found (this should never happen)")
@@ -513,7 +496,7 @@ mod fixeddepositanchorcontract_mod {
         #[doc = "Calls the contract's `wrapNative` (0x6ad481f3) function"]
         pub fn wrap_native(
             &self,
-        ) -> ethers::contract::builders::ContractCall<M, ()> {
+        ) -> ethers_contract::builders::ContractCall<M, ()> {
             self.0
                 .method_hash([106, 212, 129, 243], ())
                 .expect("method not found (this should never happen)")
@@ -521,9 +504,9 @@ mod fixeddepositanchorcontract_mod {
         #[doc = "Calls the contract's `wrapToken` (0x460b53e3) function"]
         pub fn wrap_token(
             &self,
-            token_address: ethers::core::types::Address,
-            amount: ethers::core::types::U256,
-        ) -> ethers::contract::builders::ContractCall<M, ()> {
+            token_address: ethers_core::types::Address,
+            amount: ethers_core::types::U256,
+        ) -> ethers_contract::builders::ContractCall<M, ()> {
             self.0
                 .method_hash([70, 11, 83, 227], (token_address, amount))
                 .expect("method not found (this should never happen)")
@@ -531,8 +514,8 @@ mod fixeddepositanchorcontract_mod {
         #[doc = "Calls the contract's `zeros` (0xe8295588) function"]
         pub fn zeros(
             &self,
-            i: ethers::core::types::U256,
-        ) -> ethers::contract::builders::ContractCall<M, [u8; 32]> {
+            i: ethers_core::types::U256,
+        ) -> ethers_contract::builders::ContractCall<M, [u8; 32]> {
             self.0
                 .method_hash([232, 41, 85, 136], i)
                 .expect("method not found (this should never happen)")
@@ -540,46 +523,44 @@ mod fixeddepositanchorcontract_mod {
         #[doc = "Gets the contract's `Deposit` event"]
         pub fn deposit_filter(
             &self,
-        ) -> ethers::contract::builders::Event<M, DepositFilter> {
+        ) -> ethers_contract::builders::Event<M, DepositFilter> {
             self.0.event()
         }
         #[doc = "Gets the contract's `EdgeAddition` event"]
         pub fn edge_addition_filter(
             &self,
-        ) -> ethers::contract::builders::Event<M, EdgeAdditionFilter> {
+        ) -> ethers_contract::builders::Event<M, EdgeAdditionFilter> {
             self.0.event()
         }
         #[doc = "Gets the contract's `EdgeUpdate` event"]
         pub fn edge_update_filter(
             &self,
-        ) -> ethers::contract::builders::Event<M, EdgeUpdateFilter> {
+        ) -> ethers_contract::builders::Event<M, EdgeUpdateFilter> {
             self.0.event()
         }
         #[doc = "Gets the contract's `Insertion` event"]
         pub fn insertion_filter(
             &self,
-        ) -> ethers::contract::builders::Event<M, InsertionFilter> {
+        ) -> ethers_contract::builders::Event<M, InsertionFilter> {
             self.0.event()
         }
         #[doc = "Gets the contract's `Refresh` event"]
         pub fn refresh_filter(
             &self,
-        ) -> ethers::contract::builders::Event<M, RefreshFilter> {
+        ) -> ethers_contract::builders::Event<M, RefreshFilter> {
             self.0.event()
         }
         #[doc = "Gets the contract's `Withdrawal` event"]
         pub fn withdrawal_filter(
             &self,
-        ) -> ethers::contract::builders::Event<M, WithdrawalFilter> {
+        ) -> ethers_contract::builders::Event<M, WithdrawalFilter> {
             self.0.event()
         }
         #[doc = r" Returns an [`Event`](#ethers_contract::builders::Event) builder for all events of this contract"]
         pub fn events(
             &self,
-        ) -> ethers::contract::builders::Event<
-            M,
-            FixedDepositAnchorContractEvents,
-        > {
+        ) -> ethers_contract::builders::Event<M, FixedDepositAnchorContractEvents>
+        {
             self.0.event_with_filter(Default::default())
         }
     }
@@ -589,20 +570,20 @@ mod fixeddepositanchorcontract_mod {
         Default,
         Eq,
         PartialEq,
-        ethers :: contract :: EthEvent,
-        ethers :: contract :: EthDisplay,
+        ethers_contract :: EthEvent,
+        ethers_contract :: EthDisplay,
     )]
     #[ethevent(
         name = "Deposit",
         abi = "Deposit(address,uint32,bytes32,uint256)"
     )]
     pub struct DepositFilter {
-        pub sender: ethers::core::types::Address,
+        pub sender: ethers_core::types::Address,
         #[ethevent(indexed)]
         pub leaf_index: u32,
         #[ethevent(indexed)]
         pub commitment: [u8; 32],
-        pub timestamp: ethers::core::types::U256,
+        pub timestamp: ethers_core::types::U256,
     }
     #[derive(
         Clone,
@@ -610,16 +591,16 @@ mod fixeddepositanchorcontract_mod {
         Default,
         Eq,
         PartialEq,
-        ethers :: contract :: EthEvent,
-        ethers :: contract :: EthDisplay,
+        ethers_contract :: EthEvent,
+        ethers_contract :: EthDisplay,
     )]
     #[ethevent(
         name = "EdgeAddition",
         abi = "EdgeAddition(uint256,uint256,bytes32)"
     )]
     pub struct EdgeAdditionFilter {
-        pub chain_id: ethers::core::types::U256,
-        pub latest_leaf_index: ethers::core::types::U256,
+        pub chain_id: ethers_core::types::U256,
+        pub latest_leaf_index: ethers_core::types::U256,
         pub merkle_root: [u8; 32],
     }
     #[derive(
@@ -628,16 +609,16 @@ mod fixeddepositanchorcontract_mod {
         Default,
         Eq,
         PartialEq,
-        ethers :: contract :: EthEvent,
-        ethers :: contract :: EthDisplay,
+        ethers_contract :: EthEvent,
+        ethers_contract :: EthDisplay,
     )]
     #[ethevent(
         name = "EdgeUpdate",
         abi = "EdgeUpdate(uint256,uint256,bytes32)"
     )]
     pub struct EdgeUpdateFilter {
-        pub chain_id: ethers::core::types::U256,
-        pub latest_leaf_index: ethers::core::types::U256,
+        pub chain_id: ethers_core::types::U256,
+        pub latest_leaf_index: ethers_core::types::U256,
         pub merkle_root: [u8; 32],
     }
     #[derive(
@@ -646,15 +627,15 @@ mod fixeddepositanchorcontract_mod {
         Default,
         Eq,
         PartialEq,
-        ethers :: contract :: EthEvent,
-        ethers :: contract :: EthDisplay,
+        ethers_contract :: EthEvent,
+        ethers_contract :: EthDisplay,
     )]
     #[ethevent(name = "Insertion", abi = "Insertion(bytes32,uint32,uint256)")]
     pub struct InsertionFilter {
         #[ethevent(indexed)]
         pub commitment: [u8; 32],
         pub leaf_index: u32,
-        pub timestamp: ethers::core::types::U256,
+        pub timestamp: ethers_core::types::U256,
     }
     #[derive(
         Clone,
@@ -662,8 +643,8 @@ mod fixeddepositanchorcontract_mod {
         Default,
         Eq,
         PartialEq,
-        ethers :: contract :: EthEvent,
-        ethers :: contract :: EthDisplay,
+        ethers_contract :: EthEvent,
+        ethers_contract :: EthDisplay,
     )]
     #[ethevent(name = "Refresh", abi = "Refresh(bytes32,bytes32,uint32)")]
     pub struct RefreshFilter {
@@ -678,20 +659,20 @@ mod fixeddepositanchorcontract_mod {
         Default,
         Eq,
         PartialEq,
-        ethers :: contract :: EthEvent,
-        ethers :: contract :: EthDisplay,
+        ethers_contract :: EthEvent,
+        ethers_contract :: EthDisplay,
     )]
     #[ethevent(
         name = "Withdrawal",
         abi = "Withdrawal(address,address,uint256)"
     )]
     pub struct WithdrawalFilter {
-        pub to: ethers::core::types::Address,
+        pub to: ethers_core::types::Address,
         #[ethevent(indexed)]
-        pub relayer: ethers::core::types::Address,
-        pub fee: ethers::core::types::U256,
+        pub relayer: ethers_core::types::Address,
+        pub fee: ethers_core::types::U256,
     }
-    #[derive(Debug, Clone, PartialEq, Eq, ethers :: contract :: EthAbiType)]
+    #[derive(Debug, Clone, PartialEq, Eq, ethers_contract :: EthAbiType)]
     pub enum FixedDepositAnchorContractEvents {
         DepositFilter(DepositFilter),
         EdgeAdditionFilter(EdgeAdditionFilter),
@@ -700,10 +681,10 @@ mod fixeddepositanchorcontract_mod {
         RefreshFilter(RefreshFilter),
         WithdrawalFilter(WithdrawalFilter),
     }
-    impl ethers::contract::EthLogDecode for FixedDepositAnchorContractEvents {
+    impl ethers_contract::EthLogDecode for FixedDepositAnchorContractEvents {
         fn decode_log(
-            log: &ethers::core::abi::RawLog,
-        ) -> Result<Self, ethers::core::abi::Error>
+            log: &ethers_core::abi::RawLog,
+        ) -> Result<Self, ethers_core::abi::Error>
         where
             Self: Sized,
         {
@@ -739,7 +720,7 @@ mod fixeddepositanchorcontract_mod {
                     decoded,
                 ));
             }
-            Err(ethers::core::abi::Error::InvalidData)
+            Err(ethers_core::abi::Error::InvalidData)
         }
     }
     impl ::std::fmt::Display for FixedDepositAnchorContractEvents {
@@ -773,8 +754,8 @@ mod fixeddepositanchorcontract_mod {
         Default,
         Eq,
         PartialEq,
-        ethers :: contract :: EthCall,
-        ethers :: contract :: EthDisplay,
+        ethers_contract :: EthCall,
+        ethers_contract :: EthDisplay,
     )]
     #[ethcall(name = "FIELD_SIZE", abi = "FIELD_SIZE()")]
     pub struct FieldSizeCall;
@@ -785,8 +766,8 @@ mod fixeddepositanchorcontract_mod {
         Default,
         Eq,
         PartialEq,
-        ethers :: contract :: EthCall,
-        ethers :: contract :: EthDisplay,
+        ethers_contract :: EthCall,
+        ethers_contract :: EthDisplay,
     )]
     #[ethcall(name = "ROOT_HISTORY_SIZE", abi = "ROOT_HISTORY_SIZE()")]
     pub struct RootHistorySizeCall;
@@ -797,8 +778,8 @@ mod fixeddepositanchorcontract_mod {
         Default,
         Eq,
         PartialEq,
-        ethers :: contract :: EthCall,
-        ethers :: contract :: EthDisplay,
+        ethers_contract :: EthCall,
+        ethers_contract :: EthDisplay,
     )]
     #[ethcall(name = "ZERO_VALUE", abi = "ZERO_VALUE()")]
     pub struct ZeroValueCall;
@@ -809,8 +790,8 @@ mod fixeddepositanchorcontract_mod {
         Default,
         Eq,
         PartialEq,
-        ethers :: contract :: EthCall,
-        ethers :: contract :: EthDisplay,
+        ethers_contract :: EthCall,
+        ethers_contract :: EthDisplay,
     )]
     #[ethcall(name = "commitments", abi = "commitments(bytes32)")]
     pub struct CommitmentsCall(pub [u8; 32]);
@@ -821,14 +802,14 @@ mod fixeddepositanchorcontract_mod {
         Default,
         Eq,
         PartialEq,
-        ethers :: contract :: EthCall,
-        ethers :: contract :: EthDisplay,
+        ethers_contract :: EthCall,
+        ethers_contract :: EthDisplay,
     )]
     #[ethcall(
         name = "currentNeighborRootIndex",
         abi = "currentNeighborRootIndex(uint256)"
     )]
-    pub struct CurrentNeighborRootIndexCall(pub ethers::core::types::U256);
+    pub struct CurrentNeighborRootIndexCall(pub ethers_core::types::U256);
     #[doc = "Container type for all input parameters for the `currentRootIndex`function with signature `currentRootIndex()` and selector `[144, 238, 176, 43]`"]
     #[derive(
         Clone,
@@ -836,8 +817,8 @@ mod fixeddepositanchorcontract_mod {
         Default,
         Eq,
         PartialEq,
-        ethers :: contract :: EthCall,
-        ethers :: contract :: EthDisplay,
+        ethers_contract :: EthCall,
+        ethers_contract :: EthDisplay,
     )]
     #[ethcall(name = "currentRootIndex", abi = "currentRootIndex()")]
     pub struct CurrentRootIndexCall;
@@ -848,8 +829,8 @@ mod fixeddepositanchorcontract_mod {
         Default,
         Eq,
         PartialEq,
-        ethers :: contract :: EthCall,
-        ethers :: contract :: EthDisplay,
+        ethers_contract :: EthCall,
+        ethers_contract :: EthDisplay,
     )]
     #[ethcall(name = "denomination", abi = "denomination()")]
     pub struct DenominationCall;
@@ -860,8 +841,8 @@ mod fixeddepositanchorcontract_mod {
         Default,
         Eq,
         PartialEq,
-        ethers :: contract :: EthCall,
-        ethers :: contract :: EthDisplay,
+        ethers_contract :: EthCall,
+        ethers_contract :: EthDisplay,
     )]
     #[ethcall(name = "deposit", abi = "deposit(bytes32)")]
     pub struct DepositCall {
@@ -874,11 +855,11 @@ mod fixeddepositanchorcontract_mod {
         Default,
         Eq,
         PartialEq,
-        ethers :: contract :: EthCall,
-        ethers :: contract :: EthDisplay,
+        ethers_contract :: EthCall,
+        ethers_contract :: EthDisplay,
     )]
     #[ethcall(name = "edgeExistsForChain", abi = "edgeExistsForChain(uint256)")]
-    pub struct EdgeExistsForChainCall(pub ethers::core::types::U256);
+    pub struct EdgeExistsForChainCall(pub ethers_core::types::U256);
     #[doc = "Container type for all input parameters for the `edgeIndex`function with signature `edgeIndex(uint256)` and selector `[231, 14, 168, 124]`"]
     #[derive(
         Clone,
@@ -886,11 +867,11 @@ mod fixeddepositanchorcontract_mod {
         Default,
         Eq,
         PartialEq,
-        ethers :: contract :: EthCall,
-        ethers :: contract :: EthDisplay,
+        ethers_contract :: EthCall,
+        ethers_contract :: EthDisplay,
     )]
     #[ethcall(name = "edgeIndex", abi = "edgeIndex(uint256)")]
-    pub struct EdgeIndexCall(pub ethers::core::types::U256);
+    pub struct EdgeIndexCall(pub ethers_core::types::U256);
     #[doc = "Container type for all input parameters for the `edgeList`function with signature `edgeList(uint256)` and selector `[219, 201, 22, 184]`"]
     #[derive(
         Clone,
@@ -898,11 +879,11 @@ mod fixeddepositanchorcontract_mod {
         Default,
         Eq,
         PartialEq,
-        ethers :: contract :: EthCall,
-        ethers :: contract :: EthDisplay,
+        ethers_contract :: EthCall,
+        ethers_contract :: EthDisplay,
     )]
     #[ethcall(name = "edgeList", abi = "edgeList(uint256)")]
-    pub struct EdgeListCall(pub ethers::core::types::U256);
+    pub struct EdgeListCall(pub ethers_core::types::U256);
     #[doc = "Container type for all input parameters for the `filledSubtrees`function with signature `filledSubtrees(uint256)` and selector `[241, 120, 228, 124]`"]
     #[derive(
         Clone,
@@ -910,11 +891,11 @@ mod fixeddepositanchorcontract_mod {
         Default,
         Eq,
         PartialEq,
-        ethers :: contract :: EthCall,
-        ethers :: contract :: EthDisplay,
+        ethers_contract :: EthCall,
+        ethers_contract :: EthDisplay,
     )]
     #[ethcall(name = "filledSubtrees", abi = "filledSubtrees(uint256)")]
-    pub struct FilledSubtreesCall(pub ethers::core::types::U256);
+    pub struct FilledSubtreesCall(pub ethers_core::types::U256);
     #[doc = "Container type for all input parameters for the `getChainId`function with signature `getChainId()` and selector `[52, 8, 228, 112]`"]
     #[derive(
         Clone,
@@ -922,8 +903,8 @@ mod fixeddepositanchorcontract_mod {
         Default,
         Eq,
         PartialEq,
-        ethers :: contract :: EthCall,
-        ethers :: contract :: EthDisplay,
+        ethers_contract :: EthCall,
+        ethers_contract :: EthDisplay,
     )]
     #[ethcall(name = "getChainId", abi = "getChainId()")]
     pub struct GetChainIdCall;
@@ -934,8 +915,8 @@ mod fixeddepositanchorcontract_mod {
         Default,
         Eq,
         PartialEq,
-        ethers :: contract :: EthCall,
-        ethers :: contract :: EthDisplay,
+        ethers_contract :: EthCall,
+        ethers_contract :: EthDisplay,
     )]
     #[ethcall(name = "getDenomination", abi = "getDenomination()")]
     pub struct GetDenominationCall;
@@ -946,8 +927,8 @@ mod fixeddepositanchorcontract_mod {
         Default,
         Eq,
         PartialEq,
-        ethers :: contract :: EthCall,
-        ethers :: contract :: EthDisplay,
+        ethers_contract :: EthCall,
+        ethers_contract :: EthDisplay,
     )]
     #[ethcall(name = "getLastRoot", abi = "getLastRoot()")]
     pub struct GetLastRootCall;
@@ -958,8 +939,8 @@ mod fixeddepositanchorcontract_mod {
         Default,
         Eq,
         PartialEq,
-        ethers :: contract :: EthCall,
-        ethers :: contract :: EthDisplay,
+        ethers_contract :: EthCall,
+        ethers_contract :: EthDisplay,
     )]
     #[ethcall(
         name = "getLatestNeighborEdges",
@@ -973,8 +954,8 @@ mod fixeddepositanchorcontract_mod {
         Default,
         Eq,
         PartialEq,
-        ethers :: contract :: EthCall,
-        ethers :: contract :: EthDisplay,
+        ethers_contract :: EthCall,
+        ethers_contract :: EthDisplay,
     )]
     #[ethcall(
         name = "getLatestNeighborRoots",
@@ -988,8 +969,8 @@ mod fixeddepositanchorcontract_mod {
         Default,
         Eq,
         PartialEq,
-        ethers :: contract :: EthCall,
-        ethers :: contract :: EthDisplay,
+        ethers_contract :: EthCall,
+        ethers_contract :: EthDisplay,
     )]
     #[ethcall(name = "getProposalNonce", abi = "getProposalNonce()")]
     pub struct GetProposalNonceCall;
@@ -1000,8 +981,8 @@ mod fixeddepositanchorcontract_mod {
         Default,
         Eq,
         PartialEq,
-        ethers :: contract :: EthCall,
-        ethers :: contract :: EthDisplay,
+        ethers_contract :: EthCall,
+        ethers_contract :: EthDisplay,
     )]
     #[ethcall(name = "getToken", abi = "getToken()")]
     pub struct GetTokenCall;
@@ -1012,8 +993,8 @@ mod fixeddepositanchorcontract_mod {
         Default,
         Eq,
         PartialEq,
-        ethers :: contract :: EthCall,
-        ethers :: contract :: EthDisplay,
+        ethers_contract :: EthCall,
+        ethers_contract :: EthDisplay,
     )]
     #[ethcall(name = "handler", abi = "handler()")]
     pub struct HandlerCall;
@@ -1024,12 +1005,12 @@ mod fixeddepositanchorcontract_mod {
         Default,
         Eq,
         PartialEq,
-        ethers :: contract :: EthCall,
-        ethers :: contract :: EthDisplay,
+        ethers_contract :: EthCall,
+        ethers_contract :: EthDisplay,
     )]
     #[ethcall(name = "hasEdge", abi = "hasEdge(uint256)")]
     pub struct HasEdgeCall {
-        pub chain_id: ethers::core::types::U256,
+        pub chain_id: ethers_core::types::U256,
     }
     #[doc = "Container type for all input parameters for the `hashLeftRight`function with signature `hashLeftRight(address,bytes32,bytes32)` and selector `[142, 163, 9, 158]`"]
     #[derive(
@@ -1038,15 +1019,15 @@ mod fixeddepositanchorcontract_mod {
         Default,
         Eq,
         PartialEq,
-        ethers :: contract :: EthCall,
-        ethers :: contract :: EthDisplay,
+        ethers_contract :: EthCall,
+        ethers_contract :: EthDisplay,
     )]
     #[ethcall(
         name = "hashLeftRight",
         abi = "hashLeftRight(address,bytes32,bytes32)"
     )]
     pub struct HashLeftRightCall {
-        pub hasher: ethers::core::types::Address,
+        pub hasher: ethers_core::types::Address,
         pub left: [u8; 32],
         pub right: [u8; 32],
     }
@@ -1057,8 +1038,8 @@ mod fixeddepositanchorcontract_mod {
         Default,
         Eq,
         PartialEq,
-        ethers :: contract :: EthCall,
-        ethers :: contract :: EthDisplay,
+        ethers_contract :: EthCall,
+        ethers_contract :: EthDisplay,
     )]
     #[ethcall(name = "hasher", abi = "hasher()")]
     pub struct HasherCall;
@@ -1069,15 +1050,15 @@ mod fixeddepositanchorcontract_mod {
         Default,
         Eq,
         PartialEq,
-        ethers :: contract :: EthCall,
-        ethers :: contract :: EthDisplay,
+        ethers_contract :: EthCall,
+        ethers_contract :: EthDisplay,
     )]
     #[ethcall(
         name = "isKnownNeighborRoot",
         abi = "isKnownNeighborRoot(uint256,bytes32)"
     )]
     pub struct IsKnownNeighborRootCall {
-        pub neighbor_chain_id: ethers::core::types::U256,
+        pub neighbor_chain_id: ethers_core::types::U256,
         pub root: [u8; 32],
     }
     #[doc = "Container type for all input parameters for the `isKnownRoot`function with signature `isKnownRoot(bytes32)` and selector `[109, 152, 51, 227]`"]
@@ -1087,8 +1068,8 @@ mod fixeddepositanchorcontract_mod {
         Default,
         Eq,
         PartialEq,
-        ethers :: contract :: EthCall,
-        ethers :: contract :: EthDisplay,
+        ethers_contract :: EthCall,
+        ethers_contract :: EthDisplay,
     )]
     #[ethcall(name = "isKnownRoot", abi = "isKnownRoot(bytes32)")]
     pub struct IsKnownRootCall {
@@ -1101,8 +1082,8 @@ mod fixeddepositanchorcontract_mod {
         Default,
         Eq,
         PartialEq,
-        ethers :: contract :: EthCall,
-        ethers :: contract :: EthDisplay,
+        ethers_contract :: EthCall,
+        ethers_contract :: EthDisplay,
     )]
     #[ethcall(name = "isSpent", abi = "isSpent(bytes32)")]
     pub struct IsSpentCall {
@@ -1115,8 +1096,8 @@ mod fixeddepositanchorcontract_mod {
         Default,
         Eq,
         PartialEq,
-        ethers :: contract :: EthCall,
-        ethers :: contract :: EthDisplay,
+        ethers_contract :: EthCall,
+        ethers_contract :: EthDisplay,
     )]
     #[ethcall(name = "isSpentArray", abi = "isSpentArray(bytes32[])")]
     pub struct IsSpentArrayCall {
@@ -1129,8 +1110,8 @@ mod fixeddepositanchorcontract_mod {
         Default,
         Eq,
         PartialEq,
-        ethers :: contract :: EthCall,
-        ethers :: contract :: EthDisplay,
+        ethers_contract :: EthCall,
+        ethers_contract :: EthDisplay,
     )]
     #[ethcall(name = "isValidRoots", abi = "isValidRoots(bytes32[])")]
     pub struct IsValidRootsCall {
@@ -1143,8 +1124,8 @@ mod fixeddepositanchorcontract_mod {
         Default,
         Eq,
         PartialEq,
-        ethers :: contract :: EthCall,
-        ethers :: contract :: EthDisplay,
+        ethers_contract :: EthCall,
+        ethers_contract :: EthDisplay,
     )]
     #[ethcall(name = "levels", abi = "levels()")]
     pub struct LevelsCall;
@@ -1155,8 +1136,8 @@ mod fixeddepositanchorcontract_mod {
         Default,
         Eq,
         PartialEq,
-        ethers :: contract :: EthCall,
-        ethers :: contract :: EthDisplay,
+        ethers_contract :: EthCall,
+        ethers_contract :: EthDisplay,
     )]
     #[ethcall(name = "maxEdges", abi = "maxEdges()")]
     pub struct MaxEdgesCall;
@@ -1167,11 +1148,11 @@ mod fixeddepositanchorcontract_mod {
         Default,
         Eq,
         PartialEq,
-        ethers :: contract :: EthCall,
-        ethers :: contract :: EthDisplay,
+        ethers_contract :: EthCall,
+        ethers_contract :: EthDisplay,
     )]
     #[ethcall(name = "neighborRoots", abi = "neighborRoots(uint256,uint32)")]
-    pub struct NeighborRootsCall(pub ethers::core::types::U256, pub u32);
+    pub struct NeighborRootsCall(pub ethers_core::types::U256, pub u32);
     #[doc = "Container type for all input parameters for the `nextIndex`function with signature `nextIndex()` and selector `[252, 126, 156, 111]`"]
     #[derive(
         Clone,
@@ -1179,8 +1160,8 @@ mod fixeddepositanchorcontract_mod {
         Default,
         Eq,
         PartialEq,
-        ethers :: contract :: EthCall,
-        ethers :: contract :: EthDisplay,
+        ethers_contract :: EthCall,
+        ethers_contract :: EthDisplay,
     )]
     #[ethcall(name = "nextIndex", abi = "nextIndex()")]
     pub struct NextIndexCall;
@@ -1191,8 +1172,8 @@ mod fixeddepositanchorcontract_mod {
         Default,
         Eq,
         PartialEq,
-        ethers :: contract :: EthCall,
-        ethers :: contract :: EthDisplay,
+        ethers_contract :: EthCall,
+        ethers_contract :: EthDisplay,
     )]
     #[ethcall(name = "nullifierHashes", abi = "nullifierHashes(bytes32)")]
     pub struct NullifierHashesCall(pub [u8; 32]);
@@ -1203,11 +1184,11 @@ mod fixeddepositanchorcontract_mod {
         Default,
         Eq,
         PartialEq,
-        ethers :: contract :: EthCall,
-        ethers :: contract :: EthDisplay,
+        ethers_contract :: EthCall,
+        ethers_contract :: EthDisplay,
     )]
     #[ethcall(name = "roots", abi = "roots(uint256)")]
-    pub struct RootsCall(pub ethers::core::types::U256);
+    pub struct RootsCall(pub ethers_core::types::U256);
     #[doc = "Container type for all input parameters for the `setHandler`function with signature `setHandler(address,uint32)` and selector `[114, 193, 173, 3]`"]
     #[derive(
         Clone,
@@ -1215,27 +1196,28 @@ mod fixeddepositanchorcontract_mod {
         Default,
         Eq,
         PartialEq,
-        ethers :: contract :: EthCall,
-        ethers :: contract :: EthDisplay,
+        ethers_contract :: EthCall,
+        ethers_contract :: EthDisplay,
     )]
     #[ethcall(name = "setHandler", abi = "setHandler(address,uint32)")]
     pub struct SetHandlerCall {
-        pub new_handler: ethers::core::types::Address,
+        pub new_handler: ethers_core::types::Address,
         pub nonce: u32,
     }
-    #[doc = "Container type for all input parameters for the `setVerifier`function with signature `setVerifier(address)` and selector `[84, 55, 152, 141]`"]
+    #[doc = "Container type for all input parameters for the `setVerifier`function with signature `setVerifier(address,uint32)` and selector `[160, 209, 146, 245]`"]
     #[derive(
         Clone,
         Debug,
         Default,
         Eq,
         PartialEq,
-        ethers :: contract :: EthCall,
-        ethers :: contract :: EthDisplay,
+        ethers_contract :: EthCall,
+        ethers_contract :: EthDisplay,
     )]
-    #[ethcall(name = "setVerifier", abi = "setVerifier(address)")]
+    #[ethcall(name = "setVerifier", abi = "setVerifier(address,uint32)")]
     pub struct SetVerifierCall {
-        pub new_verifier: ethers::core::types::Address,
+        pub new_verifier: ethers_core::types::Address,
+        pub nonce: u32,
     }
     #[doc = "Container type for all input parameters for the `token`function with signature `token()` and selector `[252, 12, 84, 106]`"]
     #[derive(
@@ -1244,8 +1226,8 @@ mod fixeddepositanchorcontract_mod {
         Default,
         Eq,
         PartialEq,
-        ethers :: contract :: EthCall,
-        ethers :: contract :: EthDisplay,
+        ethers_contract :: EthCall,
+        ethers_contract :: EthDisplay,
     )]
     #[ethcall(name = "token", abi = "token()")]
     pub struct TokenCall;
@@ -1256,12 +1238,12 @@ mod fixeddepositanchorcontract_mod {
         Default,
         Eq,
         PartialEq,
-        ethers :: contract :: EthCall,
-        ethers :: contract :: EthDisplay,
+        ethers_contract :: EthCall,
+        ethers_contract :: EthDisplay,
     )]
     #[ethcall(name = "unpackProof", abi = "unpackProof(uint256[8])")]
     pub struct UnpackProofCall {
-        pub proof: [ethers::core::types::U256; 8usize],
+        pub proof: [ethers_core::types::U256; 8usize],
     }
     #[doc = "Container type for all input parameters for the `unwrapIntoNative`function with signature `unwrapIntoNative(address,uint256)` and selector `[159, 248, 0, 99]`"]
     #[derive(
@@ -1270,16 +1252,16 @@ mod fixeddepositanchorcontract_mod {
         Default,
         Eq,
         PartialEq,
-        ethers :: contract :: EthCall,
-        ethers :: contract :: EthDisplay,
+        ethers_contract :: EthCall,
+        ethers_contract :: EthDisplay,
     )]
     #[ethcall(
         name = "unwrapIntoNative",
         abi = "unwrapIntoNative(address,uint256)"
     )]
     pub struct UnwrapIntoNativeCall {
-        pub token_address: ethers::core::types::Address,
-        pub amount: ethers::core::types::U256,
+        pub token_address: ethers_core::types::Address,
+        pub amount: ethers_core::types::U256,
     }
     #[doc = "Container type for all input parameters for the `unwrapIntoToken`function with signature `unwrapIntoToken(address,uint256)` and selector `[79, 64, 18, 65]`"]
     #[derive(
@@ -1288,16 +1270,16 @@ mod fixeddepositanchorcontract_mod {
         Default,
         Eq,
         PartialEq,
-        ethers :: contract :: EthCall,
-        ethers :: contract :: EthDisplay,
+        ethers_contract :: EthCall,
+        ethers_contract :: EthDisplay,
     )]
     #[ethcall(
         name = "unwrapIntoToken",
         abi = "unwrapIntoToken(address,uint256)"
     )]
     pub struct UnwrapIntoTokenCall {
-        pub token_address: ethers::core::types::Address,
-        pub amount: ethers::core::types::U256,
+        pub token_address: ethers_core::types::Address,
+        pub amount: ethers_core::types::U256,
     }
     #[doc = "Container type for all input parameters for the `updateEdge`function with signature `updateEdge(uint256,bytes32,uint256)` and selector `[68, 52, 123, 169]`"]
     #[derive(
@@ -1306,14 +1288,14 @@ mod fixeddepositanchorcontract_mod {
         Default,
         Eq,
         PartialEq,
-        ethers :: contract :: EthCall,
-        ethers :: contract :: EthDisplay,
+        ethers_contract :: EthCall,
+        ethers_contract :: EthDisplay,
     )]
     #[ethcall(name = "updateEdge", abi = "updateEdge(uint256,bytes32,uint256)")]
     pub struct UpdateEdgeCall {
-        pub source_chain_id: ethers::core::types::U256,
+        pub source_chain_id: ethers_core::types::U256,
         pub root: [u8; 32],
-        pub leaf_index: ethers::core::types::U256,
+        pub leaf_index: ethers_core::types::U256,
     }
     #[doc = "Container type for all input parameters for the `verifier`function with signature `verifier()` and selector `[43, 122, 195, 243]`"]
     #[derive(
@@ -1322,8 +1304,8 @@ mod fixeddepositanchorcontract_mod {
         Default,
         Eq,
         PartialEq,
-        ethers :: contract :: EthCall,
-        ethers :: contract :: EthDisplay,
+        ethers_contract :: EthCall,
+        ethers_contract :: EthDisplay,
     )]
     #[ethcall(name = "verifier", abi = "verifier()")]
     pub struct VerifierCall;
@@ -1334,15 +1316,15 @@ mod fixeddepositanchorcontract_mod {
         Default,
         Eq,
         PartialEq,
-        ethers :: contract :: EthCall,
-        ethers :: contract :: EthDisplay,
+        ethers_contract :: EthCall,
+        ethers_contract :: EthDisplay,
     )]
     #[ethcall(
         name = "withdraw",
         abi = "withdraw(bytes,(bytes,bytes32,bytes32,address,address,uint256,uint256))"
     )]
     pub struct WithdrawCall {
-        pub proof: ethers::core::types::Bytes,
+        pub proof: ethers_core::types::Bytes,
         pub public_inputs: PublicInputs,
     }
     #[doc = "Container type for all input parameters for the `withdrawAndUnwrap`function with signature `withdrawAndUnwrap(bytes,(bytes,bytes32,bytes32,address,address,uint256,uint256),address)` and selector `[223, 32, 58, 167]`"]
@@ -1352,17 +1334,17 @@ mod fixeddepositanchorcontract_mod {
         Default,
         Eq,
         PartialEq,
-        ethers :: contract :: EthCall,
-        ethers :: contract :: EthDisplay,
+        ethers_contract :: EthCall,
+        ethers_contract :: EthDisplay,
     )]
     #[ethcall(
         name = "withdrawAndUnwrap",
         abi = "withdrawAndUnwrap(bytes,(bytes,bytes32,bytes32,address,address,uint256,uint256),address)"
     )]
     pub struct WithdrawAndUnwrapCall {
-        pub proof: ethers::core::types::Bytes,
+        pub proof: ethers_core::types::Bytes,
         pub public_inputs: PublicInputs,
-        pub token_address: ethers::core::types::Address,
+        pub token_address: ethers_core::types::Address,
     }
     #[doc = "Container type for all input parameters for the `wrapAndDeposit`function with signature `wrapAndDeposit(address,bytes32)` and selector `[205, 58, 149, 80]`"]
     #[derive(
@@ -1371,12 +1353,12 @@ mod fixeddepositanchorcontract_mod {
         Default,
         Eq,
         PartialEq,
-        ethers :: contract :: EthCall,
-        ethers :: contract :: EthDisplay,
+        ethers_contract :: EthCall,
+        ethers_contract :: EthDisplay,
     )]
     #[ethcall(name = "wrapAndDeposit", abi = "wrapAndDeposit(address,bytes32)")]
     pub struct WrapAndDepositCall {
-        pub token_address: ethers::core::types::Address,
+        pub token_address: ethers_core::types::Address,
         pub commitment: [u8; 32],
     }
     #[doc = "Container type for all input parameters for the `wrapNative`function with signature `wrapNative()` and selector `[106, 212, 129, 243]`"]
@@ -1386,8 +1368,8 @@ mod fixeddepositanchorcontract_mod {
         Default,
         Eq,
         PartialEq,
-        ethers :: contract :: EthCall,
-        ethers :: contract :: EthDisplay,
+        ethers_contract :: EthCall,
+        ethers_contract :: EthDisplay,
     )]
     #[ethcall(name = "wrapNative", abi = "wrapNative()")]
     pub struct WrapNativeCall;
@@ -1398,13 +1380,13 @@ mod fixeddepositanchorcontract_mod {
         Default,
         Eq,
         PartialEq,
-        ethers :: contract :: EthCall,
-        ethers :: contract :: EthDisplay,
+        ethers_contract :: EthCall,
+        ethers_contract :: EthDisplay,
     )]
     #[ethcall(name = "wrapToken", abi = "wrapToken(address,uint256)")]
     pub struct WrapTokenCall {
-        pub token_address: ethers::core::types::Address,
-        pub amount: ethers::core::types::U256,
+        pub token_address: ethers_core::types::Address,
+        pub amount: ethers_core::types::U256,
     }
     #[doc = "Container type for all input parameters for the `zeros`function with signature `zeros(uint256)` and selector `[232, 41, 85, 136]`"]
     #[derive(
@@ -1413,14 +1395,14 @@ mod fixeddepositanchorcontract_mod {
         Default,
         Eq,
         PartialEq,
-        ethers :: contract :: EthCall,
-        ethers :: contract :: EthDisplay,
+        ethers_contract :: EthCall,
+        ethers_contract :: EthDisplay,
     )]
     #[ethcall(name = "zeros", abi = "zeros(uint256)")]
     pub struct ZerosCall {
-        pub i: ethers::core::types::U256,
+        pub i: ethers_core::types::U256,
     }
-    #[derive(Debug, Clone, PartialEq, Eq, ethers :: contract :: EthAbiType)]
+    #[derive(Debug, Clone, PartialEq, Eq, ethers_contract :: EthAbiType)]
     pub enum FixedDepositAnchorContractCalls {
         FieldSize(FieldSizeCall),
         RootHistorySize(RootHistorySizeCall),
@@ -1471,19 +1453,19 @@ mod fixeddepositanchorcontract_mod {
         WrapToken(WrapTokenCall),
         Zeros(ZerosCall),
     }
-    impl ethers::core::abi::AbiDecode for FixedDepositAnchorContractCalls {
+    impl ethers_core::abi::AbiDecode for FixedDepositAnchorContractCalls {
         fn decode(
             data: impl AsRef<[u8]>,
-        ) -> Result<Self, ethers::core::abi::AbiError> {
+        ) -> Result<Self, ethers_core::abi::AbiError> {
             if let Ok(decoded) =
-                <FieldSizeCall as ethers::core::abi::AbiDecode>::decode(
+                <FieldSizeCall as ethers_core::abi::AbiDecode>::decode(
                     data.as_ref(),
                 )
             {
                 return Ok(FixedDepositAnchorContractCalls::FieldSize(decoded));
             }
             if let Ok(decoded) =
-                <RootHistorySizeCall as ethers::core::abi::AbiDecode>::decode(
+                <RootHistorySizeCall as ethers_core::abi::AbiDecode>::decode(
                     data.as_ref(),
                 )
             {
@@ -1492,14 +1474,14 @@ mod fixeddepositanchorcontract_mod {
                 ));
             }
             if let Ok(decoded) =
-                <ZeroValueCall as ethers::core::abi::AbiDecode>::decode(
+                <ZeroValueCall as ethers_core::abi::AbiDecode>::decode(
                     data.as_ref(),
                 )
             {
                 return Ok(FixedDepositAnchorContractCalls::ZeroValue(decoded));
             }
             if let Ok(decoded) =
-                <CommitmentsCall as ethers::core::abi::AbiDecode>::decode(
+                <CommitmentsCall as ethers_core::abi::AbiDecode>::decode(
                     data.as_ref(),
                 )
             {
@@ -1507,9 +1489,9 @@ mod fixeddepositanchorcontract_mod {
                     decoded,
                 ));
             }
-            if let Ok (decoded) = < CurrentNeighborRootIndexCall as ethers :: core :: abi :: AbiDecode > :: decode (data . as_ref ()) { return Ok (FixedDepositAnchorContractCalls :: CurrentNeighborRootIndex (decoded)) }
+            if let Ok (decoded) = < CurrentNeighborRootIndexCall as ethers_core :: abi :: AbiDecode > :: decode (data . as_ref ()) { return Ok (FixedDepositAnchorContractCalls :: CurrentNeighborRootIndex (decoded)) }
             if let Ok(decoded) =
-                <CurrentRootIndexCall as ethers::core::abi::AbiDecode>::decode(
+                <CurrentRootIndexCall as ethers_core::abi::AbiDecode>::decode(
                     data.as_ref(),
                 )
             {
@@ -1518,7 +1500,7 @@ mod fixeddepositanchorcontract_mod {
                 ));
             }
             if let Ok(decoded) =
-                <DenominationCall as ethers::core::abi::AbiDecode>::decode(
+                <DenominationCall as ethers_core::abi::AbiDecode>::decode(
                     data.as_ref(),
                 )
             {
@@ -1527,39 +1509,37 @@ mod fixeddepositanchorcontract_mod {
                 ));
             }
             if let Ok(decoded) =
-                <DepositCall as ethers::core::abi::AbiDecode>::decode(
+                <DepositCall as ethers_core::abi::AbiDecode>::decode(
                     data.as_ref(),
                 )
             {
                 return Ok(FixedDepositAnchorContractCalls::Deposit(decoded));
             }
             if let Ok(decoded) =
-                <EdgeExistsForChainCall as ethers::core::abi::AbiDecode>::decode(
+                <EdgeExistsForChainCall as ethers_core::abi::AbiDecode>::decode(
                     data.as_ref(),
                 )
             {
-                return Ok(
-                    FixedDepositAnchorContractCalls::EdgeExistsForChain(
-                        decoded,
-                    ),
-                );
+                return Ok(FixedDepositAnchorContractCalls::EdgeExistsForChain(
+                    decoded,
+                ));
             }
             if let Ok(decoded) =
-                <EdgeIndexCall as ethers::core::abi::AbiDecode>::decode(
+                <EdgeIndexCall as ethers_core::abi::AbiDecode>::decode(
                     data.as_ref(),
                 )
             {
                 return Ok(FixedDepositAnchorContractCalls::EdgeIndex(decoded));
             }
             if let Ok(decoded) =
-                <EdgeListCall as ethers::core::abi::AbiDecode>::decode(
+                <EdgeListCall as ethers_core::abi::AbiDecode>::decode(
                     data.as_ref(),
                 )
             {
                 return Ok(FixedDepositAnchorContractCalls::EdgeList(decoded));
             }
             if let Ok(decoded) =
-                <FilledSubtreesCall as ethers::core::abi::AbiDecode>::decode(
+                <FilledSubtreesCall as ethers_core::abi::AbiDecode>::decode(
                     data.as_ref(),
                 )
             {
@@ -1568,16 +1548,14 @@ mod fixeddepositanchorcontract_mod {
                 ));
             }
             if let Ok(decoded) =
-                <GetChainIdCall as ethers::core::abi::AbiDecode>::decode(
+                <GetChainIdCall as ethers_core::abi::AbiDecode>::decode(
                     data.as_ref(),
                 )
             {
-                return Ok(FixedDepositAnchorContractCalls::GetChainId(
-                    decoded,
-                ));
+                return Ok(FixedDepositAnchorContractCalls::GetChainId(decoded));
             }
             if let Ok(decoded) =
-                <GetDenominationCall as ethers::core::abi::AbiDecode>::decode(
+                <GetDenominationCall as ethers_core::abi::AbiDecode>::decode(
                     data.as_ref(),
                 )
             {
@@ -1586,7 +1564,7 @@ mod fixeddepositanchorcontract_mod {
                 ));
             }
             if let Ok(decoded) =
-                <GetLastRootCall as ethers::core::abi::AbiDecode>::decode(
+                <GetLastRootCall as ethers_core::abi::AbiDecode>::decode(
                     data.as_ref(),
                 )
             {
@@ -1594,10 +1572,10 @@ mod fixeddepositanchorcontract_mod {
                     decoded,
                 ));
             }
-            if let Ok (decoded) = < GetLatestNeighborEdgesCall as ethers :: core :: abi :: AbiDecode > :: decode (data . as_ref ()) { return Ok (FixedDepositAnchorContractCalls :: GetLatestNeighborEdges (decoded)) }
-            if let Ok (decoded) = < GetLatestNeighborRootsCall as ethers :: core :: abi :: AbiDecode > :: decode (data . as_ref ()) { return Ok (FixedDepositAnchorContractCalls :: GetLatestNeighborRoots (decoded)) }
+            if let Ok (decoded) = < GetLatestNeighborEdgesCall as ethers_core :: abi :: AbiDecode > :: decode (data . as_ref ()) { return Ok (FixedDepositAnchorContractCalls :: GetLatestNeighborEdges (decoded)) }
+            if let Ok (decoded) = < GetLatestNeighborRootsCall as ethers_core :: abi :: AbiDecode > :: decode (data . as_ref ()) { return Ok (FixedDepositAnchorContractCalls :: GetLatestNeighborRoots (decoded)) }
             if let Ok(decoded) =
-                <GetProposalNonceCall as ethers::core::abi::AbiDecode>::decode(
+                <GetProposalNonceCall as ethers_core::abi::AbiDecode>::decode(
                     data.as_ref(),
                 )
             {
@@ -1606,28 +1584,28 @@ mod fixeddepositanchorcontract_mod {
                 ));
             }
             if let Ok(decoded) =
-                <GetTokenCall as ethers::core::abi::AbiDecode>::decode(
+                <GetTokenCall as ethers_core::abi::AbiDecode>::decode(
                     data.as_ref(),
                 )
             {
                 return Ok(FixedDepositAnchorContractCalls::GetToken(decoded));
             }
             if let Ok(decoded) =
-                <HandlerCall as ethers::core::abi::AbiDecode>::decode(
+                <HandlerCall as ethers_core::abi::AbiDecode>::decode(
                     data.as_ref(),
                 )
             {
                 return Ok(FixedDepositAnchorContractCalls::Handler(decoded));
             }
             if let Ok(decoded) =
-                <HasEdgeCall as ethers::core::abi::AbiDecode>::decode(
+                <HasEdgeCall as ethers_core::abi::AbiDecode>::decode(
                     data.as_ref(),
                 )
             {
                 return Ok(FixedDepositAnchorContractCalls::HasEdge(decoded));
             }
             if let Ok(decoded) =
-                <HashLeftRightCall as ethers::core::abi::AbiDecode>::decode(
+                <HashLeftRightCall as ethers_core::abi::AbiDecode>::decode(
                     data.as_ref(),
                 )
             {
@@ -1636,15 +1614,25 @@ mod fixeddepositanchorcontract_mod {
                 ));
             }
             if let Ok(decoded) =
-                <HasherCall as ethers::core::abi::AbiDecode>::decode(
+                <HasherCall as ethers_core::abi::AbiDecode>::decode(
                     data.as_ref(),
                 )
             {
                 return Ok(FixedDepositAnchorContractCalls::Hasher(decoded));
             }
-            if let Ok (decoded) = < IsKnownNeighborRootCall as ethers :: core :: abi :: AbiDecode > :: decode (data . as_ref ()) { return Ok (FixedDepositAnchorContractCalls :: IsKnownNeighborRoot (decoded)) }
             if let Ok(decoded) =
-                <IsKnownRootCall as ethers::core::abi::AbiDecode>::decode(
+                <IsKnownNeighborRootCall as ethers_core::abi::AbiDecode>::decode(
+                    data.as_ref(),
+                )
+            {
+                return Ok(
+                    FixedDepositAnchorContractCalls::IsKnownNeighborRoot(
+                        decoded,
+                    ),
+                );
+            }
+            if let Ok(decoded) =
+                <IsKnownRootCall as ethers_core::abi::AbiDecode>::decode(
                     data.as_ref(),
                 )
             {
@@ -1653,14 +1641,14 @@ mod fixeddepositanchorcontract_mod {
                 ));
             }
             if let Ok(decoded) =
-                <IsSpentCall as ethers::core::abi::AbiDecode>::decode(
+                <IsSpentCall as ethers_core::abi::AbiDecode>::decode(
                     data.as_ref(),
                 )
             {
                 return Ok(FixedDepositAnchorContractCalls::IsSpent(decoded));
             }
             if let Ok(decoded) =
-                <IsSpentArrayCall as ethers::core::abi::AbiDecode>::decode(
+                <IsSpentArrayCall as ethers_core::abi::AbiDecode>::decode(
                     data.as_ref(),
                 )
             {
@@ -1669,7 +1657,7 @@ mod fixeddepositanchorcontract_mod {
                 ));
             }
             if let Ok(decoded) =
-                <IsValidRootsCall as ethers::core::abi::AbiDecode>::decode(
+                <IsValidRootsCall as ethers_core::abi::AbiDecode>::decode(
                     data.as_ref(),
                 )
             {
@@ -1678,21 +1666,21 @@ mod fixeddepositanchorcontract_mod {
                 ));
             }
             if let Ok(decoded) =
-                <LevelsCall as ethers::core::abi::AbiDecode>::decode(
+                <LevelsCall as ethers_core::abi::AbiDecode>::decode(
                     data.as_ref(),
                 )
             {
                 return Ok(FixedDepositAnchorContractCalls::Levels(decoded));
             }
             if let Ok(decoded) =
-                <MaxEdgesCall as ethers::core::abi::AbiDecode>::decode(
+                <MaxEdgesCall as ethers_core::abi::AbiDecode>::decode(
                     data.as_ref(),
                 )
             {
                 return Ok(FixedDepositAnchorContractCalls::MaxEdges(decoded));
             }
             if let Ok(decoded) =
-                <NeighborRootsCall as ethers::core::abi::AbiDecode>::decode(
+                <NeighborRootsCall as ethers_core::abi::AbiDecode>::decode(
                     data.as_ref(),
                 )
             {
@@ -1701,14 +1689,14 @@ mod fixeddepositanchorcontract_mod {
                 ));
             }
             if let Ok(decoded) =
-                <NextIndexCall as ethers::core::abi::AbiDecode>::decode(
+                <NextIndexCall as ethers_core::abi::AbiDecode>::decode(
                     data.as_ref(),
                 )
             {
                 return Ok(FixedDepositAnchorContractCalls::NextIndex(decoded));
             }
             if let Ok(decoded) =
-                <NullifierHashesCall as ethers::core::abi::AbiDecode>::decode(
+                <NullifierHashesCall as ethers_core::abi::AbiDecode>::decode(
                     data.as_ref(),
                 )
             {
@@ -1717,23 +1705,21 @@ mod fixeddepositanchorcontract_mod {
                 ));
             }
             if let Ok(decoded) =
-                <RootsCall as ethers::core::abi::AbiDecode>::decode(
+                <RootsCall as ethers_core::abi::AbiDecode>::decode(
                     data.as_ref(),
                 )
             {
                 return Ok(FixedDepositAnchorContractCalls::Roots(decoded));
             }
             if let Ok(decoded) =
-                <SetHandlerCall as ethers::core::abi::AbiDecode>::decode(
+                <SetHandlerCall as ethers_core::abi::AbiDecode>::decode(
                     data.as_ref(),
                 )
             {
-                return Ok(FixedDepositAnchorContractCalls::SetHandler(
-                    decoded,
-                ));
+                return Ok(FixedDepositAnchorContractCalls::SetHandler(decoded));
             }
             if let Ok(decoded) =
-                <SetVerifierCall as ethers::core::abi::AbiDecode>::decode(
+                <SetVerifierCall as ethers_core::abi::AbiDecode>::decode(
                     data.as_ref(),
                 )
             {
@@ -1742,14 +1728,14 @@ mod fixeddepositanchorcontract_mod {
                 ));
             }
             if let Ok(decoded) =
-                <TokenCall as ethers::core::abi::AbiDecode>::decode(
+                <TokenCall as ethers_core::abi::AbiDecode>::decode(
                     data.as_ref(),
                 )
             {
                 return Ok(FixedDepositAnchorContractCalls::Token(decoded));
             }
             if let Ok(decoded) =
-                <UnpackProofCall as ethers::core::abi::AbiDecode>::decode(
+                <UnpackProofCall as ethers_core::abi::AbiDecode>::decode(
                     data.as_ref(),
                 )
             {
@@ -1758,7 +1744,7 @@ mod fixeddepositanchorcontract_mod {
                 ));
             }
             if let Ok(decoded) =
-                <UnwrapIntoNativeCall as ethers::core::abi::AbiDecode>::decode(
+                <UnwrapIntoNativeCall as ethers_core::abi::AbiDecode>::decode(
                     data.as_ref(),
                 )
             {
@@ -1767,7 +1753,7 @@ mod fixeddepositanchorcontract_mod {
                 ));
             }
             if let Ok(decoded) =
-                <UnwrapIntoTokenCall as ethers::core::abi::AbiDecode>::decode(
+                <UnwrapIntoTokenCall as ethers_core::abi::AbiDecode>::decode(
                     data.as_ref(),
                 )
             {
@@ -1776,30 +1762,28 @@ mod fixeddepositanchorcontract_mod {
                 ));
             }
             if let Ok(decoded) =
-                <UpdateEdgeCall as ethers::core::abi::AbiDecode>::decode(
+                <UpdateEdgeCall as ethers_core::abi::AbiDecode>::decode(
                     data.as_ref(),
                 )
             {
-                return Ok(FixedDepositAnchorContractCalls::UpdateEdge(
-                    decoded,
-                ));
+                return Ok(FixedDepositAnchorContractCalls::UpdateEdge(decoded));
             }
             if let Ok(decoded) =
-                <VerifierCall as ethers::core::abi::AbiDecode>::decode(
+                <VerifierCall as ethers_core::abi::AbiDecode>::decode(
                     data.as_ref(),
                 )
             {
                 return Ok(FixedDepositAnchorContractCalls::Verifier(decoded));
             }
             if let Ok(decoded) =
-                <WithdrawCall as ethers::core::abi::AbiDecode>::decode(
+                <WithdrawCall as ethers_core::abi::AbiDecode>::decode(
                     data.as_ref(),
                 )
             {
                 return Ok(FixedDepositAnchorContractCalls::Withdraw(decoded));
             }
             if let Ok(decoded) =
-                <WithdrawAndUnwrapCall as ethers::core::abi::AbiDecode>::decode(
+                <WithdrawAndUnwrapCall as ethers_core::abi::AbiDecode>::decode(
                     data.as_ref(),
                 )
             {
@@ -1808,7 +1792,7 @@ mod fixeddepositanchorcontract_mod {
                 ));
             }
             if let Ok(decoded) =
-                <WrapAndDepositCall as ethers::core::abi::AbiDecode>::decode(
+                <WrapAndDepositCall as ethers_core::abi::AbiDecode>::decode(
                     data.as_ref(),
                 )
             {
@@ -1817,32 +1801,30 @@ mod fixeddepositanchorcontract_mod {
                 ));
             }
             if let Ok(decoded) =
-                <WrapNativeCall as ethers::core::abi::AbiDecode>::decode(
+                <WrapNativeCall as ethers_core::abi::AbiDecode>::decode(
                     data.as_ref(),
                 )
             {
-                return Ok(FixedDepositAnchorContractCalls::WrapNative(
-                    decoded,
-                ));
+                return Ok(FixedDepositAnchorContractCalls::WrapNative(decoded));
             }
             if let Ok(decoded) =
-                <WrapTokenCall as ethers::core::abi::AbiDecode>::decode(
+                <WrapTokenCall as ethers_core::abi::AbiDecode>::decode(
                     data.as_ref(),
                 )
             {
                 return Ok(FixedDepositAnchorContractCalls::WrapToken(decoded));
             }
             if let Ok(decoded) =
-                <ZerosCall as ethers::core::abi::AbiDecode>::decode(
+                <ZerosCall as ethers_core::abi::AbiDecode>::decode(
                     data.as_ref(),
                 )
             {
                 return Ok(FixedDepositAnchorContractCalls::Zeros(decoded));
             }
-            Err(ethers::core::abi::Error::InvalidData.into())
+            Err(ethers_core::abi::Error::InvalidData.into())
         }
     }
-    impl ethers::core::abi::AbiEncode for FixedDepositAnchorContractCalls {
+    impl ethers_core::abi::AbiEncode for FixedDepositAnchorContractCalls {
         fn encode(self) -> Vec<u8> {
             match self {
                 FixedDepositAnchorContractCalls::FieldSize(element) => {
@@ -2424,24 +2406,24 @@ mod fixeddepositanchorcontract_mod {
     }
     #[doc = "`PublicInputs(bytes,bytes32,bytes32,address,address,uint256,uint256)`"]
     #[derive(
-        Clone, Debug, Default, Eq, PartialEq, ethers :: contract :: EthAbiType,
+        Clone, Debug, Default, Eq, PartialEq, ethers_contract :: EthAbiType,
     )]
     pub struct PublicInputs {
-        pub roots: ethers::core::types::Bytes,
+        pub roots: ethers_core::types::Bytes,
         pub nullifier_hash: [u8; 32],
         pub refresh_commitment: [u8; 32],
-        pub recipient: ethers::core::types::Address,
-        pub relayer: ethers::core::types::Address,
-        pub fee: ethers::core::types::U256,
-        pub refund: ethers::core::types::U256,
+        pub recipient: ethers_core::types::Address,
+        pub relayer: ethers_core::types::Address,
+        pub fee: ethers_core::types::U256,
+        pub refund: ethers_core::types::U256,
     }
     #[doc = "`Edge(uint256,bytes32,uint256)`"]
     #[derive(
-        Clone, Debug, Default, Eq, PartialEq, ethers :: contract :: EthAbiType,
+        Clone, Debug, Default, Eq, PartialEq, ethers_contract :: EthAbiType,
     )]
     pub struct Edge {
-        pub chain_id: ethers::core::types::U256,
+        pub chain_id: ethers_core::types::U256,
         pub root: [u8; 32],
-        pub latest_leaf_index: ethers::core::types::U256,
+        pub latest_leaf_index: ethers_core::types::U256,
     }
 }

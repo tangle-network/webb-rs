@@ -5,46 +5,46 @@ mod bridgecontract_mod {
     #![allow(dead_code)]
     #![allow(clippy::type_complexity)]
     #![allow(unused_imports)]
-    use ethers::contract::{
+    use ethers_contract::{
         builders::{ContractCall, Event},
         Contract, Lazy,
     };
-    use ethers::core::{
+    use ethers_core::{
         abi::{Abi, Detokenize, InvalidOutputType, Token, Tokenizable},
         types::*,
     };
-    use ethers::providers::Middleware;
+    use ethers_providers::Middleware;
     #[doc = "BridgeContract was auto-generated with ethers-rs Abigen. More information at: https://github.com/gakonst/ethers-rs"]
     use std::sync::Arc;
-    pub static BRIDGECONTRACT_ABI: ethers::contract::Lazy<
-        ethers::core::abi::Abi,
-    > = ethers::contract::Lazy::new(|| {
+    pub static BRIDGECONTRACT_ABI: ethers_contract::Lazy<
+        ethers_core::abi::Abi,
+    > = ethers_contract::Lazy::new(|| {
         serde_json :: from_str ("[{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"chainID\",\"type\":\"uint256\"},{\"internalType\":\"address[]\",\"name\":\"initialRelayers\",\"type\":\"address[]\"},{\"internalType\":\"uint256\",\"name\":\"initialRelayerThreshold\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"fee\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"expiry\",\"type\":\"uint256\"}],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"destinationChainID\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"bytes32\",\"name\":\"resourceID\",\"type\":\"bytes32\"},{\"indexed\":false,\"internalType\":\"uint64\",\"name\":\"nonce\",\"type\":\"uint64\"}],\"name\":\"Deposit\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"}],\"name\":\"Paused\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"originChainID\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint64\",\"name\":\"nonce\",\"type\":\"uint64\"},{\"indexed\":false,\"internalType\":\"enum Bridge.ProposalStatus\",\"name\":\"status\",\"type\":\"uint8\"},{\"indexed\":false,\"internalType\":\"bytes32\",\"name\":\"dataHash\",\"type\":\"bytes32\"}],\"name\":\"ProposalEvent\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"originChainID\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint64\",\"name\":\"nonce\",\"type\":\"uint64\"},{\"indexed\":false,\"internalType\":\"enum Bridge.ProposalStatus\",\"name\":\"status\",\"type\":\"uint8\"},{\"indexed\":false,\"internalType\":\"bytes32\",\"name\":\"dataHash\",\"type\":\"bytes32\"}],\"name\":\"ProposalVote\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"relayer\",\"type\":\"address\"}],\"name\":\"RelayerAdded\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"relayer\",\"type\":\"address\"}],\"name\":\"RelayerRemoved\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"newThreshold\",\"type\":\"uint256\"}],\"name\":\"RelayerThresholdChanged\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"bytes32\",\"name\":\"role\",\"type\":\"bytes32\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"sender\",\"type\":\"address\"}],\"name\":\"RoleGranted\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"bytes32\",\"name\":\"role\",\"type\":\"bytes32\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"sender\",\"type\":\"address\"}],\"name\":\"RoleRevoked\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"}],\"name\":\"Unpaused\",\"type\":\"event\"},{\"inputs\":[],\"name\":\"DEFAULT_ADMIN_ROLE\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"MAX_RELAYERS\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"RELAYER_ROLE\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"_chainID\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"name\":\"_counts\",\"outputs\":[{\"internalType\":\"uint64\",\"name\":\"\",\"type\":\"uint64\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"_expiry\",\"outputs\":[{\"internalType\":\"uint40\",\"name\":\"\",\"type\":\"uint40\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"_fee\",\"outputs\":[{\"internalType\":\"uint128\",\"name\":\"\",\"type\":\"uint128\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint72\",\"name\":\"destNonce\",\"type\":\"uint72\"},{\"internalType\":\"bytes32\",\"name\":\"dataHash\",\"type\":\"bytes32\"},{\"internalType\":\"address\",\"name\":\"relayer\",\"type\":\"address\"}],\"name\":\"_hasVotedOnProposal\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"_relayerThreshold\",\"outputs\":[{\"internalType\":\"uint8\",\"name\":\"\",\"type\":\"uint8\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"name\":\"_resourceIDToHandlerAddress\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"_totalRelayers\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"relayerAddress\",\"type\":\"address\"}],\"name\":\"adminAddRelayer\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"newFee\",\"type\":\"uint256\"}],\"name\":\"adminChangeFee\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"newThreshold\",\"type\":\"uint256\"}],\"name\":\"adminChangeRelayerThreshold\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"adminPauseTransfers\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"relayerAddress\",\"type\":\"address\"}],\"name\":\"adminRemoveRelayer\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"handlerAddress\",\"type\":\"address\"},{\"internalType\":\"bytes32\",\"name\":\"resourceID\",\"type\":\"bytes32\"},{\"internalType\":\"address\",\"name\":\"executionContextAddress\",\"type\":\"address\"}],\"name\":\"adminSetResource\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"adminUnpauseTransfers\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"chainID\",\"type\":\"uint256\"},{\"internalType\":\"uint64\",\"name\":\"nonce\",\"type\":\"uint64\"},{\"internalType\":\"bytes32\",\"name\":\"dataHash\",\"type\":\"bytes32\"}],\"name\":\"cancelProposal\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"chainID\",\"type\":\"uint256\"},{\"internalType\":\"uint64\",\"name\":\"nonce\",\"type\":\"uint64\"},{\"internalType\":\"bytes\",\"name\":\"data\",\"type\":\"bytes\"},{\"internalType\":\"bytes32\",\"name\":\"resourceID\",\"type\":\"bytes32\"}],\"name\":\"executeProposal\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"originChainID\",\"type\":\"uint256\"},{\"internalType\":\"uint64\",\"name\":\"nonce\",\"type\":\"uint64\"},{\"internalType\":\"bytes32\",\"name\":\"dataHash\",\"type\":\"bytes32\"}],\"name\":\"getProposal\",\"outputs\":[{\"components\":[{\"internalType\":\"enum Bridge.ProposalStatus\",\"name\":\"_status\",\"type\":\"uint8\"},{\"internalType\":\"uint200\",\"name\":\"_yesVotes\",\"type\":\"uint200\"},{\"internalType\":\"uint8\",\"name\":\"_yesVotesTotal\",\"type\":\"uint8\"},{\"internalType\":\"uint40\",\"name\":\"_proposedBlock\",\"type\":\"uint40\"}],\"internalType\":\"struct Bridge.Proposal\",\"name\":\"\",\"type\":\"tuple\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"role\",\"type\":\"bytes32\"}],\"name\":\"getRoleAdmin\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"role\",\"type\":\"bytes32\"},{\"internalType\":\"uint256\",\"name\":\"index\",\"type\":\"uint256\"}],\"name\":\"getRoleMember\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"role\",\"type\":\"bytes32\"}],\"name\":\"getRoleMemberCount\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"role\",\"type\":\"bytes32\"},{\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"}],\"name\":\"getRoleMemberIndex\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"role\",\"type\":\"bytes32\"},{\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"}],\"name\":\"grantRole\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"role\",\"type\":\"bytes32\"},{\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"}],\"name\":\"hasRole\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"relayer\",\"type\":\"address\"}],\"name\":\"isRelayer\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"paused\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"newAdmin\",\"type\":\"address\"}],\"name\":\"renounceAdmin\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"role\",\"type\":\"bytes32\"},{\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"}],\"name\":\"renounceRole\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"role\",\"type\":\"bytes32\"},{\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"}],\"name\":\"revokeRole\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address payable[]\",\"name\":\"addrs\",\"type\":\"address[]\"},{\"internalType\":\"uint256[]\",\"name\":\"amounts\",\"type\":\"uint256[]\"}],\"name\":\"transferFunds\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"chainID\",\"type\":\"uint256\"},{\"internalType\":\"uint64\",\"name\":\"nonce\",\"type\":\"uint64\"},{\"internalType\":\"bytes32\",\"name\":\"resourceID\",\"type\":\"bytes32\"},{\"internalType\":\"bytes32\",\"name\":\"dataHash\",\"type\":\"bytes32\"}],\"name\":\"voteProposal\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}]") . expect ("invalid abi")
     });
     #[derive(Clone)]
-    pub struct BridgeContract<M>(ethers::contract::Contract<M>);
+    pub struct BridgeContract<M>(ethers_contract::Contract<M>);
     impl<M> std::ops::Deref for BridgeContract<M> {
-        type Target = ethers::contract::Contract<M>;
+        type Target = ethers_contract::Contract<M>;
         fn deref(&self) -> &Self::Target {
             &self.0
         }
     }
-    impl<M: ethers::providers::Middleware> std::fmt::Debug for BridgeContract<M> {
+    impl<M: ethers_providers::Middleware> std::fmt::Debug for BridgeContract<M> {
         fn fmt(&self, f: &mut std::fmt::Formatter) -> std::fmt::Result {
             f.debug_tuple(stringify!(BridgeContract))
                 .field(&self.address())
                 .finish()
         }
     }
-    impl<'a, M: ethers::providers::Middleware> BridgeContract<M> {
+    impl<'a, M: ethers_providers::Middleware> BridgeContract<M> {
         #[doc = r" Creates a new contract instance with the specified `ethers`"]
         #[doc = r" client at the given `Address`. The contract derefs to a `ethers::Contract`"]
         #[doc = r" object"]
-        pub fn new<T: Into<ethers::core::types::Address>>(
+        pub fn new<T: Into<ethers_core::types::Address>>(
             address: T,
             client: ::std::sync::Arc<M>,
         ) -> Self {
-            let contract = ethers::contract::Contract::new(
+            let contract = ethers_contract::Contract::new(
                 address.into(),
                 BRIDGECONTRACT_ABI.clone(),
                 client,
@@ -54,7 +54,7 @@ mod bridgecontract_mod {
         #[doc = "Calls the contract's `DEFAULT_ADMIN_ROLE` (0xa217fddf) function"]
         pub fn default_admin_role(
             &self,
-        ) -> ethers::contract::builders::ContractCall<M, [u8; 32]> {
+        ) -> ethers_contract::builders::ContractCall<M, [u8; 32]> {
             self.0
                 .method_hash([162, 23, 253, 223], ())
                 .expect("method not found (this should never happen)")
@@ -62,10 +62,8 @@ mod bridgecontract_mod {
         #[doc = "Calls the contract's `MAX_RELAYERS` (0x9debb3bd) function"]
         pub fn max_relayers(
             &self,
-        ) -> ethers::contract::builders::ContractCall<
-            M,
-            ethers::core::types::U256,
-        > {
+        ) -> ethers_contract::builders::ContractCall<M, ethers_core::types::U256>
+        {
             self.0
                 .method_hash([157, 235, 179, 189], ())
                 .expect("method not found (this should never happen)")
@@ -73,7 +71,7 @@ mod bridgecontract_mod {
         #[doc = "Calls the contract's `RELAYER_ROLE` (0x926d7d7f) function"]
         pub fn relayer_role(
             &self,
-        ) -> ethers::contract::builders::ContractCall<M, [u8; 32]> {
+        ) -> ethers_contract::builders::ContractCall<M, [u8; 32]> {
             self.0
                 .method_hash([146, 109, 125, 127], ())
                 .expect("method not found (this should never happen)")
@@ -81,10 +79,8 @@ mod bridgecontract_mod {
         #[doc = "Calls the contract's `_chainID` (0xbeab7131) function"]
         pub fn chain_id(
             &self,
-        ) -> ethers::contract::builders::ContractCall<
-            M,
-            ethers::core::types::U256,
-        > {
+        ) -> ethers_contract::builders::ContractCall<M, ethers_core::types::U256>
+        {
             self.0
                 .method_hash([190, 171, 113, 49], ())
                 .expect("method not found (this should never happen)")
@@ -92,8 +88,8 @@ mod bridgecontract_mod {
         #[doc = "Calls the contract's `_counts` (0xd75a0683) function"]
         pub fn counts(
             &self,
-            p0: ethers::core::types::U256,
-        ) -> ethers::contract::builders::ContractCall<M, u64> {
+            p0: ethers_core::types::U256,
+        ) -> ethers_contract::builders::ContractCall<M, u64> {
             self.0
                 .method_hash([215, 90, 6, 131], p0)
                 .expect("method not found (this should never happen)")
@@ -101,13 +97,13 @@ mod bridgecontract_mod {
         #[doc = "Calls the contract's `_expiry` (0xc5ec8970) function"]
         pub fn expiry(
             &self,
-        ) -> ethers::contract::builders::ContractCall<M, u64> {
+        ) -> ethers_contract::builders::ContractCall<M, u64> {
             self.0
                 .method_hash([197, 236, 137, 112], ())
                 .expect("method not found (this should never happen)")
         }
         #[doc = "Calls the contract's `_fee` (0xc5b37c22) function"]
-        pub fn fee(&self) -> ethers::contract::builders::ContractCall<M, u128> {
+        pub fn fee(&self) -> ethers_contract::builders::ContractCall<M, u128> {
             self.0
                 .method_hash([197, 179, 124, 34], ())
                 .expect("method not found (this should never happen)")
@@ -117,8 +113,8 @@ mod bridgecontract_mod {
             &self,
             dest_nonce: u128,
             data_hash: [u8; 32],
-            relayer: ethers::core::types::Address,
-        ) -> ethers::contract::builders::ContractCall<M, bool> {
+            relayer: ethers_core::types::Address,
+        ) -> ethers_contract::builders::ContractCall<M, bool> {
             self.0
                 .method_hash(
                     [127, 235, 230, 63],
@@ -129,7 +125,7 @@ mod bridgecontract_mod {
         #[doc = "Calls the contract's `_relayerThreshold` (0xd7a9cd79) function"]
         pub fn relayer_threshold(
             &self,
-        ) -> ethers::contract::builders::ContractCall<M, u8> {
+        ) -> ethers_contract::builders::ContractCall<M, u8> {
             self.0
                 .method_hash([215, 169, 205, 121], ())
                 .expect("method not found (this should never happen)")
@@ -138,9 +134,9 @@ mod bridgecontract_mod {
         pub fn resource_id_to_handler_address(
             &self,
             p0: [u8; 32],
-        ) -> ethers::contract::builders::ContractCall<
+        ) -> ethers_contract::builders::ContractCall<
             M,
-            ethers::core::types::Address,
+            ethers_core::types::Address,
         > {
             self.0
                 .method_hash([132, 219, 128, 159], p0)
@@ -149,10 +145,8 @@ mod bridgecontract_mod {
         #[doc = "Calls the contract's `_totalRelayers` (0x802aabe8) function"]
         pub fn total_relayers(
             &self,
-        ) -> ethers::contract::builders::ContractCall<
-            M,
-            ethers::core::types::U256,
-        > {
+        ) -> ethers_contract::builders::ContractCall<M, ethers_core::types::U256>
+        {
             self.0
                 .method_hash([128, 42, 171, 232], ())
                 .expect("method not found (this should never happen)")
@@ -160,8 +154,8 @@ mod bridgecontract_mod {
         #[doc = "Calls the contract's `adminAddRelayer` (0xcdb0f73a) function"]
         pub fn admin_add_relayer(
             &self,
-            relayer_address: ethers::core::types::Address,
-        ) -> ethers::contract::builders::ContractCall<M, ()> {
+            relayer_address: ethers_core::types::Address,
+        ) -> ethers_contract::builders::ContractCall<M, ()> {
             self.0
                 .method_hash([205, 176, 247, 58], relayer_address)
                 .expect("method not found (this should never happen)")
@@ -169,8 +163,8 @@ mod bridgecontract_mod {
         #[doc = "Calls the contract's `adminChangeFee` (0x91c404ac) function"]
         pub fn admin_change_fee(
             &self,
-            new_fee: ethers::core::types::U256,
-        ) -> ethers::contract::builders::ContractCall<M, ()> {
+            new_fee: ethers_core::types::U256,
+        ) -> ethers_contract::builders::ContractCall<M, ()> {
             self.0
                 .method_hash([145, 196, 4, 172], new_fee)
                 .expect("method not found (this should never happen)")
@@ -178,8 +172,8 @@ mod bridgecontract_mod {
         #[doc = "Calls the contract's `adminChangeRelayerThreshold` (0x4e056005) function"]
         pub fn admin_change_relayer_threshold(
             &self,
-            new_threshold: ethers::core::types::U256,
-        ) -> ethers::contract::builders::ContractCall<M, ()> {
+            new_threshold: ethers_core::types::U256,
+        ) -> ethers_contract::builders::ContractCall<M, ()> {
             self.0
                 .method_hash([78, 5, 96, 5], new_threshold)
                 .expect("method not found (this should never happen)")
@@ -187,7 +181,7 @@ mod bridgecontract_mod {
         #[doc = "Calls the contract's `adminPauseTransfers` (0x80ae1c28) function"]
         pub fn admin_pause_transfers(
             &self,
-        ) -> ethers::contract::builders::ContractCall<M, ()> {
+        ) -> ethers_contract::builders::ContractCall<M, ()> {
             self.0
                 .method_hash([128, 174, 28, 40], ())
                 .expect("method not found (this should never happen)")
@@ -195,8 +189,8 @@ mod bridgecontract_mod {
         #[doc = "Calls the contract's `adminRemoveRelayer` (0x9d82dd63) function"]
         pub fn admin_remove_relayer(
             &self,
-            relayer_address: ethers::core::types::Address,
-        ) -> ethers::contract::builders::ContractCall<M, ()> {
+            relayer_address: ethers_core::types::Address,
+        ) -> ethers_contract::builders::ContractCall<M, ()> {
             self.0
                 .method_hash([157, 130, 221, 99], relayer_address)
                 .expect("method not found (this should never happen)")
@@ -204,10 +198,10 @@ mod bridgecontract_mod {
         #[doc = "Calls the contract's `adminSetResource` (0xcb10f215) function"]
         pub fn admin_set_resource(
             &self,
-            handler_address: ethers::core::types::Address,
+            handler_address: ethers_core::types::Address,
             resource_id: [u8; 32],
-            execution_context_address: ethers::core::types::Address,
-        ) -> ethers::contract::builders::ContractCall<M, ()> {
+            execution_context_address: ethers_core::types::Address,
+        ) -> ethers_contract::builders::ContractCall<M, ()> {
             self.0
                 .method_hash(
                     [203, 16, 242, 21],
@@ -218,7 +212,7 @@ mod bridgecontract_mod {
         #[doc = "Calls the contract's `adminUnpauseTransfers` (0xffaac0eb) function"]
         pub fn admin_unpause_transfers(
             &self,
-        ) -> ethers::contract::builders::ContractCall<M, ()> {
+        ) -> ethers_contract::builders::ContractCall<M, ()> {
             self.0
                 .method_hash([255, 170, 192, 235], ())
                 .expect("method not found (this should never happen)")
@@ -226,10 +220,10 @@ mod bridgecontract_mod {
         #[doc = "Calls the contract's `cancelProposal` (0x709940e6) function"]
         pub fn cancel_proposal(
             &self,
-            chain_id: ethers::core::types::U256,
+            chain_id: ethers_core::types::U256,
             nonce: u64,
             data_hash: [u8; 32],
-        ) -> ethers::contract::builders::ContractCall<M, ()> {
+        ) -> ethers_contract::builders::ContractCall<M, ()> {
             self.0
                 .method_hash([112, 153, 64, 230], (chain_id, nonce, data_hash))
                 .expect("method not found (this should never happen)")
@@ -237,11 +231,11 @@ mod bridgecontract_mod {
         #[doc = "Calls the contract's `executeProposal` (0xdfef9a53) function"]
         pub fn execute_proposal(
             &self,
-            chain_id: ethers::core::types::U256,
+            chain_id: ethers_core::types::U256,
             nonce: u64,
-            data: ethers::core::types::Bytes,
+            data: ethers_core::types::Bytes,
             resource_id: [u8; 32],
-        ) -> ethers::contract::builders::ContractCall<M, ()> {
+        ) -> ethers_contract::builders::ContractCall<M, ()> {
             self.0
                 .method_hash(
                     [223, 239, 154, 83],
@@ -252,10 +246,10 @@ mod bridgecontract_mod {
         #[doc = "Calls the contract's `getProposal` (0x9b303d7a) function"]
         pub fn get_proposal(
             &self,
-            origin_chain_id: ethers::core::types::U256,
+            origin_chain_id: ethers_core::types::U256,
             nonce: u64,
             data_hash: [u8; 32],
-        ) -> ethers::contract::builders::ContractCall<M, Proposal> {
+        ) -> ethers_contract::builders::ContractCall<M, Proposal> {
             self.0
                 .method_hash(
                     [155, 48, 61, 122],
@@ -267,7 +261,7 @@ mod bridgecontract_mod {
         pub fn get_role_admin(
             &self,
             role: [u8; 32],
-        ) -> ethers::contract::builders::ContractCall<M, [u8; 32]> {
+        ) -> ethers_contract::builders::ContractCall<M, [u8; 32]> {
             self.0
                 .method_hash([36, 138, 156, 163], role)
                 .expect("method not found (this should never happen)")
@@ -276,10 +270,10 @@ mod bridgecontract_mod {
         pub fn get_role_member(
             &self,
             role: [u8; 32],
-            index: ethers::core::types::U256,
-        ) -> ethers::contract::builders::ContractCall<
+            index: ethers_core::types::U256,
+        ) -> ethers_contract::builders::ContractCall<
             M,
-            ethers::core::types::Address,
+            ethers_core::types::Address,
         > {
             self.0
                 .method_hash([144, 16, 208, 124], (role, index))
@@ -289,10 +283,8 @@ mod bridgecontract_mod {
         pub fn get_role_member_count(
             &self,
             role: [u8; 32],
-        ) -> ethers::contract::builders::ContractCall<
-            M,
-            ethers::core::types::U256,
-        > {
+        ) -> ethers_contract::builders::ContractCall<M, ethers_core::types::U256>
+        {
             self.0
                 .method_hash([202, 21, 200, 115], role)
                 .expect("method not found (this should never happen)")
@@ -301,11 +293,9 @@ mod bridgecontract_mod {
         pub fn get_role_member_index(
             &self,
             role: [u8; 32],
-            account: ethers::core::types::Address,
-        ) -> ethers::contract::builders::ContractCall<
-            M,
-            ethers::core::types::U256,
-        > {
+            account: ethers_core::types::Address,
+        ) -> ethers_contract::builders::ContractCall<M, ethers_core::types::U256>
+        {
             self.0
                 .method_hash([78, 13, 243, 246], (role, account))
                 .expect("method not found (this should never happen)")
@@ -314,8 +304,8 @@ mod bridgecontract_mod {
         pub fn grant_role(
             &self,
             role: [u8; 32],
-            account: ethers::core::types::Address,
-        ) -> ethers::contract::builders::ContractCall<M, ()> {
+            account: ethers_core::types::Address,
+        ) -> ethers_contract::builders::ContractCall<M, ()> {
             self.0
                 .method_hash([47, 47, 241, 93], (role, account))
                 .expect("method not found (this should never happen)")
@@ -324,8 +314,8 @@ mod bridgecontract_mod {
         pub fn has_role(
             &self,
             role: [u8; 32],
-            account: ethers::core::types::Address,
-        ) -> ethers::contract::builders::ContractCall<M, bool> {
+            account: ethers_core::types::Address,
+        ) -> ethers_contract::builders::ContractCall<M, bool> {
             self.0
                 .method_hash([145, 209, 72, 84], (role, account))
                 .expect("method not found (this should never happen)")
@@ -333,8 +323,8 @@ mod bridgecontract_mod {
         #[doc = "Calls the contract's `isRelayer` (0x541d5548) function"]
         pub fn is_relayer(
             &self,
-            relayer: ethers::core::types::Address,
-        ) -> ethers::contract::builders::ContractCall<M, bool> {
+            relayer: ethers_core::types::Address,
+        ) -> ethers_contract::builders::ContractCall<M, bool> {
             self.0
                 .method_hash([84, 29, 85, 72], relayer)
                 .expect("method not found (this should never happen)")
@@ -342,7 +332,7 @@ mod bridgecontract_mod {
         #[doc = "Calls the contract's `paused` (0x5c975abb) function"]
         pub fn paused(
             &self,
-        ) -> ethers::contract::builders::ContractCall<M, bool> {
+        ) -> ethers_contract::builders::ContractCall<M, bool> {
             self.0
                 .method_hash([92, 151, 90, 187], ())
                 .expect("method not found (this should never happen)")
@@ -350,8 +340,8 @@ mod bridgecontract_mod {
         #[doc = "Calls the contract's `renounceAdmin` (0x5e1fab0f) function"]
         pub fn renounce_admin(
             &self,
-            new_admin: ethers::core::types::Address,
-        ) -> ethers::contract::builders::ContractCall<M, ()> {
+            new_admin: ethers_core::types::Address,
+        ) -> ethers_contract::builders::ContractCall<M, ()> {
             self.0
                 .method_hash([94, 31, 171, 15], new_admin)
                 .expect("method not found (this should never happen)")
@@ -360,8 +350,8 @@ mod bridgecontract_mod {
         pub fn renounce_role(
             &self,
             role: [u8; 32],
-            account: ethers::core::types::Address,
-        ) -> ethers::contract::builders::ContractCall<M, ()> {
+            account: ethers_core::types::Address,
+        ) -> ethers_contract::builders::ContractCall<M, ()> {
             self.0
                 .method_hash([54, 86, 138, 190], (role, account))
                 .expect("method not found (this should never happen)")
@@ -370,8 +360,8 @@ mod bridgecontract_mod {
         pub fn revoke_role(
             &self,
             role: [u8; 32],
-            account: ethers::core::types::Address,
-        ) -> ethers::contract::builders::ContractCall<M, ()> {
+            account: ethers_core::types::Address,
+        ) -> ethers_contract::builders::ContractCall<M, ()> {
             self.0
                 .method_hash([213, 71, 116, 31], (role, account))
                 .expect("method not found (this should never happen)")
@@ -379,9 +369,9 @@ mod bridgecontract_mod {
         #[doc = "Calls the contract's `transferFunds` (0x4603ae38) function"]
         pub fn transfer_funds(
             &self,
-            addrs: ::std::vec::Vec<ethers::core::types::Address>,
-            amounts: ::std::vec::Vec<ethers::core::types::U256>,
-        ) -> ethers::contract::builders::ContractCall<M, ()> {
+            addrs: ::std::vec::Vec<ethers_core::types::Address>,
+            amounts: ::std::vec::Vec<ethers_core::types::U256>,
+        ) -> ethers_contract::builders::ContractCall<M, ()> {
             self.0
                 .method_hash([70, 3, 174, 56], (addrs, amounts))
                 .expect("method not found (this should never happen)")
@@ -389,11 +379,11 @@ mod bridgecontract_mod {
         #[doc = "Calls the contract's `voteProposal` (0xa06fa09b) function"]
         pub fn vote_proposal(
             &self,
-            chain_id: ethers::core::types::U256,
+            chain_id: ethers_core::types::U256,
             nonce: u64,
             resource_id: [u8; 32],
             data_hash: [u8; 32],
-        ) -> ethers::contract::builders::ContractCall<M, ()> {
+        ) -> ethers_contract::builders::ContractCall<M, ()> {
             self.0
                 .method_hash(
                     [160, 111, 160, 155],
@@ -404,70 +394,68 @@ mod bridgecontract_mod {
         #[doc = "Gets the contract's `Deposit` event"]
         pub fn deposit_filter(
             &self,
-        ) -> ethers::contract::builders::Event<M, DepositFilter> {
+        ) -> ethers_contract::builders::Event<M, DepositFilter> {
             self.0.event()
         }
         #[doc = "Gets the contract's `Paused` event"]
         pub fn paused_filter(
             &self,
-        ) -> ethers::contract::builders::Event<M, PausedFilter> {
+        ) -> ethers_contract::builders::Event<M, PausedFilter> {
             self.0.event()
         }
         #[doc = "Gets the contract's `ProposalEvent` event"]
         pub fn proposal_event_filter(
             &self,
-        ) -> ethers::contract::builders::Event<M, ProposalEventFilter> {
+        ) -> ethers_contract::builders::Event<M, ProposalEventFilter> {
             self.0.event()
         }
         #[doc = "Gets the contract's `ProposalVote` event"]
         pub fn proposal_vote_filter(
             &self,
-        ) -> ethers::contract::builders::Event<M, ProposalVoteFilter> {
+        ) -> ethers_contract::builders::Event<M, ProposalVoteFilter> {
             self.0.event()
         }
         #[doc = "Gets the contract's `RelayerAdded` event"]
         pub fn relayer_added_filter(
             &self,
-        ) -> ethers::contract::builders::Event<M, RelayerAddedFilter> {
+        ) -> ethers_contract::builders::Event<M, RelayerAddedFilter> {
             self.0.event()
         }
         #[doc = "Gets the contract's `RelayerRemoved` event"]
         pub fn relayer_removed_filter(
             &self,
-        ) -> ethers::contract::builders::Event<M, RelayerRemovedFilter>
-        {
+        ) -> ethers_contract::builders::Event<M, RelayerRemovedFilter> {
             self.0.event()
         }
         #[doc = "Gets the contract's `RelayerThresholdChanged` event"]
         pub fn relayer_threshold_changed_filter(
             &self,
-        ) -> ethers::contract::builders::Event<M, RelayerThresholdChangedFilter>
+        ) -> ethers_contract::builders::Event<M, RelayerThresholdChangedFilter>
         {
             self.0.event()
         }
         #[doc = "Gets the contract's `RoleGranted` event"]
         pub fn role_granted_filter(
             &self,
-        ) -> ethers::contract::builders::Event<M, RoleGrantedFilter> {
+        ) -> ethers_contract::builders::Event<M, RoleGrantedFilter> {
             self.0.event()
         }
         #[doc = "Gets the contract's `RoleRevoked` event"]
         pub fn role_revoked_filter(
             &self,
-        ) -> ethers::contract::builders::Event<M, RoleRevokedFilter> {
+        ) -> ethers_contract::builders::Event<M, RoleRevokedFilter> {
             self.0.event()
         }
         #[doc = "Gets the contract's `Unpaused` event"]
         pub fn unpaused_filter(
             &self,
-        ) -> ethers::contract::builders::Event<M, UnpausedFilter> {
+        ) -> ethers_contract::builders::Event<M, UnpausedFilter> {
             self.0.event()
         }
         #[doc = r" Returns an [`Event`](#ethers_contract::builders::Event) builder for all events of this contract"]
         pub fn events(
             &self,
-        ) -> ethers::contract::builders::Event<M, BridgeContractEvents>
-        {
+        ) -> ethers_contract::builders::Event<M, BridgeContractEvents> {
             self.0.event_with_filter(Default::default())
         }
     }
@@ -477,12 +465,12 @@ mod bridgecontract_mod {
         Default,
         Eq,
         PartialEq,
-        ethers :: contract :: EthEvent,
-        ethers :: contract :: EthDisplay,
+        ethers_contract :: EthEvent,
+        ethers_contract :: EthDisplay,
     )]
     #[ethevent(name = "Deposit", abi = "Deposit(uint256,bytes32,uint64)")]
     pub struct DepositFilter {
-        pub destination_chain_id: ethers::core::types::U256,
+        pub destination_chain_id: ethers_core::types::U256,
         pub resource_id: [u8; 32],
         pub nonce: u64,
     }
@@ -492,12 +480,12 @@ mod bridgecontract_mod {
         Default,
         Eq,
         PartialEq,
-        ethers :: contract :: EthEvent,
-        ethers :: contract :: EthDisplay,
+        ethers_contract :: EthEvent,
+        ethers_contract :: EthDisplay,
     )]
     #[ethevent(name = "Paused", abi = "Paused(address)")]
     pub struct PausedFilter {
-        pub account: ethers::core::types::Address,
+        pub account: ethers_core::types::Address,
     }
     #[derive(
         Clone,
@@ -505,15 +493,15 @@ mod bridgecontract_mod {
         Default,
         Eq,
         PartialEq,
-        ethers :: contract :: EthEvent,
-        ethers :: contract :: EthDisplay,
+        ethers_contract :: EthEvent,
+        ethers_contract :: EthDisplay,
     )]
     #[ethevent(
         name = "ProposalEvent",
         abi = "ProposalEvent(uint256,uint64,uint8,bytes32)"
     )]
     pub struct ProposalEventFilter {
-        pub origin_chain_id: ethers::core::types::U256,
+        pub origin_chain_id: ethers_core::types::U256,
         pub nonce: u64,
         pub status: u8,
         pub data_hash: [u8; 32],
@@ -524,15 +512,15 @@ mod bridgecontract_mod {
         Default,
         Eq,
         PartialEq,
-        ethers :: contract :: EthEvent,
-        ethers :: contract :: EthDisplay,
+        ethers_contract :: EthEvent,
+        ethers_contract :: EthDisplay,
     )]
     #[ethevent(
         name = "ProposalVote",
         abi = "ProposalVote(uint256,uint64,uint8,bytes32)"
     )]
     pub struct ProposalVoteFilter {
-        pub origin_chain_id: ethers::core::types::U256,
+        pub origin_chain_id: ethers_core::types::U256,
         pub nonce: u64,
         pub status: u8,
         pub data_hash: [u8; 32],
@@ -543,12 +531,12 @@ mod bridgecontract_mod {
         Default,
         Eq,
         PartialEq,
-        ethers :: contract :: EthEvent,
-        ethers :: contract :: EthDisplay,
+        ethers_contract :: EthEvent,
+        ethers_contract :: EthDisplay,
     )]
     #[ethevent(name = "RelayerAdded", abi = "RelayerAdded(address)")]
     pub struct RelayerAddedFilter {
-        pub relayer: ethers::core::types::Address,
+        pub relayer: ethers_core::types::Address,
     }
     #[derive(
         Clone,
@@ -556,12 +544,12 @@ mod bridgecontract_mod {
         Default,
         Eq,
         PartialEq,
-        ethers :: contract :: EthEvent,
-        ethers :: contract :: EthDisplay,
+        ethers_contract :: EthEvent,
+        ethers_contract :: EthDisplay,
     )]
     #[ethevent(name = "RelayerRemoved", abi = "RelayerRemoved(address)")]
     pub struct RelayerRemovedFilter {
-        pub relayer: ethers::core::types::Address,
+        pub relayer: ethers_core::types::Address,
     }
     #[derive(
         Clone,
@@ -569,15 +557,15 @@ mod bridgecontract_mod {
         Default,
         Eq,
         PartialEq,
-        ethers :: contract :: EthEvent,
-        ethers :: contract :: EthDisplay,
+        ethers_contract :: EthEvent,
+        ethers_contract :: EthDisplay,
     )]
     #[ethevent(
         name = "RelayerThresholdChanged",
         abi = "RelayerThresholdChanged(uint256)"
     )]
     pub struct RelayerThresholdChangedFilter {
-        pub new_threshold: ethers::core::types::U256,
+        pub new_threshold: ethers_core::types::U256,
     }
     #[derive(
         Clone,
@@ -585,8 +573,8 @@ mod bridgecontract_mod {
         Default,
         Eq,
         PartialEq,
-        ethers :: contract :: EthEvent,
-        ethers :: contract :: EthDisplay,
+        ethers_contract :: EthEvent,
+        ethers_contract :: EthDisplay,
     )]
     #[ethevent(
         name = "RoleGranted",
@@ -596,9 +584,9 @@ mod bridgecontract_mod {
         #[ethevent(indexed)]
         pub role: [u8; 32],
         #[ethevent(indexed)]
-        pub account: ethers::core::types::Address,
+        pub account: ethers_core::types::Address,
         #[ethevent(indexed)]
-        pub sender: ethers::core::types::Address,
+        pub sender: ethers_core::types::Address,
     }
     #[derive(
         Clone,
@@ -606,8 +594,8 @@ mod bridgecontract_mod {
         Default,
         Eq,
         PartialEq,
-        ethers :: contract :: EthEvent,
-        ethers :: contract :: EthDisplay,
+        ethers_contract :: EthEvent,
+        ethers_contract :: EthDisplay,
     )]
     #[ethevent(
         name = "RoleRevoked",
@@ -617,9 +605,9 @@ mod bridgecontract_mod {
         #[ethevent(indexed)]
         pub role: [u8; 32],
         #[ethevent(indexed)]
-        pub account: ethers::core::types::Address,
+        pub account: ethers_core::types::Address,
         #[ethevent(indexed)]
-        pub sender: ethers::core::types::Address,
+        pub sender: ethers_core::types::Address,
     }
     #[derive(
         Clone,
@@ -627,14 +615,14 @@ mod bridgecontract_mod {
         Default,
         Eq,
         PartialEq,
-        ethers :: contract :: EthEvent,
-        ethers :: contract :: EthDisplay,
+        ethers_contract :: EthEvent,
+        ethers_contract :: EthDisplay,
     )]
     #[ethevent(name = "Unpaused", abi = "Unpaused(address)")]
     pub struct UnpausedFilter {
-        pub account: ethers::core::types::Address,
+        pub account: ethers_core::types::Address,
     }
-    #[derive(Debug, Clone, PartialEq, Eq, ethers :: contract :: EthAbiType)]
+    #[derive(Debug, Clone, PartialEq, Eq, ethers_contract :: EthAbiType)]
     pub enum BridgeContractEvents {
         DepositFilter(DepositFilter),
         PausedFilter(PausedFilter),
@@ -647,10 +635,10 @@ mod bridgecontract_mod {
         RoleRevokedFilter(RoleRevokedFilter),
         UnpausedFilter(UnpausedFilter),
     }
-    impl ethers::contract::EthLogDecode for BridgeContractEvents {
+    impl ethers_contract::EthLogDecode for BridgeContractEvents {
         fn decode_log(
-            log: &ethers::core::abi::RawLog,
-        ) -> Result<Self, ethers::core::abi::Error>
+            log: &ethers_core::abi::RawLog,
+        ) -> Result<Self, ethers_core::abi::Error>
         where
             Self: Sized,
         {
@@ -674,11 +662,9 @@ mod bridgecontract_mod {
             }
             if let Ok(decoded) = RelayerThresholdChangedFilter::decode_log(log)
             {
-                return Ok(
-                    BridgeContractEvents::RelayerThresholdChangedFilter(
-                        decoded,
-                    ),
-                );
+                return Ok(BridgeContractEvents::RelayerThresholdChangedFilter(
+                    decoded,
+                ));
             }
             if let Ok(decoded) = RoleGrantedFilter::decode_log(log) {
                 return Ok(BridgeContractEvents::RoleGrantedFilter(decoded));
@@ -689,7 +675,7 @@ mod bridgecontract_mod {
             if let Ok(decoded) = UnpausedFilter::decode_log(log) {
                 return Ok(BridgeContractEvents::UnpausedFilter(decoded));
             }
-            Err(ethers::core::abi::Error::InvalidData)
+            Err(ethers_core::abi::Error::InvalidData)
         }
     }
     impl ::std::fmt::Display for BridgeContractEvents {
@@ -729,8 +715,8 @@ mod bridgecontract_mod {
         Default,
         Eq,
         PartialEq,
-        ethers :: contract :: EthCall,
-        ethers :: contract :: EthDisplay,
+        ethers_contract :: EthCall,
+        ethers_contract :: EthDisplay,
     )]
     #[ethcall(name = "DEFAULT_ADMIN_ROLE", abi = "DEFAULT_ADMIN_ROLE()")]
     pub struct DefaultAdminRoleCall;
@@ -741,8 +727,8 @@ mod bridgecontract_mod {
         Default,
         Eq,
         PartialEq,
-        ethers :: contract :: EthCall,
-        ethers :: contract :: EthDisplay,
+        ethers_contract :: EthCall,
+        ethers_contract :: EthDisplay,
     )]
     #[ethcall(name = "MAX_RELAYERS", abi = "MAX_RELAYERS()")]
     pub struct MaxRelayersCall;
@@ -753,8 +739,8 @@ mod bridgecontract_mod {
         Default,
         Eq,
         PartialEq,
-        ethers :: contract :: EthCall,
-        ethers :: contract :: EthDisplay,
+        ethers_contract :: EthCall,
+        ethers_contract :: EthDisplay,
     )]
     #[ethcall(name = "RELAYER_ROLE", abi = "RELAYER_ROLE()")]
     pub struct RelayerRoleCall;
@@ -765,8 +751,8 @@ mod bridgecontract_mod {
         Default,
         Eq,
         PartialEq,
-        ethers :: contract :: EthCall,
-        ethers :: contract :: EthDisplay,
+        ethers_contract :: EthCall,
+        ethers_contract :: EthDisplay,
     )]
     #[ethcall(name = "_chainID", abi = "_chainID()")]
     pub struct ChainIDCall;
@@ -777,11 +763,11 @@ mod bridgecontract_mod {
         Default,
         Eq,
         PartialEq,
-        ethers :: contract :: EthCall,
-        ethers :: contract :: EthDisplay,
+        ethers_contract :: EthCall,
+        ethers_contract :: EthDisplay,
     )]
     #[ethcall(name = "_counts", abi = "_counts(uint256)")]
-    pub struct CountsCall(pub ethers::core::types::U256);
+    pub struct CountsCall(pub ethers_core::types::U256);
     #[doc = "Container type for all input parameters for the `_expiry`function with signature `_expiry()` and selector `[197, 236, 137, 112]`"]
     #[derive(
         Clone,
@@ -789,8 +775,8 @@ mod bridgecontract_mod {
         Default,
         Eq,
         PartialEq,
-        ethers :: contract :: EthCall,
-        ethers :: contract :: EthDisplay,
+        ethers_contract :: EthCall,
+        ethers_contract :: EthDisplay,
     )]
     #[ethcall(name = "_expiry", abi = "_expiry()")]
     pub struct ExpiryCall;
@@ -801,8 +787,8 @@ mod bridgecontract_mod {
         Default,
         Eq,
         PartialEq,
-        ethers :: contract :: EthCall,
-        ethers :: contract :: EthDisplay,
+        ethers_contract :: EthCall,
+        ethers_contract :: EthDisplay,
     )]
     #[ethcall(name = "_fee", abi = "_fee()")]
     pub struct FeeCall;
@@ -813,8 +799,8 @@ mod bridgecontract_mod {
         Default,
         Eq,
         PartialEq,
-        ethers :: contract :: EthCall,
-        ethers :: contract :: EthDisplay,
+        ethers_contract :: EthCall,
+        ethers_contract :: EthDisplay,
     )]
     #[ethcall(
         name = "_hasVotedOnProposal",
@@ -823,7 +809,7 @@ mod bridgecontract_mod {
     pub struct HasVotedOnProposalCall {
         pub dest_nonce: u128,
         pub data_hash: [u8; 32],
-        pub relayer: ethers::core::types::Address,
+        pub relayer: ethers_core::types::Address,
     }
     #[doc = "Container type for all input parameters for the `_relayerThreshold`function with signature `_relayerThreshold()` and selector `[215, 169, 205, 121]`"]
     #[derive(
@@ -832,8 +818,8 @@ mod bridgecontract_mod {
         Default,
         Eq,
         PartialEq,
-        ethers :: contract :: EthCall,
-        ethers :: contract :: EthDisplay,
+        ethers_contract :: EthCall,
+        ethers_contract :: EthDisplay,
     )]
     #[ethcall(name = "_relayerThreshold", abi = "_relayerThreshold()")]
     pub struct RelayerThresholdCall;
@@ -844,8 +830,8 @@ mod bridgecontract_mod {
         Default,
         Eq,
         PartialEq,
-        ethers :: contract :: EthCall,
-        ethers :: contract :: EthDisplay,
+        ethers_contract :: EthCall,
+        ethers_contract :: EthDisplay,
     )]
     #[ethcall(
         name = "_resourceIDToHandlerAddress",
@@ -859,8 +845,8 @@ mod bridgecontract_mod {
         Default,
         Eq,
         PartialEq,
-        ethers :: contract :: EthCall,
-        ethers :: contract :: EthDisplay,
+        ethers_contract :: EthCall,
+        ethers_contract :: EthDisplay,
     )]
     #[ethcall(name = "_totalRelayers", abi = "_totalRelayers()")]
     pub struct TotalRelayersCall;
@@ -871,12 +857,12 @@ mod bridgecontract_mod {
         Default,
         Eq,
         PartialEq,
-        ethers :: contract :: EthCall,
-        ethers :: contract :: EthDisplay,
+        ethers_contract :: EthCall,
+        ethers_contract :: EthDisplay,
     )]
     #[ethcall(name = "adminAddRelayer", abi = "adminAddRelayer(address)")]
     pub struct AdminAddRelayerCall {
-        pub relayer_address: ethers::core::types::Address,
+        pub relayer_address: ethers_core::types::Address,
     }
     #[doc = "Container type for all input parameters for the `adminChangeFee`function with signature `adminChangeFee(uint256)` and selector `[145, 196, 4, 172]`"]
     #[derive(
@@ -885,12 +871,12 @@ mod bridgecontract_mod {
         Default,
         Eq,
         PartialEq,
-        ethers :: contract :: EthCall,
-        ethers :: contract :: EthDisplay,
+        ethers_contract :: EthCall,
+        ethers_contract :: EthDisplay,
     )]
     #[ethcall(name = "adminChangeFee", abi = "adminChangeFee(uint256)")]
     pub struct AdminChangeFeeCall {
-        pub new_fee: ethers::core::types::U256,
+        pub new_fee: ethers_core::types::U256,
     }
     #[doc = "Container type for all input parameters for the `adminChangeRelayerThreshold`function with signature `adminChangeRelayerThreshold(uint256)` and selector `[78, 5, 96, 5]`"]
     #[derive(
@@ -899,15 +885,15 @@ mod bridgecontract_mod {
         Default,
         Eq,
         PartialEq,
-        ethers :: contract :: EthCall,
-        ethers :: contract :: EthDisplay,
+        ethers_contract :: EthCall,
+        ethers_contract :: EthDisplay,
     )]
     #[ethcall(
         name = "adminChangeRelayerThreshold",
         abi = "adminChangeRelayerThreshold(uint256)"
     )]
     pub struct AdminChangeRelayerThresholdCall {
-        pub new_threshold: ethers::core::types::U256,
+        pub new_threshold: ethers_core::types::U256,
     }
     #[doc = "Container type for all input parameters for the `adminPauseTransfers`function with signature `adminPauseTransfers()` and selector `[128, 174, 28, 40]`"]
     #[derive(
@@ -916,8 +902,8 @@ mod bridgecontract_mod {
         Default,
         Eq,
         PartialEq,
-        ethers :: contract :: EthCall,
-        ethers :: contract :: EthDisplay,
+        ethers_contract :: EthCall,
+        ethers_contract :: EthDisplay,
     )]
     #[ethcall(name = "adminPauseTransfers", abi = "adminPauseTransfers()")]
     pub struct AdminPauseTransfersCall;
@@ -928,12 +914,12 @@ mod bridgecontract_mod {
         Default,
         Eq,
         PartialEq,
-        ethers :: contract :: EthCall,
-        ethers :: contract :: EthDisplay,
+        ethers_contract :: EthCall,
+        ethers_contract :: EthDisplay,
     )]
     #[ethcall(name = "adminRemoveRelayer", abi = "adminRemoveRelayer(address)")]
     pub struct AdminRemoveRelayerCall {
-        pub relayer_address: ethers::core::types::Address,
+        pub relayer_address: ethers_core::types::Address,
     }
     #[doc = "Container type for all input parameters for the `adminSetResource`function with signature `adminSetResource(address,bytes32,address)` and selector `[203, 16, 242, 21]`"]
     #[derive(
@@ -942,17 +928,17 @@ mod bridgecontract_mod {
         Default,
         Eq,
         PartialEq,
-        ethers :: contract :: EthCall,
-        ethers :: contract :: EthDisplay,
+        ethers_contract :: EthCall,
+        ethers_contract :: EthDisplay,
     )]
     #[ethcall(
         name = "adminSetResource",
         abi = "adminSetResource(address,bytes32,address)"
     )]
     pub struct AdminSetResourceCall {
-        pub handler_address: ethers::core::types::Address,
+        pub handler_address: ethers_core::types::Address,
         pub resource_id: [u8; 32],
-        pub execution_context_address: ethers::core::types::Address,
+        pub execution_context_address: ethers_core::types::Address,
     }
     #[doc = "Container type for all input parameters for the `adminUnpauseTransfers`function with signature `adminUnpauseTransfers()` and selector `[255, 170, 192, 235]`"]
     #[derive(
@@ -961,8 +947,8 @@ mod bridgecontract_mod {
         Default,
         Eq,
         PartialEq,
-        ethers :: contract :: EthCall,
-        ethers :: contract :: EthDisplay,
+        ethers_contract :: EthCall,
+        ethers_contract :: EthDisplay,
     )]
     #[ethcall(name = "adminUnpauseTransfers", abi = "adminUnpauseTransfers()")]
     pub struct AdminUnpauseTransfersCall;
@@ -973,15 +959,15 @@ mod bridgecontract_mod {
         Default,
         Eq,
         PartialEq,
-        ethers :: contract :: EthCall,
-        ethers :: contract :: EthDisplay,
+        ethers_contract :: EthCall,
+        ethers_contract :: EthDisplay,
     )]
     #[ethcall(
         name = "cancelProposal",
         abi = "cancelProposal(uint256,uint64,bytes32)"
     )]
     pub struct CancelProposalCall {
-        pub chain_id: ethers::core::types::U256,
+        pub chain_id: ethers_core::types::U256,
         pub nonce: u64,
         pub data_hash: [u8; 32],
     }
@@ -992,17 +978,17 @@ mod bridgecontract_mod {
         Default,
         Eq,
         PartialEq,
-        ethers :: contract :: EthCall,
-        ethers :: contract :: EthDisplay,
+        ethers_contract :: EthCall,
+        ethers_contract :: EthDisplay,
     )]
     #[ethcall(
         name = "executeProposal",
         abi = "executeProposal(uint256,uint64,bytes,bytes32)"
     )]
     pub struct ExecuteProposalCall {
-        pub chain_id: ethers::core::types::U256,
+        pub chain_id: ethers_core::types::U256,
         pub nonce: u64,
-        pub data: ethers::core::types::Bytes,
+        pub data: ethers_core::types::Bytes,
         pub resource_id: [u8; 32],
     }
     #[doc = "Container type for all input parameters for the `getProposal`function with signature `getProposal(uint256,uint64,bytes32)` and selector `[155, 48, 61, 122]`"]
@@ -1012,15 +998,15 @@ mod bridgecontract_mod {
         Default,
         Eq,
         PartialEq,
-        ethers :: contract :: EthCall,
-        ethers :: contract :: EthDisplay,
+        ethers_contract :: EthCall,
+        ethers_contract :: EthDisplay,
     )]
     #[ethcall(
         name = "getProposal",
         abi = "getProposal(uint256,uint64,bytes32)"
     )]
     pub struct GetProposalCall {
-        pub origin_chain_id: ethers::core::types::U256,
+        pub origin_chain_id: ethers_core::types::U256,
         pub nonce: u64,
         pub data_hash: [u8; 32],
     }
@@ -1031,8 +1017,8 @@ mod bridgecontract_mod {
         Default,
         Eq,
         PartialEq,
-        ethers :: contract :: EthCall,
-        ethers :: contract :: EthDisplay,
+        ethers_contract :: EthCall,
+        ethers_contract :: EthDisplay,
     )]
     #[ethcall(name = "getRoleAdmin", abi = "getRoleAdmin(bytes32)")]
     pub struct GetRoleAdminCall {
@@ -1045,13 +1031,13 @@ mod bridgecontract_mod {
         Default,
         Eq,
         PartialEq,
-        ethers :: contract :: EthCall,
-        ethers :: contract :: EthDisplay,
+        ethers_contract :: EthCall,
+        ethers_contract :: EthDisplay,
     )]
     #[ethcall(name = "getRoleMember", abi = "getRoleMember(bytes32,uint256)")]
     pub struct GetRoleMemberCall {
         pub role: [u8; 32],
-        pub index: ethers::core::types::U256,
+        pub index: ethers_core::types::U256,
     }
     #[doc = "Container type for all input parameters for the `getRoleMemberCount`function with signature `getRoleMemberCount(bytes32)` and selector `[202, 21, 200, 115]`"]
     #[derive(
@@ -1060,8 +1046,8 @@ mod bridgecontract_mod {
         Default,
         Eq,
         PartialEq,
-        ethers :: contract :: EthCall,
-        ethers :: contract :: EthDisplay,
+        ethers_contract :: EthCall,
+        ethers_contract :: EthDisplay,
     )]
     #[ethcall(name = "getRoleMemberCount", abi = "getRoleMemberCount(bytes32)")]
     pub struct GetRoleMemberCountCall {
@@ -1074,8 +1060,8 @@ mod bridgecontract_mod {
         Default,
         Eq,
         PartialEq,
-        ethers :: contract :: EthCall,
-        ethers :: contract :: EthDisplay,
+        ethers_contract :: EthCall,
+        ethers_contract :: EthDisplay,
     )]
     #[ethcall(
         name = "getRoleMemberIndex",
@@ -1083,7 +1069,7 @@ mod bridgecontract_mod {
     )]
     pub struct GetRoleMemberIndexCall {
         pub role: [u8; 32],
-        pub account: ethers::core::types::Address,
+        pub account: ethers_core::types::Address,
     }
     #[doc = "Container type for all input parameters for the `grantRole`function with signature `grantRole(bytes32,address)` and selector `[47, 47, 241, 93]`"]
     #[derive(
@@ -1092,13 +1078,13 @@ mod bridgecontract_mod {
         Default,
         Eq,
         PartialEq,
-        ethers :: contract :: EthCall,
-        ethers :: contract :: EthDisplay,
+        ethers_contract :: EthCall,
+        ethers_contract :: EthDisplay,
     )]
     #[ethcall(name = "grantRole", abi = "grantRole(bytes32,address)")]
     pub struct GrantRoleCall {
         pub role: [u8; 32],
-        pub account: ethers::core::types::Address,
+        pub account: ethers_core::types::Address,
     }
     #[doc = "Container type for all input parameters for the `hasRole`function with signature `hasRole(bytes32,address)` and selector `[145, 209, 72, 84]`"]
     #[derive(
@@ -1107,13 +1093,13 @@ mod bridgecontract_mod {
         Default,
         Eq,
         PartialEq,
-        ethers :: contract :: EthCall,
-        ethers :: contract :: EthDisplay,
+        ethers_contract :: EthCall,
+        ethers_contract :: EthDisplay,
     )]
     #[ethcall(name = "hasRole", abi = "hasRole(bytes32,address)")]
     pub struct HasRoleCall {
         pub role: [u8; 32],
-        pub account: ethers::core::types::Address,
+        pub account: ethers_core::types::Address,
     }
     #[doc = "Container type for all input parameters for the `isRelayer`function with signature `isRelayer(address)` and selector `[84, 29, 85, 72]`"]
     #[derive(
@@ -1122,12 +1108,12 @@ mod bridgecontract_mod {
         Default,
         Eq,
         PartialEq,
-        ethers :: contract :: EthCall,
-        ethers :: contract :: EthDisplay,
+        ethers_contract :: EthCall,
+        ethers_contract :: EthDisplay,
     )]
     #[ethcall(name = "isRelayer", abi = "isRelayer(address)")]
     pub struct IsRelayerCall {
-        pub relayer: ethers::core::types::Address,
+        pub relayer: ethers_core::types::Address,
     }
     #[doc = "Container type for all input parameters for the `paused`function with signature `paused()` and selector `[92, 151, 90, 187]`"]
     #[derive(
@@ -1136,8 +1122,8 @@ mod bridgecontract_mod {
         Default,
         Eq,
         PartialEq,
-        ethers :: contract :: EthCall,
-        ethers :: contract :: EthDisplay,
+        ethers_contract :: EthCall,
+        ethers_contract :: EthDisplay,
     )]
     #[ethcall(name = "paused", abi = "paused()")]
     pub struct PausedCall;
@@ -1148,12 +1134,12 @@ mod bridgecontract_mod {
         Default,
         Eq,
         PartialEq,
-        ethers :: contract :: EthCall,
-        ethers :: contract :: EthDisplay,
+        ethers_contract :: EthCall,
+        ethers_contract :: EthDisplay,
     )]
     #[ethcall(name = "renounceAdmin", abi = "renounceAdmin(address)")]
     pub struct RenounceAdminCall {
-        pub new_admin: ethers::core::types::Address,
+        pub new_admin: ethers_core::types::Address,
     }
     #[doc = "Container type for all input parameters for the `renounceRole`function with signature `renounceRole(bytes32,address)` and selector `[54, 86, 138, 190]`"]
     #[derive(
@@ -1162,13 +1148,13 @@ mod bridgecontract_mod {
         Default,
         Eq,
         PartialEq,
-        ethers :: contract :: EthCall,
-        ethers :: contract :: EthDisplay,
+        ethers_contract :: EthCall,
+        ethers_contract :: EthDisplay,
     )]
     #[ethcall(name = "renounceRole", abi = "renounceRole(bytes32,address)")]
     pub struct RenounceRoleCall {
         pub role: [u8; 32],
-        pub account: ethers::core::types::Address,
+        pub account: ethers_core::types::Address,
     }
     #[doc = "Container type for all input parameters for the `revokeRole`function with signature `revokeRole(bytes32,address)` and selector `[213, 71, 116, 31]`"]
     #[derive(
@@ -1177,13 +1163,13 @@ mod bridgecontract_mod {
         Default,
         Eq,
         PartialEq,
-        ethers :: contract :: EthCall,
-        ethers :: contract :: EthDisplay,
+        ethers_contract :: EthCall,
+        ethers_contract :: EthDisplay,
     )]
     #[ethcall(name = "revokeRole", abi = "revokeRole(bytes32,address)")]
     pub struct RevokeRoleCall {
         pub role: [u8; 32],
-        pub account: ethers::core::types::Address,
+        pub account: ethers_core::types::Address,
     }
     #[doc = "Container type for all input parameters for the `transferFunds`function with signature `transferFunds(address[],uint256[])` and selector `[70, 3, 174, 56]`"]
     #[derive(
@@ -1192,16 +1178,16 @@ mod bridgecontract_mod {
         Default,
         Eq,
         PartialEq,
-        ethers :: contract :: EthCall,
-        ethers :: contract :: EthDisplay,
+        ethers_contract :: EthCall,
+        ethers_contract :: EthDisplay,
     )]
     #[ethcall(
         name = "transferFunds",
         abi = "transferFunds(address[],uint256[])"
     )]
     pub struct TransferFundsCall {
-        pub addrs: ::std::vec::Vec<ethers::core::types::Address>,
-        pub amounts: ::std::vec::Vec<ethers::core::types::U256>,
+        pub addrs: ::std::vec::Vec<ethers_core::types::Address>,
+        pub amounts: ::std::vec::Vec<ethers_core::types::U256>,
     }
     #[doc = "Container type for all input parameters for the `voteProposal`function with signature `voteProposal(uint256,uint64,bytes32,bytes32)` and selector `[160, 111, 160, 155]`"]
     #[derive(
@@ -1210,20 +1196,20 @@ mod bridgecontract_mod {
         Default,
         Eq,
         PartialEq,
-        ethers :: contract :: EthCall,
-        ethers :: contract :: EthDisplay,
+        ethers_contract :: EthCall,
+        ethers_contract :: EthDisplay,
     )]
     #[ethcall(
         name = "voteProposal",
         abi = "voteProposal(uint256,uint64,bytes32,bytes32)"
     )]
     pub struct VoteProposalCall {
-        pub chain_id: ethers::core::types::U256,
+        pub chain_id: ethers_core::types::U256,
         pub nonce: u64,
         pub resource_id: [u8; 32],
         pub data_hash: [u8; 32],
     }
-    #[derive(Debug, Clone, PartialEq, Eq, ethers :: contract :: EthAbiType)]
+    #[derive(Debug, Clone, PartialEq, Eq, ethers_contract :: EthAbiType)]
     pub enum BridgeContractCalls {
         DefaultAdminRole(DefaultAdminRoleCall),
         MaxRelayers(MaxRelayersCall),
@@ -1260,226 +1246,232 @@ mod bridgecontract_mod {
         TransferFunds(TransferFundsCall),
         VoteProposal(VoteProposalCall),
     }
-    impl ethers::core::abi::AbiDecode for BridgeContractCalls {
+    impl ethers_core::abi::AbiDecode for BridgeContractCalls {
         fn decode(
             data: impl AsRef<[u8]>,
-        ) -> Result<Self, ethers::core::abi::AbiError> {
+        ) -> Result<Self, ethers_core::abi::AbiError> {
             if let Ok(decoded) =
-                <DefaultAdminRoleCall as ethers::core::abi::AbiDecode>::decode(
+                <DefaultAdminRoleCall as ethers_core::abi::AbiDecode>::decode(
                     data.as_ref(),
                 )
             {
                 return Ok(BridgeContractCalls::DefaultAdminRole(decoded));
             }
             if let Ok(decoded) =
-                <MaxRelayersCall as ethers::core::abi::AbiDecode>::decode(
+                <MaxRelayersCall as ethers_core::abi::AbiDecode>::decode(
                     data.as_ref(),
                 )
             {
                 return Ok(BridgeContractCalls::MaxRelayers(decoded));
             }
             if let Ok(decoded) =
-                <RelayerRoleCall as ethers::core::abi::AbiDecode>::decode(
+                <RelayerRoleCall as ethers_core::abi::AbiDecode>::decode(
                     data.as_ref(),
                 )
             {
                 return Ok(BridgeContractCalls::RelayerRole(decoded));
             }
             if let Ok(decoded) =
-                <ChainIDCall as ethers::core::abi::AbiDecode>::decode(
+                <ChainIDCall as ethers_core::abi::AbiDecode>::decode(
                     data.as_ref(),
                 )
             {
                 return Ok(BridgeContractCalls::ChainID(decoded));
             }
             if let Ok(decoded) =
-                <CountsCall as ethers::core::abi::AbiDecode>::decode(
+                <CountsCall as ethers_core::abi::AbiDecode>::decode(
                     data.as_ref(),
                 )
             {
                 return Ok(BridgeContractCalls::Counts(decoded));
             }
             if let Ok(decoded) =
-                <ExpiryCall as ethers::core::abi::AbiDecode>::decode(
+                <ExpiryCall as ethers_core::abi::AbiDecode>::decode(
                     data.as_ref(),
                 )
             {
                 return Ok(BridgeContractCalls::Expiry(decoded));
             }
             if let Ok(decoded) =
-                <FeeCall as ethers::core::abi::AbiDecode>::decode(data.as_ref())
+                <FeeCall as ethers_core::abi::AbiDecode>::decode(data.as_ref())
             {
                 return Ok(BridgeContractCalls::Fee(decoded));
             }
             if let Ok(decoded) =
-                <HasVotedOnProposalCall as ethers::core::abi::AbiDecode>::decode(
+                <HasVotedOnProposalCall as ethers_core::abi::AbiDecode>::decode(
                     data.as_ref(),
                 )
             {
                 return Ok(BridgeContractCalls::HasVotedOnProposal(decoded));
             }
             if let Ok(decoded) =
-                <RelayerThresholdCall as ethers::core::abi::AbiDecode>::decode(
+                <RelayerThresholdCall as ethers_core::abi::AbiDecode>::decode(
                     data.as_ref(),
                 )
             {
                 return Ok(BridgeContractCalls::RelayerThreshold(decoded));
             }
-            if let Ok (decoded) = < ResourceIDToHandlerAddressCall as ethers :: core :: abi :: AbiDecode > :: decode (data . as_ref ()) { return Ok (BridgeContractCalls :: ResourceIDToHandlerAddress (decoded)) }
+            if let Ok (decoded) = < ResourceIDToHandlerAddressCall as ethers_core :: abi :: AbiDecode > :: decode (data . as_ref ()) { return Ok (BridgeContractCalls :: ResourceIDToHandlerAddress (decoded)) }
             if let Ok(decoded) =
-                <TotalRelayersCall as ethers::core::abi::AbiDecode>::decode(
+                <TotalRelayersCall as ethers_core::abi::AbiDecode>::decode(
                     data.as_ref(),
                 )
             {
                 return Ok(BridgeContractCalls::TotalRelayers(decoded));
             }
             if let Ok(decoded) =
-                <AdminAddRelayerCall as ethers::core::abi::AbiDecode>::decode(
+                <AdminAddRelayerCall as ethers_core::abi::AbiDecode>::decode(
                     data.as_ref(),
                 )
             {
                 return Ok(BridgeContractCalls::AdminAddRelayer(decoded));
             }
             if let Ok(decoded) =
-                <AdminChangeFeeCall as ethers::core::abi::AbiDecode>::decode(
+                <AdminChangeFeeCall as ethers_core::abi::AbiDecode>::decode(
                     data.as_ref(),
                 )
             {
                 return Ok(BridgeContractCalls::AdminChangeFee(decoded));
             }
-            if let Ok (decoded) = < AdminChangeRelayerThresholdCall as ethers :: core :: abi :: AbiDecode > :: decode (data . as_ref ()) { return Ok (BridgeContractCalls :: AdminChangeRelayerThreshold (decoded)) }
-            if let Ok (decoded) = < AdminPauseTransfersCall as ethers :: core :: abi :: AbiDecode > :: decode (data . as_ref ()) { return Ok (BridgeContractCalls :: AdminPauseTransfers (decoded)) }
+            if let Ok (decoded) = < AdminChangeRelayerThresholdCall as ethers_core :: abi :: AbiDecode > :: decode (data . as_ref ()) { return Ok (BridgeContractCalls :: AdminChangeRelayerThreshold (decoded)) }
             if let Ok(decoded) =
-                <AdminRemoveRelayerCall as ethers::core::abi::AbiDecode>::decode(
+                <AdminPauseTransfersCall as ethers_core::abi::AbiDecode>::decode(
+                    data.as_ref(),
+                )
+            {
+                return Ok(BridgeContractCalls::AdminPauseTransfers(decoded));
+            }
+            if let Ok(decoded) =
+                <AdminRemoveRelayerCall as ethers_core::abi::AbiDecode>::decode(
                     data.as_ref(),
                 )
             {
                 return Ok(BridgeContractCalls::AdminRemoveRelayer(decoded));
             }
             if let Ok(decoded) =
-                <AdminSetResourceCall as ethers::core::abi::AbiDecode>::decode(
+                <AdminSetResourceCall as ethers_core::abi::AbiDecode>::decode(
                     data.as_ref(),
                 )
             {
                 return Ok(BridgeContractCalls::AdminSetResource(decoded));
             }
-            if let Ok (decoded) = < AdminUnpauseTransfersCall as ethers :: core :: abi :: AbiDecode > :: decode (data . as_ref ()) { return Ok (BridgeContractCalls :: AdminUnpauseTransfers (decoded)) }
+            if let Ok (decoded) = < AdminUnpauseTransfersCall as ethers_core :: abi :: AbiDecode > :: decode (data . as_ref ()) { return Ok (BridgeContractCalls :: AdminUnpauseTransfers (decoded)) }
             if let Ok(decoded) =
-                <CancelProposalCall as ethers::core::abi::AbiDecode>::decode(
+                <CancelProposalCall as ethers_core::abi::AbiDecode>::decode(
                     data.as_ref(),
                 )
             {
                 return Ok(BridgeContractCalls::CancelProposal(decoded));
             }
             if let Ok(decoded) =
-                <ExecuteProposalCall as ethers::core::abi::AbiDecode>::decode(
+                <ExecuteProposalCall as ethers_core::abi::AbiDecode>::decode(
                     data.as_ref(),
                 )
             {
                 return Ok(BridgeContractCalls::ExecuteProposal(decoded));
             }
             if let Ok(decoded) =
-                <GetProposalCall as ethers::core::abi::AbiDecode>::decode(
+                <GetProposalCall as ethers_core::abi::AbiDecode>::decode(
                     data.as_ref(),
                 )
             {
                 return Ok(BridgeContractCalls::GetProposal(decoded));
             }
             if let Ok(decoded) =
-                <GetRoleAdminCall as ethers::core::abi::AbiDecode>::decode(
+                <GetRoleAdminCall as ethers_core::abi::AbiDecode>::decode(
                     data.as_ref(),
                 )
             {
                 return Ok(BridgeContractCalls::GetRoleAdmin(decoded));
             }
             if let Ok(decoded) =
-                <GetRoleMemberCall as ethers::core::abi::AbiDecode>::decode(
+                <GetRoleMemberCall as ethers_core::abi::AbiDecode>::decode(
                     data.as_ref(),
                 )
             {
                 return Ok(BridgeContractCalls::GetRoleMember(decoded));
             }
             if let Ok(decoded) =
-                <GetRoleMemberCountCall as ethers::core::abi::AbiDecode>::decode(
+                <GetRoleMemberCountCall as ethers_core::abi::AbiDecode>::decode(
                     data.as_ref(),
                 )
             {
                 return Ok(BridgeContractCalls::GetRoleMemberCount(decoded));
             }
             if let Ok(decoded) =
-                <GetRoleMemberIndexCall as ethers::core::abi::AbiDecode>::decode(
+                <GetRoleMemberIndexCall as ethers_core::abi::AbiDecode>::decode(
                     data.as_ref(),
                 )
             {
                 return Ok(BridgeContractCalls::GetRoleMemberIndex(decoded));
             }
             if let Ok(decoded) =
-                <GrantRoleCall as ethers::core::abi::AbiDecode>::decode(
+                <GrantRoleCall as ethers_core::abi::AbiDecode>::decode(
                     data.as_ref(),
                 )
             {
                 return Ok(BridgeContractCalls::GrantRole(decoded));
             }
             if let Ok(decoded) =
-                <HasRoleCall as ethers::core::abi::AbiDecode>::decode(
+                <HasRoleCall as ethers_core::abi::AbiDecode>::decode(
                     data.as_ref(),
                 )
             {
                 return Ok(BridgeContractCalls::HasRole(decoded));
             }
             if let Ok(decoded) =
-                <IsRelayerCall as ethers::core::abi::AbiDecode>::decode(
+                <IsRelayerCall as ethers_core::abi::AbiDecode>::decode(
                     data.as_ref(),
                 )
             {
                 return Ok(BridgeContractCalls::IsRelayer(decoded));
             }
             if let Ok(decoded) =
-                <PausedCall as ethers::core::abi::AbiDecode>::decode(
+                <PausedCall as ethers_core::abi::AbiDecode>::decode(
                     data.as_ref(),
                 )
             {
                 return Ok(BridgeContractCalls::Paused(decoded));
             }
             if let Ok(decoded) =
-                <RenounceAdminCall as ethers::core::abi::AbiDecode>::decode(
+                <RenounceAdminCall as ethers_core::abi::AbiDecode>::decode(
                     data.as_ref(),
                 )
             {
                 return Ok(BridgeContractCalls::RenounceAdmin(decoded));
             }
             if let Ok(decoded) =
-                <RenounceRoleCall as ethers::core::abi::AbiDecode>::decode(
+                <RenounceRoleCall as ethers_core::abi::AbiDecode>::decode(
                     data.as_ref(),
                 )
             {
                 return Ok(BridgeContractCalls::RenounceRole(decoded));
             }
             if let Ok(decoded) =
-                <RevokeRoleCall as ethers::core::abi::AbiDecode>::decode(
+                <RevokeRoleCall as ethers_core::abi::AbiDecode>::decode(
                     data.as_ref(),
                 )
             {
                 return Ok(BridgeContractCalls::RevokeRole(decoded));
             }
             if let Ok(decoded) =
-                <TransferFundsCall as ethers::core::abi::AbiDecode>::decode(
+                <TransferFundsCall as ethers_core::abi::AbiDecode>::decode(
                     data.as_ref(),
                 )
             {
                 return Ok(BridgeContractCalls::TransferFunds(decoded));
             }
             if let Ok(decoded) =
-                <VoteProposalCall as ethers::core::abi::AbiDecode>::decode(
+                <VoteProposalCall as ethers_core::abi::AbiDecode>::decode(
                     data.as_ref(),
                 )
             {
                 return Ok(BridgeContractCalls::VoteProposal(decoded));
             }
-            Err(ethers::core::abi::Error::InvalidData.into())
+            Err(ethers_core::abi::Error::InvalidData.into())
         }
     }
-    impl ethers::core::abi::AbiEncode for BridgeContractCalls {
+    impl ethers_core::abi::AbiEncode for BridgeContractCalls {
         fn encode(self) -> Vec<u8> {
             match self {
                 BridgeContractCalls::DefaultAdminRole(element) => {
@@ -1787,11 +1779,11 @@ mod bridgecontract_mod {
     }
     #[doc = "`Proposal(uint8,uint200,uint8,uint40)`"]
     #[derive(
-        Clone, Debug, Default, Eq, PartialEq, ethers :: contract :: EthAbiType,
+        Clone, Debug, Default, Eq, PartialEq, ethers_contract :: EthAbiType,
     )]
     pub struct Proposal {
         pub status: u8,
-        pub yes_votes: ethers::core::types::U256,
+        pub yes_votes: ethers_core::types::U256,
         pub yes_votes_total: u8,
         pub proposed_block: u64,
     }
