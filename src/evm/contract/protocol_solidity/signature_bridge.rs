@@ -5,31 +5,31 @@ mod signaturebridgecontract_mod {
     #![allow(dead_code)]
     #![allow(clippy::type_complexity)]
     #![allow(unused_imports)]
-    use ethers_contract::{
+    use ethers::contract::{
         builders::{ContractCall, Event},
         Contract, Lazy,
     };
-    use ethers_core::{
+    use ethers::core::{
         abi::{Abi, Detokenize, InvalidOutputType, Token, Tokenizable},
         types::*,
     };
-    use ethers_providers::Middleware;
+    use ethers::providers::Middleware;
     #[doc = "SignatureBridgeContract was auto-generated with ethers-rs Abigen. More information at: https://github.com/gakonst/ethers-rs"]
     use std::sync::Arc;
-    pub static SIGNATUREBRIDGECONTRACT_ABI: ethers_contract::Lazy<
-        ethers_core::abi::Abi,
-    > = ethers_contract::Lazy::new(|| {
+    pub static SIGNATUREBRIDGECONTRACT_ABI: ethers::contract::Lazy<
+        ethers::core::abi::Abi,
+    > = ethers::contract::Lazy::new(|| {
         serde_json :: from_str ("[{\"inputs\":[{\"internalType\":\"address\",\"name\":\"initialGovernor\",\"type\":\"address\"}],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"previousOwner\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"newOwner\",\"type\":\"address\"}],\"name\":\"GovernanceOwnershipTransferred\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"}],\"name\":\"Paused\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"recovered\",\"type\":\"address\"}],\"name\":\"RecoveredAddress\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"}],\"name\":\"Unpaused\",\"type\":\"event\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"name\":\"_counts\",\"outputs\":[{\"internalType\":\"uint64\",\"name\":\"\",\"type\":\"uint64\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"name\":\"_resourceIDToHandlerAddress\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32[]\",\"name\":\"resourceIDs\",\"type\":\"bytes32[]\"},{\"internalType\":\"address\",\"name\":\"newBridge\",\"type\":\"address\"},{\"internalType\":\"bytes\",\"name\":\"sig\",\"type\":\"bytes\"}],\"name\":\"adminMigrateBridgeWithSignature\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"handlerAddress\",\"type\":\"address\"},{\"internalType\":\"bytes32\",\"name\":\"resourceID\",\"type\":\"bytes32\"},{\"internalType\":\"address\",\"name\":\"executionContextAddress\",\"type\":\"address\"},{\"internalType\":\"bytes\",\"name\":\"sig\",\"type\":\"bytes\"}],\"name\":\"adminSetResourceWithSignature\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes\",\"name\":\"pubkey\",\"type\":\"bytes\"}],\"name\":\"checkPubKey\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes\",\"name\":\"data\",\"type\":\"bytes\"},{\"internalType\":\"bytes\",\"name\":\"sig\",\"type\":\"bytes\"}],\"name\":\"executeProposalWithSignature\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getChainId\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"governor\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"isGovernor\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes\",\"name\":\"data\",\"type\":\"bytes\"},{\"internalType\":\"bytes\",\"name\":\"sig\",\"type\":\"bytes\"}],\"name\":\"isSignatureFromGovernor\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"paused\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes\",\"name\":\"data\",\"type\":\"bytes\"},{\"internalType\":\"bytes\",\"name\":\"sig\",\"type\":\"bytes\"}],\"name\":\"recover\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"refreshNonce\",\"outputs\":[{\"internalType\":\"uint32\",\"name\":\"\",\"type\":\"uint32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"renounceOwnership\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"newOwner\",\"type\":\"address\"},{\"internalType\":\"uint32\",\"name\":\"nonce\",\"type\":\"uint32\"}],\"name\":\"transferOwnership\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"newOwner\",\"type\":\"address\"},{\"internalType\":\"uint32\",\"name\":\"nonce\",\"type\":\"uint32\"},{\"internalType\":\"bytes\",\"name\":\"sig\",\"type\":\"bytes\"}],\"name\":\"transferOwnershipWithSignature\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes\",\"name\":\"publicKey\",\"type\":\"bytes\"},{\"internalType\":\"uint32\",\"name\":\"nonce\",\"type\":\"uint32\"},{\"internalType\":\"bytes\",\"name\":\"sig\",\"type\":\"bytes\"}],\"name\":\"transferOwnershipWithSignaturePubKey\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"hash\",\"type\":\"bytes32\"},{\"internalType\":\"uint8\",\"name\":\"v\",\"type\":\"uint8\"},{\"internalType\":\"bytes32\",\"name\":\"r\",\"type\":\"bytes32\"},{\"internalType\":\"bytes32\",\"name\":\"s\",\"type\":\"bytes32\"}],\"name\":\"verify\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"}]") . expect ("invalid abi")
     });
     #[derive(Clone)]
-    pub struct SignatureBridgeContract<M>(ethers_contract::Contract<M>);
+    pub struct SignatureBridgeContract<M>(ethers::contract::Contract<M>);
     impl<M> std::ops::Deref for SignatureBridgeContract<M> {
-        type Target = ethers_contract::Contract<M>;
+        type Target = ethers::contract::Contract<M>;
         fn deref(&self) -> &Self::Target {
             &self.0
         }
     }
-    impl<M: ethers_providers::Middleware> std::fmt::Debug
+    impl<M: ethers::providers::Middleware> std::fmt::Debug
         for SignatureBridgeContract<M>
     {
         fn fmt(&self, f: &mut std::fmt::Formatter) -> std::fmt::Result {
@@ -38,15 +38,15 @@ mod signaturebridgecontract_mod {
                 .finish()
         }
     }
-    impl<'a, M: ethers_providers::Middleware> SignatureBridgeContract<M> {
+    impl<'a, M: ethers::providers::Middleware> SignatureBridgeContract<M> {
         #[doc = r" Creates a new contract instance with the specified `ethers`"]
         #[doc = r" client at the given `Address`. The contract derefs to a `ethers::Contract`"]
         #[doc = r" object"]
-        pub fn new<T: Into<ethers_core::types::Address>>(
+        pub fn new<T: Into<ethers::core::types::Address>>(
             address: T,
             client: ::std::sync::Arc<M>,
         ) -> Self {
-            let contract = ethers_contract::Contract::new(
+            let contract = ethers::contract::Contract::new(
                 address.into(),
                 SIGNATUREBRIDGECONTRACT_ABI.clone(),
                 client,
@@ -56,8 +56,8 @@ mod signaturebridgecontract_mod {
         #[doc = "Calls the contract's `_counts` (0xd75a0683) function"]
         pub fn counts(
             &self,
-            p0: ethers_core::types::U256,
-        ) -> ethers_contract::builders::ContractCall<M, u64> {
+            p0: ethers::core::types::U256,
+        ) -> ethers::contract::builders::ContractCall<M, u64> {
             self.0
                 .method_hash([215, 90, 6, 131], p0)
                 .expect("method not found (this should never happen)")
@@ -66,9 +66,9 @@ mod signaturebridgecontract_mod {
         pub fn resource_id_to_handler_address(
             &self,
             p0: [u8; 32],
-        ) -> ethers_contract::builders::ContractCall<
+        ) -> ethers::contract::builders::ContractCall<
             M,
-            ethers_core::types::Address,
+            ethers::core::types::Address,
         > {
             self.0
                 .method_hash([132, 219, 128, 159], p0)
@@ -78,9 +78,9 @@ mod signaturebridgecontract_mod {
         pub fn admin_migrate_bridge_with_signature(
             &self,
             resource_i_ds: ::std::vec::Vec<[u8; 32]>,
-            new_bridge: ethers_core::types::Address,
-            sig: ethers_core::types::Bytes,
-        ) -> ethers_contract::builders::ContractCall<M, ()> {
+            new_bridge: ethers::core::types::Address,
+            sig: ethers::core::types::Bytes,
+        ) -> ethers::contract::builders::ContractCall<M, ()> {
             self.0
                 .method_hash(
                     [135, 172, 79, 81],
@@ -91,11 +91,11 @@ mod signaturebridgecontract_mod {
         #[doc = "Calls the contract's `adminSetResourceWithSignature` (0x1eee6bc8) function"]
         pub fn admin_set_resource_with_signature(
             &self,
-            handler_address: ethers_core::types::Address,
+            handler_address: ethers::core::types::Address,
             resource_id: [u8; 32],
-            execution_context_address: ethers_core::types::Address,
-            sig: ethers_core::types::Bytes,
-        ) -> ethers_contract::builders::ContractCall<M, ()> {
+            execution_context_address: ethers::core::types::Address,
+            sig: ethers::core::types::Bytes,
+        ) -> ethers::contract::builders::ContractCall<M, ()> {
             self.0
                 .method_hash(
                     [30, 238, 107, 200],
@@ -111,8 +111,8 @@ mod signaturebridgecontract_mod {
         #[doc = "Calls the contract's `checkPubKey` (0xd4066f4c) function"]
         pub fn check_pub_key(
             &self,
-            pubkey: ethers_core::types::Bytes,
-        ) -> ethers_contract::builders::ContractCall<M, bool> {
+            pubkey: ethers::core::types::Bytes,
+        ) -> ethers::contract::builders::ContractCall<M, bool> {
             self.0
                 .method_hash([212, 6, 111, 76], pubkey)
                 .expect("method not found (this should never happen)")
@@ -120,9 +120,9 @@ mod signaturebridgecontract_mod {
         #[doc = "Calls the contract's `executeProposalWithSignature` (0x9d2b1ed7) function"]
         pub fn execute_proposal_with_signature(
             &self,
-            data: ethers_core::types::Bytes,
-            sig: ethers_core::types::Bytes,
-        ) -> ethers_contract::builders::ContractCall<M, ()> {
+            data: ethers::core::types::Bytes,
+            sig: ethers::core::types::Bytes,
+        ) -> ethers::contract::builders::ContractCall<M, ()> {
             self.0
                 .method_hash([157, 43, 30, 215], (data, sig))
                 .expect("method not found (this should never happen)")
@@ -130,8 +130,10 @@ mod signaturebridgecontract_mod {
         #[doc = "Calls the contract's `getChainId` (0x3408e470) function"]
         pub fn get_chain_id(
             &self,
-        ) -> ethers_contract::builders::ContractCall<M, ethers_core::types::U256>
-        {
+        ) -> ethers::contract::builders::ContractCall<
+            M,
+            ethers::core::types::U256,
+        > {
             self.0
                 .method_hash([52, 8, 228, 112], ())
                 .expect("method not found (this should never happen)")
@@ -139,9 +141,9 @@ mod signaturebridgecontract_mod {
         #[doc = "Calls the contract's `governor` (0x0c340a24) function"]
         pub fn governor(
             &self,
-        ) -> ethers_contract::builders::ContractCall<
+        ) -> ethers::contract::builders::ContractCall<
             M,
-            ethers_core::types::Address,
+            ethers::core::types::Address,
         > {
             self.0
                 .method_hash([12, 52, 10, 36], ())
@@ -150,7 +152,7 @@ mod signaturebridgecontract_mod {
         #[doc = "Calls the contract's `isGovernor` (0xc7af3352) function"]
         pub fn is_governor(
             &self,
-        ) -> ethers_contract::builders::ContractCall<M, bool> {
+        ) -> ethers::contract::builders::ContractCall<M, bool> {
             self.0
                 .method_hash([199, 175, 51, 82], ())
                 .expect("method not found (this should never happen)")
@@ -158,9 +160,9 @@ mod signaturebridgecontract_mod {
         #[doc = "Calls the contract's `isSignatureFromGovernor` (0x8755bcad) function"]
         pub fn is_signature_from_governor(
             &self,
-            data: ethers_core::types::Bytes,
-            sig: ethers_core::types::Bytes,
-        ) -> ethers_contract::builders::ContractCall<M, bool> {
+            data: ethers::core::types::Bytes,
+            sig: ethers::core::types::Bytes,
+        ) -> ethers::contract::builders::ContractCall<M, bool> {
             self.0
                 .method_hash([135, 85, 188, 173], (data, sig))
                 .expect("method not found (this should never happen)")
@@ -168,7 +170,7 @@ mod signaturebridgecontract_mod {
         #[doc = "Calls the contract's `paused` (0x5c975abb) function"]
         pub fn paused(
             &self,
-        ) -> ethers_contract::builders::ContractCall<M, bool> {
+        ) -> ethers::contract::builders::ContractCall<M, bool> {
             self.0
                 .method_hash([92, 151, 90, 187], ())
                 .expect("method not found (this should never happen)")
@@ -176,9 +178,9 @@ mod signaturebridgecontract_mod {
         #[doc = "Calls the contract's `recover` (0x1ed13d1b) function"]
         pub fn recover(
             &self,
-            data: ethers_core::types::Bytes,
-            sig: ethers_core::types::Bytes,
-        ) -> ethers_contract::builders::ContractCall<M, ()> {
+            data: ethers::core::types::Bytes,
+            sig: ethers::core::types::Bytes,
+        ) -> ethers::contract::builders::ContractCall<M, ()> {
             self.0
                 .method_hash([30, 209, 61, 27], (data, sig))
                 .expect("method not found (this should never happen)")
@@ -186,7 +188,7 @@ mod signaturebridgecontract_mod {
         #[doc = "Calls the contract's `refreshNonce` (0x13cb01f9) function"]
         pub fn refresh_nonce(
             &self,
-        ) -> ethers_contract::builders::ContractCall<M, u32> {
+        ) -> ethers::contract::builders::ContractCall<M, u32> {
             self.0
                 .method_hash([19, 203, 1, 249], ())
                 .expect("method not found (this should never happen)")
@@ -194,7 +196,7 @@ mod signaturebridgecontract_mod {
         #[doc = "Calls the contract's `renounceOwnership` (0x715018a6) function"]
         pub fn renounce_ownership(
             &self,
-        ) -> ethers_contract::builders::ContractCall<M, ()> {
+        ) -> ethers::contract::builders::ContractCall<M, ()> {
             self.0
                 .method_hash([113, 80, 24, 166], ())
                 .expect("method not found (this should never happen)")
@@ -202,9 +204,9 @@ mod signaturebridgecontract_mod {
         #[doc = "Calls the contract's `transferOwnership` (0xa6e94c91) function"]
         pub fn transfer_ownership(
             &self,
-            new_owner: ethers_core::types::Address,
+            new_owner: ethers::core::types::Address,
             nonce: u32,
-        ) -> ethers_contract::builders::ContractCall<M, ()> {
+        ) -> ethers::contract::builders::ContractCall<M, ()> {
             self.0
                 .method_hash([166, 233, 76, 145], (new_owner, nonce))
                 .expect("method not found (this should never happen)")
@@ -212,10 +214,10 @@ mod signaturebridgecontract_mod {
         #[doc = "Calls the contract's `transferOwnershipWithSignature` (0x911005e7) function"]
         pub fn transfer_ownership_with_signature(
             &self,
-            new_owner: ethers_core::types::Address,
+            new_owner: ethers::core::types::Address,
             nonce: u32,
-            sig: ethers_core::types::Bytes,
-        ) -> ethers_contract::builders::ContractCall<M, ()> {
+            sig: ethers::core::types::Bytes,
+        ) -> ethers::contract::builders::ContractCall<M, ()> {
             self.0
                 .method_hash([145, 16, 5, 231], (new_owner, nonce, sig))
                 .expect("method not found (this should never happen)")
@@ -223,10 +225,10 @@ mod signaturebridgecontract_mod {
         #[doc = "Calls the contract's `transferOwnershipWithSignaturePubKey` (0x7296b5d8) function"]
         pub fn transfer_ownership_with_signature_pub_key(
             &self,
-            public_key: ethers_core::types::Bytes,
+            public_key: ethers::core::types::Bytes,
             nonce: u32,
-            sig: ethers_core::types::Bytes,
-        ) -> ethers_contract::builders::ContractCall<M, ()> {
+            sig: ethers::core::types::Bytes,
+        ) -> ethers::contract::builders::ContractCall<M, ()> {
             self.0
                 .method_hash([114, 150, 181, 216], (public_key, nonce, sig))
                 .expect("method not found (this should never happen)")
@@ -238,7 +240,7 @@ mod signaturebridgecontract_mod {
             v: u8,
             r: [u8; 32],
             s: [u8; 32],
-        ) -> ethers_contract::builders::ContractCall<M, bool> {
+        ) -> ethers::contract::builders::ContractCall<M, bool> {
             self.0
                 .method_hash([241, 131, 93, 183], (hash, v, r, s))
                 .expect("method not found (this should never happen)")
@@ -246,7 +248,7 @@ mod signaturebridgecontract_mod {
         #[doc = "Gets the contract's `GovernanceOwnershipTransferred` event"]
         pub fn governance_ownership_transferred_filter(
             &self,
-        ) -> ethers_contract::builders::Event<
+        ) -> ethers::contract::builders::Event<
             M,
             GovernanceOwnershipTransferredFilter,
         > {
@@ -255,26 +257,26 @@ mod signaturebridgecontract_mod {
         #[doc = "Gets the contract's `Paused` event"]
         pub fn paused_filter(
             &self,
-        ) -> ethers_contract::builders::Event<M, PausedFilter> {
+        ) -> ethers::contract::builders::Event<M, PausedFilter> {
             self.0.event()
         }
         #[doc = "Gets the contract's `RecoveredAddress` event"]
         pub fn recovered_address_filter(
             &self,
-        ) -> ethers_contract::builders::Event<M, RecoveredAddressFilter>
+        ) -> ethers::contract::builders::Event<M, RecoveredAddressFilter>
         {
             self.0.event()
         }
         #[doc = "Gets the contract's `Unpaused` event"]
         pub fn unpaused_filter(
             &self,
-        ) -> ethers_contract::builders::Event<M, UnpausedFilter> {
+        ) -> ethers::contract::builders::Event<M, UnpausedFilter> {
             self.0.event()
         }
         #[doc = r" Returns an [`Event`](#ethers_contract::builders::Event) builder for all events of this contract"]
         pub fn events(
             &self,
-        ) -> ethers_contract::builders::Event<M, SignatureBridgeContractEvents>
+        ) -> ethers::contract::builders::Event<M, SignatureBridgeContractEvents>
         {
             self.0.event_with_filter(Default::default())
         }
@@ -285,8 +287,8 @@ mod signaturebridgecontract_mod {
         Default,
         Eq,
         PartialEq,
-        ethers_contract :: EthEvent,
-        ethers_contract :: EthDisplay,
+        ethers :: contract :: EthEvent,
+        ethers :: contract :: EthDisplay,
     )]
     #[ethevent(
         name = "GovernanceOwnershipTransferred",
@@ -294,9 +296,9 @@ mod signaturebridgecontract_mod {
     )]
     pub struct GovernanceOwnershipTransferredFilter {
         #[ethevent(indexed)]
-        pub previous_owner: ethers_core::types::Address,
+        pub previous_owner: ethers::core::types::Address,
         #[ethevent(indexed)]
-        pub new_owner: ethers_core::types::Address,
+        pub new_owner: ethers::core::types::Address,
     }
     #[derive(
         Clone,
@@ -304,12 +306,12 @@ mod signaturebridgecontract_mod {
         Default,
         Eq,
         PartialEq,
-        ethers_contract :: EthEvent,
-        ethers_contract :: EthDisplay,
+        ethers :: contract :: EthEvent,
+        ethers :: contract :: EthDisplay,
     )]
     #[ethevent(name = "Paused", abi = "Paused(address)")]
     pub struct PausedFilter {
-        pub account: ethers_core::types::Address,
+        pub account: ethers::core::types::Address,
     }
     #[derive(
         Clone,
@@ -317,13 +319,13 @@ mod signaturebridgecontract_mod {
         Default,
         Eq,
         PartialEq,
-        ethers_contract :: EthEvent,
-        ethers_contract :: EthDisplay,
+        ethers :: contract :: EthEvent,
+        ethers :: contract :: EthDisplay,
     )]
     #[ethevent(name = "RecoveredAddress", abi = "RecoveredAddress(address)")]
     pub struct RecoveredAddressFilter {
         #[ethevent(indexed)]
-        pub recovered: ethers_core::types::Address,
+        pub recovered: ethers::core::types::Address,
     }
     #[derive(
         Clone,
@@ -331,14 +333,14 @@ mod signaturebridgecontract_mod {
         Default,
         Eq,
         PartialEq,
-        ethers_contract :: EthEvent,
-        ethers_contract :: EthDisplay,
+        ethers :: contract :: EthEvent,
+        ethers :: contract :: EthDisplay,
     )]
     #[ethevent(name = "Unpaused", abi = "Unpaused(address)")]
     pub struct UnpausedFilter {
-        pub account: ethers_core::types::Address,
+        pub account: ethers::core::types::Address,
     }
-    #[derive(Debug, Clone, PartialEq, Eq, ethers_contract :: EthAbiType)]
+    #[derive(Debug, Clone, PartialEq, Eq, ethers :: contract :: EthAbiType)]
     pub enum SignatureBridgeContractEvents {
         GovernanceOwnershipTransferredFilter(
             GovernanceOwnershipTransferredFilter,
@@ -347,10 +349,10 @@ mod signaturebridgecontract_mod {
         RecoveredAddressFilter(RecoveredAddressFilter),
         UnpausedFilter(UnpausedFilter),
     }
-    impl ethers_contract::EthLogDecode for SignatureBridgeContractEvents {
+    impl ethers::contract::EthLogDecode for SignatureBridgeContractEvents {
         fn decode_log(
-            log: &ethers_core::abi::RawLog,
-        ) -> Result<Self, ethers_core::abi::Error>
+            log: &ethers::core::abi::RawLog,
+        ) -> Result<Self, ethers::core::abi::Error>
         where
             Self: Sized,
         {
@@ -374,7 +376,7 @@ mod signaturebridgecontract_mod {
                     decoded,
                 ));
             }
-            Err(ethers_core::abi::Error::InvalidData)
+            Err(ethers::core::abi::Error::InvalidData)
         }
     }
     impl ::std::fmt::Display for SignatureBridgeContractEvents {
@@ -389,11 +391,11 @@ mod signaturebridgecontract_mod {
         Default,
         Eq,
         PartialEq,
-        ethers_contract :: EthCall,
-        ethers_contract :: EthDisplay,
+        ethers :: contract :: EthCall,
+        ethers :: contract :: EthDisplay,
     )]
     #[ethcall(name = "_counts", abi = "_counts(uint256)")]
-    pub struct CountsCall(pub ethers_core::types::U256);
+    pub struct CountsCall(pub ethers::core::types::U256);
     #[doc = "Container type for all input parameters for the `_resourceIDToHandlerAddress`function with signature `_resourceIDToHandlerAddress(bytes32)` and selector `[132, 219, 128, 159]`"]
     #[derive(
         Clone,
@@ -401,8 +403,8 @@ mod signaturebridgecontract_mod {
         Default,
         Eq,
         PartialEq,
-        ethers_contract :: EthCall,
-        ethers_contract :: EthDisplay,
+        ethers :: contract :: EthCall,
+        ethers :: contract :: EthDisplay,
     )]
     #[ethcall(
         name = "_resourceIDToHandlerAddress",
@@ -416,8 +418,8 @@ mod signaturebridgecontract_mod {
         Default,
         Eq,
         PartialEq,
-        ethers_contract :: EthCall,
-        ethers_contract :: EthDisplay,
+        ethers :: contract :: EthCall,
+        ethers :: contract :: EthDisplay,
     )]
     #[ethcall(
         name = "adminMigrateBridgeWithSignature",
@@ -425,8 +427,8 @@ mod signaturebridgecontract_mod {
     )]
     pub struct AdminMigrateBridgeWithSignatureCall {
         pub resource_i_ds: ::std::vec::Vec<[u8; 32]>,
-        pub new_bridge: ethers_core::types::Address,
-        pub sig: ethers_core::types::Bytes,
+        pub new_bridge: ethers::core::types::Address,
+        pub sig: ethers::core::types::Bytes,
     }
     #[doc = "Container type for all input parameters for the `adminSetResourceWithSignature`function with signature `adminSetResourceWithSignature(address,bytes32,address,bytes)` and selector `[30, 238, 107, 200]`"]
     #[derive(
@@ -435,18 +437,18 @@ mod signaturebridgecontract_mod {
         Default,
         Eq,
         PartialEq,
-        ethers_contract :: EthCall,
-        ethers_contract :: EthDisplay,
+        ethers :: contract :: EthCall,
+        ethers :: contract :: EthDisplay,
     )]
     #[ethcall(
         name = "adminSetResourceWithSignature",
         abi = "adminSetResourceWithSignature(address,bytes32,address,bytes)"
     )]
     pub struct AdminSetResourceWithSignatureCall {
-        pub handler_address: ethers_core::types::Address,
+        pub handler_address: ethers::core::types::Address,
         pub resource_id: [u8; 32],
-        pub execution_context_address: ethers_core::types::Address,
-        pub sig: ethers_core::types::Bytes,
+        pub execution_context_address: ethers::core::types::Address,
+        pub sig: ethers::core::types::Bytes,
     }
     #[doc = "Container type for all input parameters for the `checkPubKey`function with signature `checkPubKey(bytes)` and selector `[212, 6, 111, 76]`"]
     #[derive(
@@ -455,12 +457,12 @@ mod signaturebridgecontract_mod {
         Default,
         Eq,
         PartialEq,
-        ethers_contract :: EthCall,
-        ethers_contract :: EthDisplay,
+        ethers :: contract :: EthCall,
+        ethers :: contract :: EthDisplay,
     )]
     #[ethcall(name = "checkPubKey", abi = "checkPubKey(bytes)")]
     pub struct CheckPubKeyCall {
-        pub pubkey: ethers_core::types::Bytes,
+        pub pubkey: ethers::core::types::Bytes,
     }
     #[doc = "Container type for all input parameters for the `executeProposalWithSignature`function with signature `executeProposalWithSignature(bytes,bytes)` and selector `[157, 43, 30, 215]`"]
     #[derive(
@@ -469,16 +471,16 @@ mod signaturebridgecontract_mod {
         Default,
         Eq,
         PartialEq,
-        ethers_contract :: EthCall,
-        ethers_contract :: EthDisplay,
+        ethers :: contract :: EthCall,
+        ethers :: contract :: EthDisplay,
     )]
     #[ethcall(
         name = "executeProposalWithSignature",
         abi = "executeProposalWithSignature(bytes,bytes)"
     )]
     pub struct ExecuteProposalWithSignatureCall {
-        pub data: ethers_core::types::Bytes,
-        pub sig: ethers_core::types::Bytes,
+        pub data: ethers::core::types::Bytes,
+        pub sig: ethers::core::types::Bytes,
     }
     #[doc = "Container type for all input parameters for the `getChainId`function with signature `getChainId()` and selector `[52, 8, 228, 112]`"]
     #[derive(
@@ -487,8 +489,8 @@ mod signaturebridgecontract_mod {
         Default,
         Eq,
         PartialEq,
-        ethers_contract :: EthCall,
-        ethers_contract :: EthDisplay,
+        ethers :: contract :: EthCall,
+        ethers :: contract :: EthDisplay,
     )]
     #[ethcall(name = "getChainId", abi = "getChainId()")]
     pub struct GetChainIdCall;
@@ -499,8 +501,8 @@ mod signaturebridgecontract_mod {
         Default,
         Eq,
         PartialEq,
-        ethers_contract :: EthCall,
-        ethers_contract :: EthDisplay,
+        ethers :: contract :: EthCall,
+        ethers :: contract :: EthDisplay,
     )]
     #[ethcall(name = "governor", abi = "governor()")]
     pub struct GovernorCall;
@@ -511,8 +513,8 @@ mod signaturebridgecontract_mod {
         Default,
         Eq,
         PartialEq,
-        ethers_contract :: EthCall,
-        ethers_contract :: EthDisplay,
+        ethers :: contract :: EthCall,
+        ethers :: contract :: EthDisplay,
     )]
     #[ethcall(name = "isGovernor", abi = "isGovernor()")]
     pub struct IsGovernorCall;
@@ -523,16 +525,16 @@ mod signaturebridgecontract_mod {
         Default,
         Eq,
         PartialEq,
-        ethers_contract :: EthCall,
-        ethers_contract :: EthDisplay,
+        ethers :: contract :: EthCall,
+        ethers :: contract :: EthDisplay,
     )]
     #[ethcall(
         name = "isSignatureFromGovernor",
         abi = "isSignatureFromGovernor(bytes,bytes)"
     )]
     pub struct IsSignatureFromGovernorCall {
-        pub data: ethers_core::types::Bytes,
-        pub sig: ethers_core::types::Bytes,
+        pub data: ethers::core::types::Bytes,
+        pub sig: ethers::core::types::Bytes,
     }
     #[doc = "Container type for all input parameters for the `paused`function with signature `paused()` and selector `[92, 151, 90, 187]`"]
     #[derive(
@@ -541,8 +543,8 @@ mod signaturebridgecontract_mod {
         Default,
         Eq,
         PartialEq,
-        ethers_contract :: EthCall,
-        ethers_contract :: EthDisplay,
+        ethers :: contract :: EthCall,
+        ethers :: contract :: EthDisplay,
     )]
     #[ethcall(name = "paused", abi = "paused()")]
     pub struct PausedCall;
@@ -553,13 +555,13 @@ mod signaturebridgecontract_mod {
         Default,
         Eq,
         PartialEq,
-        ethers_contract :: EthCall,
-        ethers_contract :: EthDisplay,
+        ethers :: contract :: EthCall,
+        ethers :: contract :: EthDisplay,
     )]
     #[ethcall(name = "recover", abi = "recover(bytes,bytes)")]
     pub struct RecoverCall {
-        pub data: ethers_core::types::Bytes,
-        pub sig: ethers_core::types::Bytes,
+        pub data: ethers::core::types::Bytes,
+        pub sig: ethers::core::types::Bytes,
     }
     #[doc = "Container type for all input parameters for the `refreshNonce`function with signature `refreshNonce()` and selector `[19, 203, 1, 249]`"]
     #[derive(
@@ -568,8 +570,8 @@ mod signaturebridgecontract_mod {
         Default,
         Eq,
         PartialEq,
-        ethers_contract :: EthCall,
-        ethers_contract :: EthDisplay,
+        ethers :: contract :: EthCall,
+        ethers :: contract :: EthDisplay,
     )]
     #[ethcall(name = "refreshNonce", abi = "refreshNonce()")]
     pub struct RefreshNonceCall;
@@ -580,8 +582,8 @@ mod signaturebridgecontract_mod {
         Default,
         Eq,
         PartialEq,
-        ethers_contract :: EthCall,
-        ethers_contract :: EthDisplay,
+        ethers :: contract :: EthCall,
+        ethers :: contract :: EthDisplay,
     )]
     #[ethcall(name = "renounceOwnership", abi = "renounceOwnership()")]
     pub struct RenounceOwnershipCall;
@@ -592,15 +594,15 @@ mod signaturebridgecontract_mod {
         Default,
         Eq,
         PartialEq,
-        ethers_contract :: EthCall,
-        ethers_contract :: EthDisplay,
+        ethers :: contract :: EthCall,
+        ethers :: contract :: EthDisplay,
     )]
     #[ethcall(
         name = "transferOwnership",
         abi = "transferOwnership(address,uint32)"
     )]
     pub struct TransferOwnershipCall {
-        pub new_owner: ethers_core::types::Address,
+        pub new_owner: ethers::core::types::Address,
         pub nonce: u32,
     }
     #[doc = "Container type for all input parameters for the `transferOwnershipWithSignature`function with signature `transferOwnershipWithSignature(address,uint32,bytes)` and selector `[145, 16, 5, 231]`"]
@@ -610,17 +612,17 @@ mod signaturebridgecontract_mod {
         Default,
         Eq,
         PartialEq,
-        ethers_contract :: EthCall,
-        ethers_contract :: EthDisplay,
+        ethers :: contract :: EthCall,
+        ethers :: contract :: EthDisplay,
     )]
     #[ethcall(
         name = "transferOwnershipWithSignature",
         abi = "transferOwnershipWithSignature(address,uint32,bytes)"
     )]
     pub struct TransferOwnershipWithSignatureCall {
-        pub new_owner: ethers_core::types::Address,
+        pub new_owner: ethers::core::types::Address,
         pub nonce: u32,
-        pub sig: ethers_core::types::Bytes,
+        pub sig: ethers::core::types::Bytes,
     }
     #[doc = "Container type for all input parameters for the `transferOwnershipWithSignaturePubKey`function with signature `transferOwnershipWithSignaturePubKey(bytes,uint32,bytes)` and selector `[114, 150, 181, 216]`"]
     #[derive(
@@ -629,17 +631,17 @@ mod signaturebridgecontract_mod {
         Default,
         Eq,
         PartialEq,
-        ethers_contract :: EthCall,
-        ethers_contract :: EthDisplay,
+        ethers :: contract :: EthCall,
+        ethers :: contract :: EthDisplay,
     )]
     #[ethcall(
         name = "transferOwnershipWithSignaturePubKey",
         abi = "transferOwnershipWithSignaturePubKey(bytes,uint32,bytes)"
     )]
     pub struct TransferOwnershipWithSignaturePubKeyCall {
-        pub public_key: ethers_core::types::Bytes,
+        pub public_key: ethers::core::types::Bytes,
         pub nonce: u32,
-        pub sig: ethers_core::types::Bytes,
+        pub sig: ethers::core::types::Bytes,
     }
     #[doc = "Container type for all input parameters for the `verify`function with signature `verify(bytes32,uint8,bytes32,bytes32)` and selector `[241, 131, 93, 183]`"]
     #[derive(
@@ -648,8 +650,8 @@ mod signaturebridgecontract_mod {
         Default,
         Eq,
         PartialEq,
-        ethers_contract :: EthCall,
-        ethers_contract :: EthDisplay,
+        ethers :: contract :: EthCall,
+        ethers :: contract :: EthDisplay,
     )]
     #[ethcall(name = "verify", abi = "verify(bytes32,uint8,bytes32,bytes32)")]
     pub struct VerifyCall {
@@ -658,7 +660,7 @@ mod signaturebridgecontract_mod {
         pub r: [u8; 32],
         pub s: [u8; 32],
     }
-    #[derive(Debug, Clone, PartialEq, Eq, ethers_contract :: EthAbiType)]
+    #[derive(Debug, Clone, PartialEq, Eq, ethers :: contract :: EthAbiType)]
     pub enum SignatureBridgeContractCalls {
         Counts(CountsCall),
         ResourceIDToHandlerAddress(ResourceIDToHandlerAddressCall),
@@ -681,73 +683,73 @@ mod signaturebridgecontract_mod {
         ),
         Verify(VerifyCall),
     }
-    impl ethers_core::abi::AbiDecode for SignatureBridgeContractCalls {
+    impl ethers::core::abi::AbiDecode for SignatureBridgeContractCalls {
         fn decode(
             data: impl AsRef<[u8]>,
-        ) -> Result<Self, ethers_core::abi::AbiError> {
+        ) -> Result<Self, ethers::core::abi::AbiError> {
             if let Ok(decoded) =
-                <CountsCall as ethers_core::abi::AbiDecode>::decode(
+                <CountsCall as ethers::core::abi::AbiDecode>::decode(
                     data.as_ref(),
                 )
             {
                 return Ok(SignatureBridgeContractCalls::Counts(decoded));
             }
-            if let Ok (decoded) = < ResourceIDToHandlerAddressCall as ethers_core :: abi :: AbiDecode > :: decode (data . as_ref ()) { return Ok (SignatureBridgeContractCalls :: ResourceIDToHandlerAddress (decoded)) }
-            if let Ok (decoded) = < AdminMigrateBridgeWithSignatureCall as ethers_core :: abi :: AbiDecode > :: decode (data . as_ref ()) { return Ok (SignatureBridgeContractCalls :: AdminMigrateBridgeWithSignature (decoded)) }
-            if let Ok (decoded) = < AdminSetResourceWithSignatureCall as ethers_core :: abi :: AbiDecode > :: decode (data . as_ref ()) { return Ok (SignatureBridgeContractCalls :: AdminSetResourceWithSignature (decoded)) }
+            if let Ok (decoded) = < ResourceIDToHandlerAddressCall as ethers :: core :: abi :: AbiDecode > :: decode (data . as_ref ()) { return Ok (SignatureBridgeContractCalls :: ResourceIDToHandlerAddress (decoded)) }
+            if let Ok (decoded) = < AdminMigrateBridgeWithSignatureCall as ethers :: core :: abi :: AbiDecode > :: decode (data . as_ref ()) { return Ok (SignatureBridgeContractCalls :: AdminMigrateBridgeWithSignature (decoded)) }
+            if let Ok (decoded) = < AdminSetResourceWithSignatureCall as ethers :: core :: abi :: AbiDecode > :: decode (data . as_ref ()) { return Ok (SignatureBridgeContractCalls :: AdminSetResourceWithSignature (decoded)) }
             if let Ok(decoded) =
-                <CheckPubKeyCall as ethers_core::abi::AbiDecode>::decode(
+                <CheckPubKeyCall as ethers::core::abi::AbiDecode>::decode(
                     data.as_ref(),
                 )
             {
                 return Ok(SignatureBridgeContractCalls::CheckPubKey(decoded));
             }
-            if let Ok (decoded) = < ExecuteProposalWithSignatureCall as ethers_core :: abi :: AbiDecode > :: decode (data . as_ref ()) { return Ok (SignatureBridgeContractCalls :: ExecuteProposalWithSignature (decoded)) }
+            if let Ok (decoded) = < ExecuteProposalWithSignatureCall as ethers :: core :: abi :: AbiDecode > :: decode (data . as_ref ()) { return Ok (SignatureBridgeContractCalls :: ExecuteProposalWithSignature (decoded)) }
             if let Ok(decoded) =
-                <GetChainIdCall as ethers_core::abi::AbiDecode>::decode(
+                <GetChainIdCall as ethers::core::abi::AbiDecode>::decode(
                     data.as_ref(),
                 )
             {
                 return Ok(SignatureBridgeContractCalls::GetChainId(decoded));
             }
             if let Ok(decoded) =
-                <GovernorCall as ethers_core::abi::AbiDecode>::decode(
+                <GovernorCall as ethers::core::abi::AbiDecode>::decode(
                     data.as_ref(),
                 )
             {
                 return Ok(SignatureBridgeContractCalls::Governor(decoded));
             }
             if let Ok(decoded) =
-                <IsGovernorCall as ethers_core::abi::AbiDecode>::decode(
+                <IsGovernorCall as ethers::core::abi::AbiDecode>::decode(
                     data.as_ref(),
                 )
             {
                 return Ok(SignatureBridgeContractCalls::IsGovernor(decoded));
             }
-            if let Ok (decoded) = < IsSignatureFromGovernorCall as ethers_core :: abi :: AbiDecode > :: decode (data . as_ref ()) { return Ok (SignatureBridgeContractCalls :: IsSignatureFromGovernor (decoded)) }
+            if let Ok (decoded) = < IsSignatureFromGovernorCall as ethers :: core :: abi :: AbiDecode > :: decode (data . as_ref ()) { return Ok (SignatureBridgeContractCalls :: IsSignatureFromGovernor (decoded)) }
             if let Ok(decoded) =
-                <PausedCall as ethers_core::abi::AbiDecode>::decode(
+                <PausedCall as ethers::core::abi::AbiDecode>::decode(
                     data.as_ref(),
                 )
             {
                 return Ok(SignatureBridgeContractCalls::Paused(decoded));
             }
             if let Ok(decoded) =
-                <RecoverCall as ethers_core::abi::AbiDecode>::decode(
+                <RecoverCall as ethers::core::abi::AbiDecode>::decode(
                     data.as_ref(),
                 )
             {
                 return Ok(SignatureBridgeContractCalls::Recover(decoded));
             }
             if let Ok(decoded) =
-                <RefreshNonceCall as ethers_core::abi::AbiDecode>::decode(
+                <RefreshNonceCall as ethers::core::abi::AbiDecode>::decode(
                     data.as_ref(),
                 )
             {
                 return Ok(SignatureBridgeContractCalls::RefreshNonce(decoded));
             }
             if let Ok(decoded) =
-                <RenounceOwnershipCall as ethers_core::abi::AbiDecode>::decode(
+                <RenounceOwnershipCall as ethers::core::abi::AbiDecode>::decode(
                     data.as_ref(),
                 )
             {
@@ -756,7 +758,7 @@ mod signaturebridgecontract_mod {
                 ));
             }
             if let Ok(decoded) =
-                <TransferOwnershipCall as ethers_core::abi::AbiDecode>::decode(
+                <TransferOwnershipCall as ethers::core::abi::AbiDecode>::decode(
                     data.as_ref(),
                 )
             {
@@ -764,19 +766,19 @@ mod signaturebridgecontract_mod {
                     decoded,
                 ));
             }
-            if let Ok (decoded) = < TransferOwnershipWithSignatureCall as ethers_core :: abi :: AbiDecode > :: decode (data . as_ref ()) { return Ok (SignatureBridgeContractCalls :: TransferOwnershipWithSignature (decoded)) }
-            if let Ok (decoded) = < TransferOwnershipWithSignaturePubKeyCall as ethers_core :: abi :: AbiDecode > :: decode (data . as_ref ()) { return Ok (SignatureBridgeContractCalls :: TransferOwnershipWithSignaturePubKey (decoded)) }
+            if let Ok (decoded) = < TransferOwnershipWithSignatureCall as ethers :: core :: abi :: AbiDecode > :: decode (data . as_ref ()) { return Ok (SignatureBridgeContractCalls :: TransferOwnershipWithSignature (decoded)) }
+            if let Ok (decoded) = < TransferOwnershipWithSignaturePubKeyCall as ethers :: core :: abi :: AbiDecode > :: decode (data . as_ref ()) { return Ok (SignatureBridgeContractCalls :: TransferOwnershipWithSignaturePubKey (decoded)) }
             if let Ok(decoded) =
-                <VerifyCall as ethers_core::abi::AbiDecode>::decode(
+                <VerifyCall as ethers::core::abi::AbiDecode>::decode(
                     data.as_ref(),
                 )
             {
                 return Ok(SignatureBridgeContractCalls::Verify(decoded));
             }
-            Err(ethers_core::abi::Error::InvalidData.into())
+            Err(ethers::core::abi::Error::InvalidData.into())
         }
     }
-    impl ethers_core::abi::AbiEncode for SignatureBridgeContractCalls {
+    impl ethers::core::abi::AbiEncode for SignatureBridgeContractCalls {
         fn encode(self) -> Vec<u8> {
             match self { SignatureBridgeContractCalls :: Counts (element) => element . encode () , SignatureBridgeContractCalls :: ResourceIDToHandlerAddress (element) => element . encode () , SignatureBridgeContractCalls :: AdminMigrateBridgeWithSignature (element) => element . encode () , SignatureBridgeContractCalls :: AdminSetResourceWithSignature (element) => element . encode () , SignatureBridgeContractCalls :: CheckPubKey (element) => element . encode () , SignatureBridgeContractCalls :: ExecuteProposalWithSignature (element) => element . encode () , SignatureBridgeContractCalls :: GetChainId (element) => element . encode () , SignatureBridgeContractCalls :: Governor (element) => element . encode () , SignatureBridgeContractCalls :: IsGovernor (element) => element . encode () , SignatureBridgeContractCalls :: IsSignatureFromGovernor (element) => element . encode () , SignatureBridgeContractCalls :: Paused (element) => element . encode () , SignatureBridgeContractCalls :: Recover (element) => element . encode () , SignatureBridgeContractCalls :: RefreshNonce (element) => element . encode () , SignatureBridgeContractCalls :: RenounceOwnership (element) => element . encode () , SignatureBridgeContractCalls :: TransferOwnership (element) => element . encode () , SignatureBridgeContractCalls :: TransferOwnershipWithSignature (element) => element . encode () , SignatureBridgeContractCalls :: TransferOwnershipWithSignaturePubKey (element) => element . encode () , SignatureBridgeContractCalls :: Verify (element) => element . encode () }
         }
