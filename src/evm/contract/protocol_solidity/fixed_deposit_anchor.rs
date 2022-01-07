@@ -1538,9 +1538,11 @@ mod fixeddepositanchorcontract_mod {
                     data.as_ref(),
                 )
             {
-                return Ok(FixedDepositAnchorContractCalls::EdgeExistsForChain(
-                    decoded,
-                ));
+                return Ok(
+                    FixedDepositAnchorContractCalls::EdgeExistsForChain(
+                        decoded,
+                    ),
+                );
             }
             if let Ok(decoded) =
                 <EdgeIndexCall as ethers::core::abi::AbiDecode>::decode(
@@ -1570,7 +1572,9 @@ mod fixeddepositanchorcontract_mod {
                     data.as_ref(),
                 )
             {
-                return Ok(FixedDepositAnchorContractCalls::GetChainId(decoded));
+                return Ok(FixedDepositAnchorContractCalls::GetChainId(
+                    decoded,
+                ));
             }
             if let Ok(decoded) =
                 <GetDenominationCall as ethers::core::abi::AbiDecode>::decode(
@@ -1724,7 +1728,9 @@ mod fixeddepositanchorcontract_mod {
                     data.as_ref(),
                 )
             {
-                return Ok(FixedDepositAnchorContractCalls::SetHandler(decoded));
+                return Ok(FixedDepositAnchorContractCalls::SetHandler(
+                    decoded,
+                ));
             }
             if let Ok(decoded) =
                 <SetVerifierCall as ethers::core::abi::AbiDecode>::decode(
@@ -1774,7 +1780,9 @@ mod fixeddepositanchorcontract_mod {
                     data.as_ref(),
                 )
             {
-                return Ok(FixedDepositAnchorContractCalls::UpdateEdge(decoded));
+                return Ok(FixedDepositAnchorContractCalls::UpdateEdge(
+                    decoded,
+                ));
             }
             if let Ok(decoded) =
                 <VerifierCall as ethers::core::abi::AbiDecode>::decode(
@@ -1813,7 +1821,9 @@ mod fixeddepositanchorcontract_mod {
                     data.as_ref(),
                 )
             {
-                return Ok(FixedDepositAnchorContractCalls::WrapNative(decoded));
+                return Ok(FixedDepositAnchorContractCalls::WrapNative(
+                    decoded,
+                ));
             }
             if let Ok(decoded) =
                 <WrapTokenCall as ethers::core::abi::AbiDecode>::decode(

@@ -1,8 +1,7 @@
-use webb::substrate::dkg_runtime::api::{
-    dkg_proposals, DefaultConfig, RuntimeApi,
-};
+use subxt::{DefaultConfig, DefaultExtra};
+use webb::substrate::dkg_runtime::api::{dkg_proposals, RuntimeApi};
 
-type DKGRuntimeApi = RuntimeApi<DefaultConfig>;
+type DKGRuntimeApi = RuntimeApi<DefaultConfig, DefaultExtra<DefaultConfig>>;
 
 const URL: &str = "ws://localhost:9944";
 
