@@ -15,6 +15,7 @@ async fn get_runtime_api() -> anyhow::Result<DKGRuntimeApi> {
 }
 
 #[tokio::test]
+#[ignore = "this needs a local node running"]
 async fn acknowledge_proposal_works() -> anyhow::Result<()> {
     let api = get_runtime_api().await?;
     let nonce = 0;
