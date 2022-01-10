@@ -4,7 +4,7 @@ use std::error::Error;
 mod evm {
     use std::io::Write;
 
-    use ethers::contract::Abigen;
+    use ethers_contract_abigen::Abigen;
     use tempfile::NamedTempFile;
 
     use super::*;

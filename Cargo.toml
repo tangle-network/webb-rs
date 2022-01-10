@@ -27,12 +27,9 @@ thiserror = "1.0.26"
 hex = { version = "0.4", default-features = false }
 
 # EVM crates.
-ethers = { version = "0.6.0", default-features = false, features = ["legacy"], optional = true }
+ethers = { version = "0.6.0", default-features = false, features = ["legacy", "rustls"], optional = true }
 serde_json = { version = "1", optional = true }
 pedersen = { version = "0.1", package = "webb-pedersen-hash", path = "pedersen-hash", optional = true }
-# just to make it compile on Linux where the OpenSSL is not available.
-# So, we just use the vendored one.
-native-tls = { version = "^0.2", features = ["vendored"] }
 
 [dependencies.subxt]
 git = "https://github.com/paritytech/subxt.git"
@@ -48,7 +45,7 @@ sp-keyring = { git = "https://github.com/paritytech/substrate/", branch = "maste
 [build-dependencies]
 serde_json = "1"
 tempfile = "3.2"
-ethers = { version = "0.6.0", default-features = false, features = ["legacy"], optional = true }
+ethers-contract-abigen = { version = "0.6.0", default-features = false, optional = true }
 syn = { version = "1.0.80", optional = true }
 scale = { package = "parity-scale-codec", version = "2.3.0", default-features = false, optional = true }
 frame-metadata = { version = "14.0.0", features = ["v14", "std"], optional = true }
@@ -72,7 +69,5 @@ evm-runtime = [
 # Tests
 integration-tests = []
 # Build
-generate-contracts = ["evm-runtime"]
+generate-contracts = ["ethers-contract-abigen"]
 generate-substrate = ["subxt-codegen", "syn", "frame-metadata", "scale"]
-
-# sp-core = { package = "sp-core", git = "https://github.com/paritytech/substrate.git", rev = "026ec33f" }
