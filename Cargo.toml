@@ -37,13 +37,13 @@ native-tls = { version = "^0.2", features = ["vendored"] }
 [dependencies.subxt]
 git = "https://github.com/paritytech/subxt.git"
 version = "0.15.0"
-rev = "ca5345c" # https://github.com/paritytech/subxt/commit/ca5345c
+rev = "d99cb9f" # https://github.com/paritytech/subxt/commit/d99cb9f
 optional = true
 
 [dev-dependencies]
 tokio = { version = "^1", features = ["macros", "rt"] }
 anyhow = "^1"
-sp-keyring = { git = "https://github.com/paritytech/substrate/", branch = "master" }
+sp-keyring = "4.0.0"
 
 [build-dependencies]
 serde_json = "1"
@@ -56,7 +56,7 @@ frame-metadata = { version = "14.0.0", features = ["v14", "std"], optional = tru
 [build-dependencies.subxt-codegen]
 git = "https://github.com/paritytech/subxt.git"
 version = "0.2.0"
-rev = "ca5345c" # https://github.com/paritytech/subxt/commit/ca5345c
+rev = "d99cb9f" # https://github.com/paritytech/subxt/commit/d99cb9f
 optional = true
 
 [features]
@@ -74,5 +74,3 @@ integration-tests = []
 # Build
 generate-contracts = ["evm-runtime"]
 generate-substrate = ["subxt-codegen", "syn", "frame-metadata", "scale"]
-
-# sp-core = { package = "sp-core", git = "https://github.com/paritytech/substrate.git", rev = "026ec33f" }
