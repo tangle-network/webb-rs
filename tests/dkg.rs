@@ -15,6 +15,27 @@ async fn get_runtime_api() -> anyhow::Result<DKGRuntimeApi> {
 }
 
 #[tokio::test]
+async fn read_chain_nonce() {
+    let api = get_runtime_api().await.unwrap();
+    let chain_id = 5001;
+    let result = api
+        .storage()
+        .dkg_proposals()
+        .chain_nonces(chain_id, None)
+        .await
+        .unwrap();
+    assert_eq!(result, Some(0));
+    let unkonwn_chain_id = 5000;
+    let result = api
+        .storage()
+        .dkg_proposals()
+        .chain_nonces(unkonwn_chain_id, None)
+        .await
+        .unwrap();
+    assert_eq!(result, None);
+}
+
+#[tokio::test]
 #[ignore = "this needs a local node running"]
 async fn acknowledge_proposal_works() -> anyhow::Result<()> {
     let api = get_runtime_api().await?;
