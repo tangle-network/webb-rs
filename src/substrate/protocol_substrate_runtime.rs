@@ -6,6 +6,7 @@ pub mod api {
         Debug,
         Eq,
         PartialEq,
+        Clone,
     )]
     pub enum Event {
         #[codec(index = 0)]
@@ -104,6 +105,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct fill_block {
                 pub ratio: runtime_types::sp_arithmetic::per_things::Perbill,
@@ -118,6 +120,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct remark {
                 pub remark: ::std::vec::Vec<::core::primitive::u8>,
@@ -132,6 +135,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
                 :: subxt :: codec :: CompactAs,
             )]
             pub struct set_heap_pages {
@@ -147,6 +151,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct set_code {
                 pub code: ::std::vec::Vec<::core::primitive::u8>,
@@ -161,6 +166,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct set_code_without_checks {
                 pub code: ::std::vec::Vec<::core::primitive::u8>,
@@ -175,6 +181,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct set_storage {
                 pub items: ::std::vec::Vec<(
@@ -192,6 +199,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct kill_storage {
                 pub keys:
@@ -207,6 +215,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct kill_prefix {
                 pub prefix: ::std::vec::Vec<::core::primitive::u8>,
@@ -222,6 +231,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct remark_with_event {
                 pub remark: ::std::vec::Vec<::core::primitive::u8>,
@@ -389,6 +399,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct ExtrinsicSuccess {
                 pub dispatch_info:
@@ -404,6 +415,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct ExtrinsicFailed {
                 pub dispatch_error: runtime_types::sp_runtime::DispatchError,
@@ -420,6 +432,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct CodeUpdated;
             impl ::subxt::Event for CodeUpdated {
@@ -432,6 +445,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct NewAccount {
                 pub account: ::subxt::sp_core::crypto::AccountId32,
@@ -446,6 +460,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct KilledAccount {
                 pub account: ::subxt::sp_core::crypto::AccountId32,
@@ -460,6 +475,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct Remarked {
                 pub sender: ::subxt::sp_core::crypto::AccountId32,
@@ -1030,6 +1046,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct set {
                 #[codec(compact)]
@@ -1148,6 +1165,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct report_equivocation {
                 pub equivocation_proof: ::std::boxed::Box<
@@ -1171,6 +1189,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct report_equivocation_unsigned {
                 pub equivocation_proof: ::std::boxed::Box<
@@ -1194,6 +1213,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct plan_config_change { pub config : runtime_types :: sp_consensus_babe :: digests :: NextConfigDescriptor , }
             impl ::subxt::Call for plan_config_change {
@@ -1615,6 +1635,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct set_uncles {
                 pub new_uncles: ::std::vec::Vec<
@@ -1775,6 +1796,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
                 :: subxt :: codec :: CompactAs,
             )]
             pub struct claim {
@@ -1790,6 +1812,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct transfer {
                 pub new: ::subxt::sp_core::crypto::AccountId32,
@@ -1805,6 +1828,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
                 :: subxt :: codec :: CompactAs,
             )]
             pub struct free {
@@ -1820,6 +1844,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct force_transfer {
                 pub new: ::subxt::sp_core::crypto::AccountId32,
@@ -1836,6 +1861,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
                 :: subxt :: codec :: CompactAs,
             )]
             pub struct freeze {
@@ -1945,6 +1971,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct IndexAssigned {
                 pub who: ::subxt::sp_core::crypto::AccountId32,
@@ -1960,6 +1987,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
                 :: subxt :: codec :: CompactAs,
             )]
             pub struct IndexFreed {
@@ -1975,6 +2003,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct IndexFrozen {
                 pub index: ::core::primitive::u32,
@@ -2069,6 +2098,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct transfer {
                 pub dest: ::subxt::sp_runtime::MultiAddress<
@@ -2088,6 +2118,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct set_balance {
                 pub who: ::subxt::sp_runtime::MultiAddress<
@@ -2109,6 +2140,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct force_transfer {
                 pub source: ::subxt::sp_runtime::MultiAddress<
@@ -2132,6 +2164,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct transfer_keep_alive {
                 pub dest: ::subxt::sp_runtime::MultiAddress<
@@ -2151,6 +2184,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct transfer_all {
                 pub dest: ::subxt::sp_runtime::MultiAddress<
@@ -2169,6 +2203,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct force_unreserve {
                 pub who: ::subxt::sp_runtime::MultiAddress<
@@ -2329,6 +2364,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct Endowed {
                 pub account: ::subxt::sp_core::crypto::AccountId32,
@@ -2344,6 +2380,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct DustLost {
                 pub account: ::subxt::sp_core::crypto::AccountId32,
@@ -2359,6 +2396,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct Transfer {
                 pub from: ::subxt::sp_core::crypto::AccountId32,
@@ -2375,6 +2413,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct BalanceSet {
                 pub who: ::subxt::sp_core::crypto::AccountId32,
@@ -2391,6 +2430,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct Reserved {
                 pub who: ::subxt::sp_core::crypto::AccountId32,
@@ -2406,6 +2446,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct Unreserved {
                 pub who: ::subxt::sp_core::crypto::AccountId32,
@@ -2421,6 +2462,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct ReserveRepatriated { pub from : :: subxt :: sp_core :: crypto :: AccountId32 , pub to : :: subxt :: sp_core :: crypto :: AccountId32 , pub amount : :: core :: primitive :: u128 , pub destination_status : runtime_types :: frame_support :: traits :: tokens :: misc :: BalanceStatus , }
             impl ::subxt::Event for ReserveRepatriated {
@@ -2433,6 +2475,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct Deposit {
                 pub who: ::subxt::sp_core::crypto::AccountId32,
@@ -2448,6 +2491,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct Withdraw {
                 pub who: ::subxt::sp_core::crypto::AccountId32,
@@ -2463,6 +2507,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct Slashed {
                 pub who: ::subxt::sp_core::crypto::AccountId32,
@@ -2752,6 +2797,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct submit_unsigned { pub raw_solution : :: std :: boxed :: Box < runtime_types :: pallet_election_provider_multi_phase :: RawSolution < runtime_types :: webb_standalone_runtime :: NposSolution16 > > , pub witness : runtime_types :: pallet_election_provider_multi_phase :: SolutionOrSnapshotSize , }
             impl ::subxt::Call for submit_unsigned {
@@ -2764,6 +2810,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct set_minimum_untrusted_score {
                 pub maybe_next_score:
@@ -2779,6 +2826,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct set_emergency_election_result {
                 pub supports: ::std::vec::Vec<(
@@ -2798,6 +2846,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct submit { pub raw_solution : :: std :: boxed :: Box < runtime_types :: pallet_election_provider_multi_phase :: RawSolution < runtime_types :: webb_standalone_runtime :: NposSolution16 > > , pub num_signed_submissions : :: core :: primitive :: u32 , }
             impl ::subxt::Call for submit {
@@ -2903,6 +2952,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct SolutionStored { pub election_compute : runtime_types :: pallet_election_provider_multi_phase :: ElectionCompute , pub prev_ejected : :: core :: primitive :: bool , }
             impl ::subxt::Event for SolutionStored {
@@ -2915,6 +2965,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct ElectionFinalized { pub election_compute : :: core :: option :: Option < runtime_types :: pallet_election_provider_multi_phase :: ElectionCompute > , }
             impl ::subxt::Event for ElectionFinalized {
@@ -2927,6 +2978,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct Rewarded {
                 pub account: ::subxt::sp_core::crypto::AccountId32,
@@ -2942,6 +2994,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct Slashed {
                 pub account: ::subxt::sp_core::crypto::AccountId32,
@@ -2957,6 +3010,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
                 :: subxt :: codec :: CompactAs,
             )]
             pub struct SignedPhaseStarted {
@@ -2972,6 +3026,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
                 :: subxt :: codec :: CompactAs,
             )]
             pub struct UnsignedPhaseStarted {
@@ -3340,6 +3395,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct bond {
                 pub controller: ::subxt::sp_runtime::MultiAddress<
@@ -3362,6 +3418,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct bond_extra {
                 #[codec(compact)]
@@ -3377,6 +3434,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct unbond {
                 #[codec(compact)]
@@ -3392,6 +3450,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
                 :: subxt :: codec :: CompactAs,
             )]
             pub struct withdraw_unbonded {
@@ -3407,6 +3466,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct validate {
                 pub prefs: runtime_types::pallet_staking::ValidatorPrefs,
@@ -3421,6 +3481,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct nominate {
                 pub targets: ::std::vec::Vec<
@@ -3440,6 +3501,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct chill;
             impl ::subxt::Call for chill {
@@ -3452,6 +3514,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct set_payee {
                 pub payee: runtime_types::pallet_staking::RewardDestination<
@@ -3468,6 +3531,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct set_controller {
                 pub controller: ::subxt::sp_runtime::MultiAddress<
@@ -3485,6 +3549,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct set_validator_count {
                 #[codec(compact)]
@@ -3500,6 +3565,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct increase_validator_count {
                 #[codec(compact)]
@@ -3515,6 +3581,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct scale_validator_count {
                 pub factor: runtime_types::sp_arithmetic::per_things::Percent,
@@ -3529,6 +3596,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct force_no_eras;
             impl ::subxt::Call for force_no_eras {
@@ -3541,6 +3609,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct force_new_era;
             impl ::subxt::Call for force_new_era {
@@ -3553,6 +3622,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct set_invulnerables {
                 pub invulnerables:
@@ -3568,6 +3638,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct force_unstake {
                 pub stash: ::subxt::sp_core::crypto::AccountId32,
@@ -3583,6 +3654,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct force_new_era_always;
             impl ::subxt::Call for force_new_era_always {
@@ -3595,6 +3667,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct cancel_deferred_slash {
                 pub era: ::core::primitive::u32,
@@ -3610,6 +3683,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct payout_stakers {
                 pub validator_stash: ::subxt::sp_core::crypto::AccountId32,
@@ -3625,6 +3699,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct rebond {
                 #[codec(compact)]
@@ -3640,6 +3715,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct set_history_depth {
                 #[codec(compact)]
@@ -3657,6 +3733,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct reap_stash {
                 pub stash: ::subxt::sp_core::crypto::AccountId32,
@@ -3672,6 +3749,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct kick {
                 pub who: ::std::vec::Vec<
@@ -3691,6 +3769,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct set_staking_configs {
                 pub min_nominator_bond: ::core::primitive::u128,
@@ -3715,6 +3794,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct chill_other {
                 pub controller: ::subxt::sp_core::crypto::AccountId32,
@@ -4159,6 +4239,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct EraPaid(
                 pub ::core::primitive::u32,
@@ -4175,6 +4256,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct Rewarded(
                 pub ::subxt::sp_core::crypto::AccountId32,
@@ -4190,6 +4272,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct Slashed(
                 pub ::subxt::sp_core::crypto::AccountId32,
@@ -4205,6 +4288,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
                 :: subxt :: codec :: CompactAs,
             )]
             pub struct OldSlashingReportDiscarded(pub ::core::primitive::u32);
@@ -4218,6 +4302,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct StakersElected;
             impl ::subxt::Event for StakersElected {
@@ -4230,6 +4315,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct Bonded(
                 pub ::subxt::sp_core::crypto::AccountId32,
@@ -4245,6 +4331,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct Unbonded(
                 pub ::subxt::sp_core::crypto::AccountId32,
@@ -4260,6 +4347,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct Withdrawn(
                 pub ::subxt::sp_core::crypto::AccountId32,
@@ -4275,6 +4363,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct Kicked(
                 pub ::subxt::sp_core::crypto::AccountId32,
@@ -4290,6 +4379,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct StakingElectionFailed;
             impl ::subxt::Event for StakingElectionFailed {
@@ -4302,6 +4392,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct Chilled(pub ::subxt::sp_core::crypto::AccountId32);
             impl ::subxt::Event for Chilled {
@@ -4314,6 +4405,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct PayoutStarted(
                 pub ::core::primitive::u32,
@@ -5520,6 +5612,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct set_keys {
                 pub keys: runtime_types::webb_standalone_runtime::SessionKeys,
@@ -5535,6 +5628,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct purge_keys;
             impl ::subxt::Call for purge_keys {
@@ -5596,6 +5690,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
                 :: subxt :: codec :: CompactAs,
             )]
             pub struct NewSession {
@@ -5808,6 +5903,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct propose {
                 pub proposal_hash: ::subxt::sp_core::H256,
@@ -5824,6 +5920,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct second {
                 #[codec(compact)]
@@ -5841,6 +5938,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct vote {
                 #[codec(compact)]
@@ -5859,6 +5957,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
                 :: subxt :: codec :: CompactAs,
             )]
             pub struct emergency_cancel {
@@ -5874,6 +5973,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct external_propose {
                 pub proposal_hash: ::subxt::sp_core::H256,
@@ -5888,6 +5988,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct external_propose_majority {
                 pub proposal_hash: ::subxt::sp_core::H256,
@@ -5902,6 +6003,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct external_propose_default {
                 pub proposal_hash: ::subxt::sp_core::H256,
@@ -5916,6 +6018,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct fast_track {
                 pub proposal_hash: ::subxt::sp_core::H256,
@@ -5932,6 +6035,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct veto_external {
                 pub proposal_hash: ::subxt::sp_core::H256,
@@ -5946,6 +6050,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct cancel_referendum {
                 #[codec(compact)]
@@ -5961,6 +6066,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
                 :: subxt :: codec :: CompactAs,
             )]
             pub struct cancel_queued {
@@ -5976,6 +6082,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct delegate {
                 pub to: ::subxt::sp_core::crypto::AccountId32,
@@ -5993,6 +6100,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct undelegate;
             impl ::subxt::Call for undelegate {
@@ -6005,6 +6113,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct clear_public_proposals;
             impl ::subxt::Call for clear_public_proposals {
@@ -6017,6 +6126,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct note_preimage {
                 pub encoded_proposal: ::std::vec::Vec<::core::primitive::u8>,
@@ -6031,6 +6141,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct note_preimage_operational {
                 pub encoded_proposal: ::std::vec::Vec<::core::primitive::u8>,
@@ -6045,6 +6156,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct note_imminent_preimage {
                 pub encoded_proposal: ::std::vec::Vec<::core::primitive::u8>,
@@ -6059,6 +6171,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct note_imminent_preimage_operational {
                 pub encoded_proposal: ::std::vec::Vec<::core::primitive::u8>,
@@ -6074,6 +6187,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct reap_preimage {
                 pub proposal_hash: ::subxt::sp_core::H256,
@@ -6090,6 +6204,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct unlock {
                 pub target: ::subxt::sp_core::crypto::AccountId32,
@@ -6104,6 +6219,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
                 :: subxt :: codec :: CompactAs,
             )]
             pub struct remove_vote {
@@ -6119,6 +6235,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct remove_other_vote {
                 pub target: ::subxt::sp_core::crypto::AccountId32,
@@ -6134,6 +6251,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct enact_proposal {
                 pub proposal_hash: ::subxt::sp_core::H256,
@@ -6149,6 +6267,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct blacklist {
                 pub proposal_hash: ::subxt::sp_core::H256,
@@ -6165,6 +6284,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct cancel_proposal {
                 #[codec(compact)]
@@ -6588,6 +6708,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct Proposed {
                 pub proposal_index: ::core::primitive::u32,
@@ -6603,6 +6724,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct Tabled {
                 pub proposal_index: ::core::primitive::u32,
@@ -6620,6 +6742,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct ExternalTabled;
             impl ::subxt::Event for ExternalTabled {
@@ -6632,6 +6755,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct Started { pub ref_index : :: core :: primitive :: u32 , pub threshold : runtime_types :: pallet_democracy :: vote_threshold :: VoteThreshold , }
             impl ::subxt::Event for Started {
@@ -6644,6 +6768,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
                 :: subxt :: codec :: CompactAs,
             )]
             pub struct Passed {
@@ -6659,6 +6784,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
                 :: subxt :: codec :: CompactAs,
             )]
             pub struct NotPassed {
@@ -6674,6 +6800,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
                 :: subxt :: codec :: CompactAs,
             )]
             pub struct Cancelled {
@@ -6689,6 +6816,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct Executed {
                 pub ref_index: ::core::primitive::u32,
@@ -6707,6 +6835,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct Delegated {
                 pub who: ::subxt::sp_core::crypto::AccountId32,
@@ -6722,6 +6851,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct Undelegated {
                 pub account: ::subxt::sp_core::crypto::AccountId32,
@@ -6736,6 +6866,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct Vetoed {
                 pub who: ::subxt::sp_core::crypto::AccountId32,
@@ -6752,6 +6883,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct PreimageNoted {
                 pub proposal_hash: ::subxt::sp_core::H256,
@@ -6768,6 +6900,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct PreimageUsed {
                 pub proposal_hash: ::subxt::sp_core::H256,
@@ -6784,6 +6917,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct PreimageInvalid {
                 pub proposal_hash: ::subxt::sp_core::H256,
@@ -6799,6 +6933,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct PreimageMissing {
                 pub proposal_hash: ::subxt::sp_core::H256,
@@ -6814,6 +6949,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct PreimageReaped {
                 pub proposal_hash: ::subxt::sp_core::H256,
@@ -6831,6 +6967,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct Blacklisted {
                 pub proposal_hash: ::subxt::sp_core::H256,
@@ -6845,6 +6982,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct Voted {
                 pub voter: ::subxt::sp_core::crypto::AccountId32,
@@ -6863,6 +7001,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct Seconded {
                 pub seconder: ::subxt::sp_core::crypto::AccountId32,
@@ -7431,6 +7570,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct set_members {
                 pub new_members:
@@ -7450,6 +7590,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct execute {
                 pub proposal: ::std::boxed::Box<
@@ -7468,6 +7609,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct propose {
                 #[codec(compact)]
@@ -7488,6 +7630,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct vote {
                 pub proposal: ::subxt::sp_core::H256,
@@ -7505,6 +7648,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct close {
                 pub proposal_hash: ::subxt::sp_core::H256,
@@ -7525,6 +7669,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct disapprove_proposal {
                 pub proposal_hash: ::subxt::sp_core::H256,
@@ -7678,6 +7823,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct Proposed {
                 pub account: ::subxt::sp_core::crypto::AccountId32,
@@ -7695,6 +7841,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct Voted {
                 pub account: ::subxt::sp_core::crypto::AccountId32,
@@ -7713,6 +7860,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct Approved {
                 pub proposal_hash: ::subxt::sp_core::H256,
@@ -7727,6 +7875,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct Disapproved {
                 pub proposal_hash: ::subxt::sp_core::H256,
@@ -7741,6 +7890,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct Executed {
                 pub proposal_hash: ::subxt::sp_core::H256,
@@ -7759,6 +7909,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct MemberExecuted {
                 pub proposal_hash: ::subxt::sp_core::H256,
@@ -7777,6 +7928,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct Closed {
                 pub proposal_hash: ::subxt::sp_core::H256,
@@ -7961,6 +8113,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct vote {
                 pub votes:
@@ -7978,6 +8131,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct remove_voter;
             impl ::subxt::Call for remove_voter {
@@ -7990,6 +8144,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct submit_candidacy {
                 #[codec(compact)]
@@ -8005,6 +8160,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct renounce_candidacy {
                 pub renouncing:
@@ -8020,6 +8176,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct remove_member {
                 pub who: ::subxt::sp_runtime::MultiAddress<
@@ -8038,6 +8195,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct clean_defunct_voters {
                 pub num_voters: ::core::primitive::u32,
@@ -8172,6 +8330,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct NewTerm {
                 pub new_members: ::std::vec::Vec<(
@@ -8189,6 +8348,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct EmptyTerm;
             impl ::subxt::Event for EmptyTerm {
@@ -8201,6 +8361,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct ElectionError;
             impl ::subxt::Event for ElectionError {
@@ -8213,6 +8374,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct MemberKicked {
                 pub member: ::subxt::sp_core::crypto::AccountId32,
@@ -8227,6 +8389,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct Renounced {
                 pub candidate: ::subxt::sp_core::crypto::AccountId32,
@@ -8241,6 +8404,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct CandidateSlashed {
                 pub candidate: ::subxt::sp_core::crypto::AccountId32,
@@ -8256,6 +8420,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct SeatHolderSlashed {
                 pub seat_holder: ::subxt::sp_core::crypto::AccountId32,
@@ -8519,6 +8684,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct report_equivocation {
                 pub equivocation_proof: ::std::boxed::Box<
@@ -8539,6 +8705,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct report_equivocation_unsigned {
                 pub equivocation_proof: ::std::boxed::Box<
@@ -8559,6 +8726,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct note_stalled {
                 pub delay: ::core::primitive::u32,
@@ -8653,6 +8821,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct NewAuthorities {
                 pub authority_set: ::std::vec::Vec<(
@@ -8670,6 +8839,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct Paused;
             impl ::subxt::Event for Paused {
@@ -8682,6 +8852,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct Resumed;
             impl ::subxt::Event for Resumed {
@@ -8870,6 +9041,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct propose_spend {
                 #[codec(compact)]
@@ -8889,6 +9061,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct reject_proposal {
                 #[codec(compact)]
@@ -8904,6 +9077,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct approve_proposal {
                 #[codec(compact)]
@@ -8986,6 +9160,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
                 :: subxt :: codec :: CompactAs,
             )]
             pub struct Proposed {
@@ -9001,6 +9176,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
                 :: subxt :: codec :: CompactAs,
             )]
             pub struct Spending {
@@ -9016,6 +9192,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct Awarded {
                 pub proposal_index: ::core::primitive::u32,
@@ -9032,6 +9209,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct Rejected {
                 pub proposal_index: ::core::primitive::u32,
@@ -9047,6 +9225,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
                 :: subxt :: codec :: CompactAs,
             )]
             pub struct Burnt {
@@ -9062,6 +9241,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
                 :: subxt :: codec :: CompactAs,
             )]
             pub struct Rollover {
@@ -9077,6 +9257,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
                 :: subxt :: codec :: CompactAs,
             )]
             pub struct Deposit {
@@ -9255,6 +9436,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct batch {
                 pub calls: ::std::vec::Vec<
@@ -9271,6 +9453,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct as_derivative {
                 pub index: ::core::primitive::u16,
@@ -9288,6 +9471,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct batch_all {
                 pub calls: ::std::vec::Vec<
@@ -9304,6 +9488,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct dispatch_as {
                 pub as_origin: ::std::boxed::Box<
@@ -9412,6 +9597,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct BatchInterrupted {
                 pub index: ::core::primitive::u32,
@@ -9427,6 +9613,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct BatchCompleted;
             impl ::subxt::Event for BatchCompleted {
@@ -9439,6 +9626,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct ItemCompleted;
             impl ::subxt::Event for ItemCompleted {
@@ -9451,6 +9639,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct DispatchedAs {
                 pub result: ::core::result::Result<
@@ -9491,6 +9680,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct as_multi_threshold_1 {
                 pub other_signatories:
@@ -9509,6 +9699,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct as_multi {
                 pub threshold: ::core::primitive::u16,
@@ -9535,6 +9726,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct approve_as_multi {
                 pub threshold: ::core::primitive::u16,
@@ -9558,6 +9750,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct cancel_as_multi {
                 pub threshold: ::core::primitive::u16,
@@ -9709,6 +9902,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct NewMultisig {
                 pub approving: ::subxt::sp_core::crypto::AccountId32,
@@ -9725,6 +9919,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct MultisigApproval {
                 pub approving: ::subxt::sp_core::crypto::AccountId32,
@@ -9744,6 +9939,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct MultisigExecuted {
                 pub approving: ::subxt::sp_core::crypto::AccountId32,
@@ -9767,6 +9963,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct MultisigCancelled {
                 pub cancelling: ::subxt::sp_core::crypto::AccountId32,
@@ -9942,6 +10139,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct schedule {
                 pub when: ::core::primitive::u32,
@@ -9967,6 +10165,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct cancel {
                 pub when: ::core::primitive::u32,
@@ -9982,6 +10181,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct schedule_named {
                 pub id: ::std::vec::Vec<::core::primitive::u8>,
@@ -10008,6 +10208,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct cancel_named {
                 pub id: ::std::vec::Vec<::core::primitive::u8>,
@@ -10022,6 +10223,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct schedule_after {
                 pub after: ::core::primitive::u32,
@@ -10047,6 +10249,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct schedule_named_after {
                 pub id: ::std::vec::Vec<::core::primitive::u8>,
@@ -10227,6 +10430,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct Scheduled {
                 pub when: ::core::primitive::u32,
@@ -10242,6 +10446,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct Canceled {
                 pub when: ::core::primitive::u32,
@@ -10257,6 +10462,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct Dispatched {
                 pub task: (::core::primitive::u32, ::core::primitive::u32),
@@ -10278,6 +10484,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct CallLookupFailed {
                 pub task: (::core::primitive::u32, ::core::primitive::u32),
@@ -10423,6 +10630,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct note_preimage {
                 pub bytes: ::std::vec::Vec<::core::primitive::u8>,
@@ -10437,6 +10645,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct unnote_preimage {
                 pub hash: ::subxt::sp_core::H256,
@@ -10451,6 +10660,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct request_preimage {
                 pub hash: ::subxt::sp_core::H256,
@@ -10465,6 +10675,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct unrequest_preimage {
                 pub hash: ::subxt::sp_core::H256,
@@ -10556,6 +10767,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct Noted {
                 pub hash: ::subxt::sp_core::H256,
@@ -10570,6 +10782,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct Requested {
                 pub hash: ::subxt::sp_core::H256,
@@ -10584,6 +10797,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct Cleared {
                 pub hash: ::subxt::sp_core::H256,
@@ -10684,6 +10898,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct proxy {
                 pub real: ::subxt::sp_core::crypto::AccountId32,
@@ -10704,6 +10919,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct add_proxy {
                 pub delegate: ::subxt::sp_core::crypto::AccountId32,
@@ -10721,6 +10937,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct remove_proxy {
                 pub delegate: ::subxt::sp_core::crypto::AccountId32,
@@ -10738,6 +10955,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct remove_proxies;
             impl ::subxt::Call for remove_proxies {
@@ -10750,6 +10968,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct anonymous {
                 pub proxy_type:
@@ -10767,6 +10986,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct kill_anonymous {
                 pub spawner: ::subxt::sp_core::crypto::AccountId32,
@@ -10788,6 +11008,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct announce {
                 pub real: ::subxt::sp_core::crypto::AccountId32,
@@ -10803,6 +11024,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct remove_announcement {
                 pub real: ::subxt::sp_core::crypto::AccountId32,
@@ -10818,6 +11040,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct reject_announcement {
                 pub delegate: ::subxt::sp_core::crypto::AccountId32,
@@ -10833,6 +11056,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct proxy_announced {
                 pub delegate: ::subxt::sp_core::crypto::AccountId32,
@@ -11066,6 +11290,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct ProxyExecuted {
                 pub result: ::core::result::Result<
@@ -11083,6 +11308,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct AnonymousCreated {
                 pub anonymous: ::subxt::sp_core::crypto::AccountId32,
@@ -11101,6 +11327,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct Announced {
                 pub real: ::subxt::sp_core::crypto::AccountId32,
@@ -11117,6 +11344,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct ProxyAdded {
                 pub delegator: ::subxt::sp_core::crypto::AccountId32,
@@ -11283,6 +11511,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct create {
                 #[codec(compact)]
@@ -11303,6 +11532,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct force_create {
                 #[codec(compact)]
@@ -11325,6 +11555,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct destroy {
                 #[codec(compact)]
@@ -11342,6 +11573,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct mint {
                 #[codec(compact)]
@@ -11363,6 +11595,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct burn {
                 #[codec(compact)]
@@ -11384,6 +11617,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct transfer {
                 #[codec(compact)]
@@ -11405,6 +11639,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct transfer_keep_alive {
                 #[codec(compact)]
@@ -11426,6 +11661,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct force_transfer {
                 #[codec(compact)]
@@ -11451,6 +11687,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct freeze {
                 #[codec(compact)]
@@ -11470,6 +11707,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct thaw {
                 #[codec(compact)]
@@ -11489,6 +11727,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct freeze_asset {
                 #[codec(compact)]
@@ -11504,6 +11743,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct thaw_asset {
                 #[codec(compact)]
@@ -11519,6 +11759,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct transfer_ownership {
                 #[codec(compact)]
@@ -11538,6 +11779,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct set_team {
                 #[codec(compact)]
@@ -11565,6 +11807,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct set_metadata {
                 #[codec(compact)]
@@ -11583,6 +11826,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct clear_metadata {
                 #[codec(compact)]
@@ -11598,6 +11842,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct force_set_metadata {
                 #[codec(compact)]
@@ -11617,6 +11862,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct force_clear_metadata {
                 #[codec(compact)]
@@ -11632,6 +11878,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct force_asset_status {
                 #[codec(compact)]
@@ -11667,6 +11914,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct approve_transfer {
                 #[codec(compact)]
@@ -11688,6 +11936,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct cancel_approval {
                 #[codec(compact)]
@@ -11707,6 +11956,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct force_cancel_approval {
                 #[codec(compact)]
@@ -11730,6 +11980,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct transfer_approved {
                 #[codec(compact)]
@@ -11755,6 +12006,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct touch {
                 #[codec(compact)]
@@ -11770,6 +12022,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct refund {
                 #[codec(compact)]
@@ -12331,6 +12584,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct Created {
                 pub asset_id: ::core::primitive::u32,
@@ -12347,6 +12601,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct Issued {
                 pub asset_id: ::core::primitive::u32,
@@ -12363,6 +12618,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct Transferred {
                 pub asset_id: ::core::primitive::u32,
@@ -12380,6 +12636,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct Burned {
                 pub asset_id: ::core::primitive::u32,
@@ -12396,6 +12653,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct TeamChanged {
                 pub asset_id: ::core::primitive::u32,
@@ -12413,6 +12671,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct OwnerChanged {
                 pub asset_id: ::core::primitive::u32,
@@ -12428,6 +12687,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct Frozen {
                 pub asset_id: ::core::primitive::u32,
@@ -12443,6 +12703,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct Thawed {
                 pub asset_id: ::core::primitive::u32,
@@ -12458,6 +12719,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
                 :: subxt :: codec :: CompactAs,
             )]
             pub struct AssetFrozen {
@@ -12473,6 +12735,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
                 :: subxt :: codec :: CompactAs,
             )]
             pub struct AssetThawed {
@@ -12488,6 +12751,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
                 :: subxt :: codec :: CompactAs,
             )]
             pub struct Destroyed {
@@ -12503,6 +12767,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct ForceCreated {
                 pub asset_id: ::core::primitive::u32,
@@ -12518,6 +12783,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct MetadataSet {
                 pub asset_id: ::core::primitive::u32,
@@ -12536,6 +12802,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
                 :: subxt :: codec :: CompactAs,
             )]
             pub struct MetadataCleared {
@@ -12551,6 +12818,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct ApprovedTransfer {
                 pub asset_id: ::core::primitive::u32,
@@ -12568,6 +12836,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct ApprovalCancelled {
                 pub asset_id: ::core::primitive::u32,
@@ -12584,6 +12853,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct TransferredApproved {
                 pub asset_id: ::core::primitive::u32,
@@ -12602,6 +12872,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
                 :: subxt :: codec :: CompactAs,
             )]
             pub struct AssetStatusChanged {
@@ -12894,6 +13165,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct sudo {
                 pub call: ::std::boxed::Box<
@@ -12910,6 +13182,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct sudo_unchecked_weight {
                 pub call: ::std::boxed::Box<
@@ -12927,6 +13200,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct set_key {
                 pub new: ::subxt::sp_runtime::MultiAddress<
@@ -12944,6 +13218,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct sudo_as {
                 pub who: ::subxt::sp_runtime::MultiAddress<
@@ -13057,6 +13332,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct Sudid {
                 pub sudo_result: ::core::result::Result<
@@ -13074,6 +13350,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct KeyChanged {
                 pub old_sudoer: ::core::option::Option<
@@ -13090,6 +13367,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct SudoAsDone {
                 pub sudo_result: ::core::result::Result<
@@ -13146,6 +13424,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct heartbeat { pub heartbeat : runtime_types :: pallet_im_online :: Heartbeat < :: core :: primitive :: u32 > , pub signature : runtime_types :: pallet_im_online :: sr25519 :: app_sr25519 :: Signature , }
             impl ::subxt::Call for heartbeat {
@@ -13199,6 +13478,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct HeartbeatReceived { pub authority_id : runtime_types :: pallet_im_online :: sr25519 :: app_sr25519 :: Public , }
             impl ::subxt::Event for HeartbeatReceived {
@@ -13211,6 +13491,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct AllGood;
             impl ::subxt::Event for AllGood {
@@ -13223,6 +13504,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct SomeOffline {
                 pub offline: ::std::vec::Vec<(
@@ -13389,6 +13671,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct Offence {
                 pub kind: [::core::primitive::u8; 16usize],
@@ -13555,6 +13838,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct propose_bounty {
                 #[codec(compact)]
@@ -13571,6 +13855,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct approve_bounty {
                 #[codec(compact)]
@@ -13586,6 +13871,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct propose_curator {
                 #[codec(compact)]
@@ -13607,6 +13893,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct unassign_curator {
                 #[codec(compact)]
@@ -13622,6 +13909,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct accept_curator {
                 #[codec(compact)]
@@ -13637,6 +13925,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct award_bounty {
                 #[codec(compact)]
@@ -13656,6 +13945,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct claim_bounty {
                 #[codec(compact)]
@@ -13671,6 +13961,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct close_bounty {
                 #[codec(compact)]
@@ -13686,6 +13977,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct extend_bounty_expiry {
                 #[codec(compact)]
@@ -13867,6 +14159,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
                 :: subxt :: codec :: CompactAs,
             )]
             pub struct BountyProposed {
@@ -13882,6 +14175,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct BountyRejected {
                 pub index: ::core::primitive::u32,
@@ -13897,6 +14191,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
                 :: subxt :: codec :: CompactAs,
             )]
             pub struct BountyBecameActive {
@@ -13912,6 +14207,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct BountyAwarded {
                 pub index: ::core::primitive::u32,
@@ -13927,6 +14223,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct BountyClaimed {
                 pub index: ::core::primitive::u32,
@@ -13943,6 +14240,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
                 :: subxt :: codec :: CompactAs,
             )]
             pub struct BountyCanceled {
@@ -13958,6 +14256,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
                 :: subxt :: codec :: CompactAs,
             )]
             pub struct BountyExtended {
@@ -14194,6 +14493,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct add_child_bounty {
                 #[codec(compact)]
@@ -14212,6 +14512,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct propose_curator {
                 #[codec(compact)]
@@ -14235,6 +14536,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct accept_curator {
                 #[codec(compact)]
@@ -14252,6 +14554,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct unassign_curator {
                 #[codec(compact)]
@@ -14269,6 +14572,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct award_child_bounty {
                 #[codec(compact)]
@@ -14290,6 +14594,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct claim_child_bounty {
                 #[codec(compact)]
@@ -14307,6 +14612,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct close_child_bounty {
                 #[codec(compact)]
@@ -14485,6 +14791,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct Added {
                 pub index: ::core::primitive::u32,
@@ -14500,6 +14807,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct Awarded {
                 pub index: ::core::primitive::u32,
@@ -14516,6 +14824,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct Claimed {
                 pub index: ::core::primitive::u32,
@@ -14533,6 +14842,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct Canceled {
                 pub index: ::core::primitive::u32,
@@ -14770,6 +15080,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct rebag {
                 pub dislocated: ::subxt::sp_core::crypto::AccountId32,
@@ -14784,6 +15095,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct put_in_front_of {
                 pub lighter: ::subxt::sp_core::crypto::AccountId32,
@@ -14847,6 +15159,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct Rebagged {
                 pub who: ::subxt::sp_core::crypto::AccountId32,
@@ -15192,6 +15505,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct force_set_parameters {
                 pub parameters: ::std::vec::Vec<::core::primitive::u8>,
@@ -15278,6 +15592,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct force_set_parameters {
                 pub parameters: ::std::vec::Vec<::core::primitive::u8>,
@@ -15364,6 +15679,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct register {
                 pub name: ::std::vec::Vec<::core::primitive::u8>,
@@ -15383,6 +15699,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct update {
                 pub asset_id: ::core::primitive::u32,
@@ -15404,6 +15721,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct set_metadata {
                 pub asset_id: ::core::primitive::u32,
@@ -15420,6 +15738,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct set_location {
                 pub asset_id: ::core::primitive::u32,
@@ -15435,6 +15754,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct add_asset_to_pool {
                 pub pool: ::std::vec::Vec<::core::primitive::u8>,
@@ -15450,6 +15770,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct delete_asset_from_pool {
                 pub pool: ::std::vec::Vec<::core::primitive::u8>,
@@ -15595,6 +15916,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct Registered { pub asset_id : :: core :: primitive :: u32 , pub name : runtime_types :: frame_support :: storage :: bounded_vec :: BoundedVec < :: core :: primitive :: u8 > , pub asset_type : runtime_types :: pallet_asset_registry :: types :: AssetType < :: core :: primitive :: u32 > , }
             impl ::subxt::Event for Registered {
@@ -15607,6 +15929,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct Updated { pub asset_id : :: core :: primitive :: u32 , pub name : runtime_types :: frame_support :: storage :: bounded_vec :: BoundedVec < :: core :: primitive :: u8 > , pub asset_type : runtime_types :: pallet_asset_registry :: types :: AssetType < :: core :: primitive :: u32 > , }
             impl ::subxt::Event for Updated {
@@ -15619,6 +15942,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct MetadataSet { pub asset_id : :: core :: primitive :: u32 , pub symbol : runtime_types :: frame_support :: storage :: bounded_vec :: BoundedVec < :: core :: primitive :: u8 > , pub decimals : :: core :: primitive :: u8 , }
             impl ::subxt::Event for MetadataSet {
@@ -15631,6 +15955,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct LocationSet {
                 pub asset_id: ::core::primitive::u32,
@@ -15847,6 +16172,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct transfer {
                 pub dest: ::subxt::sp_runtime::MultiAddress<
@@ -15867,6 +16193,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct transfer_native_currency {
                 pub dest: ::subxt::sp_runtime::MultiAddress<
@@ -15886,6 +16213,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct update_balance {
                 pub who: ::subxt::sp_runtime::MultiAddress<
@@ -15990,6 +16318,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct Transferred(
                 pub ::core::primitive::u32,
@@ -16007,6 +16336,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct BalanceUpdated(
                 pub ::core::primitive::u32,
@@ -16023,6 +16353,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct Deposited(
                 pub ::core::primitive::u32,
@@ -16039,6 +16370,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct Withdrawn(
                 pub ::core::primitive::u32,
@@ -16078,6 +16410,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct transfer {
                 pub dest: ::subxt::sp_runtime::MultiAddress<
@@ -16098,6 +16431,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct transfer_all {
                 pub dest: ::subxt::sp_runtime::MultiAddress<
@@ -16117,6 +16451,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct transfer_keep_alive {
                 pub dest: ::subxt::sp_runtime::MultiAddress<
@@ -16137,6 +16472,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct force_transfer {
                 pub source: ::subxt::sp_runtime::MultiAddress<
@@ -16161,6 +16497,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct set_balance {
                 pub who: ::subxt::sp_runtime::MultiAddress<
@@ -16326,6 +16663,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct Endowed(
                 pub ::core::primitive::u32,
@@ -16342,6 +16680,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct DustLost(
                 pub ::core::primitive::u32,
@@ -16358,6 +16697,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct Transfer(
                 pub ::core::primitive::u32,
@@ -16375,6 +16715,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct Reserved(
                 pub ::core::primitive::u32,
@@ -16391,6 +16732,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct Unreserved(
                 pub ::core::primitive::u32,
@@ -16407,6 +16749,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct BalanceSet(
                 pub ::core::primitive::u32,
@@ -16571,6 +16914,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
                 :: subxt :: codec :: CompactAs,
             )]
             pub struct set_wrapping_fee {
@@ -16586,6 +16930,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct wrap {
                 pub from_asset_id: ::core::primitive::u32,
@@ -16603,6 +16948,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct unwrap {
                 pub from_pool_share_id: ::core::primitive::u32,
@@ -16699,6 +17045,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct WrappedToken {
                 pub pool_share_asset: ::core::primitive::u32,
@@ -16716,6 +17063,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct UnwrappedToken {
                 pub pool_share_asset: ::core::primitive::u32,
@@ -16733,6 +17081,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
                 :: subxt :: codec :: CompactAs,
             )]
             pub struct UpdatedWrappingFeePercent {
@@ -16830,6 +17179,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct force_set_parameters {
                 pub parameters: ::std::vec::Vec<::core::primitive::u8>,
@@ -16916,6 +17266,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct force_set_parameters {
                 pub parameters: ::std::vec::Vec<::core::primitive::u8>,
@@ -17002,6 +17353,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
                 :: subxt :: codec :: CompactAs,
             )]
             pub struct create {
@@ -17017,6 +17369,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct insert {
                 pub tree_id: ::core::primitive::u32,
@@ -17032,6 +17385,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct force_set_default_hashes {
                 pub default_hashes: ::std::vec::Vec<
@@ -17114,6 +17468,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct TreeCreation {
                 pub tree_id: ::core::primitive::u32,
@@ -17129,6 +17484,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct LeafInsertion {
                 pub tree_id: ::core::primitive::u32,
@@ -17414,6 +17770,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
                 :: subxt :: codec :: CompactAs,
             )]
             pub struct create {
@@ -17429,6 +17786,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct insert {
                 pub tree_id: ::core::primitive::u32,
@@ -17444,6 +17802,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct force_set_default_hashes {
                 pub default_hashes: ::std::vec::Vec<
@@ -17526,6 +17885,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct TreeCreation {
                 pub tree_id: ::core::primitive::u32,
@@ -17541,6 +17901,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct LeafInsertion {
                 pub tree_id: ::core::primitive::u32,
@@ -17826,6 +18187,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct create {
                 pub max_edges: ::core::primitive::u32,
@@ -17877,6 +18239,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
                 :: subxt :: codec :: CompactAs,
             )]
             pub struct LinkableTreeCreation {
@@ -18129,6 +18492,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct create {
                 pub max_edges: ::core::primitive::u32,
@@ -18180,6 +18544,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
                 :: subxt :: codec :: CompactAs,
             )]
             pub struct LinkableTreeCreation {
@@ -18432,6 +18797,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct create {
                 pub deposit_size: ::core::primitive::u128,
@@ -18448,6 +18814,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct deposit {
                 pub tree_id: ::core::primitive::u32,
@@ -18463,6 +18830,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct withdraw {
                 pub id: ::core::primitive::u32,
@@ -18571,6 +18939,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
                 :: subxt :: codec :: CompactAs,
             )]
             pub struct MixerCreation {
@@ -18717,6 +19086,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct create {
                 pub deposit_size: ::core::primitive::u128,
@@ -18733,6 +19103,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct deposit {
                 pub tree_id: ::core::primitive::u32,
@@ -18748,6 +19119,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct withdraw {
                 pub id: ::core::primitive::u32,
@@ -18856,6 +19228,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
                 :: subxt :: codec :: CompactAs,
             )]
             pub struct MixerCreation {
@@ -19002,6 +19375,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct create {
                 pub deposit_size: ::core::primitive::u128,
@@ -19019,6 +19393,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct deposit {
                 pub tree_id: ::core::primitive::u32,
@@ -19034,6 +19409,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct deposit_and_update_linked_anchors {
                 pub tree_id: ::core::primitive::u32,
@@ -19050,6 +19426,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct withdraw {
                 pub id: ::core::primitive::u32,
@@ -19183,6 +19560,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
                 :: subxt :: codec :: CompactAs,
             )]
             pub struct AnchorCreation {
@@ -19198,6 +19576,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct Withdraw {
                 pub who: ::subxt::sp_core::crypto::AccountId32,
@@ -19213,6 +19592,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct Refresh {
                 pub tree_id: ::core::primitive::u32,
@@ -19228,6 +19608,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct Deposit {
                 pub depositor: ::subxt::sp_core::crypto::AccountId32,
@@ -19245,6 +19626,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct PostDeposit {
                 pub depositor: ::subxt::sp_core::crypto::AccountId32,
@@ -19392,6 +19774,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct create {
                 pub deposit_size: ::core::primitive::u128,
@@ -19409,6 +19792,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct deposit {
                 pub tree_id: ::core::primitive::u32,
@@ -19424,6 +19808,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct deposit_and_update_linked_anchors {
                 pub tree_id: ::core::primitive::u32,
@@ -19440,6 +19825,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct withdraw {
                 pub id: ::core::primitive::u32,
@@ -19573,6 +19959,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
                 :: subxt :: codec :: CompactAs,
             )]
             pub struct AnchorCreation {
@@ -19588,6 +19975,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct Withdraw {
                 pub who: ::subxt::sp_core::crypto::AccountId32,
@@ -19603,6 +19991,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct Refresh {
                 pub tree_id: ::core::primitive::u32,
@@ -19618,6 +20007,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct Deposit {
                 pub depositor: ::subxt::sp_core::crypto::AccountId32,
@@ -19635,6 +20025,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct PostDeposit {
                 pub depositor: ::subxt::sp_core::crypto::AccountId32,
@@ -19782,6 +20173,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct execute_anchor_create_proposal {
                 pub deposit_size: ::core::primitive::u128,
@@ -19801,6 +20193,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct execute_anchor_update_proposal {
                 pub r_id: [::core::primitive::u8; 32usize],
@@ -19886,6 +20279,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct AnchorCreated;
             impl ::subxt::Event for AnchorCreated {
@@ -19898,6 +20292,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct AnchorEdgeAdded;
             impl ::subxt::Event for AnchorEdgeAdded {
@@ -19910,6 +20305,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct AnchorEdgeUpdated;
             impl ::subxt::Event for AnchorEdgeUpdated {
@@ -20063,6 +20459,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct execute_anchor_create_proposal {
                 pub deposit_size: ::core::primitive::u128,
@@ -20082,6 +20479,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct execute_anchor_update_proposal {
                 pub r_id: [::core::primitive::u8; 32usize],
@@ -20167,6 +20565,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct AnchorCreated;
             impl ::subxt::Event for AnchorCreated {
@@ -20179,6 +20578,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct AnchorEdgeAdded;
             impl ::subxt::Event for AnchorEdgeAdded {
@@ -20191,6 +20591,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct AnchorEdgeUpdated;
             impl ::subxt::Event for AnchorEdgeUpdated {
@@ -20344,6 +20745,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
                 :: subxt :: codec :: CompactAs,
             )]
             pub struct set_threshold {
@@ -20359,6 +20761,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct set_resource {
                 pub id: [::core::primitive::u8; 32usize],
@@ -20374,6 +20777,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct remove_resource {
                 pub id: [::core::primitive::u8; 32usize],
@@ -20388,6 +20792,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
                 :: subxt :: codec :: CompactAs,
             )]
             pub struct whitelist_chain {
@@ -20403,6 +20808,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct add_relayer {
                 pub v: ::subxt::sp_core::crypto::AccountId32,
@@ -20417,6 +20823,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct remove_relayer {
                 pub v: ::subxt::sp_core::crypto::AccountId32,
@@ -20431,6 +20838,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct acknowledge_proposal {
                 pub nonce: ::core::primitive::u64,
@@ -20450,6 +20858,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct reject_proposal {
                 pub nonce: ::core::primitive::u64,
@@ -20469,6 +20878,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct eval_vote_state {
                 pub nonce: ::core::primitive::u64,
@@ -20657,6 +21067,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
                 :: subxt :: codec :: CompactAs,
             )]
             pub struct RelayerThresholdChanged {
@@ -20672,6 +21083,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
                 :: subxt :: codec :: CompactAs,
             )]
             pub struct ChainWhitelisted {
@@ -20687,6 +21099,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct RelayerAdded {
                 pub relayer_id: ::subxt::sp_core::crypto::AccountId32,
@@ -20701,6 +21114,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct RelayerRemoved {
                 pub relayer_id: ::subxt::sp_core::crypto::AccountId32,
@@ -20715,6 +21129,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct VoteFor {
                 pub chain_id: ::core::primitive::u64,
@@ -20731,6 +21146,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct VoteAgainst {
                 pub chain_id: ::core::primitive::u64,
@@ -20747,6 +21163,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct ProposalApproved {
                 pub chain_id: ::core::primitive::u64,
@@ -20762,6 +21179,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct ProposalRejected {
                 pub chain_id: ::core::primitive::u64,
@@ -20777,6 +21195,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct ProposalSucceeded {
                 pub chain_id: ::core::primitive::u64,
@@ -20792,6 +21211,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct ProposalFailed {
                 pub chain_id: ::core::primitive::u64,
@@ -21069,6 +21489,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct Equivocation<_0, _1, _2> {
                 pub round_number: ::core::primitive::u64,
@@ -21082,6 +21503,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct Precommit<_0, _1> {
                 pub target_hash: _0,
@@ -21093,6 +21515,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct Prevote<_0, _1> {
                 pub target_hash: _0,
@@ -21111,6 +21534,7 @@ pub mod api {
                         Debug,
                         Eq,
                         PartialEq,
+                        Clone,
                     )]
                     pub struct BoundedBTreeMap<_0, _1>(
                         pub ::std::collections::BTreeMap<_0, _1>,
@@ -21124,6 +21548,7 @@ pub mod api {
                         Debug,
                         Eq,
                         PartialEq,
+                        Clone,
                     )]
                     pub struct BoundedVec<_0>(pub ::std::vec::Vec<_0>);
                 }
@@ -21135,6 +21560,7 @@ pub mod api {
                         Debug,
                         Eq,
                         PartialEq,
+                        Clone,
                     )]
                     pub struct WeakBoundedVec<_0>(pub ::std::vec::Vec<_0>);
                 }
@@ -21149,6 +21575,7 @@ pub mod api {
                         Debug,
                         Eq,
                         PartialEq,
+                        Clone,
                     )]
                     pub struct WrapperKeepOpaque<_0>(
                         #[codec(compact)] pub ::core::primitive::u32,
@@ -21160,6 +21587,7 @@ pub mod api {
                         Debug,
                         Eq,
                         PartialEq,
+                        Clone,
                     )]
                     pub struct WrapperOpaque<_0>(
                         #[codec(compact)] pub ::core::primitive::u32,
@@ -21174,6 +21602,7 @@ pub mod api {
                         Debug,
                         Eq,
                         PartialEq,
+                        Clone,
                     )]
                     pub enum LookupError {
                         #[codec(index = 0)]
@@ -21187,6 +21616,7 @@ pub mod api {
                         Debug,
                         Eq,
                         PartialEq,
+                        Clone,
                     )]
                     pub enum MaybeHashed<_0, _1> {
                         #[codec(index = 0)]
@@ -21205,6 +21635,7 @@ pub mod api {
                             Debug,
                             Eq,
                             PartialEq,
+                            Clone,
                         )]
                         pub enum BalanceStatus {
                             #[codec(index = 0)]
@@ -21223,6 +21654,7 @@ pub mod api {
                     Debug,
                     Eq,
                     PartialEq,
+                    Clone,
                 )]
                 pub enum DispatchClass {
                     #[codec(index = 0)]
@@ -21238,6 +21670,7 @@ pub mod api {
                     Debug,
                     Eq,
                     PartialEq,
+                    Clone,
                 )]
                 pub struct DispatchInfo {
                     pub weight: ::core::primitive::u64,
@@ -21251,6 +21684,7 @@ pub mod api {
                     Debug,
                     Eq,
                     PartialEq,
+                    Clone,
                 )]
                 pub enum Pays {
                     #[codec(index = 0)]
@@ -21264,6 +21698,7 @@ pub mod api {
                     Debug,
                     Eq,
                     PartialEq,
+                    Clone,
                 )]
                 pub struct PerDispatchClass<_0> {
                     pub normal: _0,
@@ -21276,6 +21711,7 @@ pub mod api {
                     Debug,
                     Eq,
                     PartialEq,
+                    Clone,
                 )]
                 pub struct RuntimeDbWeight {
                     pub read: ::core::primitive::u64,
@@ -21287,6 +21723,7 @@ pub mod api {
                     Debug,
                     Eq,
                     PartialEq,
+                    Clone,
                 )]
                 pub struct WeightToFeeCoefficient<_0> {
                     pub coeff_integer: _0,
@@ -21302,6 +21739,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct PalletId(pub [::core::primitive::u8; 8usize]);
         }
@@ -21317,6 +21755,7 @@ pub mod api {
                         Debug,
                         Eq,
                         PartialEq,
+                        Clone,
                     )]
                     pub struct CheckGenesis;
                 }
@@ -21328,6 +21767,7 @@ pub mod api {
                         Debug,
                         Eq,
                         PartialEq,
+                        Clone,
                     )]
                     pub struct CheckMortality(
                         pub runtime_types::sp_runtime::generic::era::Era,
@@ -21341,6 +21781,7 @@ pub mod api {
                         Debug,
                         Eq,
                         PartialEq,
+                        Clone,
                     )]
                     pub struct CheckNonce(
                         #[codec(compact)] pub ::core::primitive::u32,
@@ -21354,6 +21795,7 @@ pub mod api {
                         Debug,
                         Eq,
                         PartialEq,
+                        Clone,
                     )]
                     pub struct CheckSpecVersion;
                 }
@@ -21365,6 +21807,7 @@ pub mod api {
                         Debug,
                         Eq,
                         PartialEq,
+                        Clone,
                     )]
                     pub struct CheckTxVersion;
                 }
@@ -21376,6 +21819,7 @@ pub mod api {
                         Debug,
                         Eq,
                         PartialEq,
+                        Clone,
                     )]
                     pub struct CheckWeight;
                 }
@@ -21388,6 +21832,7 @@ pub mod api {
                     Debug,
                     Eq,
                     PartialEq,
+                    Clone,
                 )]
                 pub struct BlockLength {
                     pub max:
@@ -21401,6 +21846,7 @@ pub mod api {
                     Debug,
                     Eq,
                     PartialEq,
+                    Clone,
                 )]
                 pub struct BlockWeights { pub base_block : :: core :: primitive :: u64 , pub max_block : :: core :: primitive :: u64 , pub per_class : runtime_types :: frame_support :: weights :: PerDispatchClass < runtime_types :: frame_system :: limits :: WeightsPerClass > , }
                 #[derive(
@@ -21409,6 +21855,7 @@ pub mod api {
                     Debug,
                     Eq,
                     PartialEq,
+                    Clone,
                 )]
                 pub struct WeightsPerClass {
                     pub base_extrinsic: ::core::primitive::u64,
@@ -21428,6 +21875,7 @@ pub mod api {
                     Debug,
                     Eq,
                     PartialEq,
+                    Clone,
                 )]
                 pub enum Call {
                     #[codec(index = 0)]
@@ -21478,6 +21926,7 @@ pub mod api {
                     Debug,
                     Eq,
                     PartialEq,
+                    Clone,
                 )]
                 pub enum Error {
                     #[codec(index = 0)]
@@ -21499,6 +21948,7 @@ pub mod api {
                     Debug,
                     Eq,
                     PartialEq,
+                    Clone,
                 )]
                 pub enum Event {
                     #[codec(index = 0)]
@@ -21536,6 +21986,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct AccountInfo<_0, _1> {
                 pub nonce: _0,
@@ -21550,6 +22001,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct EventRecord<_0, _1> {
                 pub phase: runtime_types::frame_system::Phase,
@@ -21562,6 +22014,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct LastRuntimeUpgradeInfo {
                 #[codec(compact)]
@@ -21574,6 +22027,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub enum Phase {
                 #[codec(index = 0)]
@@ -21589,6 +22043,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub enum RawOrigin<_0> {
                 #[codec(index = 0)]
@@ -21609,6 +22064,7 @@ pub mod api {
                     Debug,
                     Eq,
                     PartialEq,
+                    Clone,
                 )]
                 pub enum Call {
                     #[codec(index = 0)]
@@ -21646,6 +22102,7 @@ pub mod api {
                     Debug,
                     Eq,
                     PartialEq,
+                    Clone,
                 )]
                 pub enum Error {
                     #[codec(index = 0)]
@@ -21659,6 +22116,7 @@ pub mod api {
                     Debug,
                     Eq,
                     PartialEq,
+                    Clone,
                 )]
                 pub enum Event {
                     #[codec(index = 0)]
@@ -21699,6 +22157,7 @@ pub mod api {
                     Debug,
                     Eq,
                     PartialEq,
+                    Clone,
                 )]
                 pub enum Call {
                     #[codec(index = 0)]
@@ -21763,6 +22222,7 @@ pub mod api {
                     Debug,
                     Eq,
                     PartialEq,
+                    Clone,
                 )]
                 pub enum Error {
                     #[codec(index = 0)]
@@ -21786,6 +22246,7 @@ pub mod api {
                     Debug,
                     Eq,
                     PartialEq,
+                    Clone,
                 )]
                 pub enum Event {
                     #[codec(index = 0)]
@@ -21834,6 +22295,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct AccountData<_0> {
                 pub free: _0,
@@ -21846,6 +22308,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct BalanceLock<_0> {
                 pub id: [::core::primitive::u8; 8usize],
@@ -21862,6 +22325,7 @@ pub mod api {
                     Debug,
                     Eq,
                     PartialEq,
+                    Clone,
                 )]
                 pub enum Call {
                     #[codec(index = 0)]
@@ -21904,6 +22368,7 @@ pub mod api {
                     Debug,
                     Eq,
                     PartialEq,
+                    Clone,
                 )]
                 pub enum Error {
                     #[codec(index = 0)]
@@ -21923,6 +22388,7 @@ pub mod api {
                     Debug,
                     Eq,
                     PartialEq,
+                    Clone,
                 )]
                 pub enum Event {
                     #[codec(index = 0)]
@@ -21960,6 +22426,7 @@ pub mod api {
                     Debug,
                     Eq,
                     PartialEq,
+                    Clone,
                 )]
                 pub struct AnchorMetadata<_0, _1> {
                     pub deposit_size: _0,
@@ -21977,6 +22444,7 @@ pub mod api {
                     Debug,
                     Eq,
                     PartialEq,
+                    Clone,
                 )]
                 pub enum Call {
                     # [codec (index = 0)] execute_anchor_create_proposal { deposit_size : :: core :: primitive :: u128 , src_chain_id : :: core :: primitive :: u64 , r_id : [:: core :: primitive :: u8 ; 32usize] , max_edges : :: core :: primitive :: u32 , tree_depth : :: core :: primitive :: u8 , asset : :: core :: primitive :: u32 , } , # [codec (index = 1)] execute_anchor_update_proposal { r_id : [:: core :: primitive :: u8 ; 32usize] , anchor_metadata : runtime_types :: pallet_linkable_tree :: types :: EdgeMetadata < :: core :: primitive :: u64 , runtime_types :: webb_standalone_runtime :: Element , :: core :: primitive :: u32 > , } , }
@@ -21986,6 +22454,7 @@ pub mod api {
                     Debug,
                     Eq,
                     PartialEq,
+                    Clone,
                 )]
                 pub enum Error {
                     #[codec(index = 0)]
@@ -22005,6 +22474,7 @@ pub mod api {
                     Debug,
                     Eq,
                     PartialEq,
+                    Clone,
                 )]
                 pub enum Event {
                     #[codec(index = 0)]
@@ -22023,6 +22493,7 @@ pub mod api {
                     Debug,
                     Eq,
                     PartialEq,
+                    Clone,
                 )]
                 pub struct UpdateRecord < _0 , _1 , _2 , _3 , _4 > { pub tree_id : _0 , pub resource_id : _1 , pub edge_metadata : runtime_types :: pallet_linkable_tree :: types :: EdgeMetadata < _2 , _3 , _0 > , # [codec (skip)] pub __subxt_unused_type_params : :: core :: marker :: PhantomData < _4 > }
             }
@@ -22037,6 +22508,7 @@ pub mod api {
                     Debug,
                     Eq,
                     PartialEq,
+                    Clone,
                 )]
                 pub enum Call {
                     # [codec (index = 0)] register { name : :: std :: vec :: Vec < :: core :: primitive :: u8 > , asset_type : runtime_types :: pallet_asset_registry :: types :: AssetType < :: core :: primitive :: u32 > , existential_deposit : :: core :: primitive :: u128 , } , # [codec (index = 1)] update { asset_id : :: core :: primitive :: u32 , name : :: std :: vec :: Vec < :: core :: primitive :: u8 > , asset_type : runtime_types :: pallet_asset_registry :: types :: AssetType < :: core :: primitive :: u32 > , existential_deposit : :: core :: option :: Option < :: core :: primitive :: u128 > , } , # [codec (index = 2)] set_metadata { asset_id : :: core :: primitive :: u32 , symbol : :: std :: vec :: Vec < :: core :: primitive :: u8 > , decimals : :: core :: primitive :: u8 , } , # [codec (index = 3)] set_location { asset_id : :: core :: primitive :: u32 , location : () , } , # [codec (index = 4)] add_asset_to_pool { pool : :: std :: vec :: Vec < :: core :: primitive :: u8 > , asset_id : :: core :: primitive :: u32 , } , # [codec (index = 5)] delete_asset_from_pool { pool : :: std :: vec :: Vec < :: core :: primitive :: u8 > , asset_id : :: core :: primitive :: u32 , } , }
@@ -22046,6 +22518,7 @@ pub mod api {
                     Debug,
                     Eq,
                     PartialEq,
+                    Clone,
                 )]
                 pub enum Error {
                     #[codec(index = 0)]
@@ -22071,6 +22544,7 @@ pub mod api {
                     Debug,
                     Eq,
                     PartialEq,
+                    Clone,
                 )]
                 pub enum Event {
                     # [codec (index = 0)] Registered { asset_id : :: core :: primitive :: u32 , name : runtime_types :: frame_support :: storage :: bounded_vec :: BoundedVec < :: core :: primitive :: u8 > , asset_type : runtime_types :: pallet_asset_registry :: types :: AssetType < :: core :: primitive :: u32 > , } , # [codec (index = 1)] Updated { asset_id : :: core :: primitive :: u32 , name : runtime_types :: frame_support :: storage :: bounded_vec :: BoundedVec < :: core :: primitive :: u8 > , asset_type : runtime_types :: pallet_asset_registry :: types :: AssetType < :: core :: primitive :: u32 > , } , # [codec (index = 2)] MetadataSet { asset_id : :: core :: primitive :: u32 , symbol : runtime_types :: frame_support :: storage :: bounded_vec :: BoundedVec < :: core :: primitive :: u8 > , decimals : :: core :: primitive :: u8 , } , # [codec (index = 3)] LocationSet { asset_id : :: core :: primitive :: u32 , location : () , } , }
@@ -22083,6 +22557,7 @@ pub mod api {
                     Debug,
                     Eq,
                     PartialEq,
+                    Clone,
                 )]
                 pub struct AssetDetails<_0, _1, _2> {
                     pub name: _2,
@@ -22099,6 +22574,7 @@ pub mod api {
                     Debug,
                     Eq,
                     PartialEq,
+                    Clone,
                 )]
                 pub struct AssetMetadata<_0> {
                     pub symbol: _0,
@@ -22110,6 +22586,7 @@ pub mod api {
                     Debug,
                     Eq,
                     PartialEq,
+                    Clone,
                 )]
                 pub enum AssetType<_0> {
                     #[codec(index = 0)]
@@ -22129,6 +22606,7 @@ pub mod api {
                     Debug,
                     Eq,
                     PartialEq,
+                    Clone,
                 )]
                 pub enum Call {
                     #[codec(index = 0)]
@@ -22391,6 +22869,7 @@ pub mod api {
                     Debug,
                     Eq,
                     PartialEq,
+                    Clone,
                 )]
                 pub enum Error {
                     #[codec(index = 0)]
@@ -22430,6 +22909,7 @@ pub mod api {
                     Debug,
                     Eq,
                     PartialEq,
+                    Clone,
                 )]
                 pub enum Event {
                     #[codec(index = 0)]
@@ -22533,6 +23013,7 @@ pub mod api {
                     Debug,
                     Eq,
                     PartialEq,
+                    Clone,
                 )]
                 pub struct Approval<_0, _1> {
                     pub amount: _0,
@@ -22547,6 +23028,7 @@ pub mod api {
                     Debug,
                     Eq,
                     PartialEq,
+                    Clone,
                 )]
                 pub struct AssetAccount<_0, _1, _2> {
                     pub balance: _0,
@@ -22566,6 +23048,7 @@ pub mod api {
                     Debug,
                     Eq,
                     PartialEq,
+                    Clone,
                 )]
                 pub struct AssetDetails<_0, _1, _2> {
                     pub owner: _1,
@@ -22590,6 +23073,7 @@ pub mod api {
                     Debug,
                     Eq,
                     PartialEq,
+                    Clone,
                 )]
                 pub struct AssetMetadata<_0, _1> {
                     pub deposit: _0,
@@ -22604,6 +23088,7 @@ pub mod api {
                     Debug,
                     Eq,
                     PartialEq,
+                    Clone,
                 )]
                 pub struct DestroyWitness {
                     #[codec(compact)]
@@ -22619,6 +23104,7 @@ pub mod api {
                     Debug,
                     Eq,
                     PartialEq,
+                    Clone,
                 )]
                 pub enum ExistenceReason<_0> {
                     #[codec(index = 0)]
@@ -22642,6 +23128,7 @@ pub mod api {
                     Debug,
                     Eq,
                     PartialEq,
+                    Clone,
                 )]
                 pub enum Call {
                     #[codec(index = 0)]
@@ -22660,6 +23147,7 @@ pub mod api {
                     Debug,
                     Eq,
                     PartialEq,
+                    Clone,
                 )]
                 pub enum Error {
                     #[codec(index = 0)]
@@ -22684,6 +23172,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub enum UncleEntryItem<_0, _1, _2> {
                 #[codec(index = 0)]
@@ -22702,6 +23191,7 @@ pub mod api {
                     Debug,
                     Eq,
                     PartialEq,
+                    Clone,
                 )]
                 pub enum Call {
                     # [codec (index = 0)] report_equivocation { equivocation_proof : :: std :: boxed :: Box < runtime_types :: sp_consensus_slots :: EquivocationProof < runtime_types :: sp_runtime :: generic :: header :: Header < :: core :: primitive :: u32 , runtime_types :: sp_runtime :: traits :: BlakeTwo256 > , runtime_types :: sp_consensus_babe :: app :: Public > > , key_owner_proof : runtime_types :: sp_session :: MembershipProof , } , # [codec (index = 1)] report_equivocation_unsigned { equivocation_proof : :: std :: boxed :: Box < runtime_types :: sp_consensus_slots :: EquivocationProof < runtime_types :: sp_runtime :: generic :: header :: Header < :: core :: primitive :: u32 , runtime_types :: sp_runtime :: traits :: BlakeTwo256 > , runtime_types :: sp_consensus_babe :: app :: Public > > , key_owner_proof : runtime_types :: sp_session :: MembershipProof , } , # [codec (index = 2)] plan_config_change { config : runtime_types :: sp_consensus_babe :: digests :: NextConfigDescriptor , } , }
@@ -22711,6 +23201,7 @@ pub mod api {
                     Debug,
                     Eq,
                     PartialEq,
+                    Clone,
                 )]
                 pub enum Error {
                     #[codec(index = 0)]
@@ -22732,6 +23223,7 @@ pub mod api {
                     Debug,
                     Eq,
                     PartialEq,
+                    Clone,
                 )]
                 pub struct Bag {
                     pub head: ::core::option::Option<
@@ -22747,6 +23239,7 @@ pub mod api {
                     Debug,
                     Eq,
                     PartialEq,
+                    Clone,
                 )]
                 pub struct Node {
                     pub id: ::subxt::sp_core::crypto::AccountId32,
@@ -22767,6 +23260,7 @@ pub mod api {
                     Debug,
                     Eq,
                     PartialEq,
+                    Clone,
                 )]
                 pub enum Call {
                     #[codec(index = 0)]
@@ -22784,6 +23278,7 @@ pub mod api {
                     Debug,
                     Eq,
                     PartialEq,
+                    Clone,
                 )]
                 pub enum Error {
                     #[codec(index = 0)]
@@ -22799,6 +23294,7 @@ pub mod api {
                     Debug,
                     Eq,
                     PartialEq,
+                    Clone,
                 )]
                 pub enum Event {
                     #[codec(index = 0)]
@@ -22820,6 +23316,7 @@ pub mod api {
                     Debug,
                     Eq,
                     PartialEq,
+                    Clone,
                 )]
                 pub enum Call {
                     #[codec(index = 0)]
@@ -22887,6 +23384,7 @@ pub mod api {
                     Debug,
                     Eq,
                     PartialEq,
+                    Clone,
                 )]
                 pub enum Error {
                     #[codec(index = 0)]
@@ -22912,6 +23410,7 @@ pub mod api {
                     Debug,
                     Eq,
                     PartialEq,
+                    Clone,
                 )]
                 pub enum Event {
                     # [codec (index = 0)] Endowed { account : :: subxt :: sp_core :: crypto :: AccountId32 , free_balance : :: core :: primitive :: u128 , } , # [codec (index = 1)] DustLost { account : :: subxt :: sp_core :: crypto :: AccountId32 , amount : :: core :: primitive :: u128 , } , # [codec (index = 2)] Transfer { from : :: subxt :: sp_core :: crypto :: AccountId32 , to : :: subxt :: sp_core :: crypto :: AccountId32 , amount : :: core :: primitive :: u128 , } , # [codec (index = 3)] BalanceSet { who : :: subxt :: sp_core :: crypto :: AccountId32 , free : :: core :: primitive :: u128 , reserved : :: core :: primitive :: u128 , } , # [codec (index = 4)] Reserved { who : :: subxt :: sp_core :: crypto :: AccountId32 , amount : :: core :: primitive :: u128 , } , # [codec (index = 5)] Unreserved { who : :: subxt :: sp_core :: crypto :: AccountId32 , amount : :: core :: primitive :: u128 , } , # [codec (index = 6)] ReserveRepatriated { from : :: subxt :: sp_core :: crypto :: AccountId32 , to : :: subxt :: sp_core :: crypto :: AccountId32 , amount : :: core :: primitive :: u128 , destination_status : runtime_types :: frame_support :: traits :: tokens :: misc :: BalanceStatus , } , # [codec (index = 7)] Deposit { who : :: subxt :: sp_core :: crypto :: AccountId32 , amount : :: core :: primitive :: u128 , } , # [codec (index = 8)] Withdraw { who : :: subxt :: sp_core :: crypto :: AccountId32 , amount : :: core :: primitive :: u128 , } , # [codec (index = 9)] Slashed { who : :: subxt :: sp_core :: crypto :: AccountId32 , amount : :: core :: primitive :: u128 , } , }
@@ -22922,6 +23421,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct AccountData<_0> {
                 pub free: _0,
@@ -22935,6 +23435,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct BalanceLock<_0> {
                 pub id: [::core::primitive::u8; 8usize],
@@ -22947,6 +23448,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub enum Reasons {
                 #[codec(index = 0)]
@@ -22962,6 +23464,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub enum Releases {
                 #[codec(index = 0)]
@@ -22975,6 +23478,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct ReserveData<_0, _1> {
                 pub id: _0,
@@ -22991,6 +23495,7 @@ pub mod api {
                     Debug,
                     Eq,
                     PartialEq,
+                    Clone,
                 )]
                 pub enum Call {
                     #[codec(index = 0)]
@@ -23057,6 +23562,7 @@ pub mod api {
                     Debug,
                     Eq,
                     PartialEq,
+                    Clone,
                 )]
                 pub enum Error {
                     #[codec(index = 0)]
@@ -23086,6 +23592,7 @@ pub mod api {
                     Debug,
                     Eq,
                     PartialEq,
+                    Clone,
                 )]
                 pub enum Event {
                     #[codec(index = 0)]
@@ -23120,6 +23627,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct Bounty<_0, _1, _2> {
                 pub proposer: _0,
@@ -23136,6 +23644,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub enum BountyStatus<_0, _1> {
                 #[codec(index = 0)]
@@ -23166,6 +23675,7 @@ pub mod api {
                     Debug,
                     Eq,
                     PartialEq,
+                    Clone,
                 )]
                 pub enum Call {
                     #[codec(index = 0)]
@@ -23222,6 +23732,7 @@ pub mod api {
                     Debug,
                     Eq,
                     PartialEq,
+                    Clone,
                 )]
                 pub enum Error {
                     #[codec(index = 0)]
@@ -23263,6 +23774,7 @@ pub mod api {
                     Debug,
                     Eq,
                     PartialEq,
+                    Clone,
                 )]
                 pub enum Event {
                     #[codec(index = 0)]
@@ -23321,6 +23833,7 @@ pub mod api {
                     Debug,
                     Eq,
                     PartialEq,
+                    Clone,
                 )]
                 pub enum ProposalStatus {
                     #[codec(index = 0)]
@@ -23336,6 +23849,7 @@ pub mod api {
                     Debug,
                     Eq,
                     PartialEq,
+                    Clone,
                 )]
                 pub struct ProposalVotes<_0, _1> {
                     pub votes_for: ::std::vec::Vec<_0>,
@@ -23356,6 +23870,7 @@ pub mod api {
                     Debug,
                     Eq,
                     PartialEq,
+                    Clone,
                 )]
                 pub enum Call {
                     #[codec(index = 0)]
@@ -23425,6 +23940,7 @@ pub mod api {
                     Debug,
                     Eq,
                     PartialEq,
+                    Clone,
                 )]
                 pub enum Error {
                     #[codec(index = 0)]
@@ -23440,6 +23956,7 @@ pub mod api {
                     Debug,
                     Eq,
                     PartialEq,
+                    Clone,
                 )]
                 pub enum Event {
                     #[codec(index = 0)]
@@ -23473,6 +23990,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct ChildBounty<_0, _1, _2> {
                 pub parent_bounty: _2,
@@ -23491,6 +24009,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub enum ChildBountyStatus<_0, _1> {
                 #[codec(index = 0)]
@@ -23517,6 +24036,7 @@ pub mod api {
                     Debug,
                     Eq,
                     PartialEq,
+                    Clone,
                 )]
                 pub enum Call {
                     #[codec(index = 0)]
@@ -23575,6 +24095,7 @@ pub mod api {
                     Debug,
                     Eq,
                     PartialEq,
+                    Clone,
                 )]
                 pub enum Error {
                     #[codec(index = 0)]
@@ -23604,6 +24125,7 @@ pub mod api {
                     Debug,
                     Eq,
                     PartialEq,
+                    Clone,
                 )]
                 pub enum Event {
                     #[codec(index = 0)]
@@ -23659,6 +24181,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub enum RawOrigin<_0> {
                 #[codec(index = 0)]
@@ -23674,6 +24197,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct Votes<_0, _1> {
                 pub index: _1,
@@ -23693,6 +24217,7 @@ pub mod api {
                     Debug,
                     Eq,
                     PartialEq,
+                    Clone,
                 )]
                 pub enum Conviction {
                     #[codec(index = 0)]
@@ -23719,6 +24244,7 @@ pub mod api {
                     Debug,
                     Eq,
                     PartialEq,
+                    Clone,
                 )]
                 pub enum Call {
                     # [codec (index = 0)] propose { proposal_hash : :: subxt :: sp_core :: H256 , # [codec (compact)] value : :: core :: primitive :: u128 , } , # [codec (index = 1)] second { # [codec (compact)] proposal : :: core :: primitive :: u32 , # [codec (compact)] seconds_upper_bound : :: core :: primitive :: u32 , } , # [codec (index = 2)] vote { # [codec (compact)] ref_index : :: core :: primitive :: u32 , vote : runtime_types :: pallet_democracy :: vote :: AccountVote < :: core :: primitive :: u128 > , } , # [codec (index = 3)] emergency_cancel { ref_index : :: core :: primitive :: u32 , } , # [codec (index = 4)] external_propose { proposal_hash : :: subxt :: sp_core :: H256 , } , # [codec (index = 5)] external_propose_majority { proposal_hash : :: subxt :: sp_core :: H256 , } , # [codec (index = 6)] external_propose_default { proposal_hash : :: subxt :: sp_core :: H256 , } , # [codec (index = 7)] fast_track { proposal_hash : :: subxt :: sp_core :: H256 , voting_period : :: core :: primitive :: u32 , delay : :: core :: primitive :: u32 , } , # [codec (index = 8)] veto_external { proposal_hash : :: subxt :: sp_core :: H256 , } , # [codec (index = 9)] cancel_referendum { # [codec (compact)] ref_index : :: core :: primitive :: u32 , } , # [codec (index = 10)] cancel_queued { which : :: core :: primitive :: u32 , } , # [codec (index = 11)] delegate { to : :: subxt :: sp_core :: crypto :: AccountId32 , conviction : runtime_types :: pallet_democracy :: conviction :: Conviction , balance : :: core :: primitive :: u128 , } , # [codec (index = 12)] undelegate , # [codec (index = 13)] clear_public_proposals , # [codec (index = 14)] note_preimage { encoded_proposal : :: std :: vec :: Vec < :: core :: primitive :: u8 > , } , # [codec (index = 15)] note_preimage_operational { encoded_proposal : :: std :: vec :: Vec < :: core :: primitive :: u8 > , } , # [codec (index = 16)] note_imminent_preimage { encoded_proposal : :: std :: vec :: Vec < :: core :: primitive :: u8 > , } , # [codec (index = 17)] note_imminent_preimage_operational { encoded_proposal : :: std :: vec :: Vec < :: core :: primitive :: u8 > , } , # [codec (index = 18)] reap_preimage { proposal_hash : :: subxt :: sp_core :: H256 , # [codec (compact)] proposal_len_upper_bound : :: core :: primitive :: u32 , } , # [codec (index = 19)] unlock { target : :: subxt :: sp_core :: crypto :: AccountId32 , } , # [codec (index = 20)] remove_vote { index : :: core :: primitive :: u32 , } , # [codec (index = 21)] remove_other_vote { target : :: subxt :: sp_core :: crypto :: AccountId32 , index : :: core :: primitive :: u32 , } , # [codec (index = 22)] enact_proposal { proposal_hash : :: subxt :: sp_core :: H256 , index : :: core :: primitive :: u32 , } , # [codec (index = 23)] blacklist { proposal_hash : :: subxt :: sp_core :: H256 , maybe_ref_index : :: core :: option :: Option < :: core :: primitive :: u32 > , } , # [codec (index = 24)] cancel_proposal { # [codec (compact)] prop_index : :: core :: primitive :: u32 , } , }
@@ -23728,6 +24254,7 @@ pub mod api {
                     Debug,
                     Eq,
                     PartialEq,
+                    Clone,
                 )]
                 pub enum Error {
                     #[codec(index = 0)]
@@ -23793,6 +24320,7 @@ pub mod api {
                     Debug,
                     Eq,
                     PartialEq,
+                    Clone,
                 )]
                 pub enum Event {
                     # [codec (index = 0)] Proposed { proposal_index : :: core :: primitive :: u32 , deposit : :: core :: primitive :: u128 , } , # [codec (index = 1)] Tabled { proposal_index : :: core :: primitive :: u32 , deposit : :: core :: primitive :: u128 , depositors : :: std :: vec :: Vec < :: subxt :: sp_core :: crypto :: AccountId32 > , } , # [codec (index = 2)] ExternalTabled , # [codec (index = 3)] Started { ref_index : :: core :: primitive :: u32 , threshold : runtime_types :: pallet_democracy :: vote_threshold :: VoteThreshold , } , # [codec (index = 4)] Passed { ref_index : :: core :: primitive :: u32 , } , # [codec (index = 5)] NotPassed { ref_index : :: core :: primitive :: u32 , } , # [codec (index = 6)] Cancelled { ref_index : :: core :: primitive :: u32 , } , # [codec (index = 7)] Executed { ref_index : :: core :: primitive :: u32 , result : :: core :: result :: Result < () , runtime_types :: sp_runtime :: DispatchError > , } , # [codec (index = 8)] Delegated { who : :: subxt :: sp_core :: crypto :: AccountId32 , target : :: subxt :: sp_core :: crypto :: AccountId32 , } , # [codec (index = 9)] Undelegated { account : :: subxt :: sp_core :: crypto :: AccountId32 , } , # [codec (index = 10)] Vetoed { who : :: subxt :: sp_core :: crypto :: AccountId32 , proposal_hash : :: subxt :: sp_core :: H256 , until : :: core :: primitive :: u32 , } , # [codec (index = 11)] PreimageNoted { proposal_hash : :: subxt :: sp_core :: H256 , who : :: subxt :: sp_core :: crypto :: AccountId32 , deposit : :: core :: primitive :: u128 , } , # [codec (index = 12)] PreimageUsed { proposal_hash : :: subxt :: sp_core :: H256 , provider : :: subxt :: sp_core :: crypto :: AccountId32 , deposit : :: core :: primitive :: u128 , } , # [codec (index = 13)] PreimageInvalid { proposal_hash : :: subxt :: sp_core :: H256 , ref_index : :: core :: primitive :: u32 , } , # [codec (index = 14)] PreimageMissing { proposal_hash : :: subxt :: sp_core :: H256 , ref_index : :: core :: primitive :: u32 , } , # [codec (index = 15)] PreimageReaped { proposal_hash : :: subxt :: sp_core :: H256 , provider : :: subxt :: sp_core :: crypto :: AccountId32 , deposit : :: core :: primitive :: u128 , reaper : :: subxt :: sp_core :: crypto :: AccountId32 , } , # [codec (index = 16)] Blacklisted { proposal_hash : :: subxt :: sp_core :: H256 , } , # [codec (index = 17)] Voted { voter : :: subxt :: sp_core :: crypto :: AccountId32 , ref_index : :: core :: primitive :: u32 , vote : runtime_types :: pallet_democracy :: vote :: AccountVote < :: core :: primitive :: u128 > , } , # [codec (index = 18)] Seconded { seconder : :: subxt :: sp_core :: crypto :: AccountId32 , prop_index : :: core :: primitive :: u32 , } , }
@@ -23805,6 +24333,7 @@ pub mod api {
                     Debug,
                     Eq,
                     PartialEq,
+                    Clone,
                 )]
                 pub struct Delegations<_0> {
                     pub votes: _0,
@@ -23816,6 +24345,7 @@ pub mod api {
                     Debug,
                     Eq,
                     PartialEq,
+                    Clone,
                 )]
                 pub enum ReferendumInfo<_0, _1, _2> {
                     # [codec (index = 0)] Ongoing (runtime_types :: pallet_democracy :: types :: ReferendumStatus < _0 , _1 , _2 > ,) , # [codec (index = 1)] Finished { approved : :: core :: primitive :: bool , end : _0 , } , }
@@ -23825,6 +24355,7 @@ pub mod api {
                     Debug,
                     Eq,
                     PartialEq,
+                    Clone,
                 )]
                 pub struct ReferendumStatus < _0 , _1 , _2 > { pub end : _0 , pub proposal_hash : _1 , pub threshold : runtime_types :: pallet_democracy :: vote_threshold :: VoteThreshold , pub delay : _0 , pub tally : runtime_types :: pallet_democracy :: types :: Tally < _2 > , }
                 #[derive(
@@ -23833,6 +24364,7 @@ pub mod api {
                     Debug,
                     Eq,
                     PartialEq,
+                    Clone,
                 )]
                 pub struct Tally<_0> {
                     pub ayes: _0,
@@ -23848,6 +24380,7 @@ pub mod api {
                     Debug,
                     Eq,
                     PartialEq,
+                    Clone,
                 )]
                 pub enum AccountVote<_0> {
                     #[codec(index = 0)]
@@ -23864,6 +24397,7 @@ pub mod api {
                     Debug,
                     Eq,
                     PartialEq,
+                    Clone,
                 )]
                 pub struct PriorLock<_0, _1>(pub _0, pub _1);
                 #[derive(
@@ -23872,6 +24406,7 @@ pub mod api {
                     Debug,
                     Eq,
                     PartialEq,
+                    Clone,
                     :: subxt :: codec :: CompactAs,
                 )]
                 pub struct Vote(pub ::core::primitive::u8);
@@ -23881,6 +24416,7 @@ pub mod api {
                     Debug,
                     Eq,
                     PartialEq,
+                    Clone,
                 )]
                 pub enum Voting<_0, _1, _2> {
                     # [codec (index = 0)] Direct { votes : :: std :: vec :: Vec < (_2 , runtime_types :: pallet_democracy :: vote :: AccountVote < _0 > ,) > , delegations : runtime_types :: pallet_democracy :: types :: Delegations < _0 > , prior : runtime_types :: pallet_democracy :: vote :: PriorLock < _2 , _0 > , } , # [codec (index = 1)] Delegating { balance : _0 , target : _1 , conviction : runtime_types :: pallet_democracy :: conviction :: Conviction , delegations : runtime_types :: pallet_democracy :: types :: Delegations < _0 > , prior : runtime_types :: pallet_democracy :: vote :: PriorLock < _2 , _0 > , } , }
@@ -23893,6 +24429,7 @@ pub mod api {
                     Debug,
                     Eq,
                     PartialEq,
+                    Clone,
                 )]
                 pub enum VoteThreshold {
                     #[codec(index = 0)]
@@ -23909,6 +24446,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub enum PreimageStatus<_0, _1, _2> {
                 #[codec(index = 0)]
@@ -23928,6 +24466,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub enum Releases {
                 #[codec(index = 0)]
@@ -23944,6 +24483,7 @@ pub mod api {
                     Debug,
                     Eq,
                     PartialEq,
+                    Clone,
                 )]
                 pub enum Call {
                     # [codec (index = 0)] submit_unsigned { raw_solution : :: std :: boxed :: Box < runtime_types :: pallet_election_provider_multi_phase :: RawSolution < runtime_types :: webb_standalone_runtime :: NposSolution16 > > , witness : runtime_types :: pallet_election_provider_multi_phase :: SolutionOrSnapshotSize , } , # [codec (index = 1)] set_minimum_untrusted_score { maybe_next_score : :: core :: option :: Option < [:: core :: primitive :: u128 ; 3usize] > , } , # [codec (index = 2)] set_emergency_election_result { supports : :: std :: vec :: Vec < (:: subxt :: sp_core :: crypto :: AccountId32 , runtime_types :: sp_npos_elections :: Support < :: subxt :: sp_core :: crypto :: AccountId32 > ,) > , } , # [codec (index = 3)] submit { raw_solution : :: std :: boxed :: Box < runtime_types :: pallet_election_provider_multi_phase :: RawSolution < runtime_types :: webb_standalone_runtime :: NposSolution16 > > , num_signed_submissions : :: core :: primitive :: u32 , } , }
@@ -23953,6 +24493,7 @@ pub mod api {
                     Debug,
                     Eq,
                     PartialEq,
+                    Clone,
                 )]
                 pub enum Error {
                     #[codec(index = 0)]
@@ -23984,6 +24525,7 @@ pub mod api {
                     Debug,
                     Eq,
                     PartialEq,
+                    Clone,
                 )]
                 pub enum Event {
                     # [codec (index = 0)] SolutionStored { election_compute : runtime_types :: pallet_election_provider_multi_phase :: ElectionCompute , prev_ejected : :: core :: primitive :: bool , } , # [codec (index = 1)] ElectionFinalized { election_compute : :: core :: option :: Option < runtime_types :: pallet_election_provider_multi_phase :: ElectionCompute > , } , # [codec (index = 2)] Rewarded { account : :: subxt :: sp_core :: crypto :: AccountId32 , value : :: core :: primitive :: u128 , } , # [codec (index = 3)] Slashed { account : :: subxt :: sp_core :: crypto :: AccountId32 , value : :: core :: primitive :: u128 , } , # [codec (index = 4)] SignedPhaseStarted { round : :: core :: primitive :: u32 , } , # [codec (index = 5)] UnsignedPhaseStarted { round : :: core :: primitive :: u32 , } , }
@@ -23996,6 +24538,7 @@ pub mod api {
                     Debug,
                     Eq,
                     PartialEq,
+                    Clone,
                 )]
                 pub struct SignedSubmission < _0 , _1 , _2 > { pub who : _0 , pub deposit : _1 , pub raw_solution : runtime_types :: pallet_election_provider_multi_phase :: RawSolution < _2 > , pub reward : _1 , }
             }
@@ -24005,6 +24548,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub enum ElectionCompute {
                 #[codec(index = 0)]
@@ -24024,6 +24568,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub enum Phase<_0> {
                 #[codec(index = 0)]
@@ -24041,6 +24586,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct RawSolution<_0> {
                 pub solution: _0,
@@ -24053,6 +24599,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct ReadySolution < _0 > { pub supports : :: std :: vec :: Vec < (_0 , runtime_types :: sp_npos_elections :: Support < _0 > ,) > , pub score : [:: core :: primitive :: u128 ; 3usize] , pub compute : runtime_types :: pallet_election_provider_multi_phase :: ElectionCompute , }
             #[derive(
@@ -24061,6 +24608,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct RoundSnapshot<_0> {
                 pub voters: ::std::vec::Vec<(
@@ -24076,6 +24624,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct SolutionOrSnapshotSize {
                 #[codec(compact)]
@@ -24094,6 +24643,7 @@ pub mod api {
                     Debug,
                     Eq,
                     PartialEq,
+                    Clone,
                 )]
                 pub enum Call {
                     # [codec (index = 0)] vote { votes : :: std :: vec :: Vec < :: subxt :: sp_core :: crypto :: AccountId32 > , # [codec (compact)] value : :: core :: primitive :: u128 , } , # [codec (index = 1)] remove_voter , # [codec (index = 2)] submit_candidacy { # [codec (compact)] candidate_count : :: core :: primitive :: u32 , } , # [codec (index = 3)] renounce_candidacy { renouncing : runtime_types :: pallet_elections_phragmen :: Renouncing , } , # [codec (index = 4)] remove_member { who : :: subxt :: sp_runtime :: MultiAddress < :: subxt :: sp_core :: crypto :: AccountId32 , :: core :: primitive :: u32 > , has_replacement : :: core :: primitive :: bool , } , # [codec (index = 5)] clean_defunct_voters { num_voters : :: core :: primitive :: u32 , num_defunct : :: core :: primitive :: u32 , } , }
@@ -24103,6 +24653,7 @@ pub mod api {
                     Debug,
                     Eq,
                     PartialEq,
+                    Clone,
                 )]
                 pub enum Error {
                     #[codec(index = 0)]
@@ -24146,6 +24697,7 @@ pub mod api {
                     Debug,
                     Eq,
                     PartialEq,
+                    Clone,
                 )]
                 pub enum Event {
                     #[codec(index = 0)]
@@ -24185,6 +24737,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub enum Renouncing {
                 #[codec(index = 0)]
@@ -24200,6 +24753,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct SeatHolder<_0, _1> {
                 pub who: _0,
@@ -24212,6 +24766,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct Voter<_0, _1> {
                 pub votes: ::std::vec::Vec<_0>,
@@ -24229,6 +24784,7 @@ pub mod api {
                     Debug,
                     Eq,
                     PartialEq,
+                    Clone,
                 )]
                 pub enum Call {
                     # [codec (index = 0)] report_equivocation { equivocation_proof : :: std :: boxed :: Box < runtime_types :: sp_finality_grandpa :: EquivocationProof < :: subxt :: sp_core :: H256 , :: core :: primitive :: u32 > > , key_owner_proof : runtime_types :: sp_session :: MembershipProof , } , # [codec (index = 1)] report_equivocation_unsigned { equivocation_proof : :: std :: boxed :: Box < runtime_types :: sp_finality_grandpa :: EquivocationProof < :: subxt :: sp_core :: H256 , :: core :: primitive :: u32 > > , key_owner_proof : runtime_types :: sp_session :: MembershipProof , } , # [codec (index = 2)] note_stalled { delay : :: core :: primitive :: u32 , best_finalized_block_number : :: core :: primitive :: u32 , } , }
@@ -24238,6 +24794,7 @@ pub mod api {
                     Debug,
                     Eq,
                     PartialEq,
+                    Clone,
                 )]
                 pub enum Error {
                     #[codec(index = 0)]
@@ -24261,6 +24818,7 @@ pub mod api {
                     Debug,
                     Eq,
                     PartialEq,
+                    Clone,
                 )]
                 pub enum Event {
                     #[codec(index = 0)]
@@ -24282,6 +24840,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct StoredPendingChange < _0 > { pub scheduled_at : _0 , pub delay : _0 , pub next_authorities : runtime_types :: frame_support :: storage :: weak_bounded_vec :: WeakBoundedVec < (runtime_types :: sp_finality_grandpa :: app :: Public , :: core :: primitive :: u64 ,) > , pub forced : :: core :: option :: Option < _0 > , }
             #[derive(
@@ -24290,6 +24849,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub enum StoredState<_0> {
                 #[codec(index = 0)]
@@ -24312,6 +24872,7 @@ pub mod api {
                     Debug,
                     Eq,
                     PartialEq,
+                    Clone,
                 )]
                 pub enum Call {
                     #[codec(index = 0)]
@@ -24325,6 +24886,7 @@ pub mod api {
                     Debug,
                     Eq,
                     PartialEq,
+                    Clone,
                 )]
                 pub enum Error {
                     #[codec(index = 0)]
@@ -24338,6 +24900,7 @@ pub mod api {
                     Debug,
                     Eq,
                     PartialEq,
+                    Clone,
                 )]
                 pub enum Event {}
             }
@@ -24352,6 +24915,7 @@ pub mod api {
                     Debug,
                     Eq,
                     PartialEq,
+                    Clone,
                 )]
                 pub enum Call {
                     # [codec (index = 0)] heartbeat { heartbeat : runtime_types :: pallet_im_online :: Heartbeat < :: core :: primitive :: u32 > , signature : runtime_types :: pallet_im_online :: sr25519 :: app_sr25519 :: Signature , } , }
@@ -24361,6 +24925,7 @@ pub mod api {
                     Debug,
                     Eq,
                     PartialEq,
+                    Clone,
                 )]
                 pub enum Error {
                     #[codec(index = 0)]
@@ -24374,6 +24939,7 @@ pub mod api {
                     Debug,
                     Eq,
                     PartialEq,
+                    Clone,
                 )]
                 pub enum Event {
                     # [codec (index = 0)] HeartbeatReceived { authority_id : runtime_types :: pallet_im_online :: sr25519 :: app_sr25519 :: Public , } , # [codec (index = 1)] AllGood , # [codec (index = 2)] SomeOffline { offline : :: std :: vec :: Vec < (:: subxt :: sp_core :: crypto :: AccountId32 , runtime_types :: pallet_staking :: Exposure < :: subxt :: sp_core :: crypto :: AccountId32 , :: core :: primitive :: u128 > ,) > , } , }
@@ -24388,6 +24954,7 @@ pub mod api {
                         Debug,
                         Eq,
                         PartialEq,
+                        Clone,
                     )]
                     pub struct Public(
                         pub runtime_types::sp_core::sr25519::Public,
@@ -24398,6 +24965,7 @@ pub mod api {
                         Debug,
                         Eq,
                         PartialEq,
+                        Clone,
                     )]
                     pub struct Signature(
                         pub runtime_types::sp_core::sr25519::Signature,
@@ -24410,6 +24978,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct BoundedOpaqueNetworkState { pub peer_id : runtime_types :: frame_support :: storage :: weak_bounded_vec :: WeakBoundedVec < :: core :: primitive :: u8 > , pub external_addresses : runtime_types :: frame_support :: storage :: weak_bounded_vec :: WeakBoundedVec < runtime_types :: frame_support :: storage :: weak_bounded_vec :: WeakBoundedVec < :: core :: primitive :: u8 > > , }
             #[derive(
@@ -24418,6 +24987,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct Heartbeat<_0> {
                 pub block_number: _0,
@@ -24438,6 +25008,7 @@ pub mod api {
                     Debug,
                     Eq,
                     PartialEq,
+                    Clone,
                 )]
                 pub enum Call {
                     #[codec(index = 0)]
@@ -24464,6 +25035,7 @@ pub mod api {
                     Debug,
                     Eq,
                     PartialEq,
+                    Clone,
                 )]
                 pub enum Error {
                     #[codec(index = 0)]
@@ -24483,6 +25055,7 @@ pub mod api {
                     Debug,
                     Eq,
                     PartialEq,
+                    Clone,
                 )]
                 pub enum Event {
                     #[codec(index = 0)]
@@ -24510,6 +25083,7 @@ pub mod api {
                     Debug,
                     Eq,
                     PartialEq,
+                    Clone,
                 )]
                 pub enum Call {
                     #[codec(index = 0)]
@@ -24524,6 +25098,7 @@ pub mod api {
                     Debug,
                     Eq,
                     PartialEq,
+                    Clone,
                 )]
                 pub enum Error {
                     #[codec(index = 0)]
@@ -24545,6 +25120,7 @@ pub mod api {
                     Debug,
                     Eq,
                     PartialEq,
+                    Clone,
                 )]
                 pub enum Event {
                     #[codec(index = 0)]
@@ -24559,6 +25135,7 @@ pub mod api {
                     Debug,
                     Eq,
                     PartialEq,
+                    Clone,
                 )]
                 pub struct EdgeMetadata<_0, _1, _2> {
                     pub src_chain_id: _0,
@@ -24577,6 +25154,7 @@ pub mod api {
                     Debug,
                     Eq,
                     PartialEq,
+                    Clone,
                 )]
                 pub enum Call {
                     #[codec(index = 0)]
@@ -24609,6 +25187,7 @@ pub mod api {
                     Debug,
                     Eq,
                     PartialEq,
+                    Clone,
                 )]
                 pub enum Error {
                     #[codec(index = 0)]
@@ -24628,6 +25207,7 @@ pub mod api {
                     Debug,
                     Eq,
                     PartialEq,
+                    Clone,
                 )]
                 pub enum Event {
                     #[codec(index = 0)]
@@ -24642,6 +25222,7 @@ pub mod api {
                     Debug,
                     Eq,
                     PartialEq,
+                    Clone,
                 )]
                 pub struct MixerMetadata<_0, _1> {
                     pub deposit_size: _0,
@@ -24659,6 +25240,7 @@ pub mod api {
                     Debug,
                     Eq,
                     PartialEq,
+                    Clone,
                 )]
                 pub enum Call {
                     #[codec(index = 0)]
@@ -24681,6 +25263,7 @@ pub mod api {
                     Debug,
                     Eq,
                     PartialEq,
+                    Clone,
                 )]
                 pub enum Error {
                     #[codec(index = 0)]
@@ -24702,6 +25285,7 @@ pub mod api {
                     Debug,
                     Eq,
                     PartialEq,
+                    Clone,
                 )]
                 pub enum Event {
                     #[codec(index = 0)]
@@ -24725,6 +25309,7 @@ pub mod api {
                     Debug,
                     Eq,
                     PartialEq,
+                    Clone,
                 )]
                 pub struct TreeMetadata<_0, _1, _2> {
                     pub creator: ::core::option::Option<_0>,
@@ -24747,6 +25332,7 @@ pub mod api {
                     Debug,
                     Eq,
                     PartialEq,
+                    Clone,
                 )]
                 pub enum Call {
                     #[codec(index = 0)]
@@ -24807,6 +25393,7 @@ pub mod api {
                     Debug,
                     Eq,
                     PartialEq,
+                    Clone,
                 )]
                 pub enum Error {
                     #[codec(index = 0)]
@@ -24844,6 +25431,7 @@ pub mod api {
                     Debug,
                     Eq,
                     PartialEq,
+                    Clone,
                 )]
                 pub enum Event {
                     #[codec(index = 0)]
@@ -24891,6 +25479,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct Multisig<_0, _1, _2> {
                 pub when: runtime_types::pallet_multisig::Timepoint<_0>,
@@ -24904,6 +25493,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct Timepoint<_0> {
                 pub height: _0,
@@ -24920,6 +25510,7 @@ pub mod api {
                     Debug,
                     Eq,
                     PartialEq,
+                    Clone,
                 )]
                 pub enum Event {
                     #[codec(index = 0)]
@@ -24940,6 +25531,7 @@ pub mod api {
                     Debug,
                     Eq,
                     PartialEq,
+                    Clone,
                 )]
                 pub enum Call {
                     #[codec(index = 0)]
@@ -24959,6 +25551,7 @@ pub mod api {
                     Debug,
                     Eq,
                     PartialEq,
+                    Clone,
                 )]
                 pub enum Error {
                     #[codec(index = 0)]
@@ -24980,6 +25573,7 @@ pub mod api {
                     Debug,
                     Eq,
                     PartialEq,
+                    Clone,
                 )]
                 pub enum Event {
                     #[codec(index = 0)]
@@ -24996,6 +25590,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub enum RequestStatus<_0, _1> {
                 #[codec(index = 0)]
@@ -25014,6 +25609,7 @@ pub mod api {
                     Debug,
                     Eq,
                     PartialEq,
+                    Clone,
                 )]
                 pub enum Call {
                     #[codec(index = 0)]
@@ -25093,6 +25689,7 @@ pub mod api {
                     Debug,
                     Eq,
                     PartialEq,
+                    Clone,
                 )]
                 pub enum Error {
                     #[codec(index = 0)]
@@ -25118,6 +25715,7 @@ pub mod api {
                     Debug,
                     Eq,
                     PartialEq,
+                    Clone,
                 )]
                 pub enum Event {
                     #[codec(index = 0)]
@@ -25157,6 +25755,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct Announcement<_0, _1, _2> {
                 pub real: _0,
@@ -25169,6 +25768,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct ProxyDefinition<_0, _1, _2> {
                 pub delegate: _0,
@@ -25186,6 +25786,7 @@ pub mod api {
                     Debug,
                     Eq,
                     PartialEq,
+                    Clone,
                 )]
                 pub enum Call {
                     # [codec (index = 0)] schedule { when : :: core :: primitive :: u32 , maybe_periodic : :: core :: option :: Option < (:: core :: primitive :: u32 , :: core :: primitive :: u32 ,) > , priority : :: core :: primitive :: u8 , call : :: std :: boxed :: Box < runtime_types :: frame_support :: traits :: schedule :: MaybeHashed < runtime_types :: webb_standalone_runtime :: Call , :: subxt :: sp_core :: H256 > > , } , # [codec (index = 1)] cancel { when : :: core :: primitive :: u32 , index : :: core :: primitive :: u32 , } , # [codec (index = 2)] schedule_named { id : :: std :: vec :: Vec < :: core :: primitive :: u8 > , when : :: core :: primitive :: u32 , maybe_periodic : :: core :: option :: Option < (:: core :: primitive :: u32 , :: core :: primitive :: u32 ,) > , priority : :: core :: primitive :: u8 , call : :: std :: boxed :: Box < runtime_types :: frame_support :: traits :: schedule :: MaybeHashed < runtime_types :: webb_standalone_runtime :: Call , :: subxt :: sp_core :: H256 > > , } , # [codec (index = 3)] cancel_named { id : :: std :: vec :: Vec < :: core :: primitive :: u8 > , } , # [codec (index = 4)] schedule_after { after : :: core :: primitive :: u32 , maybe_periodic : :: core :: option :: Option < (:: core :: primitive :: u32 , :: core :: primitive :: u32 ,) > , priority : :: core :: primitive :: u8 , call : :: std :: boxed :: Box < runtime_types :: frame_support :: traits :: schedule :: MaybeHashed < runtime_types :: webb_standalone_runtime :: Call , :: subxt :: sp_core :: H256 > > , } , # [codec (index = 5)] schedule_named_after { id : :: std :: vec :: Vec < :: core :: primitive :: u8 > , after : :: core :: primitive :: u32 , maybe_periodic : :: core :: option :: Option < (:: core :: primitive :: u32 , :: core :: primitive :: u32 ,) > , priority : :: core :: primitive :: u8 , call : :: std :: boxed :: Box < runtime_types :: frame_support :: traits :: schedule :: MaybeHashed < runtime_types :: webb_standalone_runtime :: Call , :: subxt :: sp_core :: H256 > > , } , }
@@ -25195,6 +25796,7 @@ pub mod api {
                     Debug,
                     Eq,
                     PartialEq,
+                    Clone,
                 )]
                 pub enum Error {
                     #[codec(index = 0)]
@@ -25212,6 +25814,7 @@ pub mod api {
                     Debug,
                     Eq,
                     PartialEq,
+                    Clone,
                 )]
                 pub enum Event {
                     # [codec (index = 0)] Scheduled { when : :: core :: primitive :: u32 , index : :: core :: primitive :: u32 , } , # [codec (index = 1)] Canceled { when : :: core :: primitive :: u32 , index : :: core :: primitive :: u32 , } , # [codec (index = 2)] Dispatched { task : (:: core :: primitive :: u32 , :: core :: primitive :: u32 ,) , id : :: core :: option :: Option < :: std :: vec :: Vec < :: core :: primitive :: u8 > > , result : :: core :: result :: Result < () , runtime_types :: sp_runtime :: DispatchError > , } , # [codec (index = 3)] CallLookupFailed { task : (:: core :: primitive :: u32 , :: core :: primitive :: u32 ,) , id : :: core :: option :: Option < :: std :: vec :: Vec < :: core :: primitive :: u8 > > , error : runtime_types :: frame_support :: traits :: schedule :: LookupError , } , }
@@ -25222,6 +25825,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub enum Releases {
                 #[codec(index = 0)]
@@ -25237,6 +25841,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct ScheduledV3<_0, _1, _2, _3> {
                 pub maybe_id: ::core::option::Option<
@@ -25260,6 +25865,7 @@ pub mod api {
                     Debug,
                     Eq,
                     PartialEq,
+                    Clone,
                 )]
                 pub enum Call {
                     #[codec(index = 0)]
@@ -25277,6 +25883,7 @@ pub mod api {
                     Debug,
                     Eq,
                     PartialEq,
+                    Clone,
                 )]
                 pub enum Error {
                     #[codec(index = 0)]
@@ -25296,6 +25903,7 @@ pub mod api {
                     Debug,
                     Eq,
                     PartialEq,
+                    Clone,
                 )]
                 pub enum Event {
                     #[codec(index = 0)]
@@ -25317,6 +25925,7 @@ pub mod api {
                         Debug,
                         Eq,
                         PartialEq,
+                        Clone,
                     )]
                     pub enum Call {
                         # [codec (index = 0)] bond { controller : :: subxt :: sp_runtime :: MultiAddress < :: subxt :: sp_core :: crypto :: AccountId32 , :: core :: primitive :: u32 > , # [codec (compact)] value : :: core :: primitive :: u128 , payee : runtime_types :: pallet_staking :: RewardDestination < :: subxt :: sp_core :: crypto :: AccountId32 > , } , # [codec (index = 1)] bond_extra { # [codec (compact)] max_additional : :: core :: primitive :: u128 , } , # [codec (index = 2)] unbond { # [codec (compact)] value : :: core :: primitive :: u128 , } , # [codec (index = 3)] withdraw_unbonded { num_slashing_spans : :: core :: primitive :: u32 , } , # [codec (index = 4)] validate { prefs : runtime_types :: pallet_staking :: ValidatorPrefs , } , # [codec (index = 5)] nominate { targets : :: std :: vec :: Vec < :: subxt :: sp_runtime :: MultiAddress < :: subxt :: sp_core :: crypto :: AccountId32 , :: core :: primitive :: u32 > > , } , # [codec (index = 6)] chill , # [codec (index = 7)] set_payee { payee : runtime_types :: pallet_staking :: RewardDestination < :: subxt :: sp_core :: crypto :: AccountId32 > , } , # [codec (index = 8)] set_controller { controller : :: subxt :: sp_runtime :: MultiAddress < :: subxt :: sp_core :: crypto :: AccountId32 , :: core :: primitive :: u32 > , } , # [codec (index = 9)] set_validator_count { # [codec (compact)] new : :: core :: primitive :: u32 , } , # [codec (index = 10)] increase_validator_count { # [codec (compact)] additional : :: core :: primitive :: u32 , } , # [codec (index = 11)] scale_validator_count { factor : runtime_types :: sp_arithmetic :: per_things :: Percent , } , # [codec (index = 12)] force_no_eras , # [codec (index = 13)] force_new_era , # [codec (index = 14)] set_invulnerables { invulnerables : :: std :: vec :: Vec < :: subxt :: sp_core :: crypto :: AccountId32 > , } , # [codec (index = 15)] force_unstake { stash : :: subxt :: sp_core :: crypto :: AccountId32 , num_slashing_spans : :: core :: primitive :: u32 , } , # [codec (index = 16)] force_new_era_always , # [codec (index = 17)] cancel_deferred_slash { era : :: core :: primitive :: u32 , slash_indices : :: std :: vec :: Vec < :: core :: primitive :: u32 > , } , # [codec (index = 18)] payout_stakers { validator_stash : :: subxt :: sp_core :: crypto :: AccountId32 , era : :: core :: primitive :: u32 , } , # [codec (index = 19)] rebond { # [codec (compact)] value : :: core :: primitive :: u128 , } , # [codec (index = 20)] set_history_depth { # [codec (compact)] new_history_depth : :: core :: primitive :: u32 , # [codec (compact)] era_items_deleted : :: core :: primitive :: u32 , } , # [codec (index = 21)] reap_stash { stash : :: subxt :: sp_core :: crypto :: AccountId32 , num_slashing_spans : :: core :: primitive :: u32 , } , # [codec (index = 22)] kick { who : :: std :: vec :: Vec < :: subxt :: sp_runtime :: MultiAddress < :: subxt :: sp_core :: crypto :: AccountId32 , :: core :: primitive :: u32 > > , } , # [codec (index = 23)] set_staking_configs { min_nominator_bond : :: core :: primitive :: u128 , min_validator_bond : :: core :: primitive :: u128 , max_nominator_count : :: core :: option :: Option < :: core :: primitive :: u32 > , max_validator_count : :: core :: option :: Option < :: core :: primitive :: u32 > , chill_threshold : :: core :: option :: Option < runtime_types :: sp_arithmetic :: per_things :: Percent > , min_commission : runtime_types :: sp_arithmetic :: per_things :: Perbill , } , # [codec (index = 24)] chill_other { controller : :: subxt :: sp_core :: crypto :: AccountId32 , } , }
@@ -25326,6 +25935,7 @@ pub mod api {
                         Debug,
                         Eq,
                         PartialEq,
+                        Clone,
                     )]
                     pub enum Error {
                         #[codec(index = 0)]
@@ -25383,6 +25993,7 @@ pub mod api {
                         Debug,
                         Eq,
                         PartialEq,
+                        Clone,
                     )]
                     pub enum Event {
                         #[codec(index = 0)]
@@ -25445,6 +26056,7 @@ pub mod api {
                     Debug,
                     Eq,
                     PartialEq,
+                    Clone,
                 )]
                 pub struct SlashingSpans {
                     pub span_index: ::core::primitive::u32,
@@ -25458,6 +26070,7 @@ pub mod api {
                     Debug,
                     Eq,
                     PartialEq,
+                    Clone,
                 )]
                 pub struct SpanRecord<_0> {
                     pub slashed: _0,
@@ -25470,6 +26083,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct ActiveEraInfo {
                 pub index: ::core::primitive::u32,
@@ -25481,6 +26095,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct EraRewardPoints<_0> {
                 pub total: ::core::primitive::u32,
@@ -25493,6 +26108,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct Exposure<_0, _1> {
                 #[codec(compact)]
@@ -25509,6 +26125,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub enum Forcing {
                 #[codec(index = 0)]
@@ -25526,6 +26143,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct IndividualExposure<_0, _1> {
                 pub who: _0,
@@ -25538,6 +26156,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct Nominations<_0> {
                 pub targets: ::std::vec::Vec<_0>,
@@ -25550,6 +26169,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub enum Releases {
                 #[codec(index = 0)]
@@ -25575,6 +26195,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub enum RewardDestination<_0> {
                 #[codec(index = 0)]
@@ -25594,6 +26215,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct StakingLedger<_0, _1> {
                 pub stash: _0,
@@ -25612,6 +26234,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct UnappliedSlash<_0, _1> {
                 pub validator: _0,
@@ -25626,6 +26249,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct UnlockChunk<_0> {
                 #[codec(compact)]
@@ -25639,6 +26263,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct ValidatorPrefs {
                 #[codec(compact)]
@@ -25657,6 +26282,7 @@ pub mod api {
                     Debug,
                     Eq,
                     PartialEq,
+                    Clone,
                 )]
                 pub enum Call {
                     #[codec(index = 0)]
@@ -25696,6 +26322,7 @@ pub mod api {
                     Debug,
                     Eq,
                     PartialEq,
+                    Clone,
                 )]
                 pub enum Error {
                     #[codec(index = 0)]
@@ -25707,6 +26334,7 @@ pub mod api {
                     Debug,
                     Eq,
                     PartialEq,
+                    Clone,
                 )]
                 pub enum Event {
                     #[codec(index = 0)]
@@ -25742,6 +26370,7 @@ pub mod api {
                     Debug,
                     Eq,
                     PartialEq,
+                    Clone,
                 )]
                 pub enum Call {
                     #[codec(index = 0)]
@@ -25762,6 +26391,7 @@ pub mod api {
                     Debug,
                     Eq,
                     PartialEq,
+                    Clone,
                 )]
                 pub enum Call {
                     #[codec(index = 0)]
@@ -25787,6 +26417,7 @@ pub mod api {
                     Debug,
                     Eq,
                     PartialEq,
+                    Clone,
                 )]
                 pub enum Error {
                     #[codec(index = 0)]
@@ -25804,6 +26435,7 @@ pub mod api {
                     Debug,
                     Eq,
                     PartialEq,
+                    Clone,
                 )]
                 pub enum Event {
                     #[codec(index = 0)]
@@ -25835,6 +26467,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct ChargeTransactionPayment(
                 #[codec(compact)] pub ::core::primitive::u128,
@@ -25845,6 +26478,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub enum Releases {
                 #[codec(index = 0)]
@@ -25863,6 +26497,7 @@ pub mod api {
                     Debug,
                     Eq,
                     PartialEq,
+                    Clone,
                 )]
                 pub enum Call {
                     #[codec(index = 0)]
@@ -25891,6 +26526,7 @@ pub mod api {
                     Debug,
                     Eq,
                     PartialEq,
+                    Clone,
                 )]
                 pub enum Error {
                     #[codec(index = 0)]
@@ -25906,6 +26542,7 @@ pub mod api {
                     Debug,
                     Eq,
                     PartialEq,
+                    Clone,
                 )]
                 pub enum Event {
                     #[codec(index = 0)]
@@ -25945,6 +26582,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct Proposal<_0, _1> {
                 pub proposer: _0,
@@ -25963,6 +26601,7 @@ pub mod api {
                     Debug,
                     Eq,
                     PartialEq,
+                    Clone,
                 )]
                 pub enum Call {
                     # [codec (index = 0)] batch { calls : :: std :: vec :: Vec < runtime_types :: webb_standalone_runtime :: Call > , } , # [codec (index = 1)] as_derivative { index : :: core :: primitive :: u16 , call : :: std :: boxed :: Box < runtime_types :: webb_standalone_runtime :: Call > , } , # [codec (index = 2)] batch_all { calls : :: std :: vec :: Vec < runtime_types :: webb_standalone_runtime :: Call > , } , # [codec (index = 3)] dispatch_as { as_origin : :: std :: boxed :: Box < runtime_types :: webb_standalone_runtime :: OriginCaller > , call : :: std :: boxed :: Box < runtime_types :: webb_standalone_runtime :: Call > , } , }
@@ -25972,6 +26611,7 @@ pub mod api {
                     Debug,
                     Eq,
                     PartialEq,
+                    Clone,
                 )]
                 pub enum Error {
                     #[codec(index = 0)]
@@ -25983,6 +26623,7 @@ pub mod api {
                     Debug,
                     Eq,
                     PartialEq,
+                    Clone,
                 )]
                 pub enum Event {
                     #[codec(index = 0)]
@@ -26014,6 +26655,7 @@ pub mod api {
                     Debug,
                     Eq,
                     PartialEq,
+                    Clone,
                 )]
                 pub enum Call {
                     #[codec(index = 0)]
@@ -26027,6 +26669,7 @@ pub mod api {
                     Debug,
                     Eq,
                     PartialEq,
+                    Clone,
                 )]
                 pub enum Error {
                     #[codec(index = 0)]
@@ -26040,6 +26683,7 @@ pub mod api {
                     Debug,
                     Eq,
                     PartialEq,
+                    Clone,
                 )]
                 pub enum Event {}
             }
@@ -26052,6 +26696,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct H256(pub [::core::primitive::u8; 32usize]);
         }
@@ -26065,6 +26710,7 @@ pub mod api {
                     Debug,
                     Eq,
                     PartialEq,
+                    Clone,
                     :: subxt :: codec :: CompactAs,
                 )]
                 pub struct FixedU128(pub ::core::primitive::u128);
@@ -26077,6 +26723,7 @@ pub mod api {
                     Debug,
                     Eq,
                     PartialEq,
+                    Clone,
                     :: subxt :: codec :: CompactAs,
                 )]
                 pub struct PerU16(pub ::core::primitive::u16);
@@ -26086,6 +26733,7 @@ pub mod api {
                     Debug,
                     Eq,
                     PartialEq,
+                    Clone,
                     :: subxt :: codec :: CompactAs,
                 )]
                 pub struct Perbill(pub ::core::primitive::u32);
@@ -26095,6 +26743,7 @@ pub mod api {
                     Debug,
                     Eq,
                     PartialEq,
+                    Clone,
                     :: subxt :: codec :: CompactAs,
                 )]
                 pub struct Percent(pub ::core::primitive::u8);
@@ -26104,6 +26753,7 @@ pub mod api {
                     Debug,
                     Eq,
                     PartialEq,
+                    Clone,
                     :: subxt :: codec :: CompactAs,
                 )]
                 pub struct Permill(pub ::core::primitive::u32);
@@ -26119,6 +26769,7 @@ pub mod api {
                     Debug,
                     Eq,
                     PartialEq,
+                    Clone,
                 )]
                 pub struct Public(pub runtime_types::sp_core::sr25519::Public);
             }
@@ -26133,6 +26784,7 @@ pub mod api {
                     Debug,
                     Eq,
                     PartialEq,
+                    Clone,
                 )]
                 pub struct Public(pub runtime_types::sp_core::sr25519::Public);
             }
@@ -26144,6 +26796,7 @@ pub mod api {
                     Debug,
                     Eq,
                     PartialEq,
+                    Clone,
                 )]
                 pub enum NextConfigDescriptor {
                     #[codec(index = 1)]
@@ -26160,6 +26813,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub enum AllowedSlots {
                 #[codec(index = 0)]
@@ -26175,6 +26829,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct BabeEpochConfiguration {
                 pub c: (::core::primitive::u64, ::core::primitive::u64),
@@ -26190,6 +26845,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct EquivocationProof<_0, _1> {
                 pub offender: _1,
@@ -26203,6 +26859,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
                 :: subxt :: codec :: CompactAs,
             )]
             pub struct Slot(pub ::core::primitive::u64);
@@ -26217,6 +26874,7 @@ pub mod api {
                     Debug,
                     Eq,
                     PartialEq,
+                    Clone,
                 )]
                 pub struct AccountId32(pub [::core::primitive::u8; 32usize]);
                 #[derive(
@@ -26225,6 +26883,7 @@ pub mod api {
                     Debug,
                     Eq,
                     PartialEq,
+                    Clone,
                 )]
                 pub struct KeyTypeId(pub [::core::primitive::u8; 4usize]);
             }
@@ -26236,6 +26895,7 @@ pub mod api {
                     Debug,
                     Eq,
                     PartialEq,
+                    Clone,
                 )]
                 pub struct Signature(pub [::core::primitive::u8; 65usize]);
             }
@@ -26247,6 +26907,7 @@ pub mod api {
                     Debug,
                     Eq,
                     PartialEq,
+                    Clone,
                 )]
                 pub struct Public(pub [::core::primitive::u8; 32usize]);
                 #[derive(
@@ -26255,6 +26916,7 @@ pub mod api {
                     Debug,
                     Eq,
                     PartialEq,
+                    Clone,
                 )]
                 pub struct Signature(pub [::core::primitive::u8; 64usize]);
             }
@@ -26266,6 +26928,7 @@ pub mod api {
                     Debug,
                     Eq,
                     PartialEq,
+                    Clone,
                 )]
                 pub struct OpaqueMultiaddr(
                     pub ::std::vec::Vec<::core::primitive::u8>,
@@ -26276,6 +26939,7 @@ pub mod api {
                     Debug,
                     Eq,
                     PartialEq,
+                    Clone,
                 )]
                 pub struct OpaqueNetworkState {
                     pub peer_id: runtime_types::sp_core::OpaquePeerId,
@@ -26292,6 +26956,7 @@ pub mod api {
                     Debug,
                     Eq,
                     PartialEq,
+                    Clone,
                 )]
                 pub struct Public(pub [::core::primitive::u8; 32usize]);
                 #[derive(
@@ -26300,6 +26965,7 @@ pub mod api {
                     Debug,
                     Eq,
                     PartialEq,
+                    Clone,
                 )]
                 pub struct Signature(pub [::core::primitive::u8; 64usize]);
             }
@@ -26309,6 +26975,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct OpaquePeerId(pub ::std::vec::Vec<::core::primitive::u8>);
             #[derive(
@@ -26317,6 +26984,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub enum Void {}
         }
@@ -26330,6 +26998,7 @@ pub mod api {
                     Debug,
                     Eq,
                     PartialEq,
+                    Clone,
                 )]
                 pub struct Public(pub runtime_types::sp_core::ed25519::Public);
                 #[derive(
@@ -26338,6 +27007,7 @@ pub mod api {
                     Debug,
                     Eq,
                     PartialEq,
+                    Clone,
                 )]
                 pub struct Signature(
                     pub runtime_types::sp_core::ed25519::Signature,
@@ -26349,6 +27019,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub enum Equivocation<_0, _1> {
                 #[codec(index = 0)]
@@ -26374,6 +27045,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct EquivocationProof<_0, _1> {
                 pub set_id: ::core::primitive::u64,
@@ -26389,6 +27061,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct Support<_0> {
                 pub total: ::core::primitive::u128,
@@ -26407,6 +27080,7 @@ pub mod api {
                         Debug,
                         Eq,
                         PartialEq,
+                        Clone,
                     )]
                     pub struct Digest { pub logs : :: std :: vec :: Vec < runtime_types :: sp_runtime :: generic :: digest :: DigestItem > , }
                     #[derive(
@@ -26415,6 +27089,7 @@ pub mod api {
                         Debug,
                         Eq,
                         PartialEq,
+                        Clone,
                     )]
                     pub enum DigestItem {
                         #[codec(index = 6)]
@@ -26446,6 +27121,7 @@ pub mod api {
                         Debug,
                         Eq,
                         PartialEq,
+                        Clone,
                     )]
                     pub enum Era {
                         #[codec(index = 0)]
@@ -26970,6 +27646,7 @@ pub mod api {
                         Debug,
                         Eq,
                         PartialEq,
+                        Clone,
                     )]
                     pub struct Header<_0, _1> {
                         pub parent_hash: ::subxt::sp_core::H256,
@@ -26992,6 +27669,7 @@ pub mod api {
                         Debug,
                         Eq,
                         PartialEq,
+                        Clone,
                     )]
                     pub struct UncheckedExtrinsic<_0, _1, _2, _3>(
                         pub ::std::vec::Vec<::core::primitive::u8>,
@@ -27008,6 +27686,7 @@ pub mod api {
                     Debug,
                     Eq,
                     PartialEq,
+                    Clone,
                 )]
                 pub enum MultiAddress<_0, _1> {
                     #[codec(index = 0)]
@@ -27030,6 +27709,7 @@ pub mod api {
                     Debug,
                     Eq,
                     PartialEq,
+                    Clone,
                 )]
                 pub struct BlakeTwo256;
             }
@@ -27039,6 +27719,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub enum ArithmeticError {
                 #[codec(index = 0)]
@@ -27054,6 +27735,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub enum DispatchError {
                 #[codec(index = 0)]
@@ -27084,6 +27766,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub enum MultiSignature {
                 #[codec(index = 0)]
@@ -27099,6 +27782,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub enum TokenError {
                 #[codec(index = 0)]
@@ -27125,6 +27809,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct MembershipProof {
                 pub session: ::core::primitive::u32,
@@ -27143,6 +27828,7 @@ pub mod api {
                     Debug,
                     Eq,
                     PartialEq,
+                    Clone,
                 )]
                 pub struct OffenceDetails<_0, _1> {
                     pub offender: _1,
@@ -27158,6 +27844,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct RuntimeVersion {
                 pub spec_name: ::std::string::String,
@@ -27183,6 +27870,7 @@ pub mod api {
                     Debug,
                     Eq,
                     PartialEq,
+                    Clone,
                 )]
                 pub struct DepositDetails<_0, _1> {
                     pub depositor: _0,
@@ -27198,6 +27886,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub enum Call {
                 # [codec (index = 0)] System (runtime_types :: frame_system :: pallet :: Call ,) , # [codec (index = 2)] Timestamp (runtime_types :: pallet_timestamp :: pallet :: Call ,) , # [codec (index = 3)] Babe (runtime_types :: pallet_babe :: pallet :: Call ,) , # [codec (index = 4)] Authorship (runtime_types :: pallet_authorship :: pallet :: Call ,) , # [codec (index = 5)] Indices (runtime_types :: pallet_indices :: pallet :: Call ,) , # [codec (index = 6)] Balances (runtime_types :: pallet_balances :: pallet :: Call ,) , # [codec (index = 8)] ElectionProviderMultiPhase (runtime_types :: pallet_election_provider_multi_phase :: pallet :: Call ,) , # [codec (index = 9)] Staking (runtime_types :: pallet_staking :: pallet :: pallet :: Call ,) , # [codec (index = 10)] Session (runtime_types :: pallet_session :: pallet :: Call ,) , # [codec (index = 11)] Democracy (runtime_types :: pallet_democracy :: pallet :: Call ,) , # [codec (index = 12)] Council (runtime_types :: pallet_collective :: pallet :: Call ,) , # [codec (index = 13)] Elections (runtime_types :: pallet_elections_phragmen :: pallet :: Call ,) , # [codec (index = 14)] Grandpa (runtime_types :: pallet_grandpa :: pallet :: Call ,) , # [codec (index = 15)] Treasury (runtime_types :: pallet_treasury :: pallet :: Call ,) , # [codec (index = 16)] Utility (runtime_types :: pallet_utility :: pallet :: Call ,) , # [codec (index = 17)] Multisig (runtime_types :: pallet_multisig :: pallet :: Call ,) , # [codec (index = 18)] Scheduler (runtime_types :: pallet_scheduler :: pallet :: Call ,) , # [codec (index = 19)] Preimage (runtime_types :: pallet_preimage :: pallet :: Call ,) , # [codec (index = 20)] Proxy (runtime_types :: pallet_proxy :: pallet :: Call ,) , # [codec (index = 21)] Assets (runtime_types :: pallet_assets :: pallet :: Call ,) , # [codec (index = 22)] Sudo (runtime_types :: pallet_sudo :: pallet :: Call ,) , # [codec (index = 23)] ImOnline (runtime_types :: pallet_im_online :: pallet :: Call ,) , # [codec (index = 27)] Bounties (runtime_types :: pallet_bounties :: pallet :: Call ,) , # [codec (index = 28)] ChildBounties (runtime_types :: pallet_child_bounties :: pallet :: Call ,) , # [codec (index = 29)] BagsList (runtime_types :: pallet_bags_list :: pallet :: Call ,) , # [codec (index = 30)] HasherBn254 (runtime_types :: pallet_hasher :: pallet :: Call ,) , # [codec (index = 31)] HasherBls381 (runtime_types :: pallet_hasher :: pallet :: Call ,) , # [codec (index = 32)] AssetRegistry (runtime_types :: pallet_asset_registry :: pallet :: Call ,) , # [codec (index = 33)] Currencies (runtime_types :: orml_currencies :: module :: Call ,) , # [codec (index = 34)] Tokens (runtime_types :: orml_tokens :: module :: Call ,) , # [codec (index = 35)] TokenWrapper (runtime_types :: pallet_token_wrapper :: pallet :: Call ,) , # [codec (index = 36)] VerifierBn254 (runtime_types :: pallet_verifier :: pallet :: Call ,) , # [codec (index = 37)] VerifierBls381 (runtime_types :: pallet_verifier :: pallet :: Call ,) , # [codec (index = 38)] MerkleTreeBn254 (runtime_types :: pallet_mt :: pallet :: Call ,) , # [codec (index = 39)] MerkleTreeBls381 (runtime_types :: pallet_mt :: pallet :: Call ,) , # [codec (index = 40)] LinkableTreeBn254 (runtime_types :: pallet_linkable_tree :: pallet :: Call ,) , # [codec (index = 41)] LinkableTreeBls381 (runtime_types :: pallet_linkable_tree :: pallet :: Call ,) , # [codec (index = 42)] MixerBn254 (runtime_types :: pallet_mixer :: pallet :: Call ,) , # [codec (index = 43)] MixerBls381 (runtime_types :: pallet_mixer :: pallet :: Call ,) , # [codec (index = 44)] AnchorBn254 (runtime_types :: pallet_anchor :: pallet :: Call ,) , # [codec (index = 45)] AnchorBls381 (runtime_types :: pallet_anchor :: pallet :: Call ,) , # [codec (index = 46)] AnchorHandlerBn254 (runtime_types :: pallet_anchor_handler :: pallet :: Call ,) , # [codec (index = 47)] AnchorHandlerBls381 (runtime_types :: pallet_anchor_handler :: pallet :: Call ,) , # [codec (index = 48)] Bridge (runtime_types :: pallet_bridge :: pallet :: Call ,) , }
@@ -27207,6 +27896,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct Element(pub [::core::primitive::u8; 32usize]);
             #[derive(
@@ -27215,6 +27905,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub enum Event {
                 # [codec (index = 0)] System (runtime_types :: frame_system :: pallet :: Event ,) , # [codec (index = 5)] Indices (runtime_types :: pallet_indices :: pallet :: Event ,) , # [codec (index = 6)] Balances (runtime_types :: pallet_balances :: pallet :: Event ,) , # [codec (index = 8)] ElectionProviderMultiPhase (runtime_types :: pallet_election_provider_multi_phase :: pallet :: Event ,) , # [codec (index = 9)] Staking (runtime_types :: pallet_staking :: pallet :: pallet :: Event ,) , # [codec (index = 10)] Session (runtime_types :: pallet_session :: pallet :: Event ,) , # [codec (index = 11)] Democracy (runtime_types :: pallet_democracy :: pallet :: Event ,) , # [codec (index = 12)] Council (runtime_types :: pallet_collective :: pallet :: Event ,) , # [codec (index = 13)] Elections (runtime_types :: pallet_elections_phragmen :: pallet :: Event ,) , # [codec (index = 14)] Grandpa (runtime_types :: pallet_grandpa :: pallet :: Event ,) , # [codec (index = 15)] Treasury (runtime_types :: pallet_treasury :: pallet :: Event ,) , # [codec (index = 16)] Utility (runtime_types :: pallet_utility :: pallet :: Event ,) , # [codec (index = 17)] Multisig (runtime_types :: pallet_multisig :: pallet :: Event ,) , # [codec (index = 18)] Scheduler (runtime_types :: pallet_scheduler :: pallet :: Event ,) , # [codec (index = 19)] Preimage (runtime_types :: pallet_preimage :: pallet :: Event ,) , # [codec (index = 20)] Proxy (runtime_types :: pallet_proxy :: pallet :: Event ,) , # [codec (index = 21)] Assets (runtime_types :: pallet_assets :: pallet :: Event ,) , # [codec (index = 22)] Sudo (runtime_types :: pallet_sudo :: pallet :: Event ,) , # [codec (index = 23)] ImOnline (runtime_types :: pallet_im_online :: pallet :: Event ,) , # [codec (index = 25)] Offences (runtime_types :: pallet_offences :: pallet :: Event ,) , # [codec (index = 27)] Bounties (runtime_types :: pallet_bounties :: pallet :: Event ,) , # [codec (index = 28)] ChildBounties (runtime_types :: pallet_child_bounties :: pallet :: Event ,) , # [codec (index = 29)] BagsList (runtime_types :: pallet_bags_list :: pallet :: Event ,) , # [codec (index = 30)] HasherBn254 (runtime_types :: pallet_hasher :: pallet :: Event ,) , # [codec (index = 31)] HasherBls381 (runtime_types :: pallet_hasher :: pallet :: Event ,) , # [codec (index = 32)] AssetRegistry (runtime_types :: pallet_asset_registry :: pallet :: Event ,) , # [codec (index = 33)] Currencies (runtime_types :: orml_currencies :: module :: Event ,) , # [codec (index = 34)] Tokens (runtime_types :: orml_tokens :: module :: Event ,) , # [codec (index = 35)] TokenWrapper (runtime_types :: pallet_token_wrapper :: pallet :: Event ,) , # [codec (index = 36)] VerifierBn254 (runtime_types :: pallet_verifier :: pallet :: Event ,) , # [codec (index = 37)] VerifierBls381 (runtime_types :: pallet_verifier :: pallet :: Event ,) , # [codec (index = 38)] MerkleTreeBn254 (runtime_types :: pallet_mt :: pallet :: Event ,) , # [codec (index = 39)] MerkleTreeBls381 (runtime_types :: pallet_mt :: pallet :: Event ,) , # [codec (index = 40)] LinkableTreeBn254 (runtime_types :: pallet_linkable_tree :: pallet :: Event ,) , # [codec (index = 41)] LinkableTreeBls381 (runtime_types :: pallet_linkable_tree :: pallet :: Event ,) , # [codec (index = 42)] MixerBn254 (runtime_types :: pallet_mixer :: pallet :: Event ,) , # [codec (index = 43)] MixerBls381 (runtime_types :: pallet_mixer :: pallet :: Event ,) , # [codec (index = 44)] AnchorBn254 (runtime_types :: pallet_anchor :: pallet :: Event ,) , # [codec (index = 45)] AnchorBls381 (runtime_types :: pallet_anchor :: pallet :: Event ,) , # [codec (index = 46)] AnchorHandlerBn254 (runtime_types :: pallet_anchor_handler :: pallet :: Event ,) , # [codec (index = 47)] AnchorHandlerBls381 (runtime_types :: pallet_anchor_handler :: pallet :: Event ,) , # [codec (index = 48)] Bridge (runtime_types :: pallet_bridge :: pallet :: Event ,) , }
@@ -27224,6 +27915,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct NposSolution16 {
                 pub votes1: ::std::vec::Vec<(
@@ -27357,6 +28049,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub enum OriginCaller {
                 #[codec(index = 0)]
@@ -27380,6 +28073,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub enum ProxyType {
                 #[codec(index = 0)]
@@ -27401,6 +28095,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct Runtime;
             #[derive(
@@ -27409,6 +28104,7 @@ pub mod api {
                 Debug,
                 Eq,
                 PartialEq,
+                Clone,
             )]
             pub struct SessionKeys { pub grandpa : runtime_types :: sp_finality_grandpa :: app :: Public , pub babe : runtime_types :: sp_consensus_babe :: app :: Public , pub im_online : runtime_types :: pallet_im_online :: sr25519 :: app_sr25519 :: Public , pub authority_discovery : runtime_types :: sp_authority_discovery :: app :: Public , }
         }
