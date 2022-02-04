@@ -107,12 +107,8 @@ mod substrate {
         let mut generated_type_derives =
             subxt_codegen::GeneratedTypeDerives::default();
         generated_type_derives.append(
-            vec![
-                syn::parse_quote!(Debug),
-                syn::parse_quote!(Eq),
-                syn::parse_quote!(PartialEq),
-            ]
-            .into_iter(),
+            vec![syn::parse_quote!(Eq), syn::parse_quote!(PartialEq)]
+                .into_iter(),
         );
         let runtime_api =
             generator.generate_runtime(item_mod, generated_type_derives);
