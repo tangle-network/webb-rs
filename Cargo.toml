@@ -1,5 +1,5 @@
 [workspace]
-members = [".", "pedersen-hash"]
+members = [".", "pedersen-hash", "resource-id"]
 
 [package]
 name = "webb"
