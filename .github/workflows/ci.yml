@@ -31,7 +31,6 @@ jobs:
 
   linux:
     runs-on: ubuntu-latest
-    needs: install-cross
     steps:
       - uses: actions/checkout@v2
         with:
