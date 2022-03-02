@@ -1,0 +1,9 @@
+[package]
+name = "webb-proposals"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+
+[dev-dependencies]
+hex-literal = "0.3"
