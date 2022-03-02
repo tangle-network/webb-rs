@@ -490,7 +490,7 @@ mod tests {
     use super::*;
 
     #[test]
-    fn encode() {
+    fn encode_resource_id() {
         let target_system = TargetSystem::new_contract_address(
             hex_literal::hex!("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"),
         );
@@ -498,6 +498,76 @@ mod tests {
         let target_chain_id = ChainId::from(4);
         let resource_id =
             ResourceId::new(target_system, target_chain, target_chain_id);
-        assert_eq!(resource_id.to_bytes(), [0u8; 6] + hex_literal::hex!(""));
+        assert_eq!(
+            resource_id.to_bytes(),
+            // first 6 bytes are zeros.
+            // next is the target_system contract address.
+            // then two bytes of the chain type.
+            // lastly is the 4 bytes of the chain id.
+            hex_literal::hex!(
+                "000000000000aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa010000000004"
+            )
+        );
+    }
+
+    #[test]
+    fn decode_resource_id() {
+        let bytes = hex_literal::hex!(
+            "000000000000aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa010000000004"
+        );
+        let resource_id = ResourceId::from(bytes);
+        assert_eq!(
+            resource_id.target_system(),
+            TargetSystem::new_contract_address(hex_literal::hex!(
+                "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+            ))
+        );
+        assert_eq!(resource_id.chain_type(), ChainType::Evm);
+        assert_eq!(resource_id.chain_id(), ChainId::from(4));
+    }
+
+    #[test]
+    fn encode_header() {
+        let target_system = TargetSystem::new_contract_address(
+            hex_literal::hex!("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"),
+        );
+        let target_chain = ChainType::Evm;
+        let target_chain_id = ChainId::from(4);
+        let resource_id =
+            ResourceId::new(target_system, target_chain, target_chain_id);
+        let function_signature =
+            FunctionSignature::new(hex_literal::hex!("f00dbabe"));
+        let nonce = Nonce::from(0x0001);
+        let header =
+            ProposalHeader::new(resource_id, function_signature, nonce);
+        assert_eq!(
+            header.to_bytes(),
+            hex_literal::hex!(
+                "000000000000aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa010000000004f00dbabe00000001"
+            )
+        );
+    }
+
+    #[test]
+    fn decode_header() {
+        let bytes = hex_literal::hex!(
+            "000000000000aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa010000000004f00dbabe00000001"
+        );
+        let header = ProposalHeader::from(bytes);
+        assert_eq!(
+            header.resource_id(),
+            ResourceId::new(
+                TargetSystem::new_contract_address(hex_literal::hex!(
+                    "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+                )),
+                ChainType::Evm,
+                ChainId::from(4)
+            )
+        );
+        assert_eq!(
+            header.function_signature(),
+            FunctionSignature::new(hex_literal::hex!("f00dbabe"))
+        );
+        assert_eq!(header.nonce(), Nonce::from(0x0001));
     }
 }

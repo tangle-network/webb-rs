@@ -146,3 +146,86 @@ impl From<AnchorUpdateProposal> for [u8; AnchorUpdateProposal::LENGTH] {
         proposal.to_bytes()
     }
 }
+
+#[cfg(test)]
+mod tests {
+    use crate::{FunctionSignature, Nonce, ResourceId, TargetSystem};
+
+    use super::*;
+
+    #[test]
+    fn encode() {
+        let target_system = TargetSystem::new_contract_address(
+            hex_literal::hex!("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"),
+        );
+        let target_chain_type = ChainType::Evm;
+        let target_chain_id = ChainId::from(4);
+        let resource_id =
+            ResourceId::new(target_system, target_chain_type, target_chain_id);
+        let function_signature =
+            FunctionSignature::new(hex_literal::hex!("cafebabe"));
+        let nonce = Nonce::from(0x0001);
+        let header =
+            ProposalHeader::new(resource_id, function_signature, nonce);
+        let src_chain_type = ChainType::Evm;
+        let src_chain_id = ChainId::from(1);
+        let last_leaf_index = 0x0001;
+        let merkle_root = [
+            0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x0a,
+            0x0b, 0x0c, 0x0d, 0x0e, 0x0f, 0x10, 0x11, 0x12, 0x13, 0x14, 0x15,
+            0x16, 0x17, 0x18, 0x19, 0x1a, 0x1b, 0x1c, 0x1d, 0x1e, 0x1f,
+        ];
+        let proposal = AnchorUpdateProposal::new(
+            header,
+            src_chain_type,
+            src_chain_id,
+            last_leaf_index,
+            merkle_root,
+        );
+        let bytes = proposal.to_bytes();
+        let expected = hex_literal::hex!(
+            "000000000000aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa010000000004"
+            "cafebabe0000000101000000000100000001000102030405060708090a0b0c0d"
+            "0e0f101112131415161718191a1b1c1d1e1f"
+        );
+        assert_eq!(bytes, expected);
+    }
+
+    #[test]
+    fn decode() {
+        let bytes = hex_literal::hex!(
+            "000000000000aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa010000000004"
+            "cafebabe0000000101000000000100000001000102030405060708090a0b0c0d"
+            "0e0f101112131415161718191a1b1c1d1e1f"
+        );
+        let proposal = AnchorUpdateProposal::from(bytes);
+        let target_system = TargetSystem::new_contract_address(
+            hex_literal::hex!("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"),
+        );
+        let target_chain_type = ChainType::Evm;
+        let target_chain_id = ChainId::from(4);
+        let resource_id =
+            ResourceId::new(target_system, target_chain_type, target_chain_id);
+        let function_signature =
+            FunctionSignature::new(hex_literal::hex!("cafebabe"));
+        let nonce = Nonce::from(0x0001);
+        let header =
+            ProposalHeader::new(resource_id, function_signature, nonce);
+        let src_chain_type = ChainType::Evm;
+        let src_chain_id = ChainId::from(1);
+        let last_leaf_index = 0x0001;
+        let merkle_root = [
+            0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x0a,
+            0x0b, 0x0c, 0x0d, 0x0e, 0x0f, 0x10, 0x11, 0x12, 0x13, 0x14, 0x15,
+            0x16, 0x17, 0x18, 0x19, 0x1a, 0x1b, 0x1c, 0x1d, 0x1e, 0x1f,
+        ];
+        let expected = AnchorUpdateProposal::new(
+            header,
+            src_chain_type,
+            src_chain_id,
+            last_leaf_index,
+            merkle_root,
+        );
+        assert_eq!(proposal, expected);
+    }
+}
