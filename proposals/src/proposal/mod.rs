@@ -9,12 +9,13 @@
 //! - [x] `SetTreasuryHandlerProposal`
 //! - [x] `SetVerifierProposal`
 //! - [x] `FeeRecipientUpdateProposal`
-//! - [ ] `RescueTokensProposal`
+//! - [x] `RescueTokensProposal`
 
 mod anchor_update;
 mod fee_recipient_update;
 mod max_deposit_limit;
 mod min_withdrawal_limit;
+mod rescue_tokens;
 mod resource_id_update;
 mod set_treasury_handler;
 mod set_verifier;
@@ -26,6 +27,7 @@ pub use anchor_update::*;
 pub use fee_recipient_update::*;
 pub use max_deposit_limit::*;
 pub use min_withdrawal_limit::*;
+pub use rescue_tokens::*;
 pub use resource_id_update::*;
 pub use set_treasury_handler::*;
 pub use set_verifier::*;
