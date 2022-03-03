@@ -1,33 +1,33 @@
-//! Set Verifier Proposal.
+//! Fee Recipient Update Proposal.
 use crate::ProposalHeader;
 
-/// Set Verifier Proposal.
+/// Fee Recipient Update Proposal.
 ///
 /// the format of the proposal looks like this:
 /// ```text
-/// ┌────────────────────┬─────────────────────┐
-/// │                    │                     │
-/// │ ProposalHeader 40B │ VerifierAddress 20B │
-/// │                    │                     │
-/// └────────────────────┴─────────────────────┘
+/// ┌────────────────────┬─────────────────────────┐
+/// │                    │                         │
+/// │ ProposalHeader 40B │ FeeRecipientAddress 20B │
+/// │                    │                         │
+/// └────────────────────┴─────────────────────────┘
 /// ```
 #[allow(clippy::module_name_repetitions)]
 #[derive(Debug, Copy, Clone, PartialEq, Eq, Hash)]
-pub struct SetVerifierProposal {
+pub struct FeeRecipientUpdateProposal {
     header: ProposalHeader,
-    verifier_address: [u8; 20],
+    fee_recipient_address: [u8; 20],
 }
 
-impl SetVerifierProposal {
+impl FeeRecipientUpdateProposal {
     /// Length of the proposal in bytes.
-    pub const LENGTH: usize = ProposalHeader::LENGTH + 20; // verifier address
+    pub const LENGTH: usize = ProposalHeader::LENGTH + 20; // fee_recipient_address
 
-    /// Creates a new set verifier proposal.
+    /// Creates a new fee recipient update proposal.
     #[must_use]
     pub const fn new(header: ProposalHeader, address: [u8; 20]) -> Self {
         Self {
             header,
-            verifier_address: address,
+            fee_recipient_address: address,
         }
     }
 
@@ -37,10 +37,10 @@ impl SetVerifierProposal {
         self.header
     }
 
-    /// Get the verifier address.
+    /// Get the fee recipient address.
     #[must_use]
-    pub const fn verifier_address(&self) -> [u8; 20] {
-        self.verifier_address
+    pub const fn fee_recipient_address(&self) -> [u8; 20] {
+        self.fee_recipient_address
     }
 
     /// Get the proposal as a bytes
@@ -52,7 +52,7 @@ impl SetVerifierProposal {
         bytes[f..t].copy_from_slice(&self.header.to_bytes());
         let f = t;
         let t = t + 20;
-        bytes[f..t].copy_from_slice(&self.verifier_address);
+        bytes[f..t].copy_from_slice(&self.fee_recipient_address);
         bytes
     }
 
@@ -63,8 +63,10 @@ impl SetVerifierProposal {
     }
 }
 
-impl From<[u8; SetVerifierProposal::LENGTH]> for SetVerifierProposal {
-    fn from(bytes: [u8; SetVerifierProposal::LENGTH]) -> Self {
+impl From<[u8; FeeRecipientUpdateProposal::LENGTH]>
+    for FeeRecipientUpdateProposal
+{
+    fn from(bytes: [u8; FeeRecipientUpdateProposal::LENGTH]) -> Self {
         let f = 0usize;
         let t = ProposalHeader::LENGTH;
         let mut header_bytes = [0u8; ProposalHeader::LENGTH];
@@ -72,14 +74,16 @@ impl From<[u8; SetVerifierProposal::LENGTH]> for SetVerifierProposal {
         let header = ProposalHeader::from(header_bytes);
         let f = t;
         let t = t + 20;
-        let mut verifier_address = [0u8; 20];
-        verifier_address.copy_from_slice(&bytes[f..t]);
-        Self::new(header, verifier_address)
+        let mut address = [0u8; 20];
+        address.copy_from_slice(&bytes[f..t]);
+        Self::new(header, address)
     }
 }
 
-impl From<SetVerifierProposal> for [u8; SetVerifierProposal::LENGTH] {
-    fn from(proposal: SetVerifierProposal) -> Self {
+impl From<FeeRecipientUpdateProposal>
+    for [u8; FeeRecipientUpdateProposal::LENGTH]
+{
+    fn from(proposal: FeeRecipientUpdateProposal) -> Self {
         proposal.to_bytes()
     }
 }
@@ -106,9 +110,10 @@ mod tests {
         let nonce = Nonce::from(0x0001);
         let header =
             ProposalHeader::new(resource_id, function_signature, nonce);
-        let verifier_address =
+        let new_fee_recipient_address =
             hex_literal::hex!("bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb");
-        let proposal = SetVerifierProposal::new(header, verifier_address);
+        let proposal =
+            FeeRecipientUpdateProposal::new(header, new_fee_recipient_address);
         let bytes = proposal.to_bytes();
         let expected = hex_literal::hex!(
             "000000000000aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa010000000004"
@@ -123,7 +128,7 @@ mod tests {
             "000000000000aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa010000000004"
             "cafebabe00000001bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
         );
-        let proposal = SetVerifierProposal::from(bytes);
+        let proposal = FeeRecipientUpdateProposal::from(bytes);
         let header = proposal.header();
         let resource_id = header.resource_id();
         let target_system = resource_id.target_system();
@@ -145,7 +150,7 @@ mod tests {
         );
         assert_eq!(nonce, Nonce::from(0x0001));
         assert_eq!(
-            proposal.verifier_address(),
+            proposal.fee_recipient_address(),
             hex_literal::hex!("bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb")
         );
     }
