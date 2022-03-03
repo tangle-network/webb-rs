@@ -6,7 +6,7 @@
 //! - [x] `MinWithdrawalLimitProposal`
 //! - [x] `MaxDepositLimitProposal`
 //! - [x] `ResourceIdUpdateProposal`
-//! - [ ] `SetTreasuryHandlerProposal`
+//! - [x] `SetTreasuryHandlerProposal`
 //! - [ ] `SetVerifierProposal`
 //! - [ ] `FeeRecipientUpdateProposal`
 //! - [ ] `RescueTokensProposal`
@@ -16,6 +16,7 @@ mod max_deposit_limit;
 mod min_withdrawal_limit;
 mod resource_id_update;
 mod set_treasury_handler;
+mod set_verifier;
 mod token_add;
 mod token_remove;
 mod wrapping_fee_update;
@@ -25,6 +26,7 @@ pub use max_deposit_limit::*;
 pub use min_withdrawal_limit::*;
 pub use resource_id_update::*;
 pub use set_treasury_handler::*;
+pub use set_verifier::*;
 pub use token_add::*;
 pub use token_remove::*;
 pub use wrapping_fee_update::*;
