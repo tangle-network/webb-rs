@@ -20,21 +20,20 @@
 //!
 //! ## Introduction
 //!
-//! Proposals are encoded in a simple binary format that describes the changes
-//! happened to a state of a system (for example, a smart contract) and we need
-//! to apply these changes to other connected systems.
+//! Proposals are encoded as a sequence of bytes that describe the proposed changes
+//! to the state of a system. An example of such a state is a storage value on a smart
+//! contract.
 //!
-//! Each proposal is a sequence of bytes that fully describes the following:
-//! 1. The Target System that we need to apply the proposal to.
-//! 2. The Source System that is sending the proposal (_optinally_).
-//! 3. Which function of the target system we need to call.
-//! 4. The arguments of the function.
+//! Each proposal contains the following:
+//! 1. The target system we need to apply the proposal to.
+//! 2. The source system that is sending the proposal (_optionally_).
+//! 3. Which function on the target system we need to call.
+//! 4. The arguments of this function.
 //!
-//! The First 3 points described above are called the [`ProposalHeader`] and
+//! The first 3 points described above are called the [`ProposalHeader`] and
 //! they are (by definition) the first `40` bytes of the proposal. The remaining
-//! bytes are the body and they are the rest of the proposal bytes and the
-//! length could vary depending on what the proposal does.
-//! Here is diagram of the proposal:
+//! bytes are the body. The length of the body varies depending on what the proposal does.
+//! Here is a diagram of a proposal:
 //! ```text
 //! ┌───────────────────┬──────────────┬───────────────────┐
 //! │                   │              │                   │
@@ -55,38 +54,38 @@
 //!
 //! The proposal header is the first 40 bytes of the proposal. It contains the
 //! following:
-//! - The [`ResourceId`] which is 32 bytes that uniquely identifies the target
+//! - The [`ResourceId`] which is a 32 byte value that uniquely identifies the target
 //!   system.
-//! - The [`FunctionSignature`] which is 4 bytes that uniquely identifies the
-//!   function of the target system.
-//! - 3. The [`Nonce`] which is 4 bytes that is used to prevent replay attacks.
+//! - The [`FunctionSignature`] which is a 4 byte value that uniquely identifies the
+//!   function to be executed on the target system.
+//! - The [`Nonce`] which is a 4 byte value that is used to prevent replay attacks.
 //!
 //! ## The `ResourceId`
 //!
 //! The `ResourceId` is the first 32 bytes of the proposal header, and it
 //! contains the following:
-//! 1. The [`TargetSystem`] which is a the first 26 bytes of the `ResourceId`.
+//! 1. The [`TargetSystem`] which is contained within the first 26 bytes of the `ResourceId`.
 //! The [`TargetSystem`] could be one of the following (depending on the target
 //! system):
-//!    - A [`TargetSystem::ContractAddress`] which is actually a 20 bytes but
-//!      will be left padded with zeros (in this case, 6 zeros).
-//!    - A [`TargetSystem::TreeId`] which is actually a 4 bytes but will be left
-//!      padded with zeros (in this case, 22 zeros).
-//! 2. The [`ChainType`] which is a 2 bytes that identifies the chain type of
-//! the target system. whcih could be one of the following:
+//!    - A [`TargetSystem::ContractAddress`] which is actually 20 bytes but
+//!      is left padded with zeroes (in this case, 6 bytes of zeroes).
+//!    - A [`TargetSystem::TreeId`] which is actually 4 bytes but will be left
+//!      padded with zeroes (in this case, 22 bytes of zeroes).
+//! 2. The [`ChainType`] which is a 2 byte value that identifies the chain type of
+//! the target system. It can be one of the following:
 //!    - A [`ChainType::Evm`] which is `0x0100`.
 //!    - A [`ChainType::Substrate`] which is `0x0200`.
 //!    - A [`ChainType::PolkadotRelayChain`] which is `0x0301`.
 //!    - A [`ChainType::KusamaRelayChain`] which is `0x0302`.
 //!    - A [`ChainType::Cosmos`] which is `0x0400`.
 //!    - A [`ChainType::Solana`] which is `0x0500`.
-//! 3. The [`ChainId`] which is a 4 bytes that identifies the chain of the
+//! 3. The [`ChainId`] which is a 4 byte value that identifies the chain of the
 //! target system.
 //!
 //! ## The `FunctionSignature`
 //!
 //! The `FunctionSignature` is the next 4 bytes after the [`ResourceId`], and it
-//! is used to identify the function of the target system.
+//! is used to identify the function to be executed on the target system.
 //!
 //! ## The `Nonce`
 //!
@@ -96,7 +95,7 @@
 //! ## The `Body`
 //!
 //! The `Body` is the rest of the proposal bytes, and the length could vary
-//! depending on what the purpose of the proposal. See each proposal type and
+//! depending on what the purpose of the proposal. See each proposal type for
 //! the body structure.
 
 mod header;

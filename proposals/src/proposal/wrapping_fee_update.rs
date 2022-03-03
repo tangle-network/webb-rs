@@ -3,7 +3,7 @@ use crate::ProposalHeader;
 
 /// Wrapping Fee Update Proposal.
 ///
-/// the format of the proposal looks like this:
+/// The [`WrappingFeeUpdateProposal`] updates the wrapping fee percentage. The format of the proposal looks like:
 /// ```text
 /// ┌────────────────────┬──────────────────┐
 /// │                    │                  │

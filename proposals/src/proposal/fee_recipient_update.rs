@@ -3,7 +3,7 @@ use crate::ProposalHeader;
 
 /// Fee Recipient Update Proposal.
 ///
-/// the format of the proposal looks like this:
+/// The [`FeeRecipientUpdateProposal`] updates the recipient of the wrapping fees. The format of the proposal looks like:
 /// ```text
 /// ┌────────────────────┬─────────────────────────┐
 /// │                    │                         │

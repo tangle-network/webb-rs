@@ -3,21 +3,27 @@ use crate::{ChainId, ChainType, ProposalHeader};
 
 /// Anchor Update Proposal.
 ///
-/// the format of the proposal looks like this:
+/// The [`AnchorUpdateProposal`] updates the target Anchor's knowledge of the source
+/// Anchor's Merkle roots. This knowledge is necessary to prove membership in the source
+/// Anchor's Merkle tree on the target chain. The format of the proposal is:
 /// ```text
 /// ┌────────────────────┬─────────────────┬───────────────┬──────────────────┬────────────────┐
 /// │                    │                 │               │                  │                │
-/// │ ProposalHeader 40B │ SrcChainType 2B │ SrcChainId 4B │ LastLeafIndex 4B │ MerkleRoot 32B │
+/// │ ProposalHeader 40B │ SrcChainType 2B │ SrcChainId 4B │ LatestLeafIndex 4B │ MerkleRoot 32B │
 /// │                    │                 │               │                  │                │
 /// └────────────────────┴─────────────────┴───────────────┴──────────────────┴────────────────┘
 /// ```
+///
+///
+///
+///
 #[allow(clippy::module_name_repetitions)]
 #[derive(Debug, Copy, Clone, PartialEq, Eq, Hash)]
 pub struct AnchorUpdateProposal {
     header: ProposalHeader,
     src_chain_type: ChainType,
     src_chain_id: ChainId,
-    last_leaf_index: u32,
+    latest_leaf_index: u32,
     merkle_root: [u8; 32],
 }
 
@@ -26,7 +32,7 @@ impl AnchorUpdateProposal {
     pub const LENGTH: usize = ProposalHeader::LENGTH
         + ChainType::LENGTH
         + ChainId::LENGTH
-        + core::mem::size_of::<u32>() // last_leaf_index
+        + core::mem::size_of::<u32>() // latest_leaf_index
         + 32; // merkle_root
 
     /// Creates a new anchor update proposal.
@@ -35,14 +41,14 @@ impl AnchorUpdateProposal {
         header: ProposalHeader,
         src_chain_type: ChainType,
         src_chain_id: ChainId,
-        last_leaf_index: u32,
+        latest_leaf_index: u32,
         merkle_root: [u8; 32],
     ) -> Self {
         Self {
             header,
             src_chain_type,
             src_chain_id,
-            last_leaf_index,
+            latest_leaf_index,
             merkle_root,
         }
     }
@@ -65,10 +71,10 @@ impl AnchorUpdateProposal {
         self.src_chain_id
     }
 
-    /// Get the last leaf index.
+    /// Get the latest leaf index.
     #[must_use]
-    pub const fn last_leaf_index(&self) -> u32 {
-        self.last_leaf_index
+    pub const fn latest_leaf_index(&self) -> u32 {
+        self.latest_leaf_index
     }
 
     /// Get the merkle root.
@@ -92,7 +98,7 @@ impl AnchorUpdateProposal {
         bytes[f..t].copy_from_slice(&self.src_chain_id.to_bytes());
         let f = t;
         let t = t + core::mem::size_of::<u32>();
-        bytes[f..t].copy_from_slice(&self.last_leaf_index.to_be_bytes());
+        bytes[f..t].copy_from_slice(&self.latest_leaf_index.to_be_bytes());
         let f = t;
         let t = t + 32;
         bytes[f..t].copy_from_slice(&self.merkle_root);
@@ -125,9 +131,9 @@ impl From<[u8; AnchorUpdateProposal::LENGTH]> for AnchorUpdateProposal {
         let src_chain_id = ChainId::from(src_chain_id_bytes);
         let f = t;
         let t = t + core::mem::size_of::<u32>();
-        let mut last_leaf_index_bytes = [0u8; core::mem::size_of::<u32>()];
-        last_leaf_index_bytes.copy_from_slice(&bytes[f..t]);
-        let last_leaf_index = u32::from_be_bytes(last_leaf_index_bytes);
+        let mut latest_leaf_index_bytes = [0u8; core::mem::size_of::<u32>()];
+        latest_leaf_index_bytes.copy_from_slice(&bytes[f..t]);
+        let latest_leaf_index = u32::from_be_bytes(latest_leaf_index_bytes);
         let f = t;
         let t = t + 32;
         let mut merkle_root = [0u8; 32];
@@ -136,7 +142,7 @@ impl From<[u8; AnchorUpdateProposal::LENGTH]> for AnchorUpdateProposal {
             header,
             src_chain_type,
             src_chain_id,
-            last_leaf_index,
+            latest_leaf_index,
             merkle_root,
         )
     }
@@ -170,7 +176,7 @@ mod tests {
             ProposalHeader::new(resource_id, function_signature, nonce);
         let src_chain_type = ChainType::Evm;
         let src_chain_id = ChainId::from(1);
-        let last_leaf_index = 0x0001;
+        let latest_leaf_index = 0x0001;
         let merkle_root = [
             0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x0a,
             0x0b, 0x0c, 0x0d, 0x0e, 0x0f, 0x10, 0x11, 0x12, 0x13, 0x14, 0x15,
@@ -180,7 +186,7 @@ mod tests {
             header,
             src_chain_type,
             src_chain_id,
-            last_leaf_index,
+            latest_leaf_index,
             merkle_root,
         );
         let bytes = proposal.to_bytes();
@@ -214,7 +220,7 @@ mod tests {
             ProposalHeader::new(resource_id, function_signature, nonce);
         let src_chain_type = ChainType::Evm;
         let src_chain_id = ChainId::from(1);
-        let last_leaf_index = 0x0001;
+        let latest_leaf_index = 0x0001;
         let merkle_root = [
             0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x0a,
             0x0b, 0x0c, 0x0d, 0x0e, 0x0f, 0x10, 0x11, 0x12, 0x13, 0x14, 0x15,
@@ -224,7 +230,7 @@ mod tests {
             header,
             src_chain_type,
             src_chain_id,
-            last_leaf_index,
+            latest_leaf_index,
             merkle_root,
         );
         assert_eq!(proposal, expected);

@@ -3,7 +3,7 @@ use crate::ProposalHeader;
 
 /// Maximum Deposit Limit Proposal.
 ///
-/// the format of the proposal looks like this:
+/// The [`MaxDepositLimitProposal`] updates the maximum deposit amount allowed on the variable anchor system. The format of the proposal looks like:
 /// ```text
 /// ┌────────────────────┬──────────────────────┐
 /// │                    │                      │

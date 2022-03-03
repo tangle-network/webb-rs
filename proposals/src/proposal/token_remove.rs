@@ -3,7 +3,7 @@ use crate::ProposalHeader;
 
 /// Token Remove Proposal.
 ///
-/// the format of the proposal looks like this:
+/// Suppose a token has been allowed to be wrapped into the WEBB token by the token add proposal. The [`TokenRemoveProposal`] can disallow this added token from being wrapped into the WEBB token. The format of the proposal looks like:
 /// ```text
 /// ┌────────────────────┬──────────────────┐
 /// │                    │                  │

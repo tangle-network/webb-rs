@@ -3,7 +3,7 @@ use crate::ProposalHeader;
 
 /// Rescue Tokens Proposal.
 ///
-/// the format of the proposal looks like this:
+/// The `RescueTokensProposal` rescues tokens from the treasury to a specified `to` address. The format of the proposal looks like this:
 /// ```text
 /// ┌────────────────────┬───────────────────┬────────────────────┬────────────┐
 /// │                    │                   │                    │            │
