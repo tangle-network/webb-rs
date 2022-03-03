@@ -1,7 +1,8 @@
 //! Minimum Withdrawal Limit Proposal.
 use crate::ProposalHeader;
 
-/// Minimum Withdrawal Limit Proposal:
+/// Minimum Withdrawal Limit Proposal.
+///
 /// the format of the proposal looks like this:
 /// ```text
 /// ┌────────────────────┬────────────────────────┐

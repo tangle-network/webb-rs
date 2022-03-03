@@ -1,7 +1,8 @@
 //! Maximum Deposit Limit Proposal.
 use crate::ProposalHeader;
 
-/// Maximum Deposit Limit Proposal:
+/// Maximum Deposit Limit Proposal.
+///
 /// the format of the proposal looks like this:
 /// ```text
 /// ┌────────────────────┬──────────────────────┐

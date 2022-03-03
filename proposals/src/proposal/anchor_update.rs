@@ -1,7 +1,8 @@
 //! Anchor Update Proposal.
 use crate::{ChainId, ChainType, ProposalHeader};
 
-/// Anchor Update Proposal:
+/// Anchor Update Proposal.
+///
 /// the format of the proposal looks like this:
 /// ```text
 /// ┌────────────────────┬─────────────────┬───────────────┬──────────────────┬────────────────┐

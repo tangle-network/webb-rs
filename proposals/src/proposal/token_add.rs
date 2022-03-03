@@ -1,7 +1,8 @@
 //! Token Add Proposal.
 use crate::ProposalHeader;
 
-/// Token Add Proposal:
+/// Token Add Proposal.
+///
 /// the format of the proposal looks like this:
 /// ```text
 /// ┌────────────────────┬──────────────────┐

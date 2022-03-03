@@ -1,7 +1,8 @@
 //! Token Remove Proposal.
 use crate::ProposalHeader;
 
-/// Token Remove Proposal:
+/// Token Remove Proposal.
+///
 /// the format of the proposal looks like this:
 /// ```text
 /// ┌────────────────────┬──────────────────┐

@@ -1,7 +1,8 @@
 //! Wrapping Fee Update Proposal.
 use crate::ProposalHeader;
 
-/// Wrapping Fee Update Proposal:
+/// Wrapping Fee Update Proposal.
+///
 /// the format of the proposal looks like this:
 /// ```text
 /// ┌────────────────────┬──────────────────┐
