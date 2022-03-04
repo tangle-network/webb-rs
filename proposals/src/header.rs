@@ -2,6 +2,7 @@
 
 /// The Proposal Target System.
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
+#[cfg_attr(feature = "scale", derive(scale_info::TypeInfo))]
 pub enum TargetSystem {
     /// Ethereum Contract address (20 bytes).
     ContractAddress([u8; 20]),
@@ -11,14 +12,17 @@ pub enum TargetSystem {
 
 /// Proposal Nonce (4 bytes).
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Ord, PartialOrd)]
+#[cfg_attr(feature = "scale", derive(scale_info::TypeInfo))]
 pub struct Nonce(u32);
 
 /// Proposal Target Function Signature (4 bytes).
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Ord, PartialOrd)]
+#[cfg_attr(feature = "scale", derive(scale_info::TypeInfo))]
 pub struct FunctionSignature([u8; 4]);
 
 /// Proposal Target `ResourceId` (32 bytes).
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Ord, PartialOrd)]
+#[cfg_attr(feature = "scale", derive(scale_info::TypeInfo))]
 pub struct ResourceId([u8; 32]);
 
 /// Proposal Target `ChainType` (2 bytes).
@@ -45,6 +49,7 @@ pub enum ChainType {
 
 /// Proposal Target `ChainId` (4 bytes).
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Ord, PartialOrd)]
+#[cfg_attr(feature = "scale", derive(scale_info::TypeInfo))]
 pub struct ChainId(u32);
 
 /// Proposal Header (40 bytes).
@@ -107,6 +112,32 @@ impl From<[u8; ChainType::LENGTH]> for ChainType {
     }
 }
 
+#[cfg(feature = "scale")]
+impl scale_codec::Encode for ChainType {
+    fn size_hint(&self) -> usize {
+        Self::LENGTH
+    }
+
+    fn encode_to<T: scale_codec::Output + ?Sized>(&self, dest: &mut T) {
+        dest.write(&self.to_bytes());
+    }
+}
+
+#[cfg(feature = "scale")]
+impl scale_codec::Decode for ChainType {
+    fn decode<I: scale_codec::Input>(
+        input: &mut I,
+    ) -> Result<Self, scale_codec::Error> {
+        let mut bytes = [0u8; Self::LENGTH];
+        input.read(&mut bytes)?;
+        Ok(Self::from(bytes))
+    }
+
+    fn encoded_fixed_size() -> Option<usize> {
+        Some(Self::LENGTH)
+    }
+}
+
 impl ChainId {
     /// Length of the `ChainId` in bytes.
     pub const LENGTH: usize = core::mem::size_of::<u32>();
@@ -151,6 +182,32 @@ impl From<u32> for ChainId {
 impl From<ChainId> for u32 {
     fn from(chain_id: ChainId) -> Self {
         chain_id.0
+    }
+}
+
+#[cfg(feature = "scale")]
+impl scale_codec::Encode for ChainId {
+    fn size_hint(&self) -> usize {
+        Self::LENGTH
+    }
+
+    fn encode_to<T: scale_codec::Output + ?Sized>(&self, dest: &mut T) {
+        dest.write(&self.to_bytes());
+    }
+}
+
+#[cfg(feature = "scale")]
+impl scale_codec::Decode for ChainId {
+    fn decode<I: scale_codec::Input>(
+        input: &mut I,
+    ) -> Result<Self, scale_codec::Error> {
+        let mut bytes = [0u8; Self::LENGTH];
+        input.read(&mut bytes)?;
+        Ok(Self::from(bytes))
+    }
+
+    fn encoded_fixed_size() -> Option<usize> {
+        Some(Self::LENGTH)
     }
 }
 
@@ -242,6 +299,32 @@ impl From<ResourceId> for [u8; ResourceId::LENGTH] {
     }
 }
 
+#[cfg(feature = "scale")]
+impl scale_codec::Encode for ResourceId {
+    fn size_hint(&self) -> usize {
+        Self::LENGTH
+    }
+
+    fn encode_to<T: scale_codec::Output + ?Sized>(&self, dest: &mut T) {
+        dest.write(&self.to_bytes());
+    }
+}
+
+#[cfg(feature = "scale")]
+impl scale_codec::Decode for ResourceId {
+    fn decode<I: scale_codec::Input>(
+        input: &mut I,
+    ) -> Result<Self, scale_codec::Error> {
+        let mut bytes = [0u8; Self::LENGTH];
+        input.read(&mut bytes)?;
+        Ok(Self::from(bytes))
+    }
+
+    fn encoded_fixed_size() -> Option<usize> {
+        Some(Self::LENGTH)
+    }
+}
+
 impl TargetSystem {
     /// Length of the `TargetSystem` (26 bytes).
     pub const LENGTH: usize = 26;
@@ -311,6 +394,32 @@ impl From<TargetSystem> for [u8; TargetSystem::LENGTH] {
     }
 }
 
+#[cfg(feature = "scale")]
+impl scale_codec::Encode for TargetSystem {
+    fn size_hint(&self) -> usize {
+        Self::LENGTH
+    }
+
+    fn encode_to<T: scale_codec::Output + ?Sized>(&self, dest: &mut T) {
+        dest.write(&self.to_bytes());
+    }
+}
+
+#[cfg(feature = "scale")]
+impl scale_codec::Decode for TargetSystem {
+    fn decode<I: scale_codec::Input>(
+        input: &mut I,
+    ) -> Result<Self, scale_codec::Error> {
+        let mut bytes = [0u8; Self::LENGTH];
+        input.read(&mut bytes)?;
+        Ok(Self::from(bytes))
+    }
+
+    fn encoded_fixed_size() -> Option<usize> {
+        Some(Self::LENGTH)
+    }
+}
+
 impl FunctionSignature {
     /// Length of the `FunctionSignature` (4 bytes).
     pub const LENGTH: usize = 4;
@@ -341,6 +450,32 @@ impl From<[u8; FunctionSignature::LENGTH]> for FunctionSignature {
 impl From<FunctionSignature> for [u8; FunctionSignature::LENGTH] {
     fn from(signature: FunctionSignature) -> Self {
         signature.0
+    }
+}
+
+#[cfg(feature = "scale")]
+impl scale_codec::Encode for FunctionSignature {
+    fn size_hint(&self) -> usize {
+        Self::LENGTH
+    }
+
+    fn encode_to<T: scale_codec::Output + ?Sized>(&self, dest: &mut T) {
+        dest.write(&self.to_bytes());
+    }
+}
+
+#[cfg(feature = "scale")]
+impl scale_codec::Decode for FunctionSignature {
+    fn decode<I: scale_codec::Input>(
+        input: &mut I,
+    ) -> Result<Self, scale_codec::Error> {
+        let mut bytes = [0u8; Self::LENGTH];
+        input.read(&mut bytes)?;
+        Ok(Self::from(bytes))
+    }
+
+    fn encoded_fixed_size() -> Option<usize> {
+        Some(Self::LENGTH)
     }
 }
 
@@ -392,6 +527,32 @@ impl From<[u8; Nonce::LENGTH]> for Nonce {
 impl From<Nonce> for [u8; Nonce::LENGTH] {
     fn from(nonce: Nonce) -> Self {
         nonce.0.to_be_bytes()
+    }
+}
+
+#[cfg(feature = "scale")]
+impl scale_codec::Encode for Nonce {
+    fn size_hint(&self) -> usize {
+        Self::LENGTH
+    }
+
+    fn encode_to<T: scale_codec::Output + ?Sized>(&self, dest: &mut T) {
+        dest.write(&self.to_bytes());
+    }
+}
+
+#[cfg(feature = "scale")]
+impl scale_codec::Decode for Nonce {
+    fn decode<I: scale_codec::Input>(
+        input: &mut I,
+    ) -> Result<Self, scale_codec::Error> {
+        let mut bytes = [0u8; Self::LENGTH];
+        input.read(&mut bytes)?;
+        Ok(Self::from(bytes))
+    }
+
+    fn encoded_fixed_size() -> Option<usize> {
+        Some(Self::LENGTH)
     }
 }
 
@@ -482,6 +643,32 @@ impl From<[u8; ProposalHeader::LENGTH]> for ProposalHeader {
 impl From<ProposalHeader> for [u8; ProposalHeader::LENGTH] {
     fn from(header: ProposalHeader) -> Self {
         header.into_bytes()
+    }
+}
+
+#[cfg(feature = "scale")]
+impl scale_codec::Encode for ProposalHeader {
+    fn size_hint(&self) -> usize {
+        Self::LENGTH
+    }
+
+    fn encode_to<T: scale_codec::Output + ?Sized>(&self, dest: &mut T) {
+        dest.write(&self.to_bytes());
+    }
+}
+
+#[cfg(feature = "scale")]
+impl scale_codec::Decode for ProposalHeader {
+    fn decode<I: scale_codec::Input>(
+        input: &mut I,
+    ) -> Result<Self, scale_codec::Error> {
+        let mut bytes = [0u8; Self::LENGTH];
+        input.read(&mut bytes)?;
+        Ok(Self::from(bytes))
+    }
+
+    fn encoded_fixed_size() -> Option<usize> {
+        Some(Self::LENGTH)
     }
 }
 
