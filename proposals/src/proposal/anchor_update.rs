@@ -3,20 +3,18 @@ use crate::{ChainId, ChainType, ProposalHeader};
 
 /// Anchor Update Proposal.
 ///
-/// The [`AnchorUpdateProposal`] updates the target Anchor's knowledge of the source
-/// Anchor's Merkle roots. This knowledge is necessary to prove membership in the source
-/// Anchor's Merkle tree on the target chain. The format of the proposal is:
+/// The [`AnchorUpdateProposal`] updates the target Anchor's knowledge of the
+/// source Anchor's Merkle roots. This knowledge is necessary to prove
+/// membership in the source Anchor's Merkle tree on the target chain.
+///
+/// The format of the proposal is:
 /// ```text
-/// ┌────────────────────┬─────────────────┬───────────────┬──────────────────┬────────────────┐
-/// │                    │                 │               │                  │                │
+/// ┌────────────────────┬─────────────────┬───────────────┬────────────────────┬────────────────┐
+/// │                    │                 │               │                    │                │
 /// │ ProposalHeader 40B │ SrcChainType 2B │ SrcChainId 4B │ LatestLeafIndex 4B │ MerkleRoot 32B │
-/// │                    │                 │               │                  │                │
-/// └────────────────────┴─────────────────┴───────────────┴──────────────────┴────────────────┘
+/// │                    │                 │               │                    │                │
+/// └────────────────────┴─────────────────┴───────────────┴────────────────────┴────────────────┘
 /// ```
-///
-///
-///
-///
 #[allow(clippy::module_name_repetitions)]
 #[derive(Debug, Copy, Clone, PartialEq, Eq, Hash)]
 pub struct AnchorUpdateProposal {

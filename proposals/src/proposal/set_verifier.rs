@@ -3,7 +3,9 @@ use crate::ProposalHeader;
 
 /// Set Verifier Proposal.
 ///
-/// The [`SetVerifierProposal`] Proposal sets the verifier address. The format of the proposal looks like:
+/// The [`SetVerifierProposal`] Proposal sets the verifier address.
+///
+/// The format of the proposal looks like:
 /// ```text
 /// ┌────────────────────┬─────────────────────┐
 /// │                    │                     │

@@ -3,7 +3,10 @@ use crate::ProposalHeader;
 
 /// Set Treasury Handler Proposal.
 ///
-/// The [`SetTreasuryHandlerProposal`] Proposal sets the treasury handler address. The format of the proposal looks like:
+/// The [`SetTreasuryHandlerProposal`] Proposal sets the treasury handler
+/// address.
+///
+/// The format of the proposal looks like:
 /// ```text
 /// ┌────────────────────┬────────────────────────────┐
 /// │                    │                            │

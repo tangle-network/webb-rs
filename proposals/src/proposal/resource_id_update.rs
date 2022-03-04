@@ -3,7 +3,9 @@ use crate::{ProposalHeader, ResourceId};
 
 /// Resource Id Update Proposal.
 ///
-/// The [`ResourceIdUpdateProposal`] maps a new resource Id to a handler address. The format of the proposal looks like:
+/// The [`ResourceIdUpdateProposal`] maps a new resource Id to a handler
+/// address.
+/// The format of the proposal looks like:
 /// ```text
 /// ┌────────────────────┬───────────────────┬────────────────────┬──────────────────────┐
 /// │                    │                   │                    │                      │

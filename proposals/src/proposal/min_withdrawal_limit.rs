@@ -3,7 +3,10 @@ use crate::ProposalHeader;
 
 /// Minimum Withdrawal Limit Proposal.
 ///
-/// The [`MinWithdrawalLimitProposal`] updates the minimum withdrawal amount allowed on the variable anchor system. The format of the proposal looks like:
+/// The [`MinWithdrawalLimitProposal`] updates the minimum withdrawal amount
+/// allowed on the variable anchor system.
+///
+/// The format of the proposal looks like:
 /// ```text
 /// ┌────────────────────┬────────────────────────┐
 /// │                    │                        │

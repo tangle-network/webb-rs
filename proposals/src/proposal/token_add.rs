@@ -3,7 +3,10 @@ use crate::ProposalHeader;
 
 /// Token Add Proposal.
 ///
-/// The [`TokenAddProposal`] allows the token specified by the `TokenAddress` to be wrapped into the WEBB token. The format of the proposal looks like:
+/// The [`TokenAddProposal`] allows the token specified by the `TokenAddress` to
+/// be wrapped into the WEBB token.
+///
+/// The format of the proposal looks like:
 /// ```text
 /// ┌────────────────────┬──────────────────┐
 /// │                    │                  │
