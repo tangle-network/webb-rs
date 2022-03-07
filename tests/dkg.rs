@@ -16,6 +16,7 @@ async fn get_runtime_api() -> anyhow::Result<DKGRuntimeApi> {
 }
 
 #[tokio::test]
+#[ignore = "need to be run manually"]
 async fn read_chain_nonce() {
     let api = get_runtime_api().await.unwrap();
     let chain_id = ChainIdType::EVM(5001);

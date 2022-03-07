@@ -1,0 +1,22 @@
+[package]
+name = "webb-proposals"
+version = "0.1.0"
+edition = "2021"
+description = "Webb Protocol Proposals Specification & Implementation (part of webb-rs SDK)"
+categories = ["encoding", "no-std"]
+keywords = ["webb", "proposals", "protocol", "blockchain"]
+readme = "../README.md"
+repository = "https://github.com/webb-tools/webb-rs"
+license = "Apache-2.0"
+
+[dependencies]
+scale-codec = { package = 'parity-scale-codec', version = '2.0.0', default-features = false, optional = true }
+scale-info = { version = "1.0", default-features = false, optional = true }
+
+[dev-dependencies]
+hex-literal = "0.3"
+
+[features]
+default = []
+std = ["scale-codec/std", "scale-info/std"]
+scale = ["scale-codec", "scale-info/derive"]
