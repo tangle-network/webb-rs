@@ -27,24 +27,27 @@ pub struct ResourceId([u8; 32]);
 
 /// Proposal Target `ChainType` (2 bytes).
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Ord, PartialOrd)]
+#[cfg_attr(feature = "scale", derive(scale_info::TypeInfo))]
 #[repr(u16)]
 pub enum ChainType {
-    /// Unknown chain type.
+    /// None chain type.
     ///
     /// This is used when the chain type is not known.
-    Unknown = 0x0000,
+    None,
     /// EVM Based Chain (Mainnet, Polygon, ...etc)
-    Evm = 0x0100,
-    /// Substrate Based Chain (Webb, Edgeware, ...etc)
-    Substrate = 0x0200,
-    /// Polkadot Relay Chain.
-    PolkadotRelayChain = 0x0301,
-    /// Kusama Relay Chain.
-    KusamaRelayChain = 0x0302,
-    /// CosmWasm Contract.
-    Cosmos = 0x0400,
+    Evm,
+    /// Standalone Substrate Based Chain (Webb, Edgeware, ...etc)
+    Substrate,
+    /// Polkadot Parachains.
+    PolkadotParachain,
+    /// Kusama Parachains.
+    KusamaParachain,
+    /// Rococo Parachains.
+    RococoParachain,
+    /// Cosmos / CosmWasm Chains.
+    Cosmos,
     /// Solana Program.
-    Solana = 0x0500,
+    Solana,
 }
 
 /// Proposal Target `ChainId` (4 bytes).
@@ -71,11 +74,12 @@ impl ChainType {
         match self {
             ChainType::Evm => 0x0100,
             ChainType::Substrate => 0x0200,
-            ChainType::PolkadotRelayChain => 0x0301,
-            ChainType::KusamaRelayChain => 0x0302,
+            ChainType::PolkadotParachain => 0x0301,
+            ChainType::KusamaParachain => 0x0302,
+            ChainType::RococoParachain => 0x0303,
             ChainType::Cosmos => 0x0400,
             ChainType::Solana => 0x0500,
-            ChainType::Unknown => 0x0000,
+            ChainType::None => 0x0000,
         }
     }
 
@@ -103,14 +107,34 @@ impl From<[u8; ChainType::LENGTH]> for ChainType {
         match v {
             0x0100 => ChainType::Evm,
             0x0200 => ChainType::Substrate,
-            0x0301 => ChainType::PolkadotRelayChain,
-            0x0302 => ChainType::KusamaRelayChain,
+            0x0301 => ChainType::PolkadotParachain,
+            0x0302 => ChainType::KusamaParachain,
+            0x0303 => ChainType::RococoParachain,
             0x0400 => ChainType::Cosmos,
             0x0500 => ChainType::Solana,
-            _ => ChainType::Unknown,
+            _ => ChainType::None,
         }
     }
 }
+
+impl From<u16> for ChainType {
+    fn from(v: u16) -> Self {
+        let b = v.to_be_bytes();
+        Self::from(b)
+    }
+}
+
+impl From<ChainType> for u16 {
+    fn from(chain_type: ChainType) -> Self {
+        chain_type.to_u16()
+    }
+}
+
+#[cfg(feature = "scale")]
+impl scale_codec::EncodeLike<u16> for ChainType {}
+
+#[cfg(feature = "scale")]
+impl scale_codec::EncodeLike for ChainType {}
 
 #[cfg(feature = "scale")]
 impl scale_codec::Encode for ChainType {
@@ -141,6 +165,12 @@ impl scale_codec::Decode for ChainType {
 impl ChainId {
     /// Length of the `ChainId` in bytes.
     pub const LENGTH: usize = core::mem::size_of::<u32>();
+
+    /// Create new [`ChainId`] from `u32`.
+    #[must_use]
+    pub const fn new(id: u32) -> Self {
+        Self(id)
+    }
 
     /// Convert `ChainId` to `u32`.
     #[must_use]
@@ -184,6 +214,12 @@ impl From<ChainId> for u32 {
         chain_id.0
     }
 }
+
+#[cfg(feature = "scale")]
+impl scale_codec::EncodeLike<u32> for ChainId {}
+
+#[cfg(feature = "scale")]
+impl scale_codec::EncodeLike for ChainId {}
 
 #[cfg(feature = "scale")]
 impl scale_codec::Encode for ChainId {
@@ -250,7 +286,7 @@ impl ResourceId {
     ///
     /// The `ChainType` is the 27th & 28th bytes of the `ResourceId`.
     ///
-    /// **Note**: This will return [`ChainType::Unknown`] if the `ChainType` is
+    /// **Note**: This will return [`ChainType::None`] if the `ChainType` is
     /// not known. which could be the case for a proposal specification
     /// changed in the future without updating this crate.
     #[must_use]
@@ -298,6 +334,12 @@ impl From<ResourceId> for [u8; ResourceId::LENGTH] {
         resource_id.0
     }
 }
+
+#[cfg(feature = "scale")]
+impl scale_codec::EncodeLike<[u8; ResourceId::LENGTH]> for ResourceId {}
+
+#[cfg(feature = "scale")]
+impl scale_codec::EncodeLike for ResourceId {}
 
 #[cfg(feature = "scale")]
 impl scale_codec::Encode for ResourceId {
@@ -395,6 +437,12 @@ impl From<TargetSystem> for [u8; TargetSystem::LENGTH] {
 }
 
 #[cfg(feature = "scale")]
+impl scale_codec::EncodeLike<[u8; TargetSystem::LENGTH]> for TargetSystem {}
+
+#[cfg(feature = "scale")]
+impl scale_codec::EncodeLike for TargetSystem {}
+
+#[cfg(feature = "scale")]
 impl scale_codec::Encode for TargetSystem {
     fn size_hint(&self) -> usize {
         Self::LENGTH
@@ -452,6 +500,15 @@ impl From<FunctionSignature> for [u8; FunctionSignature::LENGTH] {
         signature.0
     }
 }
+
+#[cfg(feature = "scale")]
+impl scale_codec::EncodeLike<[u8; FunctionSignature::LENGTH]>
+    for FunctionSignature
+{
+}
+
+#[cfg(feature = "scale")]
+impl scale_codec::EncodeLike for FunctionSignature {}
 
 #[cfg(feature = "scale")]
 impl scale_codec::Encode for FunctionSignature {
@@ -529,6 +586,12 @@ impl From<Nonce> for [u8; Nonce::LENGTH] {
         nonce.0.to_be_bytes()
     }
 }
+
+#[cfg(feature = "scale")]
+impl scale_codec::EncodeLike<u32> for Nonce {}
+
+#[cfg(feature = "scale")]
+impl scale_codec::EncodeLike for Nonce {}
 
 #[cfg(feature = "scale")]
 impl scale_codec::Encode for Nonce {
