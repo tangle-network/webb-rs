@@ -42,8 +42,6 @@ pub enum ChainType {
     PolkadotRelayChain,
     /// Kusama Relay Chain.
     KusamaRelayChain,
-    /// Webb Protocol Parachain.
-    WebbParachain,
     /// CosmWasm Contract.
     Cosmos,
     /// Solana Program.
@@ -76,7 +74,6 @@ impl ChainType {
             ChainType::Substrate => 0x0200,
             ChainType::PolkadotRelayChain => 0x0301,
             ChainType::KusamaRelayChain => 0x0302,
-            ChainType::WebbParachain => 0x0303,
             ChainType::Cosmos => 0x0400,
             ChainType::Solana => 0x0500,
             ChainType::Unknown => 0x0000,
@@ -109,7 +106,6 @@ impl From<[u8; ChainType::LENGTH]> for ChainType {
             0x0200 => ChainType::Substrate,
             0x0301 => ChainType::PolkadotRelayChain,
             0x0302 => ChainType::KusamaRelayChain,
-            0x0303 => ChainType::WebbParachain,
             0x0400 => ChainType::Cosmos,
             0x0500 => ChainType::Solana,
             _ => ChainType::Unknown,
