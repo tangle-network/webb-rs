@@ -30,19 +30,21 @@ pub struct ResourceId([u8; 32]);
 #[cfg_attr(feature = "scale", derive(scale_info::TypeInfo))]
 #[repr(u16)]
 pub enum ChainType {
-    /// Unknown chain type.
+    /// None chain type.
     ///
     /// This is used when the chain type is not known.
-    Unknown,
+    None,
     /// EVM Based Chain (Mainnet, Polygon, ...etc)
     Evm,
-    /// Substrate Based Chain (Webb, Edgeware, ...etc)
+    /// Standalone Substrate Based Chain (Webb, Edgeware, ...etc)
     Substrate,
-    /// Polkadot Relay Chain.
-    PolkadotRelayChain,
-    /// Kusama Relay Chain.
-    KusamaRelayChain,
-    /// CosmWasm Contract.
+    /// Polkadot Parachains.
+    PolkadotParachain,
+    /// Kusama Parachains.
+    KusamaParachain,
+    /// Rococo Parachains.
+    RococoParachain,
+    /// Cosmos / CosmWasm Chains.
     Cosmos,
     /// Solana Program.
     Solana,
@@ -72,11 +74,12 @@ impl ChainType {
         match self {
             ChainType::Evm => 0x0100,
             ChainType::Substrate => 0x0200,
-            ChainType::PolkadotRelayChain => 0x0301,
-            ChainType::KusamaRelayChain => 0x0302,
+            ChainType::PolkadotParachain => 0x0301,
+            ChainType::KusamaParachain => 0x0302,
+            ChainType::RococoParachain => 0x0303,
             ChainType::Cosmos => 0x0400,
             ChainType::Solana => 0x0500,
-            ChainType::Unknown => 0x0000,
+            ChainType::None => 0x0000,
         }
     }
 
@@ -104,11 +107,12 @@ impl From<[u8; ChainType::LENGTH]> for ChainType {
         match v {
             0x0100 => ChainType::Evm,
             0x0200 => ChainType::Substrate,
-            0x0301 => ChainType::PolkadotRelayChain,
-            0x0302 => ChainType::KusamaRelayChain,
+            0x0301 => ChainType::PolkadotParachain,
+            0x0302 => ChainType::KusamaParachain,
+            0x0303 => ChainType::RococoParachain,
             0x0400 => ChainType::Cosmos,
             0x0500 => ChainType::Solana,
-            _ => ChainType::Unknown,
+            _ => ChainType::None,
         }
     }
 }
@@ -282,7 +286,7 @@ impl ResourceId {
     ///
     /// The `ChainType` is the 27th & 28th bytes of the `ResourceId`.
     ///
-    /// **Note**: This will return [`ChainType::Unknown`] if the `ChainType` is
+    /// **Note**: This will return [`ChainType::None`] if the `ChainType` is
     /// not known. which could be the case for a proposal specification
     /// changed in the future without updating this crate.
     #[must_use]
