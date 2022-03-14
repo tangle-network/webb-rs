@@ -4453,7 +4453,7 @@ dependencies = [
 
 [[package]]
 name = "webb-proposals"
-version = "0.1.0"
+version = "0.1.1"
 dependencies = [
  "hex-literal",
  "parity-scale-codec",
