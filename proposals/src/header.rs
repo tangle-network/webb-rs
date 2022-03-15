@@ -2,7 +2,10 @@
 
 /// The Proposal Target System.
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
-#[cfg_attr(feature = "scale", derive(scale_info::TypeInfo))]
+#[cfg_attr(
+    feature = "scale",
+    derive(scale_info::TypeInfo, scale_codec::Encode, scale_codec::Decode)
+)]
 pub enum TargetSystem {
     /// Ethereum Contract address (20 bytes).
     ContractAddress([u8; 20]),
@@ -12,22 +15,34 @@ pub enum TargetSystem {
 
 /// Proposal Nonce (4 bytes).
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Ord, PartialOrd)]
-#[cfg_attr(feature = "scale", derive(scale_info::TypeInfo))]
+#[cfg_attr(
+    feature = "scale",
+    derive(scale_info::TypeInfo, scale_codec::Encode, scale_codec::Decode)
+)]
 pub struct Nonce(u32);
 
 /// Proposal Target Function Signature (4 bytes).
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Ord, PartialOrd)]
-#[cfg_attr(feature = "scale", derive(scale_info::TypeInfo))]
+#[cfg_attr(
+    feature = "scale",
+    derive(scale_info::TypeInfo, scale_codec::Encode, scale_codec::Decode)
+)]
 pub struct FunctionSignature([u8; 4]);
 
 /// Proposal Target `ResourceId` (32 bytes).
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Ord, PartialOrd)]
-#[cfg_attr(feature = "scale", derive(scale_info::TypeInfo))]
+#[cfg_attr(
+    feature = "scale",
+    derive(scale_info::TypeInfo, scale_codec::Encode, scale_codec::Decode)
+)]
 pub struct ResourceId([u8; 32]);
 
 /// Proposal Target Chain and its type (6 bytes).
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Ord, PartialOrd)]
-#[cfg_attr(feature = "scale", derive(scale_info::TypeInfo))]
+#[cfg_attr(
+    feature = "scale",
+    derive(scale_info::TypeInfo, scale_codec::Encode, scale_codec::Decode)
+)]
 pub enum TypedChainId {
     /// None chain type.
     ///
@@ -83,43 +98,35 @@ impl TypedChainId {
         let mut bytes = [0u8; Self::LENGTH];
         match self {
             TypedChainId::Evm(id) => {
-                bytes[0] = 0x01;
-                bytes[1] = 0x00;
+                bytes[0..2].copy_from_slice(&(0x0100u16).to_be_bytes());
                 bytes[2..6].copy_from_slice(&id.to_be_bytes());
             }
             TypedChainId::Substrate(id) => {
-                bytes[0] = 0x02;
-                bytes[1] = 0x00;
+                bytes[0..2].copy_from_slice(&(0x0200u16).to_be_bytes());
                 bytes[2..6].copy_from_slice(&id.to_be_bytes());
             }
             TypedChainId::PolkadotParachain(id) => {
-                bytes[0] = 0x03;
-                bytes[1] = 0x01;
+                bytes[0..2].copy_from_slice(&(0x0301u16).to_be_bytes());
                 bytes[2..6].copy_from_slice(&id.to_be_bytes());
             }
             TypedChainId::KusamaParachain(id) => {
-                bytes[0] = 0x03;
-                bytes[1] = 0x02;
+                bytes[0..2].copy_from_slice(&(0x0302u16).to_be_bytes());
                 bytes[2..6].copy_from_slice(&id.to_be_bytes());
             }
             TypedChainId::RococoParachain(id) => {
-                bytes[0] = 0x03;
-                bytes[1] = 0x03;
+                bytes[0..2].copy_from_slice(&(0x0303u16).to_be_bytes());
                 bytes[2..6].copy_from_slice(&id.to_be_bytes());
             }
             TypedChainId::Cosmos(id) => {
-                bytes[0] = 0x04;
-                bytes[1] = 0x00;
+                bytes[0..2].copy_from_slice(&(0x0400u16).to_be_bytes());
                 bytes[2..6].copy_from_slice(&id.to_be_bytes());
             }
             TypedChainId::Solana(id) => {
-                bytes[0] = 0x05;
-                bytes[1] = 0x00;
+                bytes[0..2].copy_from_slice(&(0x0500u16).to_be_bytes());
                 bytes[2..6].copy_from_slice(&id.to_be_bytes());
             }
             TypedChainId::None => {
-                bytes[0] = 0x00;
-                bytes[1] = 0x00;
+                bytes[0..2].copy_from_slice(&(0x0000u16).to_be_bytes());
                 bytes[2..6].copy_from_slice(&0u32.to_be_bytes());
             }
         }
@@ -153,35 +160,6 @@ impl From<[u8; Self::LENGTH]> for TypedChainId {
             0x0500 => TypedChainId::Solana(id),
             _ => Self::None,
         }
-    }
-}
-
-#[cfg(feature = "scale")]
-impl scale_codec::EncodeLike for TypedChainId {}
-
-#[cfg(feature = "scale")]
-impl scale_codec::Encode for TypedChainId {
-    fn size_hint(&self) -> usize {
-        Self::LENGTH
-    }
-
-    fn encode_to<T: scale_codec::Output + ?Sized>(&self, dest: &mut T) {
-        dest.write(&self.to_bytes());
-    }
-}
-
-#[cfg(feature = "scale")]
-impl scale_codec::Decode for TypedChainId {
-    fn decode<I: scale_codec::Input>(
-        input: &mut I,
-    ) -> Result<Self, scale_codec::Error> {
-        let mut bytes = [0u8; Self::LENGTH];
-        input.read(&mut bytes)?;
-        Ok(Self::from(bytes))
-    }
-
-    fn encoded_fixed_size() -> Option<usize> {
-        Some(Self::LENGTH)
     }
 }
 
@@ -254,38 +232,6 @@ impl From<ResourceId> for [u8; ResourceId::LENGTH] {
     }
 }
 
-#[cfg(feature = "scale")]
-impl scale_codec::EncodeLike<[u8; ResourceId::LENGTH]> for ResourceId {}
-
-#[cfg(feature = "scale")]
-impl scale_codec::EncodeLike for ResourceId {}
-
-#[cfg(feature = "scale")]
-impl scale_codec::Encode for ResourceId {
-    fn size_hint(&self) -> usize {
-        Self::LENGTH
-    }
-
-    fn encode_to<T: scale_codec::Output + ?Sized>(&self, dest: &mut T) {
-        dest.write(&self.to_bytes());
-    }
-}
-
-#[cfg(feature = "scale")]
-impl scale_codec::Decode for ResourceId {
-    fn decode<I: scale_codec::Input>(
-        input: &mut I,
-    ) -> Result<Self, scale_codec::Error> {
-        let mut bytes = [0u8; Self::LENGTH];
-        input.read(&mut bytes)?;
-        Ok(Self::from(bytes))
-    }
-
-    fn encoded_fixed_size() -> Option<usize> {
-        Some(Self::LENGTH)
-    }
-}
-
 impl TargetSystem {
     /// Length of the `TargetSystem` (26 bytes).
     pub const LENGTH: usize = 26;
@@ -355,38 +301,6 @@ impl From<TargetSystem> for [u8; TargetSystem::LENGTH] {
     }
 }
 
-#[cfg(feature = "scale")]
-impl scale_codec::EncodeLike<[u8; TargetSystem::LENGTH]> for TargetSystem {}
-
-#[cfg(feature = "scale")]
-impl scale_codec::EncodeLike for TargetSystem {}
-
-#[cfg(feature = "scale")]
-impl scale_codec::Encode for TargetSystem {
-    fn size_hint(&self) -> usize {
-        Self::LENGTH
-    }
-
-    fn encode_to<T: scale_codec::Output + ?Sized>(&self, dest: &mut T) {
-        dest.write(&self.to_bytes());
-    }
-}
-
-#[cfg(feature = "scale")]
-impl scale_codec::Decode for TargetSystem {
-    fn decode<I: scale_codec::Input>(
-        input: &mut I,
-    ) -> Result<Self, scale_codec::Error> {
-        let mut bytes = [0u8; Self::LENGTH];
-        input.read(&mut bytes)?;
-        Ok(Self::from(bytes))
-    }
-
-    fn encoded_fixed_size() -> Option<usize> {
-        Some(Self::LENGTH)
-    }
-}
-
 impl FunctionSignature {
     /// Length of the `FunctionSignature` (4 bytes).
     pub const LENGTH: usize = 4;
@@ -417,41 +331,6 @@ impl From<[u8; FunctionSignature::LENGTH]> for FunctionSignature {
 impl From<FunctionSignature> for [u8; FunctionSignature::LENGTH] {
     fn from(signature: FunctionSignature) -> Self {
         signature.0
-    }
-}
-
-#[cfg(feature = "scale")]
-impl scale_codec::EncodeLike<[u8; FunctionSignature::LENGTH]>
-    for FunctionSignature
-{
-}
-
-#[cfg(feature = "scale")]
-impl scale_codec::EncodeLike for FunctionSignature {}
-
-#[cfg(feature = "scale")]
-impl scale_codec::Encode for FunctionSignature {
-    fn size_hint(&self) -> usize {
-        Self::LENGTH
-    }
-
-    fn encode_to<T: scale_codec::Output + ?Sized>(&self, dest: &mut T) {
-        dest.write(&self.to_bytes());
-    }
-}
-
-#[cfg(feature = "scale")]
-impl scale_codec::Decode for FunctionSignature {
-    fn decode<I: scale_codec::Input>(
-        input: &mut I,
-    ) -> Result<Self, scale_codec::Error> {
-        let mut bytes = [0u8; Self::LENGTH];
-        input.read(&mut bytes)?;
-        Ok(Self::from(bytes))
-    }
-
-    fn encoded_fixed_size() -> Option<usize> {
-        Some(Self::LENGTH)
     }
 }
 
@@ -503,38 +382,6 @@ impl From<[u8; Nonce::LENGTH]> for Nonce {
 impl From<Nonce> for [u8; Nonce::LENGTH] {
     fn from(nonce: Nonce) -> Self {
         nonce.0.to_be_bytes()
-    }
-}
-
-#[cfg(feature = "scale")]
-impl scale_codec::EncodeLike<u32> for Nonce {}
-
-#[cfg(feature = "scale")]
-impl scale_codec::EncodeLike for Nonce {}
-
-#[cfg(feature = "scale")]
-impl scale_codec::Encode for Nonce {
-    fn size_hint(&self) -> usize {
-        Self::LENGTH
-    }
-
-    fn encode_to<T: scale_codec::Output + ?Sized>(&self, dest: &mut T) {
-        dest.write(&self.to_bytes());
-    }
-}
-
-#[cfg(feature = "scale")]
-impl scale_codec::Decode for Nonce {
-    fn decode<I: scale_codec::Input>(
-        input: &mut I,
-    ) -> Result<Self, scale_codec::Error> {
-        let mut bytes = [0u8; Self::LENGTH];
-        input.read(&mut bytes)?;
-        Ok(Self::from(bytes))
-    }
-
-    fn encoded_fixed_size() -> Option<usize> {
-        Some(Self::LENGTH)
     }
 }
 
