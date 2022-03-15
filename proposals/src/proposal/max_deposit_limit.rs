@@ -90,7 +90,7 @@ impl From<MaxDepositLimitProposal> for [u8; MaxDepositLimitProposal::LENGTH] {
 #[cfg(test)]
 mod tests {
     use crate::{
-        ChainId, ChainType, FunctionSignature, Nonce, ResourceId, TargetSystem,
+        FunctionSignature, Nonce, ResourceId, TargetSystem, TypedChainId,
     };
 
     use super::*;
@@ -100,10 +100,8 @@ mod tests {
         let target_system = TargetSystem::new_contract_address(
             hex_literal::hex!("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"),
         );
-        let target_chain_type = ChainType::Evm;
-        let target_chain_id = ChainId::from(4);
-        let resource_id =
-            ResourceId::new(target_system, target_chain_type, target_chain_id);
+        let target_chain = TypedChainId::Evm(4);
+        let resource_id = ResourceId::new(target_system, target_chain);
         let function_signature =
             FunctionSignature::new(hex_literal::hex!("cafebabe"));
         let nonce = Nonce::from(0x0001);
@@ -131,8 +129,7 @@ mod tests {
         let header = proposal.header();
         let resource_id = header.resource_id();
         let target_system = resource_id.target_system();
-        let target_chain_type = resource_id.chain_type();
-        let target_chain_id = resource_id.chain_id();
+        let target_chain = resource_id.typed_chain_id();
         let function_signature = header.function_signature();
         let nonce = header.nonce();
         let max_deposit_limit = proposal.max_deposit_limit();
@@ -142,8 +139,7 @@ mod tests {
                 "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
             ))
         );
-        assert_eq!(target_chain_type, ChainType::Evm);
-        assert_eq!(target_chain_id, ChainId::from(4));
+        assert_eq!(target_chain, TypedChainId::Evm(4));
         assert_eq!(
             function_signature,
             FunctionSignature::new(hex_literal::hex!("cafebabe"))

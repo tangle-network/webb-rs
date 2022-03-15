@@ -133,7 +133,7 @@ impl From<RescueTokensProposal> for [u8; RescueTokensProposal::LENGTH] {
 #[cfg(test)]
 mod tests {
     use crate::{
-        ChainId, ChainType, FunctionSignature, Nonce, ResourceId, TargetSystem,
+        FunctionSignature, Nonce, ResourceId, TargetSystem, TypedChainId,
     };
 
     use super::*;
@@ -143,10 +143,8 @@ mod tests {
         let target_system = TargetSystem::new_contract_address(
             hex_literal::hex!("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"),
         );
-        let target_chain_type = ChainType::Evm;
-        let target_chain_id = ChainId::from(4);
-        let resource_id =
-            ResourceId::new(target_system, target_chain_type, target_chain_id);
+        let target_chain = TypedChainId::Evm(4);
+        let resource_id = ResourceId::new(target_system, target_chain);
         let function_signature =
             FunctionSignature::new(hex_literal::hex!("cafebabe"));
         let nonce = Nonce::from(0x0001);
@@ -192,10 +190,8 @@ mod tests {
         let target_system = TargetSystem::new_contract_address(
             hex_literal::hex!("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"),
         );
-        let target_chain_type = ChainType::Evm;
-        let target_chain_id = ChainId::from(4);
-        let resource_id =
-            ResourceId::new(target_system, target_chain_type, target_chain_id);
+        let target_chain = TypedChainId::Evm(4);
+        let resource_id = ResourceId::new(target_system, target_chain);
         let function_signature =
             FunctionSignature::new(hex_literal::hex!("cafebabe"));
         let nonce = Nonce::from(0x0001);

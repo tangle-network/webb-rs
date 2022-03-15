@@ -2,7 +2,10 @@
 
 /// The Proposal Target System.
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
-#[cfg_attr(feature = "scale", derive(scale_info::TypeInfo))]
+#[cfg_attr(
+    feature = "scale",
+    derive(scale_info::TypeInfo, scale_codec::Encode, scale_codec::Decode)
+)]
 pub enum TargetSystem {
     /// Ethereum Contract address (20 bytes).
     ContractAddress([u8; 20]),
@@ -12,48 +15,54 @@ pub enum TargetSystem {
 
 /// Proposal Nonce (4 bytes).
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Ord, PartialOrd)]
-#[cfg_attr(feature = "scale", derive(scale_info::TypeInfo))]
+#[cfg_attr(
+    feature = "scale",
+    derive(scale_info::TypeInfo, scale_codec::Encode, scale_codec::Decode)
+)]
 pub struct Nonce(u32);
 
 /// Proposal Target Function Signature (4 bytes).
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Ord, PartialOrd)]
-#[cfg_attr(feature = "scale", derive(scale_info::TypeInfo))]
+#[cfg_attr(
+    feature = "scale",
+    derive(scale_info::TypeInfo, scale_codec::Encode, scale_codec::Decode)
+)]
 pub struct FunctionSignature([u8; 4]);
 
 /// Proposal Target `ResourceId` (32 bytes).
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Ord, PartialOrd)]
-#[cfg_attr(feature = "scale", derive(scale_info::TypeInfo))]
+#[cfg_attr(
+    feature = "scale",
+    derive(scale_info::TypeInfo, scale_codec::Encode, scale_codec::Decode)
+)]
 pub struct ResourceId([u8; 32]);
 
-/// Proposal Target `ChainType` (2 bytes).
+/// Proposal Target Chain and its type (6 bytes).
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Ord, PartialOrd)]
-#[cfg_attr(feature = "scale", derive(scale_info::TypeInfo))]
-#[repr(u16)]
-pub enum ChainType {
+#[cfg_attr(
+    feature = "scale",
+    derive(scale_info::TypeInfo, scale_codec::Encode, scale_codec::Decode)
+)]
+pub enum TypedChainId {
     /// None chain type.
     ///
     /// This is used when the chain type is not known.
     None,
     /// EVM Based Chain (Mainnet, Polygon, ...etc)
-    Evm,
+    Evm(u32),
     /// Standalone Substrate Based Chain (Webb, Edgeware, ...etc)
-    Substrate,
+    Substrate(u32),
     /// Polkadot Parachains.
-    PolkadotParachain,
+    PolkadotParachain(u32),
     /// Kusama Parachains.
-    KusamaParachain,
+    KusamaParachain(u32),
     /// Rococo Parachains.
-    RococoParachain,
+    RococoParachain(u32),
     /// Cosmos / CosmWasm Chains.
-    Cosmos,
+    Cosmos(u32),
     /// Solana Program.
-    Solana,
+    Solana(u32),
 }
-
-/// Proposal Target `ChainId` (4 bytes).
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Ord, PartialOrd)]
-#[cfg_attr(feature = "scale", derive(scale_info::TypeInfo))]
-pub struct ChainId(u32);
 
 /// Proposal Header (40 bytes).
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Ord, PartialOrd)]
@@ -64,198 +73,104 @@ pub struct ProposalHeader {
     nonce: Nonce,
 }
 
-impl ChainType {
-    /// Length of the `ChainType` in bytes.
-    pub const LENGTH: usize = core::mem::size_of::<u16>();
+impl TypedChainId {
+    /// Length of the [`TypedChainId`] in bytes.
+    pub const LENGTH: usize = 6;
 
-    /// Convert `ChainType` to `u16`.
+    /// Get the chain id as a `u32`.
     #[must_use]
-    pub const fn to_u16(self) -> u16 {
+    pub const fn chain_id(&self) -> u32 {
         match self {
-            ChainType::Evm => 0x0100,
-            ChainType::Substrate => 0x0200,
-            ChainType::PolkadotParachain => 0x0301,
-            ChainType::KusamaParachain => 0x0302,
-            ChainType::RococoParachain => 0x0303,
-            ChainType::Cosmos => 0x0400,
-            ChainType::Solana => 0x0500,
-            ChainType::None => 0x0000,
+            TypedChainId::Evm(id)
+            | TypedChainId::Substrate(id)
+            | TypedChainId::PolkadotParachain(id)
+            | TypedChainId::KusamaParachain(id)
+            | TypedChainId::RococoParachain(id)
+            | TypedChainId::Cosmos(id)
+            | TypedChainId::Solana(id) => *id,
+            Self::None => 0,
         }
     }
 
     /// Get the underlying bytes of `ChainType`.
     #[must_use]
-    pub const fn to_bytes(self) -> [u8; Self::LENGTH] {
-        self.to_u16().to_be_bytes()
+    pub fn to_bytes(&self) -> [u8; Self::LENGTH] {
+        let mut bytes = [0u8; Self::LENGTH];
+        match self {
+            TypedChainId::Evm(id) => {
+                bytes[0..2].copy_from_slice(&(0x0100u16).to_be_bytes());
+                bytes[2..6].copy_from_slice(&id.to_be_bytes());
+            }
+            TypedChainId::Substrate(id) => {
+                bytes[0..2].copy_from_slice(&(0x0200u16).to_be_bytes());
+                bytes[2..6].copy_from_slice(&id.to_be_bytes());
+            }
+            TypedChainId::PolkadotParachain(id) => {
+                bytes[0..2].copy_from_slice(&(0x0301u16).to_be_bytes());
+                bytes[2..6].copy_from_slice(&id.to_be_bytes());
+            }
+            TypedChainId::KusamaParachain(id) => {
+                bytes[0..2].copy_from_slice(&(0x0302u16).to_be_bytes());
+                bytes[2..6].copy_from_slice(&id.to_be_bytes());
+            }
+            TypedChainId::RococoParachain(id) => {
+                bytes[0..2].copy_from_slice(&(0x0303u16).to_be_bytes());
+                bytes[2..6].copy_from_slice(&id.to_be_bytes());
+            }
+            TypedChainId::Cosmos(id) => {
+                bytes[0..2].copy_from_slice(&(0x0400u16).to_be_bytes());
+                bytes[2..6].copy_from_slice(&id.to_be_bytes());
+            }
+            TypedChainId::Solana(id) => {
+                bytes[0..2].copy_from_slice(&(0x0500u16).to_be_bytes());
+                bytes[2..6].copy_from_slice(&id.to_be_bytes());
+            }
+            TypedChainId::None => {
+                bytes[0..2].copy_from_slice(&(0x0000u16).to_be_bytes());
+                bytes[2..6].copy_from_slice(&0u32.to_be_bytes());
+            }
+        }
+        bytes
     }
     /// Get the underlying bytes of `ChainType`.
     #[must_use]
-    pub const fn into_bytes(self) -> [u8; Self::LENGTH] {
+    pub fn into_bytes(self) -> [u8; Self::LENGTH] {
         self.to_bytes()
     }
 }
 
-impl From<ChainType> for [u8; ChainType::LENGTH] {
-    fn from(chain_type: ChainType) -> Self {
-        chain_type.to_bytes()
+impl From<TypedChainId> for [u8; TypedChainId::LENGTH] {
+    fn from(v: TypedChainId) -> Self {
+        v.into_bytes()
     }
 }
 
-impl From<[u8; ChainType::LENGTH]> for ChainType {
-    fn from(bytes: [u8; ChainType::LENGTH]) -> Self {
-        let v = u16::from_be_bytes(bytes);
-        match v {
-            0x0100 => ChainType::Evm,
-            0x0200 => ChainType::Substrate,
-            0x0301 => ChainType::PolkadotParachain,
-            0x0302 => ChainType::KusamaParachain,
-            0x0303 => ChainType::RococoParachain,
-            0x0400 => ChainType::Cosmos,
-            0x0500 => ChainType::Solana,
-            _ => ChainType::None,
+impl From<[u8; Self::LENGTH]> for TypedChainId {
+    fn from(bytes: [u8; Self::LENGTH]) -> Self {
+        let ty = [bytes[0], bytes[1]];
+        let ty = u16::from_be_bytes(ty);
+        let id = u32::from_be_bytes([bytes[2], bytes[3], bytes[4], bytes[5]]);
+        match ty {
+            0x0100 => TypedChainId::Evm(id),
+            0x0200 => TypedChainId::Substrate(id),
+            0x0301 => TypedChainId::PolkadotParachain(id),
+            0x0302 => TypedChainId::KusamaParachain(id),
+            0x0303 => TypedChainId::RococoParachain(id),
+            0x0400 => TypedChainId::Cosmos(id),
+            0x0500 => TypedChainId::Solana(id),
+            _ => Self::None,
         }
-    }
-}
-
-impl From<u16> for ChainType {
-    fn from(v: u16) -> Self {
-        let b = v.to_be_bytes();
-        Self::from(b)
-    }
-}
-
-impl From<ChainType> for u16 {
-    fn from(chain_type: ChainType) -> Self {
-        chain_type.to_u16()
-    }
-}
-
-#[cfg(feature = "scale")]
-impl scale_codec::EncodeLike<u16> for ChainType {}
-
-#[cfg(feature = "scale")]
-impl scale_codec::EncodeLike for ChainType {}
-
-#[cfg(feature = "scale")]
-impl scale_codec::Encode for ChainType {
-    fn size_hint(&self) -> usize {
-        Self::LENGTH
-    }
-
-    fn encode_to<T: scale_codec::Output + ?Sized>(&self, dest: &mut T) {
-        dest.write(&self.to_bytes());
-    }
-}
-
-#[cfg(feature = "scale")]
-impl scale_codec::Decode for ChainType {
-    fn decode<I: scale_codec::Input>(
-        input: &mut I,
-    ) -> Result<Self, scale_codec::Error> {
-        let mut bytes = [0u8; Self::LENGTH];
-        input.read(&mut bytes)?;
-        Ok(Self::from(bytes))
-    }
-
-    fn encoded_fixed_size() -> Option<usize> {
-        Some(Self::LENGTH)
-    }
-}
-
-impl ChainId {
-    /// Length of the `ChainId` in bytes.
-    pub const LENGTH: usize = core::mem::size_of::<u32>();
-
-    /// Create new [`ChainId`] from `u32`.
-    #[must_use]
-    pub const fn new(id: u32) -> Self {
-        Self(id)
-    }
-
-    /// Convert `ChainId` to `u32`.
-    #[must_use]
-    pub const fn to_u32(self) -> u32 {
-        self.0
-    }
-
-    /// Get the underlying bytes of `ChainId`.
-    #[must_use]
-    pub const fn to_bytes(self) -> [u8; Self::LENGTH] {
-        self.0.to_be_bytes()
-    }
-    /// Get the underlying bytes of `ChainId`.
-    #[must_use]
-    pub const fn into_bytes(self) -> [u8; Self::LENGTH] {
-        self.to_bytes()
-    }
-}
-
-impl From<ChainId> for [u8; ChainId::LENGTH] {
-    fn from(chain_id: ChainId) -> Self {
-        chain_id.to_bytes()
-    }
-}
-
-impl From<[u8; ChainId::LENGTH]> for ChainId {
-    fn from(bytes: [u8; ChainId::LENGTH]) -> Self {
-        let v = u32::from_be_bytes(bytes);
-        ChainId(v)
-    }
-}
-
-impl From<u32> for ChainId {
-    fn from(v: u32) -> Self {
-        ChainId(v)
-    }
-}
-
-impl From<ChainId> for u32 {
-    fn from(chain_id: ChainId) -> Self {
-        chain_id.0
-    }
-}
-
-#[cfg(feature = "scale")]
-impl scale_codec::EncodeLike<u32> for ChainId {}
-
-#[cfg(feature = "scale")]
-impl scale_codec::EncodeLike for ChainId {}
-
-#[cfg(feature = "scale")]
-impl scale_codec::Encode for ChainId {
-    fn size_hint(&self) -> usize {
-        Self::LENGTH
-    }
-
-    fn encode_to<T: scale_codec::Output + ?Sized>(&self, dest: &mut T) {
-        dest.write(&self.to_bytes());
-    }
-}
-
-#[cfg(feature = "scale")]
-impl scale_codec::Decode for ChainId {
-    fn decode<I: scale_codec::Input>(
-        input: &mut I,
-    ) -> Result<Self, scale_codec::Error> {
-        let mut bytes = [0u8; Self::LENGTH];
-        input.read(&mut bytes)?;
-        Ok(Self::from(bytes))
-    }
-
-    fn encoded_fixed_size() -> Option<usize> {
-        Some(Self::LENGTH)
     }
 }
 
 impl ResourceId {
     /// Length of the `ResourceId` (32 bytes).
-    pub const LENGTH: usize = 32;
+    pub const LENGTH: usize = TargetSystem::LENGTH + TypedChainId::LENGTH;
     /// Create a new `ResourceId`.
     #[must_use]
     pub fn new(
         target_system: TargetSystem,
-        chain_type: ChainType,
-        chain_id: ChainId,
+        typed_chain_id: TypedChainId,
     ) -> Self {
         let mut bytes = [0u8; Self::LENGTH];
         let target_system_bytes: [u8; TargetSystem::LENGTH] =
@@ -264,11 +179,8 @@ impl ResourceId {
         let t = TargetSystem::LENGTH;
         bytes[f..t].copy_from_slice(&target_system_bytes);
         let f = t;
-        let t = t + ChainType::LENGTH;
-        bytes[f..t].copy_from_slice(&chain_type.into_bytes());
-        let f = t;
-        let t = t + ChainId::LENGTH;
-        bytes[f..t].copy_from_slice(&chain_id.into_bytes());
+        let t = t + TypedChainId::LENGTH;
+        bytes[f..t].copy_from_slice(&typed_chain_id.into_bytes());
         Self(bytes)
     }
 
@@ -282,32 +194,17 @@ impl ResourceId {
         TargetSystem::from(bytes)
     }
 
-    /// Get the [`ChainType`] from the `ResourceId`.
+    /// Get the [`TypedChainId`] from the `ResourceId`.
     ///
     /// The `ChainType` is the 27th & 28th bytes of the `ResourceId`.
-    ///
-    /// **Note**: This will return [`ChainType::None`] if the `ChainType` is
-    /// not known. which could be the case for a proposal specification
-    /// changed in the future without updating this crate.
+    /// Then Followed by the `ChainId`.
     #[must_use]
-    pub fn chain_type(&self) -> ChainType {
-        let mut bytes = [0u8; 2];
+    pub fn typed_chain_id(&self) -> TypedChainId {
+        let mut bytes = [0u8; TypedChainId::LENGTH];
         let f = TargetSystem::LENGTH;
-        let t = f + ChainType::LENGTH;
+        let t = f + TypedChainId::LENGTH;
         bytes.copy_from_slice(&self.0[f..t]);
-        ChainType::from(bytes)
-    }
-
-    /// Get the [`ChainId`] from the `ResourceId`.
-    ///
-    /// The `ChainId` is the last 4 bytes of the `ResourceId`.
-    #[must_use]
-    pub fn chain_id(&self) -> ChainId {
-        let mut bytes = [0u8; 4];
-        let f = TargetSystem::LENGTH + ChainType::LENGTH;
-        let t = f + ChainId::LENGTH;
-        bytes.copy_from_slice(&self.0[f..t]);
-        ChainId::from(bytes)
+        TypedChainId::from(bytes)
     }
 
     /// Get the underlying bytes of the `ResourceId`.
@@ -332,38 +229,6 @@ impl From<[u8; ResourceId::LENGTH]> for ResourceId {
 impl From<ResourceId> for [u8; ResourceId::LENGTH] {
     fn from(resource_id: ResourceId) -> Self {
         resource_id.0
-    }
-}
-
-#[cfg(feature = "scale")]
-impl scale_codec::EncodeLike<[u8; ResourceId::LENGTH]> for ResourceId {}
-
-#[cfg(feature = "scale")]
-impl scale_codec::EncodeLike for ResourceId {}
-
-#[cfg(feature = "scale")]
-impl scale_codec::Encode for ResourceId {
-    fn size_hint(&self) -> usize {
-        Self::LENGTH
-    }
-
-    fn encode_to<T: scale_codec::Output + ?Sized>(&self, dest: &mut T) {
-        dest.write(&self.to_bytes());
-    }
-}
-
-#[cfg(feature = "scale")]
-impl scale_codec::Decode for ResourceId {
-    fn decode<I: scale_codec::Input>(
-        input: &mut I,
-    ) -> Result<Self, scale_codec::Error> {
-        let mut bytes = [0u8; Self::LENGTH];
-        input.read(&mut bytes)?;
-        Ok(Self::from(bytes))
-    }
-
-    fn encoded_fixed_size() -> Option<usize> {
-        Some(Self::LENGTH)
     }
 }
 
@@ -436,38 +301,6 @@ impl From<TargetSystem> for [u8; TargetSystem::LENGTH] {
     }
 }
 
-#[cfg(feature = "scale")]
-impl scale_codec::EncodeLike<[u8; TargetSystem::LENGTH]> for TargetSystem {}
-
-#[cfg(feature = "scale")]
-impl scale_codec::EncodeLike for TargetSystem {}
-
-#[cfg(feature = "scale")]
-impl scale_codec::Encode for TargetSystem {
-    fn size_hint(&self) -> usize {
-        Self::LENGTH
-    }
-
-    fn encode_to<T: scale_codec::Output + ?Sized>(&self, dest: &mut T) {
-        dest.write(&self.to_bytes());
-    }
-}
-
-#[cfg(feature = "scale")]
-impl scale_codec::Decode for TargetSystem {
-    fn decode<I: scale_codec::Input>(
-        input: &mut I,
-    ) -> Result<Self, scale_codec::Error> {
-        let mut bytes = [0u8; Self::LENGTH];
-        input.read(&mut bytes)?;
-        Ok(Self::from(bytes))
-    }
-
-    fn encoded_fixed_size() -> Option<usize> {
-        Some(Self::LENGTH)
-    }
-}
-
 impl FunctionSignature {
     /// Length of the `FunctionSignature` (4 bytes).
     pub const LENGTH: usize = 4;
@@ -498,41 +331,6 @@ impl From<[u8; FunctionSignature::LENGTH]> for FunctionSignature {
 impl From<FunctionSignature> for [u8; FunctionSignature::LENGTH] {
     fn from(signature: FunctionSignature) -> Self {
         signature.0
-    }
-}
-
-#[cfg(feature = "scale")]
-impl scale_codec::EncodeLike<[u8; FunctionSignature::LENGTH]>
-    for FunctionSignature
-{
-}
-
-#[cfg(feature = "scale")]
-impl scale_codec::EncodeLike for FunctionSignature {}
-
-#[cfg(feature = "scale")]
-impl scale_codec::Encode for FunctionSignature {
-    fn size_hint(&self) -> usize {
-        Self::LENGTH
-    }
-
-    fn encode_to<T: scale_codec::Output + ?Sized>(&self, dest: &mut T) {
-        dest.write(&self.to_bytes());
-    }
-}
-
-#[cfg(feature = "scale")]
-impl scale_codec::Decode for FunctionSignature {
-    fn decode<I: scale_codec::Input>(
-        input: &mut I,
-    ) -> Result<Self, scale_codec::Error> {
-        let mut bytes = [0u8; Self::LENGTH];
-        input.read(&mut bytes)?;
-        Ok(Self::from(bytes))
-    }
-
-    fn encoded_fixed_size() -> Option<usize> {
-        Some(Self::LENGTH)
     }
 }
 
@@ -584,38 +382,6 @@ impl From<[u8; Nonce::LENGTH]> for Nonce {
 impl From<Nonce> for [u8; Nonce::LENGTH] {
     fn from(nonce: Nonce) -> Self {
         nonce.0.to_be_bytes()
-    }
-}
-
-#[cfg(feature = "scale")]
-impl scale_codec::EncodeLike<u32> for Nonce {}
-
-#[cfg(feature = "scale")]
-impl scale_codec::EncodeLike for Nonce {}
-
-#[cfg(feature = "scale")]
-impl scale_codec::Encode for Nonce {
-    fn size_hint(&self) -> usize {
-        Self::LENGTH
-    }
-
-    fn encode_to<T: scale_codec::Output + ?Sized>(&self, dest: &mut T) {
-        dest.write(&self.to_bytes());
-    }
-}
-
-#[cfg(feature = "scale")]
-impl scale_codec::Decode for Nonce {
-    fn decode<I: scale_codec::Input>(
-        input: &mut I,
-    ) -> Result<Self, scale_codec::Error> {
-        let mut bytes = [0u8; Self::LENGTH];
-        input.read(&mut bytes)?;
-        Ok(Self::from(bytes))
-    }
-
-    fn encoded_fixed_size() -> Option<usize> {
-        Some(Self::LENGTH)
     }
 }
 
@@ -744,10 +510,8 @@ mod tests {
         let target_system = TargetSystem::new_contract_address(
             hex_literal::hex!("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"),
         );
-        let target_chain = ChainType::Evm;
-        let target_chain_id = ChainId::from(4);
-        let resource_id =
-            ResourceId::new(target_system, target_chain, target_chain_id);
+        let target_chain = TypedChainId::Evm(4);
+        let resource_id = ResourceId::new(target_system, target_chain);
         assert_eq!(
             resource_id.to_bytes(),
             // first 6 bytes are zeros.
@@ -772,8 +536,7 @@ mod tests {
                 "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
             ))
         );
-        assert_eq!(resource_id.chain_type(), ChainType::Evm);
-        assert_eq!(resource_id.chain_id(), ChainId::from(4));
+        assert_eq!(resource_id.typed_chain_id(), TypedChainId::Evm(4));
     }
 
     #[test]
@@ -781,10 +544,8 @@ mod tests {
         let target_system = TargetSystem::new_contract_address(
             hex_literal::hex!("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"),
         );
-        let target_chain = ChainType::Evm;
-        let target_chain_id = ChainId::from(4);
-        let resource_id =
-            ResourceId::new(target_system, target_chain, target_chain_id);
+        let target_chain = TypedChainId::Evm(4);
+        let resource_id = ResourceId::new(target_system, target_chain);
         let function_signature =
             FunctionSignature::new(hex_literal::hex!("f00dbabe"));
         let nonce = Nonce::from(0x0001);
@@ -810,8 +571,7 @@ mod tests {
                 TargetSystem::new_contract_address(hex_literal::hex!(
                     "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
                 )),
-                ChainType::Evm,
-                ChainId::from(4)
+                TypedChainId::Evm(4)
             )
         );
         assert_eq!(

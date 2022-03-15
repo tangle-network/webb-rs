@@ -1,5 +1,5 @@
 //! Anchor Update Proposal.
-use crate::{ChainId, ChainType, ProposalHeader};
+use crate::{ProposalHeader, TypedChainId};
 
 /// Anchor Update Proposal.
 ///
@@ -19,8 +19,7 @@ use crate::{ChainId, ChainType, ProposalHeader};
 #[derive(Debug, Copy, Clone, PartialEq, Eq, Hash)]
 pub struct AnchorUpdateProposal {
     header: ProposalHeader,
-    src_chain_type: ChainType,
-    src_chain_id: ChainId,
+    src_chain: TypedChainId,
     latest_leaf_index: u32,
     merkle_root: [u8; 32],
 }
@@ -28,8 +27,7 @@ pub struct AnchorUpdateProposal {
 impl AnchorUpdateProposal {
     /// Length of the proposal in bytes.
     pub const LENGTH: usize = ProposalHeader::LENGTH
-        + ChainType::LENGTH
-        + ChainId::LENGTH
+        + TypedChainId::LENGTH
         + core::mem::size_of::<u32>() // latest_leaf_index
         + 32; // merkle_root
 
@@ -37,15 +35,13 @@ impl AnchorUpdateProposal {
     #[must_use]
     pub const fn new(
         header: ProposalHeader,
-        src_chain_type: ChainType,
-        src_chain_id: ChainId,
+        src_chain: TypedChainId,
         latest_leaf_index: u32,
         merkle_root: [u8; 32],
     ) -> Self {
         Self {
             header,
-            src_chain_type,
-            src_chain_id,
+            src_chain,
             latest_leaf_index,
             merkle_root,
         }
@@ -57,16 +53,10 @@ impl AnchorUpdateProposal {
         self.header
     }
 
-    /// Get the source chain type.
+    /// Get the source chain.
     #[must_use]
-    pub const fn src_chain_type(&self) -> ChainType {
-        self.src_chain_type
-    }
-
-    /// Get the source chain id.
-    #[must_use]
-    pub const fn src_chain_id(&self) -> ChainId {
-        self.src_chain_id
+    pub const fn src_chain(&self) -> TypedChainId {
+        self.src_chain
     }
 
     /// Get the latest leaf index.
@@ -89,11 +79,8 @@ impl AnchorUpdateProposal {
         let t = ProposalHeader::LENGTH;
         bytes[f..t].copy_from_slice(&self.header.to_bytes());
         let f = t;
-        let t = t + ChainType::LENGTH;
-        bytes[f..t].copy_from_slice(&self.src_chain_type.to_bytes());
-        let f = t;
-        let t = t + ChainId::LENGTH;
-        bytes[f..t].copy_from_slice(&self.src_chain_id.to_bytes());
+        let t = t + TypedChainId::LENGTH;
+        bytes[f..t].copy_from_slice(&self.src_chain.to_bytes());
         let f = t;
         let t = t + core::mem::size_of::<u32>();
         bytes[f..t].copy_from_slice(&self.latest_leaf_index.to_be_bytes());
@@ -118,15 +105,10 @@ impl From<[u8; AnchorUpdateProposal::LENGTH]> for AnchorUpdateProposal {
         header_bytes.copy_from_slice(&bytes[f..t]);
         let header = ProposalHeader::from(header_bytes);
         let f = t;
-        let t = t + ChainType::LENGTH;
-        let mut src_chain_type_bytes = [0u8; ChainType::LENGTH];
-        src_chain_type_bytes.copy_from_slice(&bytes[f..t]);
-        let src_chain_type = ChainType::from(src_chain_type_bytes);
-        let f = t;
-        let t = t + ChainId::LENGTH;
-        let mut src_chain_id_bytes = [0u8; ChainId::LENGTH];
-        src_chain_id_bytes.copy_from_slice(&bytes[f..t]);
-        let src_chain_id = ChainId::from(src_chain_id_bytes);
+        let t = t + TypedChainId::LENGTH;
+        let mut src_chain_bytes = [0u8; TypedChainId::LENGTH];
+        src_chain_bytes.copy_from_slice(&bytes[f..t]);
+        let src_chain = TypedChainId::from(src_chain_bytes);
         let f = t;
         let t = t + core::mem::size_of::<u32>();
         let mut latest_leaf_index_bytes = [0u8; core::mem::size_of::<u32>()];
@@ -136,13 +118,7 @@ impl From<[u8; AnchorUpdateProposal::LENGTH]> for AnchorUpdateProposal {
         let t = t + 32;
         let mut merkle_root = [0u8; 32];
         merkle_root.copy_from_slice(&bytes[f..t]);
-        Self::new(
-            header,
-            src_chain_type,
-            src_chain_id,
-            latest_leaf_index,
-            merkle_root,
-        )
+        Self::new(header, src_chain, latest_leaf_index, merkle_root)
     }
 }
 
@@ -163,17 +139,14 @@ mod tests {
         let target_system = TargetSystem::new_contract_address(
             hex_literal::hex!("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"),
         );
-        let target_chain_type = ChainType::Evm;
-        let target_chain_id = ChainId::from(4);
-        let resource_id =
-            ResourceId::new(target_system, target_chain_type, target_chain_id);
+        let target_chain = TypedChainId::Evm(4);
+        let resource_id = ResourceId::new(target_system, target_chain);
         let function_signature =
             FunctionSignature::new(hex_literal::hex!("cafebabe"));
         let nonce = Nonce::from(0x0001);
         let header =
             ProposalHeader::new(resource_id, function_signature, nonce);
-        let src_chain_type = ChainType::Evm;
-        let src_chain_id = ChainId::from(1);
+        let src_chain = TypedChainId::Evm(1);
         let latest_leaf_index = 0x0001;
         let merkle_root = [
             0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x0a,
@@ -182,8 +155,7 @@ mod tests {
         ];
         let proposal = AnchorUpdateProposal::new(
             header,
-            src_chain_type,
-            src_chain_id,
+            src_chain,
             latest_leaf_index,
             merkle_root,
         );
@@ -207,17 +179,14 @@ mod tests {
         let target_system = TargetSystem::new_contract_address(
             hex_literal::hex!("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"),
         );
-        let target_chain_type = ChainType::Evm;
-        let target_chain_id = ChainId::from(4);
-        let resource_id =
-            ResourceId::new(target_system, target_chain_type, target_chain_id);
+        let target_chain = TypedChainId::Evm(4);
+        let resource_id = ResourceId::new(target_system, target_chain);
         let function_signature =
             FunctionSignature::new(hex_literal::hex!("cafebabe"));
         let nonce = Nonce::from(0x0001);
         let header =
             ProposalHeader::new(resource_id, function_signature, nonce);
-        let src_chain_type = ChainType::Evm;
-        let src_chain_id = ChainId::from(1);
+        let src_chain = TypedChainId::Evm(1);
         let latest_leaf_index = 0x0001;
         let merkle_root = [
             0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x0a,
@@ -226,8 +195,7 @@ mod tests {
         ];
         let expected = AnchorUpdateProposal::new(
             header,
-            src_chain_type,
-            src_chain_id,
+            src_chain,
             latest_leaf_index,
             merkle_root,
         );
