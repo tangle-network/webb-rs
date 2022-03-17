@@ -19,7 +19,7 @@ mod signaturebridgecontract_mod {
     pub static SIGNATUREBRIDGECONTRACT_ABI: ethers::contract::Lazy<
         ethers::core::abi::Abi,
     > = ethers::contract::Lazy::new(|| {
-        serde_json :: from_str ("[{\"inputs\":[{\"internalType\":\"address\",\"name\":\"initialGovernor\",\"type\":\"address\"}],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"previousOwner\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"newOwner\",\"type\":\"address\"}],\"name\":\"GovernanceOwnershipTransferred\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"}],\"name\":\"Paused\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"recovered\",\"type\":\"address\"}],\"name\":\"RecoveredAddress\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"}],\"name\":\"Unpaused\",\"type\":\"event\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"name\":\"_counts\",\"outputs\":[{\"internalType\":\"uint64\",\"name\":\"\",\"type\":\"uint64\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"name\":\"_resourceIDToHandlerAddress\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32[]\",\"name\":\"resourceIDs\",\"type\":\"bytes32[]\"},{\"internalType\":\"address\",\"name\":\"newBridge\",\"type\":\"address\"},{\"internalType\":\"bytes\",\"name\":\"sig\",\"type\":\"bytes\"}],\"name\":\"adminMigrateBridgeWithSignature\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"handlerAddress\",\"type\":\"address\"},{\"internalType\":\"bytes32\",\"name\":\"resourceID\",\"type\":\"bytes32\"},{\"internalType\":\"address\",\"name\":\"executionContextAddress\",\"type\":\"address\"},{\"internalType\":\"bytes\",\"name\":\"sig\",\"type\":\"bytes\"}],\"name\":\"adminSetResourceWithSignature\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes\",\"name\":\"pubkey\",\"type\":\"bytes\"}],\"name\":\"checkPubKey\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes\",\"name\":\"data\",\"type\":\"bytes\"},{\"internalType\":\"bytes\",\"name\":\"sig\",\"type\":\"bytes\"}],\"name\":\"executeProposalWithSignature\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getChainId\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"governor\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"isGovernor\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes\",\"name\":\"data\",\"type\":\"bytes\"},{\"internalType\":\"bytes\",\"name\":\"sig\",\"type\":\"bytes\"}],\"name\":\"isSignatureFromGovernor\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"paused\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes\",\"name\":\"data\",\"type\":\"bytes\"},{\"internalType\":\"bytes\",\"name\":\"sig\",\"type\":\"bytes\"}],\"name\":\"recover\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"renounceOwnership\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"newOwner\",\"type\":\"address\"}],\"name\":\"transferOwnership\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"newOwner\",\"type\":\"address\"},{\"internalType\":\"bytes\",\"name\":\"sig\",\"type\":\"bytes\"}],\"name\":\"transferOwnershipWithSignature\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes\",\"name\":\"publicKey\",\"type\":\"bytes\"},{\"internalType\":\"bytes\",\"name\":\"sig\",\"type\":\"bytes\"}],\"name\":\"transferOwnershipWithSignaturePubKey\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"hash\",\"type\":\"bytes32\"},{\"internalType\":\"uint8\",\"name\":\"v\",\"type\":\"uint8\"},{\"internalType\":\"bytes32\",\"name\":\"r\",\"type\":\"bytes32\"},{\"internalType\":\"bytes32\",\"name\":\"s\",\"type\":\"bytes32\"}],\"name\":\"verify\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"}]") . expect ("invalid abi")
+        serde_json :: from_str ("[{\"inputs\":[{\"internalType\":\"address\",\"name\":\"initialGovernor\",\"type\":\"address\"}],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"previousOwner\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"newOwner\",\"type\":\"address\"}],\"name\":\"GovernanceOwnershipTransferred\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"}],\"name\":\"Paused\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"recovered\",\"type\":\"address\"}],\"name\":\"RecoveredAddress\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"}],\"name\":\"Unpaused\",\"type\":\"event\"},{\"inputs\":[],\"name\":\"EVM_CHAIN_ID_TYPE\",\"outputs\":[{\"internalType\":\"bytes2\",\"name\":\"\",\"type\":\"bytes2\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"name\":\"_counts\",\"outputs\":[{\"internalType\":\"uint64\",\"name\":\"\",\"type\":\"uint64\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"name\":\"_resourceIDToHandlerAddress\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"resourceID\",\"type\":\"bytes32\"},{\"internalType\":\"bytes4\",\"name\":\"functionSig\",\"type\":\"bytes4\"},{\"internalType\":\"uint32\",\"name\":\"nonce\",\"type\":\"uint32\"},{\"internalType\":\"bytes32\",\"name\":\"newResourceID\",\"type\":\"bytes32\"},{\"internalType\":\"address\",\"name\":\"handlerAddress\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"executionContextAddress\",\"type\":\"address\"},{\"internalType\":\"bytes\",\"name\":\"sig\",\"type\":\"bytes\"}],\"name\":\"adminSetResourceWithSignature\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"averageSessionLengthInMillisecs\",\"outputs\":[{\"internalType\":\"uint64\",\"name\":\"\",\"type\":\"uint64\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"currentVotingPeriod\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes\",\"name\":\"data\",\"type\":\"bytes\"},{\"internalType\":\"bytes\",\"name\":\"sig\",\"type\":\"bytes\"}],\"name\":\"executeProposalWithSignature\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getChainId\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getChainIdType\",\"outputs\":[{\"internalType\":\"uint48\",\"name\":\"\",\"type\":\"uint48\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"governor\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"isGovernor\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes\",\"name\":\"data\",\"type\":\"bytes\"},{\"internalType\":\"bytes\",\"name\":\"sig\",\"type\":\"bytes\"}],\"name\":\"isSignatureFromGovernor\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"lastGovernorUpdateTime\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"numOfProposers\",\"outputs\":[{\"internalType\":\"uint32\",\"name\":\"\",\"type\":\"uint32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"paused\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"proposalNonce\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"proposerSetRoot\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"proposerSetUpdateNonce\",\"outputs\":[{\"internalType\":\"uint32\",\"name\":\"\",\"type\":\"uint32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes\",\"name\":\"data\",\"type\":\"bytes\"},{\"internalType\":\"bytes\",\"name\":\"sig\",\"type\":\"bytes\"}],\"name\":\"recover\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"pure\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"refreshNonce\",\"outputs\":[{\"internalType\":\"uint32\",\"name\":\"\",\"type\":\"uint32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"renounceOwnership\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"sessionLengthMultiplier\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"newOwner\",\"type\":\"address\"},{\"internalType\":\"uint32\",\"name\":\"nonce\",\"type\":\"uint32\"}],\"name\":\"transferOwnership\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes\",\"name\":\"publicKey\",\"type\":\"bytes\"},{\"internalType\":\"uint32\",\"name\":\"nonce\",\"type\":\"uint32\"},{\"internalType\":\"bytes\",\"name\":\"sig\",\"type\":\"bytes\"}],\"name\":\"transferOwnershipWithSignaturePubKey\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"_proposerSetRoot\",\"type\":\"bytes32\"},{\"internalType\":\"uint64\",\"name\":\"_averageSessionLengthInMillisecs\",\"type\":\"uint64\"},{\"internalType\":\"uint32\",\"name\":\"_numOfProposers\",\"type\":\"uint32\"},{\"internalType\":\"uint32\",\"name\":\"_proposerSetUpdateNonce\",\"type\":\"uint32\"},{\"internalType\":\"bytes\",\"name\":\"_sig\",\"type\":\"bytes\"}],\"name\":\"updateProposerSetData\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"components\":[{\"internalType\":\"uint32\",\"name\":\"leafIndex\",\"type\":\"uint32\"},{\"internalType\":\"bytes32[]\",\"name\":\"siblingPathNodes\",\"type\":\"bytes32[]\"},{\"internalType\":\"address\",\"name\":\"proposedGovernor\",\"type\":\"address\"}],\"internalType\":\"struct Governable.Vote\",\"name\":\"vote\",\"type\":\"tuple\"}],\"name\":\"voteInFavorForceSetGovernor\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}]") . expect ("invalid abi")
     });
     #[derive(Clone)]
     pub struct SignatureBridgeContract<M>(ethers::contract::Contract<M>);
@@ -53,6 +53,14 @@ mod signaturebridgecontract_mod {
             );
             Self(contract)
         }
+        #[doc = "Calls the contract's `EVM_CHAIN_ID_TYPE` (0x8b7e8782) function"]
+        pub fn evm_chain_id_type(
+            &self,
+        ) -> ethers::contract::builders::ContractCall<M, [u8; 2]> {
+            self.0
+                .method_hash([139, 126, 135, 130], ())
+                .expect("method not found (this should never happen)")
+        }
         #[doc = "Calls the contract's `_counts` (0xd75a0683) function"]
         pub fn counts(
             &self,
@@ -74,47 +82,49 @@ mod signaturebridgecontract_mod {
                 .method_hash([132, 219, 128, 159], p0)
                 .expect("method not found (this should never happen)")
         }
-        #[doc = "Calls the contract's `adminMigrateBridgeWithSignature` (0x87ac4f51) function"]
-        pub fn admin_migrate_bridge_with_signature(
-            &self,
-            resource_i_ds: ::std::vec::Vec<[u8; 32]>,
-            new_bridge: ethers::core::types::Address,
-            sig: ethers::core::types::Bytes,
-        ) -> ethers::contract::builders::ContractCall<M, ()> {
-            self.0
-                .method_hash(
-                    [135, 172, 79, 81],
-                    (resource_i_ds, new_bridge, sig),
-                )
-                .expect("method not found (this should never happen)")
-        }
-        #[doc = "Calls the contract's `adminSetResourceWithSignature` (0x1eee6bc8) function"]
+        #[doc = "Calls the contract's `adminSetResourceWithSignature` (0xc944e408) function"]
         pub fn admin_set_resource_with_signature(
             &self,
-            handler_address: ethers::core::types::Address,
             resource_id: [u8; 32],
+            function_sig: [u8; 4],
+            nonce: u32,
+            new_resource_id: [u8; 32],
+            handler_address: ethers::core::types::Address,
             execution_context_address: ethers::core::types::Address,
             sig: ethers::core::types::Bytes,
         ) -> ethers::contract::builders::ContractCall<M, ()> {
             self.0
                 .method_hash(
-                    [30, 238, 107, 200],
+                    [201, 68, 228, 8],
                     (
-                        handler_address,
                         resource_id,
+                        function_sig,
+                        nonce,
+                        new_resource_id,
+                        handler_address,
                         execution_context_address,
                         sig,
                     ),
                 )
                 .expect("method not found (this should never happen)")
         }
-        #[doc = "Calls the contract's `checkPubKey` (0xd4066f4c) function"]
-        pub fn check_pub_key(
+        #[doc = "Calls the contract's `averageSessionLengthInMillisecs` (0x016737bb) function"]
+        pub fn average_session_length_in_millisecs(
             &self,
-            pubkey: ethers::core::types::Bytes,
-        ) -> ethers::contract::builders::ContractCall<M, bool> {
+        ) -> ethers::contract::builders::ContractCall<M, u64> {
             self.0
-                .method_hash([212, 6, 111, 76], pubkey)
+                .method_hash([1, 103, 55, 187], ())
+                .expect("method not found (this should never happen)")
+        }
+        #[doc = "Calls the contract's `currentVotingPeriod` (0x3a049e02) function"]
+        pub fn current_voting_period(
+            &self,
+        ) -> ethers::contract::builders::ContractCall<
+            M,
+            ethers::core::types::U256,
+        > {
+            self.0
+                .method_hash([58, 4, 158, 2], ())
                 .expect("method not found (this should never happen)")
         }
         #[doc = "Calls the contract's `executeProposalWithSignature` (0x9d2b1ed7) function"]
@@ -136,6 +146,14 @@ mod signaturebridgecontract_mod {
         > {
             self.0
                 .method_hash([52, 8, 228, 112], ())
+                .expect("method not found (this should never happen)")
+        }
+        #[doc = "Calls the contract's `getChainIdType` (0x4c830cbd) function"]
+        pub fn get_chain_id_type(
+            &self,
+        ) -> ethers::contract::builders::ContractCall<M, u64> {
+            self.0
+                .method_hash([76, 131, 12, 189], ())
                 .expect("method not found (this should never happen)")
         }
         #[doc = "Calls the contract's `governor` (0x0c340a24) function"]
@@ -167,6 +185,25 @@ mod signaturebridgecontract_mod {
                 .method_hash([135, 85, 188, 173], (data, sig))
                 .expect("method not found (this should never happen)")
         }
+        #[doc = "Calls the contract's `lastGovernorUpdateTime` (0x9e09583c) function"]
+        pub fn last_governor_update_time(
+            &self,
+        ) -> ethers::contract::builders::ContractCall<
+            M,
+            ethers::core::types::U256,
+        > {
+            self.0
+                .method_hash([158, 9, 88, 60], ())
+                .expect("method not found (this should never happen)")
+        }
+        #[doc = "Calls the contract's `numOfProposers` (0xbac163a2) function"]
+        pub fn num_of_proposers(
+            &self,
+        ) -> ethers::contract::builders::ContractCall<M, u32> {
+            self.0
+                .method_hash([186, 193, 99, 162], ())
+                .expect("method not found (this should never happen)")
+        }
         #[doc = "Calls the contract's `paused` (0x5c975abb) function"]
         pub fn paused(
             &self,
@@ -175,14 +212,52 @@ mod signaturebridgecontract_mod {
                 .method_hash([92, 151, 90, 187], ())
                 .expect("method not found (this should never happen)")
         }
+        #[doc = "Calls the contract's `proposalNonce` (0xcc3c74a1) function"]
+        pub fn proposal_nonce(
+            &self,
+        ) -> ethers::contract::builders::ContractCall<
+            M,
+            ethers::core::types::U256,
+        > {
+            self.0
+                .method_hash([204, 60, 116, 161], ())
+                .expect("method not found (this should never happen)")
+        }
+        #[doc = "Calls the contract's `proposerSetRoot` (0xc5eb6b1f) function"]
+        pub fn proposer_set_root(
+            &self,
+        ) -> ethers::contract::builders::ContractCall<M, [u8; 32]> {
+            self.0
+                .method_hash([197, 235, 107, 31], ())
+                .expect("method not found (this should never happen)")
+        }
+        #[doc = "Calls the contract's `proposerSetUpdateNonce` (0x93596700) function"]
+        pub fn proposer_set_update_nonce(
+            &self,
+        ) -> ethers::contract::builders::ContractCall<M, u32> {
+            self.0
+                .method_hash([147, 89, 103, 0], ())
+                .expect("method not found (this should never happen)")
+        }
         #[doc = "Calls the contract's `recover` (0x1ed13d1b) function"]
         pub fn recover(
             &self,
             data: ethers::core::types::Bytes,
             sig: ethers::core::types::Bytes,
-        ) -> ethers::contract::builders::ContractCall<M, ()> {
+        ) -> ethers::contract::builders::ContractCall<
+            M,
+            ethers::core::types::Address,
+        > {
             self.0
                 .method_hash([30, 209, 61, 27], (data, sig))
+                .expect("method not found (this should never happen)")
+        }
+        #[doc = "Calls the contract's `refreshNonce` (0x13cb01f9) function"]
+        pub fn refresh_nonce(
+            &self,
+        ) -> ethers::contract::builders::ContractCall<M, u32> {
+            self.0
+                .method_hash([19, 203, 1, 249], ())
                 .expect("method not found (this should never happen)")
         }
         #[doc = "Calls the contract's `renounceOwnership` (0x715018a6) function"]
@@ -193,45 +268,67 @@ mod signaturebridgecontract_mod {
                 .method_hash([113, 80, 24, 166], ())
                 .expect("method not found (this should never happen)")
         }
-        #[doc = "Calls the contract's `transferOwnership` (0xf2fde38b) function"]
+        #[doc = "Calls the contract's `sessionLengthMultiplier` (0xbdfadc84) function"]
+        pub fn session_length_multiplier(
+            &self,
+        ) -> ethers::contract::builders::ContractCall<
+            M,
+            ethers::core::types::U256,
+        > {
+            self.0
+                .method_hash([189, 250, 220, 132], ())
+                .expect("method not found (this should never happen)")
+        }
+        #[doc = "Calls the contract's `transferOwnership` (0xa6e94c91) function"]
         pub fn transfer_ownership(
             &self,
             new_owner: ethers::core::types::Address,
+            nonce: u32,
         ) -> ethers::contract::builders::ContractCall<M, ()> {
             self.0
-                .method_hash([242, 253, 227, 139], new_owner)
+                .method_hash([166, 233, 76, 145], (new_owner, nonce))
                 .expect("method not found (this should never happen)")
         }
-        #[doc = "Calls the contract's `transferOwnershipWithSignature` (0x0bf71175) function"]
-        pub fn transfer_ownership_with_signature(
-            &self,
-            new_owner: ethers::core::types::Address,
-            sig: ethers::core::types::Bytes,
-        ) -> ethers::contract::builders::ContractCall<M, ()> {
-            self.0
-                .method_hash([11, 247, 17, 117], (new_owner, sig))
-                .expect("method not found (this should never happen)")
-        }
-        #[doc = "Calls the contract's `transferOwnershipWithSignaturePubKey` (0x6aca1be3) function"]
+        #[doc = "Calls the contract's `transferOwnershipWithSignaturePubKey` (0x7296b5d8) function"]
         pub fn transfer_ownership_with_signature_pub_key(
             &self,
             public_key: ethers::core::types::Bytes,
+            nonce: u32,
             sig: ethers::core::types::Bytes,
         ) -> ethers::contract::builders::ContractCall<M, ()> {
             self.0
-                .method_hash([106, 202, 27, 227], (public_key, sig))
+                .method_hash([114, 150, 181, 216], (public_key, nonce, sig))
                 .expect("method not found (this should never happen)")
         }
-        #[doc = "Calls the contract's `verify` (0xf1835db7) function"]
-        pub fn verify(
+        #[doc = "Calls the contract's `updateProposerSetData` (0xf3d23d54) function"]
+        pub fn update_proposer_set_data(
             &self,
-            hash: [u8; 32],
-            v: u8,
-            r: [u8; 32],
-            s: [u8; 32],
-        ) -> ethers::contract::builders::ContractCall<M, bool> {
+            proposer_set_root: [u8; 32],
+            average_session_length_in_millisecs: u64,
+            num_of_proposers: u32,
+            proposer_set_update_nonce: u32,
+            sig: ethers::core::types::Bytes,
+        ) -> ethers::contract::builders::ContractCall<M, ()> {
             self.0
-                .method_hash([241, 131, 93, 183], (hash, v, r, s))
+                .method_hash(
+                    [243, 210, 61, 84],
+                    (
+                        proposer_set_root,
+                        average_session_length_in_millisecs,
+                        num_of_proposers,
+                        proposer_set_update_nonce,
+                        sig,
+                    ),
+                )
+                .expect("method not found (this should never happen)")
+        }
+        #[doc = "Calls the contract's `voteInFavorForceSetGovernor` (0x24118804) function"]
+        pub fn vote_in_favor_force_set_governor(
+            &self,
+            vote: Vote,
+        ) -> ethers::contract::builders::ContractCall<M, ()> {
+            self.0
+                .method_hash([36, 17, 136, 4], (vote,))
                 .expect("method not found (this should never happen)")
         }
         #[doc = "Gets the contract's `GovernanceOwnershipTransferred` event"]
@@ -375,6 +472,18 @@ mod signaturebridgecontract_mod {
             match self { SignatureBridgeContractEvents :: GovernanceOwnershipTransferredFilter (element) => element . fmt (f) , SignatureBridgeContractEvents :: PausedFilter (element) => element . fmt (f) , SignatureBridgeContractEvents :: RecoveredAddressFilter (element) => element . fmt (f) , SignatureBridgeContractEvents :: UnpausedFilter (element) => element . fmt (f) }
         }
     }
+    #[doc = "Container type for all input parameters for the `EVM_CHAIN_ID_TYPE`function with signature `EVM_CHAIN_ID_TYPE()` and selector `[139, 126, 135, 130]`"]
+    #[derive(
+        Clone,
+        Debug,
+        Default,
+        Eq,
+        PartialEq,
+        ethers :: contract :: EthCall,
+        ethers :: contract :: EthDisplay,
+    )]
+    #[ethcall(name = "EVM_CHAIN_ID_TYPE", abi = "EVM_CHAIN_ID_TYPE()")]
+    pub struct EvmChainIdTypeCall;
     #[doc = "Container type for all input parameters for the `_counts`function with signature `_counts(uint256)` and selector `[215, 90, 6, 131]`"]
     #[derive(
         Clone,
@@ -402,26 +511,7 @@ mod signaturebridgecontract_mod {
         abi = "_resourceIDToHandlerAddress(bytes32)"
     )]
     pub struct ResourceIDToHandlerAddressCall(pub [u8; 32]);
-    #[doc = "Container type for all input parameters for the `adminMigrateBridgeWithSignature`function with signature `adminMigrateBridgeWithSignature(bytes32[],address,bytes)` and selector `[135, 172, 79, 81]`"]
-    #[derive(
-        Clone,
-        Debug,
-        Default,
-        Eq,
-        PartialEq,
-        ethers :: contract :: EthCall,
-        ethers :: contract :: EthDisplay,
-    )]
-    #[ethcall(
-        name = "adminMigrateBridgeWithSignature",
-        abi = "adminMigrateBridgeWithSignature(bytes32[],address,bytes)"
-    )]
-    pub struct AdminMigrateBridgeWithSignatureCall {
-        pub resource_i_ds: ::std::vec::Vec<[u8; 32]>,
-        pub new_bridge: ethers::core::types::Address,
-        pub sig: ethers::core::types::Bytes,
-    }
-    #[doc = "Container type for all input parameters for the `adminSetResourceWithSignature`function with signature `adminSetResourceWithSignature(address,bytes32,address,bytes)` and selector `[30, 238, 107, 200]`"]
+    #[doc = "Container type for all input parameters for the `adminSetResourceWithSignature`function with signature `adminSetResourceWithSignature(bytes32,bytes4,uint32,bytes32,address,address,bytes)` and selector `[201, 68, 228, 8]`"]
     #[derive(
         Clone,
         Debug,
@@ -433,15 +523,18 @@ mod signaturebridgecontract_mod {
     )]
     #[ethcall(
         name = "adminSetResourceWithSignature",
-        abi = "adminSetResourceWithSignature(address,bytes32,address,bytes)"
+        abi = "adminSetResourceWithSignature(bytes32,bytes4,uint32,bytes32,address,address,bytes)"
     )]
     pub struct AdminSetResourceWithSignatureCall {
-        pub handler_address: ethers::core::types::Address,
         pub resource_id: [u8; 32],
+        pub function_sig: [u8; 4],
+        pub nonce: u32,
+        pub new_resource_id: [u8; 32],
+        pub handler_address: ethers::core::types::Address,
         pub execution_context_address: ethers::core::types::Address,
         pub sig: ethers::core::types::Bytes,
     }
-    #[doc = "Container type for all input parameters for the `checkPubKey`function with signature `checkPubKey(bytes)` and selector `[212, 6, 111, 76]`"]
+    #[doc = "Container type for all input parameters for the `averageSessionLengthInMillisecs`function with signature `averageSessionLengthInMillisecs()` and selector `[1, 103, 55, 187]`"]
     #[derive(
         Clone,
         Debug,
@@ -451,10 +544,23 @@ mod signaturebridgecontract_mod {
         ethers :: contract :: EthCall,
         ethers :: contract :: EthDisplay,
     )]
-    #[ethcall(name = "checkPubKey", abi = "checkPubKey(bytes)")]
-    pub struct CheckPubKeyCall {
-        pub pubkey: ethers::core::types::Bytes,
-    }
+    #[ethcall(
+        name = "averageSessionLengthInMillisecs",
+        abi = "averageSessionLengthInMillisecs()"
+    )]
+    pub struct AverageSessionLengthInMillisecsCall;
+    #[doc = "Container type for all input parameters for the `currentVotingPeriod`function with signature `currentVotingPeriod()` and selector `[58, 4, 158, 2]`"]
+    #[derive(
+        Clone,
+        Debug,
+        Default,
+        Eq,
+        PartialEq,
+        ethers :: contract :: EthCall,
+        ethers :: contract :: EthDisplay,
+    )]
+    #[ethcall(name = "currentVotingPeriod", abi = "currentVotingPeriod()")]
+    pub struct CurrentVotingPeriodCall;
     #[doc = "Container type for all input parameters for the `executeProposalWithSignature`function with signature `executeProposalWithSignature(bytes,bytes)` and selector `[157, 43, 30, 215]`"]
     #[derive(
         Clone,
@@ -485,6 +591,18 @@ mod signaturebridgecontract_mod {
     )]
     #[ethcall(name = "getChainId", abi = "getChainId()")]
     pub struct GetChainIdCall;
+    #[doc = "Container type for all input parameters for the `getChainIdType`function with signature `getChainIdType()` and selector `[76, 131, 12, 189]`"]
+    #[derive(
+        Clone,
+        Debug,
+        Default,
+        Eq,
+        PartialEq,
+        ethers :: contract :: EthCall,
+        ethers :: contract :: EthDisplay,
+    )]
+    #[ethcall(name = "getChainIdType", abi = "getChainIdType()")]
+    pub struct GetChainIdTypeCall;
     #[doc = "Container type for all input parameters for the `governor`function with signature `governor()` and selector `[12, 52, 10, 36]`"]
     #[derive(
         Clone,
@@ -527,6 +645,33 @@ mod signaturebridgecontract_mod {
         pub data: ethers::core::types::Bytes,
         pub sig: ethers::core::types::Bytes,
     }
+    #[doc = "Container type for all input parameters for the `lastGovernorUpdateTime`function with signature `lastGovernorUpdateTime()` and selector `[158, 9, 88, 60]`"]
+    #[derive(
+        Clone,
+        Debug,
+        Default,
+        Eq,
+        PartialEq,
+        ethers :: contract :: EthCall,
+        ethers :: contract :: EthDisplay,
+    )]
+    #[ethcall(
+        name = "lastGovernorUpdateTime",
+        abi = "lastGovernorUpdateTime()"
+    )]
+    pub struct LastGovernorUpdateTimeCall;
+    #[doc = "Container type for all input parameters for the `numOfProposers`function with signature `numOfProposers()` and selector `[186, 193, 99, 162]`"]
+    #[derive(
+        Clone,
+        Debug,
+        Default,
+        Eq,
+        PartialEq,
+        ethers :: contract :: EthCall,
+        ethers :: contract :: EthDisplay,
+    )]
+    #[ethcall(name = "numOfProposers", abi = "numOfProposers()")]
+    pub struct NumOfProposersCall;
     #[doc = "Container type for all input parameters for the `paused`function with signature `paused()` and selector `[92, 151, 90, 187]`"]
     #[derive(
         Clone,
@@ -539,6 +684,45 @@ mod signaturebridgecontract_mod {
     )]
     #[ethcall(name = "paused", abi = "paused()")]
     pub struct PausedCall;
+    #[doc = "Container type for all input parameters for the `proposalNonce`function with signature `proposalNonce()` and selector `[204, 60, 116, 161]`"]
+    #[derive(
+        Clone,
+        Debug,
+        Default,
+        Eq,
+        PartialEq,
+        ethers :: contract :: EthCall,
+        ethers :: contract :: EthDisplay,
+    )]
+    #[ethcall(name = "proposalNonce", abi = "proposalNonce()")]
+    pub struct ProposalNonceCall;
+    #[doc = "Container type for all input parameters for the `proposerSetRoot`function with signature `proposerSetRoot()` and selector `[197, 235, 107, 31]`"]
+    #[derive(
+        Clone,
+        Debug,
+        Default,
+        Eq,
+        PartialEq,
+        ethers :: contract :: EthCall,
+        ethers :: contract :: EthDisplay,
+    )]
+    #[ethcall(name = "proposerSetRoot", abi = "proposerSetRoot()")]
+    pub struct ProposerSetRootCall;
+    #[doc = "Container type for all input parameters for the `proposerSetUpdateNonce`function with signature `proposerSetUpdateNonce()` and selector `[147, 89, 103, 0]`"]
+    #[derive(
+        Clone,
+        Debug,
+        Default,
+        Eq,
+        PartialEq,
+        ethers :: contract :: EthCall,
+        ethers :: contract :: EthDisplay,
+    )]
+    #[ethcall(
+        name = "proposerSetUpdateNonce",
+        abi = "proposerSetUpdateNonce()"
+    )]
+    pub struct ProposerSetUpdateNonceCall;
     #[doc = "Container type for all input parameters for the `recover`function with signature `recover(bytes,bytes)` and selector `[30, 209, 61, 27]`"]
     #[derive(
         Clone,
@@ -554,6 +738,18 @@ mod signaturebridgecontract_mod {
         pub data: ethers::core::types::Bytes,
         pub sig: ethers::core::types::Bytes,
     }
+    #[doc = "Container type for all input parameters for the `refreshNonce`function with signature `refreshNonce()` and selector `[19, 203, 1, 249]`"]
+    #[derive(
+        Clone,
+        Debug,
+        Default,
+        Eq,
+        PartialEq,
+        ethers :: contract :: EthCall,
+        ethers :: contract :: EthDisplay,
+    )]
+    #[ethcall(name = "refreshNonce", abi = "refreshNonce()")]
+    pub struct RefreshNonceCall;
     #[doc = "Container type for all input parameters for the `renounceOwnership`function with signature `renounceOwnership()` and selector `[113, 80, 24, 166]`"]
     #[derive(
         Clone,
@@ -566,21 +762,7 @@ mod signaturebridgecontract_mod {
     )]
     #[ethcall(name = "renounceOwnership", abi = "renounceOwnership()")]
     pub struct RenounceOwnershipCall;
-    #[doc = "Container type for all input parameters for the `transferOwnership`function with signature `transferOwnership(address)` and selector `[242, 253, 227, 139]`"]
-    #[derive(
-        Clone,
-        Debug,
-        Default,
-        Eq,
-        PartialEq,
-        ethers :: contract :: EthCall,
-        ethers :: contract :: EthDisplay,
-    )]
-    #[ethcall(name = "transferOwnership", abi = "transferOwnership(address)")]
-    pub struct TransferOwnershipCall {
-        pub new_owner: ethers::core::types::Address,
-    }
-    #[doc = "Container type for all input parameters for the `transferOwnershipWithSignature`function with signature `transferOwnershipWithSignature(address,bytes)` and selector `[11, 247, 17, 117]`"]
+    #[doc = "Container type for all input parameters for the `sessionLengthMultiplier`function with signature `sessionLengthMultiplier()` and selector `[189, 250, 220, 132]`"]
     #[derive(
         Clone,
         Debug,
@@ -591,14 +773,29 @@ mod signaturebridgecontract_mod {
         ethers :: contract :: EthDisplay,
     )]
     #[ethcall(
-        name = "transferOwnershipWithSignature",
-        abi = "transferOwnershipWithSignature(address,bytes)"
+        name = "sessionLengthMultiplier",
+        abi = "sessionLengthMultiplier()"
     )]
-    pub struct TransferOwnershipWithSignatureCall {
+    pub struct SessionLengthMultiplierCall;
+    #[doc = "Container type for all input parameters for the `transferOwnership`function with signature `transferOwnership(address,uint32)` and selector `[166, 233, 76, 145]`"]
+    #[derive(
+        Clone,
+        Debug,
+        Default,
+        Eq,
+        PartialEq,
+        ethers :: contract :: EthCall,
+        ethers :: contract :: EthDisplay,
+    )]
+    #[ethcall(
+        name = "transferOwnership",
+        abi = "transferOwnership(address,uint32)"
+    )]
+    pub struct TransferOwnershipCall {
         pub new_owner: ethers::core::types::Address,
-        pub sig: ethers::core::types::Bytes,
+        pub nonce: u32,
     }
-    #[doc = "Container type for all input parameters for the `transferOwnershipWithSignaturePubKey`function with signature `transferOwnershipWithSignaturePubKey(bytes,bytes)` and selector `[106, 202, 27, 227]`"]
+    #[doc = "Container type for all input parameters for the `transferOwnershipWithSignaturePubKey`function with signature `transferOwnershipWithSignaturePubKey(bytes,uint32,bytes)` and selector `[114, 150, 181, 216]`"]
     #[derive(
         Clone,
         Debug,
@@ -610,13 +807,14 @@ mod signaturebridgecontract_mod {
     )]
     #[ethcall(
         name = "transferOwnershipWithSignaturePubKey",
-        abi = "transferOwnershipWithSignaturePubKey(bytes,bytes)"
+        abi = "transferOwnershipWithSignaturePubKey(bytes,uint32,bytes)"
     )]
     pub struct TransferOwnershipWithSignaturePubKeyCall {
         pub public_key: ethers::core::types::Bytes,
+        pub nonce: u32,
         pub sig: ethers::core::types::Bytes,
     }
-    #[doc = "Container type for all input parameters for the `verify`function with signature `verify(bytes32,uint8,bytes32,bytes32)` and selector `[241, 131, 93, 183]`"]
+    #[doc = "Container type for all input parameters for the `updateProposerSetData`function with signature `updateProposerSetData(bytes32,uint64,uint32,uint32,bytes)` and selector `[243, 210, 61, 84]`"]
     #[derive(
         Clone,
         Debug,
@@ -626,39 +824,78 @@ mod signaturebridgecontract_mod {
         ethers :: contract :: EthCall,
         ethers :: contract :: EthDisplay,
     )]
-    #[ethcall(name = "verify", abi = "verify(bytes32,uint8,bytes32,bytes32)")]
-    pub struct VerifyCall {
-        pub hash: [u8; 32],
-        pub v: u8,
-        pub r: [u8; 32],
-        pub s: [u8; 32],
+    #[ethcall(
+        name = "updateProposerSetData",
+        abi = "updateProposerSetData(bytes32,uint64,uint32,uint32,bytes)"
+    )]
+    pub struct UpdateProposerSetDataCall {
+        pub proposer_set_root: [u8; 32],
+        pub average_session_length_in_millisecs: u64,
+        pub num_of_proposers: u32,
+        pub proposer_set_update_nonce: u32,
+        pub sig: ethers::core::types::Bytes,
+    }
+    #[doc = "Container type for all input parameters for the `voteInFavorForceSetGovernor`function with signature `voteInFavorForceSetGovernor((uint32,bytes32[],address))` and selector `[36, 17, 136, 4]`"]
+    #[derive(
+        Clone,
+        Debug,
+        Default,
+        Eq,
+        PartialEq,
+        ethers :: contract :: EthCall,
+        ethers :: contract :: EthDisplay,
+    )]
+    #[ethcall(
+        name = "voteInFavorForceSetGovernor",
+        abi = "voteInFavorForceSetGovernor((uint32,bytes32[],address))"
+    )]
+    pub struct VoteInFavorForceSetGovernorCall {
+        pub vote: Vote,
     }
     #[derive(Debug, Clone, PartialEq, Eq, ethers :: contract :: EthAbiType)]
     pub enum SignatureBridgeContractCalls {
+        EvmChainIdType(EvmChainIdTypeCall),
         Counts(CountsCall),
         ResourceIDToHandlerAddress(ResourceIDToHandlerAddressCall),
-        AdminMigrateBridgeWithSignature(AdminMigrateBridgeWithSignatureCall),
         AdminSetResourceWithSignature(AdminSetResourceWithSignatureCall),
-        CheckPubKey(CheckPubKeyCall),
+        AverageSessionLengthInMillisecs(AverageSessionLengthInMillisecsCall),
+        CurrentVotingPeriod(CurrentVotingPeriodCall),
         ExecuteProposalWithSignature(ExecuteProposalWithSignatureCall),
         GetChainId(GetChainIdCall),
+        GetChainIdType(GetChainIdTypeCall),
         Governor(GovernorCall),
         IsGovernor(IsGovernorCall),
         IsSignatureFromGovernor(IsSignatureFromGovernorCall),
+        LastGovernorUpdateTime(LastGovernorUpdateTimeCall),
+        NumOfProposers(NumOfProposersCall),
         Paused(PausedCall),
+        ProposalNonce(ProposalNonceCall),
+        ProposerSetRoot(ProposerSetRootCall),
+        ProposerSetUpdateNonce(ProposerSetUpdateNonceCall),
         Recover(RecoverCall),
+        RefreshNonce(RefreshNonceCall),
         RenounceOwnership(RenounceOwnershipCall),
+        SessionLengthMultiplier(SessionLengthMultiplierCall),
         TransferOwnership(TransferOwnershipCall),
-        TransferOwnershipWithSignature(TransferOwnershipWithSignatureCall),
         TransferOwnershipWithSignaturePubKey(
             TransferOwnershipWithSignaturePubKeyCall,
         ),
-        Verify(VerifyCall),
+        UpdateProposerSetData(UpdateProposerSetDataCall),
+        VoteInFavorForceSetGovernor(VoteInFavorForceSetGovernorCall),
     }
     impl ethers::core::abi::AbiDecode for SignatureBridgeContractCalls {
         fn decode(
             data: impl AsRef<[u8]>,
         ) -> Result<Self, ethers::core::abi::AbiError> {
+            if let Ok(decoded) =
+                <EvmChainIdTypeCall as ethers::core::abi::AbiDecode>::decode(
+                    data.as_ref(),
+                )
+            {
+                return Ok(SignatureBridgeContractCalls::EvmChainIdType(
+                    decoded,
+                ));
+            }
             if let Ok(decoded) =
                 <CountsCall as ethers::core::abi::AbiDecode>::decode(
                     data.as_ref(),
@@ -667,15 +904,9 @@ mod signaturebridgecontract_mod {
                 return Ok(SignatureBridgeContractCalls::Counts(decoded));
             }
             if let Ok (decoded) = < ResourceIDToHandlerAddressCall as ethers :: core :: abi :: AbiDecode > :: decode (data . as_ref ()) { return Ok (SignatureBridgeContractCalls :: ResourceIDToHandlerAddress (decoded)) }
-            if let Ok (decoded) = < AdminMigrateBridgeWithSignatureCall as ethers :: core :: abi :: AbiDecode > :: decode (data . as_ref ()) { return Ok (SignatureBridgeContractCalls :: AdminMigrateBridgeWithSignature (decoded)) }
             if let Ok (decoded) = < AdminSetResourceWithSignatureCall as ethers :: core :: abi :: AbiDecode > :: decode (data . as_ref ()) { return Ok (SignatureBridgeContractCalls :: AdminSetResourceWithSignature (decoded)) }
-            if let Ok(decoded) =
-                <CheckPubKeyCall as ethers::core::abi::AbiDecode>::decode(
-                    data.as_ref(),
-                )
-            {
-                return Ok(SignatureBridgeContractCalls::CheckPubKey(decoded));
-            }
+            if let Ok (decoded) = < AverageSessionLengthInMillisecsCall as ethers :: core :: abi :: AbiDecode > :: decode (data . as_ref ()) { return Ok (SignatureBridgeContractCalls :: AverageSessionLengthInMillisecs (decoded)) }
+            if let Ok (decoded) = < CurrentVotingPeriodCall as ethers :: core :: abi :: AbiDecode > :: decode (data . as_ref ()) { return Ok (SignatureBridgeContractCalls :: CurrentVotingPeriod (decoded)) }
             if let Ok (decoded) = < ExecuteProposalWithSignatureCall as ethers :: core :: abi :: AbiDecode > :: decode (data . as_ref ()) { return Ok (SignatureBridgeContractCalls :: ExecuteProposalWithSignature (decoded)) }
             if let Ok(decoded) =
                 <GetChainIdCall as ethers::core::abi::AbiDecode>::decode(
@@ -683,6 +914,15 @@ mod signaturebridgecontract_mod {
                 )
             {
                 return Ok(SignatureBridgeContractCalls::GetChainId(decoded));
+            }
+            if let Ok(decoded) =
+                <GetChainIdTypeCall as ethers::core::abi::AbiDecode>::decode(
+                    data.as_ref(),
+                )
+            {
+                return Ok(SignatureBridgeContractCalls::GetChainIdType(
+                    decoded,
+                ));
             }
             if let Ok(decoded) =
                 <GovernorCall as ethers::core::abi::AbiDecode>::decode(
@@ -699,6 +939,16 @@ mod signaturebridgecontract_mod {
                 return Ok(SignatureBridgeContractCalls::IsGovernor(decoded));
             }
             if let Ok (decoded) = < IsSignatureFromGovernorCall as ethers :: core :: abi :: AbiDecode > :: decode (data . as_ref ()) { return Ok (SignatureBridgeContractCalls :: IsSignatureFromGovernor (decoded)) }
+            if let Ok (decoded) = < LastGovernorUpdateTimeCall as ethers :: core :: abi :: AbiDecode > :: decode (data . as_ref ()) { return Ok (SignatureBridgeContractCalls :: LastGovernorUpdateTime (decoded)) }
+            if let Ok(decoded) =
+                <NumOfProposersCall as ethers::core::abi::AbiDecode>::decode(
+                    data.as_ref(),
+                )
+            {
+                return Ok(SignatureBridgeContractCalls::NumOfProposers(
+                    decoded,
+                ));
+            }
             if let Ok(decoded) =
                 <PausedCall as ethers::core::abi::AbiDecode>::decode(
                     data.as_ref(),
@@ -707,11 +957,37 @@ mod signaturebridgecontract_mod {
                 return Ok(SignatureBridgeContractCalls::Paused(decoded));
             }
             if let Ok(decoded) =
+                <ProposalNonceCall as ethers::core::abi::AbiDecode>::decode(
+                    data.as_ref(),
+                )
+            {
+                return Ok(SignatureBridgeContractCalls::ProposalNonce(
+                    decoded,
+                ));
+            }
+            if let Ok(decoded) =
+                <ProposerSetRootCall as ethers::core::abi::AbiDecode>::decode(
+                    data.as_ref(),
+                )
+            {
+                return Ok(SignatureBridgeContractCalls::ProposerSetRoot(
+                    decoded,
+                ));
+            }
+            if let Ok (decoded) = < ProposerSetUpdateNonceCall as ethers :: core :: abi :: AbiDecode > :: decode (data . as_ref ()) { return Ok (SignatureBridgeContractCalls :: ProposerSetUpdateNonce (decoded)) }
+            if let Ok(decoded) =
                 <RecoverCall as ethers::core::abi::AbiDecode>::decode(
                     data.as_ref(),
                 )
             {
                 return Ok(SignatureBridgeContractCalls::Recover(decoded));
+            }
+            if let Ok(decoded) =
+                <RefreshNonceCall as ethers::core::abi::AbiDecode>::decode(
+                    data.as_ref(),
+                )
+            {
+                return Ok(SignatureBridgeContractCalls::RefreshNonce(decoded));
             }
             if let Ok(decoded) =
                 <RenounceOwnershipCall as ethers::core::abi::AbiDecode>::decode(
@@ -722,6 +998,7 @@ mod signaturebridgecontract_mod {
                     decoded,
                 ));
             }
+            if let Ok (decoded) = < SessionLengthMultiplierCall as ethers :: core :: abi :: AbiDecode > :: decode (data . as_ref ()) { return Ok (SignatureBridgeContractCalls :: SessionLengthMultiplier (decoded)) }
             if let Ok(decoded) =
                 <TransferOwnershipCall as ethers::core::abi::AbiDecode>::decode(
                     data.as_ref(),
@@ -731,26 +1008,25 @@ mod signaturebridgecontract_mod {
                     decoded,
                 ));
             }
-            if let Ok (decoded) = < TransferOwnershipWithSignatureCall as ethers :: core :: abi :: AbiDecode > :: decode (data . as_ref ()) { return Ok (SignatureBridgeContractCalls :: TransferOwnershipWithSignature (decoded)) }
             if let Ok (decoded) = < TransferOwnershipWithSignaturePubKeyCall as ethers :: core :: abi :: AbiDecode > :: decode (data . as_ref ()) { return Ok (SignatureBridgeContractCalls :: TransferOwnershipWithSignaturePubKey (decoded)) }
-            if let Ok(decoded) =
-                <VerifyCall as ethers::core::abi::AbiDecode>::decode(
-                    data.as_ref(),
-                )
-            {
-                return Ok(SignatureBridgeContractCalls::Verify(decoded));
-            }
+            if let Ok (decoded) = < UpdateProposerSetDataCall as ethers :: core :: abi :: AbiDecode > :: decode (data . as_ref ()) { return Ok (SignatureBridgeContractCalls :: UpdateProposerSetData (decoded)) }
+            if let Ok (decoded) = < VoteInFavorForceSetGovernorCall as ethers :: core :: abi :: AbiDecode > :: decode (data . as_ref ()) { return Ok (SignatureBridgeContractCalls :: VoteInFavorForceSetGovernor (decoded)) }
             Err(ethers::core::abi::Error::InvalidData.into())
         }
     }
     impl ethers::core::abi::AbiEncode for SignatureBridgeContractCalls {
         fn encode(self) -> Vec<u8> {
-            match self { SignatureBridgeContractCalls :: Counts (element) => element . encode () , SignatureBridgeContractCalls :: ResourceIDToHandlerAddress (element) => element . encode () , SignatureBridgeContractCalls :: AdminMigrateBridgeWithSignature (element) => element . encode () , SignatureBridgeContractCalls :: AdminSetResourceWithSignature (element) => element . encode () , SignatureBridgeContractCalls :: CheckPubKey (element) => element . encode () , SignatureBridgeContractCalls :: ExecuteProposalWithSignature (element) => element . encode () , SignatureBridgeContractCalls :: GetChainId (element) => element . encode () , SignatureBridgeContractCalls :: Governor (element) => element . encode () , SignatureBridgeContractCalls :: IsGovernor (element) => element . encode () , SignatureBridgeContractCalls :: IsSignatureFromGovernor (element) => element . encode () , SignatureBridgeContractCalls :: Paused (element) => element . encode () , SignatureBridgeContractCalls :: Recover (element) => element . encode () , SignatureBridgeContractCalls :: RenounceOwnership (element) => element . encode () , SignatureBridgeContractCalls :: TransferOwnership (element) => element . encode () , SignatureBridgeContractCalls :: TransferOwnershipWithSignature (element) => element . encode () , SignatureBridgeContractCalls :: TransferOwnershipWithSignaturePubKey (element) => element . encode () , SignatureBridgeContractCalls :: Verify (element) => element . encode () }
+            match self { SignatureBridgeContractCalls :: EvmChainIdType (element) => element . encode () , SignatureBridgeContractCalls :: Counts (element) => element . encode () , SignatureBridgeContractCalls :: ResourceIDToHandlerAddress (element) => element . encode () , SignatureBridgeContractCalls :: AdminSetResourceWithSignature (element) => element . encode () , SignatureBridgeContractCalls :: AverageSessionLengthInMillisecs (element) => element . encode () , SignatureBridgeContractCalls :: CurrentVotingPeriod (element) => element . encode () , SignatureBridgeContractCalls :: ExecuteProposalWithSignature (element) => element . encode () , SignatureBridgeContractCalls :: GetChainId (element) => element . encode () , SignatureBridgeContractCalls :: GetChainIdType (element) => element . encode () , SignatureBridgeContractCalls :: Governor (element) => element . encode () , SignatureBridgeContractCalls :: IsGovernor (element) => element . encode () , SignatureBridgeContractCalls :: IsSignatureFromGovernor (element) => element . encode () , SignatureBridgeContractCalls :: LastGovernorUpdateTime (element) => element . encode () , SignatureBridgeContractCalls :: NumOfProposers (element) => element . encode () , SignatureBridgeContractCalls :: Paused (element) => element . encode () , SignatureBridgeContractCalls :: ProposalNonce (element) => element . encode () , SignatureBridgeContractCalls :: ProposerSetRoot (element) => element . encode () , SignatureBridgeContractCalls :: ProposerSetUpdateNonce (element) => element . encode () , SignatureBridgeContractCalls :: Recover (element) => element . encode () , SignatureBridgeContractCalls :: RefreshNonce (element) => element . encode () , SignatureBridgeContractCalls :: RenounceOwnership (element) => element . encode () , SignatureBridgeContractCalls :: SessionLengthMultiplier (element) => element . encode () , SignatureBridgeContractCalls :: TransferOwnership (element) => element . encode () , SignatureBridgeContractCalls :: TransferOwnershipWithSignaturePubKey (element) => element . encode () , SignatureBridgeContractCalls :: UpdateProposerSetData (element) => element . encode () , SignatureBridgeContractCalls :: VoteInFavorForceSetGovernor (element) => element . encode () }
         }
     }
     impl ::std::fmt::Display for SignatureBridgeContractCalls {
         fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
-            match self { SignatureBridgeContractCalls :: Counts (element) => element . fmt (f) , SignatureBridgeContractCalls :: ResourceIDToHandlerAddress (element) => element . fmt (f) , SignatureBridgeContractCalls :: AdminMigrateBridgeWithSignature (element) => element . fmt (f) , SignatureBridgeContractCalls :: AdminSetResourceWithSignature (element) => element . fmt (f) , SignatureBridgeContractCalls :: CheckPubKey (element) => element . fmt (f) , SignatureBridgeContractCalls :: ExecuteProposalWithSignature (element) => element . fmt (f) , SignatureBridgeContractCalls :: GetChainId (element) => element . fmt (f) , SignatureBridgeContractCalls :: Governor (element) => element . fmt (f) , SignatureBridgeContractCalls :: IsGovernor (element) => element . fmt (f) , SignatureBridgeContractCalls :: IsSignatureFromGovernor (element) => element . fmt (f) , SignatureBridgeContractCalls :: Paused (element) => element . fmt (f) , SignatureBridgeContractCalls :: Recover (element) => element . fmt (f) , SignatureBridgeContractCalls :: RenounceOwnership (element) => element . fmt (f) , SignatureBridgeContractCalls :: TransferOwnership (element) => element . fmt (f) , SignatureBridgeContractCalls :: TransferOwnershipWithSignature (element) => element . fmt (f) , SignatureBridgeContractCalls :: TransferOwnershipWithSignaturePubKey (element) => element . fmt (f) , SignatureBridgeContractCalls :: Verify (element) => element . fmt (f) }
+            match self { SignatureBridgeContractCalls :: EvmChainIdType (element) => element . fmt (f) , SignatureBridgeContractCalls :: Counts (element) => element . fmt (f) , SignatureBridgeContractCalls :: ResourceIDToHandlerAddress (element) => element . fmt (f) , SignatureBridgeContractCalls :: AdminSetResourceWithSignature (element) => element . fmt (f) , SignatureBridgeContractCalls :: AverageSessionLengthInMillisecs (element) => element . fmt (f) , SignatureBridgeContractCalls :: CurrentVotingPeriod (element) => element . fmt (f) , SignatureBridgeContractCalls :: ExecuteProposalWithSignature (element) => element . fmt (f) , SignatureBridgeContractCalls :: GetChainId (element) => element . fmt (f) , SignatureBridgeContractCalls :: GetChainIdType (element) => element . fmt (f) , SignatureBridgeContractCalls :: Governor (element) => element . fmt (f) , SignatureBridgeContractCalls :: IsGovernor (element) => element . fmt (f) , SignatureBridgeContractCalls :: IsSignatureFromGovernor (element) => element . fmt (f) , SignatureBridgeContractCalls :: LastGovernorUpdateTime (element) => element . fmt (f) , SignatureBridgeContractCalls :: NumOfProposers (element) => element . fmt (f) , SignatureBridgeContractCalls :: Paused (element) => element . fmt (f) , SignatureBridgeContractCalls :: ProposalNonce (element) => element . fmt (f) , SignatureBridgeContractCalls :: ProposerSetRoot (element) => element . fmt (f) , SignatureBridgeContractCalls :: ProposerSetUpdateNonce (element) => element . fmt (f) , SignatureBridgeContractCalls :: Recover (element) => element . fmt (f) , SignatureBridgeContractCalls :: RefreshNonce (element) => element . fmt (f) , SignatureBridgeContractCalls :: RenounceOwnership (element) => element . fmt (f) , SignatureBridgeContractCalls :: SessionLengthMultiplier (element) => element . fmt (f) , SignatureBridgeContractCalls :: TransferOwnership (element) => element . fmt (f) , SignatureBridgeContractCalls :: TransferOwnershipWithSignaturePubKey (element) => element . fmt (f) , SignatureBridgeContractCalls :: UpdateProposerSetData (element) => element . fmt (f) , SignatureBridgeContractCalls :: VoteInFavorForceSetGovernor (element) => element . fmt (f) }
+        }
+    }
+    impl ::std::convert::From<EvmChainIdTypeCall> for SignatureBridgeContractCalls {
+        fn from(var: EvmChainIdTypeCall) -> Self {
+            SignatureBridgeContractCalls::EvmChainIdType(var)
         }
     }
     impl ::std::convert::From<CountsCall> for SignatureBridgeContractCalls {
@@ -765,13 +1041,6 @@ mod signaturebridgecontract_mod {
             SignatureBridgeContractCalls::ResourceIDToHandlerAddress(var)
         }
     }
-    impl ::std::convert::From<AdminMigrateBridgeWithSignatureCall>
-        for SignatureBridgeContractCalls
-    {
-        fn from(var: AdminMigrateBridgeWithSignatureCall) -> Self {
-            SignatureBridgeContractCalls::AdminMigrateBridgeWithSignature(var)
-        }
-    }
     impl ::std::convert::From<AdminSetResourceWithSignatureCall>
         for SignatureBridgeContractCalls
     {
@@ -779,9 +1048,18 @@ mod signaturebridgecontract_mod {
             SignatureBridgeContractCalls::AdminSetResourceWithSignature(var)
         }
     }
-    impl ::std::convert::From<CheckPubKeyCall> for SignatureBridgeContractCalls {
-        fn from(var: CheckPubKeyCall) -> Self {
-            SignatureBridgeContractCalls::CheckPubKey(var)
+    impl ::std::convert::From<AverageSessionLengthInMillisecsCall>
+        for SignatureBridgeContractCalls
+    {
+        fn from(var: AverageSessionLengthInMillisecsCall) -> Self {
+            SignatureBridgeContractCalls::AverageSessionLengthInMillisecs(var)
+        }
+    }
+    impl ::std::convert::From<CurrentVotingPeriodCall>
+        for SignatureBridgeContractCalls
+    {
+        fn from(var: CurrentVotingPeriodCall) -> Self {
+            SignatureBridgeContractCalls::CurrentVotingPeriod(var)
         }
     }
     impl ::std::convert::From<ExecuteProposalWithSignatureCall>
@@ -794,6 +1072,11 @@ mod signaturebridgecontract_mod {
     impl ::std::convert::From<GetChainIdCall> for SignatureBridgeContractCalls {
         fn from(var: GetChainIdCall) -> Self {
             SignatureBridgeContractCalls::GetChainId(var)
+        }
+    }
+    impl ::std::convert::From<GetChainIdTypeCall> for SignatureBridgeContractCalls {
+        fn from(var: GetChainIdTypeCall) -> Self {
+            SignatureBridgeContractCalls::GetChainIdType(var)
         }
     }
     impl ::std::convert::From<GovernorCall> for SignatureBridgeContractCalls {
@@ -813,14 +1096,50 @@ mod signaturebridgecontract_mod {
             SignatureBridgeContractCalls::IsSignatureFromGovernor(var)
         }
     }
+    impl ::std::convert::From<LastGovernorUpdateTimeCall>
+        for SignatureBridgeContractCalls
+    {
+        fn from(var: LastGovernorUpdateTimeCall) -> Self {
+            SignatureBridgeContractCalls::LastGovernorUpdateTime(var)
+        }
+    }
+    impl ::std::convert::From<NumOfProposersCall> for SignatureBridgeContractCalls {
+        fn from(var: NumOfProposersCall) -> Self {
+            SignatureBridgeContractCalls::NumOfProposers(var)
+        }
+    }
     impl ::std::convert::From<PausedCall> for SignatureBridgeContractCalls {
         fn from(var: PausedCall) -> Self {
             SignatureBridgeContractCalls::Paused(var)
         }
     }
+    impl ::std::convert::From<ProposalNonceCall> for SignatureBridgeContractCalls {
+        fn from(var: ProposalNonceCall) -> Self {
+            SignatureBridgeContractCalls::ProposalNonce(var)
+        }
+    }
+    impl ::std::convert::From<ProposerSetRootCall>
+        for SignatureBridgeContractCalls
+    {
+        fn from(var: ProposerSetRootCall) -> Self {
+            SignatureBridgeContractCalls::ProposerSetRoot(var)
+        }
+    }
+    impl ::std::convert::From<ProposerSetUpdateNonceCall>
+        for SignatureBridgeContractCalls
+    {
+        fn from(var: ProposerSetUpdateNonceCall) -> Self {
+            SignatureBridgeContractCalls::ProposerSetUpdateNonce(var)
+        }
+    }
     impl ::std::convert::From<RecoverCall> for SignatureBridgeContractCalls {
         fn from(var: RecoverCall) -> Self {
             SignatureBridgeContractCalls::Recover(var)
+        }
+    }
+    impl ::std::convert::From<RefreshNonceCall> for SignatureBridgeContractCalls {
+        fn from(var: RefreshNonceCall) -> Self {
+            SignatureBridgeContractCalls::RefreshNonce(var)
         }
     }
     impl ::std::convert::From<RenounceOwnershipCall>
@@ -830,18 +1149,18 @@ mod signaturebridgecontract_mod {
             SignatureBridgeContractCalls::RenounceOwnership(var)
         }
     }
+    impl ::std::convert::From<SessionLengthMultiplierCall>
+        for SignatureBridgeContractCalls
+    {
+        fn from(var: SessionLengthMultiplierCall) -> Self {
+            SignatureBridgeContractCalls::SessionLengthMultiplier(var)
+        }
+    }
     impl ::std::convert::From<TransferOwnershipCall>
         for SignatureBridgeContractCalls
     {
         fn from(var: TransferOwnershipCall) -> Self {
             SignatureBridgeContractCalls::TransferOwnership(var)
-        }
-    }
-    impl ::std::convert::From<TransferOwnershipWithSignatureCall>
-        for SignatureBridgeContractCalls
-    {
-        fn from(var: TransferOwnershipWithSignatureCall) -> Self {
-            SignatureBridgeContractCalls::TransferOwnershipWithSignature(var)
         }
     }
     impl ::std::convert::From<TransferOwnershipWithSignaturePubKeyCall>
@@ -853,9 +1172,27 @@ mod signaturebridgecontract_mod {
             )
         }
     }
-    impl ::std::convert::From<VerifyCall> for SignatureBridgeContractCalls {
-        fn from(var: VerifyCall) -> Self {
-            SignatureBridgeContractCalls::Verify(var)
+    impl ::std::convert::From<UpdateProposerSetDataCall>
+        for SignatureBridgeContractCalls
+    {
+        fn from(var: UpdateProposerSetDataCall) -> Self {
+            SignatureBridgeContractCalls::UpdateProposerSetData(var)
         }
+    }
+    impl ::std::convert::From<VoteInFavorForceSetGovernorCall>
+        for SignatureBridgeContractCalls
+    {
+        fn from(var: VoteInFavorForceSetGovernorCall) -> Self {
+            SignatureBridgeContractCalls::VoteInFavorForceSetGovernor(var)
+        }
+    }
+    #[doc = "`Vote(uint32,bytes32[],address)`"]
+    #[derive(
+        Clone, Debug, Default, Eq, PartialEq, ethers :: contract :: EthAbiType,
+    )]
+    pub struct Vote {
+        pub leaf_index: u32,
+        pub sibling_path_nodes: Vec<[u8; 32]>,
+        pub proposed_governor: ethers::core::types::Address,
     }
 }

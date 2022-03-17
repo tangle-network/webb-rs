@@ -63,14 +63,6 @@ mod evm {
         )
     }
 
-    pub fn build_protocol_solidity_bridge() -> Result<(), Box<dyn Error>> {
-        parse_and_write_abigen(
-            "contracts/protocol-solidity/Bridge.json",
-            "src/evm/contract/protocol_solidity/bridge.rs",
-            "BridgeContract",
-        )
-    }
-
     pub fn build_protocol_solidity_signature_bridge(
     ) -> Result<(), Box<dyn Error>> {
         parse_and_write_abigen(
@@ -150,7 +142,6 @@ fn main() -> Result<(), Box<dyn Error>> {
         evm::build_protocol_solidity_anchor()?;
         evm::build_protocol_solidity_anchor_proxy()?;
         evm::build_protocol_solidity_anchor_handler()?;
-        evm::build_protocol_solidity_bridge()?;
         evm::build_protocol_solidity_signature_bridge()?;
         run_cargo_fmt()?;
     }
