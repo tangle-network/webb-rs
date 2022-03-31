@@ -77,7 +77,10 @@ impl TypedChainId {
     /// Length of the [`TypedChainId`] in bytes.
     pub const LENGTH: usize = 6;
 
-    /// Get the chain id as a `u32`.
+    /// Get the chain id as a `u64`. This represents
+    /// the typed chain ID that should be used to differentiate
+    /// between differently typed chains with the same underlying
+    /// chain id.
     #[must_use]
     pub fn chain_id(&self) -> u64 {
         let mut buf: [u8; 8] = [0u8; 8];
@@ -85,7 +88,8 @@ impl TypedChainId {
         u64::from_be_bytes(buf)
     }
 
-    /// Get the chain id as a `u32`.
+    /// Get the chain id as a `u32`. This represents
+    /// the un-typed underlying chain ID for the chain.
     #[must_use]
     pub const fn underlying_chain_id(&self) -> u32 {
         match self {
