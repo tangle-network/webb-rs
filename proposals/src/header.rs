@@ -195,20 +195,7 @@ impl From<[u8; Self::LENGTH + 2]> for TypedChainId {
 
 impl From<u64> for TypedChainId {
     fn from(val: u64) -> Self {
-        let bytes = u64::to_be_bytes(val);
-        let ty = [bytes[2], bytes[3]];
-        let ty = u16::from_be_bytes(ty);
-        let id = u32::from_be_bytes([bytes[4], bytes[5], bytes[6], bytes[7]]);
-        match ty {
-            0x0100 => TypedChainId::Evm(id),
-            0x0200 => TypedChainId::Substrate(id),
-            0x0301 => TypedChainId::PolkadotParachain(id),
-            0x0302 => TypedChainId::KusamaParachain(id),
-            0x0303 => TypedChainId::RococoParachain(id),
-            0x0400 => TypedChainId::Cosmos(id),
-            0x0500 => TypedChainId::Solana(id),
-            _ => Self::None,
-        }
+        TypedChainId::from(val.to_be_bytes())
     }
 }
 
