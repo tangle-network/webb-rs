@@ -77,9 +77,21 @@ impl TypedChainId {
     /// Length of the [`TypedChainId`] in bytes.
     pub const LENGTH: usize = 6;
 
-    /// Get the chain id as a `u32`.
+    /// Get the chain id as a `u64`. This represents
+    /// the typed chain ID that should be used to differentiate
+    /// between differently typed chains with the same underlying
+    /// chain id.
     #[must_use]
-    pub const fn chain_id(&self) -> u32 {
+    pub fn chain_id(&self) -> u64 {
+        let mut buf: [u8; 8] = [0u8; 8];
+        buf[2..8].copy_from_slice(&self.to_bytes());
+        u64::from_be_bytes(buf)
+    }
+
+    /// Get the chain id as a `u32`. This represents
+    /// the un-typed underlying chain ID for the chain.
+    #[must_use]
+    pub const fn underlying_chain_id(&self) -> u32 {
         match self {
             TypedChainId::Evm(id)
             | TypedChainId::Substrate(id)
@@ -160,6 +172,30 @@ impl From<[u8; Self::LENGTH]> for TypedChainId {
             0x0500 => TypedChainId::Solana(id),
             _ => Self::None,
         }
+    }
+}
+
+impl From<[u8; Self::LENGTH + 2]> for TypedChainId {
+    fn from(bytes: [u8; Self::LENGTH + 2]) -> Self {
+        let ty = [bytes[2], bytes[3]];
+        let ty = u16::from_be_bytes(ty);
+        let id = u32::from_be_bytes([bytes[4], bytes[5], bytes[6], bytes[7]]);
+        match ty {
+            0x0100 => TypedChainId::Evm(id),
+            0x0200 => TypedChainId::Substrate(id),
+            0x0301 => TypedChainId::PolkadotParachain(id),
+            0x0302 => TypedChainId::KusamaParachain(id),
+            0x0303 => TypedChainId::RococoParachain(id),
+            0x0400 => TypedChainId::Cosmos(id),
+            0x0500 => TypedChainId::Solana(id),
+            _ => Self::None,
+        }
+    }
+}
+
+impl From<u64> for TypedChainId {
+    fn from(val: u64) -> Self {
+        TypedChainId::from(val.to_be_bytes())
     }
 }
 
@@ -537,6 +573,23 @@ mod tests {
             ))
         );
         assert_eq!(resource_id.typed_chain_id(), TypedChainId::Evm(4));
+        assert_eq!(resource_id.typed_chain_id().underlying_chain_id(), 4);
+        assert_eq!(resource_id.typed_chain_id().chain_id(), 1099511627780);
+    }
+
+    #[test]
+    fn from_bytes_typed_chain() {
+        let typed_chain_id = TypedChainId::Evm(4);
+        let bytes = typed_chain_id.to_bytes();
+        let mut larger_bytes = [0u8; TypedChainId::LENGTH + 2];
+        larger_bytes[2..].copy_from_slice(&bytes);
+        let typed_chain_from_larger_bytes = TypedChainId::from(larger_bytes);
+        let typed_chain_from_bytes = TypedChainId::from(bytes);
+        let typed_chain_from_u64 =
+            TypedChainId::from(typed_chain_id.chain_id());
+        assert_eq!(typed_chain_from_bytes, typed_chain_from_larger_bytes);
+        assert_eq!(typed_chain_from_bytes, typed_chain_id);
+        assert_eq!(typed_chain_from_u64, typed_chain_id);
     }
 
     #[test]
