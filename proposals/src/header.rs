@@ -1,5 +1,7 @@
 //! The Proposal Header.
 
+use crate::nonce::Nonce;
+
 /// The Proposal Target System.
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
 #[cfg_attr(
@@ -12,14 +14,6 @@ pub enum TargetSystem {
     /// Webb Protocol Merkle `TreeId` (4 bytes).
     TreeId(u32),
 }
-
-/// Proposal Nonce (4 bytes).
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Ord, PartialOrd)]
-#[cfg_attr(
-    feature = "scale",
-    derive(scale_info::TypeInfo, scale_codec::Encode, scale_codec::Decode)
-)]
-pub struct Nonce(u32);
 
 /// Proposal Target Function Signature (4 bytes).
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Ord, PartialOrd)]
