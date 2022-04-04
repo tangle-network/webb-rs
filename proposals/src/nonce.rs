@@ -1,6 +1,6 @@
-use core::ops::{Mul, Add};
+use core::ops::{Add, Mul};
 
-use num_traits::{Zero, One, CheckedMul, Saturating, Bounded};
+use num_traits::{Bounded, CheckedMul, One, Saturating, Zero};
 
 /// Proposal Nonce (4 bytes).
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Ord, PartialOrd)]
