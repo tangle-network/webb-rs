@@ -128,6 +128,8 @@ pub extern crate alloc;
 
 mod header;
 mod proposal;
+mod nonce;
 
 pub use header::*;
 pub use proposal::*;
+pub use nonce::*;
