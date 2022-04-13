@@ -3,11 +3,9 @@ members = [".", "proposals"]
 
 [package]
 name = "webb"
-version = "0.3.1"
+version = "0.3.2"
 edition = "2021"
-authors = [
-    "Webb Developers",
-]
+authors = ["Webb Developers"]
 license = "GPL-3.0"
 repository = "https://github.com/webb-tools/webb-rs"
 documentation = "https://docs.rs/webb"
@@ -27,8 +25,8 @@ build = "build.rs"
 
 [dependencies]
 # Substrate crates.
-scale = { package = "parity-scale-codec", version = "2.3.0", default-features = false, optional = true }
-subxt = { version = "0.16.0", optional = true }
+scale = { package = "parity-scale-codec", version = "3.0.0", default-features = false, optional = true }
+subxt = { version = "0.20.0", optional = true }
 async-trait = "0.1"
 rand = { version = "0.8", default-features = false, features = ["getrandom"] }
 thiserror = "1.0.26"
@@ -46,7 +44,7 @@ serde_json = { version = "1", optional = true }
 [dev-dependencies]
 tokio = { version = "^1", features = ["macros", "rt"] }
 anyhow = "^1"
-sp-keyring = "4.0.0"
+sp-keyring = "6.0.0"
 
 [build-dependencies]
 serde_json = "1"
@@ -55,12 +53,9 @@ ethers = { version = "0.6.0", default-features = false, optional = true, feature
     "legacy",
 ] }
 syn = { version = "1.0.80", optional = true }
-scale = { package = "parity-scale-codec", version = "2.3.0", default-features = false, optional = true }
-frame-metadata = { version = "14.0.0", optional = true, features = [
-    "v14",
-    "std",
-] }
-subxt-codegen = { version = "0.16.0", optional = true }
+scale = { package = "parity-scale-codec", version = "3.0.0", default-features = false, optional = true }
+frame-metadata = { version = "15.0.0", optional = true }
+subxt-codegen = { version = "0.20.0", optional = true }
 
 [features]
 default = ["substrate-runtime", "evm-runtime"]

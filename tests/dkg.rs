@@ -1,8 +1,10 @@
-use subxt::{DefaultConfig, DefaultExtra};
-use webb::substrate::dkg_runtime::api::runtime_types::webb_proposals::header::{TypedChainId, Nonce, ResourceId};
+use subxt::{DefaultConfig, SubstrateExtrinsicParams};
+use webb::substrate::dkg_runtime::api::runtime_types::webb_proposals::header::{TypedChainId, ResourceId};
+use webb::substrate::dkg_runtime::api::runtime_types::webb_proposals::nonce::Nonce;
 use webb::substrate::dkg_runtime::api::{dkg_proposals, RuntimeApi};
 
-type DKGRuntimeApi = RuntimeApi<DefaultConfig, DefaultExtra<DefaultConfig>>;
+type DKGRuntimeApi =
+    RuntimeApi<DefaultConfig, SubstrateExtrinsicParams<DefaultConfig>>;
 
 const URL: &str = "ws://localhost:9944";
 
@@ -23,7 +25,7 @@ async fn read_chain_nonce() {
     let result = api
         .storage()
         .dkg_proposals()
-        .chain_nonces(chain_id, None)
+        .chain_nonces(&chain_id, None)
         .await
         .unwrap();
     assert_eq!(result, Some(Nonce(0)));
@@ -31,7 +33,7 @@ async fn read_chain_nonce() {
     let result = api
         .storage()
         .dkg_proposals()
-        .chain_nonces(unkonwn_chain_id, None)
+        .chain_nonces(&unkonwn_chain_id, None)
         .await
         .unwrap();
     assert_eq!(result, None);
@@ -56,12 +58,12 @@ async fn acknowledge_proposal_works() -> anyhow::Result<()> {
         .tx()
         .dkg_proposals()
         .acknowledge_proposal(nonce.clone(), src_id, r_id, prop)
-        .sign_and_submit_then_watch(&signer)
+        .sign_and_submit_then_watch_default(&signer)
         .await?
         .wait_for_finalized_success()
         .await?;
     let event = result
-        .find_first_event::<dkg_proposals::events::ProposalSucceeded>()?
+        .find_first::<dkg_proposals::events::ProposalSucceeded>()?
         .expect("event not found");
     assert_eq!(event.proposal_nonce, nonce);
     Ok(())
