@@ -29,19 +29,19 @@ mod evm {
         Ok(())
     }
 
-    pub fn build_tornado_contract() -> Result<(), Box<dyn Error>> {
-        parse_and_write_abigen(
-            "contracts/tornado/Tornado.json",
-            "src/evm/contract/tornado/contract.rs",
-            "TornadoContract",
-        )
-    }
-
     pub fn build_protocol_solidity_anchor() -> Result<(), Box<dyn Error>> {
         parse_and_write_abigen(
             "contracts/protocol-solidity/FixedDepositAnchor.json",
             "src/evm/contract/protocol_solidity/fixed_deposit_anchor.rs",
             "FixedDepositAnchorContract",
+        )
+    }
+
+    pub fn build_protocol_solidity_vanchor() -> Result<(), Box<dyn Error>> {
+        parse_and_write_abigen(
+            "contracts/protocol-solidity/VAnchor.json",
+            "src/evm/contract/protocol_solidity/variable_anchor.rs",
+            "VAnchorContract",
         )
     }
 
@@ -138,8 +138,8 @@ fn run_cargo_fmt() -> Result<(), Box<dyn Error>> {
 fn main() -> Result<(), Box<dyn Error>> {
     #[cfg(feature = "generate-contracts")]
     {
-        evm::build_tornado_contract()?;
         evm::build_protocol_solidity_anchor()?;
+        evm::build_protocol_solidity_vanchor()?;
         evm::build_protocol_solidity_anchor_proxy()?;
         evm::build_protocol_solidity_anchor_handler()?;
         evm::build_protocol_solidity_signature_bridge()?;
