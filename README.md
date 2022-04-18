@@ -10,19 +10,51 @@
 
 ### Downloading metadata from a Substrate node
 
-Use the [`subxt-cli`](./cli) tool to download the metadata for your target runtime from a node.
+Use the [`subxt-cli`](https://lib.rs/crates/subxt-cli) tool to download the metadata for your target runtime from a node.
 
 1. Install:
 ```bash
 cargo install subxt-cli
 ```
-2. Save the encoded metadata to a file:
+
+2. To Save the metadata of `protocol-substrate`:
+Run the release build of the `protocol-substrate` node, then on another terminal run:
+
 ```bash
-subxt metadata -f bytes > metadata.scale
+subxt metadata -f bytes > ./metadata/protocol-substrate-runtime.scale
 ```
 
-This defaults to querying the metadata of a locally running node on the default `http://localhost:9933/`. If querying
+3. To Save the metadata of `dkg`:
+Run the release build of the `dkg` node, then on another terminal run:
+
+```bash
+subxt metadata -f bytes > ./metadata/dkg-runtime.scale
+```
+
+Same goes for any future runtimes.
+
+> Note: This defaults to querying the metadata of a locally running node on the default `http://localhost:9933/`. If querying
 a different node then the `metadata` command accepts a `--url` argument.
+
+4. Generating the rust code from the metadata:
+
+```bash
+cargo build --features generate-substrate
+```
+
+> Tip: See the [build.rs](./build.rs) file to see how everything is being generated.
+
+
+### Generating EVM Contracts
+
+1. Update any contracts inside the [contracts](./contracts) directory.
+2. Run
+```bash
+cargo build --features generate-contracts
+```
+
+> Tip: See the [build.rs](./build.rs) file to see how everything is being generated.
+
 
 ## Safety
 
