@@ -8,6 +8,22 @@
 
 <br />
 
+### Downloading metadata from a Substrate node
+
+Use the [`subxt-cli`](./cli) tool to download the metadata for your target runtime from a node.
+
+1. Install:
+```bash
+cargo install subxt-cli
+```
+2. Save the encoded metadata to a file:
+```bash
+subxt metadata -f bytes > metadata.scale
+```
+
+This defaults to querying the metadata of a locally running node on the default `http://localhost:9933/`. If querying
+a different node then the `metadata` command accepts a `--url` argument.
+
 ## Safety
 
 This crate uses `#![deny(unsafe_code)]` to ensure everything is implemented in
