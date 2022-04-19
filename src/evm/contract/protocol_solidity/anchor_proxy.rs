@@ -157,6 +157,8 @@ mod anchorproxycontract_mod {
         PartialEq,
         ethers :: contract :: EthEvent,
         ethers :: contract :: EthDisplay,
+        serde :: Serialize,
+        serde :: Deserialize,
     )]
     #[ethevent(
         name = "AnchorProxyDeposit",
@@ -177,6 +179,8 @@ mod anchorproxycontract_mod {
         PartialEq,
         ethers :: contract :: EthEvent,
         ethers :: contract :: EthDisplay,
+        serde :: Serialize,
+        serde :: Deserialize,
     )]
     #[ethevent(name = "EncryptedNote", abi = "EncryptedNote(address,bytes)")]
     pub struct EncryptedNoteFilter {
@@ -192,6 +196,8 @@ mod anchorproxycontract_mod {
         PartialEq,
         ethers :: contract :: EthEvent,
         ethers :: contract :: EthDisplay,
+        serde :: Serialize,
+        serde :: Deserialize,
     )]
     #[ethevent(
         name = "InstanceStateUpdated",
@@ -261,6 +267,8 @@ mod anchorproxycontract_mod {
         PartialEq,
         ethers :: contract :: EthCall,
         ethers :: contract :: EthDisplay,
+        serde :: Serialize,
+        serde :: Deserialize,
     )]
     #[ethcall(name = "anchorTrees", abi = "anchorTrees()")]
     pub struct AnchorTreesCall;
@@ -273,6 +281,8 @@ mod anchorproxycontract_mod {
         PartialEq,
         ethers :: contract :: EthCall,
         ethers :: contract :: EthDisplay,
+        serde :: Serialize,
+        serde :: Deserialize,
     )]
     #[ethcall(name = "backupNotes", abi = "backupNotes(bytes[])")]
     pub struct BackupNotesCall {
@@ -287,6 +297,8 @@ mod anchorproxycontract_mod {
         PartialEq,
         ethers :: contract :: EthCall,
         ethers :: contract :: EthDisplay,
+        serde :: Serialize,
+        serde :: Deserialize,
     )]
     #[ethcall(name = "deposit", abi = "deposit(address,bytes32,bytes)")]
     pub struct DepositCall {
@@ -303,6 +315,8 @@ mod anchorproxycontract_mod {
         PartialEq,
         ethers :: contract :: EthCall,
         ethers :: contract :: EthDisplay,
+        serde :: Serialize,
+        serde :: Deserialize,
     )]
     #[ethcall(name = "governance", abi = "governance()")]
     pub struct GovernanceCall;
@@ -315,6 +329,8 @@ mod anchorproxycontract_mod {
         PartialEq,
         ethers :: contract :: EthCall,
         ethers :: contract :: EthDisplay,
+        serde :: Serialize,
+        serde :: Deserialize,
     )]
     #[ethcall(name = "instances", abi = "instances(address)")]
     pub struct InstancesCall(pub ethers::core::types::Address);
@@ -327,6 +343,8 @@ mod anchorproxycontract_mod {
         PartialEq,
         ethers :: contract :: EthCall,
         ethers :: contract :: EthDisplay,
+        serde :: Serialize,
+        serde :: Deserialize,
     )]
     #[ethcall(
         name = "withdraw",
@@ -463,7 +481,14 @@ mod anchorproxycontract_mod {
     }
     #[doc = "`ExtData(bytes32,address,address,uint256,uint256)`"]
     #[derive(
-        Clone, Debug, Default, Eq, PartialEq, ethers :: contract :: EthAbiType,
+        Clone,
+        Debug,
+        Default,
+        Eq,
+        PartialEq,
+        ethers :: contract :: EthAbiType,
+        serde :: Serialize,
+        serde :: Deserialize,
     )]
     pub struct ExtData {
         pub refresh_commitment: [u8; 32],
@@ -474,7 +499,14 @@ mod anchorproxycontract_mod {
     }
     #[doc = "`Proof(bytes,bytes,bytes32,bytes32)`"]
     #[derive(
-        Clone, Debug, Default, Eq, PartialEq, ethers :: contract :: EthAbiType,
+        Clone,
+        Debug,
+        Default,
+        Eq,
+        PartialEq,
+        ethers :: contract :: EthAbiType,
+        serde :: Serialize,
+        serde :: Deserialize,
     )]
     pub struct Proof {
         pub proof: ethers::core::types::Bytes,

@@ -177,6 +177,8 @@ mod anchorhandlercontract_mod {
         PartialEq,
         ethers :: contract :: EthCall,
         ethers :: contract :: EthDisplay,
+        serde :: Serialize,
+        serde :: Deserialize,
     )]
     #[ethcall(name = "_bridgeAddress", abi = "_bridgeAddress()")]
     pub struct BridgeAddressCall;
@@ -189,6 +191,8 @@ mod anchorhandlercontract_mod {
         PartialEq,
         ethers :: contract :: EthCall,
         ethers :: contract :: EthDisplay,
+        serde :: Serialize,
+        serde :: Deserialize,
     )]
     #[ethcall(
         name = "_contractAddressToResourceID",
@@ -206,6 +210,8 @@ mod anchorhandlercontract_mod {
         PartialEq,
         ethers :: contract :: EthCall,
         ethers :: contract :: EthDisplay,
+        serde :: Serialize,
+        serde :: Deserialize,
     )]
     #[ethcall(name = "_contractWhitelist", abi = "_contractWhitelist(address)")]
     pub struct ContractWhitelistCall(pub ethers::core::types::Address);
@@ -218,6 +224,8 @@ mod anchorhandlercontract_mod {
         PartialEq,
         ethers :: contract :: EthCall,
         ethers :: contract :: EthDisplay,
+        serde :: Serialize,
+        serde :: Deserialize,
     )]
     #[ethcall(name = "_counts", abi = "_counts(uint256)")]
     pub struct CountsCall(pub ethers::core::types::U256);
@@ -230,6 +238,8 @@ mod anchorhandlercontract_mod {
         PartialEq,
         ethers :: contract :: EthCall,
         ethers :: contract :: EthDisplay,
+        serde :: Serialize,
+        serde :: Deserialize,
     )]
     #[ethcall(
         name = "_resourceIDToContractAddress",
@@ -245,6 +255,8 @@ mod anchorhandlercontract_mod {
         PartialEq,
         ethers :: contract :: EthCall,
         ethers :: contract :: EthDisplay,
+        serde :: Serialize,
+        serde :: Deserialize,
     )]
     #[ethcall(name = "_updateRecords", abi = "_updateRecords(uint256,uint256)")]
     pub struct UpdateRecordsCall(
@@ -260,6 +272,8 @@ mod anchorhandlercontract_mod {
         PartialEq,
         ethers :: contract :: EthCall,
         ethers :: contract :: EthDisplay,
+        serde :: Serialize,
+        serde :: Deserialize,
     )]
     #[ethcall(name = "executeProposal", abi = "executeProposal(bytes32,bytes)")]
     pub struct ExecuteProposalCall {
@@ -275,6 +289,8 @@ mod anchorhandlercontract_mod {
         PartialEq,
         ethers :: contract :: EthCall,
         ethers :: contract :: EthDisplay,
+        serde :: Serialize,
+        serde :: Deserialize,
     )]
     #[ethcall(
         name = "getUpdateRecord",
@@ -293,6 +309,8 @@ mod anchorhandlercontract_mod {
         PartialEq,
         ethers :: contract :: EthCall,
         ethers :: contract :: EthDisplay,
+        serde :: Serialize,
+        serde :: Deserialize,
     )]
     #[ethcall(name = "migrateBridge", abi = "migrateBridge(address)")]
     pub struct MigrateBridgeCall {
@@ -307,6 +325,8 @@ mod anchorhandlercontract_mod {
         PartialEq,
         ethers :: contract :: EthCall,
         ethers :: contract :: EthDisplay,
+        serde :: Serialize,
+        serde :: Deserialize,
     )]
     #[ethcall(name = "setResource", abi = "setResource(bytes32,address)")]
     pub struct SetResourceCall {
@@ -523,7 +543,14 @@ mod anchorhandlercontract_mod {
     }
     #[doc = "`UpdateRecord(address,uint256,bytes32,bytes32,uint256)`"]
     #[derive(
-        Clone, Debug, Default, Eq, PartialEq, ethers :: contract :: EthAbiType,
+        Clone,
+        Debug,
+        Default,
+        Eq,
+        PartialEq,
+        ethers :: contract :: EthAbiType,
+        serde :: Serialize,
+        serde :: Deserialize,
     )]
     pub struct UpdateRecord {
         pub token_address: ethers::core::types::Address,
