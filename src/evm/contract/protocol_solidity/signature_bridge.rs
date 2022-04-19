@@ -375,6 +375,8 @@ mod signaturebridgecontract_mod {
         PartialEq,
         ethers :: contract :: EthEvent,
         ethers :: contract :: EthDisplay,
+        serde :: Serialize,
+        serde :: Deserialize,
     )]
     #[ethevent(
         name = "GovernanceOwnershipTransferred",
@@ -394,6 +396,8 @@ mod signaturebridgecontract_mod {
         PartialEq,
         ethers :: contract :: EthEvent,
         ethers :: contract :: EthDisplay,
+        serde :: Serialize,
+        serde :: Deserialize,
     )]
     #[ethevent(name = "Paused", abi = "Paused(address)")]
     pub struct PausedFilter {
@@ -407,6 +411,8 @@ mod signaturebridgecontract_mod {
         PartialEq,
         ethers :: contract :: EthEvent,
         ethers :: contract :: EthDisplay,
+        serde :: Serialize,
+        serde :: Deserialize,
     )]
     #[ethevent(name = "RecoveredAddress", abi = "RecoveredAddress(address)")]
     pub struct RecoveredAddressFilter {
@@ -421,6 +427,8 @@ mod signaturebridgecontract_mod {
         PartialEq,
         ethers :: contract :: EthEvent,
         ethers :: contract :: EthDisplay,
+        serde :: Serialize,
+        serde :: Deserialize,
     )]
     #[ethevent(name = "Unpaused", abi = "Unpaused(address)")]
     pub struct UnpausedFilter {
@@ -448,9 +456,7 @@ mod signaturebridgecontract_mod {
                 return Ok (SignatureBridgeContractEvents :: GovernanceOwnershipTransferredFilter (decoded));
             }
             if let Ok(decoded) = PausedFilter::decode_log(log) {
-                return Ok(SignatureBridgeContractEvents::PausedFilter(
-                    decoded,
-                ));
+                return Ok(SignatureBridgeContractEvents::PausedFilter(decoded));
             }
             if let Ok(decoded) = RecoveredAddressFilter::decode_log(log) {
                 return Ok(
@@ -481,6 +487,8 @@ mod signaturebridgecontract_mod {
         PartialEq,
         ethers :: contract :: EthCall,
         ethers :: contract :: EthDisplay,
+        serde :: Serialize,
+        serde :: Deserialize,
     )]
     #[ethcall(name = "EVM_CHAIN_ID_TYPE", abi = "EVM_CHAIN_ID_TYPE()")]
     pub struct EvmChainIdTypeCall;
@@ -493,6 +501,8 @@ mod signaturebridgecontract_mod {
         PartialEq,
         ethers :: contract :: EthCall,
         ethers :: contract :: EthDisplay,
+        serde :: Serialize,
+        serde :: Deserialize,
     )]
     #[ethcall(name = "_counts", abi = "_counts(uint256)")]
     pub struct CountsCall(pub ethers::core::types::U256);
@@ -505,6 +515,8 @@ mod signaturebridgecontract_mod {
         PartialEq,
         ethers :: contract :: EthCall,
         ethers :: contract :: EthDisplay,
+        serde :: Serialize,
+        serde :: Deserialize,
     )]
     #[ethcall(
         name = "_resourceIDToHandlerAddress",
@@ -520,6 +532,8 @@ mod signaturebridgecontract_mod {
         PartialEq,
         ethers :: contract :: EthCall,
         ethers :: contract :: EthDisplay,
+        serde :: Serialize,
+        serde :: Deserialize,
     )]
     #[ethcall(
         name = "adminSetResourceWithSignature",
@@ -543,6 +557,8 @@ mod signaturebridgecontract_mod {
         PartialEq,
         ethers :: contract :: EthCall,
         ethers :: contract :: EthDisplay,
+        serde :: Serialize,
+        serde :: Deserialize,
     )]
     #[ethcall(
         name = "averageSessionLengthInMillisecs",
@@ -558,6 +574,8 @@ mod signaturebridgecontract_mod {
         PartialEq,
         ethers :: contract :: EthCall,
         ethers :: contract :: EthDisplay,
+        serde :: Serialize,
+        serde :: Deserialize,
     )]
     #[ethcall(name = "currentVotingPeriod", abi = "currentVotingPeriod()")]
     pub struct CurrentVotingPeriodCall;
@@ -570,6 +588,8 @@ mod signaturebridgecontract_mod {
         PartialEq,
         ethers :: contract :: EthCall,
         ethers :: contract :: EthDisplay,
+        serde :: Serialize,
+        serde :: Deserialize,
     )]
     #[ethcall(
         name = "executeProposalWithSignature",
@@ -588,6 +608,8 @@ mod signaturebridgecontract_mod {
         PartialEq,
         ethers :: contract :: EthCall,
         ethers :: contract :: EthDisplay,
+        serde :: Serialize,
+        serde :: Deserialize,
     )]
     #[ethcall(name = "getChainId", abi = "getChainId()")]
     pub struct GetChainIdCall;
@@ -600,6 +622,8 @@ mod signaturebridgecontract_mod {
         PartialEq,
         ethers :: contract :: EthCall,
         ethers :: contract :: EthDisplay,
+        serde :: Serialize,
+        serde :: Deserialize,
     )]
     #[ethcall(name = "getChainIdType", abi = "getChainIdType()")]
     pub struct GetChainIdTypeCall;
@@ -612,6 +636,8 @@ mod signaturebridgecontract_mod {
         PartialEq,
         ethers :: contract :: EthCall,
         ethers :: contract :: EthDisplay,
+        serde :: Serialize,
+        serde :: Deserialize,
     )]
     #[ethcall(name = "governor", abi = "governor()")]
     pub struct GovernorCall;
@@ -624,6 +650,8 @@ mod signaturebridgecontract_mod {
         PartialEq,
         ethers :: contract :: EthCall,
         ethers :: contract :: EthDisplay,
+        serde :: Serialize,
+        serde :: Deserialize,
     )]
     #[ethcall(name = "isGovernor", abi = "isGovernor()")]
     pub struct IsGovernorCall;
@@ -636,6 +664,8 @@ mod signaturebridgecontract_mod {
         PartialEq,
         ethers :: contract :: EthCall,
         ethers :: contract :: EthDisplay,
+        serde :: Serialize,
+        serde :: Deserialize,
     )]
     #[ethcall(
         name = "isSignatureFromGovernor",
@@ -654,6 +684,8 @@ mod signaturebridgecontract_mod {
         PartialEq,
         ethers :: contract :: EthCall,
         ethers :: contract :: EthDisplay,
+        serde :: Serialize,
+        serde :: Deserialize,
     )]
     #[ethcall(
         name = "lastGovernorUpdateTime",
@@ -669,6 +701,8 @@ mod signaturebridgecontract_mod {
         PartialEq,
         ethers :: contract :: EthCall,
         ethers :: contract :: EthDisplay,
+        serde :: Serialize,
+        serde :: Deserialize,
     )]
     #[ethcall(name = "numOfProposers", abi = "numOfProposers()")]
     pub struct NumOfProposersCall;
@@ -681,6 +715,8 @@ mod signaturebridgecontract_mod {
         PartialEq,
         ethers :: contract :: EthCall,
         ethers :: contract :: EthDisplay,
+        serde :: Serialize,
+        serde :: Deserialize,
     )]
     #[ethcall(name = "paused", abi = "paused()")]
     pub struct PausedCall;
@@ -693,6 +729,8 @@ mod signaturebridgecontract_mod {
         PartialEq,
         ethers :: contract :: EthCall,
         ethers :: contract :: EthDisplay,
+        serde :: Serialize,
+        serde :: Deserialize,
     )]
     #[ethcall(name = "proposalNonce", abi = "proposalNonce()")]
     pub struct ProposalNonceCall;
@@ -705,6 +743,8 @@ mod signaturebridgecontract_mod {
         PartialEq,
         ethers :: contract :: EthCall,
         ethers :: contract :: EthDisplay,
+        serde :: Serialize,
+        serde :: Deserialize,
     )]
     #[ethcall(name = "proposerSetRoot", abi = "proposerSetRoot()")]
     pub struct ProposerSetRootCall;
@@ -717,6 +757,8 @@ mod signaturebridgecontract_mod {
         PartialEq,
         ethers :: contract :: EthCall,
         ethers :: contract :: EthDisplay,
+        serde :: Serialize,
+        serde :: Deserialize,
     )]
     #[ethcall(
         name = "proposerSetUpdateNonce",
@@ -732,6 +774,8 @@ mod signaturebridgecontract_mod {
         PartialEq,
         ethers :: contract :: EthCall,
         ethers :: contract :: EthDisplay,
+        serde :: Serialize,
+        serde :: Deserialize,
     )]
     #[ethcall(name = "recover", abi = "recover(bytes,bytes)")]
     pub struct RecoverCall {
@@ -747,6 +791,8 @@ mod signaturebridgecontract_mod {
         PartialEq,
         ethers :: contract :: EthCall,
         ethers :: contract :: EthDisplay,
+        serde :: Serialize,
+        serde :: Deserialize,
     )]
     #[ethcall(name = "refreshNonce", abi = "refreshNonce()")]
     pub struct RefreshNonceCall;
@@ -759,6 +805,8 @@ mod signaturebridgecontract_mod {
         PartialEq,
         ethers :: contract :: EthCall,
         ethers :: contract :: EthDisplay,
+        serde :: Serialize,
+        serde :: Deserialize,
     )]
     #[ethcall(name = "renounceOwnership", abi = "renounceOwnership()")]
     pub struct RenounceOwnershipCall;
@@ -771,6 +819,8 @@ mod signaturebridgecontract_mod {
         PartialEq,
         ethers :: contract :: EthCall,
         ethers :: contract :: EthDisplay,
+        serde :: Serialize,
+        serde :: Deserialize,
     )]
     #[ethcall(
         name = "sessionLengthMultiplier",
@@ -786,6 +836,8 @@ mod signaturebridgecontract_mod {
         PartialEq,
         ethers :: contract :: EthCall,
         ethers :: contract :: EthDisplay,
+        serde :: Serialize,
+        serde :: Deserialize,
     )]
     #[ethcall(
         name = "transferOwnership",
@@ -804,6 +856,8 @@ mod signaturebridgecontract_mod {
         PartialEq,
         ethers :: contract :: EthCall,
         ethers :: contract :: EthDisplay,
+        serde :: Serialize,
+        serde :: Deserialize,
     )]
     #[ethcall(
         name = "transferOwnershipWithSignaturePubKey",
@@ -823,6 +877,8 @@ mod signaturebridgecontract_mod {
         PartialEq,
         ethers :: contract :: EthCall,
         ethers :: contract :: EthDisplay,
+        serde :: Serialize,
+        serde :: Deserialize,
     )]
     #[ethcall(
         name = "updateProposerSetData",
@@ -844,6 +900,8 @@ mod signaturebridgecontract_mod {
         PartialEq,
         ethers :: contract :: EthCall,
         ethers :: contract :: EthDisplay,
+        serde :: Serialize,
+        serde :: Deserialize,
     )]
     #[ethcall(
         name = "voteInFavorForceSetGovernor",
@@ -961,9 +1019,7 @@ mod signaturebridgecontract_mod {
                     data.as_ref(),
                 )
             {
-                return Ok(SignatureBridgeContractCalls::ProposalNonce(
-                    decoded,
-                ));
+                return Ok(SignatureBridgeContractCalls::ProposalNonce(decoded));
             }
             if let Ok(decoded) =
                 <ProposerSetRootCall as ethers::core::abi::AbiDecode>::decode(
@@ -1188,7 +1244,14 @@ mod signaturebridgecontract_mod {
     }
     #[doc = "`Vote(uint32,bytes32[],address)`"]
     #[derive(
-        Clone, Debug, Default, Eq, PartialEq, ethers :: contract :: EthAbiType,
+        Clone,
+        Debug,
+        Default,
+        Eq,
+        PartialEq,
+        ethers :: contract :: EthAbiType,
+        serde :: Serialize,
+        serde :: Deserialize,
     )]
     pub struct Vote {
         pub leaf_index: u32,

@@ -607,6 +607,8 @@ mod fixeddepositanchorcontract_mod {
         PartialEq,
         ethers :: contract :: EthEvent,
         ethers :: contract :: EthDisplay,
+        serde :: Serialize,
+        serde :: Deserialize,
     )]
     #[ethevent(
         name = "Deposit",
@@ -628,6 +630,8 @@ mod fixeddepositanchorcontract_mod {
         PartialEq,
         ethers :: contract :: EthEvent,
         ethers :: contract :: EthDisplay,
+        serde :: Serialize,
+        serde :: Deserialize,
     )]
     #[ethevent(
         name = "EdgeAddition",
@@ -646,6 +650,8 @@ mod fixeddepositanchorcontract_mod {
         PartialEq,
         ethers :: contract :: EthEvent,
         ethers :: contract :: EthDisplay,
+        serde :: Serialize,
+        serde :: Deserialize,
     )]
     #[ethevent(
         name = "EdgeUpdate",
@@ -664,6 +670,8 @@ mod fixeddepositanchorcontract_mod {
         PartialEq,
         ethers :: contract :: EthEvent,
         ethers :: contract :: EthDisplay,
+        serde :: Serialize,
+        serde :: Deserialize,
     )]
     #[ethevent(name = "Insertion", abi = "Insertion(bytes32,uint32,uint256)")]
     pub struct InsertionFilter {
@@ -680,6 +688,8 @@ mod fixeddepositanchorcontract_mod {
         PartialEq,
         ethers :: contract :: EthEvent,
         ethers :: contract :: EthDisplay,
+        serde :: Serialize,
+        serde :: Deserialize,
     )]
     #[ethevent(name = "Refresh", abi = "Refresh(bytes32,bytes32,uint32)")]
     pub struct RefreshFilter {
@@ -696,6 +706,8 @@ mod fixeddepositanchorcontract_mod {
         PartialEq,
         ethers :: contract :: EthEvent,
         ethers :: contract :: EthDisplay,
+        serde :: Serialize,
+        serde :: Deserialize,
     )]
     #[ethevent(
         name = "Withdrawal",
@@ -791,6 +803,8 @@ mod fixeddepositanchorcontract_mod {
         PartialEq,
         ethers :: contract :: EthCall,
         ethers :: contract :: EthDisplay,
+        serde :: Serialize,
+        serde :: Deserialize,
     )]
     #[ethcall(name = "EVM_CHAIN_ID_TYPE", abi = "EVM_CHAIN_ID_TYPE()")]
     pub struct EvmChainIdTypeCall;
@@ -803,6 +817,8 @@ mod fixeddepositanchorcontract_mod {
         PartialEq,
         ethers :: contract :: EthCall,
         ethers :: contract :: EthDisplay,
+        serde :: Serialize,
+        serde :: Deserialize,
     )]
     #[ethcall(name = "FIELD_SIZE", abi = "FIELD_SIZE()")]
     pub struct FieldSizeCall;
@@ -815,6 +831,8 @@ mod fixeddepositanchorcontract_mod {
         PartialEq,
         ethers :: contract :: EthCall,
         ethers :: contract :: EthDisplay,
+        serde :: Serialize,
+        serde :: Deserialize,
     )]
     #[ethcall(name = "ROOT_HISTORY_SIZE", abi = "ROOT_HISTORY_SIZE()")]
     pub struct RootHistorySizeCall;
@@ -827,6 +845,8 @@ mod fixeddepositanchorcontract_mod {
         PartialEq,
         ethers :: contract :: EthCall,
         ethers :: contract :: EthDisplay,
+        serde :: Serialize,
+        serde :: Deserialize,
     )]
     #[ethcall(name = "ZERO_VALUE", abi = "ZERO_VALUE()")]
     pub struct ZeroValueCall;
@@ -839,6 +859,8 @@ mod fixeddepositanchorcontract_mod {
         PartialEq,
         ethers :: contract :: EthCall,
         ethers :: contract :: EthDisplay,
+        serde :: Serialize,
+        serde :: Deserialize,
     )]
     #[ethcall(name = "commitments", abi = "commitments(bytes32)")]
     pub struct CommitmentsCall(pub [u8; 32]);
@@ -851,6 +873,8 @@ mod fixeddepositanchorcontract_mod {
         PartialEq,
         ethers :: contract :: EthCall,
         ethers :: contract :: EthDisplay,
+        serde :: Serialize,
+        serde :: Deserialize,
     )]
     #[ethcall(
         name = "currentNeighborRootIndex",
@@ -866,6 +890,8 @@ mod fixeddepositanchorcontract_mod {
         PartialEq,
         ethers :: contract :: EthCall,
         ethers :: contract :: EthDisplay,
+        serde :: Serialize,
+        serde :: Deserialize,
     )]
     #[ethcall(name = "currentRootIndex", abi = "currentRootIndex()")]
     pub struct CurrentRootIndexCall;
@@ -878,6 +904,8 @@ mod fixeddepositanchorcontract_mod {
         PartialEq,
         ethers :: contract :: EthCall,
         ethers :: contract :: EthDisplay,
+        serde :: Serialize,
+        serde :: Deserialize,
     )]
     #[ethcall(name = "denomination", abi = "denomination()")]
     pub struct DenominationCall;
@@ -890,6 +918,8 @@ mod fixeddepositanchorcontract_mod {
         PartialEq,
         ethers :: contract :: EthCall,
         ethers :: contract :: EthDisplay,
+        serde :: Serialize,
+        serde :: Deserialize,
     )]
     #[ethcall(name = "deposit", abi = "deposit(bytes32)")]
     pub struct DepositCall {
@@ -904,6 +934,8 @@ mod fixeddepositanchorcontract_mod {
         PartialEq,
         ethers :: contract :: EthCall,
         ethers :: contract :: EthDisplay,
+        serde :: Serialize,
+        serde :: Deserialize,
     )]
     #[ethcall(name = "edgeExistsForChain", abi = "edgeExistsForChain(uint256)")]
     pub struct EdgeExistsForChainCall(pub ethers::core::types::U256);
@@ -916,6 +948,8 @@ mod fixeddepositanchorcontract_mod {
         PartialEq,
         ethers :: contract :: EthCall,
         ethers :: contract :: EthDisplay,
+        serde :: Serialize,
+        serde :: Deserialize,
     )]
     #[ethcall(name = "edgeIndex", abi = "edgeIndex(uint256)")]
     pub struct EdgeIndexCall(pub ethers::core::types::U256);
@@ -928,6 +962,8 @@ mod fixeddepositanchorcontract_mod {
         PartialEq,
         ethers :: contract :: EthCall,
         ethers :: contract :: EthDisplay,
+        serde :: Serialize,
+        serde :: Deserialize,
     )]
     #[ethcall(name = "edgeList", abi = "edgeList(uint256)")]
     pub struct EdgeListCall(pub ethers::core::types::U256);
@@ -940,6 +976,8 @@ mod fixeddepositanchorcontract_mod {
         PartialEq,
         ethers :: contract :: EthCall,
         ethers :: contract :: EthDisplay,
+        serde :: Serialize,
+        serde :: Deserialize,
     )]
     #[ethcall(name = "filledSubtrees", abi = "filledSubtrees(uint256)")]
     pub struct FilledSubtreesCall(pub ethers::core::types::U256);
@@ -952,6 +990,8 @@ mod fixeddepositanchorcontract_mod {
         PartialEq,
         ethers :: contract :: EthCall,
         ethers :: contract :: EthDisplay,
+        serde :: Serialize,
+        serde :: Deserialize,
     )]
     #[ethcall(name = "getChainId", abi = "getChainId()")]
     pub struct GetChainIdCall;
@@ -964,6 +1004,8 @@ mod fixeddepositanchorcontract_mod {
         PartialEq,
         ethers :: contract :: EthCall,
         ethers :: contract :: EthDisplay,
+        serde :: Serialize,
+        serde :: Deserialize,
     )]
     #[ethcall(name = "getChainIdType", abi = "getChainIdType()")]
     pub struct GetChainIdTypeCall;
@@ -976,6 +1018,8 @@ mod fixeddepositanchorcontract_mod {
         PartialEq,
         ethers :: contract :: EthCall,
         ethers :: contract :: EthDisplay,
+        serde :: Serialize,
+        serde :: Deserialize,
     )]
     #[ethcall(name = "getDenomination", abi = "getDenomination()")]
     pub struct GetDenominationCall;
@@ -988,6 +1032,8 @@ mod fixeddepositanchorcontract_mod {
         PartialEq,
         ethers :: contract :: EthCall,
         ethers :: contract :: EthDisplay,
+        serde :: Serialize,
+        serde :: Deserialize,
     )]
     #[ethcall(name = "getLastRoot", abi = "getLastRoot()")]
     pub struct GetLastRootCall;
@@ -1000,6 +1046,8 @@ mod fixeddepositanchorcontract_mod {
         PartialEq,
         ethers :: contract :: EthCall,
         ethers :: contract :: EthDisplay,
+        serde :: Serialize,
+        serde :: Deserialize,
     )]
     #[ethcall(
         name = "getLatestNeighborEdges",
@@ -1015,6 +1063,8 @@ mod fixeddepositanchorcontract_mod {
         PartialEq,
         ethers :: contract :: EthCall,
         ethers :: contract :: EthDisplay,
+        serde :: Serialize,
+        serde :: Deserialize,
     )]
     #[ethcall(
         name = "getLatestNeighborRoots",
@@ -1030,6 +1080,8 @@ mod fixeddepositanchorcontract_mod {
         PartialEq,
         ethers :: contract :: EthCall,
         ethers :: contract :: EthDisplay,
+        serde :: Serialize,
+        serde :: Deserialize,
     )]
     #[ethcall(name = "getProposalNonce", abi = "getProposalNonce()")]
     pub struct GetProposalNonceCall;
@@ -1042,6 +1094,8 @@ mod fixeddepositanchorcontract_mod {
         PartialEq,
         ethers :: contract :: EthCall,
         ethers :: contract :: EthDisplay,
+        serde :: Serialize,
+        serde :: Deserialize,
     )]
     #[ethcall(name = "getToken", abi = "getToken()")]
     pub struct GetTokenCall;
@@ -1054,6 +1108,8 @@ mod fixeddepositanchorcontract_mod {
         PartialEq,
         ethers :: contract :: EthCall,
         ethers :: contract :: EthDisplay,
+        serde :: Serialize,
+        serde :: Deserialize,
     )]
     #[ethcall(name = "handler", abi = "handler()")]
     pub struct HandlerCall;
@@ -1066,6 +1122,8 @@ mod fixeddepositanchorcontract_mod {
         PartialEq,
         ethers :: contract :: EthCall,
         ethers :: contract :: EthDisplay,
+        serde :: Serialize,
+        serde :: Deserialize,
     )]
     #[ethcall(name = "hasEdge", abi = "hasEdge(uint256)")]
     pub struct HasEdgeCall {
@@ -1080,6 +1138,8 @@ mod fixeddepositanchorcontract_mod {
         PartialEq,
         ethers :: contract :: EthCall,
         ethers :: contract :: EthDisplay,
+        serde :: Serialize,
+        serde :: Deserialize,
     )]
     #[ethcall(
         name = "hashLeftRight",
@@ -1099,6 +1159,8 @@ mod fixeddepositanchorcontract_mod {
         PartialEq,
         ethers :: contract :: EthCall,
         ethers :: contract :: EthDisplay,
+        serde :: Serialize,
+        serde :: Deserialize,
     )]
     #[ethcall(name = "hasher", abi = "hasher()")]
     pub struct HasherCall;
@@ -1111,6 +1173,8 @@ mod fixeddepositanchorcontract_mod {
         PartialEq,
         ethers :: contract :: EthCall,
         ethers :: contract :: EthDisplay,
+        serde :: Serialize,
+        serde :: Deserialize,
     )]
     #[ethcall(
         name = "isKnownNeighborRoot",
@@ -1129,6 +1193,8 @@ mod fixeddepositanchorcontract_mod {
         PartialEq,
         ethers :: contract :: EthCall,
         ethers :: contract :: EthDisplay,
+        serde :: Serialize,
+        serde :: Deserialize,
     )]
     #[ethcall(name = "isKnownRoot", abi = "isKnownRoot(bytes32)")]
     pub struct IsKnownRootCall {
@@ -1143,6 +1209,8 @@ mod fixeddepositanchorcontract_mod {
         PartialEq,
         ethers :: contract :: EthCall,
         ethers :: contract :: EthDisplay,
+        serde :: Serialize,
+        serde :: Deserialize,
     )]
     #[ethcall(name = "isSpent", abi = "isSpent(bytes32)")]
     pub struct IsSpentCall {
@@ -1157,6 +1225,8 @@ mod fixeddepositanchorcontract_mod {
         PartialEq,
         ethers :: contract :: EthCall,
         ethers :: contract :: EthDisplay,
+        serde :: Serialize,
+        serde :: Deserialize,
     )]
     #[ethcall(name = "isSpentArray", abi = "isSpentArray(bytes32[])")]
     pub struct IsSpentArrayCall {
@@ -1171,6 +1241,8 @@ mod fixeddepositanchorcontract_mod {
         PartialEq,
         ethers :: contract :: EthCall,
         ethers :: contract :: EthDisplay,
+        serde :: Serialize,
+        serde :: Deserialize,
     )]
     #[ethcall(name = "isValidRoots", abi = "isValidRoots(bytes32[])")]
     pub struct IsValidRootsCall {
@@ -1185,6 +1257,8 @@ mod fixeddepositanchorcontract_mod {
         PartialEq,
         ethers :: contract :: EthCall,
         ethers :: contract :: EthDisplay,
+        serde :: Serialize,
+        serde :: Deserialize,
     )]
     #[ethcall(name = "levels", abi = "levels()")]
     pub struct LevelsCall;
@@ -1197,6 +1271,8 @@ mod fixeddepositanchorcontract_mod {
         PartialEq,
         ethers :: contract :: EthCall,
         ethers :: contract :: EthDisplay,
+        serde :: Serialize,
+        serde :: Deserialize,
     )]
     #[ethcall(name = "maxEdges", abi = "maxEdges()")]
     pub struct MaxEdgesCall;
@@ -1209,6 +1285,8 @@ mod fixeddepositanchorcontract_mod {
         PartialEq,
         ethers :: contract :: EthCall,
         ethers :: contract :: EthDisplay,
+        serde :: Serialize,
+        serde :: Deserialize,
     )]
     #[ethcall(name = "neighborRoots", abi = "neighborRoots(uint256,uint32)")]
     pub struct NeighborRootsCall(pub ethers::core::types::U256, pub u32);
@@ -1221,6 +1299,8 @@ mod fixeddepositanchorcontract_mod {
         PartialEq,
         ethers :: contract :: EthCall,
         ethers :: contract :: EthDisplay,
+        serde :: Serialize,
+        serde :: Deserialize,
     )]
     #[ethcall(name = "nextIndex", abi = "nextIndex()")]
     pub struct NextIndexCall;
@@ -1233,6 +1313,8 @@ mod fixeddepositanchorcontract_mod {
         PartialEq,
         ethers :: contract :: EthCall,
         ethers :: contract :: EthDisplay,
+        serde :: Serialize,
+        serde :: Deserialize,
     )]
     #[ethcall(name = "nullifierHashes", abi = "nullifierHashes(bytes32)")]
     pub struct NullifierHashesCall(pub [u8; 32]);
@@ -1245,6 +1327,8 @@ mod fixeddepositanchorcontract_mod {
         PartialEq,
         ethers :: contract :: EthCall,
         ethers :: contract :: EthDisplay,
+        serde :: Serialize,
+        serde :: Deserialize,
     )]
     #[ethcall(name = "roots", abi = "roots(uint256)")]
     pub struct RootsCall(pub ethers::core::types::U256);
@@ -1257,6 +1341,8 @@ mod fixeddepositanchorcontract_mod {
         PartialEq,
         ethers :: contract :: EthCall,
         ethers :: contract :: EthDisplay,
+        serde :: Serialize,
+        serde :: Deserialize,
     )]
     #[ethcall(name = "setHandler", abi = "setHandler(address,uint32)")]
     pub struct SetHandlerCall {
@@ -1272,6 +1358,8 @@ mod fixeddepositanchorcontract_mod {
         PartialEq,
         ethers :: contract :: EthCall,
         ethers :: contract :: EthDisplay,
+        serde :: Serialize,
+        serde :: Deserialize,
     )]
     #[ethcall(name = "setVerifier", abi = "setVerifier(address,uint32)")]
     pub struct SetVerifierCall {
@@ -1287,6 +1375,8 @@ mod fixeddepositanchorcontract_mod {
         PartialEq,
         ethers :: contract :: EthCall,
         ethers :: contract :: EthDisplay,
+        serde :: Serialize,
+        serde :: Deserialize,
     )]
     #[ethcall(name = "token", abi = "token()")]
     pub struct TokenCall;
@@ -1299,6 +1389,8 @@ mod fixeddepositanchorcontract_mod {
         PartialEq,
         ethers :: contract :: EthCall,
         ethers :: contract :: EthDisplay,
+        serde :: Serialize,
+        serde :: Deserialize,
     )]
     #[ethcall(name = "unpackProof", abi = "unpackProof(uint256[8])")]
     pub struct UnpackProofCall {
@@ -1313,6 +1405,8 @@ mod fixeddepositanchorcontract_mod {
         PartialEq,
         ethers :: contract :: EthCall,
         ethers :: contract :: EthDisplay,
+        serde :: Serialize,
+        serde :: Deserialize,
     )]
     #[ethcall(name = "unwrapIntoNative", abi = "unwrapIntoNative(uint256)")]
     pub struct UnwrapIntoNativeCall {
@@ -1327,6 +1421,8 @@ mod fixeddepositanchorcontract_mod {
         PartialEq,
         ethers :: contract :: EthCall,
         ethers :: contract :: EthDisplay,
+        serde :: Serialize,
+        serde :: Deserialize,
     )]
     #[ethcall(
         name = "unwrapIntoToken",
@@ -1345,6 +1441,8 @@ mod fixeddepositanchorcontract_mod {
         PartialEq,
         ethers :: contract :: EthCall,
         ethers :: contract :: EthDisplay,
+        serde :: Serialize,
+        serde :: Deserialize,
     )]
     #[ethcall(name = "updateEdge", abi = "updateEdge(uint256,bytes32,uint256)")]
     pub struct UpdateEdgeCall {
@@ -1361,6 +1459,8 @@ mod fixeddepositanchorcontract_mod {
         PartialEq,
         ethers :: contract :: EthCall,
         ethers :: contract :: EthDisplay,
+        serde :: Serialize,
+        serde :: Deserialize,
     )]
     #[ethcall(name = "verifier", abi = "verifier()")]
     pub struct VerifierCall;
@@ -1373,6 +1473,8 @@ mod fixeddepositanchorcontract_mod {
         PartialEq,
         ethers :: contract :: EthCall,
         ethers :: contract :: EthDisplay,
+        serde :: Serialize,
+        serde :: Deserialize,
     )]
     #[ethcall(
         name = "withdraw",
@@ -1391,6 +1493,8 @@ mod fixeddepositanchorcontract_mod {
         PartialEq,
         ethers :: contract :: EthCall,
         ethers :: contract :: EthDisplay,
+        serde :: Serialize,
+        serde :: Deserialize,
     )]
     #[ethcall(
         name = "withdrawAndUnwrap",
@@ -1410,6 +1514,8 @@ mod fixeddepositanchorcontract_mod {
         PartialEq,
         ethers :: contract :: EthCall,
         ethers :: contract :: EthDisplay,
+        serde :: Serialize,
+        serde :: Deserialize,
     )]
     #[ethcall(name = "wrapAndDeposit", abi = "wrapAndDeposit(address,bytes32)")]
     pub struct WrapAndDepositCall {
@@ -1425,6 +1531,8 @@ mod fixeddepositanchorcontract_mod {
         PartialEq,
         ethers :: contract :: EthCall,
         ethers :: contract :: EthDisplay,
+        serde :: Serialize,
+        serde :: Deserialize,
     )]
     #[ethcall(name = "wrapNative", abi = "wrapNative()")]
     pub struct WrapNativeCall;
@@ -1437,6 +1545,8 @@ mod fixeddepositanchorcontract_mod {
         PartialEq,
         ethers :: contract :: EthCall,
         ethers :: contract :: EthDisplay,
+        serde :: Serialize,
+        serde :: Deserialize,
     )]
     #[ethcall(name = "wrapToken", abi = "wrapToken(address,uint256)")]
     pub struct WrapTokenCall {
@@ -1452,6 +1562,8 @@ mod fixeddepositanchorcontract_mod {
         PartialEq,
         ethers :: contract :: EthCall,
         ethers :: contract :: EthDisplay,
+        serde :: Serialize,
+        serde :: Deserialize,
     )]
     #[ethcall(name = "zeros", abi = "zeros(uint256)")]
     pub struct ZerosCall {
@@ -1586,11 +1698,9 @@ mod fixeddepositanchorcontract_mod {
                     data.as_ref(),
                 )
             {
-                return Ok(
-                    FixedDepositAnchorContractCalls::EdgeExistsForChain(
-                        decoded,
-                    ),
-                );
+                return Ok(FixedDepositAnchorContractCalls::EdgeExistsForChain(
+                    decoded,
+                ));
             }
             if let Ok(decoded) =
                 <EdgeIndexCall as ethers::core::abi::AbiDecode>::decode(
@@ -1620,9 +1730,7 @@ mod fixeddepositanchorcontract_mod {
                     data.as_ref(),
                 )
             {
-                return Ok(FixedDepositAnchorContractCalls::GetChainId(
-                    decoded,
-                ));
+                return Ok(FixedDepositAnchorContractCalls::GetChainId(decoded));
             }
             if let Ok(decoded) =
                 <GetChainIdTypeCall as ethers::core::abi::AbiDecode>::decode(
@@ -1785,9 +1893,7 @@ mod fixeddepositanchorcontract_mod {
                     data.as_ref(),
                 )
             {
-                return Ok(FixedDepositAnchorContractCalls::SetHandler(
-                    decoded,
-                ));
+                return Ok(FixedDepositAnchorContractCalls::SetHandler(decoded));
             }
             if let Ok(decoded) =
                 <SetVerifierCall as ethers::core::abi::AbiDecode>::decode(
@@ -1837,9 +1943,7 @@ mod fixeddepositanchorcontract_mod {
                     data.as_ref(),
                 )
             {
-                return Ok(FixedDepositAnchorContractCalls::UpdateEdge(
-                    decoded,
-                ));
+                return Ok(FixedDepositAnchorContractCalls::UpdateEdge(decoded));
             }
             if let Ok(decoded) =
                 <VerifierCall as ethers::core::abi::AbiDecode>::decode(
@@ -1878,9 +1982,7 @@ mod fixeddepositanchorcontract_mod {
                     data.as_ref(),
                 )
             {
-                return Ok(FixedDepositAnchorContractCalls::WrapNative(
-                    decoded,
-                ));
+                return Ok(FixedDepositAnchorContractCalls::WrapNative(decoded));
             }
             if let Ok(decoded) =
                 <WrapTokenCall as ethers::core::abi::AbiDecode>::decode(
@@ -2507,7 +2609,14 @@ mod fixeddepositanchorcontract_mod {
     }
     #[doc = "`ExtData(bytes32,address,address,uint256,uint256)`"]
     #[derive(
-        Clone, Debug, Default, Eq, PartialEq, ethers :: contract :: EthAbiType,
+        Clone,
+        Debug,
+        Default,
+        Eq,
+        PartialEq,
+        ethers :: contract :: EthAbiType,
+        serde :: Serialize,
+        serde :: Deserialize,
     )]
     pub struct ExtData {
         pub refresh_commitment: [u8; 32],
@@ -2518,7 +2627,14 @@ mod fixeddepositanchorcontract_mod {
     }
     #[doc = "`Proof(bytes,bytes,bytes32,bytes32)`"]
     #[derive(
-        Clone, Debug, Default, Eq, PartialEq, ethers :: contract :: EthAbiType,
+        Clone,
+        Debug,
+        Default,
+        Eq,
+        PartialEq,
+        ethers :: contract :: EthAbiType,
+        serde :: Serialize,
+        serde :: Deserialize,
     )]
     pub struct Proof {
         pub proof: ethers::core::types::Bytes,
@@ -2528,7 +2644,14 @@ mod fixeddepositanchorcontract_mod {
     }
     #[doc = "`Edge(uint256,bytes32,uint256)`"]
     #[derive(
-        Clone, Debug, Default, Eq, PartialEq, ethers :: contract :: EthAbiType,
+        Clone,
+        Debug,
+        Default,
+        Eq,
+        PartialEq,
+        ethers :: contract :: EthAbiType,
+        serde :: Serialize,
+        serde :: Deserialize,
     )]
     pub struct Edge {
         pub chain_id: ethers::core::types::U256,

@@ -23,6 +23,8 @@ mod evm {
         let mut abi_file = NamedTempFile::new()?;
         abi_file.write_all(&abi)?;
         Abigen::new(contract_name, abi_file.path().to_string_lossy())?
+            .add_event_derive("serde::Serialize")
+            .add_event_derive("serde::Deserialize")
             .rustfmt(false) // don't use rustfmt for now.
             .generate()?
             .write_to_file(out)?;
