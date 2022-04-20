@@ -7,6 +7,7 @@
 )]
 
 pub mod dkg_runtime;
+pub mod egg_runtime;
 pub mod protocol_substrate_runtime;
 
 pub use scale;
