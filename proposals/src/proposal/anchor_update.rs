@@ -81,7 +81,6 @@ impl AnchorUpdateProposal {
         &self.target
     }
 
-
     /// Get the proposal as a bytes
     #[must_use]
     pub fn to_bytes(&self) -> [u8; Self::LENGTH] {
