@@ -9,11 +9,11 @@ use crate::{ProposalHeader, TypedChainId};
 ///
 /// The format of the proposal is:
 /// ```text
-/// ┌────────────────────┬─────────────────┬───────────────┬────────────────────┬────────────────┐
-/// │                    │                 │               │                    │                │
-/// │ ProposalHeader 40B │ SrcChainType 2B │ SrcChainId 4B │ LatestLeafIndex 4B │ MerkleRoot 32B │
-/// │                    │                 │               │                    │                │
-/// └────────────────────┴─────────────────┴───────────────┴────────────────────┴────────────────┘
+/// ┌────────────────────┬─────────────────┬───────────────┬────────────────────┬────────────────┬────────────────┐
+/// │                    │                 │               │                    │                │                │
+/// │ ProposalHeader 40B │ SrcChainType 2B │ SrcChainId 4B │ LatestLeafIndex 4B │ MerkleRoot 32B │  Target ID 32B │
+/// │                    │                 │               │                    │                │                │
+/// └────────────────────┴─────────────────┴───────────────┴────────────────────┴────────────────┴────────────────┘
 /// ```
 #[allow(clippy::module_name_repetitions)]
 #[derive(Debug, Copy, Clone, PartialEq, Eq, Hash)]
@@ -22,6 +22,7 @@ pub struct AnchorUpdateProposal {
     src_chain: TypedChainId,
     latest_leaf_index: u32,
     merkle_root: [u8; 32],
+    target: [u8; 32],
 }
 
 impl AnchorUpdateProposal {
@@ -29,7 +30,8 @@ impl AnchorUpdateProposal {
     pub const LENGTH: usize = ProposalHeader::LENGTH
         + TypedChainId::LENGTH
         + core::mem::size_of::<u32>() // latest_leaf_index
-        + 32; // merkle_root
+        + 32 // merkle_root
+        + 32; // target
 
     /// Creates a new anchor update proposal.
     #[must_use]
@@ -38,12 +40,14 @@ impl AnchorUpdateProposal {
         src_chain: TypedChainId,
         latest_leaf_index: u32,
         merkle_root: [u8; 32],
+        target: [u8; 32],
     ) -> Self {
         Self {
             header,
             src_chain,
             latest_leaf_index,
             merkle_root,
+            target,
         }
     }
 
@@ -71,6 +75,13 @@ impl AnchorUpdateProposal {
         &self.merkle_root
     }
 
+    /// Get the target identifier.
+    #[must_use]
+    pub const fn target(&self) -> &[u8; 32] {
+        &self.target
+    }
+
+
     /// Get the proposal as a bytes
     #[must_use]
     pub fn to_bytes(&self) -> [u8; Self::LENGTH] {
@@ -87,6 +98,9 @@ impl AnchorUpdateProposal {
         let f = t;
         let t = t + 32;
         bytes[f..t].copy_from_slice(&self.merkle_root);
+        let f = t;
+        let t = t + 32;
+        bytes[f..t].copy_from_slice(&self.target);
         bytes
     }
 
@@ -118,7 +132,11 @@ impl From<[u8; AnchorUpdateProposal::LENGTH]> for AnchorUpdateProposal {
         let t = t + 32;
         let mut merkle_root = [0u8; 32];
         merkle_root.copy_from_slice(&bytes[f..t]);
-        Self::new(header, src_chain, latest_leaf_index, merkle_root)
+        let f = t;
+        let t = t + 32;
+        let mut target = [0u8; 32];
+        target.copy_from_slice(&bytes[f..t]);
+        Self::new(header, src_chain, latest_leaf_index, merkle_root, target)
     }
 }
 
@@ -158,12 +176,14 @@ mod tests {
             src_chain,
             latest_leaf_index,
             merkle_root,
+            target_system.into_fixed_bytes(),
         );
         let bytes = proposal.to_bytes();
         let expected = hex_literal::hex!(
             "000000000000aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa010000000004"
             "cafebabe0000000101000000000100000001000102030405060708090a0b0c0d"
             "0e0f101112131415161718191a1b1c1d1e1f"
+            "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa000000000000000000000000"
         );
         assert_eq!(bytes, expected);
     }
@@ -174,6 +194,7 @@ mod tests {
             "000000000000aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa010000000004"
             "cafebabe0000000101000000000100000001000102030405060708090a0b0c0d"
             "0e0f101112131415161718191a1b1c1d1e1f"
+            "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa000000000000000000000000"
         );
         let proposal = AnchorUpdateProposal::from(bytes);
         let target_system = TargetSystem::new_contract_address(
@@ -198,6 +219,7 @@ mod tests {
             src_chain,
             latest_leaf_index,
             merkle_root,
+            target_system.into_fixed_bytes(),
         );
         assert_eq!(proposal, expected);
     }

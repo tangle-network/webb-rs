@@ -15,6 +15,22 @@ pub enum TargetSystem {
     TreeId(u32),
 }
 
+impl TargetSystem {
+    /// Turns `self` into a 32 byte array.
+    #[must_use]
+    pub fn into_fixed_bytes(self) -> [u8; 32] {
+        let encode = |elt: &[u8]| {
+            let mut bytes = [0u8; 32];
+            bytes[0..20].copy_from_slice(elt);
+            bytes
+        };
+        match self {
+            TargetSystem::ContractAddress(address) => encode(&address),
+            TargetSystem::TreeId(tree_id) => encode(&tree_id.to_le_bytes()),
+        }
+    }
+}
+
 /// Proposal Target Function Signature (4 bytes).
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Ord, PartialOrd)]
 #[cfg_attr(
