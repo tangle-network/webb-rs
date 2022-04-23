@@ -9,11 +9,11 @@ use crate::{ProposalHeader, TypedChainId};
 ///
 /// The format of the proposal is:
 /// ```text
-/// ┌────────────────────┬─────────────────┬───────────────┬────────────────────┬────────────────┬────────────────┐
-/// │                    │                 │               │                    │                │                │
-/// │ ProposalHeader 40B │ SrcChainType 2B │ SrcChainId 4B │ LatestLeafIndex 4B │ MerkleRoot 32B │  Target ID 32B │
-/// │                    │                 │               │                    │                │                │
-/// └────────────────────┴─────────────────┴───────────────┴────────────────────┴────────────────┴────────────────┘
+/// ┌────────────────────┬─────────────────┬───────────────┬────────────────────┬────────────────┬───────────────┐
+/// │                    │                 │               │                    │                │               │
+/// │ ProposalHeader 40B │ SrcChainType 2B │ SrcChainId 4B │ LatestLeafIndex 4B │ MerkleRoot 32B │ Target ID 32B │
+/// │                    │                 │               │                    │                │               │
+/// └────────────────────┴─────────────────┴───────────────┴────────────────────┴────────────────┴───────────────┘
 /// ```
 #[allow(clippy::module_name_repetitions)]
 #[derive(Debug, Copy, Clone, PartialEq, Eq, Hash)]
