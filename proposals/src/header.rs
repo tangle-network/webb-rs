@@ -20,9 +20,15 @@ impl TargetSystem {
     #[must_use]
     pub fn into_fixed_bytes(self) -> [u8; 32] {
         let encode = |elt: &[u8]| {
-            let mut bytes = [0u8; 32];
-            bytes[0..20].copy_from_slice(elt);
-            bytes
+            let mut buf = [0u8; 32];
+            let input_length = elt.len();
+            if input_length > 32 {
+                buf.copy_from_slice(elt);
+            } else {
+                buf[0..input_length].copy_from_slice(elt);
+            };
+
+            buf
         };
         match self {
             TargetSystem::ContractAddress(address) => encode(&address),
