@@ -3,7 +3,7 @@ members = [".", "proposals"]
 
 [package]
 name = "webb"
-version = "0.3.3"
+version = "0.3.4"
 edition = "2021"
 authors = ["Webb Developers"]
 license = "GPL-3.0"

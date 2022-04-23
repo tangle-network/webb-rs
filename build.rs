@@ -127,6 +127,13 @@ mod substrate {
             "src/substrate/protocol_substrate_runtime.rs",
         )
     }
+
+    pub fn generate_egg_runtime() -> Result<(), Box<dyn Error>> {
+        parse_and_generate_runtime(
+            "metadata/egg-runtime.scale",
+            "src/substrate/egg_runtime.rs",
+        )
+    }
 }
 
 #[cfg(any(feature = "generate-substrate", feature = "generate-contracts"))]
@@ -151,6 +158,7 @@ fn main() -> Result<(), Box<dyn Error>> {
     {
         substrate::generate_dkg_runtime()?;
         substrate::generate_protocol_substrate_runtime()?;
+        substrate::generate_egg_runtime()?;
         run_cargo_fmt()?;
     }
     Ok(())
