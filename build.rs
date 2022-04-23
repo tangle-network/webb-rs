@@ -73,6 +73,41 @@ mod evm {
             "SignatureBridgeContract",
         )
     }
+
+    pub fn build_protocol_solidity_governed_token_wrapper(
+    ) -> Result<(), Box<dyn Error>> {
+        parse_and_write_abigen(
+            "contracts/protocol-solidity/GovernedTokenWrapper.json",
+            "src/evm/contract/protocol_solidity/governed_token_wrapper.rs",
+            "GovernedTokenWrapperContract",
+        )
+    }
+
+    pub fn build_protocol_solidity_treasury() -> Result<(), Box<dyn Error>> {
+        parse_and_write_abigen(
+            "contracts/protocol-solidity/Treasury.json",
+            "src/evm/contract/protocol_solidity/treasury.rs",
+            "TreasuryContract",
+        )
+    }
+
+    pub fn build_protocol_solidity_treasury_handler(
+    ) -> Result<(), Box<dyn Error>> {
+        parse_and_write_abigen(
+            "contracts/protocol-solidity/TreasuryHandler.json",
+            "src/evm/contract/protocol_solidity/treasury_handler.rs",
+            "TreasuryHandlerContract",
+        )
+    }
+
+    pub fn build_protocol_solidity_token_wrapper_handler(
+    ) -> Result<(), Box<dyn Error>> {
+        parse_and_write_abigen(
+            "contracts/protocol-solidity/TokenWrapperHandler.json",
+            "src/evm/contract/protocol_solidity/token_wrapper_handler.rs",
+            "TokenWrapperHandlerContract",
+        )
+    }
 }
 
 #[cfg(feature = "generate-substrate")]
@@ -152,6 +187,10 @@ fn main() -> Result<(), Box<dyn Error>> {
         evm::build_protocol_solidity_anchor_proxy()?;
         evm::build_protocol_solidity_anchor_handler()?;
         evm::build_protocol_solidity_signature_bridge()?;
+        evm::build_protocol_solidity_governed_token_wrapper()?;
+        evm::build_protocol_solidity_token_wrapper_handler()?;
+        evm::build_protocol_solidity_treasury()?;
+        evm::build_protocol_solidity_treasury_handler()?;
         run_cargo_fmt()?;
     }
     #[cfg(feature = "generate-substrate")]
