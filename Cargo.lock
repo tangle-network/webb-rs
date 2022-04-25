@@ -4202,7 +4202,7 @@ dependencies = [
 
 [[package]]
 name = "webb-proposals"
-version = "0.2.4"
+version = "0.2.5"
 dependencies = [
  "hex-literal",
  "num-traits",
