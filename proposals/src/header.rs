@@ -21,8 +21,7 @@ impl TargetSystem {
     pub fn into_fixed_bytes(self) -> [u8; 32] {
         let encode = |elt: &[u8]| {
             let mut buf = [0u8; 32];
-            let input_length = if elt.len() > 32 { 32 } else { elt.len() };
-            buf[0..input_length].copy_from_slice(elt);
+            buf.iter_mut().rev().zip(elt.iter().rev()).for_each(|(a, b)| *a = *b);
             buf
         };
         match self {
