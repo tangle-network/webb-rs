@@ -182,7 +182,7 @@ mod tests {
             "000000000000aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa010000000004"
             "cafebabe0000000101000000000100000001000102030405060708090a0b0c0d"
             "0e0f101112131415161718191a1b1c1d1e1f"
-            "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa000000000000000000000000"
+            "000000000000000000000000aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
         );
         assert_eq!(bytes, expected);
     }
@@ -193,7 +193,7 @@ mod tests {
             "000000000000aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa010000000004"
             "cafebabe0000000101000000000100000001000102030405060708090a0b0c0d"
             "0e0f101112131415161718191a1b1c1d1e1f"
-            "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa000000000000000000000000"
+            "000000000000000000000000aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
         );
         let proposal = AnchorUpdateProposal::from(bytes);
         let target_system = TargetSystem::new_contract_address(
