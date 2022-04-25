@@ -21,18 +21,15 @@ impl TargetSystem {
     pub fn into_fixed_bytes(self) -> [u8; 32] {
         let encode = |elt: &[u8]| {
             let mut buf = [0u8; 32];
-            let input_length = elt.len();
-            if input_length > 32 {
-                buf.copy_from_slice(elt);
-            } else {
-                buf[0..input_length].copy_from_slice(elt);
-            };
-
+            buf.iter_mut()
+                .rev()
+                .zip(elt.iter().rev())
+                .for_each(|(a, b)| *a = *b);
             buf
         };
         match self {
             TargetSystem::ContractAddress(address) => encode(&address),
-            TargetSystem::TreeId(tree_id) => encode(&tree_id.to_le_bytes()),
+            TargetSystem::TreeId(tree_id) => encode(&tree_id.to_be_bytes()),
         }
     }
 }
