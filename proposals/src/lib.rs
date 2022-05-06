@@ -102,7 +102,7 @@
 //!
 //! ## Proposals Implementations
 //!
-//! The following proposals are implemented:
+//! The following proposals are implemented for EVM-based chains:
 //! - [`AnchorUpdateProposal`]
 //! - [`TokenAddProposal`]
 //! - [`TokenRemoveProposal`]
@@ -120,7 +120,9 @@
 //! The following feature flags are used to enable or disable certain features:
 //! - `scale`: Enables Implementation of the SCALE encoding and decoding
 //!   (disabled by default).
-//! - `std`: Enables the use of the standard library (disabled by default).
+//! - `std`: Enables the use of the standard library (enabled by default).
+//! - `evm`: Enables EVM proposals (disabled by default).
+//! - `substrate`: Enables Substrate proposals (disabled by default).
 
 #[cfg(not(feature = "std"))]
 #[doc(hidden)]

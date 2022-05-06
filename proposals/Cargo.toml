@@ -1,6 +1,6 @@
 [package]
 name = "webb-proposals"
-version = "0.2.5"
+version = "0.3.0"
 edition = "2021"
 description = "Webb Protocol Proposals Specification & Implementation (part of webb-rs SDK)"
 categories = ["encoding", "no-std"]
@@ -18,13 +18,8 @@ num-traits = { version = "0.2.8", default-features = false }
 hex-literal = "0.3"
 
 [features]
-default = ["std", "scale"]
-std = [
-    "scale-codec/std",
-    "scale-info/std",
-    "num-traits/std",
-]
-scale = [
-    "scale-codec",
-    "scale-info/derive",
-]
+default = ["std"]
+std = ["scale-codec/std", "scale-info/std", "num-traits/std"]
+scale = ["scale-codec", "scale-info/derive"]
+evm = []
+substrate = []

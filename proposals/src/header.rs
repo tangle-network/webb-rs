@@ -587,7 +587,7 @@ mod tests {
         );
         assert_eq!(resource_id.typed_chain_id(), TypedChainId::Evm(4));
         assert_eq!(resource_id.typed_chain_id().underlying_chain_id(), 4);
-        assert_eq!(resource_id.typed_chain_id().chain_id(), 1099511627780);
+        assert_eq!(resource_id.typed_chain_id().chain_id(), 1_099_511_627_780);
     }
 
     #[test]
