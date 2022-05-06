@@ -189,7 +189,7 @@ mod tests {
         let bytes = hex_literal::hex!(
           "2a01" // pallet index, call index
           "000000000000aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa010000000004" // resource id
-          "0100000000010000000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f01000000" // resource id
+          "0100000000010000000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f01000000" // metadata
         );
 
         let proposal = AnchorUpdateProposal::try_from(bytes.to_vec()).unwrap();

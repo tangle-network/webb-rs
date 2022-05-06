@@ -1,5 +1,5 @@
 //! ### Proposals Implemented:
-//! - [ ] `AnchorUpdateProposal`
+//! - [x] `AnchorUpdateProposal`
 //! - [ ] `TokenAddProposal`
 //! - [ ] `TokenRemoveProposal`
 //! - [ ] `WrappingFeeUpdateProposal`
