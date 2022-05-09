@@ -6,21 +6,12 @@ use crate::{ResourceId, TypedChainId};
 /// The [`AnchorUpdateProposal`] updates the target Anchor's knowledge of the
 /// source Anchor's Merkle roots. This knowledge is necessary to prove
 /// membership in the source Anchor's Merkle tree on the target chain.
-///
-/// The format of the proposal is:
-/// ```text
-/// ┌────────────────────┬────────────────────────────────────────────────────────────────────┐
-/// │                    │                                                                    │
-/// │   ResourceId 32B   │ `AnchorHandler::Call::execute_anchor_update_proposal` encoded call │
-/// │                    │                                                                    │
-/// └────────────────────┴────────────────────────────────────────────────────────────────────┘
-/// ```
 #[allow(clippy::module_name_repetitions)]
 #[derive(
     Debug, Copy, Clone, PartialEq, Eq, Hash, typed_builder::TypedBuilder,
 )]
 pub struct AnchorUpdateProposal {
-    #[builder(default = 42)]
+    #[builder(default = 50)]
     pallet_index: u8,
     #[builder(default = 1)]
     call_index: u8,
@@ -156,12 +147,10 @@ mod tests {
 
     #[test]
     fn encode() {
-        let target_system = TargetSystem::new_contract_address(
-            hex_literal::hex!("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"),
-        );
-        let target_chain = TypedChainId::Evm(4);
+        let target_system = TargetSystem::new_tree_id(2);
+        let target_chain = TypedChainId::Substrate(1);
         let resource_id = ResourceId::new(target_system, target_chain);
-        let src_chain = TypedChainId::Evm(1);
+        let src_chain = TypedChainId::Substrate(2);
         let latest_leaf_index = 0x0001;
         let merkle_root = [
             0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x0a,
@@ -176,9 +165,9 @@ mod tests {
             .build();
         let bytes = proposal.to_bytes();
         let expected = concat!(
-          "2a01", // pallet index, call index
-          "000000000000aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa010000000004", // resource id
-          "0100000000010000000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f01000000", // resource id
+          "3201", // pallet index, call index
+          "0000000000000000000000000000000000000000000000000002020000000001", // resource id
+          "0200000000020000000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f01000000", // metadata
         );
         let bytes_hex = hex::encode(bytes);
         assert_eq!(bytes_hex, expected);
@@ -187,22 +176,23 @@ mod tests {
     #[test]
     fn decode() {
         let bytes = hex_literal::hex!(
-          "2a01" // pallet index, call index
-          "000000000000aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa010000000004" // resource id
-          "0100000000010000000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f01000000" // metadata
+          "3201" // pallet index, call index
+          "0000000000000000000000000000000000000000000000000002020000000001" // resource id
+          "0200000000020000000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f01000000" // metadata
         );
 
         let proposal = AnchorUpdateProposal::try_from(bytes.to_vec()).unwrap();
-        assert_eq!(proposal.pallet_index, 0x2a);
+        assert_eq!(proposal.pallet_index, 0x32);
         assert_eq!(proposal.call_index, 0x01);
         assert_eq!(
             proposal.resource_id.target_system(),
-            TargetSystem::new_contract_address(hex_literal::hex!(
-                "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
-            ))
+            TargetSystem::new_tree_id(2)
         );
-        assert_eq!(proposal.resource_id.typed_chain_id(), TypedChainId::Evm(4));
-        assert_eq!(proposal.src_chain, TypedChainId::Evm(1));
+        assert_eq!(
+            proposal.resource_id.typed_chain_id(),
+            TypedChainId::Substrate(1)
+        );
+        assert_eq!(proposal.src_chain, TypedChainId::Substrate(2));
         assert_eq!(
             proposal.merkle_root,
             [
