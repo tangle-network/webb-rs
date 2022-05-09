@@ -28,7 +28,7 @@ impl TokenAddProposal {
     /// Get the asset name.
     #[must_use]
     pub fn name(&self) -> String {
-        String::from_utf8(self.name.to_vec()).expect("name is not valid utf8")
+        String::from_utf8(self.name.clone()).expect("name is not valid utf8")
     }
 
     /// Get the latest leaf index.

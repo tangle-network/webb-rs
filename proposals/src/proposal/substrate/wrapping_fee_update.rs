@@ -1,50 +1,56 @@
-//! Token Remove Proposal.
+//! Wrapping Fee Update Proposal.
 use crate::ResourceId;
 
-/// Token Remove Proposal.
+/// Wrapping Fee Update Proposal.
 ///
-/// The [`TokenRemoveProposal`] allows the token specified by the `AssetId` to
-/// be removed from a token pool.
+/// The [`WrappingFeeUpdateProposal`] updates the wrapping fee percentage for a specific pool share.
 #[allow(clippy::module_name_repetitions)]
-#[derive(Debug, Clone, PartialEq, Eq, Hash, typed_builder::TypedBuilder)]
-pub struct TokenRemoveProposal {
+#[derive(
+    Debug, Copy, Clone, PartialEq, Eq, Hash, typed_builder::TypedBuilder,
+)]
+pub struct WrappingFeeUpdateProposal {
     #[builder(default = 35)]
     pallet_index: u8,
-    #[builder(default = 2)]
+    #[builder(default = 0)]
     call_index: u8,
     resource_id: ResourceId,
-    #[builder(setter(transform = |v: String| v.into_bytes()))]
-    name: Vec<u8>,
-    asset_id: u32,
+    #[builder(setter(transform = |v: u8| u128::from(v)))]
+    wrapping_fee_percent: u128,
+    into_pool_share_id: u32,
 }
 
-impl TokenRemoveProposal {
+impl WrappingFeeUpdateProposal {
     /// Get the resource id.
     #[must_use]
     pub const fn resource_id(&self) -> ResourceId {
         self.resource_id
     }
 
-    /// Get the asset name.
+    /// Get the wrapping fee percent.
     #[must_use]
-    pub fn name(&self) -> String {
-        String::from_utf8(self.name.clone()).expect("name is not valid utf8")
+    pub const fn wrapping_fee_percent(&self) -> u128 {
+        debug_assert!(
+            self.wrapping_fee_percent <= 100,
+            "wrapping fee percent is too large"
+        );
+        self.wrapping_fee_percent
     }
 
-    /// Get the latest leaf index.
+    /// Get the pool share id.
+    /// The pool share id is the id of the pool share that the wrapping fee will be applied to.
     #[must_use]
-    pub const fn asset_id(&self) -> u32 {
-        self.asset_id
+    pub const fn pool_share_id(&self) -> u32 {
+        self.into_pool_share_id
     }
 
     /// Convert the proposal to a vector of bytes.
     #[must_use]
     pub fn to_bytes(&self) -> Vec<u8> {
-        let mut out = Vec::with_capacity(40 + self.name.len());
-        let call = ExecuteRemoveTokenFromPoolShare {
+        let mut out = Vec::with_capacity(40);
+        let call = ExecuteWrappingFeeUpdate {
             r_id: self.resource_id.to_bytes(),
-            name: self.name.clone(),
-            asset_id: self.asset_id,
+            wrapping_fee_percent: self.wrapping_fee_percent,
+            into_pool_share_id: self.into_pool_share_id,
         };
         // add pallet index
         out.push(self.pallet_index);
@@ -61,13 +67,13 @@ impl TokenRemoveProposal {
     }
 }
 
-impl From<TokenRemoveProposal> for Vec<u8> {
-    fn from(proposal: TokenRemoveProposal) -> Self {
+impl From<WrappingFeeUpdateProposal> for Vec<u8> {
+    fn from(proposal: WrappingFeeUpdateProposal) -> Self {
         proposal.into_bytes()
     }
 }
 
-impl TryFrom<Vec<u8>> for TokenRemoveProposal {
+impl TryFrom<Vec<u8>> for WrappingFeeUpdateProposal {
     type Error = scale_codec::Error;
 
     fn try_from(value: Vec<u8>) -> Result<Self, Self::Error> {
@@ -79,28 +85,28 @@ impl TryFrom<Vec<u8>> for TokenRemoveProposal {
             scale_codec::Error::from("invalid proposal: missing call index")
         })?;
 
-        let call: ExecuteRemoveTokenFromPoolShare =
+        let call: ExecuteWrappingFeeUpdate =
             scale_codec::Decode::decode(&mut &value[2..])?;
 
         let resource_id = ResourceId::from(call.r_id);
-        let name = call.name;
-        let asset_id = call.asset_id;
-        let proposal = TokenRemoveProposal {
+        let wrapping_fee_percent = call.wrapping_fee_percent;
+        let into_pool_share_id = call.into_pool_share_id;
+        let proposal = WrappingFeeUpdateProposal {
             pallet_index,
             call_index,
             resource_id,
-            name,
-            asset_id,
+            wrapping_fee_percent,
+            into_pool_share_id,
         };
         Ok(proposal)
     }
 }
 
 #[derive(scale_codec::Encode, scale_codec::Decode)]
-struct ExecuteRemoveTokenFromPoolShare {
+struct ExecuteWrappingFeeUpdate {
     r_id: [u8; 32],
-    name: Vec<u8>,
-    asset_id: u32,
+    wrapping_fee_percent: u128,
+    into_pool_share_id: u32,
 }
 
 #[cfg(test)]
@@ -114,18 +120,18 @@ mod tests {
         let target_system = TargetSystem::new_tree_id(2);
         let target_chain = TypedChainId::Substrate(1);
         let resource_id = ResourceId::new(target_system, target_chain);
-        let proposal = TokenRemoveProposal::builder()
+        let proposal = WrappingFeeUpdateProposal::builder()
             .resource_id(resource_id)
-            .name("test".to_string())
-            .asset_id(1)
+            .wrapping_fee_percent(5)
+            .into_pool_share_id(1)
             .build();
         let bytes = proposal.to_bytes();
         let expected = concat!(
             "23", // pallet index
-            "02", // call index
+            "00", // call index
             "0000000000000000000000000000000000000000000000000002020000000001", // resource id
-            "1074657374", // name
-            "01000000"    // asset id
+            "05000000000000000000000000000000", // wrapping fee percent
+            "01000000"                          // pool share id
         );
         assert_eq!(expected, hex::encode(bytes));
     }
@@ -134,14 +140,15 @@ mod tests {
     fn decode() {
         let proposal_bytes = hex_literal::hex!(
           "23" // pallet index
-          "02" // call index
+          "00" // call index
           "0000000000000000000000000000000000000000000000000002020000000001" // resource id
-          "1074657374" // name
-          "01000000"  // asset id
+          "05000000000000000000000000000000" // wrapping fee percent
+          "01000000"  // pool share id
         );
 
         let proposal =
-            TokenRemoveProposal::try_from(proposal_bytes.to_vec()).unwrap();
+            WrappingFeeUpdateProposal::try_from(proposal_bytes.to_vec())
+                .unwrap();
         assert_eq!(
             proposal.resource_id(),
             ResourceId::new(
@@ -149,7 +156,7 @@ mod tests {
                 TypedChainId::Substrate(1)
             )
         );
-        assert_eq!(proposal.name(), "test");
-        assert_eq!(proposal.asset_id(), 1);
+        assert_eq!(proposal.wrapping_fee_percent(), 5);
+        assert_eq!(proposal.pool_share_id(), 1);
     }
 }

@@ -20,7 +20,7 @@ hex-literal = "0.3"
 hex = "0.4.3"
 
 [features]
-default = ["std"]
+default = ["std", "evm", "substrate", "scale"]
 std = ["scale-codec/std", "scale-info/std", "num-traits/std"]
 scale = ["scale-codec", "scale-info/derive"]
 evm = []

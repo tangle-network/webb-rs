@@ -117,7 +117,7 @@ impl From<crate::evm::AnchorUpdateProposal> for AnchorUpdateProposal {
         AnchorUpdateProposal::builder()
             .resource_id(proposal.header().resource_id())
             .src_chain(proposal.src_chain())
-            .merkle_root(proposal.merkle_root().clone())
+            .merkle_root(*proposal.merkle_root())
             .latest_leaf_index(proposal.latest_leaf_index())
             .build()
     }
@@ -160,7 +160,7 @@ mod tests {
         let proposal = AnchorUpdateProposal::builder()
             .resource_id(resource_id)
             .src_chain(src_chain)
-            .merkle_root(merkle_root.clone())
+            .merkle_root(merkle_root)
             .latest_leaf_index(latest_leaf_index)
             .build();
         let bytes = proposal.to_bytes();
