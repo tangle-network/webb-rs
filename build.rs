@@ -31,6 +31,14 @@ mod evm {
         Ok(())
     }
 
+    pub fn build_protocol_solidity_anchor_base() -> Result<(), Box<dyn Error>> {
+        parse_and_write_abigen(
+            "contracts/protocol-solidity/AnchorBase.json",
+            "src/evm/contract/protocol_solidity/anchor_base.rs",
+            "AnchorBaseContract",
+        )
+    }
+
     pub fn build_protocol_solidity_anchor() -> Result<(), Box<dyn Error>> {
         parse_and_write_abigen(
             "contracts/protocol-solidity/FixedDepositAnchor.json",
@@ -182,6 +190,7 @@ fn run_cargo_fmt() -> Result<(), Box<dyn Error>> {
 fn main() -> Result<(), Box<dyn Error>> {
     #[cfg(feature = "generate-contracts")]
     {
+        evm::build_protocol_solidity_anchor_base()?;
         evm::build_protocol_solidity_anchor()?;
         evm::build_protocol_solidity_vanchor()?;
         evm::build_protocol_solidity_anchor_proxy()?;
