@@ -2,7 +2,7 @@
 //! - [x] `AnchorUpdateProposal`
 //! - [x] `TokenAddProposal`
 //! - [x] `TokenRemoveProposal`
-//! - [ ] `WrappingFeeUpdateProposal`
+//! - [x] `WrappingFeeUpdateProposal`
 
 mod anchor_update;
 mod token_add;

@@ -14,7 +14,7 @@ pub struct WrappingFeeUpdateProposal {
     #[builder(default = 0)]
     call_index: u8,
     resource_id: ResourceId,
-    #[builder(setter(transform = |v: u8| u128::from(v)))]
+    #[builder(setter(transform = |v: u128| check_and_validate_wrapping_fee(v)))]
     wrapping_fee_percent: u128,
     into_pool_share_id: u32,
 }
@@ -109,6 +109,14 @@ struct ExecuteWrappingFeeUpdate {
     into_pool_share_id: u32,
 }
 
+fn check_and_validate_wrapping_fee(wrapping_fee_percent: u128) -> u128 {
+    debug_assert!(
+        wrapping_fee_percent <= 100,
+        "wrapping fee percent is too large"
+    );
+    wrapping_fee_percent
+}
+
 #[cfg(test)]
 mod tests {
     use crate::{TargetSystem, TypedChainId};
@@ -158,5 +166,19 @@ mod tests {
         );
         assert_eq!(proposal.wrapping_fee_percent(), 5);
         assert_eq!(proposal.pool_share_id(), 1);
+    }
+
+    #[cfg(debug_assertions)]
+    #[should_panic(expected = "wrapping fee percent is too large")]
+    #[test]
+    fn should_check_wrapping_fee_value() {
+        let target_system = TargetSystem::new_tree_id(2);
+        let target_chain = TypedChainId::Substrate(1);
+        let resource_id = ResourceId::new(target_system, target_chain);
+        let _ = WrappingFeeUpdateProposal::builder()
+            .resource_id(resource_id)
+            .wrapping_fee_percent(101)
+            .into_pool_share_id(1)
+            .build();
     }
 }
