@@ -19,6 +19,7 @@ pub struct AnchorUpdateProposal {
     src_chain: TypedChainId,
     merkle_root: [u8; 32],
     latest_leaf_index: u32,
+    target: [u8; 32],
 }
 
 impl AnchorUpdateProposal {
@@ -46,6 +47,12 @@ impl AnchorUpdateProposal {
         &self.merkle_root
     }
 
+    /// Get the target.
+    #[must_use]
+    pub const fn target(&self) -> &[u8; 32] {
+        &self.target
+    }
+
     /// Convert the proposal to a vector of bytes.
     #[must_use]
     pub fn to_bytes(&self) -> Vec<u8> {
@@ -56,6 +63,7 @@ impl AnchorUpdateProposal {
                 src_chain_id: self.src_chain.chain_id(),
                 root: Element(self.merkle_root),
                 latest_leaf_index: self.latest_leaf_index,
+                target: Element(self.target),
             },
         };
         // add pallet index
@@ -98,6 +106,7 @@ impl TryFrom<Vec<u8>> for AnchorUpdateProposal {
         let src_chain = TypedChainId::from(call.anchor_metadata.src_chain_id);
         let merkle_root = call.anchor_metadata.root.0;
         let latest_leaf_index = call.anchor_metadata.latest_leaf_index;
+        let target = call.anchor_metadata.target.0;
         let proposal = AnchorUpdateProposal {
             pallet_index,
             call_index,
@@ -105,6 +114,7 @@ impl TryFrom<Vec<u8>> for AnchorUpdateProposal {
             src_chain,
             merkle_root,
             latest_leaf_index,
+            target,
         };
         Ok(proposal)
     }
@@ -119,6 +129,7 @@ impl From<crate::evm::AnchorUpdateProposal> for AnchorUpdateProposal {
             .src_chain(proposal.src_chain())
             .merkle_root(*proposal.merkle_root())
             .latest_leaf_index(proposal.latest_leaf_index())
+            .target(*proposal.target())
             .build()
     }
 }
@@ -131,6 +142,7 @@ struct EdgeMetadata {
     src_chain_id: u64,
     root: Element,
     latest_leaf_index: u32,
+    target: Element,
 }
 
 #[derive(scale_codec::Encode, scale_codec::Decode)]
@@ -157,17 +169,20 @@ mod tests {
             0x0b, 0x0c, 0x0d, 0x0e, 0x0f, 0x10, 0x11, 0x12, 0x13, 0x14, 0x15,
             0x16, 0x17, 0x18, 0x19, 0x1a, 0x1b, 0x1c, 0x1d, 0x1e, 0x1f,
         ];
+        let target = [0x11u8; 32];
         let proposal = AnchorUpdateProposal::builder()
             .resource_id(resource_id)
             .src_chain(src_chain)
             .merkle_root(merkle_root)
             .latest_leaf_index(latest_leaf_index)
+            .target(target)
             .build();
         let bytes = proposal.to_bytes();
         let expected = concat!(
           "3201", // pallet index, call index
           "0000000000000000000000000000000000000000000000000002020000000001", // resource id
           "0200000000020000000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f01000000", // metadata
+          "1111111111111111111111111111111111111111111111111111111111111111" // target
         );
         let bytes_hex = hex::encode(bytes);
         assert_eq!(bytes_hex, expected);
@@ -179,6 +194,7 @@ mod tests {
           "3201" // pallet index, call index
           "0000000000000000000000000000000000000000000000000002020000000001" // resource id
           "0200000000020000000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f01000000" // metadata
+          "1111111111111111111111111111111111111111111111111111111111111111" // target
         );
 
         let proposal = AnchorUpdateProposal::try_from(bytes.to_vec()).unwrap();
@@ -203,5 +219,6 @@ mod tests {
             ]
         );
         assert_eq!(proposal.latest_leaf_index, 0x0001);
+        assert_eq!(proposal.target, [0x11u8; 32]);
     }
 }
