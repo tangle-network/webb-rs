@@ -2,7 +2,7 @@
 use crate::ResourceId;
 
 #[cfg(not(feature = "std"))]
-use alloc::vec::Vec;
+use alloc::{string::String, vec::Vec};
 /// Token Add Proposal.
 ///
 /// The [`TokenAddProposal`] allows the token specified by the `AssetId` to
