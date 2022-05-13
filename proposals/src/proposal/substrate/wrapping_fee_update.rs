@@ -1,6 +1,9 @@
 //! Wrapping Fee Update Proposal.
 use crate::ResourceId;
 
+#[cfg(not(feature = "std"))]
+use alloc::vec::Vec;
+
 /// Wrapping Fee Update Proposal.
 ///
 /// The [`WrappingFeeUpdateProposal`] updates the wrapping fee percentage for a specific pool share.

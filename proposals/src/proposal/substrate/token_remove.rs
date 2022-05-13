@@ -1,6 +1,8 @@
 //! Token Remove Proposal.
 use crate::ResourceId;
 
+#[cfg(not(feature = "std"))]
+use alloc::vec::Vec;
 /// Token Remove Proposal.
 ///
 /// The [`TokenRemoveProposal`] allows the token specified by the `AssetId` to

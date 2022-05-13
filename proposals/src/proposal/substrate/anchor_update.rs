@@ -1,6 +1,8 @@
 //! Anchor Update Proposal.
 use crate::{ResourceId, TypedChainId};
 
+#[cfg(not(feature = "std"))]
+use alloc::vec::Vec;
 /// Anchor Update Proposal.
 ///
 /// The [`AnchorUpdateProposal`] updates the target Anchor's knowledge of the
