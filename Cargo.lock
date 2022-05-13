@@ -3933,6 +3933,17 @@ dependencies = [
 ]
 
 [[package]]
+name = "typed-builder"
+version = "0.10.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "89851716b67b937e393b3daa8423e67ddfc4bbbf1654bcf05488e95e0828db0c"
+dependencies = [
+ "proc-macro2",
+ "quote",
+ "syn",
+]
+
+[[package]]
 name = "typenum"
 version = "1.15.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -4202,12 +4213,14 @@ dependencies = [
 
 [[package]]
 name = "webb-proposals"
-version = "0.2.5"
+version = "0.3.0"
 dependencies = [
+ "hex",
  "hex-literal",
  "num-traits",
  "parity-scale-codec",
  "scale-info",
+ "typed-builder",
 ]
 
 [[package]]
