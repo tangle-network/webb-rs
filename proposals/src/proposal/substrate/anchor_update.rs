@@ -1,5 +1,5 @@
 //! Anchor Update Proposal.
-use crate::{ResourceId, TypedChainId};
+use crate::{ProposalHeader, ResourceId, TypedChainId};
 
 #[cfg(not(feature = "std"))]
 use alloc::vec::Vec;
@@ -14,11 +14,11 @@ use alloc::vec::Vec;
     Debug, Copy, Clone, PartialEq, Eq, Hash, typed_builder::TypedBuilder,
 )]
 pub struct AnchorUpdateProposal {
+    header: ProposalHeader,
     #[builder(default = 50)]
     pallet_index: u8,
     #[builder(default = 1)]
     call_index: u8,
-    resource_id: ResourceId,
     src_chain: TypedChainId,
     merkle_root: [u8; 32],
     latest_leaf_index: u32,
@@ -26,10 +26,10 @@ pub struct AnchorUpdateProposal {
 }
 
 impl AnchorUpdateProposal {
-    /// Get the resource id.
+    /// Get the proposal header.
     #[must_use]
-    pub const fn resource_id(&self) -> ResourceId {
-        self.resource_id
+    pub const fn header(&self) -> ProposalHeader {
+        self.header
     }
 
     /// Get the source chain.
@@ -59,9 +59,12 @@ impl AnchorUpdateProposal {
     /// Convert the proposal to a vector of bytes.
     #[must_use]
     pub fn to_bytes(&self) -> Vec<u8> {
-        let mut out = Vec::with_capacity(80);
+        let mut out = Vec::with_capacity(120);
+        // add proposal header 40B
+        out.extend_from_slice(&self.header.to_bytes());
+
         let call = ExecuteAnchorUpdateProposal {
-            r_id: self.resource_id.to_bytes(),
+            r_id: self.header().resource_id().to_bytes(),
             anchor_metadata: EdgeMetadata {
                 src_chain_id: self.src_chain.chain_id(),
                 root: Element(self.merkle_root),
@@ -69,6 +72,7 @@ impl AnchorUpdateProposal {
                 target: Element(self.target),
             },
         };
+
         // add pallet index
         out.push(self.pallet_index);
         // add call index
@@ -94,26 +98,30 @@ impl TryFrom<Vec<u8>> for AnchorUpdateProposal {
     type Error = scale_codec::Error;
 
     fn try_from(value: Vec<u8>) -> Result<Self, Self::Error> {
-        let pallet_index = value.get(0).copied().ok_or_else(|| {
+        // parse header bytes
+        let mut header_bytes = [0u8; ProposalHeader::LENGTH];
+        header_bytes.copy_from_slice(&value[0..ProposalHeader::LENGTH]);
+        let header = ProposalHeader::from(header_bytes);
+
+        // parse pallet index
+        let pallet_index = value.get(40).copied().ok_or_else(|| {
             scale_codec::Error::from("invalid proposal: missing pallet index")
         })?;
-
-        let call_index = value.get(1).copied().ok_or_else(|| {
+        // parse call index
+        let call_index = value.get(41).copied().ok_or_else(|| {
             scale_codec::Error::from("invalid proposal: missing call index")
         })?;
-
+        // parse encoded proposal call
         let call: ExecuteAnchorUpdateProposal =
-            scale_codec::Decode::decode(&mut &value[2..])?;
-
-        let resource_id = ResourceId::from(call.r_id);
+            scale_codec::Decode::decode(&mut &value[42..])?;
         let src_chain = TypedChainId::from(call.anchor_metadata.src_chain_id);
         let merkle_root = call.anchor_metadata.root.0;
         let latest_leaf_index = call.anchor_metadata.latest_leaf_index;
         let target = call.anchor_metadata.target.0;
         let proposal = AnchorUpdateProposal {
+            header,
             pallet_index,
             call_index,
-            resource_id,
             src_chain,
             merkle_root,
             latest_leaf_index,
@@ -128,7 +136,7 @@ impl TryFrom<Vec<u8>> for AnchorUpdateProposal {
 impl From<crate::evm::AnchorUpdateProposal> for AnchorUpdateProposal {
     fn from(proposal: crate::evm::AnchorUpdateProposal) -> Self {
         AnchorUpdateProposal::builder()
-            .resource_id(proposal.header().resource_id())
+            .header(proposal.header())
             .src_chain(proposal.src_chain())
             .merkle_root(*proposal.merkle_root())
             .latest_leaf_index(proposal.latest_leaf_index())
@@ -156,7 +164,7 @@ struct ExecuteAnchorUpdateProposal {
 
 #[cfg(test)]
 mod tests {
-    use crate::{ResourceId, TargetSystem};
+    use crate::{FunctionSignature, Nonce, ResourceId, TargetSystem};
 
     use super::*;
 
@@ -165,6 +173,11 @@ mod tests {
         let target_system = TargetSystem::new_tree_id(2);
         let target_chain = TypedChainId::Substrate(1);
         let resource_id = ResourceId::new(target_system, target_chain);
+        let function_signature =
+            FunctionSignature::new(hex_literal::hex!("cafebabe"));
+        let nonce = Nonce::from(0x0001);
+        let header =
+            ProposalHeader::new(resource_id, function_signature, nonce);
         let src_chain = TypedChainId::Substrate(2);
         let latest_leaf_index = 0x0001;
         let merkle_root = [
@@ -174,14 +187,16 @@ mod tests {
         ];
         let target = [0x11u8; 32];
         let proposal = AnchorUpdateProposal::builder()
-            .resource_id(resource_id)
+            .header(header)
             .src_chain(src_chain)
             .merkle_root(merkle_root)
             .latest_leaf_index(latest_leaf_index)
             .target(target)
             .build();
         let bytes = proposal.to_bytes();
+        println!("SIZE OF BYTES : {:?}", bytes);
         let expected = concat!(
+          "0000000000000000000000000000000000000000000000000002020000000001cafebabe00000001", // header
           "3201", // pallet index, call index
           "0000000000000000000000000000000000000000000000000002020000000001", // resource id
           "0200000000020000000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f01000000", // metadata
@@ -194,6 +209,7 @@ mod tests {
     #[test]
     fn decode() {
         let bytes = hex_literal::hex!(
+          "0000000000000000000000000000000000000000000000000002020000000001cafebabe00000001" //header
           "3201" // pallet index, call index
           "0000000000000000000000000000000000000000000000000002020000000001" // resource id
           "0200000000020000000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f01000000" // metadata
@@ -204,11 +220,11 @@ mod tests {
         assert_eq!(proposal.pallet_index, 0x32);
         assert_eq!(proposal.call_index, 0x01);
         assert_eq!(
-            proposal.resource_id.target_system(),
+            proposal.header.resource_id().target_system(),
             TargetSystem::new_tree_id(2)
         );
         assert_eq!(
-            proposal.resource_id.typed_chain_id(),
+            proposal.header.resource_id().typed_chain_id(),
             TypedChainId::Substrate(1)
         );
         assert_eq!(proposal.src_chain, TypedChainId::Substrate(2));
