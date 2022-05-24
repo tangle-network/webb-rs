@@ -79,7 +79,13 @@ impl TryFrom<Vec<u8>> for TokenRemoveProposal {
     fn try_from(value: Vec<u8>) -> Result<Self, Self::Error> {
         // parse header bytes
         let mut header_bytes = [0u8; ProposalHeader::LENGTH];
-        header_bytes.copy_from_slice(&value[0..ProposalHeader::LENGTH]);
+        let parsed_header =
+            value.get(0..ProposalHeader::LENGTH).ok_or_else(|| {
+                scale_codec::Error::from(
+                    "invaid proposal: invalid length of proposal",
+                )
+            })?;
+        header_bytes.copy_from_slice(parsed_header);
         let header = ProposalHeader::from(header_bytes);
 
         let pallet_index = value.get(40).copied().ok_or_else(|| {
