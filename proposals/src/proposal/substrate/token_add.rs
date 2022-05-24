@@ -1,5 +1,5 @@
 //! Token Add Proposal.
-use crate::ResourceId;
+use crate::ProposalHeader;
 
 #[cfg(not(feature = "std"))]
 use alloc::{string::String, vec::Vec};
@@ -10,21 +10,21 @@ use alloc::{string::String, vec::Vec};
 #[allow(clippy::module_name_repetitions)]
 #[derive(Debug, Clone, PartialEq, Eq, Hash, typed_builder::TypedBuilder)]
 pub struct TokenAddProposal {
+    header: ProposalHeader,
     #[builder(default = 35)]
     pallet_index: u8,
     #[builder(default = 1)]
     call_index: u8,
-    resource_id: ResourceId,
     #[builder(setter(transform = |v: String| v.into_bytes()))]
     name: Vec<u8>,
     asset_id: u32,
 }
 
 impl TokenAddProposal {
-    /// Get the resource id.
+    /// Get the proposal header.
     #[must_use]
-    pub const fn resource_id(&self) -> ResourceId {
-        self.resource_id
+    pub const fn header(&self) -> ProposalHeader {
+        self.header
     }
 
     /// Get the asset name.
@@ -42,9 +42,12 @@ impl TokenAddProposal {
     /// Convert the proposal to a vector of bytes.
     #[must_use]
     pub fn to_bytes(&self) -> Vec<u8> {
-        let mut out = Vec::with_capacity(40 + self.name.len());
+        let mut out = Vec::with_capacity(40 + 40 + self.name.len());
+        // add proposal header 40B
+        out.extend_from_slice(&self.header.to_bytes());
+
         let call = ExecuteAddTokenToPoolShare {
-            r_id: self.resource_id.to_bytes(),
+            r_id: self.header.resource_id().to_bytes(),
             name: self.name.clone(),
             asset_id: self.asset_id,
         };
@@ -73,24 +76,28 @@ impl TryFrom<Vec<u8>> for TokenAddProposal {
     type Error = scale_codec::Error;
 
     fn try_from(value: Vec<u8>) -> Result<Self, Self::Error> {
-        let pallet_index = value.get(0).copied().ok_or_else(|| {
+        // parse header bytes
+        let mut header_bytes = [0u8; ProposalHeader::LENGTH];
+        header_bytes.copy_from_slice(&value[0..ProposalHeader::LENGTH]);
+        let header = ProposalHeader::from(header_bytes);
+
+        let pallet_index = value.get(40).copied().ok_or_else(|| {
             scale_codec::Error::from("invalid proposal: missing pallet index")
         })?;
 
-        let call_index = value.get(1).copied().ok_or_else(|| {
+        let call_index = value.get(41).copied().ok_or_else(|| {
             scale_codec::Error::from("invalid proposal: missing call index")
         })?;
 
         let call: ExecuteAddTokenToPoolShare =
-            scale_codec::Decode::decode(&mut &value[2..])?;
+            scale_codec::Decode::decode(&mut &value[42..])?;
 
-        let resource_id = ResourceId::from(call.r_id);
         let name = call.name;
         let asset_id = call.asset_id;
         let proposal = TokenAddProposal {
+            header,
             pallet_index,
             call_index,
-            resource_id,
             name,
             asset_id,
         };
@@ -107,7 +114,7 @@ struct ExecuteAddTokenToPoolShare {
 
 #[cfg(test)]
 mod tests {
-    use crate::{TargetSystem, TypedChainId};
+    use crate::{FunctionSignature, Nonce, ResourceId, TargetSystem, TypedChainId};
 
     use super::*;
 
@@ -116,13 +123,19 @@ mod tests {
         let target_system = TargetSystem::new_tree_id(2);
         let target_chain = TypedChainId::Substrate(1);
         let resource_id = ResourceId::new(target_system, target_chain);
+        let function_signature =
+            FunctionSignature::new(hex_literal::hex!("cafebabe"));
+        let nonce = Nonce::from(0x0001);
+        let header =
+            ProposalHeader::new(resource_id, function_signature, nonce);
         let proposal = TokenAddProposal::builder()
-            .resource_id(resource_id)
+            .header(header)
             .name("test".to_string())
             .asset_id(1)
             .build();
         let bytes = proposal.to_bytes();
         let expected = concat!(
+            "0000000000000000000000000000000000000000000000000002020000000001cafebabe00000001", // header
             "23", // pallet index
             "01", // call index
             "0000000000000000000000000000000000000000000000000002020000000001", // resource id
@@ -135,6 +148,7 @@ mod tests {
     #[test]
     fn decode() {
         let proposal_bytes = hex_literal::hex!(
+          "0000000000000000000000000000000000000000000000000002020000000001cafebabe00000001" // header
           "23" // pallet index
           "01" // call index
           "0000000000000000000000000000000000000000000000000002020000000001" // resource id
@@ -145,7 +159,7 @@ mod tests {
         let proposal =
             TokenAddProposal::try_from(proposal_bytes.to_vec()).unwrap();
         assert_eq!(
-            proposal.resource_id(),
+            proposal.header.resource_id(),
             ResourceId::new(
                 TargetSystem::new_tree_id(2),
                 TypedChainId::Substrate(1)
