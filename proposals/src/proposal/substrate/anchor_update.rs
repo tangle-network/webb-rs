@@ -1,5 +1,5 @@
 //! Anchor Update Proposal.
-use crate::{ProposalHeader, ResourceId, TypedChainId};
+use crate::{ProposalHeader, TypedChainId};
 
 #[cfg(not(feature = "std"))]
 use alloc::vec::Vec;

@@ -114,7 +114,9 @@ struct ExecuteAddTokenToPoolShare {
 
 #[cfg(test)]
 mod tests {
-    use crate::{FunctionSignature, Nonce, ResourceId, TargetSystem, TypedChainId};
+    use crate::{
+        FunctionSignature, Nonce, ResourceId, TargetSystem, TypedChainId,
+    };
 
     use super::*;
 
