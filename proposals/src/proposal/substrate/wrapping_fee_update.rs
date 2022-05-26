@@ -1,5 +1,5 @@
 //! Wrapping Fee Update Proposal.
-use crate::ResourceId;
+use crate::ProposalHeader;
 
 #[cfg(not(feature = "std"))]
 use alloc::vec::Vec;
@@ -12,21 +12,21 @@ use alloc::vec::Vec;
     Debug, Copy, Clone, PartialEq, Eq, Hash, typed_builder::TypedBuilder,
 )]
 pub struct WrappingFeeUpdateProposal {
+    header: ProposalHeader,
     #[builder(default = 35)]
     pallet_index: u8,
     #[builder(default = 0)]
     call_index: u8,
-    resource_id: ResourceId,
     #[builder(setter(transform = |v: u128| check_and_validate_wrapping_fee(v)))]
     wrapping_fee_percent: u128,
     into_pool_share_id: u32,
 }
 
 impl WrappingFeeUpdateProposal {
-    /// Get the resource id.
+    /// Get the proposal header.
     #[must_use]
-    pub const fn resource_id(&self) -> ResourceId {
-        self.resource_id
+    pub const fn header(&self) -> ProposalHeader {
+        self.header
     }
 
     /// Get the wrapping fee percent.
@@ -49,9 +49,12 @@ impl WrappingFeeUpdateProposal {
     /// Convert the proposal to a vector of bytes.
     #[must_use]
     pub fn to_bytes(&self) -> Vec<u8> {
-        let mut out = Vec::with_capacity(40);
+        let mut out = Vec::with_capacity(80);
+        // add proposal header 40B
+        out.extend_from_slice(&self.header.to_bytes());
+
         let call = ExecuteWrappingFeeUpdate {
-            r_id: self.resource_id.to_bytes(),
+            r_id: self.header.resource_id().to_bytes(),
             wrapping_fee_percent: self.wrapping_fee_percent,
             into_pool_share_id: self.into_pool_share_id,
         };
@@ -80,24 +83,34 @@ impl TryFrom<Vec<u8>> for WrappingFeeUpdateProposal {
     type Error = scale_codec::Error;
 
     fn try_from(value: Vec<u8>) -> Result<Self, Self::Error> {
-        let pallet_index = value.get(0).copied().ok_or_else(|| {
+        // parse header bytes
+        let mut header_bytes = [0u8; ProposalHeader::LENGTH];
+        let parsed_header =
+            value.get(0..ProposalHeader::LENGTH).ok_or_else(|| {
+                scale_codec::Error::from(
+                    "invaid proposal: invalid length of proposal",
+                )
+            })?;
+        header_bytes.copy_from_slice(parsed_header);
+        let header = ProposalHeader::from(header_bytes);
+
+        let pallet_index = value.get(40).copied().ok_or_else(|| {
             scale_codec::Error::from("invalid proposal: missing pallet index")
         })?;
 
-        let call_index = value.get(1).copied().ok_or_else(|| {
+        let call_index = value.get(41).copied().ok_or_else(|| {
             scale_codec::Error::from("invalid proposal: missing call index")
         })?;
 
         let call: ExecuteWrappingFeeUpdate =
-            scale_codec::Decode::decode(&mut &value[2..])?;
+            scale_codec::Decode::decode(&mut &value[42..])?;
 
-        let resource_id = ResourceId::from(call.r_id);
         let wrapping_fee_percent = call.wrapping_fee_percent;
         let into_pool_share_id = call.into_pool_share_id;
         let proposal = WrappingFeeUpdateProposal {
+            header,
             pallet_index,
             call_index,
-            resource_id,
             wrapping_fee_percent,
             into_pool_share_id,
         };
@@ -122,7 +135,9 @@ fn check_and_validate_wrapping_fee(wrapping_fee_percent: u128) -> u128 {
 
 #[cfg(test)]
 mod tests {
-    use crate::{TargetSystem, TypedChainId};
+    use crate::{
+        FunctionSignature, Nonce, ResourceId, TargetSystem, TypedChainId,
+    };
 
     use super::*;
 
@@ -131,13 +146,19 @@ mod tests {
         let target_system = TargetSystem::new_tree_id(2);
         let target_chain = TypedChainId::Substrate(1);
         let resource_id = ResourceId::new(target_system, target_chain);
+        let function_signature =
+            FunctionSignature::new(hex_literal::hex!("cafebabe"));
+        let nonce = Nonce::from(0x0001);
+        let header =
+            ProposalHeader::new(resource_id, function_signature, nonce);
         let proposal = WrappingFeeUpdateProposal::builder()
-            .resource_id(resource_id)
+            .header(header)
             .wrapping_fee_percent(5)
             .into_pool_share_id(1)
             .build();
         let bytes = proposal.to_bytes();
         let expected = concat!(
+            "0000000000000000000000000000000000000000000000000002020000000001cafebabe00000001", // header
             "23", // pallet index
             "00", // call index
             "0000000000000000000000000000000000000000000000000002020000000001", // resource id
@@ -150,6 +171,7 @@ mod tests {
     #[test]
     fn decode() {
         let proposal_bytes = hex_literal::hex!(
+          "0000000000000000000000000000000000000000000000000002020000000001cafebabe00000001" // header
           "23" // pallet index
           "00" // call index
           "0000000000000000000000000000000000000000000000000002020000000001" // resource id
@@ -161,7 +183,7 @@ mod tests {
             WrappingFeeUpdateProposal::try_from(proposal_bytes.to_vec())
                 .unwrap();
         assert_eq!(
-            proposal.resource_id(),
+            proposal.header.resource_id(),
             ResourceId::new(
                 TargetSystem::new_tree_id(2),
                 TypedChainId::Substrate(1)
@@ -178,8 +200,13 @@ mod tests {
         let target_system = TargetSystem::new_tree_id(2);
         let target_chain = TypedChainId::Substrate(1);
         let resource_id = ResourceId::new(target_system, target_chain);
+        let function_signature =
+            FunctionSignature::new(hex_literal::hex!("cafebabe"));
+        let nonce = Nonce::from(0x0001);
+        let header =
+            ProposalHeader::new(resource_id, function_signature, nonce);
         let _ = WrappingFeeUpdateProposal::builder()
-            .resource_id(resource_id)
+            .header(header)
             .wrapping_fee_percent(101)
             .into_pool_share_id(1)
             .build();

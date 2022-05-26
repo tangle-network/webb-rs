@@ -100,7 +100,13 @@ impl TryFrom<Vec<u8>> for AnchorUpdateProposal {
     fn try_from(value: Vec<u8>) -> Result<Self, Self::Error> {
         // parse header bytes
         let mut header_bytes = [0u8; ProposalHeader::LENGTH];
-        header_bytes.copy_from_slice(&value[0..ProposalHeader::LENGTH]);
+        let parsed_header =
+            value.get(0..ProposalHeader::LENGTH).ok_or_else(|| {
+                scale_codec::Error::from(
+                    "invaid proposal: invalid length of proposal",
+                )
+            })?;
+        header_bytes.copy_from_slice(parsed_header);
         let header = ProposalHeader::from(header_bytes);
 
         // parse pallet index
@@ -194,7 +200,6 @@ mod tests {
             .target(target)
             .build();
         let bytes = proposal.to_bytes();
-        println!("SIZE OF BYTES : {:?}", bytes);
         let expected = concat!(
           "0000000000000000000000000000000000000000000000000002020000000001cafebabe00000001", // header
           "3201", // pallet index, call index
@@ -209,11 +214,11 @@ mod tests {
     #[test]
     fn decode() {
         let bytes = hex_literal::hex!(
-          "0000000000000000000000000000000000000000000000000002020000000001cafebabe00000001" //header
-          "3201" // pallet index, call index
-          "0000000000000000000000000000000000000000000000000002020000000001" // resource id
-          "0200000000020000000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f01000000" // metadata
-          "1111111111111111111111111111111111111111111111111111111111111111" // target
+            "0000000000000000000000000000000000000000000000000002020000000001cafebabe00000001" //header
+            "3201" // pallet index, call index
+            "0000000000000000000000000000000000000000000000000002020000000001" // resource id
+            "0200000000020000000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f01000000" // metadata
+            "1111111111111111111111111111111111111111111111111111111111111111" // target
         );
 
         let proposal = AnchorUpdateProposal::try_from(bytes.to_vec()).unwrap();
