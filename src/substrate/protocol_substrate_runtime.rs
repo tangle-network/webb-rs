@@ -58,53 +58,35 @@ pub mod api {
         #[codec(index = 30)]
         HasherBn254(hasher_bn254::Event),
         #[codec(index = 31)]
-        HasherBls381(hasher_bls381::Event),
-        #[codec(index = 32)]
         AssetRegistry(asset_registry::Event),
-        #[codec(index = 33)]
+        #[codec(index = 32)]
         Currencies(currencies::Event),
-        #[codec(index = 34)]
+        #[codec(index = 33)]
         Tokens(tokens::Event),
-        #[codec(index = 35)]
+        #[codec(index = 34)]
         TokenWrapper(token_wrapper::Event),
-        #[codec(index = 36)]
+        #[codec(index = 35)]
         MixerVerifierBn254(mixer_verifier_bn254::Event),
-        #[codec(index = 37)]
-        MixerVerifierBls381(mixer_verifier_bls381::Event),
-        #[codec(index = 38)]
+        #[codec(index = 36)]
         AnchorVerifierBn254(anchor_verifier_bn254::Event),
-        #[codec(index = 39)]
-        AnchorVerifierBls381(anchor_verifier_bls381::Event),
-        #[codec(index = 40)]
+        #[codec(index = 37)]
         VAnchorVerifier2x2Bn254(v_anchor_verifier2x2_bn254::Event),
-        #[codec(index = 41)]
-        VAnchorVerifier2x2Bls381(v_anchor_verifier2x2_bls381::Event),
-        #[codec(index = 42)]
+        #[codec(index = 38)]
         MerkleTreeBn254(merkle_tree_bn254::Event),
-        #[codec(index = 43)]
-        MerkleTreeBls381(merkle_tree_bls381::Event),
-        #[codec(index = 44)]
+        #[codec(index = 39)]
         LinkableTreeBn254(linkable_tree_bn254::Event),
-        #[codec(index = 45)]
-        LinkableTreeBls381(linkable_tree_bls381::Event),
-        #[codec(index = 46)]
+        #[codec(index = 40)]
         MixerBn254(mixer_bn254::Event),
-        #[codec(index = 47)]
-        MixerBls381(mixer_bls381::Event),
-        #[codec(index = 48)]
+        #[codec(index = 41)]
         AnchorBn254(anchor_bn254::Event),
-        #[codec(index = 49)]
-        AnchorBls381(anchor_bls381::Event),
-        #[codec(index = 50)]
+        #[codec(index = 42)]
         AnchorHandlerBn254(anchor_handler_bn254::Event),
-        #[codec(index = 51)]
-        AnchorHandlerBls381(anchor_handler_bls381::Event),
-        #[codec(index = 52)]
+        #[codec(index = 43)]
         VAnchorBn254(v_anchor_bn254::Event),
-        #[codec(index = 53)]
-        VAnchorBls381(v_anchor_bls381::Event),
-        #[codec(index = 54)]
+        #[codec(index = 44)]
         Bridge(bridge::Event),
+        #[codec(index = 45)]
+        SignatureBridge(signature_bridge::Event),
     }
     pub mod system {
         use super::runtime_types;
@@ -980,7 +962,7 @@ pub mod api {
                         &mut &[
                             16u8, 119u8, 101u8, 98u8, 98u8, 16u8, 119u8, 101u8,
                             98u8, 98u8, 1u8, 0u8, 0u8, 0u8, 3u8, 0u8, 0u8, 0u8,
-                            0u8, 0u8, 0u8, 0u8, 48u8, 223u8, 106u8, 203u8,
+                            0u8, 0u8, 0u8, 0u8, 52u8, 223u8, 106u8, 203u8,
                             104u8, 153u8, 7u8, 96u8, 155u8, 4u8, 0u8, 0u8, 0u8,
                             55u8, 227u8, 151u8, 252u8, 124u8, 145u8, 245u8,
                             228u8, 1u8, 0u8, 0u8, 0u8, 64u8, 254u8, 58u8,
@@ -998,8 +980,9 @@ pub mod api {
                             162u8, 168u8, 1u8, 0u8, 0u8, 0u8, 171u8, 60u8, 5u8,
                             114u8, 41u8, 31u8, 235u8, 139u8, 1u8, 0u8, 0u8,
                             0u8, 81u8, 255u8, 254u8, 165u8, 111u8, 208u8,
-                            197u8, 212u8, 1u8, 0u8, 0u8, 0u8, 1u8, 0u8, 0u8,
-                            0u8, 1u8,
+                            197u8, 212u8, 1u8, 0u8, 0u8, 0u8, 35u8, 88u8,
+                            169u8, 105u8, 1u8, 177u8, 170u8, 135u8, 1u8, 0u8,
+                            0u8, 0u8, 1u8, 0u8, 0u8, 0u8, 1u8,
                         ][..],
                     )?)
                 }
@@ -1022,7 +1005,7 @@ pub mod api {
             impl ::subxt::StorageEntry for RandomMaterial {
                 const PALLET: &'static str = "RandomnessCollectiveFlip";
                 const STORAGE: &'static str = "RandomMaterial";
-                type Value = ::std::vec::Vec<::subxt::sp_core::H256>;
+                type Value = runtime_types :: frame_support :: storage :: bounded_vec :: BoundedVec < :: subxt :: sp_core :: H256 > ;
                 fn key(&self) -> ::subxt::StorageEntryKey {
                     ::subxt::StorageEntryKey::Plain
                 }
@@ -1033,14 +1016,7 @@ pub mod api {
             impl<'a, T: ::subxt::Config> StorageApi<'a, T> {
                 pub fn new(client: &'a ::subxt::Client<T>) -> Self {
                     Self { client }
-                }
-                pub async fn random_material(
-                    &self,
-                    hash: ::core::option::Option<T::Hash>,
-                ) -> ::core::result::Result<
-                    ::std::vec::Vec<::subxt::sp_core::H256>,
-                    ::subxt::BasicError,
-                > {
+                }                pub async fn random_material (& self , hash : :: core :: option :: Option < T :: Hash > ,) -> :: core :: result :: Result < runtime_types :: frame_support :: storage :: bounded_vec :: BoundedVec < :: subxt :: sp_core :: H256 > , :: subxt :: BasicError >{
                     let entry = RandomMaterial;
                     self.client.storage().fetch_or_default(&entry, hash).await
                 }
@@ -2865,6 +2841,24 @@ pub mod api {
                 const PALLET: &'static str = "ElectionProviderMultiPhase";
                 const FUNCTION: &'static str = "submit";
             }
+            #[derive(
+                :: subxt :: codec :: Encode,
+                :: subxt :: codec :: Decode,
+                Debug,
+                Eq,
+                PartialEq,
+                Clone,
+            )]
+            pub struct governance_fallback {
+                pub maybe_max_voters:
+                    ::core::option::Option<::core::primitive::u32>,
+                pub maybe_max_targets:
+                    ::core::option::Option<::core::primitive::u32>,
+            }
+            impl ::subxt::Call for governance_fallback {
+                const PALLET: &'static str = "ElectionProviderMultiPhase";
+                const FUNCTION: &'static str = "governance_fallback";
+            }
             pub struct TransactionApi<'a, T: ::subxt::Config, X, A> {
                 client: &'a ::subxt::Client<T>,
                 marker: ::core::marker::PhantomData<(X, A)>,
@@ -2949,6 +2943,28 @@ pub mod api {
                     let call = submit {
                         raw_solution: ::std::boxed::Box::new(raw_solution),
                         num_signed_submissions,
+                    };
+                    ::subxt::SubmittableExtrinsic::new(self.client, call)
+                }
+                pub fn governance_fallback(
+                    &self,
+                    maybe_max_voters: ::core::option::Option<
+                        ::core::primitive::u32,
+                    >,
+                    maybe_max_targets: ::core::option::Option<
+                        ::core::primitive::u32,
+                    >,
+                ) -> ::subxt::SubmittableExtrinsic<
+                    'a,
+                    T,
+                    X,
+                    A,
+                    governance_fallback,
+                    DispatchError,
+                > {
+                    let call = governance_fallback {
+                        maybe_max_voters,
+                        maybe_max_targets,
                     };
                     ::subxt::SubmittableExtrinsic::new(self.client, call)
                 }
@@ -3085,7 +3101,7 @@ pub mod api {
             impl ::subxt::StorageEntry for Snapshot {
                 const PALLET: &'static str = "ElectionProviderMultiPhase";
                 const STORAGE: &'static str = "Snapshot";
-                type Value = runtime_types :: pallet_election_provider_multi_phase :: RoundSnapshot < :: subxt :: sp_core :: crypto :: AccountId32 > ;
+                type Value = runtime_types :: pallet_election_provider_multi_phase :: RoundSnapshot ;
                 fn key(&self) -> ::subxt::StorageEntryKey {
                     ::subxt::StorageEntryKey::Plain
                 }
@@ -3180,7 +3196,7 @@ pub mod api {
                 }                pub async fn queued_solution (& self , hash : :: core :: option :: Option < T :: Hash > ,) -> :: core :: result :: Result < :: core :: option :: Option < runtime_types :: pallet_election_provider_multi_phase :: ReadySolution < :: subxt :: sp_core :: crypto :: AccountId32 > > , :: subxt :: BasicError >{
                     let entry = QueuedSolution;
                     self.client.storage().fetch(&entry, hash).await
-                }                pub async fn snapshot (& self , hash : :: core :: option :: Option < T :: Hash > ,) -> :: core :: result :: Result < :: core :: option :: Option < runtime_types :: pallet_election_provider_multi_phase :: RoundSnapshot < :: subxt :: sp_core :: crypto :: AccountId32 > > , :: subxt :: BasicError >{
+                }                pub async fn snapshot (& self , hash : :: core :: option :: Option < T :: Hash > ,) -> :: core :: result :: Result < :: core :: option :: Option < runtime_types :: pallet_election_provider_multi_phase :: RoundSnapshot > , :: subxt :: BasicError >{
                     let entry = Snapshot;
                     self.client.storage().fetch(&entry, hash).await
                 }
@@ -3815,6 +3831,21 @@ pub mod api {
                 const PALLET: &'static str = "Staking";
                 const FUNCTION: &'static str = "chill_other";
             }
+            #[derive(
+                :: subxt :: codec :: Encode,
+                :: subxt :: codec :: Decode,
+                Debug,
+                Eq,
+                PartialEq,
+                Clone,
+            )]
+            pub struct force_apply_min_commission {
+                pub validator_stash: ::subxt::sp_core::crypto::AccountId32,
+            }
+            impl ::subxt::Call for force_apply_min_commission {
+                const PALLET: &'static str = "Staking";
+                const FUNCTION: &'static str = "force_apply_min_commission";
+            }
             pub struct TransactionApi<'a, T: ::subxt::Config, X, A> {
                 client: &'a ::subxt::Client<T>,
                 marker: ::core::marker::PhantomData<(X, A)>,
@@ -4240,6 +4271,20 @@ pub mod api {
                     let call = chill_other { controller };
                     ::subxt::SubmittableExtrinsic::new(self.client, call)
                 }
+                pub fn force_apply_min_commission(
+                    &self,
+                    validator_stash: ::subxt::sp_core::crypto::AccountId32,
+                ) -> ::subxt::SubmittableExtrinsic<
+                    'a,
+                    T,
+                    X,
+                    A,
+                    force_apply_min_commission,
+                    DispatchError,
+                > {
+                    let call = force_apply_min_commission { validator_stash };
+                    ::subxt::SubmittableExtrinsic::new(self.client, call)
+                }
             }
         }
         pub type Event = runtime_types::pallet_staking::pallet::pallet::Event;
@@ -4577,9 +4622,7 @@ pub mod api {
             impl ::subxt::StorageEntry for Nominators {
                 const PALLET: &'static str = "Staking";
                 const STORAGE: &'static str = "Nominators";
-                type Value = runtime_types::pallet_staking::Nominations<
-                    ::subxt::sp_core::crypto::AccountId32,
-                >;
+                type Value = runtime_types::pallet_staking::Nominations;
                 fn key(&self) -> ::subxt::StorageEntryKey {
                     ::subxt::StorageEntryKey::Map(vec![
                         ::subxt::StorageMapKey::new(
@@ -5130,9 +5173,7 @@ pub mod api {
                     hash: ::core::option::Option<T::Hash>,
                 ) -> ::core::result::Result<
                     ::core::option::Option<
-                        runtime_types::pallet_staking::Nominations<
-                            ::subxt::sp_core::crypto::AccountId32,
-                        >,
+                        runtime_types::pallet_staking::Nominations,
                     >,
                     ::subxt::BasicError,
                 > {
@@ -5598,16 +5639,6 @@ pub mod api {
                 > {
                     Ok(::subxt::codec::Decode::decode(
                         &mut &[0u8, 1u8, 0u8, 0u8][..],
-                    )?)
-                }
-                pub fn max_nominations(
-                    &self,
-                ) -> ::core::result::Result<
-                    ::core::primitive::u32,
-                    ::subxt::BasicError,
-                > {
-                    Ok(::subxt::codec::Decode::decode(
-                        &mut &[16u8, 0u8, 0u8, 0u8][..],
                     )?)
                 }
             }
@@ -7138,20 +7169,6 @@ pub mod api {
                     ])
                 }
             }
-            pub struct Locks(pub ::subxt::sp_core::crypto::AccountId32);
-            impl ::subxt::StorageEntry for Locks {
-                const PALLET: &'static str = "Democracy";
-                const STORAGE: &'static str = "Locks";
-                type Value = ::core::primitive::u32;
-                fn key(&self) -> ::subxt::StorageEntryKey {
-                    ::subxt::StorageEntryKey::Map(vec![
-                        ::subxt::StorageMapKey::new(
-                            &self.0,
-                            ::subxt::StorageHasher::Twox64Concat,
-                        ),
-                    ])
-                }
-            }
             pub struct LastTabledWasExternal;
             impl ::subxt::StorageEntry for LastTabledWasExternal {
                 const PALLET: &'static str = "Democracy";
@@ -7356,26 +7373,6 @@ pub mod api {
                     hash: ::core::option::Option<T::Hash>,
                 ) -> ::core::result::Result<
                     ::subxt::KeyIter<'a, T, VotingOf>,
-                    ::subxt::BasicError,
-                > {
-                    self.client.storage().iter(hash).await
-                }
-                pub async fn locks(
-                    &self,
-                    _0: ::subxt::sp_core::crypto::AccountId32,
-                    hash: ::core::option::Option<T::Hash>,
-                ) -> ::core::result::Result<
-                    ::core::option::Option<::core::primitive::u32>,
-                    ::subxt::BasicError,
-                > {
-                    let entry = Locks(_0);
-                    self.client.storage().fetch(&entry, hash).await
-                }
-                pub async fn locks_iter(
-                    &self,
-                    hash: ::core::option::Option<T::Hash>,
-                ) -> ::core::result::Result<
-                    ::subxt::KeyIter<'a, T, Locks>,
                     ::subxt::BasicError,
                 > {
                     self.client.storage().iter(hash).await
@@ -14301,7 +14298,7 @@ pub mod api {
             impl ::subxt::StorageEntry for BountyDescriptions {
                 const PALLET: &'static str = "Bounties";
                 const STORAGE: &'static str = "BountyDescriptions";
-                type Value = ::std::vec::Vec<::core::primitive::u8>;
+                type Value = runtime_types :: frame_support :: storage :: bounded_vec :: BoundedVec < :: core :: primitive :: u8 > ;
                 fn key(&self) -> ::subxt::StorageEntryKey {
                     ::subxt::StorageEntryKey::Map(vec![
                         ::subxt::StorageMapKey::new(
@@ -14315,7 +14312,7 @@ pub mod api {
             impl ::subxt::StorageEntry for BountyApprovals {
                 const PALLET: &'static str = "Bounties";
                 const STORAGE: &'static str = "BountyApprovals";
-                type Value = ::std::vec::Vec<::core::primitive::u32>;
+                type Value = runtime_types :: frame_support :: storage :: bounded_vec :: BoundedVec < :: core :: primitive :: u32 > ;
                 fn key(&self) -> ::subxt::StorageEntryKey {
                     ::subxt::StorageEntryKey::Plain
                 }
@@ -14362,17 +14359,7 @@ pub mod api {
                     ::subxt::BasicError,
                 > {
                     self.client.storage().iter(hash).await
-                }
-                pub async fn bounty_descriptions(
-                    &self,
-                    _0: ::core::primitive::u32,
-                    hash: ::core::option::Option<T::Hash>,
-                ) -> ::core::result::Result<
-                    ::core::option::Option<
-                        ::std::vec::Vec<::core::primitive::u8>,
-                    >,
-                    ::subxt::BasicError,
-                > {
+                }                pub async fn bounty_descriptions (& self , _0 : :: core :: primitive :: u32 , hash : :: core :: option :: Option < T :: Hash > ,) -> :: core :: result :: Result < :: core :: option :: Option < runtime_types :: frame_support :: storage :: bounded_vec :: BoundedVec < :: core :: primitive :: u8 > > , :: subxt :: BasicError >{
                     let entry = BountyDescriptions(_0);
                     self.client.storage().fetch(&entry, hash).await
                 }
@@ -14384,14 +14371,7 @@ pub mod api {
                     ::subxt::BasicError,
                 > {
                     self.client.storage().iter(hash).await
-                }
-                pub async fn bounty_approvals(
-                    &self,
-                    hash: ::core::option::Option<T::Hash>,
-                ) -> ::core::result::Result<
-                    ::std::vec::Vec<::core::primitive::u32>,
-                    ::subxt::BasicError,
-                > {
+                }                pub async fn bounty_approvals (& self , hash : :: core :: option :: Option < T :: Hash > ,) -> :: core :: result :: Result < runtime_types :: frame_support :: storage :: bounded_vec :: BoundedVec < :: core :: primitive :: u32 > , :: subxt :: BasicError >{
                     let entry = BountyApprovals;
                     self.client.storage().fetch_or_default(&entry, hash).await
                 }
@@ -15556,93 +15536,6 @@ pub mod api {
             pub struct Parameters;
             impl ::subxt::StorageEntry for Parameters {
                 const PALLET: &'static str = "HasherBn254";
-                const STORAGE: &'static str = "Parameters";
-                type Value = ::std::vec::Vec<::core::primitive::u8>;
-                fn key(&self) -> ::subxt::StorageEntryKey {
-                    ::subxt::StorageEntryKey::Plain
-                }
-            }
-            pub struct StorageApi<'a, T: ::subxt::Config> {
-                client: &'a ::subxt::Client<T>,
-            }
-            impl<'a, T: ::subxt::Config> StorageApi<'a, T> {
-                pub fn new(client: &'a ::subxt::Client<T>) -> Self {
-                    Self { client }
-                }
-                pub async fn parameters(
-                    &self,
-                    hash: ::core::option::Option<T::Hash>,
-                ) -> ::core::result::Result<
-                    ::std::vec::Vec<::core::primitive::u8>,
-                    ::subxt::BasicError,
-                > {
-                    let entry = Parameters;
-                    self.client.storage().fetch_or_default(&entry, hash).await
-                }
-            }
-        }
-    }
-    pub mod hasher_bls381 {
-        use super::runtime_types;
-        pub mod calls {
-            use super::runtime_types;
-            type DispatchError = runtime_types::sp_runtime::DispatchError;
-            #[derive(
-                :: subxt :: codec :: Encode,
-                :: subxt :: codec :: Decode,
-                Debug,
-                Eq,
-                PartialEq,
-                Clone,
-            )]
-            pub struct force_set_parameters {
-                pub parameters: ::std::vec::Vec<::core::primitive::u8>,
-            }
-            impl ::subxt::Call for force_set_parameters {
-                const PALLET: &'static str = "HasherBls381";
-                const FUNCTION: &'static str = "force_set_parameters";
-            }
-            pub struct TransactionApi<'a, T: ::subxt::Config, X, A> {
-                client: &'a ::subxt::Client<T>,
-                marker: ::core::marker::PhantomData<(X, A)>,
-            }
-            impl<'a, T, X, A> TransactionApi<'a, T, X, A>
-            where
-                T: ::subxt::Config,
-                X: ::subxt::SignedExtra<T>,
-                A: ::subxt::AccountData,
-            {
-                pub fn new(client: &'a ::subxt::Client<T>) -> Self {
-                    Self {
-                        client,
-                        marker: ::core::marker::PhantomData,
-                    }
-                }
-                pub fn force_set_parameters(
-                    &self,
-                    parameters: ::std::vec::Vec<::core::primitive::u8>,
-                ) -> ::subxt::SubmittableExtrinsic<
-                    'a,
-                    T,
-                    X,
-                    A,
-                    force_set_parameters,
-                    DispatchError,
-                > {
-                    let call = force_set_parameters { parameters };
-                    ::subxt::SubmittableExtrinsic::new(self.client, call)
-                }
-            }
-        }
-        pub type Event = runtime_types::pallet_hasher::pallet::Event;
-        pub mod events {
-            use super::runtime_types;
-        }
-        pub mod storage {
-            use super::runtime_types;
-            pub struct Parameters;
-            impl ::subxt::StorageEntry for Parameters {
-                const PALLET: &'static str = "HasherBls381";
                 const STORAGE: &'static str = "Parameters";
                 type Value = ::std::vec::Vec<::core::primitive::u8>;
                 fn key(&self) -> ::subxt::StorageEntryKey {
@@ -17288,93 +17181,6 @@ pub mod api {
             }
         }
     }
-    pub mod mixer_verifier_bls381 {
-        use super::runtime_types;
-        pub mod calls {
-            use super::runtime_types;
-            type DispatchError = runtime_types::sp_runtime::DispatchError;
-            #[derive(
-                :: subxt :: codec :: Encode,
-                :: subxt :: codec :: Decode,
-                Debug,
-                Eq,
-                PartialEq,
-                Clone,
-            )]
-            pub struct force_set_parameters {
-                pub parameters: ::std::vec::Vec<::core::primitive::u8>,
-            }
-            impl ::subxt::Call for force_set_parameters {
-                const PALLET: &'static str = "MixerVerifierBls381";
-                const FUNCTION: &'static str = "force_set_parameters";
-            }
-            pub struct TransactionApi<'a, T: ::subxt::Config, X, A> {
-                client: &'a ::subxt::Client<T>,
-                marker: ::core::marker::PhantomData<(X, A)>,
-            }
-            impl<'a, T, X, A> TransactionApi<'a, T, X, A>
-            where
-                T: ::subxt::Config,
-                X: ::subxt::SignedExtra<T>,
-                A: ::subxt::AccountData,
-            {
-                pub fn new(client: &'a ::subxt::Client<T>) -> Self {
-                    Self {
-                        client,
-                        marker: ::core::marker::PhantomData,
-                    }
-                }
-                pub fn force_set_parameters(
-                    &self,
-                    parameters: ::std::vec::Vec<::core::primitive::u8>,
-                ) -> ::subxt::SubmittableExtrinsic<
-                    'a,
-                    T,
-                    X,
-                    A,
-                    force_set_parameters,
-                    DispatchError,
-                > {
-                    let call = force_set_parameters { parameters };
-                    ::subxt::SubmittableExtrinsic::new(self.client, call)
-                }
-            }
-        }
-        pub type Event = runtime_types::pallet_verifier::pallet::Event;
-        pub mod events {
-            use super::runtime_types;
-        }
-        pub mod storage {
-            use super::runtime_types;
-            pub struct Parameters;
-            impl ::subxt::StorageEntry for Parameters {
-                const PALLET: &'static str = "MixerVerifierBls381";
-                const STORAGE: &'static str = "Parameters";
-                type Value = ::std::vec::Vec<::core::primitive::u8>;
-                fn key(&self) -> ::subxt::StorageEntryKey {
-                    ::subxt::StorageEntryKey::Plain
-                }
-            }
-            pub struct StorageApi<'a, T: ::subxt::Config> {
-                client: &'a ::subxt::Client<T>,
-            }
-            impl<'a, T: ::subxt::Config> StorageApi<'a, T> {
-                pub fn new(client: &'a ::subxt::Client<T>) -> Self {
-                    Self { client }
-                }
-                pub async fn parameters(
-                    &self,
-                    hash: ::core::option::Option<T::Hash>,
-                ) -> ::core::result::Result<
-                    ::std::vec::Vec<::core::primitive::u8>,
-                    ::subxt::BasicError,
-                > {
-                    let entry = Parameters;
-                    self.client.storage().fetch_or_default(&entry, hash).await
-                }
-            }
-        }
-    }
     pub mod anchor_verifier_bn254 {
         use super::runtime_types;
         pub mod calls {
@@ -17462,93 +17268,6 @@ pub mod api {
             }
         }
     }
-    pub mod anchor_verifier_bls381 {
-        use super::runtime_types;
-        pub mod calls {
-            use super::runtime_types;
-            type DispatchError = runtime_types::sp_runtime::DispatchError;
-            #[derive(
-                :: subxt :: codec :: Encode,
-                :: subxt :: codec :: Decode,
-                Debug,
-                Eq,
-                PartialEq,
-                Clone,
-            )]
-            pub struct force_set_parameters {
-                pub parameters: ::std::vec::Vec<::core::primitive::u8>,
-            }
-            impl ::subxt::Call for force_set_parameters {
-                const PALLET: &'static str = "AnchorVerifierBls381";
-                const FUNCTION: &'static str = "force_set_parameters";
-            }
-            pub struct TransactionApi<'a, T: ::subxt::Config, X, A> {
-                client: &'a ::subxt::Client<T>,
-                marker: ::core::marker::PhantomData<(X, A)>,
-            }
-            impl<'a, T, X, A> TransactionApi<'a, T, X, A>
-            where
-                T: ::subxt::Config,
-                X: ::subxt::SignedExtra<T>,
-                A: ::subxt::AccountData,
-            {
-                pub fn new(client: &'a ::subxt::Client<T>) -> Self {
-                    Self {
-                        client,
-                        marker: ::core::marker::PhantomData,
-                    }
-                }
-                pub fn force_set_parameters(
-                    &self,
-                    parameters: ::std::vec::Vec<::core::primitive::u8>,
-                ) -> ::subxt::SubmittableExtrinsic<
-                    'a,
-                    T,
-                    X,
-                    A,
-                    force_set_parameters,
-                    DispatchError,
-                > {
-                    let call = force_set_parameters { parameters };
-                    ::subxt::SubmittableExtrinsic::new(self.client, call)
-                }
-            }
-        }
-        pub type Event = runtime_types::pallet_verifier::pallet::Event;
-        pub mod events {
-            use super::runtime_types;
-        }
-        pub mod storage {
-            use super::runtime_types;
-            pub struct Parameters;
-            impl ::subxt::StorageEntry for Parameters {
-                const PALLET: &'static str = "AnchorVerifierBls381";
-                const STORAGE: &'static str = "Parameters";
-                type Value = ::std::vec::Vec<::core::primitive::u8>;
-                fn key(&self) -> ::subxt::StorageEntryKey {
-                    ::subxt::StorageEntryKey::Plain
-                }
-            }
-            pub struct StorageApi<'a, T: ::subxt::Config> {
-                client: &'a ::subxt::Client<T>,
-            }
-            impl<'a, T: ::subxt::Config> StorageApi<'a, T> {
-                pub fn new(client: &'a ::subxt::Client<T>) -> Self {
-                    Self { client }
-                }
-                pub async fn parameters(
-                    &self,
-                    hash: ::core::option::Option<T::Hash>,
-                ) -> ::core::result::Result<
-                    ::std::vec::Vec<::core::primitive::u8>,
-                    ::subxt::BasicError,
-                > {
-                    let entry = Parameters;
-                    self.client.storage().fetch_or_default(&entry, hash).await
-                }
-            }
-        }
-    }
     pub mod v_anchor_verifier2x2_bn254 {
         use super::runtime_types;
         pub mod calls {
@@ -17610,93 +17329,6 @@ pub mod api {
             pub struct Parameters;
             impl ::subxt::StorageEntry for Parameters {
                 const PALLET: &'static str = "VAnchorVerifier2x2Bn254";
-                const STORAGE: &'static str = "Parameters";
-                type Value = ::std::vec::Vec<::core::primitive::u8>;
-                fn key(&self) -> ::subxt::StorageEntryKey {
-                    ::subxt::StorageEntryKey::Plain
-                }
-            }
-            pub struct StorageApi<'a, T: ::subxt::Config> {
-                client: &'a ::subxt::Client<T>,
-            }
-            impl<'a, T: ::subxt::Config> StorageApi<'a, T> {
-                pub fn new(client: &'a ::subxt::Client<T>) -> Self {
-                    Self { client }
-                }
-                pub async fn parameters(
-                    &self,
-                    hash: ::core::option::Option<T::Hash>,
-                ) -> ::core::result::Result<
-                    ::std::vec::Vec<::core::primitive::u8>,
-                    ::subxt::BasicError,
-                > {
-                    let entry = Parameters;
-                    self.client.storage().fetch_or_default(&entry, hash).await
-                }
-            }
-        }
-    }
-    pub mod v_anchor_verifier2x2_bls381 {
-        use super::runtime_types;
-        pub mod calls {
-            use super::runtime_types;
-            type DispatchError = runtime_types::sp_runtime::DispatchError;
-            #[derive(
-                :: subxt :: codec :: Encode,
-                :: subxt :: codec :: Decode,
-                Debug,
-                Eq,
-                PartialEq,
-                Clone,
-            )]
-            pub struct force_set_parameters {
-                pub parameters: ::std::vec::Vec<::core::primitive::u8>,
-            }
-            impl ::subxt::Call for force_set_parameters {
-                const PALLET: &'static str = "VAnchorVerifier2x2Bls381";
-                const FUNCTION: &'static str = "force_set_parameters";
-            }
-            pub struct TransactionApi<'a, T: ::subxt::Config, X, A> {
-                client: &'a ::subxt::Client<T>,
-                marker: ::core::marker::PhantomData<(X, A)>,
-            }
-            impl<'a, T, X, A> TransactionApi<'a, T, X, A>
-            where
-                T: ::subxt::Config,
-                X: ::subxt::SignedExtra<T>,
-                A: ::subxt::AccountData,
-            {
-                pub fn new(client: &'a ::subxt::Client<T>) -> Self {
-                    Self {
-                        client,
-                        marker: ::core::marker::PhantomData,
-                    }
-                }
-                pub fn force_set_parameters(
-                    &self,
-                    parameters: ::std::vec::Vec<::core::primitive::u8>,
-                ) -> ::subxt::SubmittableExtrinsic<
-                    'a,
-                    T,
-                    X,
-                    A,
-                    force_set_parameters,
-                    DispatchError,
-                > {
-                    let call = force_set_parameters { parameters };
-                    ::subxt::SubmittableExtrinsic::new(self.client, call)
-                }
-            }
-        }
-        pub type Event = runtime_types::pallet_verifier::pallet::Event;
-        pub mod events {
-            use super::runtime_types;
-        }
-        pub mod storage {
-            use super::runtime_types;
-            pub struct Parameters;
-            impl ::subxt::StorageEntry for Parameters {
-                const PALLET: &'static str = "VAnchorVerifier2x2Bls381";
                 const STORAGE: &'static str = "Parameters";
                 type Value = ::std::vec::Vec<::core::primitive::u8>;
                 fn key(&self) -> ::subxt::StorageEntryKey {
@@ -17980,423 +17612,6 @@ pub mod api {
             );
             impl ::subxt::StorageEntry for CachedRoots {
                 const PALLET: &'static str = "MerkleTreeBn254";
-                const STORAGE: &'static str = "CachedRoots";
-                type Value = runtime_types::webb_standalone_runtime::Element;
-                fn key(&self) -> ::subxt::StorageEntryKey {
-                    ::subxt::StorageEntryKey::Map(vec![
-                        ::subxt::StorageMapKey::new(
-                            &self.0,
-                            ::subxt::StorageHasher::Blake2_128Concat,
-                        ),
-                        ::subxt::StorageMapKey::new(
-                            &self.1,
-                            ::subxt::StorageHasher::Blake2_128Concat,
-                        ),
-                    ])
-                }
-            }
-            pub struct StorageApi<'a, T: ::subxt::Config> {
-                client: &'a ::subxt::Client<T>,
-            }
-            impl<'a, T: ::subxt::Config> StorageApi<'a, T> {
-                pub fn new(client: &'a ::subxt::Client<T>) -> Self {
-                    Self { client }
-                }
-                pub async fn deposit(
-                    &self,
-                    hash: ::core::option::Option<T::Hash>,
-                ) -> ::core::result::Result<
-                    ::core::option::Option<
-                        runtime_types::webb_primitives::types::DepositDetails<
-                            ::subxt::sp_core::crypto::AccountId32,
-                            ::core::primitive::u128,
-                        >,
-                    >,
-                    ::subxt::BasicError,
-                > {
-                    let entry = Deposit;
-                    self.client.storage().fetch(&entry, hash).await
-                }
-                pub async fn next_tree_id(
-                    &self,
-                    hash: ::core::option::Option<T::Hash>,
-                ) -> ::core::result::Result<
-                    ::core::primitive::u32,
-                    ::subxt::BasicError,
-                > {
-                    let entry = NextTreeId;
-                    self.client.storage().fetch_or_default(&entry, hash).await
-                }
-                pub async fn trees(
-                    &self,
-                    _0: ::core::primitive::u32,
-                    hash: ::core::option::Option<T::Hash>,
-                ) -> ::core::result::Result<
-                    ::core::option::Option<
-                        runtime_types::pallet_mt::types::TreeMetadata<
-                            ::subxt::sp_core::crypto::AccountId32,
-                            ::core::primitive::u32,
-                            runtime_types::webb_standalone_runtime::Element,
-                        >,
-                    >,
-                    ::subxt::BasicError,
-                > {
-                    let entry = Trees(_0);
-                    self.client.storage().fetch(&entry, hash).await
-                }
-                pub async fn trees_iter(
-                    &self,
-                    hash: ::core::option::Option<T::Hash>,
-                ) -> ::core::result::Result<
-                    ::subxt::KeyIter<'a, T, Trees>,
-                    ::subxt::BasicError,
-                > {
-                    self.client.storage().iter(hash).await
-                }
-                pub async fn default_hashes(
-                    &self,
-                    hash: ::core::option::Option<T::Hash>,
-                ) -> ::core::result::Result<
-                    ::std::vec::Vec<
-                        runtime_types::webb_standalone_runtime::Element,
-                    >,
-                    ::subxt::BasicError,
-                > {
-                    let entry = DefaultHashes;
-                    self.client.storage().fetch_or_default(&entry, hash).await
-                }
-                pub async fn leaves(
-                    &self,
-                    _0: ::core::primitive::u32,
-                    _1: ::core::primitive::u32,
-                    hash: ::core::option::Option<T::Hash>,
-                ) -> ::core::result::Result<
-                    runtime_types::webb_standalone_runtime::Element,
-                    ::subxt::BasicError,
-                > {
-                    let entry = Leaves(_0, _1);
-                    self.client.storage().fetch_or_default(&entry, hash).await
-                }
-                pub async fn leaves_iter(
-                    &self,
-                    hash: ::core::option::Option<T::Hash>,
-                ) -> ::core::result::Result<
-                    ::subxt::KeyIter<'a, T, Leaves>,
-                    ::subxt::BasicError,
-                > {
-                    self.client.storage().iter(hash).await
-                }
-                pub async fn next_root_index(
-                    &self,
-                    hash: ::core::option::Option<T::Hash>,
-                ) -> ::core::result::Result<
-                    ::core::primitive::u32,
-                    ::subxt::BasicError,
-                > {
-                    let entry = NextRootIndex;
-                    self.client.storage().fetch_or_default(&entry, hash).await
-                }
-                pub async fn next_leaf_index(
-                    &self,
-                    _0: ::core::primitive::u32,
-                    hash: ::core::option::Option<T::Hash>,
-                ) -> ::core::result::Result<
-                    ::core::primitive::u32,
-                    ::subxt::BasicError,
-                > {
-                    let entry = NextLeafIndex(_0);
-                    self.client.storage().fetch_or_default(&entry, hash).await
-                }
-                pub async fn next_leaf_index_iter(
-                    &self,
-                    hash: ::core::option::Option<T::Hash>,
-                ) -> ::core::result::Result<
-                    ::subxt::KeyIter<'a, T, NextLeafIndex>,
-                    ::subxt::BasicError,
-                > {
-                    self.client.storage().iter(hash).await
-                }
-                pub async fn cached_roots(
-                    &self,
-                    _0: ::core::primitive::u32,
-                    _1: ::core::primitive::u32,
-                    hash: ::core::option::Option<T::Hash>,
-                ) -> ::core::result::Result<
-                    runtime_types::webb_standalone_runtime::Element,
-                    ::subxt::BasicError,
-                > {
-                    let entry = CachedRoots(_0, _1);
-                    self.client.storage().fetch_or_default(&entry, hash).await
-                }
-                pub async fn cached_roots_iter(
-                    &self,
-                    hash: ::core::option::Option<T::Hash>,
-                ) -> ::core::result::Result<
-                    ::subxt::KeyIter<'a, T, CachedRoots>,
-                    ::subxt::BasicError,
-                > {
-                    self.client.storage().iter(hash).await
-                }
-            }
-        }
-    }
-    pub mod merkle_tree_bls381 {
-        use super::runtime_types;
-        pub mod calls {
-            use super::runtime_types;
-            type DispatchError = runtime_types::sp_runtime::DispatchError;
-            #[derive(
-                :: subxt :: codec :: Encode,
-                :: subxt :: codec :: Decode,
-                Debug,
-                Eq,
-                PartialEq,
-                Clone,
-                :: subxt :: codec :: CompactAs,
-            )]
-            pub struct create {
-                pub depth: ::core::primitive::u8,
-            }
-            impl ::subxt::Call for create {
-                const PALLET: &'static str = "MerkleTreeBls381";
-                const FUNCTION: &'static str = "create";
-            }
-            #[derive(
-                :: subxt :: codec :: Encode,
-                :: subxt :: codec :: Decode,
-                Debug,
-                Eq,
-                PartialEq,
-                Clone,
-            )]
-            pub struct insert {
-                pub tree_id: ::core::primitive::u32,
-                pub leaf: runtime_types::webb_standalone_runtime::Element,
-            }
-            impl ::subxt::Call for insert {
-                const PALLET: &'static str = "MerkleTreeBls381";
-                const FUNCTION: &'static str = "insert";
-            }
-            #[derive(
-                :: subxt :: codec :: Encode,
-                :: subxt :: codec :: Decode,
-                Debug,
-                Eq,
-                PartialEq,
-                Clone,
-            )]
-            pub struct force_set_default_hashes {
-                pub default_hashes: ::std::vec::Vec<
-                    runtime_types::webb_standalone_runtime::Element,
-                >,
-            }
-            impl ::subxt::Call for force_set_default_hashes {
-                const PALLET: &'static str = "MerkleTreeBls381";
-                const FUNCTION: &'static str = "force_set_default_hashes";
-            }
-            pub struct TransactionApi<'a, T: ::subxt::Config, X, A> {
-                client: &'a ::subxt::Client<T>,
-                marker: ::core::marker::PhantomData<(X, A)>,
-            }
-            impl<'a, T, X, A> TransactionApi<'a, T, X, A>
-            where
-                T: ::subxt::Config,
-                X: ::subxt::SignedExtra<T>,
-                A: ::subxt::AccountData,
-            {
-                pub fn new(client: &'a ::subxt::Client<T>) -> Self {
-                    Self {
-                        client,
-                        marker: ::core::marker::PhantomData,
-                    }
-                }
-                pub fn create(
-                    &self,
-                    depth: ::core::primitive::u8,
-                ) -> ::subxt::SubmittableExtrinsic<
-                    'a,
-                    T,
-                    X,
-                    A,
-                    create,
-                    DispatchError,
-                > {
-                    let call = create { depth };
-                    ::subxt::SubmittableExtrinsic::new(self.client, call)
-                }
-                pub fn insert(
-                    &self,
-                    tree_id: ::core::primitive::u32,
-                    leaf: runtime_types::webb_standalone_runtime::Element,
-                ) -> ::subxt::SubmittableExtrinsic<
-                    'a,
-                    T,
-                    X,
-                    A,
-                    insert,
-                    DispatchError,
-                > {
-                    let call = insert { tree_id, leaf };
-                    ::subxt::SubmittableExtrinsic::new(self.client, call)
-                }
-                pub fn force_set_default_hashes(
-                    &self,
-                    default_hashes: ::std::vec::Vec<
-                        runtime_types::webb_standalone_runtime::Element,
-                    >,
-                ) -> ::subxt::SubmittableExtrinsic<
-                    'a,
-                    T,
-                    X,
-                    A,
-                    force_set_default_hashes,
-                    DispatchError,
-                > {
-                    let call = force_set_default_hashes { default_hashes };
-                    ::subxt::SubmittableExtrinsic::new(self.client, call)
-                }
-            }
-        }
-        pub type Event = runtime_types::pallet_mt::pallet::Event;
-        pub mod events {
-            use super::runtime_types;
-            #[derive(
-                :: subxt :: codec :: Encode,
-                :: subxt :: codec :: Decode,
-                Debug,
-                Eq,
-                PartialEq,
-                Clone,
-            )]
-            pub struct TreeCreation {
-                pub tree_id: ::core::primitive::u32,
-                pub who: ::subxt::sp_core::crypto::AccountId32,
-            }
-            impl ::subxt::Event for TreeCreation {
-                const PALLET: &'static str = "MerkleTreeBls381";
-                const EVENT: &'static str = "TreeCreation";
-            }
-            #[derive(
-                :: subxt :: codec :: Encode,
-                :: subxt :: codec :: Decode,
-                Debug,
-                Eq,
-                PartialEq,
-                Clone,
-            )]
-            pub struct LeafInsertion {
-                pub tree_id: ::core::primitive::u32,
-                pub leaf_index: ::core::primitive::u32,
-                pub leaf: runtime_types::webb_standalone_runtime::Element,
-            }
-            impl ::subxt::Event for LeafInsertion {
-                const PALLET: &'static str = "MerkleTreeBls381";
-                const EVENT: &'static str = "LeafInsertion";
-            }
-        }
-        pub mod storage {
-            use super::runtime_types;
-            pub struct Deposit;
-            impl ::subxt::StorageEntry for Deposit {
-                const PALLET: &'static str = "MerkleTreeBls381";
-                const STORAGE: &'static str = "Deposit";
-                type Value =
-                    runtime_types::webb_primitives::types::DepositDetails<
-                        ::subxt::sp_core::crypto::AccountId32,
-                        ::core::primitive::u128,
-                    >;
-                fn key(&self) -> ::subxt::StorageEntryKey {
-                    ::subxt::StorageEntryKey::Plain
-                }
-            }
-            pub struct NextTreeId;
-            impl ::subxt::StorageEntry for NextTreeId {
-                const PALLET: &'static str = "MerkleTreeBls381";
-                const STORAGE: &'static str = "NextTreeId";
-                type Value = ::core::primitive::u32;
-                fn key(&self) -> ::subxt::StorageEntryKey {
-                    ::subxt::StorageEntryKey::Plain
-                }
-            }
-            pub struct Trees(pub ::core::primitive::u32);
-            impl ::subxt::StorageEntry for Trees {
-                const PALLET: &'static str = "MerkleTreeBls381";
-                const STORAGE: &'static str = "Trees";
-                type Value = runtime_types::pallet_mt::types::TreeMetadata<
-                    ::subxt::sp_core::crypto::AccountId32,
-                    ::core::primitive::u32,
-                    runtime_types::webb_standalone_runtime::Element,
-                >;
-                fn key(&self) -> ::subxt::StorageEntryKey {
-                    ::subxt::StorageEntryKey::Map(vec![
-                        ::subxt::StorageMapKey::new(
-                            &self.0,
-                            ::subxt::StorageHasher::Blake2_128Concat,
-                        ),
-                    ])
-                }
-            }
-            pub struct DefaultHashes;
-            impl ::subxt::StorageEntry for DefaultHashes {
-                const PALLET: &'static str = "MerkleTreeBls381";
-                const STORAGE: &'static str = "DefaultHashes";
-                type Value = ::std::vec::Vec<
-                    runtime_types::webb_standalone_runtime::Element,
-                >;
-                fn key(&self) -> ::subxt::StorageEntryKey {
-                    ::subxt::StorageEntryKey::Plain
-                }
-            }
-            pub struct Leaves(
-                pub ::core::primitive::u32,
-                pub ::core::primitive::u32,
-            );
-            impl ::subxt::StorageEntry for Leaves {
-                const PALLET: &'static str = "MerkleTreeBls381";
-                const STORAGE: &'static str = "Leaves";
-                type Value = runtime_types::webb_standalone_runtime::Element;
-                fn key(&self) -> ::subxt::StorageEntryKey {
-                    ::subxt::StorageEntryKey::Map(vec![
-                        ::subxt::StorageMapKey::new(
-                            &self.0,
-                            ::subxt::StorageHasher::Blake2_128Concat,
-                        ),
-                        ::subxt::StorageMapKey::new(
-                            &self.1,
-                            ::subxt::StorageHasher::Blake2_128Concat,
-                        ),
-                    ])
-                }
-            }
-            pub struct NextRootIndex;
-            impl ::subxt::StorageEntry for NextRootIndex {
-                const PALLET: &'static str = "MerkleTreeBls381";
-                const STORAGE: &'static str = "NextRootIndex";
-                type Value = ::core::primitive::u32;
-                fn key(&self) -> ::subxt::StorageEntryKey {
-                    ::subxt::StorageEntryKey::Plain
-                }
-            }
-            pub struct NextLeafIndex(pub ::core::primitive::u32);
-            impl ::subxt::StorageEntry for NextLeafIndex {
-                const PALLET: &'static str = "MerkleTreeBls381";
-                const STORAGE: &'static str = "NextLeafIndex";
-                type Value = ::core::primitive::u32;
-                fn key(&self) -> ::subxt::StorageEntryKey {
-                    ::subxt::StorageEntryKey::Map(vec![
-                        ::subxt::StorageMapKey::new(
-                            &self.0,
-                            ::subxt::StorageHasher::Blake2_128Concat,
-                        ),
-                    ])
-                }
-            }
-            pub struct CachedRoots(
-                pub ::core::primitive::u32,
-                pub ::core::primitive::u32,
-            );
-            impl ::subxt::StorageEntry for CachedRoots {
-                const PALLET: &'static str = "MerkleTreeBls381";
                 const STORAGE: &'static str = "CachedRoots";
                 type Value = runtime_types::webb_standalone_runtime::Element;
                 fn key(&self) -> ::subxt::StorageEntryKey {
@@ -18882,331 +18097,6 @@ pub mod api {
             }
         }
     }
-    pub mod linkable_tree_bls381 {
-        use super::runtime_types;
-        pub mod calls {
-            use super::runtime_types;
-            type DispatchError = runtime_types::sp_runtime::DispatchError;
-            #[derive(
-                :: subxt :: codec :: Encode,
-                :: subxt :: codec :: Decode,
-                Debug,
-                Eq,
-                PartialEq,
-                Clone,
-            )]
-            pub struct create {
-                pub max_edges: ::core::primitive::u32,
-                pub depth: ::core::primitive::u8,
-            }
-            impl ::subxt::Call for create {
-                const PALLET: &'static str = "LinkableTreeBls381";
-                const FUNCTION: &'static str = "create";
-            }
-            pub struct TransactionApi<'a, T: ::subxt::Config, X, A> {
-                client: &'a ::subxt::Client<T>,
-                marker: ::core::marker::PhantomData<(X, A)>,
-            }
-            impl<'a, T, X, A> TransactionApi<'a, T, X, A>
-            where
-                T: ::subxt::Config,
-                X: ::subxt::SignedExtra<T>,
-                A: ::subxt::AccountData,
-            {
-                pub fn new(client: &'a ::subxt::Client<T>) -> Self {
-                    Self {
-                        client,
-                        marker: ::core::marker::PhantomData,
-                    }
-                }
-                pub fn create(
-                    &self,
-                    max_edges: ::core::primitive::u32,
-                    depth: ::core::primitive::u8,
-                ) -> ::subxt::SubmittableExtrinsic<
-                    'a,
-                    T,
-                    X,
-                    A,
-                    create,
-                    DispatchError,
-                > {
-                    let call = create { max_edges, depth };
-                    ::subxt::SubmittableExtrinsic::new(self.client, call)
-                }
-            }
-        }
-        pub type Event = runtime_types::pallet_linkable_tree::pallet::Event;
-        pub mod events {
-            use super::runtime_types;
-            #[derive(
-                :: subxt :: codec :: Encode,
-                :: subxt :: codec :: Decode,
-                Debug,
-                Eq,
-                PartialEq,
-                Clone,
-                :: subxt :: codec :: CompactAs,
-            )]
-            pub struct LinkableTreeCreation {
-                pub tree_id: ::core::primitive::u32,
-            }
-            impl ::subxt::Event for LinkableTreeCreation {
-                const PALLET: &'static str = "LinkableTreeBls381";
-                const EVENT: &'static str = "LinkableTreeCreation";
-            }
-        }
-        pub mod storage {
-            use super::runtime_types;
-            pub struct MaxEdges(pub ::core::primitive::u32);
-            impl ::subxt::StorageEntry for MaxEdges {
-                const PALLET: &'static str = "LinkableTreeBls381";
-                const STORAGE: &'static str = "MaxEdges";
-                type Value = ::core::primitive::u32;
-                fn key(&self) -> ::subxt::StorageEntryKey {
-                    ::subxt::StorageEntryKey::Map(vec![
-                        ::subxt::StorageMapKey::new(
-                            &self.0,
-                            ::subxt::StorageHasher::Blake2_128Concat,
-                        ),
-                    ])
-                }
-            }
-            pub struct EdgeList(
-                pub ::core::primitive::u32,
-                pub ::core::primitive::u64,
-            );
-            impl ::subxt::StorageEntry for EdgeList {
-                const PALLET: &'static str = "LinkableTreeBls381";
-                const STORAGE: &'static str = "EdgeList";
-                type Value =
-                    runtime_types::pallet_linkable_tree::types::EdgeMetadata<
-                        ::core::primitive::u64,
-                        runtime_types::webb_standalone_runtime::Element,
-                        ::core::primitive::u32,
-                    >;
-                fn key(&self) -> ::subxt::StorageEntryKey {
-                    ::subxt::StorageEntryKey::Map(vec![
-                        ::subxt::StorageMapKey::new(
-                            &self.0,
-                            ::subxt::StorageHasher::Blake2_128Concat,
-                        ),
-                        ::subxt::StorageMapKey::new(
-                            &self.1,
-                            ::subxt::StorageHasher::Blake2_128Concat,
-                        ),
-                    ])
-                }
-            }
-            pub struct LinkableTreeHasEdge(
-                pub ::core::primitive::u32,
-                pub ::core::primitive::u64,
-            );
-            impl ::subxt::StorageEntry for LinkableTreeHasEdge {
-                const PALLET: &'static str = "LinkableTreeBls381";
-                const STORAGE: &'static str = "LinkableTreeHasEdge";
-                type Value = ::core::primitive::bool;
-                fn key(&self) -> ::subxt::StorageEntryKey {
-                    ::subxt::StorageEntryKey::Map(vec![
-                        ::subxt::StorageMapKey::new(
-                            &self.0,
-                            ::subxt::StorageHasher::Blake2_128Concat,
-                        ),
-                    ])
-                }
-            }
-            pub struct NeighborRoots(
-                pub (::core::primitive::u32, ::core::primitive::u64),
-                pub ::core::primitive::u32,
-            );
-            impl ::subxt::StorageEntry for NeighborRoots {
-                const PALLET: &'static str = "LinkableTreeBls381";
-                const STORAGE: &'static str = "NeighborRoots";
-                type Value = runtime_types::webb_standalone_runtime::Element;
-                fn key(&self) -> ::subxt::StorageEntryKey {
-                    ::subxt::StorageEntryKey::Map(vec![
-                        ::subxt::StorageMapKey::new(
-                            &self.0,
-                            ::subxt::StorageHasher::Blake2_128Concat,
-                        ),
-                        ::subxt::StorageMapKey::new(
-                            &self.1,
-                            ::subxt::StorageHasher::Blake2_128Concat,
-                        ),
-                    ])
-                }
-            }
-            pub struct CurrentNeighborRootIndex(
-                pub ::core::primitive::u32,
-                pub ::core::primitive::u64,
-            );
-            impl ::subxt::StorageEntry for CurrentNeighborRootIndex {
-                const PALLET: &'static str = "LinkableTreeBls381";
-                const STORAGE: &'static str = "CurrentNeighborRootIndex";
-                type Value = ::core::primitive::u32;
-                fn key(&self) -> ::subxt::StorageEntryKey {
-                    ::subxt::StorageEntryKey::Map(vec![
-                        ::subxt::StorageMapKey::new(
-                            &self.0,
-                            ::subxt::StorageHasher::Blake2_128Concat,
-                        ),
-                    ])
-                }
-            }
-            pub struct StorageApi<'a, T: ::subxt::Config> {
-                client: &'a ::subxt::Client<T>,
-            }
-            impl<'a, T: ::subxt::Config> StorageApi<'a, T> {
-                pub fn new(client: &'a ::subxt::Client<T>) -> Self {
-                    Self { client }
-                }
-                pub async fn max_edges(
-                    &self,
-                    _0: ::core::primitive::u32,
-                    hash: ::core::option::Option<T::Hash>,
-                ) -> ::core::result::Result<
-                    ::core::primitive::u32,
-                    ::subxt::BasicError,
-                > {
-                    let entry = MaxEdges(_0);
-                    self.client.storage().fetch_or_default(&entry, hash).await
-                }
-                pub async fn max_edges_iter(
-                    &self,
-                    hash: ::core::option::Option<T::Hash>,
-                ) -> ::core::result::Result<
-                    ::subxt::KeyIter<'a, T, MaxEdges>,
-                    ::subxt::BasicError,
-                > {
-                    self.client.storage().iter(hash).await
-                }
-                pub async fn edge_list(
-                    &self,
-                    _0: ::core::primitive::u32,
-                    _1: ::core::primitive::u64,
-                    hash: ::core::option::Option<T::Hash>,
-                ) -> ::core::result::Result<
-                    runtime_types::pallet_linkable_tree::types::EdgeMetadata<
-                        ::core::primitive::u64,
-                        runtime_types::webb_standalone_runtime::Element,
-                        ::core::primitive::u32,
-                    >,
-                    ::subxt::BasicError,
-                > {
-                    let entry = EdgeList(_0, _1);
-                    self.client.storage().fetch_or_default(&entry, hash).await
-                }
-                pub async fn edge_list_iter(
-                    &self,
-                    hash: ::core::option::Option<T::Hash>,
-                ) -> ::core::result::Result<
-                    ::subxt::KeyIter<'a, T, EdgeList>,
-                    ::subxt::BasicError,
-                > {
-                    self.client.storage().iter(hash).await
-                }
-                pub async fn linkable_tree_has_edge(
-                    &self,
-                    _0: ::core::primitive::u32,
-                    _1: ::core::primitive::u64,
-                    hash: ::core::option::Option<T::Hash>,
-                ) -> ::core::result::Result<
-                    ::core::primitive::bool,
-                    ::subxt::BasicError,
-                > {
-                    let entry = LinkableTreeHasEdge(_0, _1);
-                    self.client.storage().fetch_or_default(&entry, hash).await
-                }
-                pub async fn linkable_tree_has_edge_iter(
-                    &self,
-                    hash: ::core::option::Option<T::Hash>,
-                ) -> ::core::result::Result<
-                    ::subxt::KeyIter<'a, T, LinkableTreeHasEdge>,
-                    ::subxt::BasicError,
-                > {
-                    self.client.storage().iter(hash).await
-                }
-                pub async fn neighbor_roots(
-                    &self,
-                    _0: (::core::primitive::u32, ::core::primitive::u64),
-                    _1: ::core::primitive::u32,
-                    hash: ::core::option::Option<T::Hash>,
-                ) -> ::core::result::Result<
-                    ::core::option::Option<
-                        runtime_types::webb_standalone_runtime::Element,
-                    >,
-                    ::subxt::BasicError,
-                > {
-                    let entry = NeighborRoots(_0, _1);
-                    self.client.storage().fetch(&entry, hash).await
-                }
-                pub async fn neighbor_roots_iter(
-                    &self,
-                    hash: ::core::option::Option<T::Hash>,
-                ) -> ::core::result::Result<
-                    ::subxt::KeyIter<'a, T, NeighborRoots>,
-                    ::subxt::BasicError,
-                > {
-                    self.client.storage().iter(hash).await
-                }
-                pub async fn current_neighbor_root_index(
-                    &self,
-                    _0: ::core::primitive::u32,
-                    _1: ::core::primitive::u64,
-                    hash: ::core::option::Option<T::Hash>,
-                ) -> ::core::result::Result<
-                    ::core::primitive::u32,
-                    ::subxt::BasicError,
-                > {
-                    let entry = CurrentNeighborRootIndex(_0, _1);
-                    self.client.storage().fetch_or_default(&entry, hash).await
-                }
-                pub async fn current_neighbor_root_index_iter(
-                    &self,
-                    hash: ::core::option::Option<T::Hash>,
-                ) -> ::core::result::Result<
-                    ::subxt::KeyIter<'a, T, CurrentNeighborRootIndex>,
-                    ::subxt::BasicError,
-                > {
-                    self.client.storage().iter(hash).await
-                }
-            }
-        }
-        pub mod constants {
-            use super::runtime_types;
-            pub struct ConstantsApi;
-            impl ConstantsApi {
-                pub fn chain_type(
-                    &self,
-                ) -> ::core::result::Result<
-                    [::core::primitive::u8; 2usize],
-                    ::subxt::BasicError,
-                > {
-                    Ok(::subxt::codec::Decode::decode(&mut &[2u8, 0u8][..])?)
-                }
-                pub fn chain_identifier(
-                    &self,
-                ) -> ::core::result::Result<
-                    ::core::primitive::u64,
-                    ::subxt::BasicError,
-                > {
-                    Ok(::subxt::codec::Decode::decode(
-                        &mut &[56u8, 4u8, 0u8, 0u8, 0u8, 0u8, 0u8, 0u8][..],
-                    )?)
-                }
-                pub fn history_length(
-                    &self,
-                ) -> ::core::result::Result<
-                    ::core::primitive::u32,
-                    ::subxt::BasicError,
-                > {
-                    Ok(::subxt::codec::Decode::decode(
-                        &mut &[30u8, 0u8, 0u8, 0u8][..],
-                    )?)
-                }
-            }
-        }
-    }
     pub mod mixer_bn254 {
         use super::runtime_types;
         pub mod calls {
@@ -19428,327 +18318,6 @@ pub mod api {
             );
             impl ::subxt::StorageEntry for NullifierHashes {
                 const PALLET: &'static str = "MixerBn254";
-                const STORAGE: &'static str = "NullifierHashes";
-                type Value = ::core::primitive::bool;
-                fn key(&self) -> ::subxt::StorageEntryKey {
-                    ::subxt::StorageEntryKey::Map(vec![
-                        ::subxt::StorageMapKey::new(
-                            &self.0,
-                            ::subxt::StorageHasher::Blake2_128Concat,
-                        ),
-                        ::subxt::StorageMapKey::new(
-                            &self.1,
-                            ::subxt::StorageHasher::Blake2_128Concat,
-                        ),
-                    ])
-                }
-            }
-            pub struct StorageApi<'a, T: ::subxt::Config> {
-                client: &'a ::subxt::Client<T>,
-            }
-            impl<'a, T: ::subxt::Config> StorageApi<'a, T> {
-                pub fn new(client: &'a ::subxt::Client<T>) -> Self {
-                    Self { client }
-                }
-                pub async fn mixers(
-                    &self,
-                    _0: ::core::primitive::u32,
-                    hash: ::core::option::Option<T::Hash>,
-                ) -> ::core::result::Result<
-                    ::core::option::Option<
-                        runtime_types::pallet_mixer::types::MixerMetadata<
-                            ::core::primitive::u128,
-                            ::core::primitive::u32,
-                        >,
-                    >,
-                    ::subxt::BasicError,
-                > {
-                    let entry = Mixers(_0);
-                    self.client.storage().fetch(&entry, hash).await
-                }
-                pub async fn mixers_iter(
-                    &self,
-                    hash: ::core::option::Option<T::Hash>,
-                ) -> ::core::result::Result<
-                    ::subxt::KeyIter<'a, T, Mixers>,
-                    ::subxt::BasicError,
-                > {
-                    self.client.storage().iter(hash).await
-                }
-                pub async fn nullifier_hashes(
-                    &self,
-                    _0: ::core::primitive::u32,
-                    _1: runtime_types::webb_standalone_runtime::Element,
-                    hash: ::core::option::Option<T::Hash>,
-                ) -> ::core::result::Result<
-                    ::core::primitive::bool,
-                    ::subxt::BasicError,
-                > {
-                    let entry = NullifierHashes(_0, _1);
-                    self.client.storage().fetch_or_default(&entry, hash).await
-                }
-                pub async fn nullifier_hashes_iter(
-                    &self,
-                    hash: ::core::option::Option<T::Hash>,
-                ) -> ::core::result::Result<
-                    ::subxt::KeyIter<'a, T, NullifierHashes>,
-                    ::subxt::BasicError,
-                > {
-                    self.client.storage().iter(hash).await
-                }
-            }
-        }
-        pub mod constants {
-            use super::runtime_types;
-            pub struct ConstantsApi;
-            impl ConstantsApi {
-                pub fn pallet_id(
-                    &self,
-                ) -> ::core::result::Result<
-                    runtime_types::frame_support::PalletId,
-                    ::subxt::BasicError,
-                > {
-                    Ok(::subxt::codec::Decode::decode(
-                        &mut &[
-                            112u8, 121u8, 47u8, 109u8, 105u8, 120u8, 101u8,
-                            114u8,
-                        ][..],
-                    )?)
-                }
-                pub fn native_currency_id(
-                    &self,
-                ) -> ::core::result::Result<
-                    ::core::primitive::u32,
-                    ::subxt::BasicError,
-                > {
-                    Ok(::subxt::codec::Decode::decode(
-                        &mut &[0u8, 0u8, 0u8, 0u8][..],
-                    )?)
-                }
-            }
-        }
-    }
-    pub mod mixer_bls381 {
-        use super::runtime_types;
-        pub mod calls {
-            use super::runtime_types;
-            type DispatchError = runtime_types::sp_runtime::DispatchError;
-            #[derive(
-                :: subxt :: codec :: Encode,
-                :: subxt :: codec :: Decode,
-                Debug,
-                Eq,
-                PartialEq,
-                Clone,
-            )]
-            pub struct create {
-                pub deposit_size: ::core::primitive::u128,
-                pub depth: ::core::primitive::u8,
-                pub asset: ::core::primitive::u32,
-            }
-            impl ::subxt::Call for create {
-                const PALLET: &'static str = "MixerBls381";
-                const FUNCTION: &'static str = "create";
-            }
-            #[derive(
-                :: subxt :: codec :: Encode,
-                :: subxt :: codec :: Decode,
-                Debug,
-                Eq,
-                PartialEq,
-                Clone,
-            )]
-            pub struct deposit {
-                pub tree_id: ::core::primitive::u32,
-                pub leaf: runtime_types::webb_standalone_runtime::Element,
-            }
-            impl ::subxt::Call for deposit {
-                const PALLET: &'static str = "MixerBls381";
-                const FUNCTION: &'static str = "deposit";
-            }
-            #[derive(
-                :: subxt :: codec :: Encode,
-                :: subxt :: codec :: Decode,
-                Debug,
-                Eq,
-                PartialEq,
-                Clone,
-            )]
-            pub struct withdraw {
-                pub id: ::core::primitive::u32,
-                pub proof_bytes: ::std::vec::Vec<::core::primitive::u8>,
-                pub root: runtime_types::webb_standalone_runtime::Element,
-                pub nullifier_hash:
-                    runtime_types::webb_standalone_runtime::Element,
-                pub recipient: ::subxt::sp_core::crypto::AccountId32,
-                pub relayer: ::subxt::sp_core::crypto::AccountId32,
-                pub fee: ::core::primitive::u128,
-                pub refund: ::core::primitive::u128,
-            }
-            impl ::subxt::Call for withdraw {
-                const PALLET: &'static str = "MixerBls381";
-                const FUNCTION: &'static str = "withdraw";
-            }
-            pub struct TransactionApi<'a, T: ::subxt::Config, X, A> {
-                client: &'a ::subxt::Client<T>,
-                marker: ::core::marker::PhantomData<(X, A)>,
-            }
-            impl<'a, T, X, A> TransactionApi<'a, T, X, A>
-            where
-                T: ::subxt::Config,
-                X: ::subxt::SignedExtra<T>,
-                A: ::subxt::AccountData,
-            {
-                pub fn new(client: &'a ::subxt::Client<T>) -> Self {
-                    Self {
-                        client,
-                        marker: ::core::marker::PhantomData,
-                    }
-                }
-                pub fn create(
-                    &self,
-                    deposit_size: ::core::primitive::u128,
-                    depth: ::core::primitive::u8,
-                    asset: ::core::primitive::u32,
-                ) -> ::subxt::SubmittableExtrinsic<
-                    'a,
-                    T,
-                    X,
-                    A,
-                    create,
-                    DispatchError,
-                > {
-                    let call = create {
-                        deposit_size,
-                        depth,
-                        asset,
-                    };
-                    ::subxt::SubmittableExtrinsic::new(self.client, call)
-                }
-                pub fn deposit(
-                    &self,
-                    tree_id: ::core::primitive::u32,
-                    leaf: runtime_types::webb_standalone_runtime::Element,
-                ) -> ::subxt::SubmittableExtrinsic<
-                    'a,
-                    T,
-                    X,
-                    A,
-                    deposit,
-                    DispatchError,
-                > {
-                    let call = deposit { tree_id, leaf };
-                    ::subxt::SubmittableExtrinsic::new(self.client, call)
-                }
-                pub fn withdraw(
-                    &self,
-                    id: ::core::primitive::u32,
-                    proof_bytes: ::std::vec::Vec<::core::primitive::u8>,
-                    root: runtime_types::webb_standalone_runtime::Element,
-                    nullifier_hash : runtime_types :: webb_standalone_runtime :: Element,
-                    recipient: ::subxt::sp_core::crypto::AccountId32,
-                    relayer: ::subxt::sp_core::crypto::AccountId32,
-                    fee: ::core::primitive::u128,
-                    refund: ::core::primitive::u128,
-                ) -> ::subxt::SubmittableExtrinsic<
-                    'a,
-                    T,
-                    X,
-                    A,
-                    withdraw,
-                    DispatchError,
-                > {
-                    let call = withdraw {
-                        id,
-                        proof_bytes,
-                        root,
-                        nullifier_hash,
-                        recipient,
-                        relayer,
-                        fee,
-                        refund,
-                    };
-                    ::subxt::SubmittableExtrinsic::new(self.client, call)
-                }
-            }
-        }
-        pub type Event = runtime_types::pallet_mixer::pallet::Event;
-        pub mod events {
-            use super::runtime_types;
-            #[derive(
-                :: subxt :: codec :: Encode,
-                :: subxt :: codec :: Decode,
-                Debug,
-                Eq,
-                PartialEq,
-                Clone,
-                :: subxt :: codec :: CompactAs,
-            )]
-            pub struct MixerCreation {
-                pub tree_id: ::core::primitive::u32,
-            }
-            impl ::subxt::Event for MixerCreation {
-                const PALLET: &'static str = "MixerBls381";
-                const EVENT: &'static str = "MixerCreation";
-            }
-            #[derive(
-                :: subxt :: codec :: Encode,
-                :: subxt :: codec :: Decode,
-                Debug,
-                Eq,
-                PartialEq,
-                Clone,
-            )]
-            pub struct Deposit {
-                pub tree_id: ::core::primitive::u32,
-                pub leaf: runtime_types::webb_standalone_runtime::Element,
-            }
-            impl ::subxt::Event for Deposit {
-                const PALLET: &'static str = "MixerBls381";
-                const EVENT: &'static str = "Deposit";
-            }
-            #[derive(
-                :: subxt :: codec :: Encode,
-                :: subxt :: codec :: Decode,
-                Debug,
-                Eq,
-                PartialEq,
-                Clone,
-            )]
-            pub struct Withdraw {
-                pub tree_id: ::core::primitive::u32,
-                pub recipient: ::subxt::sp_core::crypto::AccountId32,
-            }
-            impl ::subxt::Event for Withdraw {
-                const PALLET: &'static str = "MixerBls381";
-                const EVENT: &'static str = "Withdraw";
-            }
-        }
-        pub mod storage {
-            use super::runtime_types;
-            pub struct Mixers(pub ::core::primitive::u32);
-            impl ::subxt::StorageEntry for Mixers {
-                const PALLET: &'static str = "MixerBls381";
-                const STORAGE: &'static str = "Mixers";
-                type Value = runtime_types::pallet_mixer::types::MixerMetadata<
-                    ::core::primitive::u128,
-                    ::core::primitive::u32,
-                >;
-                fn key(&self) -> ::subxt::StorageEntryKey {
-                    ::subxt::StorageEntryKey::Map(vec![
-                        ::subxt::StorageMapKey::new(
-                            &self.0,
-                            ::subxt::StorageHasher::Blake2_128Concat,
-                        ),
-                    ])
-                }
-            }
-            pub struct NullifierHashes(
-                pub ::core::primitive::u32,
-                pub runtime_types::webb_standalone_runtime::Element,
-            );
-            impl ::subxt::StorageEntry for NullifierHashes {
-                const PALLET: &'static str = "MixerBls381";
                 const STORAGE: &'static str = "NullifierHashes";
                 type Value = ::core::primitive::bool;
                 fn key(&self) -> ::subxt::StorageEntryKey {
@@ -20248,405 +18817,6 @@ pub mod api {
             }
         }
     }
-    pub mod anchor_bls381 {
-        use super::runtime_types;
-        pub mod calls {
-            use super::runtime_types;
-            type DispatchError = runtime_types::sp_runtime::DispatchError;
-            #[derive(
-                :: subxt :: codec :: Encode,
-                :: subxt :: codec :: Decode,
-                Debug,
-                Eq,
-                PartialEq,
-                Clone,
-            )]
-            pub struct create {
-                pub deposit_size: ::core::primitive::u128,
-                pub max_edges: ::core::primitive::u32,
-                pub depth: ::core::primitive::u8,
-                pub asset: ::core::primitive::u32,
-            }
-            impl ::subxt::Call for create {
-                const PALLET: &'static str = "AnchorBls381";
-                const FUNCTION: &'static str = "create";
-            }
-            #[derive(
-                :: subxt :: codec :: Encode,
-                :: subxt :: codec :: Decode,
-                Debug,
-                Eq,
-                PartialEq,
-                Clone,
-            )]
-            pub struct deposit {
-                pub tree_id: ::core::primitive::u32,
-                pub leaf: runtime_types::webb_standalone_runtime::Element,
-            }
-            impl ::subxt::Call for deposit {
-                const PALLET: &'static str = "AnchorBls381";
-                const FUNCTION: &'static str = "deposit";
-            }
-            #[derive(
-                :: subxt :: codec :: Encode,
-                :: subxt :: codec :: Decode,
-                Debug,
-                Eq,
-                PartialEq,
-                Clone,
-            )]
-            pub struct deposit_and_update_linked_anchors {
-                pub tree_id: ::core::primitive::u32,
-                pub leaf: runtime_types::webb_standalone_runtime::Element,
-            }
-            impl ::subxt::Call for deposit_and_update_linked_anchors {
-                const PALLET: &'static str = "AnchorBls381";
-                const FUNCTION: &'static str =
-                    "deposit_and_update_linked_anchors";
-            }
-            #[derive(
-                :: subxt :: codec :: Encode,
-                :: subxt :: codec :: Decode,
-                Debug,
-                Eq,
-                PartialEq,
-                Clone,
-            )]
-            pub struct withdraw {
-                pub id: ::core::primitive::u32,
-                pub proof_bytes: ::std::vec::Vec<::core::primitive::u8>,
-                pub roots: ::std::vec::Vec<
-                    runtime_types::webb_standalone_runtime::Element,
-                >,
-                pub nullifier_hash:
-                    runtime_types::webb_standalone_runtime::Element,
-                pub recipient: ::subxt::sp_core::crypto::AccountId32,
-                pub relayer: ::subxt::sp_core::crypto::AccountId32,
-                pub fee: ::core::primitive::u128,
-                pub refund: ::core::primitive::u128,
-                pub commitment: runtime_types::webb_standalone_runtime::Element,
-            }
-            impl ::subxt::Call for withdraw {
-                const PALLET: &'static str = "AnchorBls381";
-                const FUNCTION: &'static str = "withdraw";
-            }
-            pub struct TransactionApi<'a, T: ::subxt::Config, X, A> {
-                client: &'a ::subxt::Client<T>,
-                marker: ::core::marker::PhantomData<(X, A)>,
-            }
-            impl<'a, T, X, A> TransactionApi<'a, T, X, A>
-            where
-                T: ::subxt::Config,
-                X: ::subxt::SignedExtra<T>,
-                A: ::subxt::AccountData,
-            {
-                pub fn new(client: &'a ::subxt::Client<T>) -> Self {
-                    Self {
-                        client,
-                        marker: ::core::marker::PhantomData,
-                    }
-                }
-                pub fn create(
-                    &self,
-                    deposit_size: ::core::primitive::u128,
-                    max_edges: ::core::primitive::u32,
-                    depth: ::core::primitive::u8,
-                    asset: ::core::primitive::u32,
-                ) -> ::subxt::SubmittableExtrinsic<
-                    'a,
-                    T,
-                    X,
-                    A,
-                    create,
-                    DispatchError,
-                > {
-                    let call = create {
-                        deposit_size,
-                        max_edges,
-                        depth,
-                        asset,
-                    };
-                    ::subxt::SubmittableExtrinsic::new(self.client, call)
-                }
-                pub fn deposit(
-                    &self,
-                    tree_id: ::core::primitive::u32,
-                    leaf: runtime_types::webb_standalone_runtime::Element,
-                ) -> ::subxt::SubmittableExtrinsic<
-                    'a,
-                    T,
-                    X,
-                    A,
-                    deposit,
-                    DispatchError,
-                > {
-                    let call = deposit { tree_id, leaf };
-                    ::subxt::SubmittableExtrinsic::new(self.client, call)
-                }
-                pub fn deposit_and_update_linked_anchors(
-                    &self,
-                    tree_id: ::core::primitive::u32,
-                    leaf: runtime_types::webb_standalone_runtime::Element,
-                ) -> ::subxt::SubmittableExtrinsic<
-                    'a,
-                    T,
-                    X,
-                    A,
-                    deposit_and_update_linked_anchors,
-                    DispatchError,
-                > {
-                    let call =
-                        deposit_and_update_linked_anchors { tree_id, leaf };
-                    ::subxt::SubmittableExtrinsic::new(self.client, call)
-                }
-                pub fn withdraw(
-                    &self,
-                    id: ::core::primitive::u32,
-                    proof_bytes: ::std::vec::Vec<::core::primitive::u8>,
-                    roots: ::std::vec::Vec<
-                        runtime_types::webb_standalone_runtime::Element,
-                    >,
-                    nullifier_hash : runtime_types :: webb_standalone_runtime :: Element,
-                    recipient: ::subxt::sp_core::crypto::AccountId32,
-                    relayer: ::subxt::sp_core::crypto::AccountId32,
-                    fee: ::core::primitive::u128,
-                    refund: ::core::primitive::u128,
-                    commitment: runtime_types::webb_standalone_runtime::Element,
-                ) -> ::subxt::SubmittableExtrinsic<
-                    'a,
-                    T,
-                    X,
-                    A,
-                    withdraw,
-                    DispatchError,
-                > {
-                    let call = withdraw {
-                        id,
-                        proof_bytes,
-                        roots,
-                        nullifier_hash,
-                        recipient,
-                        relayer,
-                        fee,
-                        refund,
-                        commitment,
-                    };
-                    ::subxt::SubmittableExtrinsic::new(self.client, call)
-                }
-            }
-        }
-        pub type Event = runtime_types::pallet_anchor::pallet::Event;
-        pub mod events {
-            use super::runtime_types;
-            #[derive(
-                :: subxt :: codec :: Encode,
-                :: subxt :: codec :: Decode,
-                Debug,
-                Eq,
-                PartialEq,
-                Clone,
-                :: subxt :: codec :: CompactAs,
-            )]
-            pub struct AnchorCreation {
-                pub tree_id: ::core::primitive::u32,
-            }
-            impl ::subxt::Event for AnchorCreation {
-                const PALLET: &'static str = "AnchorBls381";
-                const EVENT: &'static str = "AnchorCreation";
-            }
-            #[derive(
-                :: subxt :: codec :: Encode,
-                :: subxt :: codec :: Decode,
-                Debug,
-                Eq,
-                PartialEq,
-                Clone,
-            )]
-            pub struct Withdraw {
-                pub who: ::subxt::sp_core::crypto::AccountId32,
-                pub amount: ::core::primitive::u128,
-            }
-            impl ::subxt::Event for Withdraw {
-                const PALLET: &'static str = "AnchorBls381";
-                const EVENT: &'static str = "Withdraw";
-            }
-            #[derive(
-                :: subxt :: codec :: Encode,
-                :: subxt :: codec :: Decode,
-                Debug,
-                Eq,
-                PartialEq,
-                Clone,
-            )]
-            pub struct Refresh {
-                pub tree_id: ::core::primitive::u32,
-                pub leaf: runtime_types::webb_standalone_runtime::Element,
-            }
-            impl ::subxt::Event for Refresh {
-                const PALLET: &'static str = "AnchorBls381";
-                const EVENT: &'static str = "Refresh";
-            }
-            #[derive(
-                :: subxt :: codec :: Encode,
-                :: subxt :: codec :: Decode,
-                Debug,
-                Eq,
-                PartialEq,
-                Clone,
-            )]
-            pub struct Deposit {
-                pub depositor: ::subxt::sp_core::crypto::AccountId32,
-                pub tree_id: ::core::primitive::u32,
-                pub leaf: runtime_types::webb_standalone_runtime::Element,
-                pub amount: ::core::primitive::u128,
-            }
-            impl ::subxt::Event for Deposit {
-                const PALLET: &'static str = "AnchorBls381";
-                const EVENT: &'static str = "Deposit";
-            }
-            #[derive(
-                :: subxt :: codec :: Encode,
-                :: subxt :: codec :: Decode,
-                Debug,
-                Eq,
-                PartialEq,
-                Clone,
-            )]
-            pub struct PostDeposit {
-                pub depositor: ::subxt::sp_core::crypto::AccountId32,
-                pub tree_id: ::core::primitive::u32,
-                pub leaf: runtime_types::webb_standalone_runtime::Element,
-            }
-            impl ::subxt::Event for PostDeposit {
-                const PALLET: &'static str = "AnchorBls381";
-                const EVENT: &'static str = "PostDeposit";
-            }
-        }
-        pub mod storage {
-            use super::runtime_types;
-            pub struct Anchors(pub ::core::primitive::u32);
-            impl ::subxt::StorageEntry for Anchors {
-                const PALLET: &'static str = "AnchorBls381";
-                const STORAGE: &'static str = "Anchors";
-                type Value =
-                    runtime_types::pallet_anchor::types::AnchorMetadata<
-                        ::core::primitive::u128,
-                        ::core::primitive::u32,
-                    >;
-                fn key(&self) -> ::subxt::StorageEntryKey {
-                    ::subxt::StorageEntryKey::Map(vec![
-                        ::subxt::StorageMapKey::new(
-                            &self.0,
-                            ::subxt::StorageHasher::Blake2_128Concat,
-                        ),
-                    ])
-                }
-            }
-            pub struct NullifierHashes(
-                pub ::core::primitive::u32,
-                pub runtime_types::webb_standalone_runtime::Element,
-            );
-            impl ::subxt::StorageEntry for NullifierHashes {
-                const PALLET: &'static str = "AnchorBls381";
-                const STORAGE: &'static str = "NullifierHashes";
-                type Value = ::core::primitive::bool;
-                fn key(&self) -> ::subxt::StorageEntryKey {
-                    ::subxt::StorageEntryKey::Map(vec![
-                        ::subxt::StorageMapKey::new(
-                            &self.0,
-                            ::subxt::StorageHasher::Blake2_128Concat,
-                        ),
-                        ::subxt::StorageMapKey::new(
-                            &self.1,
-                            ::subxt::StorageHasher::Blake2_128Concat,
-                        ),
-                    ])
-                }
-            }
-            pub struct StorageApi<'a, T: ::subxt::Config> {
-                client: &'a ::subxt::Client<T>,
-            }
-            impl<'a, T: ::subxt::Config> StorageApi<'a, T> {
-                pub fn new(client: &'a ::subxt::Client<T>) -> Self {
-                    Self { client }
-                }
-                pub async fn anchors(
-                    &self,
-                    _0: ::core::primitive::u32,
-                    hash: ::core::option::Option<T::Hash>,
-                ) -> ::core::result::Result<
-                    ::core::option::Option<
-                        runtime_types::pallet_anchor::types::AnchorMetadata<
-                            ::core::primitive::u128,
-                            ::core::primitive::u32,
-                        >,
-                    >,
-                    ::subxt::BasicError,
-                > {
-                    let entry = Anchors(_0);
-                    self.client.storage().fetch(&entry, hash).await
-                }
-                pub async fn anchors_iter(
-                    &self,
-                    hash: ::core::option::Option<T::Hash>,
-                ) -> ::core::result::Result<
-                    ::subxt::KeyIter<'a, T, Anchors>,
-                    ::subxt::BasicError,
-                > {
-                    self.client.storage().iter(hash).await
-                }
-                pub async fn nullifier_hashes(
-                    &self,
-                    _0: ::core::primitive::u32,
-                    _1: runtime_types::webb_standalone_runtime::Element,
-                    hash: ::core::option::Option<T::Hash>,
-                ) -> ::core::result::Result<
-                    ::core::primitive::bool,
-                    ::subxt::BasicError,
-                > {
-                    let entry = NullifierHashes(_0, _1);
-                    self.client.storage().fetch_or_default(&entry, hash).await
-                }
-                pub async fn nullifier_hashes_iter(
-                    &self,
-                    hash: ::core::option::Option<T::Hash>,
-                ) -> ::core::result::Result<
-                    ::subxt::KeyIter<'a, T, NullifierHashes>,
-                    ::subxt::BasicError,
-                > {
-                    self.client.storage().iter(hash).await
-                }
-            }
-        }
-        pub mod constants {
-            use super::runtime_types;
-            pub struct ConstantsApi;
-            impl ConstantsApi {
-                pub fn pallet_id(
-                    &self,
-                ) -> ::core::result::Result<
-                    runtime_types::frame_support::PalletId,
-                    ::subxt::BasicError,
-                > {
-                    Ok(::subxt::codec::Decode::decode(
-                        &mut &[
-                            112u8, 121u8, 47u8, 97u8, 110u8, 99u8, 104u8, 114u8,
-                        ][..],
-                    )?)
-                }
-                pub fn native_currency_id(
-                    &self,
-                ) -> ::core::result::Result<
-                    ::core::primitive::u32,
-                    ::subxt::BasicError,
-                > {
-                    Ok(::subxt::codec::Decode::decode(
-                        &mut &[0u8, 0u8, 0u8, 0u8][..],
-                    )?)
-                }
-            }
-        }
-    }
     pub mod anchor_handler_bn254 {
         use super::runtime_types;
         pub mod calls {
@@ -20845,292 +19015,6 @@ pub mod api {
             pub struct Counts(pub ::core::primitive::u64);
             impl ::subxt::StorageEntry for Counts {
                 const PALLET: &'static str = "AnchorHandlerBn254";
-                const STORAGE: &'static str = "Counts";
-                type Value = ::core::primitive::u64;
-                fn key(&self) -> ::subxt::StorageEntryKey {
-                    ::subxt::StorageEntryKey::Map(vec![
-                        ::subxt::StorageMapKey::new(
-                            &self.0,
-                            ::subxt::StorageHasher::Blake2_128Concat,
-                        ),
-                    ])
-                }
-            }
-            pub struct StorageApi<'a, T: ::subxt::Config> {
-                client: &'a ::subxt::Client<T>,
-            }
-            impl<'a, T: ::subxt::Config> StorageApi<'a, T> {
-                pub fn new(client: &'a ::subxt::Client<T>) -> Self {
-                    Self { client }
-                }
-                pub async fn anchor_list(
-                    &self,
-                    _0: [::core::primitive::u8; 32usize],
-                    hash: ::core::option::Option<T::Hash>,
-                ) -> ::core::result::Result<
-                    ::core::primitive::u32,
-                    ::subxt::BasicError,
-                > {
-                    let entry = AnchorList(_0);
-                    self.client.storage().fetch_or_default(&entry, hash).await
-                }
-                pub async fn anchor_list_iter(
-                    &self,
-                    hash: ::core::option::Option<T::Hash>,
-                ) -> ::core::result::Result<
-                    ::subxt::KeyIter<'a, T, AnchorList>,
-                    ::subxt::BasicError,
-                > {
-                    self.client.storage().iter(hash).await
-                }
-                pub async fn update_records(
-                    &self,
-                    _0: ::core::primitive::u64,
-                    _1: ::core::primitive::u64,
-                    hash: ::core::option::Option<T::Hash>,
-                ) -> ::core::result::Result<
-                    runtime_types::pallet_anchor_handler::types::UpdateRecord<
-                        ::core::primitive::u32,
-                        [::core::primitive::u8; 32usize],
-                        ::core::primitive::u64,
-                        runtime_types::webb_standalone_runtime::Element,
-                        ::core::primitive::u32,
-                    >,
-                    ::subxt::BasicError,
-                > {
-                    let entry = UpdateRecords(_0, _1);
-                    self.client.storage().fetch_or_default(&entry, hash).await
-                }
-                pub async fn update_records_iter(
-                    &self,
-                    hash: ::core::option::Option<T::Hash>,
-                ) -> ::core::result::Result<
-                    ::subxt::KeyIter<'a, T, UpdateRecords>,
-                    ::subxt::BasicError,
-                > {
-                    self.client.storage().iter(hash).await
-                }
-                pub async fn counts(
-                    &self,
-                    _0: ::core::primitive::u64,
-                    hash: ::core::option::Option<T::Hash>,
-                ) -> ::core::result::Result<
-                    ::core::primitive::u64,
-                    ::subxt::BasicError,
-                > {
-                    let entry = Counts(_0);
-                    self.client.storage().fetch_or_default(&entry, hash).await
-                }
-                pub async fn counts_iter(
-                    &self,
-                    hash: ::core::option::Option<T::Hash>,
-                ) -> ::core::result::Result<
-                    ::subxt::KeyIter<'a, T, Counts>,
-                    ::subxt::BasicError,
-                > {
-                    self.client.storage().iter(hash).await
-                }
-            }
-        }
-    }
-    pub mod anchor_handler_bls381 {
-        use super::runtime_types;
-        pub mod calls {
-            use super::runtime_types;
-            type DispatchError = runtime_types::sp_runtime::DispatchError;
-            #[derive(
-                :: subxt :: codec :: Encode,
-                :: subxt :: codec :: Decode,
-                Debug,
-                Eq,
-                PartialEq,
-                Clone,
-            )]
-            pub struct execute_anchor_create_proposal {
-                pub deposit_size: ::core::primitive::u128,
-                pub src_chain_id: ::core::primitive::u64,
-                pub r_id: [::core::primitive::u8; 32usize],
-                pub max_edges: ::core::primitive::u32,
-                pub tree_depth: ::core::primitive::u8,
-                pub asset: ::core::primitive::u32,
-            }
-            impl ::subxt::Call for execute_anchor_create_proposal {
-                const PALLET: &'static str = "AnchorHandlerBls381";
-                const FUNCTION: &'static str = "execute_anchor_create_proposal";
-            }
-            #[derive(
-                :: subxt :: codec :: Encode,
-                :: subxt :: codec :: Decode,
-                Debug,
-                Eq,
-                PartialEq,
-                Clone,
-            )]
-            pub struct execute_anchor_update_proposal {
-                pub r_id: [::core::primitive::u8; 32usize],
-                pub anchor_metadata:
-                    runtime_types::pallet_linkable_tree::types::EdgeMetadata<
-                        ::core::primitive::u64,
-                        runtime_types::webb_standalone_runtime::Element,
-                        ::core::primitive::u32,
-                    >,
-            }
-            impl ::subxt::Call for execute_anchor_update_proposal {
-                const PALLET: &'static str = "AnchorHandlerBls381";
-                const FUNCTION: &'static str = "execute_anchor_update_proposal";
-            }
-            pub struct TransactionApi<'a, T: ::subxt::Config, X, A> {
-                client: &'a ::subxt::Client<T>,
-                marker: ::core::marker::PhantomData<(X, A)>,
-            }
-            impl<'a, T, X, A> TransactionApi<'a, T, X, A>
-            where
-                T: ::subxt::Config,
-                X: ::subxt::SignedExtra<T>,
-                A: ::subxt::AccountData,
-            {
-                pub fn new(client: &'a ::subxt::Client<T>) -> Self {
-                    Self {
-                        client,
-                        marker: ::core::marker::PhantomData,
-                    }
-                }
-                pub fn execute_anchor_create_proposal(
-                    &self,
-                    deposit_size: ::core::primitive::u128,
-                    src_chain_id: ::core::primitive::u64,
-                    r_id: [::core::primitive::u8; 32usize],
-                    max_edges: ::core::primitive::u32,
-                    tree_depth: ::core::primitive::u8,
-                    asset: ::core::primitive::u32,
-                ) -> ::subxt::SubmittableExtrinsic<
-                    'a,
-                    T,
-                    X,
-                    A,
-                    execute_anchor_create_proposal,
-                    DispatchError,
-                > {
-                    let call = execute_anchor_create_proposal {
-                        deposit_size,
-                        src_chain_id,
-                        r_id,
-                        max_edges,
-                        tree_depth,
-                        asset,
-                    };
-                    ::subxt::SubmittableExtrinsic::new(self.client, call)
-                }
-                pub fn execute_anchor_update_proposal(
-                    &self,
-                    r_id: [::core::primitive::u8; 32usize],
-                    anchor_metadata : runtime_types :: pallet_linkable_tree :: types :: EdgeMetadata < :: core :: primitive :: u64 , runtime_types :: webb_standalone_runtime :: Element , :: core :: primitive :: u32 >,
-                ) -> ::subxt::SubmittableExtrinsic<
-                    'a,
-                    T,
-                    X,
-                    A,
-                    execute_anchor_update_proposal,
-                    DispatchError,
-                > {
-                    let call = execute_anchor_update_proposal {
-                        r_id,
-                        anchor_metadata,
-                    };
-                    ::subxt::SubmittableExtrinsic::new(self.client, call)
-                }
-            }
-        }
-        pub type Event = runtime_types::pallet_anchor_handler::pallet::Event;
-        pub mod events {
-            use super::runtime_types;
-            #[derive(
-                :: subxt :: codec :: Encode,
-                :: subxt :: codec :: Decode,
-                Debug,
-                Eq,
-                PartialEq,
-                Clone,
-            )]
-            pub struct AnchorCreated;
-            impl ::subxt::Event for AnchorCreated {
-                const PALLET: &'static str = "AnchorHandlerBls381";
-                const EVENT: &'static str = "AnchorCreated";
-            }
-            #[derive(
-                :: subxt :: codec :: Encode,
-                :: subxt :: codec :: Decode,
-                Debug,
-                Eq,
-                PartialEq,
-                Clone,
-            )]
-            pub struct AnchorEdgeAdded;
-            impl ::subxt::Event for AnchorEdgeAdded {
-                const PALLET: &'static str = "AnchorHandlerBls381";
-                const EVENT: &'static str = "AnchorEdgeAdded";
-            }
-            #[derive(
-                :: subxt :: codec :: Encode,
-                :: subxt :: codec :: Decode,
-                Debug,
-                Eq,
-                PartialEq,
-                Clone,
-            )]
-            pub struct AnchorEdgeUpdated;
-            impl ::subxt::Event for AnchorEdgeUpdated {
-                const PALLET: &'static str = "AnchorHandlerBls381";
-                const EVENT: &'static str = "AnchorEdgeUpdated";
-            }
-        }
-        pub mod storage {
-            use super::runtime_types;
-            pub struct AnchorList(pub [::core::primitive::u8; 32usize]);
-            impl ::subxt::StorageEntry for AnchorList {
-                const PALLET: &'static str = "AnchorHandlerBls381";
-                const STORAGE: &'static str = "AnchorList";
-                type Value = ::core::primitive::u32;
-                fn key(&self) -> ::subxt::StorageEntryKey {
-                    ::subxt::StorageEntryKey::Map(vec![
-                        ::subxt::StorageMapKey::new(
-                            &self.0,
-                            ::subxt::StorageHasher::Blake2_128Concat,
-                        ),
-                    ])
-                }
-            }
-            pub struct UpdateRecords(
-                pub ::core::primitive::u64,
-                pub ::core::primitive::u64,
-            );
-            impl ::subxt::StorageEntry for UpdateRecords {
-                const PALLET: &'static str = "AnchorHandlerBls381";
-                const STORAGE: &'static str = "UpdateRecords";
-                type Value =
-                    runtime_types::pallet_anchor_handler::types::UpdateRecord<
-                        ::core::primitive::u32,
-                        [::core::primitive::u8; 32usize],
-                        ::core::primitive::u64,
-                        runtime_types::webb_standalone_runtime::Element,
-                        ::core::primitive::u32,
-                    >;
-                fn key(&self) -> ::subxt::StorageEntryKey {
-                    ::subxt::StorageEntryKey::Map(vec![
-                        ::subxt::StorageMapKey::new(
-                            &self.0,
-                            ::subxt::StorageHasher::Blake2_128Concat,
-                        ),
-                        ::subxt::StorageMapKey::new(
-                            &self.1,
-                            ::subxt::StorageHasher::Blake2_128Concat,
-                        ),
-                    ])
-                }
-            }
-            pub struct Counts(pub ::core::primitive::u64);
-            impl ::subxt::StorageEntry for Counts {
-                const PALLET: &'static str = "AnchorHandlerBls381";
                 const STORAGE: &'static str = "Counts";
                 type Value = ::core::primitive::u64;
                 fn key(&self) -> ::subxt::StorageEntryKey {
@@ -21516,409 +19400,6 @@ pub mod api {
             );
             impl ::subxt::StorageEntry for NullifierHashes {
                 const PALLET: &'static str = "VAnchorBn254";
-                const STORAGE: &'static str = "NullifierHashes";
-                type Value = ::core::primitive::bool;
-                fn key(&self) -> ::subxt::StorageEntryKey {
-                    ::subxt::StorageEntryKey::Map(vec![
-                        ::subxt::StorageMapKey::new(
-                            &self.0,
-                            ::subxt::StorageHasher::Blake2_128Concat,
-                        ),
-                        ::subxt::StorageMapKey::new(
-                            &self.1,
-                            ::subxt::StorageHasher::Blake2_128Concat,
-                        ),
-                    ])
-                }
-            }
-            pub struct StorageApi<'a, T: ::subxt::Config> {
-                client: &'a ::subxt::Client<T>,
-            }
-            impl<'a, T: ::subxt::Config> StorageApi<'a, T> {
-                pub fn new(client: &'a ::subxt::Client<T>) -> Self {
-                    Self { client }
-                }
-                pub async fn max_deposit_amount(
-                    &self,
-                    hash: ::core::option::Option<T::Hash>,
-                ) -> ::core::result::Result<
-                    ::core::primitive::u128,
-                    ::subxt::BasicError,
-                > {
-                    let entry = MaxDepositAmount;
-                    self.client.storage().fetch_or_default(&entry, hash).await
-                }
-                pub async fn min_withdraw_amount(
-                    &self,
-                    hash: ::core::option::Option<T::Hash>,
-                ) -> ::core::result::Result<
-                    ::core::primitive::u128,
-                    ::subxt::BasicError,
-                > {
-                    let entry = MinWithdrawAmount;
-                    self.client.storage().fetch_or_default(&entry, hash).await
-                }                pub async fn v_anchors (& self , _0 : :: core :: primitive :: u32 , hash : :: core :: option :: Option < T :: Hash > ,) -> :: core :: result :: Result < :: core :: option :: Option < runtime_types :: webb_primitives :: types :: vanchor :: VAnchorMetadata < :: subxt :: sp_core :: crypto :: AccountId32 , :: core :: primitive :: u32 > > , :: subxt :: BasicError >{
-                    let entry = VAnchors(_0);
-                    self.client.storage().fetch(&entry, hash).await
-                }
-                pub async fn v_anchors_iter(
-                    &self,
-                    hash: ::core::option::Option<T::Hash>,
-                ) -> ::core::result::Result<
-                    ::subxt::KeyIter<'a, T, VAnchors>,
-                    ::subxt::BasicError,
-                > {
-                    self.client.storage().iter(hash).await
-                }
-                pub async fn nullifier_hashes(
-                    &self,
-                    _0: ::core::primitive::u32,
-                    _1: runtime_types::webb_standalone_runtime::Element,
-                    hash: ::core::option::Option<T::Hash>,
-                ) -> ::core::result::Result<
-                    ::core::primitive::bool,
-                    ::subxt::BasicError,
-                > {
-                    let entry = NullifierHashes(_0, _1);
-                    self.client.storage().fetch_or_default(&entry, hash).await
-                }
-                pub async fn nullifier_hashes_iter(
-                    &self,
-                    hash: ::core::option::Option<T::Hash>,
-                ) -> ::core::result::Result<
-                    ::subxt::KeyIter<'a, T, NullifierHashes>,
-                    ::subxt::BasicError,
-                > {
-                    self.client.storage().iter(hash).await
-                }
-            }
-        }
-        pub mod constants {
-            use super::runtime_types;
-            pub struct ConstantsApi;
-            impl ConstantsApi {
-                pub fn pallet_id(
-                    &self,
-                ) -> ::core::result::Result<
-                    runtime_types::frame_support::PalletId,
-                    ::subxt::BasicError,
-                > {
-                    Ok(::subxt::codec::Decode::decode(
-                        &mut &[
-                            112u8, 121u8, 47u8, 118u8, 97u8, 110u8, 99u8, 104u8,
-                        ][..],
-                    )?)
-                }
-                pub fn native_currency_id(
-                    &self,
-                ) -> ::core::result::Result<
-                    ::core::primitive::u32,
-                    ::subxt::BasicError,
-                > {
-                    Ok(::subxt::codec::Decode::decode(
-                        &mut &[0u8, 0u8, 0u8, 0u8][..],
-                    )?)
-                }
-            }
-        }
-    }
-    pub mod v_anchor_bls381 {
-        use super::runtime_types;
-        pub mod calls {
-            use super::runtime_types;
-            type DispatchError = runtime_types::sp_runtime::DispatchError;
-            #[derive(
-                :: subxt :: codec :: Encode,
-                :: subxt :: codec :: Decode,
-                Debug,
-                Eq,
-                PartialEq,
-                Clone,
-            )]
-            pub struct create {
-                pub max_edges: ::core::primitive::u32,
-                pub depth: ::core::primitive::u8,
-                pub asset: ::core::primitive::u32,
-            }
-            impl ::subxt::Call for create {
-                const PALLET: &'static str = "VAnchorBls381";
-                const FUNCTION: &'static str = "create";
-            }
-            #[derive(
-                :: subxt :: codec :: Encode,
-                :: subxt :: codec :: Decode,
-                Debug,
-                Eq,
-                PartialEq,
-                Clone,
-            )]
-            pub struct transact {
-                pub id: ::core::primitive::u32,
-                pub proof_data:
-                    runtime_types::webb_primitives::types::vanchor::ProofData<
-                        runtime_types::webb_standalone_runtime::Element,
-                    >,
-                pub ext_data:
-                    runtime_types::webb_primitives::types::vanchor::ExtData<
-                        ::subxt::sp_core::crypto::AccountId32,
-                        ::core::primitive::i128,
-                        ::core::primitive::u128,
-                        runtime_types::webb_standalone_runtime::Element,
-                    >,
-            }
-            impl ::subxt::Call for transact {
-                const PALLET: &'static str = "VAnchorBls381";
-                const FUNCTION: &'static str = "transact";
-            }
-            #[derive(
-                :: subxt :: codec :: Encode,
-                :: subxt :: codec :: Decode,
-                Debug,
-                Eq,
-                PartialEq,
-                Clone,
-                :: subxt :: codec :: CompactAs,
-            )]
-            pub struct set_max_deposit_amount {
-                pub max_deposit_amount: ::core::primitive::u128,
-            }
-            impl ::subxt::Call for set_max_deposit_amount {
-                const PALLET: &'static str = "VAnchorBls381";
-                const FUNCTION: &'static str = "set_max_deposit_amount";
-            }
-            #[derive(
-                :: subxt :: codec :: Encode,
-                :: subxt :: codec :: Decode,
-                Debug,
-                Eq,
-                PartialEq,
-                Clone,
-                :: subxt :: codec :: CompactAs,
-            )]
-            pub struct set_min_withdraw_amount {
-                pub min_withdraw_amount: ::core::primitive::u128,
-            }
-            impl ::subxt::Call for set_min_withdraw_amount {
-                const PALLET: &'static str = "VAnchorBls381";
-                const FUNCTION: &'static str = "set_min_withdraw_amount";
-            }
-            pub struct TransactionApi<'a, T: ::subxt::Config, X, A> {
-                client: &'a ::subxt::Client<T>,
-                marker: ::core::marker::PhantomData<(X, A)>,
-            }
-            impl<'a, T, X, A> TransactionApi<'a, T, X, A>
-            where
-                T: ::subxt::Config,
-                X: ::subxt::SignedExtra<T>,
-                A: ::subxt::AccountData,
-            {
-                pub fn new(client: &'a ::subxt::Client<T>) -> Self {
-                    Self {
-                        client,
-                        marker: ::core::marker::PhantomData,
-                    }
-                }
-                pub fn create(
-                    &self,
-                    max_edges: ::core::primitive::u32,
-                    depth: ::core::primitive::u8,
-                    asset: ::core::primitive::u32,
-                ) -> ::subxt::SubmittableExtrinsic<
-                    'a,
-                    T,
-                    X,
-                    A,
-                    create,
-                    DispatchError,
-                > {
-                    let call = create {
-                        max_edges,
-                        depth,
-                        asset,
-                    };
-                    ::subxt::SubmittableExtrinsic::new(self.client, call)
-                }
-                pub fn transact(
-                    &self,
-                    id: ::core::primitive::u32,
-                    proof_data : runtime_types :: webb_primitives :: types :: vanchor :: ProofData < runtime_types :: webb_standalone_runtime :: Element >,
-                    ext_data : runtime_types :: webb_primitives :: types :: vanchor :: ExtData < :: subxt :: sp_core :: crypto :: AccountId32 , :: core :: primitive :: i128 , :: core :: primitive :: u128 , runtime_types :: webb_standalone_runtime :: Element >,
-                ) -> ::subxt::SubmittableExtrinsic<
-                    'a,
-                    T,
-                    X,
-                    A,
-                    transact,
-                    DispatchError,
-                > {
-                    let call = transact {
-                        id,
-                        proof_data,
-                        ext_data,
-                    };
-                    ::subxt::SubmittableExtrinsic::new(self.client, call)
-                }
-                pub fn set_max_deposit_amount(
-                    &self,
-                    max_deposit_amount: ::core::primitive::u128,
-                ) -> ::subxt::SubmittableExtrinsic<
-                    'a,
-                    T,
-                    X,
-                    A,
-                    set_max_deposit_amount,
-                    DispatchError,
-                > {
-                    let call = set_max_deposit_amount { max_deposit_amount };
-                    ::subxt::SubmittableExtrinsic::new(self.client, call)
-                }
-                pub fn set_min_withdraw_amount(
-                    &self,
-                    min_withdraw_amount: ::core::primitive::u128,
-                ) -> ::subxt::SubmittableExtrinsic<
-                    'a,
-                    T,
-                    X,
-                    A,
-                    set_min_withdraw_amount,
-                    DispatchError,
-                > {
-                    let call = set_min_withdraw_amount {
-                        min_withdraw_amount,
-                    };
-                    ::subxt::SubmittableExtrinsic::new(self.client, call)
-                }
-            }
-        }
-        pub type Event = runtime_types::pallet_vanchor::pallet::Event;
-        pub mod events {
-            use super::runtime_types;
-            #[derive(
-                :: subxt :: codec :: Encode,
-                :: subxt :: codec :: Decode,
-                Debug,
-                Eq,
-                PartialEq,
-                Clone,
-                :: subxt :: codec :: CompactAs,
-            )]
-            pub struct VAnchorCreation {
-                pub tree_id: ::core::primitive::u32,
-            }
-            impl ::subxt::Event for VAnchorCreation {
-                const PALLET: &'static str = "VAnchorBls381";
-                const EVENT: &'static str = "VAnchorCreation";
-            }
-            #[derive(
-                :: subxt :: codec :: Encode,
-                :: subxt :: codec :: Decode,
-                Debug,
-                Eq,
-                PartialEq,
-                Clone,
-            )]
-            pub struct Transaction {
-                pub transactor: ::subxt::sp_core::crypto::AccountId32,
-                pub tree_id: ::core::primitive::u32,
-                pub leafs: ::std::vec::Vec<
-                    runtime_types::webb_standalone_runtime::Element,
-                >,
-                pub amount: ::core::primitive::i128,
-            }
-            impl ::subxt::Event for Transaction {
-                const PALLET: &'static str = "VAnchorBls381";
-                const EVENT: &'static str = "Transaction";
-            }
-            #[derive(
-                :: subxt :: codec :: Encode,
-                :: subxt :: codec :: Decode,
-                Debug,
-                Eq,
-                PartialEq,
-                Clone,
-            )]
-            pub struct Deposit {
-                pub depositor: ::subxt::sp_core::crypto::AccountId32,
-                pub tree_id: ::core::primitive::u32,
-                pub leaf: runtime_types::webb_standalone_runtime::Element,
-            }
-            impl ::subxt::Event for Deposit {
-                const PALLET: &'static str = "VAnchorBls381";
-                const EVENT: &'static str = "Deposit";
-            }
-            #[derive(
-                :: subxt :: codec :: Encode,
-                :: subxt :: codec :: Decode,
-                Debug,
-                Eq,
-                PartialEq,
-                Clone,
-                :: subxt :: codec :: CompactAs,
-            )]
-            pub struct MaxDepositAmountChanged {
-                pub max_deposit_amount: ::core::primitive::u128,
-            }
-            impl ::subxt::Event for MaxDepositAmountChanged {
-                const PALLET: &'static str = "VAnchorBls381";
-                const EVENT: &'static str = "MaxDepositAmountChanged";
-            }
-            #[derive(
-                :: subxt :: codec :: Encode,
-                :: subxt :: codec :: Decode,
-                Debug,
-                Eq,
-                PartialEq,
-                Clone,
-                :: subxt :: codec :: CompactAs,
-            )]
-            pub struct MinWithdrawAmountChanged {
-                pub min_withdraw_amount: ::core::primitive::u128,
-            }
-            impl ::subxt::Event for MinWithdrawAmountChanged {
-                const PALLET: &'static str = "VAnchorBls381";
-                const EVENT: &'static str = "MinWithdrawAmountChanged";
-            }
-        }
-        pub mod storage {
-            use super::runtime_types;
-            pub struct MaxDepositAmount;
-            impl ::subxt::StorageEntry for MaxDepositAmount {
-                const PALLET: &'static str = "VAnchorBls381";
-                const STORAGE: &'static str = "MaxDepositAmount";
-                type Value = ::core::primitive::u128;
-                fn key(&self) -> ::subxt::StorageEntryKey {
-                    ::subxt::StorageEntryKey::Plain
-                }
-            }
-            pub struct MinWithdrawAmount;
-            impl ::subxt::StorageEntry for MinWithdrawAmount {
-                const PALLET: &'static str = "VAnchorBls381";
-                const STORAGE: &'static str = "MinWithdrawAmount";
-                type Value = ::core::primitive::u128;
-                fn key(&self) -> ::subxt::StorageEntryKey {
-                    ::subxt::StorageEntryKey::Plain
-                }
-            }
-            pub struct VAnchors(pub ::core::primitive::u32);
-            impl ::subxt::StorageEntry for VAnchors {
-                const PALLET: &'static str = "VAnchorBls381";
-                const STORAGE: &'static str = "VAnchors";
-                type Value = runtime_types :: webb_primitives :: types :: vanchor :: VAnchorMetadata < :: subxt :: sp_core :: crypto :: AccountId32 , :: core :: primitive :: u32 > ;
-                fn key(&self) -> ::subxt::StorageEntryKey {
-                    ::subxt::StorageEntryKey::Map(vec![
-                        ::subxt::StorageMapKey::new(
-                            &self.0,
-                            ::subxt::StorageHasher::Blake2_128Concat,
-                        ),
-                    ])
-                }
-            }
-            pub struct NullifierHashes(
-                pub ::core::primitive::u32,
-                pub runtime_types::webb_standalone_runtime::Element,
-            );
-            impl ::subxt::StorageEntry for NullifierHashes {
-                const PALLET: &'static str = "VAnchorBls381";
                 const STORAGE: &'static str = "NullifierHashes";
                 type Value = ::core::primitive::bool;
                 fn key(&self) -> ::subxt::StorageEntryKey {
@@ -22770,6 +20251,491 @@ pub mod api {
             }
         }
     }
+    pub mod signature_bridge {
+        use super::runtime_types;
+        pub mod calls {
+            use super::runtime_types;
+            type DispatchError = runtime_types::sp_runtime::DispatchError;
+            #[derive(
+                :: subxt :: codec :: Encode,
+                :: subxt :: codec :: Decode,
+                Debug,
+                Eq,
+                PartialEq,
+                Clone,
+            )]
+            pub struct set_maintainer {
+                pub message: ::std::vec::Vec<::core::primitive::u8>,
+                pub signature: ::std::vec::Vec<::core::primitive::u8>,
+            }
+            impl ::subxt::Call for set_maintainer {
+                const PALLET: &'static str = "SignatureBridge";
+                const FUNCTION: &'static str = "set_maintainer";
+            }
+            #[derive(
+                :: subxt :: codec :: Encode,
+                :: subxt :: codec :: Decode,
+                Debug,
+                Eq,
+                PartialEq,
+                Clone,
+            )]
+            pub struct force_set_maintainer {
+                pub new_maintainer: ::std::vec::Vec<::core::primitive::u8>,
+            }
+            impl ::subxt::Call for force_set_maintainer {
+                const PALLET: &'static str = "SignatureBridge";
+                const FUNCTION: &'static str = "force_set_maintainer";
+            }
+            #[derive(
+                :: subxt :: codec :: Encode,
+                :: subxt :: codec :: Decode,
+                Debug,
+                Eq,
+                PartialEq,
+                Clone,
+            )]
+            pub struct set_resource {
+                pub id: [::core::primitive::u8; 32usize],
+                pub method: ::std::vec::Vec<::core::primitive::u8>,
+            }
+            impl ::subxt::Call for set_resource {
+                const PALLET: &'static str = "SignatureBridge";
+                const FUNCTION: &'static str = "set_resource";
+            }
+            #[derive(
+                :: subxt :: codec :: Encode,
+                :: subxt :: codec :: Decode,
+                Debug,
+                Eq,
+                PartialEq,
+                Clone,
+            )]
+            pub struct remove_resource {
+                pub id: [::core::primitive::u8; 32usize],
+            }
+            impl ::subxt::Call for remove_resource {
+                const PALLET: &'static str = "SignatureBridge";
+                const FUNCTION: &'static str = "remove_resource";
+            }
+            #[derive(
+                :: subxt :: codec :: Encode,
+                :: subxt :: codec :: Decode,
+                Debug,
+                Eq,
+                PartialEq,
+                Clone,
+                :: subxt :: codec :: CompactAs,
+            )]
+            pub struct whitelist_chain {
+                pub id: ::core::primitive::u64,
+            }
+            impl ::subxt::Call for whitelist_chain {
+                const PALLET: &'static str = "SignatureBridge";
+                const FUNCTION: &'static str = "whitelist_chain";
+            }
+            #[derive(
+                :: subxt :: codec :: Encode,
+                :: subxt :: codec :: Decode,
+                Debug,
+                Eq,
+                PartialEq,
+                Clone,
+            )]
+            pub struct execute_proposal {
+                pub src_id: ::core::primitive::u64,
+                pub call: ::std::boxed::Box<
+                    runtime_types::webb_standalone_runtime::Call,
+                >,
+                pub proposal_data: ::std::vec::Vec<::core::primitive::u8>,
+                pub signature: ::std::vec::Vec<::core::primitive::u8>,
+            }
+            impl ::subxt::Call for execute_proposal {
+                const PALLET: &'static str = "SignatureBridge";
+                const FUNCTION: &'static str = "execute_proposal";
+            }
+            pub struct TransactionApi<'a, T: ::subxt::Config, X, A> {
+                client: &'a ::subxt::Client<T>,
+                marker: ::core::marker::PhantomData<(X, A)>,
+            }
+            impl<'a, T, X, A> TransactionApi<'a, T, X, A>
+            where
+                T: ::subxt::Config,
+                X: ::subxt::SignedExtra<T>,
+                A: ::subxt::AccountData,
+            {
+                pub fn new(client: &'a ::subxt::Client<T>) -> Self {
+                    Self {
+                        client,
+                        marker: ::core::marker::PhantomData,
+                    }
+                }
+                pub fn set_maintainer(
+                    &self,
+                    message: ::std::vec::Vec<::core::primitive::u8>,
+                    signature: ::std::vec::Vec<::core::primitive::u8>,
+                ) -> ::subxt::SubmittableExtrinsic<
+                    'a,
+                    T,
+                    X,
+                    A,
+                    set_maintainer,
+                    DispatchError,
+                > {
+                    let call = set_maintainer { message, signature };
+                    ::subxt::SubmittableExtrinsic::new(self.client, call)
+                }
+                pub fn force_set_maintainer(
+                    &self,
+                    new_maintainer: ::std::vec::Vec<::core::primitive::u8>,
+                ) -> ::subxt::SubmittableExtrinsic<
+                    'a,
+                    T,
+                    X,
+                    A,
+                    force_set_maintainer,
+                    DispatchError,
+                > {
+                    let call = force_set_maintainer { new_maintainer };
+                    ::subxt::SubmittableExtrinsic::new(self.client, call)
+                }
+                pub fn set_resource(
+                    &self,
+                    id: [::core::primitive::u8; 32usize],
+                    method: ::std::vec::Vec<::core::primitive::u8>,
+                ) -> ::subxt::SubmittableExtrinsic<
+                    'a,
+                    T,
+                    X,
+                    A,
+                    set_resource,
+                    DispatchError,
+                > {
+                    let call = set_resource { id, method };
+                    ::subxt::SubmittableExtrinsic::new(self.client, call)
+                }
+                pub fn remove_resource(
+                    &self,
+                    id: [::core::primitive::u8; 32usize],
+                ) -> ::subxt::SubmittableExtrinsic<
+                    'a,
+                    T,
+                    X,
+                    A,
+                    remove_resource,
+                    DispatchError,
+                > {
+                    let call = remove_resource { id };
+                    ::subxt::SubmittableExtrinsic::new(self.client, call)
+                }
+                pub fn whitelist_chain(
+                    &self,
+                    id: ::core::primitive::u64,
+                ) -> ::subxt::SubmittableExtrinsic<
+                    'a,
+                    T,
+                    X,
+                    A,
+                    whitelist_chain,
+                    DispatchError,
+                > {
+                    let call = whitelist_chain { id };
+                    ::subxt::SubmittableExtrinsic::new(self.client, call)
+                }
+                pub fn execute_proposal(
+                    &self,
+                    src_id: ::core::primitive::u64,
+                    call: runtime_types::webb_standalone_runtime::Call,
+                    proposal_data: ::std::vec::Vec<::core::primitive::u8>,
+                    signature: ::std::vec::Vec<::core::primitive::u8>,
+                ) -> ::subxt::SubmittableExtrinsic<
+                    'a,
+                    T,
+                    X,
+                    A,
+                    execute_proposal,
+                    DispatchError,
+                > {
+                    let call = execute_proposal {
+                        src_id,
+                        call: ::std::boxed::Box::new(call),
+                        proposal_data,
+                        signature,
+                    };
+                    ::subxt::SubmittableExtrinsic::new(self.client, call)
+                }
+            }
+        }
+        pub type Event = runtime_types::pallet_signature_bridge::pallet::Event;
+        pub mod events {
+            use super::runtime_types;
+            #[derive(
+                :: subxt :: codec :: Encode,
+                :: subxt :: codec :: Decode,
+                Debug,
+                Eq,
+                PartialEq,
+                Clone,
+            )]
+            pub struct MaintainerSet {
+                pub old_maintainer: ::std::vec::Vec<::core::primitive::u8>,
+                pub new_maintainer: ::std::vec::Vec<::core::primitive::u8>,
+            }
+            impl ::subxt::Event for MaintainerSet {
+                const PALLET: &'static str = "SignatureBridge";
+                const EVENT: &'static str = "MaintainerSet";
+            }
+            #[derive(
+                :: subxt :: codec :: Encode,
+                :: subxt :: codec :: Decode,
+                Debug,
+                Eq,
+                PartialEq,
+                Clone,
+                :: subxt :: codec :: CompactAs,
+            )]
+            pub struct ChainWhitelisted {
+                pub chain_id: ::core::primitive::u64,
+            }
+            impl ::subxt::Event for ChainWhitelisted {
+                const PALLET: &'static str = "SignatureBridge";
+                const EVENT: &'static str = "ChainWhitelisted";
+            }
+            #[derive(
+                :: subxt :: codec :: Encode,
+                :: subxt :: codec :: Decode,
+                Debug,
+                Eq,
+                PartialEq,
+                Clone,
+            )]
+            pub struct ProposalApproved {
+                pub chain_id: ::core::primitive::u64,
+                pub proposal_nonce: ::core::primitive::u32,
+            }
+            impl ::subxt::Event for ProposalApproved {
+                const PALLET: &'static str = "SignatureBridge";
+                const EVENT: &'static str = "ProposalApproved";
+            }
+            #[derive(
+                :: subxt :: codec :: Encode,
+                :: subxt :: codec :: Decode,
+                Debug,
+                Eq,
+                PartialEq,
+                Clone,
+            )]
+            pub struct ProposalSucceeded {
+                pub chain_id: ::core::primitive::u64,
+                pub proposal_nonce: ::core::primitive::u32,
+            }
+            impl ::subxt::Event for ProposalSucceeded {
+                const PALLET: &'static str = "SignatureBridge";
+                const EVENT: &'static str = "ProposalSucceeded";
+            }
+            #[derive(
+                :: subxt :: codec :: Encode,
+                :: subxt :: codec :: Decode,
+                Debug,
+                Eq,
+                PartialEq,
+                Clone,
+            )]
+            pub struct ProposalFailed {
+                pub chain_id: ::core::primitive::u64,
+                pub proposal_nonce: ::core::primitive::u32,
+            }
+            impl ::subxt::Event for ProposalFailed {
+                const PALLET: &'static str = "SignatureBridge";
+                const EVENT: &'static str = "ProposalFailed";
+            }
+        }
+        pub mod storage {
+            use super::runtime_types;
+            pub struct Maintainer;
+            impl ::subxt::StorageEntry for Maintainer {
+                const PALLET: &'static str = "SignatureBridge";
+                const STORAGE: &'static str = "Maintainer";
+                type Value = ::std::vec::Vec<::core::primitive::u8>;
+                fn key(&self) -> ::subxt::StorageEntryKey {
+                    ::subxt::StorageEntryKey::Plain
+                }
+            }
+            pub struct ChainNonces(pub ::core::primitive::u64);
+            impl ::subxt::StorageEntry for ChainNonces {
+                const PALLET: &'static str = "SignatureBridge";
+                const STORAGE: &'static str = "ChainNonces";
+                type Value = ::core::primitive::u32;
+                fn key(&self) -> ::subxt::StorageEntryKey {
+                    ::subxt::StorageEntryKey::Map(vec![
+                        ::subxt::StorageMapKey::new(
+                            &self.0,
+                            ::subxt::StorageHasher::Blake2_256,
+                        ),
+                    ])
+                }
+            }
+            pub struct Resources(pub [::core::primitive::u8; 32usize]);
+            impl ::subxt::StorageEntry for Resources {
+                const PALLET: &'static str = "SignatureBridge";
+                const STORAGE: &'static str = "Resources";
+                type Value = ::std::vec::Vec<::core::primitive::u8>;
+                fn key(&self) -> ::subxt::StorageEntryKey {
+                    ::subxt::StorageEntryKey::Map(vec![
+                        ::subxt::StorageMapKey::new(
+                            &self.0,
+                            ::subxt::StorageHasher::Blake2_256,
+                        ),
+                    ])
+                }
+            }
+            pub struct ProposalNonce;
+            impl ::subxt::StorageEntry for ProposalNonce {
+                const PALLET: &'static str = "SignatureBridge";
+                const STORAGE: &'static str = "ProposalNonce";
+                type Value = ::core::primitive::u32;
+                fn key(&self) -> ::subxt::StorageEntryKey {
+                    ::subxt::StorageEntryKey::Plain
+                }
+            }
+            pub struct MaintainerNonce;
+            impl ::subxt::StorageEntry for MaintainerNonce {
+                const PALLET: &'static str = "SignatureBridge";
+                const STORAGE: &'static str = "MaintainerNonce";
+                type Value = ::core::primitive::u32;
+                fn key(&self) -> ::subxt::StorageEntryKey {
+                    ::subxt::StorageEntryKey::Plain
+                }
+            }
+            pub struct StorageApi<'a, T: ::subxt::Config> {
+                client: &'a ::subxt::Client<T>,
+            }
+            impl<'a, T: ::subxt::Config> StorageApi<'a, T> {
+                pub fn new(client: &'a ::subxt::Client<T>) -> Self {
+                    Self { client }
+                }
+                pub async fn maintainer(
+                    &self,
+                    hash: ::core::option::Option<T::Hash>,
+                ) -> ::core::result::Result<
+                    ::std::vec::Vec<::core::primitive::u8>,
+                    ::subxt::BasicError,
+                > {
+                    let entry = Maintainer;
+                    self.client.storage().fetch_or_default(&entry, hash).await
+                }
+                pub async fn chain_nonces(
+                    &self,
+                    _0: ::core::primitive::u64,
+                    hash: ::core::option::Option<T::Hash>,
+                ) -> ::core::result::Result<
+                    ::core::option::Option<::core::primitive::u32>,
+                    ::subxt::BasicError,
+                > {
+                    let entry = ChainNonces(_0);
+                    self.client.storage().fetch(&entry, hash).await
+                }
+                pub async fn chain_nonces_iter(
+                    &self,
+                    hash: ::core::option::Option<T::Hash>,
+                ) -> ::core::result::Result<
+                    ::subxt::KeyIter<'a, T, ChainNonces>,
+                    ::subxt::BasicError,
+                > {
+                    self.client.storage().iter(hash).await
+                }
+                pub async fn resources(
+                    &self,
+                    _0: [::core::primitive::u8; 32usize],
+                    hash: ::core::option::Option<T::Hash>,
+                ) -> ::core::result::Result<
+                    ::core::option::Option<
+                        ::std::vec::Vec<::core::primitive::u8>,
+                    >,
+                    ::subxt::BasicError,
+                > {
+                    let entry = Resources(_0);
+                    self.client.storage().fetch(&entry, hash).await
+                }
+                pub async fn resources_iter(
+                    &self,
+                    hash: ::core::option::Option<T::Hash>,
+                ) -> ::core::result::Result<
+                    ::subxt::KeyIter<'a, T, Resources>,
+                    ::subxt::BasicError,
+                > {
+                    self.client.storage().iter(hash).await
+                }
+                pub async fn proposal_nonce(
+                    &self,
+                    hash: ::core::option::Option<T::Hash>,
+                ) -> ::core::result::Result<
+                    ::core::primitive::u32,
+                    ::subxt::BasicError,
+                > {
+                    let entry = ProposalNonce;
+                    self.client.storage().fetch_or_default(&entry, hash).await
+                }
+                pub async fn maintainer_nonce(
+                    &self,
+                    hash: ::core::option::Option<T::Hash>,
+                ) -> ::core::result::Result<
+                    ::core::primitive::u32,
+                    ::subxt::BasicError,
+                > {
+                    let entry = MaintainerNonce;
+                    self.client.storage().fetch_or_default(&entry, hash).await
+                }
+            }
+        }
+        pub mod constants {
+            use super::runtime_types;
+            pub struct ConstantsApi;
+            impl ConstantsApi {
+                pub fn chain_identifier(
+                    &self,
+                ) -> ::core::result::Result<
+                    ::core::primitive::u64,
+                    ::subxt::BasicError,
+                > {
+                    Ok(::subxt::codec::Decode::decode(
+                        &mut &[56u8, 4u8, 0u8, 0u8, 0u8, 0u8, 0u8, 0u8][..],
+                    )?)
+                }
+                pub fn chain_type(
+                    &self,
+                ) -> ::core::result::Result<
+                    [::core::primitive::u8; 2usize],
+                    ::subxt::BasicError,
+                > {
+                    Ok(::subxt::codec::Decode::decode(&mut &[2u8, 0u8][..])?)
+                }
+                pub fn proposal_lifetime(
+                    &self,
+                ) -> ::core::result::Result<
+                    ::core::primitive::u32,
+                    ::subxt::BasicError,
+                > {
+                    Ok(::subxt::codec::Decode::decode(
+                        &mut &[50u8, 0u8, 0u8, 0u8][..],
+                    )?)
+                }
+                pub fn bridge_account_id(
+                    &self,
+                ) -> ::core::result::Result<
+                    runtime_types::frame_support::PalletId,
+                    ::subxt::BasicError,
+                > {
+                    Ok(::subxt::codec::Decode::decode(
+                        &mut &[
+                            100u8, 119u8, 47u8, 98u8, 114u8, 105u8, 100u8,
+                            103u8,
+                        ][..],
+                    )?)
+                }
+            }
+        }
+    }
     pub mod runtime_types {
         use super::runtime_types;
         pub mod finality_grandpa {
@@ -22815,6 +20781,25 @@ pub mod api {
         }
         pub mod frame_support {
             use super::runtime_types;
+            pub mod dispatch {
+                use super::runtime_types;
+                #[derive(
+                    :: subxt :: codec :: Encode,
+                    :: subxt :: codec :: Decode,
+                    Debug,
+                    Eq,
+                    PartialEq,
+                    Clone,
+                )]
+                pub enum RawOrigin<_0> {
+                    #[codec(index = 0)]
+                    Root,
+                    #[codec(index = 1)]
+                    Signed(_0),
+                    #[codec(index = 2)]
+                    None,
+                }
+            }
             pub mod storage {
                 use super::runtime_types;
                 pub mod bounded_btree_map {
@@ -23327,22 +21312,6 @@ pub mod api {
                 Finalization,
                 #[codec(index = 2)]
                 Initialization,
-            }
-            #[derive(
-                :: subxt :: codec :: Encode,
-                :: subxt :: codec :: Decode,
-                Debug,
-                Eq,
-                PartialEq,
-                Clone,
-            )]
-            pub enum RawOrigin<_0> {
-                #[codec(index = 0)]
-                Root,
-                #[codec(index = 1)]
-                Signed(_0),
-                #[codec(index = 2)]
-                None,
             }
         }
         pub mod orml_currencies {
@@ -24842,6 +22811,8 @@ pub mod api {
                     Premature,
                     #[codec(index = 9)]
                     HasActiveChildBounty,
+                    #[codec(index = 10)]
+                    TooManyQueued,
                 }
                 #[derive(
                     :: subxt :: codec :: Encode,
@@ -25743,7 +23714,7 @@ pub mod api {
                     Clone,
                 )]
                 pub enum Call {
-                    # [codec (index = 0)] submit_unsigned { raw_solution : :: std :: boxed :: Box < runtime_types :: pallet_election_provider_multi_phase :: RawSolution < runtime_types :: webb_standalone_runtime :: NposSolution16 > > , witness : runtime_types :: pallet_election_provider_multi_phase :: SolutionOrSnapshotSize , } , # [codec (index = 1)] set_minimum_untrusted_score { maybe_next_score : :: core :: option :: Option < [:: core :: primitive :: u128 ; 3usize] > , } , # [codec (index = 2)] set_emergency_election_result { supports : :: std :: vec :: Vec < (:: subxt :: sp_core :: crypto :: AccountId32 , runtime_types :: sp_npos_elections :: Support < :: subxt :: sp_core :: crypto :: AccountId32 > ,) > , } , # [codec (index = 3)] submit { raw_solution : :: std :: boxed :: Box < runtime_types :: pallet_election_provider_multi_phase :: RawSolution < runtime_types :: webb_standalone_runtime :: NposSolution16 > > , num_signed_submissions : :: core :: primitive :: u32 , } , }
+                    # [codec (index = 0)] submit_unsigned { raw_solution : :: std :: boxed :: Box < runtime_types :: pallet_election_provider_multi_phase :: RawSolution < runtime_types :: webb_standalone_runtime :: NposSolution16 > > , witness : runtime_types :: pallet_election_provider_multi_phase :: SolutionOrSnapshotSize , } , # [codec (index = 1)] set_minimum_untrusted_score { maybe_next_score : :: core :: option :: Option < [:: core :: primitive :: u128 ; 3usize] > , } , # [codec (index = 2)] set_emergency_election_result { supports : :: std :: vec :: Vec < (:: subxt :: sp_core :: crypto :: AccountId32 , runtime_types :: sp_npos_elections :: Support < :: subxt :: sp_core :: crypto :: AccountId32 > ,) > , } , # [codec (index = 3)] submit { raw_solution : :: std :: boxed :: Box < runtime_types :: pallet_election_provider_multi_phase :: RawSolution < runtime_types :: webb_standalone_runtime :: NposSolution16 > > , num_signed_submissions : :: core :: primitive :: u32 , } , # [codec (index = 4)] governance_fallback { maybe_max_voters : :: core :: option :: Option < :: core :: primitive :: u32 > , maybe_max_targets : :: core :: option :: Option < :: core :: primitive :: u32 > , } , }
                 #[derive(
                     :: subxt :: codec :: Encode,
                     :: subxt :: codec :: Decode,
@@ -25775,6 +23746,8 @@ pub mod api {
                     InvalidSubmissionIndex,
                     #[codec(index = 10)]
                     CallNotAllowed,
+                    #[codec(index = 11)]
+                    FallbackFailed,
                 }
                 #[derive(
                     :: subxt :: codec :: Encode,
@@ -25867,14 +23840,7 @@ pub mod api {
                 PartialEq,
                 Clone,
             )]
-            pub struct RoundSnapshot<_0> {
-                pub voters: ::std::vec::Vec<(
-                    _0,
-                    ::core::primitive::u64,
-                    ::std::vec::Vec<_0>,
-                )>,
-                pub targets: ::std::vec::Vec<_0>,
-            }
+            pub struct RoundSnapshot { pub voters : :: std :: vec :: Vec < (:: subxt :: sp_core :: crypto :: AccountId32 , :: core :: primitive :: u64 , runtime_types :: frame_support :: storage :: bounded_vec :: BoundedVec < :: subxt :: sp_core :: crypto :: AccountId32 > ,) > , pub targets : :: std :: vec :: Vec < :: subxt :: sp_core :: crypto :: AccountId32 > , }
             #[derive(
                 :: subxt :: codec :: Encode,
                 :: subxt :: codec :: Decode,
@@ -26398,6 +24364,7 @@ pub mod api {
                     pub src_chain_id: _0,
                     pub root: _1,
                     pub latest_leaf_index: _2,
+                    pub target: _1,
                 }
             }
         }
@@ -27166,6 +25133,117 @@ pub mod api {
                 }
             }
         }
+        pub mod pallet_signature_bridge {
+            use super::runtime_types;
+            pub mod pallet {
+                use super::runtime_types;
+                #[derive(
+                    :: subxt :: codec :: Encode,
+                    :: subxt :: codec :: Decode,
+                    Debug,
+                    Eq,
+                    PartialEq,
+                    Clone,
+                )]
+                pub enum Call {
+                    #[codec(index = 0)]
+                    set_maintainer {
+                        message: ::std::vec::Vec<::core::primitive::u8>,
+                        signature: ::std::vec::Vec<::core::primitive::u8>,
+                    },
+                    #[codec(index = 1)]
+                    force_set_maintainer {
+                        new_maintainer: ::std::vec::Vec<::core::primitive::u8>,
+                    },
+                    #[codec(index = 2)]
+                    set_resource {
+                        id: [::core::primitive::u8; 32usize],
+                        method: ::std::vec::Vec<::core::primitive::u8>,
+                    },
+                    #[codec(index = 3)]
+                    remove_resource {
+                        id: [::core::primitive::u8; 32usize],
+                    },
+                    #[codec(index = 4)]
+                    whitelist_chain { id: ::core::primitive::u64 },
+                    #[codec(index = 5)]
+                    execute_proposal {
+                        src_id: ::core::primitive::u64,
+                        call: ::std::boxed::Box<
+                            runtime_types::webb_standalone_runtime::Call,
+                        >,
+                        proposal_data: ::std::vec::Vec<::core::primitive::u8>,
+                        signature: ::std::vec::Vec<::core::primitive::u8>,
+                    },
+                }
+                #[derive(
+                    :: subxt :: codec :: Encode,
+                    :: subxt :: codec :: Decode,
+                    Debug,
+                    Eq,
+                    PartialEq,
+                    Clone,
+                )]
+                pub enum Error {
+                    #[codec(index = 0)]
+                    InvalidPermissions,
+                    #[codec(index = 1)]
+                    InvalidChainId,
+                    #[codec(index = 2)]
+                    ChainNotWhitelisted,
+                    #[codec(index = 3)]
+                    ChainAlreadyWhitelisted,
+                    #[codec(index = 4)]
+                    ResourceDoesNotExist,
+                    #[codec(index = 5)]
+                    SignatureInvalid,
+                    #[codec(index = 6)]
+                    MustBeMaintainer,
+                    #[codec(index = 7)]
+                    ProposalAlreadyExists,
+                    #[codec(index = 8)]
+                    CallNotConsistentWithProposalData,
+                    #[codec(index = 9)]
+                    CallDoesNotMatchResourceId,
+                    #[codec(index = 10)]
+                    IncorrectExecutionChainIdType,
+                    #[codec(index = 11)]
+                    InvalidNonce,
+                }
+                #[derive(
+                    :: subxt :: codec :: Encode,
+                    :: subxt :: codec :: Decode,
+                    Debug,
+                    Eq,
+                    PartialEq,
+                    Clone,
+                )]
+                pub enum Event {
+                    #[codec(index = 0)]
+                    MaintainerSet {
+                        old_maintainer: ::std::vec::Vec<::core::primitive::u8>,
+                        new_maintainer: ::std::vec::Vec<::core::primitive::u8>,
+                    },
+                    #[codec(index = 1)]
+                    ChainWhitelisted { chain_id: ::core::primitive::u64 },
+                    #[codec(index = 2)]
+                    ProposalApproved {
+                        chain_id: ::core::primitive::u64,
+                        proposal_nonce: ::core::primitive::u32,
+                    },
+                    #[codec(index = 3)]
+                    ProposalSucceeded {
+                        chain_id: ::core::primitive::u64,
+                        proposal_nonce: ::core::primitive::u32,
+                    },
+                    #[codec(index = 4)]
+                    ProposalFailed {
+                        chain_id: ::core::primitive::u64,
+                        proposal_nonce: ::core::primitive::u32,
+                    },
+                }
+            }
+        }
         pub mod pallet_staking {
             use super::runtime_types;
             pub mod pallet {
@@ -27181,7 +25259,7 @@ pub mod api {
                         Clone,
                     )]
                     pub enum Call {
-                        # [codec (index = 0)] bond { controller : :: subxt :: sp_runtime :: MultiAddress < :: subxt :: sp_core :: crypto :: AccountId32 , :: core :: primitive :: u32 > , # [codec (compact)] value : :: core :: primitive :: u128 , payee : runtime_types :: pallet_staking :: RewardDestination < :: subxt :: sp_core :: crypto :: AccountId32 > , } , # [codec (index = 1)] bond_extra { # [codec (compact)] max_additional : :: core :: primitive :: u128 , } , # [codec (index = 2)] unbond { # [codec (compact)] value : :: core :: primitive :: u128 , } , # [codec (index = 3)] withdraw_unbonded { num_slashing_spans : :: core :: primitive :: u32 , } , # [codec (index = 4)] validate { prefs : runtime_types :: pallet_staking :: ValidatorPrefs , } , # [codec (index = 5)] nominate { targets : :: std :: vec :: Vec < :: subxt :: sp_runtime :: MultiAddress < :: subxt :: sp_core :: crypto :: AccountId32 , :: core :: primitive :: u32 > > , } , # [codec (index = 6)] chill , # [codec (index = 7)] set_payee { payee : runtime_types :: pallet_staking :: RewardDestination < :: subxt :: sp_core :: crypto :: AccountId32 > , } , # [codec (index = 8)] set_controller { controller : :: subxt :: sp_runtime :: MultiAddress < :: subxt :: sp_core :: crypto :: AccountId32 , :: core :: primitive :: u32 > , } , # [codec (index = 9)] set_validator_count { # [codec (compact)] new : :: core :: primitive :: u32 , } , # [codec (index = 10)] increase_validator_count { # [codec (compact)] additional : :: core :: primitive :: u32 , } , # [codec (index = 11)] scale_validator_count { factor : runtime_types :: sp_arithmetic :: per_things :: Percent , } , # [codec (index = 12)] force_no_eras , # [codec (index = 13)] force_new_era , # [codec (index = 14)] set_invulnerables { invulnerables : :: std :: vec :: Vec < :: subxt :: sp_core :: crypto :: AccountId32 > , } , # [codec (index = 15)] force_unstake { stash : :: subxt :: sp_core :: crypto :: AccountId32 , num_slashing_spans : :: core :: primitive :: u32 , } , # [codec (index = 16)] force_new_era_always , # [codec (index = 17)] cancel_deferred_slash { era : :: core :: primitive :: u32 , slash_indices : :: std :: vec :: Vec < :: core :: primitive :: u32 > , } , # [codec (index = 18)] payout_stakers { validator_stash : :: subxt :: sp_core :: crypto :: AccountId32 , era : :: core :: primitive :: u32 , } , # [codec (index = 19)] rebond { # [codec (compact)] value : :: core :: primitive :: u128 , } , # [codec (index = 20)] set_history_depth { # [codec (compact)] new_history_depth : :: core :: primitive :: u32 , # [codec (compact)] era_items_deleted : :: core :: primitive :: u32 , } , # [codec (index = 21)] reap_stash { stash : :: subxt :: sp_core :: crypto :: AccountId32 , num_slashing_spans : :: core :: primitive :: u32 , } , # [codec (index = 22)] kick { who : :: std :: vec :: Vec < :: subxt :: sp_runtime :: MultiAddress < :: subxt :: sp_core :: crypto :: AccountId32 , :: core :: primitive :: u32 > > , } , # [codec (index = 23)] set_staking_configs { min_nominator_bond : :: core :: primitive :: u128 , min_validator_bond : :: core :: primitive :: u128 , max_nominator_count : :: core :: option :: Option < :: core :: primitive :: u32 > , max_validator_count : :: core :: option :: Option < :: core :: primitive :: u32 > , chill_threshold : :: core :: option :: Option < runtime_types :: sp_arithmetic :: per_things :: Percent > , min_commission : runtime_types :: sp_arithmetic :: per_things :: Perbill , } , # [codec (index = 24)] chill_other { controller : :: subxt :: sp_core :: crypto :: AccountId32 , } , }
+                        # [codec (index = 0)] bond { controller : :: subxt :: sp_runtime :: MultiAddress < :: subxt :: sp_core :: crypto :: AccountId32 , :: core :: primitive :: u32 > , # [codec (compact)] value : :: core :: primitive :: u128 , payee : runtime_types :: pallet_staking :: RewardDestination < :: subxt :: sp_core :: crypto :: AccountId32 > , } , # [codec (index = 1)] bond_extra { # [codec (compact)] max_additional : :: core :: primitive :: u128 , } , # [codec (index = 2)] unbond { # [codec (compact)] value : :: core :: primitive :: u128 , } , # [codec (index = 3)] withdraw_unbonded { num_slashing_spans : :: core :: primitive :: u32 , } , # [codec (index = 4)] validate { prefs : runtime_types :: pallet_staking :: ValidatorPrefs , } , # [codec (index = 5)] nominate { targets : :: std :: vec :: Vec < :: subxt :: sp_runtime :: MultiAddress < :: subxt :: sp_core :: crypto :: AccountId32 , :: core :: primitive :: u32 > > , } , # [codec (index = 6)] chill , # [codec (index = 7)] set_payee { payee : runtime_types :: pallet_staking :: RewardDestination < :: subxt :: sp_core :: crypto :: AccountId32 > , } , # [codec (index = 8)] set_controller { controller : :: subxt :: sp_runtime :: MultiAddress < :: subxt :: sp_core :: crypto :: AccountId32 , :: core :: primitive :: u32 > , } , # [codec (index = 9)] set_validator_count { # [codec (compact)] new : :: core :: primitive :: u32 , } , # [codec (index = 10)] increase_validator_count { # [codec (compact)] additional : :: core :: primitive :: u32 , } , # [codec (index = 11)] scale_validator_count { factor : runtime_types :: sp_arithmetic :: per_things :: Percent , } , # [codec (index = 12)] force_no_eras , # [codec (index = 13)] force_new_era , # [codec (index = 14)] set_invulnerables { invulnerables : :: std :: vec :: Vec < :: subxt :: sp_core :: crypto :: AccountId32 > , } , # [codec (index = 15)] force_unstake { stash : :: subxt :: sp_core :: crypto :: AccountId32 , num_slashing_spans : :: core :: primitive :: u32 , } , # [codec (index = 16)] force_new_era_always , # [codec (index = 17)] cancel_deferred_slash { era : :: core :: primitive :: u32 , slash_indices : :: std :: vec :: Vec < :: core :: primitive :: u32 > , } , # [codec (index = 18)] payout_stakers { validator_stash : :: subxt :: sp_core :: crypto :: AccountId32 , era : :: core :: primitive :: u32 , } , # [codec (index = 19)] rebond { # [codec (compact)] value : :: core :: primitive :: u128 , } , # [codec (index = 20)] set_history_depth { # [codec (compact)] new_history_depth : :: core :: primitive :: u32 , # [codec (compact)] era_items_deleted : :: core :: primitive :: u32 , } , # [codec (index = 21)] reap_stash { stash : :: subxt :: sp_core :: crypto :: AccountId32 , num_slashing_spans : :: core :: primitive :: u32 , } , # [codec (index = 22)] kick { who : :: std :: vec :: Vec < :: subxt :: sp_runtime :: MultiAddress < :: subxt :: sp_core :: crypto :: AccountId32 , :: core :: primitive :: u32 > > , } , # [codec (index = 23)] set_staking_configs { min_nominator_bond : :: core :: primitive :: u128 , min_validator_bond : :: core :: primitive :: u128 , max_nominator_count : :: core :: option :: Option < :: core :: primitive :: u32 > , max_validator_count : :: core :: option :: Option < :: core :: primitive :: u32 > , chill_threshold : :: core :: option :: Option < runtime_types :: sp_arithmetic :: per_things :: Percent > , min_commission : runtime_types :: sp_arithmetic :: per_things :: Perbill , } , # [codec (index = 24)] chill_other { controller : :: subxt :: sp_core :: crypto :: AccountId32 , } , # [codec (index = 25)] force_apply_min_commission { validator_stash : :: subxt :: sp_core :: crypto :: AccountId32 , } , }
                     #[derive(
                         :: subxt :: codec :: Encode,
                         :: subxt :: codec :: Decode,
@@ -27411,11 +25489,7 @@ pub mod api {
                 PartialEq,
                 Clone,
             )]
-            pub struct Nominations<_0> {
-                pub targets: ::std::vec::Vec<_0>,
-                pub submitted_in: ::core::primitive::u32,
-                pub suppressed: ::core::primitive::bool,
-            }
+            pub struct Nominations { pub targets : runtime_types :: frame_support :: storage :: bounded_vec :: BoundedVec < :: subxt :: sp_core :: crypto :: AccountId32 > , pub submitted_in : :: core :: primitive :: u32 , pub suppressed : :: core :: primitive :: bool , }
             #[derive(
                 :: subxt :: codec :: Encode,
                 :: subxt :: codec :: Decode,
@@ -29085,10 +27159,7 @@ pub mod api {
                 #[codec(index = 2)]
                 BadOrigin,
                 #[codec(index = 3)]
-                Module {
-                    index: ::core::primitive::u8,
-                    error: ::core::primitive::u8,
-                },
+                Module(runtime_types::sp_runtime::ModuleError),
                 #[codec(index = 4)]
                 ConsumerRemaining,
                 #[codec(index = 5)]
@@ -29099,6 +27170,18 @@ pub mod api {
                 Token(runtime_types::sp_runtime::TokenError),
                 #[codec(index = 8)]
                 Arithmetic(runtime_types::sp_runtime::ArithmeticError),
+            }
+            #[derive(
+                :: subxt :: codec :: Encode,
+                :: subxt :: codec :: Decode,
+                Debug,
+                Eq,
+                PartialEq,
+                Clone,
+            )]
+            pub struct ModuleError {
+                pub index: ::core::primitive::u8,
+                pub error: ::core::primitive::u8,
             }
             #[derive(
                 :: subxt :: codec :: Encode,
@@ -29276,7 +27359,7 @@ pub mod api {
                 Clone,
             )]
             pub enum Call {
-                # [codec (index = 0)] System (runtime_types :: frame_system :: pallet :: Call ,) , # [codec (index = 2)] Timestamp (runtime_types :: pallet_timestamp :: pallet :: Call ,) , # [codec (index = 3)] Babe (runtime_types :: pallet_babe :: pallet :: Call ,) , # [codec (index = 4)] Authorship (runtime_types :: pallet_authorship :: pallet :: Call ,) , # [codec (index = 5)] Indices (runtime_types :: pallet_indices :: pallet :: Call ,) , # [codec (index = 6)] Balances (runtime_types :: pallet_balances :: pallet :: Call ,) , # [codec (index = 8)] ElectionProviderMultiPhase (runtime_types :: pallet_election_provider_multi_phase :: pallet :: Call ,) , # [codec (index = 9)] Staking (runtime_types :: pallet_staking :: pallet :: pallet :: Call ,) , # [codec (index = 10)] Session (runtime_types :: pallet_session :: pallet :: Call ,) , # [codec (index = 11)] Democracy (runtime_types :: pallet_democracy :: pallet :: Call ,) , # [codec (index = 12)] Council (runtime_types :: pallet_collective :: pallet :: Call ,) , # [codec (index = 13)] Elections (runtime_types :: pallet_elections_phragmen :: pallet :: Call ,) , # [codec (index = 14)] Grandpa (runtime_types :: pallet_grandpa :: pallet :: Call ,) , # [codec (index = 15)] Treasury (runtime_types :: pallet_treasury :: pallet :: Call ,) , # [codec (index = 16)] Utility (runtime_types :: pallet_utility :: pallet :: Call ,) , # [codec (index = 17)] Multisig (runtime_types :: pallet_multisig :: pallet :: Call ,) , # [codec (index = 18)] Scheduler (runtime_types :: pallet_scheduler :: pallet :: Call ,) , # [codec (index = 19)] Preimage (runtime_types :: pallet_preimage :: pallet :: Call ,) , # [codec (index = 20)] Proxy (runtime_types :: pallet_proxy :: pallet :: Call ,) , # [codec (index = 21)] Assets (runtime_types :: pallet_assets :: pallet :: Call ,) , # [codec (index = 22)] Sudo (runtime_types :: pallet_sudo :: pallet :: Call ,) , # [codec (index = 23)] ImOnline (runtime_types :: pallet_im_online :: pallet :: Call ,) , # [codec (index = 27)] Bounties (runtime_types :: pallet_bounties :: pallet :: Call ,) , # [codec (index = 28)] ChildBounties (runtime_types :: pallet_child_bounties :: pallet :: Call ,) , # [codec (index = 29)] BagsList (runtime_types :: pallet_bags_list :: pallet :: Call ,) , # [codec (index = 30)] HasherBn254 (runtime_types :: pallet_hasher :: pallet :: Call ,) , # [codec (index = 31)] HasherBls381 (runtime_types :: pallet_hasher :: pallet :: Call ,) , # [codec (index = 32)] AssetRegistry (runtime_types :: pallet_asset_registry :: pallet :: Call ,) , # [codec (index = 33)] Currencies (runtime_types :: orml_currencies :: module :: Call ,) , # [codec (index = 34)] Tokens (runtime_types :: orml_tokens :: module :: Call ,) , # [codec (index = 35)] TokenWrapper (runtime_types :: pallet_token_wrapper :: pallet :: Call ,) , # [codec (index = 36)] MixerVerifierBn254 (runtime_types :: pallet_verifier :: pallet :: Call ,) , # [codec (index = 37)] MixerVerifierBls381 (runtime_types :: pallet_verifier :: pallet :: Call ,) , # [codec (index = 38)] AnchorVerifierBn254 (runtime_types :: pallet_verifier :: pallet :: Call ,) , # [codec (index = 39)] AnchorVerifierBls381 (runtime_types :: pallet_verifier :: pallet :: Call ,) , # [codec (index = 40)] VAnchorVerifier2x2Bn254 (runtime_types :: pallet_verifier :: pallet :: Call ,) , # [codec (index = 41)] VAnchorVerifier2x2Bls381 (runtime_types :: pallet_verifier :: pallet :: Call ,) , # [codec (index = 42)] MerkleTreeBn254 (runtime_types :: pallet_mt :: pallet :: Call ,) , # [codec (index = 43)] MerkleTreeBls381 (runtime_types :: pallet_mt :: pallet :: Call ,) , # [codec (index = 44)] LinkableTreeBn254 (runtime_types :: pallet_linkable_tree :: pallet :: Call ,) , # [codec (index = 45)] LinkableTreeBls381 (runtime_types :: pallet_linkable_tree :: pallet :: Call ,) , # [codec (index = 46)] MixerBn254 (runtime_types :: pallet_mixer :: pallet :: Call ,) , # [codec (index = 47)] MixerBls381 (runtime_types :: pallet_mixer :: pallet :: Call ,) , # [codec (index = 48)] AnchorBn254 (runtime_types :: pallet_anchor :: pallet :: Call ,) , # [codec (index = 49)] AnchorBls381 (runtime_types :: pallet_anchor :: pallet :: Call ,) , # [codec (index = 50)] AnchorHandlerBn254 (runtime_types :: pallet_anchor_handler :: pallet :: Call ,) , # [codec (index = 51)] AnchorHandlerBls381 (runtime_types :: pallet_anchor_handler :: pallet :: Call ,) , # [codec (index = 52)] VAnchorBn254 (runtime_types :: pallet_vanchor :: pallet :: Call ,) , # [codec (index = 53)] VAnchorBls381 (runtime_types :: pallet_vanchor :: pallet :: Call ,) , # [codec (index = 54)] Bridge (runtime_types :: pallet_bridge :: pallet :: Call ,) , }
+                # [codec (index = 0)] System (runtime_types :: frame_system :: pallet :: Call ,) , # [codec (index = 2)] Timestamp (runtime_types :: pallet_timestamp :: pallet :: Call ,) , # [codec (index = 3)] Babe (runtime_types :: pallet_babe :: pallet :: Call ,) , # [codec (index = 4)] Authorship (runtime_types :: pallet_authorship :: pallet :: Call ,) , # [codec (index = 5)] Indices (runtime_types :: pallet_indices :: pallet :: Call ,) , # [codec (index = 6)] Balances (runtime_types :: pallet_balances :: pallet :: Call ,) , # [codec (index = 8)] ElectionProviderMultiPhase (runtime_types :: pallet_election_provider_multi_phase :: pallet :: Call ,) , # [codec (index = 9)] Staking (runtime_types :: pallet_staking :: pallet :: pallet :: Call ,) , # [codec (index = 10)] Session (runtime_types :: pallet_session :: pallet :: Call ,) , # [codec (index = 11)] Democracy (runtime_types :: pallet_democracy :: pallet :: Call ,) , # [codec (index = 12)] Council (runtime_types :: pallet_collective :: pallet :: Call ,) , # [codec (index = 13)] Elections (runtime_types :: pallet_elections_phragmen :: pallet :: Call ,) , # [codec (index = 14)] Grandpa (runtime_types :: pallet_grandpa :: pallet :: Call ,) , # [codec (index = 15)] Treasury (runtime_types :: pallet_treasury :: pallet :: Call ,) , # [codec (index = 16)] Utility (runtime_types :: pallet_utility :: pallet :: Call ,) , # [codec (index = 17)] Multisig (runtime_types :: pallet_multisig :: pallet :: Call ,) , # [codec (index = 18)] Scheduler (runtime_types :: pallet_scheduler :: pallet :: Call ,) , # [codec (index = 19)] Preimage (runtime_types :: pallet_preimage :: pallet :: Call ,) , # [codec (index = 20)] Proxy (runtime_types :: pallet_proxy :: pallet :: Call ,) , # [codec (index = 21)] Assets (runtime_types :: pallet_assets :: pallet :: Call ,) , # [codec (index = 22)] Sudo (runtime_types :: pallet_sudo :: pallet :: Call ,) , # [codec (index = 23)] ImOnline (runtime_types :: pallet_im_online :: pallet :: Call ,) , # [codec (index = 27)] Bounties (runtime_types :: pallet_bounties :: pallet :: Call ,) , # [codec (index = 28)] ChildBounties (runtime_types :: pallet_child_bounties :: pallet :: Call ,) , # [codec (index = 29)] BagsList (runtime_types :: pallet_bags_list :: pallet :: Call ,) , # [codec (index = 30)] HasherBn254 (runtime_types :: pallet_hasher :: pallet :: Call ,) , # [codec (index = 31)] AssetRegistry (runtime_types :: pallet_asset_registry :: pallet :: Call ,) , # [codec (index = 32)] Currencies (runtime_types :: orml_currencies :: module :: Call ,) , # [codec (index = 33)] Tokens (runtime_types :: orml_tokens :: module :: Call ,) , # [codec (index = 34)] TokenWrapper (runtime_types :: pallet_token_wrapper :: pallet :: Call ,) , # [codec (index = 35)] MixerVerifierBn254 (runtime_types :: pallet_verifier :: pallet :: Call ,) , # [codec (index = 36)] AnchorVerifierBn254 (runtime_types :: pallet_verifier :: pallet :: Call ,) , # [codec (index = 37)] VAnchorVerifier2x2Bn254 (runtime_types :: pallet_verifier :: pallet :: Call ,) , # [codec (index = 38)] MerkleTreeBn254 (runtime_types :: pallet_mt :: pallet :: Call ,) , # [codec (index = 39)] LinkableTreeBn254 (runtime_types :: pallet_linkable_tree :: pallet :: Call ,) , # [codec (index = 40)] MixerBn254 (runtime_types :: pallet_mixer :: pallet :: Call ,) , # [codec (index = 41)] AnchorBn254 (runtime_types :: pallet_anchor :: pallet :: Call ,) , # [codec (index = 42)] AnchorHandlerBn254 (runtime_types :: pallet_anchor_handler :: pallet :: Call ,) , # [codec (index = 43)] VAnchorBn254 (runtime_types :: pallet_vanchor :: pallet :: Call ,) , # [codec (index = 44)] Bridge (runtime_types :: pallet_bridge :: pallet :: Call ,) , # [codec (index = 45)] SignatureBridge (runtime_types :: pallet_signature_bridge :: pallet :: Call ,) , }
             #[derive(
                 :: subxt :: codec :: Encode,
                 :: subxt :: codec :: Decode,
@@ -29295,7 +27378,7 @@ pub mod api {
                 Clone,
             )]
             pub enum Event {
-                # [codec (index = 0)] System (runtime_types :: frame_system :: pallet :: Event ,) , # [codec (index = 5)] Indices (runtime_types :: pallet_indices :: pallet :: Event ,) , # [codec (index = 6)] Balances (runtime_types :: pallet_balances :: pallet :: Event ,) , # [codec (index = 8)] ElectionProviderMultiPhase (runtime_types :: pallet_election_provider_multi_phase :: pallet :: Event ,) , # [codec (index = 9)] Staking (runtime_types :: pallet_staking :: pallet :: pallet :: Event ,) , # [codec (index = 10)] Session (runtime_types :: pallet_session :: pallet :: Event ,) , # [codec (index = 11)] Democracy (runtime_types :: pallet_democracy :: pallet :: Event ,) , # [codec (index = 12)] Council (runtime_types :: pallet_collective :: pallet :: Event ,) , # [codec (index = 13)] Elections (runtime_types :: pallet_elections_phragmen :: pallet :: Event ,) , # [codec (index = 14)] Grandpa (runtime_types :: pallet_grandpa :: pallet :: Event ,) , # [codec (index = 15)] Treasury (runtime_types :: pallet_treasury :: pallet :: Event ,) , # [codec (index = 16)] Utility (runtime_types :: pallet_utility :: pallet :: Event ,) , # [codec (index = 17)] Multisig (runtime_types :: pallet_multisig :: pallet :: Event ,) , # [codec (index = 18)] Scheduler (runtime_types :: pallet_scheduler :: pallet :: Event ,) , # [codec (index = 19)] Preimage (runtime_types :: pallet_preimage :: pallet :: Event ,) , # [codec (index = 20)] Proxy (runtime_types :: pallet_proxy :: pallet :: Event ,) , # [codec (index = 21)] Assets (runtime_types :: pallet_assets :: pallet :: Event ,) , # [codec (index = 22)] Sudo (runtime_types :: pallet_sudo :: pallet :: Event ,) , # [codec (index = 23)] ImOnline (runtime_types :: pallet_im_online :: pallet :: Event ,) , # [codec (index = 25)] Offences (runtime_types :: pallet_offences :: pallet :: Event ,) , # [codec (index = 27)] Bounties (runtime_types :: pallet_bounties :: pallet :: Event ,) , # [codec (index = 28)] ChildBounties (runtime_types :: pallet_child_bounties :: pallet :: Event ,) , # [codec (index = 29)] BagsList (runtime_types :: pallet_bags_list :: pallet :: Event ,) , # [codec (index = 30)] HasherBn254 (runtime_types :: pallet_hasher :: pallet :: Event ,) , # [codec (index = 31)] HasherBls381 (runtime_types :: pallet_hasher :: pallet :: Event ,) , # [codec (index = 32)] AssetRegistry (runtime_types :: pallet_asset_registry :: pallet :: Event ,) , # [codec (index = 33)] Currencies (runtime_types :: orml_currencies :: module :: Event ,) , # [codec (index = 34)] Tokens (runtime_types :: orml_tokens :: module :: Event ,) , # [codec (index = 35)] TokenWrapper (runtime_types :: pallet_token_wrapper :: pallet :: Event ,) , # [codec (index = 36)] MixerVerifierBn254 (runtime_types :: pallet_verifier :: pallet :: Event ,) , # [codec (index = 37)] MixerVerifierBls381 (runtime_types :: pallet_verifier :: pallet :: Event ,) , # [codec (index = 38)] AnchorVerifierBn254 (runtime_types :: pallet_verifier :: pallet :: Event ,) , # [codec (index = 39)] AnchorVerifierBls381 (runtime_types :: pallet_verifier :: pallet :: Event ,) , # [codec (index = 40)] VAnchorVerifier2x2Bn254 (runtime_types :: pallet_verifier :: pallet :: Event ,) , # [codec (index = 41)] VAnchorVerifier2x2Bls381 (runtime_types :: pallet_verifier :: pallet :: Event ,) , # [codec (index = 42)] MerkleTreeBn254 (runtime_types :: pallet_mt :: pallet :: Event ,) , # [codec (index = 43)] MerkleTreeBls381 (runtime_types :: pallet_mt :: pallet :: Event ,) , # [codec (index = 44)] LinkableTreeBn254 (runtime_types :: pallet_linkable_tree :: pallet :: Event ,) , # [codec (index = 45)] LinkableTreeBls381 (runtime_types :: pallet_linkable_tree :: pallet :: Event ,) , # [codec (index = 46)] MixerBn254 (runtime_types :: pallet_mixer :: pallet :: Event ,) , # [codec (index = 47)] MixerBls381 (runtime_types :: pallet_mixer :: pallet :: Event ,) , # [codec (index = 48)] AnchorBn254 (runtime_types :: pallet_anchor :: pallet :: Event ,) , # [codec (index = 49)] AnchorBls381 (runtime_types :: pallet_anchor :: pallet :: Event ,) , # [codec (index = 50)] AnchorHandlerBn254 (runtime_types :: pallet_anchor_handler :: pallet :: Event ,) , # [codec (index = 51)] AnchorHandlerBls381 (runtime_types :: pallet_anchor_handler :: pallet :: Event ,) , # [codec (index = 52)] VAnchorBn254 (runtime_types :: pallet_vanchor :: pallet :: Event ,) , # [codec (index = 53)] VAnchorBls381 (runtime_types :: pallet_vanchor :: pallet :: Event ,) , # [codec (index = 54)] Bridge (runtime_types :: pallet_bridge :: pallet :: Event ,) , }
+                # [codec (index = 0)] System (runtime_types :: frame_system :: pallet :: Event ,) , # [codec (index = 5)] Indices (runtime_types :: pallet_indices :: pallet :: Event ,) , # [codec (index = 6)] Balances (runtime_types :: pallet_balances :: pallet :: Event ,) , # [codec (index = 8)] ElectionProviderMultiPhase (runtime_types :: pallet_election_provider_multi_phase :: pallet :: Event ,) , # [codec (index = 9)] Staking (runtime_types :: pallet_staking :: pallet :: pallet :: Event ,) , # [codec (index = 10)] Session (runtime_types :: pallet_session :: pallet :: Event ,) , # [codec (index = 11)] Democracy (runtime_types :: pallet_democracy :: pallet :: Event ,) , # [codec (index = 12)] Council (runtime_types :: pallet_collective :: pallet :: Event ,) , # [codec (index = 13)] Elections (runtime_types :: pallet_elections_phragmen :: pallet :: Event ,) , # [codec (index = 14)] Grandpa (runtime_types :: pallet_grandpa :: pallet :: Event ,) , # [codec (index = 15)] Treasury (runtime_types :: pallet_treasury :: pallet :: Event ,) , # [codec (index = 16)] Utility (runtime_types :: pallet_utility :: pallet :: Event ,) , # [codec (index = 17)] Multisig (runtime_types :: pallet_multisig :: pallet :: Event ,) , # [codec (index = 18)] Scheduler (runtime_types :: pallet_scheduler :: pallet :: Event ,) , # [codec (index = 19)] Preimage (runtime_types :: pallet_preimage :: pallet :: Event ,) , # [codec (index = 20)] Proxy (runtime_types :: pallet_proxy :: pallet :: Event ,) , # [codec (index = 21)] Assets (runtime_types :: pallet_assets :: pallet :: Event ,) , # [codec (index = 22)] Sudo (runtime_types :: pallet_sudo :: pallet :: Event ,) , # [codec (index = 23)] ImOnline (runtime_types :: pallet_im_online :: pallet :: Event ,) , # [codec (index = 25)] Offences (runtime_types :: pallet_offences :: pallet :: Event ,) , # [codec (index = 27)] Bounties (runtime_types :: pallet_bounties :: pallet :: Event ,) , # [codec (index = 28)] ChildBounties (runtime_types :: pallet_child_bounties :: pallet :: Event ,) , # [codec (index = 29)] BagsList (runtime_types :: pallet_bags_list :: pallet :: Event ,) , # [codec (index = 30)] HasherBn254 (runtime_types :: pallet_hasher :: pallet :: Event ,) , # [codec (index = 31)] AssetRegistry (runtime_types :: pallet_asset_registry :: pallet :: Event ,) , # [codec (index = 32)] Currencies (runtime_types :: orml_currencies :: module :: Event ,) , # [codec (index = 33)] Tokens (runtime_types :: orml_tokens :: module :: Event ,) , # [codec (index = 34)] TokenWrapper (runtime_types :: pallet_token_wrapper :: pallet :: Event ,) , # [codec (index = 35)] MixerVerifierBn254 (runtime_types :: pallet_verifier :: pallet :: Event ,) , # [codec (index = 36)] AnchorVerifierBn254 (runtime_types :: pallet_verifier :: pallet :: Event ,) , # [codec (index = 37)] VAnchorVerifier2x2Bn254 (runtime_types :: pallet_verifier :: pallet :: Event ,) , # [codec (index = 38)] MerkleTreeBn254 (runtime_types :: pallet_mt :: pallet :: Event ,) , # [codec (index = 39)] LinkableTreeBn254 (runtime_types :: pallet_linkable_tree :: pallet :: Event ,) , # [codec (index = 40)] MixerBn254 (runtime_types :: pallet_mixer :: pallet :: Event ,) , # [codec (index = 41)] AnchorBn254 (runtime_types :: pallet_anchor :: pallet :: Event ,) , # [codec (index = 42)] AnchorHandlerBn254 (runtime_types :: pallet_anchor_handler :: pallet :: Event ,) , # [codec (index = 43)] VAnchorBn254 (runtime_types :: pallet_vanchor :: pallet :: Event ,) , # [codec (index = 44)] Bridge (runtime_types :: pallet_bridge :: pallet :: Event ,) , # [codec (index = 45)] SignatureBridge (runtime_types :: pallet_signature_bridge :: pallet :: Event ,) , }
             #[derive(
                 :: subxt :: codec :: Encode,
                 :: subxt :: codec :: Decode,
@@ -29441,7 +27524,7 @@ pub mod api {
             pub enum OriginCaller {
                 #[codec(index = 0)]
                 system(
-                    runtime_types::frame_system::RawOrigin<
+                    runtime_types::frame_support::dispatch::RawOrigin<
                         ::subxt::sp_core::crypto::AccountId32,
                     >,
                 ),
@@ -29505,8 +27588,8 @@ pub mod api {
     }
     impl DispatchError {
         pub fn details(&self) -> Option<ErrorDetails> {
-            if let Self::Module { index, error } = self {
-                match (index , error) { (0u8 , 0u8) => Some (ErrorDetails { pallet : "System" , error : "InvalidSpecName" , docs : "The name of specification does not match between the current runtime\nand the new runtime." }) , (0u8 , 1u8) => Some (ErrorDetails { pallet : "System" , error : "SpecVersionNeedsToIncrease" , docs : "The specification version is not allowed to decrease between the current runtime\nand the new runtime." }) , (0u8 , 2u8) => Some (ErrorDetails { pallet : "System" , error : "FailedToExtractRuntimeVersion" , docs : "Failed to extract the runtime version from the new runtime.\n\nEither calling `Core_version` or decoding `RuntimeVersion` failed." }) , (0u8 , 3u8) => Some (ErrorDetails { pallet : "System" , error : "NonDefaultComposite" , docs : "Suicide called when the account has non-default composite data." }) , (0u8 , 4u8) => Some (ErrorDetails { pallet : "System" , error : "NonZeroRefCount" , docs : "There is a non-zero reference count preventing the account from being purged." }) , (0u8 , 5u8) => Some (ErrorDetails { pallet : "System" , error : "CallFiltered" , docs : "The origin filter prevent the call to be dispatched." }) , (3u8 , 0u8) => Some (ErrorDetails { pallet : "Babe" , error : "InvalidEquivocationProof" , docs : "An equivocation proof provided as part of an equivocation report is invalid." }) , (3u8 , 1u8) => Some (ErrorDetails { pallet : "Babe" , error : "InvalidKeyOwnershipProof" , docs : "A key ownership proof provided as part of an equivocation report is invalid." }) , (3u8 , 2u8) => Some (ErrorDetails { pallet : "Babe" , error : "DuplicateOffenceReport" , docs : "A given equivocation report is valid but already previously reported." }) , (4u8 , 0u8) => Some (ErrorDetails { pallet : "Authorship" , error : "InvalidUncleParent" , docs : "The uncle parent not in the chain." }) , (4u8 , 1u8) => Some (ErrorDetails { pallet : "Authorship" , error : "UnclesAlreadySet" , docs : "Uncles already set in the block." }) , (4u8 , 2u8) => Some (ErrorDetails { pallet : "Authorship" , error : "TooManyUncles" , docs : "Too many uncles." }) , (4u8 , 3u8) => Some (ErrorDetails { pallet : "Authorship" , error : "GenesisUncle" , docs : "The uncle is genesis." }) , (4u8 , 4u8) => Some (ErrorDetails { pallet : "Authorship" , error : "TooHighUncle" , docs : "The uncle is too high in chain." }) , (4u8 , 5u8) => Some (ErrorDetails { pallet : "Authorship" , error : "UncleAlreadyIncluded" , docs : "The uncle is already included." }) , (4u8 , 6u8) => Some (ErrorDetails { pallet : "Authorship" , error : "OldUncle" , docs : "The uncle isn't recent enough to be included." }) , (5u8 , 0u8) => Some (ErrorDetails { pallet : "Indices" , error : "NotAssigned" , docs : "The index was not already assigned." }) , (5u8 , 1u8) => Some (ErrorDetails { pallet : "Indices" , error : "NotOwner" , docs : "The index is assigned to another account." }) , (5u8 , 2u8) => Some (ErrorDetails { pallet : "Indices" , error : "InUse" , docs : "The index was not available." }) , (5u8 , 3u8) => Some (ErrorDetails { pallet : "Indices" , error : "NotTransfer" , docs : "The source and destination accounts are identical." }) , (5u8 , 4u8) => Some (ErrorDetails { pallet : "Indices" , error : "Permanent" , docs : "The index is permanent and may not be freed/changed." }) , (6u8 , 0u8) => Some (ErrorDetails { pallet : "Balances" , error : "VestingBalance" , docs : "Vesting balance too high to send value" }) , (6u8 , 1u8) => Some (ErrorDetails { pallet : "Balances" , error : "LiquidityRestrictions" , docs : "Account liquidity restrictions prevent withdrawal" }) , (6u8 , 2u8) => Some (ErrorDetails { pallet : "Balances" , error : "InsufficientBalance" , docs : "Balance too low to send value" }) , (6u8 , 3u8) => Some (ErrorDetails { pallet : "Balances" , error : "ExistentialDeposit" , docs : "Value too low to create account due to existential deposit" }) , (6u8 , 4u8) => Some (ErrorDetails { pallet : "Balances" , error : "KeepAlive" , docs : "Transfer/payment would kill account" }) , (6u8 , 5u8) => Some (ErrorDetails { pallet : "Balances" , error : "ExistingVestingSchedule" , docs : "A vesting schedule already exists for this account" }) , (6u8 , 6u8) => Some (ErrorDetails { pallet : "Balances" , error : "DeadAccount" , docs : "Beneficiary account must pre-exist" }) , (6u8 , 7u8) => Some (ErrorDetails { pallet : "Balances" , error : "TooManyReserves" , docs : "Number of named reserves exceed MaxReserves" }) , (8u8 , 0u8) => Some (ErrorDetails { pallet : "ElectionProviderMultiPhase" , error : "PreDispatchEarlySubmission" , docs : "Submission was too early." }) , (8u8 , 1u8) => Some (ErrorDetails { pallet : "ElectionProviderMultiPhase" , error : "PreDispatchWrongWinnerCount" , docs : "Wrong number of winners presented." }) , (8u8 , 2u8) => Some (ErrorDetails { pallet : "ElectionProviderMultiPhase" , error : "PreDispatchWeakSubmission" , docs : "Submission was too weak, score-wise." }) , (8u8 , 3u8) => Some (ErrorDetails { pallet : "ElectionProviderMultiPhase" , error : "SignedQueueFull" , docs : "The queue was full, and the solution was not better than any of the existing ones." }) , (8u8 , 4u8) => Some (ErrorDetails { pallet : "ElectionProviderMultiPhase" , error : "SignedCannotPayDeposit" , docs : "The origin failed to pay the deposit." }) , (8u8 , 5u8) => Some (ErrorDetails { pallet : "ElectionProviderMultiPhase" , error : "SignedInvalidWitness" , docs : "Witness data to dispatchable is invalid." }) , (8u8 , 6u8) => Some (ErrorDetails { pallet : "ElectionProviderMultiPhase" , error : "SignedTooMuchWeight" , docs : "The signed submission consumes too much weight" }) , (8u8 , 7u8) => Some (ErrorDetails { pallet : "ElectionProviderMultiPhase" , error : "OcwCallWrongEra" , docs : "OCW submitted solution for wrong round" }) , (8u8 , 8u8) => Some (ErrorDetails { pallet : "ElectionProviderMultiPhase" , error : "MissingSnapshotMetadata" , docs : "Snapshot metadata should exist but didn't." }) , (8u8 , 9u8) => Some (ErrorDetails { pallet : "ElectionProviderMultiPhase" , error : "InvalidSubmissionIndex" , docs : "`Self::insert_submission` returned an invalid index." }) , (8u8 , 10u8) => Some (ErrorDetails { pallet : "ElectionProviderMultiPhase" , error : "CallNotAllowed" , docs : "The call is not allowed at this point." }) , (9u8 , 0u8) => Some (ErrorDetails { pallet : "Staking" , error : "NotController" , docs : "Not a controller account." }) , (9u8 , 1u8) => Some (ErrorDetails { pallet : "Staking" , error : "NotStash" , docs : "Not a stash account." }) , (9u8 , 2u8) => Some (ErrorDetails { pallet : "Staking" , error : "AlreadyBonded" , docs : "Stash is already bonded." }) , (9u8 , 3u8) => Some (ErrorDetails { pallet : "Staking" , error : "AlreadyPaired" , docs : "Controller is already paired." }) , (9u8 , 4u8) => Some (ErrorDetails { pallet : "Staking" , error : "EmptyTargets" , docs : "Targets cannot be empty." }) , (9u8 , 5u8) => Some (ErrorDetails { pallet : "Staking" , error : "DuplicateIndex" , docs : "Duplicate index." }) , (9u8 , 6u8) => Some (ErrorDetails { pallet : "Staking" , error : "InvalidSlashIndex" , docs : "Slash record index out of bounds." }) , (9u8 , 7u8) => Some (ErrorDetails { pallet : "Staking" , error : "InsufficientBond" , docs : "Cannot have a validator or nominator role, with value less than the minimum defined by\ngovernance (see `MinValidatorBond` and `MinNominatorBond`). If unbonding is the\nintention, `chill` first to remove one's role as validator/nominator." }) , (9u8 , 8u8) => Some (ErrorDetails { pallet : "Staking" , error : "NoMoreChunks" , docs : "Can not schedule more unlock chunks." }) , (9u8 , 9u8) => Some (ErrorDetails { pallet : "Staking" , error : "NoUnlockChunk" , docs : "Can not rebond without unlocking chunks." }) , (9u8 , 10u8) => Some (ErrorDetails { pallet : "Staking" , error : "FundedTarget" , docs : "Attempting to target a stash that still has funds." }) , (9u8 , 11u8) => Some (ErrorDetails { pallet : "Staking" , error : "InvalidEraToReward" , docs : "Invalid era to reward." }) , (9u8 , 12u8) => Some (ErrorDetails { pallet : "Staking" , error : "InvalidNumberOfNominations" , docs : "Invalid number of nominations." }) , (9u8 , 13u8) => Some (ErrorDetails { pallet : "Staking" , error : "NotSortedAndUnique" , docs : "Items are not sorted and unique." }) , (9u8 , 14u8) => Some (ErrorDetails { pallet : "Staking" , error : "AlreadyClaimed" , docs : "Rewards for this era have already been claimed for this validator." }) , (9u8 , 15u8) => Some (ErrorDetails { pallet : "Staking" , error : "IncorrectHistoryDepth" , docs : "Incorrect previous history depth input provided." }) , (9u8 , 16u8) => Some (ErrorDetails { pallet : "Staking" , error : "IncorrectSlashingSpans" , docs : "Incorrect number of slashing spans provided." }) , (9u8 , 17u8) => Some (ErrorDetails { pallet : "Staking" , error : "BadState" , docs : "Internal state has become somehow corrupted and the operation cannot continue." }) , (9u8 , 18u8) => Some (ErrorDetails { pallet : "Staking" , error : "TooManyTargets" , docs : "Too many nomination targets supplied." }) , (9u8 , 19u8) => Some (ErrorDetails { pallet : "Staking" , error : "BadTarget" , docs : "A nomination target was supplied that was blocked or otherwise not a validator." }) , (9u8 , 20u8) => Some (ErrorDetails { pallet : "Staking" , error : "CannotChillOther" , docs : "The user has enough bond and thus cannot be chilled forcefully by an external person." }) , (9u8 , 21u8) => Some (ErrorDetails { pallet : "Staking" , error : "TooManyNominators" , docs : "There are too many nominators in the system. Governance needs to adjust the staking\nsettings to keep things safe for the runtime." }) , (9u8 , 22u8) => Some (ErrorDetails { pallet : "Staking" , error : "TooManyValidators" , docs : "There are too many validators in the system. Governance needs to adjust the staking\nsettings to keep things safe for the runtime." }) , (9u8 , 23u8) => Some (ErrorDetails { pallet : "Staking" , error : "CommissionTooLow" , docs : "Commission is too low. Must be at least `MinCommission`." }) , (10u8 , 0u8) => Some (ErrorDetails { pallet : "Session" , error : "InvalidProof" , docs : "Invalid ownership proof." }) , (10u8 , 1u8) => Some (ErrorDetails { pallet : "Session" , error : "NoAssociatedValidatorId" , docs : "No associated validator ID for account." }) , (10u8 , 2u8) => Some (ErrorDetails { pallet : "Session" , error : "DuplicatedKey" , docs : "Registered duplicate key." }) , (10u8 , 3u8) => Some (ErrorDetails { pallet : "Session" , error : "NoKeys" , docs : "No keys are associated with this account." }) , (10u8 , 4u8) => Some (ErrorDetails { pallet : "Session" , error : "NoAccount" , docs : "Key setting account is not live, so it's impossible to associate keys." }) , (11u8 , 0u8) => Some (ErrorDetails { pallet : "Democracy" , error : "ValueLow" , docs : "Value too low" }) , (11u8 , 1u8) => Some (ErrorDetails { pallet : "Democracy" , error : "ProposalMissing" , docs : "Proposal does not exist" }) , (11u8 , 2u8) => Some (ErrorDetails { pallet : "Democracy" , error : "AlreadyCanceled" , docs : "Cannot cancel the same proposal twice" }) , (11u8 , 3u8) => Some (ErrorDetails { pallet : "Democracy" , error : "DuplicateProposal" , docs : "Proposal already made" }) , (11u8 , 4u8) => Some (ErrorDetails { pallet : "Democracy" , error : "ProposalBlacklisted" , docs : "Proposal still blacklisted" }) , (11u8 , 5u8) => Some (ErrorDetails { pallet : "Democracy" , error : "NotSimpleMajority" , docs : "Next external proposal not simple majority" }) , (11u8 , 6u8) => Some (ErrorDetails { pallet : "Democracy" , error : "InvalidHash" , docs : "Invalid hash" }) , (11u8 , 7u8) => Some (ErrorDetails { pallet : "Democracy" , error : "NoProposal" , docs : "No external proposal" }) , (11u8 , 8u8) => Some (ErrorDetails { pallet : "Democracy" , error : "AlreadyVetoed" , docs : "Identity may not veto a proposal twice" }) , (11u8 , 9u8) => Some (ErrorDetails { pallet : "Democracy" , error : "DuplicatePreimage" , docs : "Preimage already noted" }) , (11u8 , 10u8) => Some (ErrorDetails { pallet : "Democracy" , error : "NotImminent" , docs : "Not imminent" }) , (11u8 , 11u8) => Some (ErrorDetails { pallet : "Democracy" , error : "TooEarly" , docs : "Too early" }) , (11u8 , 12u8) => Some (ErrorDetails { pallet : "Democracy" , error : "Imminent" , docs : "Imminent" }) , (11u8 , 13u8) => Some (ErrorDetails { pallet : "Democracy" , error : "PreimageMissing" , docs : "Preimage not found" }) , (11u8 , 14u8) => Some (ErrorDetails { pallet : "Democracy" , error : "ReferendumInvalid" , docs : "Vote given for invalid referendum" }) , (11u8 , 15u8) => Some (ErrorDetails { pallet : "Democracy" , error : "PreimageInvalid" , docs : "Invalid preimage" }) , (11u8 , 16u8) => Some (ErrorDetails { pallet : "Democracy" , error : "NoneWaiting" , docs : "No proposals waiting" }) , (11u8 , 17u8) => Some (ErrorDetails { pallet : "Democracy" , error : "NotVoter" , docs : "The given account did not vote on the referendum." }) , (11u8 , 18u8) => Some (ErrorDetails { pallet : "Democracy" , error : "NoPermission" , docs : "The actor has no permission to conduct the action." }) , (11u8 , 19u8) => Some (ErrorDetails { pallet : "Democracy" , error : "AlreadyDelegating" , docs : "The account is already delegating." }) , (11u8 , 20u8) => Some (ErrorDetails { pallet : "Democracy" , error : "InsufficientFunds" , docs : "Too high a balance was provided that the account cannot afford." }) , (11u8 , 21u8) => Some (ErrorDetails { pallet : "Democracy" , error : "NotDelegating" , docs : "The account is not currently delegating." }) , (11u8 , 22u8) => Some (ErrorDetails { pallet : "Democracy" , error : "VotesExist" , docs : "The account currently has votes attached to it and the operation cannot succeed until\nthese are removed, either through `unvote` or `reap_vote`." }) , (11u8 , 23u8) => Some (ErrorDetails { pallet : "Democracy" , error : "InstantNotAllowed" , docs : "The instant referendum origin is currently disallowed." }) , (11u8 , 24u8) => Some (ErrorDetails { pallet : "Democracy" , error : "Nonsense" , docs : "Delegation to oneself makes no sense." }) , (11u8 , 25u8) => Some (ErrorDetails { pallet : "Democracy" , error : "WrongUpperBound" , docs : "Invalid upper bound." }) , (11u8 , 26u8) => Some (ErrorDetails { pallet : "Democracy" , error : "MaxVotesReached" , docs : "Maximum number of votes reached." }) , (11u8 , 27u8) => Some (ErrorDetails { pallet : "Democracy" , error : "TooManyProposals" , docs : "Maximum number of proposals reached." }) , (12u8 , 0u8) => Some (ErrorDetails { pallet : "Council" , error : "NotMember" , docs : "Account is not a member" }) , (12u8 , 1u8) => Some (ErrorDetails { pallet : "Council" , error : "DuplicateProposal" , docs : "Duplicate proposals not allowed" }) , (12u8 , 2u8) => Some (ErrorDetails { pallet : "Council" , error : "ProposalMissing" , docs : "Proposal must exist" }) , (12u8 , 3u8) => Some (ErrorDetails { pallet : "Council" , error : "WrongIndex" , docs : "Mismatched index" }) , (12u8 , 4u8) => Some (ErrorDetails { pallet : "Council" , error : "DuplicateVote" , docs : "Duplicate vote ignored" }) , (12u8 , 5u8) => Some (ErrorDetails { pallet : "Council" , error : "AlreadyInitialized" , docs : "Members are already initialized!" }) , (12u8 , 6u8) => Some (ErrorDetails { pallet : "Council" , error : "TooEarly" , docs : "The close call was made too early, before the end of the voting." }) , (12u8 , 7u8) => Some (ErrorDetails { pallet : "Council" , error : "TooManyProposals" , docs : "There can only be a maximum of `MaxProposals` active proposals." }) , (12u8 , 8u8) => Some (ErrorDetails { pallet : "Council" , error : "WrongProposalWeight" , docs : "The given weight bound for the proposal was too low." }) , (12u8 , 9u8) => Some (ErrorDetails { pallet : "Council" , error : "WrongProposalLength" , docs : "The given length bound for the proposal was too low." }) , (13u8 , 0u8) => Some (ErrorDetails { pallet : "Elections" , error : "UnableToVote" , docs : "Cannot vote when no candidates or members exist." }) , (13u8 , 1u8) => Some (ErrorDetails { pallet : "Elections" , error : "NoVotes" , docs : "Must vote for at least one candidate." }) , (13u8 , 2u8) => Some (ErrorDetails { pallet : "Elections" , error : "TooManyVotes" , docs : "Cannot vote more than candidates." }) , (13u8 , 3u8) => Some (ErrorDetails { pallet : "Elections" , error : "MaximumVotesExceeded" , docs : "Cannot vote more than maximum allowed." }) , (13u8 , 4u8) => Some (ErrorDetails { pallet : "Elections" , error : "LowBalance" , docs : "Cannot vote with stake less than minimum balance." }) , (13u8 , 5u8) => Some (ErrorDetails { pallet : "Elections" , error : "UnableToPayBond" , docs : "Voter can not pay voting bond." }) , (13u8 , 6u8) => Some (ErrorDetails { pallet : "Elections" , error : "MustBeVoter" , docs : "Must be a voter." }) , (13u8 , 7u8) => Some (ErrorDetails { pallet : "Elections" , error : "ReportSelf" , docs : "Cannot report self." }) , (13u8 , 8u8) => Some (ErrorDetails { pallet : "Elections" , error : "DuplicatedCandidate" , docs : "Duplicated candidate submission." }) , (13u8 , 9u8) => Some (ErrorDetails { pallet : "Elections" , error : "MemberSubmit" , docs : "Member cannot re-submit candidacy." }) , (13u8 , 10u8) => Some (ErrorDetails { pallet : "Elections" , error : "RunnerUpSubmit" , docs : "Runner cannot re-submit candidacy." }) , (13u8 , 11u8) => Some (ErrorDetails { pallet : "Elections" , error : "InsufficientCandidateFunds" , docs : "Candidate does not have enough funds." }) , (13u8 , 12u8) => Some (ErrorDetails { pallet : "Elections" , error : "NotMember" , docs : "Not a member." }) , (13u8 , 13u8) => Some (ErrorDetails { pallet : "Elections" , error : "InvalidWitnessData" , docs : "The provided count of number of candidates is incorrect." }) , (13u8 , 14u8) => Some (ErrorDetails { pallet : "Elections" , error : "InvalidVoteCount" , docs : "The provided count of number of votes is incorrect." }) , (13u8 , 15u8) => Some (ErrorDetails { pallet : "Elections" , error : "InvalidRenouncing" , docs : "The renouncing origin presented a wrong `Renouncing` parameter." }) , (13u8 , 16u8) => Some (ErrorDetails { pallet : "Elections" , error : "InvalidReplacement" , docs : "Prediction regarding replacement after member removal is wrong." }) , (14u8 , 0u8) => Some (ErrorDetails { pallet : "Grandpa" , error : "PauseFailed" , docs : "Attempt to signal GRANDPA pause when the authority set isn't live\n(either paused or already pending pause)." }) , (14u8 , 1u8) => Some (ErrorDetails { pallet : "Grandpa" , error : "ResumeFailed" , docs : "Attempt to signal GRANDPA resume when the authority set isn't paused\n(either live or already pending resume)." }) , (14u8 , 2u8) => Some (ErrorDetails { pallet : "Grandpa" , error : "ChangePending" , docs : "Attempt to signal GRANDPA change with one already pending." }) , (14u8 , 3u8) => Some (ErrorDetails { pallet : "Grandpa" , error : "TooSoon" , docs : "Cannot signal forced change so soon after last." }) , (14u8 , 4u8) => Some (ErrorDetails { pallet : "Grandpa" , error : "InvalidKeyOwnershipProof" , docs : "A key ownership proof provided as part of an equivocation report is invalid." }) , (14u8 , 5u8) => Some (ErrorDetails { pallet : "Grandpa" , error : "InvalidEquivocationProof" , docs : "An equivocation proof provided as part of an equivocation report is invalid." }) , (14u8 , 6u8) => Some (ErrorDetails { pallet : "Grandpa" , error : "DuplicateOffenceReport" , docs : "A given equivocation report is valid but already previously reported." }) , (15u8 , 0u8) => Some (ErrorDetails { pallet : "Treasury" , error : "InsufficientProposersBalance" , docs : "Proposer's balance is too low." }) , (15u8 , 1u8) => Some (ErrorDetails { pallet : "Treasury" , error : "InvalidIndex" , docs : "No proposal or bounty at that index." }) , (15u8 , 2u8) => Some (ErrorDetails { pallet : "Treasury" , error : "TooManyApprovals" , docs : "Too many approvals in the queue." }) , (16u8 , 0u8) => Some (ErrorDetails { pallet : "Utility" , error : "TooManyCalls" , docs : "Too many calls batched." }) , (17u8 , 0u8) => Some (ErrorDetails { pallet : "Multisig" , error : "MinimumThreshold" , docs : "Threshold must be 2 or greater." }) , (17u8 , 1u8) => Some (ErrorDetails { pallet : "Multisig" , error : "AlreadyApproved" , docs : "Call is already approved by this signatory." }) , (17u8 , 2u8) => Some (ErrorDetails { pallet : "Multisig" , error : "NoApprovalsNeeded" , docs : "Call doesn't need any (more) approvals." }) , (17u8 , 3u8) => Some (ErrorDetails { pallet : "Multisig" , error : "TooFewSignatories" , docs : "There are too few signatories in the list." }) , (17u8 , 4u8) => Some (ErrorDetails { pallet : "Multisig" , error : "TooManySignatories" , docs : "There are too many signatories in the list." }) , (17u8 , 5u8) => Some (ErrorDetails { pallet : "Multisig" , error : "SignatoriesOutOfOrder" , docs : "The signatories were provided out of order; they should be ordered." }) , (17u8 , 6u8) => Some (ErrorDetails { pallet : "Multisig" , error : "SenderInSignatories" , docs : "The sender was contained in the other signatories; it shouldn't be." }) , (17u8 , 7u8) => Some (ErrorDetails { pallet : "Multisig" , error : "NotFound" , docs : "Multisig operation not found when attempting to cancel." }) , (17u8 , 8u8) => Some (ErrorDetails { pallet : "Multisig" , error : "NotOwner" , docs : "Only the account that originally created the multisig is able to cancel it." }) , (17u8 , 9u8) => Some (ErrorDetails { pallet : "Multisig" , error : "NoTimepoint" , docs : "No timepoint was given, yet the multisig operation is already underway." }) , (17u8 , 10u8) => Some (ErrorDetails { pallet : "Multisig" , error : "WrongTimepoint" , docs : "A different timepoint was given to the multisig operation that is underway." }) , (17u8 , 11u8) => Some (ErrorDetails { pallet : "Multisig" , error : "UnexpectedTimepoint" , docs : "A timepoint was given, yet no multisig operation is underway." }) , (17u8 , 12u8) => Some (ErrorDetails { pallet : "Multisig" , error : "MaxWeightTooLow" , docs : "The maximum weight information provided was too low." }) , (17u8 , 13u8) => Some (ErrorDetails { pallet : "Multisig" , error : "AlreadyStored" , docs : "The data to be stored is already stored." }) , (18u8 , 0u8) => Some (ErrorDetails { pallet : "Scheduler" , error : "FailedToSchedule" , docs : "Failed to schedule a call" }) , (18u8 , 1u8) => Some (ErrorDetails { pallet : "Scheduler" , error : "NotFound" , docs : "Cannot find the scheduled call." }) , (18u8 , 2u8) => Some (ErrorDetails { pallet : "Scheduler" , error : "TargetBlockNumberInPast" , docs : "Given target block number is in the past." }) , (18u8 , 3u8) => Some (ErrorDetails { pallet : "Scheduler" , error : "RescheduleNoChange" , docs : "Reschedule failed because it does not change scheduled time." }) , (19u8 , 0u8) => Some (ErrorDetails { pallet : "Preimage" , error : "TooLarge" , docs : "Preimage is too large to store on-chain." }) , (19u8 , 1u8) => Some (ErrorDetails { pallet : "Preimage" , error : "AlreadyNoted" , docs : "Preimage has already been noted on-chain." }) , (19u8 , 2u8) => Some (ErrorDetails { pallet : "Preimage" , error : "NotAuthorized" , docs : "The user is not authorized to perform this action." }) , (19u8 , 3u8) => Some (ErrorDetails { pallet : "Preimage" , error : "NotNoted" , docs : "The preimage cannot be removed since it has not yet been noted." }) , (19u8 , 4u8) => Some (ErrorDetails { pallet : "Preimage" , error : "Requested" , docs : "A preimage may not be removed when there are outstanding requests." }) , (19u8 , 5u8) => Some (ErrorDetails { pallet : "Preimage" , error : "NotRequested" , docs : "The preimage request cannot be removed since no outstanding requests exist." }) , (20u8 , 0u8) => Some (ErrorDetails { pallet : "Proxy" , error : "TooMany" , docs : "There are too many proxies registered or too many announcements pending." }) , (20u8 , 1u8) => Some (ErrorDetails { pallet : "Proxy" , error : "NotFound" , docs : "Proxy registration not found." }) , (20u8 , 2u8) => Some (ErrorDetails { pallet : "Proxy" , error : "NotProxy" , docs : "Sender is not a proxy of the account to be proxied." }) , (20u8 , 3u8) => Some (ErrorDetails { pallet : "Proxy" , error : "Unproxyable" , docs : "A call which is incompatible with the proxy type's filter was attempted." }) , (20u8 , 4u8) => Some (ErrorDetails { pallet : "Proxy" , error : "Duplicate" , docs : "Account is already a proxy." }) , (20u8 , 5u8) => Some (ErrorDetails { pallet : "Proxy" , error : "NoPermission" , docs : "Call may not be made by proxy because it may escalate its privileges." }) , (20u8 , 6u8) => Some (ErrorDetails { pallet : "Proxy" , error : "Unannounced" , docs : "Announcement, if made at all, was made too recently." }) , (20u8 , 7u8) => Some (ErrorDetails { pallet : "Proxy" , error : "NoSelfProxy" , docs : "Cannot add self as proxy." }) , (21u8 , 0u8) => Some (ErrorDetails { pallet : "Assets" , error : "BalanceLow" , docs : "Account balance must be greater than or equal to the transfer amount." }) , (21u8 , 1u8) => Some (ErrorDetails { pallet : "Assets" , error : "NoAccount" , docs : "The account to alter does not exist." }) , (21u8 , 2u8) => Some (ErrorDetails { pallet : "Assets" , error : "NoPermission" , docs : "The signing account has no permission to do the operation." }) , (21u8 , 3u8) => Some (ErrorDetails { pallet : "Assets" , error : "Unknown" , docs : "The given asset ID is unknown." }) , (21u8 , 4u8) => Some (ErrorDetails { pallet : "Assets" , error : "Frozen" , docs : "The origin account is frozen." }) , (21u8 , 5u8) => Some (ErrorDetails { pallet : "Assets" , error : "InUse" , docs : "The asset ID is already taken." }) , (21u8 , 6u8) => Some (ErrorDetails { pallet : "Assets" , error : "BadWitness" , docs : "Invalid witness data given." }) , (21u8 , 7u8) => Some (ErrorDetails { pallet : "Assets" , error : "MinBalanceZero" , docs : "Minimum balance should be non-zero." }) , (21u8 , 8u8) => Some (ErrorDetails { pallet : "Assets" , error : "NoProvider" , docs : "Unable to increment the consumer reference counters on the account. Either no provider\nreference exists to allow a non-zero balance of a non-self-sufficient asset, or the\nmaximum number of consumers has been reached." }) , (21u8 , 9u8) => Some (ErrorDetails { pallet : "Assets" , error : "BadMetadata" , docs : "Invalid metadata given." }) , (21u8 , 10u8) => Some (ErrorDetails { pallet : "Assets" , error : "Unapproved" , docs : "No approval exists that would allow the transfer." }) , (21u8 , 11u8) => Some (ErrorDetails { pallet : "Assets" , error : "WouldDie" , docs : "The source account would not survive the transfer and it needs to stay alive." }) , (21u8 , 12u8) => Some (ErrorDetails { pallet : "Assets" , error : "AlreadyExists" , docs : "The asset-account already exists." }) , (21u8 , 13u8) => Some (ErrorDetails { pallet : "Assets" , error : "NoDeposit" , docs : "The asset-account doesn't have an associated deposit." }) , (21u8 , 14u8) => Some (ErrorDetails { pallet : "Assets" , error : "WouldBurn" , docs : "The operation would result in funds being burned." }) , (22u8 , 0u8) => Some (ErrorDetails { pallet : "Sudo" , error : "RequireSudo" , docs : "Sender must be the Sudo account" }) , (23u8 , 0u8) => Some (ErrorDetails { pallet : "ImOnline" , error : "InvalidKey" , docs : "Non existent public key." }) , (23u8 , 1u8) => Some (ErrorDetails { pallet : "ImOnline" , error : "DuplicatedHeartbeat" , docs : "Duplicated heartbeat." }) , (27u8 , 0u8) => Some (ErrorDetails { pallet : "Bounties" , error : "InsufficientProposersBalance" , docs : "Proposer's balance is too low." }) , (27u8 , 1u8) => Some (ErrorDetails { pallet : "Bounties" , error : "InvalidIndex" , docs : "No proposal or bounty at that index." }) , (27u8 , 2u8) => Some (ErrorDetails { pallet : "Bounties" , error : "ReasonTooBig" , docs : "The reason given is just too big." }) , (27u8 , 3u8) => Some (ErrorDetails { pallet : "Bounties" , error : "UnexpectedStatus" , docs : "The bounty status is unexpected." }) , (27u8 , 4u8) => Some (ErrorDetails { pallet : "Bounties" , error : "RequireCurator" , docs : "Require bounty curator." }) , (27u8 , 5u8) => Some (ErrorDetails { pallet : "Bounties" , error : "InvalidValue" , docs : "Invalid bounty value." }) , (27u8 , 6u8) => Some (ErrorDetails { pallet : "Bounties" , error : "InvalidFee" , docs : "Invalid bounty fee." }) , (27u8 , 7u8) => Some (ErrorDetails { pallet : "Bounties" , error : "PendingPayout" , docs : "A bounty payout is pending.\nTo cancel the bounty, you must unassign and slash the curator." }) , (27u8 , 8u8) => Some (ErrorDetails { pallet : "Bounties" , error : "Premature" , docs : "The bounties cannot be claimed/closed because it's still in the countdown period." }) , (27u8 , 9u8) => Some (ErrorDetails { pallet : "Bounties" , error : "HasActiveChildBounty" , docs : "The bounty cannot be closed because it has active child-bounties." }) , (28u8 , 0u8) => Some (ErrorDetails { pallet : "ChildBounties" , error : "ParentBountyNotActive" , docs : "The parent bounty is not in active state." }) , (28u8 , 1u8) => Some (ErrorDetails { pallet : "ChildBounties" , error : "InsufficientBountyBalance" , docs : "The bounty balance is not enough to add new child-bounty." }) , (28u8 , 2u8) => Some (ErrorDetails { pallet : "ChildBounties" , error : "TooManyChildBounties" , docs : "Number of child-bounties exceeds limit `MaxActiveChildBountyCount`." }) , (29u8 , 0u8) => Some (ErrorDetails { pallet : "BagsList" , error : "NotInSameBag" , docs : "Attempted to place node in front of a node in another bag." }) , (29u8 , 1u8) => Some (ErrorDetails { pallet : "BagsList" , error : "IdNotFound" , docs : "Id not found in list." }) , (29u8 , 2u8) => Some (ErrorDetails { pallet : "BagsList" , error : "NotHeavier" , docs : "An Id does not have a greater vote weight than another Id." }) , (30u8 , 0u8) => Some (ErrorDetails { pallet : "HasherBn254" , error : "ParametersNotInitialized" , docs : "Parameters haven't been initialized" }) , (30u8 , 1u8) => Some (ErrorDetails { pallet : "HasherBn254" , error : "HashError" , docs : "Error during hashing" }) , (31u8 , 0u8) => Some (ErrorDetails { pallet : "HasherBls381" , error : "ParametersNotInitialized" , docs : "Parameters haven't been initialized" }) , (31u8 , 1u8) => Some (ErrorDetails { pallet : "HasherBls381" , error : "HashError" , docs : "Error during hashing" }) , (32u8 , 0u8) => Some (ErrorDetails { pallet : "AssetRegistry" , error : "NoIdAvailable" , docs : "Asset Id is not available. This only happens when it reaches the MAX\nvalue of given id type." }) , (32u8 , 1u8) => Some (ErrorDetails { pallet : "AssetRegistry" , error : "AssetNotFound" , docs : "Invalid asset name or symbol." }) , (32u8 , 2u8) => Some (ErrorDetails { pallet : "AssetRegistry" , error : "TooLong" , docs : "Invalid asset name or symbol." }) , (32u8 , 3u8) => Some (ErrorDetails { pallet : "AssetRegistry" , error : "AssetNotRegistered" , docs : "Asset ID is not registered in the asset-registry." }) , (32u8 , 4u8) => Some (ErrorDetails { pallet : "AssetRegistry" , error : "AssetAlreadyRegistered" , docs : "Asset is already registered." }) , (32u8 , 5u8) => Some (ErrorDetails { pallet : "AssetRegistry" , error : "InvalidSharedAssetLen" , docs : "Incorrect number of assets provided to create shared asset." }) , (32u8 , 6u8) => Some (ErrorDetails { pallet : "AssetRegistry" , error : "AssetExistsInPool" , docs : "Asset exists in to pool" }) , (32u8 , 7u8) => Some (ErrorDetails { pallet : "AssetRegistry" , error : "AssetNotFoundInPool" , docs : "Asset not found in pool" }) , (33u8 , 0u8) => Some (ErrorDetails { pallet : "Currencies" , error : "AmountIntoBalanceFailed" , docs : "Unable to convert the Amount type into Balance." }) , (33u8 , 1u8) => Some (ErrorDetails { pallet : "Currencies" , error : "BalanceTooLow" , docs : "Balance is too low." }) , (33u8 , 2u8) => Some (ErrorDetails { pallet : "Currencies" , error : "DepositFailed" , docs : "Deposit result is not expected" }) , (34u8 , 0u8) => Some (ErrorDetails { pallet : "Tokens" , error : "BalanceTooLow" , docs : "The balance is too low" }) , (34u8 , 1u8) => Some (ErrorDetails { pallet : "Tokens" , error : "AmountIntoBalanceFailed" , docs : "Cannot convert Amount into Balance type" }) , (34u8 , 2u8) => Some (ErrorDetails { pallet : "Tokens" , error : "LiquidityRestrictions" , docs : "Failed because liquidity restrictions due to locking" }) , (34u8 , 3u8) => Some (ErrorDetails { pallet : "Tokens" , error : "MaxLocksExceeded" , docs : "Failed because the maximum locks was exceeded" }) , (34u8 , 4u8) => Some (ErrorDetails { pallet : "Tokens" , error : "KeepAlive" , docs : "Transfer/payment would kill account" }) , (34u8 , 5u8) => Some (ErrorDetails { pallet : "Tokens" , error : "ExistentialDeposit" , docs : "Value too low to create account due to existential deposit" }) , (34u8 , 6u8) => Some (ErrorDetails { pallet : "Tokens" , error : "DeadAccount" , docs : "Beneficiary account must pre-exist" }) , (35u8 , 0u8) => Some (ErrorDetails { pallet : "TokenWrapper" , error : "InvalidAmount" , docs : "Invalid transaction amount" }) , (35u8 , 1u8) => Some (ErrorDetails { pallet : "TokenWrapper" , error : "UnregisteredAssetId" , docs : "AssetId not found in selected pool share" }) , (35u8 , 2u8) => Some (ErrorDetails { pallet : "TokenWrapper" , error : "NotFoundInPool" , docs : "Assets not found in selected pool" }) , (35u8 , 3u8) => Some (ErrorDetails { pallet : "TokenWrapper" , error : "InsufficientBalance" , docs : "Insufficient Balance for an asset" }) , (35u8 , 4u8) => Some (ErrorDetails { pallet : "TokenWrapper" , error : "NoWrappingFeePercentFound" , docs : "" }) , (36u8 , 0u8) => Some (ErrorDetails { pallet : "MixerVerifierBn254" , error : "ParametersNotInitialized" , docs : "Parameters haven't been initialized" }) , (36u8 , 1u8) => Some (ErrorDetails { pallet : "MixerVerifierBn254" , error : "VerifyError" , docs : "Error during verification" }) , (37u8 , 0u8) => Some (ErrorDetails { pallet : "MixerVerifierBls381" , error : "ParametersNotInitialized" , docs : "Parameters haven't been initialized" }) , (37u8 , 1u8) => Some (ErrorDetails { pallet : "MixerVerifierBls381" , error : "VerifyError" , docs : "Error during verification" }) , (38u8 , 0u8) => Some (ErrorDetails { pallet : "AnchorVerifierBn254" , error : "ParametersNotInitialized" , docs : "Parameters haven't been initialized" }) , (38u8 , 1u8) => Some (ErrorDetails { pallet : "AnchorVerifierBn254" , error : "VerifyError" , docs : "Error during verification" }) , (39u8 , 0u8) => Some (ErrorDetails { pallet : "AnchorVerifierBls381" , error : "ParametersNotInitialized" , docs : "Parameters haven't been initialized" }) , (39u8 , 1u8) => Some (ErrorDetails { pallet : "AnchorVerifierBls381" , error : "VerifyError" , docs : "Error during verification" }) , (40u8 , 0u8) => Some (ErrorDetails { pallet : "VAnchorVerifier2x2Bn254" , error : "ParametersNotInitialized" , docs : "Parameters haven't been initialized" }) , (40u8 , 1u8) => Some (ErrorDetails { pallet : "VAnchorVerifier2x2Bn254" , error : "VerifyError" , docs : "Error during verification" }) , (41u8 , 0u8) => Some (ErrorDetails { pallet : "VAnchorVerifier2x2Bls381" , error : "ParametersNotInitialized" , docs : "Parameters haven't been initialized" }) , (41u8 , 1u8) => Some (ErrorDetails { pallet : "VAnchorVerifier2x2Bls381" , error : "VerifyError" , docs : "Error during verification" }) , (42u8 , 0u8) => Some (ErrorDetails { pallet : "MerkleTreeBn254" , error : "InvalidPermissions" , docs : "Account does not have correct permissions" }) , (42u8 , 1u8) => Some (ErrorDetails { pallet : "MerkleTreeBn254" , error : "InvalidTreeDepth" , docs : "Invalid depth of the tree specified" }) , (42u8 , 2u8) => Some (ErrorDetails { pallet : "MerkleTreeBn254" , error : "InvalidLeafIndex" , docs : "Invalid  leaf index,  either taken or too large" }) , (42u8 , 3u8) => Some (ErrorDetails { pallet : "MerkleTreeBn254" , error : "ExceedsMaxLeaves" , docs : "Tree is full" }) , (42u8 , 4u8) => Some (ErrorDetails { pallet : "MerkleTreeBn254" , error : "TreeDoesntExist" , docs : "Tree doesnt exist" }) , (42u8 , 5u8) => Some (ErrorDetails { pallet : "MerkleTreeBn254" , error : "ExceedsMaxDefaultHashes" , docs : "Invalid length for default hashes" }) , (43u8 , 0u8) => Some (ErrorDetails { pallet : "MerkleTreeBls381" , error : "InvalidPermissions" , docs : "Account does not have correct permissions" }) , (43u8 , 1u8) => Some (ErrorDetails { pallet : "MerkleTreeBls381" , error : "InvalidTreeDepth" , docs : "Invalid depth of the tree specified" }) , (43u8 , 2u8) => Some (ErrorDetails { pallet : "MerkleTreeBls381" , error : "InvalidLeafIndex" , docs : "Invalid  leaf index,  either taken or too large" }) , (43u8 , 3u8) => Some (ErrorDetails { pallet : "MerkleTreeBls381" , error : "ExceedsMaxLeaves" , docs : "Tree is full" }) , (43u8 , 4u8) => Some (ErrorDetails { pallet : "MerkleTreeBls381" , error : "TreeDoesntExist" , docs : "Tree doesnt exist" }) , (43u8 , 5u8) => Some (ErrorDetails { pallet : "MerkleTreeBls381" , error : "ExceedsMaxDefaultHashes" , docs : "Invalid length for default hashes" }) , (44u8 , 0u8) => Some (ErrorDetails { pallet : "LinkableTreeBn254" , error : "UnknownRoot" , docs : "" }) , (44u8 , 1u8) => Some (ErrorDetails { pallet : "LinkableTreeBn254" , error : "InvalidMerkleRoots" , docs : "Invalid Merkle Roots" }) , (44u8 , 2u8) => Some (ErrorDetails { pallet : "LinkableTreeBn254" , error : "InvalidNeighborWithdrawRoot" , docs : "Invalid neighbor root passed in withdrawal\n(neighbor root is not in neighbor history)" }) , (44u8 , 3u8) => Some (ErrorDetails { pallet : "LinkableTreeBn254" , error : "TooManyEdges" , docs : "Anchor is at maximum number of edges for the given tree" }) , (44u8 , 4u8) => Some (ErrorDetails { pallet : "LinkableTreeBn254" , error : "EdgeAlreadyExists" , docs : "Edge already exists" }) , (44u8 , 5u8) => Some (ErrorDetails { pallet : "LinkableTreeBn254" , error : "EdgeDoesntExists" , docs : "Edge does not exist" }) , (45u8 , 0u8) => Some (ErrorDetails { pallet : "LinkableTreeBls381" , error : "UnknownRoot" , docs : "" }) , (45u8 , 1u8) => Some (ErrorDetails { pallet : "LinkableTreeBls381" , error : "InvalidMerkleRoots" , docs : "Invalid Merkle Roots" }) , (45u8 , 2u8) => Some (ErrorDetails { pallet : "LinkableTreeBls381" , error : "InvalidNeighborWithdrawRoot" , docs : "Invalid neighbor root passed in withdrawal\n(neighbor root is not in neighbor history)" }) , (45u8 , 3u8) => Some (ErrorDetails { pallet : "LinkableTreeBls381" , error : "TooManyEdges" , docs : "Anchor is at maximum number of edges for the given tree" }) , (45u8 , 4u8) => Some (ErrorDetails { pallet : "LinkableTreeBls381" , error : "EdgeAlreadyExists" , docs : "Edge already exists" }) , (45u8 , 5u8) => Some (ErrorDetails { pallet : "LinkableTreeBls381" , error : "EdgeDoesntExists" , docs : "Edge does not exist" }) , (46u8 , 0u8) => Some (ErrorDetails { pallet : "MixerBn254" , error : "InvalidPermissions" , docs : "Account does not have correct permissions" }) , (46u8 , 1u8) => Some (ErrorDetails { pallet : "MixerBn254" , error : "InvalidWithdrawProof" , docs : "Invalid withdraw proof" }) , (46u8 , 2u8) => Some (ErrorDetails { pallet : "MixerBn254" , error : "AlreadyRevealedNullifier" , docs : "Invalid nullifier that is already used\n(this error is returned when a nullifier is used twice)" }) , (46u8 , 3u8) => Some (ErrorDetails { pallet : "MixerBn254" , error : "InvalidArbitraryData" , docs : "" }) , (46u8 , 4u8) => Some (ErrorDetails { pallet : "MixerBn254" , error : "UnknownRoot" , docs : "Invalid root" }) , (46u8 , 5u8) => Some (ErrorDetails { pallet : "MixerBn254" , error : "NoMixerFound" , docs : "No mixer found" }) , (47u8 , 0u8) => Some (ErrorDetails { pallet : "MixerBls381" , error : "InvalidPermissions" , docs : "Account does not have correct permissions" }) , (47u8 , 1u8) => Some (ErrorDetails { pallet : "MixerBls381" , error : "InvalidWithdrawProof" , docs : "Invalid withdraw proof" }) , (47u8 , 2u8) => Some (ErrorDetails { pallet : "MixerBls381" , error : "AlreadyRevealedNullifier" , docs : "Invalid nullifier that is already used\n(this error is returned when a nullifier is used twice)" }) , (47u8 , 3u8) => Some (ErrorDetails { pallet : "MixerBls381" , error : "InvalidArbitraryData" , docs : "" }) , (47u8 , 4u8) => Some (ErrorDetails { pallet : "MixerBls381" , error : "UnknownRoot" , docs : "Invalid root" }) , (47u8 , 5u8) => Some (ErrorDetails { pallet : "MixerBls381" , error : "NoMixerFound" , docs : "No mixer found" }) , (48u8 , 0u8) => Some (ErrorDetails { pallet : "AnchorBn254" , error : "InvalidMerkleRoots" , docs : "Invalid Merkle Roots" }) , (48u8 , 1u8) => Some (ErrorDetails { pallet : "AnchorBn254" , error : "UnknownRoot" , docs : "Unknown root" }) , (48u8 , 2u8) => Some (ErrorDetails { pallet : "AnchorBn254" , error : "InvalidWithdrawProof" , docs : "Invalid withdraw proof" }) , (48u8 , 3u8) => Some (ErrorDetails { pallet : "AnchorBn254" , error : "NoAnchorFound" , docs : "Mixer not found." }) , (48u8 , 4u8) => Some (ErrorDetails { pallet : "AnchorBn254" , error : "InvalidArbitraryData" , docs : "" }) , (48u8 , 5u8) => Some (ErrorDetails { pallet : "AnchorBn254" , error : "AlreadyRevealedNullifier" , docs : "Invalid nullifier that is already used\n(this error is returned when a nullifier is used twice)" }) , (49u8 , 0u8) => Some (ErrorDetails { pallet : "AnchorBls381" , error : "InvalidMerkleRoots" , docs : "Invalid Merkle Roots" }) , (49u8 , 1u8) => Some (ErrorDetails { pallet : "AnchorBls381" , error : "UnknownRoot" , docs : "Unknown root" }) , (49u8 , 2u8) => Some (ErrorDetails { pallet : "AnchorBls381" , error : "InvalidWithdrawProof" , docs : "Invalid withdraw proof" }) , (49u8 , 3u8) => Some (ErrorDetails { pallet : "AnchorBls381" , error : "NoAnchorFound" , docs : "Mixer not found." }) , (49u8 , 4u8) => Some (ErrorDetails { pallet : "AnchorBls381" , error : "InvalidArbitraryData" , docs : "" }) , (49u8 , 5u8) => Some (ErrorDetails { pallet : "AnchorBls381" , error : "AlreadyRevealedNullifier" , docs : "Invalid nullifier that is already used\n(this error is returned when a nullifier is used twice)" }) , (50u8 , 0u8) => Some (ErrorDetails { pallet : "AnchorHandlerBn254" , error : "InvalidPermissions" , docs : "Access violation." }) , (50u8 , 1u8) => Some (ErrorDetails { pallet : "AnchorHandlerBn254" , error : "ResourceIsAlreadyAnchored" , docs : "" }) , (50u8 , 2u8) => Some (ErrorDetails { pallet : "AnchorHandlerBn254" , error : "AnchorHandlerNotFound" , docs : "" }) , (50u8 , 3u8) => Some (ErrorDetails { pallet : "AnchorHandlerBn254" , error : "SourceChainIdNotFound" , docs : "" }) , (50u8 , 4u8) => Some (ErrorDetails { pallet : "AnchorHandlerBn254" , error : "StorageOverflow" , docs : "Storage overflowed." }) , (51u8 , 0u8) => Some (ErrorDetails { pallet : "AnchorHandlerBls381" , error : "InvalidPermissions" , docs : "Access violation." }) , (51u8 , 1u8) => Some (ErrorDetails { pallet : "AnchorHandlerBls381" , error : "ResourceIsAlreadyAnchored" , docs : "" }) , (51u8 , 2u8) => Some (ErrorDetails { pallet : "AnchorHandlerBls381" , error : "AnchorHandlerNotFound" , docs : "" }) , (51u8 , 3u8) => Some (ErrorDetails { pallet : "AnchorHandlerBls381" , error : "SourceChainIdNotFound" , docs : "" }) , (51u8 , 4u8) => Some (ErrorDetails { pallet : "AnchorHandlerBls381" , error : "StorageOverflow" , docs : "Storage overflowed." }) , (52u8 , 0u8) => Some (ErrorDetails { pallet : "VAnchorBn254" , error : "InvalidTransactionProof" , docs : "Invalid transaction proof" }) , (52u8 , 1u8) => Some (ErrorDetails { pallet : "VAnchorBn254" , error : "NoVAnchorFound" , docs : "Variable Anchor not found." }) , (52u8 , 2u8) => Some (ErrorDetails { pallet : "VAnchorBn254" , error : "AlreadyRevealedNullifier" , docs : "Invalid nullifier that is already used\n(this error is returned when a nullifier is used twice)" }) , (52u8 , 3u8) => Some (ErrorDetails { pallet : "VAnchorBn254" , error : "InvalidExtAmount" , docs : "" }) , (52u8 , 4u8) => Some (ErrorDetails { pallet : "VAnchorBn254" , error : "InvalidDepositAmount" , docs : "" }) , (52u8 , 5u8) => Some (ErrorDetails { pallet : "VAnchorBn254" , error : "InvalidWithdrawAmount" , docs : "" }) , (52u8 , 6u8) => Some (ErrorDetails { pallet : "VAnchorBn254" , error : "InvalidExtData" , docs : "" }) , (52u8 , 7u8) => Some (ErrorDetails { pallet : "VAnchorBn254" , error : "InvalidInputNullifiers" , docs : "" }) , (52u8 , 8u8) => Some (ErrorDetails { pallet : "VAnchorBn254" , error : "InvalidFee" , docs : "" }) , (52u8 , 9u8) => Some (ErrorDetails { pallet : "VAnchorBn254" , error : "InvalidPublicAmount" , docs : "" }) , (53u8 , 0u8) => Some (ErrorDetails { pallet : "VAnchorBls381" , error : "InvalidTransactionProof" , docs : "Invalid transaction proof" }) , (53u8 , 1u8) => Some (ErrorDetails { pallet : "VAnchorBls381" , error : "NoVAnchorFound" , docs : "Variable Anchor not found." }) , (53u8 , 2u8) => Some (ErrorDetails { pallet : "VAnchorBls381" , error : "AlreadyRevealedNullifier" , docs : "Invalid nullifier that is already used\n(this error is returned when a nullifier is used twice)" }) , (53u8 , 3u8) => Some (ErrorDetails { pallet : "VAnchorBls381" , error : "InvalidExtAmount" , docs : "" }) , (53u8 , 4u8) => Some (ErrorDetails { pallet : "VAnchorBls381" , error : "InvalidDepositAmount" , docs : "" }) , (53u8 , 5u8) => Some (ErrorDetails { pallet : "VAnchorBls381" , error : "InvalidWithdrawAmount" , docs : "" }) , (53u8 , 6u8) => Some (ErrorDetails { pallet : "VAnchorBls381" , error : "InvalidExtData" , docs : "" }) , (53u8 , 7u8) => Some (ErrorDetails { pallet : "VAnchorBls381" , error : "InvalidInputNullifiers" , docs : "" }) , (53u8 , 8u8) => Some (ErrorDetails { pallet : "VAnchorBls381" , error : "InvalidFee" , docs : "" }) , (53u8 , 9u8) => Some (ErrorDetails { pallet : "VAnchorBls381" , error : "InvalidPublicAmount" , docs : "" }) , (54u8 , 0u8) => Some (ErrorDetails { pallet : "Bridge" , error : "InvalidPermissions" , docs : "Account does not have correct permissions" }) , (54u8 , 1u8) => Some (ErrorDetails { pallet : "Bridge" , error : "ThresholdNotSet" , docs : "Relayer threshold not set" }) , (54u8 , 2u8) => Some (ErrorDetails { pallet : "Bridge" , error : "InvalidChainId" , docs : "Provided chain Id is not valid" }) , (54u8 , 3u8) => Some (ErrorDetails { pallet : "Bridge" , error : "InvalidThreshold" , docs : "Relayer threshold cannot be 0" }) , (54u8 , 4u8) => Some (ErrorDetails { pallet : "Bridge" , error : "ChainNotWhitelisted" , docs : "Interactions with this chain is not permitted" }) , (54u8 , 5u8) => Some (ErrorDetails { pallet : "Bridge" , error : "ChainAlreadyWhitelisted" , docs : "Chain has already been enabled" }) , (54u8 , 6u8) => Some (ErrorDetails { pallet : "Bridge" , error : "ResourceDoesNotExist" , docs : "Resource ID provided isn't mapped to anything" }) , (54u8 , 7u8) => Some (ErrorDetails { pallet : "Bridge" , error : "RelayerAlreadyExists" , docs : "Relayer already in set" }) , (54u8 , 8u8) => Some (ErrorDetails { pallet : "Bridge" , error : "RelayerInvalid" , docs : "Provided accountId is not a relayer" }) , (54u8 , 9u8) => Some (ErrorDetails { pallet : "Bridge" , error : "MustBeRelayer" , docs : "Protected operation, must be performed by relayer" }) , (54u8 , 10u8) => Some (ErrorDetails { pallet : "Bridge" , error : "RelayerAlreadyVoted" , docs : "Relayer has already submitted some vote for this proposal" }) , (54u8 , 11u8) => Some (ErrorDetails { pallet : "Bridge" , error : "ProposalAlreadyExists" , docs : "A proposal with these parameters has already been submitted" }) , (54u8 , 12u8) => Some (ErrorDetails { pallet : "Bridge" , error : "ProposalDoesNotExist" , docs : "No proposal with the ID was found" }) , (54u8 , 13u8) => Some (ErrorDetails { pallet : "Bridge" , error : "ProposalNotComplete" , docs : "Cannot complete proposal, needs more votes" }) , (54u8 , 14u8) => Some (ErrorDetails { pallet : "Bridge" , error : "ProposalAlreadyComplete" , docs : "Proposal has either failed or succeeded" }) , (54u8 , 15u8) => Some (ErrorDetails { pallet : "Bridge" , error : "ProposalExpired" , docs : "Lifetime of proposal has been exceeded" }) , _ => None }
+            if let Self::Module(v) = self {
+                match (v.index , v.error) { (0u8 , 0u8) => Some (ErrorDetails { pallet : "System" , error : "InvalidSpecName" , docs : "The name of specification does not match between the current runtime\nand the new runtime." }) , (0u8 , 1u8) => Some (ErrorDetails { pallet : "System" , error : "SpecVersionNeedsToIncrease" , docs : "The specification version is not allowed to decrease between the current runtime\nand the new runtime." }) , (0u8 , 2u8) => Some (ErrorDetails { pallet : "System" , error : "FailedToExtractRuntimeVersion" , docs : "Failed to extract the runtime version from the new runtime.\n\nEither calling `Core_version` or decoding `RuntimeVersion` failed." }) , (0u8 , 3u8) => Some (ErrorDetails { pallet : "System" , error : "NonDefaultComposite" , docs : "Suicide called when the account has non-default composite data." }) , (0u8 , 4u8) => Some (ErrorDetails { pallet : "System" , error : "NonZeroRefCount" , docs : "There is a non-zero reference count preventing the account from being purged." }) , (0u8 , 5u8) => Some (ErrorDetails { pallet : "System" , error : "CallFiltered" , docs : "The origin filter prevent the call to be dispatched." }) , (3u8 , 0u8) => Some (ErrorDetails { pallet : "Babe" , error : "InvalidEquivocationProof" , docs : "An equivocation proof provided as part of an equivocation report is invalid." }) , (3u8 , 1u8) => Some (ErrorDetails { pallet : "Babe" , error : "InvalidKeyOwnershipProof" , docs : "A key ownership proof provided as part of an equivocation report is invalid." }) , (3u8 , 2u8) => Some (ErrorDetails { pallet : "Babe" , error : "DuplicateOffenceReport" , docs : "A given equivocation report is valid but already previously reported." }) , (4u8 , 0u8) => Some (ErrorDetails { pallet : "Authorship" , error : "InvalidUncleParent" , docs : "The uncle parent not in the chain." }) , (4u8 , 1u8) => Some (ErrorDetails { pallet : "Authorship" , error : "UnclesAlreadySet" , docs : "Uncles already set in the block." }) , (4u8 , 2u8) => Some (ErrorDetails { pallet : "Authorship" , error : "TooManyUncles" , docs : "Too many uncles." }) , (4u8 , 3u8) => Some (ErrorDetails { pallet : "Authorship" , error : "GenesisUncle" , docs : "The uncle is genesis." }) , (4u8 , 4u8) => Some (ErrorDetails { pallet : "Authorship" , error : "TooHighUncle" , docs : "The uncle is too high in chain." }) , (4u8 , 5u8) => Some (ErrorDetails { pallet : "Authorship" , error : "UncleAlreadyIncluded" , docs : "The uncle is already included." }) , (4u8 , 6u8) => Some (ErrorDetails { pallet : "Authorship" , error : "OldUncle" , docs : "The uncle isn't recent enough to be included." }) , (5u8 , 0u8) => Some (ErrorDetails { pallet : "Indices" , error : "NotAssigned" , docs : "The index was not already assigned." }) , (5u8 , 1u8) => Some (ErrorDetails { pallet : "Indices" , error : "NotOwner" , docs : "The index is assigned to another account." }) , (5u8 , 2u8) => Some (ErrorDetails { pallet : "Indices" , error : "InUse" , docs : "The index was not available." }) , (5u8 , 3u8) => Some (ErrorDetails { pallet : "Indices" , error : "NotTransfer" , docs : "The source and destination accounts are identical." }) , (5u8 , 4u8) => Some (ErrorDetails { pallet : "Indices" , error : "Permanent" , docs : "The index is permanent and may not be freed/changed." }) , (6u8 , 0u8) => Some (ErrorDetails { pallet : "Balances" , error : "VestingBalance" , docs : "Vesting balance too high to send value" }) , (6u8 , 1u8) => Some (ErrorDetails { pallet : "Balances" , error : "LiquidityRestrictions" , docs : "Account liquidity restrictions prevent withdrawal" }) , (6u8 , 2u8) => Some (ErrorDetails { pallet : "Balances" , error : "InsufficientBalance" , docs : "Balance too low to send value" }) , (6u8 , 3u8) => Some (ErrorDetails { pallet : "Balances" , error : "ExistentialDeposit" , docs : "Value too low to create account due to existential deposit" }) , (6u8 , 4u8) => Some (ErrorDetails { pallet : "Balances" , error : "KeepAlive" , docs : "Transfer/payment would kill account" }) , (6u8 , 5u8) => Some (ErrorDetails { pallet : "Balances" , error : "ExistingVestingSchedule" , docs : "A vesting schedule already exists for this account" }) , (6u8 , 6u8) => Some (ErrorDetails { pallet : "Balances" , error : "DeadAccount" , docs : "Beneficiary account must pre-exist" }) , (6u8 , 7u8) => Some (ErrorDetails { pallet : "Balances" , error : "TooManyReserves" , docs : "Number of named reserves exceed MaxReserves" }) , (8u8 , 0u8) => Some (ErrorDetails { pallet : "ElectionProviderMultiPhase" , error : "PreDispatchEarlySubmission" , docs : "Submission was too early." }) , (8u8 , 1u8) => Some (ErrorDetails { pallet : "ElectionProviderMultiPhase" , error : "PreDispatchWrongWinnerCount" , docs : "Wrong number of winners presented." }) , (8u8 , 2u8) => Some (ErrorDetails { pallet : "ElectionProviderMultiPhase" , error : "PreDispatchWeakSubmission" , docs : "Submission was too weak, score-wise." }) , (8u8 , 3u8) => Some (ErrorDetails { pallet : "ElectionProviderMultiPhase" , error : "SignedQueueFull" , docs : "The queue was full, and the solution was not better than any of the existing ones." }) , (8u8 , 4u8) => Some (ErrorDetails { pallet : "ElectionProviderMultiPhase" , error : "SignedCannotPayDeposit" , docs : "The origin failed to pay the deposit." }) , (8u8 , 5u8) => Some (ErrorDetails { pallet : "ElectionProviderMultiPhase" , error : "SignedInvalidWitness" , docs : "Witness data to dispatchable is invalid." }) , (8u8 , 6u8) => Some (ErrorDetails { pallet : "ElectionProviderMultiPhase" , error : "SignedTooMuchWeight" , docs : "The signed submission consumes too much weight" }) , (8u8 , 7u8) => Some (ErrorDetails { pallet : "ElectionProviderMultiPhase" , error : "OcwCallWrongEra" , docs : "OCW submitted solution for wrong round" }) , (8u8 , 8u8) => Some (ErrorDetails { pallet : "ElectionProviderMultiPhase" , error : "MissingSnapshotMetadata" , docs : "Snapshot metadata should exist but didn't." }) , (8u8 , 9u8) => Some (ErrorDetails { pallet : "ElectionProviderMultiPhase" , error : "InvalidSubmissionIndex" , docs : "`Self::insert_submission` returned an invalid index." }) , (8u8 , 10u8) => Some (ErrorDetails { pallet : "ElectionProviderMultiPhase" , error : "CallNotAllowed" , docs : "The call is not allowed at this point." }) , (8u8 , 11u8) => Some (ErrorDetails { pallet : "ElectionProviderMultiPhase" , error : "FallbackFailed" , docs : "The fallback failed" }) , (9u8 , 0u8) => Some (ErrorDetails { pallet : "Staking" , error : "NotController" , docs : "Not a controller account." }) , (9u8 , 1u8) => Some (ErrorDetails { pallet : "Staking" , error : "NotStash" , docs : "Not a stash account." }) , (9u8 , 2u8) => Some (ErrorDetails { pallet : "Staking" , error : "AlreadyBonded" , docs : "Stash is already bonded." }) , (9u8 , 3u8) => Some (ErrorDetails { pallet : "Staking" , error : "AlreadyPaired" , docs : "Controller is already paired." }) , (9u8 , 4u8) => Some (ErrorDetails { pallet : "Staking" , error : "EmptyTargets" , docs : "Targets cannot be empty." }) , (9u8 , 5u8) => Some (ErrorDetails { pallet : "Staking" , error : "DuplicateIndex" , docs : "Duplicate index." }) , (9u8 , 6u8) => Some (ErrorDetails { pallet : "Staking" , error : "InvalidSlashIndex" , docs : "Slash record index out of bounds." }) , (9u8 , 7u8) => Some (ErrorDetails { pallet : "Staking" , error : "InsufficientBond" , docs : "Cannot have a validator or nominator role, with value less than the minimum defined by\ngovernance (see `MinValidatorBond` and `MinNominatorBond`). If unbonding is the\nintention, `chill` first to remove one's role as validator/nominator." }) , (9u8 , 8u8) => Some (ErrorDetails { pallet : "Staking" , error : "NoMoreChunks" , docs : "Can not schedule more unlock chunks." }) , (9u8 , 9u8) => Some (ErrorDetails { pallet : "Staking" , error : "NoUnlockChunk" , docs : "Can not rebond without unlocking chunks." }) , (9u8 , 10u8) => Some (ErrorDetails { pallet : "Staking" , error : "FundedTarget" , docs : "Attempting to target a stash that still has funds." }) , (9u8 , 11u8) => Some (ErrorDetails { pallet : "Staking" , error : "InvalidEraToReward" , docs : "Invalid era to reward." }) , (9u8 , 12u8) => Some (ErrorDetails { pallet : "Staking" , error : "InvalidNumberOfNominations" , docs : "Invalid number of nominations." }) , (9u8 , 13u8) => Some (ErrorDetails { pallet : "Staking" , error : "NotSortedAndUnique" , docs : "Items are not sorted and unique." }) , (9u8 , 14u8) => Some (ErrorDetails { pallet : "Staking" , error : "AlreadyClaimed" , docs : "Rewards for this era have already been claimed for this validator." }) , (9u8 , 15u8) => Some (ErrorDetails { pallet : "Staking" , error : "IncorrectHistoryDepth" , docs : "Incorrect previous history depth input provided." }) , (9u8 , 16u8) => Some (ErrorDetails { pallet : "Staking" , error : "IncorrectSlashingSpans" , docs : "Incorrect number of slashing spans provided." }) , (9u8 , 17u8) => Some (ErrorDetails { pallet : "Staking" , error : "BadState" , docs : "Internal state has become somehow corrupted and the operation cannot continue." }) , (9u8 , 18u8) => Some (ErrorDetails { pallet : "Staking" , error : "TooManyTargets" , docs : "Too many nomination targets supplied." }) , (9u8 , 19u8) => Some (ErrorDetails { pallet : "Staking" , error : "BadTarget" , docs : "A nomination target was supplied that was blocked or otherwise not a validator." }) , (9u8 , 20u8) => Some (ErrorDetails { pallet : "Staking" , error : "CannotChillOther" , docs : "The user has enough bond and thus cannot be chilled forcefully by an external person." }) , (9u8 , 21u8) => Some (ErrorDetails { pallet : "Staking" , error : "TooManyNominators" , docs : "There are too many nominators in the system. Governance needs to adjust the staking\nsettings to keep things safe for the runtime." }) , (9u8 , 22u8) => Some (ErrorDetails { pallet : "Staking" , error : "TooManyValidators" , docs : "There are too many validators in the system. Governance needs to adjust the staking\nsettings to keep things safe for the runtime." }) , (9u8 , 23u8) => Some (ErrorDetails { pallet : "Staking" , error : "CommissionTooLow" , docs : "Commission is too low. Must be at least `MinCommission`." }) , (10u8 , 0u8) => Some (ErrorDetails { pallet : "Session" , error : "InvalidProof" , docs : "Invalid ownership proof." }) , (10u8 , 1u8) => Some (ErrorDetails { pallet : "Session" , error : "NoAssociatedValidatorId" , docs : "No associated validator ID for account." }) , (10u8 , 2u8) => Some (ErrorDetails { pallet : "Session" , error : "DuplicatedKey" , docs : "Registered duplicate key." }) , (10u8 , 3u8) => Some (ErrorDetails { pallet : "Session" , error : "NoKeys" , docs : "No keys are associated with this account." }) , (10u8 , 4u8) => Some (ErrorDetails { pallet : "Session" , error : "NoAccount" , docs : "Key setting account is not live, so it's impossible to associate keys." }) , (11u8 , 0u8) => Some (ErrorDetails { pallet : "Democracy" , error : "ValueLow" , docs : "Value too low" }) , (11u8 , 1u8) => Some (ErrorDetails { pallet : "Democracy" , error : "ProposalMissing" , docs : "Proposal does not exist" }) , (11u8 , 2u8) => Some (ErrorDetails { pallet : "Democracy" , error : "AlreadyCanceled" , docs : "Cannot cancel the same proposal twice" }) , (11u8 , 3u8) => Some (ErrorDetails { pallet : "Democracy" , error : "DuplicateProposal" , docs : "Proposal already made" }) , (11u8 , 4u8) => Some (ErrorDetails { pallet : "Democracy" , error : "ProposalBlacklisted" , docs : "Proposal still blacklisted" }) , (11u8 , 5u8) => Some (ErrorDetails { pallet : "Democracy" , error : "NotSimpleMajority" , docs : "Next external proposal not simple majority" }) , (11u8 , 6u8) => Some (ErrorDetails { pallet : "Democracy" , error : "InvalidHash" , docs : "Invalid hash" }) , (11u8 , 7u8) => Some (ErrorDetails { pallet : "Democracy" , error : "NoProposal" , docs : "No external proposal" }) , (11u8 , 8u8) => Some (ErrorDetails { pallet : "Democracy" , error : "AlreadyVetoed" , docs : "Identity may not veto a proposal twice" }) , (11u8 , 9u8) => Some (ErrorDetails { pallet : "Democracy" , error : "DuplicatePreimage" , docs : "Preimage already noted" }) , (11u8 , 10u8) => Some (ErrorDetails { pallet : "Democracy" , error : "NotImminent" , docs : "Not imminent" }) , (11u8 , 11u8) => Some (ErrorDetails { pallet : "Democracy" , error : "TooEarly" , docs : "Too early" }) , (11u8 , 12u8) => Some (ErrorDetails { pallet : "Democracy" , error : "Imminent" , docs : "Imminent" }) , (11u8 , 13u8) => Some (ErrorDetails { pallet : "Democracy" , error : "PreimageMissing" , docs : "Preimage not found" }) , (11u8 , 14u8) => Some (ErrorDetails { pallet : "Democracy" , error : "ReferendumInvalid" , docs : "Vote given for invalid referendum" }) , (11u8 , 15u8) => Some (ErrorDetails { pallet : "Democracy" , error : "PreimageInvalid" , docs : "Invalid preimage" }) , (11u8 , 16u8) => Some (ErrorDetails { pallet : "Democracy" , error : "NoneWaiting" , docs : "No proposals waiting" }) , (11u8 , 17u8) => Some (ErrorDetails { pallet : "Democracy" , error : "NotVoter" , docs : "The given account did not vote on the referendum." }) , (11u8 , 18u8) => Some (ErrorDetails { pallet : "Democracy" , error : "NoPermission" , docs : "The actor has no permission to conduct the action." }) , (11u8 , 19u8) => Some (ErrorDetails { pallet : "Democracy" , error : "AlreadyDelegating" , docs : "The account is already delegating." }) , (11u8 , 20u8) => Some (ErrorDetails { pallet : "Democracy" , error : "InsufficientFunds" , docs : "Too high a balance was provided that the account cannot afford." }) , (11u8 , 21u8) => Some (ErrorDetails { pallet : "Democracy" , error : "NotDelegating" , docs : "The account is not currently delegating." }) , (11u8 , 22u8) => Some (ErrorDetails { pallet : "Democracy" , error : "VotesExist" , docs : "The account currently has votes attached to it and the operation cannot succeed until\nthese are removed, either through `unvote` or `reap_vote`." }) , (11u8 , 23u8) => Some (ErrorDetails { pallet : "Democracy" , error : "InstantNotAllowed" , docs : "The instant referendum origin is currently disallowed." }) , (11u8 , 24u8) => Some (ErrorDetails { pallet : "Democracy" , error : "Nonsense" , docs : "Delegation to oneself makes no sense." }) , (11u8 , 25u8) => Some (ErrorDetails { pallet : "Democracy" , error : "WrongUpperBound" , docs : "Invalid upper bound." }) , (11u8 , 26u8) => Some (ErrorDetails { pallet : "Democracy" , error : "MaxVotesReached" , docs : "Maximum number of votes reached." }) , (11u8 , 27u8) => Some (ErrorDetails { pallet : "Democracy" , error : "TooManyProposals" , docs : "Maximum number of proposals reached." }) , (12u8 , 0u8) => Some (ErrorDetails { pallet : "Council" , error : "NotMember" , docs : "Account is not a member" }) , (12u8 , 1u8) => Some (ErrorDetails { pallet : "Council" , error : "DuplicateProposal" , docs : "Duplicate proposals not allowed" }) , (12u8 , 2u8) => Some (ErrorDetails { pallet : "Council" , error : "ProposalMissing" , docs : "Proposal must exist" }) , (12u8 , 3u8) => Some (ErrorDetails { pallet : "Council" , error : "WrongIndex" , docs : "Mismatched index" }) , (12u8 , 4u8) => Some (ErrorDetails { pallet : "Council" , error : "DuplicateVote" , docs : "Duplicate vote ignored" }) , (12u8 , 5u8) => Some (ErrorDetails { pallet : "Council" , error : "AlreadyInitialized" , docs : "Members are already initialized!" }) , (12u8 , 6u8) => Some (ErrorDetails { pallet : "Council" , error : "TooEarly" , docs : "The close call was made too early, before the end of the voting." }) , (12u8 , 7u8) => Some (ErrorDetails { pallet : "Council" , error : "TooManyProposals" , docs : "There can only be a maximum of `MaxProposals` active proposals." }) , (12u8 , 8u8) => Some (ErrorDetails { pallet : "Council" , error : "WrongProposalWeight" , docs : "The given weight bound for the proposal was too low." }) , (12u8 , 9u8) => Some (ErrorDetails { pallet : "Council" , error : "WrongProposalLength" , docs : "The given length bound for the proposal was too low." }) , (13u8 , 0u8) => Some (ErrorDetails { pallet : "Elections" , error : "UnableToVote" , docs : "Cannot vote when no candidates or members exist." }) , (13u8 , 1u8) => Some (ErrorDetails { pallet : "Elections" , error : "NoVotes" , docs : "Must vote for at least one candidate." }) , (13u8 , 2u8) => Some (ErrorDetails { pallet : "Elections" , error : "TooManyVotes" , docs : "Cannot vote more than candidates." }) , (13u8 , 3u8) => Some (ErrorDetails { pallet : "Elections" , error : "MaximumVotesExceeded" , docs : "Cannot vote more than maximum allowed." }) , (13u8 , 4u8) => Some (ErrorDetails { pallet : "Elections" , error : "LowBalance" , docs : "Cannot vote with stake less than minimum balance." }) , (13u8 , 5u8) => Some (ErrorDetails { pallet : "Elections" , error : "UnableToPayBond" , docs : "Voter can not pay voting bond." }) , (13u8 , 6u8) => Some (ErrorDetails { pallet : "Elections" , error : "MustBeVoter" , docs : "Must be a voter." }) , (13u8 , 7u8) => Some (ErrorDetails { pallet : "Elections" , error : "ReportSelf" , docs : "Cannot report self." }) , (13u8 , 8u8) => Some (ErrorDetails { pallet : "Elections" , error : "DuplicatedCandidate" , docs : "Duplicated candidate submission." }) , (13u8 , 9u8) => Some (ErrorDetails { pallet : "Elections" , error : "MemberSubmit" , docs : "Member cannot re-submit candidacy." }) , (13u8 , 10u8) => Some (ErrorDetails { pallet : "Elections" , error : "RunnerUpSubmit" , docs : "Runner cannot re-submit candidacy." }) , (13u8 , 11u8) => Some (ErrorDetails { pallet : "Elections" , error : "InsufficientCandidateFunds" , docs : "Candidate does not have enough funds." }) , (13u8 , 12u8) => Some (ErrorDetails { pallet : "Elections" , error : "NotMember" , docs : "Not a member." }) , (13u8 , 13u8) => Some (ErrorDetails { pallet : "Elections" , error : "InvalidWitnessData" , docs : "The provided count of number of candidates is incorrect." }) , (13u8 , 14u8) => Some (ErrorDetails { pallet : "Elections" , error : "InvalidVoteCount" , docs : "The provided count of number of votes is incorrect." }) , (13u8 , 15u8) => Some (ErrorDetails { pallet : "Elections" , error : "InvalidRenouncing" , docs : "The renouncing origin presented a wrong `Renouncing` parameter." }) , (13u8 , 16u8) => Some (ErrorDetails { pallet : "Elections" , error : "InvalidReplacement" , docs : "Prediction regarding replacement after member removal is wrong." }) , (14u8 , 0u8) => Some (ErrorDetails { pallet : "Grandpa" , error : "PauseFailed" , docs : "Attempt to signal GRANDPA pause when the authority set isn't live\n(either paused or already pending pause)." }) , (14u8 , 1u8) => Some (ErrorDetails { pallet : "Grandpa" , error : "ResumeFailed" , docs : "Attempt to signal GRANDPA resume when the authority set isn't paused\n(either live or already pending resume)." }) , (14u8 , 2u8) => Some (ErrorDetails { pallet : "Grandpa" , error : "ChangePending" , docs : "Attempt to signal GRANDPA change with one already pending." }) , (14u8 , 3u8) => Some (ErrorDetails { pallet : "Grandpa" , error : "TooSoon" , docs : "Cannot signal forced change so soon after last." }) , (14u8 , 4u8) => Some (ErrorDetails { pallet : "Grandpa" , error : "InvalidKeyOwnershipProof" , docs : "A key ownership proof provided as part of an equivocation report is invalid." }) , (14u8 , 5u8) => Some (ErrorDetails { pallet : "Grandpa" , error : "InvalidEquivocationProof" , docs : "An equivocation proof provided as part of an equivocation report is invalid." }) , (14u8 , 6u8) => Some (ErrorDetails { pallet : "Grandpa" , error : "DuplicateOffenceReport" , docs : "A given equivocation report is valid but already previously reported." }) , (15u8 , 0u8) => Some (ErrorDetails { pallet : "Treasury" , error : "InsufficientProposersBalance" , docs : "Proposer's balance is too low." }) , (15u8 , 1u8) => Some (ErrorDetails { pallet : "Treasury" , error : "InvalidIndex" , docs : "No proposal or bounty at that index." }) , (15u8 , 2u8) => Some (ErrorDetails { pallet : "Treasury" , error : "TooManyApprovals" , docs : "Too many approvals in the queue." }) , (16u8 , 0u8) => Some (ErrorDetails { pallet : "Utility" , error : "TooManyCalls" , docs : "Too many calls batched." }) , (17u8 , 0u8) => Some (ErrorDetails { pallet : "Multisig" , error : "MinimumThreshold" , docs : "Threshold must be 2 or greater." }) , (17u8 , 1u8) => Some (ErrorDetails { pallet : "Multisig" , error : "AlreadyApproved" , docs : "Call is already approved by this signatory." }) , (17u8 , 2u8) => Some (ErrorDetails { pallet : "Multisig" , error : "NoApprovalsNeeded" , docs : "Call doesn't need any (more) approvals." }) , (17u8 , 3u8) => Some (ErrorDetails { pallet : "Multisig" , error : "TooFewSignatories" , docs : "There are too few signatories in the list." }) , (17u8 , 4u8) => Some (ErrorDetails { pallet : "Multisig" , error : "TooManySignatories" , docs : "There are too many signatories in the list." }) , (17u8 , 5u8) => Some (ErrorDetails { pallet : "Multisig" , error : "SignatoriesOutOfOrder" , docs : "The signatories were provided out of order; they should be ordered." }) , (17u8 , 6u8) => Some (ErrorDetails { pallet : "Multisig" , error : "SenderInSignatories" , docs : "The sender was contained in the other signatories; it shouldn't be." }) , (17u8 , 7u8) => Some (ErrorDetails { pallet : "Multisig" , error : "NotFound" , docs : "Multisig operation not found when attempting to cancel." }) , (17u8 , 8u8) => Some (ErrorDetails { pallet : "Multisig" , error : "NotOwner" , docs : "Only the account that originally created the multisig is able to cancel it." }) , (17u8 , 9u8) => Some (ErrorDetails { pallet : "Multisig" , error : "NoTimepoint" , docs : "No timepoint was given, yet the multisig operation is already underway." }) , (17u8 , 10u8) => Some (ErrorDetails { pallet : "Multisig" , error : "WrongTimepoint" , docs : "A different timepoint was given to the multisig operation that is underway." }) , (17u8 , 11u8) => Some (ErrorDetails { pallet : "Multisig" , error : "UnexpectedTimepoint" , docs : "A timepoint was given, yet no multisig operation is underway." }) , (17u8 , 12u8) => Some (ErrorDetails { pallet : "Multisig" , error : "MaxWeightTooLow" , docs : "The maximum weight information provided was too low." }) , (17u8 , 13u8) => Some (ErrorDetails { pallet : "Multisig" , error : "AlreadyStored" , docs : "The data to be stored is already stored." }) , (18u8 , 0u8) => Some (ErrorDetails { pallet : "Scheduler" , error : "FailedToSchedule" , docs : "Failed to schedule a call" }) , (18u8 , 1u8) => Some (ErrorDetails { pallet : "Scheduler" , error : "NotFound" , docs : "Cannot find the scheduled call." }) , (18u8 , 2u8) => Some (ErrorDetails { pallet : "Scheduler" , error : "TargetBlockNumberInPast" , docs : "Given target block number is in the past." }) , (18u8 , 3u8) => Some (ErrorDetails { pallet : "Scheduler" , error : "RescheduleNoChange" , docs : "Reschedule failed because it does not change scheduled time." }) , (19u8 , 0u8) => Some (ErrorDetails { pallet : "Preimage" , error : "TooLarge" , docs : "Preimage is too large to store on-chain." }) , (19u8 , 1u8) => Some (ErrorDetails { pallet : "Preimage" , error : "AlreadyNoted" , docs : "Preimage has already been noted on-chain." }) , (19u8 , 2u8) => Some (ErrorDetails { pallet : "Preimage" , error : "NotAuthorized" , docs : "The user is not authorized to perform this action." }) , (19u8 , 3u8) => Some (ErrorDetails { pallet : "Preimage" , error : "NotNoted" , docs : "The preimage cannot be removed since it has not yet been noted." }) , (19u8 , 4u8) => Some (ErrorDetails { pallet : "Preimage" , error : "Requested" , docs : "A preimage may not be removed when there are outstanding requests." }) , (19u8 , 5u8) => Some (ErrorDetails { pallet : "Preimage" , error : "NotRequested" , docs : "The preimage request cannot be removed since no outstanding requests exist." }) , (20u8 , 0u8) => Some (ErrorDetails { pallet : "Proxy" , error : "TooMany" , docs : "There are too many proxies registered or too many announcements pending." }) , (20u8 , 1u8) => Some (ErrorDetails { pallet : "Proxy" , error : "NotFound" , docs : "Proxy registration not found." }) , (20u8 , 2u8) => Some (ErrorDetails { pallet : "Proxy" , error : "NotProxy" , docs : "Sender is not a proxy of the account to be proxied." }) , (20u8 , 3u8) => Some (ErrorDetails { pallet : "Proxy" , error : "Unproxyable" , docs : "A call which is incompatible with the proxy type's filter was attempted." }) , (20u8 , 4u8) => Some (ErrorDetails { pallet : "Proxy" , error : "Duplicate" , docs : "Account is already a proxy." }) , (20u8 , 5u8) => Some (ErrorDetails { pallet : "Proxy" , error : "NoPermission" , docs : "Call may not be made by proxy because it may escalate its privileges." }) , (20u8 , 6u8) => Some (ErrorDetails { pallet : "Proxy" , error : "Unannounced" , docs : "Announcement, if made at all, was made too recently." }) , (20u8 , 7u8) => Some (ErrorDetails { pallet : "Proxy" , error : "NoSelfProxy" , docs : "Cannot add self as proxy." }) , (21u8 , 0u8) => Some (ErrorDetails { pallet : "Assets" , error : "BalanceLow" , docs : "Account balance must be greater than or equal to the transfer amount." }) , (21u8 , 1u8) => Some (ErrorDetails { pallet : "Assets" , error : "NoAccount" , docs : "The account to alter does not exist." }) , (21u8 , 2u8) => Some (ErrorDetails { pallet : "Assets" , error : "NoPermission" , docs : "The signing account has no permission to do the operation." }) , (21u8 , 3u8) => Some (ErrorDetails { pallet : "Assets" , error : "Unknown" , docs : "The given asset ID is unknown." }) , (21u8 , 4u8) => Some (ErrorDetails { pallet : "Assets" , error : "Frozen" , docs : "The origin account is frozen." }) , (21u8 , 5u8) => Some (ErrorDetails { pallet : "Assets" , error : "InUse" , docs : "The asset ID is already taken." }) , (21u8 , 6u8) => Some (ErrorDetails { pallet : "Assets" , error : "BadWitness" , docs : "Invalid witness data given." }) , (21u8 , 7u8) => Some (ErrorDetails { pallet : "Assets" , error : "MinBalanceZero" , docs : "Minimum balance should be non-zero." }) , (21u8 , 8u8) => Some (ErrorDetails { pallet : "Assets" , error : "NoProvider" , docs : "Unable to increment the consumer reference counters on the account. Either no provider\nreference exists to allow a non-zero balance of a non-self-sufficient asset, or the\nmaximum number of consumers has been reached." }) , (21u8 , 9u8) => Some (ErrorDetails { pallet : "Assets" , error : "BadMetadata" , docs : "Invalid metadata given." }) , (21u8 , 10u8) => Some (ErrorDetails { pallet : "Assets" , error : "Unapproved" , docs : "No approval exists that would allow the transfer." }) , (21u8 , 11u8) => Some (ErrorDetails { pallet : "Assets" , error : "WouldDie" , docs : "The source account would not survive the transfer and it needs to stay alive." }) , (21u8 , 12u8) => Some (ErrorDetails { pallet : "Assets" , error : "AlreadyExists" , docs : "The asset-account already exists." }) , (21u8 , 13u8) => Some (ErrorDetails { pallet : "Assets" , error : "NoDeposit" , docs : "The asset-account doesn't have an associated deposit." }) , (21u8 , 14u8) => Some (ErrorDetails { pallet : "Assets" , error : "WouldBurn" , docs : "The operation would result in funds being burned." }) , (22u8 , 0u8) => Some (ErrorDetails { pallet : "Sudo" , error : "RequireSudo" , docs : "Sender must be the Sudo account" }) , (23u8 , 0u8) => Some (ErrorDetails { pallet : "ImOnline" , error : "InvalidKey" , docs : "Non existent public key." }) , (23u8 , 1u8) => Some (ErrorDetails { pallet : "ImOnline" , error : "DuplicatedHeartbeat" , docs : "Duplicated heartbeat." }) , (27u8 , 0u8) => Some (ErrorDetails { pallet : "Bounties" , error : "InsufficientProposersBalance" , docs : "Proposer's balance is too low." }) , (27u8 , 1u8) => Some (ErrorDetails { pallet : "Bounties" , error : "InvalidIndex" , docs : "No proposal or bounty at that index." }) , (27u8 , 2u8) => Some (ErrorDetails { pallet : "Bounties" , error : "ReasonTooBig" , docs : "The reason given is just too big." }) , (27u8 , 3u8) => Some (ErrorDetails { pallet : "Bounties" , error : "UnexpectedStatus" , docs : "The bounty status is unexpected." }) , (27u8 , 4u8) => Some (ErrorDetails { pallet : "Bounties" , error : "RequireCurator" , docs : "Require bounty curator." }) , (27u8 , 5u8) => Some (ErrorDetails { pallet : "Bounties" , error : "InvalidValue" , docs : "Invalid bounty value." }) , (27u8 , 6u8) => Some (ErrorDetails { pallet : "Bounties" , error : "InvalidFee" , docs : "Invalid bounty fee." }) , (27u8 , 7u8) => Some (ErrorDetails { pallet : "Bounties" , error : "PendingPayout" , docs : "A bounty payout is pending.\nTo cancel the bounty, you must unassign and slash the curator." }) , (27u8 , 8u8) => Some (ErrorDetails { pallet : "Bounties" , error : "Premature" , docs : "The bounties cannot be claimed/closed because it's still in the countdown period." }) , (27u8 , 9u8) => Some (ErrorDetails { pallet : "Bounties" , error : "HasActiveChildBounty" , docs : "The bounty cannot be closed because it has active child-bounties." }) , (27u8 , 10u8) => Some (ErrorDetails { pallet : "Bounties" , error : "TooManyQueued" , docs : "Too many approvals are already queued." }) , (28u8 , 0u8) => Some (ErrorDetails { pallet : "ChildBounties" , error : "ParentBountyNotActive" , docs : "The parent bounty is not in active state." }) , (28u8 , 1u8) => Some (ErrorDetails { pallet : "ChildBounties" , error : "InsufficientBountyBalance" , docs : "The bounty balance is not enough to add new child-bounty." }) , (28u8 , 2u8) => Some (ErrorDetails { pallet : "ChildBounties" , error : "TooManyChildBounties" , docs : "Number of child-bounties exceeds limit `MaxActiveChildBountyCount`." }) , (29u8 , 0u8) => Some (ErrorDetails { pallet : "BagsList" , error : "NotInSameBag" , docs : "Attempted to place node in front of a node in another bag." }) , (29u8 , 1u8) => Some (ErrorDetails { pallet : "BagsList" , error : "IdNotFound" , docs : "Id not found in list." }) , (29u8 , 2u8) => Some (ErrorDetails { pallet : "BagsList" , error : "NotHeavier" , docs : "An Id does not have a greater vote weight than another Id." }) , (30u8 , 0u8) => Some (ErrorDetails { pallet : "HasherBn254" , error : "ParametersNotInitialized" , docs : "Parameters haven't been initialized" }) , (30u8 , 1u8) => Some (ErrorDetails { pallet : "HasherBn254" , error : "HashError" , docs : "Error during hashing" }) , (31u8 , 0u8) => Some (ErrorDetails { pallet : "AssetRegistry" , error : "NoIdAvailable" , docs : "Asset Id is not available. This only happens when it reaches the MAX\nvalue of given id type." }) , (31u8 , 1u8) => Some (ErrorDetails { pallet : "AssetRegistry" , error : "AssetNotFound" , docs : "Invalid asset name or symbol." }) , (31u8 , 2u8) => Some (ErrorDetails { pallet : "AssetRegistry" , error : "TooLong" , docs : "Invalid asset name or symbol." }) , (31u8 , 3u8) => Some (ErrorDetails { pallet : "AssetRegistry" , error : "AssetNotRegistered" , docs : "Asset ID is not registered in the asset-registry." }) , (31u8 , 4u8) => Some (ErrorDetails { pallet : "AssetRegistry" , error : "AssetAlreadyRegistered" , docs : "Asset is already registered." }) , (31u8 , 5u8) => Some (ErrorDetails { pallet : "AssetRegistry" , error : "InvalidSharedAssetLen" , docs : "Incorrect number of assets provided to create shared asset." }) , (31u8 , 6u8) => Some (ErrorDetails { pallet : "AssetRegistry" , error : "AssetExistsInPool" , docs : "Asset exists in to pool" }) , (31u8 , 7u8) => Some (ErrorDetails { pallet : "AssetRegistry" , error : "AssetNotFoundInPool" , docs : "Asset not found in pool" }) , (32u8 , 0u8) => Some (ErrorDetails { pallet : "Currencies" , error : "AmountIntoBalanceFailed" , docs : "Unable to convert the Amount type into Balance." }) , (32u8 , 1u8) => Some (ErrorDetails { pallet : "Currencies" , error : "BalanceTooLow" , docs : "Balance is too low." }) , (32u8 , 2u8) => Some (ErrorDetails { pallet : "Currencies" , error : "DepositFailed" , docs : "Deposit result is not expected" }) , (33u8 , 0u8) => Some (ErrorDetails { pallet : "Tokens" , error : "BalanceTooLow" , docs : "The balance is too low" }) , (33u8 , 1u8) => Some (ErrorDetails { pallet : "Tokens" , error : "AmountIntoBalanceFailed" , docs : "Cannot convert Amount into Balance type" }) , (33u8 , 2u8) => Some (ErrorDetails { pallet : "Tokens" , error : "LiquidityRestrictions" , docs : "Failed because liquidity restrictions due to locking" }) , (33u8 , 3u8) => Some (ErrorDetails { pallet : "Tokens" , error : "MaxLocksExceeded" , docs : "Failed because the maximum locks was exceeded" }) , (33u8 , 4u8) => Some (ErrorDetails { pallet : "Tokens" , error : "KeepAlive" , docs : "Transfer/payment would kill account" }) , (33u8 , 5u8) => Some (ErrorDetails { pallet : "Tokens" , error : "ExistentialDeposit" , docs : "Value too low to create account due to existential deposit" }) , (33u8 , 6u8) => Some (ErrorDetails { pallet : "Tokens" , error : "DeadAccount" , docs : "Beneficiary account must pre-exist" }) , (34u8 , 0u8) => Some (ErrorDetails { pallet : "TokenWrapper" , error : "InvalidAmount" , docs : "Invalid transaction amount" }) , (34u8 , 1u8) => Some (ErrorDetails { pallet : "TokenWrapper" , error : "UnregisteredAssetId" , docs : "AssetId not found in selected pool share" }) , (34u8 , 2u8) => Some (ErrorDetails { pallet : "TokenWrapper" , error : "NotFoundInPool" , docs : "Assets not found in selected pool" }) , (34u8 , 3u8) => Some (ErrorDetails { pallet : "TokenWrapper" , error : "InsufficientBalance" , docs : "Insufficient Balance for an asset" }) , (34u8 , 4u8) => Some (ErrorDetails { pallet : "TokenWrapper" , error : "NoWrappingFeePercentFound" , docs : "" }) , (35u8 , 0u8) => Some (ErrorDetails { pallet : "MixerVerifierBn254" , error : "ParametersNotInitialized" , docs : "Parameters haven't been initialized" }) , (35u8 , 1u8) => Some (ErrorDetails { pallet : "MixerVerifierBn254" , error : "VerifyError" , docs : "Error during verification" }) , (36u8 , 0u8) => Some (ErrorDetails { pallet : "AnchorVerifierBn254" , error : "ParametersNotInitialized" , docs : "Parameters haven't been initialized" }) , (36u8 , 1u8) => Some (ErrorDetails { pallet : "AnchorVerifierBn254" , error : "VerifyError" , docs : "Error during verification" }) , (37u8 , 0u8) => Some (ErrorDetails { pallet : "VAnchorVerifier2x2Bn254" , error : "ParametersNotInitialized" , docs : "Parameters haven't been initialized" }) , (37u8 , 1u8) => Some (ErrorDetails { pallet : "VAnchorVerifier2x2Bn254" , error : "VerifyError" , docs : "Error during verification" }) , (38u8 , 0u8) => Some (ErrorDetails { pallet : "MerkleTreeBn254" , error : "InvalidPermissions" , docs : "Account does not have correct permissions" }) , (38u8 , 1u8) => Some (ErrorDetails { pallet : "MerkleTreeBn254" , error : "InvalidTreeDepth" , docs : "Invalid depth of the tree specified" }) , (38u8 , 2u8) => Some (ErrorDetails { pallet : "MerkleTreeBn254" , error : "InvalidLeafIndex" , docs : "Invalid  leaf index,  either taken or too large" }) , (38u8 , 3u8) => Some (ErrorDetails { pallet : "MerkleTreeBn254" , error : "ExceedsMaxLeaves" , docs : "Tree is full" }) , (38u8 , 4u8) => Some (ErrorDetails { pallet : "MerkleTreeBn254" , error : "TreeDoesntExist" , docs : "Tree doesnt exist" }) , (38u8 , 5u8) => Some (ErrorDetails { pallet : "MerkleTreeBn254" , error : "ExceedsMaxDefaultHashes" , docs : "Invalid length for default hashes" }) , (39u8 , 0u8) => Some (ErrorDetails { pallet : "LinkableTreeBn254" , error : "UnknownRoot" , docs : "" }) , (39u8 , 1u8) => Some (ErrorDetails { pallet : "LinkableTreeBn254" , error : "InvalidMerkleRoots" , docs : "Invalid Merkle Roots" }) , (39u8 , 2u8) => Some (ErrorDetails { pallet : "LinkableTreeBn254" , error : "InvalidNeighborWithdrawRoot" , docs : "Invalid neighbor root passed in withdrawal\n(neighbor root is not in neighbor history)" }) , (39u8 , 3u8) => Some (ErrorDetails { pallet : "LinkableTreeBn254" , error : "TooManyEdges" , docs : "Anchor is at maximum number of edges for the given tree" }) , (39u8 , 4u8) => Some (ErrorDetails { pallet : "LinkableTreeBn254" , error : "EdgeAlreadyExists" , docs : "Edge already exists" }) , (39u8 , 5u8) => Some (ErrorDetails { pallet : "LinkableTreeBn254" , error : "EdgeDoesntExists" , docs : "Edge does not exist" }) , (40u8 , 0u8) => Some (ErrorDetails { pallet : "MixerBn254" , error : "InvalidPermissions" , docs : "Account does not have correct permissions" }) , (40u8 , 1u8) => Some (ErrorDetails { pallet : "MixerBn254" , error : "InvalidWithdrawProof" , docs : "Invalid withdraw proof" }) , (40u8 , 2u8) => Some (ErrorDetails { pallet : "MixerBn254" , error : "AlreadyRevealedNullifier" , docs : "Invalid nullifier that is already used\n(this error is returned when a nullifier is used twice)" }) , (40u8 , 3u8) => Some (ErrorDetails { pallet : "MixerBn254" , error : "InvalidArbitraryData" , docs : "" }) , (40u8 , 4u8) => Some (ErrorDetails { pallet : "MixerBn254" , error : "UnknownRoot" , docs : "Invalid root" }) , (40u8 , 5u8) => Some (ErrorDetails { pallet : "MixerBn254" , error : "NoMixerFound" , docs : "No mixer found" }) , (41u8 , 0u8) => Some (ErrorDetails { pallet : "AnchorBn254" , error : "InvalidMerkleRoots" , docs : "Invalid Merkle Roots" }) , (41u8 , 1u8) => Some (ErrorDetails { pallet : "AnchorBn254" , error : "UnknownRoot" , docs : "Unknown root" }) , (41u8 , 2u8) => Some (ErrorDetails { pallet : "AnchorBn254" , error : "InvalidWithdrawProof" , docs : "Invalid withdraw proof" }) , (41u8 , 3u8) => Some (ErrorDetails { pallet : "AnchorBn254" , error : "NoAnchorFound" , docs : "Anchor not found." }) , (41u8 , 4u8) => Some (ErrorDetails { pallet : "AnchorBn254" , error : "InvalidArbitraryData" , docs : "" }) , (41u8 , 5u8) => Some (ErrorDetails { pallet : "AnchorBn254" , error : "AlreadyRevealedNullifier" , docs : "Invalid nullifier that is already used\n(this error is returned when a nullifier is used twice)" }) , (42u8 , 0u8) => Some (ErrorDetails { pallet : "AnchorHandlerBn254" , error : "InvalidPermissions" , docs : "Access violation." }) , (42u8 , 1u8) => Some (ErrorDetails { pallet : "AnchorHandlerBn254" , error : "ResourceIsAlreadyAnchored" , docs : "" }) , (42u8 , 2u8) => Some (ErrorDetails { pallet : "AnchorHandlerBn254" , error : "AnchorHandlerNotFound" , docs : "" }) , (42u8 , 3u8) => Some (ErrorDetails { pallet : "AnchorHandlerBn254" , error : "SourceChainIdNotFound" , docs : "" }) , (42u8 , 4u8) => Some (ErrorDetails { pallet : "AnchorHandlerBn254" , error : "StorageOverflow" , docs : "Storage overflowed." }) , (43u8 , 0u8) => Some (ErrorDetails { pallet : "VAnchorBn254" , error : "InvalidTransactionProof" , docs : "Invalid transaction proof" }) , (43u8 , 1u8) => Some (ErrorDetails { pallet : "VAnchorBn254" , error : "NoVAnchorFound" , docs : "Variable Anchor not found." }) , (43u8 , 2u8) => Some (ErrorDetails { pallet : "VAnchorBn254" , error : "AlreadyRevealedNullifier" , docs : "Invalid nullifier that is already used\n(this error is returned when a nullifier is used twice)" }) , (43u8 , 3u8) => Some (ErrorDetails { pallet : "VAnchorBn254" , error : "InvalidExtAmount" , docs : "" }) , (43u8 , 4u8) => Some (ErrorDetails { pallet : "VAnchorBn254" , error : "InvalidDepositAmount" , docs : "" }) , (43u8 , 5u8) => Some (ErrorDetails { pallet : "VAnchorBn254" , error : "InvalidWithdrawAmount" , docs : "" }) , (43u8 , 6u8) => Some (ErrorDetails { pallet : "VAnchorBn254" , error : "InvalidExtData" , docs : "" }) , (43u8 , 7u8) => Some (ErrorDetails { pallet : "VAnchorBn254" , error : "InvalidInputNullifiers" , docs : "" }) , (43u8 , 8u8) => Some (ErrorDetails { pallet : "VAnchorBn254" , error : "InvalidFee" , docs : "" }) , (43u8 , 9u8) => Some (ErrorDetails { pallet : "VAnchorBn254" , error : "InvalidPublicAmount" , docs : "" }) , (44u8 , 0u8) => Some (ErrorDetails { pallet : "Bridge" , error : "InvalidPermissions" , docs : "Account does not have correct permissions" }) , (44u8 , 1u8) => Some (ErrorDetails { pallet : "Bridge" , error : "ThresholdNotSet" , docs : "Relayer threshold not set" }) , (44u8 , 2u8) => Some (ErrorDetails { pallet : "Bridge" , error : "InvalidChainId" , docs : "Provided chain Id is not valid" }) , (44u8 , 3u8) => Some (ErrorDetails { pallet : "Bridge" , error : "InvalidThreshold" , docs : "Relayer threshold cannot be 0" }) , (44u8 , 4u8) => Some (ErrorDetails { pallet : "Bridge" , error : "ChainNotWhitelisted" , docs : "Interactions with this chain is not permitted" }) , (44u8 , 5u8) => Some (ErrorDetails { pallet : "Bridge" , error : "ChainAlreadyWhitelisted" , docs : "Chain has already been enabled" }) , (44u8 , 6u8) => Some (ErrorDetails { pallet : "Bridge" , error : "ResourceDoesNotExist" , docs : "Resource ID provided isn't mapped to anything" }) , (44u8 , 7u8) => Some (ErrorDetails { pallet : "Bridge" , error : "RelayerAlreadyExists" , docs : "Relayer already in set" }) , (44u8 , 8u8) => Some (ErrorDetails { pallet : "Bridge" , error : "RelayerInvalid" , docs : "Provided accountId is not a relayer" }) , (44u8 , 9u8) => Some (ErrorDetails { pallet : "Bridge" , error : "MustBeRelayer" , docs : "Protected operation, must be performed by relayer" }) , (44u8 , 10u8) => Some (ErrorDetails { pallet : "Bridge" , error : "RelayerAlreadyVoted" , docs : "Relayer has already submitted some vote for this proposal" }) , (44u8 , 11u8) => Some (ErrorDetails { pallet : "Bridge" , error : "ProposalAlreadyExists" , docs : "A proposal with these parameters has already been submitted" }) , (44u8 , 12u8) => Some (ErrorDetails { pallet : "Bridge" , error : "ProposalDoesNotExist" , docs : "No proposal with the ID was found" }) , (44u8 , 13u8) => Some (ErrorDetails { pallet : "Bridge" , error : "ProposalNotComplete" , docs : "Cannot complete proposal, needs more votes" }) , (44u8 , 14u8) => Some (ErrorDetails { pallet : "Bridge" , error : "ProposalAlreadyComplete" , docs : "Proposal has either failed or succeeded" }) , (44u8 , 15u8) => Some (ErrorDetails { pallet : "Bridge" , error : "ProposalExpired" , docs : "Lifetime of proposal has been exceeded" }) , (45u8 , 0u8) => Some (ErrorDetails { pallet : "SignatureBridge" , error : "InvalidPermissions" , docs : "Account does not have correct permissions" }) , (45u8 , 1u8) => Some (ErrorDetails { pallet : "SignatureBridge" , error : "InvalidChainId" , docs : "Provided chain Id is not valid" }) , (45u8 , 2u8) => Some (ErrorDetails { pallet : "SignatureBridge" , error : "ChainNotWhitelisted" , docs : "Interactions with this chain is not permitted" }) , (45u8 , 3u8) => Some (ErrorDetails { pallet : "SignatureBridge" , error : "ChainAlreadyWhitelisted" , docs : "Chain has already been enabled" }) , (45u8 , 4u8) => Some (ErrorDetails { pallet : "SignatureBridge" , error : "ResourceDoesNotExist" , docs : "Resource ID provided isn't mapped to anything" }) , (45u8 , 5u8) => Some (ErrorDetails { pallet : "SignatureBridge" , error : "SignatureInvalid" , docs : "Provided signature is not from the active maintainer" }) , (45u8 , 6u8) => Some (ErrorDetails { pallet : "SignatureBridge" , error : "MustBeMaintainer" , docs : "Protected operation, must be performed by relayer" }) , (45u8 , 7u8) => Some (ErrorDetails { pallet : "SignatureBridge" , error : "ProposalAlreadyExists" , docs : "A proposal with these parameters has already been submitted" }) , (45u8 , 8u8) => Some (ErrorDetails { pallet : "SignatureBridge" , error : "CallNotConsistentWithProposalData" , docs : "Call does not match parsed call from proposal data" }) , (45u8 , 9u8) => Some (ErrorDetails { pallet : "SignatureBridge" , error : "CallDoesNotMatchResourceId" , docs : "Call does not match resource id according to resources mapping" }) , (45u8 , 10u8) => Some (ErrorDetails { pallet : "SignatureBridge" , error : "IncorrectExecutionChainIdType" , docs : "Chain Id Type from the r_id does not match this chain" }) , (45u8 , 11u8) => Some (ErrorDetails { pallet : "SignatureBridge" , error : "InvalidNonce" , docs : "Invalid nonce" }) , _ => None }
             } else {
                 None
             }
@@ -29659,35 +27742,24 @@ pub mod api {
         ) -> linkable_tree_bn254::constants::ConstantsApi {
             linkable_tree_bn254::constants::ConstantsApi
         }
-        pub fn linkable_tree_bls381(
-            &self,
-        ) -> linkable_tree_bls381::constants::ConstantsApi {
-            linkable_tree_bls381::constants::ConstantsApi
-        }
         pub fn mixer_bn254(&self) -> mixer_bn254::constants::ConstantsApi {
             mixer_bn254::constants::ConstantsApi
         }
-        pub fn mixer_bls381(&self) -> mixer_bls381::constants::ConstantsApi {
-            mixer_bls381::constants::ConstantsApi
-        }
         pub fn anchor_bn254(&self) -> anchor_bn254::constants::ConstantsApi {
             anchor_bn254::constants::ConstantsApi
-        }
-        pub fn anchor_bls381(&self) -> anchor_bls381::constants::ConstantsApi {
-            anchor_bls381::constants::ConstantsApi
         }
         pub fn v_anchor_bn254(
             &self,
         ) -> v_anchor_bn254::constants::ConstantsApi {
             v_anchor_bn254::constants::ConstantsApi
         }
-        pub fn v_anchor_bls381(
-            &self,
-        ) -> v_anchor_bls381::constants::ConstantsApi {
-            v_anchor_bls381::constants::ConstantsApi
-        }
         pub fn bridge(&self) -> bridge::constants::ConstantsApi {
             bridge::constants::ConstantsApi
+        }
+        pub fn signature_bridge(
+            &self,
+        ) -> signature_bridge::constants::ConstantsApi {
+            signature_bridge::constants::ConstantsApi
         }
     }
     pub struct StorageApi<'a, T: ::subxt::Config> {
@@ -29789,11 +27861,6 @@ pub mod api {
         pub fn hasher_bn254(&self) -> hasher_bn254::storage::StorageApi<'a, T> {
             hasher_bn254::storage::StorageApi::new(self.client)
         }
-        pub fn hasher_bls381(
-            &self,
-        ) -> hasher_bls381::storage::StorageApi<'a, T> {
-            hasher_bls381::storage::StorageApi::new(self.client)
-        }
         pub fn asset_registry(
             &self,
         ) -> asset_registry::storage::StorageApi<'a, T> {
@@ -29812,87 +27879,49 @@ pub mod api {
         ) -> mixer_verifier_bn254::storage::StorageApi<'a, T> {
             mixer_verifier_bn254::storage::StorageApi::new(self.client)
         }
-        pub fn mixer_verifier_bls381(
-            &self,
-        ) -> mixer_verifier_bls381::storage::StorageApi<'a, T> {
-            mixer_verifier_bls381::storage::StorageApi::new(self.client)
-        }
         pub fn anchor_verifier_bn254(
             &self,
         ) -> anchor_verifier_bn254::storage::StorageApi<'a, T> {
             anchor_verifier_bn254::storage::StorageApi::new(self.client)
-        }
-        pub fn anchor_verifier_bls381(
-            &self,
-        ) -> anchor_verifier_bls381::storage::StorageApi<'a, T> {
-            anchor_verifier_bls381::storage::StorageApi::new(self.client)
         }
         pub fn v_anchor_verifier2x2_bn254(
             &self,
         ) -> v_anchor_verifier2x2_bn254::storage::StorageApi<'a, T> {
             v_anchor_verifier2x2_bn254::storage::StorageApi::new(self.client)
         }
-        pub fn v_anchor_verifier2x2_bls381(
-            &self,
-        ) -> v_anchor_verifier2x2_bls381::storage::StorageApi<'a, T> {
-            v_anchor_verifier2x2_bls381::storage::StorageApi::new(self.client)
-        }
         pub fn merkle_tree_bn254(
             &self,
         ) -> merkle_tree_bn254::storage::StorageApi<'a, T> {
             merkle_tree_bn254::storage::StorageApi::new(self.client)
-        }
-        pub fn merkle_tree_bls381(
-            &self,
-        ) -> merkle_tree_bls381::storage::StorageApi<'a, T> {
-            merkle_tree_bls381::storage::StorageApi::new(self.client)
         }
         pub fn linkable_tree_bn254(
             &self,
         ) -> linkable_tree_bn254::storage::StorageApi<'a, T> {
             linkable_tree_bn254::storage::StorageApi::new(self.client)
         }
-        pub fn linkable_tree_bls381(
-            &self,
-        ) -> linkable_tree_bls381::storage::StorageApi<'a, T> {
-            linkable_tree_bls381::storage::StorageApi::new(self.client)
-        }
         pub fn mixer_bn254(&self) -> mixer_bn254::storage::StorageApi<'a, T> {
             mixer_bn254::storage::StorageApi::new(self.client)
         }
-        pub fn mixer_bls381(&self) -> mixer_bls381::storage::StorageApi<'a, T> {
-            mixer_bls381::storage::StorageApi::new(self.client)
-        }
         pub fn anchor_bn254(&self) -> anchor_bn254::storage::StorageApi<'a, T> {
             anchor_bn254::storage::StorageApi::new(self.client)
-        }
-        pub fn anchor_bls381(
-            &self,
-        ) -> anchor_bls381::storage::StorageApi<'a, T> {
-            anchor_bls381::storage::StorageApi::new(self.client)
         }
         pub fn anchor_handler_bn254(
             &self,
         ) -> anchor_handler_bn254::storage::StorageApi<'a, T> {
             anchor_handler_bn254::storage::StorageApi::new(self.client)
         }
-        pub fn anchor_handler_bls381(
-            &self,
-        ) -> anchor_handler_bls381::storage::StorageApi<'a, T> {
-            anchor_handler_bls381::storage::StorageApi::new(self.client)
-        }
         pub fn v_anchor_bn254(
             &self,
         ) -> v_anchor_bn254::storage::StorageApi<'a, T> {
             v_anchor_bn254::storage::StorageApi::new(self.client)
         }
-        pub fn v_anchor_bls381(
-            &self,
-        ) -> v_anchor_bls381::storage::StorageApi<'a, T> {
-            v_anchor_bls381::storage::StorageApi::new(self.client)
-        }
         pub fn bridge(&self) -> bridge::storage::StorageApi<'a, T> {
             bridge::storage::StorageApi::new(self.client)
+        }
+        pub fn signature_bridge(
+            &self,
+        ) -> signature_bridge::storage::StorageApi<'a, T> {
+            signature_bridge::storage::StorageApi::new(self.client)
         }
     }
     pub struct TransactionApi<'a, T: ::subxt::Config, X, A> {
@@ -30006,11 +28035,6 @@ pub mod api {
         ) -> hasher_bn254::calls::TransactionApi<'a, T, X, A> {
             hasher_bn254::calls::TransactionApi::new(self.client)
         }
-        pub fn hasher_bls381(
-            &self,
-        ) -> hasher_bls381::calls::TransactionApi<'a, T, X, A> {
-            hasher_bls381::calls::TransactionApi::new(self.client)
-        }
         pub fn asset_registry(
             &self,
         ) -> asset_registry::calls::TransactionApi<'a, T, X, A> {
@@ -30034,21 +28058,10 @@ pub mod api {
         ) -> mixer_verifier_bn254::calls::TransactionApi<'a, T, X, A> {
             mixer_verifier_bn254::calls::TransactionApi::new(self.client)
         }
-        pub fn mixer_verifier_bls381(
-            &self,
-        ) -> mixer_verifier_bls381::calls::TransactionApi<'a, T, X, A> {
-            mixer_verifier_bls381::calls::TransactionApi::new(self.client)
-        }
         pub fn anchor_verifier_bn254(
             &self,
         ) -> anchor_verifier_bn254::calls::TransactionApi<'a, T, X, A> {
             anchor_verifier_bn254::calls::TransactionApi::new(self.client)
-        }
-        pub fn anchor_verifier_bls381(
-            &self,
-        ) -> anchor_verifier_bls381::calls::TransactionApi<'a, T, X, A>
-        {
-            anchor_verifier_bls381::calls::TransactionApi::new(self.client)
         }
         pub fn v_anchor_verifier2x2_bn254(
             &self,
@@ -30056,74 +28069,43 @@ pub mod api {
         {
             v_anchor_verifier2x2_bn254::calls::TransactionApi::new(self.client)
         }
-        pub fn v_anchor_verifier2x2_bls381(
-            &self,
-        ) -> v_anchor_verifier2x2_bls381::calls::TransactionApi<'a, T, X, A>
-        {
-            v_anchor_verifier2x2_bls381::calls::TransactionApi::new(self.client)
-        }
         pub fn merkle_tree_bn254(
             &self,
         ) -> merkle_tree_bn254::calls::TransactionApi<'a, T, X, A> {
             merkle_tree_bn254::calls::TransactionApi::new(self.client)
-        }
-        pub fn merkle_tree_bls381(
-            &self,
-        ) -> merkle_tree_bls381::calls::TransactionApi<'a, T, X, A> {
-            merkle_tree_bls381::calls::TransactionApi::new(self.client)
         }
         pub fn linkable_tree_bn254(
             &self,
         ) -> linkable_tree_bn254::calls::TransactionApi<'a, T, X, A> {
             linkable_tree_bn254::calls::TransactionApi::new(self.client)
         }
-        pub fn linkable_tree_bls381(
-            &self,
-        ) -> linkable_tree_bls381::calls::TransactionApi<'a, T, X, A> {
-            linkable_tree_bls381::calls::TransactionApi::new(self.client)
-        }
         pub fn mixer_bn254(
             &self,
         ) -> mixer_bn254::calls::TransactionApi<'a, T, X, A> {
             mixer_bn254::calls::TransactionApi::new(self.client)
-        }
-        pub fn mixer_bls381(
-            &self,
-        ) -> mixer_bls381::calls::TransactionApi<'a, T, X, A> {
-            mixer_bls381::calls::TransactionApi::new(self.client)
         }
         pub fn anchor_bn254(
             &self,
         ) -> anchor_bn254::calls::TransactionApi<'a, T, X, A> {
             anchor_bn254::calls::TransactionApi::new(self.client)
         }
-        pub fn anchor_bls381(
-            &self,
-        ) -> anchor_bls381::calls::TransactionApi<'a, T, X, A> {
-            anchor_bls381::calls::TransactionApi::new(self.client)
-        }
         pub fn anchor_handler_bn254(
             &self,
         ) -> anchor_handler_bn254::calls::TransactionApi<'a, T, X, A> {
             anchor_handler_bn254::calls::TransactionApi::new(self.client)
-        }
-        pub fn anchor_handler_bls381(
-            &self,
-        ) -> anchor_handler_bls381::calls::TransactionApi<'a, T, X, A> {
-            anchor_handler_bls381::calls::TransactionApi::new(self.client)
         }
         pub fn v_anchor_bn254(
             &self,
         ) -> v_anchor_bn254::calls::TransactionApi<'a, T, X, A> {
             v_anchor_bn254::calls::TransactionApi::new(self.client)
         }
-        pub fn v_anchor_bls381(
-            &self,
-        ) -> v_anchor_bls381::calls::TransactionApi<'a, T, X, A> {
-            v_anchor_bls381::calls::TransactionApi::new(self.client)
-        }
         pub fn bridge(&self) -> bridge::calls::TransactionApi<'a, T, X, A> {
             bridge::calls::TransactionApi::new(self.client)
+        }
+        pub fn signature_bridge(
+            &self,
+        ) -> signature_bridge::calls::TransactionApi<'a, T, X, A> {
+            signature_bridge::calls::TransactionApi::new(self.client)
         }
     }
 }
