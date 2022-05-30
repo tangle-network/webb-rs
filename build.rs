@@ -206,7 +206,7 @@ fn main() -> Result<(), Box<dyn Error>> {
     {
         substrate::generate_dkg_runtime()?;
         substrate::generate_protocol_substrate_runtime()?;
-        // substrate::generate_egg_runtime()?;
+        substrate::generate_egg_runtime()?;
         run_cargo_fmt()?;
     }
     Ok(())
