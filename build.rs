@@ -142,8 +142,8 @@ mod substrate {
             pub mod api {}
         );
         let mut generated_type_derives =
-            subxt_codegen::GeneratedTypeDerives::default();
-        generated_type_derives.append(
+            subxt_codegen::DerivesRegistry::default();
+        generated_type_derives.extend_for_all(
             vec![
                 syn::parse_quote!(Eq),
                 syn::parse_quote!(PartialEq),
@@ -206,7 +206,7 @@ fn main() -> Result<(), Box<dyn Error>> {
     {
         substrate::generate_dkg_runtime()?;
         substrate::generate_protocol_substrate_runtime()?;
-        substrate::generate_egg_runtime()?;
+        // substrate::generate_egg_runtime()?;
         run_cargo_fmt()?;
     }
     Ok(())
