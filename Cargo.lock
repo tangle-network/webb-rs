@@ -1207,7 +1207,7 @@ checksum = "df6bb8542ef006ef0de09a5c4420787d79823c0ed7924225822362fd2bf2ff2d"
 dependencies = [
  "cfg-if",
  "parity-scale-codec 3.1.2",
- "scale-info 2.1.2",
+ "scale-info",
  "serde",
 ]
 
@@ -2403,7 +2403,7 @@ dependencies = [
  "fixed-hash",
  "impl-codec 0.6.0",
  "impl-serde",
- "scale-info 2.1.2",
+ "scale-info",
  "uint",
 ]
 
@@ -2836,19 +2836,6 @@ dependencies = [
 
 [[package]]
 name = "scale-info"
-version = "1.0.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "5c55b744399c25532d63a0d2789b109df8d46fc93752d46b0782991a931a782f"
-dependencies = [
- "bitvec 0.20.4",
- "cfg-if",
- "derive_more",
- "parity-scale-codec 2.3.1",
- "scale-info-derive 1.0.0",
-]
-
-[[package]]
-name = "scale-info"
 version = "2.1.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "c46be926081c9f4dd5dd9b6f1d3e3229f2360bc6502dd8836f84a93b7c75e99a"
@@ -2857,20 +2844,8 @@ dependencies = [
  "cfg-if",
  "derive_more",
  "parity-scale-codec 3.1.2",
- "scale-info-derive 2.1.2",
+ "scale-info-derive",
  "serde",
-]
-
-[[package]]
-name = "scale-info-derive"
-version = "1.0.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "baeb2780690380592f86205aa4ee49815feb2acad8c2f59e6dd207148c3f1fcd"
-dependencies = [
- "proc-macro-crate",
- "proc-macro2",
- "quote",
- "syn",
 ]
 
 [[package]]
@@ -3194,7 +3169,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "acb4490364cb3b097a6755343e552495b0013778152300714be4647d107e9a2e"
 dependencies = [
  "parity-scale-codec 3.1.2",
- "scale-info 2.1.2",
+ "scale-info",
  "serde",
  "sp-core",
  "sp-io",
@@ -3210,7 +3185,7 @@ dependencies = [
  "integer-sqrt",
  "num-traits",
  "parity-scale-codec 3.1.2",
- "scale-info 2.1.2",
+ "scale-info",
  "serde",
  "sp-debug-derive",
  "sp-std",
@@ -3245,7 +3220,7 @@ dependencies = [
  "primitive-types 0.11.1",
  "rand 0.7.3",
  "regex",
- "scale-info 2.1.2",
+ "scale-info",
  "schnorrkel",
  "secp256k1",
  "secrecy",
@@ -3381,7 +3356,7 @@ dependencies = [
  "parity-util-mem",
  "paste",
  "rand 0.7.3",
- "scale-info 2.1.2",
+ "scale-info",
  "serde",
  "sp-application-crypto",
  "sp-arithmetic",
@@ -3487,7 +3462,7 @@ dependencies = [
  "hash-db",
  "memory-db",
  "parity-scale-codec 3.1.2",
- "scale-info 2.1.2",
+ "scale-info",
  "sp-core",
  "sp-std",
  "trie-db",
@@ -3605,7 +3580,7 @@ dependencies = [
  "log",
  "parity-scale-codec 3.1.2",
  "parking_lot 0.12.0",
- "scale-info 2.1.2",
+ "scale-info",
  "serde",
  "serde_json",
  "sp-core",
@@ -3628,7 +3603,7 @@ dependencies = [
  "proc-macro-error",
  "proc-macro2",
  "quote",
- "scale-info 2.1.2",
+ "scale-info",
  "subxt-metadata",
  "syn",
 ]
@@ -3653,7 +3628,7 @@ checksum = "2819a10a1a13bd9645419f59ac9d7cc8deb51052566b9d0c2157354ea44513d5"
 dependencies = [
  "frame-metadata",
  "parity-scale-codec 3.1.2",
- "scale-info 2.1.2",
+ "scale-info",
  "sp-core",
 ]
 
@@ -4307,7 +4282,7 @@ dependencies = [
  "openssl",
  "parity-scale-codec 3.1.2",
  "rand 0.8.5",
- "scale-info 2.1.2",
+ "scale-info",
  "serde",
  "serde_json",
  "sp-keyring",
@@ -4326,8 +4301,8 @@ dependencies = [
  "hex",
  "hex-literal",
  "num-traits",
- "parity-scale-codec 2.3.1",
- "scale-info 1.0.0",
+ "parity-scale-codec 3.1.2",
+ "scale-info",
  "typed-builder",
 ]
 
