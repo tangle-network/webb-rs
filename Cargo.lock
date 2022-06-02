@@ -4272,7 +4272,7 @@ dependencies = [
 
 [[package]]
 name = "webb"
-version = "0.4.0"
+version = "0.4.1"
 dependencies = [
  "anyhow",
  "async-trait",
@@ -4296,7 +4296,7 @@ dependencies = [
 
 [[package]]
 name = "webb-proposals"
-version = "0.3.2"
+version = "0.3.3"
 dependencies = [
  "hex",
  "hex-literal",
