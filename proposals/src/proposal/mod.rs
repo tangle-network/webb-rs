@@ -3,6 +3,9 @@ pub mod evm;
 #[cfg(feature = "substrate")]
 pub mod substrate;
 
+#[cfg(not(feature = "std"))]
+use alloc::vec::Vec;
+
 /// The `Proposal` trait is used to abstract over the different proposals for
 /// all the different chains.
 pub trait Proposal {
