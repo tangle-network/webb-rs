@@ -53,6 +53,7 @@ impl_proposal_for! {
 #[cfg(feature = "substrate")]
 impl_proposal_for! {
     crate::proposal::substrate::AnchorUpdateProposal,
+    crate::proposal::substrate::ResourceIdUpdateProposal,
     crate::proposal::substrate::TokenAddProposal,
     crate::proposal::substrate::TokenRemoveProposal,
     crate::proposal::substrate::WrappingFeeUpdateProposal,
