@@ -47,7 +47,7 @@ impl ResourceIdUpdateProposal {
         out.extend_from_slice(&self.header.to_bytes());
         let call = ExecuteSetResourceProposal {
             r_id: self.new_resource_id().to_bytes(),
-            tree_id: self.tree_id()
+            tree_id: self.tree_id(),
         };
         // add pallet index
         out.push(self.pallet_index);
@@ -112,7 +112,7 @@ impl TryFrom<Vec<u8>> for ResourceIdUpdateProposal {
 #[derive(scale_codec::Encode, scale_codec::Decode)]
 struct ExecuteSetResourceProposal {
     r_id: [u8; 32],
-    tree_id: u32
+    tree_id: u32,
 }
 
 #[cfg(test)]
