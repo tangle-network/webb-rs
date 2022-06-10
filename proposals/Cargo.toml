@@ -1,6 +1,6 @@
 [package]
 name = "webb-proposals"
-version = "0.3.5"
+version = "0.3.6"
 edition = "2021"
 description = "Webb Protocol Proposals Specification & Implementation (part of webb-rs SDK)"
 categories = ["encoding", "no-std"]
