@@ -21,6 +21,7 @@ mod set_treasury_handler;
 mod set_verifier;
 mod token_add;
 mod token_remove;
+mod utils;
 mod wrapping_fee_update;
 
 pub use anchor_update::*;
@@ -33,4 +34,5 @@ pub use set_treasury_handler::*;
 pub use set_verifier::*;
 pub use token_add::*;
 pub use token_remove::*;
+pub use utils::*;
 pub use wrapping_fee_update::*;
