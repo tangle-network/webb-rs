@@ -72,4 +72,8 @@ impl_proposal_for! {
     crate::proposal::cosmwasm::MaxDepositLimitProposal,
     crate::proposal::cosmwasm::ResourceIdUpdateProposal,
     crate::proposal::cosmwasm::FeeRecipientUpdateProposal,
+    crate::proposal::cosmwasm::SetTreasuryHandlerProposal,
+    crate::proposal::cosmwasm::SetVerifierProposal,
+    crate::proposal::cosmwasm::FeeRecipientUpdateProposal,
+    crate::proposal::cosmwasm::RescueTokensProposal,
 }
