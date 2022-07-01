@@ -1768,9 +1768,11 @@ mod governedtokenwrappercontract_mod {
                     data.as_ref(),
                 )
             {
-                return Ok(GovernedTokenWrapperContractCalls::DefaultAdminRole(
-                    decoded,
-                ));
+                return Ok(
+                    GovernedTokenWrapperContractCalls::DefaultAdminRole(
+                        decoded,
+                    ),
+                );
             }
             if let Ok(decoded) =
                 <MinterRoleCall as ethers::core::abi::AbiDecode>::decode(
@@ -1832,14 +1834,18 @@ mod governedtokenwrappercontract_mod {
                     data.as_ref(),
                 )
             {
-                return Ok(GovernedTokenWrapperContractCalls::BurnFrom(decoded));
+                return Ok(GovernedTokenWrapperContractCalls::BurnFrom(
+                    decoded,
+                ));
             }
             if let Ok(decoded) =
                 <DecimalsCall as ethers::core::abi::AbiDecode>::decode(
                     data.as_ref(),
                 )
             {
-                return Ok(GovernedTokenWrapperContractCalls::Decimals(decoded));
+                return Ok(GovernedTokenWrapperContractCalls::Decimals(
+                    decoded,
+                ));
             }
             if let Ok(decoded) =
                 <DecreaseAllowanceCall as ethers::core::abi::AbiDecode>::decode(
@@ -1882,9 +1888,11 @@ mod governedtokenwrappercontract_mod {
                     data.as_ref(),
                 )
             {
-                return Ok(GovernedTokenWrapperContractCalls::GetFeeFromAmount(
-                    decoded,
-                ));
+                return Ok(
+                    GovernedTokenWrapperContractCalls::GetFeeFromAmount(
+                        decoded,
+                    ),
+                );
             }
             if let Ok(decoded) =
                 <GetRoleAdminCall as ethers::core::abi::AbiDecode>::decode(
@@ -1929,7 +1937,9 @@ mod governedtokenwrappercontract_mod {
                     data.as_ref(),
                 )
             {
-                return Ok(GovernedTokenWrapperContractCalls::Governor(decoded));
+                return Ok(GovernedTokenWrapperContractCalls::Governor(
+                    decoded,
+                ));
             }
             if let Ok(decoded) =
                 <GrantRoleCall as ethers::core::abi::AbiDecode>::decode(
@@ -1952,9 +1962,11 @@ mod governedtokenwrappercontract_mod {
                     data.as_ref(),
                 )
             {
-                return Ok(GovernedTokenWrapperContractCalls::HistoricalTokens(
-                    decoded,
-                ));
+                return Ok(
+                    GovernedTokenWrapperContractCalls::HistoricalTokens(
+                        decoded,
+                    ),
+                );
             }
             if let Ok(decoded) =
                 <IncreaseAllowanceCall as ethers::core::abi::AbiDecode>::decode(
@@ -2068,9 +2080,11 @@ mod governedtokenwrappercontract_mod {
                     data.as_ref(),
                 )
             {
-                return Ok(GovernedTokenWrapperContractCalls::SetNativeAllowed(
-                    decoded,
-                ));
+                return Ok(
+                    GovernedTokenWrapperContractCalls::SetNativeAllowed(
+                        decoded,
+                    ),
+                );
             }
             if let Ok(decoded) =
                 <SupportsInterfaceCall as ethers::core::abi::AbiDecode>::decode(
@@ -2111,7 +2125,9 @@ mod governedtokenwrappercontract_mod {
                     data.as_ref(),
                 )
             {
-                return Ok(GovernedTokenWrapperContractCalls::Transfer(decoded));
+                return Ok(GovernedTokenWrapperContractCalls::Transfer(
+                    decoded,
+                ));
             }
             if let Ok(decoded) =
                 <TransferFromCall as ethers::core::abi::AbiDecode>::decode(
@@ -2182,9 +2198,11 @@ mod governedtokenwrappercontract_mod {
                     data.as_ref(),
                 )
             {
-                return Ok(GovernedTokenWrapperContractCalls::WrapForAndSendTo(
-                    decoded,
-                ));
+                return Ok(
+                    GovernedTokenWrapperContractCalls::WrapForAndSendTo(
+                        decoded,
+                    ),
+                );
             }
             if let Ok(decoded) =
                 <WrappingLimitCall as ethers::core::abi::AbiDecode>::decode(
