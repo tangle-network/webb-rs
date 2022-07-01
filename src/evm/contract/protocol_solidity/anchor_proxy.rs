@@ -222,11 +222,9 @@ mod anchorproxycontract_mod {
             Self: Sized,
         {
             if let Ok(decoded) = AnchorProxyDepositFilter::decode_log(log) {
-                return Ok(
-                    AnchorProxyContractEvents::AnchorProxyDepositFilter(
-                        decoded,
-                    ),
-                );
+                return Ok(AnchorProxyContractEvents::AnchorProxyDepositFilter(
+                    decoded,
+                ));
             }
             if let Ok(decoded) = EncryptedNoteFilter::decode_log(log) {
                 return Ok(AnchorProxyContractEvents::EncryptedNoteFilter(

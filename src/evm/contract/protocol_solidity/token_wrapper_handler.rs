@@ -369,11 +369,9 @@ mod tokenwrapperhandlercontract_mod {
                     data.as_ref(),
                 )
             {
-                return Ok(
-                    TokenWrapperHandlerContractCalls::ContractWhitelist(
-                        decoded,
-                    ),
-                );
+                return Ok(TokenWrapperHandlerContractCalls::ContractWhitelist(
+                    decoded,
+                ));
             }
             if let Ok(decoded) =
                 <CountsCall as ethers::core::abi::AbiDecode>::decode(
