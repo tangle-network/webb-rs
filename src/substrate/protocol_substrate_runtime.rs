@@ -1,7 +1,7 @@
 #[allow(dead_code, unused_imports, non_camel_case_types)]
 pub mod api {
     use super::api as root_mod;
-    pub static PALLETS: [&str; 48usize] = [
+    pub static PALLETS: [&str; 49usize] = [
         "System",
         "RandomnessCollectiveFlip",
         "Timestamp",
@@ -48,6 +48,7 @@ pub mod api {
         "AnchorBn254",
         "AnchorHandlerBn254",
         "VAnchorBn254",
+        "VAnchorHandlerBn254",
         "Bridge",
         "SignatureBridge",
     ];
@@ -135,8 +136,10 @@ pub mod api {
         #[codec(index = 45)]
         VAnchorBn254(v_anchor_bn254::Event),
         #[codec(index = 46)]
-        Bridge(bridge::Event),
+        VAnchorHandlerBn254(v_anchor_handler_bn254::Event),
         #[codec(index = 47)]
+        Bridge(bridge::Event),
+        #[codec(index = 48)]
         SignatureBridge(signature_bridge::Event),
     }
     pub mod system {
@@ -1261,11 +1264,11 @@ pub mod api {
                 > {
                     if self.client.metadata().storage_hash::<Events>()?
                         == [
-                            47u8, 135u8, 173u8, 156u8, 195u8, 89u8, 95u8, 94u8,
-                            105u8, 223u8, 63u8, 42u8, 15u8, 149u8, 102u8,
-                            250u8, 64u8, 58u8, 234u8, 8u8, 167u8, 103u8, 186u8,
-                            138u8, 157u8, 183u8, 171u8, 159u8, 106u8, 58u8,
-                            139u8, 92u8,
+                            54u8, 75u8, 142u8, 97u8, 55u8, 48u8, 223u8, 205u8,
+                            233u8, 117u8, 130u8, 184u8, 3u8, 247u8, 157u8,
+                            94u8, 142u8, 75u8, 76u8, 45u8, 0u8, 21u8, 252u8,
+                            250u8, 224u8, 222u8, 205u8, 102u8, 139u8, 210u8,
+                            25u8, 107u8,
                         ]
                     {
                         let entry = Events;
@@ -1509,11 +1512,11 @@ pub mod api {
                         .metadata()
                         .constant_hash("System", "BlockWeights")?
                         == [
-                            171u8, 219u8, 233u8, 26u8, 8u8, 82u8, 126u8, 26u8,
-                            45u8, 242u8, 95u8, 241u8, 173u8, 95u8, 182u8, 49u8,
-                            162u8, 240u8, 151u8, 9u8, 49u8, 197u8, 203u8,
-                            181u8, 118u8, 90u8, 209u8, 38u8, 23u8, 22u8, 164u8,
-                            1u8,
+                            129u8, 27u8, 39u8, 144u8, 79u8, 246u8, 6u8, 108u8,
+                            160u8, 23u8, 121u8, 32u8, 114u8, 113u8, 216u8,
+                            219u8, 213u8, 100u8, 124u8, 151u8, 58u8, 63u8,
+                            104u8, 153u8, 34u8, 66u8, 187u8, 214u8, 73u8,
+                            252u8, 89u8, 253u8,
                         ]
                     {
                         let pallet = self.client.metadata().pallet("System")?;
@@ -4830,58 +4833,6 @@ pub mod api {
                         Err(::subxt::MetadataError::IncompatibleMetadata.into())
                     }
                 }
-                #[doc = " The polynomial that is applied in order to derive fee from weight."]                pub fn weight_to_fee (& self) -> :: core :: result :: Result < :: std :: vec :: Vec < runtime_types :: frame_support :: weights :: WeightToFeeCoefficient < :: core :: primitive :: u128 > > , :: subxt :: BasicError >{
-                    if self
-                        .client
-                        .metadata()
-                        .constant_hash("TransactionPayment", "WeightToFee")?
-                        == [
-                            236u8, 89u8, 172u8, 50u8, 101u8, 218u8, 151u8,
-                            158u8, 128u8, 186u8, 120u8, 84u8, 103u8, 248u8,
-                            220u8, 191u8, 9u8, 185u8, 114u8, 160u8, 104u8,
-                            235u8, 167u8, 83u8, 228u8, 6u8, 56u8, 179u8, 160u8,
-                            4u8, 230u8, 12u8,
-                        ]
-                    {
-                        let pallet = self
-                            .client
-                            .metadata()
-                            .pallet("TransactionPayment")?;
-                        let constant = pallet.constant("WeightToFee")?;
-                        let value = ::subxt::codec::Decode::decode(
-                            &mut &constant.value[..],
-                        )?;
-                        Ok(value)
-                    } else {
-                        Err(::subxt::MetadataError::IncompatibleMetadata.into())
-                    }
-                }
-                #[doc = " The polynomial that is applied in order to derive fee from length."]                pub fn length_to_fee (& self) -> :: core :: result :: Result < :: std :: vec :: Vec < runtime_types :: frame_support :: weights :: WeightToFeeCoefficient < :: core :: primitive :: u128 > > , :: subxt :: BasicError >{
-                    if self
-                        .client
-                        .metadata()
-                        .constant_hash("TransactionPayment", "LengthToFee")?
-                        == [
-                            68u8, 81u8, 173u8, 120u8, 245u8, 251u8, 98u8,
-                            246u8, 140u8, 16u8, 36u8, 129u8, 156u8, 26u8,
-                            206u8, 12u8, 92u8, 243u8, 155u8, 146u8, 83u8,
-                            184u8, 53u8, 211u8, 237u8, 137u8, 160u8, 107u8,
-                            120u8, 24u8, 23u8, 24u8,
-                        ]
-                    {
-                        let pallet = self
-                            .client
-                            .metadata()
-                            .pallet("TransactionPayment")?;
-                        let constant = pallet.constant("LengthToFee")?;
-                        let value = ::subxt::codec::Decode::decode(
-                            &mut &constant.value[..],
-                        )?;
-                        Ok(value)
-                    } else {
-                        Err(::subxt::MetadataError::IncompatibleMetadata.into())
-                    }
-                }
             }
         }
     }
@@ -5034,11 +4985,11 @@ pub mod api {
                 > {
                     if self.client.metadata().call_hash::<SubmitUnsigned>()?
                         == [
-                            202u8, 104u8, 247u8, 250u8, 171u8, 119u8, 119u8,
-                            96u8, 213u8, 119u8, 41u8, 116u8, 29u8, 99u8, 71u8,
-                            203u8, 168u8, 212u8, 15u8, 10u8, 64u8, 126u8,
-                            177u8, 56u8, 177u8, 42u8, 236u8, 124u8, 36u8, 94u8,
-                            47u8, 27u8,
+                            212u8, 126u8, 4u8, 62u8, 15u8, 223u8, 54u8, 80u8,
+                            27u8, 96u8, 170u8, 169u8, 238u8, 149u8, 139u8,
+                            190u8, 179u8, 158u8, 126u8, 191u8, 50u8, 201u8,
+                            108u8, 200u8, 78u8, 139u8, 92u8, 69u8, 50u8, 239u8,
+                            51u8, 18u8,
                         ]
                     {
                         let call = SubmitUnsigned {
@@ -5168,11 +5119,11 @@ pub mod api {
                 > {
                     if self.client.metadata().call_hash::<Submit>()?
                         == [
-                            192u8, 193u8, 242u8, 99u8, 80u8, 253u8, 100u8,
-                            234u8, 199u8, 15u8, 119u8, 251u8, 94u8, 248u8,
-                            110u8, 171u8, 216u8, 218u8, 60u8, 223u8, 227u8,
-                            79u8, 174u8, 232u8, 251u8, 75u8, 17u8, 241u8, 15u8,
-                            23u8, 11u8, 99u8,
+                            2u8, 131u8, 162u8, 38u8, 102u8, 73u8, 144u8, 71u8,
+                            200u8, 229u8, 140u8, 38u8, 58u8, 159u8, 59u8,
+                            167u8, 91u8, 169u8, 22u8, 228u8, 127u8, 153u8,
+                            125u8, 241u8, 60u8, 61u8, 103u8, 192u8, 95u8, 87u8,
+                            81u8, 73u8,
                         ]
                     {
                         let call = Submit {
@@ -5936,38 +5887,6 @@ pub mod api {
                         Err(::subxt::MetadataError::IncompatibleMetadata.into())
                     }
                 }
-                #[doc = " Maximum weight that the miner should consume."]
-                #[doc = ""]
-                #[doc = " The miner will ensure that the total weight of the unsigned solution will not exceed"]
-                #[doc = " this value, based on [`WeightInfo::submit_unsigned`]."]
-                pub fn miner_max_weight(
-                    &self,
-                ) -> ::core::result::Result<
-                    ::core::primitive::u64,
-                    ::subxt::BasicError,
-                > {
-                    if self.client.metadata().constant_hash(
-                        "ElectionProviderMultiPhase",
-                        "MinerMaxWeight",
-                    )? == [
-                        58u8, 56u8, 116u8, 165u8, 37u8, 16u8, 39u8, 123u8,
-                        250u8, 148u8, 29u8, 245u8, 46u8, 100u8, 54u8, 183u8,
-                        3u8, 125u8, 35u8, 102u8, 93u8, 10u8, 149u8, 71u8, 12u8,
-                        156u8, 97u8, 238u8, 70u8, 252u8, 222u8, 127u8,
-                    ] {
-                        let pallet = self
-                            .client
-                            .metadata()
-                            .pallet("ElectionProviderMultiPhase")?;
-                        let constant = pallet.constant("MinerMaxWeight")?;
-                        let value = ::subxt::codec::Decode::decode(
-                            &mut &constant.value[..],
-                        )?;
-                        Ok(value)
-                    } else {
-                        Err(::subxt::MetadataError::IncompatibleMetadata.into())
-                    }
-                }
                 #[doc = " Maximum number of signed submissions that can be queued."]
                 #[doc = ""]
                 #[doc = " It is best to avoid adjusting this during an election, as it impacts downstream data"]
@@ -6006,7 +5925,9 @@ pub mod api {
                 }
                 #[doc = " Maximum weight of a signed solution."]
                 #[doc = ""]
-                #[doc = " This should probably be similar to [`Config::MinerMaxWeight`]."]
+                #[doc = " If [`Config::MinerConfig`] is being implemented to submit signed solutions (outside of"]
+                #[doc = " this pallet), then [`MinerConfig::solution_weight`] is used to compare against"]
+                #[doc = " this value."]
                 pub fn signed_max_weight(
                     &self,
                 ) -> ::core::result::Result<
@@ -6017,10 +5938,10 @@ pub mod api {
                         "ElectionProviderMultiPhase",
                         "SignedMaxWeight",
                     )? == [
-                        46u8, 136u8, 54u8, 194u8, 58u8, 75u8, 86u8, 23u8, 16u8,
-                        86u8, 190u8, 229u8, 89u8, 109u8, 196u8, 3u8, 102u8,
-                        80u8, 240u8, 185u8, 175u8, 251u8, 59u8, 131u8, 118u8,
-                        87u8, 234u8, 7u8, 126u8, 123u8, 143u8, 64u8,
+                        120u8, 229u8, 97u8, 14u8, 194u8, 14u8, 191u8, 9u8,
+                        193u8, 189u8, 248u8, 130u8, 178u8, 22u8, 29u8, 201u8,
+                        43u8, 209u8, 115u8, 60u8, 217u8, 28u8, 141u8, 187u8,
+                        91u8, 73u8, 138u8, 14u8, 118u8, 236u8, 45u8, 71u8,
                     ] {
                         let pallet = self
                             .client
@@ -6234,38 +6155,6 @@ pub mod api {
                             .pallet("ElectionProviderMultiPhase")?;
                         let constant =
                             pallet.constant("MaxElectableTargets")?;
-                        let value = ::subxt::codec::Decode::decode(
-                            &mut &constant.value[..],
-                        )?;
-                        Ok(value)
-                    } else {
-                        Err(::subxt::MetadataError::IncompatibleMetadata.into())
-                    }
-                }
-                #[doc = " Maximum length (bytes) that the mined solution should consume."]
-                #[doc = ""]
-                #[doc = " The miner will ensure that the total length of the unsigned solution will not exceed"]
-                #[doc = " this value."]
-                pub fn miner_max_length(
-                    &self,
-                ) -> ::core::result::Result<
-                    ::core::primitive::u32,
-                    ::subxt::BasicError,
-                > {
-                    if self.client.metadata().constant_hash(
-                        "ElectionProviderMultiPhase",
-                        "MinerMaxLength",
-                    )? == [
-                        131u8, 141u8, 170u8, 106u8, 200u8, 39u8, 188u8, 38u8,
-                        159u8, 91u8, 130u8, 187u8, 164u8, 109u8, 34u8, 75u8,
-                        198u8, 247u8, 204u8, 249u8, 246u8, 87u8, 217u8, 117u8,
-                        113u8, 120u8, 57u8, 201u8, 210u8, 22u8, 108u8, 124u8,
-                    ] {
-                        let pallet = self
-                            .client
-                            .metadata()
-                            .pallet("ElectionProviderMultiPhase")?;
-                        let constant = pallet.constant("MinerMaxLength")?;
                         let value = ::subxt::codec::Decode::decode(
                             &mut &constant.value[..],
                         )?;
@@ -14208,11 +14097,11 @@ pub mod api {
                 > {
                     if self.client.metadata().call_hash::<Execute>()?
                         == [
-                            38u8, 252u8, 36u8, 119u8, 239u8, 55u8, 127u8,
-                            235u8, 193u8, 144u8, 132u8, 218u8, 111u8, 179u8,
-                            45u8, 116u8, 140u8, 95u8, 142u8, 71u8, 53u8, 159u8,
-                            15u8, 241u8, 139u8, 191u8, 165u8, 223u8, 142u8,
-                            1u8, 1u8, 96u8,
+                            247u8, 255u8, 125u8, 192u8, 0u8, 191u8, 53u8,
+                            125u8, 67u8, 177u8, 230u8, 10u8, 169u8, 120u8,
+                            175u8, 24u8, 253u8, 134u8, 236u8, 218u8, 158u8,
+                            173u8, 68u8, 55u8, 18u8, 243u8, 51u8, 209u8, 148u8,
+                            230u8, 67u8, 114u8,
                         ]
                     {
                         let call = Execute {
@@ -14272,11 +14161,11 @@ pub mod api {
                 > {
                     if self.client.metadata().call_hash::<Propose>()?
                         == [
-                            246u8, 152u8, 132u8, 124u8, 181u8, 18u8, 66u8,
-                            166u8, 186u8, 50u8, 115u8, 208u8, 255u8, 22u8, 3u8,
-                            41u8, 240u8, 236u8, 243u8, 123u8, 73u8, 253u8, 5u8,
-                            184u8, 78u8, 126u8, 32u8, 249u8, 153u8, 200u8,
-                            45u8, 111u8,
+                            71u8, 73u8, 181u8, 127u8, 215u8, 60u8, 112u8,
+                            109u8, 212u8, 85u8, 89u8, 147u8, 115u8, 99u8,
+                            105u8, 203u8, 226u8, 178u8, 104u8, 185u8, 84u8,
+                            246u8, 3u8, 128u8, 102u8, 114u8, 205u8, 250u8,
+                            21u8, 62u8, 181u8, 52u8,
                         ]
                     {
                         let call = Propose {
@@ -14712,11 +14601,11 @@ pub mod api {
                 > {
                     if self.client.metadata().storage_hash::<ProposalOf>()?
                         == [
-                            175u8, 245u8, 189u8, 25u8, 34u8, 92u8, 235u8,
-                            124u8, 48u8, 23u8, 158u8, 29u8, 43u8, 199u8, 228u8,
-                            133u8, 49u8, 12u8, 75u8, 157u8, 187u8, 71u8, 88u8,
-                            149u8, 58u8, 52u8, 54u8, 27u8, 17u8, 234u8, 82u8,
-                            10u8,
+                            227u8, 50u8, 184u8, 128u8, 1u8, 251u8, 237u8,
+                            198u8, 229u8, 168u8, 55u8, 33u8, 55u8, 190u8,
+                            135u8, 78u8, 100u8, 242u8, 215u8, 52u8, 36u8, 50u8,
+                            225u8, 226u8, 54u8, 161u8, 209u8, 166u8, 71u8,
+                            33u8, 228u8, 205u8,
                         ]
                     {
                         let entry = ProposalOf(_0);
@@ -14735,11 +14624,11 @@ pub mod api {
                 > {
                     if self.client.metadata().storage_hash::<ProposalOf>()?
                         == [
-                            175u8, 245u8, 189u8, 25u8, 34u8, 92u8, 235u8,
-                            124u8, 48u8, 23u8, 158u8, 29u8, 43u8, 199u8, 228u8,
-                            133u8, 49u8, 12u8, 75u8, 157u8, 187u8, 71u8, 88u8,
-                            149u8, 58u8, 52u8, 54u8, 27u8, 17u8, 234u8, 82u8,
-                            10u8,
+                            227u8, 50u8, 184u8, 128u8, 1u8, 251u8, 237u8,
+                            198u8, 229u8, 168u8, 55u8, 33u8, 55u8, 190u8,
+                            135u8, 78u8, 100u8, 242u8, 215u8, 52u8, 36u8, 50u8,
+                            225u8, 226u8, 54u8, 161u8, 209u8, 166u8, 71u8,
+                            33u8, 228u8, 205u8,
                         ]
                     {
                         self.client.storage().iter(block_hash).await
@@ -17392,11 +17281,10 @@ pub mod api {
                 > {
                     if self.client.metadata().call_hash::<Batch>()?
                         == [
-                            236u8, 249u8, 216u8, 163u8, 231u8, 134u8, 52u8,
-                            209u8, 33u8, 179u8, 8u8, 39u8, 128u8, 18u8, 107u8,
-                            210u8, 13u8, 240u8, 1u8, 218u8, 214u8, 234u8, 62u8,
-                            157u8, 152u8, 30u8, 180u8, 85u8, 151u8, 45u8,
-                            123u8, 121u8,
+                            203u8, 83u8, 92u8, 52u8, 15u8, 104u8, 22u8, 131u8,
+                            1u8, 21u8, 76u8, 197u8, 224u8, 120u8, 52u8, 126u8,
+                            69u8, 28u8, 157u8, 87u8, 111u8, 224u8, 12u8, 161u8,
+                            104u8, 97u8, 71u8, 22u8, 9u8, 38u8, 157u8, 245u8,
                         ]
                     {
                         let call = Batch { calls };
@@ -17438,11 +17326,11 @@ pub mod api {
                 > {
                     if self.client.metadata().call_hash::<AsDerivative>()?
                         == [
-                            15u8, 214u8, 165u8, 63u8, 18u8, 81u8, 137u8, 22u8,
-                            51u8, 197u8, 111u8, 214u8, 195u8, 87u8, 64u8,
-                            245u8, 32u8, 35u8, 63u8, 200u8, 136u8, 68u8, 110u8,
-                            87u8, 214u8, 52u8, 130u8, 236u8, 231u8, 201u8,
-                            135u8, 4u8,
+                            67u8, 67u8, 32u8, 137u8, 4u8, 217u8, 249u8, 5u8,
+                            78u8, 200u8, 116u8, 95u8, 70u8, 119u8, 140u8,
+                            248u8, 101u8, 149u8, 150u8, 184u8, 151u8, 157u8,
+                            187u8, 127u8, 187u8, 211u8, 221u8, 4u8, 131u8,
+                            220u8, 199u8, 17u8,
                         ]
                     {
                         let call = AsDerivative {
@@ -17489,11 +17377,11 @@ pub mod api {
                 > {
                     if self.client.metadata().call_hash::<BatchAll>()?
                         == [
-                            8u8, 140u8, 191u8, 184u8, 21u8, 147u8, 110u8,
-                            225u8, 202u8, 235u8, 110u8, 19u8, 3u8, 59u8, 147u8,
-                            105u8, 49u8, 64u8, 112u8, 51u8, 200u8, 242u8,
-                            147u8, 107u8, 4u8, 223u8, 224u8, 247u8, 57u8,
-                            199u8, 83u8, 29u8,
+                            141u8, 164u8, 247u8, 20u8, 78u8, 91u8, 211u8,
+                            216u8, 28u8, 179u8, 212u8, 33u8, 73u8, 10u8, 82u8,
+                            10u8, 160u8, 106u8, 40u8, 159u8, 3u8, 18u8, 206u8,
+                            214u8, 211u8, 36u8, 114u8, 98u8, 111u8, 105u8,
+                            115u8, 182u8,
                         ]
                     {
                         let call = BatchAll { calls };
@@ -17532,11 +17420,11 @@ pub mod api {
                 > {
                     if self.client.metadata().call_hash::<DispatchAs>()?
                         == [
-                            134u8, 60u8, 8u8, 87u8, 120u8, 91u8, 234u8, 208u8,
-                            237u8, 164u8, 160u8, 7u8, 121u8, 13u8, 33u8, 106u8,
-                            33u8, 42u8, 142u8, 17u8, 22u8, 111u8, 156u8, 251u8,
-                            38u8, 194u8, 9u8, 215u8, 205u8, 177u8, 161u8,
-                            191u8,
+                            26u8, 46u8, 18u8, 32u8, 42u8, 55u8, 150u8, 225u8,
+                            24u8, 232u8, 194u8, 245u8, 207u8, 201u8, 174u8,
+                            209u8, 246u8, 171u8, 226u8, 214u8, 239u8, 101u8,
+                            214u8, 31u8, 64u8, 203u8, 232u8, 226u8, 237u8,
+                            210u8, 118u8, 81u8,
                         ]
                     {
                         let call = DispatchAs {
@@ -17583,11 +17471,11 @@ pub mod api {
                 > {
                     if self.client.metadata().call_hash::<ForceBatch>()?
                         == [
-                            182u8, 38u8, 56u8, 128u8, 99u8, 18u8, 31u8, 53u8,
-                            69u8, 233u8, 8u8, 250u8, 219u8, 95u8, 230u8, 162u8,
-                            234u8, 25u8, 197u8, 216u8, 196u8, 210u8, 34u8,
-                            122u8, 140u8, 204u8, 32u8, 68u8, 34u8, 38u8, 248u8,
-                            16u8,
+                            134u8, 213u8, 245u8, 214u8, 202u8, 198u8, 136u8,
+                            196u8, 23u8, 252u8, 164u8, 237u8, 193u8, 6u8, 78u8,
+                            86u8, 8u8, 160u8, 170u8, 175u8, 49u8, 83u8, 220u8,
+                            160u8, 113u8, 96u8, 209u8, 237u8, 68u8, 161u8,
+                            208u8, 193u8,
                         ]
                     {
                         let call = ForceBatch { calls };
@@ -17894,11 +17782,11 @@ pub mod api {
                         .metadata()
                         .call_hash::<AsMultiThreshold1>()?
                         == [
-                            213u8, 143u8, 201u8, 143u8, 85u8, 193u8, 41u8,
-                            22u8, 199u8, 100u8, 164u8, 120u8, 133u8, 214u8,
-                            51u8, 56u8, 228u8, 224u8, 231u8, 229u8, 117u8,
-                            28u8, 186u8, 208u8, 179u8, 167u8, 173u8, 143u8,
-                            28u8, 82u8, 202u8, 19u8,
+                            128u8, 4u8, 227u8, 252u8, 4u8, 63u8, 116u8, 55u8,
+                            247u8, 83u8, 63u8, 189u8, 53u8, 162u8, 148u8,
+                            208u8, 245u8, 140u8, 225u8, 110u8, 34u8, 60u8, 9u8,
+                            44u8, 96u8, 56u8, 236u8, 138u8, 159u8, 189u8,
+                            219u8, 188u8,
                         ]
                     {
                         let call = AsMultiThreshold1 {
@@ -17987,11 +17875,11 @@ pub mod api {
                 > {
                     if self.client.metadata().call_hash::<AsMulti>()?
                         == [
-                            191u8, 155u8, 246u8, 214u8, 147u8, 215u8, 241u8,
-                            193u8, 9u8, 121u8, 185u8, 29u8, 12u8, 65u8, 251u8,
-                            127u8, 207u8, 118u8, 172u8, 60u8, 68u8, 50u8,
-                            254u8, 48u8, 76u8, 163u8, 27u8, 143u8, 83u8, 72u8,
-                            82u8, 122u8,
+                            203u8, 187u8, 79u8, 206u8, 213u8, 44u8, 192u8,
+                            241u8, 79u8, 53u8, 19u8, 161u8, 220u8, 225u8,
+                            252u8, 41u8, 214u8, 231u8, 98u8, 75u8, 62u8, 57u8,
+                            24u8, 223u8, 144u8, 143u8, 235u8, 107u8, 233u8,
+                            102u8, 7u8, 151u8,
                         ]
                     {
                         let call = AsMulti {
@@ -18377,11 +18265,11 @@ pub mod api {
                 > {
                     if self.client.metadata().storage_hash::<Calls>()?
                         == [
-                            134u8, 85u8, 40u8, 138u8, 131u8, 250u8, 13u8, 51u8,
-                            115u8, 71u8, 130u8, 212u8, 251u8, 22u8, 136u8,
-                            20u8, 6u8, 62u8, 151u8, 155u8, 179u8, 144u8, 127u8,
-                            242u8, 211u8, 22u8, 237u8, 158u8, 215u8, 133u8,
-                            76u8, 234u8,
+                            73u8, 129u8, 190u8, 78u8, 194u8, 115u8, 135u8,
+                            197u8, 107u8, 206u8, 92u8, 206u8, 124u8, 60u8,
+                            70u8, 93u8, 53u8, 21u8, 122u8, 5u8, 118u8, 50u8,
+                            102u8, 222u8, 245u8, 63u8, 100u8, 198u8, 82u8,
+                            108u8, 253u8, 135u8,
                         ]
                     {
                         let entry = Calls(_0);
@@ -18399,11 +18287,11 @@ pub mod api {
                 > {
                     if self.client.metadata().storage_hash::<Calls>()?
                         == [
-                            134u8, 85u8, 40u8, 138u8, 131u8, 250u8, 13u8, 51u8,
-                            115u8, 71u8, 130u8, 212u8, 251u8, 22u8, 136u8,
-                            20u8, 6u8, 62u8, 151u8, 155u8, 179u8, 144u8, 127u8,
-                            242u8, 211u8, 22u8, 237u8, 158u8, 215u8, 133u8,
-                            76u8, 234u8,
+                            73u8, 129u8, 190u8, 78u8, 194u8, 115u8, 135u8,
+                            197u8, 107u8, 206u8, 92u8, 206u8, 124u8, 60u8,
+                            70u8, 93u8, 53u8, 21u8, 122u8, 5u8, 118u8, 50u8,
+                            102u8, 222u8, 245u8, 63u8, 100u8, 198u8, 82u8,
+                            108u8, 253u8, 135u8,
                         ]
                     {
                         self.client.storage().iter(block_hash).await
@@ -18704,11 +18592,11 @@ pub mod api {
                 > {
                     if self.client.metadata().call_hash::<Schedule>()?
                         == [
-                            46u8, 248u8, 104u8, 181u8, 162u8, 195u8, 14u8,
-                            211u8, 31u8, 224u8, 146u8, 219u8, 247u8, 188u8,
-                            42u8, 114u8, 153u8, 20u8, 154u8, 216u8, 55u8,
-                            112u8, 223u8, 157u8, 169u8, 253u8, 129u8, 20u8,
-                            137u8, 5u8, 123u8, 153u8,
+                            122u8, 25u8, 255u8, 94u8, 15u8, 82u8, 209u8, 209u8,
+                            98u8, 137u8, 167u8, 10u8, 84u8, 226u8, 204u8,
+                            252u8, 213u8, 111u8, 8u8, 31u8, 72u8, 199u8, 180u8,
+                            221u8, 254u8, 238u8, 222u8, 105u8, 109u8, 97u8,
+                            32u8, 10u8,
                         ]
                     {
                         let call = Schedule {
@@ -18783,11 +18671,11 @@ pub mod api {
                 > {
                     if self.client.metadata().call_hash::<ScheduleNamed>()?
                         == [
-                            167u8, 99u8, 20u8, 153u8, 7u8, 201u8, 164u8, 209u8,
-                            204u8, 91u8, 65u8, 70u8, 110u8, 172u8, 81u8, 32u8,
-                            85u8, 136u8, 64u8, 11u8, 185u8, 145u8, 147u8,
-                            215u8, 207u8, 115u8, 137u8, 181u8, 166u8, 121u8,
-                            24u8, 162u8,
+                            143u8, 45u8, 173u8, 201u8, 120u8, 107u8, 186u8,
+                            228u8, 7u8, 253u8, 175u8, 161u8, 163u8, 135u8,
+                            140u8, 44u8, 119u8, 145u8, 86u8, 187u8, 204u8,
+                            46u8, 163u8, 236u8, 110u8, 32u8, 164u8, 21u8, 51u8,
+                            177u8, 147u8, 192u8,
                         ]
                     {
                         let call = ScheduleNamed {
@@ -18864,11 +18752,11 @@ pub mod api {
                 > {
                     if self.client.metadata().call_hash::<ScheduleAfter>()?
                         == [
-                            208u8, 36u8, 165u8, 245u8, 14u8, 130u8, 124u8, 8u8,
-                            31u8, 46u8, 120u8, 251u8, 141u8, 251u8, 44u8,
-                            184u8, 4u8, 195u8, 45u8, 196u8, 85u8, 209u8, 50u8,
-                            127u8, 216u8, 91u8, 56u8, 150u8, 156u8, 87u8, 4u8,
-                            22u8,
+                            188u8, 145u8, 95u8, 132u8, 26u8, 180u8, 37u8,
+                            148u8, 98u8, 210u8, 54u8, 45u8, 157u8, 131u8, 58u8,
+                            56u8, 117u8, 51u8, 144u8, 35u8, 163u8, 235u8,
+                            125u8, 147u8, 180u8, 221u8, 234u8, 57u8, 172u8,
+                            27u8, 167u8, 75u8,
                         ]
                     {
                         let call = ScheduleAfter {
@@ -18916,11 +18804,11 @@ pub mod api {
                         .metadata()
                         .call_hash::<ScheduleNamedAfter>()?
                         == [
-                            35u8, 43u8, 14u8, 4u8, 247u8, 189u8, 174u8, 125u8,
-                            12u8, 213u8, 252u8, 14u8, 151u8, 160u8, 39u8,
-                            240u8, 99u8, 16u8, 83u8, 251u8, 27u8, 207u8, 164u8,
-                            227u8, 15u8, 29u8, 61u8, 45u8, 24u8, 238u8, 198u8,
-                            109u8,
+                            28u8, 225u8, 233u8, 115u8, 222u8, 141u8, 138u8,
+                            137u8, 213u8, 174u8, 115u8, 114u8, 151u8, 144u8,
+                            224u8, 84u8, 157u8, 91u8, 16u8, 0u8, 220u8, 150u8,
+                            68u8, 91u8, 16u8, 209u8, 48u8, 160u8, 116u8, 127u8,
+                            215u8, 202u8,
                         ]
                     {
                         let call = ScheduleNamedAfter {
@@ -19062,10 +18950,10 @@ pub mod api {
                 #[doc = " Items to be executed, indexed by the block number that they should be executed on."]                pub async fn agenda (& self , _0 : & :: core :: primitive :: u64 , block_hash : :: core :: option :: Option < T :: Hash > ,) -> :: core :: result :: Result < :: std :: vec :: Vec < :: core :: option :: Option < runtime_types :: pallet_scheduler :: ScheduledV3 < runtime_types :: frame_support :: traits :: schedule :: MaybeHashed < runtime_types :: webb_standalone_runtime :: Call , :: subxt :: sp_core :: H256 > , :: core :: primitive :: u64 , runtime_types :: webb_standalone_runtime :: OriginCaller , :: subxt :: sp_core :: crypto :: AccountId32 > > > , :: subxt :: BasicError >{
                     if self.client.metadata().storage_hash::<Agenda>()?
                         == [
-                            84u8, 32u8, 94u8, 144u8, 3u8, 151u8, 191u8, 207u8,
-                            124u8, 75u8, 206u8, 227u8, 174u8, 96u8, 29u8, 34u8,
-                            241u8, 83u8, 157u8, 135u8, 135u8, 159u8, 8u8, 51u8,
-                            186u8, 87u8, 8u8, 23u8, 226u8, 33u8, 226u8, 202u8,
+                            193u8, 10u8, 148u8, 9u8, 125u8, 117u8, 34u8, 60u8,
+                            52u8, 42u8, 211u8, 22u8, 37u8, 66u8, 147u8, 222u8,
+                            13u8, 179u8, 88u8, 132u8, 142u8, 211u8, 9u8, 217u8,
+                            40u8, 227u8, 161u8, 90u8, 49u8, 230u8, 121u8, 97u8,
                         ]
                     {
                         let entry = Agenda(_0);
@@ -19087,10 +18975,10 @@ pub mod api {
                 > {
                     if self.client.metadata().storage_hash::<Agenda>()?
                         == [
-                            84u8, 32u8, 94u8, 144u8, 3u8, 151u8, 191u8, 207u8,
-                            124u8, 75u8, 206u8, 227u8, 174u8, 96u8, 29u8, 34u8,
-                            241u8, 83u8, 157u8, 135u8, 135u8, 159u8, 8u8, 51u8,
-                            186u8, 87u8, 8u8, 23u8, 226u8, 33u8, 226u8, 202u8,
+                            193u8, 10u8, 148u8, 9u8, 125u8, 117u8, 34u8, 60u8,
+                            52u8, 42u8, 211u8, 22u8, 37u8, 66u8, 147u8, 222u8,
+                            13u8, 179u8, 88u8, 132u8, 142u8, 211u8, 9u8, 217u8,
+                            40u8, 227u8, 161u8, 90u8, 49u8, 230u8, 121u8, 97u8,
                         ]
                     {
                         self.client.storage().iter(block_hash).await
@@ -19872,11 +19760,11 @@ pub mod api {
                 > {
                     if self.client.metadata().call_hash::<Proxy>()?
                         == [
-                            80u8, 167u8, 82u8, 124u8, 154u8, 211u8, 31u8,
-                            155u8, 36u8, 134u8, 33u8, 77u8, 196u8, 245u8,
-                            116u8, 52u8, 50u8, 232u8, 92u8, 33u8, 44u8, 94u8,
-                            214u8, 239u8, 54u8, 189u8, 58u8, 18u8, 104u8,
-                            170u8, 234u8, 134u8,
+                            244u8, 22u8, 44u8, 87u8, 144u8, 13u8, 204u8, 21u8,
+                            121u8, 105u8, 245u8, 223u8, 76u8, 213u8, 205u8,
+                            95u8, 89u8, 214u8, 164u8, 43u8, 89u8, 249u8, 219u8,
+                            41u8, 7u8, 38u8, 243u8, 214u8, 0u8, 55u8, 23u8,
+                            0u8,
                         ]
                     {
                         let call = Proxy {
@@ -20354,11 +20242,11 @@ pub mod api {
                 > {
                     if self.client.metadata().call_hash::<ProxyAnnounced>()?
                         == [
-                            170u8, 134u8, 167u8, 4u8, 84u8, 174u8, 50u8, 216u8,
-                            10u8, 32u8, 56u8, 228u8, 248u8, 156u8, 197u8, 94u8,
-                            60u8, 91u8, 52u8, 205u8, 31u8, 23u8, 21u8, 128u8,
-                            198u8, 49u8, 75u8, 188u8, 212u8, 188u8, 239u8,
-                            57u8,
+                            232u8, 225u8, 185u8, 131u8, 59u8, 86u8, 223u8,
+                            68u8, 239u8, 125u8, 84u8, 85u8, 240u8, 58u8, 79u8,
+                            183u8, 212u8, 30u8, 69u8, 69u8, 119u8, 75u8, 186u8,
+                            227u8, 152u8, 23u8, 167u8, 58u8, 87u8, 218u8,
+                            115u8, 108u8,
                         ]
                     {
                         let call = ProxyAnnounced {
@@ -23636,11 +23524,11 @@ pub mod api {
                 > {
                     if self.client.metadata().call_hash::<Sudo>()?
                         == [
-                            83u8, 10u8, 217u8, 83u8, 177u8, 251u8, 85u8, 211u8,
-                            204u8, 11u8, 75u8, 30u8, 250u8, 8u8, 105u8, 63u8,
-                            176u8, 35u8, 114u8, 107u8, 182u8, 188u8, 112u8,
-                            163u8, 69u8, 80u8, 245u8, 134u8, 41u8, 12u8, 13u8,
-                            80u8,
+                            255u8, 63u8, 86u8, 214u8, 35u8, 27u8, 116u8, 83u8,
+                            22u8, 235u8, 85u8, 49u8, 14u8, 19u8, 146u8, 157u8,
+                            165u8, 230u8, 126u8, 62u8, 106u8, 26u8, 40u8,
+                            203u8, 255u8, 225u8, 118u8, 176u8, 24u8, 121u8,
+                            113u8, 143u8,
                         ]
                     {
                         let call = Sudo {
@@ -23684,11 +23572,11 @@ pub mod api {
                         .metadata()
                         .call_hash::<SudoUncheckedWeight>()?
                         == [
-                            234u8, 204u8, 72u8, 221u8, 107u8, 13u8, 95u8,
-                            233u8, 212u8, 192u8, 181u8, 99u8, 130u8, 69u8,
-                            58u8, 45u8, 210u8, 230u8, 203u8, 147u8, 131u8, 6u8,
-                            140u8, 231u8, 233u8, 238u8, 120u8, 165u8, 244u8,
-                            239u8, 12u8, 52u8,
+                            68u8, 28u8, 243u8, 132u8, 86u8, 169u8, 46u8, 98u8,
+                            96u8, 252u8, 192u8, 68u8, 106u8, 52u8, 189u8,
+                            235u8, 177u8, 195u8, 189u8, 230u8, 80u8, 93u8,
+                            30u8, 189u8, 35u8, 235u8, 118u8, 59u8, 212u8,
+                            113u8, 148u8, 90u8,
                         ]
                     {
                         let call = SudoUncheckedWeight {
@@ -23779,11 +23667,11 @@ pub mod api {
                 > {
                     if self.client.metadata().call_hash::<SudoAs>()?
                         == [
-                            168u8, 250u8, 27u8, 84u8, 126u8, 212u8, 122u8,
-                            228u8, 108u8, 2u8, 145u8, 227u8, 185u8, 107u8,
-                            40u8, 248u8, 130u8, 158u8, 178u8, 188u8, 214u8,
-                            24u8, 167u8, 236u8, 74u8, 244u8, 226u8, 181u8,
-                            88u8, 78u8, 60u8, 29u8,
+                            2u8, 145u8, 97u8, 58u8, 56u8, 228u8, 107u8, 183u8,
+                            173u8, 62u8, 39u8, 5u8, 198u8, 4u8, 52u8, 71u8,
+                            63u8, 55u8, 197u8, 253u8, 165u8, 42u8, 117u8,
+                            145u8, 60u8, 230u8, 116u8, 33u8, 49u8, 74u8, 247u8,
+                            145u8,
                         ]
                     {
                         let call = SudoAs {
@@ -26903,8 +26791,10 @@ pub mod api {
                 #[doc = ""]
                 #[doc = "Anyone can call this function about any potentially dislocated account."]
                 #[doc = ""]
-                #[doc = "Will never return an error; if `dislocated` does not exist or doesn't need a rebag, then"]
-                #[doc = "it is a noop and fees are still collected from `origin`."]
+                #[doc = "Will always update the stored score of `dislocated` to the correct score, based on"]
+                #[doc = "`ScoreProvider`."]
+                #[doc = ""]
+                #[doc = "If `dislocated` does not exists, it returns an error."]
                 pub fn rebag(
                     &self,
                     dislocated: ::subxt::sp_core::crypto::AccountId32,
@@ -27000,6 +26890,23 @@ pub mod api {
                 const PALLET: &'static str = "BagsList";
                 const EVENT: &'static str = "Rebagged";
             }
+            #[derive(
+                :: subxt :: codec :: Decode,
+                :: subxt :: codec :: Encode,
+                Clone,
+                Debug,
+                Eq,
+                PartialEq,
+            )]
+            #[doc = "Updated the score of some account to the given amount."]
+            pub struct ScoreUpdated {
+                pub who: ::subxt::sp_core::crypto::AccountId32,
+                pub new_score: ::core::primitive::u64,
+            }
+            impl ::subxt::Event for ScoreUpdated {
+                const PALLET: &'static str = "BagsList";
+                const EVENT: &'static str = "ScoreUpdated";
+            }
         }
         pub mod storage {
             use super::runtime_types;
@@ -27064,11 +26971,11 @@ pub mod api {
                 > {
                     if self.client.metadata().storage_hash::<ListNodes>()?
                         == [
-                            114u8, 219u8, 206u8, 128u8, 160u8, 134u8, 95u8,
-                            214u8, 195u8, 15u8, 140u8, 174u8, 89u8, 85u8,
-                            191u8, 85u8, 96u8, 58u8, 214u8, 128u8, 6u8, 238u8,
-                            148u8, 141u8, 206u8, 107u8, 68u8, 41u8, 35u8,
-                            246u8, 169u8, 209u8,
+                            144u8, 72u8, 250u8, 207u8, 66u8, 204u8, 6u8, 146u8,
+                            219u8, 225u8, 6u8, 82u8, 111u8, 172u8, 171u8,
+                            184u8, 35u8, 129u8, 246u8, 162u8, 224u8, 116u8,
+                            244u8, 80u8, 197u8, 146u8, 243u8, 123u8, 209u8,
+                            135u8, 164u8, 201u8,
                         ]
                     {
                         let entry = ListNodes(_0);
@@ -27089,11 +26996,11 @@ pub mod api {
                 > {
                     if self.client.metadata().storage_hash::<ListNodes>()?
                         == [
-                            114u8, 219u8, 206u8, 128u8, 160u8, 134u8, 95u8,
-                            214u8, 195u8, 15u8, 140u8, 174u8, 89u8, 85u8,
-                            191u8, 85u8, 96u8, 58u8, 214u8, 128u8, 6u8, 238u8,
-                            148u8, 141u8, 206u8, 107u8, 68u8, 41u8, 35u8,
-                            246u8, 169u8, 209u8,
+                            144u8, 72u8, 250u8, 207u8, 66u8, 204u8, 6u8, 146u8,
+                            219u8, 225u8, 6u8, 82u8, 111u8, 172u8, 171u8,
+                            184u8, 35u8, 129u8, 246u8, 162u8, 224u8, 116u8,
+                            244u8, 80u8, 197u8, 146u8, 243u8, 123u8, 209u8,
+                            135u8, 164u8, 201u8,
                         ]
                     {
                         self.client.storage().iter(block_hash).await
@@ -27480,15 +27387,17 @@ pub mod api {
             )]
             pub struct UpdateRoles {
                 pub pool_id: ::core::primitive::u32,
-                pub root: ::core::option::Option<
+                pub new_root: runtime_types::pallet_nomination_pools::ConfigOp<
                     ::subxt::sp_core::crypto::AccountId32,
                 >,
-                pub nominator: ::core::option::Option<
-                    ::subxt::sp_core::crypto::AccountId32,
-                >,
-                pub state_toggler: ::core::option::Option<
-                    ::subxt::sp_core::crypto::AccountId32,
-                >,
+                pub new_nominator:
+                    runtime_types::pallet_nomination_pools::ConfigOp<
+                        ::subxt::sp_core::crypto::AccountId32,
+                    >,
+                pub new_state_toggler:
+                    runtime_types::pallet_nomination_pools::ConfigOp<
+                        ::subxt::sp_core::crypto::AccountId32,
+                    >,
             }
             impl ::subxt::Call for UpdateRoles {
                 const PALLET: &'static str = "NominationPools";
@@ -27952,7 +27861,7 @@ pub mod api {
                         Err(::subxt::MetadataError::IncompatibleMetadata.into())
                     }
                 }
-                #[doc = "Update configurations for the nomination pools. The origin must for this call must be"]
+                #[doc = "Update configurations for the nomination pools. The origin for this call must be"]
                 #[doc = "Root."]
                 #[doc = ""]
                 #[doc = "# Arguments"]
@@ -28016,15 +27925,11 @@ pub mod api {
                 pub fn update_roles(
                     &self,
                     pool_id: ::core::primitive::u32,
-                    root: ::core::option::Option<
+                    new_root: runtime_types::pallet_nomination_pools::ConfigOp<
                         ::subxt::sp_core::crypto::AccountId32,
                     >,
-                    nominator: ::core::option::Option<
-                        ::subxt::sp_core::crypto::AccountId32,
-                    >,
-                    state_toggler: ::core::option::Option<
-                        ::subxt::sp_core::crypto::AccountId32,
-                    >,
+                    new_nominator : runtime_types :: pallet_nomination_pools :: ConfigOp < :: subxt :: sp_core :: crypto :: AccountId32 >,
+                    new_state_toggler : runtime_types :: pallet_nomination_pools :: ConfigOp < :: subxt :: sp_core :: crypto :: AccountId32 >,
                 ) -> Result<
                     ::subxt::SubmittableExtrinsic<
                         'a,
@@ -28038,18 +27943,18 @@ pub mod api {
                 > {
                     if self.client.metadata().call_hash::<UpdateRoles>()?
                         == [
-                            224u8, 13u8, 170u8, 241u8, 2u8, 138u8, 139u8,
-                            124u8, 165u8, 213u8, 53u8, 184u8, 21u8, 125u8,
-                            176u8, 181u8, 234u8, 54u8, 119u8, 175u8, 172u8,
-                            143u8, 81u8, 86u8, 231u8, 206u8, 205u8, 89u8,
-                            208u8, 4u8, 102u8, 174u8,
+                            129u8, 78u8, 95u8, 251u8, 33u8, 37u8, 120u8, 87u8,
+                            2u8, 54u8, 242u8, 245u8, 51u8, 160u8, 121u8, 51u8,
+                            15u8, 21u8, 56u8, 40u8, 60u8, 79u8, 75u8, 190u8,
+                            200u8, 18u8, 248u8, 237u8, 210u8, 194u8, 158u8,
+                            214u8,
                         ]
                     {
                         let call = UpdateRoles {
                             pool_id,
-                            root,
-                            nominator,
-                            state_toggler,
+                            new_root,
+                            new_nominator,
+                            new_state_toggler,
                         };
                         Ok(::subxt::SubmittableExtrinsic::new(
                             self.client,
@@ -28216,11 +28121,18 @@ pub mod api {
                 Eq,
                 PartialEq,
             )]
-            #[doc = "The roles of a pool have been updated to the given new roles."]
+            #[doc = "The roles of a pool have been updated to the given new roles. Note that the depositor"]
+            #[doc = "can never change."]
             pub struct RolesUpdated {
-                pub root: ::subxt::sp_core::crypto::AccountId32,
-                pub state_toggler: ::subxt::sp_core::crypto::AccountId32,
-                pub nominator: ::subxt::sp_core::crypto::AccountId32,
+                pub root: ::core::option::Option<
+                    ::subxt::sp_core::crypto::AccountId32,
+                >,
+                pub state_toggler: ::core::option::Option<
+                    ::subxt::sp_core::crypto::AccountId32,
+                >,
+                pub nominator: ::core::option::Option<
+                    ::subxt::sp_core::crypto::AccountId32,
+                >,
             }
             impl ::subxt::Event for RolesUpdated {
                 const PALLET: &'static str = "NominationPools";
@@ -28656,11 +28568,11 @@ pub mod api {
                 > {
                     if self.client.metadata().storage_hash::<BondedPools>()?
                         == [
-                            226u8, 11u8, 104u8, 52u8, 234u8, 12u8, 68u8, 31u8,
-                            172u8, 229u8, 125u8, 254u8, 31u8, 1u8, 170u8,
-                            185u8, 53u8, 171u8, 210u8, 202u8, 140u8, 143u8,
-                            58u8, 162u8, 140u8, 151u8, 18u8, 211u8, 99u8,
-                            150u8, 164u8, 105u8,
+                            118u8, 190u8, 153u8, 45u8, 232u8, 166u8, 193u8,
+                            158u8, 194u8, 178u8, 150u8, 75u8, 216u8, 176u8,
+                            191u8, 215u8, 213u8, 188u8, 176u8, 235u8, 241u8,
+                            106u8, 125u8, 204u8, 61u8, 179u8, 133u8, 229u8,
+                            161u8, 53u8, 161u8, 254u8,
                         ]
                     {
                         let entry = BondedPools(_0);
@@ -28679,11 +28591,11 @@ pub mod api {
                 > {
                     if self.client.metadata().storage_hash::<BondedPools>()?
                         == [
-                            226u8, 11u8, 104u8, 52u8, 234u8, 12u8, 68u8, 31u8,
-                            172u8, 229u8, 125u8, 254u8, 31u8, 1u8, 170u8,
-                            185u8, 53u8, 171u8, 210u8, 202u8, 140u8, 143u8,
-                            58u8, 162u8, 140u8, 151u8, 18u8, 211u8, 99u8,
-                            150u8, 164u8, 105u8,
+                            118u8, 190u8, 153u8, 45u8, 232u8, 166u8, 193u8,
+                            158u8, 194u8, 178u8, 150u8, 75u8, 216u8, 176u8,
+                            191u8, 215u8, 213u8, 188u8, 176u8, 235u8, 241u8,
+                            106u8, 125u8, 204u8, 61u8, 179u8, 133u8, 229u8,
+                            161u8, 53u8, 161u8, 254u8,
                         ]
                     {
                         self.client.storage().iter(block_hash).await
@@ -29100,6 +29012,37 @@ pub mod api {
                         let pallet =
                             self.client.metadata().pallet("NominationPools")?;
                         let constant = pallet.constant("PalletId")?;
+                        let value = ::subxt::codec::Decode::decode(
+                            &mut &constant.value[..],
+                        )?;
+                        Ok(value)
+                    } else {
+                        Err(::subxt::MetadataError::IncompatibleMetadata.into())
+                    }
+                }
+                #[doc = " The minimum pool points-to-balance ratio that must be maintained for it to be `open`."]
+                #[doc = " This is important in the event slashing takes place and the pool's points-to-balance"]
+                #[doc = " ratio becomes disproportional."]
+                #[doc = " For a value of 10, the threshold would be a pool points-to-balance ratio of 10:1."]
+                #[doc = " Such a scenario would also be the equivalent of the pool being 90% slashed."]
+                pub fn min_points_to_balance(
+                    &self,
+                ) -> ::core::result::Result<
+                    ::core::primitive::u32,
+                    ::subxt::BasicError,
+                > {
+                    if self.client.metadata().constant_hash(
+                        "NominationPools",
+                        "MinPointsToBalance",
+                    )? == [
+                        137u8, 170u8, 155u8, 98u8, 250u8, 181u8, 167u8, 57u8,
+                        199u8, 204u8, 60u8, 159u8, 39u8, 207u8, 21u8, 173u8,
+                        138u8, 109u8, 104u8, 115u8, 237u8, 191u8, 111u8, 108u8,
+                        152u8, 192u8, 30u8, 202u8, 183u8, 233u8, 161u8, 40u8,
+                    ] {
+                        let pallet =
+                            self.client.metadata().pallet("NominationPools")?;
+                        let constant = pallet.constant("MinPointsToBalance")?;
                         let value = ::subxt::codec::Decode::decode(
                             &mut &constant.value[..],
                         )?;
@@ -32165,7 +32108,7 @@ pub mod api {
             )]
             pub struct Insert {
                 pub tree_id: ::core::primitive::u32,
-                pub leaf: runtime_types::webb_standalone_runtime::Element,
+                pub leaf: runtime_types::webb_primitives::runtime::Element,
             }
             impl ::subxt::Call for Insert {
                 const PALLET: &'static str = "MerkleTreeBn254";
@@ -32181,7 +32124,7 @@ pub mod api {
             )]
             pub struct ForceSetDefaultHashes {
                 pub default_hashes: ::std::vec::Vec<
-                    runtime_types::webb_standalone_runtime::Element,
+                    runtime_types::webb_primitives::runtime::Element,
                 >,
             }
             impl ::subxt::Call for ForceSetDefaultHashes {
@@ -32238,7 +32181,7 @@ pub mod api {
                 pub fn insert(
                     &self,
                     tree_id: ::core::primitive::u32,
-                    leaf: runtime_types::webb_standalone_runtime::Element,
+                    leaf: runtime_types::webb_primitives::runtime::Element,
                 ) -> Result<
                     ::subxt::SubmittableExtrinsic<
                         'a,
@@ -32271,7 +32214,7 @@ pub mod api {
                 pub fn force_set_default_hashes(
                     &self,
                     default_hashes: ::std::vec::Vec<
-                        runtime_types::webb_standalone_runtime::Element,
+                        runtime_types::webb_primitives::runtime::Element,
                     >,
                 ) -> Result<
                     ::subxt::SubmittableExtrinsic<
@@ -32339,7 +32282,7 @@ pub mod api {
             pub struct LeafInsertion {
                 pub tree_id: ::core::primitive::u32,
                 pub leaf_index: ::core::primitive::u32,
-                pub leaf: runtime_types::webb_standalone_runtime::Element,
+                pub leaf: runtime_types::webb_primitives::runtime::Element,
             }
             impl ::subxt::Event for LeafInsertion {
                 const PALLET: &'static str = "MerkleTreeBn254";
@@ -32377,7 +32320,7 @@ pub mod api {
                 type Value = runtime_types::pallet_mt::types::TreeMetadata<
                     ::subxt::sp_core::crypto::AccountId32,
                     ::core::primitive::u32,
-                    runtime_types::webb_standalone_runtime::Element,
+                    runtime_types::webb_primitives::runtime::Element,
                 >;
                 fn key(&self) -> ::subxt::StorageEntryKey {
                     ::subxt::StorageEntryKey::Map(vec![
@@ -32393,7 +32336,7 @@ pub mod api {
                 const PALLET: &'static str = "MerkleTreeBn254";
                 const STORAGE: &'static str = "DefaultHashes";
                 type Value = ::std::vec::Vec<
-                    runtime_types::webb_standalone_runtime::Element,
+                    runtime_types::webb_primitives::runtime::Element,
                 >;
                 fn key(&self) -> ::subxt::StorageEntryKey {
                     ::subxt::StorageEntryKey::Plain
@@ -32406,7 +32349,7 @@ pub mod api {
             impl ::subxt::StorageEntry for Leaves<'_> {
                 const PALLET: &'static str = "MerkleTreeBn254";
                 const STORAGE: &'static str = "Leaves";
-                type Value = runtime_types::webb_standalone_runtime::Element;
+                type Value = runtime_types::webb_primitives::runtime::Element;
                 fn key(&self) -> ::subxt::StorageEntryKey {
                     ::subxt::StorageEntryKey::Map(vec![
                         ::subxt::StorageMapKey::new(
@@ -32450,7 +32393,7 @@ pub mod api {
             impl ::subxt::StorageEntry for CachedRoots<'_> {
                 const PALLET: &'static str = "MerkleTreeBn254";
                 const STORAGE: &'static str = "CachedRoots";
-                type Value = runtime_types::webb_standalone_runtime::Element;
+                type Value = runtime_types::webb_primitives::runtime::Element;
                 fn key(&self) -> ::subxt::StorageEntryKey {
                     ::subxt::StorageEntryKey::Map(vec![
                         ::subxt::StorageMapKey::new(
@@ -32535,7 +32478,7 @@ pub mod api {
                         runtime_types::pallet_mt::types::TreeMetadata<
                             ::subxt::sp_core::crypto::AccountId32,
                             ::core::primitive::u32,
-                            runtime_types::webb_standalone_runtime::Element,
+                            runtime_types::webb_primitives::runtime::Element,
                         >,
                     >,
                     ::subxt::BasicError,
@@ -32583,7 +32526,7 @@ pub mod api {
                     block_hash: ::core::option::Option<T::Hash>,
                 ) -> ::core::result::Result<
                     ::std::vec::Vec<
-                        runtime_types::webb_standalone_runtime::Element,
+                        runtime_types::webb_primitives::runtime::Element,
                     >,
                     ::subxt::BasicError,
                 > {
@@ -32612,7 +32555,7 @@ pub mod api {
                     _1: &::core::primitive::u32,
                     block_hash: ::core::option::Option<T::Hash>,
                 ) -> ::core::result::Result<
-                    runtime_types::webb_standalone_runtime::Element,
+                    runtime_types::webb_primitives::runtime::Element,
                     ::subxt::BasicError,
                 > {
                     if self.client.metadata().storage_hash::<Leaves>()?
@@ -32737,7 +32680,7 @@ pub mod api {
                     _1: &::core::primitive::u32,
                     block_hash: ::core::option::Option<T::Hash>,
                 ) -> ::core::result::Result<
-                    runtime_types::webb_standalone_runtime::Element,
+                    runtime_types::webb_primitives::runtime::Element,
                     ::subxt::BasicError,
                 > {
                     if self.client.metadata().storage_hash::<CachedRoots>()?
@@ -32903,7 +32846,7 @@ pub mod api {
                 type Value =
                     runtime_types::pallet_linkable_tree::types::EdgeMetadata<
                         ::core::primitive::u64,
-                        runtime_types::webb_standalone_runtime::Element,
+                        runtime_types::webb_primitives::runtime::Element,
                         ::core::primitive::u32,
                     >;
                 fn key(&self) -> ::subxt::StorageEntryKey {
@@ -32943,7 +32886,7 @@ pub mod api {
             impl ::subxt::StorageEntry for NeighborRoots<'_> {
                 const PALLET: &'static str = "LinkableTreeBn254";
                 const STORAGE: &'static str = "NeighborRoots";
-                type Value = runtime_types::webb_standalone_runtime::Element;
+                type Value = runtime_types::webb_primitives::runtime::Element;
                 fn key(&self) -> ::subxt::StorageEntryKey {
                     ::subxt::StorageEntryKey::Map(vec![
                         ::subxt::StorageMapKey::new(
@@ -33039,7 +32982,7 @@ pub mod api {
                 ) -> ::core::result::Result<
                     runtime_types::pallet_linkable_tree::types::EdgeMetadata<
                         ::core::primitive::u64,
-                        runtime_types::webb_standalone_runtime::Element,
+                        runtime_types::webb_primitives::runtime::Element,
                         ::core::primitive::u32,
                     >,
                     ::subxt::BasicError,
@@ -33148,7 +33091,7 @@ pub mod api {
                     block_hash: ::core::option::Option<T::Hash>,
                 ) -> ::core::result::Result<
                     ::core::option::Option<
-                        runtime_types::webb_standalone_runtime::Element,
+                        runtime_types::webb_primitives::runtime::Element,
                     >,
                     ::subxt::BasicError,
                 > {
@@ -33387,7 +33330,7 @@ pub mod api {
             )]
             pub struct Deposit {
                 pub tree_id: ::core::primitive::u32,
-                pub leaf: runtime_types::webb_standalone_runtime::Element,
+                pub leaf: runtime_types::webb_primitives::runtime::Element,
             }
             impl ::subxt::Call for Deposit {
                 const PALLET: &'static str = "MixerBn254";
@@ -33404,9 +33347,9 @@ pub mod api {
             pub struct Withdraw {
                 pub id: ::core::primitive::u32,
                 pub proof_bytes: ::std::vec::Vec<::core::primitive::u8>,
-                pub root: runtime_types::webb_standalone_runtime::Element,
+                pub root: runtime_types::webb_primitives::runtime::Element,
                 pub nullifier_hash:
-                    runtime_types::webb_standalone_runtime::Element,
+                    runtime_types::webb_primitives::runtime::Element,
                 pub recipient: ::subxt::sp_core::crypto::AccountId32,
                 pub relayer: ::subxt::sp_core::crypto::AccountId32,
                 pub fee: ::core::primitive::u128,
@@ -33472,7 +33415,7 @@ pub mod api {
                 pub fn deposit(
                     &self,
                     tree_id: ::core::primitive::u32,
-                    leaf: runtime_types::webb_standalone_runtime::Element,
+                    leaf: runtime_types::webb_primitives::runtime::Element,
                 ) -> Result<
                     ::subxt::SubmittableExtrinsic<
                         'a,
@@ -33506,8 +33449,8 @@ pub mod api {
                     &self,
                     id: ::core::primitive::u32,
                     proof_bytes: ::std::vec::Vec<::core::primitive::u8>,
-                    root: runtime_types::webb_standalone_runtime::Element,
-                    nullifier_hash : runtime_types :: webb_standalone_runtime :: Element,
+                    root: runtime_types::webb_primitives::runtime::Element,
+                    nullifier_hash : runtime_types :: webb_primitives :: runtime :: Element,
                     recipient: ::subxt::sp_core::crypto::AccountId32,
                     relayer: ::subxt::sp_core::crypto::AccountId32,
                     fee: ::core::primitive::u128,
@@ -33582,7 +33525,7 @@ pub mod api {
             )]
             pub struct Deposit {
                 pub tree_id: ::core::primitive::u32,
-                pub leaf: runtime_types::webb_standalone_runtime::Element,
+                pub leaf: runtime_types::webb_primitives::runtime::Element,
             }
             impl ::subxt::Event for Deposit {
                 const PALLET: &'static str = "MixerBn254";
@@ -33626,7 +33569,7 @@ pub mod api {
             }
             pub struct NullifierHashes<'a>(
                 pub &'a ::core::primitive::u32,
-                pub &'a runtime_types::webb_standalone_runtime::Element,
+                pub &'a runtime_types::webb_primitives::runtime::Element,
             );
             impl ::subxt::StorageEntry for NullifierHashes<'_> {
                 const PALLET: &'static str = "MixerBn254";
@@ -33705,7 +33648,7 @@ pub mod api {
                 pub async fn nullifier_hashes(
                     &self,
                     _0: &::core::primitive::u32,
-                    _1: &runtime_types::webb_standalone_runtime::Element,
+                    _1: &runtime_types::webb_primitives::runtime::Element,
                     block_hash: ::core::option::Option<T::Hash>,
                 ) -> ::core::result::Result<
                     ::core::primitive::bool,
@@ -33864,7 +33807,7 @@ pub mod api {
             )]
             pub struct Deposit {
                 pub tree_id: ::core::primitive::u32,
-                pub leaf: runtime_types::webb_standalone_runtime::Element,
+                pub leaf: runtime_types::webb_primitives::runtime::Element,
             }
             impl ::subxt::Call for Deposit {
                 const PALLET: &'static str = "AnchorBn254";
@@ -33880,7 +33823,7 @@ pub mod api {
             )]
             pub struct DepositAndUpdateLinkedAnchors {
                 pub tree_id: ::core::primitive::u32,
-                pub leaf: runtime_types::webb_standalone_runtime::Element,
+                pub leaf: runtime_types::webb_primitives::runtime::Element,
             }
             impl ::subxt::Call for DepositAndUpdateLinkedAnchors {
                 const PALLET: &'static str = "AnchorBn254";
@@ -33899,15 +33842,16 @@ pub mod api {
                 pub id: ::core::primitive::u32,
                 pub proof_bytes: ::std::vec::Vec<::core::primitive::u8>,
                 pub roots: ::std::vec::Vec<
-                    runtime_types::webb_standalone_runtime::Element,
+                    runtime_types::webb_primitives::runtime::Element,
                 >,
                 pub nullifier_hash:
-                    runtime_types::webb_standalone_runtime::Element,
+                    runtime_types::webb_primitives::runtime::Element,
                 pub recipient: ::subxt::sp_core::crypto::AccountId32,
                 pub relayer: ::subxt::sp_core::crypto::AccountId32,
                 pub fee: ::core::primitive::u128,
                 pub refund: ::core::primitive::u128,
-                pub commitment: runtime_types::webb_standalone_runtime::Element,
+                pub commitment:
+                    runtime_types::webb_primitives::runtime::Element,
             }
             impl ::subxt::Call for Withdraw {
                 const PALLET: &'static str = "AnchorBn254";
@@ -33971,7 +33915,7 @@ pub mod api {
                 pub fn deposit(
                     &self,
                     tree_id: ::core::primitive::u32,
-                    leaf: runtime_types::webb_standalone_runtime::Element,
+                    leaf: runtime_types::webb_primitives::runtime::Element,
                 ) -> Result<
                     ::subxt::SubmittableExtrinsic<
                         'a,
@@ -34006,7 +33950,7 @@ pub mod api {
                 pub fn deposit_and_update_linked_anchors(
                     &self,
                     tree_id: ::core::primitive::u32,
-                    leaf: runtime_types::webb_standalone_runtime::Element,
+                    leaf: runtime_types::webb_primitives::runtime::Element,
                 ) -> Result<
                     ::subxt::SubmittableExtrinsic<
                         'a,
@@ -34045,14 +33989,14 @@ pub mod api {
                     id: ::core::primitive::u32,
                     proof_bytes: ::std::vec::Vec<::core::primitive::u8>,
                     roots: ::std::vec::Vec<
-                        runtime_types::webb_standalone_runtime::Element,
+                        runtime_types::webb_primitives::runtime::Element,
                     >,
-                    nullifier_hash : runtime_types :: webb_standalone_runtime :: Element,
+                    nullifier_hash : runtime_types :: webb_primitives :: runtime :: Element,
                     recipient: ::subxt::sp_core::crypto::AccountId32,
                     relayer: ::subxt::sp_core::crypto::AccountId32,
                     fee: ::core::primitive::u128,
                     refund: ::core::primitive::u128,
-                    commitment: runtime_types::webb_standalone_runtime::Element,
+                    commitment : runtime_types :: webb_primitives :: runtime :: Element,
                 ) -> Result<
                     ::subxt::SubmittableExtrinsic<
                         'a,
@@ -34142,7 +34086,7 @@ pub mod api {
             #[doc = "A transaction has been refreshed (one spent, another inserted)"]
             pub struct Refresh {
                 pub tree_id: ::core::primitive::u32,
-                pub leaf: runtime_types::webb_standalone_runtime::Element,
+                pub leaf: runtime_types::webb_primitives::runtime::Element,
             }
             impl ::subxt::Event for Refresh {
                 const PALLET: &'static str = "AnchorBn254";
@@ -34160,7 +34104,7 @@ pub mod api {
             pub struct Deposit {
                 pub depositor: ::subxt::sp_core::crypto::AccountId32,
                 pub tree_id: ::core::primitive::u32,
-                pub leaf: runtime_types::webb_standalone_runtime::Element,
+                pub leaf: runtime_types::webb_primitives::runtime::Element,
                 pub amount: ::core::primitive::u128,
             }
             impl ::subxt::Event for Deposit {
@@ -34179,7 +34123,7 @@ pub mod api {
             pub struct PostDeposit {
                 pub depositor: ::subxt::sp_core::crypto::AccountId32,
                 pub tree_id: ::core::primitive::u32,
-                pub leaf: runtime_types::webb_standalone_runtime::Element,
+                pub leaf: runtime_types::webb_primitives::runtime::Element,
             }
             impl ::subxt::Event for PostDeposit {
                 const PALLET: &'static str = "AnchorBn254";
@@ -34208,7 +34152,7 @@ pub mod api {
             }
             pub struct NullifierHashes<'a>(
                 pub &'a ::core::primitive::u32,
-                pub &'a runtime_types::webb_standalone_runtime::Element,
+                pub &'a runtime_types::webb_primitives::runtime::Element,
             );
             impl ::subxt::StorageEntry for NullifierHashes<'_> {
                 const PALLET: &'static str = "AnchorBn254";
@@ -34289,7 +34233,7 @@ pub mod api {
                 pub async fn nullifier_hashes(
                     &self,
                     _0: &::core::primitive::u32,
-                    _1: &runtime_types::webb_standalone_runtime::Element,
+                    _1: &runtime_types::webb_primitives::runtime::Element,
                     block_hash: ::core::option::Option<T::Hash>,
                 ) -> ::core::result::Result<
                     ::core::primitive::bool,
@@ -34454,13 +34398,29 @@ pub mod api {
                 pub anchor_metadata:
                     runtime_types::pallet_linkable_tree::types::EdgeMetadata<
                         ::core::primitive::u64,
-                        runtime_types::webb_standalone_runtime::Element,
+                        runtime_types::webb_primitives::runtime::Element,
                         ::core::primitive::u32,
                     >,
             }
             impl ::subxt::Call for ExecuteAnchorUpdateProposal {
                 const PALLET: &'static str = "AnchorHandlerBn254";
                 const FUNCTION: &'static str = "execute_anchor_update_proposal";
+            }
+            #[derive(
+                :: subxt :: codec :: Decode,
+                :: subxt :: codec :: Encode,
+                Clone,
+                Debug,
+                Eq,
+                PartialEq,
+            )]
+            pub struct ExecuteSetResourceProposal {
+                pub r_id: [::core::primitive::u8; 32usize],
+                pub target: runtime_types::webb_proposals::header::TargetSystem,
+            }
+            impl ::subxt::Call for ExecuteSetResourceProposal {
+                const PALLET: &'static str = "AnchorHandlerBn254";
+                const FUNCTION: &'static str = "execute_set_resource_proposal";
             }
             pub struct TransactionApi<'a, T: ::subxt::Config, X> {
                 client: &'a ::subxt::Client<T>,
@@ -34531,7 +34491,7 @@ pub mod api {
                 pub fn execute_anchor_update_proposal(
                     &self,
                     r_id: [::core::primitive::u8; 32usize],
-                    anchor_metadata : runtime_types :: pallet_linkable_tree :: types :: EdgeMetadata < :: core :: primitive :: u64 , runtime_types :: webb_standalone_runtime :: Element , :: core :: primitive :: u32 >,
+                    anchor_metadata : runtime_types :: pallet_linkable_tree :: types :: EdgeMetadata < :: core :: primitive :: u64 , runtime_types :: webb_primitives :: runtime :: Element , :: core :: primitive :: u32 >,
                 ) -> Result<
                     ::subxt::SubmittableExtrinsic<
                         'a,
@@ -34559,6 +34519,44 @@ pub mod api {
                             r_id,
                             anchor_metadata,
                         };
+                        Ok(::subxt::SubmittableExtrinsic::new(
+                            self.client,
+                            call,
+                        ))
+                    } else {
+                        Err(::subxt::MetadataError::IncompatibleMetadata.into())
+                    }
+                }
+                #[doc = "This will by called by bridge when proposal to set new resource for"]
+                #[doc = "handler has been successfully voted on"]
+                pub fn execute_set_resource_proposal(
+                    &self,
+                    r_id: [::core::primitive::u8; 32usize],
+                    target: runtime_types::webb_proposals::header::TargetSystem,
+                ) -> Result<
+                    ::subxt::SubmittableExtrinsic<
+                        'a,
+                        T,
+                        X,
+                        ExecuteSetResourceProposal,
+                        DispatchError,
+                        root_mod::Event,
+                    >,
+                    ::subxt::BasicError,
+                > {
+                    if self
+                        .client
+                        .metadata()
+                        .call_hash::<ExecuteSetResourceProposal>()?
+                        == [
+                            59u8, 187u8, 49u8, 240u8, 6u8, 37u8, 17u8, 83u8,
+                            244u8, 4u8, 161u8, 211u8, 238u8, 78u8, 51u8, 246u8,
+                            194u8, 115u8, 103u8, 112u8, 111u8, 189u8, 230u8,
+                            217u8, 124u8, 215u8, 186u8, 146u8, 190u8, 110u8,
+                            233u8, 146u8,
+                        ]
+                    {
+                        let call = ExecuteSetResourceProposal { r_id, target };
                         Ok(::subxt::SubmittableExtrinsic::new(
                             self.client,
                             call,
@@ -34611,6 +34609,19 @@ pub mod api {
                 const PALLET: &'static str = "AnchorHandlerBn254";
                 const EVENT: &'static str = "AnchorEdgeUpdated";
             }
+            #[derive(
+                :: subxt :: codec :: Decode,
+                :: subxt :: codec :: Encode,
+                Clone,
+                Debug,
+                Eq,
+                PartialEq,
+            )]
+            pub struct ResourceAnchored;
+            impl ::subxt::Event for ResourceAnchored {
+                const PALLET: &'static str = "AnchorHandlerBn254";
+                const EVENT: &'static str = "ResourceAnchored";
+            }
         }
         pub mod storage {
             use super::runtime_types;
@@ -34640,7 +34651,7 @@ pub mod api {
                         ::core::primitive::u32,
                         [::core::primitive::u8; 32usize],
                         ::core::primitive::u64,
-                        runtime_types::webb_standalone_runtime::Element,
+                        runtime_types::webb_primitives::runtime::Element,
                         ::core::primitive::u32,
                     >;
                 fn key(&self) -> ::subxt::StorageEntryKey {
@@ -34737,7 +34748,7 @@ pub mod api {
                         ::core::primitive::u32,
                         [::core::primitive::u8; 32usize],
                         ::core::primitive::u64,
-                        runtime_types::webb_standalone_runtime::Element,
+                        runtime_types::webb_primitives::runtime::Element,
                         ::core::primitive::u32,
                     >,
                     ::subxt::BasicError,
@@ -34870,7 +34881,7 @@ pub mod api {
                 pub id: ::core::primitive::u32,
                 pub proof_data:
                     runtime_types::webb_primitives::types::vanchor::ProofData<
-                        runtime_types::webb_standalone_runtime::Element,
+                        runtime_types::webb_primitives::runtime::Element,
                     >,
                 pub ext_data:
                     runtime_types::webb_primitives::types::vanchor::ExtData<
@@ -34971,7 +34982,7 @@ pub mod api {
                 pub fn transact(
                     &self,
                     id: ::core::primitive::u32,
-                    proof_data : runtime_types :: webb_primitives :: types :: vanchor :: ProofData < runtime_types :: webb_standalone_runtime :: Element >,
+                    proof_data : runtime_types :: webb_primitives :: types :: vanchor :: ProofData < runtime_types :: webb_primitives :: runtime :: Element >,
                     ext_data : runtime_types :: webb_primitives :: types :: vanchor :: ExtData < :: subxt :: sp_core :: crypto :: AccountId32 , :: core :: primitive :: i128 , :: core :: primitive :: u128 >,
                 ) -> Result<
                     ::subxt::SubmittableExtrinsic<
@@ -35113,7 +35124,7 @@ pub mod api {
                 pub transactor: ::subxt::sp_core::crypto::AccountId32,
                 pub tree_id: ::core::primitive::u32,
                 pub leafs: ::std::vec::Vec<
-                    runtime_types::webb_standalone_runtime::Element,
+                    runtime_types::webb_primitives::runtime::Element,
                 >,
                 pub amount: ::core::primitive::i128,
             }
@@ -35133,7 +35144,7 @@ pub mod api {
             pub struct Deposit {
                 pub depositor: ::subxt::sp_core::crypto::AccountId32,
                 pub tree_id: ::core::primitive::u32,
-                pub leaf: runtime_types::webb_standalone_runtime::Element,
+                pub leaf: runtime_types::webb_primitives::runtime::Element,
             }
             impl ::subxt::Event for Deposit {
                 const PALLET: &'static str = "VAnchorBn254";
@@ -35208,7 +35219,7 @@ pub mod api {
             }
             pub struct NullifierHashes<'a>(
                 pub &'a ::core::primitive::u32,
-                pub &'a runtime_types::webb_standalone_runtime::Element,
+                pub &'a runtime_types::webb_primitives::runtime::Element,
             );
             impl ::subxt::StorageEntry for NullifierHashes<'_> {
                 const PALLET: &'static str = "VAnchorBn254";
@@ -35332,7 +35343,7 @@ pub mod api {
                 pub async fn nullifier_hashes(
                     &self,
                     _0: &::core::primitive::u32,
-                    _1: &runtime_types::webb_standalone_runtime::Element,
+                    _1: &runtime_types::webb_primitives::runtime::Element,
                     block_hash: ::core::option::Option<T::Hash>,
                 ) -> ::core::result::Result<
                     ::core::primitive::bool,
@@ -35450,6 +35461,492 @@ pub mod api {
                             &mut &constant.value[..],
                         )?;
                         Ok(value)
+                    } else {
+                        Err(::subxt::MetadataError::IncompatibleMetadata.into())
+                    }
+                }
+            }
+        }
+    }
+    pub mod v_anchor_handler_bn254 {
+        use super::root_mod;
+        use super::runtime_types;
+        pub mod calls {
+            use super::root_mod;
+            use super::runtime_types;
+            type DispatchError = runtime_types::sp_runtime::DispatchError;
+            #[derive(
+                :: subxt :: codec :: Decode,
+                :: subxt :: codec :: Encode,
+                Clone,
+                Debug,
+                Eq,
+                PartialEq,
+            )]
+            pub struct ExecuteVanchorCreateProposal {
+                pub src_chain_id: ::core::primitive::u64,
+                pub r_id: [::core::primitive::u8; 32usize],
+                pub max_edges: ::core::primitive::u32,
+                pub tree_depth: ::core::primitive::u8,
+                pub asset: ::core::primitive::u32,
+            }
+            impl ::subxt::Call for ExecuteVanchorCreateProposal {
+                const PALLET: &'static str = "VAnchorHandlerBn254";
+                const FUNCTION: &'static str =
+                    "execute_vanchor_create_proposal";
+            }
+            #[derive(
+                :: subxt :: codec :: Decode,
+                :: subxt :: codec :: Encode,
+                Clone,
+                Debug,
+                Eq,
+                PartialEq,
+            )]
+            pub struct ExecuteVanchorUpdateProposal {
+                pub r_id: [::core::primitive::u8; 32usize],
+                pub vanchor_metadata:
+                    runtime_types::pallet_linkable_tree::types::EdgeMetadata<
+                        ::core::primitive::u64,
+                        runtime_types::webb_primitives::runtime::Element,
+                        ::core::primitive::u32,
+                    >,
+            }
+            impl ::subxt::Call for ExecuteVanchorUpdateProposal {
+                const PALLET: &'static str = "VAnchorHandlerBn254";
+                const FUNCTION: &'static str =
+                    "execute_vanchor_update_proposal";
+            }
+            #[derive(
+                :: subxt :: codec :: Decode,
+                :: subxt :: codec :: Encode,
+                Clone,
+                Debug,
+                Eq,
+                PartialEq,
+            )]
+            pub struct ExecuteSetResourceProposal {
+                pub r_id: [::core::primitive::u8; 32usize],
+                pub target: runtime_types::webb_proposals::header::TargetSystem,
+            }
+            impl ::subxt::Call for ExecuteSetResourceProposal {
+                const PALLET: &'static str = "VAnchorHandlerBn254";
+                const FUNCTION: &'static str = "execute_set_resource_proposal";
+            }
+            pub struct TransactionApi<'a, T: ::subxt::Config, X> {
+                client: &'a ::subxt::Client<T>,
+                marker: ::core::marker::PhantomData<X>,
+            }
+            impl<'a, T, X> TransactionApi<'a, T, X>
+            where
+                T: ::subxt::Config,
+                X: ::subxt::extrinsic::ExtrinsicParams<T>,
+            {
+                pub fn new(client: &'a ::subxt::Client<T>) -> Self {
+                    Self {
+                        client,
+                        marker: ::core::marker::PhantomData,
+                    }
+                }
+                #[doc = "This will be called by bridge when proposal to create a"]
+                #[doc = "vanchor has been successfully voted on."]
+                pub fn execute_vanchor_create_proposal(
+                    &self,
+                    src_chain_id: ::core::primitive::u64,
+                    r_id: [::core::primitive::u8; 32usize],
+                    max_edges: ::core::primitive::u32,
+                    tree_depth: ::core::primitive::u8,
+                    asset: ::core::primitive::u32,
+                ) -> Result<
+                    ::subxt::SubmittableExtrinsic<
+                        'a,
+                        T,
+                        X,
+                        ExecuteVanchorCreateProposal,
+                        DispatchError,
+                        root_mod::Event,
+                    >,
+                    ::subxt::BasicError,
+                > {
+                    if self
+                        .client
+                        .metadata()
+                        .call_hash::<ExecuteVanchorCreateProposal>()?
+                        == [
+                            34u8, 169u8, 142u8, 97u8, 93u8, 97u8, 25u8, 19u8,
+                            50u8, 194u8, 103u8, 34u8, 240u8, 254u8, 146u8,
+                            69u8, 25u8, 3u8, 241u8, 11u8, 68u8, 115u8, 144u8,
+                            219u8, 28u8, 0u8, 158u8, 237u8, 107u8, 177u8, 99u8,
+                            139u8,
+                        ]
+                    {
+                        let call = ExecuteVanchorCreateProposal {
+                            src_chain_id,
+                            r_id,
+                            max_edges,
+                            tree_depth,
+                            asset,
+                        };
+                        Ok(::subxt::SubmittableExtrinsic::new(
+                            self.client,
+                            call,
+                        ))
+                    } else {
+                        Err(::subxt::MetadataError::IncompatibleMetadata.into())
+                    }
+                }
+                #[doc = "This will be called by bridge when proposal to add/update edge of a"]
+                #[doc = "vanchor has been successfully voted on."]
+                pub fn execute_vanchor_update_proposal(
+                    &self,
+                    r_id: [::core::primitive::u8; 32usize],
+                    vanchor_metadata : runtime_types :: pallet_linkable_tree :: types :: EdgeMetadata < :: core :: primitive :: u64 , runtime_types :: webb_primitives :: runtime :: Element , :: core :: primitive :: u32 >,
+                ) -> Result<
+                    ::subxt::SubmittableExtrinsic<
+                        'a,
+                        T,
+                        X,
+                        ExecuteVanchorUpdateProposal,
+                        DispatchError,
+                        root_mod::Event,
+                    >,
+                    ::subxt::BasicError,
+                > {
+                    if self
+                        .client
+                        .metadata()
+                        .call_hash::<ExecuteVanchorUpdateProposal>()?
+                        == [
+                            73u8, 67u8, 191u8, 13u8, 246u8, 15u8, 103u8, 187u8,
+                            41u8, 21u8, 124u8, 250u8, 30u8, 235u8, 170u8,
+                            141u8, 8u8, 3u8, 88u8, 21u8, 147u8, 139u8, 52u8,
+                            167u8, 218u8, 128u8, 126u8, 141u8, 118u8, 135u8,
+                            163u8, 142u8,
+                        ]
+                    {
+                        let call = ExecuteVanchorUpdateProposal {
+                            r_id,
+                            vanchor_metadata,
+                        };
+                        Ok(::subxt::SubmittableExtrinsic::new(
+                            self.client,
+                            call,
+                        ))
+                    } else {
+                        Err(::subxt::MetadataError::IncompatibleMetadata.into())
+                    }
+                }
+                #[doc = "This will by called by bridge when proposal to set new resource for"]
+                #[doc = "handler has been successfully voted on"]
+                pub fn execute_set_resource_proposal(
+                    &self,
+                    r_id: [::core::primitive::u8; 32usize],
+                    target: runtime_types::webb_proposals::header::TargetSystem,
+                ) -> Result<
+                    ::subxt::SubmittableExtrinsic<
+                        'a,
+                        T,
+                        X,
+                        ExecuteSetResourceProposal,
+                        DispatchError,
+                        root_mod::Event,
+                    >,
+                    ::subxt::BasicError,
+                > {
+                    if self
+                        .client
+                        .metadata()
+                        .call_hash::<ExecuteSetResourceProposal>()?
+                        == [
+                            59u8, 187u8, 49u8, 240u8, 6u8, 37u8, 17u8, 83u8,
+                            244u8, 4u8, 161u8, 211u8, 238u8, 78u8, 51u8, 246u8,
+                            194u8, 115u8, 103u8, 112u8, 111u8, 189u8, 230u8,
+                            217u8, 124u8, 215u8, 186u8, 146u8, 190u8, 110u8,
+                            233u8, 146u8,
+                        ]
+                    {
+                        let call = ExecuteSetResourceProposal { r_id, target };
+                        Ok(::subxt::SubmittableExtrinsic::new(
+                            self.client,
+                            call,
+                        ))
+                    } else {
+                        Err(::subxt::MetadataError::IncompatibleMetadata.into())
+                    }
+                }
+            }
+        }
+        pub type Event = runtime_types::pallet_vanchor_handler::pallet::Event;
+        pub mod events {
+            use super::runtime_types;
+            #[derive(
+                :: subxt :: codec :: Decode,
+                :: subxt :: codec :: Encode,
+                Clone,
+                Debug,
+                Eq,
+                PartialEq,
+            )]
+            pub struct AnchorCreated;
+            impl ::subxt::Event for AnchorCreated {
+                const PALLET: &'static str = "VAnchorHandlerBn254";
+                const EVENT: &'static str = "AnchorCreated";
+            }
+            #[derive(
+                :: subxt :: codec :: Decode,
+                :: subxt :: codec :: Encode,
+                Clone,
+                Debug,
+                Eq,
+                PartialEq,
+            )]
+            pub struct AnchorEdgeAdded;
+            impl ::subxt::Event for AnchorEdgeAdded {
+                const PALLET: &'static str = "VAnchorHandlerBn254";
+                const EVENT: &'static str = "AnchorEdgeAdded";
+            }
+            #[derive(
+                :: subxt :: codec :: Decode,
+                :: subxt :: codec :: Encode,
+                Clone,
+                Debug,
+                Eq,
+                PartialEq,
+            )]
+            pub struct AnchorEdgeUpdated;
+            impl ::subxt::Event for AnchorEdgeUpdated {
+                const PALLET: &'static str = "VAnchorHandlerBn254";
+                const EVENT: &'static str = "AnchorEdgeUpdated";
+            }
+            #[derive(
+                :: subxt :: codec :: Decode,
+                :: subxt :: codec :: Encode,
+                Clone,
+                Debug,
+                Eq,
+                PartialEq,
+            )]
+            pub struct ResourceAnchored;
+            impl ::subxt::Event for ResourceAnchored {
+                const PALLET: &'static str = "VAnchorHandlerBn254";
+                const EVENT: &'static str = "ResourceAnchored";
+            }
+        }
+        pub mod storage {
+            use super::runtime_types;
+            pub struct AnchorList<'a>(pub &'a [::core::primitive::u8; 32usize]);
+            impl ::subxt::StorageEntry for AnchorList<'_> {
+                const PALLET: &'static str = "VAnchorHandlerBn254";
+                const STORAGE: &'static str = "AnchorList";
+                type Value = ::core::primitive::u32;
+                fn key(&self) -> ::subxt::StorageEntryKey {
+                    ::subxt::StorageEntryKey::Map(vec![
+                        ::subxt::StorageMapKey::new(
+                            &self.0,
+                            ::subxt::StorageHasher::Blake2_128Concat,
+                        ),
+                    ])
+                }
+            }
+            pub struct UpdateRecords<'a>(
+                pub &'a ::core::primitive::u64,
+                pub &'a ::core::primitive::u64,
+            );
+            impl ::subxt::StorageEntry for UpdateRecords<'_> {
+                const PALLET: &'static str = "VAnchorHandlerBn254";
+                const STORAGE: &'static str = "UpdateRecords";
+                type Value =
+                    runtime_types::pallet_vanchor_handler::types::UpdateRecord<
+                        ::core::primitive::u32,
+                        [::core::primitive::u8; 32usize],
+                        ::core::primitive::u64,
+                        runtime_types::webb_primitives::runtime::Element,
+                        ::core::primitive::u32,
+                    >;
+                fn key(&self) -> ::subxt::StorageEntryKey {
+                    ::subxt::StorageEntryKey::Map(vec![
+                        ::subxt::StorageMapKey::new(
+                            &self.0,
+                            ::subxt::StorageHasher::Blake2_128Concat,
+                        ),
+                        ::subxt::StorageMapKey::new(
+                            &self.1,
+                            ::subxt::StorageHasher::Blake2_128Concat,
+                        ),
+                    ])
+                }
+            }
+            pub struct Counts<'a>(pub &'a ::core::primitive::u64);
+            impl ::subxt::StorageEntry for Counts<'_> {
+                const PALLET: &'static str = "VAnchorHandlerBn254";
+                const STORAGE: &'static str = "Counts";
+                type Value = ::core::primitive::u64;
+                fn key(&self) -> ::subxt::StorageEntryKey {
+                    ::subxt::StorageEntryKey::Map(vec![
+                        ::subxt::StorageMapKey::new(
+                            &self.0,
+                            ::subxt::StorageHasher::Blake2_128Concat,
+                        ),
+                    ])
+                }
+            }
+            pub struct StorageApi<'a, T: ::subxt::Config> {
+                client: &'a ::subxt::Client<T>,
+            }
+            impl<'a, T: ::subxt::Config> StorageApi<'a, T> {
+                pub fn new(client: &'a ::subxt::Client<T>) -> Self {
+                    Self { client }
+                }
+                #[doc = " The map of trees to their anchor metadata"]
+                pub async fn anchor_list(
+                    &self,
+                    _0: &[::core::primitive::u8; 32usize],
+                    block_hash: ::core::option::Option<T::Hash>,
+                ) -> ::core::result::Result<
+                    ::core::primitive::u32,
+                    ::subxt::BasicError,
+                > {
+                    if self.client.metadata().storage_hash::<AnchorList>()?
+                        == [
+                            119u8, 143u8, 232u8, 251u8, 245u8, 242u8, 120u8,
+                            50u8, 100u8, 36u8, 177u8, 168u8, 131u8, 64u8,
+                            236u8, 38u8, 45u8, 241u8, 201u8, 146u8, 134u8,
+                            66u8, 242u8, 38u8, 199u8, 152u8, 243u8, 84u8, 44u8,
+                            169u8, 120u8, 157u8,
+                        ]
+                    {
+                        let entry = AnchorList(_0);
+                        self.client
+                            .storage()
+                            .fetch_or_default(&entry, block_hash)
+                            .await
+                    } else {
+                        Err(::subxt::MetadataError::IncompatibleMetadata.into())
+                    }
+                }
+                #[doc = " The map of trees to their anchor metadata"]
+                pub async fn anchor_list_iter(
+                    &self,
+                    block_hash: ::core::option::Option<T::Hash>,
+                ) -> ::core::result::Result<
+                    ::subxt::KeyIter<'a, T, AnchorList<'a>>,
+                    ::subxt::BasicError,
+                > {
+                    if self.client.metadata().storage_hash::<AnchorList>()?
+                        == [
+                            119u8, 143u8, 232u8, 251u8, 245u8, 242u8, 120u8,
+                            50u8, 100u8, 36u8, 177u8, 168u8, 131u8, 64u8,
+                            236u8, 38u8, 45u8, 241u8, 201u8, 146u8, 134u8,
+                            66u8, 242u8, 38u8, 199u8, 152u8, 243u8, 84u8, 44u8,
+                            169u8, 120u8, 157u8,
+                        ]
+                    {
+                        self.client.storage().iter(block_hash).await
+                    } else {
+                        Err(::subxt::MetadataError::IncompatibleMetadata.into())
+                    }
+                }
+                #[doc = " sourceChainID => nonce => Update Record"]
+                pub async fn update_records(
+                    &self,
+                    _0: &::core::primitive::u64,
+                    _1: &::core::primitive::u64,
+                    block_hash: ::core::option::Option<T::Hash>,
+                ) -> ::core::result::Result<
+                    runtime_types::pallet_vanchor_handler::types::UpdateRecord<
+                        ::core::primitive::u32,
+                        [::core::primitive::u8; 32usize],
+                        ::core::primitive::u64,
+                        runtime_types::webb_primitives::runtime::Element,
+                        ::core::primitive::u32,
+                    >,
+                    ::subxt::BasicError,
+                > {
+                    if self.client.metadata().storage_hash::<UpdateRecords>()?
+                        == [
+                            216u8, 83u8, 7u8, 202u8, 224u8, 171u8, 207u8, 13u8,
+                            110u8, 120u8, 176u8, 149u8, 233u8, 2u8, 138u8,
+                            17u8, 29u8, 228u8, 129u8, 229u8, 241u8, 196u8,
+                            13u8, 118u8, 138u8, 7u8, 56u8, 53u8, 170u8, 158u8,
+                            58u8, 198u8,
+                        ]
+                    {
+                        let entry = UpdateRecords(_0, _1);
+                        self.client
+                            .storage()
+                            .fetch_or_default(&entry, block_hash)
+                            .await
+                    } else {
+                        Err(::subxt::MetadataError::IncompatibleMetadata.into())
+                    }
+                }
+                #[doc = " sourceChainID => nonce => Update Record"]
+                pub async fn update_records_iter(
+                    &self,
+                    block_hash: ::core::option::Option<T::Hash>,
+                ) -> ::core::result::Result<
+                    ::subxt::KeyIter<'a, T, UpdateRecords<'a>>,
+                    ::subxt::BasicError,
+                > {
+                    if self.client.metadata().storage_hash::<UpdateRecords>()?
+                        == [
+                            216u8, 83u8, 7u8, 202u8, 224u8, 171u8, 207u8, 13u8,
+                            110u8, 120u8, 176u8, 149u8, 233u8, 2u8, 138u8,
+                            17u8, 29u8, 228u8, 129u8, 229u8, 241u8, 196u8,
+                            13u8, 118u8, 138u8, 7u8, 56u8, 53u8, 170u8, 158u8,
+                            58u8, 198u8,
+                        ]
+                    {
+                        self.client.storage().iter(block_hash).await
+                    } else {
+                        Err(::subxt::MetadataError::IncompatibleMetadata.into())
+                    }
+                }
+                #[doc = " The number of updates"]
+                pub async fn counts(
+                    &self,
+                    _0: &::core::primitive::u64,
+                    block_hash: ::core::option::Option<T::Hash>,
+                ) -> ::core::result::Result<
+                    ::core::primitive::u64,
+                    ::subxt::BasicError,
+                > {
+                    if self.client.metadata().storage_hash::<Counts>()?
+                        == [
+                            86u8, 26u8, 24u8, 236u8, 36u8, 118u8, 53u8, 152u8,
+                            62u8, 237u8, 203u8, 191u8, 180u8, 174u8, 186u8,
+                            122u8, 236u8, 198u8, 121u8, 159u8, 15u8, 190u8,
+                            75u8, 43u8, 124u8, 255u8, 207u8, 46u8, 28u8, 232u8,
+                            198u8, 231u8,
+                        ]
+                    {
+                        let entry = Counts(_0);
+                        self.client
+                            .storage()
+                            .fetch_or_default(&entry, block_hash)
+                            .await
+                    } else {
+                        Err(::subxt::MetadataError::IncompatibleMetadata.into())
+                    }
+                }
+                #[doc = " The number of updates"]
+                pub async fn counts_iter(
+                    &self,
+                    block_hash: ::core::option::Option<T::Hash>,
+                ) -> ::core::result::Result<
+                    ::subxt::KeyIter<'a, T, Counts<'a>>,
+                    ::subxt::BasicError,
+                > {
+                    if self.client.metadata().storage_hash::<Counts>()?
+                        == [
+                            86u8, 26u8, 24u8, 236u8, 36u8, 118u8, 53u8, 152u8,
+                            62u8, 237u8, 203u8, 191u8, 180u8, 174u8, 186u8,
+                            122u8, 236u8, 198u8, 121u8, 159u8, 15u8, 190u8,
+                            75u8, 43u8, 124u8, 255u8, 207u8, 46u8, 28u8, 232u8,
+                            198u8, 231u8,
+                        ]
+                    {
+                        self.client.storage().iter(block_hash).await
                     } else {
                         Err(::subxt::MetadataError::IncompatibleMetadata.into())
                     }
@@ -35891,11 +36388,11 @@ pub mod api {
                         .metadata()
                         .call_hash::<AcknowledgeProposal>()?
                         == [
-                            54u8, 229u8, 91u8, 196u8, 43u8, 117u8, 245u8,
-                            148u8, 8u8, 240u8, 17u8, 95u8, 186u8, 179u8, 71u8,
-                            3u8, 215u8, 193u8, 171u8, 174u8, 56u8, 50u8, 248u8,
-                            83u8, 226u8, 215u8, 27u8, 100u8, 127u8, 117u8,
-                            231u8, 195u8,
+                            156u8, 118u8, 142u8, 159u8, 155u8, 235u8, 21u8,
+                            241u8, 39u8, 4u8, 34u8, 145u8, 113u8, 123u8, 243u8,
+                            85u8, 129u8, 228u8, 89u8, 6u8, 178u8, 77u8, 153u8,
+                            40u8, 176u8, 77u8, 227u8, 151u8, 134u8, 246u8,
+                            203u8, 176u8,
                         ]
                     {
                         let call = AcknowledgeProposal {
@@ -35936,10 +36433,11 @@ pub mod api {
                 > {
                     if self.client.metadata().call_hash::<RejectProposal>()?
                         == [
-                            35u8, 17u8, 228u8, 8u8, 131u8, 108u8, 198u8, 204u8,
-                            194u8, 4u8, 194u8, 5u8, 118u8, 89u8, 210u8, 63u8,
-                            76u8, 160u8, 21u8, 164u8, 3u8, 36u8, 77u8, 146u8,
-                            228u8, 0u8, 213u8, 222u8, 139u8, 193u8, 39u8, 28u8,
+                            91u8, 241u8, 119u8, 187u8, 109u8, 171u8, 42u8,
+                            135u8, 175u8, 170u8, 15u8, 252u8, 182u8, 103u8,
+                            200u8, 133u8, 43u8, 61u8, 227u8, 190u8, 18u8,
+                            183u8, 186u8, 19u8, 202u8, 55u8, 139u8, 64u8, 42u8,
+                            245u8, 236u8, 132u8,
                         ]
                     {
                         let call = RejectProposal {
@@ -35982,11 +36480,11 @@ pub mod api {
                 > {
                     if self.client.metadata().call_hash::<EvalVoteState>()?
                         == [
-                            219u8, 59u8, 40u8, 189u8, 68u8, 9u8, 230u8, 39u8,
-                            65u8, 108u8, 240u8, 181u8, 12u8, 171u8, 123u8,
-                            222u8, 185u8, 11u8, 221u8, 80u8, 227u8, 19u8,
-                            170u8, 182u8, 253u8, 152u8, 5u8, 207u8, 105u8,
-                            152u8, 188u8, 246u8,
+                            131u8, 145u8, 252u8, 122u8, 151u8, 216u8, 206u8,
+                            140u8, 47u8, 171u8, 238u8, 184u8, 114u8, 6u8,
+                            247u8, 140u8, 113u8, 108u8, 55u8, 206u8, 195u8,
+                            114u8, 234u8, 45u8, 248u8, 222u8, 253u8, 114u8,
+                            140u8, 108u8, 89u8, 156u8,
                         ]
                     {
                         let call = EvalVoteState {
@@ -36445,11 +36943,11 @@ pub mod api {
                 > {
                     if self.client.metadata().storage_hash::<Votes>()?
                         == [
-                            96u8, 2u8, 166u8, 231u8, 23u8, 29u8, 114u8, 195u8,
-                            207u8, 95u8, 98u8, 36u8, 94u8, 68u8, 249u8, 95u8,
-                            144u8, 129u8, 158u8, 21u8, 22u8, 25u8, 4u8, 199u8,
-                            208u8, 255u8, 238u8, 183u8, 60u8, 136u8, 6u8,
-                            116u8,
+                            122u8, 59u8, 160u8, 58u8, 82u8, 151u8, 234u8,
+                            244u8, 227u8, 19u8, 19u8, 50u8, 96u8, 70u8, 195u8,
+                            213u8, 14u8, 83u8, 130u8, 87u8, 104u8, 121u8, 42u8,
+                            147u8, 49u8, 43u8, 229u8, 193u8, 67u8, 205u8,
+                            107u8, 188u8,
                         ]
                     {
                         let entry = Votes(_0, _1);
@@ -36470,11 +36968,11 @@ pub mod api {
                 > {
                     if self.client.metadata().storage_hash::<Votes>()?
                         == [
-                            96u8, 2u8, 166u8, 231u8, 23u8, 29u8, 114u8, 195u8,
-                            207u8, 95u8, 98u8, 36u8, 94u8, 68u8, 249u8, 95u8,
-                            144u8, 129u8, 158u8, 21u8, 22u8, 25u8, 4u8, 199u8,
-                            208u8, 255u8, 238u8, 183u8, 60u8, 136u8, 6u8,
-                            116u8,
+                            122u8, 59u8, 160u8, 58u8, 82u8, 151u8, 234u8,
+                            244u8, 227u8, 19u8, 19u8, 50u8, 96u8, 70u8, 195u8,
+                            213u8, 14u8, 83u8, 130u8, 87u8, 104u8, 121u8, 42u8,
+                            147u8, 49u8, 43u8, 229u8, 193u8, 67u8, 205u8,
+                            107u8, 188u8,
                         ]
                     {
                         self.client.storage().iter(block_hash).await
@@ -36708,7 +37206,6 @@ pub mod api {
             )]
             pub struct SetResource {
                 pub id: [::core::primitive::u8; 32usize],
-                pub method: ::std::vec::Vec<::core::primitive::u8>,
             }
             impl ::subxt::Call for SetResource {
                 const PALLET: &'static str = "SignatureBridge";
@@ -36744,6 +37241,26 @@ pub mod api {
             impl ::subxt::Call for WhitelistChain {
                 const PALLET: &'static str = "SignatureBridge";
                 const FUNCTION: &'static str = "whitelist_chain";
+            }
+            #[derive(
+                :: subxt :: codec :: Decode,
+                :: subxt :: codec :: Encode,
+                Clone,
+                Debug,
+                Eq,
+                PartialEq,
+            )]
+            pub struct SetResourceWithSignature {
+                pub src_id: ::core::primitive::u64,
+                pub call: ::std::boxed::Box<
+                    runtime_types::webb_standalone_runtime::Call,
+                >,
+                pub proposal_data: ::std::vec::Vec<::core::primitive::u8>,
+                pub signature: ::std::vec::Vec<::core::primitive::u8>,
+            }
+            impl ::subxt::Call for SetResourceWithSignature {
+                const PALLET: &'static str = "SignatureBridge";
+                const FUNCTION: &'static str = "set_resource_with_signature";
             }
             #[derive(
                 :: subxt :: codec :: Decode,
@@ -36857,7 +37374,6 @@ pub mod api {
                 pub fn set_resource(
                     &self,
                     id: [::core::primitive::u8; 32usize],
-                    method: ::std::vec::Vec<::core::primitive::u8>,
                 ) -> Result<
                     ::subxt::SubmittableExtrinsic<
                         'a,
@@ -36871,14 +37387,14 @@ pub mod api {
                 > {
                     if self.client.metadata().call_hash::<SetResource>()?
                         == [
-                            243u8, 25u8, 3u8, 44u8, 185u8, 245u8, 35u8, 7u8,
-                            113u8, 119u8, 142u8, 3u8, 60u8, 121u8, 208u8,
-                            130u8, 232u8, 27u8, 120u8, 86u8, 41u8, 26u8, 169u8,
-                            139u8, 108u8, 0u8, 253u8, 151u8, 127u8, 144u8,
-                            201u8, 74u8,
+                            100u8, 44u8, 212u8, 120u8, 8u8, 138u8, 129u8, 98u8,
+                            209u8, 139u8, 169u8, 124u8, 161u8, 63u8, 63u8,
+                            74u8, 241u8, 135u8, 2u8, 230u8, 140u8, 249u8,
+                            245u8, 152u8, 182u8, 139u8, 53u8, 126u8, 189u8,
+                            153u8, 221u8, 197u8,
                         ]
                     {
-                        let call = SetResource { id, method };
+                        let call = SetResource { id };
                         Ok(::subxt::SubmittableExtrinsic::new(
                             self.client,
                             call,
@@ -36973,6 +37489,73 @@ pub mod api {
                 #[doc = ""]
                 #[doc = "We check:"]
                 #[doc = "1. That the signature is actually over the proposal data"]
+                #[doc = "2. Add ResourceId to the Storage"]
+                #[doc = "3. That the call from the proposal data and the call input parameter to the function are"]
+                #[doc = "consistent with each other 4. That the execution chain id type parsed from the r_id is"]
+                #[doc = "indeed this chain's id type"]
+                #[doc = ""]
+                #[doc = "If all these checks pass then we call finalize_execution which actually executes the"]
+                #[doc = "dispatchable call. The dispatchable call is usually a handler function, for instance in"]
+                #[doc = "the anchor-handler or token-wrapper-handler pallet."]
+                #[doc = ""]
+                #[doc = "There are a few TODOs left in the function."]
+                #[doc = ""]
+                #[doc = "In the set_resource_with_signature"]
+                #[doc = "# <weight>"]
+                #[doc = "- weight of proposed call, regardless of whether execution is performed"]
+                #[doc = "# </weight>"]
+                pub fn set_resource_with_signature(
+                    &self,
+                    src_id: ::core::primitive::u64,
+                    call: runtime_types::webb_standalone_runtime::Call,
+                    proposal_data: ::std::vec::Vec<::core::primitive::u8>,
+                    signature: ::std::vec::Vec<::core::primitive::u8>,
+                ) -> Result<
+                    ::subxt::SubmittableExtrinsic<
+                        'a,
+                        T,
+                        X,
+                        SetResourceWithSignature,
+                        DispatchError,
+                        root_mod::Event,
+                    >,
+                    ::subxt::BasicError,
+                > {
+                    if self
+                        .client
+                        .metadata()
+                        .call_hash::<SetResourceWithSignature>()?
+                        == [
+                            146u8, 53u8, 34u8, 127u8, 166u8, 179u8, 220u8,
+                            74u8, 50u8, 112u8, 97u8, 240u8, 221u8, 219u8,
+                            155u8, 146u8, 235u8, 202u8, 87u8, 136u8, 173u8,
+                            135u8, 70u8, 98u8, 183u8, 239u8, 167u8, 68u8,
+                            209u8, 115u8, 76u8, 94u8,
+                        ]
+                    {
+                        let call = SetResourceWithSignature {
+                            src_id,
+                            call: ::std::boxed::Box::new(call),
+                            proposal_data,
+                            signature,
+                        };
+                        Ok(::subxt::SubmittableExtrinsic::new(
+                            self.client,
+                            call,
+                        ))
+                    } else {
+                        Err(::subxt::MetadataError::IncompatibleMetadata.into())
+                    }
+                }
+                #[doc = "@param origin"]
+                #[doc = "@param src_id"]
+                #[doc = "@param call: the dispatchable call corresponding to a"]
+                #[doc = "handler function"]
+                #[doc = "@param proposal_data: (r_id, nonce, 4 bytes of zeroes, call)"]
+                #[doc = "@param signature: a signature over the proposal_data"]
+                #[doc = ""]
+                #[doc = "We check:"]
+                #[doc = "1. That the signature is actually over the proposal data"]
                 #[doc = "2. That the r_id parsed from the proposal data exists"]
                 #[doc = "3. That the call from the proposal data and the call input parameter to the function are"]
                 #[doc = "consistent with each other 4. That the execution chain id type parsed from the r_id is"]
@@ -37007,11 +37590,11 @@ pub mod api {
                 > {
                     if self.client.metadata().call_hash::<ExecuteProposal>()?
                         == [
-                            103u8, 240u8, 235u8, 225u8, 205u8, 60u8, 36u8,
-                            203u8, 131u8, 234u8, 25u8, 142u8, 223u8, 253u8,
-                            196u8, 189u8, 0u8, 59u8, 47u8, 114u8, 86u8, 240u8,
-                            15u8, 246u8, 164u8, 110u8, 197u8, 122u8, 24u8,
-                            80u8, 123u8, 134u8,
+                            66u8, 234u8, 77u8, 223u8, 238u8, 224u8, 164u8,
+                            208u8, 114u8, 110u8, 35u8, 110u8, 160u8, 142u8,
+                            60u8, 226u8, 172u8, 158u8, 159u8, 47u8, 163u8,
+                            77u8, 1u8, 244u8, 177u8, 78u8, 96u8, 211u8, 116u8,
+                            205u8, 199u8, 123u8,
                         ]
                     {
                         let call = ExecuteProposal {
@@ -37148,7 +37731,7 @@ pub mod api {
             impl ::subxt::StorageEntry for Resources<'_> {
                 const PALLET: &'static str = "SignatureBridge";
                 const STORAGE: &'static str = "Resources";
-                type Value = ::std::vec::Vec<::core::primitive::u8>;
+                type Value = ();
                 fn key(&self) -> ::subxt::StorageEntryKey {
                     ::subxt::StorageEntryKey::Map(vec![
                         ::subxt::StorageMapKey::new(
@@ -37261,18 +37844,16 @@ pub mod api {
                     _0: &[::core::primitive::u8; 32usize],
                     block_hash: ::core::option::Option<T::Hash>,
                 ) -> ::core::result::Result<
-                    ::core::option::Option<
-                        ::std::vec::Vec<::core::primitive::u8>,
-                    >,
+                    ::core::option::Option<()>,
                     ::subxt::BasicError,
                 > {
                     if self.client.metadata().storage_hash::<Resources>()?
                         == [
-                            143u8, 101u8, 64u8, 185u8, 7u8, 45u8, 158u8, 77u8,
-                            193u8, 0u8, 255u8, 148u8, 2u8, 142u8, 226u8, 49u8,
-                            219u8, 196u8, 211u8, 67u8, 75u8, 207u8, 43u8, 90u8,
-                            55u8, 100u8, 183u8, 144u8, 169u8, 113u8, 123u8,
-                            202u8,
+                            83u8, 68u8, 123u8, 152u8, 160u8, 232u8, 194u8,
+                            136u8, 246u8, 188u8, 141u8, 172u8, 71u8, 164u8,
+                            102u8, 49u8, 170u8, 212u8, 0u8, 227u8, 226u8, 47u8,
+                            28u8, 54u8, 131u8, 186u8, 23u8, 38u8, 64u8, 61u8,
+                            106u8, 172u8,
                         ]
                     {
                         let entry = Resources(_0);
@@ -37291,11 +37872,11 @@ pub mod api {
                 > {
                     if self.client.metadata().storage_hash::<Resources>()?
                         == [
-                            143u8, 101u8, 64u8, 185u8, 7u8, 45u8, 158u8, 77u8,
-                            193u8, 0u8, 255u8, 148u8, 2u8, 142u8, 226u8, 49u8,
-                            219u8, 196u8, 211u8, 67u8, 75u8, 207u8, 43u8, 90u8,
-                            55u8, 100u8, 183u8, 144u8, 169u8, 113u8, 123u8,
-                            202u8,
+                            83u8, 68u8, 123u8, 152u8, 160u8, 232u8, 194u8,
+                            136u8, 246u8, 188u8, 141u8, 172u8, 71u8, 164u8,
+                            102u8, 49u8, 170u8, 212u8, 0u8, 227u8, 226u8, 47u8,
+                            28u8, 54u8, 131u8, 186u8, 23u8, 38u8, 64u8, 61u8,
+                            106u8, 172u8,
                         ]
                     {
                         self.client.storage().iter(block_hash).await
@@ -37746,21 +38327,6 @@ pub mod api {
                 pub struct RuntimeDbWeight {
                     pub read: ::core::primitive::u64,
                     pub write: ::core::primitive::u64,
-                }
-                #[derive(
-                    :: subxt :: codec :: Decode,
-                    :: subxt :: codec :: Encode,
-                    Clone,
-                    Debug,
-                    Eq,
-                    PartialEq,
-                )]
-                pub struct WeightToFeeCoefficient<_0> {
-                    pub coeff_integer: _0,
-                    pub coeff_frac:
-                        runtime_types::sp_arithmetic::per_things::Perbill,
-                    pub negative: ::core::primitive::bool,
-                    pub degree: ::core::primitive::u8,
                 }
             }
             #[derive(
@@ -38439,30 +39005,30 @@ pub mod api {
                     #[codec(index = 1)]
                     deposit {
                         tree_id: ::core::primitive::u32,
-                        leaf: runtime_types::webb_standalone_runtime::Element,
+                        leaf: runtime_types::webb_primitives::runtime::Element,
                     },
                     #[codec(index = 2)]
                     #[doc = "Same as [Self::deposit] but with another call to update the linked"]
                     #[doc = "anchors cross-chain (if any)."]
                     deposit_and_update_linked_anchors {
                         tree_id: ::core::primitive::u32,
-                        leaf: runtime_types::webb_standalone_runtime::Element,
+                        leaf: runtime_types::webb_primitives::runtime::Element,
                     },
                     #[codec(index = 3)]
                     withdraw {
                         id: ::core::primitive::u32,
                         proof_bytes: ::std::vec::Vec<::core::primitive::u8>,
                         roots: ::std::vec::Vec<
-                            runtime_types::webb_standalone_runtime::Element,
+                            runtime_types::webb_primitives::runtime::Element,
                         >,
                         nullifier_hash:
-                            runtime_types::webb_standalone_runtime::Element,
+                            runtime_types::webb_primitives::runtime::Element,
                         recipient: ::subxt::sp_core::crypto::AccountId32,
                         relayer: ::subxt::sp_core::crypto::AccountId32,
                         fee: ::core::primitive::u128,
                         refund: ::core::primitive::u128,
                         commitment:
-                            runtime_types::webb_standalone_runtime::Element,
+                            runtime_types::webb_primitives::runtime::Element,
                     },
                 }
                 #[derive(
@@ -38515,14 +39081,14 @@ pub mod api {
                     #[doc = "A transaction has been refreshed (one spent, another inserted)"]
                     Refresh {
                         tree_id: ::core::primitive::u32,
-                        leaf: runtime_types::webb_standalone_runtime::Element,
+                        leaf: runtime_types::webb_primitives::runtime::Element,
                     },
                     #[codec(index = 3)]
                     #[doc = "Amount has been deposited into the anchor"]
                     Deposit {
                         depositor: ::subxt::sp_core::crypto::AccountId32,
                         tree_id: ::core::primitive::u32,
-                        leaf: runtime_types::webb_standalone_runtime::Element,
+                        leaf: runtime_types::webb_primitives::runtime::Element,
                         amount: ::core::primitive::u128,
                     },
                     #[codec(index = 4)]
@@ -38530,7 +39096,7 @@ pub mod api {
                     PostDeposit {
                         depositor: ::subxt::sp_core::crypto::AccountId32,
                         tree_id: ::core::primitive::u32,
-                        leaf: runtime_types::webb_standalone_runtime::Element,
+                        leaf: runtime_types::webb_primitives::runtime::Element,
                     },
                 }
             }
@@ -38563,7 +39129,7 @@ pub mod api {
                     PartialEq,
                 )]
                 pub enum Call {
-                    # [codec (index = 0)] # [doc = "This will be called by bridge when proposal to create an"] # [doc = "anchor has been successfully voted on."] execute_anchor_create_proposal { deposit_size : :: core :: primitive :: u128 , src_chain_id : :: core :: primitive :: u64 , r_id : [:: core :: primitive :: u8 ; 32usize] , max_edges : :: core :: primitive :: u32 , tree_depth : :: core :: primitive :: u8 , asset : :: core :: primitive :: u32 , } , # [codec (index = 1)] # [doc = "This will be called by bridge when proposal to add/update edge of an"] # [doc = "anchor has been successfully voted on."] execute_anchor_update_proposal { r_id : [:: core :: primitive :: u8 ; 32usize] , anchor_metadata : runtime_types :: pallet_linkable_tree :: types :: EdgeMetadata < :: core :: primitive :: u64 , runtime_types :: webb_standalone_runtime :: Element , :: core :: primitive :: u32 > , } , }
+                    # [codec (index = 0)] # [doc = "This will be called by bridge when proposal to create an"] # [doc = "anchor has been successfully voted on."] execute_anchor_create_proposal { deposit_size : :: core :: primitive :: u128 , src_chain_id : :: core :: primitive :: u64 , r_id : [:: core :: primitive :: u8 ; 32usize] , max_edges : :: core :: primitive :: u32 , tree_depth : :: core :: primitive :: u8 , asset : :: core :: primitive :: u32 , } , # [codec (index = 1)] # [doc = "This will be called by bridge when proposal to add/update edge of an"] # [doc = "anchor has been successfully voted on."] execute_anchor_update_proposal { r_id : [:: core :: primitive :: u8 ; 32usize] , anchor_metadata : runtime_types :: pallet_linkable_tree :: types :: EdgeMetadata < :: core :: primitive :: u64 , runtime_types :: webb_primitives :: runtime :: Element , :: core :: primitive :: u32 > , } , # [codec (index = 2)] # [doc = "This will by called by bridge when proposal to set new resource for"] # [doc = "handler has been successfully voted on"] execute_set_resource_proposal { r_id : [:: core :: primitive :: u8 ; 32usize] , target : runtime_types :: webb_proposals :: header :: TargetSystem , } , }
                 #[derive(
                     :: subxt :: codec :: Decode,
                     :: subxt :: codec :: Encode,
@@ -38601,6 +39167,8 @@ pub mod api {
                     AnchorEdgeAdded,
                     #[codec(index = 2)]
                     AnchorEdgeUpdated,
+                    #[codec(index = 3)]
+                    ResourceAnchored,
                 }
             }
             pub mod types {
@@ -39814,6 +40382,7 @@ pub mod api {
                         ::subxt::sp_core::crypto::AccountId32,
                     >,
                     pub bag_upper: ::core::primitive::u64,
+                    pub score: ::core::primitive::u64,
                 }
             }
             pub mod pallet {
@@ -39834,8 +40403,10 @@ pub mod api {
                     #[doc = ""]
                     #[doc = "Anyone can call this function about any potentially dislocated account."]
                     #[doc = ""]
-                    #[doc = "Will never return an error; if `dislocated` does not exist or doesn't need a rebag, then"]
-                    #[doc = "it is a noop and fees are still collected from `origin`."]
+                    #[doc = "Will always update the stored score of `dislocated` to the correct score, based on"]
+                    #[doc = "`ScoreProvider`."]
+                    #[doc = ""]
+                    #[doc = "If `dislocated` does not exists, it returns an error."]
                     rebag {
                         dislocated: ::subxt::sp_core::crypto::AccountId32,
                     },
@@ -39880,6 +40451,12 @@ pub mod api {
                         who: ::subxt::sp_core::crypto::AccountId32,
                         from: ::core::primitive::u64,
                         to: ::core::primitive::u64,
+                    },
+                    #[codec(index = 1)]
+                    #[doc = "Updated the score of some account to the given amount."]
+                    ScoreUpdated {
+                        who: ::subxt::sp_core::crypto::AccountId32,
+                        new_score: ::core::primitive::u64,
                     },
                 }
             }
@@ -42510,15 +43087,15 @@ pub mod api {
                     #[codec(index = 1)]
                     deposit {
                         tree_id: ::core::primitive::u32,
-                        leaf: runtime_types::webb_standalone_runtime::Element,
+                        leaf: runtime_types::webb_primitives::runtime::Element,
                     },
                     #[codec(index = 2)]
                     withdraw {
                         id: ::core::primitive::u32,
                         proof_bytes: ::std::vec::Vec<::core::primitive::u8>,
-                        root: runtime_types::webb_standalone_runtime::Element,
+                        root: runtime_types::webb_primitives::runtime::Element,
                         nullifier_hash:
-                            runtime_types::webb_standalone_runtime::Element,
+                            runtime_types::webb_primitives::runtime::Element,
                         recipient: ::subxt::sp_core::crypto::AccountId32,
                         relayer: ::subxt::sp_core::crypto::AccountId32,
                         fee: ::core::primitive::u128,
@@ -42568,7 +43145,7 @@ pub mod api {
                     #[codec(index = 1)]
                     Deposit {
                         tree_id: ::core::primitive::u32,
-                        leaf: runtime_types::webb_standalone_runtime::Element,
+                        leaf: runtime_types::webb_primitives::runtime::Element,
                     },
                     #[codec(index = 2)]
                     Withdraw {
@@ -42611,12 +43188,12 @@ pub mod api {
                     #[codec(index = 1)]
                     insert {
                         tree_id: ::core::primitive::u32,
-                        leaf: runtime_types::webb_standalone_runtime::Element,
+                        leaf: runtime_types::webb_primitives::runtime::Element,
                     },
                     #[codec(index = 2)]
                     force_set_default_hashes {
                         default_hashes: ::std::vec::Vec<
-                            runtime_types::webb_standalone_runtime::Element,
+                            runtime_types::webb_primitives::runtime::Element,
                         >,
                     },
                 }
@@ -42668,7 +43245,7 @@ pub mod api {
                     LeafInsertion {
                         tree_id: ::core::primitive::u32,
                         leaf_index: ::core::primitive::u32,
-                        leaf: runtime_types::webb_standalone_runtime::Element,
+                        leaf: runtime_types::webb_primitives::runtime::Element,
                     },
                 }
             }
@@ -43172,7 +43749,7 @@ pub mod api {
                         metadata: ::std::vec::Vec<::core::primitive::u8>,
                     },
                     #[codec(index = 10)]
-                    #[doc = "Update configurations for the nomination pools. The origin must for this call must be"]
+                    #[doc = "Update configurations for the nomination pools. The origin for this call must be"]
                     #[doc = "Root."]
                     #[doc = ""]
                     #[doc = "# Arguments"]
@@ -43214,15 +43791,18 @@ pub mod api {
                     #[doc = "most pool members and they should be informed of changes to pool roles."]
                     update_roles {
                         pool_id: ::core::primitive::u32,
-                        root: ::core::option::Option<
-                            ::subxt::sp_core::crypto::AccountId32,
-                        >,
-                        nominator: ::core::option::Option<
-                            ::subxt::sp_core::crypto::AccountId32,
-                        >,
-                        state_toggler: ::core::option::Option<
-                            ::subxt::sp_core::crypto::AccountId32,
-                        >,
+                        new_root:
+                            runtime_types::pallet_nomination_pools::ConfigOp<
+                                ::subxt::sp_core::crypto::AccountId32,
+                            >,
+                        new_nominator:
+                            runtime_types::pallet_nomination_pools::ConfigOp<
+                                ::subxt::sp_core::crypto::AccountId32,
+                            >,
+                        new_state_toggler:
+                            runtime_types::pallet_nomination_pools::ConfigOp<
+                                ::subxt::sp_core::crypto::AccountId32,
+                            >,
                     },
                 }
                 #[derive(
@@ -43378,11 +43958,18 @@ pub mod api {
                         member: ::subxt::sp_core::crypto::AccountId32,
                     },
                     #[codec(index = 8)]
-                    #[doc = "The roles of a pool have been updated to the given new roles."]
+                    #[doc = "The roles of a pool have been updated to the given new roles. Note that the depositor"]
+                    #[doc = "can never change."]
                     RolesUpdated {
-                        root: ::subxt::sp_core::crypto::AccountId32,
-                        state_toggler: ::subxt::sp_core::crypto::AccountId32,
-                        nominator: ::subxt::sp_core::crypto::AccountId32,
+                        root: ::core::option::Option<
+                            ::subxt::sp_core::crypto::AccountId32,
+                        >,
+                        state_toggler: ::core::option::Option<
+                            ::subxt::sp_core::crypto::AccountId32,
+                        >,
+                        nominator: ::core::option::Option<
+                            ::subxt::sp_core::crypto::AccountId32,
+                        >,
                     },
                 }
             }
@@ -43451,9 +44038,9 @@ pub mod api {
             )]
             pub struct PoolRoles<_0> {
                 pub depositor: _0,
-                pub root: _0,
-                pub nominator: _0,
-                pub state_toggler: _0,
+                pub root: ::core::option::Option<_0>,
+                pub nominator: ::core::option::Option<_0>,
+                pub state_toggler: ::core::option::Option<_0>,
             }
             #[derive(
                 :: subxt :: codec :: Decode,
@@ -44184,7 +44771,6 @@ pub mod api {
                     #[doc = "# </weight>"]
                     set_resource {
                         id: [::core::primitive::u8; 32usize],
-                        method: ::std::vec::Vec<::core::primitive::u8>,
                     },
                     #[codec(index = 3)]
                     #[doc = "Removes a resource ID from the resource mapping."]
@@ -44206,6 +44792,39 @@ pub mod api {
                     #[doc = "# </weight>"]
                     whitelist_chain { id: ::core::primitive::u64 },
                     #[codec(index = 5)]
+                    #[doc = "@param origin"]
+                    #[doc = "@param src_id"]
+                    #[doc = "@param call: the dispatchable call corresponding to a"]
+                    #[doc = "handler function"]
+                    #[doc = "@param proposal_data: (r_id, nonce, 4 bytes of zeroes, call)"]
+                    #[doc = "@param signature: a signature over the proposal_data"]
+                    #[doc = ""]
+                    #[doc = "We check:"]
+                    #[doc = "1. That the signature is actually over the proposal data"]
+                    #[doc = "2. Add ResourceId to the Storage"]
+                    #[doc = "3. That the call from the proposal data and the call input parameter to the function are"]
+                    #[doc = "consistent with each other 4. That the execution chain id type parsed from the r_id is"]
+                    #[doc = "indeed this chain's id type"]
+                    #[doc = ""]
+                    #[doc = "If all these checks pass then we call finalize_execution which actually executes the"]
+                    #[doc = "dispatchable call. The dispatchable call is usually a handler function, for instance in"]
+                    #[doc = "the anchor-handler or token-wrapper-handler pallet."]
+                    #[doc = ""]
+                    #[doc = "There are a few TODOs left in the function."]
+                    #[doc = ""]
+                    #[doc = "In the set_resource_with_signature"]
+                    #[doc = "# <weight>"]
+                    #[doc = "- weight of proposed call, regardless of whether execution is performed"]
+                    #[doc = "# </weight>"]
+                    set_resource_with_signature {
+                        src_id: ::core::primitive::u64,
+                        call: ::std::boxed::Box<
+                            runtime_types::webb_standalone_runtime::Call,
+                        >,
+                        proposal_data: ::std::vec::Vec<::core::primitive::u8>,
+                        signature: ::std::vec::Vec<::core::primitive::u8>,
+                    },
+                    #[codec(index = 6)]
                     #[doc = "@param origin"]
                     #[doc = "@param src_id"]
                     #[doc = "@param call: the dispatchable call corresponding to a"]
@@ -44264,27 +44883,30 @@ pub mod api {
                     #[doc = "Resource ID provided isn't mapped to anything"]
                     ResourceDoesNotExist,
                     #[codec(index = 5)]
+                    #[doc = "Resource ID provided is already mapped to anchor"]
+                    ResourceAlreadyExists,
+                    #[codec(index = 6)]
                     #[doc = "Provided signature is not from the active maintainer"]
                     SignatureInvalid,
-                    #[codec(index = 6)]
+                    #[codec(index = 7)]
                     #[doc = "Protected operation, must be performed by relayer"]
                     MustBeMaintainer,
-                    #[codec(index = 7)]
+                    #[codec(index = 8)]
                     #[doc = "A proposal with these parameters has already been submitted"]
                     ProposalAlreadyExists,
-                    #[codec(index = 8)]
+                    #[codec(index = 9)]
                     #[doc = "Call does not match parsed call from proposal data"]
                     CallNotConsistentWithProposalData,
-                    #[codec(index = 9)]
+                    #[codec(index = 10)]
                     #[doc = "Call does not match resource id according to resources mapping"]
                     CallDoesNotMatchResourceId,
-                    #[codec(index = 10)]
+                    #[codec(index = 11)]
                     #[doc = "Chain Id Type from the r_id does not match this chain"]
                     IncorrectExecutionChainIdType,
-                    #[codec(index = 11)]
+                    #[codec(index = 12)]
                     #[doc = "Invalid nonce"]
                     InvalidNonce,
-                    #[codec(index = 12)]
+                    #[codec(index = 13)]
                     #[doc = "Invalid proposal data"]
                     InvalidProposalData,
                 }
@@ -45265,7 +45887,7 @@ pub mod api {
                     PartialEq,
                 )]
                 pub enum Call {
-                    # [codec (index = 0)] create { max_edges : :: core :: primitive :: u32 , depth : :: core :: primitive :: u8 , asset : :: core :: primitive :: u32 , } , # [codec (index = 1)] transact { id : :: core :: primitive :: u32 , proof_data : runtime_types :: webb_primitives :: types :: vanchor :: ProofData < runtime_types :: webb_standalone_runtime :: Element > , ext_data : runtime_types :: webb_primitives :: types :: vanchor :: ExtData < :: subxt :: sp_core :: crypto :: AccountId32 , :: core :: primitive :: i128 , :: core :: primitive :: u128 > , } , # [codec (index = 2)] set_max_deposit_amount { max_deposit_amount : :: core :: primitive :: u128 , } , # [codec (index = 3)] set_min_withdraw_amount { min_withdraw_amount : :: core :: primitive :: u128 , } , }
+                    # [codec (index = 0)] create { max_edges : :: core :: primitive :: u32 , depth : :: core :: primitive :: u8 , asset : :: core :: primitive :: u32 , } , # [codec (index = 1)] transact { id : :: core :: primitive :: u32 , proof_data : runtime_types :: webb_primitives :: types :: vanchor :: ProofData < runtime_types :: webb_primitives :: runtime :: Element > , ext_data : runtime_types :: webb_primitives :: types :: vanchor :: ExtData < :: subxt :: sp_core :: crypto :: AccountId32 , :: core :: primitive :: i128 , :: core :: primitive :: u128 > , } , # [codec (index = 2)] set_max_deposit_amount { max_deposit_amount : :: core :: primitive :: u128 , } , # [codec (index = 3)] set_min_withdraw_amount { min_withdraw_amount : :: core :: primitive :: u128 , } , }
                 #[derive(
                     :: subxt :: codec :: Decode,
                     :: subxt :: codec :: Encode,
@@ -45318,7 +45940,7 @@ pub mod api {
                         transactor: ::subxt::sp_core::crypto::AccountId32,
                         tree_id: ::core::primitive::u32,
                         leafs: ::std::vec::Vec<
-                            runtime_types::webb_standalone_runtime::Element,
+                            runtime_types::webb_primitives::runtime::Element,
                         >,
                         amount: ::core::primitive::i128,
                     },
@@ -45327,7 +45949,7 @@ pub mod api {
                     Deposit {
                         depositor: ::subxt::sp_core::crypto::AccountId32,
                         tree_id: ::core::primitive::u32,
-                        leaf: runtime_types::webb_standalone_runtime::Element,
+                        leaf: runtime_types::webb_primitives::runtime::Element,
                     },
                     #[codec(index = 3)]
                     MaxDepositAmountChanged {
@@ -45338,6 +45960,74 @@ pub mod api {
                         min_withdraw_amount: ::core::primitive::u128,
                     },
                 }
+            }
+        }
+        pub mod pallet_vanchor_handler {
+            use super::runtime_types;
+            pub mod pallet {
+                use super::runtime_types;
+                #[derive(
+                    :: subxt :: codec :: Decode,
+                    :: subxt :: codec :: Encode,
+                    Clone,
+                    Debug,
+                    Eq,
+                    PartialEq,
+                )]
+                pub enum Call {
+                    # [codec (index = 0)] # [doc = "This will be called by bridge when proposal to create a"] # [doc = "vanchor has been successfully voted on."] execute_vanchor_create_proposal { src_chain_id : :: core :: primitive :: u64 , r_id : [:: core :: primitive :: u8 ; 32usize] , max_edges : :: core :: primitive :: u32 , tree_depth : :: core :: primitive :: u8 , asset : :: core :: primitive :: u32 , } , # [codec (index = 1)] # [doc = "This will be called by bridge when proposal to add/update edge of a"] # [doc = "vanchor has been successfully voted on."] execute_vanchor_update_proposal { r_id : [:: core :: primitive :: u8 ; 32usize] , vanchor_metadata : runtime_types :: pallet_linkable_tree :: types :: EdgeMetadata < :: core :: primitive :: u64 , runtime_types :: webb_primitives :: runtime :: Element , :: core :: primitive :: u32 > , } , # [codec (index = 2)] # [doc = "This will by called by bridge when proposal to set new resource for"] # [doc = "handler has been successfully voted on"] execute_set_resource_proposal { r_id : [:: core :: primitive :: u8 ; 32usize] , target : runtime_types :: webb_proposals :: header :: TargetSystem , } , }
+                #[derive(
+                    :: subxt :: codec :: Decode,
+                    :: subxt :: codec :: Encode,
+                    Clone,
+                    Debug,
+                    Eq,
+                    PartialEq,
+                )]
+                pub enum Error {
+                    #[codec(index = 0)]
+                    #[doc = "Access violation."]
+                    InvalidPermissions,
+                    #[codec(index = 1)]
+                    ResourceIsAlreadyAnchored,
+                    #[codec(index = 2)]
+                    AnchorHandlerNotFound,
+                    #[codec(index = 3)]
+                    SourceChainIdNotFound,
+                    #[codec(index = 4)]
+                    #[doc = "Storage overflowed."]
+                    StorageOverflow,
+                }
+                #[derive(
+                    :: subxt :: codec :: Decode,
+                    :: subxt :: codec :: Encode,
+                    Clone,
+                    Debug,
+                    Eq,
+                    PartialEq,
+                )]
+                pub enum Event {
+                    #[codec(index = 0)]
+                    AnchorCreated,
+                    #[codec(index = 1)]
+                    AnchorEdgeAdded,
+                    #[codec(index = 2)]
+                    AnchorEdgeUpdated,
+                    #[codec(index = 3)]
+                    ResourceAnchored,
+                }
+            }
+            pub mod types {
+                use super::runtime_types;
+                #[derive(
+                    :: subxt :: codec :: Decode,
+                    :: subxt :: codec :: Encode,
+                    Clone,
+                    Debug,
+                    Eq,
+                    PartialEq,
+                )]
+                pub struct UpdateRecord < _0 , _1 , _2 , _3 , _4 > { pub tree_id : _0 , pub resource_id : _1 , pub edge_metadata : runtime_types :: pallet_linkable_tree :: types :: EdgeMetadata < _2 , _3 , _0 > , # [codec (skip)] pub __subxt_unused_type_params : :: core :: marker :: PhantomData < _4 > }
             }
         }
         pub mod pallet_verifier {
@@ -46656,6 +47346,18 @@ pub mod api {
         }
         pub mod webb_primitives {
             use super::runtime_types;
+            pub mod runtime {
+                use super::runtime_types;
+                #[derive(
+                    :: subxt :: codec :: Decode,
+                    :: subxt :: codec :: Encode,
+                    Clone,
+                    Debug,
+                    Eq,
+                    PartialEq,
+                )]
+                pub struct Element(pub [::core::primitive::u8; 32usize]);
+            }
             pub mod types {
                 use super::runtime_types;
                 pub mod vanchor {
@@ -46721,6 +47423,26 @@ pub mod api {
                 }
             }
         }
+        pub mod webb_proposals {
+            use super::runtime_types;
+            pub mod header {
+                use super::runtime_types;
+                #[derive(
+                    :: subxt :: codec :: Decode,
+                    :: subxt :: codec :: Encode,
+                    Clone,
+                    Debug,
+                    Eq,
+                    PartialEq,
+                )]
+                pub enum TargetSystem {
+                    #[codec(index = 0)]
+                    ContractAddress([::core::primitive::u8; 20usize]),
+                    #[codec(index = 1)]
+                    TreeId(::core::primitive::u32),
+                }
+            }
+        }
         pub mod webb_standalone_runtime {
             use super::runtime_types;
             #[derive(
@@ -46732,16 +47454,7 @@ pub mod api {
                 PartialEq,
             )]
             pub enum Call {
-                # [codec (index = 0)] System (runtime_types :: frame_system :: pallet :: Call ,) , # [codec (index = 2)] Timestamp (runtime_types :: pallet_timestamp :: pallet :: Call ,) , # [codec (index = 3)] Babe (runtime_types :: pallet_babe :: pallet :: Call ,) , # [codec (index = 4)] Authorship (runtime_types :: pallet_authorship :: pallet :: Call ,) , # [codec (index = 5)] Indices (runtime_types :: pallet_indices :: pallet :: Call ,) , # [codec (index = 6)] Balances (runtime_types :: pallet_balances :: pallet :: Call ,) , # [codec (index = 9)] ElectionProviderMultiPhase (runtime_types :: pallet_election_provider_multi_phase :: pallet :: Call ,) , # [codec (index = 10)] Staking (runtime_types :: pallet_staking :: pallet :: pallet :: Call ,) , # [codec (index = 11)] Session (runtime_types :: pallet_session :: pallet :: Call ,) , # [codec (index = 12)] Democracy (runtime_types :: pallet_democracy :: pallet :: Call ,) , # [codec (index = 13)] Council (runtime_types :: pallet_collective :: pallet :: Call ,) , # [codec (index = 14)] Elections (runtime_types :: pallet_elections_phragmen :: pallet :: Call ,) , # [codec (index = 15)] Grandpa (runtime_types :: pallet_grandpa :: pallet :: Call ,) , # [codec (index = 16)] Treasury (runtime_types :: pallet_treasury :: pallet :: Call ,) , # [codec (index = 17)] Utility (runtime_types :: pallet_utility :: pallet :: Call ,) , # [codec (index = 18)] Multisig (runtime_types :: pallet_multisig :: pallet :: Call ,) , # [codec (index = 19)] Scheduler (runtime_types :: pallet_scheduler :: pallet :: Call ,) , # [codec (index = 20)] Preimage (runtime_types :: pallet_preimage :: pallet :: Call ,) , # [codec (index = 21)] Proxy (runtime_types :: pallet_proxy :: pallet :: Call ,) , # [codec (index = 22)] Assets (runtime_types :: pallet_assets :: pallet :: Call ,) , # [codec (index = 23)] Sudo (runtime_types :: pallet_sudo :: pallet :: Call ,) , # [codec (index = 24)] ImOnline (runtime_types :: pallet_im_online :: pallet :: Call ,) , # [codec (index = 28)] Bounties (runtime_types :: pallet_bounties :: pallet :: Call ,) , # [codec (index = 29)] ChildBounties (runtime_types :: pallet_child_bounties :: pallet :: Call ,) , # [codec (index = 30)] BagsList (runtime_types :: pallet_bags_list :: pallet :: Call ,) , # [codec (index = 31)] NominationPools (runtime_types :: pallet_nomination_pools :: pallet :: Call ,) , # [codec (index = 32)] HasherBn254 (runtime_types :: pallet_hasher :: pallet :: Call ,) , # [codec (index = 33)] AssetRegistry (runtime_types :: pallet_asset_registry :: pallet :: Call ,) , # [codec (index = 34)] Currencies (runtime_types :: orml_currencies :: module :: Call ,) , # [codec (index = 35)] Tokens (runtime_types :: orml_tokens :: module :: Call ,) , # [codec (index = 36)] TokenWrapper (runtime_types :: pallet_token_wrapper :: pallet :: Call ,) , # [codec (index = 37)] MixerVerifierBn254 (runtime_types :: pallet_verifier :: pallet :: Call ,) , # [codec (index = 38)] AnchorVerifierBn254 (runtime_types :: pallet_verifier :: pallet :: Call ,) , # [codec (index = 39)] VAnchorVerifier2x2Bn254 (runtime_types :: pallet_verifier :: pallet :: Call ,) , # [codec (index = 40)] MerkleTreeBn254 (runtime_types :: pallet_mt :: pallet :: Call ,) , # [codec (index = 41)] LinkableTreeBn254 (runtime_types :: pallet_linkable_tree :: pallet :: Call ,) , # [codec (index = 42)] MixerBn254 (runtime_types :: pallet_mixer :: pallet :: Call ,) , # [codec (index = 43)] AnchorBn254 (runtime_types :: pallet_anchor :: pallet :: Call ,) , # [codec (index = 44)] AnchorHandlerBn254 (runtime_types :: pallet_anchor_handler :: pallet :: Call ,) , # [codec (index = 45)] VAnchorBn254 (runtime_types :: pallet_vanchor :: pallet :: Call ,) , # [codec (index = 46)] Bridge (runtime_types :: pallet_bridge :: pallet :: Call ,) , # [codec (index = 47)] SignatureBridge (runtime_types :: pallet_signature_bridge :: pallet :: Call ,) , }
-            #[derive(
-                :: subxt :: codec :: Decode,
-                :: subxt :: codec :: Encode,
-                Clone,
-                Debug,
-                Eq,
-                PartialEq,
-            )]
-            pub struct Element(pub [::core::primitive::u8; 32usize]);
+                # [codec (index = 0)] System (runtime_types :: frame_system :: pallet :: Call ,) , # [codec (index = 2)] Timestamp (runtime_types :: pallet_timestamp :: pallet :: Call ,) , # [codec (index = 3)] Babe (runtime_types :: pallet_babe :: pallet :: Call ,) , # [codec (index = 4)] Authorship (runtime_types :: pallet_authorship :: pallet :: Call ,) , # [codec (index = 5)] Indices (runtime_types :: pallet_indices :: pallet :: Call ,) , # [codec (index = 6)] Balances (runtime_types :: pallet_balances :: pallet :: Call ,) , # [codec (index = 9)] ElectionProviderMultiPhase (runtime_types :: pallet_election_provider_multi_phase :: pallet :: Call ,) , # [codec (index = 10)] Staking (runtime_types :: pallet_staking :: pallet :: pallet :: Call ,) , # [codec (index = 11)] Session (runtime_types :: pallet_session :: pallet :: Call ,) , # [codec (index = 12)] Democracy (runtime_types :: pallet_democracy :: pallet :: Call ,) , # [codec (index = 13)] Council (runtime_types :: pallet_collective :: pallet :: Call ,) , # [codec (index = 14)] Elections (runtime_types :: pallet_elections_phragmen :: pallet :: Call ,) , # [codec (index = 15)] Grandpa (runtime_types :: pallet_grandpa :: pallet :: Call ,) , # [codec (index = 16)] Treasury (runtime_types :: pallet_treasury :: pallet :: Call ,) , # [codec (index = 17)] Utility (runtime_types :: pallet_utility :: pallet :: Call ,) , # [codec (index = 18)] Multisig (runtime_types :: pallet_multisig :: pallet :: Call ,) , # [codec (index = 19)] Scheduler (runtime_types :: pallet_scheduler :: pallet :: Call ,) , # [codec (index = 20)] Preimage (runtime_types :: pallet_preimage :: pallet :: Call ,) , # [codec (index = 21)] Proxy (runtime_types :: pallet_proxy :: pallet :: Call ,) , # [codec (index = 22)] Assets (runtime_types :: pallet_assets :: pallet :: Call ,) , # [codec (index = 23)] Sudo (runtime_types :: pallet_sudo :: pallet :: Call ,) , # [codec (index = 24)] ImOnline (runtime_types :: pallet_im_online :: pallet :: Call ,) , # [codec (index = 28)] Bounties (runtime_types :: pallet_bounties :: pallet :: Call ,) , # [codec (index = 29)] ChildBounties (runtime_types :: pallet_child_bounties :: pallet :: Call ,) , # [codec (index = 30)] BagsList (runtime_types :: pallet_bags_list :: pallet :: Call ,) , # [codec (index = 31)] NominationPools (runtime_types :: pallet_nomination_pools :: pallet :: Call ,) , # [codec (index = 32)] HasherBn254 (runtime_types :: pallet_hasher :: pallet :: Call ,) , # [codec (index = 33)] AssetRegistry (runtime_types :: pallet_asset_registry :: pallet :: Call ,) , # [codec (index = 34)] Currencies (runtime_types :: orml_currencies :: module :: Call ,) , # [codec (index = 35)] Tokens (runtime_types :: orml_tokens :: module :: Call ,) , # [codec (index = 36)] TokenWrapper (runtime_types :: pallet_token_wrapper :: pallet :: Call ,) , # [codec (index = 37)] MixerVerifierBn254 (runtime_types :: pallet_verifier :: pallet :: Call ,) , # [codec (index = 38)] AnchorVerifierBn254 (runtime_types :: pallet_verifier :: pallet :: Call ,) , # [codec (index = 39)] VAnchorVerifier2x2Bn254 (runtime_types :: pallet_verifier :: pallet :: Call ,) , # [codec (index = 40)] MerkleTreeBn254 (runtime_types :: pallet_mt :: pallet :: Call ,) , # [codec (index = 41)] LinkableTreeBn254 (runtime_types :: pallet_linkable_tree :: pallet :: Call ,) , # [codec (index = 42)] MixerBn254 (runtime_types :: pallet_mixer :: pallet :: Call ,) , # [codec (index = 43)] AnchorBn254 (runtime_types :: pallet_anchor :: pallet :: Call ,) , # [codec (index = 44)] AnchorHandlerBn254 (runtime_types :: pallet_anchor_handler :: pallet :: Call ,) , # [codec (index = 45)] VAnchorBn254 (runtime_types :: pallet_vanchor :: pallet :: Call ,) , # [codec (index = 46)] VAnchorHandlerBn254 (runtime_types :: pallet_vanchor_handler :: pallet :: Call ,) , # [codec (index = 47)] Bridge (runtime_types :: pallet_bridge :: pallet :: Call ,) , # [codec (index = 48)] SignatureBridge (runtime_types :: pallet_signature_bridge :: pallet :: Call ,) , }
             #[derive(
                 :: subxt :: codec :: Decode,
                 :: subxt :: codec :: Encode,
@@ -46751,7 +47464,7 @@ pub mod api {
                 PartialEq,
             )]
             pub enum Event {
-                # [codec (index = 0)] System (runtime_types :: frame_system :: pallet :: Event ,) , # [codec (index = 5)] Indices (runtime_types :: pallet_indices :: pallet :: Event ,) , # [codec (index = 6)] Balances (runtime_types :: pallet_balances :: pallet :: Event ,) , # [codec (index = 9)] ElectionProviderMultiPhase (runtime_types :: pallet_election_provider_multi_phase :: pallet :: Event ,) , # [codec (index = 10)] Staking (runtime_types :: pallet_staking :: pallet :: pallet :: Event ,) , # [codec (index = 11)] Session (runtime_types :: pallet_session :: pallet :: Event ,) , # [codec (index = 12)] Democracy (runtime_types :: pallet_democracy :: pallet :: Event ,) , # [codec (index = 13)] Council (runtime_types :: pallet_collective :: pallet :: Event ,) , # [codec (index = 14)] Elections (runtime_types :: pallet_elections_phragmen :: pallet :: Event ,) , # [codec (index = 15)] Grandpa (runtime_types :: pallet_grandpa :: pallet :: Event ,) , # [codec (index = 16)] Treasury (runtime_types :: pallet_treasury :: pallet :: Event ,) , # [codec (index = 17)] Utility (runtime_types :: pallet_utility :: pallet :: Event ,) , # [codec (index = 18)] Multisig (runtime_types :: pallet_multisig :: pallet :: Event ,) , # [codec (index = 19)] Scheduler (runtime_types :: pallet_scheduler :: pallet :: Event ,) , # [codec (index = 20)] Preimage (runtime_types :: pallet_preimage :: pallet :: Event ,) , # [codec (index = 21)] Proxy (runtime_types :: pallet_proxy :: pallet :: Event ,) , # [codec (index = 22)] Assets (runtime_types :: pallet_assets :: pallet :: Event ,) , # [codec (index = 23)] Sudo (runtime_types :: pallet_sudo :: pallet :: Event ,) , # [codec (index = 24)] ImOnline (runtime_types :: pallet_im_online :: pallet :: Event ,) , # [codec (index = 26)] Offences (runtime_types :: pallet_offences :: pallet :: Event ,) , # [codec (index = 28)] Bounties (runtime_types :: pallet_bounties :: pallet :: Event ,) , # [codec (index = 29)] ChildBounties (runtime_types :: pallet_child_bounties :: pallet :: Event ,) , # [codec (index = 30)] BagsList (runtime_types :: pallet_bags_list :: pallet :: Event ,) , # [codec (index = 31)] NominationPools (runtime_types :: pallet_nomination_pools :: pallet :: Event ,) , # [codec (index = 32)] HasherBn254 (runtime_types :: pallet_hasher :: pallet :: Event ,) , # [codec (index = 33)] AssetRegistry (runtime_types :: pallet_asset_registry :: pallet :: Event ,) , # [codec (index = 35)] Tokens (runtime_types :: orml_tokens :: module :: Event ,) , # [codec (index = 36)] TokenWrapper (runtime_types :: pallet_token_wrapper :: pallet :: Event ,) , # [codec (index = 37)] MixerVerifierBn254 (runtime_types :: pallet_verifier :: pallet :: Event ,) , # [codec (index = 38)] AnchorVerifierBn254 (runtime_types :: pallet_verifier :: pallet :: Event ,) , # [codec (index = 39)] VAnchorVerifier2x2Bn254 (runtime_types :: pallet_verifier :: pallet :: Event ,) , # [codec (index = 40)] MerkleTreeBn254 (runtime_types :: pallet_mt :: pallet :: Event ,) , # [codec (index = 41)] LinkableTreeBn254 (runtime_types :: pallet_linkable_tree :: pallet :: Event ,) , # [codec (index = 42)] MixerBn254 (runtime_types :: pallet_mixer :: pallet :: Event ,) , # [codec (index = 43)] AnchorBn254 (runtime_types :: pallet_anchor :: pallet :: Event ,) , # [codec (index = 44)] AnchorHandlerBn254 (runtime_types :: pallet_anchor_handler :: pallet :: Event ,) , # [codec (index = 45)] VAnchorBn254 (runtime_types :: pallet_vanchor :: pallet :: Event ,) , # [codec (index = 46)] Bridge (runtime_types :: pallet_bridge :: pallet :: Event ,) , # [codec (index = 47)] SignatureBridge (runtime_types :: pallet_signature_bridge :: pallet :: Event ,) , }
+                # [codec (index = 0)] System (runtime_types :: frame_system :: pallet :: Event ,) , # [codec (index = 5)] Indices (runtime_types :: pallet_indices :: pallet :: Event ,) , # [codec (index = 6)] Balances (runtime_types :: pallet_balances :: pallet :: Event ,) , # [codec (index = 9)] ElectionProviderMultiPhase (runtime_types :: pallet_election_provider_multi_phase :: pallet :: Event ,) , # [codec (index = 10)] Staking (runtime_types :: pallet_staking :: pallet :: pallet :: Event ,) , # [codec (index = 11)] Session (runtime_types :: pallet_session :: pallet :: Event ,) , # [codec (index = 12)] Democracy (runtime_types :: pallet_democracy :: pallet :: Event ,) , # [codec (index = 13)] Council (runtime_types :: pallet_collective :: pallet :: Event ,) , # [codec (index = 14)] Elections (runtime_types :: pallet_elections_phragmen :: pallet :: Event ,) , # [codec (index = 15)] Grandpa (runtime_types :: pallet_grandpa :: pallet :: Event ,) , # [codec (index = 16)] Treasury (runtime_types :: pallet_treasury :: pallet :: Event ,) , # [codec (index = 17)] Utility (runtime_types :: pallet_utility :: pallet :: Event ,) , # [codec (index = 18)] Multisig (runtime_types :: pallet_multisig :: pallet :: Event ,) , # [codec (index = 19)] Scheduler (runtime_types :: pallet_scheduler :: pallet :: Event ,) , # [codec (index = 20)] Preimage (runtime_types :: pallet_preimage :: pallet :: Event ,) , # [codec (index = 21)] Proxy (runtime_types :: pallet_proxy :: pallet :: Event ,) , # [codec (index = 22)] Assets (runtime_types :: pallet_assets :: pallet :: Event ,) , # [codec (index = 23)] Sudo (runtime_types :: pallet_sudo :: pallet :: Event ,) , # [codec (index = 24)] ImOnline (runtime_types :: pallet_im_online :: pallet :: Event ,) , # [codec (index = 26)] Offences (runtime_types :: pallet_offences :: pallet :: Event ,) , # [codec (index = 28)] Bounties (runtime_types :: pallet_bounties :: pallet :: Event ,) , # [codec (index = 29)] ChildBounties (runtime_types :: pallet_child_bounties :: pallet :: Event ,) , # [codec (index = 30)] BagsList (runtime_types :: pallet_bags_list :: pallet :: Event ,) , # [codec (index = 31)] NominationPools (runtime_types :: pallet_nomination_pools :: pallet :: Event ,) , # [codec (index = 32)] HasherBn254 (runtime_types :: pallet_hasher :: pallet :: Event ,) , # [codec (index = 33)] AssetRegistry (runtime_types :: pallet_asset_registry :: pallet :: Event ,) , # [codec (index = 35)] Tokens (runtime_types :: orml_tokens :: module :: Event ,) , # [codec (index = 36)] TokenWrapper (runtime_types :: pallet_token_wrapper :: pallet :: Event ,) , # [codec (index = 37)] MixerVerifierBn254 (runtime_types :: pallet_verifier :: pallet :: Event ,) , # [codec (index = 38)] AnchorVerifierBn254 (runtime_types :: pallet_verifier :: pallet :: Event ,) , # [codec (index = 39)] VAnchorVerifier2x2Bn254 (runtime_types :: pallet_verifier :: pallet :: Event ,) , # [codec (index = 40)] MerkleTreeBn254 (runtime_types :: pallet_mt :: pallet :: Event ,) , # [codec (index = 41)] LinkableTreeBn254 (runtime_types :: pallet_linkable_tree :: pallet :: Event ,) , # [codec (index = 42)] MixerBn254 (runtime_types :: pallet_mixer :: pallet :: Event ,) , # [codec (index = 43)] AnchorBn254 (runtime_types :: pallet_anchor :: pallet :: Event ,) , # [codec (index = 44)] AnchorHandlerBn254 (runtime_types :: pallet_anchor_handler :: pallet :: Event ,) , # [codec (index = 45)] VAnchorBn254 (runtime_types :: pallet_vanchor :: pallet :: Event ,) , # [codec (index = 46)] VAnchorHandlerBn254 (runtime_types :: pallet_vanchor_handler :: pallet :: Event ,) , # [codec (index = 47)] Bridge (runtime_types :: pallet_bridge :: pallet :: Event ,) , # [codec (index = 48)] SignatureBridge (runtime_types :: pallet_signature_bridge :: pallet :: Event ,) , }
             #[derive(
                 :: subxt :: codec :: Decode,
                 :: subxt :: codec :: Encode,
@@ -46992,10 +47705,10 @@ pub mod api {
         ) -> Result<(), ::subxt::MetadataError> {
             if self.client.metadata().metadata_hash(&PALLETS)
                 != [
-                    78u8, 64u8, 6u8, 240u8, 32u8, 182u8, 22u8, 248u8, 219u8,
-                    147u8, 24u8, 242u8, 32u8, 124u8, 93u8, 59u8, 213u8, 145u8,
-                    61u8, 61u8, 156u8, 236u8, 75u8, 239u8, 84u8, 133u8, 93u8,
-                    251u8, 165u8, 33u8, 205u8, 235u8,
+                    199u8, 148u8, 187u8, 248u8, 253u8, 242u8, 250u8, 29u8,
+                    140u8, 189u8, 58u8, 202u8, 229u8, 202u8, 234u8, 137u8,
+                    148u8, 164u8, 215u8, 221u8, 91u8, 195u8, 215u8, 255u8,
+                    190u8, 37u8, 169u8, 229u8, 167u8, 212u8, 121u8, 228u8,
                 ]
             {
                 Err(::subxt::MetadataError::IncompatibleMetadata)
@@ -47355,6 +48068,11 @@ pub mod api {
         ) -> v_anchor_bn254::storage::StorageApi<'a, T> {
             v_anchor_bn254::storage::StorageApi::new(self.client)
         }
+        pub fn v_anchor_handler_bn254(
+            &self,
+        ) -> v_anchor_handler_bn254::storage::StorageApi<'a, T> {
+            v_anchor_handler_bn254::storage::StorageApi::new(self.client)
+        }
         pub fn bridge(&self) -> bridge::storage::StorageApi<'a, T> {
             bridge::storage::StorageApi::new(self.client)
         }
@@ -47530,6 +48248,11 @@ pub mod api {
             &self,
         ) -> v_anchor_bn254::calls::TransactionApi<'a, T, X> {
             v_anchor_bn254::calls::TransactionApi::new(self.client)
+        }
+        pub fn v_anchor_handler_bn254(
+            &self,
+        ) -> v_anchor_handler_bn254::calls::TransactionApi<'a, T, X> {
+            v_anchor_handler_bn254::calls::TransactionApi::new(self.client)
         }
         pub fn bridge(&self) -> bridge::calls::TransactionApi<'a, T, X> {
             bridge::calls::TransactionApi::new(self.client)
