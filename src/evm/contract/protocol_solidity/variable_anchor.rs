@@ -36,7 +36,7 @@ mod vanchorcontract_mod {
                 .finish()
         }
     }
-    impl<'a, M: ethers::providers::Middleware> VAnchorContract<M> {
+    impl<M: ethers::providers::Middleware> VAnchorContract<M> {
         #[doc = r" Creates a new contract instance with the specified `ethers`"]
         #[doc = r" client at the given `Address`. The contract derefs to a `ethers::Contract`"]
         #[doc = r" object"]
