@@ -114,8 +114,8 @@ impl TypedChainId {
             | TypedChainId::KusamaParachain(id)
             | TypedChainId::RococoParachain(id)
             | TypedChainId::Cosmos(id)
-            | TypedChainId::Solana(id) => *id,
-            TypedChainId::Ink(id) => *id,
+            | TypedChainId::Solana(id)
+            | TypedChainId::Ink(id) => *id,
             Self::None => 0,
         }
     }
