@@ -75,6 +75,8 @@ pub enum TypedChainId {
     Cosmos(u32),
     /// Solana Program.
     Solana(u32),
+    /// Ink Based Chains
+    Ink(u32),
 }
 
 /// Proposal Header (40 bytes).
@@ -112,7 +114,8 @@ impl TypedChainId {
             | TypedChainId::KusamaParachain(id)
             | TypedChainId::RococoParachain(id)
             | TypedChainId::Cosmos(id)
-            | TypedChainId::Solana(id) => *id,
+            | TypedChainId::Solana(id)
+            | TypedChainId::Ink(id) => *id,
             Self::None => 0,
         }
     }
@@ -150,6 +153,10 @@ impl TypedChainId {
                 bytes[0..2].copy_from_slice(&(0x0500u16).to_be_bytes());
                 bytes[2..6].copy_from_slice(&id.to_be_bytes());
             }
+            TypedChainId::Ink(id) => {
+                bytes[0..2].copy_from_slice(&(0x0600u16).to_be_bytes());
+                bytes[2..6].copy_from_slice(&id.to_be_bytes());
+            }
             TypedChainId::None => {
                 bytes[0..2].copy_from_slice(&(0x0000u16).to_be_bytes());
                 bytes[2..6].copy_from_slice(&0u32.to_be_bytes());
@@ -183,6 +190,7 @@ impl From<[u8; Self::LENGTH]> for TypedChainId {
             0x0303 => TypedChainId::RococoParachain(id),
             0x0400 => TypedChainId::Cosmos(id),
             0x0500 => TypedChainId::Solana(id),
+            0x0600 => TypedChainId::Ink(id),
             _ => Self::None,
         }
     }
@@ -201,6 +209,7 @@ impl From<[u8; Self::LENGTH + 2]> for TypedChainId {
             0x0303 => TypedChainId::RococoParachain(id),
             0x0400 => TypedChainId::Cosmos(id),
             0x0500 => TypedChainId::Solana(id),
+            0x0600 => TypedChainId::Ink(id),
             _ => Self::None,
         }
     }
