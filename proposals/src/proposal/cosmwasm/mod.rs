@@ -8,8 +8,6 @@
 //! - [x] `ResourceIdUpdateProposal`
 //! - [x] `FeeRecipientUpdateProposal`
 //! - [x] `SetTreasuryHandlerProposal`
-//! - [x] `SetVerifierProposal`
-//! - [x] `FeeRecipientUpdateProposal`
 
 mod anchor_update;
 mod fee_recipient_update;
