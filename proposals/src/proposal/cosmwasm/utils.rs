@@ -1,13 +1,13 @@
 use tiny_keccak::{Hasher, Keccak};
 
-/// Convert Cosmos-sdk chain contract/account address(43 ~ 45 bytes) 
+/// Convert Cosmos-sdk chain contract/account address(43 ~ 45 bytes)
 /// to Webb proposal target system address(20 bytes).
-/// 
-/// Example: 
+///
+/// Example:
 ///   Contract/account addr:  juno16e3t7td2wu0wmggnxa3xnyu5whljyed69ptvkp
 ///   Keccak256 hash:         7164f72199667ca6301626c67e4dba0a5a2e4cd1703af65d04e3e566845a4f7c
 ///   Target addr(hex):       7e4dba0a5a2e4cd1703af65d04e3e566845a4f7c
-/// 
+///
 pub fn cosmos_addr_2_target_addr(bech32_addr_string: &str) -> [u8; 20] {
     let mut keccak = Keccak::v256();
     keccak.update(bech32_addr_string.as_bytes());
@@ -27,12 +27,13 @@ mod tests {
 
     #[test]
     fn cosmos_addr_conversion_works() {
-        let cosmos_addr = "juno16e3t7td2wu0wmggnxa3xnyu5whljyed69ptvkp".to_string();
+        let cosmos_addr =
+            "juno16e3t7td2wu0wmggnxa3xnyu5whljyed69ptvkp".to_string();
         let expected = "7e4dba0a5a2e4cd1703af65d04e3e566845a4f7c".to_string();
         let decoded = hex::decode(expected).unwrap();
 
         let target_addr = cosmos_addr_2_target_addr(&cosmos_addr);
-        
+
         assert_eq!(decoded, target_addr.to_vec());
     }
 }

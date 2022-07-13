@@ -1,4 +1,8 @@
 //! Anchor Update Proposal.
+use cosmwasm_std::{from_slice, to_binary};
+use schemars::JsonSchema;
+use serde::{Deserialize, Serialize};
+
 use crate::{ProposalHeader, TypedChainId};
 
 /// Anchor Update Proposal.
@@ -6,15 +10,6 @@ use crate::{ProposalHeader, TypedChainId};
 /// The [`AnchorUpdateProposal`] updates the target Anchor's knowledge of the
 /// source Anchor's Merkle roots. This knowledge is necessary to prove
 /// membership in the source Anchor's Merkle tree on the target chain.
-///
-/// The format of the proposal is:
-/// ```text
-/// ┌────────────────────┬─────────────────┬───────────────┬────────────────────┬────────────────┬───────────────┐
-/// │                    │                 │               │                    │                │               │
-/// │ ProposalHeader 40B │ SrcChainType 2B │ SrcChainId 4B │ LatestLeafIndex 4B │ MerkleRoot 32B │ Target ID 32B │
-/// │                    │                 │               │                    │                │               │
-/// └────────────────────┴─────────────────┴───────────────┴────────────────────┴────────────────┴───────────────┘
-/// ```
 #[allow(clippy::module_name_repetitions)]
 #[derive(Debug, Copy, Clone, PartialEq, Eq, Hash)]
 pub struct AnchorUpdateProposal {
@@ -26,13 +21,6 @@ pub struct AnchorUpdateProposal {
 }
 
 impl AnchorUpdateProposal {
-    /// Length of the proposal in bytes.
-    pub const LENGTH: usize = ProposalHeader::LENGTH
-        + TypedChainId::LENGTH
-        + core::mem::size_of::<u32>() // latest_leaf_index
-        + 32 // merkle_root
-        + 32; // target
-
     /// Creates a new anchor update proposal.
     #[must_use]
     pub const fn new(
@@ -83,66 +71,95 @@ impl AnchorUpdateProposal {
 
     /// Get the proposal as a bytes
     #[must_use]
-    pub fn to_bytes(&self) -> [u8; Self::LENGTH] {
-        let mut bytes = [0u8; Self::LENGTH];
-        let f = 0usize;
-        let t = ProposalHeader::LENGTH;
-        bytes[f..t].copy_from_slice(&self.header.to_bytes());
-        let f = t;
-        let t = t + TypedChainId::LENGTH;
-        bytes[f..t].copy_from_slice(&self.src_chain.to_bytes());
-        let f = t;
-        let t = t + core::mem::size_of::<u32>();
-        bytes[f..t].copy_from_slice(&self.latest_leaf_index.to_be_bytes());
-        let f = t;
-        let t = t + 32;
-        bytes[f..t].copy_from_slice(&self.merkle_root);
-        let f = t;
-        let t = t + 32;
-        bytes[f..t].copy_from_slice(&self.target);
+    pub fn to_bytes(&self) -> Vec<u8> {
+        let mut bytes = vec![];
+
+        bytes.extend_from_slice(&self.header.to_bytes());
+
+        let message = to_binary(&UpdateEdge {
+            src_chain_id: self.src_chain.chain_id(),
+            root: self.merkle_root,
+            latest_leaf_index: self.latest_leaf_index,
+            target: self.target,
+        })
+        .unwrap();
+
+        bytes.extend_from_slice(&message.to_vec());
+
         bytes
     }
 
     /// Get the proposal as a bytes without copying.
     #[must_use]
-    pub fn into_bytes(self) -> [u8; Self::LENGTH] {
+    pub fn into_bytes(self) -> Vec<u8> {
         self.to_bytes()
     }
 }
 
-impl From<[u8; AnchorUpdateProposal::LENGTH]> for AnchorUpdateProposal {
-    fn from(bytes: [u8; AnchorUpdateProposal::LENGTH]) -> Self {
+impl From<Vec<u8>> for AnchorUpdateProposal {
+    fn from(bytes: Vec<u8>) -> Self {
         let f = 0usize;
         let t = ProposalHeader::LENGTH;
         let mut header_bytes = [0u8; ProposalHeader::LENGTH];
         header_bytes.copy_from_slice(&bytes[f..t]);
         let header = ProposalHeader::from(header_bytes);
+        
         let f = t;
-        let t = t + TypedChainId::LENGTH;
-        let mut src_chain_bytes = [0u8; TypedChainId::LENGTH];
-        src_chain_bytes.copy_from_slice(&bytes[f..t]);
-        let src_chain = TypedChainId::from(src_chain_bytes);
-        let f = t;
-        let t = t + core::mem::size_of::<u32>();
-        let mut latest_leaf_index_bytes = [0u8; core::mem::size_of::<u32>()];
-        latest_leaf_index_bytes.copy_from_slice(&bytes[f..t]);
-        let latest_leaf_index = u32::from_be_bytes(latest_leaf_index_bytes);
-        let f = t;
-        let t = t + 32;
-        let mut merkle_root = [0u8; 32];
-        merkle_root.copy_from_slice(&bytes[f..t]);
-        let f = t;
-        let t = t + 32;
-        let mut target = [0u8; 32];
-        target.copy_from_slice(&bytes[f..t]);
-        Self::new(header, src_chain, latest_leaf_index, merkle_root, target)
+        let msg_bytes = bytes[f..].to_vec();
+        let decoded_edge_data: UpdateEdge =
+            from_slice(&msg_bytes).unwrap();
+
+        Self::new(
+            header,
+            TypedChainId::from(decoded_edge_data.src_chain_id),
+            decoded_edge_data.latest_leaf_index,
+            decoded_edge_data.root,
+            decoded_edge_data.target,
+        )
     }
 }
 
-impl From<AnchorUpdateProposal> for [u8; AnchorUpdateProposal::LENGTH] {
+impl From<AnchorUpdateProposal> for Vec<u8> {
     fn from(proposal: AnchorUpdateProposal) -> Self {
         proposal.to_bytes()
     }
+}
+
+// if we have EVM available, we can convert the EVM proposal to a cosmwasm proposal
+#[cfg(feature = "evm")]
+impl From<crate::evm::AnchorUpdateProposal> for AnchorUpdateProposal {
+    fn from(proposal: crate::evm::AnchorUpdateProposal) -> Self {
+        AnchorUpdateProposal::new(
+            proposal.header(),
+            proposal.src_chain(),
+            proposal.latest_leaf_index(),
+            *proposal.merkle_root(),
+            *proposal.target(),
+        )
+    }
+}
+
+// if we have Substrate available, we can convert the EVM proposal to a cosmwasm proposal
+#[cfg(feature = "substrate")]
+impl From<crate::substrate::AnchorUpdateProposal> for AnchorUpdateProposal {
+    fn from(proposal: crate::substrate::AnchorUpdateProposal) -> Self {
+        AnchorUpdateProposal::new(
+            proposal.header(),
+            proposal.src_chain(),
+            proposal.latest_leaf_index(),
+            *proposal.merkle_root(),
+            *proposal.target(),
+        )
+    }
+}
+
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, JsonSchema)]
+#[serde(rename_all = "snake_case")]
+struct UpdateEdge {
+    src_chain_id: u64,
+    root: [u8; 32],
+    latest_leaf_index: u32,
+    target: [u8; 32],
 }
 
 #[cfg(test)]
@@ -159,7 +176,7 @@ mod tests {
         let target_chain = TypedChainId::Cosmos(4);
         let resource_id = ResourceId::new(target_system, target_chain);
         let function_signature =
-            FunctionSignature::new(hex_literal::hex!("cafebabe"));
+            FunctionSignature::new(hex_literal::hex!("00000000"));
         let nonce = Nonce::from(0x0001);
         let header =
             ProposalHeader::new(resource_id, function_signature, nonce);
@@ -178,31 +195,24 @@ mod tests {
             target_system.into_fixed_bytes(),
         );
         let bytes = proposal.to_bytes();
+        println!("bytes: {:02x?}", bytes);
         let expected = hex_literal::hex!(
-            "000000000000aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa040000000004"
-            "cafebabe0000000104000000000100000001000102030405060708090a0b0c0d"
-            "0e0f101112131415161718191a1b1c1d1e1f"
-            "000000000000000000000000aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+            "000000000000aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa04000000000400000000000000017b227372635f636861696e5f6964223a343339383034363531313130352c22726f6f74223a5b302c312c322c332c342c352c362c372c382c392c31302c31312c31322c31332c31342c31352c31362c31372c31382c31392c32302c32312c32322c32332c32342c32352c32362c32372c32382c32392c33302c33315d2c226c61746573745f6c6561665f696e646578223a312c22746172676574223a5b302c302c302c302c302c302c302c302c302c302c302c302c3137302c3137302c3137302c3137302c3137302c3137302c3137302c3137302c3137302c3137302c3137302c3137302c3137302c3137302c3137302c3137302c3137302c3137302c3137302c3137305d7d"
         );
         assert_eq!(bytes, expected);
     }
 
     #[test]
     fn decode() {
-        let bytes = hex_literal::hex!(
-            "000000000000aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa040000000004"
-            "cafebabe0000000104000000000100000001000102030405060708090a0b0c0d"
-            "0e0f101112131415161718191a1b1c1d1e1f"
-            "000000000000000000000000aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
-        );
-        let proposal = AnchorUpdateProposal::from(bytes);
+        let bytes = hex_literal::hex!("000000000000aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa04000000000400000000000000017b227372635f636861696e5f6964223a343339383034363531313130352c22726f6f74223a5b302c312c322c332c342c352c362c372c382c392c31302c31312c31322c31332c31342c31352c31362c31372c31382c31392c32302c32312c32322c32332c32342c32352c32362c32372c32382c32392c33302c33315d2c226c61746573745f6c6561665f696e646578223a312c22746172676574223a5b302c302c302c302c302c302c302c302c302c302c302c302c3137302c3137302c3137302c3137302c3137302c3137302c3137302c3137302c3137302c3137302c3137302c3137302c3137302c3137302c3137302c3137302c3137302c3137302c3137302c3137305d7d");
+        let proposal = AnchorUpdateProposal::from(bytes.to_vec());
         let target_system = TargetSystem::new_contract_address(
             hex_literal::hex!("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"),
         );
         let target_chain = TypedChainId::Cosmos(4);
         let resource_id = ResourceId::new(target_system, target_chain);
         let function_signature =
-            FunctionSignature::new(hex_literal::hex!("cafebabe"));
+            FunctionSignature::new(hex_literal::hex!("00000000"));
         let nonce = Nonce::from(0x0001);
         let header =
             ProposalHeader::new(resource_id, function_signature, nonce);
