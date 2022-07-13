@@ -103,11 +103,10 @@ impl From<Vec<u8>> for AnchorUpdateProposal {
         let mut header_bytes = [0u8; ProposalHeader::LENGTH];
         header_bytes.copy_from_slice(&bytes[f..t]);
         let header = ProposalHeader::from(header_bytes);
-        
+
         let f = t;
         let msg_bytes = bytes[f..].to_vec();
-        let decoded_edge_data: UpdateEdge =
-            from_slice(&msg_bytes).unwrap();
+        let decoded_edge_data: UpdateEdge = from_slice(&msg_bytes).unwrap();
 
         Self::new(
             header,

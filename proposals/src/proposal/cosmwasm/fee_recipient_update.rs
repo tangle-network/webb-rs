@@ -1,8 +1,8 @@
 //! Fee Recipient Update Proposal.
+use crate::ProposalHeader;
 use cosmwasm_std::{from_slice, to_binary, Uint128};
 use schemars::JsonSchema;
 use serde::{Deserialize, Serialize};
-use crate::ProposalHeader;
 
 /// Fee Recipient Update Proposal.
 ///
@@ -62,15 +62,14 @@ impl FeeRecipientUpdateProposal {
     }
 }
 
-impl From<Vec<u8>> for FeeRecipientUpdateProposal
-{
+impl From<Vec<u8>> for FeeRecipientUpdateProposal {
     fn from(bytes: Vec<u8>) -> Self {
         let f = 0usize;
         let t = ProposalHeader::LENGTH;
         let mut header_bytes = [0u8; ProposalHeader::LENGTH];
         header_bytes.copy_from_slice(&bytes[f..t]);
         let header = ProposalHeader::from(header_bytes);
-        
+
         let f = t;
         let msg_bytes = &bytes[f..];
         let decoded_msg: UpdateConfigMsg = from_slice(&msg_bytes).unwrap();
@@ -79,8 +78,7 @@ impl From<Vec<u8>> for FeeRecipientUpdateProposal
     }
 }
 
-impl From<FeeRecipientUpdateProposal> for Vec<u8>
-{
+impl From<FeeRecipientUpdateProposal> for Vec<u8> {
     fn from(proposal: FeeRecipientUpdateProposal) -> Self {
         proposal.to_bytes()
     }
@@ -116,7 +114,9 @@ mod tests {
         let nonce = Nonce::from(0x0001);
         let header =
             ProposalHeader::new(resource_id, function_signature, nonce);
-        let new_fee_recipient_address = "juno14hj2tavq8fpesdwxxcu44rty3hh90vhujrvcmstl4zr3txmfvw9skjuwg8".to_string();
+        let new_fee_recipient_address =
+            "juno14hj2tavq8fpesdwxxcu44rty3hh90vhujrvcmstl4zr3txmfvw9skjuwg8"
+                .to_string();
         let proposal =
             FeeRecipientUpdateProposal::new(header, new_fee_recipient_address);
         let bytes = proposal.to_bytes();
@@ -150,7 +150,8 @@ mod tests {
         assert_eq!(nonce, Nonce::from(0x0001));
         assert_eq!(
             proposal.fee_recipient_address(),
-            "juno14hj2tavq8fpesdwxxcu44rty3hh90vhujrvcmstl4zr3txmfvw9skjuwg8".to_string(),
+            "juno14hj2tavq8fpesdwxxcu44rty3hh90vhujrvcmstl4zr3txmfvw9skjuwg8"
+                .to_string(),
         );
     }
 }
