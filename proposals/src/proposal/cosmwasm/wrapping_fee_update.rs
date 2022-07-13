@@ -60,7 +60,8 @@ impl WrappingFeeUpdateProposal {
             wrapping_limit: None,
             fee_percentage: Some(self.wrapping_fee),
             fee_recipient: None,
-        }).unwrap();
+        })
+        .unwrap();
         bytes.extend_from_slice(msg.as_slice());
 
         bytes
@@ -73,15 +74,14 @@ impl WrappingFeeUpdateProposal {
     }
 }
 
-impl From<Vec<u8>> for WrappingFeeUpdateProposal
-{
+impl From<Vec<u8>> for WrappingFeeUpdateProposal {
     fn from(bytes: Vec<u8>) -> Self {
         let f = 0usize;
         let t = ProposalHeader::LENGTH;
         let mut header_bytes = [0u8; ProposalHeader::LENGTH];
         header_bytes.copy_from_slice(&bytes[f..t]);
         let header = ProposalHeader::from(header_bytes);
-        
+
         let f = t;
         let message: UpdateConfigMsg = from_slice(&bytes[f..]).unwrap();
 
@@ -89,9 +89,7 @@ impl From<Vec<u8>> for WrappingFeeUpdateProposal
     }
 }
 
-impl From<WrappingFeeUpdateProposal>
-    for Vec<u8>
-{
+impl From<WrappingFeeUpdateProposal> for Vec<u8> {
     fn from(proposal: WrappingFeeUpdateProposal) -> Self {
         proposal.to_bytes()
     }
