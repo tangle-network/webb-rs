@@ -1,18 +1,13 @@
 //! Wrapping Fee Update Proposal.
 use crate::ProposalHeader;
+use cosmwasm_std::{from_slice, to_binary, Uint128};
+use schemars::JsonSchema;
+use serde::{Deserialize, Serialize};
 
 /// Wrapping Fee Update Proposal.
 ///
 /// The [`WrappingFeeUpdateProposal`] updates the wrapping fee percentage.
 ///
-/// The format of the proposal looks like:
-/// ```text
-/// ┌────────────────────┬──────────────────┐
-/// │                    │                  │
-/// │ ProposalHeader 40B │ WrappingFee 1B   │
-/// │                    │                  │
-/// └────────────────────┴──────────────────┘
-/// ```
 #[allow(clippy::module_name_repetitions)]
 #[derive(Debug, Copy, Clone, PartialEq, Eq, Hash)]
 pub struct WrappingFeeUpdateProposal {
@@ -21,9 +16,6 @@ pub struct WrappingFeeUpdateProposal {
 }
 
 impl WrappingFeeUpdateProposal {
-    /// Length of the proposal in bytes.
-    pub const LENGTH: usize = ProposalHeader::LENGTH + 1; // wrapping_fee
-
     /// Creates a new wrapping fee update proposal.
     ///
     /// Wrapping fee is in the range of 0 to 100.
@@ -58,42 +50,61 @@ impl WrappingFeeUpdateProposal {
 
     /// Get the proposal as a bytes
     #[must_use]
-    pub fn to_bytes(&self) -> [u8; Self::LENGTH] {
-        let mut bytes = [0u8; Self::LENGTH];
-        let f = 0usize;
-        let t = ProposalHeader::LENGTH;
-        bytes[f..t].copy_from_slice(&self.header.to_bytes());
-        bytes[t] = self.wrapping_fee;
+    pub fn to_bytes(&self) -> Vec<u8> {
+        let mut bytes = vec![];
+        bytes.extend_from_slice(&self.header.to_bytes());
+
+        let msg = to_binary(&UpdateConfigMsg {
+            governor: None,
+            is_native_allowed: None,
+            wrapping_limit: None,
+            fee_percentage: Some(self.wrapping_fee),
+            fee_recipient: None,
+        }).unwrap();
+        bytes.extend_from_slice(msg.as_slice());
+
         bytes
     }
 
     /// Get the proposal as a bytes without copying.
     #[must_use]
-    pub fn into_bytes(self) -> [u8; Self::LENGTH] {
+    pub fn into_bytes(self) -> Vec<u8> {
         self.to_bytes()
     }
 }
 
-impl From<[u8; WrappingFeeUpdateProposal::LENGTH]>
-    for WrappingFeeUpdateProposal
+impl From<Vec<u8>> for WrappingFeeUpdateProposal
 {
-    fn from(bytes: [u8; WrappingFeeUpdateProposal::LENGTH]) -> Self {
+    fn from(bytes: Vec<u8>) -> Self {
         let f = 0usize;
         let t = ProposalHeader::LENGTH;
         let mut header_bytes = [0u8; ProposalHeader::LENGTH];
         header_bytes.copy_from_slice(&bytes[f..t]);
         let header = ProposalHeader::from(header_bytes);
-        let wrapping_fee = bytes[t];
-        Self::new(header, wrapping_fee)
+        
+        let f = t;
+        let message: UpdateConfigMsg = from_slice(&bytes[f..]).unwrap();
+
+        Self::new(header, message.fee_percentage.unwrap())
     }
 }
 
 impl From<WrappingFeeUpdateProposal>
-    for [u8; WrappingFeeUpdateProposal::LENGTH]
+    for Vec<u8>
 {
     fn from(proposal: WrappingFeeUpdateProposal) -> Self {
         proposal.to_bytes()
     }
+}
+
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Eq, JsonSchema)]
+#[serde(rename_all = "snake_case")]
+struct UpdateConfigMsg {
+    pub governor: Option<String>,
+    pub is_native_allowed: Option<bool>,
+    pub wrapping_limit: Option<Uint128>,
+    pub fee_percentage: Option<u8>,
+    pub fee_recipient: Option<String>,
 }
 
 #[cfg(test)]
@@ -112,7 +123,7 @@ mod tests {
         let target_chain = TypedChainId::Cosmos(4);
         let resource_id = ResourceId::new(target_system, target_chain);
         let function_signature =
-            FunctionSignature::new(hex_literal::hex!("cafebabe"));
+            FunctionSignature::new(hex_literal::hex!("00000000"));
         let nonce = Nonce::from(0x0001);
         let header =
             ProposalHeader::new(resource_id, function_signature, nonce);
@@ -120,8 +131,7 @@ mod tests {
         let proposal = WrappingFeeUpdateProposal::new(header, wrapping_fee);
         let bytes = proposal.to_bytes();
         let expected = hex_literal::hex!(
-            "000000000000aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa040000000004"
-            "cafebabe0000000101"
+            "000000000000aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa04000000000400000000000000017b22676f7665726e6f72223a6e756c6c2c2269735f6e61746976655f616c6c6f776564223a6e756c6c2c227772617070696e675f6c696d6974223a6e756c6c2c226665655f70657263656e74616765223a312c226665655f726563697069656e74223a6e756c6c7d"
         );
         assert_eq!(bytes, expected);
     }
@@ -129,10 +139,9 @@ mod tests {
     #[test]
     fn decode() {
         let bytes = hex_literal::hex!(
-            "000000000000aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa040000000004"
-            "cafebabe0000000101"
+            "000000000000aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa04000000000400000000000000017b22676f7665726e6f72223a6e756c6c2c2269735f6e61746976655f616c6c6f776564223a6e756c6c2c227772617070696e675f6c696d6974223a6e756c6c2c226665655f70657263656e74616765223a312c226665655f726563697069656e74223a6e756c6c7d"
         );
-        let proposal = WrappingFeeUpdateProposal::from(bytes);
+        let proposal = WrappingFeeUpdateProposal::from(bytes.to_vec());
         let header = proposal.header();
         let target_system = TargetSystem::new_contract_address(
             hex_literal::hex!("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"),
@@ -140,7 +149,7 @@ mod tests {
         let target_chain = TypedChainId::Cosmos(4);
         let resource_id = ResourceId::new(target_system, target_chain);
         let function_signature =
-            FunctionSignature::new(hex_literal::hex!("cafebabe"));
+            FunctionSignature::new(hex_literal::hex!("00000000"));
         let nonce = Nonce::from(0x0001);
         let expected_header =
             ProposalHeader::new(resource_id, function_signature, nonce);
@@ -158,7 +167,7 @@ mod tests {
         let target_chain = TypedChainId::Cosmos(4);
         let resource_id = ResourceId::new(target_system, target_chain);
         let function_signature =
-            FunctionSignature::new(hex_literal::hex!("cafebabe"));
+            FunctionSignature::new(hex_literal::hex!("00000000"));
         let nonce = Nonce::from(0x0001);
         let header =
             ProposalHeader::new(resource_id, function_signature, nonce);
