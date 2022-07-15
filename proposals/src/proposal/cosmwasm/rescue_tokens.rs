@@ -1,47 +1,36 @@
 //! Rescue Tokens Proposal.
 use crate::ProposalHeader;
+use cosmwasm_std::{from_slice, to_binary, Uint128};
+use schemars::JsonSchema;
+use serde::{Deserialize, Serialize};
 
 /// Rescue Tokens Proposal.
 ///
 /// The `RescueTokensProposal` rescues tokens from the treasury to a specified
 /// `to` address.
-/// The format of the proposal looks like this:
 ///
-/// ```text
-/// ┌────────────────────┬───────────────────┬────────────────────┬────────────┐
-/// │                    │                   │                    │            │
-/// │ ProposalHeader 40B │ TokenAddress 20B  │ ToTokenAddress 20B │ Amount 32B │
-/// │                    │                   │                    │            │
-/// └────────────────────┴───────────────────┴────────────────────┴────────────┘
-/// ```
 #[allow(clippy::module_name_repetitions)]
-#[derive(Debug, Copy, Clone, PartialEq, Eq, Hash)]
+#[derive(Debug, Clone, PartialEq, Eq, Hash)]
 pub struct RescueTokensProposal {
     header: ProposalHeader,
-    token_address: [u8; 20],
-    to_token_address: [u8; 20],
+    token_address: String,
+    recipient: String,
     amount: [u8; 32],
 }
 
 impl RescueTokensProposal {
-    /// Length of the proposal in bytes.
-    pub const LENGTH: usize = ProposalHeader::LENGTH
-        + 20 // token_address
-        + 20 // to_token_address
-        + 32; // amount
-
     /// Creates a new resource id update proposal.
     #[must_use]
     pub const fn new(
         header: ProposalHeader,
-        token_address: [u8; 20],
-        to_token_address: [u8; 20],
+        token_address: String,
+        recipient: String,
         amount: [u8; 32],
     ) -> Self {
         Self {
             header,
             token_address,
-            to_token_address,
+            recipient,
             amount,
         }
     }
@@ -60,74 +49,84 @@ impl RescueTokensProposal {
 
     /// Get the token address.
     #[must_use]
-    pub const fn token_address(&self) -> [u8; 20] {
-        self.token_address
+    pub fn token_address(&self) -> String {
+        self.token_address.clone()
     }
 
     /// Get the to token address.
     #[must_use]
-    pub const fn to_token_address(&self) -> [u8; 20] {
-        self.to_token_address
+    pub fn recipient(&self) -> String {
+        self.recipient.clone()
     }
 
     /// Get the proposal as a bytes
     #[must_use]
-    pub fn to_bytes(&self) -> [u8; Self::LENGTH] {
-        let mut bytes = [0u8; Self::LENGTH];
-        let f = 0usize;
-        let t = ProposalHeader::LENGTH;
-        bytes[f..t].copy_from_slice(&self.header.to_bytes());
-        let f = t;
-        let t = f + 20;
-        bytes[f..t].copy_from_slice(&self.token_address);
-        let f = t;
-        let t = f + 20;
-        bytes[f..t].copy_from_slice(&self.to_token_address);
-        let f = t;
-        let t = f + 32;
-        bytes[f..t].copy_from_slice(&self.amount);
+    pub fn to_bytes(&self) -> Vec<u8> {
+        let mut bytes = vec![];
+        bytes.extend_from_slice(&self.header.to_bytes());
+
+        let mut rescue_amt_bytes = [0u8; 16];
+        rescue_amt_bytes.copy_from_slice(self.amount.split_at(16).1);
+        let message = to_binary(&RescueTokens {
+            token_address: self.token_address.clone(),
+            to: self.recipient.clone(),
+            amount_to_rescue: Uint128::from(u128::from_be_bytes(
+                rescue_amt_bytes,
+            )),
+            nonce: self.header.nonce().0,
+        })
+        .unwrap();
+        bytes.extend_from_slice(&message.as_slice());
+
         bytes
     }
 
     /// Get the proposal as a bytes without copying.
     #[must_use]
-    pub fn into_bytes(self) -> [u8; Self::LENGTH] {
+    pub fn into_bytes(self) -> Vec<u8> {
         self.to_bytes()
     }
 }
 
-impl From<[u8; RescueTokensProposal::LENGTH]> for RescueTokensProposal {
-    fn from(bytes: [u8; RescueTokensProposal::LENGTH]) -> Self {
+impl From<Vec<u8>> for RescueTokensProposal {
+    fn from(bytes: Vec<u8>) -> Self {
         let f = 0usize;
         let t = ProposalHeader::LENGTH;
         let mut header_bytes = [0u8; ProposalHeader::LENGTH];
         header_bytes.copy_from_slice(&bytes[f..t]);
         let header = ProposalHeader::from(header_bytes);
+
         let f = t;
-        let t = f + 20;
-        let mut token_address = [0u8; 20];
-        token_address.copy_from_slice(&bytes[f..t]);
-        let f = t;
-        let t = f + 20;
-        let mut to_token_address = [0u8; 20];
-        to_token_address.copy_from_slice(&bytes[f..t]);
-        let f = t;
-        let t = f + 32;
+        let decoded_message: RescueTokens = from_slice(&bytes[f..]).unwrap();
+        let token_address = decoded_message.token_address;
+        let recipient = decoded_message.to;
         let mut amount = [0u8; 32];
-        amount.copy_from_slice(&bytes[f..t]);
+        amount[16..].copy_from_slice(
+            &decoded_message.amount_to_rescue.u128().to_be_bytes(),
+        );
+
         Self {
             header,
             token_address,
-            to_token_address,
+            recipient,
             amount,
         }
     }
 }
 
-impl From<RescueTokensProposal> for [u8; RescueTokensProposal::LENGTH] {
+impl From<RescueTokensProposal> for Vec<u8> {
     fn from(proposal: RescueTokensProposal) -> Self {
         proposal.to_bytes()
     }
+}
+
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, JsonSchema)]
+#[serde(rename_all = "snake_case")]
+struct RescueTokens {
+    token_address: String,
+    to: String,
+    amount_to_rescue: Uint128,
+    nonce: u32,
 }
 
 #[cfg(test)]
@@ -146,32 +145,26 @@ mod tests {
         let target_chain = TypedChainId::Evm(4);
         let resource_id = ResourceId::new(target_system, target_chain);
         let function_signature =
-            FunctionSignature::new(hex_literal::hex!("cafebabe"));
+            FunctionSignature::new(hex_literal::hex!("00000000"));
         let nonce = Nonce::from(0x0001);
         let header =
             ProposalHeader::new(resource_id, function_signature, nonce);
         let token_address =
-            hex_literal::hex!("cccccccccccccccccccccccccccccccccccccccc");
-        let to_token_address =
-            hex_literal::hex!("dddddddddddddddddddddddddddddddddddddddd");
+            "juno1u235cpgju5vvlzp4w53vu0z5x3etytdpeh78ffekctfcmfc8ezhs9p248h"
+                .to_string();
+        let recipient =
+            "juno1afxj87jjd4usd80gsprtq76uykv02egaydwvj62ldhngzj2zdamqxn9an3"
+                .to_string();
         let amount = [
-            0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x0a,
-            0x0b, 0x0c, 0x0d, 0x0e, 0x0f, 0x10, 0x11, 0x12, 0x13, 0x14, 0x15,
-            0x16, 0x17, 0x18, 0x19, 0x1a, 0x1b, 0x1c, 0x1d, 0x1e, 0x1f,
+            0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+            0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+            0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x0f,
         ];
-        let proposal = RescueTokensProposal::new(
-            header,
-            token_address,
-            to_token_address,
-            amount,
-        );
+        let proposal =
+            RescueTokensProposal::new(header, token_address, recipient, amount);
         let bytes = proposal.to_bytes();
         let expected = hex_literal::hex!(
-        "000000000000aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa010000000004" // resource_id
-        "cafebabe00000001" // function_signature + nonce
-        "cccccccccccccccccccccccccccccccccccccccc" // token_address
-        "dddddddddddddddddddddddddddddddddddddddd" // to_token_address
-        "000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f" // amount
+        "000000000000aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa01000000000400000000000000017b22746f6b656e5f61646472657373223a226a756e6f31753233356370676a753576766c7a70347735337675307a357833657479746470656837386666656b637466636d666338657a6873397032343868222c22746f223a226a756e6f316166786a38376a6a64347573643830677370727471373675796b763032656761796477766a36326c64686e677a6a327a64616d71786e39616e33222c22616d6f756e745f746f5f726573637565223a223135222c226e6f6e6365223a317d"
         );
         assert_eq!(bytes, expected);
     }
@@ -180,38 +173,32 @@ mod tests {
     fn decode() {
         // the reverse of encode
         let bytes = hex_literal::hex!(
-        "000000000000aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa010000000004" // resource_id
-        "cafebabe00000001" // function_signature + nonce
-        "cccccccccccccccccccccccccccccccccccccccc" // token_address
-        "dddddddddddddddddddddddddddddddddddddddd" // new_token_address
-        "000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f" // amount
+        "000000000000aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa01000000000400000000000000017b22746f6b656e5f61646472657373223a226a756e6f31753233356370676a753576766c7a70347735337675307a357833657479746470656837386666656b637466636d666338657a6873397032343868222c22746f223a226a756e6f316166786a38376a6a64347573643830677370727471373675796b763032656761796477766a36326c64686e677a6a327a64616d71786e39616e33222c22616d6f756e745f746f5f726573637565223a223135222c226e6f6e6365223a317d"
         );
-        let expected_proposal = RescueTokensProposal::from(bytes);
+        let expected_proposal = RescueTokensProposal::from(bytes.to_vec());
         let target_system = TargetSystem::new_contract_address(
             hex_literal::hex!("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"),
         );
         let target_chain = TypedChainId::Evm(4);
         let resource_id = ResourceId::new(target_system, target_chain);
         let function_signature =
-            FunctionSignature::new(hex_literal::hex!("cafebabe"));
+            FunctionSignature::new(hex_literal::hex!("00000000"));
         let nonce = Nonce::from(0x0001);
         let header =
             ProposalHeader::new(resource_id, function_signature, nonce);
         let token_address =
-            hex_literal::hex!("cccccccccccccccccccccccccccccccccccccccc");
-        let to_token_address =
-            hex_literal::hex!("dddddddddddddddddddddddddddddddddddddddd");
+            "juno1u235cpgju5vvlzp4w53vu0z5x3etytdpeh78ffekctfcmfc8ezhs9p248h"
+                .to_string();
+        let recipient =
+            "juno1afxj87jjd4usd80gsprtq76uykv02egaydwvj62ldhngzj2zdamqxn9an3"
+                .to_string();
         let amount = [
-            0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x0a,
-            0x0b, 0x0c, 0x0d, 0x0e, 0x0f, 0x10, 0x11, 0x12, 0x13, 0x14, 0x15,
-            0x16, 0x17, 0x18, 0x19, 0x1a, 0x1b, 0x1c, 0x1d, 0x1e, 0x1f,
+            0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+            0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+            0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x0f,
         ];
-        let proposal = RescueTokensProposal::new(
-            header,
-            token_address,
-            to_token_address,
-            amount,
-        );
+        let proposal =
+            RescueTokensProposal::new(header, token_address, recipient, amount);
         assert_eq!(proposal, expected_proposal);
     }
 }
