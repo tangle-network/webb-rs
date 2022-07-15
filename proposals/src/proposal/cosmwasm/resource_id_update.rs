@@ -1,41 +1,31 @@
 //! Resource Id Update Proposal.
 use crate::{ProposalHeader, ResourceId};
+use cosmwasm_std::{from_slice, to_binary};
+use schemars::JsonSchema;
+use serde::{Deserialize, Serialize};
 
 /// Resource Id Update Proposal.
 ///
 /// The [`ResourceIdUpdateProposal`] maps a new resource Id to a handler
 /// address.
-/// The format of the proposal looks like:
-/// ```text
-/// ┌────────────────────┬───────────────────┬────────────────────┬──────────────────────┐
-/// │                    │                   │                    │                      │
-/// │ ProposalHeader 40B │ NewResourceId 32B │ HandlerAddress 20B │ ExecutionAddress 20B │
-/// │                    │                   │                    │                      │
-/// └────────────────────┴───────────────────┴────────────────────┴──────────────────────┘
-/// ```
+///
 #[allow(clippy::module_name_repetitions)]
-#[derive(Debug, Copy, Clone, PartialEq, Eq, Hash)]
+#[derive(Debug, Clone, PartialEq, Eq, Hash)]
 pub struct ResourceIdUpdateProposal {
     header: ProposalHeader,
     new_resource_id: ResourceId,
-    handler_address: [u8; 20],
-    execution_address: [u8; 20],
+    handler_address: String,
+    execution_address: String,
 }
 
 impl ResourceIdUpdateProposal {
-    /// Length of the proposal in bytes.
-    pub const LENGTH: usize = ProposalHeader::LENGTH
-        + ResourceId::LENGTH // new_resource_id
-        + 20 // handler_address
-        + 20; // execution_address
-
     /// Creates a new resource id update proposal.
     #[must_use]
     pub const fn new(
         header: ProposalHeader,
         new_resource_id: ResourceId,
-        handler_address: [u8; 20],
-        execution_address: [u8; 20],
+        handler_address: String,
+        execution_address: String,
     ) -> Self {
         Self {
             header,
@@ -59,75 +49,78 @@ impl ResourceIdUpdateProposal {
 
     /// Get the handler address.
     #[must_use]
-    pub const fn handler_address(&self) -> [u8; 20] {
-        self.handler_address
+    pub fn handler_address(&self) -> String {
+        self.handler_address.clone()
     }
 
     /// Get the execution address.
     #[must_use]
-    pub const fn execution_address(&self) -> [u8; 20] {
-        self.execution_address
+    pub fn execution_address(&self) -> String {
+        self.execution_address.clone()
     }
 
     /// Get the proposal as a bytes
     #[must_use]
-    pub fn to_bytes(&self) -> [u8; Self::LENGTH] {
-        let mut bytes = [0u8; Self::LENGTH];
-        let f = 0usize;
-        let t = ProposalHeader::LENGTH;
-        bytes[f..t].copy_from_slice(&self.header.to_bytes());
-        let f = t;
-        let t = f + ResourceId::LENGTH;
-        bytes[f..t].copy_from_slice(&self.new_resource_id.to_bytes());
-        let f = t;
-        let t = f + 20;
-        bytes[f..t].copy_from_slice(&self.handler_address);
-        let f = t;
-        let t = f + 20;
-        bytes[f..t].copy_from_slice(&self.execution_address);
+    pub fn to_bytes(&self) -> Vec<u8> {
+        let mut bytes = vec![];
+        bytes.extend_from_slice(&self.header.to_bytes());
+
+        let message = to_binary(&ResourceIdUpdateData {
+            resource_id: self.header.resource_id().to_bytes(),
+            function_sig: self.header.function_signature().to_bytes(),
+            nonce: self.header.nonce().0,
+            new_resource_id: self.new_resource_id.to_bytes(),
+            handler_addr: self.handler_address.clone(),
+            execution_context_addr: self.execution_address.clone(),
+        })
+        .unwrap();
+        bytes.extend_from_slice(message.as_slice());
+
         bytes
     }
 
     /// Get the proposal as a bytes without copying.
     #[must_use]
-    pub fn into_bytes(self) -> [u8; Self::LENGTH] {
+    pub fn into_bytes(self) -> Vec<u8> {
         self.to_bytes()
     }
 }
 
-impl From<[u8; ResourceIdUpdateProposal::LENGTH]> for ResourceIdUpdateProposal {
-    fn from(bytes: [u8; ResourceIdUpdateProposal::LENGTH]) -> Self {
+impl From<Vec<u8>> for ResourceIdUpdateProposal {
+    fn from(bytes: Vec<u8>) -> Self {
         let f = 0usize;
         let t = ProposalHeader::LENGTH;
         let mut header_bytes = [0u8; ProposalHeader::LENGTH];
         header_bytes.copy_from_slice(&bytes[f..t]);
         let header = ProposalHeader::from(header_bytes);
+
         let f = t;
-        let t = f + ResourceId::LENGTH;
-        let mut new_resource_id = [0u8; 32];
-        new_resource_id.copy_from_slice(&bytes[f..t]);
-        let new_resource_id = ResourceId::from(new_resource_id);
-        let f = t;
-        let t = f + 20;
-        let mut handler_address = [0u8; 20];
-        handler_address.copy_from_slice(&bytes[f..t]);
-        let f = t;
-        let t = f + 20;
-        let mut execution_address = [0u8; 20];
-        execution_address.copy_from_slice(&bytes[f..t]);
+        let decoded_msg: ResourceIdUpdateData =
+            from_slice(&bytes[f..]).unwrap();
+
         Self {
             header,
-            new_resource_id,
-            handler_address,
-            execution_address,
+            new_resource_id: decoded_msg.new_resource_id.into(),
+            handler_address: decoded_msg.handler_addr,
+            execution_address: decoded_msg.execution_context_addr,
         }
     }
 }
 
-impl From<ResourceIdUpdateProposal> for [u8; ResourceIdUpdateProposal::LENGTH] {
+impl From<ResourceIdUpdateProposal> for Vec<u8> {
     fn from(proposal: ResourceIdUpdateProposal) -> Self {
         proposal.to_bytes()
     }
+}
+
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Eq, JsonSchema)]
+struct ResourceIdUpdateData {
+    pub resource_id: [u8; 32],
+    pub function_sig: [u8; 4],
+    pub nonce: u32,
+    pub new_resource_id: [u8; 32],
+    pub handler_addr: String,
+    pub execution_context_addr: String,
 }
 
 #[cfg(test)]
@@ -146,7 +139,7 @@ mod tests {
         let target_chain = TypedChainId::Cosmos(4);
         let resource_id = ResourceId::new(target_system, target_chain);
         let function_signature =
-            FunctionSignature::new(hex_literal::hex!("cafebabe"));
+            FunctionSignature::new(hex_literal::hex!("00000000"));
         let nonce = Nonce::from(0x0001);
         let header =
             ProposalHeader::new(resource_id, function_signature, nonce);
@@ -155,9 +148,11 @@ mod tests {
         );
         let new_resource_id = ResourceId::new(new_target_system, target_chain);
         let handler_address =
-            hex_literal::hex!("cccccccccccccccccccccccccccccccccccccccc");
+            "juno1u235cpgju5vvlzp4w53vu0z5x3etytdpeh78ffekctfcmfc8ezhs9p248h"
+                .to_string();
         let execution_address =
-            hex_literal::hex!("dddddddddddddddddddddddddddddddddddddddd");
+            "juno1afxj87jjd4usd80gsprtq76uykv02egaydwvj62ldhngzj2zdamqxn9an3"
+                .to_string();
         let proposal = ResourceIdUpdateProposal::new(
             header,
             new_resource_id,
@@ -165,12 +160,9 @@ mod tests {
             execution_address,
         );
         let bytes = proposal.to_bytes();
+        println!("{:02x?}", bytes);
         let expected = hex_literal::hex!(
-        "000000000000aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa040000000004" // resource_id
-        "cafebabe00000001" // function_signature + nonce
-        "000000000000bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb040000000004" // new_resource_id
-        "cccccccccccccccccccccccccccccccccccccccc" // handler_address
-        "dddddddddddddddddddddddddddddddddddddddd" // execution_address
+            "000000000000aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa04000000000400000000000000017b227265736f757263655f6964223a5b302c302c302c302c302c302c3137302c3137302c3137302c3137302c3137302c3137302c3137302c3137302c3137302c3137302c3137302c3137302c3137302c3137302c3137302c3137302c3137302c3137302c3137302c3137302c342c302c302c302c302c345d2c2266756e6374696f6e5f736967223a5b302c302c302c305d2c226e6f6e6365223a312c226e65775f7265736f757263655f6964223a5b302c302c302c302c302c302c3138372c3138372c3138372c3138372c3138372c3138372c3138372c3138372c3138372c3138372c3138372c3138372c3138372c3138372c3138372c3138372c3138372c3138372c3138372c3138372c342c302c302c302c302c345d2c2268616e646c65725f61646472223a226a756e6f31753233356370676a753576766c7a70347735337675307a357833657479746470656837386666656b637466636d666338657a6873397032343868222c22657865637574696f6e5f636f6e746578745f61646472223a226a756e6f316166786a38376a6a64347573643830677370727471373675796b763032656761796477766a36326c64686e677a6a327a64616d71786e39616e33227d"
         );
         assert_eq!(bytes, expected);
     }
@@ -179,20 +171,16 @@ mod tests {
     fn decode() {
         // do the reverse of encode
         let bytes = hex_literal::hex!(
-        "000000000000aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa040000000004" // resource_id
-        "cafebabe00000001" // function_signature + nonce
-        "000000000000bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb040000000004" // new_resource_id
-        "cccccccccccccccccccccccccccccccccccccccc" // handler_address
-        "dddddddddddddddddddddddddddddddddddddddd" // execution_address
+            "000000000000aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa04000000000400000000000000017b227265736f757263655f6964223a5b302c302c302c302c302c302c3137302c3137302c3137302c3137302c3137302c3137302c3137302c3137302c3137302c3137302c3137302c3137302c3137302c3137302c3137302c3137302c3137302c3137302c3137302c3137302c342c302c302c302c302c345d2c2266756e6374696f6e5f736967223a5b302c302c302c305d2c226e6f6e6365223a312c226e65775f7265736f757263655f6964223a5b302c302c302c302c302c302c3138372c3138372c3138372c3138372c3138372c3138372c3138372c3138372c3138372c3138372c3138372c3138372c3138372c3138372c3138372c3138372c3138372c3138372c3138372c3138372c342c302c302c302c302c345d2c2268616e646c65725f61646472223a226a756e6f31753233356370676a753576766c7a70347735337675307a357833657479746470656837386666656b637466636d666338657a6873397032343868222c22657865637574696f6e5f636f6e746578745f61646472223a226a756e6f316166786a38376a6a64347573643830677370727471373675796b763032656761796477766a36326c64686e677a6a327a64616d71786e39616e33227d"
         );
-        let proposal = ResourceIdUpdateProposal::from(bytes);
+        let proposal = ResourceIdUpdateProposal::from(bytes.to_vec());
         let target_system = TargetSystem::new_contract_address(
             hex_literal::hex!("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"),
         );
         let target_chain = TypedChainId::Cosmos(4);
         let resource_id = ResourceId::new(target_system, target_chain);
         let function_signature =
-            FunctionSignature::new(hex_literal::hex!("cafebabe"));
+            FunctionSignature::new(hex_literal::hex!("00000000"));
         let nonce = Nonce::from(0x0001);
         let header =
             ProposalHeader::new(resource_id, function_signature, nonce);
@@ -201,9 +189,11 @@ mod tests {
         );
         let new_resource_id = ResourceId::new(new_target_system, target_chain);
         let handler_address =
-            hex_literal::hex!("cccccccccccccccccccccccccccccccccccccccc");
+            "juno1u235cpgju5vvlzp4w53vu0z5x3etytdpeh78ffekctfcmfc8ezhs9p248h"
+                .to_string();
         let execution_address =
-            hex_literal::hex!("dddddddddddddddddddddddddddddddddddddddd");
+            "juno1afxj87jjd4usd80gsprtq76uykv02egaydwvj62ldhngzj2zdamqxn9an3"
+                .to_string();
         let expected_proposal = ResourceIdUpdateProposal::new(
             header,
             new_resource_id,
