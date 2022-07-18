@@ -101,16 +101,19 @@ struct ConfigureMaximumDepositLimit {
 #[cfg(test)]
 mod tests {
     use crate::{
-        FunctionSignature, Nonce, ResourceId, TargetSystem, TypedChainId,
+        cosmwasm::cosmos_addr_2_target_addr, FunctionSignature, Nonce,
+        ResourceId, TargetSystem, TypedChainId,
     };
 
     use super::*;
 
+    const TARGET_CONTRACT_ADDR: &str =
+        "juno1hset4pny4h8xm4s4lek57msq7j4zwfqwjf7zxqjt4npxyv0lrgnsp8qy9j";
+
     #[test]
     fn encode() {
-        let target_system = TargetSystem::new_contract_address(
-            hex_literal::hex!("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"),
-        );
+        let target_addr = cosmos_addr_2_target_addr(TARGET_CONTRACT_ADDR);
+        let target_system = TargetSystem::ContractAddress(target_addr);
         let target_chain = TypedChainId::Cosmos(4);
         let resource_id = ResourceId::new(target_system, target_chain);
         let function_signature =
@@ -124,18 +127,14 @@ mod tests {
         let proposal = MaxDepositLimitProposal::new(header, max_deposit_limit);
         let bytes = proposal.to_bytes();
         let expected = hex_literal::hex!(
-            "000000000000aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa04000000000400000000000000017b226d6178696d756d5f6465706f7369745f616d6f756e74223a223231333536323833353734303736383931343933393438393639393739363835343435313531227d"
+            "000000000000b37383a2ad2de9e68da75f583e7d0ef2eae1184f04000000000400000000000000017b226d6178696d756d5f6465706f7369745f616d6f756e74223a223231333536323833353734303736383931343933393438393639393739363835343435313531227d"
         );
         assert_eq!(bytes, expected);
     }
 
     #[test]
     fn decode() {
-        // let bytes = hex_literal::hex!(
-        //     "000000000000aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa040000000004"
-        //     "000000000000000100000000000000000000000000000000101112131415161718191a1b1c1d1e1f"
-        // );
-        let bytes = hex_literal::hex!("000000000000aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa04000000000400000000000000017b226d6178696d756d5f6465706f7369745f616d6f756e74223a223231333536323833353734303736383931343933393438393639393739363835343435313531227d");
+        let bytes = hex_literal::hex!("000000000000b37383a2ad2de9e68da75f583e7d0ef2eae1184f04000000000400000000000000017b226d6178696d756d5f6465706f7369745f616d6f756e74223a223231333536323833353734303736383931343933393438393639393739363835343435313531227d");
         let proposal = MaxDepositLimitProposal::from(bytes.to_vec());
         let header = proposal.header();
         let resource_id = header.resource_id();
@@ -146,8 +145,8 @@ mod tests {
         let max_deposit_limit = proposal.max_deposit_limit();
         assert_eq!(
             target_system,
-            TargetSystem::new_contract_address(hex_literal::hex!(
-                "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+            TargetSystem::ContractAddress(cosmos_addr_2_target_addr(
+                TARGET_CONTRACT_ADDR
             ))
         );
         assert_eq!(target_chain, TypedChainId::Cosmos(4));

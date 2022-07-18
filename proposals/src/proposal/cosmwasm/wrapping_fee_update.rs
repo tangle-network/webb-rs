@@ -108,16 +108,19 @@ struct UpdateConfigMsg {
 #[cfg(test)]
 mod tests {
     use crate::{
-        FunctionSignature, Nonce, ResourceId, TargetSystem, TypedChainId,
+        cosmwasm::cosmos_addr_2_target_addr, FunctionSignature, Nonce,
+        ResourceId, TargetSystem, TypedChainId,
     };
 
     use super::*;
 
+    const TARGET_CONTRACT_ADDR: &str =
+        "juno1hset4pny4h8xm4s4lek57msq7j4zwfqwjf7zxqjt4npxyv0lrgnsp8qy9j";
+
     #[test]
     fn encode() {
-        let target_system = TargetSystem::new_contract_address(
-            hex_literal::hex!("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"),
-        );
+        let target_addr = cosmos_addr_2_target_addr(TARGET_CONTRACT_ADDR);
+        let target_system = TargetSystem::ContractAddress(target_addr);
         let target_chain = TypedChainId::Cosmos(4);
         let resource_id = ResourceId::new(target_system, target_chain);
         let function_signature =
@@ -129,7 +132,7 @@ mod tests {
         let proposal = WrappingFeeUpdateProposal::new(header, wrapping_fee);
         let bytes = proposal.to_bytes();
         let expected = hex_literal::hex!(
-            "000000000000aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa04000000000400000000000000017b22676f7665726e6f72223a6e756c6c2c2269735f6e61746976655f616c6c6f776564223a6e756c6c2c227772617070696e675f6c696d6974223a6e756c6c2c226665655f70657263656e74616765223a312c226665655f726563697069656e74223a6e756c6c7d"
+            "000000000000b37383a2ad2de9e68da75f583e7d0ef2eae1184f04000000000400000000000000017b22676f7665726e6f72223a6e756c6c2c2269735f6e61746976655f616c6c6f776564223a6e756c6c2c227772617070696e675f6c696d6974223a6e756c6c2c226665655f70657263656e74616765223a312c226665655f726563697069656e74223a6e756c6c7d"
         );
         assert_eq!(bytes, expected);
     }
@@ -137,12 +140,12 @@ mod tests {
     #[test]
     fn decode() {
         let bytes = hex_literal::hex!(
-            "000000000000aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa04000000000400000000000000017b22676f7665726e6f72223a6e756c6c2c2269735f6e61746976655f616c6c6f776564223a6e756c6c2c227772617070696e675f6c696d6974223a6e756c6c2c226665655f70657263656e74616765223a312c226665655f726563697069656e74223a6e756c6c7d"
+            "000000000000b37383a2ad2de9e68da75f583e7d0ef2eae1184f04000000000400000000000000017b22676f7665726e6f72223a6e756c6c2c2269735f6e61746976655f616c6c6f776564223a6e756c6c2c227772617070696e675f6c696d6974223a6e756c6c2c226665655f70657263656e74616765223a312c226665655f726563697069656e74223a6e756c6c7d"
         );
         let proposal = WrappingFeeUpdateProposal::from(bytes.to_vec());
         let header = proposal.header();
-        let target_system = TargetSystem::new_contract_address(
-            hex_literal::hex!("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"),
+        let target_system = TargetSystem::ContractAddress(
+            cosmos_addr_2_target_addr(TARGET_CONTRACT_ADDR),
         );
         let target_chain = TypedChainId::Cosmos(4);
         let resource_id = ResourceId::new(target_system, target_chain);
@@ -159,8 +162,8 @@ mod tests {
     #[test]
     #[should_panic]
     fn should_panic_if_wrapping_fee_out_of_range() {
-        let target_system = TargetSystem::new_contract_address(
-            hex_literal::hex!("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"),
+        let target_system = TargetSystem::ContractAddress(
+            cosmos_addr_2_target_addr(TARGET_CONTRACT_ADDR),
         );
         let target_chain = TypedChainId::Cosmos(4);
         let resource_id = ResourceId::new(target_system, target_chain);

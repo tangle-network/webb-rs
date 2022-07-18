@@ -132,16 +132,23 @@ struct RescueTokens {
 #[cfg(test)]
 mod tests {
     use crate::{
-        FunctionSignature, Nonce, ResourceId, TargetSystem, TypedChainId,
+        cosmwasm::cosmos_addr_2_target_addr, FunctionSignature, Nonce,
+        ResourceId, TargetSystem, TypedChainId,
     };
 
     use super::*;
 
+    const TARGET_CONTRACT_ADDR: &str =
+        "juno1hset4pny4h8xm4s4lek57msq7j4zwfqwjf7zxqjt4npxyv0lrgnsp8qy9j";
+    const TOKEN_ADDR: &str =
+        "juno1u235cpgju5vvlzp4w53vu0z5x3etytdpeh78ffekctfcmfc8ezhs9p248h";
+    const RECIPIENT: &str =
+        "juno1afxj87jjd4usd80gsprtq76uykv02egaydwvj62ldhngzj2zdamqxn9an3";
+
     #[test]
     fn encode() {
-        let target_system = TargetSystem::new_contract_address(
-            hex_literal::hex!("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"),
-        );
+        let target_addr = cosmos_addr_2_target_addr(TARGET_CONTRACT_ADDR);
+        let target_system = TargetSystem::ContractAddress(target_addr);
         let target_chain = TypedChainId::Evm(4);
         let resource_id = ResourceId::new(target_system, target_chain);
         let function_signature =
@@ -149,22 +156,16 @@ mod tests {
         let nonce = Nonce::from(0x0001);
         let header =
             ProposalHeader::new(resource_id, function_signature, nonce);
-        let token_address =
-            "juno1u235cpgju5vvlzp4w53vu0z5x3etytdpeh78ffekctfcmfc8ezhs9p248h"
-                .to_string();
-        let recipient =
-            "juno1afxj87jjd4usd80gsprtq76uykv02egaydwvj62ldhngzj2zdamqxn9an3"
-                .to_string();
-        let amount = [
-            0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-            0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-            0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x0f,
-        ];
+        let token_address = TOKEN_ADDR.to_string();
+        let recipient = RECIPIENT.to_string();
+        let amount = hex_literal::hex!(
+            "000000000000000000000000000000000000000000000000000000000000000f"
+        );
         let proposal =
             RescueTokensProposal::new(header, token_address, recipient, amount);
         let bytes = proposal.to_bytes();
         let expected = hex_literal::hex!(
-        "000000000000aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa01000000000400000000000000017b22746f6b656e5f61646472657373223a226a756e6f31753233356370676a753576766c7a70347735337675307a357833657479746470656837386666656b637466636d666338657a6873397032343868222c22746f223a226a756e6f316166786a38376a6a64347573643830677370727471373675796b763032656761796477766a36326c64686e677a6a327a64616d71786e39616e33222c22616d6f756e745f746f5f726573637565223a223135222c226e6f6e6365223a317d"
+            "000000000000b37383a2ad2de9e68da75f583e7d0ef2eae1184f01000000000400000000000000017b22746f6b656e5f61646472657373223a226a756e6f31753233356370676a753576766c7a70347735337675307a357833657479746470656837386666656b637466636d666338657a6873397032343868222c22746f223a226a756e6f316166786a38376a6a64347573643830677370727471373675796b763032656761796477766a36326c64686e677a6a327a64616d71786e39616e33222c22616d6f756e745f746f5f726573637565223a223135222c226e6f6e6365223a317d"
         );
         assert_eq!(bytes, expected);
     }
@@ -173,12 +174,11 @@ mod tests {
     fn decode() {
         // the reverse of encode
         let bytes = hex_literal::hex!(
-        "000000000000aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa01000000000400000000000000017b22746f6b656e5f61646472657373223a226a756e6f31753233356370676a753576766c7a70347735337675307a357833657479746470656837386666656b637466636d666338657a6873397032343868222c22746f223a226a756e6f316166786a38376a6a64347573643830677370727471373675796b763032656761796477766a36326c64686e677a6a327a64616d71786e39616e33222c22616d6f756e745f746f5f726573637565223a223135222c226e6f6e6365223a317d"
+            "000000000000b37383a2ad2de9e68da75f583e7d0ef2eae1184f01000000000400000000000000017b22746f6b656e5f61646472657373223a226a756e6f31753233356370676a753576766c7a70347735337675307a357833657479746470656837386666656b637466636d666338657a6873397032343868222c22746f223a226a756e6f316166786a38376a6a64347573643830677370727471373675796b763032656761796477766a36326c64686e677a6a327a64616d71786e39616e33222c22616d6f756e745f746f5f726573637565223a223135222c226e6f6e6365223a317d"
         );
         let expected_proposal = RescueTokensProposal::from(bytes.to_vec());
-        let target_system = TargetSystem::new_contract_address(
-            hex_literal::hex!("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"),
-        );
+        let target_addr = cosmos_addr_2_target_addr(TARGET_CONTRACT_ADDR);
+        let target_system = TargetSystem::ContractAddress(target_addr);
         let target_chain = TypedChainId::Evm(4);
         let resource_id = ResourceId::new(target_system, target_chain);
         let function_signature =
@@ -186,17 +186,11 @@ mod tests {
         let nonce = Nonce::from(0x0001);
         let header =
             ProposalHeader::new(resource_id, function_signature, nonce);
-        let token_address =
-            "juno1u235cpgju5vvlzp4w53vu0z5x3etytdpeh78ffekctfcmfc8ezhs9p248h"
-                .to_string();
-        let recipient =
-            "juno1afxj87jjd4usd80gsprtq76uykv02egaydwvj62ldhngzj2zdamqxn9an3"
-                .to_string();
-        let amount = [
-            0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-            0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-            0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x0f,
-        ];
+        let token_address = TOKEN_ADDR.to_string();
+        let recipient = RECIPIENT.to_string();
+        let amount = hex_literal::hex!(
+            "000000000000000000000000000000000000000000000000000000000000000f"
+        );
         let proposal =
             RescueTokensProposal::new(header, token_address, recipient, amount);
         assert_eq!(proposal, expected_proposal);
