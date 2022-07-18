@@ -165,7 +165,7 @@ struct UpdateEdge {
 #[cfg(test)]
 mod tests {
     use crate::{
-        cosmwasm::cosmos_addr_2_target_addr, FunctionSignature, Nonce,
+        cosmwasm::cosmos_address_to_target_address, FunctionSignature, Nonce,
         ResourceId, TargetSystem,
     };
 
@@ -176,7 +176,8 @@ mod tests {
 
     #[test]
     fn encode() {
-        let target_addr = cosmos_addr_2_target_addr(TARGET_CONTRACT_ADDR);
+        let target_addr =
+            cosmos_address_to_target_address(TARGET_CONTRACT_ADDR);
         let target_system = TargetSystem::ContractAddress(target_addr);
         let target_chain = TypedChainId::Cosmos(4);
         let resource_id = ResourceId::new(target_system, target_chain);
@@ -210,7 +211,8 @@ mod tests {
     fn decode() {
         let bytes = hex_literal::hex!("000000000000b37383a2ad2de9e68da75f583e7d0ef2eae1184f04000000000400000000000000017b227372635f636861696e5f6964223a343339383034363531313130352c22726f6f74223a5b302c312c322c332c342c352c362c372c382c392c31302c31312c31322c31332c31342c31352c31362c31372c31382c31392c32302c32312c32322c32332c32342c32352c32362c32372c32382c32392c33302c33315d2c226c61746573745f6c6561665f696e646578223a312c22746172676574223a5b302c302c302c302c302c302c302c302c302c302c302c302c3137392c3131352c3133312c3136322c3137332c34352c3233332c3233302c3134312c3136372c39352c38382c36322c3132352c31342c3234322c3233342c3232352c32342c37395d7d");
         let proposal = AnchorUpdateProposal::from(bytes.to_vec());
-        let target_addr = cosmos_addr_2_target_addr(TARGET_CONTRACT_ADDR);
+        let target_addr =
+            cosmos_address_to_target_address(TARGET_CONTRACT_ADDR);
         let target_system = TargetSystem::ContractAddress(target_addr);
         let target_chain = TypedChainId::Cosmos(4);
         let resource_id = ResourceId::new(target_system, target_chain);

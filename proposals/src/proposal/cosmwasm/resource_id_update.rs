@@ -126,7 +126,7 @@ struct ResourceIdUpdateData {
 #[cfg(test)]
 mod tests {
     use crate::{
-        cosmwasm::cosmos_addr_2_target_addr, FunctionSignature, Nonce,
+        cosmwasm::cosmos_address_to_target_address, FunctionSignature, Nonce,
         ResourceId, TargetSystem, TypedChainId,
     };
 
@@ -143,7 +143,8 @@ mod tests {
 
     #[test]
     fn encode() {
-        let target_addr = cosmos_addr_2_target_addr(TARGET_CONTRACT_ADDR);
+        let target_addr =
+            cosmos_address_to_target_address(TARGET_CONTRACT_ADDR);
         let target_system = TargetSystem::ContractAddress(target_addr);
         let target_chain = TypedChainId::Cosmos(4);
         let resource_id = ResourceId::new(target_system, target_chain);
@@ -153,7 +154,7 @@ mod tests {
         let header =
             ProposalHeader::new(resource_id, function_signature, nonce);
         let new_target_addr =
-            cosmos_addr_2_target_addr(NEW_TARGET_CONTRACT_ADDR);
+            cosmos_address_to_target_address(NEW_TARGET_CONTRACT_ADDR);
         let new_target_system = TargetSystem::ContractAddress(new_target_addr);
         let new_resource_id = ResourceId::new(new_target_system, target_chain);
         let handler_address = HANDLER_ADDR.to_string();
@@ -178,7 +179,8 @@ mod tests {
             "000000000000b37383a2ad2de9e68da75f583e7d0ef2eae1184f04000000000400000000000000017b227265736f757263655f6964223a5b302c302c302c302c302c302c3137392c3131352c3133312c3136322c3137332c34352c3233332c3233302c3134312c3136372c39352c38382c36322c3132352c31342c3234322c3233342c3232352c32342c37392c342c302c302c302c302c345d2c2266756e6374696f6e5f736967223a5b302c302c302c305d2c226e6f6e6365223a312c226e65775f7265736f757263655f6964223a5b302c302c302c302c302c302c39382c3139332c3130352c3130362c3134392c3138312c33392c3134362c32332c3133392c3233352c3233382c34312c33312c3132372c39372c3135322c31372c39372c3136332c342c302c302c302c302c345d2c2268616e646c65725f61646472223a226a756e6f31753233356370676a753576766c7a70347735337675307a357833657479746470656837386666656b637466636d666338657a6873397032343868222c22657865637574696f6e5f636f6e746578745f61646472223a226a756e6f316166786a38376a6a64347573643830677370727471373675796b763032656761796477766a36326c64686e677a6a327a64616d71786e39616e33227d"
         );
         let proposal = ResourceIdUpdateProposal::from(bytes.to_vec());
-        let target_addr = cosmos_addr_2_target_addr(TARGET_CONTRACT_ADDR);
+        let target_addr =
+            cosmos_address_to_target_address(TARGET_CONTRACT_ADDR);
         let target_system = TargetSystem::ContractAddress(target_addr);
         let target_chain = TypedChainId::Cosmos(4);
         let resource_id = ResourceId::new(target_system, target_chain);
@@ -188,7 +190,7 @@ mod tests {
         let header =
             ProposalHeader::new(resource_id, function_signature, nonce);
         let new_target_addr =
-            cosmos_addr_2_target_addr(NEW_TARGET_CONTRACT_ADDR);
+            cosmos_address_to_target_address(NEW_TARGET_CONTRACT_ADDR);
         let new_target_system = TargetSystem::ContractAddress(new_target_addr);
         let new_resource_id = ResourceId::new(new_target_system, target_chain);
         let handler_address = HANDLER_ADDR.to_string();

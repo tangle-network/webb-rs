@@ -108,7 +108,7 @@ struct UpdateConfigMsg {
 #[cfg(test)]
 mod tests {
     use crate::{
-        cosmwasm::cosmos_addr_2_target_addr, FunctionSignature, Nonce,
+        cosmwasm::cosmos_address_to_target_address, FunctionSignature, Nonce,
         ResourceId, TargetSystem, TypedChainId,
     };
 
@@ -119,7 +119,8 @@ mod tests {
 
     #[test]
     fn encode() {
-        let target_addr = cosmos_addr_2_target_addr(TARGET_CONTRACT_ADDR);
+        let target_addr =
+            cosmos_address_to_target_address(TARGET_CONTRACT_ADDR);
         let target_system = TargetSystem::ContractAddress(target_addr);
         let target_chain = TypedChainId::Cosmos(4);
         let resource_id = ResourceId::new(target_system, target_chain);
@@ -145,7 +146,7 @@ mod tests {
         let proposal = WrappingFeeUpdateProposal::from(bytes.to_vec());
         let header = proposal.header();
         let target_system = TargetSystem::ContractAddress(
-            cosmos_addr_2_target_addr(TARGET_CONTRACT_ADDR),
+            cosmos_address_to_target_address(TARGET_CONTRACT_ADDR),
         );
         let target_chain = TypedChainId::Cosmos(4);
         let resource_id = ResourceId::new(target_system, target_chain);
@@ -163,7 +164,7 @@ mod tests {
     #[should_panic]
     fn should_panic_if_wrapping_fee_out_of_range() {
         let target_system = TargetSystem::ContractAddress(
-            cosmos_addr_2_target_addr(TARGET_CONTRACT_ADDR),
+            cosmos_address_to_target_address(TARGET_CONTRACT_ADDR),
         );
         let target_chain = TypedChainId::Cosmos(4);
         let resource_id = ResourceId::new(target_system, target_chain);

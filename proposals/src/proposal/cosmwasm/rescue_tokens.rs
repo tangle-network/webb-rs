@@ -132,7 +132,7 @@ struct RescueTokens {
 #[cfg(test)]
 mod tests {
     use crate::{
-        cosmwasm::cosmos_addr_2_target_addr, FunctionSignature, Nonce,
+        cosmwasm::cosmos_address_to_target_address, FunctionSignature, Nonce,
         ResourceId, TargetSystem, TypedChainId,
     };
 
@@ -147,7 +147,8 @@ mod tests {
 
     #[test]
     fn encode() {
-        let target_addr = cosmos_addr_2_target_addr(TARGET_CONTRACT_ADDR);
+        let target_addr =
+            cosmos_address_to_target_address(TARGET_CONTRACT_ADDR);
         let target_system = TargetSystem::ContractAddress(target_addr);
         let target_chain = TypedChainId::Evm(4);
         let resource_id = ResourceId::new(target_system, target_chain);
@@ -177,7 +178,8 @@ mod tests {
             "000000000000b37383a2ad2de9e68da75f583e7d0ef2eae1184f01000000000400000000000000017b22746f6b656e5f61646472657373223a226a756e6f31753233356370676a753576766c7a70347735337675307a357833657479746470656837386666656b637466636d666338657a6873397032343868222c22746f223a226a756e6f316166786a38376a6a64347573643830677370727471373675796b763032656761796477766a36326c64686e677a6a327a64616d71786e39616e33222c22616d6f756e745f746f5f726573637565223a223135222c226e6f6e6365223a317d"
         );
         let expected_proposal = RescueTokensProposal::from(bytes.to_vec());
-        let target_addr = cosmos_addr_2_target_addr(TARGET_CONTRACT_ADDR);
+        let target_addr =
+            cosmos_address_to_target_address(TARGET_CONTRACT_ADDR);
         let target_system = TargetSystem::ContractAddress(target_addr);
         let target_chain = TypedChainId::Evm(4);
         let resource_id = ResourceId::new(target_system, target_chain);

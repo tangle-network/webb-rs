@@ -92,7 +92,7 @@ struct SetHandler {
 #[cfg(test)]
 mod tests {
     use crate::{
-        cosmwasm::cosmos_addr_2_target_addr, FunctionSignature, Nonce,
+        cosmwasm::cosmos_address_to_target_address, FunctionSignature, Nonce,
         ResourceId, TargetSystem, TypedChainId,
     };
 
@@ -105,7 +105,8 @@ mod tests {
 
     #[test]
     fn encode() {
-        let target_addr = cosmos_addr_2_target_addr(TARGET_CONTRACT_ADDR);
+        let target_addr =
+            cosmos_address_to_target_address(TARGET_CONTRACT_ADDR);
         let target_system = TargetSystem::ContractAddress(target_addr);
         let target_chain = TypedChainId::Cosmos(4);
         let resource_id = ResourceId::new(target_system, target_chain);
@@ -137,7 +138,7 @@ mod tests {
         let nonce = header.nonce();
         assert_eq!(
             target_system,
-            TargetSystem::ContractAddress(cosmos_addr_2_target_addr(
+            TargetSystem::ContractAddress(cosmos_address_to_target_address(
                 TARGET_CONTRACT_ADDR
             )),
         );
