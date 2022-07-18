@@ -1,7 +1,7 @@
 use tiny_keccak::{Hasher, Keccak};
 
-/// Convert Cosmos-sdk chain contract/account address(43 ~ 45 bytes)
-/// to Webb proposal target system address(20 bytes).
+/// Convert the cosmos-sdk chain(like Juno, Terra) account address(43 ~ 45 bytes)
+/// and contract address(63 ~ 65 bytes) to Webb proposal target system address(20 bytes).
 ///
 /// Example:
 ///   Contract/account addr:  juno16e3t7td2wu0wmggnxa3xnyu5whljyed69ptvkp

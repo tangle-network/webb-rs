@@ -8,6 +8,7 @@ use serde::{Deserialize, Serialize};
 ///
 /// The [`FeeRecipientUpdateProposal`] updates the recipient of the wrapping
 /// fees.
+///
 #[allow(clippy::module_name_repetitions)]
 #[derive(Debug, Clone, PartialEq, Eq, Hash)]
 pub struct FeeRecipientUpdateProposal {

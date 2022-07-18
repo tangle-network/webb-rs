@@ -10,6 +10,7 @@ use crate::{ProposalHeader, TypedChainId};
 /// The [`AnchorUpdateProposal`] updates the target Anchor's knowledge of the
 /// source Anchor's Merkle roots. This knowledge is necessary to prove
 /// membership in the source Anchor's Merkle tree on the target chain.
+///
 #[allow(clippy::module_name_repetitions)]
 #[derive(Debug, Copy, Clone, PartialEq, Eq, Hash)]
 pub struct AnchorUpdateProposal {
@@ -194,7 +195,6 @@ mod tests {
             target_system.into_fixed_bytes(),
         );
         let bytes = proposal.to_bytes();
-        println!("bytes: {:02x?}", bytes);
         let expected = hex_literal::hex!(
             "000000000000aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa04000000000400000000000000017b227372635f636861696e5f6964223a343339383034363531313130352c22726f6f74223a5b302c312c322c332c342c352c362c372c382c392c31302c31312c31322c31332c31342c31352c31362c31372c31382c31392c32302c32312c32322c32332c32342c32352c32362c32372c32382c32392c33302c33315d2c226c61746573745f6c6561665f696e646578223a312c22746172676574223a5b302c302c302c302c302c302c302c302c302c302c302c302c3137302c3137302c3137302c3137302c3137302c3137302c3137302c3137302c3137302c3137302c3137302c3137302c3137302c3137302c3137302c3137302c3137302c3137302c3137302c3137305d7d"
         );
