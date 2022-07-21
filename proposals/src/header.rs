@@ -80,6 +80,11 @@ pub enum TypedChainId {
 }
 
 /// Proposal Header (40 bytes).
+/// ┌────────────────────┬─────────────────┬───────────────┐
+/// │                    │                 │               │
+/// │   Resource ID 32B  │ Function Sig 4B │    Nonce 4B   │
+/// │                    │                 │               │
+/// └────────────────────┴─────────────────┴───────────────┘
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Ord, PartialOrd)]
 #[allow(clippy::module_name_repetitions)]
 pub struct ProposalHeader {
