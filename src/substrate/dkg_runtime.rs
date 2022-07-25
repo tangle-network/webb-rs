@@ -9,6 +9,9 @@ pub mod api {
         "Aura",
         "Grandpa",
         "Balances",
+        "DKG",
+        "DKGProposals",
+        "DKGProposalHandler",
         "TransactionPayment",
         "Sudo",
         "ElectionProviderMultiPhase",
@@ -17,9 +20,6 @@ pub mod api {
         "Staking",
         "Session",
         "Historical",
-        "DKG",
-        "DKGProposals",
-        "DKGProposalHandler",
     ];
     #[derive(
         :: subxt :: codec :: Decode,
@@ -38,24 +38,24 @@ pub mod api {
         Grandpa(grandpa::Event),
         #[codec(index = 6)]
         Balances(balances::Event),
-        #[codec(index = 8)]
-        Sudo(sudo::Event),
-        #[codec(index = 9)]
-        ElectionProviderMultiPhase(election_provider_multi_phase::Event),
-        #[codec(index = 10)]
-        BagsList(bags_list::Event),
-        #[codec(index = 11)]
-        NominationPools(nomination_pools::Event),
-        #[codec(index = 12)]
-        Staking(staking::Event),
-        #[codec(index = 13)]
-        Session(session::Event),
-        #[codec(index = 15)]
+        #[codec(index = 7)]
         DKG(dkg::Event),
-        #[codec(index = 16)]
+        #[codec(index = 8)]
         DKGProposals(dkg_proposals::Event),
-        #[codec(index = 17)]
+        #[codec(index = 9)]
         DKGProposalHandler(dkg_proposal_handler::Event),
+        #[codec(index = 11)]
+        Sudo(sudo::Event),
+        #[codec(index = 12)]
+        ElectionProviderMultiPhase(election_provider_multi_phase::Event),
+        #[codec(index = 13)]
+        BagsList(bags_list::Event),
+        #[codec(index = 14)]
+        NominationPools(nomination_pools::Event),
+        #[codec(index = 15)]
+        Staking(staking::Event),
+        #[codec(index = 16)]
+        Session(session::Event),
     }
     pub mod system {
         use super::root_mod;
@@ -1179,11 +1179,11 @@ pub mod api {
                 > {
                     if self.client.metadata().storage_hash::<Events>()?
                         == [
-                            135u8, 90u8, 228u8, 160u8, 176u8, 190u8, 115u8,
-                            123u8, 167u8, 169u8, 107u8, 142u8, 79u8, 122u8,
-                            44u8, 181u8, 201u8, 5u8, 203u8, 156u8, 34u8, 108u8,
-                            63u8, 197u8, 186u8, 57u8, 42u8, 176u8, 41u8, 162u8,
-                            202u8, 246u8,
+                            31u8, 93u8, 175u8, 1u8, 66u8, 5u8, 53u8, 13u8,
+                            15u8, 97u8, 246u8, 60u8, 150u8, 57u8, 113u8, 230u8,
+                            163u8, 99u8, 103u8, 223u8, 22u8, 253u8, 169u8,
+                            200u8, 249u8, 0u8, 135u8, 137u8, 38u8, 165u8, 90u8,
+                            99u8,
                         ]
                     {
                         let entry = Events;
@@ -1427,11 +1427,11 @@ pub mod api {
                         .metadata()
                         .constant_hash("System", "BlockWeights")?
                         == [
-                            171u8, 219u8, 233u8, 26u8, 8u8, 82u8, 126u8, 26u8,
-                            45u8, 242u8, 95u8, 241u8, 173u8, 95u8, 182u8, 49u8,
-                            162u8, 240u8, 151u8, 9u8, 49u8, 197u8, 203u8,
-                            181u8, 118u8, 90u8, 209u8, 38u8, 23u8, 22u8, 164u8,
-                            1u8,
+                            129u8, 27u8, 39u8, 144u8, 79u8, 246u8, 6u8, 108u8,
+                            160u8, 23u8, 121u8, 32u8, 114u8, 113u8, 216u8,
+                            219u8, 213u8, 100u8, 124u8, 151u8, 58u8, 63u8,
+                            104u8, 153u8, 34u8, 66u8, 187u8, 214u8, 73u8,
+                            252u8, 89u8, 253u8,
                         ]
                     {
                         let pallet = self.client.metadata().pallet("System")?;
@@ -4082,6 +4082,4070 @@ pub mod api {
             }
         }
     }
+    pub mod dkg {
+        use super::root_mod;
+        use super::runtime_types;
+        pub mod calls {
+            use super::root_mod;
+            use super::runtime_types;
+            type DispatchError = runtime_types::sp_runtime::DispatchError;
+            #[derive(
+                :: subxt :: codec :: CompactAs,
+                :: subxt :: codec :: Decode,
+                :: subxt :: codec :: Encode,
+                Clone,
+                Debug,
+                Eq,
+                PartialEq,
+            )]
+            pub struct SetSignatureThreshold {
+                pub new_threshold: ::core::primitive::u16,
+            }
+            impl ::subxt::Call for SetSignatureThreshold {
+                const PALLET: &'static str = "DKG";
+                const FUNCTION: &'static str = "set_signature_threshold";
+            }
+            #[derive(
+                :: subxt :: codec :: CompactAs,
+                :: subxt :: codec :: Decode,
+                :: subxt :: codec :: Encode,
+                Clone,
+                Debug,
+                Eq,
+                PartialEq,
+            )]
+            pub struct SetKeygenThreshold {
+                pub new_threshold: ::core::primitive::u16,
+            }
+            impl ::subxt::Call for SetKeygenThreshold {
+                const PALLET: &'static str = "DKG";
+                const FUNCTION: &'static str = "set_keygen_threshold";
+            }
+            #[derive(
+                :: subxt :: codec :: CompactAs,
+                :: subxt :: codec :: Decode,
+                :: subxt :: codec :: Encode,
+                Clone,
+                Debug,
+                Eq,
+                PartialEq,
+            )]
+            pub struct SetRefreshDelay {
+                pub new_delay: ::core::primitive::u8,
+            }
+            impl ::subxt::Call for SetRefreshDelay {
+                const PALLET: &'static str = "DKG";
+                const FUNCTION: &'static str = "set_refresh_delay";
+            }
+            #[derive(
+                :: subxt :: codec :: Decode,
+                :: subxt :: codec :: Encode,
+                Clone,
+                Debug,
+                Eq,
+                PartialEq,
+            )]
+            pub struct SubmitPublicKey {
+                pub keys_and_signatures:
+                    runtime_types::dkg_runtime_primitives::AggregatedPublicKeys,
+            }
+            impl ::subxt::Call for SubmitPublicKey {
+                const PALLET: &'static str = "DKG";
+                const FUNCTION: &'static str = "submit_public_key";
+            }
+            #[derive(
+                :: subxt :: codec :: Decode,
+                :: subxt :: codec :: Encode,
+                Clone,
+                Debug,
+                Eq,
+                PartialEq,
+            )]
+            pub struct SubmitNextPublicKey {
+                pub keys_and_signatures:
+                    runtime_types::dkg_runtime_primitives::AggregatedPublicKeys,
+            }
+            impl ::subxt::Call for SubmitNextPublicKey {
+                const PALLET: &'static str = "DKG";
+                const FUNCTION: &'static str = "submit_next_public_key";
+            }
+            #[derive(
+                :: subxt :: codec :: Decode,
+                :: subxt :: codec :: Encode,
+                Clone,
+                Debug,
+                Eq,
+                PartialEq,
+            )]
+            pub struct SubmitPublicKeySignature { pub signature_proposal : runtime_types :: dkg_runtime_primitives :: proposal :: RefreshProposalSigned , }
+            impl ::subxt::Call for SubmitPublicKeySignature {
+                const PALLET: &'static str = "DKG";
+                const FUNCTION: &'static str = "submit_public_key_signature";
+            }
+            #[derive(
+                :: subxt :: codec :: Decode,
+                :: subxt :: codec :: Encode,
+                Clone,
+                Debug,
+                Eq,
+                PartialEq,
+            )]
+            pub struct SubmitMisbehaviourReports { pub reports : runtime_types :: dkg_runtime_primitives :: AggregatedMisbehaviourReports < runtime_types :: dkg_runtime_primitives :: crypto :: Public > , }
+            impl ::subxt::Call for SubmitMisbehaviourReports {
+                const PALLET: &'static str = "DKG";
+                const FUNCTION: &'static str = "submit_misbehaviour_reports";
+            }
+            #[derive(
+                :: subxt :: codec :: Decode,
+                :: subxt :: codec :: Encode,
+                Clone,
+                Debug,
+                Eq,
+                PartialEq,
+            )]
+            pub struct Unjail;
+            impl ::subxt::Call for Unjail {
+                const PALLET: &'static str = "DKG";
+                const FUNCTION: &'static str = "unjail";
+            }
+            #[derive(
+                :: subxt :: codec :: Decode,
+                :: subxt :: codec :: Encode,
+                Clone,
+                Debug,
+                Eq,
+                PartialEq,
+            )]
+            pub struct ForceUnjailKeygen {
+                pub authority:
+                    runtime_types::dkg_runtime_primitives::crypto::Public,
+            }
+            impl ::subxt::Call for ForceUnjailKeygen {
+                const PALLET: &'static str = "DKG";
+                const FUNCTION: &'static str = "force_unjail_keygen";
+            }
+            #[derive(
+                :: subxt :: codec :: Decode,
+                :: subxt :: codec :: Encode,
+                Clone,
+                Debug,
+                Eq,
+                PartialEq,
+            )]
+            pub struct ForceUnjailSigning {
+                pub authority:
+                    runtime_types::dkg_runtime_primitives::crypto::Public,
+            }
+            impl ::subxt::Call for ForceUnjailSigning {
+                const PALLET: &'static str = "DKG";
+                const FUNCTION: &'static str = "force_unjail_signing";
+            }
+            #[derive(
+                :: subxt :: codec :: Decode,
+                :: subxt :: codec :: Encode,
+                Clone,
+                Debug,
+                Eq,
+                PartialEq,
+            )]
+            pub struct ManualIncrementNonce;
+            impl ::subxt::Call for ManualIncrementNonce {
+                const PALLET: &'static str = "DKG";
+                const FUNCTION: &'static str = "manual_increment_nonce";
+            }
+            #[derive(
+                :: subxt :: codec :: Decode,
+                :: subxt :: codec :: Encode,
+                Clone,
+                Debug,
+                Eq,
+                PartialEq,
+            )]
+            pub struct ManualRefresh;
+            impl ::subxt::Call for ManualRefresh {
+                const PALLET: &'static str = "DKG";
+                const FUNCTION: &'static str = "manual_refresh";
+            }
+            #[derive(
+                :: subxt :: codec :: Decode,
+                :: subxt :: codec :: Encode,
+                Clone,
+                Debug,
+                Eq,
+                PartialEq,
+            )]
+            pub struct ForceChangeAuthorities;
+            impl ::subxt::Call for ForceChangeAuthorities {
+                const PALLET: &'static str = "DKG";
+                const FUNCTION: &'static str = "force_change_authorities";
+            }
+            pub struct TransactionApi<'a, T: ::subxt::Config, X> {
+                client: &'a ::subxt::Client<T>,
+                marker: ::core::marker::PhantomData<X>,
+            }
+            impl<'a, T, X> TransactionApi<'a, T, X>
+            where
+                T: ::subxt::Config,
+                X: ::subxt::extrinsic::ExtrinsicParams<T>,
+            {
+                pub fn new(client: &'a ::subxt::Client<T>) -> Self {
+                    Self {
+                        client,
+                        marker: ::core::marker::PhantomData,
+                    }
+                }
+                #[doc = "Set the pending signature threshold for the session following the next session."]
+                #[doc = ""]
+                #[doc = "We cannot assume that the next DKG has not already completed keygen."]
+                #[doc = "After all, if we are in a new session the next DKG may have already completed."]
+                #[doc = "Therefore, when we update the thresholds we are updating a threshold"]
+                #[doc = "that will become the next threshold after the next session update."]
+                #[doc = ""]
+                #[doc = "* `origin` - The account origin."]
+                #[doc = "* `new_threshold` - The new signature threshold for the DKG."]
+                pub fn set_signature_threshold(
+                    &self,
+                    new_threshold: ::core::primitive::u16,
+                ) -> Result<
+                    ::subxt::SubmittableExtrinsic<
+                        'a,
+                        T,
+                        X,
+                        SetSignatureThreshold,
+                        DispatchError,
+                        root_mod::Event,
+                    >,
+                    ::subxt::BasicError,
+                > {
+                    if self
+                        .client
+                        .metadata()
+                        .call_hash::<SetSignatureThreshold>()?
+                        == [
+                            122u8, 91u8, 136u8, 125u8, 136u8, 58u8, 171u8,
+                            101u8, 232u8, 23u8, 111u8, 125u8, 213u8, 79u8,
+                            92u8, 100u8, 221u8, 250u8, 51u8, 28u8, 12u8, 88u8,
+                            101u8, 175u8, 158u8, 185u8, 134u8, 50u8, 33u8,
+                            53u8, 147u8, 158u8,
+                        ]
+                    {
+                        let call = SetSignatureThreshold { new_threshold };
+                        Ok(::subxt::SubmittableExtrinsic::new(
+                            self.client,
+                            call,
+                        ))
+                    } else {
+                        Err(::subxt::MetadataError::IncompatibleMetadata.into())
+                    }
+                }
+                #[doc = "Set the pending keygen threshold for the session following the next session."]
+                #[doc = ""]
+                #[doc = "We cannot assume that the next DKG has not already completed keygen."]
+                #[doc = "After all, if we are in a new session the next DKG may have already completed."]
+                #[doc = "Therefore, when we update the thresholds we are updating a threshold"]
+                #[doc = "that will become the next threshold after the next session update."]
+                #[doc = ""]
+                #[doc = "* `origin` - The account origin."]
+                #[doc = "* `new_threshold` - The new keygen threshold for the DKG."]
+                pub fn set_keygen_threshold(
+                    &self,
+                    new_threshold: ::core::primitive::u16,
+                ) -> Result<
+                    ::subxt::SubmittableExtrinsic<
+                        'a,
+                        T,
+                        X,
+                        SetKeygenThreshold,
+                        DispatchError,
+                        root_mod::Event,
+                    >,
+                    ::subxt::BasicError,
+                > {
+                    if self
+                        .client
+                        .metadata()
+                        .call_hash::<SetKeygenThreshold>()?
+                        == [
+                            247u8, 170u8, 146u8, 242u8, 43u8, 84u8, 205u8,
+                            99u8, 131u8, 228u8, 228u8, 252u8, 132u8, 234u8,
+                            3u8, 4u8, 6u8, 242u8, 109u8, 226u8, 71u8, 244u8,
+                            212u8, 2u8, 33u8, 68u8, 220u8, 237u8, 40u8, 39u8,
+                            254u8, 142u8,
+                        ]
+                    {
+                        let call = SetKeygenThreshold { new_threshold };
+                        Ok(::subxt::SubmittableExtrinsic::new(
+                            self.client,
+                            call,
+                        ))
+                    } else {
+                        Err(::subxt::MetadataError::IncompatibleMetadata.into())
+                    }
+                }
+                #[doc = "Sets the delay when a unsigned `RefreshProposal` will be added to the unsigned"]
+                #[doc = "proposal queue."]
+                #[doc = ""]
+                #[doc = "* `origin` - The account origin."]
+                #[doc = "* `new_delay` - The percentage of elapsed session duration to wait before adding an"]
+                #[doc = "  unsigned refresh proposal to the unsigned proposal queue."]
+                pub fn set_refresh_delay(
+                    &self,
+                    new_delay: ::core::primitive::u8,
+                ) -> Result<
+                    ::subxt::SubmittableExtrinsic<
+                        'a,
+                        T,
+                        X,
+                        SetRefreshDelay,
+                        DispatchError,
+                        root_mod::Event,
+                    >,
+                    ::subxt::BasicError,
+                > {
+                    if self.client.metadata().call_hash::<SetRefreshDelay>()?
+                        == [
+                            153u8, 213u8, 152u8, 100u8, 176u8, 155u8, 11u8,
+                            107u8, 152u8, 61u8, 137u8, 56u8, 184u8, 130u8,
+                            234u8, 108u8, 213u8, 62u8, 166u8, 1u8, 204u8,
+                            160u8, 33u8, 28u8, 54u8, 27u8, 223u8, 23u8, 45u8,
+                            234u8, 242u8, 161u8,
+                        ]
+                    {
+                        let call = SetRefreshDelay { new_delay };
+                        Ok(::subxt::SubmittableExtrinsic::new(
+                            self.client,
+                            call,
+                        ))
+                    } else {
+                        Err(::subxt::MetadataError::IncompatibleMetadata.into())
+                    }
+                }
+                #[doc = "Submits and stores the active public key for the genesis session into the on-chain"]
+                #[doc = "storage. This is primarily used to separate the genesis public key submission from"]
+                #[doc = "non-genesis rounds."]
+                #[doc = ""]
+                #[doc = "Can only be submitted by the current authorities. It is also required that a"]
+                #[doc = "`SignatureThreshold` of submissions is reached in order to successfully"]
+                #[doc = "store the public key on-chain."]
+                #[doc = ""]
+                #[doc = "* `origin` - The account origin."]
+                #[doc = "* `keys_and_signatures` - The aggregated public keys and signatures for possible current"]
+                #[doc = "  DKG public keys."]
+                pub fn submit_public_key(
+                    &self,
+                    keys_and_signatures : runtime_types :: dkg_runtime_primitives :: AggregatedPublicKeys,
+                ) -> Result<
+                    ::subxt::SubmittableExtrinsic<
+                        'a,
+                        T,
+                        X,
+                        SubmitPublicKey,
+                        DispatchError,
+                        root_mod::Event,
+                    >,
+                    ::subxt::BasicError,
+                > {
+                    if self.client.metadata().call_hash::<SubmitPublicKey>()?
+                        == [
+                            173u8, 232u8, 176u8, 226u8, 83u8, 67u8, 238u8,
+                            215u8, 161u8, 193u8, 191u8, 223u8, 165u8, 253u8,
+                            44u8, 204u8, 128u8, 146u8, 194u8, 102u8, 115u8,
+                            55u8, 255u8, 30u8, 53u8, 139u8, 72u8, 90u8, 16u8,
+                            190u8, 192u8, 75u8,
+                        ]
+                    {
+                        let call = SubmitPublicKey {
+                            keys_and_signatures,
+                        };
+                        Ok(::subxt::SubmittableExtrinsic::new(
+                            self.client,
+                            call,
+                        ))
+                    } else {
+                        Err(::subxt::MetadataError::IncompatibleMetadata.into())
+                    }
+                }
+                #[doc = "Submits and stores the next public key for the next session into the on-chain storage."]
+                #[doc = ""]
+                #[doc = "Can only be submitted by the next authorities. It is also required that a"]
+                #[doc = "`NextSignatureThreshold` of submissions is reached in order to successfully"]
+                #[doc = "store the public key on-chain."]
+                #[doc = ""]
+                #[doc = "* `origin` - The account origin."]
+                #[doc = "* `keys_and_signatures` - The aggregated public keys and signatures for possible next"]
+                #[doc = "  DKG public keys."]
+                pub fn submit_next_public_key(
+                    &self,
+                    keys_and_signatures : runtime_types :: dkg_runtime_primitives :: AggregatedPublicKeys,
+                ) -> Result<
+                    ::subxt::SubmittableExtrinsic<
+                        'a,
+                        T,
+                        X,
+                        SubmitNextPublicKey,
+                        DispatchError,
+                        root_mod::Event,
+                    >,
+                    ::subxt::BasicError,
+                > {
+                    if self
+                        .client
+                        .metadata()
+                        .call_hash::<SubmitNextPublicKey>()?
+                        == [
+                            100u8, 255u8, 127u8, 211u8, 252u8, 234u8, 21u8,
+                            41u8, 59u8, 68u8, 62u8, 130u8, 131u8, 46u8, 93u8,
+                            194u8, 122u8, 68u8, 223u8, 119u8, 211u8, 191u8,
+                            187u8, 139u8, 15u8, 161u8, 211u8, 109u8, 168u8,
+                            78u8, 165u8, 41u8,
+                        ]
+                    {
+                        let call = SubmitNextPublicKey {
+                            keys_and_signatures,
+                        };
+                        Ok(::subxt::SubmittableExtrinsic::new(
+                            self.client,
+                            call,
+                        ))
+                    } else {
+                        Err(::subxt::MetadataError::IncompatibleMetadata.into())
+                    }
+                }
+                #[doc = "Submits the public key signature for the key refresh/rotation process."]
+                #[doc = ""]
+                #[doc = "The signature is the signature of the next public key `RefreshProposal`, signed by the"]
+                #[doc = "current DKG. It is stored on-chain only if it verifies successfully against the current"]
+                #[doc = "DKG's public key. Successful storage of this public key signature also removes"]
+                #[doc = "the unsigned `RefreshProposal` from the unsigned queue."]
+                #[doc = ""]
+                #[doc = "For manual refreshes, after the signature is submitted and stored on-chain,"]
+                #[doc = "the keys are immediately refreshed and the authority set is immediately rotated"]
+                #[doc = "and incremented."]
+                #[doc = ""]
+                #[doc = "* `origin` - The account origin."]
+                #[doc = "* `signature_proposal` - The signed refresh proposal containing the public key signature"]
+                #[doc = "  and nonce."]
+                pub fn submit_public_key_signature(
+                    &self,
+                    signature_proposal : runtime_types :: dkg_runtime_primitives :: proposal :: RefreshProposalSigned,
+                ) -> Result<
+                    ::subxt::SubmittableExtrinsic<
+                        'a,
+                        T,
+                        X,
+                        SubmitPublicKeySignature,
+                        DispatchError,
+                        root_mod::Event,
+                    >,
+                    ::subxt::BasicError,
+                > {
+                    if self
+                        .client
+                        .metadata()
+                        .call_hash::<SubmitPublicKeySignature>()?
+                        == [
+                            64u8, 121u8, 205u8, 174u8, 235u8, 120u8, 49u8,
+                            71u8, 91u8, 199u8, 18u8, 52u8, 161u8, 61u8, 232u8,
+                            90u8, 246u8, 207u8, 79u8, 19u8, 173u8, 156u8,
+                            150u8, 52u8, 127u8, 218u8, 165u8, 181u8, 221u8,
+                            121u8, 216u8, 65u8,
+                        ]
+                    {
+                        let call =
+                            SubmitPublicKeySignature { signature_proposal };
+                        Ok(::subxt::SubmittableExtrinsic::new(
+                            self.client,
+                            call,
+                        ))
+                    } else {
+                        Err(::subxt::MetadataError::IncompatibleMetadata.into())
+                    }
+                }
+                #[doc = "Submits misbehaviour reports on chain. Signatures of the offending authority are"]
+                #[doc = "verified against the current or next authorities depending on the type of misbehaviour."]
+                #[doc = "- Keygen: Verifies against the next authorities, since they are doing keygen."]
+                #[doc = "- Signing: Verifies against the current authorities, since they are doing signing."]
+                #[doc = ""]
+                #[doc = "Verifies the reports against the respective thresholds and if enough reports are met"]
+                #[doc = "begins to jail and decrease the reputation of the offending authority."]
+                #[doc = ""]
+                #[doc = "The misbehaviour reputation update is:"]
+                #[doc = "\tAUTHORITY_REPUTATION = DECAY_PERCENTAGE * AUTHORITY_REPUTATION"]
+                #[doc = ""]
+                #[doc = "If there are not enough unjailed keygen authorities to perform a keygen after the next"]
+                #[doc = "session, then we deduct the pending keygen threshold (and pending signing threshold)"]
+                #[doc = "accordingly."]
+                #[doc = ""]
+                #[doc = "* `origin` - The account origin."]
+                #[doc = "* `reports` - The aggregated misbehaviour reports containing signatures of an offending"]
+                #[doc = "  authority"]
+                pub fn submit_misbehaviour_reports(
+                    &self,
+                    reports : runtime_types :: dkg_runtime_primitives :: AggregatedMisbehaviourReports < runtime_types :: dkg_runtime_primitives :: crypto :: Public >,
+                ) -> Result<
+                    ::subxt::SubmittableExtrinsic<
+                        'a,
+                        T,
+                        X,
+                        SubmitMisbehaviourReports,
+                        DispatchError,
+                        root_mod::Event,
+                    >,
+                    ::subxt::BasicError,
+                > {
+                    if self
+                        .client
+                        .metadata()
+                        .call_hash::<SubmitMisbehaviourReports>()?
+                        == [
+                            179u8, 201u8, 171u8, 224u8, 9u8, 158u8, 65u8, 95u8,
+                            226u8, 168u8, 136u8, 197u8, 129u8, 197u8, 49u8,
+                            197u8, 235u8, 0u8, 254u8, 39u8, 111u8, 240u8,
+                            117u8, 123u8, 163u8, 177u8, 9u8, 211u8, 223u8,
+                            104u8, 131u8, 237u8,
+                        ]
+                    {
+                        let call = SubmitMisbehaviourReports { reports };
+                        Ok(::subxt::SubmittableExtrinsic::new(
+                            self.client,
+                            call,
+                        ))
+                    } else {
+                        Err(::subxt::MetadataError::IncompatibleMetadata.into())
+                    }
+                }
+                #[doc = "Attempts to remove an authority from all possible jails (keygen & signing)."]
+                #[doc = "This can only be called by the controller of the authority in jail. The"]
+                #[doc = "origin must map directly to the authority in jail."]
+                #[doc = ""]
+                #[doc = "The authority's jail sentence for either keygen or signing must be elapsed"]
+                #[doc = "for the authority to be removed from the jail."]
+                #[doc = ""]
+                #[doc = "* `origin` - The account origin."]
+                pub fn unjail(
+                    &self,
+                ) -> Result<
+                    ::subxt::SubmittableExtrinsic<
+                        'a,
+                        T,
+                        X,
+                        Unjail,
+                        DispatchError,
+                        root_mod::Event,
+                    >,
+                    ::subxt::BasicError,
+                > {
+                    if self.client.metadata().call_hash::<Unjail>()?
+                        == [
+                            209u8, 5u8, 90u8, 85u8, 167u8, 92u8, 85u8, 132u8,
+                            48u8, 27u8, 89u8, 149u8, 242u8, 209u8, 97u8, 87u8,
+                            13u8, 58u8, 124u8, 41u8, 155u8, 103u8, 62u8, 115u8,
+                            58u8, 143u8, 233u8, 105u8, 18u8, 198u8, 173u8,
+                            77u8,
+                        ]
+                    {
+                        let call = Unjail {};
+                        Ok(::subxt::SubmittableExtrinsic::new(
+                            self.client,
+                            call,
+                        ))
+                    } else {
+                        Err(::subxt::MetadataError::IncompatibleMetadata.into())
+                    }
+                }
+                #[doc = "Force removes an authority from keygen jail."]
+                #[doc = ""]
+                #[doc = "Can only be called by the root origin."]
+                #[doc = ""]
+                #[doc = "* `origin` - The account origin."]
+                #[doc = "* `authority` - The authority to be removed from the keygen jail."]
+                pub fn force_unjail_keygen(
+                    &self,
+                    authority : runtime_types :: dkg_runtime_primitives :: crypto :: Public,
+                ) -> Result<
+                    ::subxt::SubmittableExtrinsic<
+                        'a,
+                        T,
+                        X,
+                        ForceUnjailKeygen,
+                        DispatchError,
+                        root_mod::Event,
+                    >,
+                    ::subxt::BasicError,
+                > {
+                    if self
+                        .client
+                        .metadata()
+                        .call_hash::<ForceUnjailKeygen>()?
+                        == [
+                            195u8, 242u8, 39u8, 180u8, 7u8, 13u8, 185u8, 92u8,
+                            203u8, 183u8, 123u8, 71u8, 100u8, 56u8, 32u8,
+                            234u8, 213u8, 1u8, 70u8, 91u8, 158u8, 124u8, 224u8,
+                            135u8, 252u8, 149u8, 118u8, 135u8, 52u8, 253u8,
+                            82u8, 148u8,
+                        ]
+                    {
+                        let call = ForceUnjailKeygen { authority };
+                        Ok(::subxt::SubmittableExtrinsic::new(
+                            self.client,
+                            call,
+                        ))
+                    } else {
+                        Err(::subxt::MetadataError::IncompatibleMetadata.into())
+                    }
+                }
+                #[doc = "Force removes an authority from signing jail."]
+                #[doc = ""]
+                #[doc = "Can only be called by the root origin."]
+                #[doc = ""]
+                #[doc = "* `origin` - The account origin."]
+                #[doc = "* `authority` - The authority to be removed from the signing jail."]
+                pub fn force_unjail_signing(
+                    &self,
+                    authority : runtime_types :: dkg_runtime_primitives :: crypto :: Public,
+                ) -> Result<
+                    ::subxt::SubmittableExtrinsic<
+                        'a,
+                        T,
+                        X,
+                        ForceUnjailSigning,
+                        DispatchError,
+                        root_mod::Event,
+                    >,
+                    ::subxt::BasicError,
+                > {
+                    if self
+                        .client
+                        .metadata()
+                        .call_hash::<ForceUnjailSigning>()?
+                        == [
+                            58u8, 229u8, 158u8, 234u8, 101u8, 114u8, 53u8,
+                            203u8, 70u8, 72u8, 122u8, 70u8, 121u8, 80u8, 221u8,
+                            208u8, 9u8, 10u8, 66u8, 165u8, 41u8, 156u8, 97u8,
+                            76u8, 21u8, 204u8, 82u8, 244u8, 27u8, 223u8, 244u8,
+                            173u8,
+                        ]
+                    {
+                        let call = ForceUnjailSigning { authority };
+                        Ok(::subxt::SubmittableExtrinsic::new(
+                            self.client,
+                            call,
+                        ))
+                    } else {
+                        Err(::subxt::MetadataError::IncompatibleMetadata.into())
+                    }
+                }
+                #[doc = "Manually Update the `RefreshNonce` (increment it by one)."]
+                #[doc = ""]
+                #[doc = "Can only be called by the root origin."]
+                #[doc = ""]
+                #[doc = "* `origin` - The account origin."]
+                #[doc = "**Important**: This function is only available for testing purposes."]
+                pub fn manual_increment_nonce(
+                    &self,
+                ) -> Result<
+                    ::subxt::SubmittableExtrinsic<
+                        'a,
+                        T,
+                        X,
+                        ManualIncrementNonce,
+                        DispatchError,
+                        root_mod::Event,
+                    >,
+                    ::subxt::BasicError,
+                > {
+                    if self
+                        .client
+                        .metadata()
+                        .call_hash::<ManualIncrementNonce>()?
+                        == [
+                            22u8, 159u8, 183u8, 158u8, 52u8, 204u8, 244u8,
+                            244u8, 25u8, 35u8, 106u8, 37u8, 142u8, 136u8,
+                            162u8, 142u8, 8u8, 184u8, 168u8, 216u8, 224u8,
+                            54u8, 160u8, 201u8, 147u8, 181u8, 178u8, 49u8,
+                            132u8, 194u8, 244u8, 121u8,
+                        ]
+                    {
+                        let call = ManualIncrementNonce {};
+                        Ok(::subxt::SubmittableExtrinsic::new(
+                            self.client,
+                            call,
+                        ))
+                    } else {
+                        Err(::subxt::MetadataError::IncompatibleMetadata.into())
+                    }
+                }
+                #[doc = "Manual Trigger DKG Refresh process."]
+                #[doc = ""]
+                #[doc = "Can only be called by the root origin."]
+                #[doc = ""]
+                #[doc = "* `origin` - The account that is initiating the refresh process."]
+                #[doc = "**Important**: This function is only available for testing purposes."]
+                pub fn manual_refresh(
+                    &self,
+                ) -> Result<
+                    ::subxt::SubmittableExtrinsic<
+                        'a,
+                        T,
+                        X,
+                        ManualRefresh,
+                        DispatchError,
+                        root_mod::Event,
+                    >,
+                    ::subxt::BasicError,
+                > {
+                    if self.client.metadata().call_hash::<ManualRefresh>()?
+                        == [
+                            141u8, 166u8, 81u8, 218u8, 235u8, 190u8, 65u8,
+                            190u8, 157u8, 160u8, 105u8, 236u8, 47u8, 129u8,
+                            0u8, 155u8, 6u8, 182u8, 20u8, 39u8, 71u8, 195u8,
+                            13u8, 242u8, 94u8, 6u8, 130u8, 192u8, 89u8, 240u8,
+                            46u8, 21u8,
+                        ]
+                    {
+                        let call = ManualRefresh {};
+                        Ok(::subxt::SubmittableExtrinsic::new(
+                            self.client,
+                            call,
+                        ))
+                    } else {
+                        Err(::subxt::MetadataError::IncompatibleMetadata.into())
+                    }
+                }
+                #[doc = "Forcefully rotate the DKG"]
+                #[doc = ""]
+                #[doc = "This forces the next authorities into the current authority spot and"]
+                #[doc = "automatically increments the authority ID. It uses `change_authorities`"]
+                #[doc = "to execute the rotation forcefully."]
+                pub fn force_change_authorities(
+                    &self,
+                ) -> Result<
+                    ::subxt::SubmittableExtrinsic<
+                        'a,
+                        T,
+                        X,
+                        ForceChangeAuthorities,
+                        DispatchError,
+                        root_mod::Event,
+                    >,
+                    ::subxt::BasicError,
+                > {
+                    if self
+                        .client
+                        .metadata()
+                        .call_hash::<ForceChangeAuthorities>()?
+                        == [
+                            98u8, 226u8, 238u8, 39u8, 98u8, 79u8, 85u8, 160u8,
+                            82u8, 3u8, 34u8, 195u8, 220u8, 178u8, 25u8, 110u8,
+                            12u8, 72u8, 165u8, 126u8, 207u8, 173u8, 210u8,
+                            74u8, 54u8, 106u8, 255u8, 243u8, 240u8, 22u8,
+                            161u8, 255u8,
+                        ]
+                    {
+                        let call = ForceChangeAuthorities {};
+                        Ok(::subxt::SubmittableExtrinsic::new(
+                            self.client,
+                            call,
+                        ))
+                    } else {
+                        Err(::subxt::MetadataError::IncompatibleMetadata.into())
+                    }
+                }
+            }
+        }
+        pub type Event = runtime_types::pallet_dkg_metadata::pallet::Event;
+        pub mod events {
+            use super::runtime_types;
+            #[derive(
+                :: subxt :: codec :: Decode,
+                :: subxt :: codec :: Encode,
+                Clone,
+                Debug,
+                Eq,
+                PartialEq,
+            )]
+            #[doc = "Current public key submitted"]
+            pub struct PublicKeySubmitted {
+                pub compressed_pub_key: ::std::vec::Vec<::core::primitive::u8>,
+                pub uncompressed_pub_key:
+                    ::std::vec::Vec<::core::primitive::u8>,
+            }
+            impl ::subxt::Event for PublicKeySubmitted {
+                const PALLET: &'static str = "DKG";
+                const EVENT: &'static str = "PublicKeySubmitted";
+            }
+            #[derive(
+                :: subxt :: codec :: Decode,
+                :: subxt :: codec :: Encode,
+                Clone,
+                Debug,
+                Eq,
+                PartialEq,
+            )]
+            #[doc = "Next public key submitted"]
+            pub struct NextPublicKeySubmitted {
+                pub compressed_pub_key: ::std::vec::Vec<::core::primitive::u8>,
+                pub uncompressed_pub_key:
+                    ::std::vec::Vec<::core::primitive::u8>,
+            }
+            impl ::subxt::Event for NextPublicKeySubmitted {
+                const PALLET: &'static str = "DKG";
+                const EVENT: &'static str = "NextPublicKeySubmitted";
+            }
+            #[derive(
+                :: subxt :: codec :: Decode,
+                :: subxt :: codec :: Encode,
+                Clone,
+                Debug,
+                Eq,
+                PartialEq,
+            )]
+            #[doc = "Next public key signature submitted"]
+            pub struct NextPublicKeySignatureSubmitted {
+                pub pub_key_sig: ::std::vec::Vec<::core::primitive::u8>,
+            }
+            impl ::subxt::Event for NextPublicKeySignatureSubmitted {
+                const PALLET: &'static str = "DKG";
+                const EVENT: &'static str = "NextPublicKeySignatureSubmitted";
+            }
+            #[derive(
+                :: subxt :: codec :: Decode,
+                :: subxt :: codec :: Encode,
+                Clone,
+                Debug,
+                Eq,
+                PartialEq,
+            )]
+            #[doc = "Current Public Key Changed."]
+            pub struct PublicKeyChanged {
+                pub compressed_pub_key: ::std::vec::Vec<::core::primitive::u8>,
+                pub uncompressed_pub_key:
+                    ::std::vec::Vec<::core::primitive::u8>,
+            }
+            impl ::subxt::Event for PublicKeyChanged {
+                const PALLET: &'static str = "DKG";
+                const EVENT: &'static str = "PublicKeyChanged";
+            }
+            #[derive(
+                :: subxt :: codec :: Decode,
+                :: subxt :: codec :: Encode,
+                Clone,
+                Debug,
+                Eq,
+                PartialEq,
+            )]
+            #[doc = "Current Public Key Signature Changed."]
+            pub struct PublicKeySignatureChanged {
+                pub pub_key_sig: ::std::vec::Vec<::core::primitive::u8>,
+            }
+            impl ::subxt::Event for PublicKeySignatureChanged {
+                const PALLET: &'static str = "DKG";
+                const EVENT: &'static str = "PublicKeySignatureChanged";
+            }
+            #[derive(
+                :: subxt :: codec :: Decode,
+                :: subxt :: codec :: Encode,
+                Clone,
+                Debug,
+                Eq,
+                PartialEq,
+            )]
+            #[doc = "Misbehaviour reports submitted"]
+            pub struct MisbehaviourReportsSubmitted {
+                pub misbehaviour_type:
+                    runtime_types::dkg_runtime_primitives::MisbehaviourType,
+                pub reporters: ::std::vec::Vec<
+                    runtime_types::dkg_runtime_primitives::crypto::Public,
+                >,
+            }
+            impl ::subxt::Event for MisbehaviourReportsSubmitted {
+                const PALLET: &'static str = "DKG";
+                const EVENT: &'static str = "MisbehaviourReportsSubmitted";
+            }
+            #[derive(
+                :: subxt :: codec :: CompactAs,
+                :: subxt :: codec :: Decode,
+                :: subxt :: codec :: Encode,
+                Clone,
+                Debug,
+                Eq,
+                PartialEq,
+            )]
+            #[doc = "Refresh DKG Keys Finished (forcefully)."]
+            pub struct RefreshKeysFinished {
+                pub next_authority_set_id: ::core::primitive::u64,
+            }
+            impl ::subxt::Event for RefreshKeysFinished {
+                const PALLET: &'static str = "DKG";
+                const EVENT: &'static str = "RefreshKeysFinished";
+            }
+        }
+        pub mod storage {
+            use super::runtime_types;
+            pub struct UsedSignatures;
+            impl ::subxt::StorageEntry for UsedSignatures {
+                const PALLET: &'static str = "DKG";
+                const STORAGE: &'static str = "UsedSignatures";
+                type Value =
+                    ::std::vec::Vec<::std::vec::Vec<::core::primitive::u8>>;
+                fn key(&self) -> ::subxt::StorageEntryKey {
+                    ::subxt::StorageEntryKey::Plain
+                }
+            }
+            pub struct RefreshNonce;
+            impl ::subxt::StorageEntry for RefreshNonce {
+                const PALLET: &'static str = "DKG";
+                const STORAGE: &'static str = "RefreshNonce";
+                type Value = ::core::primitive::u32;
+                fn key(&self) -> ::subxt::StorageEntryKey {
+                    ::subxt::StorageEntryKey::Plain
+                }
+            }
+            pub struct RefreshDelay;
+            impl ::subxt::StorageEntry for RefreshDelay {
+                const PALLET: &'static str = "DKG";
+                const STORAGE: &'static str = "RefreshDelay";
+                type Value = runtime_types::sp_arithmetic::per_things::Permill;
+                fn key(&self) -> ::subxt::StorageEntryKey {
+                    ::subxt::StorageEntryKey::Plain
+                }
+            }
+            pub struct RefreshInProgress;
+            impl ::subxt::StorageEntry for RefreshInProgress {
+                const PALLET: &'static str = "DKG";
+                const STORAGE: &'static str = "RefreshInProgress";
+                type Value = ::core::primitive::bool;
+                fn key(&self) -> ::subxt::StorageEntryKey {
+                    ::subxt::StorageEntryKey::Plain
+                }
+            }
+            pub struct ShouldManualRefresh;
+            impl ::subxt::StorageEntry for ShouldManualRefresh {
+                const PALLET: &'static str = "DKG";
+                const STORAGE: &'static str = "ShouldManualRefresh";
+                type Value = ::core::primitive::bool;
+                fn key(&self) -> ::subxt::StorageEntryKey {
+                    ::subxt::StorageEntryKey::Plain
+                }
+            }
+            pub struct NextDKGPublicKey;
+            impl ::subxt::StorageEntry for NextDKGPublicKey {
+                const PALLET: &'static str = "DKG";
+                const STORAGE: &'static str = "NextDKGPublicKey";
+                type Value = (
+                    ::core::primitive::u64,
+                    ::std::vec::Vec<::core::primitive::u8>,
+                );
+                fn key(&self) -> ::subxt::StorageEntryKey {
+                    ::subxt::StorageEntryKey::Plain
+                }
+            }
+            pub struct NextPublicKeySignature;
+            impl ::subxt::StorageEntry for NextPublicKeySignature {
+                const PALLET: &'static str = "DKG";
+                const STORAGE: &'static str = "NextPublicKeySignature";
+                type Value = ::std::vec::Vec<::core::primitive::u8>;
+                fn key(&self) -> ::subxt::StorageEntryKey {
+                    ::subxt::StorageEntryKey::Plain
+                }
+            }
+            pub struct DKGPublicKey;
+            impl ::subxt::StorageEntry for DKGPublicKey {
+                const PALLET: &'static str = "DKG";
+                const STORAGE: &'static str = "DKGPublicKey";
+                type Value = (
+                    ::core::primitive::u64,
+                    ::std::vec::Vec<::core::primitive::u8>,
+                );
+                fn key(&self) -> ::subxt::StorageEntryKey {
+                    ::subxt::StorageEntryKey::Plain
+                }
+            }
+            pub struct DKGPublicKeySignature;
+            impl ::subxt::StorageEntry for DKGPublicKeySignature {
+                const PALLET: &'static str = "DKG";
+                const STORAGE: &'static str = "DKGPublicKeySignature";
+                type Value = ::std::vec::Vec<::core::primitive::u8>;
+                fn key(&self) -> ::subxt::StorageEntryKey {
+                    ::subxt::StorageEntryKey::Plain
+                }
+            }
+            pub struct PreviousPublicKey;
+            impl ::subxt::StorageEntry for PreviousPublicKey {
+                const PALLET: &'static str = "DKG";
+                const STORAGE: &'static str = "PreviousPublicKey";
+                type Value = (
+                    ::core::primitive::u64,
+                    ::std::vec::Vec<::core::primitive::u8>,
+                );
+                fn key(&self) -> ::subxt::StorageEntryKey {
+                    ::subxt::StorageEntryKey::Plain
+                }
+            }
+            pub struct HistoricalRounds<'a>(pub &'a ::core::primitive::u64);
+            impl ::subxt::StorageEntry for HistoricalRounds<'_> {
+                const PALLET: &'static str = "DKG";
+                const STORAGE: &'static str = "HistoricalRounds";
+                type Value =
+                    runtime_types::pallet_dkg_metadata::types::RoundMetadata;
+                fn key(&self) -> ::subxt::StorageEntryKey {
+                    ::subxt::StorageEntryKey::Map(vec![
+                        ::subxt::StorageMapKey::new(
+                            &self.0,
+                            ::subxt::StorageHasher::Blake2_256,
+                        ),
+                    ])
+                }
+            }
+            pub struct SignatureThreshold;
+            impl ::subxt::StorageEntry for SignatureThreshold {
+                const PALLET: &'static str = "DKG";
+                const STORAGE: &'static str = "SignatureThreshold";
+                type Value = ::core::primitive::u16;
+                fn key(&self) -> ::subxt::StorageEntryKey {
+                    ::subxt::StorageEntryKey::Plain
+                }
+            }
+            pub struct KeygenThreshold;
+            impl ::subxt::StorageEntry for KeygenThreshold {
+                const PALLET: &'static str = "DKG";
+                const STORAGE: &'static str = "KeygenThreshold";
+                type Value = ::core::primitive::u16;
+                fn key(&self) -> ::subxt::StorageEntryKey {
+                    ::subxt::StorageEntryKey::Plain
+                }
+            }
+            pub struct NextSignatureThreshold;
+            impl ::subxt::StorageEntry for NextSignatureThreshold {
+                const PALLET: &'static str = "DKG";
+                const STORAGE: &'static str = "NextSignatureThreshold";
+                type Value = ::core::primitive::u16;
+                fn key(&self) -> ::subxt::StorageEntryKey {
+                    ::subxt::StorageEntryKey::Plain
+                }
+            }
+            pub struct NextKeygenThreshold;
+            impl ::subxt::StorageEntry for NextKeygenThreshold {
+                const PALLET: &'static str = "DKG";
+                const STORAGE: &'static str = "NextKeygenThreshold";
+                type Value = ::core::primitive::u16;
+                fn key(&self) -> ::subxt::StorageEntryKey {
+                    ::subxt::StorageEntryKey::Plain
+                }
+            }
+            pub struct PendingSignatureThreshold;
+            impl ::subxt::StorageEntry for PendingSignatureThreshold {
+                const PALLET: &'static str = "DKG";
+                const STORAGE: &'static str = "PendingSignatureThreshold";
+                type Value = ::core::primitive::u16;
+                fn key(&self) -> ::subxt::StorageEntryKey {
+                    ::subxt::StorageEntryKey::Plain
+                }
+            }
+            pub struct PendingKeygenThreshold;
+            impl ::subxt::StorageEntry for PendingKeygenThreshold {
+                const PALLET: &'static str = "DKG";
+                const STORAGE: &'static str = "PendingKeygenThreshold";
+                type Value = ::core::primitive::u16;
+                fn key(&self) -> ::subxt::StorageEntryKey {
+                    ::subxt::StorageEntryKey::Plain
+                }
+            }
+            pub struct Authorities;
+            impl ::subxt::StorageEntry for Authorities {
+                const PALLET: &'static str = "DKG";
+                const STORAGE: &'static str = "Authorities";
+                type Value = ::std::vec::Vec<
+                    runtime_types::dkg_runtime_primitives::crypto::Public,
+                >;
+                fn key(&self) -> ::subxt::StorageEntryKey {
+                    ::subxt::StorageEntryKey::Plain
+                }
+            }
+            pub struct AuthoritySetId;
+            impl ::subxt::StorageEntry for AuthoritySetId {
+                const PALLET: &'static str = "DKG";
+                const STORAGE: &'static str = "AuthoritySetId";
+                type Value = ::core::primitive::u64;
+                fn key(&self) -> ::subxt::StorageEntryKey {
+                    ::subxt::StorageEntryKey::Plain
+                }
+            }
+            pub struct NextAuthoritySetId;
+            impl ::subxt::StorageEntry for NextAuthoritySetId {
+                const PALLET: &'static str = "DKG";
+                const STORAGE: &'static str = "NextAuthoritySetId";
+                type Value = ::core::primitive::u64;
+                fn key(&self) -> ::subxt::StorageEntryKey {
+                    ::subxt::StorageEntryKey::Plain
+                }
+            }
+            pub struct NextAuthorities;
+            impl ::subxt::StorageEntry for NextAuthorities {
+                const PALLET: &'static str = "DKG";
+                const STORAGE: &'static str = "NextAuthorities";
+                type Value = ::std::vec::Vec<
+                    runtime_types::dkg_runtime_primitives::crypto::Public,
+                >;
+                fn key(&self) -> ::subxt::StorageEntryKey {
+                    ::subxt::StorageEntryKey::Plain
+                }
+            }
+            pub struct CurrentAuthoritiesAccounts;
+            impl ::subxt::StorageEntry for CurrentAuthoritiesAccounts {
+                const PALLET: &'static str = "DKG";
+                const STORAGE: &'static str = "CurrentAuthoritiesAccounts";
+                type Value =
+                    ::std::vec::Vec<::subxt::sp_core::crypto::AccountId32>;
+                fn key(&self) -> ::subxt::StorageEntryKey {
+                    ::subxt::StorageEntryKey::Plain
+                }
+            }
+            pub struct NextAuthoritiesAccounts;
+            impl ::subxt::StorageEntry for NextAuthoritiesAccounts {
+                const PALLET: &'static str = "DKG";
+                const STORAGE: &'static str = "NextAuthoritiesAccounts";
+                type Value =
+                    ::std::vec::Vec<::subxt::sp_core::crypto::AccountId32>;
+                fn key(&self) -> ::subxt::StorageEntryKey {
+                    ::subxt::StorageEntryKey::Plain
+                }
+            }
+            pub struct AccountToAuthority<'a>(
+                pub &'a ::subxt::sp_core::crypto::AccountId32,
+            );
+            impl ::subxt::StorageEntry for AccountToAuthority<'_> {
+                const PALLET: &'static str = "DKG";
+                const STORAGE: &'static str = "AccountToAuthority";
+                type Value =
+                    runtime_types::dkg_runtime_primitives::crypto::Public;
+                fn key(&self) -> ::subxt::StorageEntryKey {
+                    ::subxt::StorageEntryKey::Map(vec![
+                        ::subxt::StorageMapKey::new(
+                            &self.0,
+                            ::subxt::StorageHasher::Blake2_256,
+                        ),
+                    ])
+                }
+            }
+            pub struct MisbehaviourReports<'a>(
+                pub &'a runtime_types::dkg_runtime_primitives::MisbehaviourType,
+                pub &'a ::core::primitive::u64,
+                pub &'a runtime_types::dkg_runtime_primitives::crypto::Public,
+            );
+            impl ::subxt::StorageEntry for MisbehaviourReports<'_> {
+                const PALLET: &'static str = "DKG";
+                const STORAGE: &'static str = "MisbehaviourReports";
+                type Value = runtime_types :: dkg_runtime_primitives :: AggregatedMisbehaviourReports < runtime_types :: dkg_runtime_primitives :: crypto :: Public > ;
+                fn key(&self) -> ::subxt::StorageEntryKey {
+                    ::subxt::StorageEntryKey::Map(vec![
+                        ::subxt::StorageMapKey::new(
+                            &(&self.0, &self.1, &self.2),
+                            ::subxt::StorageHasher::Blake2_256,
+                        ),
+                    ])
+                }
+            }
+            pub struct AuthorityReputations<'a>(
+                pub &'a runtime_types::dkg_runtime_primitives::crypto::Public,
+            );
+            impl ::subxt::StorageEntry for AuthorityReputations<'_> {
+                const PALLET: &'static str = "DKG";
+                const STORAGE: &'static str = "AuthorityReputations";
+                type Value = ::core::primitive::u128;
+                fn key(&self) -> ::subxt::StorageEntryKey {
+                    ::subxt::StorageEntryKey::Map(vec![
+                        ::subxt::StorageMapKey::new(
+                            &self.0,
+                            ::subxt::StorageHasher::Blake2_256,
+                        ),
+                    ])
+                }
+            }
+            pub struct JailedKeygenAuthorities<'a>(
+                pub &'a runtime_types::dkg_runtime_primitives::crypto::Public,
+            );
+            impl ::subxt::StorageEntry for JailedKeygenAuthorities<'_> {
+                const PALLET: &'static str = "DKG";
+                const STORAGE: &'static str = "JailedKeygenAuthorities";
+                type Value = ::core::primitive::u32;
+                fn key(&self) -> ::subxt::StorageEntryKey {
+                    ::subxt::StorageEntryKey::Map(vec![
+                        ::subxt::StorageMapKey::new(
+                            &self.0,
+                            ::subxt::StorageHasher::Blake2_256,
+                        ),
+                    ])
+                }
+            }
+            pub struct JailedSigningAuthorities<'a>(
+                pub &'a runtime_types::dkg_runtime_primitives::crypto::Public,
+            );
+            impl ::subxt::StorageEntry for JailedSigningAuthorities<'_> {
+                const PALLET: &'static str = "DKG";
+                const STORAGE: &'static str = "JailedSigningAuthorities";
+                type Value = ::core::primitive::u32;
+                fn key(&self) -> ::subxt::StorageEntryKey {
+                    ::subxt::StorageEntryKey::Map(vec![
+                        ::subxt::StorageMapKey::new(
+                            &self.0,
+                            ::subxt::StorageHasher::Blake2_256,
+                        ),
+                    ])
+                }
+            }
+            pub struct BestAuthorities;
+            impl ::subxt::StorageEntry for BestAuthorities {
+                const PALLET: &'static str = "DKG";
+                const STORAGE: &'static str = "BestAuthorities";
+                type Value = ::std::vec::Vec<(
+                    ::core::primitive::u16,
+                    runtime_types::dkg_runtime_primitives::crypto::Public,
+                )>;
+                fn key(&self) -> ::subxt::StorageEntryKey {
+                    ::subxt::StorageEntryKey::Plain
+                }
+            }
+            pub struct NextBestAuthorities;
+            impl ::subxt::StorageEntry for NextBestAuthorities {
+                const PALLET: &'static str = "DKG";
+                const STORAGE: &'static str = "NextBestAuthorities";
+                type Value = ::std::vec::Vec<(
+                    ::core::primitive::u16,
+                    runtime_types::dkg_runtime_primitives::crypto::Public,
+                )>;
+                fn key(&self) -> ::subxt::StorageEntryKey {
+                    ::subxt::StorageEntryKey::Plain
+                }
+            }
+            pub struct StorageApi<'a, T: ::subxt::Config> {
+                client: &'a ::subxt::Client<T>,
+            }
+            impl<'a, T: ::subxt::Config> StorageApi<'a, T> {
+                pub fn new(client: &'a ::subxt::Client<T>) -> Self {
+                    Self { client }
+                }
+                #[doc = " Public key Signatures for past sessions"]
+                pub async fn used_signatures(
+                    &self,
+                    block_hash: ::core::option::Option<T::Hash>,
+                ) -> ::core::result::Result<
+                    ::std::vec::Vec<::std::vec::Vec<::core::primitive::u8>>,
+                    ::subxt::BasicError,
+                > {
+                    if self
+                        .client
+                        .metadata()
+                        .storage_hash::<UsedSignatures>()?
+                        == [
+                            17u8, 166u8, 71u8, 200u8, 53u8, 132u8, 79u8, 208u8,
+                            187u8, 231u8, 68u8, 227u8, 163u8, 125u8, 235u8,
+                            145u8, 171u8, 160u8, 82u8, 237u8, 170u8, 48u8,
+                            173u8, 104u8, 13u8, 113u8, 12u8, 56u8, 47u8, 42u8,
+                            250u8, 70u8,
+                        ]
+                    {
+                        let entry = UsedSignatures;
+                        self.client
+                            .storage()
+                            .fetch_or_default(&entry, block_hash)
+                            .await
+                    } else {
+                        Err(::subxt::MetadataError::IncompatibleMetadata.into())
+                    }
+                }
+                #[doc = " Nonce value for next refresh proposal"]
+                pub async fn refresh_nonce(
+                    &self,
+                    block_hash: ::core::option::Option<T::Hash>,
+                ) -> ::core::result::Result<
+                    ::core::primitive::u32,
+                    ::subxt::BasicError,
+                > {
+                    if self.client.metadata().storage_hash::<RefreshNonce>()?
+                        == [
+                            184u8, 107u8, 53u8, 61u8, 92u8, 121u8, 77u8, 93u8,
+                            141u8, 192u8, 238u8, 92u8, 15u8, 155u8, 1u8, 153u8,
+                            55u8, 64u8, 83u8, 144u8, 127u8, 250u8, 207u8, 14u8,
+                            62u8, 137u8, 151u8, 230u8, 86u8, 236u8, 27u8,
+                            175u8,
+                        ]
+                    {
+                        let entry = RefreshNonce;
+                        self.client
+                            .storage()
+                            .fetch_or_default(&entry, block_hash)
+                            .await
+                    } else {
+                        Err(::subxt::MetadataError::IncompatibleMetadata.into())
+                    }
+                }
+                #[doc = " Session progress required to kickstart refresh process"]
+                pub async fn refresh_delay(
+                    &self,
+                    block_hash: ::core::option::Option<T::Hash>,
+                ) -> ::core::result::Result<
+                    runtime_types::sp_arithmetic::per_things::Permill,
+                    ::subxt::BasicError,
+                > {
+                    if self.client.metadata().storage_hash::<RefreshDelay>()?
+                        == [
+                            180u8, 202u8, 73u8, 192u8, 104u8, 179u8, 161u8,
+                            128u8, 190u8, 211u8, 99u8, 82u8, 64u8, 192u8,
+                            208u8, 39u8, 86u8, 224u8, 232u8, 25u8, 187u8, 32u8,
+                            8u8, 39u8, 36u8, 47u8, 137u8, 92u8, 129u8, 115u8,
+                            93u8, 100u8,
+                        ]
+                    {
+                        let entry = RefreshDelay;
+                        self.client
+                            .storage()
+                            .fetch_or_default(&entry, block_hash)
+                            .await
+                    } else {
+                        Err(::subxt::MetadataError::IncompatibleMetadata.into())
+                    }
+                }
+                #[doc = " Check if there is a refresh in progress."]
+                pub async fn refresh_in_progress(
+                    &self,
+                    block_hash: ::core::option::Option<T::Hash>,
+                ) -> ::core::result::Result<
+                    ::core::primitive::bool,
+                    ::subxt::BasicError,
+                > {
+                    if self
+                        .client
+                        .metadata()
+                        .storage_hash::<RefreshInProgress>()?
+                        == [
+                            150u8, 114u8, 14u8, 254u8, 132u8, 254u8, 10u8,
+                            89u8, 109u8, 4u8, 182u8, 128u8, 114u8, 15u8, 82u8,
+                            35u8, 88u8, 86u8, 32u8, 82u8, 83u8, 175u8, 123u8,
+                            98u8, 120u8, 180u8, 167u8, 185u8, 57u8, 221u8,
+                            12u8, 62u8,
+                        ]
+                    {
+                        let entry = RefreshInProgress;
+                        self.client
+                            .storage()
+                            .fetch_or_default(&entry, block_hash)
+                            .await
+                    } else {
+                        Err(::subxt::MetadataError::IncompatibleMetadata.into())
+                    }
+                }
+                #[doc = " Should we manually trigger a DKG refresh process."]
+                pub async fn should_manual_refresh(
+                    &self,
+                    block_hash: ::core::option::Option<T::Hash>,
+                ) -> ::core::result::Result<
+                    ::core::primitive::bool,
+                    ::subxt::BasicError,
+                > {
+                    if self
+                        .client
+                        .metadata()
+                        .storage_hash::<ShouldManualRefresh>()?
+                        == [
+                            8u8, 62u8, 186u8, 74u8, 165u8, 5u8, 229u8, 30u8,
+                            130u8, 245u8, 0u8, 67u8, 160u8, 166u8, 39u8, 193u8,
+                            18u8, 152u8, 51u8, 30u8, 228u8, 176u8, 167u8,
+                            200u8, 114u8, 106u8, 125u8, 65u8, 176u8, 234u8,
+                            192u8, 95u8,
+                        ]
+                    {
+                        let entry = ShouldManualRefresh;
+                        self.client
+                            .storage()
+                            .fetch_or_default(&entry, block_hash)
+                            .await
+                    } else {
+                        Err(::subxt::MetadataError::IncompatibleMetadata.into())
+                    }
+                }
+                #[doc = " Holds public key for next session"]
+                pub async fn next_dkg_public_key(
+                    &self,
+                    block_hash: ::core::option::Option<T::Hash>,
+                ) -> ::core::result::Result<
+                    ::core::option::Option<(
+                        ::core::primitive::u64,
+                        ::std::vec::Vec<::core::primitive::u8>,
+                    )>,
+                    ::subxt::BasicError,
+                > {
+                    if self
+                        .client
+                        .metadata()
+                        .storage_hash::<NextDKGPublicKey>()?
+                        == [
+                            147u8, 213u8, 171u8, 9u8, 247u8, 218u8, 74u8, 10u8,
+                            66u8, 24u8, 52u8, 251u8, 125u8, 28u8, 54u8, 12u8,
+                            243u8, 205u8, 242u8, 48u8, 179u8, 211u8, 178u8,
+                            219u8, 88u8, 247u8, 51u8, 52u8, 27u8, 170u8, 212u8,
+                            181u8,
+                        ]
+                    {
+                        let entry = NextDKGPublicKey;
+                        self.client.storage().fetch(&entry, block_hash).await
+                    } else {
+                        Err(::subxt::MetadataError::IncompatibleMetadata.into())
+                    }
+                }
+                #[doc = " Signature of the DKG public key for the next session"]
+                pub async fn next_public_key_signature(
+                    &self,
+                    block_hash: ::core::option::Option<T::Hash>,
+                ) -> ::core::result::Result<
+                    ::core::option::Option<
+                        ::std::vec::Vec<::core::primitive::u8>,
+                    >,
+                    ::subxt::BasicError,
+                > {
+                    if self
+                        .client
+                        .metadata()
+                        .storage_hash::<NextPublicKeySignature>()?
+                        == [
+                            128u8, 96u8, 220u8, 158u8, 111u8, 181u8, 68u8,
+                            32u8, 33u8, 122u8, 61u8, 99u8, 58u8, 84u8, 110u8,
+                            13u8, 8u8, 179u8, 11u8, 80u8, 5u8, 90u8, 194u8,
+                            230u8, 3u8, 124u8, 27u8, 157u8, 73u8, 143u8, 159u8,
+                            98u8,
+                        ]
+                    {
+                        let entry = NextPublicKeySignature;
+                        self.client.storage().fetch(&entry, block_hash).await
+                    } else {
+                        Err(::subxt::MetadataError::IncompatibleMetadata.into())
+                    }
+                }
+                #[doc = " Holds active public key for ongoing session"]
+                pub async fn dkg_public_key(
+                    &self,
+                    block_hash: ::core::option::Option<T::Hash>,
+                ) -> ::core::result::Result<
+                    (
+                        ::core::primitive::u64,
+                        ::std::vec::Vec<::core::primitive::u8>,
+                    ),
+                    ::subxt::BasicError,
+                > {
+                    if self.client.metadata().storage_hash::<DKGPublicKey>()?
+                        == [
+                            134u8, 73u8, 251u8, 94u8, 50u8, 143u8, 130u8, 71u8,
+                            180u8, 91u8, 29u8, 20u8, 105u8, 138u8, 225u8,
+                            205u8, 180u8, 94u8, 203u8, 106u8, 109u8, 101u8,
+                            114u8, 3u8, 182u8, 236u8, 231u8, 124u8, 198u8,
+                            106u8, 102u8, 242u8,
+                        ]
+                    {
+                        let entry = DKGPublicKey;
+                        self.client
+                            .storage()
+                            .fetch_or_default(&entry, block_hash)
+                            .await
+                    } else {
+                        Err(::subxt::MetadataError::IncompatibleMetadata.into())
+                    }
+                }
+                #[doc = " Signature of the current DKG public key"]
+                pub async fn dkg_public_key_signature(
+                    &self,
+                    block_hash: ::core::option::Option<T::Hash>,
+                ) -> ::core::result::Result<
+                    ::std::vec::Vec<::core::primitive::u8>,
+                    ::subxt::BasicError,
+                > {
+                    if self
+                        .client
+                        .metadata()
+                        .storage_hash::<DKGPublicKeySignature>()?
+                        == [
+                            184u8, 31u8, 185u8, 8u8, 102u8, 120u8, 175u8,
+                            105u8, 106u8, 6u8, 14u8, 197u8, 211u8, 49u8, 192u8,
+                            201u8, 46u8, 42u8, 208u8, 63u8, 234u8, 131u8,
+                            207u8, 131u8, 21u8, 119u8, 39u8, 105u8, 27u8,
+                            174u8, 173u8, 29u8,
+                        ]
+                    {
+                        let entry = DKGPublicKeySignature;
+                        self.client
+                            .storage()
+                            .fetch_or_default(&entry, block_hash)
+                            .await
+                    } else {
+                        Err(::subxt::MetadataError::IncompatibleMetadata.into())
+                    }
+                }
+                #[doc = " Holds public key for immediate past session"]
+                pub async fn previous_public_key(
+                    &self,
+                    block_hash: ::core::option::Option<T::Hash>,
+                ) -> ::core::result::Result<
+                    (
+                        ::core::primitive::u64,
+                        ::std::vec::Vec<::core::primitive::u8>,
+                    ),
+                    ::subxt::BasicError,
+                > {
+                    if self
+                        .client
+                        .metadata()
+                        .storage_hash::<PreviousPublicKey>()?
+                        == [
+                            254u8, 74u8, 168u8, 47u8, 143u8, 21u8, 245u8,
+                            148u8, 75u8, 45u8, 54u8, 49u8, 22u8, 239u8, 129u8,
+                            250u8, 127u8, 70u8, 231u8, 25u8, 215u8, 229u8,
+                            130u8, 32u8, 137u8, 160u8, 108u8, 183u8, 65u8,
+                            34u8, 241u8, 245u8,
+                        ]
+                    {
+                        let entry = PreviousPublicKey;
+                        self.client
+                            .storage()
+                            .fetch_or_default(&entry, block_hash)
+                            .await
+                    } else {
+                        Err(::subxt::MetadataError::IncompatibleMetadata.into())
+                    }
+                }
+                #[doc = " Tracks current proposer set"]
+                pub async fn historical_rounds(
+                    &self,
+                    _0: &::core::primitive::u64,
+                    block_hash: ::core::option::Option<T::Hash>,
+                ) -> ::core::result::Result<
+                    runtime_types::pallet_dkg_metadata::types::RoundMetadata,
+                    ::subxt::BasicError,
+                > {
+                    if self
+                        .client
+                        .metadata()
+                        .storage_hash::<HistoricalRounds>()?
+                        == [
+                            68u8, 204u8, 162u8, 133u8, 183u8, 110u8, 221u8,
+                            109u8, 249u8, 29u8, 65u8, 94u8, 10u8, 16u8, 59u8,
+                            13u8, 85u8, 128u8, 18u8, 253u8, 15u8, 10u8, 6u8,
+                            211u8, 206u8, 176u8, 90u8, 15u8, 242u8, 141u8,
+                            177u8, 179u8,
+                        ]
+                    {
+                        let entry = HistoricalRounds(_0);
+                        self.client
+                            .storage()
+                            .fetch_or_default(&entry, block_hash)
+                            .await
+                    } else {
+                        Err(::subxt::MetadataError::IncompatibleMetadata.into())
+                    }
+                }
+                #[doc = " Tracks current proposer set"]
+                pub async fn historical_rounds_iter(
+                    &self,
+                    block_hash: ::core::option::Option<T::Hash>,
+                ) -> ::core::result::Result<
+                    ::subxt::KeyIter<'a, T, HistoricalRounds<'a>>,
+                    ::subxt::BasicError,
+                > {
+                    if self
+                        .client
+                        .metadata()
+                        .storage_hash::<HistoricalRounds>()?
+                        == [
+                            68u8, 204u8, 162u8, 133u8, 183u8, 110u8, 221u8,
+                            109u8, 249u8, 29u8, 65u8, 94u8, 10u8, 16u8, 59u8,
+                            13u8, 85u8, 128u8, 18u8, 253u8, 15u8, 10u8, 6u8,
+                            211u8, 206u8, 176u8, 90u8, 15u8, 242u8, 141u8,
+                            177u8, 179u8,
+                        ]
+                    {
+                        self.client.storage().iter(block_hash).await
+                    } else {
+                        Err(::subxt::MetadataError::IncompatibleMetadata.into())
+                    }
+                }
+                #[doc = " The current signature threshold (i.e. the `t` in t-of-n)"]
+                pub async fn signature_threshold(
+                    &self,
+                    block_hash: ::core::option::Option<T::Hash>,
+                ) -> ::core::result::Result<
+                    ::core::primitive::u16,
+                    ::subxt::BasicError,
+                > {
+                    if self
+                        .client
+                        .metadata()
+                        .storage_hash::<SignatureThreshold>()?
+                        == [
+                            228u8, 213u8, 121u8, 182u8, 49u8, 44u8, 159u8,
+                            113u8, 209u8, 234u8, 107u8, 232u8, 192u8, 211u8,
+                            144u8, 183u8, 170u8, 37u8, 236u8, 48u8, 177u8, 7u8,
+                            62u8, 63u8, 39u8, 134u8, 158u8, 72u8, 52u8, 179u8,
+                            184u8, 217u8,
+                        ]
+                    {
+                        let entry = SignatureThreshold;
+                        self.client
+                            .storage()
+                            .fetch_or_default(&entry, block_hash)
+                            .await
+                    } else {
+                        Err(::subxt::MetadataError::IncompatibleMetadata.into())
+                    }
+                }
+                #[doc = " The current signature threshold (i.e. the `n` in t-of-n)"]
+                pub async fn keygen_threshold(
+                    &self,
+                    block_hash: ::core::option::Option<T::Hash>,
+                ) -> ::core::result::Result<
+                    ::core::primitive::u16,
+                    ::subxt::BasicError,
+                > {
+                    if self
+                        .client
+                        .metadata()
+                        .storage_hash::<KeygenThreshold>()?
+                        == [
+                            52u8, 253u8, 133u8, 19u8, 89u8, 89u8, 8u8, 246u8,
+                            87u8, 16u8, 72u8, 213u8, 230u8, 168u8, 223u8, 38u8,
+                            33u8, 83u8, 79u8, 28u8, 2u8, 92u8, 141u8, 197u8,
+                            73u8, 190u8, 6u8, 177u8, 240u8, 245u8, 119u8, 70u8,
+                        ]
+                    {
+                        let entry = KeygenThreshold;
+                        self.client
+                            .storage()
+                            .fetch_or_default(&entry, block_hash)
+                            .await
+                    } else {
+                        Err(::subxt::MetadataError::IncompatibleMetadata.into())
+                    }
+                }
+                #[doc = " The current signature threshold (i.e. the `t` in t-of-n)"]
+                pub async fn next_signature_threshold(
+                    &self,
+                    block_hash: ::core::option::Option<T::Hash>,
+                ) -> ::core::result::Result<
+                    ::core::primitive::u16,
+                    ::subxt::BasicError,
+                > {
+                    if self
+                        .client
+                        .metadata()
+                        .storage_hash::<NextSignatureThreshold>()?
+                        == [
+                            83u8, 91u8, 234u8, 198u8, 71u8, 140u8, 138u8,
+                            136u8, 26u8, 244u8, 93u8, 37u8, 141u8, 37u8, 91u8,
+                            236u8, 135u8, 137u8, 86u8, 35u8, 240u8, 136u8,
+                            144u8, 203u8, 230u8, 163u8, 66u8, 121u8, 18u8,
+                            128u8, 102u8, 124u8,
+                        ]
+                    {
+                        let entry = NextSignatureThreshold;
+                        self.client
+                            .storage()
+                            .fetch_or_default(&entry, block_hash)
+                            .await
+                    } else {
+                        Err(::subxt::MetadataError::IncompatibleMetadata.into())
+                    }
+                }
+                #[doc = " The current signature threshold (i.e. the `n` in t-of-n)"]
+                pub async fn next_keygen_threshold(
+                    &self,
+                    block_hash: ::core::option::Option<T::Hash>,
+                ) -> ::core::result::Result<
+                    ::core::primitive::u16,
+                    ::subxt::BasicError,
+                > {
+                    if self
+                        .client
+                        .metadata()
+                        .storage_hash::<NextKeygenThreshold>()?
+                        == [
+                            244u8, 125u8, 22u8, 245u8, 44u8, 192u8, 133u8,
+                            170u8, 115u8, 173u8, 56u8, 200u8, 83u8, 192u8,
+                            65u8, 213u8, 71u8, 28u8, 15u8, 200u8, 47u8, 103u8,
+                            215u8, 179u8, 6u8, 95u8, 214u8, 89u8, 223u8, 133u8,
+                            161u8, 191u8,
+                        ]
+                    {
+                        let entry = NextKeygenThreshold;
+                        self.client
+                            .storage()
+                            .fetch_or_default(&entry, block_hash)
+                            .await
+                    } else {
+                        Err(::subxt::MetadataError::IncompatibleMetadata.into())
+                    }
+                }
+                #[doc = " The pending signature threshold (i.e. the `t` in t-of-n)"]
+                pub async fn pending_signature_threshold(
+                    &self,
+                    block_hash: ::core::option::Option<T::Hash>,
+                ) -> ::core::result::Result<
+                    ::core::primitive::u16,
+                    ::subxt::BasicError,
+                > {
+                    if self
+                        .client
+                        .metadata()
+                        .storage_hash::<PendingSignatureThreshold>()?
+                        == [
+                            69u8, 20u8, 129u8, 76u8, 67u8, 68u8, 122u8, 151u8,
+                            39u8, 116u8, 35u8, 34u8, 96u8, 168u8, 39u8, 43u8,
+                            64u8, 185u8, 126u8, 145u8, 247u8, 150u8, 96u8,
+                            125u8, 109u8, 208u8, 254u8, 121u8, 227u8, 235u8,
+                            108u8, 169u8,
+                        ]
+                    {
+                        let entry = PendingSignatureThreshold;
+                        self.client
+                            .storage()
+                            .fetch_or_default(&entry, block_hash)
+                            .await
+                    } else {
+                        Err(::subxt::MetadataError::IncompatibleMetadata.into())
+                    }
+                }
+                #[doc = " The pending signature threshold (i.e. the `n` in t-of-n)"]
+                pub async fn pending_keygen_threshold(
+                    &self,
+                    block_hash: ::core::option::Option<T::Hash>,
+                ) -> ::core::result::Result<
+                    ::core::primitive::u16,
+                    ::subxt::BasicError,
+                > {
+                    if self
+                        .client
+                        .metadata()
+                        .storage_hash::<PendingKeygenThreshold>()?
+                        == [
+                            80u8, 94u8, 41u8, 244u8, 115u8, 174u8, 75u8, 71u8,
+                            225u8, 122u8, 125u8, 141u8, 81u8, 69u8, 51u8,
+                            200u8, 129u8, 143u8, 14u8, 106u8, 228u8, 177u8,
+                            196u8, 167u8, 18u8, 70u8, 31u8, 137u8, 8u8, 233u8,
+                            249u8, 202u8,
+                        ]
+                    {
+                        let entry = PendingKeygenThreshold;
+                        self.client
+                            .storage()
+                            .fetch_or_default(&entry, block_hash)
+                            .await
+                    } else {
+                        Err(::subxt::MetadataError::IncompatibleMetadata.into())
+                    }
+                }
+                #[doc = " The current authorities set"]
+                pub async fn authorities(
+                    &self,
+                    block_hash: ::core::option::Option<T::Hash>,
+                ) -> ::core::result::Result<
+                    ::std::vec::Vec<
+                        runtime_types::dkg_runtime_primitives::crypto::Public,
+                    >,
+                    ::subxt::BasicError,
+                > {
+                    if self.client.metadata().storage_hash::<Authorities>()?
+                        == [
+                            45u8, 197u8, 244u8, 25u8, 113u8, 204u8, 231u8,
+                            240u8, 124u8, 4u8, 153u8, 160u8, 92u8, 242u8,
+                            251u8, 64u8, 146u8, 82u8, 161u8, 154u8, 238u8,
+                            220u8, 206u8, 186u8, 244u8, 49u8, 238u8, 244u8,
+                            122u8, 26u8, 159u8, 168u8,
+                        ]
+                    {
+                        let entry = Authorities;
+                        self.client
+                            .storage()
+                            .fetch_or_default(&entry, block_hash)
+                            .await
+                    } else {
+                        Err(::subxt::MetadataError::IncompatibleMetadata.into())
+                    }
+                }
+                #[doc = " The current authority set id"]
+                pub async fn authority_set_id(
+                    &self,
+                    block_hash: ::core::option::Option<T::Hash>,
+                ) -> ::core::result::Result<
+                    ::core::primitive::u64,
+                    ::subxt::BasicError,
+                > {
+                    if self
+                        .client
+                        .metadata()
+                        .storage_hash::<AuthoritySetId>()?
+                        == [
+                            97u8, 57u8, 86u8, 112u8, 28u8, 206u8, 59u8, 216u8,
+                            109u8, 216u8, 119u8, 48u8, 31u8, 112u8, 189u8,
+                            19u8, 234u8, 38u8, 14u8, 212u8, 191u8, 203u8, 72u8,
+                            164u8, 131u8, 57u8, 77u8, 192u8, 182u8, 168u8,
+                            185u8, 114u8,
+                        ]
+                    {
+                        let entry = AuthoritySetId;
+                        self.client
+                            .storage()
+                            .fetch_or_default(&entry, block_hash)
+                            .await
+                    } else {
+                        Err(::subxt::MetadataError::IncompatibleMetadata.into())
+                    }
+                }
+                #[doc = " The next authority set id"]
+                pub async fn next_authority_set_id(
+                    &self,
+                    block_hash: ::core::option::Option<T::Hash>,
+                ) -> ::core::result::Result<
+                    ::core::primitive::u64,
+                    ::subxt::BasicError,
+                > {
+                    if self
+                        .client
+                        .metadata()
+                        .storage_hash::<NextAuthoritySetId>()?
+                        == [
+                            27u8, 226u8, 90u8, 171u8, 61u8, 158u8, 36u8, 48u8,
+                            88u8, 240u8, 189u8, 234u8, 176u8, 40u8, 78u8,
+                            239u8, 201u8, 189u8, 111u8, 160u8, 5u8, 232u8,
+                            196u8, 228u8, 19u8, 238u8, 185u8, 98u8, 73u8,
+                            207u8, 135u8, 20u8,
+                        ]
+                    {
+                        let entry = NextAuthoritySetId;
+                        self.client
+                            .storage()
+                            .fetch_or_default(&entry, block_hash)
+                            .await
+                    } else {
+                        Err(::subxt::MetadataError::IncompatibleMetadata.into())
+                    }
+                }
+                #[doc = " Authorities set scheduled to be used with the next session"]
+                pub async fn next_authorities(
+                    &self,
+                    block_hash: ::core::option::Option<T::Hash>,
+                ) -> ::core::result::Result<
+                    ::std::vec::Vec<
+                        runtime_types::dkg_runtime_primitives::crypto::Public,
+                    >,
+                    ::subxt::BasicError,
+                > {
+                    if self
+                        .client
+                        .metadata()
+                        .storage_hash::<NextAuthorities>()?
+                        == [
+                            217u8, 12u8, 213u8, 100u8, 67u8, 73u8, 155u8,
+                            134u8, 236u8, 210u8, 129u8, 96u8, 191u8, 83u8,
+                            200u8, 17u8, 181u8, 124u8, 201u8, 155u8, 14u8,
+                            246u8, 203u8, 23u8, 57u8, 221u8, 95u8, 174u8,
+                            128u8, 9u8, 32u8, 1u8,
+                        ]
+                    {
+                        let entry = NextAuthorities;
+                        self.client
+                            .storage()
+                            .fetch_or_default(&entry, block_hash)
+                            .await
+                    } else {
+                        Err(::subxt::MetadataError::IncompatibleMetadata.into())
+                    }
+                }
+                #[doc = " Accounts for the current authorities"]
+                pub async fn current_authorities_accounts(
+                    &self,
+                    block_hash: ::core::option::Option<T::Hash>,
+                ) -> ::core::result::Result<
+                    ::std::vec::Vec<::subxt::sp_core::crypto::AccountId32>,
+                    ::subxt::BasicError,
+                > {
+                    if self
+                        .client
+                        .metadata()
+                        .storage_hash::<CurrentAuthoritiesAccounts>()?
+                        == [
+                            143u8, 155u8, 186u8, 132u8, 219u8, 16u8, 177u8,
+                            244u8, 116u8, 144u8, 165u8, 191u8, 14u8, 56u8,
+                            62u8, 63u8, 18u8, 33u8, 41u8, 252u8, 56u8, 98u8,
+                            40u8, 14u8, 249u8, 170u8, 6u8, 101u8, 31u8, 90u8,
+                            101u8, 35u8,
+                        ]
+                    {
+                        let entry = CurrentAuthoritiesAccounts;
+                        self.client
+                            .storage()
+                            .fetch_or_default(&entry, block_hash)
+                            .await
+                    } else {
+                        Err(::subxt::MetadataError::IncompatibleMetadata.into())
+                    }
+                }
+                #[doc = " Authority account ids scheduled for the next session"]
+                pub async fn next_authorities_accounts(
+                    &self,
+                    block_hash: ::core::option::Option<T::Hash>,
+                ) -> ::core::result::Result<
+                    ::std::vec::Vec<::subxt::sp_core::crypto::AccountId32>,
+                    ::subxt::BasicError,
+                > {
+                    if self
+                        .client
+                        .metadata()
+                        .storage_hash::<NextAuthoritiesAccounts>()?
+                        == [
+                            13u8, 29u8, 34u8, 81u8, 8u8, 237u8, 117u8, 154u8,
+                            204u8, 126u8, 180u8, 185u8, 26u8, 3u8, 214u8,
+                            240u8, 106u8, 66u8, 205u8, 195u8, 182u8, 72u8,
+                            210u8, 240u8, 88u8, 85u8, 97u8, 154u8, 176u8, 72u8,
+                            128u8, 72u8,
+                        ]
+                    {
+                        let entry = NextAuthoritiesAccounts;
+                        self.client
+                            .storage()
+                            .fetch_or_default(&entry, block_hash)
+                            .await
+                    } else {
+                        Err(::subxt::MetadataError::IncompatibleMetadata.into())
+                    }
+                }
+                #[doc = " Authority account ids scheduled for the next session"]
+                pub async fn account_to_authority(
+                    &self,
+                    _0: &::subxt::sp_core::crypto::AccountId32,
+                    block_hash: ::core::option::Option<T::Hash>,
+                ) -> ::core::result::Result<
+                    ::core::option::Option<
+                        runtime_types::dkg_runtime_primitives::crypto::Public,
+                    >,
+                    ::subxt::BasicError,
+                > {
+                    if self
+                        .client
+                        .metadata()
+                        .storage_hash::<AccountToAuthority>()?
+                        == [
+                            9u8, 173u8, 43u8, 145u8, 55u8, 81u8, 127u8, 90u8,
+                            228u8, 13u8, 32u8, 72u8, 33u8, 13u8, 193u8, 171u8,
+                            247u8, 159u8, 147u8, 15u8, 119u8, 213u8, 108u8,
+                            148u8, 130u8, 10u8, 80u8, 141u8, 207u8, 109u8,
+                            19u8, 190u8,
+                        ]
+                    {
+                        let entry = AccountToAuthority(_0);
+                        self.client.storage().fetch(&entry, block_hash).await
+                    } else {
+                        Err(::subxt::MetadataError::IncompatibleMetadata.into())
+                    }
+                }
+                #[doc = " Authority account ids scheduled for the next session"]
+                pub async fn account_to_authority_iter(
+                    &self,
+                    block_hash: ::core::option::Option<T::Hash>,
+                ) -> ::core::result::Result<
+                    ::subxt::KeyIter<'a, T, AccountToAuthority<'a>>,
+                    ::subxt::BasicError,
+                > {
+                    if self
+                        .client
+                        .metadata()
+                        .storage_hash::<AccountToAuthority>()?
+                        == [
+                            9u8, 173u8, 43u8, 145u8, 55u8, 81u8, 127u8, 90u8,
+                            228u8, 13u8, 32u8, 72u8, 33u8, 13u8, 193u8, 171u8,
+                            247u8, 159u8, 147u8, 15u8, 119u8, 213u8, 108u8,
+                            148u8, 130u8, 10u8, 80u8, 141u8, 207u8, 109u8,
+                            19u8, 190u8,
+                        ]
+                    {
+                        self.client.storage().iter(block_hash).await
+                    } else {
+                        Err(::subxt::MetadataError::IncompatibleMetadata.into())
+                    }
+                }
+                #[doc = " Tracks misbehaviour reports"]                pub async fn misbehaviour_reports (& self , _0 : & runtime_types :: dkg_runtime_primitives :: MisbehaviourType , _1 : & :: core :: primitive :: u64 , _2 : & runtime_types :: dkg_runtime_primitives :: crypto :: Public , block_hash : :: core :: option :: Option < T :: Hash > ,) -> :: core :: result :: Result < :: core :: option :: Option < runtime_types :: dkg_runtime_primitives :: AggregatedMisbehaviourReports < runtime_types :: dkg_runtime_primitives :: crypto :: Public > > , :: subxt :: BasicError >{
+                    if self
+                        .client
+                        .metadata()
+                        .storage_hash::<MisbehaviourReports>()?
+                        == [
+                            214u8, 191u8, 27u8, 35u8, 205u8, 145u8, 162u8,
+                            119u8, 139u8, 197u8, 120u8, 119u8, 88u8, 78u8,
+                            196u8, 24u8, 225u8, 14u8, 192u8, 246u8, 60u8,
+                            107u8, 38u8, 47u8, 147u8, 16u8, 200u8, 4u8, 41u8,
+                            233u8, 230u8, 48u8,
+                        ]
+                    {
+                        let entry = MisbehaviourReports(_0, _1, _2);
+                        self.client.storage().fetch(&entry, block_hash).await
+                    } else {
+                        Err(::subxt::MetadataError::IncompatibleMetadata.into())
+                    }
+                }
+                #[doc = " Tracks misbehaviour reports"]
+                pub async fn misbehaviour_reports_iter(
+                    &self,
+                    block_hash: ::core::option::Option<T::Hash>,
+                ) -> ::core::result::Result<
+                    ::subxt::KeyIter<'a, T, MisbehaviourReports<'a>>,
+                    ::subxt::BasicError,
+                > {
+                    if self
+                        .client
+                        .metadata()
+                        .storage_hash::<MisbehaviourReports>()?
+                        == [
+                            214u8, 191u8, 27u8, 35u8, 205u8, 145u8, 162u8,
+                            119u8, 139u8, 197u8, 120u8, 119u8, 88u8, 78u8,
+                            196u8, 24u8, 225u8, 14u8, 192u8, 246u8, 60u8,
+                            107u8, 38u8, 47u8, 147u8, 16u8, 200u8, 4u8, 41u8,
+                            233u8, 230u8, 48u8,
+                        ]
+                    {
+                        self.client.storage().iter(block_hash).await
+                    } else {
+                        Err(::subxt::MetadataError::IncompatibleMetadata.into())
+                    }
+                }
+                #[doc = " Tracks authority reputations"]
+                pub async fn authority_reputations(
+                    &self,
+                    _0: &runtime_types::dkg_runtime_primitives::crypto::Public,
+                    block_hash: ::core::option::Option<T::Hash>,
+                ) -> ::core::result::Result<
+                    ::core::primitive::u128,
+                    ::subxt::BasicError,
+                > {
+                    if self
+                        .client
+                        .metadata()
+                        .storage_hash::<AuthorityReputations>()?
+                        == [
+                            28u8, 53u8, 70u8, 152u8, 69u8, 174u8, 255u8, 70u8,
+                            170u8, 125u8, 51u8, 63u8, 180u8, 13u8, 223u8,
+                            163u8, 241u8, 137u8, 156u8, 105u8, 144u8, 178u8,
+                            255u8, 226u8, 203u8, 188u8, 171u8, 30u8, 62u8,
+                            254u8, 123u8, 103u8,
+                        ]
+                    {
+                        let entry = AuthorityReputations(_0);
+                        self.client
+                            .storage()
+                            .fetch_or_default(&entry, block_hash)
+                            .await
+                    } else {
+                        Err(::subxt::MetadataError::IncompatibleMetadata.into())
+                    }
+                }
+                #[doc = " Tracks authority reputations"]
+                pub async fn authority_reputations_iter(
+                    &self,
+                    block_hash: ::core::option::Option<T::Hash>,
+                ) -> ::core::result::Result<
+                    ::subxt::KeyIter<'a, T, AuthorityReputations<'a>>,
+                    ::subxt::BasicError,
+                > {
+                    if self
+                        .client
+                        .metadata()
+                        .storage_hash::<AuthorityReputations>()?
+                        == [
+                            28u8, 53u8, 70u8, 152u8, 69u8, 174u8, 255u8, 70u8,
+                            170u8, 125u8, 51u8, 63u8, 180u8, 13u8, 223u8,
+                            163u8, 241u8, 137u8, 156u8, 105u8, 144u8, 178u8,
+                            255u8, 226u8, 203u8, 188u8, 171u8, 30u8, 62u8,
+                            254u8, 123u8, 103u8,
+                        ]
+                    {
+                        self.client.storage().iter(block_hash).await
+                    } else {
+                        Err(::subxt::MetadataError::IncompatibleMetadata.into())
+                    }
+                }
+                #[doc = " Tracks jailed authorities for keygen by mapping"]
+                #[doc = " to the block number when the authority was last jailed"]
+                pub async fn jailed_keygen_authorities(
+                    &self,
+                    _0: &runtime_types::dkg_runtime_primitives::crypto::Public,
+                    block_hash: ::core::option::Option<T::Hash>,
+                ) -> ::core::result::Result<
+                    ::core::primitive::u32,
+                    ::subxt::BasicError,
+                > {
+                    if self
+                        .client
+                        .metadata()
+                        .storage_hash::<JailedKeygenAuthorities>()?
+                        == [
+                            202u8, 174u8, 183u8, 226u8, 51u8, 73u8, 54u8, 72u8,
+                            252u8, 21u8, 184u8, 218u8, 238u8, 6u8, 198u8,
+                            144u8, 58u8, 113u8, 105u8, 189u8, 107u8, 121u8,
+                            227u8, 254u8, 82u8, 26u8, 148u8, 196u8, 113u8,
+                            125u8, 180u8, 232u8,
+                        ]
+                    {
+                        let entry = JailedKeygenAuthorities(_0);
+                        self.client
+                            .storage()
+                            .fetch_or_default(&entry, block_hash)
+                            .await
+                    } else {
+                        Err(::subxt::MetadataError::IncompatibleMetadata.into())
+                    }
+                }
+                #[doc = " Tracks jailed authorities for keygen by mapping"]
+                #[doc = " to the block number when the authority was last jailed"]
+                pub async fn jailed_keygen_authorities_iter(
+                    &self,
+                    block_hash: ::core::option::Option<T::Hash>,
+                ) -> ::core::result::Result<
+                    ::subxt::KeyIter<'a, T, JailedKeygenAuthorities<'a>>,
+                    ::subxt::BasicError,
+                > {
+                    if self
+                        .client
+                        .metadata()
+                        .storage_hash::<JailedKeygenAuthorities>()?
+                        == [
+                            202u8, 174u8, 183u8, 226u8, 51u8, 73u8, 54u8, 72u8,
+                            252u8, 21u8, 184u8, 218u8, 238u8, 6u8, 198u8,
+                            144u8, 58u8, 113u8, 105u8, 189u8, 107u8, 121u8,
+                            227u8, 254u8, 82u8, 26u8, 148u8, 196u8, 113u8,
+                            125u8, 180u8, 232u8,
+                        ]
+                    {
+                        self.client.storage().iter(block_hash).await
+                    } else {
+                        Err(::subxt::MetadataError::IncompatibleMetadata.into())
+                    }
+                }
+                #[doc = " Tracks jailed authorities for signing by mapping"]
+                #[doc = " to the block number when the authority was last jailed"]
+                pub async fn jailed_signing_authorities(
+                    &self,
+                    _0: &runtime_types::dkg_runtime_primitives::crypto::Public,
+                    block_hash: ::core::option::Option<T::Hash>,
+                ) -> ::core::result::Result<
+                    ::core::primitive::u32,
+                    ::subxt::BasicError,
+                > {
+                    if self
+                        .client
+                        .metadata()
+                        .storage_hash::<JailedSigningAuthorities>()?
+                        == [
+                            209u8, 156u8, 105u8, 15u8, 152u8, 58u8, 67u8,
+                            127u8, 167u8, 239u8, 52u8, 141u8, 188u8, 6u8,
+                            241u8, 61u8, 153u8, 119u8, 167u8, 196u8, 72u8,
+                            208u8, 127u8, 230u8, 184u8, 147u8, 37u8, 254u8,
+                            171u8, 47u8, 148u8, 218u8,
+                        ]
+                    {
+                        let entry = JailedSigningAuthorities(_0);
+                        self.client
+                            .storage()
+                            .fetch_or_default(&entry, block_hash)
+                            .await
+                    } else {
+                        Err(::subxt::MetadataError::IncompatibleMetadata.into())
+                    }
+                }
+                #[doc = " Tracks jailed authorities for signing by mapping"]
+                #[doc = " to the block number when the authority was last jailed"]
+                pub async fn jailed_signing_authorities_iter(
+                    &self,
+                    block_hash: ::core::option::Option<T::Hash>,
+                ) -> ::core::result::Result<
+                    ::subxt::KeyIter<'a, T, JailedSigningAuthorities<'a>>,
+                    ::subxt::BasicError,
+                > {
+                    if self
+                        .client
+                        .metadata()
+                        .storage_hash::<JailedSigningAuthorities>()?
+                        == [
+                            209u8, 156u8, 105u8, 15u8, 152u8, 58u8, 67u8,
+                            127u8, 167u8, 239u8, 52u8, 141u8, 188u8, 6u8,
+                            241u8, 61u8, 153u8, 119u8, 167u8, 196u8, 72u8,
+                            208u8, 127u8, 230u8, 184u8, 147u8, 37u8, 254u8,
+                            171u8, 47u8, 148u8, 218u8,
+                        ]
+                    {
+                        self.client.storage().iter(block_hash).await
+                    } else {
+                        Err(::subxt::MetadataError::IncompatibleMetadata.into())
+                    }
+                }
+                #[doc = " The current best authorities of the active keygen set"]
+                pub async fn best_authorities(
+                    &self,
+                    block_hash: ::core::option::Option<T::Hash>,
+                ) -> ::core::result::Result<
+                    ::std::vec::Vec<(
+                        ::core::primitive::u16,
+                        runtime_types::dkg_runtime_primitives::crypto::Public,
+                    )>,
+                    ::subxt::BasicError,
+                > {
+                    if self
+                        .client
+                        .metadata()
+                        .storage_hash::<BestAuthorities>()?
+                        == [
+                            104u8, 132u8, 203u8, 155u8, 81u8, 123u8, 70u8,
+                            116u8, 31u8, 53u8, 74u8, 46u8, 34u8, 231u8, 211u8,
+                            233u8, 191u8, 203u8, 35u8, 18u8, 17u8, 226u8,
+                            224u8, 107u8, 218u8, 51u8, 173u8, 32u8, 64u8,
+                            154u8, 92u8, 94u8,
+                        ]
+                    {
+                        let entry = BestAuthorities;
+                        self.client
+                            .storage()
+                            .fetch_or_default(&entry, block_hash)
+                            .await
+                    } else {
+                        Err(::subxt::MetadataError::IncompatibleMetadata.into())
+                    }
+                }
+                #[doc = " The next best authorities of the active keygen set"]
+                pub async fn next_best_authorities(
+                    &self,
+                    block_hash: ::core::option::Option<T::Hash>,
+                ) -> ::core::result::Result<
+                    ::std::vec::Vec<(
+                        ::core::primitive::u16,
+                        runtime_types::dkg_runtime_primitives::crypto::Public,
+                    )>,
+                    ::subxt::BasicError,
+                > {
+                    if self
+                        .client
+                        .metadata()
+                        .storage_hash::<NextBestAuthorities>()?
+                        == [
+                            126u8, 128u8, 162u8, 68u8, 114u8, 88u8, 254u8,
+                            24u8, 64u8, 79u8, 172u8, 20u8, 203u8, 208u8, 100u8,
+                            141u8, 4u8, 229u8, 228u8, 179u8, 19u8, 126u8, 98u8,
+                            232u8, 178u8, 32u8, 34u8, 227u8, 237u8, 16u8, 85u8,
+                            76u8,
+                        ]
+                    {
+                        let entry = NextBestAuthorities;
+                        self.client
+                            .storage()
+                            .fetch_or_default(&entry, block_hash)
+                            .await
+                    } else {
+                        Err(::subxt::MetadataError::IncompatibleMetadata.into())
+                    }
+                }
+            }
+        }
+        pub mod constants {
+            use super::runtime_types;
+            pub struct ConstantsApi<'a, T: ::subxt::Config> {
+                client: &'a ::subxt::Client<T>,
+            }
+            impl<'a, T: ::subxt::Config> ConstantsApi<'a, T> {
+                pub fn new(client: &'a ::subxt::Client<T>) -> Self {
+                    Self { client }
+                }
+                #[doc = " Percentage session should have progressed for refresh to begin"]
+                pub fn refresh_delay(
+                    &self,
+                ) -> ::core::result::Result<
+                    runtime_types::sp_arithmetic::per_things::Permill,
+                    ::subxt::BasicError,
+                > {
+                    if self
+                        .client
+                        .metadata()
+                        .constant_hash("DKG", "RefreshDelay")?
+                        == [
+                            60u8, 94u8, 168u8, 100u8, 9u8, 147u8, 193u8, 212u8,
+                            47u8, 170u8, 116u8, 217u8, 55u8, 48u8, 195u8,
+                            137u8, 207u8, 6u8, 132u8, 80u8, 134u8, 150u8, 90u8,
+                            54u8, 204u8, 244u8, 165u8, 156u8, 220u8, 49u8,
+                            51u8, 247u8,
+                        ]
+                    {
+                        let pallet = self.client.metadata().pallet("DKG")?;
+                        let constant = pallet.constant("RefreshDelay")?;
+                        let value = ::subxt::codec::Decode::decode(
+                            &mut &constant.value[..],
+                        )?;
+                        Ok(value)
+                    } else {
+                        Err(::subxt::MetadataError::IncompatibleMetadata.into())
+                    }
+                }
+            }
+        }
+    }
+    pub mod dkg_proposals {
+        use super::root_mod;
+        use super::runtime_types;
+        pub mod calls {
+            use super::root_mod;
+            use super::runtime_types;
+            type DispatchError = runtime_types::sp_runtime::DispatchError;
+            #[derive(
+                :: subxt :: codec :: CompactAs,
+                :: subxt :: codec :: Decode,
+                :: subxt :: codec :: Encode,
+                Clone,
+                Debug,
+                Eq,
+                PartialEq,
+            )]
+            pub struct SetThreshold {
+                pub threshold: ::core::primitive::u32,
+            }
+            impl ::subxt::Call for SetThreshold {
+                const PALLET: &'static str = "DKGProposals";
+                const FUNCTION: &'static str = "set_threshold";
+            }
+            #[derive(
+                :: subxt :: codec :: Decode,
+                :: subxt :: codec :: Encode,
+                Clone,
+                Debug,
+                Eq,
+                PartialEq,
+            )]
+            pub struct SetResource {
+                pub id: runtime_types::webb_proposals::header::ResourceId,
+                pub method: ::std::vec::Vec<::core::primitive::u8>,
+            }
+            impl ::subxt::Call for SetResource {
+                const PALLET: &'static str = "DKGProposals";
+                const FUNCTION: &'static str = "set_resource";
+            }
+            #[derive(
+                :: subxt :: codec :: Decode,
+                :: subxt :: codec :: Encode,
+                Clone,
+                Debug,
+                Eq,
+                PartialEq,
+            )]
+            pub struct RemoveResource {
+                pub id: runtime_types::webb_proposals::header::ResourceId,
+            }
+            impl ::subxt::Call for RemoveResource {
+                const PALLET: &'static str = "DKGProposals";
+                const FUNCTION: &'static str = "remove_resource";
+            }
+            #[derive(
+                :: subxt :: codec :: Decode,
+                :: subxt :: codec :: Encode,
+                Clone,
+                Debug,
+                Eq,
+                PartialEq,
+            )]
+            pub struct WhitelistChain {
+                pub chain_id:
+                    runtime_types::webb_proposals::header::TypedChainId,
+            }
+            impl ::subxt::Call for WhitelistChain {
+                const PALLET: &'static str = "DKGProposals";
+                const FUNCTION: &'static str = "whitelist_chain";
+            }
+            #[derive(
+                :: subxt :: codec :: Decode,
+                :: subxt :: codec :: Encode,
+                Clone,
+                Debug,
+                Eq,
+                PartialEq,
+            )]
+            pub struct AddProposer {
+                pub native_account: ::subxt::sp_core::crypto::AccountId32,
+                pub external_account: ::std::vec::Vec<::core::primitive::u8>,
+            }
+            impl ::subxt::Call for AddProposer {
+                const PALLET: &'static str = "DKGProposals";
+                const FUNCTION: &'static str = "add_proposer";
+            }
+            #[derive(
+                :: subxt :: codec :: Decode,
+                :: subxt :: codec :: Encode,
+                Clone,
+                Debug,
+                Eq,
+                PartialEq,
+            )]
+            pub struct RemoveProposer {
+                pub v: ::subxt::sp_core::crypto::AccountId32,
+            }
+            impl ::subxt::Call for RemoveProposer {
+                const PALLET: &'static str = "DKGProposals";
+                const FUNCTION: &'static str = "remove_proposer";
+            }
+            #[derive(
+                :: subxt :: codec :: Decode,
+                :: subxt :: codec :: Encode,
+                Clone,
+                Debug,
+                Eq,
+                PartialEq,
+            )]
+            pub struct AcknowledgeProposal {
+                pub nonce: runtime_types::webb_proposals::nonce::Nonce,
+                pub src_chain_id:
+                    runtime_types::webb_proposals::header::TypedChainId,
+                pub r_id: runtime_types::webb_proposals::header::ResourceId,
+                pub prop: ::std::vec::Vec<::core::primitive::u8>,
+            }
+            impl ::subxt::Call for AcknowledgeProposal {
+                const PALLET: &'static str = "DKGProposals";
+                const FUNCTION: &'static str = "acknowledge_proposal";
+            }
+            #[derive(
+                :: subxt :: codec :: Decode,
+                :: subxt :: codec :: Encode,
+                Clone,
+                Debug,
+                Eq,
+                PartialEq,
+            )]
+            pub struct RejectProposal {
+                pub nonce: runtime_types::webb_proposals::nonce::Nonce,
+                pub src_chain_id:
+                    runtime_types::webb_proposals::header::TypedChainId,
+                pub r_id: runtime_types::webb_proposals::header::ResourceId,
+                pub prop: ::std::vec::Vec<::core::primitive::u8>,
+            }
+            impl ::subxt::Call for RejectProposal {
+                const PALLET: &'static str = "DKGProposals";
+                const FUNCTION: &'static str = "reject_proposal";
+            }
+            #[derive(
+                :: subxt :: codec :: Decode,
+                :: subxt :: codec :: Encode,
+                Clone,
+                Debug,
+                Eq,
+                PartialEq,
+            )]
+            pub struct EvalVoteState {
+                pub nonce: runtime_types::webb_proposals::nonce::Nonce,
+                pub src_chain_id:
+                    runtime_types::webb_proposals::header::TypedChainId,
+                pub prop: ::std::vec::Vec<::core::primitive::u8>,
+            }
+            impl ::subxt::Call for EvalVoteState {
+                const PALLET: &'static str = "DKGProposals";
+                const FUNCTION: &'static str = "eval_vote_state";
+            }
+            pub struct TransactionApi<'a, T: ::subxt::Config, X> {
+                client: &'a ::subxt::Client<T>,
+                marker: ::core::marker::PhantomData<X>,
+            }
+            impl<'a, T, X> TransactionApi<'a, T, X>
+            where
+                T: ::subxt::Config,
+                X: ::subxt::extrinsic::ExtrinsicParams<T>,
+            {
+                pub fn new(client: &'a ::subxt::Client<T>) -> Self {
+                    Self {
+                        client,
+                        marker: ::core::marker::PhantomData,
+                    }
+                }
+                #[doc = "Sets the vote threshold for proposals."]
+                #[doc = ""]
+                #[doc = "This threshold is used to determine how many votes are required"]
+                #[doc = "before a proposal is executed."]
+                #[doc = ""]
+                #[doc = "# <weight>"]
+                #[doc = "- O(1) lookup and insert"]
+                #[doc = "# </weight>"]
+                pub fn set_threshold(
+                    &self,
+                    threshold: ::core::primitive::u32,
+                ) -> Result<
+                    ::subxt::SubmittableExtrinsic<
+                        'a,
+                        T,
+                        X,
+                        SetThreshold,
+                        DispatchError,
+                        root_mod::Event,
+                    >,
+                    ::subxt::BasicError,
+                > {
+                    if self.client.metadata().call_hash::<SetThreshold>()?
+                        == [
+                            52u8, 167u8, 254u8, 240u8, 138u8, 213u8, 67u8,
+                            65u8, 79u8, 11u8, 193u8, 17u8, 248u8, 153u8, 47u8,
+                            179u8, 218u8, 86u8, 157u8, 230u8, 186u8, 234u8,
+                            123u8, 36u8, 22u8, 164u8, 17u8, 183u8, 180u8,
+                            111u8, 252u8, 206u8,
+                        ]
+                    {
+                        let call = SetThreshold { threshold };
+                        Ok(::subxt::SubmittableExtrinsic::new(
+                            self.client,
+                            call,
+                        ))
+                    } else {
+                        Err(::subxt::MetadataError::IncompatibleMetadata.into())
+                    }
+                }
+                #[doc = "Stores a method name on chain under an associated resource ID."]
+                #[doc = ""]
+                #[doc = "# <weight>"]
+                #[doc = "- O(1) write"]
+                #[doc = "# </weight>"]
+                pub fn set_resource(
+                    &self,
+                    id: runtime_types::webb_proposals::header::ResourceId,
+                    method: ::std::vec::Vec<::core::primitive::u8>,
+                ) -> Result<
+                    ::subxt::SubmittableExtrinsic<
+                        'a,
+                        T,
+                        X,
+                        SetResource,
+                        DispatchError,
+                        root_mod::Event,
+                    >,
+                    ::subxt::BasicError,
+                > {
+                    if self.client.metadata().call_hash::<SetResource>()?
+                        == [
+                            65u8, 166u8, 135u8, 98u8, 143u8, 120u8, 107u8,
+                            115u8, 206u8, 47u8, 74u8, 229u8, 10u8, 128u8,
+                            109u8, 202u8, 167u8, 141u8, 16u8, 170u8, 23u8,
+                            132u8, 94u8, 80u8, 193u8, 175u8, 11u8, 107u8,
+                            120u8, 142u8, 113u8, 51u8,
+                        ]
+                    {
+                        let call = SetResource { id, method };
+                        Ok(::subxt::SubmittableExtrinsic::new(
+                            self.client,
+                            call,
+                        ))
+                    } else {
+                        Err(::subxt::MetadataError::IncompatibleMetadata.into())
+                    }
+                }
+                #[doc = "Removes a resource ID from the resource mapping."]
+                #[doc = ""]
+                #[doc = "After this call, bridge transfers with the associated resource ID"]
+                #[doc = "will be rejected."]
+                #[doc = ""]
+                #[doc = "# <weight>"]
+                #[doc = "- O(1) removal"]
+                #[doc = "# </weight>"]
+                pub fn remove_resource(
+                    &self,
+                    id: runtime_types::webb_proposals::header::ResourceId,
+                ) -> Result<
+                    ::subxt::SubmittableExtrinsic<
+                        'a,
+                        T,
+                        X,
+                        RemoveResource,
+                        DispatchError,
+                        root_mod::Event,
+                    >,
+                    ::subxt::BasicError,
+                > {
+                    if self.client.metadata().call_hash::<RemoveResource>()?
+                        == [
+                            78u8, 126u8, 251u8, 144u8, 188u8, 199u8, 39u8,
+                            253u8, 82u8, 42u8, 99u8, 95u8, 244u8, 201u8, 210u8,
+                            110u8, 95u8, 246u8, 66u8, 240u8, 128u8, 235u8,
+                            145u8, 72u8, 236u8, 9u8, 113u8, 51u8, 91u8, 81u8,
+                            223u8, 226u8,
+                        ]
+                    {
+                        let call = RemoveResource { id };
+                        Ok(::subxt::SubmittableExtrinsic::new(
+                            self.client,
+                            call,
+                        ))
+                    } else {
+                        Err(::subxt::MetadataError::IncompatibleMetadata.into())
+                    }
+                }
+                #[doc = "Enables a chain ID as a source or destination for a bridge transfer."]
+                #[doc = ""]
+                #[doc = "# <weight>"]
+                #[doc = "- O(1) lookup and insert"]
+                #[doc = "# </weight>"]
+                pub fn whitelist_chain(
+                    &self,
+                    chain_id : runtime_types :: webb_proposals :: header :: TypedChainId,
+                ) -> Result<
+                    ::subxt::SubmittableExtrinsic<
+                        'a,
+                        T,
+                        X,
+                        WhitelistChain,
+                        DispatchError,
+                        root_mod::Event,
+                    >,
+                    ::subxt::BasicError,
+                > {
+                    if self.client.metadata().call_hash::<WhitelistChain>()?
+                        == [
+                            209u8, 249u8, 214u8, 43u8, 232u8, 214u8, 133u8,
+                            102u8, 212u8, 33u8, 24u8, 104u8, 106u8, 162u8,
+                            146u8, 16u8, 58u8, 131u8, 35u8, 147u8, 60u8, 1u8,
+                            22u8, 142u8, 175u8, 190u8, 121u8, 58u8, 62u8,
+                            243u8, 191u8, 226u8,
+                        ]
+                    {
+                        let call = WhitelistChain { chain_id };
+                        Ok(::subxt::SubmittableExtrinsic::new(
+                            self.client,
+                            call,
+                        ))
+                    } else {
+                        Err(::subxt::MetadataError::IncompatibleMetadata.into())
+                    }
+                }
+                #[doc = "Adds a new proposer to the proposer set."]
+                #[doc = ""]
+                #[doc = "# <weight>"]
+                #[doc = "- O(1) lookup and insert"]
+                #[doc = "# </weight>"]
+                pub fn add_proposer(
+                    &self,
+                    native_account: ::subxt::sp_core::crypto::AccountId32,
+                    external_account: ::std::vec::Vec<::core::primitive::u8>,
+                ) -> Result<
+                    ::subxt::SubmittableExtrinsic<
+                        'a,
+                        T,
+                        X,
+                        AddProposer,
+                        DispatchError,
+                        root_mod::Event,
+                    >,
+                    ::subxt::BasicError,
+                > {
+                    if self.client.metadata().call_hash::<AddProposer>()?
+                        == [
+                            242u8, 216u8, 225u8, 176u8, 155u8, 212u8, 134u8,
+                            196u8, 170u8, 136u8, 230u8, 164u8, 145u8, 82u8,
+                            90u8, 204u8, 235u8, 92u8, 14u8, 136u8, 177u8,
+                            123u8, 178u8, 218u8, 154u8, 130u8, 125u8, 222u8,
+                            24u8, 206u8, 121u8, 20u8,
+                        ]
+                    {
+                        let call = AddProposer {
+                            native_account,
+                            external_account,
+                        };
+                        Ok(::subxt::SubmittableExtrinsic::new(
+                            self.client,
+                            call,
+                        ))
+                    } else {
+                        Err(::subxt::MetadataError::IncompatibleMetadata.into())
+                    }
+                }
+                #[doc = "Removes an existing proposer from the set."]
+                #[doc = ""]
+                #[doc = "# <weight>"]
+                #[doc = "- O(1) lookup and removal"]
+                #[doc = "# </weight>"]
+                pub fn remove_proposer(
+                    &self,
+                    v: ::subxt::sp_core::crypto::AccountId32,
+                ) -> Result<
+                    ::subxt::SubmittableExtrinsic<
+                        'a,
+                        T,
+                        X,
+                        RemoveProposer,
+                        DispatchError,
+                        root_mod::Event,
+                    >,
+                    ::subxt::BasicError,
+                > {
+                    if self.client.metadata().call_hash::<RemoveProposer>()?
+                        == [
+                            27u8, 73u8, 114u8, 131u8, 234u8, 127u8, 131u8,
+                            218u8, 184u8, 48u8, 223u8, 149u8, 70u8, 109u8,
+                            192u8, 238u8, 153u8, 201u8, 146u8, 14u8, 6u8,
+                            210u8, 60u8, 54u8, 216u8, 252u8, 121u8, 252u8,
+                            90u8, 208u8, 125u8, 244u8,
+                        ]
+                    {
+                        let call = RemoveProposer { v };
+                        Ok(::subxt::SubmittableExtrinsic::new(
+                            self.client,
+                            call,
+                        ))
+                    } else {
+                        Err(::subxt::MetadataError::IncompatibleMetadata.into())
+                    }
+                }
+                #[doc = "Commits a vote in favour of the provided proposal."]
+                #[doc = ""]
+                #[doc = "If a proposal with the given nonce and source chain ID does not"]
+                #[doc = "already exist, it will be created with an initial vote in favour"]
+                #[doc = "from the caller."]
+                #[doc = ""]
+                #[doc = "# <weight>"]
+                #[doc = "- weight of proposed call, regardless of whether execution is performed"]
+                #[doc = "# </weight>"]
+                pub fn acknowledge_proposal(
+                    &self,
+                    nonce: runtime_types::webb_proposals::nonce::Nonce,
+                    src_chain_id : runtime_types :: webb_proposals :: header :: TypedChainId,
+                    r_id: runtime_types::webb_proposals::header::ResourceId,
+                    prop: ::std::vec::Vec<::core::primitive::u8>,
+                ) -> Result<
+                    ::subxt::SubmittableExtrinsic<
+                        'a,
+                        T,
+                        X,
+                        AcknowledgeProposal,
+                        DispatchError,
+                        root_mod::Event,
+                    >,
+                    ::subxt::BasicError,
+                > {
+                    if self
+                        .client
+                        .metadata()
+                        .call_hash::<AcknowledgeProposal>()?
+                        == [
+                            183u8, 196u8, 193u8, 205u8, 69u8, 125u8, 240u8,
+                            164u8, 158u8, 109u8, 24u8, 197u8, 166u8, 24u8,
+                            216u8, 46u8, 217u8, 200u8, 36u8, 112u8, 142u8,
+                            82u8, 70u8, 213u8, 16u8, 169u8, 89u8, 93u8, 199u8,
+                            96u8, 211u8, 40u8,
+                        ]
+                    {
+                        let call = AcknowledgeProposal {
+                            nonce,
+                            src_chain_id,
+                            r_id,
+                            prop,
+                        };
+                        Ok(::subxt::SubmittableExtrinsic::new(
+                            self.client,
+                            call,
+                        ))
+                    } else {
+                        Err(::subxt::MetadataError::IncompatibleMetadata.into())
+                    }
+                }
+                #[doc = "Commits a vote against a provided proposal."]
+                #[doc = ""]
+                #[doc = "# <weight>"]
+                #[doc = "- Fixed, since execution of proposal should not be included"]
+                #[doc = "# </weight>"]
+                pub fn reject_proposal(
+                    &self,
+                    nonce: runtime_types::webb_proposals::nonce::Nonce,
+                    src_chain_id : runtime_types :: webb_proposals :: header :: TypedChainId,
+                    r_id: runtime_types::webb_proposals::header::ResourceId,
+                    prop: ::std::vec::Vec<::core::primitive::u8>,
+                ) -> Result<
+                    ::subxt::SubmittableExtrinsic<
+                        'a,
+                        T,
+                        X,
+                        RejectProposal,
+                        DispatchError,
+                        root_mod::Event,
+                    >,
+                    ::subxt::BasicError,
+                > {
+                    if self.client.metadata().call_hash::<RejectProposal>()?
+                        == [
+                            190u8, 15u8, 45u8, 81u8, 218u8, 88u8, 44u8, 117u8,
+                            34u8, 123u8, 107u8, 96u8, 174u8, 11u8, 141u8,
+                            228u8, 201u8, 247u8, 150u8, 108u8, 160u8, 200u8,
+                            184u8, 16u8, 102u8, 175u8, 152u8, 123u8, 169u8,
+                            61u8, 175u8, 121u8,
+                        ]
+                    {
+                        let call = RejectProposal {
+                            nonce,
+                            src_chain_id,
+                            r_id,
+                            prop,
+                        };
+                        Ok(::subxt::SubmittableExtrinsic::new(
+                            self.client,
+                            call,
+                        ))
+                    } else {
+                        Err(::subxt::MetadataError::IncompatibleMetadata.into())
+                    }
+                }
+                #[doc = "Evaluate the state of a proposal given the current vote threshold."]
+                #[doc = ""]
+                #[doc = "A proposal with enough votes will be either executed or cancelled,"]
+                #[doc = "and the status will be updated accordingly."]
+                #[doc = ""]
+                #[doc = "# <weight>"]
+                #[doc = "- weight of proposed call, regardless of whether execution is performed"]
+                #[doc = "# </weight>"]
+                pub fn eval_vote_state(
+                    &self,
+                    nonce: runtime_types::webb_proposals::nonce::Nonce,
+                    src_chain_id : runtime_types :: webb_proposals :: header :: TypedChainId,
+                    prop: ::std::vec::Vec<::core::primitive::u8>,
+                ) -> Result<
+                    ::subxt::SubmittableExtrinsic<
+                        'a,
+                        T,
+                        X,
+                        EvalVoteState,
+                        DispatchError,
+                        root_mod::Event,
+                    >,
+                    ::subxt::BasicError,
+                > {
+                    if self.client.metadata().call_hash::<EvalVoteState>()?
+                        == [
+                            248u8, 117u8, 51u8, 78u8, 33u8, 126u8, 124u8,
+                            190u8, 226u8, 76u8, 164u8, 206u8, 48u8, 81u8,
+                            163u8, 210u8, 230u8, 206u8, 206u8, 168u8, 200u8,
+                            152u8, 35u8, 176u8, 129u8, 121u8, 84u8, 49u8,
+                            100u8, 155u8, 76u8, 237u8,
+                        ]
+                    {
+                        let call = EvalVoteState {
+                            nonce,
+                            src_chain_id,
+                            prop,
+                        };
+                        Ok(::subxt::SubmittableExtrinsic::new(
+                            self.client,
+                            call,
+                        ))
+                    } else {
+                        Err(::subxt::MetadataError::IncompatibleMetadata.into())
+                    }
+                }
+            }
+        }
+        pub type Event = runtime_types::pallet_dkg_proposals::pallet::Event;
+        pub mod events {
+            use super::runtime_types;
+            #[derive(
+                :: subxt :: codec :: CompactAs,
+                :: subxt :: codec :: Decode,
+                :: subxt :: codec :: Encode,
+                Clone,
+                Debug,
+                Eq,
+                PartialEq,
+            )]
+            #[doc = "Vote threshold has changed (new_threshold)"]
+            pub struct ProposerThresholdChanged {
+                pub new_threshold: ::core::primitive::u32,
+            }
+            impl ::subxt::Event for ProposerThresholdChanged {
+                const PALLET: &'static str = "DKGProposals";
+                const EVENT: &'static str = "ProposerThresholdChanged";
+            }
+            #[derive(
+                :: subxt :: codec :: Decode,
+                :: subxt :: codec :: Encode,
+                Clone,
+                Debug,
+                Eq,
+                PartialEq,
+            )]
+            #[doc = "Chain now available for transfers (chain_id)"]
+            pub struct ChainWhitelisted {
+                pub chain_id:
+                    runtime_types::webb_proposals::header::TypedChainId,
+            }
+            impl ::subxt::Event for ChainWhitelisted {
+                const PALLET: &'static str = "DKGProposals";
+                const EVENT: &'static str = "ChainWhitelisted";
+            }
+            #[derive(
+                :: subxt :: codec :: Decode,
+                :: subxt :: codec :: Encode,
+                Clone,
+                Debug,
+                Eq,
+                PartialEq,
+            )]
+            #[doc = "Proposer added to set"]
+            pub struct ProposerAdded {
+                pub proposer_id: ::subxt::sp_core::crypto::AccountId32,
+            }
+            impl ::subxt::Event for ProposerAdded {
+                const PALLET: &'static str = "DKGProposals";
+                const EVENT: &'static str = "ProposerAdded";
+            }
+            #[derive(
+                :: subxt :: codec :: Decode,
+                :: subxt :: codec :: Encode,
+                Clone,
+                Debug,
+                Eq,
+                PartialEq,
+            )]
+            #[doc = "Proposer removed from set"]
+            pub struct ProposerRemoved {
+                pub proposer_id: ::subxt::sp_core::crypto::AccountId32,
+            }
+            impl ::subxt::Event for ProposerRemoved {
+                const PALLET: &'static str = "DKGProposals";
+                const EVENT: &'static str = "ProposerRemoved";
+            }
+            #[derive(
+                :: subxt :: codec :: Decode,
+                :: subxt :: codec :: Encode,
+                Clone,
+                Debug,
+                Eq,
+                PartialEq,
+            )]
+            #[doc = "Vote submitted in favour of proposal"]
+            pub struct VoteFor {
+                pub chain_id:
+                    runtime_types::webb_proposals::header::TypedChainId,
+                pub proposal_nonce: runtime_types::webb_proposals::nonce::Nonce,
+                pub who: ::subxt::sp_core::crypto::AccountId32,
+            }
+            impl ::subxt::Event for VoteFor {
+                const PALLET: &'static str = "DKGProposals";
+                const EVENT: &'static str = "VoteFor";
+            }
+            #[derive(
+                :: subxt :: codec :: Decode,
+                :: subxt :: codec :: Encode,
+                Clone,
+                Debug,
+                Eq,
+                PartialEq,
+            )]
+            #[doc = "Vot submitted against proposal"]
+            pub struct VoteAgainst {
+                pub chain_id:
+                    runtime_types::webb_proposals::header::TypedChainId,
+                pub proposal_nonce: runtime_types::webb_proposals::nonce::Nonce,
+                pub who: ::subxt::sp_core::crypto::AccountId32,
+            }
+            impl ::subxt::Event for VoteAgainst {
+                const PALLET: &'static str = "DKGProposals";
+                const EVENT: &'static str = "VoteAgainst";
+            }
+            #[derive(
+                :: subxt :: codec :: Decode,
+                :: subxt :: codec :: Encode,
+                Clone,
+                Debug,
+                Eq,
+                PartialEq,
+            )]
+            #[doc = "Voting successful for a proposal"]
+            pub struct ProposalApproved {
+                pub chain_id:
+                    runtime_types::webb_proposals::header::TypedChainId,
+                pub proposal_nonce: runtime_types::webb_proposals::nonce::Nonce,
+            }
+            impl ::subxt::Event for ProposalApproved {
+                const PALLET: &'static str = "DKGProposals";
+                const EVENT: &'static str = "ProposalApproved";
+            }
+            #[derive(
+                :: subxt :: codec :: Decode,
+                :: subxt :: codec :: Encode,
+                Clone,
+                Debug,
+                Eq,
+                PartialEq,
+            )]
+            #[doc = "Voting rejected a proposal"]
+            pub struct ProposalRejected {
+                pub chain_id:
+                    runtime_types::webb_proposals::header::TypedChainId,
+                pub proposal_nonce: runtime_types::webb_proposals::nonce::Nonce,
+            }
+            impl ::subxt::Event for ProposalRejected {
+                const PALLET: &'static str = "DKGProposals";
+                const EVENT: &'static str = "ProposalRejected";
+            }
+            #[derive(
+                :: subxt :: codec :: Decode,
+                :: subxt :: codec :: Encode,
+                Clone,
+                Debug,
+                Eq,
+                PartialEq,
+            )]
+            #[doc = "Execution of call succeeded"]
+            pub struct ProposalSucceeded {
+                pub chain_id:
+                    runtime_types::webb_proposals::header::TypedChainId,
+                pub proposal_nonce: runtime_types::webb_proposals::nonce::Nonce,
+            }
+            impl ::subxt::Event for ProposalSucceeded {
+                const PALLET: &'static str = "DKGProposals";
+                const EVENT: &'static str = "ProposalSucceeded";
+            }
+            #[derive(
+                :: subxt :: codec :: Decode,
+                :: subxt :: codec :: Encode,
+                Clone,
+                Debug,
+                Eq,
+                PartialEq,
+            )]
+            #[doc = "Execution of call failed"]
+            pub struct ProposalFailed {
+                pub chain_id:
+                    runtime_types::webb_proposals::header::TypedChainId,
+                pub proposal_nonce: runtime_types::webb_proposals::nonce::Nonce,
+            }
+            impl ::subxt::Event for ProposalFailed {
+                const PALLET: &'static str = "DKGProposals";
+                const EVENT: &'static str = "ProposalFailed";
+            }
+            #[derive(
+                :: subxt :: codec :: Decode,
+                :: subxt :: codec :: Encode,
+                Clone,
+                Debug,
+                Eq,
+                PartialEq,
+            )]
+            #[doc = "Proposers have been reset"]
+            pub struct AuthorityProposersReset {
+                pub proposers:
+                    ::std::vec::Vec<::subxt::sp_core::crypto::AccountId32>,
+            }
+            impl ::subxt::Event for AuthorityProposersReset {
+                const PALLET: &'static str = "DKGProposals";
+                const EVENT: &'static str = "AuthorityProposersReset";
+            }
+        }
+        pub mod storage {
+            use super::runtime_types;
+            pub struct ChainNonces<'a>(
+                pub &'a runtime_types::webb_proposals::header::TypedChainId,
+            );
+            impl ::subxt::StorageEntry for ChainNonces<'_> {
+                const PALLET: &'static str = "DKGProposals";
+                const STORAGE: &'static str = "ChainNonces";
+                type Value = runtime_types::webb_proposals::nonce::Nonce;
+                fn key(&self) -> ::subxt::StorageEntryKey {
+                    ::subxt::StorageEntryKey::Map(vec![
+                        ::subxt::StorageMapKey::new(
+                            &self.0,
+                            ::subxt::StorageHasher::Blake2_256,
+                        ),
+                    ])
+                }
+            }
+            pub struct ProposerThreshold;
+            impl ::subxt::StorageEntry for ProposerThreshold {
+                const PALLET: &'static str = "DKGProposals";
+                const STORAGE: &'static str = "ProposerThreshold";
+                type Value = ::core::primitive::u32;
+                fn key(&self) -> ::subxt::StorageEntryKey {
+                    ::subxt::StorageEntryKey::Plain
+                }
+            }
+            pub struct ProposerSetUpdateProposalNonce;
+            impl ::subxt::StorageEntry for ProposerSetUpdateProposalNonce {
+                const PALLET: &'static str = "DKGProposals";
+                const STORAGE: &'static str = "ProposerSetUpdateProposalNonce";
+                type Value = ::core::primitive::u32;
+                fn key(&self) -> ::subxt::StorageEntryKey {
+                    ::subxt::StorageEntryKey::Plain
+                }
+            }
+            pub struct Proposers<'a>(
+                pub &'a ::subxt::sp_core::crypto::AccountId32,
+            );
+            impl ::subxt::StorageEntry for Proposers<'_> {
+                const PALLET: &'static str = "DKGProposals";
+                const STORAGE: &'static str = "Proposers";
+                type Value = ::core::primitive::bool;
+                fn key(&self) -> ::subxt::StorageEntryKey {
+                    ::subxt::StorageEntryKey::Map(vec![
+                        ::subxt::StorageMapKey::new(
+                            &self.0,
+                            ::subxt::StorageHasher::Blake2_128Concat,
+                        ),
+                    ])
+                }
+            }
+            pub struct ExternalProposerAccounts<'a>(
+                pub &'a ::subxt::sp_core::crypto::AccountId32,
+            );
+            impl ::subxt::StorageEntry for ExternalProposerAccounts<'_> {
+                const PALLET: &'static str = "DKGProposals";
+                const STORAGE: &'static str = "ExternalProposerAccounts";
+                type Value = ::std::vec::Vec<::core::primitive::u8>;
+                fn key(&self) -> ::subxt::StorageEntryKey {
+                    ::subxt::StorageEntryKey::Map(vec![
+                        ::subxt::StorageMapKey::new(
+                            &self.0,
+                            ::subxt::StorageHasher::Blake2_128Concat,
+                        ),
+                    ])
+                }
+            }
+            pub struct AuthorityProposers;
+            impl ::subxt::StorageEntry for AuthorityProposers {
+                const PALLET: &'static str = "DKGProposals";
+                const STORAGE: &'static str = "AuthorityProposers";
+                type Value =
+                    ::std::vec::Vec<::subxt::sp_core::crypto::AccountId32>;
+                fn key(&self) -> ::subxt::StorageEntryKey {
+                    ::subxt::StorageEntryKey::Plain
+                }
+            }
+            pub struct ExternalAuthorityProposerAccounts;
+            impl ::subxt::StorageEntry for ExternalAuthorityProposerAccounts {
+                const PALLET: &'static str = "DKGProposals";
+                const STORAGE: &'static str =
+                    "ExternalAuthorityProposerAccounts";
+                type Value =
+                    ::std::vec::Vec<::std::vec::Vec<::core::primitive::u8>>;
+                fn key(&self) -> ::subxt::StorageEntryKey {
+                    ::subxt::StorageEntryKey::Plain
+                }
+            }
+            pub struct ProposerCount;
+            impl ::subxt::StorageEntry for ProposerCount {
+                const PALLET: &'static str = "DKGProposals";
+                const STORAGE: &'static str = "ProposerCount";
+                type Value = ::core::primitive::u32;
+                fn key(&self) -> ::subxt::StorageEntryKey {
+                    ::subxt::StorageEntryKey::Plain
+                }
+            }
+            pub struct Votes<'a>(
+                pub &'a runtime_types::webb_proposals::header::TypedChainId,
+                pub  &'a (
+                    runtime_types::webb_proposals::nonce::Nonce,
+                    ::std::vec::Vec<::core::primitive::u8>,
+                ),
+            );
+            impl ::subxt::StorageEntry for Votes<'_> {
+                const PALLET: &'static str = "DKGProposals";
+                const STORAGE: &'static str = "Votes";
+                type Value =
+                    runtime_types::pallet_dkg_proposals::types::ProposalVotes<
+                        ::subxt::sp_core::crypto::AccountId32,
+                        ::core::primitive::u32,
+                    >;
+                fn key(&self) -> ::subxt::StorageEntryKey {
+                    ::subxt::StorageEntryKey::Map(vec![
+                        ::subxt::StorageMapKey::new(
+                            &self.0,
+                            ::subxt::StorageHasher::Blake2_256,
+                        ),
+                        ::subxt::StorageMapKey::new(
+                            &self.1,
+                            ::subxt::StorageHasher::Blake2_256,
+                        ),
+                    ])
+                }
+            }
+            pub struct Resources<'a>(
+                pub &'a runtime_types::webb_proposals::header::ResourceId,
+            );
+            impl ::subxt::StorageEntry for Resources<'_> {
+                const PALLET: &'static str = "DKGProposals";
+                const STORAGE: &'static str = "Resources";
+                type Value = ::std::vec::Vec<::core::primitive::u8>;
+                fn key(&self) -> ::subxt::StorageEntryKey {
+                    ::subxt::StorageEntryKey::Map(vec![
+                        ::subxt::StorageMapKey::new(
+                            &self.0,
+                            ::subxt::StorageHasher::Blake2_256,
+                        ),
+                    ])
+                }
+            }
+            pub struct StorageApi<'a, T: ::subxt::Config> {
+                client: &'a ::subxt::Client<T>,
+            }
+            impl<'a, T: ::subxt::Config> StorageApi<'a, T> {
+                pub fn new(client: &'a ::subxt::Client<T>) -> Self {
+                    Self { client }
+                }
+                #[doc = " All whitelisted chains and their respective transaction counts"]
+                pub async fn chain_nonces(
+                    &self,
+                    _0: &runtime_types::webb_proposals::header::TypedChainId,
+                    block_hash: ::core::option::Option<T::Hash>,
+                ) -> ::core::result::Result<
+                    ::core::option::Option<
+                        runtime_types::webb_proposals::nonce::Nonce,
+                    >,
+                    ::subxt::BasicError,
+                > {
+                    if self.client.metadata().storage_hash::<ChainNonces>()?
+                        == [
+                            217u8, 18u8, 163u8, 125u8, 232u8, 176u8, 251u8,
+                            33u8, 149u8, 2u8, 197u8, 185u8, 79u8, 112u8, 92u8,
+                            39u8, 165u8, 141u8, 162u8, 151u8, 199u8, 156u8,
+                            58u8, 40u8, 255u8, 123u8, 7u8, 83u8, 134u8, 91u8,
+                            201u8, 44u8,
+                        ]
+                    {
+                        let entry = ChainNonces(_0);
+                        self.client.storage().fetch(&entry, block_hash).await
+                    } else {
+                        Err(::subxt::MetadataError::IncompatibleMetadata.into())
+                    }
+                }
+                #[doc = " All whitelisted chains and their respective transaction counts"]
+                pub async fn chain_nonces_iter(
+                    &self,
+                    block_hash: ::core::option::Option<T::Hash>,
+                ) -> ::core::result::Result<
+                    ::subxt::KeyIter<'a, T, ChainNonces<'a>>,
+                    ::subxt::BasicError,
+                > {
+                    if self.client.metadata().storage_hash::<ChainNonces>()?
+                        == [
+                            217u8, 18u8, 163u8, 125u8, 232u8, 176u8, 251u8,
+                            33u8, 149u8, 2u8, 197u8, 185u8, 79u8, 112u8, 92u8,
+                            39u8, 165u8, 141u8, 162u8, 151u8, 199u8, 156u8,
+                            58u8, 40u8, 255u8, 123u8, 7u8, 83u8, 134u8, 91u8,
+                            201u8, 44u8,
+                        ]
+                    {
+                        self.client.storage().iter(block_hash).await
+                    } else {
+                        Err(::subxt::MetadataError::IncompatibleMetadata.into())
+                    }
+                }
+                #[doc = " Number of votes required for a proposal to execute"]
+                pub async fn proposer_threshold(
+                    &self,
+                    block_hash: ::core::option::Option<T::Hash>,
+                ) -> ::core::result::Result<
+                    ::core::primitive::u32,
+                    ::subxt::BasicError,
+                > {
+                    if self
+                        .client
+                        .metadata()
+                        .storage_hash::<ProposerThreshold>()?
+                        == [
+                            129u8, 174u8, 171u8, 36u8, 172u8, 108u8, 139u8,
+                            176u8, 152u8, 127u8, 52u8, 68u8, 109u8, 238u8,
+                            50u8, 176u8, 49u8, 78u8, 240u8, 36u8, 94u8, 247u8,
+                            215u8, 82u8, 109u8, 10u8, 81u8, 156u8, 14u8, 247u8,
+                            39u8, 154u8,
+                        ]
+                    {
+                        let entry = ProposerThreshold;
+                        self.client
+                            .storage()
+                            .fetch_or_default(&entry, block_hash)
+                            .await
+                    } else {
+                        Err(::subxt::MetadataError::IncompatibleMetadata.into())
+                    }
+                }
+                #[doc = " Proposer Set Update Proposal Nonce"]
+                pub async fn proposer_set_update_proposal_nonce(
+                    &self,
+                    block_hash: ::core::option::Option<T::Hash>,
+                ) -> ::core::result::Result<
+                    ::core::primitive::u32,
+                    ::subxt::BasicError,
+                > {
+                    if self
+                        .client
+                        .metadata()
+                        .storage_hash::<ProposerSetUpdateProposalNonce>()?
+                        == [
+                            118u8, 52u8, 184u8, 159u8, 206u8, 28u8, 122u8,
+                            219u8, 168u8, 206u8, 143u8, 16u8, 128u8, 31u8,
+                            254u8, 40u8, 45u8, 92u8, 183u8, 46u8, 80u8, 19u8,
+                            131u8, 6u8, 26u8, 105u8, 81u8, 174u8, 10u8, 154u8,
+                            186u8, 157u8,
+                        ]
+                    {
+                        let entry = ProposerSetUpdateProposalNonce;
+                        self.client
+                            .storage()
+                            .fetch_or_default(&entry, block_hash)
+                            .await
+                    } else {
+                        Err(::subxt::MetadataError::IncompatibleMetadata.into())
+                    }
+                }
+                #[doc = " Tracks current proposer set"]
+                pub async fn proposers(
+                    &self,
+                    _0: &::subxt::sp_core::crypto::AccountId32,
+                    block_hash: ::core::option::Option<T::Hash>,
+                ) -> ::core::result::Result<
+                    ::core::primitive::bool,
+                    ::subxt::BasicError,
+                > {
+                    if self.client.metadata().storage_hash::<Proposers>()?
+                        == [
+                            137u8, 239u8, 193u8, 226u8, 156u8, 178u8, 137u8,
+                            139u8, 181u8, 99u8, 72u8, 129u8, 47u8, 24u8, 41u8,
+                            41u8, 180u8, 191u8, 219u8, 186u8, 240u8, 143u8,
+                            127u8, 146u8, 93u8, 164u8, 181u8, 112u8, 197u8,
+                            207u8, 149u8, 218u8,
+                        ]
+                    {
+                        let entry = Proposers(_0);
+                        self.client
+                            .storage()
+                            .fetch_or_default(&entry, block_hash)
+                            .await
+                    } else {
+                        Err(::subxt::MetadataError::IncompatibleMetadata.into())
+                    }
+                }
+                #[doc = " Tracks current proposer set"]
+                pub async fn proposers_iter(
+                    &self,
+                    block_hash: ::core::option::Option<T::Hash>,
+                ) -> ::core::result::Result<
+                    ::subxt::KeyIter<'a, T, Proposers<'a>>,
+                    ::subxt::BasicError,
+                > {
+                    if self.client.metadata().storage_hash::<Proposers>()?
+                        == [
+                            137u8, 239u8, 193u8, 226u8, 156u8, 178u8, 137u8,
+                            139u8, 181u8, 99u8, 72u8, 129u8, 47u8, 24u8, 41u8,
+                            41u8, 180u8, 191u8, 219u8, 186u8, 240u8, 143u8,
+                            127u8, 146u8, 93u8, 164u8, 181u8, 112u8, 197u8,
+                            207u8, 149u8, 218u8,
+                        ]
+                    {
+                        self.client.storage().iter(block_hash).await
+                    } else {
+                        Err(::subxt::MetadataError::IncompatibleMetadata.into())
+                    }
+                }
+                #[doc = " Tracks current proposer set external accounts"]
+                #[doc = " Currently meant to store Ethereum compatible 64-bytes ECDSA public keys"]
+                pub async fn external_proposer_accounts(
+                    &self,
+                    _0: &::subxt::sp_core::crypto::AccountId32,
+                    block_hash: ::core::option::Option<T::Hash>,
+                ) -> ::core::result::Result<
+                    ::std::vec::Vec<::core::primitive::u8>,
+                    ::subxt::BasicError,
+                > {
+                    if self
+                        .client
+                        .metadata()
+                        .storage_hash::<ExternalProposerAccounts>()?
+                        == [
+                            159u8, 244u8, 45u8, 186u8, 3u8, 16u8, 234u8, 133u8,
+                            22u8, 98u8, 8u8, 59u8, 33u8, 124u8, 46u8, 93u8,
+                            115u8, 222u8, 198u8, 150u8, 196u8, 188u8, 206u8,
+                            93u8, 186u8, 248u8, 193u8, 171u8, 181u8, 247u8,
+                            232u8, 73u8,
+                        ]
+                    {
+                        let entry = ExternalProposerAccounts(_0);
+                        self.client
+                            .storage()
+                            .fetch_or_default(&entry, block_hash)
+                            .await
+                    } else {
+                        Err(::subxt::MetadataError::IncompatibleMetadata.into())
+                    }
+                }
+                #[doc = " Tracks current proposer set external accounts"]
+                #[doc = " Currently meant to store Ethereum compatible 64-bytes ECDSA public keys"]
+                pub async fn external_proposer_accounts_iter(
+                    &self,
+                    block_hash: ::core::option::Option<T::Hash>,
+                ) -> ::core::result::Result<
+                    ::subxt::KeyIter<'a, T, ExternalProposerAccounts<'a>>,
+                    ::subxt::BasicError,
+                > {
+                    if self
+                        .client
+                        .metadata()
+                        .storage_hash::<ExternalProposerAccounts>()?
+                        == [
+                            159u8, 244u8, 45u8, 186u8, 3u8, 16u8, 234u8, 133u8,
+                            22u8, 98u8, 8u8, 59u8, 33u8, 124u8, 46u8, 93u8,
+                            115u8, 222u8, 198u8, 150u8, 196u8, 188u8, 206u8,
+                            93u8, 186u8, 248u8, 193u8, 171u8, 181u8, 247u8,
+                            232u8, 73u8,
+                        ]
+                    {
+                        self.client.storage().iter(block_hash).await
+                    } else {
+                        Err(::subxt::MetadataError::IncompatibleMetadata.into())
+                    }
+                }
+                #[doc = " Tracks the authorities that are proposers so we can properly update the proposer set"]
+                #[doc = " across sessions and authority changes."]
+                pub async fn authority_proposers(
+                    &self,
+                    block_hash: ::core::option::Option<T::Hash>,
+                ) -> ::core::result::Result<
+                    ::std::vec::Vec<::subxt::sp_core::crypto::AccountId32>,
+                    ::subxt::BasicError,
+                > {
+                    if self
+                        .client
+                        .metadata()
+                        .storage_hash::<AuthorityProposers>()?
+                        == [
+                            189u8, 68u8, 230u8, 107u8, 231u8, 3u8, 192u8,
+                            182u8, 18u8, 22u8, 91u8, 23u8, 106u8, 108u8, 246u8,
+                            58u8, 102u8, 58u8, 112u8, 198u8, 141u8, 66u8,
+                            233u8, 117u8, 49u8, 67u8, 138u8, 163u8, 145u8,
+                            93u8, 209u8, 46u8,
+                        ]
+                    {
+                        let entry = AuthorityProposers;
+                        self.client
+                            .storage()
+                            .fetch_or_default(&entry, block_hash)
+                            .await
+                    } else {
+                        Err(::subxt::MetadataError::IncompatibleMetadata.into())
+                    }
+                }
+                #[doc = " Tracks current proposer set external accounts"]
+                pub async fn external_authority_proposer_accounts(
+                    &self,
+                    block_hash: ::core::option::Option<T::Hash>,
+                ) -> ::core::result::Result<
+                    ::std::vec::Vec<::std::vec::Vec<::core::primitive::u8>>,
+                    ::subxt::BasicError,
+                > {
+                    if self
+                        .client
+                        .metadata()
+                        .storage_hash::<ExternalAuthorityProposerAccounts>()?
+                        == [
+                            180u8, 223u8, 172u8, 35u8, 236u8, 128u8, 207u8,
+                            140u8, 38u8, 75u8, 40u8, 243u8, 244u8, 122u8, 7u8,
+                            25u8, 120u8, 152u8, 240u8, 169u8, 165u8, 208u8,
+                            190u8, 127u8, 189u8, 117u8, 160u8, 34u8, 243u8,
+                            253u8, 223u8, 18u8,
+                        ]
+                    {
+                        let entry = ExternalAuthorityProposerAccounts;
+                        self.client
+                            .storage()
+                            .fetch_or_default(&entry, block_hash)
+                            .await
+                    } else {
+                        Err(::subxt::MetadataError::IncompatibleMetadata.into())
+                    }
+                }
+                #[doc = " Number of proposers in set"]
+                pub async fn proposer_count(
+                    &self,
+                    block_hash: ::core::option::Option<T::Hash>,
+                ) -> ::core::result::Result<
+                    ::core::primitive::u32,
+                    ::subxt::BasicError,
+                > {
+                    if self.client.metadata().storage_hash::<ProposerCount>()?
+                        == [
+                            150u8, 116u8, 125u8, 20u8, 135u8, 11u8, 47u8,
+                            155u8, 87u8, 113u8, 44u8, 139u8, 67u8, 74u8, 92u8,
+                            113u8, 173u8, 62u8, 207u8, 79u8, 125u8, 109u8,
+                            170u8, 166u8, 55u8, 85u8, 3u8, 32u8, 155u8, 45u8,
+                            236u8, 253u8,
+                        ]
+                    {
+                        let entry = ProposerCount;
+                        self.client
+                            .storage()
+                            .fetch_or_default(&entry, block_hash)
+                            .await
+                    } else {
+                        Err(::subxt::MetadataError::IncompatibleMetadata.into())
+                    }
+                }
+                #[doc = " All known proposals."]
+                #[doc = " The key is the hash of the call and the deposit ID, to ensure it's"]
+                #[doc = " unique."]                pub async fn votes (& self , _0 : & runtime_types :: webb_proposals :: header :: TypedChainId , _1 : & (runtime_types :: webb_proposals :: nonce :: Nonce , :: std :: vec :: Vec < :: core :: primitive :: u8 > ,) , block_hash : :: core :: option :: Option < T :: Hash > ,) -> :: core :: result :: Result < :: core :: option :: Option < runtime_types :: pallet_dkg_proposals :: types :: ProposalVotes < :: subxt :: sp_core :: crypto :: AccountId32 , :: core :: primitive :: u32 > > , :: subxt :: BasicError >{
+                    if self.client.metadata().storage_hash::<Votes>()?
+                        == [
+                            144u8, 169u8, 168u8, 187u8, 69u8, 77u8, 116u8, 6u8,
+                            37u8, 235u8, 103u8, 7u8, 42u8, 92u8, 84u8, 238u8,
+                            93u8, 111u8, 215u8, 146u8, 224u8, 80u8, 106u8,
+                            119u8, 6u8, 30u8, 170u8, 114u8, 103u8, 126u8,
+                            194u8, 227u8,
+                        ]
+                    {
+                        let entry = Votes(_0, _1);
+                        self.client.storage().fetch(&entry, block_hash).await
+                    } else {
+                        Err(::subxt::MetadataError::IncompatibleMetadata.into())
+                    }
+                }
+                #[doc = " All known proposals."]
+                #[doc = " The key is the hash of the call and the deposit ID, to ensure it's"]
+                #[doc = " unique."]
+                pub async fn votes_iter(
+                    &self,
+                    block_hash: ::core::option::Option<T::Hash>,
+                ) -> ::core::result::Result<
+                    ::subxt::KeyIter<'a, T, Votes<'a>>,
+                    ::subxt::BasicError,
+                > {
+                    if self.client.metadata().storage_hash::<Votes>()?
+                        == [
+                            144u8, 169u8, 168u8, 187u8, 69u8, 77u8, 116u8, 6u8,
+                            37u8, 235u8, 103u8, 7u8, 42u8, 92u8, 84u8, 238u8,
+                            93u8, 111u8, 215u8, 146u8, 224u8, 80u8, 106u8,
+                            119u8, 6u8, 30u8, 170u8, 114u8, 103u8, 126u8,
+                            194u8, 227u8,
+                        ]
+                    {
+                        self.client.storage().iter(block_hash).await
+                    } else {
+                        Err(::subxt::MetadataError::IncompatibleMetadata.into())
+                    }
+                }
+                #[doc = " Utilized by the bridge software to map resource IDs to actual methods"]
+                pub async fn resources(
+                    &self,
+                    _0: &runtime_types::webb_proposals::header::ResourceId,
+                    block_hash: ::core::option::Option<T::Hash>,
+                ) -> ::core::result::Result<
+                    ::core::option::Option<
+                        ::std::vec::Vec<::core::primitive::u8>,
+                    >,
+                    ::subxt::BasicError,
+                > {
+                    if self.client.metadata().storage_hash::<Resources>()?
+                        == [
+                            2u8, 126u8, 117u8, 136u8, 0u8, 115u8, 243u8, 121u8,
+                            130u8, 45u8, 25u8, 203u8, 234u8, 205u8, 60u8, 45u8,
+                            105u8, 25u8, 33u8, 245u8, 159u8, 50u8, 90u8, 107u8,
+                            5u8, 62u8, 147u8, 122u8, 18u8, 58u8, 107u8, 138u8,
+                        ]
+                    {
+                        let entry = Resources(_0);
+                        self.client.storage().fetch(&entry, block_hash).await
+                    } else {
+                        Err(::subxt::MetadataError::IncompatibleMetadata.into())
+                    }
+                }
+                #[doc = " Utilized by the bridge software to map resource IDs to actual methods"]
+                pub async fn resources_iter(
+                    &self,
+                    block_hash: ::core::option::Option<T::Hash>,
+                ) -> ::core::result::Result<
+                    ::subxt::KeyIter<'a, T, Resources<'a>>,
+                    ::subxt::BasicError,
+                > {
+                    if self.client.metadata().storage_hash::<Resources>()?
+                        == [
+                            2u8, 126u8, 117u8, 136u8, 0u8, 115u8, 243u8, 121u8,
+                            130u8, 45u8, 25u8, 203u8, 234u8, 205u8, 60u8, 45u8,
+                            105u8, 25u8, 33u8, 245u8, 159u8, 50u8, 90u8, 107u8,
+                            5u8, 62u8, 147u8, 122u8, 18u8, 58u8, 107u8, 138u8,
+                        ]
+                    {
+                        self.client.storage().iter(block_hash).await
+                    } else {
+                        Err(::subxt::MetadataError::IncompatibleMetadata.into())
+                    }
+                }
+            }
+        }
+        pub mod constants {
+            use super::runtime_types;
+            pub struct ConstantsApi<'a, T: ::subxt::Config> {
+                client: &'a ::subxt::Client<T>,
+            }
+            impl<'a, T: ::subxt::Config> ConstantsApi<'a, T> {
+                pub fn new(client: &'a ::subxt::Client<T>) -> Self {
+                    Self { client }
+                }
+                #[doc = " The identifier for this chain."]
+                #[doc = " This must be unique and must not collide with existing IDs within a"]
+                #[doc = " set of bridged chains."]
+                pub fn chain_identifier(
+                    &self,
+                ) -> ::core::result::Result<
+                    runtime_types::webb_proposals::header::TypedChainId,
+                    ::subxt::BasicError,
+                > {
+                    if self
+                        .client
+                        .metadata()
+                        .constant_hash("DKGProposals", "ChainIdentifier")?
+                        == [
+                            25u8, 195u8, 34u8, 179u8, 235u8, 0u8, 99u8, 251u8,
+                            69u8, 97u8, 82u8, 210u8, 204u8, 193u8, 10u8, 65u8,
+                            110u8, 39u8, 48u8, 246u8, 11u8, 33u8, 219u8, 169u8,
+                            226u8, 50u8, 38u8, 184u8, 97u8, 201u8, 30u8, 142u8,
+                        ]
+                    {
+                        let pallet =
+                            self.client.metadata().pallet("DKGProposals")?;
+                        let constant = pallet.constant("ChainIdentifier")?;
+                        let value = ::subxt::codec::Decode::decode(
+                            &mut &constant.value[..],
+                        )?;
+                        Ok(value)
+                    } else {
+                        Err(::subxt::MetadataError::IncompatibleMetadata.into())
+                    }
+                }
+                pub fn proposal_lifetime(
+                    &self,
+                ) -> ::core::result::Result<
+                    ::core::primitive::u32,
+                    ::subxt::BasicError,
+                > {
+                    if self
+                        .client
+                        .metadata()
+                        .constant_hash("DKGProposals", "ProposalLifetime")?
+                        == [
+                            130u8, 207u8, 135u8, 17u8, 0u8, 248u8, 194u8,
+                            143u8, 107u8, 214u8, 163u8, 5u8, 247u8, 63u8,
+                            198u8, 121u8, 202u8, 61u8, 62u8, 198u8, 168u8,
+                            212u8, 127u8, 48u8, 246u8, 162u8, 189u8, 101u8,
+                            190u8, 5u8, 191u8, 210u8,
+                        ]
+                    {
+                        let pallet =
+                            self.client.metadata().pallet("DKGProposals")?;
+                        let constant = pallet.constant("ProposalLifetime")?;
+                        let value = ::subxt::codec::Decode::decode(
+                            &mut &constant.value[..],
+                        )?;
+                        Ok(value)
+                    } else {
+                        Err(::subxt::MetadataError::IncompatibleMetadata.into())
+                    }
+                }
+                #[doc = " The session period"]
+                pub fn period(
+                    &self,
+                ) -> ::core::result::Result<
+                    ::core::primitive::u32,
+                    ::subxt::BasicError,
+                > {
+                    if self
+                        .client
+                        .metadata()
+                        .constant_hash("DKGProposals", "Period")?
+                        == [
+                            227u8, 23u8, 74u8, 179u8, 17u8, 231u8, 230u8,
+                            126u8, 122u8, 109u8, 25u8, 135u8, 172u8, 156u8,
+                            147u8, 161u8, 50u8, 28u8, 48u8, 39u8, 111u8, 191u8,
+                            24u8, 60u8, 2u8, 93u8, 16u8, 3u8, 89u8, 45u8,
+                            205u8, 251u8,
+                        ]
+                    {
+                        let pallet =
+                            self.client.metadata().pallet("DKGProposals")?;
+                        let constant = pallet.constant("Period")?;
+                        let value = ::subxt::codec::Decode::decode(
+                            &mut &constant.value[..],
+                        )?;
+                        Ok(value)
+                    } else {
+                        Err(::subxt::MetadataError::IncompatibleMetadata.into())
+                    }
+                }
+            }
+        }
+    }
+    pub mod dkg_proposal_handler {
+        use super::root_mod;
+        use super::runtime_types;
+        pub mod calls {
+            use super::root_mod;
+            use super::runtime_types;
+            type DispatchError = runtime_types::sp_runtime::DispatchError;
+            #[derive(
+                :: subxt :: codec :: Decode,
+                :: subxt :: codec :: Encode,
+                Clone,
+                Debug,
+                Eq,
+                PartialEq,
+            )]
+            pub struct SubmitSignedProposals {
+                pub props: ::std::vec::Vec<
+                    runtime_types::dkg_runtime_primitives::proposal::Proposal,
+                >,
+            }
+            impl ::subxt::Call for SubmitSignedProposals {
+                const PALLET: &'static str = "DKGProposalHandler";
+                const FUNCTION: &'static str = "submit_signed_proposals";
+            }
+            #[derive(
+                :: subxt :: codec :: Decode,
+                :: subxt :: codec :: Encode,
+                Clone,
+                Debug,
+                Eq,
+                PartialEq,
+            )]
+            pub struct ForceSubmitUnsignedProposal {
+                pub prop:
+                    runtime_types::dkg_runtime_primitives::proposal::Proposal,
+            }
+            impl ::subxt::Call for ForceSubmitUnsignedProposal {
+                const PALLET: &'static str = "DKGProposalHandler";
+                const FUNCTION: &'static str = "force_submit_unsigned_proposal";
+            }
+            pub struct TransactionApi<'a, T: ::subxt::Config, X> {
+                client: &'a ::subxt::Client<T>,
+                marker: ::core::marker::PhantomData<X>,
+            }
+            impl<'a, T, X> TransactionApi<'a, T, X>
+            where
+                T: ::subxt::Config,
+                X: ::subxt::extrinsic::ExtrinsicParams<T>,
+            {
+                pub fn new(client: &'a ::subxt::Client<T>) -> Self {
+                    Self {
+                        client,
+                        marker: ::core::marker::PhantomData,
+                    }
+                }
+                pub fn submit_signed_proposals(
+                    &self,
+                    props : :: std :: vec :: Vec < runtime_types :: dkg_runtime_primitives :: proposal :: Proposal >,
+                ) -> Result<
+                    ::subxt::SubmittableExtrinsic<
+                        'a,
+                        T,
+                        X,
+                        SubmitSignedProposals,
+                        DispatchError,
+                        root_mod::Event,
+                    >,
+                    ::subxt::BasicError,
+                > {
+                    if self
+                        .client
+                        .metadata()
+                        .call_hash::<SubmitSignedProposals>()?
+                        == [
+                            156u8, 161u8, 126u8, 188u8, 21u8, 186u8, 122u8,
+                            180u8, 78u8, 175u8, 140u8, 111u8, 10u8, 38u8, 66u8,
+                            254u8, 138u8, 37u8, 115u8, 187u8, 255u8, 222u8,
+                            22u8, 230u8, 117u8, 157u8, 205u8, 32u8, 123u8,
+                            14u8, 136u8, 227u8,
+                        ]
+                    {
+                        let call = SubmitSignedProposals { props };
+                        Ok(::subxt::SubmittableExtrinsic::new(
+                            self.client,
+                            call,
+                        ))
+                    } else {
+                        Err(::subxt::MetadataError::IncompatibleMetadata.into())
+                    }
+                }
+                #[doc = "Force submit an unsigned proposal to the DKG"]
+                #[doc = ""]
+                #[doc = "There are certain proposals we'd like to be proposable only"]
+                #[doc = "through root actions. The currently supported proposals are"]
+                #[doc = "\t1. Updating"]
+                pub fn force_submit_unsigned_proposal(
+                    &self,
+                    prop : runtime_types :: dkg_runtime_primitives :: proposal :: Proposal,
+                ) -> Result<
+                    ::subxt::SubmittableExtrinsic<
+                        'a,
+                        T,
+                        X,
+                        ForceSubmitUnsignedProposal,
+                        DispatchError,
+                        root_mod::Event,
+                    >,
+                    ::subxt::BasicError,
+                > {
+                    if self
+                        .client
+                        .metadata()
+                        .call_hash::<ForceSubmitUnsignedProposal>()?
+                        == [
+                            62u8, 173u8, 173u8, 166u8, 248u8, 172u8, 104u8,
+                            204u8, 165u8, 8u8, 141u8, 253u8, 205u8, 111u8,
+                            129u8, 47u8, 141u8, 29u8, 122u8, 66u8, 68u8, 231u8,
+                            26u8, 48u8, 165u8, 189u8, 16u8, 180u8, 140u8,
+                            232u8, 18u8, 41u8,
+                        ]
+                    {
+                        let call = ForceSubmitUnsignedProposal { prop };
+                        Ok(::subxt::SubmittableExtrinsic::new(
+                            self.client,
+                            call,
+                        ))
+                    } else {
+                        Err(::subxt::MetadataError::IncompatibleMetadata.into())
+                    }
+                }
+            }
+        }
+        pub type Event =
+            runtime_types::pallet_dkg_proposal_handler::pallet::Event;
+        pub mod events {
+            use super::runtime_types;
+            #[derive(
+                :: subxt :: codec :: Decode,
+                :: subxt :: codec :: Encode,
+                Clone,
+                Debug,
+                Eq,
+                PartialEq,
+            )]
+            #[doc = "Event Emitted when we encounter a Proposal with invalid Signature."]
+            pub struct InvalidProposalSignature { pub kind : runtime_types :: dkg_runtime_primitives :: proposal :: ProposalKind , pub data : :: std :: vec :: Vec < :: core :: primitive :: u8 > , pub invalid_signature : :: std :: vec :: Vec < :: core :: primitive :: u8 > , pub expected_public_key : :: core :: option :: Option < :: std :: vec :: Vec < :: core :: primitive :: u8 > > , pub actual_public_key : :: core :: option :: Option < :: std :: vec :: Vec < :: core :: primitive :: u8 > > , }
+            impl ::subxt::Event for InvalidProposalSignature {
+                const PALLET: &'static str = "DKGProposalHandler";
+                const EVENT: &'static str = "InvalidProposalSignature";
+            }
+            #[derive(
+                :: subxt :: codec :: Decode,
+                :: subxt :: codec :: Encode,
+                Clone,
+                Debug,
+                Eq,
+                PartialEq,
+            )]
+            #[doc = "Event When a Proposal Gets Signed by DKG."]
+            pub struct ProposalSigned { pub key : runtime_types :: dkg_runtime_primitives :: proposal :: DKGPayloadKey , pub target_chain : runtime_types :: webb_proposals :: header :: TypedChainId , pub data : :: std :: vec :: Vec < :: core :: primitive :: u8 > , pub signature : :: std :: vec :: Vec < :: core :: primitive :: u8 > , }
+            impl ::subxt::Event for ProposalSigned {
+                const PALLET: &'static str = "DKGProposalHandler";
+                const EVENT: &'static str = "ProposalSigned";
+            }
+        }
+        pub mod storage {
+            use super::runtime_types;
+            pub struct UnsignedProposalQueue < 'a > (pub & 'a runtime_types :: webb_proposals :: header :: TypedChainId , pub & 'a runtime_types :: dkg_runtime_primitives :: proposal :: DKGPayloadKey) ;
+            impl ::subxt::StorageEntry for UnsignedProposalQueue<'_> {
+                const PALLET: &'static str = "DKGProposalHandler";
+                const STORAGE: &'static str = "UnsignedProposalQueue";
+                type Value = runtime_types :: dkg_runtime_primitives :: proposal :: StoredUnsignedProposal < :: core :: primitive :: u32 > ;
+                fn key(&self) -> ::subxt::StorageEntryKey {
+                    ::subxt::StorageEntryKey::Map(vec![
+                        ::subxt::StorageMapKey::new(
+                            &self.0,
+                            ::subxt::StorageHasher::Blake2_128Concat,
+                        ),
+                        ::subxt::StorageMapKey::new(
+                            &self.1,
+                            ::subxt::StorageHasher::Blake2_128Concat,
+                        ),
+                    ])
+                }
+            }
+            pub struct SignedProposals < 'a > (pub & 'a runtime_types :: webb_proposals :: header :: TypedChainId , pub & 'a runtime_types :: dkg_runtime_primitives :: proposal :: DKGPayloadKey) ;
+            impl ::subxt::StorageEntry for SignedProposals<'_> {
+                const PALLET: &'static str = "DKGProposalHandler";
+                const STORAGE: &'static str = "SignedProposals";
+                type Value =
+                    runtime_types::dkg_runtime_primitives::proposal::Proposal;
+                fn key(&self) -> ::subxt::StorageEntryKey {
+                    ::subxt::StorageEntryKey::Map(vec![
+                        ::subxt::StorageMapKey::new(
+                            &self.0,
+                            ::subxt::StorageHasher::Blake2_128Concat,
+                        ),
+                        ::subxt::StorageMapKey::new(
+                            &self.1,
+                            ::subxt::StorageHasher::Blake2_128Concat,
+                        ),
+                    ])
+                }
+            }
+            pub struct StorageApi<'a, T: ::subxt::Config> {
+                client: &'a ::subxt::Client<T>,
+            }
+            impl<'a, T: ::subxt::Config> StorageApi<'a, T> {
+                pub fn new(client: &'a ::subxt::Client<T>) -> Self {
+                    Self { client }
+                }
+                #[doc = " All unsigned proposals."]                pub async fn unsigned_proposal_queue (& self , _0 : & runtime_types :: webb_proposals :: header :: TypedChainId , _1 : & runtime_types :: dkg_runtime_primitives :: proposal :: DKGPayloadKey , block_hash : :: core :: option :: Option < T :: Hash > ,) -> :: core :: result :: Result < :: core :: option :: Option < runtime_types :: dkg_runtime_primitives :: proposal :: StoredUnsignedProposal < :: core :: primitive :: u32 > > , :: subxt :: BasicError >{
+                    if self
+                        .client
+                        .metadata()
+                        .storage_hash::<UnsignedProposalQueue>()?
+                        == [
+                            9u8, 92u8, 6u8, 217u8, 7u8, 253u8, 172u8, 174u8,
+                            145u8, 109u8, 121u8, 149u8, 150u8, 253u8, 207u8,
+                            212u8, 191u8, 161u8, 34u8, 156u8, 78u8, 242u8,
+                            164u8, 14u8, 85u8, 67u8, 41u8, 119u8, 180u8, 9u8,
+                            217u8, 1u8,
+                        ]
+                    {
+                        let entry = UnsignedProposalQueue(_0, _1);
+                        self.client.storage().fetch(&entry, block_hash).await
+                    } else {
+                        Err(::subxt::MetadataError::IncompatibleMetadata.into())
+                    }
+                }
+                #[doc = " All unsigned proposals."]
+                pub async fn unsigned_proposal_queue_iter(
+                    &self,
+                    block_hash: ::core::option::Option<T::Hash>,
+                ) -> ::core::result::Result<
+                    ::subxt::KeyIter<'a, T, UnsignedProposalQueue<'a>>,
+                    ::subxt::BasicError,
+                > {
+                    if self
+                        .client
+                        .metadata()
+                        .storage_hash::<UnsignedProposalQueue>()?
+                        == [
+                            9u8, 92u8, 6u8, 217u8, 7u8, 253u8, 172u8, 174u8,
+                            145u8, 109u8, 121u8, 149u8, 150u8, 253u8, 207u8,
+                            212u8, 191u8, 161u8, 34u8, 156u8, 78u8, 242u8,
+                            164u8, 14u8, 85u8, 67u8, 41u8, 119u8, 180u8, 9u8,
+                            217u8, 1u8,
+                        ]
+                    {
+                        self.client.storage().iter(block_hash).await
+                    } else {
+                        Err(::subxt::MetadataError::IncompatibleMetadata.into())
+                    }
+                }
+                #[doc = " All signed proposals."]                pub async fn signed_proposals (& self , _0 : & runtime_types :: webb_proposals :: header :: TypedChainId , _1 : & runtime_types :: dkg_runtime_primitives :: proposal :: DKGPayloadKey , block_hash : :: core :: option :: Option < T :: Hash > ,) -> :: core :: result :: Result < :: core :: option :: Option < runtime_types :: dkg_runtime_primitives :: proposal :: Proposal > , :: subxt :: BasicError >{
+                    if self
+                        .client
+                        .metadata()
+                        .storage_hash::<SignedProposals>()?
+                        == [
+                            120u8, 64u8, 147u8, 235u8, 194u8, 48u8, 151u8,
+                            219u8, 73u8, 93u8, 162u8, 49u8, 133u8, 239u8,
+                            164u8, 252u8, 134u8, 2u8, 85u8, 49u8, 254u8, 107u8,
+                            239u8, 222u8, 82u8, 94u8, 52u8, 135u8, 162u8,
+                            104u8, 40u8, 241u8,
+                        ]
+                    {
+                        let entry = SignedProposals(_0, _1);
+                        self.client.storage().fetch(&entry, block_hash).await
+                    } else {
+                        Err(::subxt::MetadataError::IncompatibleMetadata.into())
+                    }
+                }
+                #[doc = " All signed proposals."]
+                pub async fn signed_proposals_iter(
+                    &self,
+                    block_hash: ::core::option::Option<T::Hash>,
+                ) -> ::core::result::Result<
+                    ::subxt::KeyIter<'a, T, SignedProposals<'a>>,
+                    ::subxt::BasicError,
+                > {
+                    if self
+                        .client
+                        .metadata()
+                        .storage_hash::<SignedProposals>()?
+                        == [
+                            120u8, 64u8, 147u8, 235u8, 194u8, 48u8, 151u8,
+                            219u8, 73u8, 93u8, 162u8, 49u8, 133u8, 239u8,
+                            164u8, 252u8, 134u8, 2u8, 85u8, 49u8, 254u8, 107u8,
+                            239u8, 222u8, 82u8, 94u8, 52u8, 135u8, 162u8,
+                            104u8, 40u8, 241u8,
+                        ]
+                    {
+                        self.client.storage().iter(block_hash).await
+                    } else {
+                        Err(::subxt::MetadataError::IncompatibleMetadata.into())
+                    }
+                }
+            }
+        }
+        pub mod constants {
+            use super::runtime_types;
+            pub struct ConstantsApi<'a, T: ::subxt::Config> {
+                client: &'a ::subxt::Client<T>,
+            }
+            impl<'a, T: ::subxt::Config> ConstantsApi<'a, T> {
+                pub fn new(client: &'a ::subxt::Client<T>) -> Self {
+                    Self { client }
+                }
+                #[doc = " Max number of signed proposal submissions per batch;"]
+                pub fn max_submissions_per_batch(
+                    &self,
+                ) -> ::core::result::Result<
+                    ::core::primitive::u16,
+                    ::subxt::BasicError,
+                > {
+                    if self.client.metadata().constant_hash(
+                        "DKGProposalHandler",
+                        "MaxSubmissionsPerBatch",
+                    )? == [
+                        137u8, 131u8, 2u8, 168u8, 44u8, 84u8, 1u8, 54u8, 42u8,
+                        54u8, 128u8, 211u8, 84u8, 154u8, 199u8, 9u8, 14u8,
+                        115u8, 117u8, 141u8, 225u8, 236u8, 81u8, 61u8, 24u8,
+                        249u8, 54u8, 106u8, 14u8, 49u8, 255u8, 227u8,
+                    ] {
+                        let pallet = self
+                            .client
+                            .metadata()
+                            .pallet("DKGProposalHandler")?;
+                        let constant =
+                            pallet.constant("MaxSubmissionsPerBatch")?;
+                        let value = ::subxt::codec::Decode::decode(
+                            &mut &constant.value[..],
+                        )?;
+                        Ok(value)
+                    } else {
+                        Err(::subxt::MetadataError::IncompatibleMetadata.into())
+                    }
+                }
+                #[doc = " Max blocks to store an unsigned proposal"]
+                pub fn unsigned_proposal_expiry(
+                    &self,
+                ) -> ::core::result::Result<
+                    ::core::primitive::u32,
+                    ::subxt::BasicError,
+                > {
+                    if self.client.metadata().constant_hash(
+                        "DKGProposalHandler",
+                        "UnsignedProposalExpiry",
+                    )? == [
+                        95u8, 216u8, 56u8, 164u8, 254u8, 166u8, 117u8, 73u8,
+                        111u8, 249u8, 165u8, 25u8, 30u8, 107u8, 178u8, 89u8,
+                        90u8, 242u8, 56u8, 250u8, 186u8, 13u8, 97u8, 34u8,
+                        124u8, 125u8, 20u8, 99u8, 199u8, 37u8, 12u8, 204u8,
+                    ] {
+                        let pallet = self
+                            .client
+                            .metadata()
+                            .pallet("DKGProposalHandler")?;
+                        let constant =
+                            pallet.constant("UnsignedProposalExpiry")?;
+                        let value = ::subxt::codec::Decode::decode(
+                            &mut &constant.value[..],
+                        )?;
+                        Ok(value)
+                    } else {
+                        Err(::subxt::MetadataError::IncompatibleMetadata.into())
+                    }
+                }
+            }
+        }
+    }
     pub mod transaction_payment {
         use super::root_mod;
         use super::runtime_types;
@@ -4230,58 +8294,6 @@ pub mod api {
                         Err(::subxt::MetadataError::IncompatibleMetadata.into())
                     }
                 }
-                #[doc = " The polynomial that is applied in order to derive fee from weight."]                pub fn weight_to_fee (& self) -> :: core :: result :: Result < :: std :: vec :: Vec < runtime_types :: frame_support :: weights :: WeightToFeeCoefficient < :: core :: primitive :: u128 > > , :: subxt :: BasicError >{
-                    if self
-                        .client
-                        .metadata()
-                        .constant_hash("TransactionPayment", "WeightToFee")?
-                        == [
-                            236u8, 89u8, 172u8, 50u8, 101u8, 218u8, 151u8,
-                            158u8, 128u8, 186u8, 120u8, 84u8, 103u8, 248u8,
-                            220u8, 191u8, 9u8, 185u8, 114u8, 160u8, 104u8,
-                            235u8, 167u8, 83u8, 228u8, 6u8, 56u8, 179u8, 160u8,
-                            4u8, 230u8, 12u8,
-                        ]
-                    {
-                        let pallet = self
-                            .client
-                            .metadata()
-                            .pallet("TransactionPayment")?;
-                        let constant = pallet.constant("WeightToFee")?;
-                        let value = ::subxt::codec::Decode::decode(
-                            &mut &constant.value[..],
-                        )?;
-                        Ok(value)
-                    } else {
-                        Err(::subxt::MetadataError::IncompatibleMetadata.into())
-                    }
-                }
-                #[doc = " The polynomial that is applied in order to derive fee from length."]                pub fn length_to_fee (& self) -> :: core :: result :: Result < :: std :: vec :: Vec < runtime_types :: frame_support :: weights :: WeightToFeeCoefficient < :: core :: primitive :: u128 > > , :: subxt :: BasicError >{
-                    if self
-                        .client
-                        .metadata()
-                        .constant_hash("TransactionPayment", "LengthToFee")?
-                        == [
-                            68u8, 81u8, 173u8, 120u8, 245u8, 251u8, 98u8,
-                            246u8, 140u8, 16u8, 36u8, 129u8, 156u8, 26u8,
-                            206u8, 12u8, 92u8, 243u8, 155u8, 146u8, 83u8,
-                            184u8, 53u8, 211u8, 237u8, 137u8, 160u8, 107u8,
-                            120u8, 24u8, 23u8, 24u8,
-                        ]
-                    {
-                        let pallet = self
-                            .client
-                            .metadata()
-                            .pallet("TransactionPayment")?;
-                        let constant = pallet.constant("LengthToFee")?;
-                        let value = ::subxt::codec::Decode::decode(
-                            &mut &constant.value[..],
-                        )?;
-                        Ok(value)
-                    } else {
-                        Err(::subxt::MetadataError::IncompatibleMetadata.into())
-                    }
-                }
             }
         }
     }
@@ -4407,11 +8419,11 @@ pub mod api {
                 > {
                     if self.client.metadata().call_hash::<Sudo>()?
                         == [
-                            62u8, 181u8, 251u8, 101u8, 139u8, 196u8, 172u8,
-                            237u8, 87u8, 246u8, 27u8, 114u8, 131u8, 212u8,
-                            247u8, 180u8, 88u8, 250u8, 208u8, 183u8, 3u8, 86u8,
-                            193u8, 153u8, 105u8, 201u8, 37u8, 70u8, 191u8,
-                            37u8, 57u8, 245u8,
+                            112u8, 215u8, 207u8, 28u8, 59u8, 244u8, 8u8, 168u8,
+                            93u8, 0u8, 27u8, 64u8, 11u8, 119u8, 67u8, 214u8,
+                            80u8, 228u8, 2u8, 123u8, 53u8, 37u8, 105u8, 167u8,
+                            114u8, 223u8, 139u8, 186u8, 175u8, 85u8, 24u8,
+                            48u8,
                         ]
                     {
                         let call = Sudo {
@@ -4455,11 +8467,11 @@ pub mod api {
                         .metadata()
                         .call_hash::<SudoUncheckedWeight>()?
                         == [
-                            204u8, 210u8, 110u8, 73u8, 130u8, 121u8, 24u8,
-                            177u8, 40u8, 130u8, 22u8, 252u8, 247u8, 220u8,
-                            106u8, 87u8, 50u8, 184u8, 180u8, 182u8, 159u8,
-                            187u8, 250u8, 1u8, 189u8, 208u8, 61u8, 78u8, 175u8,
-                            27u8, 89u8, 66u8,
+                            99u8, 18u8, 230u8, 137u8, 222u8, 230u8, 188u8,
+                            13u8, 155u8, 90u8, 37u8, 94u8, 144u8, 222u8, 121u8,
+                            174u8, 70u8, 112u8, 74u8, 17u8, 153u8, 36u8, 88u8,
+                            252u8, 139u8, 123u8, 140u8, 118u8, 218u8, 233u8,
+                            218u8, 170u8,
                         ]
                     {
                         let call = SudoUncheckedWeight {
@@ -4550,11 +8562,11 @@ pub mod api {
                 > {
                     if self.client.metadata().call_hash::<SudoAs>()?
                         == [
-                            161u8, 222u8, 242u8, 56u8, 75u8, 93u8, 133u8,
-                            248u8, 217u8, 3u8, 15u8, 252u8, 114u8, 113u8, 21u8,
-                            242u8, 236u8, 117u8, 233u8, 127u8, 254u8, 28u8,
-                            164u8, 28u8, 45u8, 58u8, 244u8, 179u8, 68u8, 14u8,
-                            208u8, 25u8,
+                            25u8, 156u8, 136u8, 149u8, 39u8, 205u8, 22u8,
+                            127u8, 21u8, 44u8, 184u8, 4u8, 187u8, 26u8, 94u8,
+                            38u8, 181u8, 113u8, 6u8, 5u8, 72u8, 46u8, 34u8,
+                            52u8, 134u8, 16u8, 74u8, 219u8, 31u8, 254u8, 211u8,
+                            9u8,
                         ]
                     {
                         let call = SudoAs {
@@ -4811,11 +8823,11 @@ pub mod api {
                 > {
                     if self.client.metadata().call_hash::<SubmitUnsigned>()?
                         == [
-                            202u8, 104u8, 247u8, 250u8, 171u8, 119u8, 119u8,
-                            96u8, 213u8, 119u8, 41u8, 116u8, 29u8, 99u8, 71u8,
-                            203u8, 168u8, 212u8, 15u8, 10u8, 64u8, 126u8,
-                            177u8, 56u8, 177u8, 42u8, 236u8, 124u8, 36u8, 94u8,
-                            47u8, 27u8,
+                            212u8, 126u8, 4u8, 62u8, 15u8, 223u8, 54u8, 80u8,
+                            27u8, 96u8, 170u8, 169u8, 238u8, 149u8, 139u8,
+                            190u8, 179u8, 158u8, 126u8, 191u8, 50u8, 201u8,
+                            108u8, 200u8, 78u8, 139u8, 92u8, 69u8, 50u8, 239u8,
+                            51u8, 18u8,
                         ]
                     {
                         let call = SubmitUnsigned {
@@ -4945,11 +8957,11 @@ pub mod api {
                 > {
                     if self.client.metadata().call_hash::<Submit>()?
                         == [
-                            192u8, 193u8, 242u8, 99u8, 80u8, 253u8, 100u8,
-                            234u8, 199u8, 15u8, 119u8, 251u8, 94u8, 248u8,
-                            110u8, 171u8, 216u8, 218u8, 60u8, 223u8, 227u8,
-                            79u8, 174u8, 232u8, 251u8, 75u8, 17u8, 241u8, 15u8,
-                            23u8, 11u8, 99u8,
+                            2u8, 131u8, 162u8, 38u8, 102u8, 73u8, 144u8, 71u8,
+                            200u8, 229u8, 140u8, 38u8, 58u8, 159u8, 59u8,
+                            167u8, 91u8, 169u8, 22u8, 228u8, 127u8, 153u8,
+                            125u8, 241u8, 60u8, 61u8, 103u8, 192u8, 95u8, 87u8,
+                            81u8, 73u8,
                         ]
                     {
                         let call = Submit {
@@ -5712,38 +9724,6 @@ pub mod api {
                         Err(::subxt::MetadataError::IncompatibleMetadata.into())
                     }
                 }
-                #[doc = " Maximum weight that the miner should consume."]
-                #[doc = ""]
-                #[doc = " The miner will ensure that the total weight of the unsigned solution will not exceed"]
-                #[doc = " this value, based on [`WeightInfo::submit_unsigned`]."]
-                pub fn miner_max_weight(
-                    &self,
-                ) -> ::core::result::Result<
-                    ::core::primitive::u64,
-                    ::subxt::BasicError,
-                > {
-                    if self.client.metadata().constant_hash(
-                        "ElectionProviderMultiPhase",
-                        "MinerMaxWeight",
-                    )? == [
-                        58u8, 56u8, 116u8, 165u8, 37u8, 16u8, 39u8, 123u8,
-                        250u8, 148u8, 29u8, 245u8, 46u8, 100u8, 54u8, 183u8,
-                        3u8, 125u8, 35u8, 102u8, 93u8, 10u8, 149u8, 71u8, 12u8,
-                        156u8, 97u8, 238u8, 70u8, 252u8, 222u8, 127u8,
-                    ] {
-                        let pallet = self
-                            .client
-                            .metadata()
-                            .pallet("ElectionProviderMultiPhase")?;
-                        let constant = pallet.constant("MinerMaxWeight")?;
-                        let value = ::subxt::codec::Decode::decode(
-                            &mut &constant.value[..],
-                        )?;
-                        Ok(value)
-                    } else {
-                        Err(::subxt::MetadataError::IncompatibleMetadata.into())
-                    }
-                }
                 #[doc = " Maximum number of signed submissions that can be queued."]
                 #[doc = ""]
                 #[doc = " It is best to avoid adjusting this during an election, as it impacts downstream data"]
@@ -5782,7 +9762,9 @@ pub mod api {
                 }
                 #[doc = " Maximum weight of a signed solution."]
                 #[doc = ""]
-                #[doc = " This should probably be similar to [`Config::MinerMaxWeight`]."]
+                #[doc = " If [`Config::MinerConfig`] is being implemented to submit signed solutions (outside of"]
+                #[doc = " this pallet), then [`MinerConfig::solution_weight`] is used to compare against"]
+                #[doc = " this value."]
                 pub fn signed_max_weight(
                     &self,
                 ) -> ::core::result::Result<
@@ -5793,10 +9775,10 @@ pub mod api {
                         "ElectionProviderMultiPhase",
                         "SignedMaxWeight",
                     )? == [
-                        46u8, 136u8, 54u8, 194u8, 58u8, 75u8, 86u8, 23u8, 16u8,
-                        86u8, 190u8, 229u8, 89u8, 109u8, 196u8, 3u8, 102u8,
-                        80u8, 240u8, 185u8, 175u8, 251u8, 59u8, 131u8, 118u8,
-                        87u8, 234u8, 7u8, 126u8, 123u8, 143u8, 64u8,
+                        120u8, 229u8, 97u8, 14u8, 194u8, 14u8, 191u8, 9u8,
+                        193u8, 189u8, 248u8, 130u8, 178u8, 22u8, 29u8, 201u8,
+                        43u8, 209u8, 115u8, 60u8, 217u8, 28u8, 141u8, 187u8,
+                        91u8, 73u8, 138u8, 14u8, 118u8, 236u8, 45u8, 71u8,
                     ] {
                         let pallet = self
                             .client
@@ -6018,38 +10000,6 @@ pub mod api {
                         Err(::subxt::MetadataError::IncompatibleMetadata.into())
                     }
                 }
-                #[doc = " Maximum length (bytes) that the mined solution should consume."]
-                #[doc = ""]
-                #[doc = " The miner will ensure that the total length of the unsigned solution will not exceed"]
-                #[doc = " this value."]
-                pub fn miner_max_length(
-                    &self,
-                ) -> ::core::result::Result<
-                    ::core::primitive::u32,
-                    ::subxt::BasicError,
-                > {
-                    if self.client.metadata().constant_hash(
-                        "ElectionProviderMultiPhase",
-                        "MinerMaxLength",
-                    )? == [
-                        131u8, 141u8, 170u8, 106u8, 200u8, 39u8, 188u8, 38u8,
-                        159u8, 91u8, 130u8, 187u8, 164u8, 109u8, 34u8, 75u8,
-                        198u8, 247u8, 204u8, 249u8, 246u8, 87u8, 217u8, 117u8,
-                        113u8, 120u8, 57u8, 201u8, 210u8, 22u8, 108u8, 124u8,
-                    ] {
-                        let pallet = self
-                            .client
-                            .metadata()
-                            .pallet("ElectionProviderMultiPhase")?;
-                        let constant = pallet.constant("MinerMaxLength")?;
-                        let value = ::subxt::codec::Decode::decode(
-                            &mut &constant.value[..],
-                        )?;
-                        Ok(value)
-                    } else {
-                        Err(::subxt::MetadataError::IncompatibleMetadata.into())
-                    }
-                }
             }
         }
     }
@@ -6111,8 +10061,10 @@ pub mod api {
                 #[doc = ""]
                 #[doc = "Anyone can call this function about any potentially dislocated account."]
                 #[doc = ""]
-                #[doc = "Will never return an error; if `dislocated` does not exist or doesn't need a rebag, then"]
-                #[doc = "it is a noop and fees are still collected from `origin`."]
+                #[doc = "Will always update the stored score of `dislocated` to the correct score, based on"]
+                #[doc = "`ScoreProvider`."]
+                #[doc = ""]
+                #[doc = "If `dislocated` does not exists, it returns an error."]
                 pub fn rebag(
                     &self,
                     dislocated: ::subxt::sp_core::crypto::AccountId32,
@@ -6208,6 +10160,23 @@ pub mod api {
                 const PALLET: &'static str = "BagsList";
                 const EVENT: &'static str = "Rebagged";
             }
+            #[derive(
+                :: subxt :: codec :: Decode,
+                :: subxt :: codec :: Encode,
+                Clone,
+                Debug,
+                Eq,
+                PartialEq,
+            )]
+            #[doc = "Updated the score of some account to the given amount."]
+            pub struct ScoreUpdated {
+                pub who: ::subxt::sp_core::crypto::AccountId32,
+                pub new_score: ::core::primitive::u64,
+            }
+            impl ::subxt::Event for ScoreUpdated {
+                const PALLET: &'static str = "BagsList";
+                const EVENT: &'static str = "ScoreUpdated";
+            }
         }
         pub mod storage {
             use super::runtime_types;
@@ -6272,11 +10241,11 @@ pub mod api {
                 > {
                     if self.client.metadata().storage_hash::<ListNodes>()?
                         == [
-                            114u8, 219u8, 206u8, 128u8, 160u8, 134u8, 95u8,
-                            214u8, 195u8, 15u8, 140u8, 174u8, 89u8, 85u8,
-                            191u8, 85u8, 96u8, 58u8, 214u8, 128u8, 6u8, 238u8,
-                            148u8, 141u8, 206u8, 107u8, 68u8, 41u8, 35u8,
-                            246u8, 169u8, 209u8,
+                            144u8, 72u8, 250u8, 207u8, 66u8, 204u8, 6u8, 146u8,
+                            219u8, 225u8, 6u8, 82u8, 111u8, 172u8, 171u8,
+                            184u8, 35u8, 129u8, 246u8, 162u8, 224u8, 116u8,
+                            244u8, 80u8, 197u8, 146u8, 243u8, 123u8, 209u8,
+                            135u8, 164u8, 201u8,
                         ]
                     {
                         let entry = ListNodes(_0);
@@ -6297,11 +10266,11 @@ pub mod api {
                 > {
                     if self.client.metadata().storage_hash::<ListNodes>()?
                         == [
-                            114u8, 219u8, 206u8, 128u8, 160u8, 134u8, 95u8,
-                            214u8, 195u8, 15u8, 140u8, 174u8, 89u8, 85u8,
-                            191u8, 85u8, 96u8, 58u8, 214u8, 128u8, 6u8, 238u8,
-                            148u8, 141u8, 206u8, 107u8, 68u8, 41u8, 35u8,
-                            246u8, 169u8, 209u8,
+                            144u8, 72u8, 250u8, 207u8, 66u8, 204u8, 6u8, 146u8,
+                            219u8, 225u8, 6u8, 82u8, 111u8, 172u8, 171u8,
+                            184u8, 35u8, 129u8, 246u8, 162u8, 224u8, 116u8,
+                            244u8, 80u8, 197u8, 146u8, 243u8, 123u8, 209u8,
+                            135u8, 164u8, 201u8,
                         ]
                     {
                         self.client.storage().iter(block_hash).await
@@ -6688,15 +10657,17 @@ pub mod api {
             )]
             pub struct UpdateRoles {
                 pub pool_id: ::core::primitive::u32,
-                pub root: ::core::option::Option<
+                pub new_root: runtime_types::pallet_nomination_pools::ConfigOp<
                     ::subxt::sp_core::crypto::AccountId32,
                 >,
-                pub nominator: ::core::option::Option<
-                    ::subxt::sp_core::crypto::AccountId32,
-                >,
-                pub state_toggler: ::core::option::Option<
-                    ::subxt::sp_core::crypto::AccountId32,
-                >,
+                pub new_nominator:
+                    runtime_types::pallet_nomination_pools::ConfigOp<
+                        ::subxt::sp_core::crypto::AccountId32,
+                    >,
+                pub new_state_toggler:
+                    runtime_types::pallet_nomination_pools::ConfigOp<
+                        ::subxt::sp_core::crypto::AccountId32,
+                    >,
             }
             impl ::subxt::Call for UpdateRoles {
                 const PALLET: &'static str = "NominationPools";
@@ -7160,7 +11131,7 @@ pub mod api {
                         Err(::subxt::MetadataError::IncompatibleMetadata.into())
                     }
                 }
-                #[doc = "Update configurations for the nomination pools. The origin must for this call must be"]
+                #[doc = "Update configurations for the nomination pools. The origin for this call must be"]
                 #[doc = "Root."]
                 #[doc = ""]
                 #[doc = "# Arguments"]
@@ -7224,15 +11195,11 @@ pub mod api {
                 pub fn update_roles(
                     &self,
                     pool_id: ::core::primitive::u32,
-                    root: ::core::option::Option<
+                    new_root: runtime_types::pallet_nomination_pools::ConfigOp<
                         ::subxt::sp_core::crypto::AccountId32,
                     >,
-                    nominator: ::core::option::Option<
-                        ::subxt::sp_core::crypto::AccountId32,
-                    >,
-                    state_toggler: ::core::option::Option<
-                        ::subxt::sp_core::crypto::AccountId32,
-                    >,
+                    new_nominator : runtime_types :: pallet_nomination_pools :: ConfigOp < :: subxt :: sp_core :: crypto :: AccountId32 >,
+                    new_state_toggler : runtime_types :: pallet_nomination_pools :: ConfigOp < :: subxt :: sp_core :: crypto :: AccountId32 >,
                 ) -> Result<
                     ::subxt::SubmittableExtrinsic<
                         'a,
@@ -7246,18 +11213,18 @@ pub mod api {
                 > {
                     if self.client.metadata().call_hash::<UpdateRoles>()?
                         == [
-                            224u8, 13u8, 170u8, 241u8, 2u8, 138u8, 139u8,
-                            124u8, 165u8, 213u8, 53u8, 184u8, 21u8, 125u8,
-                            176u8, 181u8, 234u8, 54u8, 119u8, 175u8, 172u8,
-                            143u8, 81u8, 86u8, 231u8, 206u8, 205u8, 89u8,
-                            208u8, 4u8, 102u8, 174u8,
+                            129u8, 78u8, 95u8, 251u8, 33u8, 37u8, 120u8, 87u8,
+                            2u8, 54u8, 242u8, 245u8, 51u8, 160u8, 121u8, 51u8,
+                            15u8, 21u8, 56u8, 40u8, 60u8, 79u8, 75u8, 190u8,
+                            200u8, 18u8, 248u8, 237u8, 210u8, 194u8, 158u8,
+                            214u8,
                         ]
                     {
                         let call = UpdateRoles {
                             pool_id,
-                            root,
-                            nominator,
-                            state_toggler,
+                            new_root,
+                            new_nominator,
+                            new_state_toggler,
                         };
                         Ok(::subxt::SubmittableExtrinsic::new(
                             self.client,
@@ -7424,11 +11391,18 @@ pub mod api {
                 Eq,
                 PartialEq,
             )]
-            #[doc = "The roles of a pool have been updated to the given new roles."]
+            #[doc = "The roles of a pool have been updated to the given new roles. Note that the depositor"]
+            #[doc = "can never change."]
             pub struct RolesUpdated {
-                pub root: ::subxt::sp_core::crypto::AccountId32,
-                pub state_toggler: ::subxt::sp_core::crypto::AccountId32,
-                pub nominator: ::subxt::sp_core::crypto::AccountId32,
+                pub root: ::core::option::Option<
+                    ::subxt::sp_core::crypto::AccountId32,
+                >,
+                pub state_toggler: ::core::option::Option<
+                    ::subxt::sp_core::crypto::AccountId32,
+                >,
+                pub nominator: ::core::option::Option<
+                    ::subxt::sp_core::crypto::AccountId32,
+                >,
             }
             impl ::subxt::Event for RolesUpdated {
                 const PALLET: &'static str = "NominationPools";
@@ -7864,11 +11838,11 @@ pub mod api {
                 > {
                     if self.client.metadata().storage_hash::<BondedPools>()?
                         == [
-                            226u8, 11u8, 104u8, 52u8, 234u8, 12u8, 68u8, 31u8,
-                            172u8, 229u8, 125u8, 254u8, 31u8, 1u8, 170u8,
-                            185u8, 53u8, 171u8, 210u8, 202u8, 140u8, 143u8,
-                            58u8, 162u8, 140u8, 151u8, 18u8, 211u8, 99u8,
-                            150u8, 164u8, 105u8,
+                            118u8, 190u8, 153u8, 45u8, 232u8, 166u8, 193u8,
+                            158u8, 194u8, 178u8, 150u8, 75u8, 216u8, 176u8,
+                            191u8, 215u8, 213u8, 188u8, 176u8, 235u8, 241u8,
+                            106u8, 125u8, 204u8, 61u8, 179u8, 133u8, 229u8,
+                            161u8, 53u8, 161u8, 254u8,
                         ]
                     {
                         let entry = BondedPools(_0);
@@ -7887,11 +11861,11 @@ pub mod api {
                 > {
                     if self.client.metadata().storage_hash::<BondedPools>()?
                         == [
-                            226u8, 11u8, 104u8, 52u8, 234u8, 12u8, 68u8, 31u8,
-                            172u8, 229u8, 125u8, 254u8, 31u8, 1u8, 170u8,
-                            185u8, 53u8, 171u8, 210u8, 202u8, 140u8, 143u8,
-                            58u8, 162u8, 140u8, 151u8, 18u8, 211u8, 99u8,
-                            150u8, 164u8, 105u8,
+                            118u8, 190u8, 153u8, 45u8, 232u8, 166u8, 193u8,
+                            158u8, 194u8, 178u8, 150u8, 75u8, 216u8, 176u8,
+                            191u8, 215u8, 213u8, 188u8, 176u8, 235u8, 241u8,
+                            106u8, 125u8, 204u8, 61u8, 179u8, 133u8, 229u8,
+                            161u8, 53u8, 161u8, 254u8,
                         ]
                     {
                         self.client.storage().iter(block_hash).await
@@ -8308,6 +12282,37 @@ pub mod api {
                         let pallet =
                             self.client.metadata().pallet("NominationPools")?;
                         let constant = pallet.constant("PalletId")?;
+                        let value = ::subxt::codec::Decode::decode(
+                            &mut &constant.value[..],
+                        )?;
+                        Ok(value)
+                    } else {
+                        Err(::subxt::MetadataError::IncompatibleMetadata.into())
+                    }
+                }
+                #[doc = " The minimum pool points-to-balance ratio that must be maintained for it to be `open`."]
+                #[doc = " This is important in the event slashing takes place and the pool's points-to-balance"]
+                #[doc = " ratio becomes disproportional."]
+                #[doc = " For a value of 10, the threshold would be a pool points-to-balance ratio of 10:1."]
+                #[doc = " Such a scenario would also be the equivalent of the pool being 90% slashed."]
+                pub fn min_points_to_balance(
+                    &self,
+                ) -> ::core::result::Result<
+                    ::core::primitive::u32,
+                    ::subxt::BasicError,
+                > {
+                    if self.client.metadata().constant_hash(
+                        "NominationPools",
+                        "MinPointsToBalance",
+                    )? == [
+                        137u8, 170u8, 155u8, 98u8, 250u8, 181u8, 167u8, 57u8,
+                        199u8, 204u8, 60u8, 159u8, 39u8, 207u8, 21u8, 173u8,
+                        138u8, 109u8, 104u8, 115u8, 237u8, 191u8, 111u8, 108u8,
+                        152u8, 192u8, 30u8, 202u8, 183u8, 233u8, 161u8, 40u8,
+                    ] {
+                        let pallet =
+                            self.client.metadata().pallet("NominationPools")?;
+                        let constant = pallet.constant("MinPointsToBalance")?;
                         let value = ::subxt::codec::Decode::decode(
                             &mut &constant.value[..],
                         )?;
@@ -13186,4041 +17191,6 @@ pub mod api {
             }
         }
     }
-    pub mod dkg {
-        use super::root_mod;
-        use super::runtime_types;
-        pub mod calls {
-            use super::root_mod;
-            use super::runtime_types;
-            type DispatchError = runtime_types::sp_runtime::DispatchError;
-            #[derive(
-                :: subxt :: codec :: CompactAs,
-                :: subxt :: codec :: Decode,
-                :: subxt :: codec :: Encode,
-                Clone,
-                Debug,
-                Eq,
-                PartialEq,
-            )]
-            pub struct SetSignatureThreshold {
-                pub new_threshold: ::core::primitive::u16,
-            }
-            impl ::subxt::Call for SetSignatureThreshold {
-                const PALLET: &'static str = "DKG";
-                const FUNCTION: &'static str = "set_signature_threshold";
-            }
-            #[derive(
-                :: subxt :: codec :: CompactAs,
-                :: subxt :: codec :: Decode,
-                :: subxt :: codec :: Encode,
-                Clone,
-                Debug,
-                Eq,
-                PartialEq,
-            )]
-            pub struct SetKeygenThreshold {
-                pub new_threshold: ::core::primitive::u16,
-            }
-            impl ::subxt::Call for SetKeygenThreshold {
-                const PALLET: &'static str = "DKG";
-                const FUNCTION: &'static str = "set_keygen_threshold";
-            }
-            #[derive(
-                :: subxt :: codec :: CompactAs,
-                :: subxt :: codec :: Decode,
-                :: subxt :: codec :: Encode,
-                Clone,
-                Debug,
-                Eq,
-                PartialEq,
-            )]
-            pub struct SetRefreshDelay {
-                pub new_delay: ::core::primitive::u8,
-            }
-            impl ::subxt::Call for SetRefreshDelay {
-                const PALLET: &'static str = "DKG";
-                const FUNCTION: &'static str = "set_refresh_delay";
-            }
-            #[derive(
-                :: subxt :: codec :: Decode,
-                :: subxt :: codec :: Encode,
-                Clone,
-                Debug,
-                Eq,
-                PartialEq,
-            )]
-            pub struct SubmitPublicKey {
-                pub keys_and_signatures:
-                    runtime_types::dkg_runtime_primitives::AggregatedPublicKeys,
-            }
-            impl ::subxt::Call for SubmitPublicKey {
-                const PALLET: &'static str = "DKG";
-                const FUNCTION: &'static str = "submit_public_key";
-            }
-            #[derive(
-                :: subxt :: codec :: Decode,
-                :: subxt :: codec :: Encode,
-                Clone,
-                Debug,
-                Eq,
-                PartialEq,
-            )]
-            pub struct SubmitNextPublicKey {
-                pub keys_and_signatures:
-                    runtime_types::dkg_runtime_primitives::AggregatedPublicKeys,
-            }
-            impl ::subxt::Call for SubmitNextPublicKey {
-                const PALLET: &'static str = "DKG";
-                const FUNCTION: &'static str = "submit_next_public_key";
-            }
-            #[derive(
-                :: subxt :: codec :: Decode,
-                :: subxt :: codec :: Encode,
-                Clone,
-                Debug,
-                Eq,
-                PartialEq,
-            )]
-            pub struct SubmitPublicKeySignature { pub signature_proposal : runtime_types :: dkg_runtime_primitives :: proposal :: RefreshProposalSigned , }
-            impl ::subxt::Call for SubmitPublicKeySignature {
-                const PALLET: &'static str = "DKG";
-                const FUNCTION: &'static str = "submit_public_key_signature";
-            }
-            #[derive(
-                :: subxt :: codec :: Decode,
-                :: subxt :: codec :: Encode,
-                Clone,
-                Debug,
-                Eq,
-                PartialEq,
-            )]
-            pub struct SubmitMisbehaviourReports { pub reports : runtime_types :: dkg_runtime_primitives :: AggregatedMisbehaviourReports < runtime_types :: dkg_runtime_primitives :: crypto :: Public > , }
-            impl ::subxt::Call for SubmitMisbehaviourReports {
-                const PALLET: &'static str = "DKG";
-                const FUNCTION: &'static str = "submit_misbehaviour_reports";
-            }
-            #[derive(
-                :: subxt :: codec :: Decode,
-                :: subxt :: codec :: Encode,
-                Clone,
-                Debug,
-                Eq,
-                PartialEq,
-            )]
-            pub struct Unjail;
-            impl ::subxt::Call for Unjail {
-                const PALLET: &'static str = "DKG";
-                const FUNCTION: &'static str = "unjail";
-            }
-            #[derive(
-                :: subxt :: codec :: Decode,
-                :: subxt :: codec :: Encode,
-                Clone,
-                Debug,
-                Eq,
-                PartialEq,
-            )]
-            pub struct ForceUnjailKeygen {
-                pub authority:
-                    runtime_types::dkg_runtime_primitives::crypto::Public,
-            }
-            impl ::subxt::Call for ForceUnjailKeygen {
-                const PALLET: &'static str = "DKG";
-                const FUNCTION: &'static str = "force_unjail_keygen";
-            }
-            #[derive(
-                :: subxt :: codec :: Decode,
-                :: subxt :: codec :: Encode,
-                Clone,
-                Debug,
-                Eq,
-                PartialEq,
-            )]
-            pub struct ForceUnjailSigning {
-                pub authority:
-                    runtime_types::dkg_runtime_primitives::crypto::Public,
-            }
-            impl ::subxt::Call for ForceUnjailSigning {
-                const PALLET: &'static str = "DKG";
-                const FUNCTION: &'static str = "force_unjail_signing";
-            }
-            #[derive(
-                :: subxt :: codec :: Decode,
-                :: subxt :: codec :: Encode,
-                Clone,
-                Debug,
-                Eq,
-                PartialEq,
-            )]
-            pub struct ManualIncrementNonce;
-            impl ::subxt::Call for ManualIncrementNonce {
-                const PALLET: &'static str = "DKG";
-                const FUNCTION: &'static str = "manual_increment_nonce";
-            }
-            #[derive(
-                :: subxt :: codec :: Decode,
-                :: subxt :: codec :: Encode,
-                Clone,
-                Debug,
-                Eq,
-                PartialEq,
-            )]
-            pub struct ManualRefresh;
-            impl ::subxt::Call for ManualRefresh {
-                const PALLET: &'static str = "DKG";
-                const FUNCTION: &'static str = "manual_refresh";
-            }
-            #[derive(
-                :: subxt :: codec :: Decode,
-                :: subxt :: codec :: Encode,
-                Clone,
-                Debug,
-                Eq,
-                PartialEq,
-            )]
-            pub struct ForceChangeAuthorities;
-            impl ::subxt::Call for ForceChangeAuthorities {
-                const PALLET: &'static str = "DKG";
-                const FUNCTION: &'static str = "force_change_authorities";
-            }
-            pub struct TransactionApi<'a, T: ::subxt::Config, X> {
-                client: &'a ::subxt::Client<T>,
-                marker: ::core::marker::PhantomData<X>,
-            }
-            impl<'a, T, X> TransactionApi<'a, T, X>
-            where
-                T: ::subxt::Config,
-                X: ::subxt::extrinsic::ExtrinsicParams<T>,
-            {
-                pub fn new(client: &'a ::subxt::Client<T>) -> Self {
-                    Self {
-                        client,
-                        marker: ::core::marker::PhantomData,
-                    }
-                }
-                #[doc = "Set the pending signature threshold for the session following the next session."]
-                #[doc = ""]
-                #[doc = "We cannot assume that the next DKG has not already completed keygen."]
-                #[doc = "After all, if we are in a new session the next DKG may have already completed."]
-                #[doc = "Therefore, when we update the thresholds we are updating a threshold"]
-                #[doc = "that will become the next threshold after the next session update."]
-                #[doc = ""]
-                #[doc = "* `origin` - The account origin."]
-                #[doc = "* `new_threshold` - The new signature threshold for the DKG."]
-                pub fn set_signature_threshold(
-                    &self,
-                    new_threshold: ::core::primitive::u16,
-                ) -> Result<
-                    ::subxt::SubmittableExtrinsic<
-                        'a,
-                        T,
-                        X,
-                        SetSignatureThreshold,
-                        DispatchError,
-                        root_mod::Event,
-                    >,
-                    ::subxt::BasicError,
-                > {
-                    if self
-                        .client
-                        .metadata()
-                        .call_hash::<SetSignatureThreshold>()?
-                        == [
-                            122u8, 91u8, 136u8, 125u8, 136u8, 58u8, 171u8,
-                            101u8, 232u8, 23u8, 111u8, 125u8, 213u8, 79u8,
-                            92u8, 100u8, 221u8, 250u8, 51u8, 28u8, 12u8, 88u8,
-                            101u8, 175u8, 158u8, 185u8, 134u8, 50u8, 33u8,
-                            53u8, 147u8, 158u8,
-                        ]
-                    {
-                        let call = SetSignatureThreshold { new_threshold };
-                        Ok(::subxt::SubmittableExtrinsic::new(
-                            self.client,
-                            call,
-                        ))
-                    } else {
-                        Err(::subxt::MetadataError::IncompatibleMetadata.into())
-                    }
-                }
-                #[doc = "Set the pending keygen threshold for the session following the next session."]
-                #[doc = ""]
-                #[doc = "We cannot assume that the next DKG has not already completed keygen."]
-                #[doc = "After all, if we are in a new session the next DKG may have already completed."]
-                #[doc = "Therefore, when we update the thresholds we are updating a threshold"]
-                #[doc = "that will become the next threshold after the next session update."]
-                #[doc = ""]
-                #[doc = "* `origin` - The account origin."]
-                #[doc = "* `new_threshold` - The new keygen threshold for the DKG."]
-                pub fn set_keygen_threshold(
-                    &self,
-                    new_threshold: ::core::primitive::u16,
-                ) -> Result<
-                    ::subxt::SubmittableExtrinsic<
-                        'a,
-                        T,
-                        X,
-                        SetKeygenThreshold,
-                        DispatchError,
-                        root_mod::Event,
-                    >,
-                    ::subxt::BasicError,
-                > {
-                    if self
-                        .client
-                        .metadata()
-                        .call_hash::<SetKeygenThreshold>()?
-                        == [
-                            247u8, 170u8, 146u8, 242u8, 43u8, 84u8, 205u8,
-                            99u8, 131u8, 228u8, 228u8, 252u8, 132u8, 234u8,
-                            3u8, 4u8, 6u8, 242u8, 109u8, 226u8, 71u8, 244u8,
-                            212u8, 2u8, 33u8, 68u8, 220u8, 237u8, 40u8, 39u8,
-                            254u8, 142u8,
-                        ]
-                    {
-                        let call = SetKeygenThreshold { new_threshold };
-                        Ok(::subxt::SubmittableExtrinsic::new(
-                            self.client,
-                            call,
-                        ))
-                    } else {
-                        Err(::subxt::MetadataError::IncompatibleMetadata.into())
-                    }
-                }
-                #[doc = "Sets the delay when a unsigned `RefreshProposal` will be added to the unsigned"]
-                #[doc = "proposal queue."]
-                #[doc = ""]
-                #[doc = "* `origin` - The account origin."]
-                #[doc = "* `new_delay` - The percentage of elapsed session duration to wait before adding an"]
-                #[doc = "  unsigned refresh proposal to the unsigned proposal queue."]
-                pub fn set_refresh_delay(
-                    &self,
-                    new_delay: ::core::primitive::u8,
-                ) -> Result<
-                    ::subxt::SubmittableExtrinsic<
-                        'a,
-                        T,
-                        X,
-                        SetRefreshDelay,
-                        DispatchError,
-                        root_mod::Event,
-                    >,
-                    ::subxt::BasicError,
-                > {
-                    if self.client.metadata().call_hash::<SetRefreshDelay>()?
-                        == [
-                            153u8, 213u8, 152u8, 100u8, 176u8, 155u8, 11u8,
-                            107u8, 152u8, 61u8, 137u8, 56u8, 184u8, 130u8,
-                            234u8, 108u8, 213u8, 62u8, 166u8, 1u8, 204u8,
-                            160u8, 33u8, 28u8, 54u8, 27u8, 223u8, 23u8, 45u8,
-                            234u8, 242u8, 161u8,
-                        ]
-                    {
-                        let call = SetRefreshDelay { new_delay };
-                        Ok(::subxt::SubmittableExtrinsic::new(
-                            self.client,
-                            call,
-                        ))
-                    } else {
-                        Err(::subxt::MetadataError::IncompatibleMetadata.into())
-                    }
-                }
-                #[doc = "Submits and stores the active public key for the genesis session into the on-chain"]
-                #[doc = "storage. This is primarily used to separate the genesis public key submission from"]
-                #[doc = "non-genesis rounds."]
-                #[doc = ""]
-                #[doc = "Can only be submitted by the current authorities. It is also required that a"]
-                #[doc = "`SignatureThreshold` of submissions is reached in order to successfully"]
-                #[doc = "store the public key on-chain."]
-                #[doc = ""]
-                #[doc = "* `origin` - The account origin."]
-                #[doc = "* `keys_and_signatures` - The aggregated public keys and signatures for possible current"]
-                #[doc = "  DKG public keys."]
-                pub fn submit_public_key(
-                    &self,
-                    keys_and_signatures : runtime_types :: dkg_runtime_primitives :: AggregatedPublicKeys,
-                ) -> Result<
-                    ::subxt::SubmittableExtrinsic<
-                        'a,
-                        T,
-                        X,
-                        SubmitPublicKey,
-                        DispatchError,
-                        root_mod::Event,
-                    >,
-                    ::subxt::BasicError,
-                > {
-                    if self.client.metadata().call_hash::<SubmitPublicKey>()?
-                        == [
-                            173u8, 232u8, 176u8, 226u8, 83u8, 67u8, 238u8,
-                            215u8, 161u8, 193u8, 191u8, 223u8, 165u8, 253u8,
-                            44u8, 204u8, 128u8, 146u8, 194u8, 102u8, 115u8,
-                            55u8, 255u8, 30u8, 53u8, 139u8, 72u8, 90u8, 16u8,
-                            190u8, 192u8, 75u8,
-                        ]
-                    {
-                        let call = SubmitPublicKey {
-                            keys_and_signatures,
-                        };
-                        Ok(::subxt::SubmittableExtrinsic::new(
-                            self.client,
-                            call,
-                        ))
-                    } else {
-                        Err(::subxt::MetadataError::IncompatibleMetadata.into())
-                    }
-                }
-                #[doc = "Submits and stores the next public key for the next session into the on-chain storage."]
-                #[doc = ""]
-                #[doc = "Can only be submitted by the next authorities. It is also required that a"]
-                #[doc = "`NextSignatureThreshold` of submissions is reached in order to successfully"]
-                #[doc = "store the public key on-chain."]
-                #[doc = ""]
-                #[doc = "* `origin` - The account origin."]
-                #[doc = "* `keys_and_signatures` - The aggregated public keys and signatures for possible next"]
-                #[doc = "  DKG public keys."]
-                pub fn submit_next_public_key(
-                    &self,
-                    keys_and_signatures : runtime_types :: dkg_runtime_primitives :: AggregatedPublicKeys,
-                ) -> Result<
-                    ::subxt::SubmittableExtrinsic<
-                        'a,
-                        T,
-                        X,
-                        SubmitNextPublicKey,
-                        DispatchError,
-                        root_mod::Event,
-                    >,
-                    ::subxt::BasicError,
-                > {
-                    if self
-                        .client
-                        .metadata()
-                        .call_hash::<SubmitNextPublicKey>()?
-                        == [
-                            100u8, 255u8, 127u8, 211u8, 252u8, 234u8, 21u8,
-                            41u8, 59u8, 68u8, 62u8, 130u8, 131u8, 46u8, 93u8,
-                            194u8, 122u8, 68u8, 223u8, 119u8, 211u8, 191u8,
-                            187u8, 139u8, 15u8, 161u8, 211u8, 109u8, 168u8,
-                            78u8, 165u8, 41u8,
-                        ]
-                    {
-                        let call = SubmitNextPublicKey {
-                            keys_and_signatures,
-                        };
-                        Ok(::subxt::SubmittableExtrinsic::new(
-                            self.client,
-                            call,
-                        ))
-                    } else {
-                        Err(::subxt::MetadataError::IncompatibleMetadata.into())
-                    }
-                }
-                #[doc = "Submits the public key signature for the key refresh/rotation process."]
-                #[doc = ""]
-                #[doc = "The signature is the signature of the next public key `RefreshProposal`, signed by the"]
-                #[doc = "current DKG. It is stored on-chain only if it verifies successfully against the current"]
-                #[doc = "DKG's public key. Successful storage of this public key signature also removes"]
-                #[doc = "the unsigned `RefreshProposal` from the unsigned queue."]
-                #[doc = ""]
-                #[doc = "For manual refreshes, after the signature is submitted and stored on-chain,"]
-                #[doc = "the keys are immediately refreshed and the authority set is immediately rotated"]
-                #[doc = "and incremented."]
-                #[doc = ""]
-                #[doc = "* `origin` - The account origin."]
-                #[doc = "* `signature_proposal` - The signed refresh proposal containing the public key signature"]
-                #[doc = "  and nonce."]
-                pub fn submit_public_key_signature(
-                    &self,
-                    signature_proposal : runtime_types :: dkg_runtime_primitives :: proposal :: RefreshProposalSigned,
-                ) -> Result<
-                    ::subxt::SubmittableExtrinsic<
-                        'a,
-                        T,
-                        X,
-                        SubmitPublicKeySignature,
-                        DispatchError,
-                        root_mod::Event,
-                    >,
-                    ::subxt::BasicError,
-                > {
-                    if self
-                        .client
-                        .metadata()
-                        .call_hash::<SubmitPublicKeySignature>()?
-                        == [
-                            64u8, 121u8, 205u8, 174u8, 235u8, 120u8, 49u8,
-                            71u8, 91u8, 199u8, 18u8, 52u8, 161u8, 61u8, 232u8,
-                            90u8, 246u8, 207u8, 79u8, 19u8, 173u8, 156u8,
-                            150u8, 52u8, 127u8, 218u8, 165u8, 181u8, 221u8,
-                            121u8, 216u8, 65u8,
-                        ]
-                    {
-                        let call =
-                            SubmitPublicKeySignature { signature_proposal };
-                        Ok(::subxt::SubmittableExtrinsic::new(
-                            self.client,
-                            call,
-                        ))
-                    } else {
-                        Err(::subxt::MetadataError::IncompatibleMetadata.into())
-                    }
-                }
-                #[doc = "Submits misbehaviour reports on chain. Signatures of the offending authority are"]
-                #[doc = "verified against the current or next authorities depending on the type of misbehaviour."]
-                #[doc = "- Keygen: Verifies against the next authorities, since they are doing keygen."]
-                #[doc = "- Signing: Verifies against the current authorities, since they are doing signing."]
-                #[doc = ""]
-                #[doc = "Verifies the reports against the respective thresholds and if enough reports are met"]
-                #[doc = "begins to jail and decrease the reputation of the offending authority."]
-                #[doc = ""]
-                #[doc = "The misbehaviour reputation update is:"]
-                #[doc = "\tAUTHORITY_REPUTATION = DECAY_PERCENTAGE * AUTHORITY_REPUTATION"]
-                #[doc = ""]
-                #[doc = "If there are not enough unjailed keygen authorities to perform a keygen after the next"]
-                #[doc = "session, then we deduct the pending keygen threshold (and pending signing threshold)"]
-                #[doc = "accordingly."]
-                #[doc = ""]
-                #[doc = "* `origin` - The account origin."]
-                #[doc = "* `reports` - The aggregated misbehaviour reports containing signatures of an offending"]
-                #[doc = "  authority"]
-                pub fn submit_misbehaviour_reports(
-                    &self,
-                    reports : runtime_types :: dkg_runtime_primitives :: AggregatedMisbehaviourReports < runtime_types :: dkg_runtime_primitives :: crypto :: Public >,
-                ) -> Result<
-                    ::subxt::SubmittableExtrinsic<
-                        'a,
-                        T,
-                        X,
-                        SubmitMisbehaviourReports,
-                        DispatchError,
-                        root_mod::Event,
-                    >,
-                    ::subxt::BasicError,
-                > {
-                    if self
-                        .client
-                        .metadata()
-                        .call_hash::<SubmitMisbehaviourReports>()?
-                        == [
-                            179u8, 201u8, 171u8, 224u8, 9u8, 158u8, 65u8, 95u8,
-                            226u8, 168u8, 136u8, 197u8, 129u8, 197u8, 49u8,
-                            197u8, 235u8, 0u8, 254u8, 39u8, 111u8, 240u8,
-                            117u8, 123u8, 163u8, 177u8, 9u8, 211u8, 223u8,
-                            104u8, 131u8, 237u8,
-                        ]
-                    {
-                        let call = SubmitMisbehaviourReports { reports };
-                        Ok(::subxt::SubmittableExtrinsic::new(
-                            self.client,
-                            call,
-                        ))
-                    } else {
-                        Err(::subxt::MetadataError::IncompatibleMetadata.into())
-                    }
-                }
-                #[doc = "Attempts to remove an authority from all possible jails (keygen & signing)."]
-                #[doc = "This can only be called by the controller of the authority in jail. The"]
-                #[doc = "origin must map directly to the authority in jail."]
-                #[doc = ""]
-                #[doc = "The authority's jail sentence for either keygen or signing must be elapsed"]
-                #[doc = "for the authority to be removed from the jail."]
-                #[doc = ""]
-                #[doc = "* `origin` - The account origin."]
-                pub fn unjail(
-                    &self,
-                ) -> Result<
-                    ::subxt::SubmittableExtrinsic<
-                        'a,
-                        T,
-                        X,
-                        Unjail,
-                        DispatchError,
-                        root_mod::Event,
-                    >,
-                    ::subxt::BasicError,
-                > {
-                    if self.client.metadata().call_hash::<Unjail>()?
-                        == [
-                            209u8, 5u8, 90u8, 85u8, 167u8, 92u8, 85u8, 132u8,
-                            48u8, 27u8, 89u8, 149u8, 242u8, 209u8, 97u8, 87u8,
-                            13u8, 58u8, 124u8, 41u8, 155u8, 103u8, 62u8, 115u8,
-                            58u8, 143u8, 233u8, 105u8, 18u8, 198u8, 173u8,
-                            77u8,
-                        ]
-                    {
-                        let call = Unjail {};
-                        Ok(::subxt::SubmittableExtrinsic::new(
-                            self.client,
-                            call,
-                        ))
-                    } else {
-                        Err(::subxt::MetadataError::IncompatibleMetadata.into())
-                    }
-                }
-                #[doc = "Force removes an authority from keygen jail."]
-                #[doc = ""]
-                #[doc = "Can only be called by the root origin."]
-                #[doc = ""]
-                #[doc = "* `origin` - The account origin."]
-                #[doc = "* `authority` - The authority to be removed from the keygen jail."]
-                pub fn force_unjail_keygen(
-                    &self,
-                    authority : runtime_types :: dkg_runtime_primitives :: crypto :: Public,
-                ) -> Result<
-                    ::subxt::SubmittableExtrinsic<
-                        'a,
-                        T,
-                        X,
-                        ForceUnjailKeygen,
-                        DispatchError,
-                        root_mod::Event,
-                    >,
-                    ::subxt::BasicError,
-                > {
-                    if self
-                        .client
-                        .metadata()
-                        .call_hash::<ForceUnjailKeygen>()?
-                        == [
-                            195u8, 242u8, 39u8, 180u8, 7u8, 13u8, 185u8, 92u8,
-                            203u8, 183u8, 123u8, 71u8, 100u8, 56u8, 32u8,
-                            234u8, 213u8, 1u8, 70u8, 91u8, 158u8, 124u8, 224u8,
-                            135u8, 252u8, 149u8, 118u8, 135u8, 52u8, 253u8,
-                            82u8, 148u8,
-                        ]
-                    {
-                        let call = ForceUnjailKeygen { authority };
-                        Ok(::subxt::SubmittableExtrinsic::new(
-                            self.client,
-                            call,
-                        ))
-                    } else {
-                        Err(::subxt::MetadataError::IncompatibleMetadata.into())
-                    }
-                }
-                #[doc = "Force removes an authority from signing jail."]
-                #[doc = ""]
-                #[doc = "Can only be called by the root origin."]
-                #[doc = ""]
-                #[doc = "* `origin` - The account origin."]
-                #[doc = "* `authority` - The authority to be removed from the signing jail."]
-                pub fn force_unjail_signing(
-                    &self,
-                    authority : runtime_types :: dkg_runtime_primitives :: crypto :: Public,
-                ) -> Result<
-                    ::subxt::SubmittableExtrinsic<
-                        'a,
-                        T,
-                        X,
-                        ForceUnjailSigning,
-                        DispatchError,
-                        root_mod::Event,
-                    >,
-                    ::subxt::BasicError,
-                > {
-                    if self
-                        .client
-                        .metadata()
-                        .call_hash::<ForceUnjailSigning>()?
-                        == [
-                            58u8, 229u8, 158u8, 234u8, 101u8, 114u8, 53u8,
-                            203u8, 70u8, 72u8, 122u8, 70u8, 121u8, 80u8, 221u8,
-                            208u8, 9u8, 10u8, 66u8, 165u8, 41u8, 156u8, 97u8,
-                            76u8, 21u8, 204u8, 82u8, 244u8, 27u8, 223u8, 244u8,
-                            173u8,
-                        ]
-                    {
-                        let call = ForceUnjailSigning { authority };
-                        Ok(::subxt::SubmittableExtrinsic::new(
-                            self.client,
-                            call,
-                        ))
-                    } else {
-                        Err(::subxt::MetadataError::IncompatibleMetadata.into())
-                    }
-                }
-                #[doc = "Manually Update the `RefreshNonce` (increment it by one)."]
-                #[doc = ""]
-                #[doc = "Can only be called by the root origin."]
-                #[doc = ""]
-                #[doc = "* `origin` - The account origin."]
-                #[doc = "**Important**: This function is only available for testing purposes."]
-                pub fn manual_increment_nonce(
-                    &self,
-                ) -> Result<
-                    ::subxt::SubmittableExtrinsic<
-                        'a,
-                        T,
-                        X,
-                        ManualIncrementNonce,
-                        DispatchError,
-                        root_mod::Event,
-                    >,
-                    ::subxt::BasicError,
-                > {
-                    if self
-                        .client
-                        .metadata()
-                        .call_hash::<ManualIncrementNonce>()?
-                        == [
-                            22u8, 159u8, 183u8, 158u8, 52u8, 204u8, 244u8,
-                            244u8, 25u8, 35u8, 106u8, 37u8, 142u8, 136u8,
-                            162u8, 142u8, 8u8, 184u8, 168u8, 216u8, 224u8,
-                            54u8, 160u8, 201u8, 147u8, 181u8, 178u8, 49u8,
-                            132u8, 194u8, 244u8, 121u8,
-                        ]
-                    {
-                        let call = ManualIncrementNonce {};
-                        Ok(::subxt::SubmittableExtrinsic::new(
-                            self.client,
-                            call,
-                        ))
-                    } else {
-                        Err(::subxt::MetadataError::IncompatibleMetadata.into())
-                    }
-                }
-                #[doc = "Manual Trigger DKG Refresh process."]
-                #[doc = ""]
-                #[doc = "Can only be called by the root origin."]
-                #[doc = ""]
-                #[doc = "* `origin` - The account that is initiating the refresh process."]
-                #[doc = "**Important**: This function is only available for testing purposes."]
-                pub fn manual_refresh(
-                    &self,
-                ) -> Result<
-                    ::subxt::SubmittableExtrinsic<
-                        'a,
-                        T,
-                        X,
-                        ManualRefresh,
-                        DispatchError,
-                        root_mod::Event,
-                    >,
-                    ::subxt::BasicError,
-                > {
-                    if self.client.metadata().call_hash::<ManualRefresh>()?
-                        == [
-                            141u8, 166u8, 81u8, 218u8, 235u8, 190u8, 65u8,
-                            190u8, 157u8, 160u8, 105u8, 236u8, 47u8, 129u8,
-                            0u8, 155u8, 6u8, 182u8, 20u8, 39u8, 71u8, 195u8,
-                            13u8, 242u8, 94u8, 6u8, 130u8, 192u8, 89u8, 240u8,
-                            46u8, 21u8,
-                        ]
-                    {
-                        let call = ManualRefresh {};
-                        Ok(::subxt::SubmittableExtrinsic::new(
-                            self.client,
-                            call,
-                        ))
-                    } else {
-                        Err(::subxt::MetadataError::IncompatibleMetadata.into())
-                    }
-                }
-                #[doc = "Forcefully rotate the DKG"]
-                #[doc = ""]
-                #[doc = "This forces the next authorities into the current authority spot and"]
-                #[doc = "automatically increments the authority ID. It uses `change_authorities`"]
-                #[doc = "to execute the rotation forcefully."]
-                pub fn force_change_authorities(
-                    &self,
-                ) -> Result<
-                    ::subxt::SubmittableExtrinsic<
-                        'a,
-                        T,
-                        X,
-                        ForceChangeAuthorities,
-                        DispatchError,
-                        root_mod::Event,
-                    >,
-                    ::subxt::BasicError,
-                > {
-                    if self
-                        .client
-                        .metadata()
-                        .call_hash::<ForceChangeAuthorities>()?
-                        == [
-                            98u8, 226u8, 238u8, 39u8, 98u8, 79u8, 85u8, 160u8,
-                            82u8, 3u8, 34u8, 195u8, 220u8, 178u8, 25u8, 110u8,
-                            12u8, 72u8, 165u8, 126u8, 207u8, 173u8, 210u8,
-                            74u8, 54u8, 106u8, 255u8, 243u8, 240u8, 22u8,
-                            161u8, 255u8,
-                        ]
-                    {
-                        let call = ForceChangeAuthorities {};
-                        Ok(::subxt::SubmittableExtrinsic::new(
-                            self.client,
-                            call,
-                        ))
-                    } else {
-                        Err(::subxt::MetadataError::IncompatibleMetadata.into())
-                    }
-                }
-            }
-        }
-        pub type Event = runtime_types::pallet_dkg_metadata::pallet::Event;
-        pub mod events {
-            use super::runtime_types;
-            #[derive(
-                :: subxt :: codec :: Decode,
-                :: subxt :: codec :: Encode,
-                Clone,
-                Debug,
-                Eq,
-                PartialEq,
-            )]
-            #[doc = "Current public key submitted"]
-            pub struct PublicKeySubmitted {
-                pub compressed_pub_key: ::std::vec::Vec<::core::primitive::u8>,
-                pub uncompressed_pub_key:
-                    ::std::vec::Vec<::core::primitive::u8>,
-            }
-            impl ::subxt::Event for PublicKeySubmitted {
-                const PALLET: &'static str = "DKG";
-                const EVENT: &'static str = "PublicKeySubmitted";
-            }
-            #[derive(
-                :: subxt :: codec :: Decode,
-                :: subxt :: codec :: Encode,
-                Clone,
-                Debug,
-                Eq,
-                PartialEq,
-            )]
-            #[doc = "Next public key submitted"]
-            pub struct NextPublicKeySubmitted {
-                pub compressed_pub_key: ::std::vec::Vec<::core::primitive::u8>,
-                pub uncompressed_pub_key:
-                    ::std::vec::Vec<::core::primitive::u8>,
-            }
-            impl ::subxt::Event for NextPublicKeySubmitted {
-                const PALLET: &'static str = "DKG";
-                const EVENT: &'static str = "NextPublicKeySubmitted";
-            }
-            #[derive(
-                :: subxt :: codec :: Decode,
-                :: subxt :: codec :: Encode,
-                Clone,
-                Debug,
-                Eq,
-                PartialEq,
-            )]
-            #[doc = "Next public key signature submitted"]
-            pub struct NextPublicKeySignatureSubmitted {
-                pub pub_key_sig: ::std::vec::Vec<::core::primitive::u8>,
-            }
-            impl ::subxt::Event for NextPublicKeySignatureSubmitted {
-                const PALLET: &'static str = "DKG";
-                const EVENT: &'static str = "NextPublicKeySignatureSubmitted";
-            }
-            #[derive(
-                :: subxt :: codec :: Decode,
-                :: subxt :: codec :: Encode,
-                Clone,
-                Debug,
-                Eq,
-                PartialEq,
-            )]
-            #[doc = "Current Public Key Changed."]
-            pub struct PublicKeyChanged {
-                pub compressed_pub_key: ::std::vec::Vec<::core::primitive::u8>,
-                pub uncompressed_pub_key:
-                    ::std::vec::Vec<::core::primitive::u8>,
-            }
-            impl ::subxt::Event for PublicKeyChanged {
-                const PALLET: &'static str = "DKG";
-                const EVENT: &'static str = "PublicKeyChanged";
-            }
-            #[derive(
-                :: subxt :: codec :: Decode,
-                :: subxt :: codec :: Encode,
-                Clone,
-                Debug,
-                Eq,
-                PartialEq,
-            )]
-            #[doc = "Current Public Key Signature Changed."]
-            pub struct PublicKeySignatureChanged {
-                pub pub_key_sig: ::std::vec::Vec<::core::primitive::u8>,
-            }
-            impl ::subxt::Event for PublicKeySignatureChanged {
-                const PALLET: &'static str = "DKG";
-                const EVENT: &'static str = "PublicKeySignatureChanged";
-            }
-            #[derive(
-                :: subxt :: codec :: Decode,
-                :: subxt :: codec :: Encode,
-                Clone,
-                Debug,
-                Eq,
-                PartialEq,
-            )]
-            #[doc = "Misbehaviour reports submitted"]
-            pub struct MisbehaviourReportsSubmitted {
-                pub misbehaviour_type:
-                    runtime_types::dkg_runtime_primitives::MisbehaviourType,
-                pub reporters: ::std::vec::Vec<
-                    runtime_types::dkg_runtime_primitives::crypto::Public,
-                >,
-            }
-            impl ::subxt::Event for MisbehaviourReportsSubmitted {
-                const PALLET: &'static str = "DKG";
-                const EVENT: &'static str = "MisbehaviourReportsSubmitted";
-            }
-            #[derive(
-                :: subxt :: codec :: CompactAs,
-                :: subxt :: codec :: Decode,
-                :: subxt :: codec :: Encode,
-                Clone,
-                Debug,
-                Eq,
-                PartialEq,
-            )]
-            #[doc = "Refresh DKG Keys Finished (forcefully)."]
-            pub struct RefreshKeysFinished {
-                pub next_authority_set_id: ::core::primitive::u64,
-            }
-            impl ::subxt::Event for RefreshKeysFinished {
-                const PALLET: &'static str = "DKG";
-                const EVENT: &'static str = "RefreshKeysFinished";
-            }
-        }
-        pub mod storage {
-            use super::runtime_types;
-            pub struct UsedSignatures;
-            impl ::subxt::StorageEntry for UsedSignatures {
-                const PALLET: &'static str = "DKG";
-                const STORAGE: &'static str = "UsedSignatures";
-                type Value =
-                    ::std::vec::Vec<::std::vec::Vec<::core::primitive::u8>>;
-                fn key(&self) -> ::subxt::StorageEntryKey {
-                    ::subxt::StorageEntryKey::Plain
-                }
-            }
-            pub struct RefreshNonce;
-            impl ::subxt::StorageEntry for RefreshNonce {
-                const PALLET: &'static str = "DKG";
-                const STORAGE: &'static str = "RefreshNonce";
-                type Value = ::core::primitive::u32;
-                fn key(&self) -> ::subxt::StorageEntryKey {
-                    ::subxt::StorageEntryKey::Plain
-                }
-            }
-            pub struct RefreshDelay;
-            impl ::subxt::StorageEntry for RefreshDelay {
-                const PALLET: &'static str = "DKG";
-                const STORAGE: &'static str = "RefreshDelay";
-                type Value = runtime_types::sp_arithmetic::per_things::Permill;
-                fn key(&self) -> ::subxt::StorageEntryKey {
-                    ::subxt::StorageEntryKey::Plain
-                }
-            }
-            pub struct RefreshInProgress;
-            impl ::subxt::StorageEntry for RefreshInProgress {
-                const PALLET: &'static str = "DKG";
-                const STORAGE: &'static str = "RefreshInProgress";
-                type Value = ::core::primitive::bool;
-                fn key(&self) -> ::subxt::StorageEntryKey {
-                    ::subxt::StorageEntryKey::Plain
-                }
-            }
-            pub struct ShouldManualRefresh;
-            impl ::subxt::StorageEntry for ShouldManualRefresh {
-                const PALLET: &'static str = "DKG";
-                const STORAGE: &'static str = "ShouldManualRefresh";
-                type Value = ::core::primitive::bool;
-                fn key(&self) -> ::subxt::StorageEntryKey {
-                    ::subxt::StorageEntryKey::Plain
-                }
-            }
-            pub struct NextDKGPublicKey;
-            impl ::subxt::StorageEntry for NextDKGPublicKey {
-                const PALLET: &'static str = "DKG";
-                const STORAGE: &'static str = "NextDKGPublicKey";
-                type Value = (
-                    ::core::primitive::u64,
-                    ::std::vec::Vec<::core::primitive::u8>,
-                );
-                fn key(&self) -> ::subxt::StorageEntryKey {
-                    ::subxt::StorageEntryKey::Plain
-                }
-            }
-            pub struct NextPublicKeySignature;
-            impl ::subxt::StorageEntry for NextPublicKeySignature {
-                const PALLET: &'static str = "DKG";
-                const STORAGE: &'static str = "NextPublicKeySignature";
-                type Value = ::std::vec::Vec<::core::primitive::u8>;
-                fn key(&self) -> ::subxt::StorageEntryKey {
-                    ::subxt::StorageEntryKey::Plain
-                }
-            }
-            pub struct DKGPublicKey;
-            impl ::subxt::StorageEntry for DKGPublicKey {
-                const PALLET: &'static str = "DKG";
-                const STORAGE: &'static str = "DKGPublicKey";
-                type Value = (
-                    ::core::primitive::u64,
-                    ::std::vec::Vec<::core::primitive::u8>,
-                );
-                fn key(&self) -> ::subxt::StorageEntryKey {
-                    ::subxt::StorageEntryKey::Plain
-                }
-            }
-            pub struct DKGPublicKeySignature;
-            impl ::subxt::StorageEntry for DKGPublicKeySignature {
-                const PALLET: &'static str = "DKG";
-                const STORAGE: &'static str = "DKGPublicKeySignature";
-                type Value = ::std::vec::Vec<::core::primitive::u8>;
-                fn key(&self) -> ::subxt::StorageEntryKey {
-                    ::subxt::StorageEntryKey::Plain
-                }
-            }
-            pub struct PreviousPublicKey;
-            impl ::subxt::StorageEntry for PreviousPublicKey {
-                const PALLET: &'static str = "DKG";
-                const STORAGE: &'static str = "PreviousPublicKey";
-                type Value = (
-                    ::core::primitive::u64,
-                    ::std::vec::Vec<::core::primitive::u8>,
-                );
-                fn key(&self) -> ::subxt::StorageEntryKey {
-                    ::subxt::StorageEntryKey::Plain
-                }
-            }
-            pub struct HistoricalRounds<'a>(pub &'a ::core::primitive::u64);
-            impl ::subxt::StorageEntry for HistoricalRounds<'_> {
-                const PALLET: &'static str = "DKG";
-                const STORAGE: &'static str = "HistoricalRounds";
-                type Value =
-                    runtime_types::pallet_dkg_metadata::types::RoundMetadata;
-                fn key(&self) -> ::subxt::StorageEntryKey {
-                    ::subxt::StorageEntryKey::Map(vec![
-                        ::subxt::StorageMapKey::new(
-                            &self.0,
-                            ::subxt::StorageHasher::Blake2_256,
-                        ),
-                    ])
-                }
-            }
-            pub struct SignatureThreshold;
-            impl ::subxt::StorageEntry for SignatureThreshold {
-                const PALLET: &'static str = "DKG";
-                const STORAGE: &'static str = "SignatureThreshold";
-                type Value = ::core::primitive::u16;
-                fn key(&self) -> ::subxt::StorageEntryKey {
-                    ::subxt::StorageEntryKey::Plain
-                }
-            }
-            pub struct KeygenThreshold;
-            impl ::subxt::StorageEntry for KeygenThreshold {
-                const PALLET: &'static str = "DKG";
-                const STORAGE: &'static str = "KeygenThreshold";
-                type Value = ::core::primitive::u16;
-                fn key(&self) -> ::subxt::StorageEntryKey {
-                    ::subxt::StorageEntryKey::Plain
-                }
-            }
-            pub struct NextSignatureThreshold;
-            impl ::subxt::StorageEntry for NextSignatureThreshold {
-                const PALLET: &'static str = "DKG";
-                const STORAGE: &'static str = "NextSignatureThreshold";
-                type Value = ::core::primitive::u16;
-                fn key(&self) -> ::subxt::StorageEntryKey {
-                    ::subxt::StorageEntryKey::Plain
-                }
-            }
-            pub struct NextKeygenThreshold;
-            impl ::subxt::StorageEntry for NextKeygenThreshold {
-                const PALLET: &'static str = "DKG";
-                const STORAGE: &'static str = "NextKeygenThreshold";
-                type Value = ::core::primitive::u16;
-                fn key(&self) -> ::subxt::StorageEntryKey {
-                    ::subxt::StorageEntryKey::Plain
-                }
-            }
-            pub struct PendingSignatureThreshold;
-            impl ::subxt::StorageEntry for PendingSignatureThreshold {
-                const PALLET: &'static str = "DKG";
-                const STORAGE: &'static str = "PendingSignatureThreshold";
-                type Value = ::core::primitive::u16;
-                fn key(&self) -> ::subxt::StorageEntryKey {
-                    ::subxt::StorageEntryKey::Plain
-                }
-            }
-            pub struct PendingKeygenThreshold;
-            impl ::subxt::StorageEntry for PendingKeygenThreshold {
-                const PALLET: &'static str = "DKG";
-                const STORAGE: &'static str = "PendingKeygenThreshold";
-                type Value = ::core::primitive::u16;
-                fn key(&self) -> ::subxt::StorageEntryKey {
-                    ::subxt::StorageEntryKey::Plain
-                }
-            }
-            pub struct Authorities;
-            impl ::subxt::StorageEntry for Authorities {
-                const PALLET: &'static str = "DKG";
-                const STORAGE: &'static str = "Authorities";
-                type Value = ::std::vec::Vec<
-                    runtime_types::dkg_runtime_primitives::crypto::Public,
-                >;
-                fn key(&self) -> ::subxt::StorageEntryKey {
-                    ::subxt::StorageEntryKey::Plain
-                }
-            }
-            pub struct AuthoritySetId;
-            impl ::subxt::StorageEntry for AuthoritySetId {
-                const PALLET: &'static str = "DKG";
-                const STORAGE: &'static str = "AuthoritySetId";
-                type Value = ::core::primitive::u64;
-                fn key(&self) -> ::subxt::StorageEntryKey {
-                    ::subxt::StorageEntryKey::Plain
-                }
-            }
-            pub struct NextAuthoritySetId;
-            impl ::subxt::StorageEntry for NextAuthoritySetId {
-                const PALLET: &'static str = "DKG";
-                const STORAGE: &'static str = "NextAuthoritySetId";
-                type Value = ::core::primitive::u64;
-                fn key(&self) -> ::subxt::StorageEntryKey {
-                    ::subxt::StorageEntryKey::Plain
-                }
-            }
-            pub struct NextAuthorities;
-            impl ::subxt::StorageEntry for NextAuthorities {
-                const PALLET: &'static str = "DKG";
-                const STORAGE: &'static str = "NextAuthorities";
-                type Value = ::std::vec::Vec<
-                    runtime_types::dkg_runtime_primitives::crypto::Public,
-                >;
-                fn key(&self) -> ::subxt::StorageEntryKey {
-                    ::subxt::StorageEntryKey::Plain
-                }
-            }
-            pub struct CurrentAuthoritiesAccounts;
-            impl ::subxt::StorageEntry for CurrentAuthoritiesAccounts {
-                const PALLET: &'static str = "DKG";
-                const STORAGE: &'static str = "CurrentAuthoritiesAccounts";
-                type Value =
-                    ::std::vec::Vec<::subxt::sp_core::crypto::AccountId32>;
-                fn key(&self) -> ::subxt::StorageEntryKey {
-                    ::subxt::StorageEntryKey::Plain
-                }
-            }
-            pub struct NextAuthoritiesAccounts;
-            impl ::subxt::StorageEntry for NextAuthoritiesAccounts {
-                const PALLET: &'static str = "DKG";
-                const STORAGE: &'static str = "NextAuthoritiesAccounts";
-                type Value =
-                    ::std::vec::Vec<::subxt::sp_core::crypto::AccountId32>;
-                fn key(&self) -> ::subxt::StorageEntryKey {
-                    ::subxt::StorageEntryKey::Plain
-                }
-            }
-            pub struct AccountToAuthority<'a>(
-                pub &'a ::subxt::sp_core::crypto::AccountId32,
-            );
-            impl ::subxt::StorageEntry for AccountToAuthority<'_> {
-                const PALLET: &'static str = "DKG";
-                const STORAGE: &'static str = "AccountToAuthority";
-                type Value =
-                    runtime_types::dkg_runtime_primitives::crypto::Public;
-                fn key(&self) -> ::subxt::StorageEntryKey {
-                    ::subxt::StorageEntryKey::Map(vec![
-                        ::subxt::StorageMapKey::new(
-                            &self.0,
-                            ::subxt::StorageHasher::Blake2_256,
-                        ),
-                    ])
-                }
-            }
-            pub struct MisbehaviourReports<'a>(
-                pub &'a runtime_types::dkg_runtime_primitives::MisbehaviourType,
-                pub &'a ::core::primitive::u64,
-                pub &'a runtime_types::dkg_runtime_primitives::crypto::Public,
-            );
-            impl ::subxt::StorageEntry for MisbehaviourReports<'_> {
-                const PALLET: &'static str = "DKG";
-                const STORAGE: &'static str = "MisbehaviourReports";
-                type Value = runtime_types :: dkg_runtime_primitives :: AggregatedMisbehaviourReports < runtime_types :: dkg_runtime_primitives :: crypto :: Public > ;
-                fn key(&self) -> ::subxt::StorageEntryKey {
-                    ::subxt::StorageEntryKey::Map(vec![
-                        ::subxt::StorageMapKey::new(
-                            &(&self.0, &self.1, &self.2),
-                            ::subxt::StorageHasher::Blake2_256,
-                        ),
-                    ])
-                }
-            }
-            pub struct AuthorityReputations<'a>(
-                pub &'a runtime_types::dkg_runtime_primitives::crypto::Public,
-            );
-            impl ::subxt::StorageEntry for AuthorityReputations<'_> {
-                const PALLET: &'static str = "DKG";
-                const STORAGE: &'static str = "AuthorityReputations";
-                type Value = ::core::primitive::u128;
-                fn key(&self) -> ::subxt::StorageEntryKey {
-                    ::subxt::StorageEntryKey::Map(vec![
-                        ::subxt::StorageMapKey::new(
-                            &self.0,
-                            ::subxt::StorageHasher::Blake2_256,
-                        ),
-                    ])
-                }
-            }
-            pub struct JailedKeygenAuthorities<'a>(
-                pub &'a runtime_types::dkg_runtime_primitives::crypto::Public,
-            );
-            impl ::subxt::StorageEntry for JailedKeygenAuthorities<'_> {
-                const PALLET: &'static str = "DKG";
-                const STORAGE: &'static str = "JailedKeygenAuthorities";
-                type Value = ::core::primitive::u32;
-                fn key(&self) -> ::subxt::StorageEntryKey {
-                    ::subxt::StorageEntryKey::Map(vec![
-                        ::subxt::StorageMapKey::new(
-                            &self.0,
-                            ::subxt::StorageHasher::Blake2_256,
-                        ),
-                    ])
-                }
-            }
-            pub struct JailedSigningAuthorities<'a>(
-                pub &'a runtime_types::dkg_runtime_primitives::crypto::Public,
-            );
-            impl ::subxt::StorageEntry for JailedSigningAuthorities<'_> {
-                const PALLET: &'static str = "DKG";
-                const STORAGE: &'static str = "JailedSigningAuthorities";
-                type Value = ::core::primitive::u32;
-                fn key(&self) -> ::subxt::StorageEntryKey {
-                    ::subxt::StorageEntryKey::Map(vec![
-                        ::subxt::StorageMapKey::new(
-                            &self.0,
-                            ::subxt::StorageHasher::Blake2_256,
-                        ),
-                    ])
-                }
-            }
-            pub struct BestAuthorities;
-            impl ::subxt::StorageEntry for BestAuthorities {
-                const PALLET: &'static str = "DKG";
-                const STORAGE: &'static str = "BestAuthorities";
-                type Value = ::std::vec::Vec<(
-                    ::core::primitive::u16,
-                    runtime_types::dkg_runtime_primitives::crypto::Public,
-                )>;
-                fn key(&self) -> ::subxt::StorageEntryKey {
-                    ::subxt::StorageEntryKey::Plain
-                }
-            }
-            pub struct NextBestAuthorities;
-            impl ::subxt::StorageEntry for NextBestAuthorities {
-                const PALLET: &'static str = "DKG";
-                const STORAGE: &'static str = "NextBestAuthorities";
-                type Value = ::std::vec::Vec<(
-                    ::core::primitive::u16,
-                    runtime_types::dkg_runtime_primitives::crypto::Public,
-                )>;
-                fn key(&self) -> ::subxt::StorageEntryKey {
-                    ::subxt::StorageEntryKey::Plain
-                }
-            }
-            pub struct StorageApi<'a, T: ::subxt::Config> {
-                client: &'a ::subxt::Client<T>,
-            }
-            impl<'a, T: ::subxt::Config> StorageApi<'a, T> {
-                pub fn new(client: &'a ::subxt::Client<T>) -> Self {
-                    Self { client }
-                }
-                #[doc = " Public key Signatures for past sessions"]
-                pub async fn used_signatures(
-                    &self,
-                    block_hash: ::core::option::Option<T::Hash>,
-                ) -> ::core::result::Result<
-                    ::std::vec::Vec<::std::vec::Vec<::core::primitive::u8>>,
-                    ::subxt::BasicError,
-                > {
-                    if self
-                        .client
-                        .metadata()
-                        .storage_hash::<UsedSignatures>()?
-                        == [
-                            17u8, 166u8, 71u8, 200u8, 53u8, 132u8, 79u8, 208u8,
-                            187u8, 231u8, 68u8, 227u8, 163u8, 125u8, 235u8,
-                            145u8, 171u8, 160u8, 82u8, 237u8, 170u8, 48u8,
-                            173u8, 104u8, 13u8, 113u8, 12u8, 56u8, 47u8, 42u8,
-                            250u8, 70u8,
-                        ]
-                    {
-                        let entry = UsedSignatures;
-                        self.client
-                            .storage()
-                            .fetch_or_default(&entry, block_hash)
-                            .await
-                    } else {
-                        Err(::subxt::MetadataError::IncompatibleMetadata.into())
-                    }
-                }
-                #[doc = " Nonce value for next refresh proposal"]
-                pub async fn refresh_nonce(
-                    &self,
-                    block_hash: ::core::option::Option<T::Hash>,
-                ) -> ::core::result::Result<
-                    ::core::primitive::u32,
-                    ::subxt::BasicError,
-                > {
-                    if self.client.metadata().storage_hash::<RefreshNonce>()?
-                        == [
-                            184u8, 107u8, 53u8, 61u8, 92u8, 121u8, 77u8, 93u8,
-                            141u8, 192u8, 238u8, 92u8, 15u8, 155u8, 1u8, 153u8,
-                            55u8, 64u8, 83u8, 144u8, 127u8, 250u8, 207u8, 14u8,
-                            62u8, 137u8, 151u8, 230u8, 86u8, 236u8, 27u8,
-                            175u8,
-                        ]
-                    {
-                        let entry = RefreshNonce;
-                        self.client
-                            .storage()
-                            .fetch_or_default(&entry, block_hash)
-                            .await
-                    } else {
-                        Err(::subxt::MetadataError::IncompatibleMetadata.into())
-                    }
-                }
-                #[doc = " Session progress required to kickstart refresh process"]
-                pub async fn refresh_delay(
-                    &self,
-                    block_hash: ::core::option::Option<T::Hash>,
-                ) -> ::core::result::Result<
-                    runtime_types::sp_arithmetic::per_things::Permill,
-                    ::subxt::BasicError,
-                > {
-                    if self.client.metadata().storage_hash::<RefreshDelay>()?
-                        == [
-                            180u8, 202u8, 73u8, 192u8, 104u8, 179u8, 161u8,
-                            128u8, 190u8, 211u8, 99u8, 82u8, 64u8, 192u8,
-                            208u8, 39u8, 86u8, 224u8, 232u8, 25u8, 187u8, 32u8,
-                            8u8, 39u8, 36u8, 47u8, 137u8, 92u8, 129u8, 115u8,
-                            93u8, 100u8,
-                        ]
-                    {
-                        let entry = RefreshDelay;
-                        self.client
-                            .storage()
-                            .fetch_or_default(&entry, block_hash)
-                            .await
-                    } else {
-                        Err(::subxt::MetadataError::IncompatibleMetadata.into())
-                    }
-                }
-                #[doc = " Check if there is a refresh in progress."]
-                pub async fn refresh_in_progress(
-                    &self,
-                    block_hash: ::core::option::Option<T::Hash>,
-                ) -> ::core::result::Result<
-                    ::core::primitive::bool,
-                    ::subxt::BasicError,
-                > {
-                    if self
-                        .client
-                        .metadata()
-                        .storage_hash::<RefreshInProgress>()?
-                        == [
-                            150u8, 114u8, 14u8, 254u8, 132u8, 254u8, 10u8,
-                            89u8, 109u8, 4u8, 182u8, 128u8, 114u8, 15u8, 82u8,
-                            35u8, 88u8, 86u8, 32u8, 82u8, 83u8, 175u8, 123u8,
-                            98u8, 120u8, 180u8, 167u8, 185u8, 57u8, 221u8,
-                            12u8, 62u8,
-                        ]
-                    {
-                        let entry = RefreshInProgress;
-                        self.client
-                            .storage()
-                            .fetch_or_default(&entry, block_hash)
-                            .await
-                    } else {
-                        Err(::subxt::MetadataError::IncompatibleMetadata.into())
-                    }
-                }
-                #[doc = " Should we manually trigger a DKG refresh process."]
-                pub async fn should_manual_refresh(
-                    &self,
-                    block_hash: ::core::option::Option<T::Hash>,
-                ) -> ::core::result::Result<
-                    ::core::primitive::bool,
-                    ::subxt::BasicError,
-                > {
-                    if self
-                        .client
-                        .metadata()
-                        .storage_hash::<ShouldManualRefresh>()?
-                        == [
-                            8u8, 62u8, 186u8, 74u8, 165u8, 5u8, 229u8, 30u8,
-                            130u8, 245u8, 0u8, 67u8, 160u8, 166u8, 39u8, 193u8,
-                            18u8, 152u8, 51u8, 30u8, 228u8, 176u8, 167u8,
-                            200u8, 114u8, 106u8, 125u8, 65u8, 176u8, 234u8,
-                            192u8, 95u8,
-                        ]
-                    {
-                        let entry = ShouldManualRefresh;
-                        self.client
-                            .storage()
-                            .fetch_or_default(&entry, block_hash)
-                            .await
-                    } else {
-                        Err(::subxt::MetadataError::IncompatibleMetadata.into())
-                    }
-                }
-                #[doc = " Holds public key for next session"]
-                pub async fn next_dkg_public_key(
-                    &self,
-                    block_hash: ::core::option::Option<T::Hash>,
-                ) -> ::core::result::Result<
-                    ::core::option::Option<(
-                        ::core::primitive::u64,
-                        ::std::vec::Vec<::core::primitive::u8>,
-                    )>,
-                    ::subxt::BasicError,
-                > {
-                    if self
-                        .client
-                        .metadata()
-                        .storage_hash::<NextDKGPublicKey>()?
-                        == [
-                            147u8, 213u8, 171u8, 9u8, 247u8, 218u8, 74u8, 10u8,
-                            66u8, 24u8, 52u8, 251u8, 125u8, 28u8, 54u8, 12u8,
-                            243u8, 205u8, 242u8, 48u8, 179u8, 211u8, 178u8,
-                            219u8, 88u8, 247u8, 51u8, 52u8, 27u8, 170u8, 212u8,
-                            181u8,
-                        ]
-                    {
-                        let entry = NextDKGPublicKey;
-                        self.client.storage().fetch(&entry, block_hash).await
-                    } else {
-                        Err(::subxt::MetadataError::IncompatibleMetadata.into())
-                    }
-                }
-                #[doc = " Signature of the DKG public key for the next session"]
-                pub async fn next_public_key_signature(
-                    &self,
-                    block_hash: ::core::option::Option<T::Hash>,
-                ) -> ::core::result::Result<
-                    ::core::option::Option<
-                        ::std::vec::Vec<::core::primitive::u8>,
-                    >,
-                    ::subxt::BasicError,
-                > {
-                    if self
-                        .client
-                        .metadata()
-                        .storage_hash::<NextPublicKeySignature>()?
-                        == [
-                            128u8, 96u8, 220u8, 158u8, 111u8, 181u8, 68u8,
-                            32u8, 33u8, 122u8, 61u8, 99u8, 58u8, 84u8, 110u8,
-                            13u8, 8u8, 179u8, 11u8, 80u8, 5u8, 90u8, 194u8,
-                            230u8, 3u8, 124u8, 27u8, 157u8, 73u8, 143u8, 159u8,
-                            98u8,
-                        ]
-                    {
-                        let entry = NextPublicKeySignature;
-                        self.client.storage().fetch(&entry, block_hash).await
-                    } else {
-                        Err(::subxt::MetadataError::IncompatibleMetadata.into())
-                    }
-                }
-                #[doc = " Holds active public key for ongoing session"]
-                pub async fn dkg_public_key(
-                    &self,
-                    block_hash: ::core::option::Option<T::Hash>,
-                ) -> ::core::result::Result<
-                    (
-                        ::core::primitive::u64,
-                        ::std::vec::Vec<::core::primitive::u8>,
-                    ),
-                    ::subxt::BasicError,
-                > {
-                    if self.client.metadata().storage_hash::<DKGPublicKey>()?
-                        == [
-                            134u8, 73u8, 251u8, 94u8, 50u8, 143u8, 130u8, 71u8,
-                            180u8, 91u8, 29u8, 20u8, 105u8, 138u8, 225u8,
-                            205u8, 180u8, 94u8, 203u8, 106u8, 109u8, 101u8,
-                            114u8, 3u8, 182u8, 236u8, 231u8, 124u8, 198u8,
-                            106u8, 102u8, 242u8,
-                        ]
-                    {
-                        let entry = DKGPublicKey;
-                        self.client
-                            .storage()
-                            .fetch_or_default(&entry, block_hash)
-                            .await
-                    } else {
-                        Err(::subxt::MetadataError::IncompatibleMetadata.into())
-                    }
-                }
-                #[doc = " Signature of the current DKG public key"]
-                pub async fn dkg_public_key_signature(
-                    &self,
-                    block_hash: ::core::option::Option<T::Hash>,
-                ) -> ::core::result::Result<
-                    ::std::vec::Vec<::core::primitive::u8>,
-                    ::subxt::BasicError,
-                > {
-                    if self
-                        .client
-                        .metadata()
-                        .storage_hash::<DKGPublicKeySignature>()?
-                        == [
-                            184u8, 31u8, 185u8, 8u8, 102u8, 120u8, 175u8,
-                            105u8, 106u8, 6u8, 14u8, 197u8, 211u8, 49u8, 192u8,
-                            201u8, 46u8, 42u8, 208u8, 63u8, 234u8, 131u8,
-                            207u8, 131u8, 21u8, 119u8, 39u8, 105u8, 27u8,
-                            174u8, 173u8, 29u8,
-                        ]
-                    {
-                        let entry = DKGPublicKeySignature;
-                        self.client
-                            .storage()
-                            .fetch_or_default(&entry, block_hash)
-                            .await
-                    } else {
-                        Err(::subxt::MetadataError::IncompatibleMetadata.into())
-                    }
-                }
-                #[doc = " Holds public key for immediate past session"]
-                pub async fn previous_public_key(
-                    &self,
-                    block_hash: ::core::option::Option<T::Hash>,
-                ) -> ::core::result::Result<
-                    (
-                        ::core::primitive::u64,
-                        ::std::vec::Vec<::core::primitive::u8>,
-                    ),
-                    ::subxt::BasicError,
-                > {
-                    if self
-                        .client
-                        .metadata()
-                        .storage_hash::<PreviousPublicKey>()?
-                        == [
-                            254u8, 74u8, 168u8, 47u8, 143u8, 21u8, 245u8,
-                            148u8, 75u8, 45u8, 54u8, 49u8, 22u8, 239u8, 129u8,
-                            250u8, 127u8, 70u8, 231u8, 25u8, 215u8, 229u8,
-                            130u8, 32u8, 137u8, 160u8, 108u8, 183u8, 65u8,
-                            34u8, 241u8, 245u8,
-                        ]
-                    {
-                        let entry = PreviousPublicKey;
-                        self.client
-                            .storage()
-                            .fetch_or_default(&entry, block_hash)
-                            .await
-                    } else {
-                        Err(::subxt::MetadataError::IncompatibleMetadata.into())
-                    }
-                }
-                #[doc = " Tracks current proposer set"]
-                pub async fn historical_rounds(
-                    &self,
-                    _0: &::core::primitive::u64,
-                    block_hash: ::core::option::Option<T::Hash>,
-                ) -> ::core::result::Result<
-                    runtime_types::pallet_dkg_metadata::types::RoundMetadata,
-                    ::subxt::BasicError,
-                > {
-                    if self
-                        .client
-                        .metadata()
-                        .storage_hash::<HistoricalRounds>()?
-                        == [
-                            68u8, 204u8, 162u8, 133u8, 183u8, 110u8, 221u8,
-                            109u8, 249u8, 29u8, 65u8, 94u8, 10u8, 16u8, 59u8,
-                            13u8, 85u8, 128u8, 18u8, 253u8, 15u8, 10u8, 6u8,
-                            211u8, 206u8, 176u8, 90u8, 15u8, 242u8, 141u8,
-                            177u8, 179u8,
-                        ]
-                    {
-                        let entry = HistoricalRounds(_0);
-                        self.client
-                            .storage()
-                            .fetch_or_default(&entry, block_hash)
-                            .await
-                    } else {
-                        Err(::subxt::MetadataError::IncompatibleMetadata.into())
-                    }
-                }
-                #[doc = " Tracks current proposer set"]
-                pub async fn historical_rounds_iter(
-                    &self,
-                    block_hash: ::core::option::Option<T::Hash>,
-                ) -> ::core::result::Result<
-                    ::subxt::KeyIter<'a, T, HistoricalRounds<'a>>,
-                    ::subxt::BasicError,
-                > {
-                    if self
-                        .client
-                        .metadata()
-                        .storage_hash::<HistoricalRounds>()?
-                        == [
-                            68u8, 204u8, 162u8, 133u8, 183u8, 110u8, 221u8,
-                            109u8, 249u8, 29u8, 65u8, 94u8, 10u8, 16u8, 59u8,
-                            13u8, 85u8, 128u8, 18u8, 253u8, 15u8, 10u8, 6u8,
-                            211u8, 206u8, 176u8, 90u8, 15u8, 242u8, 141u8,
-                            177u8, 179u8,
-                        ]
-                    {
-                        self.client.storage().iter(block_hash).await
-                    } else {
-                        Err(::subxt::MetadataError::IncompatibleMetadata.into())
-                    }
-                }
-                #[doc = " The current signature threshold (i.e. the `t` in t-of-n)"]
-                pub async fn signature_threshold(
-                    &self,
-                    block_hash: ::core::option::Option<T::Hash>,
-                ) -> ::core::result::Result<
-                    ::core::primitive::u16,
-                    ::subxt::BasicError,
-                > {
-                    if self
-                        .client
-                        .metadata()
-                        .storage_hash::<SignatureThreshold>()?
-                        == [
-                            228u8, 213u8, 121u8, 182u8, 49u8, 44u8, 159u8,
-                            113u8, 209u8, 234u8, 107u8, 232u8, 192u8, 211u8,
-                            144u8, 183u8, 170u8, 37u8, 236u8, 48u8, 177u8, 7u8,
-                            62u8, 63u8, 39u8, 134u8, 158u8, 72u8, 52u8, 179u8,
-                            184u8, 217u8,
-                        ]
-                    {
-                        let entry = SignatureThreshold;
-                        self.client
-                            .storage()
-                            .fetch_or_default(&entry, block_hash)
-                            .await
-                    } else {
-                        Err(::subxt::MetadataError::IncompatibleMetadata.into())
-                    }
-                }
-                #[doc = " The current signature threshold (i.e. the `n` in t-of-n)"]
-                pub async fn keygen_threshold(
-                    &self,
-                    block_hash: ::core::option::Option<T::Hash>,
-                ) -> ::core::result::Result<
-                    ::core::primitive::u16,
-                    ::subxt::BasicError,
-                > {
-                    if self
-                        .client
-                        .metadata()
-                        .storage_hash::<KeygenThreshold>()?
-                        == [
-                            52u8, 253u8, 133u8, 19u8, 89u8, 89u8, 8u8, 246u8,
-                            87u8, 16u8, 72u8, 213u8, 230u8, 168u8, 223u8, 38u8,
-                            33u8, 83u8, 79u8, 28u8, 2u8, 92u8, 141u8, 197u8,
-                            73u8, 190u8, 6u8, 177u8, 240u8, 245u8, 119u8, 70u8,
-                        ]
-                    {
-                        let entry = KeygenThreshold;
-                        self.client
-                            .storage()
-                            .fetch_or_default(&entry, block_hash)
-                            .await
-                    } else {
-                        Err(::subxt::MetadataError::IncompatibleMetadata.into())
-                    }
-                }
-                #[doc = " The current signature threshold (i.e. the `t` in t-of-n)"]
-                pub async fn next_signature_threshold(
-                    &self,
-                    block_hash: ::core::option::Option<T::Hash>,
-                ) -> ::core::result::Result<
-                    ::core::primitive::u16,
-                    ::subxt::BasicError,
-                > {
-                    if self
-                        .client
-                        .metadata()
-                        .storage_hash::<NextSignatureThreshold>()?
-                        == [
-                            83u8, 91u8, 234u8, 198u8, 71u8, 140u8, 138u8,
-                            136u8, 26u8, 244u8, 93u8, 37u8, 141u8, 37u8, 91u8,
-                            236u8, 135u8, 137u8, 86u8, 35u8, 240u8, 136u8,
-                            144u8, 203u8, 230u8, 163u8, 66u8, 121u8, 18u8,
-                            128u8, 102u8, 124u8,
-                        ]
-                    {
-                        let entry = NextSignatureThreshold;
-                        self.client
-                            .storage()
-                            .fetch_or_default(&entry, block_hash)
-                            .await
-                    } else {
-                        Err(::subxt::MetadataError::IncompatibleMetadata.into())
-                    }
-                }
-                #[doc = " The current signature threshold (i.e. the `n` in t-of-n)"]
-                pub async fn next_keygen_threshold(
-                    &self,
-                    block_hash: ::core::option::Option<T::Hash>,
-                ) -> ::core::result::Result<
-                    ::core::primitive::u16,
-                    ::subxt::BasicError,
-                > {
-                    if self
-                        .client
-                        .metadata()
-                        .storage_hash::<NextKeygenThreshold>()?
-                        == [
-                            244u8, 125u8, 22u8, 245u8, 44u8, 192u8, 133u8,
-                            170u8, 115u8, 173u8, 56u8, 200u8, 83u8, 192u8,
-                            65u8, 213u8, 71u8, 28u8, 15u8, 200u8, 47u8, 103u8,
-                            215u8, 179u8, 6u8, 95u8, 214u8, 89u8, 223u8, 133u8,
-                            161u8, 191u8,
-                        ]
-                    {
-                        let entry = NextKeygenThreshold;
-                        self.client
-                            .storage()
-                            .fetch_or_default(&entry, block_hash)
-                            .await
-                    } else {
-                        Err(::subxt::MetadataError::IncompatibleMetadata.into())
-                    }
-                }
-                #[doc = " The pending signature threshold (i.e. the `t` in t-of-n)"]
-                pub async fn pending_signature_threshold(
-                    &self,
-                    block_hash: ::core::option::Option<T::Hash>,
-                ) -> ::core::result::Result<
-                    ::core::primitive::u16,
-                    ::subxt::BasicError,
-                > {
-                    if self
-                        .client
-                        .metadata()
-                        .storage_hash::<PendingSignatureThreshold>()?
-                        == [
-                            69u8, 20u8, 129u8, 76u8, 67u8, 68u8, 122u8, 151u8,
-                            39u8, 116u8, 35u8, 34u8, 96u8, 168u8, 39u8, 43u8,
-                            64u8, 185u8, 126u8, 145u8, 247u8, 150u8, 96u8,
-                            125u8, 109u8, 208u8, 254u8, 121u8, 227u8, 235u8,
-                            108u8, 169u8,
-                        ]
-                    {
-                        let entry = PendingSignatureThreshold;
-                        self.client
-                            .storage()
-                            .fetch_or_default(&entry, block_hash)
-                            .await
-                    } else {
-                        Err(::subxt::MetadataError::IncompatibleMetadata.into())
-                    }
-                }
-                #[doc = " The pending signature threshold (i.e. the `n` in t-of-n)"]
-                pub async fn pending_keygen_threshold(
-                    &self,
-                    block_hash: ::core::option::Option<T::Hash>,
-                ) -> ::core::result::Result<
-                    ::core::primitive::u16,
-                    ::subxt::BasicError,
-                > {
-                    if self
-                        .client
-                        .metadata()
-                        .storage_hash::<PendingKeygenThreshold>()?
-                        == [
-                            80u8, 94u8, 41u8, 244u8, 115u8, 174u8, 75u8, 71u8,
-                            225u8, 122u8, 125u8, 141u8, 81u8, 69u8, 51u8,
-                            200u8, 129u8, 143u8, 14u8, 106u8, 228u8, 177u8,
-                            196u8, 167u8, 18u8, 70u8, 31u8, 137u8, 8u8, 233u8,
-                            249u8, 202u8,
-                        ]
-                    {
-                        let entry = PendingKeygenThreshold;
-                        self.client
-                            .storage()
-                            .fetch_or_default(&entry, block_hash)
-                            .await
-                    } else {
-                        Err(::subxt::MetadataError::IncompatibleMetadata.into())
-                    }
-                }
-                #[doc = " The current authorities set"]
-                pub async fn authorities(
-                    &self,
-                    block_hash: ::core::option::Option<T::Hash>,
-                ) -> ::core::result::Result<
-                    ::std::vec::Vec<
-                        runtime_types::dkg_runtime_primitives::crypto::Public,
-                    >,
-                    ::subxt::BasicError,
-                > {
-                    if self.client.metadata().storage_hash::<Authorities>()?
-                        == [
-                            45u8, 197u8, 244u8, 25u8, 113u8, 204u8, 231u8,
-                            240u8, 124u8, 4u8, 153u8, 160u8, 92u8, 242u8,
-                            251u8, 64u8, 146u8, 82u8, 161u8, 154u8, 238u8,
-                            220u8, 206u8, 186u8, 244u8, 49u8, 238u8, 244u8,
-                            122u8, 26u8, 159u8, 168u8,
-                        ]
-                    {
-                        let entry = Authorities;
-                        self.client
-                            .storage()
-                            .fetch_or_default(&entry, block_hash)
-                            .await
-                    } else {
-                        Err(::subxt::MetadataError::IncompatibleMetadata.into())
-                    }
-                }
-                #[doc = " The current authority set id"]
-                pub async fn authority_set_id(
-                    &self,
-                    block_hash: ::core::option::Option<T::Hash>,
-                ) -> ::core::result::Result<
-                    ::core::primitive::u64,
-                    ::subxt::BasicError,
-                > {
-                    if self
-                        .client
-                        .metadata()
-                        .storage_hash::<AuthoritySetId>()?
-                        == [
-                            97u8, 57u8, 86u8, 112u8, 28u8, 206u8, 59u8, 216u8,
-                            109u8, 216u8, 119u8, 48u8, 31u8, 112u8, 189u8,
-                            19u8, 234u8, 38u8, 14u8, 212u8, 191u8, 203u8, 72u8,
-                            164u8, 131u8, 57u8, 77u8, 192u8, 182u8, 168u8,
-                            185u8, 114u8,
-                        ]
-                    {
-                        let entry = AuthoritySetId;
-                        self.client
-                            .storage()
-                            .fetch_or_default(&entry, block_hash)
-                            .await
-                    } else {
-                        Err(::subxt::MetadataError::IncompatibleMetadata.into())
-                    }
-                }
-                #[doc = " The next authority set id"]
-                pub async fn next_authority_set_id(
-                    &self,
-                    block_hash: ::core::option::Option<T::Hash>,
-                ) -> ::core::result::Result<
-                    ::core::primitive::u64,
-                    ::subxt::BasicError,
-                > {
-                    if self
-                        .client
-                        .metadata()
-                        .storage_hash::<NextAuthoritySetId>()?
-                        == [
-                            27u8, 226u8, 90u8, 171u8, 61u8, 158u8, 36u8, 48u8,
-                            88u8, 240u8, 189u8, 234u8, 176u8, 40u8, 78u8,
-                            239u8, 201u8, 189u8, 111u8, 160u8, 5u8, 232u8,
-                            196u8, 228u8, 19u8, 238u8, 185u8, 98u8, 73u8,
-                            207u8, 135u8, 20u8,
-                        ]
-                    {
-                        let entry = NextAuthoritySetId;
-                        self.client
-                            .storage()
-                            .fetch_or_default(&entry, block_hash)
-                            .await
-                    } else {
-                        Err(::subxt::MetadataError::IncompatibleMetadata.into())
-                    }
-                }
-                #[doc = " Authorities set scheduled to be used with the next session"]
-                pub async fn next_authorities(
-                    &self,
-                    block_hash: ::core::option::Option<T::Hash>,
-                ) -> ::core::result::Result<
-                    ::std::vec::Vec<
-                        runtime_types::dkg_runtime_primitives::crypto::Public,
-                    >,
-                    ::subxt::BasicError,
-                > {
-                    if self
-                        .client
-                        .metadata()
-                        .storage_hash::<NextAuthorities>()?
-                        == [
-                            217u8, 12u8, 213u8, 100u8, 67u8, 73u8, 155u8,
-                            134u8, 236u8, 210u8, 129u8, 96u8, 191u8, 83u8,
-                            200u8, 17u8, 181u8, 124u8, 201u8, 155u8, 14u8,
-                            246u8, 203u8, 23u8, 57u8, 221u8, 95u8, 174u8,
-                            128u8, 9u8, 32u8, 1u8,
-                        ]
-                    {
-                        let entry = NextAuthorities;
-                        self.client
-                            .storage()
-                            .fetch_or_default(&entry, block_hash)
-                            .await
-                    } else {
-                        Err(::subxt::MetadataError::IncompatibleMetadata.into())
-                    }
-                }
-                #[doc = " Accounts for the current authorities"]
-                pub async fn current_authorities_accounts(
-                    &self,
-                    block_hash: ::core::option::Option<T::Hash>,
-                ) -> ::core::result::Result<
-                    ::std::vec::Vec<::subxt::sp_core::crypto::AccountId32>,
-                    ::subxt::BasicError,
-                > {
-                    if self
-                        .client
-                        .metadata()
-                        .storage_hash::<CurrentAuthoritiesAccounts>()?
-                        == [
-                            143u8, 155u8, 186u8, 132u8, 219u8, 16u8, 177u8,
-                            244u8, 116u8, 144u8, 165u8, 191u8, 14u8, 56u8,
-                            62u8, 63u8, 18u8, 33u8, 41u8, 252u8, 56u8, 98u8,
-                            40u8, 14u8, 249u8, 170u8, 6u8, 101u8, 31u8, 90u8,
-                            101u8, 35u8,
-                        ]
-                    {
-                        let entry = CurrentAuthoritiesAccounts;
-                        self.client
-                            .storage()
-                            .fetch_or_default(&entry, block_hash)
-                            .await
-                    } else {
-                        Err(::subxt::MetadataError::IncompatibleMetadata.into())
-                    }
-                }
-                #[doc = " Authority account ids scheduled for the next session"]
-                pub async fn next_authorities_accounts(
-                    &self,
-                    block_hash: ::core::option::Option<T::Hash>,
-                ) -> ::core::result::Result<
-                    ::std::vec::Vec<::subxt::sp_core::crypto::AccountId32>,
-                    ::subxt::BasicError,
-                > {
-                    if self
-                        .client
-                        .metadata()
-                        .storage_hash::<NextAuthoritiesAccounts>()?
-                        == [
-                            13u8, 29u8, 34u8, 81u8, 8u8, 237u8, 117u8, 154u8,
-                            204u8, 126u8, 180u8, 185u8, 26u8, 3u8, 214u8,
-                            240u8, 106u8, 66u8, 205u8, 195u8, 182u8, 72u8,
-                            210u8, 240u8, 88u8, 85u8, 97u8, 154u8, 176u8, 72u8,
-                            128u8, 72u8,
-                        ]
-                    {
-                        let entry = NextAuthoritiesAccounts;
-                        self.client
-                            .storage()
-                            .fetch_or_default(&entry, block_hash)
-                            .await
-                    } else {
-                        Err(::subxt::MetadataError::IncompatibleMetadata.into())
-                    }
-                }
-                #[doc = " Authority account ids scheduled for the next session"]
-                pub async fn account_to_authority(
-                    &self,
-                    _0: &::subxt::sp_core::crypto::AccountId32,
-                    block_hash: ::core::option::Option<T::Hash>,
-                ) -> ::core::result::Result<
-                    ::core::option::Option<
-                        runtime_types::dkg_runtime_primitives::crypto::Public,
-                    >,
-                    ::subxt::BasicError,
-                > {
-                    if self
-                        .client
-                        .metadata()
-                        .storage_hash::<AccountToAuthority>()?
-                        == [
-                            9u8, 173u8, 43u8, 145u8, 55u8, 81u8, 127u8, 90u8,
-                            228u8, 13u8, 32u8, 72u8, 33u8, 13u8, 193u8, 171u8,
-                            247u8, 159u8, 147u8, 15u8, 119u8, 213u8, 108u8,
-                            148u8, 130u8, 10u8, 80u8, 141u8, 207u8, 109u8,
-                            19u8, 190u8,
-                        ]
-                    {
-                        let entry = AccountToAuthority(_0);
-                        self.client.storage().fetch(&entry, block_hash).await
-                    } else {
-                        Err(::subxt::MetadataError::IncompatibleMetadata.into())
-                    }
-                }
-                #[doc = " Authority account ids scheduled for the next session"]
-                pub async fn account_to_authority_iter(
-                    &self,
-                    block_hash: ::core::option::Option<T::Hash>,
-                ) -> ::core::result::Result<
-                    ::subxt::KeyIter<'a, T, AccountToAuthority<'a>>,
-                    ::subxt::BasicError,
-                > {
-                    if self
-                        .client
-                        .metadata()
-                        .storage_hash::<AccountToAuthority>()?
-                        == [
-                            9u8, 173u8, 43u8, 145u8, 55u8, 81u8, 127u8, 90u8,
-                            228u8, 13u8, 32u8, 72u8, 33u8, 13u8, 193u8, 171u8,
-                            247u8, 159u8, 147u8, 15u8, 119u8, 213u8, 108u8,
-                            148u8, 130u8, 10u8, 80u8, 141u8, 207u8, 109u8,
-                            19u8, 190u8,
-                        ]
-                    {
-                        self.client.storage().iter(block_hash).await
-                    } else {
-                        Err(::subxt::MetadataError::IncompatibleMetadata.into())
-                    }
-                }
-                #[doc = " Tracks misbehaviour reports"]                pub async fn misbehaviour_reports (& self , _0 : & runtime_types :: dkg_runtime_primitives :: MisbehaviourType , _1 : & :: core :: primitive :: u64 , _2 : & runtime_types :: dkg_runtime_primitives :: crypto :: Public , block_hash : :: core :: option :: Option < T :: Hash > ,) -> :: core :: result :: Result < :: core :: option :: Option < runtime_types :: dkg_runtime_primitives :: AggregatedMisbehaviourReports < runtime_types :: dkg_runtime_primitives :: crypto :: Public > > , :: subxt :: BasicError >{
-                    if self
-                        .client
-                        .metadata()
-                        .storage_hash::<MisbehaviourReports>()?
-                        == [
-                            214u8, 191u8, 27u8, 35u8, 205u8, 145u8, 162u8,
-                            119u8, 139u8, 197u8, 120u8, 119u8, 88u8, 78u8,
-                            196u8, 24u8, 225u8, 14u8, 192u8, 246u8, 60u8,
-                            107u8, 38u8, 47u8, 147u8, 16u8, 200u8, 4u8, 41u8,
-                            233u8, 230u8, 48u8,
-                        ]
-                    {
-                        let entry = MisbehaviourReports(_0, _1, _2);
-                        self.client.storage().fetch(&entry, block_hash).await
-                    } else {
-                        Err(::subxt::MetadataError::IncompatibleMetadata.into())
-                    }
-                }
-                #[doc = " Tracks misbehaviour reports"]
-                pub async fn misbehaviour_reports_iter(
-                    &self,
-                    block_hash: ::core::option::Option<T::Hash>,
-                ) -> ::core::result::Result<
-                    ::subxt::KeyIter<'a, T, MisbehaviourReports<'a>>,
-                    ::subxt::BasicError,
-                > {
-                    if self
-                        .client
-                        .metadata()
-                        .storage_hash::<MisbehaviourReports>()?
-                        == [
-                            214u8, 191u8, 27u8, 35u8, 205u8, 145u8, 162u8,
-                            119u8, 139u8, 197u8, 120u8, 119u8, 88u8, 78u8,
-                            196u8, 24u8, 225u8, 14u8, 192u8, 246u8, 60u8,
-                            107u8, 38u8, 47u8, 147u8, 16u8, 200u8, 4u8, 41u8,
-                            233u8, 230u8, 48u8,
-                        ]
-                    {
-                        self.client.storage().iter(block_hash).await
-                    } else {
-                        Err(::subxt::MetadataError::IncompatibleMetadata.into())
-                    }
-                }
-                #[doc = " Tracks authority reputations"]
-                pub async fn authority_reputations(
-                    &self,
-                    _0: &runtime_types::dkg_runtime_primitives::crypto::Public,
-                    block_hash: ::core::option::Option<T::Hash>,
-                ) -> ::core::result::Result<
-                    ::core::primitive::u128,
-                    ::subxt::BasicError,
-                > {
-                    if self
-                        .client
-                        .metadata()
-                        .storage_hash::<AuthorityReputations>()?
-                        == [
-                            28u8, 53u8, 70u8, 152u8, 69u8, 174u8, 255u8, 70u8,
-                            170u8, 125u8, 51u8, 63u8, 180u8, 13u8, 223u8,
-                            163u8, 241u8, 137u8, 156u8, 105u8, 144u8, 178u8,
-                            255u8, 226u8, 203u8, 188u8, 171u8, 30u8, 62u8,
-                            254u8, 123u8, 103u8,
-                        ]
-                    {
-                        let entry = AuthorityReputations(_0);
-                        self.client
-                            .storage()
-                            .fetch_or_default(&entry, block_hash)
-                            .await
-                    } else {
-                        Err(::subxt::MetadataError::IncompatibleMetadata.into())
-                    }
-                }
-                #[doc = " Tracks authority reputations"]
-                pub async fn authority_reputations_iter(
-                    &self,
-                    block_hash: ::core::option::Option<T::Hash>,
-                ) -> ::core::result::Result<
-                    ::subxt::KeyIter<'a, T, AuthorityReputations<'a>>,
-                    ::subxt::BasicError,
-                > {
-                    if self
-                        .client
-                        .metadata()
-                        .storage_hash::<AuthorityReputations>()?
-                        == [
-                            28u8, 53u8, 70u8, 152u8, 69u8, 174u8, 255u8, 70u8,
-                            170u8, 125u8, 51u8, 63u8, 180u8, 13u8, 223u8,
-                            163u8, 241u8, 137u8, 156u8, 105u8, 144u8, 178u8,
-                            255u8, 226u8, 203u8, 188u8, 171u8, 30u8, 62u8,
-                            254u8, 123u8, 103u8,
-                        ]
-                    {
-                        self.client.storage().iter(block_hash).await
-                    } else {
-                        Err(::subxt::MetadataError::IncompatibleMetadata.into())
-                    }
-                }
-                #[doc = " Tracks jailed authorities for keygen by mapping"]
-                #[doc = " to the block number when the authority was last jailed"]
-                pub async fn jailed_keygen_authorities(
-                    &self,
-                    _0: &runtime_types::dkg_runtime_primitives::crypto::Public,
-                    block_hash: ::core::option::Option<T::Hash>,
-                ) -> ::core::result::Result<
-                    ::core::primitive::u32,
-                    ::subxt::BasicError,
-                > {
-                    if self
-                        .client
-                        .metadata()
-                        .storage_hash::<JailedKeygenAuthorities>()?
-                        == [
-                            202u8, 174u8, 183u8, 226u8, 51u8, 73u8, 54u8, 72u8,
-                            252u8, 21u8, 184u8, 218u8, 238u8, 6u8, 198u8,
-                            144u8, 58u8, 113u8, 105u8, 189u8, 107u8, 121u8,
-                            227u8, 254u8, 82u8, 26u8, 148u8, 196u8, 113u8,
-                            125u8, 180u8, 232u8,
-                        ]
-                    {
-                        let entry = JailedKeygenAuthorities(_0);
-                        self.client
-                            .storage()
-                            .fetch_or_default(&entry, block_hash)
-                            .await
-                    } else {
-                        Err(::subxt::MetadataError::IncompatibleMetadata.into())
-                    }
-                }
-                #[doc = " Tracks jailed authorities for keygen by mapping"]
-                #[doc = " to the block number when the authority was last jailed"]
-                pub async fn jailed_keygen_authorities_iter(
-                    &self,
-                    block_hash: ::core::option::Option<T::Hash>,
-                ) -> ::core::result::Result<
-                    ::subxt::KeyIter<'a, T, JailedKeygenAuthorities<'a>>,
-                    ::subxt::BasicError,
-                > {
-                    if self
-                        .client
-                        .metadata()
-                        .storage_hash::<JailedKeygenAuthorities>()?
-                        == [
-                            202u8, 174u8, 183u8, 226u8, 51u8, 73u8, 54u8, 72u8,
-                            252u8, 21u8, 184u8, 218u8, 238u8, 6u8, 198u8,
-                            144u8, 58u8, 113u8, 105u8, 189u8, 107u8, 121u8,
-                            227u8, 254u8, 82u8, 26u8, 148u8, 196u8, 113u8,
-                            125u8, 180u8, 232u8,
-                        ]
-                    {
-                        self.client.storage().iter(block_hash).await
-                    } else {
-                        Err(::subxt::MetadataError::IncompatibleMetadata.into())
-                    }
-                }
-                #[doc = " Tracks jailed authorities for signing by mapping"]
-                #[doc = " to the block number when the authority was last jailed"]
-                pub async fn jailed_signing_authorities(
-                    &self,
-                    _0: &runtime_types::dkg_runtime_primitives::crypto::Public,
-                    block_hash: ::core::option::Option<T::Hash>,
-                ) -> ::core::result::Result<
-                    ::core::primitive::u32,
-                    ::subxt::BasicError,
-                > {
-                    if self
-                        .client
-                        .metadata()
-                        .storage_hash::<JailedSigningAuthorities>()?
-                        == [
-                            209u8, 156u8, 105u8, 15u8, 152u8, 58u8, 67u8,
-                            127u8, 167u8, 239u8, 52u8, 141u8, 188u8, 6u8,
-                            241u8, 61u8, 153u8, 119u8, 167u8, 196u8, 72u8,
-                            208u8, 127u8, 230u8, 184u8, 147u8, 37u8, 254u8,
-                            171u8, 47u8, 148u8, 218u8,
-                        ]
-                    {
-                        let entry = JailedSigningAuthorities(_0);
-                        self.client
-                            .storage()
-                            .fetch_or_default(&entry, block_hash)
-                            .await
-                    } else {
-                        Err(::subxt::MetadataError::IncompatibleMetadata.into())
-                    }
-                }
-                #[doc = " Tracks jailed authorities for signing by mapping"]
-                #[doc = " to the block number when the authority was last jailed"]
-                pub async fn jailed_signing_authorities_iter(
-                    &self,
-                    block_hash: ::core::option::Option<T::Hash>,
-                ) -> ::core::result::Result<
-                    ::subxt::KeyIter<'a, T, JailedSigningAuthorities<'a>>,
-                    ::subxt::BasicError,
-                > {
-                    if self
-                        .client
-                        .metadata()
-                        .storage_hash::<JailedSigningAuthorities>()?
-                        == [
-                            209u8, 156u8, 105u8, 15u8, 152u8, 58u8, 67u8,
-                            127u8, 167u8, 239u8, 52u8, 141u8, 188u8, 6u8,
-                            241u8, 61u8, 153u8, 119u8, 167u8, 196u8, 72u8,
-                            208u8, 127u8, 230u8, 184u8, 147u8, 37u8, 254u8,
-                            171u8, 47u8, 148u8, 218u8,
-                        ]
-                    {
-                        self.client.storage().iter(block_hash).await
-                    } else {
-                        Err(::subxt::MetadataError::IncompatibleMetadata.into())
-                    }
-                }
-                #[doc = " The current best authorities of the active keygen set"]
-                pub async fn best_authorities(
-                    &self,
-                    block_hash: ::core::option::Option<T::Hash>,
-                ) -> ::core::result::Result<
-                    ::std::vec::Vec<(
-                        ::core::primitive::u16,
-                        runtime_types::dkg_runtime_primitives::crypto::Public,
-                    )>,
-                    ::subxt::BasicError,
-                > {
-                    if self
-                        .client
-                        .metadata()
-                        .storage_hash::<BestAuthorities>()?
-                        == [
-                            104u8, 132u8, 203u8, 155u8, 81u8, 123u8, 70u8,
-                            116u8, 31u8, 53u8, 74u8, 46u8, 34u8, 231u8, 211u8,
-                            233u8, 191u8, 203u8, 35u8, 18u8, 17u8, 226u8,
-                            224u8, 107u8, 218u8, 51u8, 173u8, 32u8, 64u8,
-                            154u8, 92u8, 94u8,
-                        ]
-                    {
-                        let entry = BestAuthorities;
-                        self.client
-                            .storage()
-                            .fetch_or_default(&entry, block_hash)
-                            .await
-                    } else {
-                        Err(::subxt::MetadataError::IncompatibleMetadata.into())
-                    }
-                }
-                #[doc = " The next best authorities of the active keygen set"]
-                pub async fn next_best_authorities(
-                    &self,
-                    block_hash: ::core::option::Option<T::Hash>,
-                ) -> ::core::result::Result<
-                    ::std::vec::Vec<(
-                        ::core::primitive::u16,
-                        runtime_types::dkg_runtime_primitives::crypto::Public,
-                    )>,
-                    ::subxt::BasicError,
-                > {
-                    if self
-                        .client
-                        .metadata()
-                        .storage_hash::<NextBestAuthorities>()?
-                        == [
-                            126u8, 128u8, 162u8, 68u8, 114u8, 88u8, 254u8,
-                            24u8, 64u8, 79u8, 172u8, 20u8, 203u8, 208u8, 100u8,
-                            141u8, 4u8, 229u8, 228u8, 179u8, 19u8, 126u8, 98u8,
-                            232u8, 178u8, 32u8, 34u8, 227u8, 237u8, 16u8, 85u8,
-                            76u8,
-                        ]
-                    {
-                        let entry = NextBestAuthorities;
-                        self.client
-                            .storage()
-                            .fetch_or_default(&entry, block_hash)
-                            .await
-                    } else {
-                        Err(::subxt::MetadataError::IncompatibleMetadata.into())
-                    }
-                }
-            }
-        }
-        pub mod constants {
-            use super::runtime_types;
-            pub struct ConstantsApi<'a, T: ::subxt::Config> {
-                client: &'a ::subxt::Client<T>,
-            }
-            impl<'a, T: ::subxt::Config> ConstantsApi<'a, T> {
-                pub fn new(client: &'a ::subxt::Client<T>) -> Self {
-                    Self { client }
-                }
-                #[doc = " Percentage session should have progressed for refresh to begin"]
-                pub fn refresh_delay(
-                    &self,
-                ) -> ::core::result::Result<
-                    runtime_types::sp_arithmetic::per_things::Permill,
-                    ::subxt::BasicError,
-                > {
-                    if self
-                        .client
-                        .metadata()
-                        .constant_hash("DKG", "RefreshDelay")?
-                        == [
-                            60u8, 94u8, 168u8, 100u8, 9u8, 147u8, 193u8, 212u8,
-                            47u8, 170u8, 116u8, 217u8, 55u8, 48u8, 195u8,
-                            137u8, 207u8, 6u8, 132u8, 80u8, 134u8, 150u8, 90u8,
-                            54u8, 204u8, 244u8, 165u8, 156u8, 220u8, 49u8,
-                            51u8, 247u8,
-                        ]
-                    {
-                        let pallet = self.client.metadata().pallet("DKG")?;
-                        let constant = pallet.constant("RefreshDelay")?;
-                        let value = ::subxt::codec::Decode::decode(
-                            &mut &constant.value[..],
-                        )?;
-                        Ok(value)
-                    } else {
-                        Err(::subxt::MetadataError::IncompatibleMetadata.into())
-                    }
-                }
-            }
-        }
-    }
-    pub mod dkg_proposals {
-        use super::root_mod;
-        use super::runtime_types;
-        pub mod calls {
-            use super::root_mod;
-            use super::runtime_types;
-            type DispatchError = runtime_types::sp_runtime::DispatchError;
-            #[derive(
-                :: subxt :: codec :: CompactAs,
-                :: subxt :: codec :: Decode,
-                :: subxt :: codec :: Encode,
-                Clone,
-                Debug,
-                Eq,
-                PartialEq,
-            )]
-            pub struct SetThreshold {
-                pub threshold: ::core::primitive::u32,
-            }
-            impl ::subxt::Call for SetThreshold {
-                const PALLET: &'static str = "DKGProposals";
-                const FUNCTION: &'static str = "set_threshold";
-            }
-            #[derive(
-                :: subxt :: codec :: Decode,
-                :: subxt :: codec :: Encode,
-                Clone,
-                Debug,
-                Eq,
-                PartialEq,
-            )]
-            pub struct SetResource {
-                pub id: runtime_types::webb_proposals::header::ResourceId,
-                pub method: ::std::vec::Vec<::core::primitive::u8>,
-            }
-            impl ::subxt::Call for SetResource {
-                const PALLET: &'static str = "DKGProposals";
-                const FUNCTION: &'static str = "set_resource";
-            }
-            #[derive(
-                :: subxt :: codec :: Decode,
-                :: subxt :: codec :: Encode,
-                Clone,
-                Debug,
-                Eq,
-                PartialEq,
-            )]
-            pub struct RemoveResource {
-                pub id: runtime_types::webb_proposals::header::ResourceId,
-            }
-            impl ::subxt::Call for RemoveResource {
-                const PALLET: &'static str = "DKGProposals";
-                const FUNCTION: &'static str = "remove_resource";
-            }
-            #[derive(
-                :: subxt :: codec :: Decode,
-                :: subxt :: codec :: Encode,
-                Clone,
-                Debug,
-                Eq,
-                PartialEq,
-            )]
-            pub struct WhitelistChain {
-                pub chain_id:
-                    runtime_types::webb_proposals::header::TypedChainId,
-            }
-            impl ::subxt::Call for WhitelistChain {
-                const PALLET: &'static str = "DKGProposals";
-                const FUNCTION: &'static str = "whitelist_chain";
-            }
-            #[derive(
-                :: subxt :: codec :: Decode,
-                :: subxt :: codec :: Encode,
-                Clone,
-                Debug,
-                Eq,
-                PartialEq,
-            )]
-            pub struct AddProposer {
-                pub native_account: ::subxt::sp_core::crypto::AccountId32,
-                pub external_account: ::std::vec::Vec<::core::primitive::u8>,
-            }
-            impl ::subxt::Call for AddProposer {
-                const PALLET: &'static str = "DKGProposals";
-                const FUNCTION: &'static str = "add_proposer";
-            }
-            #[derive(
-                :: subxt :: codec :: Decode,
-                :: subxt :: codec :: Encode,
-                Clone,
-                Debug,
-                Eq,
-                PartialEq,
-            )]
-            pub struct RemoveProposer {
-                pub v: ::subxt::sp_core::crypto::AccountId32,
-            }
-            impl ::subxt::Call for RemoveProposer {
-                const PALLET: &'static str = "DKGProposals";
-                const FUNCTION: &'static str = "remove_proposer";
-            }
-            #[derive(
-                :: subxt :: codec :: Decode,
-                :: subxt :: codec :: Encode,
-                Clone,
-                Debug,
-                Eq,
-                PartialEq,
-            )]
-            pub struct AcknowledgeProposal {
-                pub nonce: runtime_types::webb_proposals::nonce::Nonce,
-                pub src_chain_id:
-                    runtime_types::webb_proposals::header::TypedChainId,
-                pub r_id: runtime_types::webb_proposals::header::ResourceId,
-                pub prop: ::std::vec::Vec<::core::primitive::u8>,
-            }
-            impl ::subxt::Call for AcknowledgeProposal {
-                const PALLET: &'static str = "DKGProposals";
-                const FUNCTION: &'static str = "acknowledge_proposal";
-            }
-            #[derive(
-                :: subxt :: codec :: Decode,
-                :: subxt :: codec :: Encode,
-                Clone,
-                Debug,
-                Eq,
-                PartialEq,
-            )]
-            pub struct RejectProposal {
-                pub nonce: runtime_types::webb_proposals::nonce::Nonce,
-                pub src_chain_id:
-                    runtime_types::webb_proposals::header::TypedChainId,
-                pub r_id: runtime_types::webb_proposals::header::ResourceId,
-                pub prop: ::std::vec::Vec<::core::primitive::u8>,
-            }
-            impl ::subxt::Call for RejectProposal {
-                const PALLET: &'static str = "DKGProposals";
-                const FUNCTION: &'static str = "reject_proposal";
-            }
-            #[derive(
-                :: subxt :: codec :: Decode,
-                :: subxt :: codec :: Encode,
-                Clone,
-                Debug,
-                Eq,
-                PartialEq,
-            )]
-            pub struct EvalVoteState {
-                pub nonce: runtime_types::webb_proposals::nonce::Nonce,
-                pub src_chain_id:
-                    runtime_types::webb_proposals::header::TypedChainId,
-                pub prop: ::std::vec::Vec<::core::primitive::u8>,
-            }
-            impl ::subxt::Call for EvalVoteState {
-                const PALLET: &'static str = "DKGProposals";
-                const FUNCTION: &'static str = "eval_vote_state";
-            }
-            pub struct TransactionApi<'a, T: ::subxt::Config, X> {
-                client: &'a ::subxt::Client<T>,
-                marker: ::core::marker::PhantomData<X>,
-            }
-            impl<'a, T, X> TransactionApi<'a, T, X>
-            where
-                T: ::subxt::Config,
-                X: ::subxt::extrinsic::ExtrinsicParams<T>,
-            {
-                pub fn new(client: &'a ::subxt::Client<T>) -> Self {
-                    Self {
-                        client,
-                        marker: ::core::marker::PhantomData,
-                    }
-                }
-                #[doc = "Sets the vote threshold for proposals."]
-                #[doc = ""]
-                #[doc = "This threshold is used to determine how many votes are required"]
-                #[doc = "before a proposal is executed."]
-                #[doc = ""]
-                #[doc = "# <weight>"]
-                #[doc = "- O(1) lookup and insert"]
-                #[doc = "# </weight>"]
-                pub fn set_threshold(
-                    &self,
-                    threshold: ::core::primitive::u32,
-                ) -> Result<
-                    ::subxt::SubmittableExtrinsic<
-                        'a,
-                        T,
-                        X,
-                        SetThreshold,
-                        DispatchError,
-                        root_mod::Event,
-                    >,
-                    ::subxt::BasicError,
-                > {
-                    if self.client.metadata().call_hash::<SetThreshold>()?
-                        == [
-                            52u8, 167u8, 254u8, 240u8, 138u8, 213u8, 67u8,
-                            65u8, 79u8, 11u8, 193u8, 17u8, 248u8, 153u8, 47u8,
-                            179u8, 218u8, 86u8, 157u8, 230u8, 186u8, 234u8,
-                            123u8, 36u8, 22u8, 164u8, 17u8, 183u8, 180u8,
-                            111u8, 252u8, 206u8,
-                        ]
-                    {
-                        let call = SetThreshold { threshold };
-                        Ok(::subxt::SubmittableExtrinsic::new(
-                            self.client,
-                            call,
-                        ))
-                    } else {
-                        Err(::subxt::MetadataError::IncompatibleMetadata.into())
-                    }
-                }
-                #[doc = "Stores a method name on chain under an associated resource ID."]
-                #[doc = ""]
-                #[doc = "# <weight>"]
-                #[doc = "- O(1) write"]
-                #[doc = "# </weight>"]
-                pub fn set_resource(
-                    &self,
-                    id: runtime_types::webb_proposals::header::ResourceId,
-                    method: ::std::vec::Vec<::core::primitive::u8>,
-                ) -> Result<
-                    ::subxt::SubmittableExtrinsic<
-                        'a,
-                        T,
-                        X,
-                        SetResource,
-                        DispatchError,
-                        root_mod::Event,
-                    >,
-                    ::subxt::BasicError,
-                > {
-                    if self.client.metadata().call_hash::<SetResource>()?
-                        == [
-                            65u8, 166u8, 135u8, 98u8, 143u8, 120u8, 107u8,
-                            115u8, 206u8, 47u8, 74u8, 229u8, 10u8, 128u8,
-                            109u8, 202u8, 167u8, 141u8, 16u8, 170u8, 23u8,
-                            132u8, 94u8, 80u8, 193u8, 175u8, 11u8, 107u8,
-                            120u8, 142u8, 113u8, 51u8,
-                        ]
-                    {
-                        let call = SetResource { id, method };
-                        Ok(::subxt::SubmittableExtrinsic::new(
-                            self.client,
-                            call,
-                        ))
-                    } else {
-                        Err(::subxt::MetadataError::IncompatibleMetadata.into())
-                    }
-                }
-                #[doc = "Removes a resource ID from the resource mapping."]
-                #[doc = ""]
-                #[doc = "After this call, bridge transfers with the associated resource ID"]
-                #[doc = "will be rejected."]
-                #[doc = ""]
-                #[doc = "# <weight>"]
-                #[doc = "- O(1) removal"]
-                #[doc = "# </weight>"]
-                pub fn remove_resource(
-                    &self,
-                    id: runtime_types::webb_proposals::header::ResourceId,
-                ) -> Result<
-                    ::subxt::SubmittableExtrinsic<
-                        'a,
-                        T,
-                        X,
-                        RemoveResource,
-                        DispatchError,
-                        root_mod::Event,
-                    >,
-                    ::subxt::BasicError,
-                > {
-                    if self.client.metadata().call_hash::<RemoveResource>()?
-                        == [
-                            78u8, 126u8, 251u8, 144u8, 188u8, 199u8, 39u8,
-                            253u8, 82u8, 42u8, 99u8, 95u8, 244u8, 201u8, 210u8,
-                            110u8, 95u8, 246u8, 66u8, 240u8, 128u8, 235u8,
-                            145u8, 72u8, 236u8, 9u8, 113u8, 51u8, 91u8, 81u8,
-                            223u8, 226u8,
-                        ]
-                    {
-                        let call = RemoveResource { id };
-                        Ok(::subxt::SubmittableExtrinsic::new(
-                            self.client,
-                            call,
-                        ))
-                    } else {
-                        Err(::subxt::MetadataError::IncompatibleMetadata.into())
-                    }
-                }
-                #[doc = "Enables a chain ID as a source or destination for a bridge transfer."]
-                #[doc = ""]
-                #[doc = "# <weight>"]
-                #[doc = "- O(1) lookup and insert"]
-                #[doc = "# </weight>"]
-                pub fn whitelist_chain(
-                    &self,
-                    chain_id : runtime_types :: webb_proposals :: header :: TypedChainId,
-                ) -> Result<
-                    ::subxt::SubmittableExtrinsic<
-                        'a,
-                        T,
-                        X,
-                        WhitelistChain,
-                        DispatchError,
-                        root_mod::Event,
-                    >,
-                    ::subxt::BasicError,
-                > {
-                    if self.client.metadata().call_hash::<WhitelistChain>()?
-                        == [
-                            209u8, 249u8, 214u8, 43u8, 232u8, 214u8, 133u8,
-                            102u8, 212u8, 33u8, 24u8, 104u8, 106u8, 162u8,
-                            146u8, 16u8, 58u8, 131u8, 35u8, 147u8, 60u8, 1u8,
-                            22u8, 142u8, 175u8, 190u8, 121u8, 58u8, 62u8,
-                            243u8, 191u8, 226u8,
-                        ]
-                    {
-                        let call = WhitelistChain { chain_id };
-                        Ok(::subxt::SubmittableExtrinsic::new(
-                            self.client,
-                            call,
-                        ))
-                    } else {
-                        Err(::subxt::MetadataError::IncompatibleMetadata.into())
-                    }
-                }
-                #[doc = "Adds a new proposer to the proposer set."]
-                #[doc = ""]
-                #[doc = "# <weight>"]
-                #[doc = "- O(1) lookup and insert"]
-                #[doc = "# </weight>"]
-                pub fn add_proposer(
-                    &self,
-                    native_account: ::subxt::sp_core::crypto::AccountId32,
-                    external_account: ::std::vec::Vec<::core::primitive::u8>,
-                ) -> Result<
-                    ::subxt::SubmittableExtrinsic<
-                        'a,
-                        T,
-                        X,
-                        AddProposer,
-                        DispatchError,
-                        root_mod::Event,
-                    >,
-                    ::subxt::BasicError,
-                > {
-                    if self.client.metadata().call_hash::<AddProposer>()?
-                        == [
-                            242u8, 216u8, 225u8, 176u8, 155u8, 212u8, 134u8,
-                            196u8, 170u8, 136u8, 230u8, 164u8, 145u8, 82u8,
-                            90u8, 204u8, 235u8, 92u8, 14u8, 136u8, 177u8,
-                            123u8, 178u8, 218u8, 154u8, 130u8, 125u8, 222u8,
-                            24u8, 206u8, 121u8, 20u8,
-                        ]
-                    {
-                        let call = AddProposer {
-                            native_account,
-                            external_account,
-                        };
-                        Ok(::subxt::SubmittableExtrinsic::new(
-                            self.client,
-                            call,
-                        ))
-                    } else {
-                        Err(::subxt::MetadataError::IncompatibleMetadata.into())
-                    }
-                }
-                #[doc = "Removes an existing proposer from the set."]
-                #[doc = ""]
-                #[doc = "# <weight>"]
-                #[doc = "- O(1) lookup and removal"]
-                #[doc = "# </weight>"]
-                pub fn remove_proposer(
-                    &self,
-                    v: ::subxt::sp_core::crypto::AccountId32,
-                ) -> Result<
-                    ::subxt::SubmittableExtrinsic<
-                        'a,
-                        T,
-                        X,
-                        RemoveProposer,
-                        DispatchError,
-                        root_mod::Event,
-                    >,
-                    ::subxt::BasicError,
-                > {
-                    if self.client.metadata().call_hash::<RemoveProposer>()?
-                        == [
-                            27u8, 73u8, 114u8, 131u8, 234u8, 127u8, 131u8,
-                            218u8, 184u8, 48u8, 223u8, 149u8, 70u8, 109u8,
-                            192u8, 238u8, 153u8, 201u8, 146u8, 14u8, 6u8,
-                            210u8, 60u8, 54u8, 216u8, 252u8, 121u8, 252u8,
-                            90u8, 208u8, 125u8, 244u8,
-                        ]
-                    {
-                        let call = RemoveProposer { v };
-                        Ok(::subxt::SubmittableExtrinsic::new(
-                            self.client,
-                            call,
-                        ))
-                    } else {
-                        Err(::subxt::MetadataError::IncompatibleMetadata.into())
-                    }
-                }
-                #[doc = "Commits a vote in favour of the provided proposal."]
-                #[doc = ""]
-                #[doc = "If a proposal with the given nonce and source chain ID does not"]
-                #[doc = "already exist, it will be created with an initial vote in favour"]
-                #[doc = "from the caller."]
-                #[doc = ""]
-                #[doc = "# <weight>"]
-                #[doc = "- weight of proposed call, regardless of whether execution is performed"]
-                #[doc = "# </weight>"]
-                pub fn acknowledge_proposal(
-                    &self,
-                    nonce: runtime_types::webb_proposals::nonce::Nonce,
-                    src_chain_id : runtime_types :: webb_proposals :: header :: TypedChainId,
-                    r_id: runtime_types::webb_proposals::header::ResourceId,
-                    prop: ::std::vec::Vec<::core::primitive::u8>,
-                ) -> Result<
-                    ::subxt::SubmittableExtrinsic<
-                        'a,
-                        T,
-                        X,
-                        AcknowledgeProposal,
-                        DispatchError,
-                        root_mod::Event,
-                    >,
-                    ::subxt::BasicError,
-                > {
-                    if self
-                        .client
-                        .metadata()
-                        .call_hash::<AcknowledgeProposal>()?
-                        == [
-                            183u8, 196u8, 193u8, 205u8, 69u8, 125u8, 240u8,
-                            164u8, 158u8, 109u8, 24u8, 197u8, 166u8, 24u8,
-                            216u8, 46u8, 217u8, 200u8, 36u8, 112u8, 142u8,
-                            82u8, 70u8, 213u8, 16u8, 169u8, 89u8, 93u8, 199u8,
-                            96u8, 211u8, 40u8,
-                        ]
-                    {
-                        let call = AcknowledgeProposal {
-                            nonce,
-                            src_chain_id,
-                            r_id,
-                            prop,
-                        };
-                        Ok(::subxt::SubmittableExtrinsic::new(
-                            self.client,
-                            call,
-                        ))
-                    } else {
-                        Err(::subxt::MetadataError::IncompatibleMetadata.into())
-                    }
-                }
-                #[doc = "Commits a vote against a provided proposal."]
-                #[doc = ""]
-                #[doc = "# <weight>"]
-                #[doc = "- Fixed, since execution of proposal should not be included"]
-                #[doc = "# </weight>"]
-                pub fn reject_proposal(
-                    &self,
-                    nonce: runtime_types::webb_proposals::nonce::Nonce,
-                    src_chain_id : runtime_types :: webb_proposals :: header :: TypedChainId,
-                    r_id: runtime_types::webb_proposals::header::ResourceId,
-                    prop: ::std::vec::Vec<::core::primitive::u8>,
-                ) -> Result<
-                    ::subxt::SubmittableExtrinsic<
-                        'a,
-                        T,
-                        X,
-                        RejectProposal,
-                        DispatchError,
-                        root_mod::Event,
-                    >,
-                    ::subxt::BasicError,
-                > {
-                    if self.client.metadata().call_hash::<RejectProposal>()?
-                        == [
-                            190u8, 15u8, 45u8, 81u8, 218u8, 88u8, 44u8, 117u8,
-                            34u8, 123u8, 107u8, 96u8, 174u8, 11u8, 141u8,
-                            228u8, 201u8, 247u8, 150u8, 108u8, 160u8, 200u8,
-                            184u8, 16u8, 102u8, 175u8, 152u8, 123u8, 169u8,
-                            61u8, 175u8, 121u8,
-                        ]
-                    {
-                        let call = RejectProposal {
-                            nonce,
-                            src_chain_id,
-                            r_id,
-                            prop,
-                        };
-                        Ok(::subxt::SubmittableExtrinsic::new(
-                            self.client,
-                            call,
-                        ))
-                    } else {
-                        Err(::subxt::MetadataError::IncompatibleMetadata.into())
-                    }
-                }
-                #[doc = "Evaluate the state of a proposal given the current vote threshold."]
-                #[doc = ""]
-                #[doc = "A proposal with enough votes will be either executed or cancelled,"]
-                #[doc = "and the status will be updated accordingly."]
-                #[doc = ""]
-                #[doc = "# <weight>"]
-                #[doc = "- weight of proposed call, regardless of whether execution is performed"]
-                #[doc = "# </weight>"]
-                pub fn eval_vote_state(
-                    &self,
-                    nonce: runtime_types::webb_proposals::nonce::Nonce,
-                    src_chain_id : runtime_types :: webb_proposals :: header :: TypedChainId,
-                    prop: ::std::vec::Vec<::core::primitive::u8>,
-                ) -> Result<
-                    ::subxt::SubmittableExtrinsic<
-                        'a,
-                        T,
-                        X,
-                        EvalVoteState,
-                        DispatchError,
-                        root_mod::Event,
-                    >,
-                    ::subxt::BasicError,
-                > {
-                    if self.client.metadata().call_hash::<EvalVoteState>()?
-                        == [
-                            248u8, 117u8, 51u8, 78u8, 33u8, 126u8, 124u8,
-                            190u8, 226u8, 76u8, 164u8, 206u8, 48u8, 81u8,
-                            163u8, 210u8, 230u8, 206u8, 206u8, 168u8, 200u8,
-                            152u8, 35u8, 176u8, 129u8, 121u8, 84u8, 49u8,
-                            100u8, 155u8, 76u8, 237u8,
-                        ]
-                    {
-                        let call = EvalVoteState {
-                            nonce,
-                            src_chain_id,
-                            prop,
-                        };
-                        Ok(::subxt::SubmittableExtrinsic::new(
-                            self.client,
-                            call,
-                        ))
-                    } else {
-                        Err(::subxt::MetadataError::IncompatibleMetadata.into())
-                    }
-                }
-            }
-        }
-        pub type Event = runtime_types::pallet_dkg_proposals::pallet::Event;
-        pub mod events {
-            use super::runtime_types;
-            #[derive(
-                :: subxt :: codec :: CompactAs,
-                :: subxt :: codec :: Decode,
-                :: subxt :: codec :: Encode,
-                Clone,
-                Debug,
-                Eq,
-                PartialEq,
-            )]
-            #[doc = "Vote threshold has changed (new_threshold)"]
-            pub struct ProposerThresholdChanged {
-                pub new_threshold: ::core::primitive::u32,
-            }
-            impl ::subxt::Event for ProposerThresholdChanged {
-                const PALLET: &'static str = "DKGProposals";
-                const EVENT: &'static str = "ProposerThresholdChanged";
-            }
-            #[derive(
-                :: subxt :: codec :: Decode,
-                :: subxt :: codec :: Encode,
-                Clone,
-                Debug,
-                Eq,
-                PartialEq,
-            )]
-            #[doc = "Chain now available for transfers (chain_id)"]
-            pub struct ChainWhitelisted {
-                pub chain_id:
-                    runtime_types::webb_proposals::header::TypedChainId,
-            }
-            impl ::subxt::Event for ChainWhitelisted {
-                const PALLET: &'static str = "DKGProposals";
-                const EVENT: &'static str = "ChainWhitelisted";
-            }
-            #[derive(
-                :: subxt :: codec :: Decode,
-                :: subxt :: codec :: Encode,
-                Clone,
-                Debug,
-                Eq,
-                PartialEq,
-            )]
-            #[doc = "Proposer added to set"]
-            pub struct ProposerAdded {
-                pub proposer_id: ::subxt::sp_core::crypto::AccountId32,
-            }
-            impl ::subxt::Event for ProposerAdded {
-                const PALLET: &'static str = "DKGProposals";
-                const EVENT: &'static str = "ProposerAdded";
-            }
-            #[derive(
-                :: subxt :: codec :: Decode,
-                :: subxt :: codec :: Encode,
-                Clone,
-                Debug,
-                Eq,
-                PartialEq,
-            )]
-            #[doc = "Proposer removed from set"]
-            pub struct ProposerRemoved {
-                pub proposer_id: ::subxt::sp_core::crypto::AccountId32,
-            }
-            impl ::subxt::Event for ProposerRemoved {
-                const PALLET: &'static str = "DKGProposals";
-                const EVENT: &'static str = "ProposerRemoved";
-            }
-            #[derive(
-                :: subxt :: codec :: Decode,
-                :: subxt :: codec :: Encode,
-                Clone,
-                Debug,
-                Eq,
-                PartialEq,
-            )]
-            #[doc = "Vote submitted in favour of proposal"]
-            pub struct VoteFor {
-                pub chain_id:
-                    runtime_types::webb_proposals::header::TypedChainId,
-                pub proposal_nonce: runtime_types::webb_proposals::nonce::Nonce,
-                pub who: ::subxt::sp_core::crypto::AccountId32,
-            }
-            impl ::subxt::Event for VoteFor {
-                const PALLET: &'static str = "DKGProposals";
-                const EVENT: &'static str = "VoteFor";
-            }
-            #[derive(
-                :: subxt :: codec :: Decode,
-                :: subxt :: codec :: Encode,
-                Clone,
-                Debug,
-                Eq,
-                PartialEq,
-            )]
-            #[doc = "Vot submitted against proposal"]
-            pub struct VoteAgainst {
-                pub chain_id:
-                    runtime_types::webb_proposals::header::TypedChainId,
-                pub proposal_nonce: runtime_types::webb_proposals::nonce::Nonce,
-                pub who: ::subxt::sp_core::crypto::AccountId32,
-            }
-            impl ::subxt::Event for VoteAgainst {
-                const PALLET: &'static str = "DKGProposals";
-                const EVENT: &'static str = "VoteAgainst";
-            }
-            #[derive(
-                :: subxt :: codec :: Decode,
-                :: subxt :: codec :: Encode,
-                Clone,
-                Debug,
-                Eq,
-                PartialEq,
-            )]
-            #[doc = "Voting successful for a proposal"]
-            pub struct ProposalApproved {
-                pub chain_id:
-                    runtime_types::webb_proposals::header::TypedChainId,
-                pub proposal_nonce: runtime_types::webb_proposals::nonce::Nonce,
-            }
-            impl ::subxt::Event for ProposalApproved {
-                const PALLET: &'static str = "DKGProposals";
-                const EVENT: &'static str = "ProposalApproved";
-            }
-            #[derive(
-                :: subxt :: codec :: Decode,
-                :: subxt :: codec :: Encode,
-                Clone,
-                Debug,
-                Eq,
-                PartialEq,
-            )]
-            #[doc = "Voting rejected a proposal"]
-            pub struct ProposalRejected {
-                pub chain_id:
-                    runtime_types::webb_proposals::header::TypedChainId,
-                pub proposal_nonce: runtime_types::webb_proposals::nonce::Nonce,
-            }
-            impl ::subxt::Event for ProposalRejected {
-                const PALLET: &'static str = "DKGProposals";
-                const EVENT: &'static str = "ProposalRejected";
-            }
-            #[derive(
-                :: subxt :: codec :: Decode,
-                :: subxt :: codec :: Encode,
-                Clone,
-                Debug,
-                Eq,
-                PartialEq,
-            )]
-            #[doc = "Execution of call succeeded"]
-            pub struct ProposalSucceeded {
-                pub chain_id:
-                    runtime_types::webb_proposals::header::TypedChainId,
-                pub proposal_nonce: runtime_types::webb_proposals::nonce::Nonce,
-            }
-            impl ::subxt::Event for ProposalSucceeded {
-                const PALLET: &'static str = "DKGProposals";
-                const EVENT: &'static str = "ProposalSucceeded";
-            }
-            #[derive(
-                :: subxt :: codec :: Decode,
-                :: subxt :: codec :: Encode,
-                Clone,
-                Debug,
-                Eq,
-                PartialEq,
-            )]
-            #[doc = "Execution of call failed"]
-            pub struct ProposalFailed {
-                pub chain_id:
-                    runtime_types::webb_proposals::header::TypedChainId,
-                pub proposal_nonce: runtime_types::webb_proposals::nonce::Nonce,
-            }
-            impl ::subxt::Event for ProposalFailed {
-                const PALLET: &'static str = "DKGProposals";
-                const EVENT: &'static str = "ProposalFailed";
-            }
-            #[derive(
-                :: subxt :: codec :: Decode,
-                :: subxt :: codec :: Encode,
-                Clone,
-                Debug,
-                Eq,
-                PartialEq,
-            )]
-            #[doc = "Proposers have been reset"]
-            pub struct AuthorityProposersReset {
-                pub proposers:
-                    ::std::vec::Vec<::subxt::sp_core::crypto::AccountId32>,
-            }
-            impl ::subxt::Event for AuthorityProposersReset {
-                const PALLET: &'static str = "DKGProposals";
-                const EVENT: &'static str = "AuthorityProposersReset";
-            }
-        }
-        pub mod storage {
-            use super::runtime_types;
-            pub struct ChainNonces<'a>(
-                pub &'a runtime_types::webb_proposals::header::TypedChainId,
-            );
-            impl ::subxt::StorageEntry for ChainNonces<'_> {
-                const PALLET: &'static str = "DKGProposals";
-                const STORAGE: &'static str = "ChainNonces";
-                type Value = runtime_types::webb_proposals::nonce::Nonce;
-                fn key(&self) -> ::subxt::StorageEntryKey {
-                    ::subxt::StorageEntryKey::Map(vec![
-                        ::subxt::StorageMapKey::new(
-                            &self.0,
-                            ::subxt::StorageHasher::Blake2_256,
-                        ),
-                    ])
-                }
-            }
-            pub struct ProposerThreshold;
-            impl ::subxt::StorageEntry for ProposerThreshold {
-                const PALLET: &'static str = "DKGProposals";
-                const STORAGE: &'static str = "ProposerThreshold";
-                type Value = ::core::primitive::u32;
-                fn key(&self) -> ::subxt::StorageEntryKey {
-                    ::subxt::StorageEntryKey::Plain
-                }
-            }
-            pub struct ProposerSetUpdateProposalNonce;
-            impl ::subxt::StorageEntry for ProposerSetUpdateProposalNonce {
-                const PALLET: &'static str = "DKGProposals";
-                const STORAGE: &'static str = "ProposerSetUpdateProposalNonce";
-                type Value = ::core::primitive::u32;
-                fn key(&self) -> ::subxt::StorageEntryKey {
-                    ::subxt::StorageEntryKey::Plain
-                }
-            }
-            pub struct Proposers<'a>(
-                pub &'a ::subxt::sp_core::crypto::AccountId32,
-            );
-            impl ::subxt::StorageEntry for Proposers<'_> {
-                const PALLET: &'static str = "DKGProposals";
-                const STORAGE: &'static str = "Proposers";
-                type Value = ::core::primitive::bool;
-                fn key(&self) -> ::subxt::StorageEntryKey {
-                    ::subxt::StorageEntryKey::Map(vec![
-                        ::subxt::StorageMapKey::new(
-                            &self.0,
-                            ::subxt::StorageHasher::Blake2_128Concat,
-                        ),
-                    ])
-                }
-            }
-            pub struct ExternalProposerAccounts<'a>(
-                pub &'a ::subxt::sp_core::crypto::AccountId32,
-            );
-            impl ::subxt::StorageEntry for ExternalProposerAccounts<'_> {
-                const PALLET: &'static str = "DKGProposals";
-                const STORAGE: &'static str = "ExternalProposerAccounts";
-                type Value = ::std::vec::Vec<::core::primitive::u8>;
-                fn key(&self) -> ::subxt::StorageEntryKey {
-                    ::subxt::StorageEntryKey::Map(vec![
-                        ::subxt::StorageMapKey::new(
-                            &self.0,
-                            ::subxt::StorageHasher::Blake2_128Concat,
-                        ),
-                    ])
-                }
-            }
-            pub struct AuthorityProposers;
-            impl ::subxt::StorageEntry for AuthorityProposers {
-                const PALLET: &'static str = "DKGProposals";
-                const STORAGE: &'static str = "AuthorityProposers";
-                type Value =
-                    ::std::vec::Vec<::subxt::sp_core::crypto::AccountId32>;
-                fn key(&self) -> ::subxt::StorageEntryKey {
-                    ::subxt::StorageEntryKey::Plain
-                }
-            }
-            pub struct ExternalAuthorityProposerAccounts;
-            impl ::subxt::StorageEntry for ExternalAuthorityProposerAccounts {
-                const PALLET: &'static str = "DKGProposals";
-                const STORAGE: &'static str =
-                    "ExternalAuthorityProposerAccounts";
-                type Value =
-                    ::std::vec::Vec<::std::vec::Vec<::core::primitive::u8>>;
-                fn key(&self) -> ::subxt::StorageEntryKey {
-                    ::subxt::StorageEntryKey::Plain
-                }
-            }
-            pub struct ProposerCount;
-            impl ::subxt::StorageEntry for ProposerCount {
-                const PALLET: &'static str = "DKGProposals";
-                const STORAGE: &'static str = "ProposerCount";
-                type Value = ::core::primitive::u32;
-                fn key(&self) -> ::subxt::StorageEntryKey {
-                    ::subxt::StorageEntryKey::Plain
-                }
-            }
-            pub struct Votes<'a>(
-                pub &'a runtime_types::webb_proposals::header::TypedChainId,
-                pub  &'a (
-                    runtime_types::webb_proposals::nonce::Nonce,
-                    ::std::vec::Vec<::core::primitive::u8>,
-                ),
-            );
-            impl ::subxt::StorageEntry for Votes<'_> {
-                const PALLET: &'static str = "DKGProposals";
-                const STORAGE: &'static str = "Votes";
-                type Value =
-                    runtime_types::pallet_dkg_proposals::types::ProposalVotes<
-                        ::subxt::sp_core::crypto::AccountId32,
-                        ::core::primitive::u32,
-                    >;
-                fn key(&self) -> ::subxt::StorageEntryKey {
-                    ::subxt::StorageEntryKey::Map(vec![
-                        ::subxt::StorageMapKey::new(
-                            &self.0,
-                            ::subxt::StorageHasher::Blake2_256,
-                        ),
-                        ::subxt::StorageMapKey::new(
-                            &self.1,
-                            ::subxt::StorageHasher::Blake2_256,
-                        ),
-                    ])
-                }
-            }
-            pub struct Resources<'a>(
-                pub &'a runtime_types::webb_proposals::header::ResourceId,
-            );
-            impl ::subxt::StorageEntry for Resources<'_> {
-                const PALLET: &'static str = "DKGProposals";
-                const STORAGE: &'static str = "Resources";
-                type Value = ::std::vec::Vec<::core::primitive::u8>;
-                fn key(&self) -> ::subxt::StorageEntryKey {
-                    ::subxt::StorageEntryKey::Map(vec![
-                        ::subxt::StorageMapKey::new(
-                            &self.0,
-                            ::subxt::StorageHasher::Blake2_256,
-                        ),
-                    ])
-                }
-            }
-            pub struct StorageApi<'a, T: ::subxt::Config> {
-                client: &'a ::subxt::Client<T>,
-            }
-            impl<'a, T: ::subxt::Config> StorageApi<'a, T> {
-                pub fn new(client: &'a ::subxt::Client<T>) -> Self {
-                    Self { client }
-                }
-                #[doc = " All whitelisted chains and their respective transaction counts"]
-                pub async fn chain_nonces(
-                    &self,
-                    _0: &runtime_types::webb_proposals::header::TypedChainId,
-                    block_hash: ::core::option::Option<T::Hash>,
-                ) -> ::core::result::Result<
-                    ::core::option::Option<
-                        runtime_types::webb_proposals::nonce::Nonce,
-                    >,
-                    ::subxt::BasicError,
-                > {
-                    if self.client.metadata().storage_hash::<ChainNonces>()?
-                        == [
-                            217u8, 18u8, 163u8, 125u8, 232u8, 176u8, 251u8,
-                            33u8, 149u8, 2u8, 197u8, 185u8, 79u8, 112u8, 92u8,
-                            39u8, 165u8, 141u8, 162u8, 151u8, 199u8, 156u8,
-                            58u8, 40u8, 255u8, 123u8, 7u8, 83u8, 134u8, 91u8,
-                            201u8, 44u8,
-                        ]
-                    {
-                        let entry = ChainNonces(_0);
-                        self.client.storage().fetch(&entry, block_hash).await
-                    } else {
-                        Err(::subxt::MetadataError::IncompatibleMetadata.into())
-                    }
-                }
-                #[doc = " All whitelisted chains and their respective transaction counts"]
-                pub async fn chain_nonces_iter(
-                    &self,
-                    block_hash: ::core::option::Option<T::Hash>,
-                ) -> ::core::result::Result<
-                    ::subxt::KeyIter<'a, T, ChainNonces<'a>>,
-                    ::subxt::BasicError,
-                > {
-                    if self.client.metadata().storage_hash::<ChainNonces>()?
-                        == [
-                            217u8, 18u8, 163u8, 125u8, 232u8, 176u8, 251u8,
-                            33u8, 149u8, 2u8, 197u8, 185u8, 79u8, 112u8, 92u8,
-                            39u8, 165u8, 141u8, 162u8, 151u8, 199u8, 156u8,
-                            58u8, 40u8, 255u8, 123u8, 7u8, 83u8, 134u8, 91u8,
-                            201u8, 44u8,
-                        ]
-                    {
-                        self.client.storage().iter(block_hash).await
-                    } else {
-                        Err(::subxt::MetadataError::IncompatibleMetadata.into())
-                    }
-                }
-                #[doc = " Number of votes required for a proposal to execute"]
-                pub async fn proposer_threshold(
-                    &self,
-                    block_hash: ::core::option::Option<T::Hash>,
-                ) -> ::core::result::Result<
-                    ::core::primitive::u32,
-                    ::subxt::BasicError,
-                > {
-                    if self
-                        .client
-                        .metadata()
-                        .storage_hash::<ProposerThreshold>()?
-                        == [
-                            129u8, 174u8, 171u8, 36u8, 172u8, 108u8, 139u8,
-                            176u8, 152u8, 127u8, 52u8, 68u8, 109u8, 238u8,
-                            50u8, 176u8, 49u8, 78u8, 240u8, 36u8, 94u8, 247u8,
-                            215u8, 82u8, 109u8, 10u8, 81u8, 156u8, 14u8, 247u8,
-                            39u8, 154u8,
-                        ]
-                    {
-                        let entry = ProposerThreshold;
-                        self.client
-                            .storage()
-                            .fetch_or_default(&entry, block_hash)
-                            .await
-                    } else {
-                        Err(::subxt::MetadataError::IncompatibleMetadata.into())
-                    }
-                }
-                #[doc = " Proposer Set Update Proposal Nonce"]
-                pub async fn proposer_set_update_proposal_nonce(
-                    &self,
-                    block_hash: ::core::option::Option<T::Hash>,
-                ) -> ::core::result::Result<
-                    ::core::primitive::u32,
-                    ::subxt::BasicError,
-                > {
-                    if self
-                        .client
-                        .metadata()
-                        .storage_hash::<ProposerSetUpdateProposalNonce>()?
-                        == [
-                            118u8, 52u8, 184u8, 159u8, 206u8, 28u8, 122u8,
-                            219u8, 168u8, 206u8, 143u8, 16u8, 128u8, 31u8,
-                            254u8, 40u8, 45u8, 92u8, 183u8, 46u8, 80u8, 19u8,
-                            131u8, 6u8, 26u8, 105u8, 81u8, 174u8, 10u8, 154u8,
-                            186u8, 157u8,
-                        ]
-                    {
-                        let entry = ProposerSetUpdateProposalNonce;
-                        self.client
-                            .storage()
-                            .fetch_or_default(&entry, block_hash)
-                            .await
-                    } else {
-                        Err(::subxt::MetadataError::IncompatibleMetadata.into())
-                    }
-                }
-                #[doc = " Tracks current proposer set"]
-                pub async fn proposers(
-                    &self,
-                    _0: &::subxt::sp_core::crypto::AccountId32,
-                    block_hash: ::core::option::Option<T::Hash>,
-                ) -> ::core::result::Result<
-                    ::core::primitive::bool,
-                    ::subxt::BasicError,
-                > {
-                    if self.client.metadata().storage_hash::<Proposers>()?
-                        == [
-                            137u8, 239u8, 193u8, 226u8, 156u8, 178u8, 137u8,
-                            139u8, 181u8, 99u8, 72u8, 129u8, 47u8, 24u8, 41u8,
-                            41u8, 180u8, 191u8, 219u8, 186u8, 240u8, 143u8,
-                            127u8, 146u8, 93u8, 164u8, 181u8, 112u8, 197u8,
-                            207u8, 149u8, 218u8,
-                        ]
-                    {
-                        let entry = Proposers(_0);
-                        self.client
-                            .storage()
-                            .fetch_or_default(&entry, block_hash)
-                            .await
-                    } else {
-                        Err(::subxt::MetadataError::IncompatibleMetadata.into())
-                    }
-                }
-                #[doc = " Tracks current proposer set"]
-                pub async fn proposers_iter(
-                    &self,
-                    block_hash: ::core::option::Option<T::Hash>,
-                ) -> ::core::result::Result<
-                    ::subxt::KeyIter<'a, T, Proposers<'a>>,
-                    ::subxt::BasicError,
-                > {
-                    if self.client.metadata().storage_hash::<Proposers>()?
-                        == [
-                            137u8, 239u8, 193u8, 226u8, 156u8, 178u8, 137u8,
-                            139u8, 181u8, 99u8, 72u8, 129u8, 47u8, 24u8, 41u8,
-                            41u8, 180u8, 191u8, 219u8, 186u8, 240u8, 143u8,
-                            127u8, 146u8, 93u8, 164u8, 181u8, 112u8, 197u8,
-                            207u8, 149u8, 218u8,
-                        ]
-                    {
-                        self.client.storage().iter(block_hash).await
-                    } else {
-                        Err(::subxt::MetadataError::IncompatibleMetadata.into())
-                    }
-                }
-                #[doc = " Tracks current proposer set external accounts"]
-                #[doc = " Currently meant to store Ethereum compatible 64-bytes ECDSA public keys"]
-                pub async fn external_proposer_accounts(
-                    &self,
-                    _0: &::subxt::sp_core::crypto::AccountId32,
-                    block_hash: ::core::option::Option<T::Hash>,
-                ) -> ::core::result::Result<
-                    ::std::vec::Vec<::core::primitive::u8>,
-                    ::subxt::BasicError,
-                > {
-                    if self
-                        .client
-                        .metadata()
-                        .storage_hash::<ExternalProposerAccounts>()?
-                        == [
-                            159u8, 244u8, 45u8, 186u8, 3u8, 16u8, 234u8, 133u8,
-                            22u8, 98u8, 8u8, 59u8, 33u8, 124u8, 46u8, 93u8,
-                            115u8, 222u8, 198u8, 150u8, 196u8, 188u8, 206u8,
-                            93u8, 186u8, 248u8, 193u8, 171u8, 181u8, 247u8,
-                            232u8, 73u8,
-                        ]
-                    {
-                        let entry = ExternalProposerAccounts(_0);
-                        self.client
-                            .storage()
-                            .fetch_or_default(&entry, block_hash)
-                            .await
-                    } else {
-                        Err(::subxt::MetadataError::IncompatibleMetadata.into())
-                    }
-                }
-                #[doc = " Tracks current proposer set external accounts"]
-                #[doc = " Currently meant to store Ethereum compatible 64-bytes ECDSA public keys"]
-                pub async fn external_proposer_accounts_iter(
-                    &self,
-                    block_hash: ::core::option::Option<T::Hash>,
-                ) -> ::core::result::Result<
-                    ::subxt::KeyIter<'a, T, ExternalProposerAccounts<'a>>,
-                    ::subxt::BasicError,
-                > {
-                    if self
-                        .client
-                        .metadata()
-                        .storage_hash::<ExternalProposerAccounts>()?
-                        == [
-                            159u8, 244u8, 45u8, 186u8, 3u8, 16u8, 234u8, 133u8,
-                            22u8, 98u8, 8u8, 59u8, 33u8, 124u8, 46u8, 93u8,
-                            115u8, 222u8, 198u8, 150u8, 196u8, 188u8, 206u8,
-                            93u8, 186u8, 248u8, 193u8, 171u8, 181u8, 247u8,
-                            232u8, 73u8,
-                        ]
-                    {
-                        self.client.storage().iter(block_hash).await
-                    } else {
-                        Err(::subxt::MetadataError::IncompatibleMetadata.into())
-                    }
-                }
-                #[doc = " Tracks the authorities that are proposers so we can properly update the proposer set"]
-                #[doc = " across sessions and authority changes."]
-                pub async fn authority_proposers(
-                    &self,
-                    block_hash: ::core::option::Option<T::Hash>,
-                ) -> ::core::result::Result<
-                    ::std::vec::Vec<::subxt::sp_core::crypto::AccountId32>,
-                    ::subxt::BasicError,
-                > {
-                    if self
-                        .client
-                        .metadata()
-                        .storage_hash::<AuthorityProposers>()?
-                        == [
-                            189u8, 68u8, 230u8, 107u8, 231u8, 3u8, 192u8,
-                            182u8, 18u8, 22u8, 91u8, 23u8, 106u8, 108u8, 246u8,
-                            58u8, 102u8, 58u8, 112u8, 198u8, 141u8, 66u8,
-                            233u8, 117u8, 49u8, 67u8, 138u8, 163u8, 145u8,
-                            93u8, 209u8, 46u8,
-                        ]
-                    {
-                        let entry = AuthorityProposers;
-                        self.client
-                            .storage()
-                            .fetch_or_default(&entry, block_hash)
-                            .await
-                    } else {
-                        Err(::subxt::MetadataError::IncompatibleMetadata.into())
-                    }
-                }
-                #[doc = " Tracks current proposer set external accounts"]
-                pub async fn external_authority_proposer_accounts(
-                    &self,
-                    block_hash: ::core::option::Option<T::Hash>,
-                ) -> ::core::result::Result<
-                    ::std::vec::Vec<::std::vec::Vec<::core::primitive::u8>>,
-                    ::subxt::BasicError,
-                > {
-                    if self
-                        .client
-                        .metadata()
-                        .storage_hash::<ExternalAuthorityProposerAccounts>()?
-                        == [
-                            180u8, 223u8, 172u8, 35u8, 236u8, 128u8, 207u8,
-                            140u8, 38u8, 75u8, 40u8, 243u8, 244u8, 122u8, 7u8,
-                            25u8, 120u8, 152u8, 240u8, 169u8, 165u8, 208u8,
-                            190u8, 127u8, 189u8, 117u8, 160u8, 34u8, 243u8,
-                            253u8, 223u8, 18u8,
-                        ]
-                    {
-                        let entry = ExternalAuthorityProposerAccounts;
-                        self.client
-                            .storage()
-                            .fetch_or_default(&entry, block_hash)
-                            .await
-                    } else {
-                        Err(::subxt::MetadataError::IncompatibleMetadata.into())
-                    }
-                }
-                #[doc = " Number of proposers in set"]
-                pub async fn proposer_count(
-                    &self,
-                    block_hash: ::core::option::Option<T::Hash>,
-                ) -> ::core::result::Result<
-                    ::core::primitive::u32,
-                    ::subxt::BasicError,
-                > {
-                    if self.client.metadata().storage_hash::<ProposerCount>()?
-                        == [
-                            150u8, 116u8, 125u8, 20u8, 135u8, 11u8, 47u8,
-                            155u8, 87u8, 113u8, 44u8, 139u8, 67u8, 74u8, 92u8,
-                            113u8, 173u8, 62u8, 207u8, 79u8, 125u8, 109u8,
-                            170u8, 166u8, 55u8, 85u8, 3u8, 32u8, 155u8, 45u8,
-                            236u8, 253u8,
-                        ]
-                    {
-                        let entry = ProposerCount;
-                        self.client
-                            .storage()
-                            .fetch_or_default(&entry, block_hash)
-                            .await
-                    } else {
-                        Err(::subxt::MetadataError::IncompatibleMetadata.into())
-                    }
-                }
-                #[doc = " All known proposals."]
-                #[doc = " The key is the hash of the call and the deposit ID, to ensure it's"]
-                #[doc = " unique."]                pub async fn votes (& self , _0 : & runtime_types :: webb_proposals :: header :: TypedChainId , _1 : & (runtime_types :: webb_proposals :: nonce :: Nonce , :: std :: vec :: Vec < :: core :: primitive :: u8 > ,) , block_hash : :: core :: option :: Option < T :: Hash > ,) -> :: core :: result :: Result < :: core :: option :: Option < runtime_types :: pallet_dkg_proposals :: types :: ProposalVotes < :: subxt :: sp_core :: crypto :: AccountId32 , :: core :: primitive :: u32 > > , :: subxt :: BasicError >{
-                    if self.client.metadata().storage_hash::<Votes>()?
-                        == [
-                            144u8, 169u8, 168u8, 187u8, 69u8, 77u8, 116u8, 6u8,
-                            37u8, 235u8, 103u8, 7u8, 42u8, 92u8, 84u8, 238u8,
-                            93u8, 111u8, 215u8, 146u8, 224u8, 80u8, 106u8,
-                            119u8, 6u8, 30u8, 170u8, 114u8, 103u8, 126u8,
-                            194u8, 227u8,
-                        ]
-                    {
-                        let entry = Votes(_0, _1);
-                        self.client.storage().fetch(&entry, block_hash).await
-                    } else {
-                        Err(::subxt::MetadataError::IncompatibleMetadata.into())
-                    }
-                }
-                #[doc = " All known proposals."]
-                #[doc = " The key is the hash of the call and the deposit ID, to ensure it's"]
-                #[doc = " unique."]
-                pub async fn votes_iter(
-                    &self,
-                    block_hash: ::core::option::Option<T::Hash>,
-                ) -> ::core::result::Result<
-                    ::subxt::KeyIter<'a, T, Votes<'a>>,
-                    ::subxt::BasicError,
-                > {
-                    if self.client.metadata().storage_hash::<Votes>()?
-                        == [
-                            144u8, 169u8, 168u8, 187u8, 69u8, 77u8, 116u8, 6u8,
-                            37u8, 235u8, 103u8, 7u8, 42u8, 92u8, 84u8, 238u8,
-                            93u8, 111u8, 215u8, 146u8, 224u8, 80u8, 106u8,
-                            119u8, 6u8, 30u8, 170u8, 114u8, 103u8, 126u8,
-                            194u8, 227u8,
-                        ]
-                    {
-                        self.client.storage().iter(block_hash).await
-                    } else {
-                        Err(::subxt::MetadataError::IncompatibleMetadata.into())
-                    }
-                }
-                #[doc = " Utilized by the bridge software to map resource IDs to actual methods"]
-                pub async fn resources(
-                    &self,
-                    _0: &runtime_types::webb_proposals::header::ResourceId,
-                    block_hash: ::core::option::Option<T::Hash>,
-                ) -> ::core::result::Result<
-                    ::core::option::Option<
-                        ::std::vec::Vec<::core::primitive::u8>,
-                    >,
-                    ::subxt::BasicError,
-                > {
-                    if self.client.metadata().storage_hash::<Resources>()?
-                        == [
-                            2u8, 126u8, 117u8, 136u8, 0u8, 115u8, 243u8, 121u8,
-                            130u8, 45u8, 25u8, 203u8, 234u8, 205u8, 60u8, 45u8,
-                            105u8, 25u8, 33u8, 245u8, 159u8, 50u8, 90u8, 107u8,
-                            5u8, 62u8, 147u8, 122u8, 18u8, 58u8, 107u8, 138u8,
-                        ]
-                    {
-                        let entry = Resources(_0);
-                        self.client.storage().fetch(&entry, block_hash).await
-                    } else {
-                        Err(::subxt::MetadataError::IncompatibleMetadata.into())
-                    }
-                }
-                #[doc = " Utilized by the bridge software to map resource IDs to actual methods"]
-                pub async fn resources_iter(
-                    &self,
-                    block_hash: ::core::option::Option<T::Hash>,
-                ) -> ::core::result::Result<
-                    ::subxt::KeyIter<'a, T, Resources<'a>>,
-                    ::subxt::BasicError,
-                > {
-                    if self.client.metadata().storage_hash::<Resources>()?
-                        == [
-                            2u8, 126u8, 117u8, 136u8, 0u8, 115u8, 243u8, 121u8,
-                            130u8, 45u8, 25u8, 203u8, 234u8, 205u8, 60u8, 45u8,
-                            105u8, 25u8, 33u8, 245u8, 159u8, 50u8, 90u8, 107u8,
-                            5u8, 62u8, 147u8, 122u8, 18u8, 58u8, 107u8, 138u8,
-                        ]
-                    {
-                        self.client.storage().iter(block_hash).await
-                    } else {
-                        Err(::subxt::MetadataError::IncompatibleMetadata.into())
-                    }
-                }
-            }
-        }
-        pub mod constants {
-            use super::runtime_types;
-            pub struct ConstantsApi<'a, T: ::subxt::Config> {
-                client: &'a ::subxt::Client<T>,
-            }
-            impl<'a, T: ::subxt::Config> ConstantsApi<'a, T> {
-                pub fn new(client: &'a ::subxt::Client<T>) -> Self {
-                    Self { client }
-                }
-                #[doc = " The identifier for this chain."]
-                #[doc = " This must be unique and must not collide with existing IDs within a"]
-                #[doc = " set of bridged chains."]
-                pub fn chain_identifier(
-                    &self,
-                ) -> ::core::result::Result<
-                    runtime_types::webb_proposals::header::TypedChainId,
-                    ::subxt::BasicError,
-                > {
-                    if self
-                        .client
-                        .metadata()
-                        .constant_hash("DKGProposals", "ChainIdentifier")?
-                        == [
-                            25u8, 195u8, 34u8, 179u8, 235u8, 0u8, 99u8, 251u8,
-                            69u8, 97u8, 82u8, 210u8, 204u8, 193u8, 10u8, 65u8,
-                            110u8, 39u8, 48u8, 246u8, 11u8, 33u8, 219u8, 169u8,
-                            226u8, 50u8, 38u8, 184u8, 97u8, 201u8, 30u8, 142u8,
-                        ]
-                    {
-                        let pallet =
-                            self.client.metadata().pallet("DKGProposals")?;
-                        let constant = pallet.constant("ChainIdentifier")?;
-                        let value = ::subxt::codec::Decode::decode(
-                            &mut &constant.value[..],
-                        )?;
-                        Ok(value)
-                    } else {
-                        Err(::subxt::MetadataError::IncompatibleMetadata.into())
-                    }
-                }
-                pub fn proposal_lifetime(
-                    &self,
-                ) -> ::core::result::Result<
-                    ::core::primitive::u32,
-                    ::subxt::BasicError,
-                > {
-                    if self
-                        .client
-                        .metadata()
-                        .constant_hash("DKGProposals", "ProposalLifetime")?
-                        == [
-                            130u8, 207u8, 135u8, 17u8, 0u8, 248u8, 194u8,
-                            143u8, 107u8, 214u8, 163u8, 5u8, 247u8, 63u8,
-                            198u8, 121u8, 202u8, 61u8, 62u8, 198u8, 168u8,
-                            212u8, 127u8, 48u8, 246u8, 162u8, 189u8, 101u8,
-                            190u8, 5u8, 191u8, 210u8,
-                        ]
-                    {
-                        let pallet =
-                            self.client.metadata().pallet("DKGProposals")?;
-                        let constant = pallet.constant("ProposalLifetime")?;
-                        let value = ::subxt::codec::Decode::decode(
-                            &mut &constant.value[..],
-                        )?;
-                        Ok(value)
-                    } else {
-                        Err(::subxt::MetadataError::IncompatibleMetadata.into())
-                    }
-                }
-                #[doc = " The session period"]
-                pub fn period(
-                    &self,
-                ) -> ::core::result::Result<
-                    ::core::primitive::u32,
-                    ::subxt::BasicError,
-                > {
-                    if self
-                        .client
-                        .metadata()
-                        .constant_hash("DKGProposals", "Period")?
-                        == [
-                            227u8, 23u8, 74u8, 179u8, 17u8, 231u8, 230u8,
-                            126u8, 122u8, 109u8, 25u8, 135u8, 172u8, 156u8,
-                            147u8, 161u8, 50u8, 28u8, 48u8, 39u8, 111u8, 191u8,
-                            24u8, 60u8, 2u8, 93u8, 16u8, 3u8, 89u8, 45u8,
-                            205u8, 251u8,
-                        ]
-                    {
-                        let pallet =
-                            self.client.metadata().pallet("DKGProposals")?;
-                        let constant = pallet.constant("Period")?;
-                        let value = ::subxt::codec::Decode::decode(
-                            &mut &constant.value[..],
-                        )?;
-                        Ok(value)
-                    } else {
-                        Err(::subxt::MetadataError::IncompatibleMetadata.into())
-                    }
-                }
-            }
-        }
-    }
-    pub mod dkg_proposal_handler {
-        use super::root_mod;
-        use super::runtime_types;
-        pub mod calls {
-            use super::root_mod;
-            use super::runtime_types;
-            type DispatchError = runtime_types::sp_runtime::DispatchError;
-            #[derive(
-                :: subxt :: codec :: Decode,
-                :: subxt :: codec :: Encode,
-                Clone,
-                Debug,
-                Eq,
-                PartialEq,
-            )]
-            pub struct SubmitSignedProposals {
-                pub props: ::std::vec::Vec<
-                    runtime_types::dkg_runtime_primitives::proposal::Proposal,
-                >,
-            }
-            impl ::subxt::Call for SubmitSignedProposals {
-                const PALLET: &'static str = "DKGProposalHandler";
-                const FUNCTION: &'static str = "submit_signed_proposals";
-            }
-            #[derive(
-                :: subxt :: codec :: Decode,
-                :: subxt :: codec :: Encode,
-                Clone,
-                Debug,
-                Eq,
-                PartialEq,
-            )]
-            pub struct ForceSubmitUnsignedProposal {
-                pub prop:
-                    runtime_types::dkg_runtime_primitives::proposal::Proposal,
-            }
-            impl ::subxt::Call for ForceSubmitUnsignedProposal {
-                const PALLET: &'static str = "DKGProposalHandler";
-                const FUNCTION: &'static str = "force_submit_unsigned_proposal";
-            }
-            pub struct TransactionApi<'a, T: ::subxt::Config, X> {
-                client: &'a ::subxt::Client<T>,
-                marker: ::core::marker::PhantomData<X>,
-            }
-            impl<'a, T, X> TransactionApi<'a, T, X>
-            where
-                T: ::subxt::Config,
-                X: ::subxt::extrinsic::ExtrinsicParams<T>,
-            {
-                pub fn new(client: &'a ::subxt::Client<T>) -> Self {
-                    Self {
-                        client,
-                        marker: ::core::marker::PhantomData,
-                    }
-                }
-                pub fn submit_signed_proposals(
-                    &self,
-                    props : :: std :: vec :: Vec < runtime_types :: dkg_runtime_primitives :: proposal :: Proposal >,
-                ) -> Result<
-                    ::subxt::SubmittableExtrinsic<
-                        'a,
-                        T,
-                        X,
-                        SubmitSignedProposals,
-                        DispatchError,
-                        root_mod::Event,
-                    >,
-                    ::subxt::BasicError,
-                > {
-                    if self
-                        .client
-                        .metadata()
-                        .call_hash::<SubmitSignedProposals>()?
-                        == [
-                            156u8, 161u8, 126u8, 188u8, 21u8, 186u8, 122u8,
-                            180u8, 78u8, 175u8, 140u8, 111u8, 10u8, 38u8, 66u8,
-                            254u8, 138u8, 37u8, 115u8, 187u8, 255u8, 222u8,
-                            22u8, 230u8, 117u8, 157u8, 205u8, 32u8, 123u8,
-                            14u8, 136u8, 227u8,
-                        ]
-                    {
-                        let call = SubmitSignedProposals { props };
-                        Ok(::subxt::SubmittableExtrinsic::new(
-                            self.client,
-                            call,
-                        ))
-                    } else {
-                        Err(::subxt::MetadataError::IncompatibleMetadata.into())
-                    }
-                }
-                #[doc = "Force submit an unsigned proposal to the DKG"]
-                #[doc = ""]
-                #[doc = "There are certain proposals we'd like to be proposable only"]
-                #[doc = "through root actions. The currently supported proposals are"]
-                #[doc = "\t1. Updating"]
-                pub fn force_submit_unsigned_proposal(
-                    &self,
-                    prop : runtime_types :: dkg_runtime_primitives :: proposal :: Proposal,
-                ) -> Result<
-                    ::subxt::SubmittableExtrinsic<
-                        'a,
-                        T,
-                        X,
-                        ForceSubmitUnsignedProposal,
-                        DispatchError,
-                        root_mod::Event,
-                    >,
-                    ::subxt::BasicError,
-                > {
-                    if self
-                        .client
-                        .metadata()
-                        .call_hash::<ForceSubmitUnsignedProposal>()?
-                        == [
-                            62u8, 173u8, 173u8, 166u8, 248u8, 172u8, 104u8,
-                            204u8, 165u8, 8u8, 141u8, 253u8, 205u8, 111u8,
-                            129u8, 47u8, 141u8, 29u8, 122u8, 66u8, 68u8, 231u8,
-                            26u8, 48u8, 165u8, 189u8, 16u8, 180u8, 140u8,
-                            232u8, 18u8, 41u8,
-                        ]
-                    {
-                        let call = ForceSubmitUnsignedProposal { prop };
-                        Ok(::subxt::SubmittableExtrinsic::new(
-                            self.client,
-                            call,
-                        ))
-                    } else {
-                        Err(::subxt::MetadataError::IncompatibleMetadata.into())
-                    }
-                }
-            }
-        }
-        pub type Event =
-            runtime_types::pallet_dkg_proposal_handler::pallet::Event;
-        pub mod events {
-            use super::runtime_types;
-            #[derive(
-                :: subxt :: codec :: Decode,
-                :: subxt :: codec :: Encode,
-                Clone,
-                Debug,
-                Eq,
-                PartialEq,
-            )]
-            #[doc = "Event Emitted when we encounter a Proposal with invalid Signature."]
-            pub struct InvalidProposalSignature { pub kind : runtime_types :: dkg_runtime_primitives :: proposal :: ProposalKind , pub data : :: std :: vec :: Vec < :: core :: primitive :: u8 > , pub invalid_signature : :: std :: vec :: Vec < :: core :: primitive :: u8 > , }
-            impl ::subxt::Event for InvalidProposalSignature {
-                const PALLET: &'static str = "DKGProposalHandler";
-                const EVENT: &'static str = "InvalidProposalSignature";
-            }
-            #[derive(
-                :: subxt :: codec :: Decode,
-                :: subxt :: codec :: Encode,
-                Clone,
-                Debug,
-                Eq,
-                PartialEq,
-            )]
-            #[doc = "Event When a Proposal Gets Signed by DKG."]
-            pub struct ProposalSigned { pub key : runtime_types :: dkg_runtime_primitives :: proposal :: DKGPayloadKey , pub target_chain : runtime_types :: webb_proposals :: header :: TypedChainId , pub data : :: std :: vec :: Vec < :: core :: primitive :: u8 > , pub signature : :: std :: vec :: Vec < :: core :: primitive :: u8 > , }
-            impl ::subxt::Event for ProposalSigned {
-                const PALLET: &'static str = "DKGProposalHandler";
-                const EVENT: &'static str = "ProposalSigned";
-            }
-        }
-        pub mod storage {
-            use super::runtime_types;
-            pub struct UnsignedProposalQueue < 'a > (pub & 'a runtime_types :: webb_proposals :: header :: TypedChainId , pub & 'a runtime_types :: dkg_runtime_primitives :: proposal :: DKGPayloadKey) ;
-            impl ::subxt::StorageEntry for UnsignedProposalQueue<'_> {
-                const PALLET: &'static str = "DKGProposalHandler";
-                const STORAGE: &'static str = "UnsignedProposalQueue";
-                type Value =
-                    runtime_types::dkg_runtime_primitives::proposal::Proposal;
-                fn key(&self) -> ::subxt::StorageEntryKey {
-                    ::subxt::StorageEntryKey::Map(vec![
-                        ::subxt::StorageMapKey::new(
-                            &self.0,
-                            ::subxt::StorageHasher::Blake2_128Concat,
-                        ),
-                        ::subxt::StorageMapKey::new(
-                            &self.1,
-                            ::subxt::StorageHasher::Blake2_128Concat,
-                        ),
-                    ])
-                }
-            }
-            pub struct SignedProposals < 'a > (pub & 'a runtime_types :: webb_proposals :: header :: TypedChainId , pub & 'a runtime_types :: dkg_runtime_primitives :: proposal :: DKGPayloadKey) ;
-            impl ::subxt::StorageEntry for SignedProposals<'_> {
-                const PALLET: &'static str = "DKGProposalHandler";
-                const STORAGE: &'static str = "SignedProposals";
-                type Value =
-                    runtime_types::dkg_runtime_primitives::proposal::Proposal;
-                fn key(&self) -> ::subxt::StorageEntryKey {
-                    ::subxt::StorageEntryKey::Map(vec![
-                        ::subxt::StorageMapKey::new(
-                            &self.0,
-                            ::subxt::StorageHasher::Blake2_128Concat,
-                        ),
-                        ::subxt::StorageMapKey::new(
-                            &self.1,
-                            ::subxt::StorageHasher::Blake2_128Concat,
-                        ),
-                    ])
-                }
-            }
-            pub struct StorageApi<'a, T: ::subxt::Config> {
-                client: &'a ::subxt::Client<T>,
-            }
-            impl<'a, T: ::subxt::Config> StorageApi<'a, T> {
-                pub fn new(client: &'a ::subxt::Client<T>) -> Self {
-                    Self { client }
-                }
-                #[doc = " All unsigned proposals."]                pub async fn unsigned_proposal_queue (& self , _0 : & runtime_types :: webb_proposals :: header :: TypedChainId , _1 : & runtime_types :: dkg_runtime_primitives :: proposal :: DKGPayloadKey , block_hash : :: core :: option :: Option < T :: Hash > ,) -> :: core :: result :: Result < :: core :: option :: Option < runtime_types :: dkg_runtime_primitives :: proposal :: Proposal > , :: subxt :: BasicError >{
-                    if self
-                        .client
-                        .metadata()
-                        .storage_hash::<UnsignedProposalQueue>()?
-                        == [
-                            133u8, 222u8, 170u8, 247u8, 101u8, 24u8, 82u8,
-                            166u8, 34u8, 73u8, 101u8, 183u8, 224u8, 19u8,
-                            118u8, 195u8, 169u8, 239u8, 218u8, 130u8, 53u8,
-                            201u8, 2u8, 190u8, 226u8, 141u8, 213u8, 46u8, 45u8,
-                            254u8, 139u8, 18u8,
-                        ]
-                    {
-                        let entry = UnsignedProposalQueue(_0, _1);
-                        self.client.storage().fetch(&entry, block_hash).await
-                    } else {
-                        Err(::subxt::MetadataError::IncompatibleMetadata.into())
-                    }
-                }
-                #[doc = " All unsigned proposals."]
-                pub async fn unsigned_proposal_queue_iter(
-                    &self,
-                    block_hash: ::core::option::Option<T::Hash>,
-                ) -> ::core::result::Result<
-                    ::subxt::KeyIter<'a, T, UnsignedProposalQueue<'a>>,
-                    ::subxt::BasicError,
-                > {
-                    if self
-                        .client
-                        .metadata()
-                        .storage_hash::<UnsignedProposalQueue>()?
-                        == [
-                            133u8, 222u8, 170u8, 247u8, 101u8, 24u8, 82u8,
-                            166u8, 34u8, 73u8, 101u8, 183u8, 224u8, 19u8,
-                            118u8, 195u8, 169u8, 239u8, 218u8, 130u8, 53u8,
-                            201u8, 2u8, 190u8, 226u8, 141u8, 213u8, 46u8, 45u8,
-                            254u8, 139u8, 18u8,
-                        ]
-                    {
-                        self.client.storage().iter(block_hash).await
-                    } else {
-                        Err(::subxt::MetadataError::IncompatibleMetadata.into())
-                    }
-                }
-                #[doc = " All signed proposals."]                pub async fn signed_proposals (& self , _0 : & runtime_types :: webb_proposals :: header :: TypedChainId , _1 : & runtime_types :: dkg_runtime_primitives :: proposal :: DKGPayloadKey , block_hash : :: core :: option :: Option < T :: Hash > ,) -> :: core :: result :: Result < :: core :: option :: Option < runtime_types :: dkg_runtime_primitives :: proposal :: Proposal > , :: subxt :: BasicError >{
-                    if self
-                        .client
-                        .metadata()
-                        .storage_hash::<SignedProposals>()?
-                        == [
-                            120u8, 64u8, 147u8, 235u8, 194u8, 48u8, 151u8,
-                            219u8, 73u8, 93u8, 162u8, 49u8, 133u8, 239u8,
-                            164u8, 252u8, 134u8, 2u8, 85u8, 49u8, 254u8, 107u8,
-                            239u8, 222u8, 82u8, 94u8, 52u8, 135u8, 162u8,
-                            104u8, 40u8, 241u8,
-                        ]
-                    {
-                        let entry = SignedProposals(_0, _1);
-                        self.client.storage().fetch(&entry, block_hash).await
-                    } else {
-                        Err(::subxt::MetadataError::IncompatibleMetadata.into())
-                    }
-                }
-                #[doc = " All signed proposals."]
-                pub async fn signed_proposals_iter(
-                    &self,
-                    block_hash: ::core::option::Option<T::Hash>,
-                ) -> ::core::result::Result<
-                    ::subxt::KeyIter<'a, T, SignedProposals<'a>>,
-                    ::subxt::BasicError,
-                > {
-                    if self
-                        .client
-                        .metadata()
-                        .storage_hash::<SignedProposals>()?
-                        == [
-                            120u8, 64u8, 147u8, 235u8, 194u8, 48u8, 151u8,
-                            219u8, 73u8, 93u8, 162u8, 49u8, 133u8, 239u8,
-                            164u8, 252u8, 134u8, 2u8, 85u8, 49u8, 254u8, 107u8,
-                            239u8, 222u8, 82u8, 94u8, 52u8, 135u8, 162u8,
-                            104u8, 40u8, 241u8,
-                        ]
-                    {
-                        self.client.storage().iter(block_hash).await
-                    } else {
-                        Err(::subxt::MetadataError::IncompatibleMetadata.into())
-                    }
-                }
-            }
-        }
-        pub mod constants {
-            use super::runtime_types;
-            pub struct ConstantsApi<'a, T: ::subxt::Config> {
-                client: &'a ::subxt::Client<T>,
-            }
-            impl<'a, T: ::subxt::Config> ConstantsApi<'a, T> {
-                pub fn new(client: &'a ::subxt::Client<T>) -> Self {
-                    Self { client }
-                }
-                #[doc = " Max number of signed proposal submissions per batch;"]
-                pub fn max_submissions_per_batch(
-                    &self,
-                ) -> ::core::result::Result<
-                    ::core::primitive::u16,
-                    ::subxt::BasicError,
-                > {
-                    if self.client.metadata().constant_hash(
-                        "DKGProposalHandler",
-                        "MaxSubmissionsPerBatch",
-                    )? == [
-                        137u8, 131u8, 2u8, 168u8, 44u8, 84u8, 1u8, 54u8, 42u8,
-                        54u8, 128u8, 211u8, 84u8, 154u8, 199u8, 9u8, 14u8,
-                        115u8, 117u8, 141u8, 225u8, 236u8, 81u8, 61u8, 24u8,
-                        249u8, 54u8, 106u8, 14u8, 49u8, 255u8, 227u8,
-                    ] {
-                        let pallet = self
-                            .client
-                            .metadata()
-                            .pallet("DKGProposalHandler")?;
-                        let constant =
-                            pallet.constant("MaxSubmissionsPerBatch")?;
-                        let value = ::subxt::codec::Decode::decode(
-                            &mut &constant.value[..],
-                        )?;
-                        Ok(value)
-                    } else {
-                        Err(::subxt::MetadataError::IncompatibleMetadata.into())
-                    }
-                }
-            }
-        }
-    }
     pub mod runtime_types {
         use super::runtime_types;
         pub mod dkg_runtime_primitives {
@@ -17367,6 +17337,15 @@ pub mod api {
                     pub nonce: runtime_types::webb_proposals::nonce::Nonce,
                     pub signature: ::std::vec::Vec<::core::primitive::u8>,
                 }
+                #[derive(
+                    :: subxt :: codec :: Decode,
+                    :: subxt :: codec :: Encode,
+                    Clone,
+                    Debug,
+                    Eq,
+                    PartialEq,
+                )]
+                pub struct StoredUnsignedProposal < _0 > { pub proposal : runtime_types :: dkg_runtime_primitives :: proposal :: Proposal , pub timestamp : _0 , }
             }
             #[derive(
                 :: subxt :: codec :: Decode,
@@ -17437,7 +17416,7 @@ pub mod api {
                 PartialEq,
             )]
             pub enum Call {
-                # [codec (index = 0)] System (runtime_types :: frame_system :: pallet :: Call ,) , # [codec (index = 1)] Indices (runtime_types :: pallet_indices :: pallet :: Call ,) , # [codec (index = 3)] Timestamp (runtime_types :: pallet_timestamp :: pallet :: Call ,) , # [codec (index = 5)] Grandpa (runtime_types :: pallet_grandpa :: pallet :: Call ,) , # [codec (index = 6)] Balances (runtime_types :: pallet_balances :: pallet :: Call ,) , # [codec (index = 8)] Sudo (runtime_types :: pallet_sudo :: pallet :: Call ,) , # [codec (index = 9)] ElectionProviderMultiPhase (runtime_types :: pallet_election_provider_multi_phase :: pallet :: Call ,) , # [codec (index = 10)] BagsList (runtime_types :: pallet_bags_list :: pallet :: Call ,) , # [codec (index = 11)] NominationPools (runtime_types :: pallet_nomination_pools :: pallet :: Call ,) , # [codec (index = 12)] Staking (runtime_types :: pallet_staking :: pallet :: pallet :: Call ,) , # [codec (index = 13)] Session (runtime_types :: pallet_session :: pallet :: Call ,) , # [codec (index = 15)] DKG (runtime_types :: pallet_dkg_metadata :: pallet :: Call ,) , # [codec (index = 16)] DKGProposals (runtime_types :: pallet_dkg_proposals :: pallet :: Call ,) , # [codec (index = 17)] DKGProposalHandler (runtime_types :: pallet_dkg_proposal_handler :: pallet :: Call ,) , }
+                # [codec (index = 0)] System (runtime_types :: frame_system :: pallet :: Call ,) , # [codec (index = 1)] Indices (runtime_types :: pallet_indices :: pallet :: Call ,) , # [codec (index = 3)] Timestamp (runtime_types :: pallet_timestamp :: pallet :: Call ,) , # [codec (index = 5)] Grandpa (runtime_types :: pallet_grandpa :: pallet :: Call ,) , # [codec (index = 6)] Balances (runtime_types :: pallet_balances :: pallet :: Call ,) , # [codec (index = 7)] DKG (runtime_types :: pallet_dkg_metadata :: pallet :: Call ,) , # [codec (index = 8)] DKGProposals (runtime_types :: pallet_dkg_proposals :: pallet :: Call ,) , # [codec (index = 9)] DKGProposalHandler (runtime_types :: pallet_dkg_proposal_handler :: pallet :: Call ,) , # [codec (index = 11)] Sudo (runtime_types :: pallet_sudo :: pallet :: Call ,) , # [codec (index = 12)] ElectionProviderMultiPhase (runtime_types :: pallet_election_provider_multi_phase :: pallet :: Call ,) , # [codec (index = 13)] BagsList (runtime_types :: pallet_bags_list :: pallet :: Call ,) , # [codec (index = 14)] NominationPools (runtime_types :: pallet_nomination_pools :: pallet :: Call ,) , # [codec (index = 15)] Staking (runtime_types :: pallet_staking :: pallet :: pallet :: Call ,) , # [codec (index = 16)] Session (runtime_types :: pallet_session :: pallet :: Call ,) , }
             #[derive(
                 :: subxt :: codec :: Decode,
                 :: subxt :: codec :: Encode,
@@ -17447,7 +17426,7 @@ pub mod api {
                 PartialEq,
             )]
             pub enum Event {
-                # [codec (index = 0)] System (runtime_types :: frame_system :: pallet :: Event ,) , # [codec (index = 1)] Indices (runtime_types :: pallet_indices :: pallet :: Event ,) , # [codec (index = 5)] Grandpa (runtime_types :: pallet_grandpa :: pallet :: Event ,) , # [codec (index = 6)] Balances (runtime_types :: pallet_balances :: pallet :: Event ,) , # [codec (index = 8)] Sudo (runtime_types :: pallet_sudo :: pallet :: Event ,) , # [codec (index = 9)] ElectionProviderMultiPhase (runtime_types :: pallet_election_provider_multi_phase :: pallet :: Event ,) , # [codec (index = 10)] BagsList (runtime_types :: pallet_bags_list :: pallet :: Event ,) , # [codec (index = 11)] NominationPools (runtime_types :: pallet_nomination_pools :: pallet :: Event ,) , # [codec (index = 12)] Staking (runtime_types :: pallet_staking :: pallet :: pallet :: Event ,) , # [codec (index = 13)] Session (runtime_types :: pallet_session :: pallet :: Event ,) , # [codec (index = 15)] DKG (runtime_types :: pallet_dkg_metadata :: pallet :: Event ,) , # [codec (index = 16)] DKGProposals (runtime_types :: pallet_dkg_proposals :: pallet :: Event ,) , # [codec (index = 17)] DKGProposalHandler (runtime_types :: pallet_dkg_proposal_handler :: pallet :: Event ,) , }
+                # [codec (index = 0)] System (runtime_types :: frame_system :: pallet :: Event ,) , # [codec (index = 1)] Indices (runtime_types :: pallet_indices :: pallet :: Event ,) , # [codec (index = 5)] Grandpa (runtime_types :: pallet_grandpa :: pallet :: Event ,) , # [codec (index = 6)] Balances (runtime_types :: pallet_balances :: pallet :: Event ,) , # [codec (index = 7)] DKG (runtime_types :: pallet_dkg_metadata :: pallet :: Event ,) , # [codec (index = 8)] DKGProposals (runtime_types :: pallet_dkg_proposals :: pallet :: Event ,) , # [codec (index = 9)] DKGProposalHandler (runtime_types :: pallet_dkg_proposal_handler :: pallet :: Event ,) , # [codec (index = 11)] Sudo (runtime_types :: pallet_sudo :: pallet :: Event ,) , # [codec (index = 12)] ElectionProviderMultiPhase (runtime_types :: pallet_election_provider_multi_phase :: pallet :: Event ,) , # [codec (index = 13)] BagsList (runtime_types :: pallet_bags_list :: pallet :: Event ,) , # [codec (index = 14)] NominationPools (runtime_types :: pallet_nomination_pools :: pallet :: Event ,) , # [codec (index = 15)] Staking (runtime_types :: pallet_staking :: pallet :: pallet :: Event ,) , # [codec (index = 16)] Session (runtime_types :: pallet_session :: pallet :: Event ,) , }
             #[derive(
                 :: subxt :: codec :: Decode,
                 :: subxt :: codec :: Encode,
@@ -17769,21 +17748,6 @@ pub mod api {
                 pub struct RuntimeDbWeight {
                     pub read: ::core::primitive::u64,
                     pub write: ::core::primitive::u64,
-                }
-                #[derive(
-                    :: subxt :: codec :: Decode,
-                    :: subxt :: codec :: Encode,
-                    Clone,
-                    Debug,
-                    Eq,
-                    PartialEq,
-                )]
-                pub struct WeightToFeeCoefficient<_0> {
-                    pub coeff_integer: _0,
-                    pub coeff_frac:
-                        runtime_types::sp_arithmetic::per_things::Perbill,
-                    pub negative: ::core::primitive::bool,
-                    pub degree: ::core::primitive::u8,
                 }
             }
             #[derive(
@@ -18209,6 +18173,7 @@ pub mod api {
                         ::subxt::sp_core::crypto::AccountId32,
                     >,
                     pub bag_upper: ::core::primitive::u64,
+                    pub score: ::core::primitive::u64,
                 }
             }
             pub mod pallet {
@@ -18229,8 +18194,10 @@ pub mod api {
                     #[doc = ""]
                     #[doc = "Anyone can call this function about any potentially dislocated account."]
                     #[doc = ""]
-                    #[doc = "Will never return an error; if `dislocated` does not exist or doesn't need a rebag, then"]
-                    #[doc = "it is a noop and fees are still collected from `origin`."]
+                    #[doc = "Will always update the stored score of `dislocated` to the correct score, based on"]
+                    #[doc = "`ScoreProvider`."]
+                    #[doc = ""]
+                    #[doc = "If `dislocated` does not exists, it returns an error."]
                     rebag {
                         dislocated: ::subxt::sp_core::crypto::AccountId32,
                     },
@@ -18275,6 +18242,12 @@ pub mod api {
                         who: ::subxt::sp_core::crypto::AccountId32,
                         from: ::core::primitive::u64,
                         to: ::core::primitive::u64,
+                    },
+                    #[codec(index = 1)]
+                    #[doc = "Updated the score of some account to the given amount."]
+                    ScoreUpdated {
+                        who: ::subxt::sp_core::crypto::AccountId32,
+                        new_score: ::core::primitive::u64,
                     },
                 }
             }
@@ -18688,7 +18661,7 @@ pub mod api {
                     PartialEq,
                 )]
                 pub enum Event {
-                    # [codec (index = 0)] # [doc = "Event Emitted when we encounter a Proposal with invalid Signature."] InvalidProposalSignature { kind : runtime_types :: dkg_runtime_primitives :: proposal :: ProposalKind , data : :: std :: vec :: Vec < :: core :: primitive :: u8 > , invalid_signature : :: std :: vec :: Vec < :: core :: primitive :: u8 > , } , # [codec (index = 1)] # [doc = "Event When a Proposal Gets Signed by DKG."] ProposalSigned { key : runtime_types :: dkg_runtime_primitives :: proposal :: DKGPayloadKey , target_chain : runtime_types :: webb_proposals :: header :: TypedChainId , data : :: std :: vec :: Vec < :: core :: primitive :: u8 > , signature : :: std :: vec :: Vec < :: core :: primitive :: u8 > , } , }
+                    # [codec (index = 0)] # [doc = "Event Emitted when we encounter a Proposal with invalid Signature."] InvalidProposalSignature { kind : runtime_types :: dkg_runtime_primitives :: proposal :: ProposalKind , data : :: std :: vec :: Vec < :: core :: primitive :: u8 > , invalid_signature : :: std :: vec :: Vec < :: core :: primitive :: u8 > , expected_public_key : :: core :: option :: Option < :: std :: vec :: Vec < :: core :: primitive :: u8 > > , actual_public_key : :: core :: option :: Option < :: std :: vec :: Vec < :: core :: primitive :: u8 > > , } , # [codec (index = 1)] # [doc = "Event When a Proposal Gets Signed by DKG."] ProposalSigned { key : runtime_types :: dkg_runtime_primitives :: proposal :: DKGPayloadKey , target_chain : runtime_types :: webb_proposals :: header :: TypedChainId , data : :: std :: vec :: Vec < :: core :: primitive :: u8 > , signature : :: std :: vec :: Vec < :: core :: primitive :: u8 > , } , }
             }
         }
         pub mod pallet_dkg_proposals {
@@ -19597,7 +19570,7 @@ pub mod api {
                         metadata: ::std::vec::Vec<::core::primitive::u8>,
                     },
                     #[codec(index = 10)]
-                    #[doc = "Update configurations for the nomination pools. The origin must for this call must be"]
+                    #[doc = "Update configurations for the nomination pools. The origin for this call must be"]
                     #[doc = "Root."]
                     #[doc = ""]
                     #[doc = "# Arguments"]
@@ -19639,15 +19612,18 @@ pub mod api {
                     #[doc = "most pool members and they should be informed of changes to pool roles."]
                     update_roles {
                         pool_id: ::core::primitive::u32,
-                        root: ::core::option::Option<
-                            ::subxt::sp_core::crypto::AccountId32,
-                        >,
-                        nominator: ::core::option::Option<
-                            ::subxt::sp_core::crypto::AccountId32,
-                        >,
-                        state_toggler: ::core::option::Option<
-                            ::subxt::sp_core::crypto::AccountId32,
-                        >,
+                        new_root:
+                            runtime_types::pallet_nomination_pools::ConfigOp<
+                                ::subxt::sp_core::crypto::AccountId32,
+                            >,
+                        new_nominator:
+                            runtime_types::pallet_nomination_pools::ConfigOp<
+                                ::subxt::sp_core::crypto::AccountId32,
+                            >,
+                        new_state_toggler:
+                            runtime_types::pallet_nomination_pools::ConfigOp<
+                                ::subxt::sp_core::crypto::AccountId32,
+                            >,
                     },
                 }
                 #[derive(
@@ -19803,11 +19779,18 @@ pub mod api {
                         member: ::subxt::sp_core::crypto::AccountId32,
                     },
                     #[codec(index = 8)]
-                    #[doc = "The roles of a pool have been updated to the given new roles."]
+                    #[doc = "The roles of a pool have been updated to the given new roles. Note that the depositor"]
+                    #[doc = "can never change."]
                     RolesUpdated {
-                        root: ::subxt::sp_core::crypto::AccountId32,
-                        state_toggler: ::subxt::sp_core::crypto::AccountId32,
-                        nominator: ::subxt::sp_core::crypto::AccountId32,
+                        root: ::core::option::Option<
+                            ::subxt::sp_core::crypto::AccountId32,
+                        >,
+                        state_toggler: ::core::option::Option<
+                            ::subxt::sp_core::crypto::AccountId32,
+                        >,
+                        nominator: ::core::option::Option<
+                            ::subxt::sp_core::crypto::AccountId32,
+                        >,
                     },
                 }
             }
@@ -19876,9 +19859,9 @@ pub mod api {
             )]
             pub struct PoolRoles<_0> {
                 pub depositor: _0,
-                pub root: _0,
-                pub nominator: _0,
-                pub state_toggler: _0,
+                pub root: ::core::option::Option<_0>,
+                pub nominator: ::core::option::Option<_0>,
+                pub state_toggler: ::core::option::Option<_0>,
             }
             #[derive(
                 :: subxt :: codec :: Decode,
@@ -21747,10 +21730,10 @@ pub mod api {
         ) -> Result<(), ::subxt::MetadataError> {
             if self.client.metadata().metadata_hash(&PALLETS)
                 != [
-                    95u8, 64u8, 63u8, 3u8, 221u8, 187u8, 49u8, 185u8, 188u8,
-                    80u8, 132u8, 98u8, 181u8, 193u8, 113u8, 1u8, 177u8, 82u8,
-                    43u8, 148u8, 89u8, 157u8, 65u8, 30u8, 190u8, 134u8, 253u8,
-                    151u8, 66u8, 75u8, 36u8, 95u8,
+                    123u8, 233u8, 217u8, 134u8, 88u8, 84u8, 27u8, 77u8, 151u8,
+                    97u8, 43u8, 211u8, 35u8, 144u8, 34u8, 200u8, 24u8, 50u8,
+                    58u8, 6u8, 167u8, 39u8, 127u8, 97u8, 248u8, 81u8, 115u8,
+                    104u8, 82u8, 125u8, 171u8, 15u8,
                 ]
             {
                 Err(::subxt::MetadataError::IncompatibleMetadata)
@@ -21837,6 +21820,19 @@ pub mod api {
         pub fn balances(&self) -> balances::constants::ConstantsApi<'a, T> {
             balances::constants::ConstantsApi::new(self.client)
         }
+        pub fn dkg(&self) -> dkg::constants::ConstantsApi<'a, T> {
+            dkg::constants::ConstantsApi::new(self.client)
+        }
+        pub fn dkg_proposals(
+            &self,
+        ) -> dkg_proposals::constants::ConstantsApi<'a, T> {
+            dkg_proposals::constants::ConstantsApi::new(self.client)
+        }
+        pub fn dkg_proposal_handler(
+            &self,
+        ) -> dkg_proposal_handler::constants::ConstantsApi<'a, T> {
+            dkg_proposal_handler::constants::ConstantsApi::new(self.client)
+        }
         pub fn transaction_payment(
             &self,
         ) -> transaction_payment::constants::ConstantsApi<'a, T> {
@@ -21860,19 +21856,6 @@ pub mod api {
         }
         pub fn staking(&self) -> staking::constants::ConstantsApi<'a, T> {
             staking::constants::ConstantsApi::new(self.client)
-        }
-        pub fn dkg(&self) -> dkg::constants::ConstantsApi<'a, T> {
-            dkg::constants::ConstantsApi::new(self.client)
-        }
-        pub fn dkg_proposals(
-            &self,
-        ) -> dkg_proposals::constants::ConstantsApi<'a, T> {
-            dkg_proposals::constants::ConstantsApi::new(self.client)
-        }
-        pub fn dkg_proposal_handler(
-            &self,
-        ) -> dkg_proposal_handler::constants::ConstantsApi<'a, T> {
-            dkg_proposal_handler::constants::ConstantsApi::new(self.client)
         }
     }
     pub struct StorageApi<'a, T: ::subxt::Config> {
@@ -21905,6 +21888,19 @@ pub mod api {
         pub fn balances(&self) -> balances::storage::StorageApi<'a, T> {
             balances::storage::StorageApi::new(self.client)
         }
+        pub fn dkg(&self) -> dkg::storage::StorageApi<'a, T> {
+            dkg::storage::StorageApi::new(self.client)
+        }
+        pub fn dkg_proposals(
+            &self,
+        ) -> dkg_proposals::storage::StorageApi<'a, T> {
+            dkg_proposals::storage::StorageApi::new(self.client)
+        }
+        pub fn dkg_proposal_handler(
+            &self,
+        ) -> dkg_proposal_handler::storage::StorageApi<'a, T> {
+            dkg_proposal_handler::storage::StorageApi::new(self.client)
+        }
         pub fn transaction_payment(
             &self,
         ) -> transaction_payment::storage::StorageApi<'a, T> {
@@ -21935,19 +21931,6 @@ pub mod api {
         pub fn historical(&self) -> historical::storage::StorageApi<'a, T> {
             historical::storage::StorageApi::new(self.client)
         }
-        pub fn dkg(&self) -> dkg::storage::StorageApi<'a, T> {
-            dkg::storage::StorageApi::new(self.client)
-        }
-        pub fn dkg_proposals(
-            &self,
-        ) -> dkg_proposals::storage::StorageApi<'a, T> {
-            dkg_proposals::storage::StorageApi::new(self.client)
-        }
-        pub fn dkg_proposal_handler(
-            &self,
-        ) -> dkg_proposal_handler::storage::StorageApi<'a, T> {
-            dkg_proposal_handler::storage::StorageApi::new(self.client)
-        }
     }
     pub struct TransactionApi<'a, T: ::subxt::Config, X> {
         client: &'a ::subxt::Client<T>,
@@ -21973,6 +21956,19 @@ pub mod api {
         pub fn balances(&self) -> balances::calls::TransactionApi<'a, T, X> {
             balances::calls::TransactionApi::new(self.client)
         }
+        pub fn dkg(&self) -> dkg::calls::TransactionApi<'a, T, X> {
+            dkg::calls::TransactionApi::new(self.client)
+        }
+        pub fn dkg_proposals(
+            &self,
+        ) -> dkg_proposals::calls::TransactionApi<'a, T, X> {
+            dkg_proposals::calls::TransactionApi::new(self.client)
+        }
+        pub fn dkg_proposal_handler(
+            &self,
+        ) -> dkg_proposal_handler::calls::TransactionApi<'a, T, X> {
+            dkg_proposal_handler::calls::TransactionApi::new(self.client)
+        }
         pub fn sudo(&self) -> sudo::calls::TransactionApi<'a, T, X> {
             sudo::calls::TransactionApi::new(self.client)
         }
@@ -21997,19 +21993,6 @@ pub mod api {
         }
         pub fn session(&self) -> session::calls::TransactionApi<'a, T, X> {
             session::calls::TransactionApi::new(self.client)
-        }
-        pub fn dkg(&self) -> dkg::calls::TransactionApi<'a, T, X> {
-            dkg::calls::TransactionApi::new(self.client)
-        }
-        pub fn dkg_proposals(
-            &self,
-        ) -> dkg_proposals::calls::TransactionApi<'a, T, X> {
-            dkg_proposals::calls::TransactionApi::new(self.client)
-        }
-        pub fn dkg_proposal_handler(
-            &self,
-        ) -> dkg_proposal_handler::calls::TransactionApi<'a, T, X> {
-            dkg_proposal_handler::calls::TransactionApi::new(self.client)
         }
     }
 }

@@ -67,6 +67,8 @@ pub mod api {
         Indices(indices::Event),
         #[codec(index = 6)]
         Balances(balances::Event),
+        #[codec(index = 7)]
+        TransactionPayment(transaction_payment::Event),
         #[codec(index = 9)]
         ElectionProviderMultiPhase(election_provider_multi_phase::Event),
         #[codec(index = 10)]
@@ -1264,11 +1266,11 @@ pub mod api {
                 > {
                     if self.client.metadata().storage_hash::<Events>()?
                         == [
-                            54u8, 75u8, 142u8, 97u8, 55u8, 48u8, 223u8, 205u8,
-                            233u8, 117u8, 130u8, 184u8, 3u8, 247u8, 157u8,
-                            94u8, 142u8, 75u8, 76u8, 45u8, 0u8, 21u8, 252u8,
-                            250u8, 224u8, 222u8, 205u8, 102u8, 139u8, 210u8,
-                            25u8, 107u8,
+                            162u8, 247u8, 183u8, 20u8, 191u8, 171u8, 71u8,
+                            223u8, 88u8, 249u8, 15u8, 153u8, 206u8, 154u8,
+                            60u8, 113u8, 145u8, 123u8, 10u8, 111u8, 117u8,
+                            79u8, 149u8, 33u8, 161u8, 27u8, 179u8, 40u8, 233u8,
+                            165u8, 153u8, 216u8,
                         ]
                     {
                         let entry = Events;
@@ -1512,11 +1514,11 @@ pub mod api {
                         .metadata()
                         .constant_hash("System", "BlockWeights")?
                         == [
-                            129u8, 27u8, 39u8, 144u8, 79u8, 246u8, 6u8, 108u8,
-                            160u8, 23u8, 121u8, 32u8, 114u8, 113u8, 216u8,
-                            219u8, 213u8, 100u8, 124u8, 151u8, 58u8, 63u8,
-                            104u8, 153u8, 34u8, 66u8, 187u8, 214u8, 73u8,
-                            252u8, 89u8, 253u8,
+                            227u8, 20u8, 126u8, 88u8, 139u8, 155u8, 158u8,
+                            72u8, 139u8, 121u8, 166u8, 37u8, 42u8, 199u8, 62u8,
+                            105u8, 39u8, 36u8, 27u8, 43u8, 117u8, 234u8, 116u8,
+                            225u8, 82u8, 69u8, 38u8, 242u8, 16u8, 91u8, 231u8,
+                            52u8,
                         ]
                     {
                         let pallet = self.client.metadata().pallet("System")?;
@@ -1690,7 +1692,10 @@ pub mod api {
             impl ::subxt::StorageEntry for RandomMaterial {
                 const PALLET: &'static str = "RandomnessCollectiveFlip";
                 const STORAGE: &'static str = "RandomMaterial";
-                type Value = runtime_types :: frame_support :: storage :: bounded_vec :: BoundedVec < :: subxt :: sp_core :: H256 > ;
+                type Value =
+                    runtime_types::sp_runtime::bounded::bounded_vec::BoundedVec<
+                        ::subxt::sp_core::H256,
+                    >;
                 fn key(&self) -> ::subxt::StorageEntryKey {
                     ::subxt::StorageEntryKey::Plain
                 }
@@ -1704,7 +1709,16 @@ pub mod api {
                 }
                 #[doc = " Series of block headers from the last 81 blocks that acts as random seed material. This"]
                 #[doc = " is arranged as a ring buffer with `block_number % 81` being the index into the `Vec` of"]
-                #[doc = " the oldest hash."]                pub async fn random_material (& self , block_hash : :: core :: option :: Option < T :: Hash > ,) -> :: core :: result :: Result < runtime_types :: frame_support :: storage :: bounded_vec :: BoundedVec < :: subxt :: sp_core :: H256 > , :: subxt :: BasicError >{
+                #[doc = " the oldest hash."]
+                pub async fn random_material(
+                    &self,
+                    block_hash: ::core::option::Option<T::Hash>,
+                ) -> ::core::result::Result<
+                    runtime_types::sp_runtime::bounded::bounded_vec::BoundedVec<
+                        ::subxt::sp_core::H256,
+                    >,
+                    ::subxt::BasicError,
+                > {
                     if self
                         .client
                         .metadata()
@@ -2172,7 +2186,7 @@ pub mod api {
             impl ::subxt::StorageEntry for Authorities {
                 const PALLET: &'static str = "Babe";
                 const STORAGE: &'static str = "Authorities";
-                type Value = runtime_types :: frame_support :: storage :: weak_bounded_vec :: WeakBoundedVec < (runtime_types :: sp_consensus_babe :: app :: Public , :: core :: primitive :: u64 ,) > ;
+                type Value = runtime_types :: sp_runtime :: bounded :: weak_bounded_vec :: WeakBoundedVec < (runtime_types :: sp_consensus_babe :: app :: Public , :: core :: primitive :: u64 ,) > ;
                 fn key(&self) -> ::subxt::StorageEntryKey {
                     ::subxt::StorageEntryKey::Plain
                 }
@@ -2226,7 +2240,7 @@ pub mod api {
             impl ::subxt::StorageEntry for NextAuthorities {
                 const PALLET: &'static str = "Babe";
                 const STORAGE: &'static str = "NextAuthorities";
-                type Value = runtime_types :: frame_support :: storage :: weak_bounded_vec :: WeakBoundedVec < (runtime_types :: sp_consensus_babe :: app :: Public , :: core :: primitive :: u64 ,) > ;
+                type Value = runtime_types :: sp_runtime :: bounded :: weak_bounded_vec :: WeakBoundedVec < (runtime_types :: sp_consensus_babe :: app :: Public , :: core :: primitive :: u64 ,) > ;
                 fn key(&self) -> ::subxt::StorageEntryKey {
                     ::subxt::StorageEntryKey::Plain
                 }
@@ -2244,7 +2258,10 @@ pub mod api {
             impl ::subxt::StorageEntry for UnderConstruction<'_> {
                 const PALLET: &'static str = "Babe";
                 const STORAGE: &'static str = "UnderConstruction";
-                type Value = runtime_types :: frame_support :: storage :: bounded_vec :: BoundedVec < [:: core :: primitive :: u8 ; 32usize] > ;
+                type Value =
+                    runtime_types::sp_runtime::bounded::bounded_vec::BoundedVec<
+                        [::core::primitive::u8; 32usize],
+                    >;
                 fn key(&self) -> ::subxt::StorageEntryKey {
                     ::subxt::StorageEntryKey::Map(vec![
                         ::subxt::StorageMapKey::new(
@@ -2346,7 +2363,7 @@ pub mod api {
                         Err(::subxt::MetadataError::IncompatibleMetadata.into())
                     }
                 }
-                #[doc = " Current epoch authorities."]                pub async fn authorities (& self , block_hash : :: core :: option :: Option < T :: Hash > ,) -> :: core :: result :: Result < runtime_types :: frame_support :: storage :: weak_bounded_vec :: WeakBoundedVec < (runtime_types :: sp_consensus_babe :: app :: Public , :: core :: primitive :: u64 ,) > , :: subxt :: BasicError >{
+                #[doc = " Current epoch authorities."]                pub async fn authorities (& self , block_hash : :: core :: option :: Option < T :: Hash > ,) -> :: core :: result :: Result < runtime_types :: sp_runtime :: bounded :: weak_bounded_vec :: WeakBoundedVec < (runtime_types :: sp_consensus_babe :: app :: Public , :: core :: primitive :: u64 ,) > , :: subxt :: BasicError >{
                     if self.client.metadata().storage_hash::<Authorities>()?
                         == [
                             39u8, 102u8, 251u8, 125u8, 230u8, 247u8, 174u8,
@@ -2501,7 +2518,7 @@ pub mod api {
                         Err(::subxt::MetadataError::IncompatibleMetadata.into())
                     }
                 }
-                #[doc = " Next epoch authorities."]                pub async fn next_authorities (& self , block_hash : :: core :: option :: Option < T :: Hash > ,) -> :: core :: result :: Result < runtime_types :: frame_support :: storage :: weak_bounded_vec :: WeakBoundedVec < (runtime_types :: sp_consensus_babe :: app :: Public , :: core :: primitive :: u64 ,) > , :: subxt :: BasicError >{
+                #[doc = " Next epoch authorities."]                pub async fn next_authorities (& self , block_hash : :: core :: option :: Option < T :: Hash > ,) -> :: core :: result :: Result < runtime_types :: sp_runtime :: bounded :: weak_bounded_vec :: WeakBoundedVec < (runtime_types :: sp_consensus_babe :: app :: Public , :: core :: primitive :: u64 ,) > , :: subxt :: BasicError >{
                     if self
                         .client
                         .metadata()
@@ -2557,7 +2574,17 @@ pub mod api {
                         Err(::subxt::MetadataError::IncompatibleMetadata.into())
                     }
                 }
-                #[doc = " TWOX-NOTE: `SegmentIndex` is an increasing integer, so this is okay."]                pub async fn under_construction (& self , _0 : & :: core :: primitive :: u32 , block_hash : :: core :: option :: Option < T :: Hash > ,) -> :: core :: result :: Result < runtime_types :: frame_support :: storage :: bounded_vec :: BoundedVec < [:: core :: primitive :: u8 ; 32usize] > , :: subxt :: BasicError >{
+                #[doc = " TWOX-NOTE: `SegmentIndex` is an increasing integer, so this is okay."]
+                pub async fn under_construction(
+                    &self,
+                    _0: &::core::primitive::u32,
+                    block_hash: ::core::option::Option<T::Hash>,
+                ) -> ::core::result::Result<
+                    runtime_types::sp_runtime::bounded::bounded_vec::BoundedVec<
+                        [::core::primitive::u8; 32usize],
+                    >,
+                    ::subxt::BasicError,
+                > {
                     if self
                         .client
                         .metadata()
@@ -2945,13 +2972,14 @@ pub mod api {
             impl ::subxt::StorageEntry for Uncles {
                 const PALLET: &'static str = "Authorship";
                 const STORAGE: &'static str = "Uncles";
-                type Value = ::std::vec::Vec<
-                    runtime_types::pallet_authorship::UncleEntryItem<
-                        ::core::primitive::u64,
-                        ::subxt::sp_core::H256,
-                        ::subxt::sp_core::crypto::AccountId32,
-                    >,
-                >;
+                type Value =
+                    runtime_types::sp_runtime::bounded::bounded_vec::BoundedVec<
+                        runtime_types::pallet_authorship::UncleEntryItem<
+                            ::core::primitive::u64,
+                            ::subxt::sp_core::H256,
+                            ::subxt::sp_core::crypto::AccountId32,
+                        >,
+                    >;
                 fn key(&self) -> ::subxt::StorageEntryKey {
                     ::subxt::StorageEntryKey::Plain
                 }
@@ -2986,7 +3014,7 @@ pub mod api {
                     &self,
                     block_hash: ::core::option::Option<T::Hash>,
                 ) -> ::core::result::Result<
-                    ::std::vec::Vec<
+                    runtime_types::sp_runtime::bounded::bounded_vec::BoundedVec<
                         runtime_types::pallet_authorship::UncleEntryItem<
                             ::core::primitive::u64,
                             ::subxt::sp_core::H256,
@@ -2997,11 +3025,11 @@ pub mod api {
                 > {
                     if self.client.metadata().storage_hash::<Uncles>()?
                         == [
-                            66u8, 245u8, 243u8, 153u8, 86u8, 0u8, 224u8, 67u8,
-                            126u8, 91u8, 180u8, 39u8, 67u8, 170u8, 119u8,
-                            119u8, 203u8, 162u8, 46u8, 194u8, 39u8, 195u8,
-                            181u8, 163u8, 147u8, 15u8, 165u8, 238u8, 114u8,
-                            132u8, 61u8, 38u8,
+                            45u8, 229u8, 67u8, 14u8, 64u8, 106u8, 151u8, 198u8,
+                            187u8, 225u8, 111u8, 36u8, 196u8, 61u8, 206u8,
+                            12u8, 228u8, 122u8, 19u8, 8u8, 0u8, 112u8, 101u8,
+                            112u8, 132u8, 143u8, 70u8, 187u8, 157u8, 161u8,
+                            240u8, 135u8,
                         ]
                     {
                         let entry = Uncles;
@@ -4302,7 +4330,7 @@ pub mod api {
             impl ::subxt::StorageEntry for Locks<'_> {
                 const PALLET: &'static str = "Balances";
                 const STORAGE: &'static str = "Locks";
-                type Value = runtime_types :: frame_support :: storage :: weak_bounded_vec :: WeakBoundedVec < runtime_types :: pallet_balances :: BalanceLock < :: core :: primitive :: u128 > > ;
+                type Value = runtime_types :: sp_runtime :: bounded :: weak_bounded_vec :: WeakBoundedVec < runtime_types :: pallet_balances :: BalanceLock < :: core :: primitive :: u128 > > ;
                 fn key(&self) -> ::subxt::StorageEntryKey {
                     ::subxt::StorageEntryKey::Map(vec![
                         ::subxt::StorageMapKey::new(
@@ -4318,7 +4346,13 @@ pub mod api {
             impl ::subxt::StorageEntry for Reserves<'_> {
                 const PALLET: &'static str = "Balances";
                 const STORAGE: &'static str = "Reserves";
-                type Value = runtime_types :: frame_support :: storage :: bounded_vec :: BoundedVec < runtime_types :: pallet_balances :: ReserveData < [:: core :: primitive :: u8 ; 8usize] , :: core :: primitive :: u128 > > ;
+                type Value =
+                    runtime_types::sp_runtime::bounded::bounded_vec::BoundedVec<
+                        runtime_types::pallet_balances::ReserveData<
+                            [::core::primitive::u8; 8usize],
+                            ::core::primitive::u128,
+                        >,
+                    >;
                 fn key(&self) -> ::subxt::StorageEntryKey {
                     ::subxt::StorageEntryKey::Map(vec![
                         ::subxt::StorageMapKey::new(
@@ -4468,7 +4502,7 @@ pub mod api {
                     }
                 }
                 #[doc = " Any liquidity locks on some account balances."]
-                #[doc = " NOTE: Should only be accessed when setting, changing and freeing a lock."]                pub async fn locks (& self , _0 : & :: subxt :: sp_core :: crypto :: AccountId32 , block_hash : :: core :: option :: Option < T :: Hash > ,) -> :: core :: result :: Result < runtime_types :: frame_support :: storage :: weak_bounded_vec :: WeakBoundedVec < runtime_types :: pallet_balances :: BalanceLock < :: core :: primitive :: u128 > > , :: subxt :: BasicError >{
+                #[doc = " NOTE: Should only be accessed when setting, changing and freeing a lock."]                pub async fn locks (& self , _0 : & :: subxt :: sp_core :: crypto :: AccountId32 , block_hash : :: core :: option :: Option < T :: Hash > ,) -> :: core :: result :: Result < runtime_types :: sp_runtime :: bounded :: weak_bounded_vec :: WeakBoundedVec < runtime_types :: pallet_balances :: BalanceLock < :: core :: primitive :: u128 > > , :: subxt :: BasicError >{
                     if self.client.metadata().storage_hash::<Locks>()?
                         == [
                             31u8, 76u8, 213u8, 60u8, 86u8, 11u8, 155u8, 151u8,
@@ -4508,7 +4542,20 @@ pub mod api {
                         Err(::subxt::MetadataError::IncompatibleMetadata.into())
                     }
                 }
-                #[doc = " Named reserves on some account balances."]                pub async fn reserves (& self , _0 : & :: subxt :: sp_core :: crypto :: AccountId32 , block_hash : :: core :: option :: Option < T :: Hash > ,) -> :: core :: result :: Result < runtime_types :: frame_support :: storage :: bounded_vec :: BoundedVec < runtime_types :: pallet_balances :: ReserveData < [:: core :: primitive :: u8 ; 8usize] , :: core :: primitive :: u128 > > , :: subxt :: BasicError >{
+                #[doc = " Named reserves on some account balances."]
+                pub async fn reserves(
+                    &self,
+                    _0: &::subxt::sp_core::crypto::AccountId32,
+                    block_hash: ::core::option::Option<T::Hash>,
+                ) -> ::core::result::Result<
+                    runtime_types::sp_runtime::bounded::bounded_vec::BoundedVec<
+                        runtime_types::pallet_balances::ReserveData<
+                            [::core::primitive::u8; 8usize],
+                            ::core::primitive::u128,
+                        >,
+                    >,
+                    ::subxt::BasicError,
+                > {
                     if self.client.metadata().storage_hash::<Reserves>()?
                         == [
                             103u8, 6u8, 69u8, 151u8, 81u8, 40u8, 146u8, 113u8,
@@ -4688,6 +4735,30 @@ pub mod api {
     pub mod transaction_payment {
         use super::root_mod;
         use super::runtime_types;
+        pub type Event =
+            runtime_types::pallet_transaction_payment::pallet::Event;
+        pub mod events {
+            use super::runtime_types;
+            #[derive(
+                :: subxt :: codec :: Decode,
+                :: subxt :: codec :: Encode,
+                Clone,
+                Debug,
+                Eq,
+                PartialEq,
+            )]
+            #[doc = "A transaction fee `actual_fee`, of which `tip` was added to the minimum inclusion fee,"]
+            #[doc = "has been paid by `who`."]
+            pub struct TransactionFeePaid {
+                pub who: ::subxt::sp_core::crypto::AccountId32,
+                pub actual_fee: ::core::primitive::u128,
+                pub tip: ::core::primitive::u128,
+            }
+            impl ::subxt::Event for TransactionFeePaid {
+                const PALLET: &'static str = "TransactionPayment";
+                const EVENT: &'static str = "TransactionFeePaid";
+            }
+        }
         pub mod storage {
             use super::runtime_types;
             pub struct NextFeeMultiplier;
@@ -5365,7 +5436,7 @@ pub mod api {
             impl ::subxt::StorageEntry for SignedSubmissionIndices {
                 const PALLET: &'static str = "ElectionProviderMultiPhase";
                 const STORAGE: &'static str = "SignedSubmissionIndices";
-                type Value = runtime_types :: frame_support :: storage :: bounded_btree_map :: BoundedBTreeMap < runtime_types :: sp_npos_elections :: ElectionScore , :: core :: primitive :: u32 > ;
+                type Value = runtime_types :: sp_runtime :: bounded :: bounded_btree_map :: BoundedBTreeMap < runtime_types :: sp_npos_elections :: ElectionScore , :: core :: primitive :: u32 > ;
                 fn key(&self) -> ::subxt::StorageEntryKey {
                     ::subxt::StorageEntryKey::Plain
                 }
@@ -5586,7 +5657,7 @@ pub mod api {
                 #[doc = ""]
                 #[doc = " We never need to process more than a single signed submission at a time. Signed submissions"]
                 #[doc = " can be quite large, so we're willing to pay the cost of multiple database accesses to access"]
-                #[doc = " them one at a time instead of reading and decoding all of them at once."]                pub async fn signed_submission_indices (& self , block_hash : :: core :: option :: Option < T :: Hash > ,) -> :: core :: result :: Result < runtime_types :: frame_support :: storage :: bounded_btree_map :: BoundedBTreeMap < runtime_types :: sp_npos_elections :: ElectionScore , :: core :: primitive :: u32 > , :: subxt :: BasicError >{
+                #[doc = " them one at a time instead of reading and decoding all of them at once."]                pub async fn signed_submission_indices (& self , block_hash : :: core :: option :: Option < T :: Hash > ,) -> :: core :: result :: Result < runtime_types :: sp_runtime :: bounded :: bounded_btree_map :: BoundedBTreeMap < runtime_types :: sp_npos_elections :: ElectionScore , :: core :: primitive :: u32 > , :: subxt :: BasicError >{
                     if self
                         .client
                         .metadata()
@@ -5938,10 +6009,10 @@ pub mod api {
                         "ElectionProviderMultiPhase",
                         "SignedMaxWeight",
                     )? == [
-                        120u8, 229u8, 97u8, 14u8, 194u8, 14u8, 191u8, 9u8,
-                        193u8, 189u8, 248u8, 130u8, 178u8, 22u8, 29u8, 201u8,
-                        43u8, 209u8, 115u8, 60u8, 217u8, 28u8, 141u8, 187u8,
-                        91u8, 73u8, 138u8, 14u8, 118u8, 236u8, 45u8, 71u8,
+                        162u8, 38u8, 192u8, 252u8, 153u8, 108u8, 43u8, 217u8,
+                        136u8, 239u8, 183u8, 42u8, 90u8, 110u8, 172u8, 254u8,
+                        163u8, 201u8, 237u8, 117u8, 153u8, 247u8, 135u8, 239u8,
+                        1u8, 106u8, 175u8, 239u8, 195u8, 100u8, 144u8, 95u8,
                     ] {
                         let pallet = self
                             .client
@@ -11671,8 +11742,9 @@ pub mod api {
                 #[doc = "The dispatch of this call must be `FastTrackOrigin`."]
                 #[doc = ""]
                 #[doc = "- `proposal_hash`: The hash of the current external proposal."]
-                #[doc = "- `voting_period`: The period that is allowed for voting on this proposal. Increased to"]
-                #[doc = "  `FastTrackVotingPeriod` if too low."]
+                #[doc = "- `voting_period`: The period that is allowed for voting on this proposal."]
+                #[doc = "\tMust be always greater than zero."]
+                #[doc = "\tFor `FastTrackOrigin` must be equal or greater than `FastTrackVotingPeriod`."]
                 #[doc = "- `delay`: The number of block after voting has ended in approval and this should be"]
                 #[doc = "  enacted. This doesn't have a minimum amount."]
                 #[doc = ""]
@@ -12797,6 +12869,23 @@ pub mod api {
             impl ::subxt::Event for Seconded {
                 const PALLET: &'static str = "Democracy";
                 const EVENT: &'static str = "Seconded";
+            }
+            #[derive(
+                :: subxt :: codec :: CompactAs,
+                :: subxt :: codec :: Decode,
+                :: subxt :: codec :: Encode,
+                Clone,
+                Debug,
+                Eq,
+                PartialEq,
+            )]
+            #[doc = "A proposal got canceled."]
+            pub struct ProposalCanceled {
+                pub prop_index: ::core::primitive::u32,
+            }
+            impl ::subxt::Event for ProposalCanceled {
+                const PALLET: &'static str = "Democracy";
+                const EVENT: &'static str = "ProposalCanceled";
             }
         }
         pub mod storage {
@@ -14097,11 +14186,11 @@ pub mod api {
                 > {
                     if self.client.metadata().call_hash::<Execute>()?
                         == [
-                            247u8, 255u8, 125u8, 192u8, 0u8, 191u8, 53u8,
-                            125u8, 67u8, 177u8, 230u8, 10u8, 169u8, 120u8,
-                            175u8, 24u8, 253u8, 134u8, 236u8, 218u8, 158u8,
-                            173u8, 68u8, 55u8, 18u8, 243u8, 51u8, 209u8, 148u8,
-                            230u8, 67u8, 114u8,
+                            204u8, 236u8, 88u8, 129u8, 57u8, 54u8, 101u8,
+                            128u8, 119u8, 27u8, 36u8, 175u8, 189u8, 165u8,
+                            235u8, 248u8, 103u8, 182u8, 120u8, 237u8, 113u8,
+                            2u8, 225u8, 187u8, 89u8, 5u8, 25u8, 83u8, 174u8,
+                            18u8, 75u8, 111u8,
                         ]
                     {
                         let call = Execute {
@@ -14161,11 +14250,11 @@ pub mod api {
                 > {
                     if self.client.metadata().call_hash::<Propose>()?
                         == [
-                            71u8, 73u8, 181u8, 127u8, 215u8, 60u8, 112u8,
-                            109u8, 212u8, 85u8, 89u8, 147u8, 115u8, 99u8,
-                            105u8, 203u8, 226u8, 178u8, 104u8, 185u8, 84u8,
-                            246u8, 3u8, 128u8, 102u8, 114u8, 205u8, 250u8,
-                            21u8, 62u8, 181u8, 52u8,
+                            211u8, 14u8, 122u8, 212u8, 206u8, 174u8, 71u8,
+                            82u8, 106u8, 48u8, 130u8, 46u8, 236u8, 11u8, 134u8,
+                            149u8, 154u8, 117u8, 244u8, 229u8, 132u8, 49u8,
+                            138u8, 241u8, 30u8, 229u8, 26u8, 143u8, 151u8,
+                            155u8, 100u8, 224u8,
                         ]
                     {
                         let call = Propose {
@@ -14498,7 +14587,10 @@ pub mod api {
             impl ::subxt::StorageEntry for Proposals {
                 const PALLET: &'static str = "Council";
                 const STORAGE: &'static str = "Proposals";
-                type Value = runtime_types :: frame_support :: storage :: bounded_vec :: BoundedVec < :: subxt :: sp_core :: H256 > ;
+                type Value =
+                    runtime_types::sp_runtime::bounded::bounded_vec::BoundedVec<
+                        ::subxt::sp_core::H256,
+                    >;
                 fn key(&self) -> ::subxt::StorageEntryKey {
                     ::subxt::StorageEntryKey::Plain
                 }
@@ -14569,7 +14661,16 @@ pub mod api {
                 pub fn new(client: &'a ::subxt::Client<T>) -> Self {
                     Self { client }
                 }
-                #[doc = " The hashes of the active proposals."]                pub async fn proposals (& self , block_hash : :: core :: option :: Option < T :: Hash > ,) -> :: core :: result :: Result < runtime_types :: frame_support :: storage :: bounded_vec :: BoundedVec < :: subxt :: sp_core :: H256 > , :: subxt :: BasicError >{
+                #[doc = " The hashes of the active proposals."]
+                pub async fn proposals(
+                    &self,
+                    block_hash: ::core::option::Option<T::Hash>,
+                ) -> ::core::result::Result<
+                    runtime_types::sp_runtime::bounded::bounded_vec::BoundedVec<
+                        ::subxt::sp_core::H256,
+                    >,
+                    ::subxt::BasicError,
+                > {
                     if self.client.metadata().storage_hash::<Proposals>()?
                         == [
                             174u8, 75u8, 108u8, 245u8, 86u8, 50u8, 107u8,
@@ -14601,11 +14702,11 @@ pub mod api {
                 > {
                     if self.client.metadata().storage_hash::<ProposalOf>()?
                         == [
-                            227u8, 50u8, 184u8, 128u8, 1u8, 251u8, 237u8,
-                            198u8, 229u8, 168u8, 55u8, 33u8, 55u8, 190u8,
-                            135u8, 78u8, 100u8, 242u8, 215u8, 52u8, 36u8, 50u8,
-                            225u8, 226u8, 54u8, 161u8, 209u8, 166u8, 71u8,
-                            33u8, 228u8, 205u8,
+                            181u8, 109u8, 128u8, 106u8, 164u8, 234u8, 235u8,
+                            250u8, 194u8, 36u8, 5u8, 130u8, 110u8, 145u8,
+                            231u8, 242u8, 242u8, 21u8, 25u8, 218u8, 111u8,
+                            110u8, 57u8, 216u8, 83u8, 154u8, 45u8, 39u8, 182u8,
+                            182u8, 141u8, 188u8,
                         ]
                     {
                         let entry = ProposalOf(_0);
@@ -14624,11 +14725,11 @@ pub mod api {
                 > {
                     if self.client.metadata().storage_hash::<ProposalOf>()?
                         == [
-                            227u8, 50u8, 184u8, 128u8, 1u8, 251u8, 237u8,
-                            198u8, 229u8, 168u8, 55u8, 33u8, 55u8, 190u8,
-                            135u8, 78u8, 100u8, 242u8, 215u8, 52u8, 36u8, 50u8,
-                            225u8, 226u8, 54u8, 161u8, 209u8, 166u8, 71u8,
-                            33u8, 228u8, 205u8,
+                            181u8, 109u8, 128u8, 106u8, 164u8, 234u8, 235u8,
+                            250u8, 194u8, 36u8, 5u8, 130u8, 110u8, 145u8,
+                            231u8, 242u8, 242u8, 21u8, 25u8, 218u8, 111u8,
+                            110u8, 57u8, 216u8, 83u8, 154u8, 45u8, 39u8, 182u8,
+                            182u8, 141u8, 188u8,
                         ]
                     {
                         self.client.storage().iter(block_hash).await
@@ -15979,12 +16080,17 @@ pub mod api {
                         Err(::subxt::MetadataError::IncompatibleMetadata.into())
                     }
                 }
-                #[doc = "Note that the current authority set of the GRANDPA finality gadget has"]
-                #[doc = "stalled. This will trigger a forced authority set change at the beginning"]
-                #[doc = "of the next session, to be enacted `delay` blocks after that. The delay"]
-                #[doc = "should be high enough to safely assume that the block signalling the"]
-                #[doc = "forced change will not be re-orged (e.g. 1000 blocks). The GRANDPA voters"]
-                #[doc = "will start the new authority set using the given finalized block as base."]
+                #[doc = "Note that the current authority set of the GRANDPA finality gadget has stalled."]
+                #[doc = ""]
+                #[doc = "This will trigger a forced authority set change at the beginning of the next session, to"]
+                #[doc = "be enacted `delay` blocks after that. The `delay` should be high enough to safely assume"]
+                #[doc = "that the block signalling the forced change will not be re-orged e.g. 1000 blocks."]
+                #[doc = "The block production rate (which may be slowed down because of finality lagging) should"]
+                #[doc = "be taken into account when choosing the `delay`. The GRANDPA voters based on the new"]
+                #[doc = "authority will start voting on top of `best_finalized_block_number` for new finalized"]
+                #[doc = "blocks. `best_finalized_block_number` should be the highest of the latest finalized"]
+                #[doc = "block of all validators of the new authority set."]
+                #[doc = ""]
                 #[doc = "Only callable by root."]
                 pub fn note_stalled(
                     &self,
@@ -16441,6 +16547,26 @@ pub mod api {
                 Eq,
                 PartialEq,
             )]
+            pub struct Spend {
+                #[codec(compact)]
+                pub amount: ::core::primitive::u128,
+                pub beneficiary: ::subxt::sp_runtime::MultiAddress<
+                    ::subxt::sp_core::crypto::AccountId32,
+                    ::core::primitive::u32,
+                >,
+            }
+            impl ::subxt::Call for Spend {
+                const PALLET: &'static str = "Treasury";
+                const FUNCTION: &'static str = "spend";
+            }
+            #[derive(
+                :: subxt :: codec :: Decode,
+                :: subxt :: codec :: Encode,
+                Clone,
+                Debug,
+                Eq,
+                PartialEq,
+            )]
             pub struct RemoveApproval {
                 #[codec(compact)]
                 pub proposal_id: ::core::primitive::u32,
@@ -16584,6 +16710,53 @@ pub mod api {
                         ]
                     {
                         let call = ApproveProposal { proposal_id };
+                        Ok(::subxt::SubmittableExtrinsic::new(
+                            self.client,
+                            call,
+                        ))
+                    } else {
+                        Err(::subxt::MetadataError::IncompatibleMetadata.into())
+                    }
+                }
+                #[doc = "Propose and approve a spend of treasury funds."]
+                #[doc = ""]
+                #[doc = "- `origin`: Must be `SpendOrigin` with the `Success` value being at least `amount`."]
+                #[doc = "- `amount`: The amount to be transferred from the treasury to the `beneficiary`."]
+                #[doc = "- `beneficiary`: The destination account for the transfer."]
+                #[doc = ""]
+                #[doc = "NOTE: For record-keeping purposes, the proposer is deemed to be equivalent to the"]
+                #[doc = "beneficiary."]
+                pub fn spend(
+                    &self,
+                    amount: ::core::primitive::u128,
+                    beneficiary: ::subxt::sp_runtime::MultiAddress<
+                        ::subxt::sp_core::crypto::AccountId32,
+                        ::core::primitive::u32,
+                    >,
+                ) -> Result<
+                    ::subxt::SubmittableExtrinsic<
+                        'a,
+                        T,
+                        X,
+                        Spend,
+                        DispatchError,
+                        root_mod::Event,
+                    >,
+                    ::subxt::BasicError,
+                > {
+                    if self.client.metadata().call_hash::<Spend>()?
+                        == [
+                            33u8, 165u8, 91u8, 184u8, 205u8, 162u8, 10u8,
+                            142u8, 182u8, 60u8, 250u8, 247u8, 181u8, 1u8,
+                            173u8, 103u8, 61u8, 23u8, 183u8, 1u8, 142u8, 206u8,
+                            149u8, 41u8, 131u8, 219u8, 137u8, 120u8, 157u8,
+                            114u8, 102u8, 143u8,
+                        ]
+                    {
+                        let call = Spend {
+                            amount,
+                            beneficiary,
+                        };
                         Ok(::subxt::SubmittableExtrinsic::new(
                             self.client,
                             call,
@@ -16764,6 +16937,24 @@ pub mod api {
                 const PALLET: &'static str = "Treasury";
                 const EVENT: &'static str = "Deposit";
             }
+            #[derive(
+                :: subxt :: codec :: Decode,
+                :: subxt :: codec :: Encode,
+                Clone,
+                Debug,
+                Eq,
+                PartialEq,
+            )]
+            #[doc = "A new spend proposal has been approved."]
+            pub struct SpendApproved {
+                pub proposal_index: ::core::primitive::u32,
+                pub amount: ::core::primitive::u128,
+                pub beneficiary: ::subxt::sp_core::crypto::AccountId32,
+            }
+            impl ::subxt::Event for SpendApproved {
+                const PALLET: &'static str = "Treasury";
+                const EVENT: &'static str = "SpendApproved";
+            }
         }
         pub mod storage {
             use super::runtime_types;
@@ -16797,7 +16988,10 @@ pub mod api {
             impl ::subxt::StorageEntry for Approvals {
                 const PALLET: &'static str = "Treasury";
                 const STORAGE: &'static str = "Approvals";
-                type Value = runtime_types :: frame_support :: storage :: bounded_vec :: BoundedVec < :: core :: primitive :: u32 > ;
+                type Value =
+                    runtime_types::sp_runtime::bounded::bounded_vec::BoundedVec<
+                        ::core::primitive::u32,
+                    >;
                 fn key(&self) -> ::subxt::StorageEntryKey {
                     ::subxt::StorageEntryKey::Plain
                 }
@@ -16886,7 +17080,16 @@ pub mod api {
                         Err(::subxt::MetadataError::IncompatibleMetadata.into())
                     }
                 }
-                #[doc = " Proposal indices that have been approved but not yet awarded."]                pub async fn approvals (& self , block_hash : :: core :: option :: Option < T :: Hash > ,) -> :: core :: result :: Result < runtime_types :: frame_support :: storage :: bounded_vec :: BoundedVec < :: core :: primitive :: u32 > , :: subxt :: BasicError >{
+                #[doc = " Proposal indices that have been approved but not yet awarded."]
+                pub async fn approvals(
+                    &self,
+                    block_hash: ::core::option::Option<T::Hash>,
+                ) -> ::core::result::Result<
+                    runtime_types::sp_runtime::bounded::bounded_vec::BoundedVec<
+                        ::core::primitive::u32,
+                    >,
+                    ::subxt::BasicError,
+                > {
                     if self.client.metadata().storage_hash::<Approvals>()?
                         == [
                             152u8, 185u8, 127u8, 54u8, 169u8, 155u8, 124u8,
@@ -17281,10 +17484,11 @@ pub mod api {
                 > {
                     if self.client.metadata().call_hash::<Batch>()?
                         == [
-                            203u8, 83u8, 92u8, 52u8, 15u8, 104u8, 22u8, 131u8,
-                            1u8, 21u8, 76u8, 197u8, 224u8, 120u8, 52u8, 126u8,
-                            69u8, 28u8, 157u8, 87u8, 111u8, 224u8, 12u8, 161u8,
-                            104u8, 97u8, 71u8, 22u8, 9u8, 38u8, 157u8, 245u8,
+                            129u8, 62u8, 56u8, 246u8, 97u8, 4u8, 69u8, 61u8,
+                            24u8, 167u8, 74u8, 78u8, 232u8, 254u8, 240u8,
+                            211u8, 26u8, 206u8, 206u8, 82u8, 158u8, 128u8,
+                            166u8, 72u8, 209u8, 181u8, 255u8, 69u8, 41u8, 97u8,
+                            77u8, 71u8,
                         ]
                     {
                         let call = Batch { calls };
@@ -17326,11 +17530,10 @@ pub mod api {
                 > {
                     if self.client.metadata().call_hash::<AsDerivative>()?
                         == [
-                            67u8, 67u8, 32u8, 137u8, 4u8, 217u8, 249u8, 5u8,
-                            78u8, 200u8, 116u8, 95u8, 70u8, 119u8, 140u8,
-                            248u8, 101u8, 149u8, 150u8, 184u8, 151u8, 157u8,
-                            187u8, 127u8, 187u8, 211u8, 221u8, 4u8, 131u8,
-                            220u8, 199u8, 17u8,
+                            30u8, 34u8, 193u8, 15u8, 168u8, 94u8, 97u8, 205u8,
+                            8u8, 61u8, 5u8, 97u8, 230u8, 47u8, 69u8, 103u8,
+                            167u8, 116u8, 194u8, 150u8, 60u8, 19u8, 7u8, 90u8,
+                            65u8, 95u8, 85u8, 44u8, 221u8, 49u8, 19u8, 5u8,
                         ]
                     {
                         let call = AsDerivative {
@@ -17377,11 +17580,11 @@ pub mod api {
                 > {
                     if self.client.metadata().call_hash::<BatchAll>()?
                         == [
-                            141u8, 164u8, 247u8, 20u8, 78u8, 91u8, 211u8,
-                            216u8, 28u8, 179u8, 212u8, 33u8, 73u8, 10u8, 82u8,
-                            10u8, 160u8, 106u8, 40u8, 159u8, 3u8, 18u8, 206u8,
-                            214u8, 211u8, 36u8, 114u8, 98u8, 111u8, 105u8,
-                            115u8, 182u8,
+                            68u8, 181u8, 34u8, 37u8, 153u8, 114u8, 237u8,
+                            140u8, 142u8, 4u8, 119u8, 91u8, 59u8, 142u8, 95u8,
+                            153u8, 228u8, 208u8, 30u8, 49u8, 51u8, 100u8,
+                            114u8, 13u8, 138u8, 170u8, 165u8, 185u8, 6u8, 95u8,
+                            218u8, 234u8,
                         ]
                     {
                         let call = BatchAll { calls };
@@ -17420,11 +17623,11 @@ pub mod api {
                 > {
                     if self.client.metadata().call_hash::<DispatchAs>()?
                         == [
-                            26u8, 46u8, 18u8, 32u8, 42u8, 55u8, 150u8, 225u8,
-                            24u8, 232u8, 194u8, 245u8, 207u8, 201u8, 174u8,
-                            209u8, 246u8, 171u8, 226u8, 214u8, 239u8, 101u8,
-                            214u8, 31u8, 64u8, 203u8, 232u8, 226u8, 237u8,
-                            210u8, 118u8, 81u8,
+                            42u8, 87u8, 131u8, 167u8, 240u8, 187u8, 248u8,
+                            59u8, 106u8, 35u8, 142u8, 90u8, 106u8, 149u8,
+                            210u8, 214u8, 125u8, 225u8, 159u8, 100u8, 190u8,
+                            216u8, 102u8, 193u8, 64u8, 60u8, 240u8, 55u8, 8u8,
+                            148u8, 65u8, 127u8,
                         ]
                     {
                         let call = DispatchAs {
@@ -17471,11 +17674,11 @@ pub mod api {
                 > {
                     if self.client.metadata().call_hash::<ForceBatch>()?
                         == [
-                            134u8, 213u8, 245u8, 214u8, 202u8, 198u8, 136u8,
-                            196u8, 23u8, 252u8, 164u8, 237u8, 193u8, 6u8, 78u8,
-                            86u8, 8u8, 160u8, 170u8, 175u8, 49u8, 83u8, 220u8,
-                            160u8, 113u8, 96u8, 209u8, 237u8, 68u8, 161u8,
-                            208u8, 193u8,
+                            102u8, 59u8, 137u8, 10u8, 97u8, 9u8, 88u8, 33u8,
+                            207u8, 80u8, 180u8, 20u8, 23u8, 12u8, 77u8, 229u8,
+                            26u8, 231u8, 207u8, 16u8, 195u8, 62u8, 156u8,
+                            237u8, 129u8, 244u8, 242u8, 102u8, 75u8, 137u8,
+                            65u8, 85u8,
                         ]
                     {
                         let call = ForceBatch { calls };
@@ -17782,11 +17985,11 @@ pub mod api {
                         .metadata()
                         .call_hash::<AsMultiThreshold1>()?
                         == [
-                            128u8, 4u8, 227u8, 252u8, 4u8, 63u8, 116u8, 55u8,
-                            247u8, 83u8, 63u8, 189u8, 53u8, 162u8, 148u8,
-                            208u8, 245u8, 140u8, 225u8, 110u8, 34u8, 60u8, 9u8,
-                            44u8, 96u8, 56u8, 236u8, 138u8, 159u8, 189u8,
-                            219u8, 188u8,
+                            213u8, 78u8, 212u8, 189u8, 236u8, 230u8, 162u8,
+                            133u8, 226u8, 9u8, 203u8, 109u8, 95u8, 190u8,
+                            108u8, 45u8, 241u8, 3u8, 102u8, 225u8, 170u8, 67u8,
+                            151u8, 27u8, 218u8, 8u8, 166u8, 235u8, 194u8,
+                            202u8, 83u8, 86u8,
                         ]
                     {
                         let call = AsMultiThreshold1 {
@@ -17875,11 +18078,11 @@ pub mod api {
                 > {
                     if self.client.metadata().call_hash::<AsMulti>()?
                         == [
-                            203u8, 187u8, 79u8, 206u8, 213u8, 44u8, 192u8,
-                            241u8, 79u8, 53u8, 19u8, 161u8, 220u8, 225u8,
-                            252u8, 41u8, 214u8, 231u8, 98u8, 75u8, 62u8, 57u8,
-                            24u8, 223u8, 144u8, 143u8, 235u8, 107u8, 233u8,
-                            102u8, 7u8, 151u8,
+                            94u8, 144u8, 36u8, 188u8, 110u8, 142u8, 177u8,
+                            185u8, 40u8, 103u8, 87u8, 120u8, 216u8, 9u8, 1u8,
+                            10u8, 158u8, 184u8, 10u8, 250u8, 145u8, 72u8, 76u8,
+                            251u8, 71u8, 107u8, 111u8, 193u8, 12u8, 114u8,
+                            200u8, 58u8,
                         ]
                     {
                         let call = AsMulti {
@@ -18265,11 +18468,11 @@ pub mod api {
                 > {
                     if self.client.metadata().storage_hash::<Calls>()?
                         == [
-                            73u8, 129u8, 190u8, 78u8, 194u8, 115u8, 135u8,
-                            197u8, 107u8, 206u8, 92u8, 206u8, 124u8, 60u8,
-                            70u8, 93u8, 53u8, 21u8, 122u8, 5u8, 118u8, 50u8,
-                            102u8, 222u8, 245u8, 63u8, 100u8, 198u8, 82u8,
-                            108u8, 253u8, 135u8,
+                            179u8, 158u8, 224u8, 123u8, 165u8, 8u8, 191u8,
+                            70u8, 249u8, 109u8, 209u8, 151u8, 176u8, 19u8,
+                            34u8, 117u8, 238u8, 95u8, 100u8, 136u8, 172u8,
+                            207u8, 248u8, 154u8, 177u8, 106u8, 97u8, 73u8,
+                            77u8, 205u8, 68u8, 36u8,
                         ]
                     {
                         let entry = Calls(_0);
@@ -18287,11 +18490,11 @@ pub mod api {
                 > {
                     if self.client.metadata().storage_hash::<Calls>()?
                         == [
-                            73u8, 129u8, 190u8, 78u8, 194u8, 115u8, 135u8,
-                            197u8, 107u8, 206u8, 92u8, 206u8, 124u8, 60u8,
-                            70u8, 93u8, 53u8, 21u8, 122u8, 5u8, 118u8, 50u8,
-                            102u8, 222u8, 245u8, 63u8, 100u8, 198u8, 82u8,
-                            108u8, 253u8, 135u8,
+                            179u8, 158u8, 224u8, 123u8, 165u8, 8u8, 191u8,
+                            70u8, 249u8, 109u8, 209u8, 151u8, 176u8, 19u8,
+                            34u8, 117u8, 238u8, 95u8, 100u8, 136u8, 172u8,
+                            207u8, 248u8, 154u8, 177u8, 106u8, 97u8, 73u8,
+                            77u8, 205u8, 68u8, 36u8,
                         ]
                     {
                         self.client.storage().iter(block_hash).await
@@ -18592,11 +18795,11 @@ pub mod api {
                 > {
                     if self.client.metadata().call_hash::<Schedule>()?
                         == [
-                            122u8, 25u8, 255u8, 94u8, 15u8, 82u8, 209u8, 209u8,
-                            98u8, 137u8, 167u8, 10u8, 84u8, 226u8, 204u8,
-                            252u8, 213u8, 111u8, 8u8, 31u8, 72u8, 199u8, 180u8,
-                            221u8, 254u8, 238u8, 222u8, 105u8, 109u8, 97u8,
-                            32u8, 10u8,
+                            105u8, 90u8, 143u8, 67u8, 166u8, 83u8, 222u8, 9u8,
+                            39u8, 228u8, 240u8, 64u8, 211u8, 122u8, 19u8,
+                            175u8, 147u8, 226u8, 45u8, 246u8, 208u8, 214u8,
+                            24u8, 115u8, 154u8, 42u8, 21u8, 181u8, 148u8,
+                            147u8, 171u8, 238u8,
                         ]
                     {
                         let call = Schedule {
@@ -18671,11 +18874,11 @@ pub mod api {
                 > {
                     if self.client.metadata().call_hash::<ScheduleNamed>()?
                         == [
-                            143u8, 45u8, 173u8, 201u8, 120u8, 107u8, 186u8,
-                            228u8, 7u8, 253u8, 175u8, 161u8, 163u8, 135u8,
-                            140u8, 44u8, 119u8, 145u8, 86u8, 187u8, 204u8,
-                            46u8, 163u8, 236u8, 110u8, 32u8, 164u8, 21u8, 51u8,
-                            177u8, 147u8, 192u8,
+                            147u8, 37u8, 185u8, 181u8, 29u8, 184u8, 124u8,
+                            12u8, 86u8, 67u8, 253u8, 84u8, 132u8, 154u8, 243u8,
+                            216u8, 149u8, 40u8, 159u8, 17u8, 204u8, 141u8,
+                            184u8, 204u8, 228u8, 105u8, 244u8, 227u8, 230u8,
+                            173u8, 201u8, 49u8,
                         ]
                     {
                         let call = ScheduleNamed {
@@ -18752,11 +18955,11 @@ pub mod api {
                 > {
                     if self.client.metadata().call_hash::<ScheduleAfter>()?
                         == [
-                            188u8, 145u8, 95u8, 132u8, 26u8, 180u8, 37u8,
-                            148u8, 98u8, 210u8, 54u8, 45u8, 157u8, 131u8, 58u8,
-                            56u8, 117u8, 51u8, 144u8, 35u8, 163u8, 235u8,
-                            125u8, 147u8, 180u8, 221u8, 234u8, 57u8, 172u8,
-                            27u8, 167u8, 75u8,
+                            77u8, 225u8, 99u8, 181u8, 64u8, 17u8, 61u8, 80u8,
+                            216u8, 209u8, 31u8, 244u8, 157u8, 223u8, 140u8,
+                            201u8, 92u8, 176u8, 161u8, 57u8, 222u8, 133u8,
+                            24u8, 234u8, 192u8, 162u8, 28u8, 34u8, 97u8, 40u8,
+                            240u8, 172u8,
                         ]
                     {
                         let call = ScheduleAfter {
@@ -18804,11 +19007,11 @@ pub mod api {
                         .metadata()
                         .call_hash::<ScheduleNamedAfter>()?
                         == [
-                            28u8, 225u8, 233u8, 115u8, 222u8, 141u8, 138u8,
-                            137u8, 213u8, 174u8, 115u8, 114u8, 151u8, 144u8,
-                            224u8, 84u8, 157u8, 91u8, 16u8, 0u8, 220u8, 150u8,
-                            68u8, 91u8, 16u8, 209u8, 48u8, 160u8, 116u8, 127u8,
-                            215u8, 202u8,
+                            39u8, 247u8, 7u8, 210u8, 206u8, 183u8, 210u8,
+                            231u8, 188u8, 241u8, 199u8, 135u8, 214u8, 14u8,
+                            189u8, 73u8, 35u8, 77u8, 35u8, 226u8, 29u8, 217u8,
+                            189u8, 16u8, 12u8, 29u8, 28u8, 137u8, 150u8, 111u8,
+                            70u8, 243u8,
                         ]
                     {
                         let call = ScheduleNamedAfter {
@@ -18950,10 +19153,11 @@ pub mod api {
                 #[doc = " Items to be executed, indexed by the block number that they should be executed on."]                pub async fn agenda (& self , _0 : & :: core :: primitive :: u64 , block_hash : :: core :: option :: Option < T :: Hash > ,) -> :: core :: result :: Result < :: std :: vec :: Vec < :: core :: option :: Option < runtime_types :: pallet_scheduler :: ScheduledV3 < runtime_types :: frame_support :: traits :: schedule :: MaybeHashed < runtime_types :: webb_standalone_runtime :: Call , :: subxt :: sp_core :: H256 > , :: core :: primitive :: u64 , runtime_types :: webb_standalone_runtime :: OriginCaller , :: subxt :: sp_core :: crypto :: AccountId32 > > > , :: subxt :: BasicError >{
                     if self.client.metadata().storage_hash::<Agenda>()?
                         == [
-                            193u8, 10u8, 148u8, 9u8, 125u8, 117u8, 34u8, 60u8,
-                            52u8, 42u8, 211u8, 22u8, 37u8, 66u8, 147u8, 222u8,
-                            13u8, 179u8, 88u8, 132u8, 142u8, 211u8, 9u8, 217u8,
-                            40u8, 227u8, 161u8, 90u8, 49u8, 230u8, 121u8, 97u8,
+                            96u8, 159u8, 186u8, 232u8, 14u8, 174u8, 193u8,
+                            24u8, 11u8, 105u8, 215u8, 31u8, 87u8, 151u8, 66u8,
+                            100u8, 179u8, 175u8, 66u8, 39u8, 192u8, 55u8, 71u8,
+                            7u8, 177u8, 134u8, 81u8, 11u8, 244u8, 0u8, 9u8,
+                            43u8,
                         ]
                     {
                         let entry = Agenda(_0);
@@ -18975,10 +19179,11 @@ pub mod api {
                 > {
                     if self.client.metadata().storage_hash::<Agenda>()?
                         == [
-                            193u8, 10u8, 148u8, 9u8, 125u8, 117u8, 34u8, 60u8,
-                            52u8, 42u8, 211u8, 22u8, 37u8, 66u8, 147u8, 222u8,
-                            13u8, 179u8, 88u8, 132u8, 142u8, 211u8, 9u8, 217u8,
-                            40u8, 227u8, 161u8, 90u8, 49u8, 230u8, 121u8, 97u8,
+                            96u8, 159u8, 186u8, 232u8, 14u8, 174u8, 193u8,
+                            24u8, 11u8, 105u8, 215u8, 31u8, 87u8, 151u8, 66u8,
+                            100u8, 179u8, 175u8, 66u8, 39u8, 192u8, 55u8, 71u8,
+                            7u8, 177u8, 134u8, 81u8, 11u8, 244u8, 0u8, 9u8,
+                            43u8,
                         ]
                     {
                         self.client.storage().iter(block_hash).await
@@ -19414,7 +19619,10 @@ pub mod api {
             impl ::subxt::StorageEntry for PreimageFor<'_> {
                 const PALLET: &'static str = "Preimage";
                 const STORAGE: &'static str = "PreimageFor";
-                type Value = runtime_types :: frame_support :: storage :: bounded_vec :: BoundedVec < :: core :: primitive :: u8 > ;
+                type Value =
+                    runtime_types::sp_runtime::bounded::bounded_vec::BoundedVec<
+                        ::core::primitive::u8,
+                    >;
                 fn key(&self) -> ::subxt::StorageEntryKey {
                     ::subxt::StorageEntryKey::Map(vec![
                         ::subxt::StorageMapKey::new(
@@ -19482,7 +19690,7 @@ pub mod api {
                         Err(::subxt::MetadataError::IncompatibleMetadata.into())
                     }
                 }
-                #[doc = " The preimages stored by this pallet."]                pub async fn preimage_for (& self , _0 : & :: subxt :: sp_core :: H256 , block_hash : :: core :: option :: Option < T :: Hash > ,) -> :: core :: result :: Result < :: core :: option :: Option < runtime_types :: frame_support :: storage :: bounded_vec :: BoundedVec < :: core :: primitive :: u8 > > , :: subxt :: BasicError >{
+                #[doc = " The preimages stored by this pallet."]                pub async fn preimage_for (& self , _0 : & :: subxt :: sp_core :: H256 , block_hash : :: core :: option :: Option < T :: Hash > ,) -> :: core :: result :: Result < :: core :: option :: Option < runtime_types :: sp_runtime :: bounded :: bounded_vec :: BoundedVec < :: core :: primitive :: u8 > > , :: subxt :: BasicError >{
                     if self.client.metadata().storage_hash::<PreimageFor>()?
                         == [
                             153u8, 48u8, 185u8, 144u8, 57u8, 68u8, 133u8, 92u8,
@@ -19760,11 +19968,11 @@ pub mod api {
                 > {
                     if self.client.metadata().call_hash::<Proxy>()?
                         == [
-                            244u8, 22u8, 44u8, 87u8, 144u8, 13u8, 204u8, 21u8,
-                            121u8, 105u8, 245u8, 223u8, 76u8, 213u8, 205u8,
-                            95u8, 89u8, 214u8, 164u8, 43u8, 89u8, 249u8, 219u8,
-                            41u8, 7u8, 38u8, 243u8, 214u8, 0u8, 55u8, 23u8,
-                            0u8,
+                            61u8, 137u8, 138u8, 142u8, 42u8, 143u8, 219u8,
+                            219u8, 59u8, 99u8, 88u8, 79u8, 177u8, 116u8, 231u8,
+                            4u8, 239u8, 190u8, 223u8, 240u8, 200u8, 46u8,
+                            108u8, 75u8, 232u8, 21u8, 151u8, 40u8, 56u8, 140u8,
+                            218u8, 133u8,
                         ]
                     {
                         let call = Proxy {
@@ -20242,11 +20450,11 @@ pub mod api {
                 > {
                     if self.client.metadata().call_hash::<ProxyAnnounced>()?
                         == [
-                            232u8, 225u8, 185u8, 131u8, 59u8, 86u8, 223u8,
-                            68u8, 239u8, 125u8, 84u8, 85u8, 240u8, 58u8, 79u8,
-                            183u8, 212u8, 30u8, 69u8, 69u8, 119u8, 75u8, 186u8,
-                            227u8, 152u8, 23u8, 167u8, 58u8, 87u8, 218u8,
-                            115u8, 108u8,
+                            31u8, 220u8, 81u8, 97u8, 166u8, 62u8, 201u8, 150u8,
+                            113u8, 104u8, 122u8, 209u8, 243u8, 202u8, 146u8,
+                            39u8, 53u8, 242u8, 30u8, 244u8, 219u8, 100u8,
+                            208u8, 142u8, 55u8, 160u8, 68u8, 170u8, 71u8,
+                            239u8, 42u8, 10u8,
                         ]
                     {
                         let call = ProxyAnnounced {
@@ -20375,7 +20583,16 @@ pub mod api {
             impl ::subxt::StorageEntry for Proxies<'_> {
                 const PALLET: &'static str = "Proxy";
                 const STORAGE: &'static str = "Proxies";
-                type Value = (runtime_types :: frame_support :: storage :: bounded_vec :: BoundedVec < runtime_types :: pallet_proxy :: ProxyDefinition < :: subxt :: sp_core :: crypto :: AccountId32 , runtime_types :: webb_standalone_runtime :: ProxyType , :: core :: primitive :: u64 > > , :: core :: primitive :: u128 ,) ;
+                type Value = (
+                    runtime_types::sp_runtime::bounded::bounded_vec::BoundedVec<
+                        runtime_types::pallet_proxy::ProxyDefinition<
+                            ::subxt::sp_core::crypto::AccountId32,
+                            runtime_types::webb_standalone_runtime::ProxyType,
+                            ::core::primitive::u64,
+                        >,
+                    >,
+                    ::core::primitive::u128,
+                );
                 fn key(&self) -> ::subxt::StorageEntryKey {
                     ::subxt::StorageEntryKey::Map(vec![
                         ::subxt::StorageMapKey::new(
@@ -20391,7 +20608,16 @@ pub mod api {
             impl ::subxt::StorageEntry for Announcements<'_> {
                 const PALLET: &'static str = "Proxy";
                 const STORAGE: &'static str = "Announcements";
-                type Value = (runtime_types :: frame_support :: storage :: bounded_vec :: BoundedVec < runtime_types :: pallet_proxy :: Announcement < :: subxt :: sp_core :: crypto :: AccountId32 , :: subxt :: sp_core :: H256 , :: core :: primitive :: u64 > > , :: core :: primitive :: u128 ,) ;
+                type Value = (
+                    runtime_types::sp_runtime::bounded::bounded_vec::BoundedVec<
+                        runtime_types::pallet_proxy::Announcement<
+                            ::subxt::sp_core::crypto::AccountId32,
+                            ::subxt::sp_core::H256,
+                            ::core::primitive::u64,
+                        >,
+                    >,
+                    ::core::primitive::u128,
+                );
                 fn key(&self) -> ::subxt::StorageEntryKey {
                     ::subxt::StorageEntryKey::Map(vec![
                         ::subxt::StorageMapKey::new(
@@ -20409,7 +20635,7 @@ pub mod api {
                     Self { client }
                 }
                 #[doc = " The set of account proxies. Maps the account which has delegated to the accounts"]
-                #[doc = " which are being delegated to, together with the amount held on deposit."]                pub async fn proxies (& self , _0 : & :: subxt :: sp_core :: crypto :: AccountId32 , block_hash : :: core :: option :: Option < T :: Hash > ,) -> :: core :: result :: Result < (runtime_types :: frame_support :: storage :: bounded_vec :: BoundedVec < runtime_types :: pallet_proxy :: ProxyDefinition < :: subxt :: sp_core :: crypto :: AccountId32 , runtime_types :: webb_standalone_runtime :: ProxyType , :: core :: primitive :: u64 > > , :: core :: primitive :: u128 ,) , :: subxt :: BasicError >{
+                #[doc = " which are being delegated to, together with the amount held on deposit."]                pub async fn proxies (& self , _0 : & :: subxt :: sp_core :: crypto :: AccountId32 , block_hash : :: core :: option :: Option < T :: Hash > ,) -> :: core :: result :: Result < (runtime_types :: sp_runtime :: bounded :: bounded_vec :: BoundedVec < runtime_types :: pallet_proxy :: ProxyDefinition < :: subxt :: sp_core :: crypto :: AccountId32 , runtime_types :: webb_standalone_runtime :: ProxyType , :: core :: primitive :: u64 > > , :: core :: primitive :: u128 ,) , :: subxt :: BasicError >{
                     if self.client.metadata().storage_hash::<Proxies>()?
                         == [
                             127u8, 77u8, 156u8, 242u8, 68u8, 20u8, 105u8,
@@ -20451,7 +20677,7 @@ pub mod api {
                         Err(::subxt::MetadataError::IncompatibleMetadata.into())
                     }
                 }
-                #[doc = " The announcements made by the proxy (key)."]                pub async fn announcements (& self , _0 : & :: subxt :: sp_core :: crypto :: AccountId32 , block_hash : :: core :: option :: Option < T :: Hash > ,) -> :: core :: result :: Result < (runtime_types :: frame_support :: storage :: bounded_vec :: BoundedVec < runtime_types :: pallet_proxy :: Announcement < :: subxt :: sp_core :: crypto :: AccountId32 , :: subxt :: sp_core :: H256 , :: core :: primitive :: u64 > > , :: core :: primitive :: u128 ,) , :: subxt :: BasicError >{
+                #[doc = " The announcements made by the proxy (key)."]                pub async fn announcements (& self , _0 : & :: subxt :: sp_core :: crypto :: AccountId32 , block_hash : :: core :: option :: Option < T :: Hash > ,) -> :: core :: result :: Result < (runtime_types :: sp_runtime :: bounded :: bounded_vec :: BoundedVec < runtime_types :: pallet_proxy :: Announcement < :: subxt :: sp_core :: crypto :: AccountId32 , :: subxt :: sp_core :: H256 , :: core :: primitive :: u64 > > , :: core :: primitive :: u128 ,) , :: subxt :: BasicError >{
                     if self.client.metadata().storage_hash::<Announcements>()?
                         == [
                             250u8, 129u8, 217u8, 14u8, 165u8, 118u8, 194u8,
@@ -22990,7 +23216,12 @@ pub mod api {
             impl ::subxt::StorageEntry for Metadata<'_> {
                 const PALLET: &'static str = "Assets";
                 const STORAGE: &'static str = "Metadata";
-                type Value = runtime_types :: pallet_assets :: types :: AssetMetadata < :: core :: primitive :: u128 , runtime_types :: frame_support :: storage :: bounded_vec :: BoundedVec < :: core :: primitive :: u8 > > ;
+                type Value = runtime_types::pallet_assets::types::AssetMetadata<
+                    ::core::primitive::u128,
+                    runtime_types::sp_runtime::bounded::bounded_vec::BoundedVec<
+                        ::core::primitive::u8,
+                    >,
+                >;
                 fn key(&self) -> ::subxt::StorageEntryKey {
                     ::subxt::StorageEntryKey::Map(vec![
                         ::subxt::StorageMapKey::new(
@@ -23169,7 +23400,7 @@ pub mod api {
                         Err(::subxt::MetadataError::IncompatibleMetadata.into())
                     }
                 }
-                #[doc = " Metadata of an asset."]                pub async fn metadata (& self , _0 : & :: core :: primitive :: u32 , block_hash : :: core :: option :: Option < T :: Hash > ,) -> :: core :: result :: Result < runtime_types :: pallet_assets :: types :: AssetMetadata < :: core :: primitive :: u128 , runtime_types :: frame_support :: storage :: bounded_vec :: BoundedVec < :: core :: primitive :: u8 > > , :: subxt :: BasicError >{
+                #[doc = " Metadata of an asset."]                pub async fn metadata (& self , _0 : & :: core :: primitive :: u32 , block_hash : :: core :: option :: Option < T :: Hash > ,) -> :: core :: result :: Result < runtime_types :: pallet_assets :: types :: AssetMetadata < :: core :: primitive :: u128 , runtime_types :: sp_runtime :: bounded :: bounded_vec :: BoundedVec < :: core :: primitive :: u8 > > , :: subxt :: BasicError >{
                     if self.client.metadata().storage_hash::<Metadata>()?
                         == [
                             209u8, 23u8, 7u8, 106u8, 173u8, 10u8, 115u8, 39u8,
@@ -23524,11 +23755,11 @@ pub mod api {
                 > {
                     if self.client.metadata().call_hash::<Sudo>()?
                         == [
-                            255u8, 63u8, 86u8, 214u8, 35u8, 27u8, 116u8, 83u8,
-                            22u8, 235u8, 85u8, 49u8, 14u8, 19u8, 146u8, 157u8,
-                            165u8, 230u8, 126u8, 62u8, 106u8, 26u8, 40u8,
-                            203u8, 255u8, 225u8, 118u8, 176u8, 24u8, 121u8,
-                            113u8, 143u8,
+                            125u8, 245u8, 117u8, 155u8, 110u8, 144u8, 208u8,
+                            29u8, 123u8, 28u8, 90u8, 84u8, 199u8, 222u8, 110u8,
+                            144u8, 12u8, 230u8, 123u8, 204u8, 224u8, 12u8,
+                            42u8, 48u8, 73u8, 243u8, 61u8, 44u8, 163u8, 117u8,
+                            123u8, 216u8,
                         ]
                     {
                         let call = Sudo {
@@ -23572,11 +23803,11 @@ pub mod api {
                         .metadata()
                         .call_hash::<SudoUncheckedWeight>()?
                         == [
-                            68u8, 28u8, 243u8, 132u8, 86u8, 169u8, 46u8, 98u8,
-                            96u8, 252u8, 192u8, 68u8, 106u8, 52u8, 189u8,
-                            235u8, 177u8, 195u8, 189u8, 230u8, 80u8, 93u8,
-                            30u8, 189u8, 35u8, 235u8, 118u8, 59u8, 212u8,
-                            113u8, 148u8, 90u8,
+                            56u8, 88u8, 99u8, 190u8, 99u8, 19u8, 155u8, 228u8,
+                            249u8, 176u8, 114u8, 106u8, 63u8, 178u8, 131u8,
+                            142u8, 119u8, 189u8, 93u8, 228u8, 154u8, 19u8,
+                            87u8, 115u8, 182u8, 203u8, 72u8, 243u8, 166u8,
+                            54u8, 247u8, 172u8,
                         ]
                     {
                         let call = SudoUncheckedWeight {
@@ -23667,11 +23898,11 @@ pub mod api {
                 > {
                     if self.client.metadata().call_hash::<SudoAs>()?
                         == [
-                            2u8, 145u8, 97u8, 58u8, 56u8, 228u8, 107u8, 183u8,
-                            173u8, 62u8, 39u8, 5u8, 198u8, 4u8, 52u8, 71u8,
-                            63u8, 55u8, 197u8, 253u8, 165u8, 42u8, 117u8,
-                            145u8, 60u8, 230u8, 116u8, 33u8, 49u8, 74u8, 247u8,
-                            145u8,
+                            112u8, 18u8, 88u8, 16u8, 123u8, 148u8, 176u8,
+                            201u8, 152u8, 126u8, 70u8, 32u8, 144u8, 115u8,
+                            160u8, 230u8, 23u8, 27u8, 237u8, 248u8, 254u8,
+                            242u8, 172u8, 217u8, 51u8, 254u8, 138u8, 252u8,
+                            110u8, 115u8, 244u8, 215u8,
                         ]
                     {
                         let call = SudoAs {
@@ -23947,7 +24178,7 @@ pub mod api {
             impl ::subxt::StorageEntry for Keys {
                 const PALLET: &'static str = "ImOnline";
                 const STORAGE: &'static str = "Keys";
-                type Value = runtime_types :: frame_support :: storage :: weak_bounded_vec :: WeakBoundedVec < runtime_types :: pallet_im_online :: sr25519 :: app_sr25519 :: Public > ;
+                type Value = runtime_types :: sp_runtime :: bounded :: weak_bounded_vec :: WeakBoundedVec < runtime_types :: pallet_im_online :: sr25519 :: app_sr25519 :: Public > ;
                 fn key(&self) -> ::subxt::StorageEntryKey {
                     ::subxt::StorageEntryKey::Plain
                 }
@@ -24040,7 +24271,7 @@ pub mod api {
                         Err(::subxt::MetadataError::IncompatibleMetadata.into())
                     }
                 }
-                #[doc = " The current set of keys that may issue a heartbeat."]                pub async fn keys (& self , block_hash : :: core :: option :: Option < T :: Hash > ,) -> :: core :: result :: Result < runtime_types :: frame_support :: storage :: weak_bounded_vec :: WeakBoundedVec < runtime_types :: pallet_im_online :: sr25519 :: app_sr25519 :: Public > , :: subxt :: BasicError >{
+                #[doc = " The current set of keys that may issue a heartbeat."]                pub async fn keys (& self , block_hash : :: core :: option :: Option < T :: Hash > ,) -> :: core :: result :: Result < runtime_types :: sp_runtime :: bounded :: weak_bounded_vec :: WeakBoundedVec < runtime_types :: pallet_im_online :: sr25519 :: app_sr25519 :: Public > , :: subxt :: BasicError >{
                     if self.client.metadata().storage_hash::<Keys>()?
                         == [
                             105u8, 250u8, 99u8, 106u8, 9u8, 29u8, 73u8, 176u8,
@@ -24701,11 +24932,10 @@ pub mod api {
                 > {
                     if self.client.metadata().call_hash::<ProposeBounty>()?
                         == [
-                            208u8, 22u8, 157u8, 134u8, 214u8, 95u8, 249u8,
-                            10u8, 67u8, 223u8, 190u8, 192u8, 69u8, 32u8, 7u8,
-                            235u8, 205u8, 145u8, 90u8, 80u8, 60u8, 4u8, 16u8,
-                            189u8, 59u8, 180u8, 68u8, 77u8, 69u8, 121u8, 92u8,
-                            33u8,
+                            253u8, 42u8, 134u8, 229u8, 115u8, 98u8, 40u8, 39u8,
+                            180u8, 206u8, 12u8, 1u8, 35u8, 196u8, 71u8, 167u8,
+                            210u8, 16u8, 215u8, 84u8, 56u8, 193u8, 19u8, 147u8,
+                            96u8, 5u8, 4u8, 223u8, 106u8, 30u8, 21u8, 89u8,
                         ]
                     {
                         let call = ProposeBounty { value, description };
@@ -24785,11 +25015,11 @@ pub mod api {
                 > {
                     if self.client.metadata().call_hash::<ProposeCurator>()?
                         == [
-                            189u8, 94u8, 10u8, 85u8, 139u8, 136u8, 154u8, 18u8,
-                            84u8, 174u8, 183u8, 92u8, 98u8, 90u8, 173u8, 177u8,
-                            218u8, 104u8, 248u8, 99u8, 59u8, 45u8, 100u8,
-                            163u8, 244u8, 25u8, 64u8, 133u8, 125u8, 170u8,
-                            251u8, 107u8,
+                            252u8, 38u8, 214u8, 162u8, 194u8, 249u8, 16u8,
+                            54u8, 77u8, 181u8, 121u8, 16u8, 242u8, 109u8, 13u8,
+                            28u8, 111u8, 194u8, 174u8, 234u8, 254u8, 80u8,
+                            26u8, 19u8, 58u8, 149u8, 2u8, 50u8, 10u8, 70u8,
+                            154u8, 101u8,
                         ]
                     {
                         let call = ProposeCurator {
@@ -25233,7 +25463,10 @@ pub mod api {
             impl ::subxt::StorageEntry for BountyDescriptions<'_> {
                 const PALLET: &'static str = "Bounties";
                 const STORAGE: &'static str = "BountyDescriptions";
-                type Value = runtime_types :: frame_support :: storage :: bounded_vec :: BoundedVec < :: core :: primitive :: u8 > ;
+                type Value =
+                    runtime_types::sp_runtime::bounded::bounded_vec::BoundedVec<
+                        ::core::primitive::u8,
+                    >;
                 fn key(&self) -> ::subxt::StorageEntryKey {
                     ::subxt::StorageEntryKey::Map(vec![
                         ::subxt::StorageMapKey::new(
@@ -25247,7 +25480,10 @@ pub mod api {
             impl ::subxt::StorageEntry for BountyApprovals {
                 const PALLET: &'static str = "Bounties";
                 const STORAGE: &'static str = "BountyApprovals";
-                type Value = runtime_types :: frame_support :: storage :: bounded_vec :: BoundedVec < :: core :: primitive :: u32 > ;
+                type Value =
+                    runtime_types::sp_runtime::bounded::bounded_vec::BoundedVec<
+                        ::core::primitive::u32,
+                    >;
                 fn key(&self) -> ::subxt::StorageEntryKey {
                     ::subxt::StorageEntryKey::Plain
                 }
@@ -25337,7 +25573,7 @@ pub mod api {
                         Err(::subxt::MetadataError::IncompatibleMetadata.into())
                     }
                 }
-                #[doc = " The description of each bounty."]                pub async fn bounty_descriptions (& self , _0 : & :: core :: primitive :: u32 , block_hash : :: core :: option :: Option < T :: Hash > ,) -> :: core :: result :: Result < :: core :: option :: Option < runtime_types :: frame_support :: storage :: bounded_vec :: BoundedVec < :: core :: primitive :: u8 > > , :: subxt :: BasicError >{
+                #[doc = " The description of each bounty."]                pub async fn bounty_descriptions (& self , _0 : & :: core :: primitive :: u32 , block_hash : :: core :: option :: Option < T :: Hash > ,) -> :: core :: result :: Result < :: core :: option :: Option < runtime_types :: sp_runtime :: bounded :: bounded_vec :: BoundedVec < :: core :: primitive :: u8 > > , :: subxt :: BasicError >{
                     if self
                         .client
                         .metadata()
@@ -25381,7 +25617,16 @@ pub mod api {
                         Err(::subxt::MetadataError::IncompatibleMetadata.into())
                     }
                 }
-                #[doc = " Bounty indices that have been approved but not yet funded."]                pub async fn bounty_approvals (& self , block_hash : :: core :: option :: Option < T :: Hash > ,) -> :: core :: result :: Result < runtime_types :: frame_support :: storage :: bounded_vec :: BoundedVec < :: core :: primitive :: u32 > , :: subxt :: BasicError >{
+                #[doc = " Bounty indices that have been approved but not yet funded."]
+                pub async fn bounty_approvals(
+                    &self,
+                    block_hash: ::core::option::Option<T::Hash>,
+                ) -> ::core::result::Result<
+                    runtime_types::sp_runtime::bounded::bounded_vec::BoundedVec<
+                        ::core::primitive::u32,
+                    >,
+                    ::subxt::BasicError,
+                > {
                     if self
                         .client
                         .metadata()
@@ -26394,7 +26639,10 @@ pub mod api {
             impl ::subxt::StorageEntry for ChildBountyDescriptions<'_> {
                 const PALLET: &'static str = "ChildBounties";
                 const STORAGE: &'static str = "ChildBountyDescriptions";
-                type Value = runtime_types :: frame_support :: storage :: bounded_vec :: BoundedVec < :: core :: primitive :: u8 > ;
+                type Value =
+                    runtime_types::sp_runtime::bounded::bounded_vec::BoundedVec<
+                        ::core::primitive::u8,
+                    >;
                 fn key(&self) -> ::subxt::StorageEntryKey {
                     ::subxt::StorageEntryKey::Map(vec![
                         ::subxt::StorageMapKey::new(
@@ -26564,7 +26812,7 @@ pub mod api {
                         Err(::subxt::MetadataError::IncompatibleMetadata.into())
                     }
                 }
-                #[doc = " The description of each child-bounty."]                pub async fn child_bounty_descriptions (& self , _0 : & :: core :: primitive :: u32 , block_hash : :: core :: option :: Option < T :: Hash > ,) -> :: core :: result :: Result < :: core :: option :: Option < runtime_types :: frame_support :: storage :: bounded_vec :: BoundedVec < :: core :: primitive :: u8 > > , :: subxt :: BasicError >{
+                #[doc = " The description of each child-bounty."]                pub async fn child_bounty_descriptions (& self , _0 : & :: core :: primitive :: u32 , block_hash : :: core :: option :: Option < T :: Hash > ,) -> :: core :: result :: Result < :: core :: option :: Option < runtime_types :: sp_runtime :: bounded :: bounded_vec :: BoundedVec < :: core :: primitive :: u8 > > , :: subxt :: BasicError >{
                     if self
                         .client
                         .metadata()
@@ -27403,6 +27651,22 @@ pub mod api {
                 const PALLET: &'static str = "NominationPools";
                 const FUNCTION: &'static str = "update_roles";
             }
+            #[derive(
+                :: subxt :: codec :: CompactAs,
+                :: subxt :: codec :: Decode,
+                :: subxt :: codec :: Encode,
+                Clone,
+                Debug,
+                Eq,
+                PartialEq,
+            )]
+            pub struct Chill {
+                pub pool_id: ::core::primitive::u32,
+            }
+            impl ::subxt::Call for Chill {
+                const PALLET: &'static str = "NominationPools";
+                const FUNCTION: &'static str = "chill";
+            }
             pub struct TransactionApi<'a, T: ::subxt::Config, X> {
                 client: &'a ::subxt::Client<T>,
                 marker: ::core::marker::PhantomData<X>,
@@ -27538,7 +27802,7 @@ pub mod api {
                 }
                 #[doc = "Unbond up to `unbonding_points` of the `member_account`'s funds from the pool. It"]
                 #[doc = "implicitly collects the rewards one last time, since not doing so would mean some"]
-                #[doc = "rewards would go forfeited."]
+                #[doc = "rewards would be forfeited."]
                 #[doc = ""]
                 #[doc = "Under certain conditions, this call can be dispatched permissionlessly (i.e. by any"]
                 #[doc = "account)."]
@@ -27757,6 +28021,13 @@ pub mod api {
                         Err(::subxt::MetadataError::IncompatibleMetadata.into())
                     }
                 }
+                #[doc = "Nominate on behalf of the pool."]
+                #[doc = ""]
+                #[doc = "The dispatch origin of this call must be signed by the pool nominator or the pool"]
+                #[doc = "root role."]
+                #[doc = ""]
+                #[doc = "This directly forward the call to the staking pallet, on behalf of the pool bonded"]
+                #[doc = "account."]
                 pub fn nominate(
                     &self,
                     pool_id: ::core::primitive::u32,
@@ -27795,6 +28066,10 @@ pub mod api {
                         Err(::subxt::MetadataError::IncompatibleMetadata.into())
                     }
                 }
+                #[doc = "Set a new state for the pool."]
+                #[doc = ""]
+                #[doc = "The dispatch origin of this call must be signed by the state toggler, or the root role"]
+                #[doc = "of the pool."]
                 pub fn set_state(
                     &self,
                     pool_id: ::core::primitive::u32,
@@ -27828,6 +28103,10 @@ pub mod api {
                         Err(::subxt::MetadataError::IncompatibleMetadata.into())
                     }
                 }
+                #[doc = "Set a new metadata for the pool."]
+                #[doc = ""]
+                #[doc = "The dispatch origin of this call must be signed by the state toggler, or the root role"]
+                #[doc = "of the pool."]
                 pub fn set_metadata(
                     &self,
                     pool_id: ::core::primitive::u32,
@@ -27964,6 +28243,45 @@ pub mod api {
                         Err(::subxt::MetadataError::IncompatibleMetadata.into())
                     }
                 }
+                #[doc = "Chill on behalf of the pool."]
+                #[doc = ""]
+                #[doc = "The dispatch origin of this call must be signed by the pool nominator or the pool"]
+                #[doc = "root role, same as [`Pallet::nominate`]."]
+                #[doc = ""]
+                #[doc = "This directly forward the call to the staking pallet, on behalf of the pool bonded"]
+                #[doc = "account."]
+                pub fn chill(
+                    &self,
+                    pool_id: ::core::primitive::u32,
+                ) -> Result<
+                    ::subxt::SubmittableExtrinsic<
+                        'a,
+                        T,
+                        X,
+                        Chill,
+                        DispatchError,
+                        root_mod::Event,
+                    >,
+                    ::subxt::BasicError,
+                > {
+                    if self.client.metadata().call_hash::<Chill>()?
+                        == [
+                            12u8, 36u8, 224u8, 17u8, 59u8, 5u8, 198u8, 193u8,
+                            237u8, 29u8, 227u8, 171u8, 238u8, 81u8, 35u8, 90u8,
+                            73u8, 68u8, 168u8, 129u8, 248u8, 103u8, 30u8, 10u8,
+                            88u8, 241u8, 164u8, 91u8, 116u8, 48u8, 129u8,
+                            157u8,
+                        ]
+                    {
+                        let call = Chill { pool_id };
+                        Ok(::subxt::SubmittableExtrinsic::new(
+                            self.client,
+                            call,
+                        ))
+                    } else {
+                        Err(::subxt::MetadataError::IncompatibleMetadata.into())
+                    }
+                }
             }
         }
         pub type Event = runtime_types::pallet_nomination_pools::pallet::Event;
@@ -28032,10 +28350,21 @@ pub mod api {
                 PartialEq,
             )]
             #[doc = "A member has unbonded from their pool."]
+            #[doc = ""]
+            #[doc = "- `balance` is the corresponding balance of the number of points that has been"]
+            #[doc = "  requested to be unbonded (the argument of the `unbond` transaction) from the bonded"]
+            #[doc = "  pool."]
+            #[doc = "- `points` is the number of points that are issued as a result of `balance` being"]
+            #[doc = "dissolved into the corresponding unbonding pool."]
+            #[doc = ""]
+            #[doc = "In the absence of slashing, these values will match. In the presence of slashing, the"]
+            #[doc = "number of points that are issued in the unbonding pool will be less than the amount"]
+            #[doc = "requested to be unbonded."]
             pub struct Unbonded {
                 pub member: ::subxt::sp_core::crypto::AccountId32,
                 pub pool_id: ::core::primitive::u32,
-                pub amount: ::core::primitive::u128,
+                pub balance: ::core::primitive::u128,
+                pub points: ::core::primitive::u128,
             }
             impl ::subxt::Event for Unbonded {
                 const PALLET: &'static str = "NominationPools";
@@ -28050,10 +28379,16 @@ pub mod api {
                 PartialEq,
             )]
             #[doc = "A member has withdrawn from their pool."]
+            #[doc = ""]
+            #[doc = "The given number of `points` have been dissolved in return of `balance`."]
+            #[doc = ""]
+            #[doc = "Similar to `Unbonded` event, in the absence of slashing, the ratio of point to balance"]
+            #[doc = "will be 1."]
             pub struct Withdrawn {
                 pub member: ::subxt::sp_core::crypto::AccountId32,
                 pub pool_id: ::core::primitive::u32,
-                pub amount: ::core::primitive::u128,
+                pub balance: ::core::primitive::u128,
+                pub points: ::core::primitive::u128,
             }
             impl ::subxt::Event for Withdrawn {
                 const PALLET: &'static str = "NominationPools";
@@ -28137,6 +28472,41 @@ pub mod api {
             impl ::subxt::Event for RolesUpdated {
                 const PALLET: &'static str = "NominationPools";
                 const EVENT: &'static str = "RolesUpdated";
+            }
+            #[derive(
+                :: subxt :: codec :: Decode,
+                :: subxt :: codec :: Encode,
+                Clone,
+                Debug,
+                Eq,
+                PartialEq,
+            )]
+            #[doc = "The active balance of pool `pool_id` has been slashed to `balance`."]
+            pub struct PoolSlashed {
+                pub pool_id: ::core::primitive::u32,
+                pub balance: ::core::primitive::u128,
+            }
+            impl ::subxt::Event for PoolSlashed {
+                const PALLET: &'static str = "NominationPools";
+                const EVENT: &'static str = "PoolSlashed";
+            }
+            #[derive(
+                :: subxt :: codec :: Decode,
+                :: subxt :: codec :: Encode,
+                Clone,
+                Debug,
+                Eq,
+                PartialEq,
+            )]
+            #[doc = "The unbond pool at `era` of pool `pool_id` has been slashed to `balance`."]
+            pub struct UnbondingPoolSlashed {
+                pub pool_id: ::core::primitive::u32,
+                pub era: ::core::primitive::u32,
+                pub balance: ::core::primitive::u128,
+            }
+            impl ::subxt::Event for UnbondingPoolSlashed {
+                const PALLET: &'static str = "NominationPools";
+                const EVENT: &'static str = "UnbondingPoolSlashed";
             }
         }
         pub mod storage {
@@ -28285,7 +28655,10 @@ pub mod api {
             impl ::subxt::StorageEntry for Metadata<'_> {
                 const PALLET: &'static str = "NominationPools";
                 const STORAGE: &'static str = "Metadata";
-                type Value = runtime_types :: frame_support :: storage :: bounded_vec :: BoundedVec < :: core :: primitive :: u8 > ;
+                type Value =
+                    runtime_types::sp_runtime::bounded::bounded_vec::BoundedVec<
+                        ::core::primitive::u8,
+                    >;
                 fn key(&self) -> ::subxt::StorageEntryKey {
                     ::subxt::StorageEntryKey::Map(vec![
                         ::subxt::StorageMapKey::new(
@@ -28375,6 +28748,9 @@ pub mod api {
                 #[doc = ""]
                 #[doc = " This is the amount that the depositor must put as their initial stake in the pool, as an"]
                 #[doc = " indication of \"skin in the game\"."]
+                #[doc = ""]
+                #[doc = " This is the value that will always exist in the staking ledger of the pool bonded account"]
+                #[doc = " while all other accounts leave."]
                 pub async fn min_create_bond(
                     &self,
                     block_hash: ::core::option::Option<T::Hash>,
@@ -28796,7 +29172,17 @@ pub mod api {
                         Err(::subxt::MetadataError::IncompatibleMetadata.into())
                     }
                 }
-                #[doc = " Metadata for the pool."]                pub async fn metadata (& self , _0 : & :: core :: primitive :: u32 , block_hash : :: core :: option :: Option < T :: Hash > ,) -> :: core :: result :: Result < runtime_types :: frame_support :: storage :: bounded_vec :: BoundedVec < :: core :: primitive :: u8 > , :: subxt :: BasicError >{
+                #[doc = " Metadata for the pool."]
+                pub async fn metadata(
+                    &self,
+                    _0: &::core::primitive::u32,
+                    block_hash: ::core::option::Option<T::Hash>,
+                ) -> ::core::result::Result<
+                    runtime_types::sp_runtime::bounded::bounded_vec::BoundedVec<
+                        ::core::primitive::u8,
+                    >,
+                    ::subxt::BasicError,
+                > {
                     if self.client.metadata().storage_hash::<Metadata>()?
                         == [
                             185u8, 180u8, 185u8, 231u8, 60u8, 87u8, 71u8, 2u8,
@@ -29577,7 +29963,17 @@ pub mod api {
                 PartialEq,
             )]
             #[doc = "Asset was registered."]
-            pub struct Registered { pub asset_id : :: core :: primitive :: u32 , pub name : runtime_types :: frame_support :: storage :: bounded_vec :: BoundedVec < :: core :: primitive :: u8 > , pub asset_type : runtime_types :: pallet_asset_registry :: types :: AssetType < :: core :: primitive :: u32 > , }
+            pub struct Registered {
+                pub asset_id: ::core::primitive::u32,
+                pub name:
+                    runtime_types::sp_runtime::bounded::bounded_vec::BoundedVec<
+                        ::core::primitive::u8,
+                    >,
+                pub asset_type:
+                    runtime_types::pallet_asset_registry::types::AssetType<
+                        ::core::primitive::u32,
+                    >,
+            }
             impl ::subxt::Event for Registered {
                 const PALLET: &'static str = "AssetRegistry";
                 const EVENT: &'static str = "Registered";
@@ -29591,7 +29987,17 @@ pub mod api {
                 PartialEq,
             )]
             #[doc = "Asset was updated."]
-            pub struct Updated { pub asset_id : :: core :: primitive :: u32 , pub name : runtime_types :: frame_support :: storage :: bounded_vec :: BoundedVec < :: core :: primitive :: u8 > , pub asset_type : runtime_types :: pallet_asset_registry :: types :: AssetType < :: core :: primitive :: u32 > , }
+            pub struct Updated {
+                pub asset_id: ::core::primitive::u32,
+                pub name:
+                    runtime_types::sp_runtime::bounded::bounded_vec::BoundedVec<
+                        ::core::primitive::u8,
+                    >,
+                pub asset_type:
+                    runtime_types::pallet_asset_registry::types::AssetType<
+                        ::core::primitive::u32,
+                    >,
+            }
             impl ::subxt::Event for Updated {
                 const PALLET: &'static str = "AssetRegistry";
                 const EVENT: &'static str = "Updated";
@@ -29605,7 +30011,14 @@ pub mod api {
                 PartialEq,
             )]
             #[doc = "Metadata set for an asset."]
-            pub struct MetadataSet { pub asset_id : :: core :: primitive :: u32 , pub symbol : runtime_types :: frame_support :: storage :: bounded_vec :: BoundedVec < :: core :: primitive :: u8 > , pub decimals : :: core :: primitive :: u8 , }
+            pub struct MetadataSet {
+                pub asset_id: ::core::primitive::u32,
+                pub symbol:
+                    runtime_types::sp_runtime::bounded::bounded_vec::BoundedVec<
+                        ::core::primitive::u8,
+                    >,
+                pub decimals: ::core::primitive::u8,
+            }
             impl ::subxt::Event for MetadataSet {
                 const PALLET: &'static str = "AssetRegistry";
                 const EVENT: &'static str = "MetadataSet";
@@ -29634,7 +30047,7 @@ pub mod api {
             impl ::subxt::StorageEntry for Assets<'_> {
                 const PALLET: &'static str = "AssetRegistry";
                 const STORAGE: &'static str = "Assets";
-                type Value = runtime_types :: pallet_asset_registry :: types :: AssetDetails < :: core :: primitive :: u32 , :: core :: primitive :: u128 , runtime_types :: frame_support :: storage :: bounded_vec :: BoundedVec < :: core :: primitive :: u8 > > ;
+                type Value = runtime_types :: pallet_asset_registry :: types :: AssetDetails < :: core :: primitive :: u32 , :: core :: primitive :: u128 , runtime_types :: sp_runtime :: bounded :: bounded_vec :: BoundedVec < :: core :: primitive :: u8 > > ;
                 fn key(&self) -> ::subxt::StorageEntryKey {
                     ::subxt::StorageEntryKey::Map(vec![
                         ::subxt::StorageMapKey::new(
@@ -29653,7 +30066,7 @@ pub mod api {
                     ::subxt::StorageEntryKey::Plain
                 }
             }
-            pub struct AssetIds < 'a > (pub & 'a runtime_types :: frame_support :: storage :: bounded_vec :: BoundedVec < :: core :: primitive :: u8 >) ;
+            pub struct AssetIds < 'a > (pub & 'a runtime_types :: sp_runtime :: bounded :: bounded_vec :: BoundedVec < :: core :: primitive :: u8 >) ;
             impl ::subxt::StorageEntry for AssetIds<'_> {
                 const PALLET: &'static str = "AssetRegistry";
                 const STORAGE: &'static str = "AssetIds";
@@ -29699,7 +30112,7 @@ pub mod api {
             impl ::subxt::StorageEntry for AssetMetadataMap<'_> {
                 const PALLET: &'static str = "AssetRegistry";
                 const STORAGE: &'static str = "AssetMetadataMap";
-                type Value = runtime_types :: pallet_asset_registry :: types :: AssetMetadata < runtime_types :: frame_support :: storage :: bounded_vec :: BoundedVec < :: core :: primitive :: u8 > > ;
+                type Value = runtime_types :: pallet_asset_registry :: types :: AssetMetadata < runtime_types :: sp_runtime :: bounded :: bounded_vec :: BoundedVec < :: core :: primitive :: u8 > > ;
                 fn key(&self) -> ::subxt::StorageEntryKey {
                     ::subxt::StorageEntryKey::Map(vec![
                         ::subxt::StorageMapKey::new(
@@ -29716,7 +30129,7 @@ pub mod api {
                 pub fn new(client: &'a ::subxt::Client<T>) -> Self {
                     Self { client }
                 }
-                #[doc = " Details of an asset."]                pub async fn assets (& self , _0 : & :: core :: primitive :: u32 , block_hash : :: core :: option :: Option < T :: Hash > ,) -> :: core :: result :: Result < :: core :: option :: Option < runtime_types :: pallet_asset_registry :: types :: AssetDetails < :: core :: primitive :: u32 , :: core :: primitive :: u128 , runtime_types :: frame_support :: storage :: bounded_vec :: BoundedVec < :: core :: primitive :: u8 > > > , :: subxt :: BasicError >{
+                #[doc = " Details of an asset."]                pub async fn assets (& self , _0 : & :: core :: primitive :: u32 , block_hash : :: core :: option :: Option < T :: Hash > ,) -> :: core :: result :: Result < :: core :: option :: Option < runtime_types :: pallet_asset_registry :: types :: AssetDetails < :: core :: primitive :: u32 , :: core :: primitive :: u128 , runtime_types :: sp_runtime :: bounded :: bounded_vec :: BoundedVec < :: core :: primitive :: u8 > > > , :: subxt :: BasicError >{
                     if self.client.metadata().storage_hash::<Assets>()?
                         == [
                             218u8, 252u8, 103u8, 16u8, 161u8, 109u8, 105u8,
@@ -29784,7 +30197,7 @@ pub mod api {
                 #[doc = " Mapping between asset name and asset id."]
                 pub async fn asset_ids(
                     &self,
-                    _0 : & runtime_types :: frame_support :: storage :: bounded_vec :: BoundedVec < :: core :: primitive :: u8 >,
+                    _0 : & runtime_types :: sp_runtime :: bounded :: bounded_vec :: BoundedVec < :: core :: primitive :: u8 >,
                     block_hash: ::core::option::Option<T::Hash>,
                 ) -> ::core::result::Result<
                     ::core::option::Option<::core::primitive::u32>,
@@ -29931,7 +30344,7 @@ pub mod api {
                         Err(::subxt::MetadataError::IncompatibleMetadata.into())
                     }
                 }
-                #[doc = " Metadata of an asset."]                pub async fn asset_metadata_map (& self , _0 : & :: core :: primitive :: u32 , block_hash : :: core :: option :: Option < T :: Hash > ,) -> :: core :: result :: Result < :: core :: option :: Option < runtime_types :: pallet_asset_registry :: types :: AssetMetadata < runtime_types :: frame_support :: storage :: bounded_vec :: BoundedVec < :: core :: primitive :: u8 > > > , :: subxt :: BasicError >{
+                #[doc = " Metadata of an asset."]                pub async fn asset_metadata_map (& self , _0 : & :: core :: primitive :: u32 , block_hash : :: core :: option :: Option < T :: Hash > ,) -> :: core :: result :: Result < :: core :: option :: Option < runtime_types :: pallet_asset_registry :: types :: AssetMetadata < runtime_types :: sp_runtime :: bounded :: bounded_vec :: BoundedVec < :: core :: primitive :: u8 > > > , :: subxt :: BasicError >{
                     if self
                         .client
                         .metadata()
@@ -30948,7 +31361,12 @@ pub mod api {
             impl ::subxt::StorageEntry for Locks<'_> {
                 const PALLET: &'static str = "Tokens";
                 const STORAGE: &'static str = "Locks";
-                type Value = runtime_types :: frame_support :: storage :: bounded_vec :: BoundedVec < runtime_types :: orml_tokens :: BalanceLock < :: core :: primitive :: u128 > > ;
+                type Value =
+                    runtime_types::sp_runtime::bounded::bounded_vec::BoundedVec<
+                        runtime_types::orml_tokens::BalanceLock<
+                            ::core::primitive::u128,
+                        >,
+                    >;
                 fn key(&self) -> ::subxt::StorageEntryKey {
                     ::subxt::StorageEntryKey::Map(vec![
                         ::subxt::StorageMapKey::new(
@@ -30992,7 +31410,13 @@ pub mod api {
             impl ::subxt::StorageEntry for Reserves<'_> {
                 const PALLET: &'static str = "Tokens";
                 const STORAGE: &'static str = "Reserves";
-                type Value = runtime_types :: frame_support :: storage :: bounded_vec :: BoundedVec < runtime_types :: orml_tokens :: ReserveData < [:: core :: primitive :: u8 ; 8usize] , :: core :: primitive :: u128 > > ;
+                type Value =
+                    runtime_types::sp_runtime::bounded::bounded_vec::BoundedVec<
+                        runtime_types::orml_tokens::ReserveData<
+                            [::core::primitive::u8; 8usize],
+                            ::core::primitive::u128,
+                        >,
+                    >;
                 fn key(&self) -> ::subxt::StorageEntryKey {
                     ::subxt::StorageEntryKey::Map(vec![
                         ::subxt::StorageMapKey::new(
@@ -31063,7 +31487,20 @@ pub mod api {
                     }
                 }
                 #[doc = " Any liquidity locks of a token type under an account."]
-                #[doc = " NOTE: Should only be accessed when setting, changing and freeing a lock."]                pub async fn locks (& self , _0 : & :: subxt :: sp_core :: crypto :: AccountId32 , _1 : & :: core :: primitive :: u32 , block_hash : :: core :: option :: Option < T :: Hash > ,) -> :: core :: result :: Result < runtime_types :: frame_support :: storage :: bounded_vec :: BoundedVec < runtime_types :: orml_tokens :: BalanceLock < :: core :: primitive :: u128 > > , :: subxt :: BasicError >{
+                #[doc = " NOTE: Should only be accessed when setting, changing and freeing a lock."]
+                pub async fn locks(
+                    &self,
+                    _0: &::subxt::sp_core::crypto::AccountId32,
+                    _1: &::core::primitive::u32,
+                    block_hash: ::core::option::Option<T::Hash>,
+                ) -> ::core::result::Result<
+                    runtime_types::sp_runtime::bounded::bounded_vec::BoundedVec<
+                        runtime_types::orml_tokens::BalanceLock<
+                            ::core::primitive::u128,
+                        >,
+                    >,
+                    ::subxt::BasicError,
+                > {
                     if self.client.metadata().storage_hash::<Locks>()?
                         == [
                             54u8, 228u8, 55u8, 85u8, 74u8, 86u8, 166u8, 102u8,
@@ -31165,7 +31602,21 @@ pub mod api {
                         Err(::subxt::MetadataError::IncompatibleMetadata.into())
                     }
                 }
-                #[doc = " Named reserves on some account balances."]                pub async fn reserves (& self , _0 : & :: subxt :: sp_core :: crypto :: AccountId32 , _1 : & :: core :: primitive :: u32 , block_hash : :: core :: option :: Option < T :: Hash > ,) -> :: core :: result :: Result < runtime_types :: frame_support :: storage :: bounded_vec :: BoundedVec < runtime_types :: orml_tokens :: ReserveData < [:: core :: primitive :: u8 ; 8usize] , :: core :: primitive :: u128 > > , :: subxt :: BasicError >{
+                #[doc = " Named reserves on some account balances."]
+                pub async fn reserves(
+                    &self,
+                    _0: &::subxt::sp_core::crypto::AccountId32,
+                    _1: &::core::primitive::u32,
+                    block_hash: ::core::option::Option<T::Hash>,
+                ) -> ::core::result::Result<
+                    runtime_types::sp_runtime::bounded::bounded_vec::BoundedVec<
+                        runtime_types::orml_tokens::ReserveData<
+                            [::core::primitive::u8; 8usize],
+                            ::core::primitive::u128,
+                        >,
+                    >,
+                    ::subxt::BasicError,
+                > {
                     if self.client.metadata().storage_hash::<Reserves>()?
                         == [
                             21u8, 43u8, 4u8, 147u8, 195u8, 66u8, 224u8, 166u8,
@@ -36388,11 +36839,11 @@ pub mod api {
                         .metadata()
                         .call_hash::<AcknowledgeProposal>()?
                         == [
-                            156u8, 118u8, 142u8, 159u8, 155u8, 235u8, 21u8,
-                            241u8, 39u8, 4u8, 34u8, 145u8, 113u8, 123u8, 243u8,
-                            85u8, 129u8, 228u8, 89u8, 6u8, 178u8, 77u8, 153u8,
-                            40u8, 176u8, 77u8, 227u8, 151u8, 134u8, 246u8,
-                            203u8, 176u8,
+                            236u8, 28u8, 51u8, 146u8, 141u8, 49u8, 231u8, 40u8,
+                            201u8, 90u8, 100u8, 250u8, 125u8, 66u8, 188u8,
+                            64u8, 40u8, 117u8, 205u8, 250u8, 213u8, 16u8, 20u8,
+                            227u8, 51u8, 162u8, 99u8, 86u8, 235u8, 3u8, 196u8,
+                            125u8,
                         ]
                     {
                         let call = AcknowledgeProposal {
@@ -36433,11 +36884,11 @@ pub mod api {
                 > {
                     if self.client.metadata().call_hash::<RejectProposal>()?
                         == [
-                            91u8, 241u8, 119u8, 187u8, 109u8, 171u8, 42u8,
-                            135u8, 175u8, 170u8, 15u8, 252u8, 182u8, 103u8,
-                            200u8, 133u8, 43u8, 61u8, 227u8, 190u8, 18u8,
-                            183u8, 186u8, 19u8, 202u8, 55u8, 139u8, 64u8, 42u8,
-                            245u8, 236u8, 132u8,
+                            55u8, 2u8, 133u8, 134u8, 109u8, 53u8, 173u8, 248u8,
+                            174u8, 238u8, 214u8, 156u8, 122u8, 39u8, 132u8,
+                            108u8, 179u8, 255u8, 62u8, 243u8, 95u8, 204u8,
+                            105u8, 173u8, 118u8, 137u8, 54u8, 116u8, 41u8,
+                            59u8, 117u8, 208u8,
                         ]
                     {
                         let call = RejectProposal {
@@ -36480,11 +36931,11 @@ pub mod api {
                 > {
                     if self.client.metadata().call_hash::<EvalVoteState>()?
                         == [
-                            131u8, 145u8, 252u8, 122u8, 151u8, 216u8, 206u8,
-                            140u8, 47u8, 171u8, 238u8, 184u8, 114u8, 6u8,
-                            247u8, 140u8, 113u8, 108u8, 55u8, 206u8, 195u8,
-                            114u8, 234u8, 45u8, 248u8, 222u8, 253u8, 114u8,
-                            140u8, 108u8, 89u8, 156u8,
+                            145u8, 111u8, 93u8, 243u8, 214u8, 119u8, 123u8,
+                            176u8, 87u8, 111u8, 128u8, 122u8, 194u8, 17u8,
+                            163u8, 155u8, 58u8, 16u8, 74u8, 120u8, 100u8,
+                            167u8, 66u8, 54u8, 189u8, 212u8, 187u8, 24u8, 9u8,
+                            242u8, 1u8, 68u8,
                         ]
                     {
                         let call = EvalVoteState {
@@ -36943,11 +37394,11 @@ pub mod api {
                 > {
                     if self.client.metadata().storage_hash::<Votes>()?
                         == [
-                            122u8, 59u8, 160u8, 58u8, 82u8, 151u8, 234u8,
-                            244u8, 227u8, 19u8, 19u8, 50u8, 96u8, 70u8, 195u8,
-                            213u8, 14u8, 83u8, 130u8, 87u8, 104u8, 121u8, 42u8,
-                            147u8, 49u8, 43u8, 229u8, 193u8, 67u8, 205u8,
-                            107u8, 188u8,
+                            57u8, 50u8, 68u8, 126u8, 11u8, 102u8, 76u8, 67u8,
+                            133u8, 43u8, 243u8, 206u8, 228u8, 1u8, 149u8,
+                            103u8, 97u8, 151u8, 222u8, 232u8, 16u8, 212u8,
+                            209u8, 255u8, 80u8, 25u8, 108u8, 121u8, 241u8,
+                            121u8, 3u8, 29u8,
                         ]
                     {
                         let entry = Votes(_0, _1);
@@ -36968,11 +37419,11 @@ pub mod api {
                 > {
                     if self.client.metadata().storage_hash::<Votes>()?
                         == [
-                            122u8, 59u8, 160u8, 58u8, 82u8, 151u8, 234u8,
-                            244u8, 227u8, 19u8, 19u8, 50u8, 96u8, 70u8, 195u8,
-                            213u8, 14u8, 83u8, 130u8, 87u8, 104u8, 121u8, 42u8,
-                            147u8, 49u8, 43u8, 229u8, 193u8, 67u8, 205u8,
-                            107u8, 188u8,
+                            57u8, 50u8, 68u8, 126u8, 11u8, 102u8, 76u8, 67u8,
+                            133u8, 43u8, 243u8, 206u8, 228u8, 1u8, 149u8,
+                            103u8, 97u8, 151u8, 222u8, 232u8, 16u8, 212u8,
+                            209u8, 255u8, 80u8, 25u8, 108u8, 121u8, 241u8,
+                            121u8, 3u8, 29u8,
                         ]
                     {
                         self.client.storage().iter(block_hash).await
@@ -37526,11 +37977,11 @@ pub mod api {
                         .metadata()
                         .call_hash::<SetResourceWithSignature>()?
                         == [
-                            146u8, 53u8, 34u8, 127u8, 166u8, 179u8, 220u8,
-                            74u8, 50u8, 112u8, 97u8, 240u8, 221u8, 219u8,
-                            155u8, 146u8, 235u8, 202u8, 87u8, 136u8, 173u8,
-                            135u8, 70u8, 98u8, 183u8, 239u8, 167u8, 68u8,
-                            209u8, 115u8, 76u8, 94u8,
+                            85u8, 177u8, 67u8, 43u8, 211u8, 124u8, 8u8, 240u8,
+                            113u8, 195u8, 64u8, 21u8, 147u8, 41u8, 153u8,
+                            155u8, 132u8, 3u8, 254u8, 124u8, 192u8, 185u8,
+                            145u8, 78u8, 10u8, 171u8, 18u8, 184u8, 57u8, 232u8,
+                            242u8, 242u8,
                         ]
                     {
                         let call = SetResourceWithSignature {
@@ -37590,11 +38041,11 @@ pub mod api {
                 > {
                     if self.client.metadata().call_hash::<ExecuteProposal>()?
                         == [
-                            66u8, 234u8, 77u8, 223u8, 238u8, 224u8, 164u8,
-                            208u8, 114u8, 110u8, 35u8, 110u8, 160u8, 142u8,
-                            60u8, 226u8, 172u8, 158u8, 159u8, 47u8, 163u8,
-                            77u8, 1u8, 244u8, 177u8, 78u8, 96u8, 211u8, 116u8,
-                            205u8, 199u8, 123u8,
+                            10u8, 140u8, 52u8, 82u8, 32u8, 196u8, 101u8, 129u8,
+                            248u8, 124u8, 136u8, 128u8, 246u8, 30u8, 43u8,
+                            86u8, 233u8, 25u8, 13u8, 32u8, 16u8, 102u8, 232u8,
+                            211u8, 223u8, 118u8, 7u8, 14u8, 20u8, 228u8, 140u8,
+                            232u8,
                         ]
                     {
                         let call = ExecuteProposal {
@@ -38133,47 +38584,6 @@ pub mod api {
                     Signed(_0),
                     #[codec(index = 2)]
                     None,
-                }
-            }
-            pub mod storage {
-                use super::runtime_types;
-                pub mod bounded_btree_map {
-                    use super::runtime_types;
-                    #[derive(
-                        :: subxt :: codec :: Decode,
-                        :: subxt :: codec :: Encode,
-                        Clone,
-                        Debug,
-                        Eq,
-                        PartialEq,
-                    )]
-                    pub struct BoundedBTreeMap<_0, _1>(
-                        pub ::subxt::KeyedVec<_0, _1>,
-                    );
-                }
-                pub mod bounded_vec {
-                    use super::runtime_types;
-                    #[derive(
-                        :: subxt :: codec :: Decode,
-                        :: subxt :: codec :: Encode,
-                        Clone,
-                        Debug,
-                        Eq,
-                        PartialEq,
-                    )]
-                    pub struct BoundedVec<_0>(pub ::std::vec::Vec<_0>);
-                }
-                pub mod weak_bounded_vec {
-                    use super::runtime_types;
-                    #[derive(
-                        :: subxt :: codec :: Decode,
-                        :: subxt :: codec :: Encode,
-                        Clone,
-                        Debug,
-                        Eq,
-                        PartialEq,
-                    )]
-                    pub struct WeakBoundedVec<_0>(pub ::std::vec::Vec<_0>);
                 }
             }
             pub mod traits {
@@ -39242,7 +39652,7 @@ pub mod api {
                     PartialEq,
                 )]
                 pub enum Event {
-                    # [codec (index = 0)] # [doc = "Asset was registered."] Registered { asset_id : :: core :: primitive :: u32 , name : runtime_types :: frame_support :: storage :: bounded_vec :: BoundedVec < :: core :: primitive :: u8 > , asset_type : runtime_types :: pallet_asset_registry :: types :: AssetType < :: core :: primitive :: u32 > , } , # [codec (index = 1)] # [doc = "Asset was updated."] Updated { asset_id : :: core :: primitive :: u32 , name : runtime_types :: frame_support :: storage :: bounded_vec :: BoundedVec < :: core :: primitive :: u8 > , asset_type : runtime_types :: pallet_asset_registry :: types :: AssetType < :: core :: primitive :: u32 > , } , # [codec (index = 2)] # [doc = "Metadata set for an asset."] MetadataSet { asset_id : :: core :: primitive :: u32 , symbol : runtime_types :: frame_support :: storage :: bounded_vec :: BoundedVec < :: core :: primitive :: u8 > , decimals : :: core :: primitive :: u8 , } , # [codec (index = 3)] # [doc = "Native location set for an asset."] LocationSet { asset_id : :: core :: primitive :: u32 , location : :: core :: primitive :: u32 , } , }
+                    # [codec (index = 0)] # [doc = "Asset was registered."] Registered { asset_id : :: core :: primitive :: u32 , name : runtime_types :: sp_runtime :: bounded :: bounded_vec :: BoundedVec < :: core :: primitive :: u8 > , asset_type : runtime_types :: pallet_asset_registry :: types :: AssetType < :: core :: primitive :: u32 > , } , # [codec (index = 1)] # [doc = "Asset was updated."] Updated { asset_id : :: core :: primitive :: u32 , name : runtime_types :: sp_runtime :: bounded :: bounded_vec :: BoundedVec < :: core :: primitive :: u8 > , asset_type : runtime_types :: pallet_asset_registry :: types :: AssetType < :: core :: primitive :: u32 > , } , # [codec (index = 2)] # [doc = "Metadata set for an asset."] MetadataSet { asset_id : :: core :: primitive :: u32 , symbol : runtime_types :: sp_runtime :: bounded :: bounded_vec :: BoundedVec < :: core :: primitive :: u8 > , decimals : :: core :: primitive :: u8 , } , # [codec (index = 3)] # [doc = "Native location set for an asset."] LocationSet { asset_id : :: core :: primitive :: u32 , location : :: core :: primitive :: u32 , } , }
             }
             pub mod types {
                 use super::runtime_types;
@@ -41972,7 +42382,7 @@ pub mod api {
                     PartialEq,
                 )]
                 pub enum Call {
-                    # [codec (index = 0)] # [doc = "Propose a sensitive action to be taken."] # [doc = ""] # [doc = "The dispatch origin of this call must be _Signed_ and the sender must"] # [doc = "have funds to cover the deposit."] # [doc = ""] # [doc = "- `proposal_hash`: The hash of the proposal preimage."] # [doc = "- `value`: The amount of deposit (must be at least `MinimumDeposit`)."] # [doc = ""] # [doc = "Emits `Proposed`."] # [doc = ""] # [doc = "Weight: `O(p)`"] propose { proposal_hash : :: subxt :: sp_core :: H256 , # [codec (compact)] value : :: core :: primitive :: u128 , } , # [codec (index = 1)] # [doc = "Signals agreement with a particular proposal."] # [doc = ""] # [doc = "The dispatch origin of this call must be _Signed_ and the sender"] # [doc = "must have funds to cover the deposit, equal to the original deposit."] # [doc = ""] # [doc = "- `proposal`: The index of the proposal to second."] # [doc = "- `seconds_upper_bound`: an upper bound on the current number of seconds on this"] # [doc = "  proposal. Extrinsic is weighted according to this value with no refund."] # [doc = ""] # [doc = "Weight: `O(S)` where S is the number of seconds a proposal already has."] second { # [codec (compact)] proposal : :: core :: primitive :: u32 , # [codec (compact)] seconds_upper_bound : :: core :: primitive :: u32 , } , # [codec (index = 2)] # [doc = "Vote in a referendum. If `vote.is_aye()`, the vote is to enact the proposal;"] # [doc = "otherwise it is a vote to keep the status quo."] # [doc = ""] # [doc = "The dispatch origin of this call must be _Signed_."] # [doc = ""] # [doc = "- `ref_index`: The index of the referendum to vote for."] # [doc = "- `vote`: The vote configuration."] # [doc = ""] # [doc = "Weight: `O(R)` where R is the number of referendums the voter has voted on."] vote { # [codec (compact)] ref_index : :: core :: primitive :: u32 , vote : runtime_types :: pallet_democracy :: vote :: AccountVote < :: core :: primitive :: u128 > , } , # [codec (index = 3)] # [doc = "Schedule an emergency cancellation of a referendum. Cannot happen twice to the same"] # [doc = "referendum."] # [doc = ""] # [doc = "The dispatch origin of this call must be `CancellationOrigin`."] # [doc = ""] # [doc = "-`ref_index`: The index of the referendum to cancel."] # [doc = ""] # [doc = "Weight: `O(1)`."] emergency_cancel { ref_index : :: core :: primitive :: u32 , } , # [codec (index = 4)] # [doc = "Schedule a referendum to be tabled once it is legal to schedule an external"] # [doc = "referendum."] # [doc = ""] # [doc = "The dispatch origin of this call must be `ExternalOrigin`."] # [doc = ""] # [doc = "- `proposal_hash`: The preimage hash of the proposal."] # [doc = ""] # [doc = "Weight: `O(V)` with V number of vetoers in the blacklist of proposal."] # [doc = "  Decoding vec of length V. Charged as maximum"] external_propose { proposal_hash : :: subxt :: sp_core :: H256 , } , # [codec (index = 5)] # [doc = "Schedule a majority-carries referendum to be tabled next once it is legal to schedule"] # [doc = "an external referendum."] # [doc = ""] # [doc = "The dispatch of this call must be `ExternalMajorityOrigin`."] # [doc = ""] # [doc = "- `proposal_hash`: The preimage hash of the proposal."] # [doc = ""] # [doc = "Unlike `external_propose`, blacklisting has no effect on this and it may replace a"] # [doc = "pre-scheduled `external_propose` call."] # [doc = ""] # [doc = "Weight: `O(1)`"] external_propose_majority { proposal_hash : :: subxt :: sp_core :: H256 , } , # [codec (index = 6)] # [doc = "Schedule a negative-turnout-bias referendum to be tabled next once it is legal to"] # [doc = "schedule an external referendum."] # [doc = ""] # [doc = "The dispatch of this call must be `ExternalDefaultOrigin`."] # [doc = ""] # [doc = "- `proposal_hash`: The preimage hash of the proposal."] # [doc = ""] # [doc = "Unlike `external_propose`, blacklisting has no effect on this and it may replace a"] # [doc = "pre-scheduled `external_propose` call."] # [doc = ""] # [doc = "Weight: `O(1)`"] external_propose_default { proposal_hash : :: subxt :: sp_core :: H256 , } , # [codec (index = 7)] # [doc = "Schedule the currently externally-proposed majority-carries referendum to be tabled"] # [doc = "immediately. If there is no externally-proposed referendum currently, or if there is one"] # [doc = "but it is not a majority-carries referendum then it fails."] # [doc = ""] # [doc = "The dispatch of this call must be `FastTrackOrigin`."] # [doc = ""] # [doc = "- `proposal_hash`: The hash of the current external proposal."] # [doc = "- `voting_period`: The period that is allowed for voting on this proposal. Increased to"] # [doc = "  `FastTrackVotingPeriod` if too low."] # [doc = "- `delay`: The number of block after voting has ended in approval and this should be"] # [doc = "  enacted. This doesn't have a minimum amount."] # [doc = ""] # [doc = "Emits `Started`."] # [doc = ""] # [doc = "Weight: `O(1)`"] fast_track { proposal_hash : :: subxt :: sp_core :: H256 , voting_period : :: core :: primitive :: u64 , delay : :: core :: primitive :: u64 , } , # [codec (index = 8)] # [doc = "Veto and blacklist the external proposal hash."] # [doc = ""] # [doc = "The dispatch origin of this call must be `VetoOrigin`."] # [doc = ""] # [doc = "- `proposal_hash`: The preimage hash of the proposal to veto and blacklist."] # [doc = ""] # [doc = "Emits `Vetoed`."] # [doc = ""] # [doc = "Weight: `O(V + log(V))` where V is number of `existing vetoers`"] veto_external { proposal_hash : :: subxt :: sp_core :: H256 , } , # [codec (index = 9)] # [doc = "Remove a referendum."] # [doc = ""] # [doc = "The dispatch origin of this call must be _Root_."] # [doc = ""] # [doc = "- `ref_index`: The index of the referendum to cancel."] # [doc = ""] # [doc = "# Weight: `O(1)`."] cancel_referendum { # [codec (compact)] ref_index : :: core :: primitive :: u32 , } , # [codec (index = 10)] # [doc = "Cancel a proposal queued for enactment."] # [doc = ""] # [doc = "The dispatch origin of this call must be _Root_."] # [doc = ""] # [doc = "- `which`: The index of the referendum to cancel."] # [doc = ""] # [doc = "Weight: `O(D)` where `D` is the items in the dispatch queue. Weighted as `D = 10`."] cancel_queued { which : :: core :: primitive :: u32 , } , # [codec (index = 11)] # [doc = "Delegate the voting power (with some given conviction) of the sending account."] # [doc = ""] # [doc = "The balance delegated is locked for as long as it's delegated, and thereafter for the"] # [doc = "time appropriate for the conviction's lock period."] # [doc = ""] # [doc = "The dispatch origin of this call must be _Signed_, and the signing account must either:"] # [doc = "  - be delegating already; or"] # [doc = "  - have no voting activity (if there is, then it will need to be removed/consolidated"] # [doc = "    through `reap_vote` or `unvote`)."] # [doc = ""] # [doc = "- `to`: The account whose voting the `target` account's voting power will follow."] # [doc = "- `conviction`: The conviction that will be attached to the delegated votes. When the"] # [doc = "  account is undelegated, the funds will be locked for the corresponding period."] # [doc = "- `balance`: The amount of the account's balance to be used in delegating. This must not"] # [doc = "  be more than the account's current balance."] # [doc = ""] # [doc = "Emits `Delegated`."] # [doc = ""] # [doc = "Weight: `O(R)` where R is the number of referendums the voter delegating to has"] # [doc = "  voted on. Weight is charged as if maximum votes."] delegate { to : :: subxt :: sp_core :: crypto :: AccountId32 , conviction : runtime_types :: pallet_democracy :: conviction :: Conviction , balance : :: core :: primitive :: u128 , } , # [codec (index = 12)] # [doc = "Undelegate the voting power of the sending account."] # [doc = ""] # [doc = "Tokens may be unlocked following once an amount of time consistent with the lock period"] # [doc = "of the conviction with which the delegation was issued."] # [doc = ""] # [doc = "The dispatch origin of this call must be _Signed_ and the signing account must be"] # [doc = "currently delegating."] # [doc = ""] # [doc = "Emits `Undelegated`."] # [doc = ""] # [doc = "Weight: `O(R)` where R is the number of referendums the voter delegating to has"] # [doc = "  voted on. Weight is charged as if maximum votes."] undelegate , # [codec (index = 13)] # [doc = "Clears all public proposals."] # [doc = ""] # [doc = "The dispatch origin of this call must be _Root_."] # [doc = ""] # [doc = "Weight: `O(1)`."] clear_public_proposals , # [codec (index = 14)] # [doc = "Register the preimage for an upcoming proposal. This doesn't require the proposal to be"] # [doc = "in the dispatch queue but does require a deposit, returned once enacted."] # [doc = ""] # [doc = "The dispatch origin of this call must be _Signed_."] # [doc = ""] # [doc = "- `encoded_proposal`: The preimage of a proposal."] # [doc = ""] # [doc = "Emits `PreimageNoted`."] # [doc = ""] # [doc = "Weight: `O(E)` with E size of `encoded_proposal` (protected by a required deposit)."] note_preimage { encoded_proposal : :: std :: vec :: Vec < :: core :: primitive :: u8 > , } , # [codec (index = 15)] # [doc = "Same as `note_preimage` but origin is `OperationalPreimageOrigin`."] note_preimage_operational { encoded_proposal : :: std :: vec :: Vec < :: core :: primitive :: u8 > , } , # [codec (index = 16)] # [doc = "Register the preimage for an upcoming proposal. This requires the proposal to be"] # [doc = "in the dispatch queue. No deposit is needed. When this call is successful, i.e."] # [doc = "the preimage has not been uploaded before and matches some imminent proposal,"] # [doc = "no fee is paid."] # [doc = ""] # [doc = "The dispatch origin of this call must be _Signed_."] # [doc = ""] # [doc = "- `encoded_proposal`: The preimage of a proposal."] # [doc = ""] # [doc = "Emits `PreimageNoted`."] # [doc = ""] # [doc = "Weight: `O(E)` with E size of `encoded_proposal` (protected by a required deposit)."] note_imminent_preimage { encoded_proposal : :: std :: vec :: Vec < :: core :: primitive :: u8 > , } , # [codec (index = 17)] # [doc = "Same as `note_imminent_preimage` but origin is `OperationalPreimageOrigin`."] note_imminent_preimage_operational { encoded_proposal : :: std :: vec :: Vec < :: core :: primitive :: u8 > , } , # [codec (index = 18)] # [doc = "Remove an expired proposal preimage and collect the deposit."] # [doc = ""] # [doc = "The dispatch origin of this call must be _Signed_."] # [doc = ""] # [doc = "- `proposal_hash`: The preimage hash of a proposal."] # [doc = "- `proposal_length_upper_bound`: an upper bound on length of the proposal. Extrinsic is"] # [doc = "  weighted according to this value with no refund."] # [doc = ""] # [doc = "This will only work after `VotingPeriod` blocks from the time that the preimage was"] # [doc = "noted, if it's the same account doing it. If it's a different account, then it'll only"] # [doc = "work an additional `EnactmentPeriod` later."] # [doc = ""] # [doc = "Emits `PreimageReaped`."] # [doc = ""] # [doc = "Weight: `O(D)` where D is length of proposal."] reap_preimage { proposal_hash : :: subxt :: sp_core :: H256 , # [codec (compact)] proposal_len_upper_bound : :: core :: primitive :: u32 , } , # [codec (index = 19)] # [doc = "Unlock tokens that have an expired lock."] # [doc = ""] # [doc = "The dispatch origin of this call must be _Signed_."] # [doc = ""] # [doc = "- `target`: The account to remove the lock on."] # [doc = ""] # [doc = "Weight: `O(R)` with R number of vote of target."] unlock { target : :: subxt :: sp_core :: crypto :: AccountId32 , } , # [codec (index = 20)] # [doc = "Remove a vote for a referendum."] # [doc = ""] # [doc = "If:"] # [doc = "- the referendum was cancelled, or"] # [doc = "- the referendum is ongoing, or"] # [doc = "- the referendum has ended such that"] # [doc = "  - the vote of the account was in opposition to the result; or"] # [doc = "  - there was no conviction to the account's vote; or"] # [doc = "  - the account made a split vote"] # [doc = "...then the vote is removed cleanly and a following call to `unlock` may result in more"] # [doc = "funds being available."] # [doc = ""] # [doc = "If, however, the referendum has ended and:"] # [doc = "- it finished corresponding to the vote of the account, and"] # [doc = "- the account made a standard vote with conviction, and"] # [doc = "- the lock period of the conviction is not over"] # [doc = "...then the lock will be aggregated into the overall account's lock, which may involve"] # [doc = "*overlocking* (where the two locks are combined into a single lock that is the maximum"] # [doc = "of both the amount locked and the time is it locked for)."] # [doc = ""] # [doc = "The dispatch origin of this call must be _Signed_, and the signer must have a vote"] # [doc = "registered for referendum `index`."] # [doc = ""] # [doc = "- `index`: The index of referendum of the vote to be removed."] # [doc = ""] # [doc = "Weight: `O(R + log R)` where R is the number of referenda that `target` has voted on."] # [doc = "  Weight is calculated for the maximum number of vote."] remove_vote { index : :: core :: primitive :: u32 , } , # [codec (index = 21)] # [doc = "Remove a vote for a referendum."] # [doc = ""] # [doc = "If the `target` is equal to the signer, then this function is exactly equivalent to"] # [doc = "`remove_vote`. If not equal to the signer, then the vote must have expired,"] # [doc = "either because the referendum was cancelled, because the voter lost the referendum or"] # [doc = "because the conviction period is over."] # [doc = ""] # [doc = "The dispatch origin of this call must be _Signed_."] # [doc = ""] # [doc = "- `target`: The account of the vote to be removed; this account must have voted for"] # [doc = "  referendum `index`."] # [doc = "- `index`: The index of referendum of the vote to be removed."] # [doc = ""] # [doc = "Weight: `O(R + log R)` where R is the number of referenda that `target` has voted on."] # [doc = "  Weight is calculated for the maximum number of vote."] remove_other_vote { target : :: subxt :: sp_core :: crypto :: AccountId32 , index : :: core :: primitive :: u32 , } , # [codec (index = 22)] # [doc = "Enact a proposal from a referendum. For now we just make the weight be the maximum."] enact_proposal { proposal_hash : :: subxt :: sp_core :: H256 , index : :: core :: primitive :: u32 , } , # [codec (index = 23)] # [doc = "Permanently place a proposal into the blacklist. This prevents it from ever being"] # [doc = "proposed again."] # [doc = ""] # [doc = "If called on a queued public or external proposal, then this will result in it being"] # [doc = "removed. If the `ref_index` supplied is an active referendum with the proposal hash,"] # [doc = "then it will be cancelled."] # [doc = ""] # [doc = "The dispatch origin of this call must be `BlacklistOrigin`."] # [doc = ""] # [doc = "- `proposal_hash`: The proposal hash to blacklist permanently."] # [doc = "- `ref_index`: An ongoing referendum whose hash is `proposal_hash`, which will be"] # [doc = "cancelled."] # [doc = ""] # [doc = "Weight: `O(p)` (though as this is an high-privilege dispatch, we assume it has a"] # [doc = "  reasonable value)."] blacklist { proposal_hash : :: subxt :: sp_core :: H256 , maybe_ref_index : :: core :: option :: Option < :: core :: primitive :: u32 > , } , # [codec (index = 24)] # [doc = "Remove a proposal."] # [doc = ""] # [doc = "The dispatch origin of this call must be `CancelProposalOrigin`."] # [doc = ""] # [doc = "- `prop_index`: The index of the proposal to cancel."] # [doc = ""] # [doc = "Weight: `O(p)` where `p = PublicProps::<T>::decode_len()`"] cancel_proposal { # [codec (compact)] prop_index : :: core :: primitive :: u32 , } , }
+                    # [codec (index = 0)] # [doc = "Propose a sensitive action to be taken."] # [doc = ""] # [doc = "The dispatch origin of this call must be _Signed_ and the sender must"] # [doc = "have funds to cover the deposit."] # [doc = ""] # [doc = "- `proposal_hash`: The hash of the proposal preimage."] # [doc = "- `value`: The amount of deposit (must be at least `MinimumDeposit`)."] # [doc = ""] # [doc = "Emits `Proposed`."] # [doc = ""] # [doc = "Weight: `O(p)`"] propose { proposal_hash : :: subxt :: sp_core :: H256 , # [codec (compact)] value : :: core :: primitive :: u128 , } , # [codec (index = 1)] # [doc = "Signals agreement with a particular proposal."] # [doc = ""] # [doc = "The dispatch origin of this call must be _Signed_ and the sender"] # [doc = "must have funds to cover the deposit, equal to the original deposit."] # [doc = ""] # [doc = "- `proposal`: The index of the proposal to second."] # [doc = "- `seconds_upper_bound`: an upper bound on the current number of seconds on this"] # [doc = "  proposal. Extrinsic is weighted according to this value with no refund."] # [doc = ""] # [doc = "Weight: `O(S)` where S is the number of seconds a proposal already has."] second { # [codec (compact)] proposal : :: core :: primitive :: u32 , # [codec (compact)] seconds_upper_bound : :: core :: primitive :: u32 , } , # [codec (index = 2)] # [doc = "Vote in a referendum. If `vote.is_aye()`, the vote is to enact the proposal;"] # [doc = "otherwise it is a vote to keep the status quo."] # [doc = ""] # [doc = "The dispatch origin of this call must be _Signed_."] # [doc = ""] # [doc = "- `ref_index`: The index of the referendum to vote for."] # [doc = "- `vote`: The vote configuration."] # [doc = ""] # [doc = "Weight: `O(R)` where R is the number of referendums the voter has voted on."] vote { # [codec (compact)] ref_index : :: core :: primitive :: u32 , vote : runtime_types :: pallet_democracy :: vote :: AccountVote < :: core :: primitive :: u128 > , } , # [codec (index = 3)] # [doc = "Schedule an emergency cancellation of a referendum. Cannot happen twice to the same"] # [doc = "referendum."] # [doc = ""] # [doc = "The dispatch origin of this call must be `CancellationOrigin`."] # [doc = ""] # [doc = "-`ref_index`: The index of the referendum to cancel."] # [doc = ""] # [doc = "Weight: `O(1)`."] emergency_cancel { ref_index : :: core :: primitive :: u32 , } , # [codec (index = 4)] # [doc = "Schedule a referendum to be tabled once it is legal to schedule an external"] # [doc = "referendum."] # [doc = ""] # [doc = "The dispatch origin of this call must be `ExternalOrigin`."] # [doc = ""] # [doc = "- `proposal_hash`: The preimage hash of the proposal."] # [doc = ""] # [doc = "Weight: `O(V)` with V number of vetoers in the blacklist of proposal."] # [doc = "  Decoding vec of length V. Charged as maximum"] external_propose { proposal_hash : :: subxt :: sp_core :: H256 , } , # [codec (index = 5)] # [doc = "Schedule a majority-carries referendum to be tabled next once it is legal to schedule"] # [doc = "an external referendum."] # [doc = ""] # [doc = "The dispatch of this call must be `ExternalMajorityOrigin`."] # [doc = ""] # [doc = "- `proposal_hash`: The preimage hash of the proposal."] # [doc = ""] # [doc = "Unlike `external_propose`, blacklisting has no effect on this and it may replace a"] # [doc = "pre-scheduled `external_propose` call."] # [doc = ""] # [doc = "Weight: `O(1)`"] external_propose_majority { proposal_hash : :: subxt :: sp_core :: H256 , } , # [codec (index = 6)] # [doc = "Schedule a negative-turnout-bias referendum to be tabled next once it is legal to"] # [doc = "schedule an external referendum."] # [doc = ""] # [doc = "The dispatch of this call must be `ExternalDefaultOrigin`."] # [doc = ""] # [doc = "- `proposal_hash`: The preimage hash of the proposal."] # [doc = ""] # [doc = "Unlike `external_propose`, blacklisting has no effect on this and it may replace a"] # [doc = "pre-scheduled `external_propose` call."] # [doc = ""] # [doc = "Weight: `O(1)`"] external_propose_default { proposal_hash : :: subxt :: sp_core :: H256 , } , # [codec (index = 7)] # [doc = "Schedule the currently externally-proposed majority-carries referendum to be tabled"] # [doc = "immediately. If there is no externally-proposed referendum currently, or if there is one"] # [doc = "but it is not a majority-carries referendum then it fails."] # [doc = ""] # [doc = "The dispatch of this call must be `FastTrackOrigin`."] # [doc = ""] # [doc = "- `proposal_hash`: The hash of the current external proposal."] # [doc = "- `voting_period`: The period that is allowed for voting on this proposal."] # [doc = "\tMust be always greater than zero."] # [doc = "\tFor `FastTrackOrigin` must be equal or greater than `FastTrackVotingPeriod`."] # [doc = "- `delay`: The number of block after voting has ended in approval and this should be"] # [doc = "  enacted. This doesn't have a minimum amount."] # [doc = ""] # [doc = "Emits `Started`."] # [doc = ""] # [doc = "Weight: `O(1)`"] fast_track { proposal_hash : :: subxt :: sp_core :: H256 , voting_period : :: core :: primitive :: u64 , delay : :: core :: primitive :: u64 , } , # [codec (index = 8)] # [doc = "Veto and blacklist the external proposal hash."] # [doc = ""] # [doc = "The dispatch origin of this call must be `VetoOrigin`."] # [doc = ""] # [doc = "- `proposal_hash`: The preimage hash of the proposal to veto and blacklist."] # [doc = ""] # [doc = "Emits `Vetoed`."] # [doc = ""] # [doc = "Weight: `O(V + log(V))` where V is number of `existing vetoers`"] veto_external { proposal_hash : :: subxt :: sp_core :: H256 , } , # [codec (index = 9)] # [doc = "Remove a referendum."] # [doc = ""] # [doc = "The dispatch origin of this call must be _Root_."] # [doc = ""] # [doc = "- `ref_index`: The index of the referendum to cancel."] # [doc = ""] # [doc = "# Weight: `O(1)`."] cancel_referendum { # [codec (compact)] ref_index : :: core :: primitive :: u32 , } , # [codec (index = 10)] # [doc = "Cancel a proposal queued for enactment."] # [doc = ""] # [doc = "The dispatch origin of this call must be _Root_."] # [doc = ""] # [doc = "- `which`: The index of the referendum to cancel."] # [doc = ""] # [doc = "Weight: `O(D)` where `D` is the items in the dispatch queue. Weighted as `D = 10`."] cancel_queued { which : :: core :: primitive :: u32 , } , # [codec (index = 11)] # [doc = "Delegate the voting power (with some given conviction) of the sending account."] # [doc = ""] # [doc = "The balance delegated is locked for as long as it's delegated, and thereafter for the"] # [doc = "time appropriate for the conviction's lock period."] # [doc = ""] # [doc = "The dispatch origin of this call must be _Signed_, and the signing account must either:"] # [doc = "  - be delegating already; or"] # [doc = "  - have no voting activity (if there is, then it will need to be removed/consolidated"] # [doc = "    through `reap_vote` or `unvote`)."] # [doc = ""] # [doc = "- `to`: The account whose voting the `target` account's voting power will follow."] # [doc = "- `conviction`: The conviction that will be attached to the delegated votes. When the"] # [doc = "  account is undelegated, the funds will be locked for the corresponding period."] # [doc = "- `balance`: The amount of the account's balance to be used in delegating. This must not"] # [doc = "  be more than the account's current balance."] # [doc = ""] # [doc = "Emits `Delegated`."] # [doc = ""] # [doc = "Weight: `O(R)` where R is the number of referendums the voter delegating to has"] # [doc = "  voted on. Weight is charged as if maximum votes."] delegate { to : :: subxt :: sp_core :: crypto :: AccountId32 , conviction : runtime_types :: pallet_democracy :: conviction :: Conviction , balance : :: core :: primitive :: u128 , } , # [codec (index = 12)] # [doc = "Undelegate the voting power of the sending account."] # [doc = ""] # [doc = "Tokens may be unlocked following once an amount of time consistent with the lock period"] # [doc = "of the conviction with which the delegation was issued."] # [doc = ""] # [doc = "The dispatch origin of this call must be _Signed_ and the signing account must be"] # [doc = "currently delegating."] # [doc = ""] # [doc = "Emits `Undelegated`."] # [doc = ""] # [doc = "Weight: `O(R)` where R is the number of referendums the voter delegating to has"] # [doc = "  voted on. Weight is charged as if maximum votes."] undelegate , # [codec (index = 13)] # [doc = "Clears all public proposals."] # [doc = ""] # [doc = "The dispatch origin of this call must be _Root_."] # [doc = ""] # [doc = "Weight: `O(1)`."] clear_public_proposals , # [codec (index = 14)] # [doc = "Register the preimage for an upcoming proposal. This doesn't require the proposal to be"] # [doc = "in the dispatch queue but does require a deposit, returned once enacted."] # [doc = ""] # [doc = "The dispatch origin of this call must be _Signed_."] # [doc = ""] # [doc = "- `encoded_proposal`: The preimage of a proposal."] # [doc = ""] # [doc = "Emits `PreimageNoted`."] # [doc = ""] # [doc = "Weight: `O(E)` with E size of `encoded_proposal` (protected by a required deposit)."] note_preimage { encoded_proposal : :: std :: vec :: Vec < :: core :: primitive :: u8 > , } , # [codec (index = 15)] # [doc = "Same as `note_preimage` but origin is `OperationalPreimageOrigin`."] note_preimage_operational { encoded_proposal : :: std :: vec :: Vec < :: core :: primitive :: u8 > , } , # [codec (index = 16)] # [doc = "Register the preimage for an upcoming proposal. This requires the proposal to be"] # [doc = "in the dispatch queue. No deposit is needed. When this call is successful, i.e."] # [doc = "the preimage has not been uploaded before and matches some imminent proposal,"] # [doc = "no fee is paid."] # [doc = ""] # [doc = "The dispatch origin of this call must be _Signed_."] # [doc = ""] # [doc = "- `encoded_proposal`: The preimage of a proposal."] # [doc = ""] # [doc = "Emits `PreimageNoted`."] # [doc = ""] # [doc = "Weight: `O(E)` with E size of `encoded_proposal` (protected by a required deposit)."] note_imminent_preimage { encoded_proposal : :: std :: vec :: Vec < :: core :: primitive :: u8 > , } , # [codec (index = 17)] # [doc = "Same as `note_imminent_preimage` but origin is `OperationalPreimageOrigin`."] note_imminent_preimage_operational { encoded_proposal : :: std :: vec :: Vec < :: core :: primitive :: u8 > , } , # [codec (index = 18)] # [doc = "Remove an expired proposal preimage and collect the deposit."] # [doc = ""] # [doc = "The dispatch origin of this call must be _Signed_."] # [doc = ""] # [doc = "- `proposal_hash`: The preimage hash of a proposal."] # [doc = "- `proposal_length_upper_bound`: an upper bound on length of the proposal. Extrinsic is"] # [doc = "  weighted according to this value with no refund."] # [doc = ""] # [doc = "This will only work after `VotingPeriod` blocks from the time that the preimage was"] # [doc = "noted, if it's the same account doing it. If it's a different account, then it'll only"] # [doc = "work an additional `EnactmentPeriod` later."] # [doc = ""] # [doc = "Emits `PreimageReaped`."] # [doc = ""] # [doc = "Weight: `O(D)` where D is length of proposal."] reap_preimage { proposal_hash : :: subxt :: sp_core :: H256 , # [codec (compact)] proposal_len_upper_bound : :: core :: primitive :: u32 , } , # [codec (index = 19)] # [doc = "Unlock tokens that have an expired lock."] # [doc = ""] # [doc = "The dispatch origin of this call must be _Signed_."] # [doc = ""] # [doc = "- `target`: The account to remove the lock on."] # [doc = ""] # [doc = "Weight: `O(R)` with R number of vote of target."] unlock { target : :: subxt :: sp_core :: crypto :: AccountId32 , } , # [codec (index = 20)] # [doc = "Remove a vote for a referendum."] # [doc = ""] # [doc = "If:"] # [doc = "- the referendum was cancelled, or"] # [doc = "- the referendum is ongoing, or"] # [doc = "- the referendum has ended such that"] # [doc = "  - the vote of the account was in opposition to the result; or"] # [doc = "  - there was no conviction to the account's vote; or"] # [doc = "  - the account made a split vote"] # [doc = "...then the vote is removed cleanly and a following call to `unlock` may result in more"] # [doc = "funds being available."] # [doc = ""] # [doc = "If, however, the referendum has ended and:"] # [doc = "- it finished corresponding to the vote of the account, and"] # [doc = "- the account made a standard vote with conviction, and"] # [doc = "- the lock period of the conviction is not over"] # [doc = "...then the lock will be aggregated into the overall account's lock, which may involve"] # [doc = "*overlocking* (where the two locks are combined into a single lock that is the maximum"] # [doc = "of both the amount locked and the time is it locked for)."] # [doc = ""] # [doc = "The dispatch origin of this call must be _Signed_, and the signer must have a vote"] # [doc = "registered for referendum `index`."] # [doc = ""] # [doc = "- `index`: The index of referendum of the vote to be removed."] # [doc = ""] # [doc = "Weight: `O(R + log R)` where R is the number of referenda that `target` has voted on."] # [doc = "  Weight is calculated for the maximum number of vote."] remove_vote { index : :: core :: primitive :: u32 , } , # [codec (index = 21)] # [doc = "Remove a vote for a referendum."] # [doc = ""] # [doc = "If the `target` is equal to the signer, then this function is exactly equivalent to"] # [doc = "`remove_vote`. If not equal to the signer, then the vote must have expired,"] # [doc = "either because the referendum was cancelled, because the voter lost the referendum or"] # [doc = "because the conviction period is over."] # [doc = ""] # [doc = "The dispatch origin of this call must be _Signed_."] # [doc = ""] # [doc = "- `target`: The account of the vote to be removed; this account must have voted for"] # [doc = "  referendum `index`."] # [doc = "- `index`: The index of referendum of the vote to be removed."] # [doc = ""] # [doc = "Weight: `O(R + log R)` where R is the number of referenda that `target` has voted on."] # [doc = "  Weight is calculated for the maximum number of vote."] remove_other_vote { target : :: subxt :: sp_core :: crypto :: AccountId32 , index : :: core :: primitive :: u32 , } , # [codec (index = 22)] # [doc = "Enact a proposal from a referendum. For now we just make the weight be the maximum."] enact_proposal { proposal_hash : :: subxt :: sp_core :: H256 , index : :: core :: primitive :: u32 , } , # [codec (index = 23)] # [doc = "Permanently place a proposal into the blacklist. This prevents it from ever being"] # [doc = "proposed again."] # [doc = ""] # [doc = "If called on a queued public or external proposal, then this will result in it being"] # [doc = "removed. If the `ref_index` supplied is an active referendum with the proposal hash,"] # [doc = "then it will be cancelled."] # [doc = ""] # [doc = "The dispatch origin of this call must be `BlacklistOrigin`."] # [doc = ""] # [doc = "- `proposal_hash`: The proposal hash to blacklist permanently."] # [doc = "- `ref_index`: An ongoing referendum whose hash is `proposal_hash`, which will be"] # [doc = "cancelled."] # [doc = ""] # [doc = "Weight: `O(p)` (though as this is an high-privilege dispatch, we assume it has a"] # [doc = "  reasonable value)."] blacklist { proposal_hash : :: subxt :: sp_core :: H256 , maybe_ref_index : :: core :: option :: Option < :: core :: primitive :: u32 > , } , # [codec (index = 24)] # [doc = "Remove a proposal."] # [doc = ""] # [doc = "The dispatch origin of this call must be `CancelProposalOrigin`."] # [doc = ""] # [doc = "- `prop_index`: The index of the proposal to cancel."] # [doc = ""] # [doc = "Weight: `O(p)` where `p = PublicProps::<T>::decode_len()`"] cancel_proposal { # [codec (compact)] prop_index : :: core :: primitive :: u32 , } , }
                 #[derive(
                     :: subxt :: codec :: Decode,
                     :: subxt :: codec :: Encode,
@@ -42067,6 +42477,9 @@ pub mod api {
                     #[codec(index = 27)]
                     #[doc = "Maximum number of proposals reached."]
                     TooManyProposals,
+                    #[codec(index = 28)]
+                    #[doc = "Voting period too low"]
+                    VotingPeriodLow,
                 }
                 #[derive(
                     :: subxt :: codec :: Decode,
@@ -42077,7 +42490,7 @@ pub mod api {
                     PartialEq,
                 )]
                 pub enum Event {
-                    # [codec (index = 0)] # [doc = "A motion has been proposed by a public account."] Proposed { proposal_index : :: core :: primitive :: u32 , deposit : :: core :: primitive :: u128 , } , # [codec (index = 1)] # [doc = "A public proposal has been tabled for referendum vote."] Tabled { proposal_index : :: core :: primitive :: u32 , deposit : :: core :: primitive :: u128 , depositors : :: std :: vec :: Vec < :: subxt :: sp_core :: crypto :: AccountId32 > , } , # [codec (index = 2)] # [doc = "An external proposal has been tabled."] ExternalTabled , # [codec (index = 3)] # [doc = "A referendum has begun."] Started { ref_index : :: core :: primitive :: u32 , threshold : runtime_types :: pallet_democracy :: vote_threshold :: VoteThreshold , } , # [codec (index = 4)] # [doc = "A proposal has been approved by referendum."] Passed { ref_index : :: core :: primitive :: u32 , } , # [codec (index = 5)] # [doc = "A proposal has been rejected by referendum."] NotPassed { ref_index : :: core :: primitive :: u32 , } , # [codec (index = 6)] # [doc = "A referendum has been cancelled."] Cancelled { ref_index : :: core :: primitive :: u32 , } , # [codec (index = 7)] # [doc = "A proposal has been enacted."] Executed { ref_index : :: core :: primitive :: u32 , result : :: core :: result :: Result < () , runtime_types :: sp_runtime :: DispatchError > , } , # [codec (index = 8)] # [doc = "An account has delegated their vote to another account."] Delegated { who : :: subxt :: sp_core :: crypto :: AccountId32 , target : :: subxt :: sp_core :: crypto :: AccountId32 , } , # [codec (index = 9)] # [doc = "An account has cancelled a previous delegation operation."] Undelegated { account : :: subxt :: sp_core :: crypto :: AccountId32 , } , # [codec (index = 10)] # [doc = "An external proposal has been vetoed."] Vetoed { who : :: subxt :: sp_core :: crypto :: AccountId32 , proposal_hash : :: subxt :: sp_core :: H256 , until : :: core :: primitive :: u64 , } , # [codec (index = 11)] # [doc = "A proposal's preimage was noted, and the deposit taken."] PreimageNoted { proposal_hash : :: subxt :: sp_core :: H256 , who : :: subxt :: sp_core :: crypto :: AccountId32 , deposit : :: core :: primitive :: u128 , } , # [codec (index = 12)] # [doc = "A proposal preimage was removed and used (the deposit was returned)."] PreimageUsed { proposal_hash : :: subxt :: sp_core :: H256 , provider : :: subxt :: sp_core :: crypto :: AccountId32 , deposit : :: core :: primitive :: u128 , } , # [codec (index = 13)] # [doc = "A proposal could not be executed because its preimage was invalid."] PreimageInvalid { proposal_hash : :: subxt :: sp_core :: H256 , ref_index : :: core :: primitive :: u32 , } , # [codec (index = 14)] # [doc = "A proposal could not be executed because its preimage was missing."] PreimageMissing { proposal_hash : :: subxt :: sp_core :: H256 , ref_index : :: core :: primitive :: u32 , } , # [codec (index = 15)] # [doc = "A registered preimage was removed and the deposit collected by the reaper."] PreimageReaped { proposal_hash : :: subxt :: sp_core :: H256 , provider : :: subxt :: sp_core :: crypto :: AccountId32 , deposit : :: core :: primitive :: u128 , reaper : :: subxt :: sp_core :: crypto :: AccountId32 , } , # [codec (index = 16)] # [doc = "A proposal_hash has been blacklisted permanently."] Blacklisted { proposal_hash : :: subxt :: sp_core :: H256 , } , # [codec (index = 17)] # [doc = "An account has voted in a referendum"] Voted { voter : :: subxt :: sp_core :: crypto :: AccountId32 , ref_index : :: core :: primitive :: u32 , vote : runtime_types :: pallet_democracy :: vote :: AccountVote < :: core :: primitive :: u128 > , } , # [codec (index = 18)] # [doc = "An account has secconded a proposal"] Seconded { seconder : :: subxt :: sp_core :: crypto :: AccountId32 , prop_index : :: core :: primitive :: u32 , } , }
+                    # [codec (index = 0)] # [doc = "A motion has been proposed by a public account."] Proposed { proposal_index : :: core :: primitive :: u32 , deposit : :: core :: primitive :: u128 , } , # [codec (index = 1)] # [doc = "A public proposal has been tabled for referendum vote."] Tabled { proposal_index : :: core :: primitive :: u32 , deposit : :: core :: primitive :: u128 , depositors : :: std :: vec :: Vec < :: subxt :: sp_core :: crypto :: AccountId32 > , } , # [codec (index = 2)] # [doc = "An external proposal has been tabled."] ExternalTabled , # [codec (index = 3)] # [doc = "A referendum has begun."] Started { ref_index : :: core :: primitive :: u32 , threshold : runtime_types :: pallet_democracy :: vote_threshold :: VoteThreshold , } , # [codec (index = 4)] # [doc = "A proposal has been approved by referendum."] Passed { ref_index : :: core :: primitive :: u32 , } , # [codec (index = 5)] # [doc = "A proposal has been rejected by referendum."] NotPassed { ref_index : :: core :: primitive :: u32 , } , # [codec (index = 6)] # [doc = "A referendum has been cancelled."] Cancelled { ref_index : :: core :: primitive :: u32 , } , # [codec (index = 7)] # [doc = "A proposal has been enacted."] Executed { ref_index : :: core :: primitive :: u32 , result : :: core :: result :: Result < () , runtime_types :: sp_runtime :: DispatchError > , } , # [codec (index = 8)] # [doc = "An account has delegated their vote to another account."] Delegated { who : :: subxt :: sp_core :: crypto :: AccountId32 , target : :: subxt :: sp_core :: crypto :: AccountId32 , } , # [codec (index = 9)] # [doc = "An account has cancelled a previous delegation operation."] Undelegated { account : :: subxt :: sp_core :: crypto :: AccountId32 , } , # [codec (index = 10)] # [doc = "An external proposal has been vetoed."] Vetoed { who : :: subxt :: sp_core :: crypto :: AccountId32 , proposal_hash : :: subxt :: sp_core :: H256 , until : :: core :: primitive :: u64 , } , # [codec (index = 11)] # [doc = "A proposal's preimage was noted, and the deposit taken."] PreimageNoted { proposal_hash : :: subxt :: sp_core :: H256 , who : :: subxt :: sp_core :: crypto :: AccountId32 , deposit : :: core :: primitive :: u128 , } , # [codec (index = 12)] # [doc = "A proposal preimage was removed and used (the deposit was returned)."] PreimageUsed { proposal_hash : :: subxt :: sp_core :: H256 , provider : :: subxt :: sp_core :: crypto :: AccountId32 , deposit : :: core :: primitive :: u128 , } , # [codec (index = 13)] # [doc = "A proposal could not be executed because its preimage was invalid."] PreimageInvalid { proposal_hash : :: subxt :: sp_core :: H256 , ref_index : :: core :: primitive :: u32 , } , # [codec (index = 14)] # [doc = "A proposal could not be executed because its preimage was missing."] PreimageMissing { proposal_hash : :: subxt :: sp_core :: H256 , ref_index : :: core :: primitive :: u32 , } , # [codec (index = 15)] # [doc = "A registered preimage was removed and the deposit collected by the reaper."] PreimageReaped { proposal_hash : :: subxt :: sp_core :: H256 , provider : :: subxt :: sp_core :: crypto :: AccountId32 , deposit : :: core :: primitive :: u128 , reaper : :: subxt :: sp_core :: crypto :: AccountId32 , } , # [codec (index = 16)] # [doc = "A proposal_hash has been blacklisted permanently."] Blacklisted { proposal_hash : :: subxt :: sp_core :: H256 , } , # [codec (index = 17)] # [doc = "An account has voted in a referendum"] Voted { voter : :: subxt :: sp_core :: crypto :: AccountId32 , ref_index : :: core :: primitive :: u32 , vote : runtime_types :: pallet_democracy :: vote :: AccountVote < :: core :: primitive :: u128 > , } , # [codec (index = 18)] # [doc = "An account has secconded a proposal"] Seconded { seconder : :: subxt :: sp_core :: crypto :: AccountId32 , prop_index : :: core :: primitive :: u32 , } , # [codec (index = 19)] # [doc = "A proposal got canceled."] ProposalCanceled { prop_index : :: core :: primitive :: u32 , } , }
             }
             pub mod types {
                 use super::runtime_types;
@@ -42378,7 +42791,17 @@ pub mod api {
                 Eq,
                 PartialEq,
             )]
-            pub struct RoundSnapshot { pub voters : :: std :: vec :: Vec < (:: subxt :: sp_core :: crypto :: AccountId32 , :: core :: primitive :: u64 , runtime_types :: frame_support :: storage :: bounded_vec :: BoundedVec < :: subxt :: sp_core :: crypto :: AccountId32 > ,) > , pub targets : :: std :: vec :: Vec < :: subxt :: sp_core :: crypto :: AccountId32 > , }
+            pub struct RoundSnapshot {
+                pub voters: ::std::vec::Vec<(
+                    ::subxt::sp_core::crypto::AccountId32,
+                    ::core::primitive::u64,
+                    runtime_types::sp_runtime::bounded::bounded_vec::BoundedVec<
+                        ::subxt::sp_core::crypto::AccountId32,
+                    >,
+                )>,
+                pub targets:
+                    ::std::vec::Vec<::subxt::sp_core::crypto::AccountId32>,
+            }
             #[derive(
                 :: subxt :: codec :: Decode,
                 :: subxt :: codec :: Encode,
@@ -42581,7 +43004,7 @@ pub mod api {
                     PartialEq,
                 )]
                 pub enum Call {
-                    # [codec (index = 0)] # [doc = "Report voter equivocation/misbehavior. This method will verify the"] # [doc = "equivocation proof and validate the given key ownership proof"] # [doc = "against the extracted offender. If both are valid, the offence"] # [doc = "will be reported."] report_equivocation { equivocation_proof : :: std :: boxed :: Box < runtime_types :: sp_finality_grandpa :: EquivocationProof < :: subxt :: sp_core :: H256 , :: core :: primitive :: u64 > > , key_owner_proof : runtime_types :: sp_session :: MembershipProof , } , # [codec (index = 1)] # [doc = "Report voter equivocation/misbehavior. This method will verify the"] # [doc = "equivocation proof and validate the given key ownership proof"] # [doc = "against the extracted offender. If both are valid, the offence"] # [doc = "will be reported."] # [doc = ""] # [doc = "This extrinsic must be called unsigned and it is expected that only"] # [doc = "block authors will call it (validated in `ValidateUnsigned`), as such"] # [doc = "if the block author is defined it will be defined as the equivocation"] # [doc = "reporter."] report_equivocation_unsigned { equivocation_proof : :: std :: boxed :: Box < runtime_types :: sp_finality_grandpa :: EquivocationProof < :: subxt :: sp_core :: H256 , :: core :: primitive :: u64 > > , key_owner_proof : runtime_types :: sp_session :: MembershipProof , } , # [codec (index = 2)] # [doc = "Note that the current authority set of the GRANDPA finality gadget has"] # [doc = "stalled. This will trigger a forced authority set change at the beginning"] # [doc = "of the next session, to be enacted `delay` blocks after that. The delay"] # [doc = "should be high enough to safely assume that the block signalling the"] # [doc = "forced change will not be re-orged (e.g. 1000 blocks). The GRANDPA voters"] # [doc = "will start the new authority set using the given finalized block as base."] # [doc = "Only callable by root."] note_stalled { delay : :: core :: primitive :: u64 , best_finalized_block_number : :: core :: primitive :: u64 , } , }
+                    # [codec (index = 0)] # [doc = "Report voter equivocation/misbehavior. This method will verify the"] # [doc = "equivocation proof and validate the given key ownership proof"] # [doc = "against the extracted offender. If both are valid, the offence"] # [doc = "will be reported."] report_equivocation { equivocation_proof : :: std :: boxed :: Box < runtime_types :: sp_finality_grandpa :: EquivocationProof < :: subxt :: sp_core :: H256 , :: core :: primitive :: u64 > > , key_owner_proof : runtime_types :: sp_session :: MembershipProof , } , # [codec (index = 1)] # [doc = "Report voter equivocation/misbehavior. This method will verify the"] # [doc = "equivocation proof and validate the given key ownership proof"] # [doc = "against the extracted offender. If both are valid, the offence"] # [doc = "will be reported."] # [doc = ""] # [doc = "This extrinsic must be called unsigned and it is expected that only"] # [doc = "block authors will call it (validated in `ValidateUnsigned`), as such"] # [doc = "if the block author is defined it will be defined as the equivocation"] # [doc = "reporter."] report_equivocation_unsigned { equivocation_proof : :: std :: boxed :: Box < runtime_types :: sp_finality_grandpa :: EquivocationProof < :: subxt :: sp_core :: H256 , :: core :: primitive :: u64 > > , key_owner_proof : runtime_types :: sp_session :: MembershipProof , } , # [codec (index = 2)] # [doc = "Note that the current authority set of the GRANDPA finality gadget has stalled."] # [doc = ""] # [doc = "This will trigger a forced authority set change at the beginning of the next session, to"] # [doc = "be enacted `delay` blocks after that. The `delay` should be high enough to safely assume"] # [doc = "that the block signalling the forced change will not be re-orged e.g. 1000 blocks."] # [doc = "The block production rate (which may be slowed down because of finality lagging) should"] # [doc = "be taken into account when choosing the `delay`. The GRANDPA voters based on the new"] # [doc = "authority will start voting on top of `best_finalized_block_number` for new finalized"] # [doc = "blocks. `best_finalized_block_number` should be the highest of the latest finalized"] # [doc = "block of all validators of the new authority set."] # [doc = ""] # [doc = "Only callable by root."] note_stalled { delay : :: core :: primitive :: u64 , best_finalized_block_number : :: core :: primitive :: u64 , } , }
                 #[derive(
                     :: subxt :: codec :: Decode,
                     :: subxt :: codec :: Encode,
@@ -42648,7 +43071,7 @@ pub mod api {
                 Eq,
                 PartialEq,
             )]
-            pub struct StoredPendingChange < _0 > { pub scheduled_at : _0 , pub delay : _0 , pub next_authorities : runtime_types :: frame_support :: storage :: weak_bounded_vec :: WeakBoundedVec < (runtime_types :: sp_finality_grandpa :: app :: Public , _0 ,) > , pub forced : :: core :: option :: Option < _0 > , }
+            pub struct StoredPendingChange < _0 > { pub scheduled_at : _0 , pub delay : _0 , pub next_authorities : runtime_types :: sp_runtime :: bounded :: weak_bounded_vec :: WeakBoundedVec < (runtime_types :: sp_finality_grandpa :: app :: Public , _0 ,) > , pub forced : :: core :: option :: Option < _0 > , }
             #[derive(
                 :: subxt :: codec :: Decode,
                 :: subxt :: codec :: Encode,
@@ -42790,7 +43213,7 @@ pub mod api {
                 Eq,
                 PartialEq,
             )]
-            pub struct BoundedOpaqueNetworkState { pub peer_id : runtime_types :: frame_support :: storage :: weak_bounded_vec :: WeakBoundedVec < :: core :: primitive :: u8 > , pub external_addresses : runtime_types :: frame_support :: storage :: weak_bounded_vec :: WeakBoundedVec < runtime_types :: frame_support :: storage :: weak_bounded_vec :: WeakBoundedVec < :: core :: primitive :: u8 > > , }
+            pub struct BoundedOpaqueNetworkState { pub peer_id : runtime_types :: sp_runtime :: bounded :: weak_bounded_vec :: WeakBoundedVec < :: core :: primitive :: u8 > , pub external_addresses : runtime_types :: sp_runtime :: bounded :: weak_bounded_vec :: WeakBoundedVec < runtime_types :: sp_runtime :: bounded :: weak_bounded_vec :: WeakBoundedVec < :: core :: primitive :: u8 > > , }
             #[derive(
                 :: subxt :: codec :: Decode,
                 :: subxt :: codec :: Encode,
@@ -43639,7 +44062,7 @@ pub mod api {
                     #[codec(index = 3)]
                     #[doc = "Unbond up to `unbonding_points` of the `member_account`'s funds from the pool. It"]
                     #[doc = "implicitly collects the rewards one last time, since not doing so would mean some"]
-                    #[doc = "rewards would go forfeited."]
+                    #[doc = "rewards would be forfeited."]
                     #[doc = ""]
                     #[doc = "Under certain conditions, this call can be dispatched permissionlessly (i.e. by any"]
                     #[doc = "account)."]
@@ -43731,6 +44154,13 @@ pub mod api {
                         state_toggler: ::subxt::sp_core::crypto::AccountId32,
                     },
                     #[codec(index = 7)]
+                    #[doc = "Nominate on behalf of the pool."]
+                    #[doc = ""]
+                    #[doc = "The dispatch origin of this call must be signed by the pool nominator or the pool"]
+                    #[doc = "root role."]
+                    #[doc = ""]
+                    #[doc = "This directly forward the call to the staking pallet, on behalf of the pool bonded"]
+                    #[doc = "account."]
                     nominate {
                         pool_id: ::core::primitive::u32,
                         validators: ::std::vec::Vec<
@@ -43738,12 +44168,20 @@ pub mod api {
                         >,
                     },
                     #[codec(index = 8)]
+                    #[doc = "Set a new state for the pool."]
+                    #[doc = ""]
+                    #[doc = "The dispatch origin of this call must be signed by the state toggler, or the root role"]
+                    #[doc = "of the pool."]
                     set_state {
                         pool_id: ::core::primitive::u32,
                         state:
                             runtime_types::pallet_nomination_pools::PoolState,
                     },
                     #[codec(index = 9)]
+                    #[doc = "Set a new metadata for the pool."]
+                    #[doc = ""]
+                    #[doc = "The dispatch origin of this call must be signed by the state toggler, or the root role"]
+                    #[doc = "of the pool."]
                     set_metadata {
                         pool_id: ::core::primitive::u32,
                         metadata: ::std::vec::Vec<::core::primitive::u8>,
@@ -43804,6 +44242,35 @@ pub mod api {
                                 ::subxt::sp_core::crypto::AccountId32,
                             >,
                     },
+                    #[codec(index = 12)]
+                    #[doc = "Chill on behalf of the pool."]
+                    #[doc = ""]
+                    #[doc = "The dispatch origin of this call must be signed by the pool nominator or the pool"]
+                    #[doc = "root role, same as [`Pallet::nominate`]."]
+                    #[doc = ""]
+                    #[doc = "This directly forward the call to the staking pallet, on behalf of the pool bonded"]
+                    #[doc = "account."]
+                    chill { pool_id: ::core::primitive::u32 },
+                }
+                #[derive(
+                    :: subxt :: codec :: Decode,
+                    :: subxt :: codec :: Encode,
+                    Clone,
+                    Debug,
+                    Eq,
+                    PartialEq,
+                )]
+                pub enum DefensiveError {
+                    #[codec(index = 0)]
+                    NotEnoughSpaceInUnbondPool,
+                    #[codec(index = 1)]
+                    PoolNotFound,
+                    #[codec(index = 2)]
+                    RewardPoolNotFound,
+                    #[codec(index = 3)]
+                    SubPoolsNotFound,
+                    #[codec(index = 4)]
+                    BondedStashKilledPrematurely,
                 }
                 #[derive(
                     :: subxt :: codec :: Decode,
@@ -43814,87 +44281,7 @@ pub mod api {
                     PartialEq,
                 )]
                 pub enum Error {
-                    #[codec(index = 0)]
-                    #[doc = "A (bonded) pool id does not exist."]
-                    PoolNotFound,
-                    #[codec(index = 1)]
-                    #[doc = "An account is not a member."]
-                    PoolMemberNotFound,
-                    #[codec(index = 2)]
-                    #[doc = "A reward pool does not exist. In all cases this is a system logic error."]
-                    RewardPoolNotFound,
-                    #[codec(index = 3)]
-                    #[doc = "A sub pool does not exist."]
-                    SubPoolsNotFound,
-                    #[codec(index = 4)]
-                    #[doc = "An account is already delegating in another pool. An account may only belong to one"]
-                    #[doc = "pool at a time."]
-                    AccountBelongsToOtherPool,
-                    #[codec(index = 5)]
-                    #[doc = "The pool has insufficient balance to bond as a nominator."]
-                    InsufficientBond,
-                    #[codec(index = 6)]
-                    #[doc = "The member is already unbonding in this era."]
-                    AlreadyUnbonding,
-                    #[codec(index = 7)]
-                    #[doc = "The member is fully unbonded (and thus cannot access the bonded and reward pool"]
-                    #[doc = "anymore to, for example, collect rewards)."]
-                    FullyUnbonding,
-                    #[codec(index = 8)]
-                    #[doc = "The member cannot unbond further chunks due to reaching the limit."]
-                    MaxUnbondingLimit,
-                    #[codec(index = 9)]
-                    #[doc = "None of the funds can be withdrawn yet because the bonding duration has not passed."]
-                    CannotWithdrawAny,
-                    #[codec(index = 10)]
-                    #[doc = "The amount does not meet the minimum bond to either join or create a pool."]
-                    MinimumBondNotMet,
-                    #[codec(index = 11)]
-                    #[doc = "The transaction could not be executed due to overflow risk for the pool."]
-                    OverflowRisk,
-                    #[codec(index = 12)]
-                    #[doc = "A pool must be in [`PoolState::Destroying`] in order for the depositor to unbond or for"]
-                    #[doc = "other members to be permissionlessly unbonded."]
-                    NotDestroying,
-                    #[codec(index = 13)]
-                    #[doc = "The depositor must be the only member in the bonded pool in order to unbond. And the"]
-                    #[doc = "depositor must be the only member in the sub pools in order to withdraw unbonded."]
-                    NotOnlyPoolMember,
-                    #[codec(index = 14)]
-                    #[doc = "The caller does not have nominating permissions for the pool."]
-                    NotNominator,
-                    #[codec(index = 15)]
-                    #[doc = "Either a) the caller cannot make a valid kick or b) the pool is not destroying."]
-                    NotKickerOrDestroying,
-                    #[codec(index = 16)]
-                    #[doc = "The pool is not open to join"]
-                    NotOpen,
-                    #[codec(index = 17)]
-                    #[doc = "The system is maxed out on pools."]
-                    MaxPools,
-                    #[codec(index = 18)]
-                    #[doc = "Too many members in the pool or system."]
-                    MaxPoolMembers,
-                    #[codec(index = 19)]
-                    #[doc = "The pools state cannot be changed."]
-                    CanNotChangeState,
-                    #[codec(index = 20)]
-                    #[doc = "The caller does not have adequate permissions."]
-                    DoesNotHavePermission,
-                    #[codec(index = 21)]
-                    #[doc = "Metadata exceeds [`Config::MaxMetadataLen`]"]
-                    MetadataExceedsMaxLen,
-                    #[codec(index = 22)]
-                    #[doc = "Some error occurred that should never happen. This should be reported to the"]
-                    #[doc = "maintainers."]
-                    DefensiveError,
-                    #[codec(index = 23)]
-                    #[doc = "Not enough points. Ty unbonding less."]
-                    NotEnoughPointsToUnbond,
-                    #[codec(index = 24)]
-                    #[doc = "Partial unbonding now allowed permissionlessly."]
-                    PartialUnbondNotAllowedPermissionlessly,
-                }
+                    # [codec (index = 0)] # [doc = "A (bonded) pool id does not exist."] PoolNotFound , # [codec (index = 1)] # [doc = "An account is not a member."] PoolMemberNotFound , # [codec (index = 2)] # [doc = "A reward pool does not exist. In all cases this is a system logic error."] RewardPoolNotFound , # [codec (index = 3)] # [doc = "A sub pool does not exist."] SubPoolsNotFound , # [codec (index = 4)] # [doc = "An account is already delegating in another pool. An account may only belong to one"] # [doc = "pool at a time."] AccountBelongsToOtherPool , # [codec (index = 5)] # [doc = "The member is fully unbonded (and thus cannot access the bonded and reward pool"] # [doc = "anymore to, for example, collect rewards)."] FullyUnbonding , # [codec (index = 6)] # [doc = "The member cannot unbond further chunks due to reaching the limit."] MaxUnbondingLimit , # [codec (index = 7)] # [doc = "None of the funds can be withdrawn yet because the bonding duration has not passed."] CannotWithdrawAny , # [codec (index = 8)] # [doc = "The amount does not meet the minimum bond to either join or create a pool."] MinimumBondNotMet , # [codec (index = 9)] # [doc = "The transaction could not be executed due to overflow risk for the pool."] OverflowRisk , # [codec (index = 10)] # [doc = "A pool must be in [`PoolState::Destroying`] in order for the depositor to unbond or for"] # [doc = "other members to be permissionlessly unbonded."] NotDestroying , # [codec (index = 11)] # [doc = "The depositor must be the only member in the bonded pool in order to unbond. And the"] # [doc = "depositor must be the only member in the sub pools in order to withdraw unbonded."] NotOnlyPoolMember , # [codec (index = 12)] # [doc = "The caller does not have nominating permissions for the pool."] NotNominator , # [codec (index = 13)] # [doc = "Either a) the caller cannot make a valid kick or b) the pool is not destroying."] NotKickerOrDestroying , # [codec (index = 14)] # [doc = "The pool is not open to join"] NotOpen , # [codec (index = 15)] # [doc = "The system is maxed out on pools."] MaxPools , # [codec (index = 16)] # [doc = "Too many members in the pool or system."] MaxPoolMembers , # [codec (index = 17)] # [doc = "The pools state cannot be changed."] CanNotChangeState , # [codec (index = 18)] # [doc = "The caller does not have adequate permissions."] DoesNotHavePermission , # [codec (index = 19)] # [doc = "Metadata exceeds [`Config::MaxMetadataLen`]"] MetadataExceedsMaxLen , # [codec (index = 20)] # [doc = "Some error occurred that should never happen. This should be reported to the"] # [doc = "maintainers."] Defensive (runtime_types :: pallet_nomination_pools :: pallet :: DefensiveError ,) , # [codec (index = 21)] # [doc = "Not enough points. Ty unbonding less."] NotEnoughPointsToUnbond , # [codec (index = 22)] # [doc = "Partial unbonding now allowed permissionlessly."] PartialUnbondNotAllowedPermissionlessly , }
                 #[derive(
                     :: subxt :: codec :: Decode,
                     :: subxt :: codec :: Encode,
@@ -43927,17 +44314,34 @@ pub mod api {
                     },
                     #[codec(index = 3)]
                     #[doc = "A member has unbonded from their pool."]
+                    #[doc = ""]
+                    #[doc = "- `balance` is the corresponding balance of the number of points that has been"]
+                    #[doc = "  requested to be unbonded (the argument of the `unbond` transaction) from the bonded"]
+                    #[doc = "  pool."]
+                    #[doc = "- `points` is the number of points that are issued as a result of `balance` being"]
+                    #[doc = "dissolved into the corresponding unbonding pool."]
+                    #[doc = ""]
+                    #[doc = "In the absence of slashing, these values will match. In the presence of slashing, the"]
+                    #[doc = "number of points that are issued in the unbonding pool will be less than the amount"]
+                    #[doc = "requested to be unbonded."]
                     Unbonded {
                         member: ::subxt::sp_core::crypto::AccountId32,
                         pool_id: ::core::primitive::u32,
-                        amount: ::core::primitive::u128,
+                        balance: ::core::primitive::u128,
+                        points: ::core::primitive::u128,
                     },
                     #[codec(index = 4)]
                     #[doc = "A member has withdrawn from their pool."]
+                    #[doc = ""]
+                    #[doc = "The given number of `points` have been dissolved in return of `balance`."]
+                    #[doc = ""]
+                    #[doc = "Similar to `Unbonded` event, in the absence of slashing, the ratio of point to balance"]
+                    #[doc = "will be 1."]
                     Withdrawn {
                         member: ::subxt::sp_core::crypto::AccountId32,
                         pool_id: ::core::primitive::u32,
-                        amount: ::core::primitive::u128,
+                        balance: ::core::primitive::u128,
+                        points: ::core::primitive::u128,
                     },
                     #[codec(index = 5)]
                     #[doc = "A pool has been destroyed."]
@@ -43970,6 +44374,19 @@ pub mod api {
                         nominator: ::core::option::Option<
                             ::subxt::sp_core::crypto::AccountId32,
                         >,
+                    },
+                    #[codec(index = 9)]
+                    #[doc = "The active balance of pool `pool_id` has been slashed to `balance`."]
+                    PoolSlashed {
+                        pool_id: ::core::primitive::u32,
+                        balance: ::core::primitive::u128,
+                    },
+                    #[codec(index = 10)]
+                    #[doc = "The unbond pool at `era` of pool `pool_id` has been slashed to `balance`."]
+                    UnbondingPoolSlashed {
+                        pool_id: ::core::primitive::u32,
+                        era: ::core::primitive::u32,
+                        balance: ::core::primitive::u128,
                     },
                 }
             }
@@ -44027,7 +44444,7 @@ pub mod api {
                 Eq,
                 PartialEq,
             )]
-            pub struct PoolMember { pub pool_id : :: core :: primitive :: u32 , pub points : :: core :: primitive :: u128 , pub reward_pool_total_earnings : :: core :: primitive :: u128 , pub unbonding_eras : runtime_types :: frame_support :: storage :: bounded_btree_map :: BoundedBTreeMap < :: core :: primitive :: u32 , :: core :: primitive :: u128 > , }
+            pub struct PoolMember { pub pool_id : :: core :: primitive :: u32 , pub points : :: core :: primitive :: u128 , pub reward_pool_total_earnings : :: core :: primitive :: u128 , pub unbonding_eras : runtime_types :: sp_runtime :: bounded :: bounded_btree_map :: BoundedBTreeMap < :: core :: primitive :: u32 , :: core :: primitive :: u128 > , }
             #[derive(
                 :: subxt :: codec :: Decode,
                 :: subxt :: codec :: Encode,
@@ -44079,7 +44496,7 @@ pub mod api {
                 Eq,
                 PartialEq,
             )]
-            pub struct SubPools { pub no_era : runtime_types :: pallet_nomination_pools :: UnbondPool , pub with_era : runtime_types :: frame_support :: storage :: bounded_btree_map :: BoundedBTreeMap < :: core :: primitive :: u32 , runtime_types :: pallet_nomination_pools :: UnbondPool > , }
+            pub struct SubPools { pub no_era : runtime_types :: pallet_nomination_pools :: UnbondPool , pub with_era : runtime_types :: sp_runtime :: bounded :: bounded_btree_map :: BoundedBTreeMap < :: core :: primitive :: u32 , runtime_types :: pallet_nomination_pools :: UnbondPool > , }
             #[derive(
                 :: subxt :: codec :: Decode,
                 :: subxt :: codec :: Encode,
@@ -45264,7 +45681,14 @@ pub mod api {
                 Eq,
                 PartialEq,
             )]
-            pub struct Nominations { pub targets : runtime_types :: frame_support :: storage :: bounded_vec :: BoundedVec < :: subxt :: sp_core :: crypto :: AccountId32 > , pub submitted_in : :: core :: primitive :: u32 , pub suppressed : :: core :: primitive :: bool , }
+            pub struct Nominations {
+                pub targets:
+                    runtime_types::sp_runtime::bounded::bounded_vec::BoundedVec<
+                        ::subxt::sp_core::crypto::AccountId32,
+                    >,
+                pub submitted_in: ::core::primitive::u32,
+                pub suppressed: ::core::primitive::bool,
+            }
             #[derive(
                 :: subxt :: codec :: Decode,
                 :: subxt :: codec :: Encode,
@@ -45321,7 +45745,20 @@ pub mod api {
                 Eq,
                 PartialEq,
             )]
-            pub struct StakingLedger { pub stash : :: subxt :: sp_core :: crypto :: AccountId32 , # [codec (compact)] pub total : :: core :: primitive :: u128 , # [codec (compact)] pub active : :: core :: primitive :: u128 , pub unlocking : runtime_types :: frame_support :: storage :: bounded_vec :: BoundedVec < runtime_types :: pallet_staking :: UnlockChunk < :: core :: primitive :: u128 > > , pub claimed_rewards : :: std :: vec :: Vec < :: core :: primitive :: u32 > , }
+            pub struct StakingLedger {
+                pub stash: ::subxt::sp_core::crypto::AccountId32,
+                #[codec(compact)]
+                pub total: ::core::primitive::u128,
+                #[codec(compact)]
+                pub active: ::core::primitive::u128,
+                pub unlocking:
+                    runtime_types::sp_runtime::bounded::bounded_vec::BoundedVec<
+                        runtime_types::pallet_staking::UnlockChunk<
+                            ::core::primitive::u128,
+                        >,
+                    >,
+                pub claimed_rewards: ::std::vec::Vec<::core::primitive::u32>,
+            }
             #[derive(
                 :: subxt :: codec :: Decode,
                 :: subxt :: codec :: Encode,
@@ -45626,6 +46063,27 @@ pub mod api {
         }
         pub mod pallet_transaction_payment {
             use super::runtime_types;
+            pub mod pallet {
+                use super::runtime_types;
+                #[derive(
+                    :: subxt :: codec :: Decode,
+                    :: subxt :: codec :: Encode,
+                    Clone,
+                    Debug,
+                    Eq,
+                    PartialEq,
+                )]
+                pub enum Event {
+                    #[codec(index = 0)]
+                    #[doc = "A transaction fee `actual_fee`, of which `tip` was added to the minimum inclusion fee,"]
+                    #[doc = "has been paid by `who`."]
+                    TransactionFeePaid {
+                        who: ::subxt::sp_core::crypto::AccountId32,
+                        actual_fee: ::core::primitive::u128,
+                        tip: ::core::primitive::u128,
+                    },
+                }
+            }
             #[derive(
                 :: subxt :: codec :: Decode,
                 :: subxt :: codec :: Encode,
@@ -45702,6 +46160,23 @@ pub mod api {
                         proposal_id: ::core::primitive::u32,
                     },
                     #[codec(index = 3)]
+                    #[doc = "Propose and approve a spend of treasury funds."]
+                    #[doc = ""]
+                    #[doc = "- `origin`: Must be `SpendOrigin` with the `Success` value being at least `amount`."]
+                    #[doc = "- `amount`: The amount to be transferred from the treasury to the `beneficiary`."]
+                    #[doc = "- `beneficiary`: The destination account for the transfer."]
+                    #[doc = ""]
+                    #[doc = "NOTE: For record-keeping purposes, the proposer is deemed to be equivalent to the"]
+                    #[doc = "beneficiary."]
+                    spend {
+                        #[codec(compact)]
+                        amount: ::core::primitive::u128,
+                        beneficiary: ::subxt::sp_runtime::MultiAddress<
+                            ::subxt::sp_core::crypto::AccountId32,
+                            ::core::primitive::u32,
+                        >,
+                    },
+                    #[codec(index = 4)]
                     #[doc = "Force a previously approved proposal to be removed from the approval queue."]
                     #[doc = "The original deposit will no longer be returned."]
                     #[doc = ""]
@@ -45741,6 +46216,10 @@ pub mod api {
                     #[doc = "Too many approvals in the queue."]
                     TooManyApprovals,
                     #[codec(index = 3)]
+                    #[doc = "The spend origin is valid but the amount it is allowed to spend is lower than the"]
+                    #[doc = "amount to be spent."]
+                    InsufficientPermission,
+                    #[codec(index = 4)]
                     #[doc = "Proposal has not been approved."]
                     ProposalNotApproved,
                 }
@@ -45789,6 +46268,13 @@ pub mod api {
                     #[codec(index = 6)]
                     #[doc = "Some funds have been deposited."]
                     Deposit { value: ::core::primitive::u128 },
+                    #[codec(index = 7)]
+                    #[doc = "A new spend proposal has been approved."]
+                    SpendApproved {
+                        proposal_index: ::core::primitive::u32,
+                        amount: ::core::primitive::u128,
+                        beneficiary: ::subxt::sp_core::crypto::AccountId32,
+                    },
                 }
             }
             #[derive(
@@ -46529,6 +47015,47 @@ pub mod api {
         }
         pub mod sp_runtime {
             use super::runtime_types;
+            pub mod bounded {
+                use super::runtime_types;
+                pub mod bounded_btree_map {
+                    use super::runtime_types;
+                    #[derive(
+                        :: subxt :: codec :: Decode,
+                        :: subxt :: codec :: Encode,
+                        Clone,
+                        Debug,
+                        Eq,
+                        PartialEq,
+                    )]
+                    pub struct BoundedBTreeMap<_0, _1>(
+                        pub ::subxt::KeyedVec<_0, _1>,
+                    );
+                }
+                pub mod bounded_vec {
+                    use super::runtime_types;
+                    #[derive(
+                        :: subxt :: codec :: Decode,
+                        :: subxt :: codec :: Encode,
+                        Clone,
+                        Debug,
+                        Eq,
+                        PartialEq,
+                    )]
+                    pub struct BoundedVec<_0>(pub ::std::vec::Vec<_0>);
+                }
+                pub mod weak_bounded_vec {
+                    use super::runtime_types;
+                    #[derive(
+                        :: subxt :: codec :: Decode,
+                        :: subxt :: codec :: Encode,
+                        Clone,
+                        Debug,
+                        Eq,
+                        PartialEq,
+                    )]
+                    pub struct WeakBoundedVec<_0>(pub ::std::vec::Vec<_0>);
+                }
+            }
             pub mod generic {
                 use super::runtime_types;
                 pub mod digest {
@@ -47464,7 +47991,7 @@ pub mod api {
                 PartialEq,
             )]
             pub enum Event {
-                # [codec (index = 0)] System (runtime_types :: frame_system :: pallet :: Event ,) , # [codec (index = 5)] Indices (runtime_types :: pallet_indices :: pallet :: Event ,) , # [codec (index = 6)] Balances (runtime_types :: pallet_balances :: pallet :: Event ,) , # [codec (index = 9)] ElectionProviderMultiPhase (runtime_types :: pallet_election_provider_multi_phase :: pallet :: Event ,) , # [codec (index = 10)] Staking (runtime_types :: pallet_staking :: pallet :: pallet :: Event ,) , # [codec (index = 11)] Session (runtime_types :: pallet_session :: pallet :: Event ,) , # [codec (index = 12)] Democracy (runtime_types :: pallet_democracy :: pallet :: Event ,) , # [codec (index = 13)] Council (runtime_types :: pallet_collective :: pallet :: Event ,) , # [codec (index = 14)] Elections (runtime_types :: pallet_elections_phragmen :: pallet :: Event ,) , # [codec (index = 15)] Grandpa (runtime_types :: pallet_grandpa :: pallet :: Event ,) , # [codec (index = 16)] Treasury (runtime_types :: pallet_treasury :: pallet :: Event ,) , # [codec (index = 17)] Utility (runtime_types :: pallet_utility :: pallet :: Event ,) , # [codec (index = 18)] Multisig (runtime_types :: pallet_multisig :: pallet :: Event ,) , # [codec (index = 19)] Scheduler (runtime_types :: pallet_scheduler :: pallet :: Event ,) , # [codec (index = 20)] Preimage (runtime_types :: pallet_preimage :: pallet :: Event ,) , # [codec (index = 21)] Proxy (runtime_types :: pallet_proxy :: pallet :: Event ,) , # [codec (index = 22)] Assets (runtime_types :: pallet_assets :: pallet :: Event ,) , # [codec (index = 23)] Sudo (runtime_types :: pallet_sudo :: pallet :: Event ,) , # [codec (index = 24)] ImOnline (runtime_types :: pallet_im_online :: pallet :: Event ,) , # [codec (index = 26)] Offences (runtime_types :: pallet_offences :: pallet :: Event ,) , # [codec (index = 28)] Bounties (runtime_types :: pallet_bounties :: pallet :: Event ,) , # [codec (index = 29)] ChildBounties (runtime_types :: pallet_child_bounties :: pallet :: Event ,) , # [codec (index = 30)] BagsList (runtime_types :: pallet_bags_list :: pallet :: Event ,) , # [codec (index = 31)] NominationPools (runtime_types :: pallet_nomination_pools :: pallet :: Event ,) , # [codec (index = 32)] HasherBn254 (runtime_types :: pallet_hasher :: pallet :: Event ,) , # [codec (index = 33)] AssetRegistry (runtime_types :: pallet_asset_registry :: pallet :: Event ,) , # [codec (index = 35)] Tokens (runtime_types :: orml_tokens :: module :: Event ,) , # [codec (index = 36)] TokenWrapper (runtime_types :: pallet_token_wrapper :: pallet :: Event ,) , # [codec (index = 37)] MixerVerifierBn254 (runtime_types :: pallet_verifier :: pallet :: Event ,) , # [codec (index = 38)] AnchorVerifierBn254 (runtime_types :: pallet_verifier :: pallet :: Event ,) , # [codec (index = 39)] VAnchorVerifier2x2Bn254 (runtime_types :: pallet_verifier :: pallet :: Event ,) , # [codec (index = 40)] MerkleTreeBn254 (runtime_types :: pallet_mt :: pallet :: Event ,) , # [codec (index = 41)] LinkableTreeBn254 (runtime_types :: pallet_linkable_tree :: pallet :: Event ,) , # [codec (index = 42)] MixerBn254 (runtime_types :: pallet_mixer :: pallet :: Event ,) , # [codec (index = 43)] AnchorBn254 (runtime_types :: pallet_anchor :: pallet :: Event ,) , # [codec (index = 44)] AnchorHandlerBn254 (runtime_types :: pallet_anchor_handler :: pallet :: Event ,) , # [codec (index = 45)] VAnchorBn254 (runtime_types :: pallet_vanchor :: pallet :: Event ,) , # [codec (index = 46)] VAnchorHandlerBn254 (runtime_types :: pallet_vanchor_handler :: pallet :: Event ,) , # [codec (index = 47)] Bridge (runtime_types :: pallet_bridge :: pallet :: Event ,) , # [codec (index = 48)] SignatureBridge (runtime_types :: pallet_signature_bridge :: pallet :: Event ,) , }
+                # [codec (index = 0)] System (runtime_types :: frame_system :: pallet :: Event ,) , # [codec (index = 5)] Indices (runtime_types :: pallet_indices :: pallet :: Event ,) , # [codec (index = 6)] Balances (runtime_types :: pallet_balances :: pallet :: Event ,) , # [codec (index = 7)] TransactionPayment (runtime_types :: pallet_transaction_payment :: pallet :: Event ,) , # [codec (index = 9)] ElectionProviderMultiPhase (runtime_types :: pallet_election_provider_multi_phase :: pallet :: Event ,) , # [codec (index = 10)] Staking (runtime_types :: pallet_staking :: pallet :: pallet :: Event ,) , # [codec (index = 11)] Session (runtime_types :: pallet_session :: pallet :: Event ,) , # [codec (index = 12)] Democracy (runtime_types :: pallet_democracy :: pallet :: Event ,) , # [codec (index = 13)] Council (runtime_types :: pallet_collective :: pallet :: Event ,) , # [codec (index = 14)] Elections (runtime_types :: pallet_elections_phragmen :: pallet :: Event ,) , # [codec (index = 15)] Grandpa (runtime_types :: pallet_grandpa :: pallet :: Event ,) , # [codec (index = 16)] Treasury (runtime_types :: pallet_treasury :: pallet :: Event ,) , # [codec (index = 17)] Utility (runtime_types :: pallet_utility :: pallet :: Event ,) , # [codec (index = 18)] Multisig (runtime_types :: pallet_multisig :: pallet :: Event ,) , # [codec (index = 19)] Scheduler (runtime_types :: pallet_scheduler :: pallet :: Event ,) , # [codec (index = 20)] Preimage (runtime_types :: pallet_preimage :: pallet :: Event ,) , # [codec (index = 21)] Proxy (runtime_types :: pallet_proxy :: pallet :: Event ,) , # [codec (index = 22)] Assets (runtime_types :: pallet_assets :: pallet :: Event ,) , # [codec (index = 23)] Sudo (runtime_types :: pallet_sudo :: pallet :: Event ,) , # [codec (index = 24)] ImOnline (runtime_types :: pallet_im_online :: pallet :: Event ,) , # [codec (index = 26)] Offences (runtime_types :: pallet_offences :: pallet :: Event ,) , # [codec (index = 28)] Bounties (runtime_types :: pallet_bounties :: pallet :: Event ,) , # [codec (index = 29)] ChildBounties (runtime_types :: pallet_child_bounties :: pallet :: Event ,) , # [codec (index = 30)] BagsList (runtime_types :: pallet_bags_list :: pallet :: Event ,) , # [codec (index = 31)] NominationPools (runtime_types :: pallet_nomination_pools :: pallet :: Event ,) , # [codec (index = 32)] HasherBn254 (runtime_types :: pallet_hasher :: pallet :: Event ,) , # [codec (index = 33)] AssetRegistry (runtime_types :: pallet_asset_registry :: pallet :: Event ,) , # [codec (index = 35)] Tokens (runtime_types :: orml_tokens :: module :: Event ,) , # [codec (index = 36)] TokenWrapper (runtime_types :: pallet_token_wrapper :: pallet :: Event ,) , # [codec (index = 37)] MixerVerifierBn254 (runtime_types :: pallet_verifier :: pallet :: Event ,) , # [codec (index = 38)] AnchorVerifierBn254 (runtime_types :: pallet_verifier :: pallet :: Event ,) , # [codec (index = 39)] VAnchorVerifier2x2Bn254 (runtime_types :: pallet_verifier :: pallet :: Event ,) , # [codec (index = 40)] MerkleTreeBn254 (runtime_types :: pallet_mt :: pallet :: Event ,) , # [codec (index = 41)] LinkableTreeBn254 (runtime_types :: pallet_linkable_tree :: pallet :: Event ,) , # [codec (index = 42)] MixerBn254 (runtime_types :: pallet_mixer :: pallet :: Event ,) , # [codec (index = 43)] AnchorBn254 (runtime_types :: pallet_anchor :: pallet :: Event ,) , # [codec (index = 44)] AnchorHandlerBn254 (runtime_types :: pallet_anchor_handler :: pallet :: Event ,) , # [codec (index = 45)] VAnchorBn254 (runtime_types :: pallet_vanchor :: pallet :: Event ,) , # [codec (index = 46)] VAnchorHandlerBn254 (runtime_types :: pallet_vanchor_handler :: pallet :: Event ,) , # [codec (index = 47)] Bridge (runtime_types :: pallet_bridge :: pallet :: Event ,) , # [codec (index = 48)] SignatureBridge (runtime_types :: pallet_signature_bridge :: pallet :: Event ,) , }
             #[derive(
                 :: subxt :: codec :: Decode,
                 :: subxt :: codec :: Encode,
@@ -47705,10 +48232,10 @@ pub mod api {
         ) -> Result<(), ::subxt::MetadataError> {
             if self.client.metadata().metadata_hash(&PALLETS)
                 != [
-                    199u8, 148u8, 187u8, 248u8, 253u8, 242u8, 250u8, 29u8,
-                    140u8, 189u8, 58u8, 202u8, 229u8, 202u8, 234u8, 137u8,
-                    148u8, 164u8, 215u8, 221u8, 91u8, 195u8, 215u8, 255u8,
-                    190u8, 37u8, 169u8, 229u8, 167u8, 212u8, 121u8, 228u8,
+                    149u8, 0u8, 197u8, 156u8, 47u8, 142u8, 81u8, 131u8, 30u8,
+                    0u8, 43u8, 63u8, 105u8, 237u8, 161u8, 4u8, 212u8, 73u8,
+                    93u8, 171u8, 186u8, 217u8, 22u8, 80u8, 92u8, 109u8, 67u8,
+                    228u8, 70u8, 18u8, 242u8, 85u8,
                 ]
             {
                 Err(::subxt::MetadataError::IncompatibleMetadata)
