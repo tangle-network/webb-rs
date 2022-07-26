@@ -105,7 +105,8 @@ pub enum Proposal {
     feature = "scale",
     derive(scale_info::TypeInfo, scale_codec::Encode, scale_codec::Decode)
 )]
-/// Test
+#[cfg_attr(feature = "max-encoded-len", derive(scale_codec::MaxEncodedLen))]
+/// Proposal kind enum
 pub enum ProposalKind {
     /// Refresh proposal for DKG rotation
     Refresh,

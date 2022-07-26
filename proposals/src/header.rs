@@ -8,6 +8,7 @@ use crate::nonce::Nonce;
     feature = "scale",
     derive(scale_info::TypeInfo, scale_codec::Encode, scale_codec::Decode)
 )]
+#[cfg_attr(feature = "max-encoded-len", derive(scale_codec::MaxEncodedLen))]
 pub enum TargetSystem {
     /// Ethereum Contract address (20 bytes).
     ContractAddress([u8; 20]),
@@ -40,7 +41,8 @@ impl TargetSystem {
     feature = "scale",
     derive(scale_info::TypeInfo, scale_codec::Encode, scale_codec::Decode)
 )]
-pub struct FunctionSignature([u8; 4]);
+#[cfg_attr(feature = "max-encoded-len", derive(scale_codec::MaxEncodedLen))]
+pub struct FunctionSignature(pub [u8; 4]);
 
 /// Proposal Target `ResourceId` (32 bytes).
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Ord, PartialOrd)]
@@ -48,7 +50,8 @@ pub struct FunctionSignature([u8; 4]);
     feature = "scale",
     derive(scale_info::TypeInfo, scale_codec::Encode, scale_codec::Decode)
 )]
-pub struct ResourceId([u8; 32]);
+#[cfg_attr(feature = "max-encoded-len", derive(scale_codec::MaxEncodedLen))]
+pub struct ResourceId(pub [u8; 32]);
 
 /// Proposal Target Chain and its type (6 bytes).
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Ord, PartialOrd)]
@@ -56,6 +59,7 @@ pub struct ResourceId([u8; 32]);
     feature = "scale",
     derive(scale_info::TypeInfo, scale_codec::Encode, scale_codec::Decode)
 )]
+#[cfg_attr(feature = "max-encoded-len", derive(scale_codec::MaxEncodedLen))]
 pub enum TypedChainId {
     /// None chain type.
     ///
