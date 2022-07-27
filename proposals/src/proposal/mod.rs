@@ -103,9 +103,13 @@ pub enum Proposal {
 #[derive(Debug, Clone, Copy, Eq, PartialEq)]
 #[cfg_attr(
     feature = "scale",
-    derive(scale_info::TypeInfo, scale_codec::Encode, scale_codec::Decode)
+    derive(
+        scale_info::TypeInfo,
+        scale_codec::Encode,
+        scale_codec::Decode,
+        scale_codec::MaxEncodedLen
+    )
 )]
-#[cfg_attr(feature = "max-encoded-len", derive(scale_codec::MaxEncodedLen))]
 /// Proposal kind enum
 pub enum ProposalKind {
     /// Refresh proposal for DKG rotation
@@ -114,6 +118,8 @@ pub enum ProposalKind {
     ProposerSetUpdate,
     /// EVM transaction proposal
     EVM,
+    /// Anchor create proposal for linking anchors together
+    AnchorCreate,
     /// Anchor update proposal for linking anchors together
     AnchorUpdate,
     /// Token add proposal for adding new tokens to the asset application

@@ -51,7 +51,6 @@ default = ["substrate-runtime", "evm-runtime"]
 # Main features.
 substrate-runtime = ["subxt", "scale", "scale-info"]
 evm-runtime = ["ethers", "serde_json", "openssl"]
-
 # Tests
 integration-tests = []
 # Build
