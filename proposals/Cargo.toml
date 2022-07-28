@@ -1,6 +1,6 @@
 [package]
 name = "webb-proposals"
-version = "0.4.2"
+version = "0.4.3"
 edition = "2021"
 description = "Webb Protocol Proposals Specification & Implementation (part of webb-rs SDK)"
 categories = ["encoding", "no-std"]
@@ -12,10 +12,11 @@ license = "Apache-2.0"
 [dependencies]
 scale-codec = { package = 'parity-scale-codec', version = '3.0.0', default-features = false, optional = true }
 scale-info = { version = "2.1.1", default-features = false, optional = true }
+
 num-traits = { version = "0.2.8", default-features = false }
 typed-builder = { version = "0.10.0", default-features = false, optional = true }
 tiny-keccak = { version = "2.0.0", features = ["keccak"] }
-cosmwasm-std = "1.0.0"
+cosmwasm-std = { version = "1.0.0", default-features = false, optional = true }
 schemars = "0.8.1"
 serde = { version = "1.0.103", default-features = false, features = ["derive"] }
 
@@ -27,7 +28,6 @@ hex = "0.4.3"
 default = ["std", "evm", "substrate", "scale", "cosmwasm"]
 std = ["scale-codec/std", "scale-info/std", "num-traits/std"]
 scale = ["scale-codec", "scale-info/derive"]
-max-encoded-len = []
 evm = []
 substrate = ["scale-codec", "typed-builder"]
-cosmwasm = []
+cosmwasm = ["cosmwasm-std"]

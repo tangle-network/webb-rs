@@ -6,9 +6,13 @@ use crate::nonce::Nonce;
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
 #[cfg_attr(
     feature = "scale",
-    derive(scale_info::TypeInfo, scale_codec::Encode, scale_codec::Decode)
+    derive(
+        scale_info::TypeInfo,
+        scale_codec::Encode,
+        scale_codec::Decode,
+        scale_codec::MaxEncodedLen
+    )
 )]
-#[cfg_attr(feature = "max-encoded-len", derive(scale_codec::MaxEncodedLen))]
 pub enum TargetSystem {
     /// Ethereum Contract address (20 bytes).
     ContractAddress([u8; 20]),
@@ -39,27 +43,39 @@ impl TargetSystem {
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Ord, PartialOrd)]
 #[cfg_attr(
     feature = "scale",
-    derive(scale_info::TypeInfo, scale_codec::Encode, scale_codec::Decode)
+    derive(
+        scale_info::TypeInfo,
+        scale_codec::Encode,
+        scale_codec::Decode,
+        scale_codec::MaxEncodedLen
+    )
 )]
-#[cfg_attr(feature = "max-encoded-len", derive(scale_codec::MaxEncodedLen))]
 pub struct FunctionSignature(pub [u8; 4]);
 
 /// Proposal Target `ResourceId` (32 bytes).
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Ord, PartialOrd)]
+#[derive(Debug, Default, Clone, Copy, PartialEq, Eq, Hash, Ord, PartialOrd)]
 #[cfg_attr(
     feature = "scale",
-    derive(scale_info::TypeInfo, scale_codec::Encode, scale_codec::Decode)
+    derive(
+        scale_info::TypeInfo,
+        scale_codec::Encode,
+        scale_codec::Decode,
+        scale_codec::MaxEncodedLen
+    )
 )]
-#[cfg_attr(feature = "max-encoded-len", derive(scale_codec::MaxEncodedLen))]
 pub struct ResourceId(pub [u8; 32]);
 
 /// Proposal Target Chain and its type (6 bytes).
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Ord, PartialOrd)]
 #[cfg_attr(
     feature = "scale",
-    derive(scale_info::TypeInfo, scale_codec::Encode, scale_codec::Decode)
+    derive(
+        scale_info::TypeInfo,
+        scale_codec::Encode,
+        scale_codec::Decode,
+        scale_codec::MaxEncodedLen
+    )
 )]
-#[cfg_attr(feature = "max-encoded-len", derive(scale_codec::MaxEncodedLen))]
 pub enum TypedChainId {
     /// None chain type.
     ///
