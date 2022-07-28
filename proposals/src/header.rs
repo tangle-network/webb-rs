@@ -99,6 +99,12 @@ pub enum TypedChainId {
     Ink(u32),
 }
 
+impl Default for TypedChainId {
+    fn default() -> Self {
+        TypedChainId::None
+    }
+}
+
 /// Proposal Header (40 bytes).
 /// ┌────────────────────┬─────────────────┬───────────────┐
 /// │                    │                 │               │
@@ -381,6 +387,12 @@ impl From<[u8; TargetSystem::LENGTH]> for TargetSystem {
 impl From<TargetSystem> for [u8; TargetSystem::LENGTH] {
     fn from(target_system: TargetSystem) -> Self {
         target_system.into_bytes()
+    }
+}
+
+impl Default for TargetSystem {
+    fn default() -> Self {
+        TargetSystem::TreeId(0)
     }
 }
 
