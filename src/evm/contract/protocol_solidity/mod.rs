@@ -1,7 +1,5 @@
 pub mod anchor_base;
 pub mod anchor_handler;
-pub mod anchor_proxy;
-pub mod fixed_deposit_anchor;
 pub mod governed_token_wrapper;
 pub mod signature_bridge;
 pub mod token_wrapper;
@@ -12,8 +10,6 @@ pub mod variable_anchor;
 
 pub use anchor_base::*;
 pub use anchor_handler::*;
-pub use anchor_proxy::*;
-pub use fixed_deposit_anchor::*;
 pub use governed_token_wrapper::*;
 pub use signature_bridge::*;
 pub use token_wrapper::*;
