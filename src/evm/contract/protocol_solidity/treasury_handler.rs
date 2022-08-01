@@ -351,7 +351,9 @@ pub mod treasury_handler_contract {
                     data.as_ref(),
                 )
             {
-                return Ok(TreasuryHandlerContractCalls::BridgeAddress(decoded));
+                return Ok(TreasuryHandlerContractCalls::BridgeAddress(
+                    decoded,
+                ));
             }
             if let Ok (decoded) = < ContractAddressToResourceIDCall as ethers :: core :: abi :: AbiDecode > :: decode (data . as_ref ()) { return Ok (TreasuryHandlerContractCalls :: ContractAddressToResourceID (decoded)) }
             if let Ok(decoded) =
@@ -369,7 +371,9 @@ pub mod treasury_handler_contract {
                     data.as_ref(),
                 )
             {
-                return Ok(TreasuryHandlerContractCalls::UpdateRecords(decoded));
+                return Ok(TreasuryHandlerContractCalls::UpdateRecords(
+                    decoded,
+                ));
             }
             if let Ok(decoded) =
                 <ExecuteProposalCall as ethers::core::abi::AbiDecode>::decode(
@@ -394,7 +398,9 @@ pub mod treasury_handler_contract {
                     data.as_ref(),
                 )
             {
-                return Ok(TreasuryHandlerContractCalls::MigrateBridge(decoded));
+                return Ok(TreasuryHandlerContractCalls::MigrateBridge(
+                    decoded,
+                ));
             }
             if let Ok(decoded) =
                 <SetResourceCall as ethers::core::abi::AbiDecode>::decode(

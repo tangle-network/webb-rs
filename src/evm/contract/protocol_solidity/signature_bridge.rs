@@ -466,7 +466,9 @@ pub mod signature_bridge_contract {
                 return Ok (SignatureBridgeContractEvents :: GovernanceOwnershipTransferredFilter (decoded));
             }
             if let Ok(decoded) = PausedFilter::decode_log(log) {
-                return Ok(SignatureBridgeContractEvents::PausedFilter(decoded));
+                return Ok(SignatureBridgeContractEvents::PausedFilter(
+                    decoded,
+                ));
             }
             if let Ok(decoded) = RecoveredAddressFilter::decode_log(log) {
                 return Ok(
@@ -1015,7 +1017,9 @@ pub mod signature_bridge_contract {
                     data.as_ref(),
                 )
             {
-                return Ok(SignatureBridgeContractCalls::ProposalNonce(decoded));
+                return Ok(SignatureBridgeContractCalls::ProposalNonce(
+                    decoded,
+                ));
             }
             if let Ok(decoded) =
                 <ProposerSetRootCall as ethers::core::abi::AbiDecode>::decode(
