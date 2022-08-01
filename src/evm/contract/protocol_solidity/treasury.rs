@@ -1,6 +1,6 @@
-pub use treasurycontract_mod::*;
-#[allow(clippy::too_many_arguments)]
-mod treasurycontract_mod {
+pub use treasury_contract::*;
+#[allow(clippy::too_many_arguments, non_camel_case_types)]
+pub mod treasury_contract {
     #![allow(clippy::enum_variant_names)]
     #![allow(dead_code)]
     #![allow(clippy::type_complexity)]
@@ -19,10 +19,14 @@ mod treasurycontract_mod {
     pub static TREASURYCONTRACT_ABI: ethers::contract::Lazy<
         ethers::core::abi::Abi,
     > = ethers::contract::Lazy::new(|| {
-        serde_json :: from_str ("[{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_treasuryHandler\",\"type\":\"address\"}],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"inputs\":[],\"name\":\"proposalNonce\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"tokenAddress\",\"type\":\"address\"},{\"internalType\":\"address payable\",\"name\":\"to\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"amountToRescue\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"nonce\",\"type\":\"uint256\"}],\"name\":\"rescueTokens\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"newHandler\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"nonce\",\"type\":\"uint256\"}],\"name\":\"setHandler\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"stateMutability\":\"payable\",\"type\":\"receive\"}]") . expect ("invalid abi")
+        ethers :: core :: utils :: __serde_json :: from_str ("[{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_treasuryHandler\",\"type\":\"address\",\"components\":[]}],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\",\"outputs\":[]},{\"inputs\":[],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"proposalNonce\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\",\"components\":[]}]},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"tokenAddress\",\"type\":\"address\",\"components\":[]},{\"internalType\":\"address payable\",\"name\":\"to\",\"type\":\"address\",\"components\":[]},{\"internalType\":\"uint256\",\"name\":\"amountToRescue\",\"type\":\"uint256\",\"components\":[]},{\"internalType\":\"uint256\",\"name\":\"nonce\",\"type\":\"uint256\",\"components\":[]}],\"stateMutability\":\"nonpayable\",\"type\":\"function\",\"name\":\"rescueTokens\",\"outputs\":[]},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"newHandler\",\"type\":\"address\",\"components\":[]},{\"internalType\":\"uint256\",\"name\":\"nonce\",\"type\":\"uint256\",\"components\":[]}],\"stateMutability\":\"nonpayable\",\"type\":\"function\",\"name\":\"setHandler\",\"outputs\":[]},{\"inputs\":[],\"stateMutability\":\"payable\",\"type\":\"receive\",\"outputs\":[]}]") . expect ("invalid abi")
     });
-    #[derive(Clone)]
     pub struct TreasuryContract<M>(ethers::contract::Contract<M>);
+    impl<M> Clone for TreasuryContract<M> {
+        fn clone(&self) -> Self {
+            TreasuryContract(self.0.clone())
+        }
+    }
     impl<M> std::ops::Deref for TreasuryContract<M> {
         type Target = ethers::contract::Contract<M>;
         fn deref(&self) -> &Self::Target {
@@ -44,12 +48,12 @@ mod treasurycontract_mod {
             address: T,
             client: ::std::sync::Arc<M>,
         ) -> Self {
-            let contract = ethers::contract::Contract::new(
+            ethers::contract::Contract::new(
                 address.into(),
                 TREASURYCONTRACT_ABI.clone(),
                 client,
-            );
-            Self(contract)
+            )
+            .into()
         }
         #[doc = "Calls the contract's `proposalNonce` (0xcc3c74a1) function"]
         pub fn proposal_nonce(
@@ -88,7 +92,14 @@ mod treasurycontract_mod {
                 .expect("method not found (this should never happen)")
         }
     }
-    #[doc = "Container type for all input parameters for the `proposalNonce`function with signature `proposalNonce()` and selector `[204, 60, 116, 161]`"]
+    impl<M: ethers::providers::Middleware> From<ethers::contract::Contract<M>>
+        for TreasuryContract<M>
+    {
+        fn from(contract: ethers::contract::Contract<M>) -> Self {
+            Self(contract)
+        }
+    }
+    #[doc = "Container type for all input parameters for the `proposalNonce` function with signature `proposalNonce()` and selector `[204, 60, 116, 161]`"]
     #[derive(
         Clone,
         Debug,
@@ -102,7 +113,7 @@ mod treasurycontract_mod {
     )]
     #[ethcall(name = "proposalNonce", abi = "proposalNonce()")]
     pub struct ProposalNonceCall;
-    #[doc = "Container type for all input parameters for the `rescueTokens`function with signature `rescueTokens(address,address,uint256,uint256)` and selector `[23, 168, 169, 117]`"]
+    #[doc = "Container type for all input parameters for the `rescueTokens` function with signature `rescueTokens(address,address,uint256,uint256)` and selector `[23, 168, 169, 117]`"]
     #[derive(
         Clone,
         Debug,
@@ -124,7 +135,7 @@ mod treasurycontract_mod {
         pub amount_to_rescue: ethers::core::types::U256,
         pub nonce: ethers::core::types::U256,
     }
-    #[doc = "Container type for all input parameters for the `setHandler`function with signature `setHandler(address,uint256)` and selector `[226, 155, 44, 106]`"]
+    #[doc = "Container type for all input parameters for the `setHandler` function with signature `setHandler(address,uint256)` and selector `[226, 155, 44, 106]`"]
     #[derive(
         Clone,
         Debug,
@@ -141,7 +152,15 @@ mod treasurycontract_mod {
         pub new_handler: ethers::core::types::Address,
         pub nonce: ethers::core::types::U256,
     }
-    #[derive(Debug, Clone, PartialEq, Eq, ethers :: contract :: EthAbiType)]
+    #[derive(
+        Debug,
+        Clone,
+        PartialEq,
+        Eq,
+        ethers :: contract :: EthAbiType,
+        serde :: Serialize,
+        serde :: Deserialize,
+    )]
     pub enum TreasuryContractCalls {
         ProposalNonce(ProposalNonceCall),
         RescueTokens(RescueTokensCall),
@@ -212,4 +231,17 @@ mod treasurycontract_mod {
             TreasuryContractCalls::SetHandler(var)
         }
     }
+    #[doc = "Container type for all return fields from the `proposalNonce` function with signature `proposalNonce()` and selector `[204, 60, 116, 161]`"]
+    #[derive(
+        Clone,
+        Debug,
+        Default,
+        Eq,
+        PartialEq,
+        ethers :: contract :: EthAbiType,
+        ethers :: contract :: EthAbiCodec,
+        serde :: Serialize,
+        serde :: Deserialize,
+    )]
+    pub struct ProposalNonceReturn(pub ethers::core::types::U256);
 }

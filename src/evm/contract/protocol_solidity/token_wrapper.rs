@@ -1,6 +1,6 @@
-pub use governed_token_wrapper_contract::*;
+pub use token_wrapper_contract::*;
 #[allow(clippy::too_many_arguments, non_camel_case_types)]
-pub mod governed_token_wrapper_contract {
+pub mod token_wrapper_contract {
     #![allow(clippy::enum_variant_names)]
     #![allow(dead_code)]
     #![allow(clippy::type_complexity)]
@@ -14,35 +14,35 @@ pub mod governed_token_wrapper_contract {
         types::*,
     };
     use ethers::providers::Middleware;
-    #[doc = "GovernedTokenWrapperContract was auto-generated with ethers-rs Abigen. More information at: https://github.com/gakonst/ethers-rs"]
+    #[doc = "TokenWrapperContract was auto-generated with ethers-rs Abigen. More information at: https://github.com/gakonst/ethers-rs"]
     use std::sync::Arc;
-    pub static GOVERNEDTOKENWRAPPERCONTRACT_ABI: ethers::contract::Lazy<
+    pub static TOKENWRAPPERCONTRACT_ABI: ethers::contract::Lazy<
         ethers::core::abi::Abi,
     > = ethers::contract::Lazy::new(|| {
-        ethers :: core :: utils :: __serde_json :: from_str ("[{\"inputs\":[{\"internalType\":\"string\",\"name\":\"_name\",\"type\":\"string\",\"components\":[]},{\"internalType\":\"string\",\"name\":\"_symbol\",\"type\":\"string\",\"components\":[]},{\"internalType\":\"address payable\",\"name\":\"_feeRecipient\",\"type\":\"address\",\"components\":[]},{\"internalType\":\"address\",\"name\":\"_governor\",\"type\":\"address\",\"components\":[]},{\"internalType\":\"uint256\",\"name\":\"_limit\",\"type\":\"uint256\",\"components\":[]},{\"internalType\":\"bool\",\"name\":\"_isNativeAllowed\",\"type\":\"bool\",\"components\":[]}],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\",\"outputs\":[]},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\",\"components\":[],\"indexed\":true},{\"internalType\":\"address\",\"name\":\"spender\",\"type\":\"address\",\"components\":[],\"indexed\":true},{\"internalType\":\"uint256\",\"name\":\"value\",\"type\":\"uint256\",\"components\":[],\"indexed\":false}],\"type\":\"event\",\"name\":\"Approval\",\"outputs\":[],\"anonymous\":false},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\",\"components\":[],\"indexed\":false}],\"type\":\"event\",\"name\":\"Paused\",\"outputs\":[],\"anonymous\":false},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"role\",\"type\":\"bytes32\",\"components\":[],\"indexed\":true},{\"internalType\":\"bytes32\",\"name\":\"previousAdminRole\",\"type\":\"bytes32\",\"components\":[],\"indexed\":true},{\"internalType\":\"bytes32\",\"name\":\"newAdminRole\",\"type\":\"bytes32\",\"components\":[],\"indexed\":true}],\"type\":\"event\",\"name\":\"RoleAdminChanged\",\"outputs\":[],\"anonymous\":false},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"role\",\"type\":\"bytes32\",\"components\":[],\"indexed\":true},{\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\",\"components\":[],\"indexed\":true},{\"internalType\":\"address\",\"name\":\"sender\",\"type\":\"address\",\"components\":[],\"indexed\":true}],\"type\":\"event\",\"name\":\"RoleGranted\",\"outputs\":[],\"anonymous\":false},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"role\",\"type\":\"bytes32\",\"components\":[],\"indexed\":true},{\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\",\"components\":[],\"indexed\":true},{\"internalType\":\"address\",\"name\":\"sender\",\"type\":\"address\",\"components\":[],\"indexed\":true}],\"type\":\"event\",\"name\":\"RoleRevoked\",\"outputs\":[],\"anonymous\":false},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"from\",\"type\":\"address\",\"components\":[],\"indexed\":true},{\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\",\"components\":[],\"indexed\":true},{\"internalType\":\"uint256\",\"name\":\"value\",\"type\":\"uint256\",\"components\":[],\"indexed\":false}],\"type\":\"event\",\"name\":\"Transfer\",\"outputs\":[],\"anonymous\":false},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\",\"components\":[],\"indexed\":false}],\"type\":\"event\",\"name\":\"Unpaused\",\"outputs\":[],\"anonymous\":false},{\"inputs\":[],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"DEFAULT_ADMIN_ROLE\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\",\"components\":[]}]},{\"inputs\":[],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"MINTER_ROLE\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\",\"components\":[]}]},{\"inputs\":[],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"PAUSER_ROLE\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\",\"components\":[]}]},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_tokenAddress\",\"type\":\"address\",\"components\":[]},{\"internalType\":\"uint256\",\"name\":\"_nonce\",\"type\":\"uint256\",\"components\":[]}],\"stateMutability\":\"nonpayable\",\"type\":\"function\",\"name\":\"add\",\"outputs\":[]},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\",\"components\":[]},{\"internalType\":\"address\",\"name\":\"spender\",\"type\":\"address\",\"components\":[]}],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"allowance\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\",\"components\":[]}]},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"spender\",\"type\":\"address\",\"components\":[]},{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\",\"components\":[]}],\"stateMutability\":\"nonpayable\",\"type\":\"function\",\"name\":\"approve\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\",\"components\":[]}]},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\",\"components\":[]}],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"balanceOf\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\",\"components\":[]}]},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\",\"components\":[]}],\"stateMutability\":\"nonpayable\",\"type\":\"function\",\"name\":\"burn\",\"outputs\":[]},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\",\"components\":[]},{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\",\"components\":[]}],\"stateMutability\":\"nonpayable\",\"type\":\"function\",\"name\":\"burnFrom\",\"outputs\":[]},{\"inputs\":[],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"decimals\",\"outputs\":[{\"internalType\":\"uint8\",\"name\":\"\",\"type\":\"uint8\",\"components\":[]}]},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"spender\",\"type\":\"address\",\"components\":[]},{\"internalType\":\"uint256\",\"name\":\"subtractedValue\",\"type\":\"uint256\",\"components\":[]}],\"stateMutability\":\"nonpayable\",\"type\":\"function\",\"name\":\"decreaseAllowance\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\",\"components\":[]}]},{\"inputs\":[],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"feeRecipient\",\"outputs\":[{\"internalType\":\"address payable\",\"name\":\"\",\"type\":\"address\",\"components\":[]}]},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_deposit\",\"type\":\"uint256\",\"components\":[]}],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"getAmountToWrap\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\",\"components\":[]}]},{\"inputs\":[],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"getFee\",\"outputs\":[{\"internalType\":\"uint8\",\"name\":\"\",\"type\":\"uint8\",\"components\":[]}]},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_amountToWrap\",\"type\":\"uint256\",\"components\":[]}],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"getFeeFromAmount\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\",\"components\":[]}]},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"role\",\"type\":\"bytes32\",\"components\":[]}],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"getRoleAdmin\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\",\"components\":[]}]},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"role\",\"type\":\"bytes32\",\"components\":[]},{\"internalType\":\"uint256\",\"name\":\"index\",\"type\":\"uint256\",\"components\":[]}],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"getRoleMember\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\",\"components\":[]}]},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"role\",\"type\":\"bytes32\",\"components\":[]}],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"getRoleMemberCount\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\",\"components\":[]}]},{\"inputs\":[],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"getTokens\",\"outputs\":[{\"internalType\":\"address[]\",\"name\":\"\",\"type\":\"address[]\",\"components\":[]}]},{\"inputs\":[],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"governor\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\",\"components\":[]}]},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"role\",\"type\":\"bytes32\",\"components\":[]},{\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\",\"components\":[]}],\"stateMutability\":\"nonpayable\",\"type\":\"function\",\"name\":\"grantRole\",\"outputs\":[]},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"role\",\"type\":\"bytes32\",\"components\":[]},{\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\",\"components\":[]}],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"hasRole\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\",\"components\":[]}]},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\",\"components\":[]}],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"historicalTokens\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\",\"components\":[]}]},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"spender\",\"type\":\"address\",\"components\":[]},{\"internalType\":\"uint256\",\"name\":\"addedValue\",\"type\":\"uint256\",\"components\":[]}],\"stateMutability\":\"nonpayable\",\"type\":\"function\",\"name\":\"increaseAllowance\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\",\"components\":[]}]},{\"inputs\":[],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"isNativeAllowed\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\",\"components\":[]}]},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\",\"components\":[]},{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\",\"components\":[]}],\"stateMutability\":\"nonpayable\",\"type\":\"function\",\"name\":\"mint\",\"outputs\":[]},{\"inputs\":[],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"name\",\"outputs\":[{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\",\"components\":[]}]},{\"inputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\",\"name\":\"pause\",\"outputs\":[]},{\"inputs\":[],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"paused\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\",\"components\":[]}]},{\"inputs\":[],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"proposalNonce\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\",\"components\":[]}]},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_tokenAddress\",\"type\":\"address\",\"components\":[]},{\"internalType\":\"uint256\",\"name\":\"_nonce\",\"type\":\"uint256\",\"components\":[]}],\"stateMutability\":\"nonpayable\",\"type\":\"function\",\"name\":\"remove\",\"outputs\":[]},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"role\",\"type\":\"bytes32\",\"components\":[]},{\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\",\"components\":[]}],\"stateMutability\":\"nonpayable\",\"type\":\"function\",\"name\":\"renounceRole\",\"outputs\":[]},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"role\",\"type\":\"bytes32\",\"components\":[]},{\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\",\"components\":[]}],\"stateMutability\":\"nonpayable\",\"type\":\"function\",\"name\":\"revokeRole\",\"outputs\":[]},{\"inputs\":[{\"internalType\":\"uint8\",\"name\":\"_feePercentage\",\"type\":\"uint8\",\"components\":[]},{\"internalType\":\"uint256\",\"name\":\"_nonce\",\"type\":\"uint256\",\"components\":[]}],\"stateMutability\":\"nonpayable\",\"type\":\"function\",\"name\":\"setFee\",\"outputs\":[]},{\"inputs\":[{\"internalType\":\"address payable\",\"name\":\"_feeRecipient\",\"type\":\"address\",\"components\":[]},{\"internalType\":\"uint256\",\"name\":\"_nonce\",\"type\":\"uint256\",\"components\":[]}],\"stateMutability\":\"nonpayable\",\"type\":\"function\",\"name\":\"setFeeRecipient\",\"outputs\":[]},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_governor\",\"type\":\"address\",\"components\":[]}],\"stateMutability\":\"nonpayable\",\"type\":\"function\",\"name\":\"setGovernor\",\"outputs\":[]},{\"inputs\":[{\"internalType\":\"bool\",\"name\":\"_isNativeAllowed\",\"type\":\"bool\",\"components\":[]}],\"stateMutability\":\"nonpayable\",\"type\":\"function\",\"name\":\"setNativeAllowed\",\"outputs\":[]},{\"inputs\":[{\"internalType\":\"bytes4\",\"name\":\"interfaceId\",\"type\":\"bytes4\",\"components\":[]}],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"supportsInterface\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\",\"components\":[]}]},{\"inputs\":[],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"symbol\",\"outputs\":[{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\",\"components\":[]}]},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\",\"components\":[]}],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"tokens\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\",\"components\":[]}]},{\"inputs\":[],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"totalSupply\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\",\"components\":[]}]},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\",\"components\":[]},{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\",\"components\":[]}],\"stateMutability\":\"nonpayable\",\"type\":\"function\",\"name\":\"transfer\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\",\"components\":[]}]},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"from\",\"type\":\"address\",\"components\":[]},{\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\",\"components\":[]},{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\",\"components\":[]}],\"stateMutability\":\"nonpayable\",\"type\":\"function\",\"name\":\"transferFrom\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\",\"components\":[]}]},{\"inputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\",\"name\":\"unpause\",\"outputs\":[]},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"tokenAddress\",\"type\":\"address\",\"components\":[]},{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\",\"components\":[]}],\"stateMutability\":\"nonpayable\",\"type\":\"function\",\"name\":\"unwrap\",\"outputs\":[]},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"tokenAddress\",\"type\":\"address\",\"components\":[]},{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\",\"components\":[]},{\"internalType\":\"address\",\"name\":\"recipient\",\"type\":\"address\",\"components\":[]}],\"stateMutability\":\"nonpayable\",\"type\":\"function\",\"name\":\"unwrapAndSendTo\",\"outputs\":[]},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"sender\",\"type\":\"address\",\"components\":[]},{\"internalType\":\"address\",\"name\":\"tokenAddress\",\"type\":\"address\",\"components\":[]},{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\",\"components\":[]}],\"stateMutability\":\"nonpayable\",\"type\":\"function\",\"name\":\"unwrapFor\",\"outputs\":[]},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_limit\",\"type\":\"uint256\",\"components\":[]}],\"stateMutability\":\"nonpayable\",\"type\":\"function\",\"name\":\"updateLimit\",\"outputs\":[]},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"tokenAddress\",\"type\":\"address\",\"components\":[]},{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\",\"components\":[]}],\"stateMutability\":\"payable\",\"type\":\"function\",\"name\":\"wrap\",\"outputs\":[]},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"sender\",\"type\":\"address\",\"components\":[]},{\"internalType\":\"address\",\"name\":\"tokenAddress\",\"type\":\"address\",\"components\":[]},{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\",\"components\":[]}],\"stateMutability\":\"payable\",\"type\":\"function\",\"name\":\"wrapFor\",\"outputs\":[]},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"sender\",\"type\":\"address\",\"components\":[]},{\"internalType\":\"address\",\"name\":\"tokenAddress\",\"type\":\"address\",\"components\":[]},{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\",\"components\":[]},{\"internalType\":\"address\",\"name\":\"recipient\",\"type\":\"address\",\"components\":[]}],\"stateMutability\":\"payable\",\"type\":\"function\",\"name\":\"wrapForAndSendTo\",\"outputs\":[]},{\"inputs\":[],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"wrappingLimit\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\",\"components\":[]}]}]") . expect ("invalid abi")
+        ethers :: core :: utils :: __serde_json :: from_str ("[{\"inputs\":[{\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\",\"components\":[],\"indexed\":true},{\"internalType\":\"address\",\"name\":\"spender\",\"type\":\"address\",\"components\":[],\"indexed\":true},{\"internalType\":\"uint256\",\"name\":\"value\",\"type\":\"uint256\",\"components\":[],\"indexed\":false}],\"type\":\"event\",\"name\":\"Approval\",\"outputs\":[],\"anonymous\":false},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\",\"components\":[],\"indexed\":false}],\"type\":\"event\",\"name\":\"Paused\",\"outputs\":[],\"anonymous\":false},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"role\",\"type\":\"bytes32\",\"components\":[],\"indexed\":true},{\"internalType\":\"bytes32\",\"name\":\"previousAdminRole\",\"type\":\"bytes32\",\"components\":[],\"indexed\":true},{\"internalType\":\"bytes32\",\"name\":\"newAdminRole\",\"type\":\"bytes32\",\"components\":[],\"indexed\":true}],\"type\":\"event\",\"name\":\"RoleAdminChanged\",\"outputs\":[],\"anonymous\":false},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"role\",\"type\":\"bytes32\",\"components\":[],\"indexed\":true},{\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\",\"components\":[],\"indexed\":true},{\"internalType\":\"address\",\"name\":\"sender\",\"type\":\"address\",\"components\":[],\"indexed\":true}],\"type\":\"event\",\"name\":\"RoleGranted\",\"outputs\":[],\"anonymous\":false},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"role\",\"type\":\"bytes32\",\"components\":[],\"indexed\":true},{\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\",\"components\":[],\"indexed\":true},{\"internalType\":\"address\",\"name\":\"sender\",\"type\":\"address\",\"components\":[],\"indexed\":true}],\"type\":\"event\",\"name\":\"RoleRevoked\",\"outputs\":[],\"anonymous\":false},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"from\",\"type\":\"address\",\"components\":[],\"indexed\":true},{\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\",\"components\":[],\"indexed\":true},{\"internalType\":\"uint256\",\"name\":\"value\",\"type\":\"uint256\",\"components\":[],\"indexed\":false}],\"type\":\"event\",\"name\":\"Transfer\",\"outputs\":[],\"anonymous\":false},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\",\"components\":[],\"indexed\":false}],\"type\":\"event\",\"name\":\"Unpaused\",\"outputs\":[],\"anonymous\":false},{\"inputs\":[],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"DEFAULT_ADMIN_ROLE\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\",\"components\":[]}]},{\"inputs\":[],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"MINTER_ROLE\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\",\"components\":[]}]},{\"inputs\":[],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"PAUSER_ROLE\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\",\"components\":[]}]},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\",\"components\":[]},{\"internalType\":\"address\",\"name\":\"spender\",\"type\":\"address\",\"components\":[]}],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"allowance\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\",\"components\":[]}]},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"spender\",\"type\":\"address\",\"components\":[]},{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\",\"components\":[]}],\"stateMutability\":\"nonpayable\",\"type\":\"function\",\"name\":\"approve\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\",\"components\":[]}]},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\",\"components\":[]}],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"balanceOf\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\",\"components\":[]}]},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\",\"components\":[]}],\"stateMutability\":\"nonpayable\",\"type\":\"function\",\"name\":\"burn\",\"outputs\":[]},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\",\"components\":[]},{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\",\"components\":[]}],\"stateMutability\":\"nonpayable\",\"type\":\"function\",\"name\":\"burnFrom\",\"outputs\":[]},{\"inputs\":[],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"decimals\",\"outputs\":[{\"internalType\":\"uint8\",\"name\":\"\",\"type\":\"uint8\",\"components\":[]}]},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"spender\",\"type\":\"address\",\"components\":[]},{\"internalType\":\"uint256\",\"name\":\"subtractedValue\",\"type\":\"uint256\",\"components\":[]}],\"stateMutability\":\"nonpayable\",\"type\":\"function\",\"name\":\"decreaseAllowance\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\",\"components\":[]}]},{\"inputs\":[],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"feeRecipient\",\"outputs\":[{\"internalType\":\"address payable\",\"name\":\"\",\"type\":\"address\",\"components\":[]}]},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_deposit\",\"type\":\"uint256\",\"components\":[]}],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"getAmountToWrap\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\",\"components\":[]}]},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_amountToWrap\",\"type\":\"uint256\",\"components\":[]}],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"getFeeFromAmount\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\",\"components\":[]}]},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"role\",\"type\":\"bytes32\",\"components\":[]}],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"getRoleAdmin\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\",\"components\":[]}]},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"role\",\"type\":\"bytes32\",\"components\":[]},{\"internalType\":\"uint256\",\"name\":\"index\",\"type\":\"uint256\",\"components\":[]}],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"getRoleMember\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\",\"components\":[]}]},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"role\",\"type\":\"bytes32\",\"components\":[]}],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"getRoleMemberCount\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\",\"components\":[]}]},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"role\",\"type\":\"bytes32\",\"components\":[]},{\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\",\"components\":[]}],\"stateMutability\":\"nonpayable\",\"type\":\"function\",\"name\":\"grantRole\",\"outputs\":[]},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"role\",\"type\":\"bytes32\",\"components\":[]},{\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\",\"components\":[]}],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"hasRole\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\",\"components\":[]}]},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"spender\",\"type\":\"address\",\"components\":[]},{\"internalType\":\"uint256\",\"name\":\"addedValue\",\"type\":\"uint256\",\"components\":[]}],\"stateMutability\":\"nonpayable\",\"type\":\"function\",\"name\":\"increaseAllowance\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\",\"components\":[]}]},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\",\"components\":[]},{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\",\"components\":[]}],\"stateMutability\":\"nonpayable\",\"type\":\"function\",\"name\":\"mint\",\"outputs\":[]},{\"inputs\":[],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"name\",\"outputs\":[{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\",\"components\":[]}]},{\"inputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\",\"name\":\"pause\",\"outputs\":[]},{\"inputs\":[],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"paused\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\",\"components\":[]}]},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"role\",\"type\":\"bytes32\",\"components\":[]},{\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\",\"components\":[]}],\"stateMutability\":\"nonpayable\",\"type\":\"function\",\"name\":\"renounceRole\",\"outputs\":[]},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"role\",\"type\":\"bytes32\",\"components\":[]},{\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\",\"components\":[]}],\"stateMutability\":\"nonpayable\",\"type\":\"function\",\"name\":\"revokeRole\",\"outputs\":[]},{\"inputs\":[{\"internalType\":\"uint8\",\"name\":\"_feePercentage\",\"type\":\"uint8\",\"components\":[]},{\"internalType\":\"uint256\",\"name\":\"_nonce\",\"type\":\"uint256\",\"components\":[]}],\"stateMutability\":\"nonpayable\",\"type\":\"function\",\"name\":\"setFee\",\"outputs\":[]},{\"inputs\":[{\"internalType\":\"bytes4\",\"name\":\"interfaceId\",\"type\":\"bytes4\",\"components\":[]}],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"supportsInterface\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\",\"components\":[]}]},{\"inputs\":[],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"symbol\",\"outputs\":[{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\",\"components\":[]}]},{\"inputs\":[],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"totalSupply\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\",\"components\":[]}]},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\",\"components\":[]},{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\",\"components\":[]}],\"stateMutability\":\"nonpayable\",\"type\":\"function\",\"name\":\"transfer\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\",\"components\":[]}]},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"from\",\"type\":\"address\",\"components\":[]},{\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\",\"components\":[]},{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\",\"components\":[]}],\"stateMutability\":\"nonpayable\",\"type\":\"function\",\"name\":\"transferFrom\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\",\"components\":[]}]},{\"inputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\",\"name\":\"unpause\",\"outputs\":[]},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"tokenAddress\",\"type\":\"address\",\"components\":[]},{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\",\"components\":[]}],\"stateMutability\":\"nonpayable\",\"type\":\"function\",\"name\":\"unwrap\",\"outputs\":[]},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"tokenAddress\",\"type\":\"address\",\"components\":[]},{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\",\"components\":[]},{\"internalType\":\"address\",\"name\":\"recipient\",\"type\":\"address\",\"components\":[]}],\"stateMutability\":\"nonpayable\",\"type\":\"function\",\"name\":\"unwrapAndSendTo\",\"outputs\":[]},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"sender\",\"type\":\"address\",\"components\":[]},{\"internalType\":\"address\",\"name\":\"tokenAddress\",\"type\":\"address\",\"components\":[]},{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\",\"components\":[]}],\"stateMutability\":\"nonpayable\",\"type\":\"function\",\"name\":\"unwrapFor\",\"outputs\":[]},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"tokenAddress\",\"type\":\"address\",\"components\":[]},{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\",\"components\":[]}],\"stateMutability\":\"payable\",\"type\":\"function\",\"name\":\"wrap\",\"outputs\":[]},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"sender\",\"type\":\"address\",\"components\":[]},{\"internalType\":\"address\",\"name\":\"tokenAddress\",\"type\":\"address\",\"components\":[]},{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\",\"components\":[]}],\"stateMutability\":\"payable\",\"type\":\"function\",\"name\":\"wrapFor\",\"outputs\":[]},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"sender\",\"type\":\"address\",\"components\":[]},{\"internalType\":\"address\",\"name\":\"tokenAddress\",\"type\":\"address\",\"components\":[]},{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\",\"components\":[]},{\"internalType\":\"address\",\"name\":\"recipient\",\"type\":\"address\",\"components\":[]}],\"stateMutability\":\"payable\",\"type\":\"function\",\"name\":\"wrapForAndSendTo\",\"outputs\":[]}]") . expect ("invalid abi")
     });
-    pub struct GovernedTokenWrapperContract<M>(ethers::contract::Contract<M>);
-    impl<M> Clone for GovernedTokenWrapperContract<M> {
+    pub struct TokenWrapperContract<M>(ethers::contract::Contract<M>);
+    impl<M> Clone for TokenWrapperContract<M> {
         fn clone(&self) -> Self {
-            GovernedTokenWrapperContract(self.0.clone())
+            TokenWrapperContract(self.0.clone())
         }
     }
-    impl<M> std::ops::Deref for GovernedTokenWrapperContract<M> {
+    impl<M> std::ops::Deref for TokenWrapperContract<M> {
         type Target = ethers::contract::Contract<M>;
         fn deref(&self) -> &Self::Target {
             &self.0
         }
     }
     impl<M: ethers::providers::Middleware> std::fmt::Debug
-        for GovernedTokenWrapperContract<M>
+        for TokenWrapperContract<M>
     {
         fn fmt(&self, f: &mut std::fmt::Formatter) -> std::fmt::Result {
-            f.debug_tuple(stringify!(GovernedTokenWrapperContract))
+            f.debug_tuple(stringify!(TokenWrapperContract))
                 .field(&self.address())
                 .finish()
         }
     }
-    impl<M: ethers::providers::Middleware> GovernedTokenWrapperContract<M> {
+    impl<M: ethers::providers::Middleware> TokenWrapperContract<M> {
         #[doc = r" Creates a new contract instance with the specified `ethers`"]
         #[doc = r" client at the given `Address`. The contract derefs to a `ethers::Contract`"]
         #[doc = r" object"]
@@ -52,7 +52,7 @@ pub mod governed_token_wrapper_contract {
         ) -> Self {
             ethers::contract::Contract::new(
                 address.into(),
-                GOVERNEDTOKENWRAPPERCONTRACT_ABI.clone(),
+                TOKENWRAPPERCONTRACT_ABI.clone(),
                 client,
             )
             .into()
@@ -79,16 +79,6 @@ pub mod governed_token_wrapper_contract {
         ) -> ethers::contract::builders::ContractCall<M, [u8; 32]> {
             self.0
                 .method_hash([230, 58, 177, 233], ())
-                .expect("method not found (this should never happen)")
-        }
-        #[doc = "Calls the contract's `add` (0xf5d82b6b) function"]
-        pub fn add(
-            &self,
-            token_address: ethers::core::types::Address,
-            nonce: ethers::core::types::U256,
-        ) -> ethers::contract::builders::ContractCall<M, ()> {
-            self.0
-                .method_hash([245, 216, 43, 107], (token_address, nonce))
                 .expect("method not found (this should never happen)")
         }
         #[doc = "Calls the contract's `allowance` (0xdd62ed3e) function"]
@@ -186,14 +176,6 @@ pub mod governed_token_wrapper_contract {
                 .method_hash([150, 205, 77, 254], deposit)
                 .expect("method not found (this should never happen)")
         }
-        #[doc = "Calls the contract's `getFee` (0xced72f87) function"]
-        pub fn get_fee(
-            &self,
-        ) -> ethers::contract::builders::ContractCall<M, u8> {
-            self.0
-                .method_hash([206, 215, 47, 135], ())
-                .expect("method not found (this should never happen)")
-        }
         #[doc = "Calls the contract's `getFeeFromAmount` (0x85c00ae8) function"]
         pub fn get_fee_from_amount(
             &self,
@@ -240,28 +222,6 @@ pub mod governed_token_wrapper_contract {
                 .method_hash([202, 21, 200, 115], role)
                 .expect("method not found (this should never happen)")
         }
-        #[doc = "Calls the contract's `getTokens` (0xaa6ca808) function"]
-        pub fn get_tokens(
-            &self,
-        ) -> ethers::contract::builders::ContractCall<
-            M,
-            ::std::vec::Vec<ethers::core::types::Address>,
-        > {
-            self.0
-                .method_hash([170, 108, 168, 8], ())
-                .expect("method not found (this should never happen)")
-        }
-        #[doc = "Calls the contract's `governor` (0x0c340a24) function"]
-        pub fn governor(
-            &self,
-        ) -> ethers::contract::builders::ContractCall<
-            M,
-            ethers::core::types::Address,
-        > {
-            self.0
-                .method_hash([12, 52, 10, 36], ())
-                .expect("method not found (this should never happen)")
-        }
         #[doc = "Calls the contract's `grantRole` (0x2f2ff15d) function"]
         pub fn grant_role(
             &self,
@@ -282,18 +242,6 @@ pub mod governed_token_wrapper_contract {
                 .method_hash([145, 209, 72, 84], (role, account))
                 .expect("method not found (this should never happen)")
         }
-        #[doc = "Calls the contract's `historicalTokens` (0x85d14834) function"]
-        pub fn historical_tokens(
-            &self,
-            p0: ethers::core::types::U256,
-        ) -> ethers::contract::builders::ContractCall<
-            M,
-            ethers::core::types::Address,
-        > {
-            self.0
-                .method_hash([133, 209, 72, 52], p0)
-                .expect("method not found (this should never happen)")
-        }
         #[doc = "Calls the contract's `increaseAllowance` (0x39509351) function"]
         pub fn increase_allowance(
             &self,
@@ -302,14 +250,6 @@ pub mod governed_token_wrapper_contract {
         ) -> ethers::contract::builders::ContractCall<M, bool> {
             self.0
                 .method_hash([57, 80, 147, 81], (spender, added_value))
-                .expect("method not found (this should never happen)")
-        }
-        #[doc = "Calls the contract's `isNativeAllowed` (0xb3e4083f) function"]
-        pub fn is_native_allowed(
-            &self,
-        ) -> ethers::contract::builders::ContractCall<M, bool> {
-            self.0
-                .method_hash([179, 228, 8, 63], ())
                 .expect("method not found (this should never happen)")
         }
         #[doc = "Calls the contract's `mint` (0x40c10f19) function"]
@@ -344,27 +284,6 @@ pub mod governed_token_wrapper_contract {
                 .method_hash([92, 151, 90, 187], ())
                 .expect("method not found (this should never happen)")
         }
-        #[doc = "Calls the contract's `proposalNonce` (0xcc3c74a1) function"]
-        pub fn proposal_nonce(
-            &self,
-        ) -> ethers::contract::builders::ContractCall<
-            M,
-            ethers::core::types::U256,
-        > {
-            self.0
-                .method_hash([204, 60, 116, 161], ())
-                .expect("method not found (this should never happen)")
-        }
-        #[doc = "Calls the contract's `remove` (0xabe7f1ab) function"]
-        pub fn remove(
-            &self,
-            token_address: ethers::core::types::Address,
-            nonce: ethers::core::types::U256,
-        ) -> ethers::contract::builders::ContractCall<M, ()> {
-            self.0
-                .method_hash([171, 231, 241, 171], (token_address, nonce))
-                .expect("method not found (this should never happen)")
-        }
         #[doc = "Calls the contract's `renounceRole` (0x36568abe) function"]
         pub fn renounce_role(
             &self,
@@ -395,34 +314,6 @@ pub mod governed_token_wrapper_contract {
                 .method_hash([140, 106, 163, 245], (fee_percentage, nonce))
                 .expect("method not found (this should never happen)")
         }
-        #[doc = "Calls the contract's `setFeeRecipient` (0xc602ac14) function"]
-        pub fn set_fee_recipient(
-            &self,
-            fee_recipient: ethers::core::types::Address,
-            nonce: ethers::core::types::U256,
-        ) -> ethers::contract::builders::ContractCall<M, ()> {
-            self.0
-                .method_hash([198, 2, 172, 20], (fee_recipient, nonce))
-                .expect("method not found (this should never happen)")
-        }
-        #[doc = "Calls the contract's `setGovernor` (0xc42cf535) function"]
-        pub fn set_governor(
-            &self,
-            governor: ethers::core::types::Address,
-        ) -> ethers::contract::builders::ContractCall<M, ()> {
-            self.0
-                .method_hash([196, 44, 245, 53], governor)
-                .expect("method not found (this should never happen)")
-        }
-        #[doc = "Calls the contract's `setNativeAllowed` (0x8b5478b9) function"]
-        pub fn set_native_allowed(
-            &self,
-            is_native_allowed: bool,
-        ) -> ethers::contract::builders::ContractCall<M, ()> {
-            self.0
-                .method_hash([139, 84, 120, 185], is_native_allowed)
-                .expect("method not found (this should never happen)")
-        }
         #[doc = "Calls the contract's `supportsInterface` (0x01ffc9a7) function"]
         pub fn supports_interface(
             &self,
@@ -438,18 +329,6 @@ pub mod governed_token_wrapper_contract {
         ) -> ethers::contract::builders::ContractCall<M, String> {
             self.0
                 .method_hash([149, 216, 155, 65], ())
-                .expect("method not found (this should never happen)")
-        }
-        #[doc = "Calls the contract's `tokens` (0x4f64b2be) function"]
-        pub fn tokens(
-            &self,
-            p0: ethers::core::types::U256,
-        ) -> ethers::contract::builders::ContractCall<
-            M,
-            ethers::core::types::Address,
-        > {
-            self.0
-                .method_hash([79, 100, 178, 190], p0)
                 .expect("method not found (this should never happen)")
         }
         #[doc = "Calls the contract's `totalSupply` (0x18160ddd) function"]
@@ -530,15 +409,6 @@ pub mod governed_token_wrapper_contract {
                 )
                 .expect("method not found (this should never happen)")
         }
-        #[doc = "Calls the contract's `updateLimit` (0xfae0959a) function"]
-        pub fn update_limit(
-            &self,
-            limit: ethers::core::types::U256,
-        ) -> ethers::contract::builders::ContractCall<M, ()> {
-            self.0
-                .method_hash([250, 224, 149, 154], limit)
-                .expect("method not found (this should never happen)")
-        }
         #[doc = "Calls the contract's `wrap` (0xbf376c7a) function"]
         pub fn wrap(
             &self,
@@ -576,17 +446,6 @@ pub mod governed_token_wrapper_contract {
                     [123, 46, 48, 214],
                     (sender, token_address, amount, recipient),
                 )
-                .expect("method not found (this should never happen)")
-        }
-        #[doc = "Calls the contract's `wrappingLimit` (0x1f914382) function"]
-        pub fn wrapping_limit(
-            &self,
-        ) -> ethers::contract::builders::ContractCall<
-            M,
-            ethers::core::types::U256,
-        > {
-            self.0
-                .method_hash([31, 145, 67, 130], ())
                 .expect("method not found (this should never happen)")
         }
         #[doc = "Gets the contract's `Approval` event"]
@@ -635,15 +494,13 @@ pub mod governed_token_wrapper_contract {
         #[doc = r" Returns an [`Event`](#ethers_contract::builders::Event) builder for all events of this contract"]
         pub fn events(
             &self,
-        ) -> ethers::contract::builders::Event<
-            M,
-            GovernedTokenWrapperContractEvents,
-        > {
+        ) -> ethers::contract::builders::Event<M, TokenWrapperContractEvents>
+        {
             self.0.event_with_filter(Default::default())
         }
     }
     impl<M: ethers::providers::Middleware> From<ethers::contract::Contract<M>>
-        for GovernedTokenWrapperContract<M>
+        for TokenWrapperContract<M>
     {
         fn from(contract: ethers::contract::Contract<M>) -> Self {
             Self(contract)
@@ -795,7 +652,7 @@ pub mod governed_token_wrapper_contract {
         serde :: Serialize,
         serde :: Deserialize,
     )]
-    pub enum GovernedTokenWrapperContractEvents {
+    pub enum TokenWrapperContractEvents {
         ApprovalFilter(ApprovalFilter),
         PausedFilter(PausedFilter),
         RoleAdminChangedFilter(RoleAdminChangedFilter),
@@ -804,7 +661,7 @@ pub mod governed_token_wrapper_contract {
         TransferFilter(TransferFilter),
         UnpausedFilter(UnpausedFilter),
     }
-    impl ethers::contract::EthLogDecode for GovernedTokenWrapperContractEvents {
+    impl ethers::contract::EthLogDecode for TokenWrapperContractEvents {
         fn decode_log(
             log: &ethers::core::abi::RawLog,
         ) -> Result<Self, ethers::core::abi::Error>
@@ -812,71 +669,57 @@ pub mod governed_token_wrapper_contract {
             Self: Sized,
         {
             if let Ok(decoded) = ApprovalFilter::decode_log(log) {
-                return Ok(GovernedTokenWrapperContractEvents::ApprovalFilter(
-                    decoded,
-                ));
+                return Ok(TokenWrapperContractEvents::ApprovalFilter(decoded));
             }
             if let Ok(decoded) = PausedFilter::decode_log(log) {
-                return Ok(GovernedTokenWrapperContractEvents::PausedFilter(
-                    decoded,
-                ));
+                return Ok(TokenWrapperContractEvents::PausedFilter(decoded));
             }
             if let Ok(decoded) = RoleAdminChangedFilter::decode_log(log) {
-                return Ok(
-                    GovernedTokenWrapperContractEvents::RoleAdminChangedFilter(
-                        decoded,
-                    ),
-                );
+                return Ok(TokenWrapperContractEvents::RoleAdminChangedFilter(
+                    decoded,
+                ));
             }
             if let Ok(decoded) = RoleGrantedFilter::decode_log(log) {
-                return Ok(
-                    GovernedTokenWrapperContractEvents::RoleGrantedFilter(
-                        decoded,
-                    ),
-                );
+                return Ok(TokenWrapperContractEvents::RoleGrantedFilter(
+                    decoded,
+                ));
             }
             if let Ok(decoded) = RoleRevokedFilter::decode_log(log) {
-                return Ok(
-                    GovernedTokenWrapperContractEvents::RoleRevokedFilter(
-                        decoded,
-                    ),
-                );
+                return Ok(TokenWrapperContractEvents::RoleRevokedFilter(
+                    decoded,
+                ));
             }
             if let Ok(decoded) = TransferFilter::decode_log(log) {
-                return Ok(GovernedTokenWrapperContractEvents::TransferFilter(
-                    decoded,
-                ));
+                return Ok(TokenWrapperContractEvents::TransferFilter(decoded));
             }
             if let Ok(decoded) = UnpausedFilter::decode_log(log) {
-                return Ok(GovernedTokenWrapperContractEvents::UnpausedFilter(
-                    decoded,
-                ));
+                return Ok(TokenWrapperContractEvents::UnpausedFilter(decoded));
             }
             Err(ethers::core::abi::Error::InvalidData)
         }
     }
-    impl ::std::fmt::Display for GovernedTokenWrapperContractEvents {
+    impl ::std::fmt::Display for TokenWrapperContractEvents {
         fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
             match self {
-                GovernedTokenWrapperContractEvents::ApprovalFilter(element) => {
+                TokenWrapperContractEvents::ApprovalFilter(element) => {
                     element.fmt(f)
                 }
-                GovernedTokenWrapperContractEvents::PausedFilter(element) => {
+                TokenWrapperContractEvents::PausedFilter(element) => {
                     element.fmt(f)
                 }
-                GovernedTokenWrapperContractEvents::RoleAdminChangedFilter(
-                    element,
-                ) => element.fmt(f),
-                GovernedTokenWrapperContractEvents::RoleGrantedFilter(
-                    element,
-                ) => element.fmt(f),
-                GovernedTokenWrapperContractEvents::RoleRevokedFilter(
-                    element,
-                ) => element.fmt(f),
-                GovernedTokenWrapperContractEvents::TransferFilter(element) => {
+                TokenWrapperContractEvents::RoleAdminChangedFilter(element) => {
                     element.fmt(f)
                 }
-                GovernedTokenWrapperContractEvents::UnpausedFilter(element) => {
+                TokenWrapperContractEvents::RoleGrantedFilter(element) => {
+                    element.fmt(f)
+                }
+                TokenWrapperContractEvents::RoleRevokedFilter(element) => {
+                    element.fmt(f)
+                }
+                TokenWrapperContractEvents::TransferFilter(element) => {
+                    element.fmt(f)
+                }
+                TokenWrapperContractEvents::UnpausedFilter(element) => {
                     element.fmt(f)
                 }
             }
@@ -924,23 +767,6 @@ pub mod governed_token_wrapper_contract {
     )]
     #[ethcall(name = "PAUSER_ROLE", abi = "PAUSER_ROLE()")]
     pub struct PauserRoleCall;
-    #[doc = "Container type for all input parameters for the `add` function with signature `add(address,uint256)` and selector `[245, 216, 43, 107]`"]
-    #[derive(
-        Clone,
-        Debug,
-        Default,
-        Eq,
-        PartialEq,
-        ethers :: contract :: EthCall,
-        ethers :: contract :: EthDisplay,
-        serde :: Serialize,
-        serde :: Deserialize,
-    )]
-    #[ethcall(name = "add", abi = "add(address,uint256)")]
-    pub struct AddCall {
-        pub token_address: ethers::core::types::Address,
-        pub nonce: ethers::core::types::U256,
-    }
     #[doc = "Container type for all input parameters for the `allowance` function with signature `allowance(address,address)` and selector `[221, 98, 237, 62]`"]
     #[derive(
         Clone,
@@ -1088,20 +914,6 @@ pub mod governed_token_wrapper_contract {
     pub struct GetAmountToWrapCall {
         pub deposit: ethers::core::types::U256,
     }
-    #[doc = "Container type for all input parameters for the `getFee` function with signature `getFee()` and selector `[206, 215, 47, 135]`"]
-    #[derive(
-        Clone,
-        Debug,
-        Default,
-        Eq,
-        PartialEq,
-        ethers :: contract :: EthCall,
-        ethers :: contract :: EthDisplay,
-        serde :: Serialize,
-        serde :: Deserialize,
-    )]
-    #[ethcall(name = "getFee", abi = "getFee()")]
-    pub struct GetFeeCall;
     #[doc = "Container type for all input parameters for the `getFeeFromAmount` function with signature `getFeeFromAmount(uint256)` and selector `[133, 192, 10, 232]`"]
     #[derive(
         Clone,
@@ -1167,34 +979,6 @@ pub mod governed_token_wrapper_contract {
     pub struct GetRoleMemberCountCall {
         pub role: [u8; 32],
     }
-    #[doc = "Container type for all input parameters for the `getTokens` function with signature `getTokens()` and selector `[170, 108, 168, 8]`"]
-    #[derive(
-        Clone,
-        Debug,
-        Default,
-        Eq,
-        PartialEq,
-        ethers :: contract :: EthCall,
-        ethers :: contract :: EthDisplay,
-        serde :: Serialize,
-        serde :: Deserialize,
-    )]
-    #[ethcall(name = "getTokens", abi = "getTokens()")]
-    pub struct GetTokensCall;
-    #[doc = "Container type for all input parameters for the `governor` function with signature `governor()` and selector `[12, 52, 10, 36]`"]
-    #[derive(
-        Clone,
-        Debug,
-        Default,
-        Eq,
-        PartialEq,
-        ethers :: contract :: EthCall,
-        ethers :: contract :: EthDisplay,
-        serde :: Serialize,
-        serde :: Deserialize,
-    )]
-    #[ethcall(name = "governor", abi = "governor()")]
-    pub struct GovernorCall;
     #[doc = "Container type for all input parameters for the `grantRole` function with signature `grantRole(bytes32,address)` and selector `[47, 47, 241, 93]`"]
     #[derive(
         Clone,
@@ -1229,20 +1013,6 @@ pub mod governed_token_wrapper_contract {
         pub role: [u8; 32],
         pub account: ethers::core::types::Address,
     }
-    #[doc = "Container type for all input parameters for the `historicalTokens` function with signature `historicalTokens(uint256)` and selector `[133, 209, 72, 52]`"]
-    #[derive(
-        Clone,
-        Debug,
-        Default,
-        Eq,
-        PartialEq,
-        ethers :: contract :: EthCall,
-        ethers :: contract :: EthDisplay,
-        serde :: Serialize,
-        serde :: Deserialize,
-    )]
-    #[ethcall(name = "historicalTokens", abi = "historicalTokens(uint256)")]
-    pub struct HistoricalTokensCall(pub ethers::core::types::U256);
     #[doc = "Container type for all input parameters for the `increaseAllowance` function with signature `increaseAllowance(address,uint256)` and selector `[57, 80, 147, 81]`"]
     #[derive(
         Clone,
@@ -1263,20 +1033,6 @@ pub mod governed_token_wrapper_contract {
         pub spender: ethers::core::types::Address,
         pub added_value: ethers::core::types::U256,
     }
-    #[doc = "Container type for all input parameters for the `isNativeAllowed` function with signature `isNativeAllowed()` and selector `[179, 228, 8, 63]`"]
-    #[derive(
-        Clone,
-        Debug,
-        Default,
-        Eq,
-        PartialEq,
-        ethers :: contract :: EthCall,
-        ethers :: contract :: EthDisplay,
-        serde :: Serialize,
-        serde :: Deserialize,
-    )]
-    #[ethcall(name = "isNativeAllowed", abi = "isNativeAllowed()")]
-    pub struct IsNativeAllowedCall;
     #[doc = "Container type for all input parameters for the `mint` function with signature `mint(address,uint256)` and selector `[64, 193, 15, 25]`"]
     #[derive(
         Clone,
@@ -1336,37 +1092,6 @@ pub mod governed_token_wrapper_contract {
     )]
     #[ethcall(name = "paused", abi = "paused()")]
     pub struct PausedCall;
-    #[doc = "Container type for all input parameters for the `proposalNonce` function with signature `proposalNonce()` and selector `[204, 60, 116, 161]`"]
-    #[derive(
-        Clone,
-        Debug,
-        Default,
-        Eq,
-        PartialEq,
-        ethers :: contract :: EthCall,
-        ethers :: contract :: EthDisplay,
-        serde :: Serialize,
-        serde :: Deserialize,
-    )]
-    #[ethcall(name = "proposalNonce", abi = "proposalNonce()")]
-    pub struct ProposalNonceCall;
-    #[doc = "Container type for all input parameters for the `remove` function with signature `remove(address,uint256)` and selector `[171, 231, 241, 171]`"]
-    #[derive(
-        Clone,
-        Debug,
-        Default,
-        Eq,
-        PartialEq,
-        ethers :: contract :: EthCall,
-        ethers :: contract :: EthDisplay,
-        serde :: Serialize,
-        serde :: Deserialize,
-    )]
-    #[ethcall(name = "remove", abi = "remove(address,uint256)")]
-    pub struct RemoveCall {
-        pub token_address: ethers::core::types::Address,
-        pub nonce: ethers::core::types::U256,
-    }
     #[doc = "Container type for all input parameters for the `renounceRole` function with signature `renounceRole(bytes32,address)` and selector `[54, 86, 138, 190]`"]
     #[derive(
         Clone,
@@ -1418,58 +1143,6 @@ pub mod governed_token_wrapper_contract {
         pub fee_percentage: u8,
         pub nonce: ethers::core::types::U256,
     }
-    #[doc = "Container type for all input parameters for the `setFeeRecipient` function with signature `setFeeRecipient(address,uint256)` and selector `[198, 2, 172, 20]`"]
-    #[derive(
-        Clone,
-        Debug,
-        Default,
-        Eq,
-        PartialEq,
-        ethers :: contract :: EthCall,
-        ethers :: contract :: EthDisplay,
-        serde :: Serialize,
-        serde :: Deserialize,
-    )]
-    #[ethcall(
-        name = "setFeeRecipient",
-        abi = "setFeeRecipient(address,uint256)"
-    )]
-    pub struct SetFeeRecipientCall {
-        pub fee_recipient: ethers::core::types::Address,
-        pub nonce: ethers::core::types::U256,
-    }
-    #[doc = "Container type for all input parameters for the `setGovernor` function with signature `setGovernor(address)` and selector `[196, 44, 245, 53]`"]
-    #[derive(
-        Clone,
-        Debug,
-        Default,
-        Eq,
-        PartialEq,
-        ethers :: contract :: EthCall,
-        ethers :: contract :: EthDisplay,
-        serde :: Serialize,
-        serde :: Deserialize,
-    )]
-    #[ethcall(name = "setGovernor", abi = "setGovernor(address)")]
-    pub struct SetGovernorCall {
-        pub governor: ethers::core::types::Address,
-    }
-    #[doc = "Container type for all input parameters for the `setNativeAllowed` function with signature `setNativeAllowed(bool)` and selector `[139, 84, 120, 185]`"]
-    #[derive(
-        Clone,
-        Debug,
-        Default,
-        Eq,
-        PartialEq,
-        ethers :: contract :: EthCall,
-        ethers :: contract :: EthDisplay,
-        serde :: Serialize,
-        serde :: Deserialize,
-    )]
-    #[ethcall(name = "setNativeAllowed", abi = "setNativeAllowed(bool)")]
-    pub struct SetNativeAllowedCall {
-        pub is_native_allowed: bool,
-    }
     #[doc = "Container type for all input parameters for the `supportsInterface` function with signature `supportsInterface(bytes4)` and selector `[1, 255, 201, 167]`"]
     #[derive(
         Clone,
@@ -1500,20 +1173,6 @@ pub mod governed_token_wrapper_contract {
     )]
     #[ethcall(name = "symbol", abi = "symbol()")]
     pub struct SymbolCall;
-    #[doc = "Container type for all input parameters for the `tokens` function with signature `tokens(uint256)` and selector `[79, 100, 178, 190]`"]
-    #[derive(
-        Clone,
-        Debug,
-        Default,
-        Eq,
-        PartialEq,
-        ethers :: contract :: EthCall,
-        ethers :: contract :: EthDisplay,
-        serde :: Serialize,
-        serde :: Deserialize,
-    )]
-    #[ethcall(name = "tokens", abi = "tokens(uint256)")]
-    pub struct TokensCall(pub ethers::core::types::U256);
     #[doc = "Container type for all input parameters for the `totalSupply` function with signature `totalSupply()` and selector `[24, 22, 13, 221]`"]
     #[derive(
         Clone,
@@ -1636,22 +1295,6 @@ pub mod governed_token_wrapper_contract {
         pub token_address: ethers::core::types::Address,
         pub amount: ethers::core::types::U256,
     }
-    #[doc = "Container type for all input parameters for the `updateLimit` function with signature `updateLimit(uint256)` and selector `[250, 224, 149, 154]`"]
-    #[derive(
-        Clone,
-        Debug,
-        Default,
-        Eq,
-        PartialEq,
-        ethers :: contract :: EthCall,
-        ethers :: contract :: EthDisplay,
-        serde :: Serialize,
-        serde :: Deserialize,
-    )]
-    #[ethcall(name = "updateLimit", abi = "updateLimit(uint256)")]
-    pub struct UpdateLimitCall {
-        pub limit: ethers::core::types::U256,
-    }
     #[doc = "Container type for all input parameters for the `wrap` function with signature `wrap(address,uint256)` and selector `[191, 55, 108, 122]`"]
     #[derive(
         Clone,
@@ -1709,20 +1352,6 @@ pub mod governed_token_wrapper_contract {
         pub amount: ethers::core::types::U256,
         pub recipient: ethers::core::types::Address,
     }
-    #[doc = "Container type for all input parameters for the `wrappingLimit` function with signature `wrappingLimit()` and selector `[31, 145, 67, 130]`"]
-    #[derive(
-        Clone,
-        Debug,
-        Default,
-        Eq,
-        PartialEq,
-        ethers :: contract :: EthCall,
-        ethers :: contract :: EthDisplay,
-        serde :: Serialize,
-        serde :: Deserialize,
-    )]
-    #[ethcall(name = "wrappingLimit", abi = "wrappingLimit()")]
-    pub struct WrappingLimitCall;
     #[derive(
         Debug,
         Clone,
@@ -1732,11 +1361,10 @@ pub mod governed_token_wrapper_contract {
         serde :: Serialize,
         serde :: Deserialize,
     )]
-    pub enum GovernedTokenWrapperContractCalls {
+    pub enum TokenWrapperContractCalls {
         DefaultAdminRole(DefaultAdminRoleCall),
         MinterRole(MinterRoleCall),
         PauserRole(PauserRoleCall),
-        Add(AddCall),
         Allowance(AllowanceCall),
         Approve(ApproveCall),
         BalanceOf(BalanceOfCall),
@@ -1746,33 +1374,22 @@ pub mod governed_token_wrapper_contract {
         DecreaseAllowance(DecreaseAllowanceCall),
         FeeRecipient(FeeRecipientCall),
         GetAmountToWrap(GetAmountToWrapCall),
-        GetFee(GetFeeCall),
         GetFeeFromAmount(GetFeeFromAmountCall),
         GetRoleAdmin(GetRoleAdminCall),
         GetRoleMember(GetRoleMemberCall),
         GetRoleMemberCount(GetRoleMemberCountCall),
-        GetTokens(GetTokensCall),
-        Governor(GovernorCall),
         GrantRole(GrantRoleCall),
         HasRole(HasRoleCall),
-        HistoricalTokens(HistoricalTokensCall),
         IncreaseAllowance(IncreaseAllowanceCall),
-        IsNativeAllowed(IsNativeAllowedCall),
         Mint(MintCall),
         Name(NameCall),
         Pause(PauseCall),
         Paused(PausedCall),
-        ProposalNonce(ProposalNonceCall),
-        Remove(RemoveCall),
         RenounceRole(RenounceRoleCall),
         RevokeRole(RevokeRoleCall),
         SetFee(SetFeeCall),
-        SetFeeRecipient(SetFeeRecipientCall),
-        SetGovernor(SetGovernorCall),
-        SetNativeAllowed(SetNativeAllowedCall),
         SupportsInterface(SupportsInterfaceCall),
         Symbol(SymbolCall),
-        Tokens(TokensCall),
         TotalSupply(TotalSupplyCall),
         Transfer(TransferCall),
         TransferFrom(TransferFromCall),
@@ -1780,13 +1397,11 @@ pub mod governed_token_wrapper_contract {
         Unwrap(UnwrapCall),
         UnwrapAndSendTo(UnwrapAndSendToCall),
         UnwrapFor(UnwrapForCall),
-        UpdateLimit(UpdateLimitCall),
         Wrap(WrapCall),
         WrapFor(WrapForCall),
         WrapForAndSendTo(WrapForAndSendToCall),
-        WrappingLimit(WrappingLimitCall),
     }
-    impl ethers::core::abi::AbiDecode for GovernedTokenWrapperContractCalls {
+    impl ethers::core::abi::AbiDecode for TokenWrapperContractCalls {
         fn decode(
             data: impl AsRef<[u8]>,
         ) -> Result<Self, ethers::core::abi::AbiError> {
@@ -1795,176 +1410,118 @@ pub mod governed_token_wrapper_contract {
                     data.as_ref(),
                 )
             {
-                return Ok(
-                    GovernedTokenWrapperContractCalls::DefaultAdminRole(
-                        decoded,
-                    ),
-                );
+                return Ok(TokenWrapperContractCalls::DefaultAdminRole(
+                    decoded,
+                ));
             }
             if let Ok(decoded) =
                 <MinterRoleCall as ethers::core::abi::AbiDecode>::decode(
                     data.as_ref(),
                 )
             {
-                return Ok(GovernedTokenWrapperContractCalls::MinterRole(
-                    decoded,
-                ));
+                return Ok(TokenWrapperContractCalls::MinterRole(decoded));
             }
             if let Ok(decoded) =
                 <PauserRoleCall as ethers::core::abi::AbiDecode>::decode(
                     data.as_ref(),
                 )
             {
-                return Ok(GovernedTokenWrapperContractCalls::PauserRole(
-                    decoded,
-                ));
-            }
-            if let Ok(decoded) =
-                <AddCall as ethers::core::abi::AbiDecode>::decode(data.as_ref())
-            {
-                return Ok(GovernedTokenWrapperContractCalls::Add(decoded));
+                return Ok(TokenWrapperContractCalls::PauserRole(decoded));
             }
             if let Ok(decoded) =
                 <AllowanceCall as ethers::core::abi::AbiDecode>::decode(
                     data.as_ref(),
                 )
             {
-                return Ok(GovernedTokenWrapperContractCalls::Allowance(
-                    decoded,
-                ));
+                return Ok(TokenWrapperContractCalls::Allowance(decoded));
             }
             if let Ok(decoded) =
                 <ApproveCall as ethers::core::abi::AbiDecode>::decode(
                     data.as_ref(),
                 )
             {
-                return Ok(GovernedTokenWrapperContractCalls::Approve(decoded));
+                return Ok(TokenWrapperContractCalls::Approve(decoded));
             }
             if let Ok(decoded) =
                 <BalanceOfCall as ethers::core::abi::AbiDecode>::decode(
                     data.as_ref(),
                 )
             {
-                return Ok(GovernedTokenWrapperContractCalls::BalanceOf(
-                    decoded,
-                ));
+                return Ok(TokenWrapperContractCalls::BalanceOf(decoded));
             }
             if let Ok(decoded) =
                 <BurnCall as ethers::core::abi::AbiDecode>::decode(
                     data.as_ref(),
                 )
             {
-                return Ok(GovernedTokenWrapperContractCalls::Burn(decoded));
+                return Ok(TokenWrapperContractCalls::Burn(decoded));
             }
             if let Ok(decoded) =
                 <BurnFromCall as ethers::core::abi::AbiDecode>::decode(
                     data.as_ref(),
                 )
             {
-                return Ok(GovernedTokenWrapperContractCalls::BurnFrom(
-                    decoded,
-                ));
+                return Ok(TokenWrapperContractCalls::BurnFrom(decoded));
             }
             if let Ok(decoded) =
                 <DecimalsCall as ethers::core::abi::AbiDecode>::decode(
                     data.as_ref(),
                 )
             {
-                return Ok(GovernedTokenWrapperContractCalls::Decimals(
-                    decoded,
-                ));
+                return Ok(TokenWrapperContractCalls::Decimals(decoded));
             }
             if let Ok(decoded) =
                 <DecreaseAllowanceCall as ethers::core::abi::AbiDecode>::decode(
                     data.as_ref(),
                 )
             {
-                return Ok(
-                    GovernedTokenWrapperContractCalls::DecreaseAllowance(
-                        decoded,
-                    ),
-                );
+                return Ok(TokenWrapperContractCalls::DecreaseAllowance(
+                    decoded,
+                ));
             }
             if let Ok(decoded) =
                 <FeeRecipientCall as ethers::core::abi::AbiDecode>::decode(
                     data.as_ref(),
                 )
             {
-                return Ok(GovernedTokenWrapperContractCalls::FeeRecipient(
-                    decoded,
-                ));
+                return Ok(TokenWrapperContractCalls::FeeRecipient(decoded));
             }
             if let Ok(decoded) =
                 <GetAmountToWrapCall as ethers::core::abi::AbiDecode>::decode(
                     data.as_ref(),
                 )
             {
-                return Ok(GovernedTokenWrapperContractCalls::GetAmountToWrap(
-                    decoded,
-                ));
-            }
-            if let Ok(decoded) =
-                <GetFeeCall as ethers::core::abi::AbiDecode>::decode(
-                    data.as_ref(),
-                )
-            {
-                return Ok(GovernedTokenWrapperContractCalls::GetFee(decoded));
+                return Ok(TokenWrapperContractCalls::GetAmountToWrap(decoded));
             }
             if let Ok(decoded) =
                 <GetFeeFromAmountCall as ethers::core::abi::AbiDecode>::decode(
                     data.as_ref(),
                 )
             {
-                return Ok(
-                    GovernedTokenWrapperContractCalls::GetFeeFromAmount(
-                        decoded,
-                    ),
-                );
+                return Ok(TokenWrapperContractCalls::GetFeeFromAmount(
+                    decoded,
+                ));
             }
             if let Ok(decoded) =
                 <GetRoleAdminCall as ethers::core::abi::AbiDecode>::decode(
                     data.as_ref(),
                 )
             {
-                return Ok(GovernedTokenWrapperContractCalls::GetRoleAdmin(
-                    decoded,
-                ));
+                return Ok(TokenWrapperContractCalls::GetRoleAdmin(decoded));
             }
             if let Ok(decoded) =
                 <GetRoleMemberCall as ethers::core::abi::AbiDecode>::decode(
                     data.as_ref(),
                 )
             {
-                return Ok(GovernedTokenWrapperContractCalls::GetRoleMember(
-                    decoded,
-                ));
+                return Ok(TokenWrapperContractCalls::GetRoleMember(decoded));
             }
             if let Ok(decoded) =
                 <GetRoleMemberCountCall as ethers::core::abi::AbiDecode>::decode(
                     data.as_ref(),
                 )
             {
-                return Ok(
-                    GovernedTokenWrapperContractCalls::GetRoleMemberCount(
-                        decoded,
-                    ),
-                );
-            }
-            if let Ok(decoded) =
-                <GetTokensCall as ethers::core::abi::AbiDecode>::decode(
-                    data.as_ref(),
-                )
-            {
-                return Ok(GovernedTokenWrapperContractCalls::GetTokens(
-                    decoded,
-                ));
-            }
-            if let Ok(decoded) =
-                <GovernorCall as ethers::core::abi::AbiDecode>::decode(
-                    data.as_ref(),
-                )
-            {
-                return Ok(GovernedTokenWrapperContractCalls::Governor(
+                return Ok(TokenWrapperContractCalls::GetRoleMemberCount(
                     decoded,
                 ));
             }
@@ -1973,45 +1530,21 @@ pub mod governed_token_wrapper_contract {
                     data.as_ref(),
                 )
             {
-                return Ok(GovernedTokenWrapperContractCalls::GrantRole(
-                    decoded,
-                ));
+                return Ok(TokenWrapperContractCalls::GrantRole(decoded));
             }
             if let Ok(decoded) =
                 <HasRoleCall as ethers::core::abi::AbiDecode>::decode(
                     data.as_ref(),
                 )
             {
-                return Ok(GovernedTokenWrapperContractCalls::HasRole(decoded));
-            }
-            if let Ok(decoded) =
-                <HistoricalTokensCall as ethers::core::abi::AbiDecode>::decode(
-                    data.as_ref(),
-                )
-            {
-                return Ok(
-                    GovernedTokenWrapperContractCalls::HistoricalTokens(
-                        decoded,
-                    ),
-                );
+                return Ok(TokenWrapperContractCalls::HasRole(decoded));
             }
             if let Ok(decoded) =
                 <IncreaseAllowanceCall as ethers::core::abi::AbiDecode>::decode(
                     data.as_ref(),
                 )
             {
-                return Ok(
-                    GovernedTokenWrapperContractCalls::IncreaseAllowance(
-                        decoded,
-                    ),
-                );
-            }
-            if let Ok(decoded) =
-                <IsNativeAllowedCall as ethers::core::abi::AbiDecode>::decode(
-                    data.as_ref(),
-                )
-            {
-                return Ok(GovernedTokenWrapperContractCalls::IsNativeAllowed(
+                return Ok(TokenWrapperContractCalls::IncreaseAllowance(
                     decoded,
                 ));
             }
@@ -2020,863 +1553,505 @@ pub mod governed_token_wrapper_contract {
                     data.as_ref(),
                 )
             {
-                return Ok(GovernedTokenWrapperContractCalls::Mint(decoded));
+                return Ok(TokenWrapperContractCalls::Mint(decoded));
             }
             if let Ok(decoded) =
                 <NameCall as ethers::core::abi::AbiDecode>::decode(
                     data.as_ref(),
                 )
             {
-                return Ok(GovernedTokenWrapperContractCalls::Name(decoded));
+                return Ok(TokenWrapperContractCalls::Name(decoded));
             }
             if let Ok(decoded) =
                 <PauseCall as ethers::core::abi::AbiDecode>::decode(
                     data.as_ref(),
                 )
             {
-                return Ok(GovernedTokenWrapperContractCalls::Pause(decoded));
+                return Ok(TokenWrapperContractCalls::Pause(decoded));
             }
             if let Ok(decoded) =
                 <PausedCall as ethers::core::abi::AbiDecode>::decode(
                     data.as_ref(),
                 )
             {
-                return Ok(GovernedTokenWrapperContractCalls::Paused(decoded));
-            }
-            if let Ok(decoded) =
-                <ProposalNonceCall as ethers::core::abi::AbiDecode>::decode(
-                    data.as_ref(),
-                )
-            {
-                return Ok(GovernedTokenWrapperContractCalls::ProposalNonce(
-                    decoded,
-                ));
-            }
-            if let Ok(decoded) =
-                <RemoveCall as ethers::core::abi::AbiDecode>::decode(
-                    data.as_ref(),
-                )
-            {
-                return Ok(GovernedTokenWrapperContractCalls::Remove(decoded));
+                return Ok(TokenWrapperContractCalls::Paused(decoded));
             }
             if let Ok(decoded) =
                 <RenounceRoleCall as ethers::core::abi::AbiDecode>::decode(
                     data.as_ref(),
                 )
             {
-                return Ok(GovernedTokenWrapperContractCalls::RenounceRole(
-                    decoded,
-                ));
+                return Ok(TokenWrapperContractCalls::RenounceRole(decoded));
             }
             if let Ok(decoded) =
                 <RevokeRoleCall as ethers::core::abi::AbiDecode>::decode(
                     data.as_ref(),
                 )
             {
-                return Ok(GovernedTokenWrapperContractCalls::RevokeRole(
-                    decoded,
-                ));
+                return Ok(TokenWrapperContractCalls::RevokeRole(decoded));
             }
             if let Ok(decoded) =
                 <SetFeeCall as ethers::core::abi::AbiDecode>::decode(
                     data.as_ref(),
                 )
             {
-                return Ok(GovernedTokenWrapperContractCalls::SetFee(decoded));
-            }
-            if let Ok(decoded) =
-                <SetFeeRecipientCall as ethers::core::abi::AbiDecode>::decode(
-                    data.as_ref(),
-                )
-            {
-                return Ok(GovernedTokenWrapperContractCalls::SetFeeRecipient(
-                    decoded,
-                ));
-            }
-            if let Ok(decoded) =
-                <SetGovernorCall as ethers::core::abi::AbiDecode>::decode(
-                    data.as_ref(),
-                )
-            {
-                return Ok(GovernedTokenWrapperContractCalls::SetGovernor(
-                    decoded,
-                ));
-            }
-            if let Ok(decoded) =
-                <SetNativeAllowedCall as ethers::core::abi::AbiDecode>::decode(
-                    data.as_ref(),
-                )
-            {
-                return Ok(
-                    GovernedTokenWrapperContractCalls::SetNativeAllowed(
-                        decoded,
-                    ),
-                );
+                return Ok(TokenWrapperContractCalls::SetFee(decoded));
             }
             if let Ok(decoded) =
                 <SupportsInterfaceCall as ethers::core::abi::AbiDecode>::decode(
                     data.as_ref(),
                 )
             {
-                return Ok(
-                    GovernedTokenWrapperContractCalls::SupportsInterface(
-                        decoded,
-                    ),
-                );
+                return Ok(TokenWrapperContractCalls::SupportsInterface(
+                    decoded,
+                ));
             }
             if let Ok(decoded) =
                 <SymbolCall as ethers::core::abi::AbiDecode>::decode(
                     data.as_ref(),
                 )
             {
-                return Ok(GovernedTokenWrapperContractCalls::Symbol(decoded));
-            }
-            if let Ok(decoded) =
-                <TokensCall as ethers::core::abi::AbiDecode>::decode(
-                    data.as_ref(),
-                )
-            {
-                return Ok(GovernedTokenWrapperContractCalls::Tokens(decoded));
+                return Ok(TokenWrapperContractCalls::Symbol(decoded));
             }
             if let Ok(decoded) =
                 <TotalSupplyCall as ethers::core::abi::AbiDecode>::decode(
                     data.as_ref(),
                 )
             {
-                return Ok(GovernedTokenWrapperContractCalls::TotalSupply(
-                    decoded,
-                ));
+                return Ok(TokenWrapperContractCalls::TotalSupply(decoded));
             }
             if let Ok(decoded) =
                 <TransferCall as ethers::core::abi::AbiDecode>::decode(
                     data.as_ref(),
                 )
             {
-                return Ok(GovernedTokenWrapperContractCalls::Transfer(
-                    decoded,
-                ));
+                return Ok(TokenWrapperContractCalls::Transfer(decoded));
             }
             if let Ok(decoded) =
                 <TransferFromCall as ethers::core::abi::AbiDecode>::decode(
                     data.as_ref(),
                 )
             {
-                return Ok(GovernedTokenWrapperContractCalls::TransferFrom(
-                    decoded,
-                ));
+                return Ok(TokenWrapperContractCalls::TransferFrom(decoded));
             }
             if let Ok(decoded) =
                 <UnpauseCall as ethers::core::abi::AbiDecode>::decode(
                     data.as_ref(),
                 )
             {
-                return Ok(GovernedTokenWrapperContractCalls::Unpause(decoded));
+                return Ok(TokenWrapperContractCalls::Unpause(decoded));
             }
             if let Ok(decoded) =
                 <UnwrapCall as ethers::core::abi::AbiDecode>::decode(
                     data.as_ref(),
                 )
             {
-                return Ok(GovernedTokenWrapperContractCalls::Unwrap(decoded));
+                return Ok(TokenWrapperContractCalls::Unwrap(decoded));
             }
             if let Ok(decoded) =
                 <UnwrapAndSendToCall as ethers::core::abi::AbiDecode>::decode(
                     data.as_ref(),
                 )
             {
-                return Ok(GovernedTokenWrapperContractCalls::UnwrapAndSendTo(
-                    decoded,
-                ));
+                return Ok(TokenWrapperContractCalls::UnwrapAndSendTo(decoded));
             }
             if let Ok(decoded) =
                 <UnwrapForCall as ethers::core::abi::AbiDecode>::decode(
                     data.as_ref(),
                 )
             {
-                return Ok(GovernedTokenWrapperContractCalls::UnwrapFor(
-                    decoded,
-                ));
-            }
-            if let Ok(decoded) =
-                <UpdateLimitCall as ethers::core::abi::AbiDecode>::decode(
-                    data.as_ref(),
-                )
-            {
-                return Ok(GovernedTokenWrapperContractCalls::UpdateLimit(
-                    decoded,
-                ));
+                return Ok(TokenWrapperContractCalls::UnwrapFor(decoded));
             }
             if let Ok(decoded) =
                 <WrapCall as ethers::core::abi::AbiDecode>::decode(
                     data.as_ref(),
                 )
             {
-                return Ok(GovernedTokenWrapperContractCalls::Wrap(decoded));
+                return Ok(TokenWrapperContractCalls::Wrap(decoded));
             }
             if let Ok(decoded) =
                 <WrapForCall as ethers::core::abi::AbiDecode>::decode(
                     data.as_ref(),
                 )
             {
-                return Ok(GovernedTokenWrapperContractCalls::WrapFor(decoded));
+                return Ok(TokenWrapperContractCalls::WrapFor(decoded));
             }
             if let Ok(decoded) =
                 <WrapForAndSendToCall as ethers::core::abi::AbiDecode>::decode(
                     data.as_ref(),
                 )
             {
-                return Ok(
-                    GovernedTokenWrapperContractCalls::WrapForAndSendTo(
-                        decoded,
-                    ),
-                );
-            }
-            if let Ok(decoded) =
-                <WrappingLimitCall as ethers::core::abi::AbiDecode>::decode(
-                    data.as_ref(),
-                )
-            {
-                return Ok(GovernedTokenWrapperContractCalls::WrappingLimit(
+                return Ok(TokenWrapperContractCalls::WrapForAndSendTo(
                     decoded,
                 ));
             }
             Err(ethers::core::abi::Error::InvalidData.into())
         }
     }
-    impl ethers::core::abi::AbiEncode for GovernedTokenWrapperContractCalls {
+    impl ethers::core::abi::AbiEncode for TokenWrapperContractCalls {
         fn encode(self) -> Vec<u8> {
             match self {
-                GovernedTokenWrapperContractCalls::DefaultAdminRole(
-                    element,
-                ) => element.encode(),
-                GovernedTokenWrapperContractCalls::MinterRole(element) => {
+                TokenWrapperContractCalls::DefaultAdminRole(element) => {
                     element.encode()
                 }
-                GovernedTokenWrapperContractCalls::PauserRole(element) => {
+                TokenWrapperContractCalls::MinterRole(element) => {
                     element.encode()
                 }
-                GovernedTokenWrapperContractCalls::Add(element) => {
+                TokenWrapperContractCalls::PauserRole(element) => {
                     element.encode()
                 }
-                GovernedTokenWrapperContractCalls::Allowance(element) => {
+                TokenWrapperContractCalls::Allowance(element) => {
                     element.encode()
                 }
-                GovernedTokenWrapperContractCalls::Approve(element) => {
+                TokenWrapperContractCalls::Approve(element) => element.encode(),
+                TokenWrapperContractCalls::BalanceOf(element) => {
                     element.encode()
                 }
-                GovernedTokenWrapperContractCalls::BalanceOf(element) => {
+                TokenWrapperContractCalls::Burn(element) => element.encode(),
+                TokenWrapperContractCalls::BurnFrom(element) => {
                     element.encode()
                 }
-                GovernedTokenWrapperContractCalls::Burn(element) => {
+                TokenWrapperContractCalls::Decimals(element) => {
                     element.encode()
                 }
-                GovernedTokenWrapperContractCalls::BurnFrom(element) => {
+                TokenWrapperContractCalls::DecreaseAllowance(element) => {
                     element.encode()
                 }
-                GovernedTokenWrapperContractCalls::Decimals(element) => {
+                TokenWrapperContractCalls::FeeRecipient(element) => {
                     element.encode()
                 }
-                GovernedTokenWrapperContractCalls::DecreaseAllowance(
-                    element,
-                ) => element.encode(),
-                GovernedTokenWrapperContractCalls::FeeRecipient(element) => {
+                TokenWrapperContractCalls::GetAmountToWrap(element) => {
                     element.encode()
                 }
-                GovernedTokenWrapperContractCalls::GetAmountToWrap(element) => {
+                TokenWrapperContractCalls::GetFeeFromAmount(element) => {
                     element.encode()
                 }
-                GovernedTokenWrapperContractCalls::GetFee(element) => {
+                TokenWrapperContractCalls::GetRoleAdmin(element) => {
                     element.encode()
                 }
-                GovernedTokenWrapperContractCalls::GetFeeFromAmount(
-                    element,
-                ) => element.encode(),
-                GovernedTokenWrapperContractCalls::GetRoleAdmin(element) => {
+                TokenWrapperContractCalls::GetRoleMember(element) => {
                     element.encode()
                 }
-                GovernedTokenWrapperContractCalls::GetRoleMember(element) => {
+                TokenWrapperContractCalls::GetRoleMemberCount(element) => {
                     element.encode()
                 }
-                GovernedTokenWrapperContractCalls::GetRoleMemberCount(
-                    element,
-                ) => element.encode(),
-                GovernedTokenWrapperContractCalls::GetTokens(element) => {
+                TokenWrapperContractCalls::GrantRole(element) => {
                     element.encode()
                 }
-                GovernedTokenWrapperContractCalls::Governor(element) => {
+                TokenWrapperContractCalls::HasRole(element) => element.encode(),
+                TokenWrapperContractCalls::IncreaseAllowance(element) => {
                     element.encode()
                 }
-                GovernedTokenWrapperContractCalls::GrantRole(element) => {
+                TokenWrapperContractCalls::Mint(element) => element.encode(),
+                TokenWrapperContractCalls::Name(element) => element.encode(),
+                TokenWrapperContractCalls::Pause(element) => element.encode(),
+                TokenWrapperContractCalls::Paused(element) => element.encode(),
+                TokenWrapperContractCalls::RenounceRole(element) => {
                     element.encode()
                 }
-                GovernedTokenWrapperContractCalls::HasRole(element) => {
+                TokenWrapperContractCalls::RevokeRole(element) => {
                     element.encode()
                 }
-                GovernedTokenWrapperContractCalls::HistoricalTokens(
-                    element,
-                ) => element.encode(),
-                GovernedTokenWrapperContractCalls::IncreaseAllowance(
-                    element,
-                ) => element.encode(),
-                GovernedTokenWrapperContractCalls::IsNativeAllowed(element) => {
+                TokenWrapperContractCalls::SetFee(element) => element.encode(),
+                TokenWrapperContractCalls::SupportsInterface(element) => {
                     element.encode()
                 }
-                GovernedTokenWrapperContractCalls::Mint(element) => {
+                TokenWrapperContractCalls::Symbol(element) => element.encode(),
+                TokenWrapperContractCalls::TotalSupply(element) => {
                     element.encode()
                 }
-                GovernedTokenWrapperContractCalls::Name(element) => {
+                TokenWrapperContractCalls::Transfer(element) => {
                     element.encode()
                 }
-                GovernedTokenWrapperContractCalls::Pause(element) => {
+                TokenWrapperContractCalls::TransferFrom(element) => {
                     element.encode()
                 }
-                GovernedTokenWrapperContractCalls::Paused(element) => {
+                TokenWrapperContractCalls::Unpause(element) => element.encode(),
+                TokenWrapperContractCalls::Unwrap(element) => element.encode(),
+                TokenWrapperContractCalls::UnwrapAndSendTo(element) => {
                     element.encode()
                 }
-                GovernedTokenWrapperContractCalls::ProposalNonce(element) => {
+                TokenWrapperContractCalls::UnwrapFor(element) => {
                     element.encode()
                 }
-                GovernedTokenWrapperContractCalls::Remove(element) => {
-                    element.encode()
-                }
-                GovernedTokenWrapperContractCalls::RenounceRole(element) => {
-                    element.encode()
-                }
-                GovernedTokenWrapperContractCalls::RevokeRole(element) => {
-                    element.encode()
-                }
-                GovernedTokenWrapperContractCalls::SetFee(element) => {
-                    element.encode()
-                }
-                GovernedTokenWrapperContractCalls::SetFeeRecipient(element) => {
-                    element.encode()
-                }
-                GovernedTokenWrapperContractCalls::SetGovernor(element) => {
-                    element.encode()
-                }
-                GovernedTokenWrapperContractCalls::SetNativeAllowed(
-                    element,
-                ) => element.encode(),
-                GovernedTokenWrapperContractCalls::SupportsInterface(
-                    element,
-                ) => element.encode(),
-                GovernedTokenWrapperContractCalls::Symbol(element) => {
-                    element.encode()
-                }
-                GovernedTokenWrapperContractCalls::Tokens(element) => {
-                    element.encode()
-                }
-                GovernedTokenWrapperContractCalls::TotalSupply(element) => {
-                    element.encode()
-                }
-                GovernedTokenWrapperContractCalls::Transfer(element) => {
-                    element.encode()
-                }
-                GovernedTokenWrapperContractCalls::TransferFrom(element) => {
-                    element.encode()
-                }
-                GovernedTokenWrapperContractCalls::Unpause(element) => {
-                    element.encode()
-                }
-                GovernedTokenWrapperContractCalls::Unwrap(element) => {
-                    element.encode()
-                }
-                GovernedTokenWrapperContractCalls::UnwrapAndSendTo(element) => {
-                    element.encode()
-                }
-                GovernedTokenWrapperContractCalls::UnwrapFor(element) => {
-                    element.encode()
-                }
-                GovernedTokenWrapperContractCalls::UpdateLimit(element) => {
-                    element.encode()
-                }
-                GovernedTokenWrapperContractCalls::Wrap(element) => {
-                    element.encode()
-                }
-                GovernedTokenWrapperContractCalls::WrapFor(element) => {
-                    element.encode()
-                }
-                GovernedTokenWrapperContractCalls::WrapForAndSendTo(
-                    element,
-                ) => element.encode(),
-                GovernedTokenWrapperContractCalls::WrappingLimit(element) => {
+                TokenWrapperContractCalls::Wrap(element) => element.encode(),
+                TokenWrapperContractCalls::WrapFor(element) => element.encode(),
+                TokenWrapperContractCalls::WrapForAndSendTo(element) => {
                     element.encode()
                 }
             }
         }
     }
-    impl ::std::fmt::Display for GovernedTokenWrapperContractCalls {
+    impl ::std::fmt::Display for TokenWrapperContractCalls {
         fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
             match self {
-                GovernedTokenWrapperContractCalls::DefaultAdminRole(
-                    element,
-                ) => element.fmt(f),
-                GovernedTokenWrapperContractCalls::MinterRole(element) => {
+                TokenWrapperContractCalls::DefaultAdminRole(element) => {
                     element.fmt(f)
                 }
-                GovernedTokenWrapperContractCalls::PauserRole(element) => {
+                TokenWrapperContractCalls::MinterRole(element) => {
                     element.fmt(f)
                 }
-                GovernedTokenWrapperContractCalls::Add(element) => {
+                TokenWrapperContractCalls::PauserRole(element) => {
                     element.fmt(f)
                 }
-                GovernedTokenWrapperContractCalls::Allowance(element) => {
+                TokenWrapperContractCalls::Allowance(element) => element.fmt(f),
+                TokenWrapperContractCalls::Approve(element) => element.fmt(f),
+                TokenWrapperContractCalls::BalanceOf(element) => element.fmt(f),
+                TokenWrapperContractCalls::Burn(element) => element.fmt(f),
+                TokenWrapperContractCalls::BurnFrom(element) => element.fmt(f),
+                TokenWrapperContractCalls::Decimals(element) => element.fmt(f),
+                TokenWrapperContractCalls::DecreaseAllowance(element) => {
                     element.fmt(f)
                 }
-                GovernedTokenWrapperContractCalls::Approve(element) => {
+                TokenWrapperContractCalls::FeeRecipient(element) => {
                     element.fmt(f)
                 }
-                GovernedTokenWrapperContractCalls::BalanceOf(element) => {
+                TokenWrapperContractCalls::GetAmountToWrap(element) => {
                     element.fmt(f)
                 }
-                GovernedTokenWrapperContractCalls::Burn(element) => {
+                TokenWrapperContractCalls::GetFeeFromAmount(element) => {
                     element.fmt(f)
                 }
-                GovernedTokenWrapperContractCalls::BurnFrom(element) => {
+                TokenWrapperContractCalls::GetRoleAdmin(element) => {
                     element.fmt(f)
                 }
-                GovernedTokenWrapperContractCalls::Decimals(element) => {
+                TokenWrapperContractCalls::GetRoleMember(element) => {
                     element.fmt(f)
                 }
-                GovernedTokenWrapperContractCalls::DecreaseAllowance(
-                    element,
-                ) => element.fmt(f),
-                GovernedTokenWrapperContractCalls::FeeRecipient(element) => {
+                TokenWrapperContractCalls::GetRoleMemberCount(element) => {
                     element.fmt(f)
                 }
-                GovernedTokenWrapperContractCalls::GetAmountToWrap(element) => {
+                TokenWrapperContractCalls::GrantRole(element) => element.fmt(f),
+                TokenWrapperContractCalls::HasRole(element) => element.fmt(f),
+                TokenWrapperContractCalls::IncreaseAllowance(element) => {
                     element.fmt(f)
                 }
-                GovernedTokenWrapperContractCalls::GetFee(element) => {
+                TokenWrapperContractCalls::Mint(element) => element.fmt(f),
+                TokenWrapperContractCalls::Name(element) => element.fmt(f),
+                TokenWrapperContractCalls::Pause(element) => element.fmt(f),
+                TokenWrapperContractCalls::Paused(element) => element.fmt(f),
+                TokenWrapperContractCalls::RenounceRole(element) => {
                     element.fmt(f)
                 }
-                GovernedTokenWrapperContractCalls::GetFeeFromAmount(
-                    element,
-                ) => element.fmt(f),
-                GovernedTokenWrapperContractCalls::GetRoleAdmin(element) => {
+                TokenWrapperContractCalls::RevokeRole(element) => {
                     element.fmt(f)
                 }
-                GovernedTokenWrapperContractCalls::GetRoleMember(element) => {
+                TokenWrapperContractCalls::SetFee(element) => element.fmt(f),
+                TokenWrapperContractCalls::SupportsInterface(element) => {
                     element.fmt(f)
                 }
-                GovernedTokenWrapperContractCalls::GetRoleMemberCount(
-                    element,
-                ) => element.fmt(f),
-                GovernedTokenWrapperContractCalls::GetTokens(element) => {
+                TokenWrapperContractCalls::Symbol(element) => element.fmt(f),
+                TokenWrapperContractCalls::TotalSupply(element) => {
                     element.fmt(f)
                 }
-                GovernedTokenWrapperContractCalls::Governor(element) => {
+                TokenWrapperContractCalls::Transfer(element) => element.fmt(f),
+                TokenWrapperContractCalls::TransferFrom(element) => {
                     element.fmt(f)
                 }
-                GovernedTokenWrapperContractCalls::GrantRole(element) => {
+                TokenWrapperContractCalls::Unpause(element) => element.fmt(f),
+                TokenWrapperContractCalls::Unwrap(element) => element.fmt(f),
+                TokenWrapperContractCalls::UnwrapAndSendTo(element) => {
                     element.fmt(f)
                 }
-                GovernedTokenWrapperContractCalls::HasRole(element) => {
-                    element.fmt(f)
-                }
-                GovernedTokenWrapperContractCalls::HistoricalTokens(
-                    element,
-                ) => element.fmt(f),
-                GovernedTokenWrapperContractCalls::IncreaseAllowance(
-                    element,
-                ) => element.fmt(f),
-                GovernedTokenWrapperContractCalls::IsNativeAllowed(element) => {
-                    element.fmt(f)
-                }
-                GovernedTokenWrapperContractCalls::Mint(element) => {
-                    element.fmt(f)
-                }
-                GovernedTokenWrapperContractCalls::Name(element) => {
-                    element.fmt(f)
-                }
-                GovernedTokenWrapperContractCalls::Pause(element) => {
-                    element.fmt(f)
-                }
-                GovernedTokenWrapperContractCalls::Paused(element) => {
-                    element.fmt(f)
-                }
-                GovernedTokenWrapperContractCalls::ProposalNonce(element) => {
-                    element.fmt(f)
-                }
-                GovernedTokenWrapperContractCalls::Remove(element) => {
-                    element.fmt(f)
-                }
-                GovernedTokenWrapperContractCalls::RenounceRole(element) => {
-                    element.fmt(f)
-                }
-                GovernedTokenWrapperContractCalls::RevokeRole(element) => {
-                    element.fmt(f)
-                }
-                GovernedTokenWrapperContractCalls::SetFee(element) => {
-                    element.fmt(f)
-                }
-                GovernedTokenWrapperContractCalls::SetFeeRecipient(element) => {
-                    element.fmt(f)
-                }
-                GovernedTokenWrapperContractCalls::SetGovernor(element) => {
-                    element.fmt(f)
-                }
-                GovernedTokenWrapperContractCalls::SetNativeAllowed(
-                    element,
-                ) => element.fmt(f),
-                GovernedTokenWrapperContractCalls::SupportsInterface(
-                    element,
-                ) => element.fmt(f),
-                GovernedTokenWrapperContractCalls::Symbol(element) => {
-                    element.fmt(f)
-                }
-                GovernedTokenWrapperContractCalls::Tokens(element) => {
-                    element.fmt(f)
-                }
-                GovernedTokenWrapperContractCalls::TotalSupply(element) => {
-                    element.fmt(f)
-                }
-                GovernedTokenWrapperContractCalls::Transfer(element) => {
-                    element.fmt(f)
-                }
-                GovernedTokenWrapperContractCalls::TransferFrom(element) => {
-                    element.fmt(f)
-                }
-                GovernedTokenWrapperContractCalls::Unpause(element) => {
-                    element.fmt(f)
-                }
-                GovernedTokenWrapperContractCalls::Unwrap(element) => {
-                    element.fmt(f)
-                }
-                GovernedTokenWrapperContractCalls::UnwrapAndSendTo(element) => {
-                    element.fmt(f)
-                }
-                GovernedTokenWrapperContractCalls::UnwrapFor(element) => {
-                    element.fmt(f)
-                }
-                GovernedTokenWrapperContractCalls::UpdateLimit(element) => {
-                    element.fmt(f)
-                }
-                GovernedTokenWrapperContractCalls::Wrap(element) => {
-                    element.fmt(f)
-                }
-                GovernedTokenWrapperContractCalls::WrapFor(element) => {
-                    element.fmt(f)
-                }
-                GovernedTokenWrapperContractCalls::WrapForAndSendTo(
-                    element,
-                ) => element.fmt(f),
-                GovernedTokenWrapperContractCalls::WrappingLimit(element) => {
+                TokenWrapperContractCalls::UnwrapFor(element) => element.fmt(f),
+                TokenWrapperContractCalls::Wrap(element) => element.fmt(f),
+                TokenWrapperContractCalls::WrapFor(element) => element.fmt(f),
+                TokenWrapperContractCalls::WrapForAndSendTo(element) => {
                     element.fmt(f)
                 }
             }
         }
     }
-    impl ::std::convert::From<DefaultAdminRoleCall>
-        for GovernedTokenWrapperContractCalls
-    {
+    impl ::std::convert::From<DefaultAdminRoleCall> for TokenWrapperContractCalls {
         fn from(var: DefaultAdminRoleCall) -> Self {
-            GovernedTokenWrapperContractCalls::DefaultAdminRole(var)
+            TokenWrapperContractCalls::DefaultAdminRole(var)
         }
     }
-    impl ::std::convert::From<MinterRoleCall>
-        for GovernedTokenWrapperContractCalls
-    {
+    impl ::std::convert::From<MinterRoleCall> for TokenWrapperContractCalls {
         fn from(var: MinterRoleCall) -> Self {
-            GovernedTokenWrapperContractCalls::MinterRole(var)
+            TokenWrapperContractCalls::MinterRole(var)
         }
     }
-    impl ::std::convert::From<PauserRoleCall>
-        for GovernedTokenWrapperContractCalls
-    {
+    impl ::std::convert::From<PauserRoleCall> for TokenWrapperContractCalls {
         fn from(var: PauserRoleCall) -> Self {
-            GovernedTokenWrapperContractCalls::PauserRole(var)
+            TokenWrapperContractCalls::PauserRole(var)
         }
     }
-    impl ::std::convert::From<AddCall> for GovernedTokenWrapperContractCalls {
-        fn from(var: AddCall) -> Self {
-            GovernedTokenWrapperContractCalls::Add(var)
-        }
-    }
-    impl ::std::convert::From<AllowanceCall> for GovernedTokenWrapperContractCalls {
+    impl ::std::convert::From<AllowanceCall> for TokenWrapperContractCalls {
         fn from(var: AllowanceCall) -> Self {
-            GovernedTokenWrapperContractCalls::Allowance(var)
+            TokenWrapperContractCalls::Allowance(var)
         }
     }
-    impl ::std::convert::From<ApproveCall> for GovernedTokenWrapperContractCalls {
+    impl ::std::convert::From<ApproveCall> for TokenWrapperContractCalls {
         fn from(var: ApproveCall) -> Self {
-            GovernedTokenWrapperContractCalls::Approve(var)
+            TokenWrapperContractCalls::Approve(var)
         }
     }
-    impl ::std::convert::From<BalanceOfCall> for GovernedTokenWrapperContractCalls {
+    impl ::std::convert::From<BalanceOfCall> for TokenWrapperContractCalls {
         fn from(var: BalanceOfCall) -> Self {
-            GovernedTokenWrapperContractCalls::BalanceOf(var)
+            TokenWrapperContractCalls::BalanceOf(var)
         }
     }
-    impl ::std::convert::From<BurnCall> for GovernedTokenWrapperContractCalls {
+    impl ::std::convert::From<BurnCall> for TokenWrapperContractCalls {
         fn from(var: BurnCall) -> Self {
-            GovernedTokenWrapperContractCalls::Burn(var)
+            TokenWrapperContractCalls::Burn(var)
         }
     }
-    impl ::std::convert::From<BurnFromCall> for GovernedTokenWrapperContractCalls {
+    impl ::std::convert::From<BurnFromCall> for TokenWrapperContractCalls {
         fn from(var: BurnFromCall) -> Self {
-            GovernedTokenWrapperContractCalls::BurnFrom(var)
+            TokenWrapperContractCalls::BurnFrom(var)
         }
     }
-    impl ::std::convert::From<DecimalsCall> for GovernedTokenWrapperContractCalls {
+    impl ::std::convert::From<DecimalsCall> for TokenWrapperContractCalls {
         fn from(var: DecimalsCall) -> Self {
-            GovernedTokenWrapperContractCalls::Decimals(var)
+            TokenWrapperContractCalls::Decimals(var)
         }
     }
-    impl ::std::convert::From<DecreaseAllowanceCall>
-        for GovernedTokenWrapperContractCalls
-    {
+    impl ::std::convert::From<DecreaseAllowanceCall> for TokenWrapperContractCalls {
         fn from(var: DecreaseAllowanceCall) -> Self {
-            GovernedTokenWrapperContractCalls::DecreaseAllowance(var)
+            TokenWrapperContractCalls::DecreaseAllowance(var)
         }
     }
-    impl ::std::convert::From<FeeRecipientCall>
-        for GovernedTokenWrapperContractCalls
-    {
+    impl ::std::convert::From<FeeRecipientCall> for TokenWrapperContractCalls {
         fn from(var: FeeRecipientCall) -> Self {
-            GovernedTokenWrapperContractCalls::FeeRecipient(var)
+            TokenWrapperContractCalls::FeeRecipient(var)
         }
     }
-    impl ::std::convert::From<GetAmountToWrapCall>
-        for GovernedTokenWrapperContractCalls
-    {
+    impl ::std::convert::From<GetAmountToWrapCall> for TokenWrapperContractCalls {
         fn from(var: GetAmountToWrapCall) -> Self {
-            GovernedTokenWrapperContractCalls::GetAmountToWrap(var)
+            TokenWrapperContractCalls::GetAmountToWrap(var)
         }
     }
-    impl ::std::convert::From<GetFeeCall> for GovernedTokenWrapperContractCalls {
-        fn from(var: GetFeeCall) -> Self {
-            GovernedTokenWrapperContractCalls::GetFee(var)
-        }
-    }
-    impl ::std::convert::From<GetFeeFromAmountCall>
-        for GovernedTokenWrapperContractCalls
-    {
+    impl ::std::convert::From<GetFeeFromAmountCall> for TokenWrapperContractCalls {
         fn from(var: GetFeeFromAmountCall) -> Self {
-            GovernedTokenWrapperContractCalls::GetFeeFromAmount(var)
+            TokenWrapperContractCalls::GetFeeFromAmount(var)
         }
     }
-    impl ::std::convert::From<GetRoleAdminCall>
-        for GovernedTokenWrapperContractCalls
-    {
+    impl ::std::convert::From<GetRoleAdminCall> for TokenWrapperContractCalls {
         fn from(var: GetRoleAdminCall) -> Self {
-            GovernedTokenWrapperContractCalls::GetRoleAdmin(var)
+            TokenWrapperContractCalls::GetRoleAdmin(var)
         }
     }
-    impl ::std::convert::From<GetRoleMemberCall>
-        for GovernedTokenWrapperContractCalls
-    {
+    impl ::std::convert::From<GetRoleMemberCall> for TokenWrapperContractCalls {
         fn from(var: GetRoleMemberCall) -> Self {
-            GovernedTokenWrapperContractCalls::GetRoleMember(var)
+            TokenWrapperContractCalls::GetRoleMember(var)
         }
     }
     impl ::std::convert::From<GetRoleMemberCountCall>
-        for GovernedTokenWrapperContractCalls
+        for TokenWrapperContractCalls
     {
         fn from(var: GetRoleMemberCountCall) -> Self {
-            GovernedTokenWrapperContractCalls::GetRoleMemberCount(var)
+            TokenWrapperContractCalls::GetRoleMemberCount(var)
         }
     }
-    impl ::std::convert::From<GetTokensCall> for GovernedTokenWrapperContractCalls {
-        fn from(var: GetTokensCall) -> Self {
-            GovernedTokenWrapperContractCalls::GetTokens(var)
-        }
-    }
-    impl ::std::convert::From<GovernorCall> for GovernedTokenWrapperContractCalls {
-        fn from(var: GovernorCall) -> Self {
-            GovernedTokenWrapperContractCalls::Governor(var)
-        }
-    }
-    impl ::std::convert::From<GrantRoleCall> for GovernedTokenWrapperContractCalls {
+    impl ::std::convert::From<GrantRoleCall> for TokenWrapperContractCalls {
         fn from(var: GrantRoleCall) -> Self {
-            GovernedTokenWrapperContractCalls::GrantRole(var)
+            TokenWrapperContractCalls::GrantRole(var)
         }
     }
-    impl ::std::convert::From<HasRoleCall> for GovernedTokenWrapperContractCalls {
+    impl ::std::convert::From<HasRoleCall> for TokenWrapperContractCalls {
         fn from(var: HasRoleCall) -> Self {
-            GovernedTokenWrapperContractCalls::HasRole(var)
+            TokenWrapperContractCalls::HasRole(var)
         }
     }
-    impl ::std::convert::From<HistoricalTokensCall>
-        for GovernedTokenWrapperContractCalls
-    {
-        fn from(var: HistoricalTokensCall) -> Self {
-            GovernedTokenWrapperContractCalls::HistoricalTokens(var)
-        }
-    }
-    impl ::std::convert::From<IncreaseAllowanceCall>
-        for GovernedTokenWrapperContractCalls
-    {
+    impl ::std::convert::From<IncreaseAllowanceCall> for TokenWrapperContractCalls {
         fn from(var: IncreaseAllowanceCall) -> Self {
-            GovernedTokenWrapperContractCalls::IncreaseAllowance(var)
+            TokenWrapperContractCalls::IncreaseAllowance(var)
         }
     }
-    impl ::std::convert::From<IsNativeAllowedCall>
-        for GovernedTokenWrapperContractCalls
-    {
-        fn from(var: IsNativeAllowedCall) -> Self {
-            GovernedTokenWrapperContractCalls::IsNativeAllowed(var)
-        }
-    }
-    impl ::std::convert::From<MintCall> for GovernedTokenWrapperContractCalls {
+    impl ::std::convert::From<MintCall> for TokenWrapperContractCalls {
         fn from(var: MintCall) -> Self {
-            GovernedTokenWrapperContractCalls::Mint(var)
+            TokenWrapperContractCalls::Mint(var)
         }
     }
-    impl ::std::convert::From<NameCall> for GovernedTokenWrapperContractCalls {
+    impl ::std::convert::From<NameCall> for TokenWrapperContractCalls {
         fn from(var: NameCall) -> Self {
-            GovernedTokenWrapperContractCalls::Name(var)
+            TokenWrapperContractCalls::Name(var)
         }
     }
-    impl ::std::convert::From<PauseCall> for GovernedTokenWrapperContractCalls {
+    impl ::std::convert::From<PauseCall> for TokenWrapperContractCalls {
         fn from(var: PauseCall) -> Self {
-            GovernedTokenWrapperContractCalls::Pause(var)
+            TokenWrapperContractCalls::Pause(var)
         }
     }
-    impl ::std::convert::From<PausedCall> for GovernedTokenWrapperContractCalls {
+    impl ::std::convert::From<PausedCall> for TokenWrapperContractCalls {
         fn from(var: PausedCall) -> Self {
-            GovernedTokenWrapperContractCalls::Paused(var)
+            TokenWrapperContractCalls::Paused(var)
         }
     }
-    impl ::std::convert::From<ProposalNonceCall>
-        for GovernedTokenWrapperContractCalls
-    {
-        fn from(var: ProposalNonceCall) -> Self {
-            GovernedTokenWrapperContractCalls::ProposalNonce(var)
-        }
-    }
-    impl ::std::convert::From<RemoveCall> for GovernedTokenWrapperContractCalls {
-        fn from(var: RemoveCall) -> Self {
-            GovernedTokenWrapperContractCalls::Remove(var)
-        }
-    }
-    impl ::std::convert::From<RenounceRoleCall>
-        for GovernedTokenWrapperContractCalls
-    {
+    impl ::std::convert::From<RenounceRoleCall> for TokenWrapperContractCalls {
         fn from(var: RenounceRoleCall) -> Self {
-            GovernedTokenWrapperContractCalls::RenounceRole(var)
+            TokenWrapperContractCalls::RenounceRole(var)
         }
     }
-    impl ::std::convert::From<RevokeRoleCall>
-        for GovernedTokenWrapperContractCalls
-    {
+    impl ::std::convert::From<RevokeRoleCall> for TokenWrapperContractCalls {
         fn from(var: RevokeRoleCall) -> Self {
-            GovernedTokenWrapperContractCalls::RevokeRole(var)
+            TokenWrapperContractCalls::RevokeRole(var)
         }
     }
-    impl ::std::convert::From<SetFeeCall> for GovernedTokenWrapperContractCalls {
+    impl ::std::convert::From<SetFeeCall> for TokenWrapperContractCalls {
         fn from(var: SetFeeCall) -> Self {
-            GovernedTokenWrapperContractCalls::SetFee(var)
+            TokenWrapperContractCalls::SetFee(var)
         }
     }
-    impl ::std::convert::From<SetFeeRecipientCall>
-        for GovernedTokenWrapperContractCalls
-    {
-        fn from(var: SetFeeRecipientCall) -> Self {
-            GovernedTokenWrapperContractCalls::SetFeeRecipient(var)
-        }
-    }
-    impl ::std::convert::From<SetGovernorCall>
-        for GovernedTokenWrapperContractCalls
-    {
-        fn from(var: SetGovernorCall) -> Self {
-            GovernedTokenWrapperContractCalls::SetGovernor(var)
-        }
-    }
-    impl ::std::convert::From<SetNativeAllowedCall>
-        for GovernedTokenWrapperContractCalls
-    {
-        fn from(var: SetNativeAllowedCall) -> Self {
-            GovernedTokenWrapperContractCalls::SetNativeAllowed(var)
-        }
-    }
-    impl ::std::convert::From<SupportsInterfaceCall>
-        for GovernedTokenWrapperContractCalls
-    {
+    impl ::std::convert::From<SupportsInterfaceCall> for TokenWrapperContractCalls {
         fn from(var: SupportsInterfaceCall) -> Self {
-            GovernedTokenWrapperContractCalls::SupportsInterface(var)
+            TokenWrapperContractCalls::SupportsInterface(var)
         }
     }
-    impl ::std::convert::From<SymbolCall> for GovernedTokenWrapperContractCalls {
+    impl ::std::convert::From<SymbolCall> for TokenWrapperContractCalls {
         fn from(var: SymbolCall) -> Self {
-            GovernedTokenWrapperContractCalls::Symbol(var)
+            TokenWrapperContractCalls::Symbol(var)
         }
     }
-    impl ::std::convert::From<TokensCall> for GovernedTokenWrapperContractCalls {
-        fn from(var: TokensCall) -> Self {
-            GovernedTokenWrapperContractCalls::Tokens(var)
-        }
-    }
-    impl ::std::convert::From<TotalSupplyCall>
-        for GovernedTokenWrapperContractCalls
-    {
+    impl ::std::convert::From<TotalSupplyCall> for TokenWrapperContractCalls {
         fn from(var: TotalSupplyCall) -> Self {
-            GovernedTokenWrapperContractCalls::TotalSupply(var)
+            TokenWrapperContractCalls::TotalSupply(var)
         }
     }
-    impl ::std::convert::From<TransferCall> for GovernedTokenWrapperContractCalls {
+    impl ::std::convert::From<TransferCall> for TokenWrapperContractCalls {
         fn from(var: TransferCall) -> Self {
-            GovernedTokenWrapperContractCalls::Transfer(var)
+            TokenWrapperContractCalls::Transfer(var)
         }
     }
-    impl ::std::convert::From<TransferFromCall>
-        for GovernedTokenWrapperContractCalls
-    {
+    impl ::std::convert::From<TransferFromCall> for TokenWrapperContractCalls {
         fn from(var: TransferFromCall) -> Self {
-            GovernedTokenWrapperContractCalls::TransferFrom(var)
+            TokenWrapperContractCalls::TransferFrom(var)
         }
     }
-    impl ::std::convert::From<UnpauseCall> for GovernedTokenWrapperContractCalls {
+    impl ::std::convert::From<UnpauseCall> for TokenWrapperContractCalls {
         fn from(var: UnpauseCall) -> Self {
-            GovernedTokenWrapperContractCalls::Unpause(var)
+            TokenWrapperContractCalls::Unpause(var)
         }
     }
-    impl ::std::convert::From<UnwrapCall> for GovernedTokenWrapperContractCalls {
+    impl ::std::convert::From<UnwrapCall> for TokenWrapperContractCalls {
         fn from(var: UnwrapCall) -> Self {
-            GovernedTokenWrapperContractCalls::Unwrap(var)
+            TokenWrapperContractCalls::Unwrap(var)
         }
     }
-    impl ::std::convert::From<UnwrapAndSendToCall>
-        for GovernedTokenWrapperContractCalls
-    {
+    impl ::std::convert::From<UnwrapAndSendToCall> for TokenWrapperContractCalls {
         fn from(var: UnwrapAndSendToCall) -> Self {
-            GovernedTokenWrapperContractCalls::UnwrapAndSendTo(var)
+            TokenWrapperContractCalls::UnwrapAndSendTo(var)
         }
     }
-    impl ::std::convert::From<UnwrapForCall> for GovernedTokenWrapperContractCalls {
+    impl ::std::convert::From<UnwrapForCall> for TokenWrapperContractCalls {
         fn from(var: UnwrapForCall) -> Self {
-            GovernedTokenWrapperContractCalls::UnwrapFor(var)
+            TokenWrapperContractCalls::UnwrapFor(var)
         }
     }
-    impl ::std::convert::From<UpdateLimitCall>
-        for GovernedTokenWrapperContractCalls
-    {
-        fn from(var: UpdateLimitCall) -> Self {
-            GovernedTokenWrapperContractCalls::UpdateLimit(var)
-        }
-    }
-    impl ::std::convert::From<WrapCall> for GovernedTokenWrapperContractCalls {
+    impl ::std::convert::From<WrapCall> for TokenWrapperContractCalls {
         fn from(var: WrapCall) -> Self {
-            GovernedTokenWrapperContractCalls::Wrap(var)
+            TokenWrapperContractCalls::Wrap(var)
         }
     }
-    impl ::std::convert::From<WrapForCall> for GovernedTokenWrapperContractCalls {
+    impl ::std::convert::From<WrapForCall> for TokenWrapperContractCalls {
         fn from(var: WrapForCall) -> Self {
-            GovernedTokenWrapperContractCalls::WrapFor(var)
+            TokenWrapperContractCalls::WrapFor(var)
         }
     }
-    impl ::std::convert::From<WrapForAndSendToCall>
-        for GovernedTokenWrapperContractCalls
-    {
+    impl ::std::convert::From<WrapForAndSendToCall> for TokenWrapperContractCalls {
         fn from(var: WrapForAndSendToCall) -> Self {
-            GovernedTokenWrapperContractCalls::WrapForAndSendTo(var)
-        }
-    }
-    impl ::std::convert::From<WrappingLimitCall>
-        for GovernedTokenWrapperContractCalls
-    {
-        fn from(var: WrappingLimitCall) -> Self {
-            GovernedTokenWrapperContractCalls::WrappingLimit(var)
+            TokenWrapperContractCalls::WrapForAndSendTo(var)
         }
     }
     #[doc = "Container type for all return fields from the `DEFAULT_ADMIN_ROLE` function with signature `DEFAULT_ADMIN_ROLE()` and selector `[162, 23, 253, 223]`"]
@@ -3009,19 +2184,6 @@ pub mod governed_token_wrapper_contract {
         serde :: Deserialize,
     )]
     pub struct GetAmountToWrapReturn(pub ethers::core::types::U256);
-    #[doc = "Container type for all return fields from the `getFee` function with signature `getFee()` and selector `[206, 215, 47, 135]`"]
-    #[derive(
-        Clone,
-        Debug,
-        Default,
-        Eq,
-        PartialEq,
-        ethers :: contract :: EthAbiType,
-        ethers :: contract :: EthAbiCodec,
-        serde :: Serialize,
-        serde :: Deserialize,
-    )]
-    pub struct GetFeeReturn(pub u8);
     #[doc = "Container type for all return fields from the `getFeeFromAmount` function with signature `getFeeFromAmount(uint256)` and selector `[133, 192, 10, 232]`"]
     #[derive(
         Clone,
@@ -3074,34 +2236,6 @@ pub mod governed_token_wrapper_contract {
         serde :: Deserialize,
     )]
     pub struct GetRoleMemberCountReturn(pub ethers::core::types::U256);
-    #[doc = "Container type for all return fields from the `getTokens` function with signature `getTokens()` and selector `[170, 108, 168, 8]`"]
-    #[derive(
-        Clone,
-        Debug,
-        Default,
-        Eq,
-        PartialEq,
-        ethers :: contract :: EthAbiType,
-        ethers :: contract :: EthAbiCodec,
-        serde :: Serialize,
-        serde :: Deserialize,
-    )]
-    pub struct GetTokensReturn(
-        pub ::std::vec::Vec<ethers::core::types::Address>,
-    );
-    #[doc = "Container type for all return fields from the `governor` function with signature `governor()` and selector `[12, 52, 10, 36]`"]
-    #[derive(
-        Clone,
-        Debug,
-        Default,
-        Eq,
-        PartialEq,
-        ethers :: contract :: EthAbiType,
-        ethers :: contract :: EthAbiCodec,
-        serde :: Serialize,
-        serde :: Deserialize,
-    )]
-    pub struct GovernorReturn(pub ethers::core::types::Address);
     #[doc = "Container type for all return fields from the `hasRole` function with signature `hasRole(bytes32,address)` and selector `[145, 209, 72, 84]`"]
     #[derive(
         Clone,
@@ -3115,19 +2249,6 @@ pub mod governed_token_wrapper_contract {
         serde :: Deserialize,
     )]
     pub struct HasRoleReturn(pub bool);
-    #[doc = "Container type for all return fields from the `historicalTokens` function with signature `historicalTokens(uint256)` and selector `[133, 209, 72, 52]`"]
-    #[derive(
-        Clone,
-        Debug,
-        Default,
-        Eq,
-        PartialEq,
-        ethers :: contract :: EthAbiType,
-        ethers :: contract :: EthAbiCodec,
-        serde :: Serialize,
-        serde :: Deserialize,
-    )]
-    pub struct HistoricalTokensReturn(pub ethers::core::types::Address);
     #[doc = "Container type for all return fields from the `increaseAllowance` function with signature `increaseAllowance(address,uint256)` and selector `[57, 80, 147, 81]`"]
     #[derive(
         Clone,
@@ -3141,19 +2262,6 @@ pub mod governed_token_wrapper_contract {
         serde :: Deserialize,
     )]
     pub struct IncreaseAllowanceReturn(pub bool);
-    #[doc = "Container type for all return fields from the `isNativeAllowed` function with signature `isNativeAllowed()` and selector `[179, 228, 8, 63]`"]
-    #[derive(
-        Clone,
-        Debug,
-        Default,
-        Eq,
-        PartialEq,
-        ethers :: contract :: EthAbiType,
-        ethers :: contract :: EthAbiCodec,
-        serde :: Serialize,
-        serde :: Deserialize,
-    )]
-    pub struct IsNativeAllowedReturn(pub bool);
     #[doc = "Container type for all return fields from the `name` function with signature `name()` and selector `[6, 253, 222, 3]`"]
     #[derive(
         Clone,
@@ -3180,19 +2288,6 @@ pub mod governed_token_wrapper_contract {
         serde :: Deserialize,
     )]
     pub struct PausedReturn(pub bool);
-    #[doc = "Container type for all return fields from the `proposalNonce` function with signature `proposalNonce()` and selector `[204, 60, 116, 161]`"]
-    #[derive(
-        Clone,
-        Debug,
-        Default,
-        Eq,
-        PartialEq,
-        ethers :: contract :: EthAbiType,
-        ethers :: contract :: EthAbiCodec,
-        serde :: Serialize,
-        serde :: Deserialize,
-    )]
-    pub struct ProposalNonceReturn(pub ethers::core::types::U256);
     #[doc = "Container type for all return fields from the `supportsInterface` function with signature `supportsInterface(bytes4)` and selector `[1, 255, 201, 167]`"]
     #[derive(
         Clone,
@@ -3219,19 +2314,6 @@ pub mod governed_token_wrapper_contract {
         serde :: Deserialize,
     )]
     pub struct SymbolReturn(pub String);
-    #[doc = "Container type for all return fields from the `tokens` function with signature `tokens(uint256)` and selector `[79, 100, 178, 190]`"]
-    #[derive(
-        Clone,
-        Debug,
-        Default,
-        Eq,
-        PartialEq,
-        ethers :: contract :: EthAbiType,
-        ethers :: contract :: EthAbiCodec,
-        serde :: Serialize,
-        serde :: Deserialize,
-    )]
-    pub struct TokensReturn(pub ethers::core::types::Address);
     #[doc = "Container type for all return fields from the `totalSupply` function with signature `totalSupply()` and selector `[24, 22, 13, 221]`"]
     #[derive(
         Clone,
@@ -3271,17 +2353,4 @@ pub mod governed_token_wrapper_contract {
         serde :: Deserialize,
     )]
     pub struct TransferFromReturn(pub bool);
-    #[doc = "Container type for all return fields from the `wrappingLimit` function with signature `wrappingLimit()` and selector `[31, 145, 67, 130]`"]
-    #[derive(
-        Clone,
-        Debug,
-        Default,
-        Eq,
-        PartialEq,
-        ethers :: contract :: EthAbiType,
-        ethers :: contract :: EthAbiCodec,
-        serde :: Serialize,
-        serde :: Deserialize,
-    )]
-    pub struct WrappingLimitReturn(pub ethers::core::types::U256);
 }

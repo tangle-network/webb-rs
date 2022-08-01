@@ -2,12 +2,8 @@ use std::error::Error;
 
 #[cfg(feature = "generate-contracts")]
 mod evm {
-    use std::io::Write;
-
-    use ethers::contract::Abigen;
-    use tempfile::NamedTempFile;
-
     use super::*;
+    use ethers::contract::Abigen;
 
     fn parse_and_write_abigen(
         path: &str,
@@ -17,12 +13,7 @@ mod evm {
         println!("cargo:rerun-if-changed=./{}", path);
         println!("cargo:rerun-if-changed=./{}", out);
 
-        let contract_file = std::fs::read_to_string(path)?;
-        let raw: serde_json::Value = serde_json::from_str(&contract_file)?;
-        let abi = serde_json::to_vec(&raw["abi"])?;
-        let mut abi_file = NamedTempFile::new()?;
-        abi_file.write_all(&abi)?;
-        Abigen::new(contract_name, abi_file.path().to_string_lossy())?
+        Abigen::new(contract_name, path)?
             .add_event_derive("serde::Serialize")
             .add_event_derive("serde::Deserialize")
             .rustfmt(false) // don't use rustfmt for now.
@@ -36,14 +27,6 @@ mod evm {
             "contracts/protocol-solidity/AnchorBase.json",
             "src/evm/contract/protocol_solidity/anchor_base.rs",
             "AnchorBaseContract",
-        )
-    }
-
-    pub fn build_protocol_solidity_anchor() -> Result<(), Box<dyn Error>> {
-        parse_and_write_abigen(
-            "contracts/protocol-solidity/FixedDepositAnchor.json",
-            "src/evm/contract/protocol_solidity/fixed_deposit_anchor.rs",
-            "FixedDepositAnchorContract",
         )
     }
 
@@ -91,6 +74,14 @@ mod evm {
         )
     }
 
+    pub fn build_protocol_solidity_token_wrapper() -> Result<(), Box<dyn Error>>
+    {
+        parse_and_write_abigen(
+            "contracts/protocol-solidity/TokenWrapper.json",
+            "src/evm/contract/protocol_solidity/token_wrapper.rs",
+            "TokenWrapperContract",
+        )
+    }
     pub fn build_protocol_solidity_treasury() -> Result<(), Box<dyn Error>> {
         parse_and_write_abigen(
             "contracts/protocol-solidity/Treasury.json",
@@ -191,11 +182,11 @@ fn main() -> Result<(), Box<dyn Error>> {
     #[cfg(feature = "generate-contracts")]
     {
         evm::build_protocol_solidity_anchor_base()?;
-        evm::build_protocol_solidity_anchor()?;
         evm::build_protocol_solidity_vanchor()?;
         evm::build_protocol_solidity_anchor_proxy()?;
         evm::build_protocol_solidity_anchor_handler()?;
         evm::build_protocol_solidity_signature_bridge()?;
+        evm::build_protocol_solidity_token_wrapper()?;
         evm::build_protocol_solidity_governed_token_wrapper()?;
         evm::build_protocol_solidity_token_wrapper_handler()?;
         evm::build_protocol_solidity_treasury()?;
