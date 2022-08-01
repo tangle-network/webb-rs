@@ -1,6 +1,6 @@
-pub use tokenwrapperhandlercontract_mod::*;
-#[allow(clippy::too_many_arguments)]
-mod tokenwrapperhandlercontract_mod {
+pub use token_wrapper_handler_contract::*;
+#[allow(clippy::too_many_arguments, non_camel_case_types)]
+pub mod token_wrapper_handler_contract {
     #![allow(clippy::enum_variant_names)]
     #![allow(dead_code)]
     #![allow(clippy::type_complexity)]
@@ -19,10 +19,14 @@ mod tokenwrapperhandlercontract_mod {
     pub static TOKENWRAPPERHANDLERCONTRACT_ABI: ethers::contract::Lazy<
         ethers::core::abi::Abi,
     > = ethers::contract::Lazy::new(|| {
-        serde_json :: from_str ("[{\"inputs\":[{\"internalType\":\"address\",\"name\":\"bridgeAddress\",\"type\":\"address\"},{\"internalType\":\"bytes32[]\",\"name\":\"initialResourceIDs\",\"type\":\"bytes32[]\"},{\"internalType\":\"address[]\",\"name\":\"initialContractAddresses\",\"type\":\"address[]\"}],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"inputs\":[],\"name\":\"_bridgeAddress\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"name\":\"_contractAddressToResourceID\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"name\":\"_contractWhitelist\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"name\":\"_counts\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"name\":\"_resourceIDToContractAddress\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"name\":\"_updateRecords\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"_tokenWrapperAddress\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"_executionChainID\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"_nonce\",\"type\":\"uint256\"},{\"internalType\":\"bytes4\",\"name\":\"functionSig\",\"type\":\"bytes4\"},{\"internalType\":\"bytes32\",\"name\":\"_resourceID\",\"type\":\"bytes32\"},{\"internalType\":\"bytes32\",\"name\":\"_updateValue\",\"type\":\"bytes32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"resourceID\",\"type\":\"bytes32\"},{\"internalType\":\"bytes\",\"name\":\"data\",\"type\":\"bytes\"}],\"name\":\"executeProposal\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"updateNonce\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"executionChainId\",\"type\":\"uint256\"}],\"name\":\"getUpdateRecord\",\"outputs\":[{\"components\":[{\"internalType\":\"address\",\"name\":\"_tokenWrapperAddress\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"_executionChainID\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"_nonce\",\"type\":\"uint256\"},{\"internalType\":\"bytes4\",\"name\":\"functionSig\",\"type\":\"bytes4\"},{\"internalType\":\"bytes32\",\"name\":\"_resourceID\",\"type\":\"bytes32\"},{\"internalType\":\"bytes32\",\"name\":\"_updateValue\",\"type\":\"bytes32\"}],\"internalType\":\"struct TokenWrapperHandler.UpdateRecord\",\"name\":\"\",\"type\":\"tuple\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"newBridge\",\"type\":\"address\"}],\"name\":\"migrateBridge\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"resourceID\",\"type\":\"bytes32\"},{\"internalType\":\"address\",\"name\":\"contractAddress\",\"type\":\"address\"}],\"name\":\"setResource\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}]") . expect ("invalid abi")
+        ethers :: core :: utils :: __serde_json :: from_str ("[{\"inputs\":[{\"internalType\":\"address\",\"name\":\"bridgeAddress\",\"type\":\"address\",\"components\":[]},{\"internalType\":\"bytes32[]\",\"name\":\"initialResourceIDs\",\"type\":\"bytes32[]\",\"components\":[]},{\"internalType\":\"address[]\",\"name\":\"initialContractAddresses\",\"type\":\"address[]\",\"components\":[]}],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\",\"outputs\":[]},{\"inputs\":[],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"_bridgeAddress\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\",\"components\":[]}]},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\",\"components\":[]}],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"_contractAddressToResourceID\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\",\"components\":[]}]},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\",\"components\":[]}],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"_contractWhitelist\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\",\"components\":[]}]},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\",\"components\":[]}],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"_resourceIDToContractAddress\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\",\"components\":[]}]},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\",\"components\":[]},{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\",\"components\":[]}],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"_updateRecords\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"_tokenWrapperAddress\",\"type\":\"address\",\"components\":[]},{\"internalType\":\"uint256\",\"name\":\"_executionChainID\",\"type\":\"uint256\",\"components\":[]},{\"internalType\":\"uint256\",\"name\":\"_nonce\",\"type\":\"uint256\",\"components\":[]},{\"internalType\":\"bytes4\",\"name\":\"functionSig\",\"type\":\"bytes4\",\"components\":[]},{\"internalType\":\"bytes32\",\"name\":\"_resourceID\",\"type\":\"bytes32\",\"components\":[]},{\"internalType\":\"bytes32\",\"name\":\"_updateValue\",\"type\":\"bytes32\",\"components\":[]}]},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"resourceID\",\"type\":\"bytes32\",\"components\":[]},{\"internalType\":\"bytes\",\"name\":\"data\",\"type\":\"bytes\",\"components\":[]}],\"stateMutability\":\"nonpayable\",\"type\":\"function\",\"name\":\"executeProposal\",\"outputs\":[]},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"updateNonce\",\"type\":\"uint256\",\"components\":[]},{\"internalType\":\"uint256\",\"name\":\"executionChainId\",\"type\":\"uint256\",\"components\":[]}],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"getUpdateRecord\",\"outputs\":[{\"internalType\":\"struct TokenWrapperHandler.UpdateRecord\",\"name\":\"\",\"type\":\"tuple\",\"components\":[{\"internalType\":\"address\",\"name\":\"_tokenWrapperAddress\",\"type\":\"address\",\"components\":[]},{\"internalType\":\"uint256\",\"name\":\"_executionChainID\",\"type\":\"uint256\",\"components\":[]},{\"internalType\":\"uint256\",\"name\":\"_nonce\",\"type\":\"uint256\",\"components\":[]},{\"internalType\":\"bytes4\",\"name\":\"functionSig\",\"type\":\"bytes4\",\"components\":[]},{\"internalType\":\"bytes32\",\"name\":\"_resourceID\",\"type\":\"bytes32\",\"components\":[]},{\"internalType\":\"bytes32\",\"name\":\"_updateValue\",\"type\":\"bytes32\",\"components\":[]}]}]},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"newBridge\",\"type\":\"address\",\"components\":[]}],\"stateMutability\":\"nonpayable\",\"type\":\"function\",\"name\":\"migrateBridge\",\"outputs\":[]},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"resourceID\",\"type\":\"bytes32\",\"components\":[]},{\"internalType\":\"address\",\"name\":\"contractAddress\",\"type\":\"address\",\"components\":[]}],\"stateMutability\":\"nonpayable\",\"type\":\"function\",\"name\":\"setResource\",\"outputs\":[]}]") . expect ("invalid abi")
     });
-    #[derive(Clone)]
     pub struct TokenWrapperHandlerContract<M>(ethers::contract::Contract<M>);
+    impl<M> Clone for TokenWrapperHandlerContract<M> {
+        fn clone(&self) -> Self {
+            TokenWrapperHandlerContract(self.0.clone())
+        }
+    }
     impl<M> std::ops::Deref for TokenWrapperHandlerContract<M> {
         type Target = ethers::contract::Contract<M>;
         fn deref(&self) -> &Self::Target {
@@ -46,12 +50,12 @@ mod tokenwrapperhandlercontract_mod {
             address: T,
             client: ::std::sync::Arc<M>,
         ) -> Self {
-            let contract = ethers::contract::Contract::new(
+            ethers::contract::Contract::new(
                 address.into(),
                 TOKENWRAPPERHANDLERCONTRACT_ABI.clone(),
                 client,
-            );
-            Self(contract)
+            )
+            .into()
         }
         #[doc = "Calls the contract's `_bridgeAddress` (0x318c136e) function"]
         pub fn bridge_address(
@@ -80,18 +84,6 @@ mod tokenwrapperhandlercontract_mod {
         ) -> ethers::contract::builders::ContractCall<M, bool> {
             self.0
                 .method_hash([127, 121, 190, 168], p0)
-                .expect("method not found (this should never happen)")
-        }
-        #[doc = "Calls the contract's `_counts` (0xd75a0683) function"]
-        pub fn counts(
-            &self,
-            p0: ethers::core::types::U256,
-        ) -> ethers::contract::builders::ContractCall<
-            M,
-            ethers::core::types::U256,
-        > {
-            self.0
-                .method_hash([215, 90, 6, 131], p0)
                 .expect("method not found (this should never happen)")
         }
         #[doc = "Calls the contract's `_resourceIDToContractAddress` (0xc54c2a11) function"]
@@ -172,7 +164,14 @@ mod tokenwrapperhandlercontract_mod {
                 .expect("method not found (this should never happen)")
         }
     }
-    #[doc = "Container type for all input parameters for the `_bridgeAddress`function with signature `_bridgeAddress()` and selector `[49, 140, 19, 110]`"]
+    impl<M: ethers::providers::Middleware> From<ethers::contract::Contract<M>>
+        for TokenWrapperHandlerContract<M>
+    {
+        fn from(contract: ethers::contract::Contract<M>) -> Self {
+            Self(contract)
+        }
+    }
+    #[doc = "Container type for all input parameters for the `_bridgeAddress` function with signature `_bridgeAddress()` and selector `[49, 140, 19, 110]`"]
     #[derive(
         Clone,
         Debug,
@@ -186,7 +185,7 @@ mod tokenwrapperhandlercontract_mod {
     )]
     #[ethcall(name = "_bridgeAddress", abi = "_bridgeAddress()")]
     pub struct BridgeAddressCall;
-    #[doc = "Container type for all input parameters for the `_contractAddressToResourceID`function with signature `_contractAddressToResourceID(address)` and selector `[236, 151, 211, 180]`"]
+    #[doc = "Container type for all input parameters for the `_contractAddressToResourceID` function with signature `_contractAddressToResourceID(address)` and selector `[236, 151, 211, 180]`"]
     #[derive(
         Clone,
         Debug,
@@ -205,7 +204,7 @@ mod tokenwrapperhandlercontract_mod {
     pub struct ContractAddressToResourceIDCall(
         pub ethers::core::types::Address,
     );
-    #[doc = "Container type for all input parameters for the `_contractWhitelist`function with signature `_contractWhitelist(address)` and selector `[127, 121, 190, 168]`"]
+    #[doc = "Container type for all input parameters for the `_contractWhitelist` function with signature `_contractWhitelist(address)` and selector `[127, 121, 190, 168]`"]
     #[derive(
         Clone,
         Debug,
@@ -219,21 +218,7 @@ mod tokenwrapperhandlercontract_mod {
     )]
     #[ethcall(name = "_contractWhitelist", abi = "_contractWhitelist(address)")]
     pub struct ContractWhitelistCall(pub ethers::core::types::Address);
-    #[doc = "Container type for all input parameters for the `_counts`function with signature `_counts(uint256)` and selector `[215, 90, 6, 131]`"]
-    #[derive(
-        Clone,
-        Debug,
-        Default,
-        Eq,
-        PartialEq,
-        ethers :: contract :: EthCall,
-        ethers :: contract :: EthDisplay,
-        serde :: Serialize,
-        serde :: Deserialize,
-    )]
-    #[ethcall(name = "_counts", abi = "_counts(uint256)")]
-    pub struct CountsCall(pub ethers::core::types::U256);
-    #[doc = "Container type for all input parameters for the `_resourceIDToContractAddress`function with signature `_resourceIDToContractAddress(bytes32)` and selector `[197, 76, 42, 17]`"]
+    #[doc = "Container type for all input parameters for the `_resourceIDToContractAddress` function with signature `_resourceIDToContractAddress(bytes32)` and selector `[197, 76, 42, 17]`"]
     #[derive(
         Clone,
         Debug,
@@ -250,7 +235,7 @@ mod tokenwrapperhandlercontract_mod {
         abi = "_resourceIDToContractAddress(bytes32)"
     )]
     pub struct ResourceIDToContractAddressCall(pub [u8; 32]);
-    #[doc = "Container type for all input parameters for the `_updateRecords`function with signature `_updateRecords(uint256,uint256)` and selector `[12, 158, 158, 20]`"]
+    #[doc = "Container type for all input parameters for the `_updateRecords` function with signature `_updateRecords(uint256,uint256)` and selector `[12, 158, 158, 20]`"]
     #[derive(
         Clone,
         Debug,
@@ -267,7 +252,7 @@ mod tokenwrapperhandlercontract_mod {
         pub ethers::core::types::U256,
         pub ethers::core::types::U256,
     );
-    #[doc = "Container type for all input parameters for the `executeProposal`function with signature `executeProposal(bytes32,bytes)` and selector `[226, 72, 207, 242]`"]
+    #[doc = "Container type for all input parameters for the `executeProposal` function with signature `executeProposal(bytes32,bytes)` and selector `[226, 72, 207, 242]`"]
     #[derive(
         Clone,
         Debug,
@@ -284,7 +269,7 @@ mod tokenwrapperhandlercontract_mod {
         pub resource_id: [u8; 32],
         pub data: ethers::core::types::Bytes,
     }
-    #[doc = "Container type for all input parameters for the `getUpdateRecord`function with signature `getUpdateRecord(uint256,uint256)` and selector `[107, 132, 114, 74]`"]
+    #[doc = "Container type for all input parameters for the `getUpdateRecord` function with signature `getUpdateRecord(uint256,uint256)` and selector `[107, 132, 114, 74]`"]
     #[derive(
         Clone,
         Debug,
@@ -304,7 +289,7 @@ mod tokenwrapperhandlercontract_mod {
         pub update_nonce: ethers::core::types::U256,
         pub execution_chain_id: ethers::core::types::U256,
     }
-    #[doc = "Container type for all input parameters for the `migrateBridge`function with signature `migrateBridge(address)` and selector `[215, 245, 179, 89]`"]
+    #[doc = "Container type for all input parameters for the `migrateBridge` function with signature `migrateBridge(address)` and selector `[215, 245, 179, 89]`"]
     #[derive(
         Clone,
         Debug,
@@ -320,7 +305,7 @@ mod tokenwrapperhandlercontract_mod {
     pub struct MigrateBridgeCall {
         pub new_bridge: ethers::core::types::Address,
     }
-    #[doc = "Container type for all input parameters for the `setResource`function with signature `setResource(bytes32,address)` and selector `[184, 250, 55, 54]`"]
+    #[doc = "Container type for all input parameters for the `setResource` function with signature `setResource(bytes32,address)` and selector `[184, 250, 55, 54]`"]
     #[derive(
         Clone,
         Debug,
@@ -337,12 +322,19 @@ mod tokenwrapperhandlercontract_mod {
         pub resource_id: [u8; 32],
         pub contract_address: ethers::core::types::Address,
     }
-    #[derive(Debug, Clone, PartialEq, Eq, ethers :: contract :: EthAbiType)]
+    #[derive(
+        Debug,
+        Clone,
+        PartialEq,
+        Eq,
+        ethers :: contract :: EthAbiType,
+        serde :: Serialize,
+        serde :: Deserialize,
+    )]
     pub enum TokenWrapperHandlerContractCalls {
         BridgeAddress(BridgeAddressCall),
         ContractAddressToResourceID(ContractAddressToResourceIDCall),
         ContractWhitelist(ContractWhitelistCall),
-        Counts(CountsCall),
         ResourceIDToContractAddress(ResourceIDToContractAddressCall),
         UpdateRecords(UpdateRecordsCall),
         ExecuteProposal(ExecuteProposalCall),
@@ -374,13 +366,6 @@ mod tokenwrapperhandlercontract_mod {
                         decoded,
                     ),
                 );
-            }
-            if let Ok(decoded) =
-                <CountsCall as ethers::core::abi::AbiDecode>::decode(
-                    data.as_ref(),
-                )
-            {
-                return Ok(TokenWrapperHandlerContractCalls::Counts(decoded));
             }
             if let Ok (decoded) = < ResourceIDToContractAddressCall as ethers :: core :: abi :: AbiDecode > :: decode (data . as_ref ()) { return Ok (TokenWrapperHandlerContractCalls :: ResourceIDToContractAddress (decoded)) }
             if let Ok(decoded) =
@@ -433,12 +418,12 @@ mod tokenwrapperhandlercontract_mod {
     }
     impl ethers::core::abi::AbiEncode for TokenWrapperHandlerContractCalls {
         fn encode(self) -> Vec<u8> {
-            match self { TokenWrapperHandlerContractCalls :: BridgeAddress (element) => element . encode () , TokenWrapperHandlerContractCalls :: ContractAddressToResourceID (element) => element . encode () , TokenWrapperHandlerContractCalls :: ContractWhitelist (element) => element . encode () , TokenWrapperHandlerContractCalls :: Counts (element) => element . encode () , TokenWrapperHandlerContractCalls :: ResourceIDToContractAddress (element) => element . encode () , TokenWrapperHandlerContractCalls :: UpdateRecords (element) => element . encode () , TokenWrapperHandlerContractCalls :: ExecuteProposal (element) => element . encode () , TokenWrapperHandlerContractCalls :: GetUpdateRecord (element) => element . encode () , TokenWrapperHandlerContractCalls :: MigrateBridge (element) => element . encode () , TokenWrapperHandlerContractCalls :: SetResource (element) => element . encode () }
+            match self { TokenWrapperHandlerContractCalls :: BridgeAddress (element) => element . encode () , TokenWrapperHandlerContractCalls :: ContractAddressToResourceID (element) => element . encode () , TokenWrapperHandlerContractCalls :: ContractWhitelist (element) => element . encode () , TokenWrapperHandlerContractCalls :: ResourceIDToContractAddress (element) => element . encode () , TokenWrapperHandlerContractCalls :: UpdateRecords (element) => element . encode () , TokenWrapperHandlerContractCalls :: ExecuteProposal (element) => element . encode () , TokenWrapperHandlerContractCalls :: GetUpdateRecord (element) => element . encode () , TokenWrapperHandlerContractCalls :: MigrateBridge (element) => element . encode () , TokenWrapperHandlerContractCalls :: SetResource (element) => element . encode () }
         }
     }
     impl ::std::fmt::Display for TokenWrapperHandlerContractCalls {
         fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
-            match self { TokenWrapperHandlerContractCalls :: BridgeAddress (element) => element . fmt (f) , TokenWrapperHandlerContractCalls :: ContractAddressToResourceID (element) => element . fmt (f) , TokenWrapperHandlerContractCalls :: ContractWhitelist (element) => element . fmt (f) , TokenWrapperHandlerContractCalls :: Counts (element) => element . fmt (f) , TokenWrapperHandlerContractCalls :: ResourceIDToContractAddress (element) => element . fmt (f) , TokenWrapperHandlerContractCalls :: UpdateRecords (element) => element . fmt (f) , TokenWrapperHandlerContractCalls :: ExecuteProposal (element) => element . fmt (f) , TokenWrapperHandlerContractCalls :: GetUpdateRecord (element) => element . fmt (f) , TokenWrapperHandlerContractCalls :: MigrateBridge (element) => element . fmt (f) , TokenWrapperHandlerContractCalls :: SetResource (element) => element . fmt (f) }
+            match self { TokenWrapperHandlerContractCalls :: BridgeAddress (element) => element . fmt (f) , TokenWrapperHandlerContractCalls :: ContractAddressToResourceID (element) => element . fmt (f) , TokenWrapperHandlerContractCalls :: ContractWhitelist (element) => element . fmt (f) , TokenWrapperHandlerContractCalls :: ResourceIDToContractAddress (element) => element . fmt (f) , TokenWrapperHandlerContractCalls :: UpdateRecords (element) => element . fmt (f) , TokenWrapperHandlerContractCalls :: ExecuteProposal (element) => element . fmt (f) , TokenWrapperHandlerContractCalls :: GetUpdateRecord (element) => element . fmt (f) , TokenWrapperHandlerContractCalls :: MigrateBridge (element) => element . fmt (f) , TokenWrapperHandlerContractCalls :: SetResource (element) => element . fmt (f) }
         }
     }
     impl ::std::convert::From<BridgeAddressCall>
@@ -460,11 +445,6 @@ mod tokenwrapperhandlercontract_mod {
     {
         fn from(var: ContractWhitelistCall) -> Self {
             TokenWrapperHandlerContractCalls::ContractWhitelist(var)
-        }
-    }
-    impl ::std::convert::From<CountsCall> for TokenWrapperHandlerContractCalls {
-        fn from(var: CountsCall) -> Self {
-            TokenWrapperHandlerContractCalls::Counts(var)
         }
     }
     impl ::std::convert::From<ResourceIDToContractAddressCall>
@@ -509,6 +489,102 @@ mod tokenwrapperhandlercontract_mod {
             TokenWrapperHandlerContractCalls::SetResource(var)
         }
     }
+    #[doc = "Container type for all return fields from the `_bridgeAddress` function with signature `_bridgeAddress()` and selector `[49, 140, 19, 110]`"]
+    #[derive(
+        Clone,
+        Debug,
+        Default,
+        Eq,
+        PartialEq,
+        ethers :: contract :: EthAbiType,
+        ethers :: contract :: EthAbiCodec,
+        serde :: Serialize,
+        serde :: Deserialize,
+    )]
+    pub struct BridgeAddressReturn(pub ethers::core::types::Address);
+    #[doc = "Container type for all return fields from the `_contractAddressToResourceID` function with signature `_contractAddressToResourceID(address)` and selector `[236, 151, 211, 180]`"]
+    #[derive(
+        Clone,
+        Debug,
+        Default,
+        Eq,
+        PartialEq,
+        ethers :: contract :: EthAbiType,
+        ethers :: contract :: EthAbiCodec,
+        serde :: Serialize,
+        serde :: Deserialize,
+    )]
+    pub struct ContractAddressToResourceIDReturn(pub [u8; 32]);
+    #[doc = "Container type for all return fields from the `_contractWhitelist` function with signature `_contractWhitelist(address)` and selector `[127, 121, 190, 168]`"]
+    #[derive(
+        Clone,
+        Debug,
+        Default,
+        Eq,
+        PartialEq,
+        ethers :: contract :: EthAbiType,
+        ethers :: contract :: EthAbiCodec,
+        serde :: Serialize,
+        serde :: Deserialize,
+    )]
+    pub struct ContractWhitelistReturn(pub bool);
+    #[doc = "Container type for all return fields from the `_resourceIDToContractAddress` function with signature `_resourceIDToContractAddress(bytes32)` and selector `[197, 76, 42, 17]`"]
+    #[derive(
+        Clone,
+        Debug,
+        Default,
+        Eq,
+        PartialEq,
+        ethers :: contract :: EthAbiType,
+        ethers :: contract :: EthAbiCodec,
+        serde :: Serialize,
+        serde :: Deserialize,
+    )]
+    pub struct ResourceIDToContractAddressReturn(
+        pub ethers::core::types::Address,
+    );
+    #[doc = "Container type for all return fields from the `_updateRecords` function with signature `_updateRecords(uint256,uint256)` and selector `[12, 158, 158, 20]`"]
+    #[derive(
+        Clone,
+        Debug,
+        Default,
+        Eq,
+        PartialEq,
+        ethers :: contract :: EthAbiType,
+        ethers :: contract :: EthAbiCodec,
+        serde :: Serialize,
+        serde :: Deserialize,
+    )]
+    pub struct UpdateRecordsReturn {
+        pub token_wrapper_address: ethers::core::types::Address,
+        pub execution_chain_id: ethers::core::types::U256,
+        pub nonce: ethers::core::types::U256,
+        pub function_sig: [u8; 4],
+        pub resource_id: [u8; 32],
+        pub update_value: [u8; 32],
+    }
+    #[doc = "Container type for all return fields from the `getUpdateRecord` function with signature `getUpdateRecord(uint256,uint256)` and selector `[107, 132, 114, 74]`"]
+    #[derive(
+        Clone,
+        Debug,
+        Default,
+        Eq,
+        PartialEq,
+        ethers :: contract :: EthAbiType,
+        ethers :: contract :: EthAbiCodec,
+        serde :: Serialize,
+        serde :: Deserialize,
+    )]
+    pub struct GetUpdateRecordReturn(
+        pub  (
+            ethers::core::types::Address,
+            ethers::core::types::U256,
+            ethers::core::types::U256,
+            [u8; 4],
+            [u8; 32],
+            [u8; 32],
+        ),
+    );
     #[doc = "`UpdateRecord(address,uint256,uint256,bytes4,bytes32,bytes32)`"]
     #[derive(
         Clone,
@@ -517,6 +593,7 @@ mod tokenwrapperhandlercontract_mod {
         Eq,
         PartialEq,
         ethers :: contract :: EthAbiType,
+        ethers :: contract :: EthAbiCodec,
         serde :: Serialize,
         serde :: Deserialize,
     )]

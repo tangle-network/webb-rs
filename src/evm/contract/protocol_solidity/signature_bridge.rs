@@ -1,6 +1,6 @@
-pub use signaturebridgecontract_mod::*;
-#[allow(clippy::too_many_arguments)]
-mod signaturebridgecontract_mod {
+pub use signature_bridge_contract::*;
+#[allow(clippy::too_many_arguments, non_camel_case_types)]
+pub mod signature_bridge_contract {
     #![allow(clippy::enum_variant_names)]
     #![allow(dead_code)]
     #![allow(clippy::type_complexity)]
@@ -19,10 +19,14 @@ mod signaturebridgecontract_mod {
     pub static SIGNATUREBRIDGECONTRACT_ABI: ethers::contract::Lazy<
         ethers::core::abi::Abi,
     > = ethers::contract::Lazy::new(|| {
-        serde_json :: from_str ("[{\"inputs\":[{\"internalType\":\"address\",\"name\":\"initialGovernor\",\"type\":\"address\"}],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"previousOwner\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"newOwner\",\"type\":\"address\"}],\"name\":\"GovernanceOwnershipTransferred\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"}],\"name\":\"Paused\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"recovered\",\"type\":\"address\"}],\"name\":\"RecoveredAddress\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"}],\"name\":\"Unpaused\",\"type\":\"event\"},{\"inputs\":[],\"name\":\"EVM_CHAIN_ID_TYPE\",\"outputs\":[{\"internalType\":\"bytes2\",\"name\":\"\",\"type\":\"bytes2\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"name\":\"_counts\",\"outputs\":[{\"internalType\":\"uint64\",\"name\":\"\",\"type\":\"uint64\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"name\":\"_resourceIDToHandlerAddress\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"resourceID\",\"type\":\"bytes32\"},{\"internalType\":\"bytes4\",\"name\":\"functionSig\",\"type\":\"bytes4\"},{\"internalType\":\"uint32\",\"name\":\"nonce\",\"type\":\"uint32\"},{\"internalType\":\"bytes32\",\"name\":\"newResourceID\",\"type\":\"bytes32\"},{\"internalType\":\"address\",\"name\":\"handlerAddress\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"executionContextAddress\",\"type\":\"address\"},{\"internalType\":\"bytes\",\"name\":\"sig\",\"type\":\"bytes\"}],\"name\":\"adminSetResourceWithSignature\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"averageSessionLengthInMillisecs\",\"outputs\":[{\"internalType\":\"uint64\",\"name\":\"\",\"type\":\"uint64\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"currentVotingPeriod\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes\",\"name\":\"data\",\"type\":\"bytes\"},{\"internalType\":\"bytes\",\"name\":\"sig\",\"type\":\"bytes\"}],\"name\":\"executeProposalWithSignature\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getChainId\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getChainIdType\",\"outputs\":[{\"internalType\":\"uint48\",\"name\":\"\",\"type\":\"uint48\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"governor\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"isGovernor\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes\",\"name\":\"data\",\"type\":\"bytes\"},{\"internalType\":\"bytes\",\"name\":\"sig\",\"type\":\"bytes\"}],\"name\":\"isSignatureFromGovernor\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"lastGovernorUpdateTime\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"numOfProposers\",\"outputs\":[{\"internalType\":\"uint32\",\"name\":\"\",\"type\":\"uint32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"paused\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"proposalNonce\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"proposerSetRoot\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"proposerSetUpdateNonce\",\"outputs\":[{\"internalType\":\"uint32\",\"name\":\"\",\"type\":\"uint32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes\",\"name\":\"data\",\"type\":\"bytes\"},{\"internalType\":\"bytes\",\"name\":\"sig\",\"type\":\"bytes\"}],\"name\":\"recover\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"pure\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"refreshNonce\",\"outputs\":[{\"internalType\":\"uint32\",\"name\":\"\",\"type\":\"uint32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"renounceOwnership\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"sessionLengthMultiplier\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"newOwner\",\"type\":\"address\"},{\"internalType\":\"uint32\",\"name\":\"nonce\",\"type\":\"uint32\"}],\"name\":\"transferOwnership\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes\",\"name\":\"publicKey\",\"type\":\"bytes\"},{\"internalType\":\"uint32\",\"name\":\"nonce\",\"type\":\"uint32\"},{\"internalType\":\"bytes\",\"name\":\"sig\",\"type\":\"bytes\"}],\"name\":\"transferOwnershipWithSignaturePubKey\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"_proposerSetRoot\",\"type\":\"bytes32\"},{\"internalType\":\"uint64\",\"name\":\"_averageSessionLengthInMillisecs\",\"type\":\"uint64\"},{\"internalType\":\"uint32\",\"name\":\"_numOfProposers\",\"type\":\"uint32\"},{\"internalType\":\"uint32\",\"name\":\"_proposerSetUpdateNonce\",\"type\":\"uint32\"},{\"internalType\":\"bytes\",\"name\":\"_sig\",\"type\":\"bytes\"}],\"name\":\"updateProposerSetData\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"components\":[{\"internalType\":\"uint32\",\"name\":\"leafIndex\",\"type\":\"uint32\"},{\"internalType\":\"bytes32[]\",\"name\":\"siblingPathNodes\",\"type\":\"bytes32[]\"},{\"internalType\":\"address\",\"name\":\"proposedGovernor\",\"type\":\"address\"}],\"internalType\":\"struct Governable.Vote\",\"name\":\"vote\",\"type\":\"tuple\"}],\"name\":\"voteInFavorForceSetGovernor\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}]") . expect ("invalid abi")
+        ethers :: core :: utils :: __serde_json :: from_str ("[{\"inputs\":[{\"internalType\":\"address\",\"name\":\"initialGovernor\",\"type\":\"address\",\"components\":[]},{\"internalType\":\"uint32\",\"name\":\"nonce\",\"type\":\"uint32\",\"components\":[]}],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\",\"outputs\":[]},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"previousOwner\",\"type\":\"address\",\"components\":[],\"indexed\":true},{\"internalType\":\"address\",\"name\":\"newOwner\",\"type\":\"address\",\"components\":[],\"indexed\":true}],\"type\":\"event\",\"name\":\"GovernanceOwnershipTransferred\",\"outputs\":[],\"anonymous\":false},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\",\"components\":[],\"indexed\":false}],\"type\":\"event\",\"name\":\"Paused\",\"outputs\":[],\"anonymous\":false},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"recovered\",\"type\":\"address\",\"components\":[],\"indexed\":true}],\"type\":\"event\",\"name\":\"RecoveredAddress\",\"outputs\":[],\"anonymous\":false},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\",\"components\":[],\"indexed\":false}],\"type\":\"event\",\"name\":\"Unpaused\",\"outputs\":[],\"anonymous\":false},{\"inputs\":[],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"EVM_CHAIN_ID_TYPE\",\"outputs\":[{\"internalType\":\"bytes2\",\"name\":\"\",\"type\":\"bytes2\",\"components\":[]}]},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\",\"components\":[]}],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"_resourceIDToHandlerAddress\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\",\"components\":[]}]},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"resourceID\",\"type\":\"bytes32\",\"components\":[]},{\"internalType\":\"bytes4\",\"name\":\"functionSig\",\"type\":\"bytes4\",\"components\":[]},{\"internalType\":\"uint32\",\"name\":\"nonce\",\"type\":\"uint32\",\"components\":[]},{\"internalType\":\"bytes32\",\"name\":\"newResourceID\",\"type\":\"bytes32\",\"components\":[]},{\"internalType\":\"address\",\"name\":\"handlerAddress\",\"type\":\"address\",\"components\":[]},{\"internalType\":\"address\",\"name\":\"executionContextAddress\",\"type\":\"address\",\"components\":[]},{\"internalType\":\"bytes\",\"name\":\"sig\",\"type\":\"bytes\",\"components\":[]}],\"stateMutability\":\"nonpayable\",\"type\":\"function\",\"name\":\"adminSetResourceWithSignature\",\"outputs\":[]},{\"inputs\":[],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"averageSessionLengthInMillisecs\",\"outputs\":[{\"internalType\":\"uint64\",\"name\":\"\",\"type\":\"uint64\",\"components\":[]}]},{\"inputs\":[],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"currentVotingPeriod\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\",\"components\":[]}]},{\"inputs\":[{\"internalType\":\"bytes\",\"name\":\"data\",\"type\":\"bytes\",\"components\":[]},{\"internalType\":\"bytes\",\"name\":\"sig\",\"type\":\"bytes\",\"components\":[]}],\"stateMutability\":\"nonpayable\",\"type\":\"function\",\"name\":\"executeProposalWithSignature\",\"outputs\":[]},{\"inputs\":[],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"getChainId\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\",\"components\":[]}]},{\"inputs\":[],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"getChainIdType\",\"outputs\":[{\"internalType\":\"uint48\",\"name\":\"\",\"type\":\"uint48\",\"components\":[]}]},{\"inputs\":[],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"governor\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\",\"components\":[]}]},{\"inputs\":[],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"isGovernor\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\",\"components\":[]}]},{\"inputs\":[{\"internalType\":\"bytes\",\"name\":\"data\",\"type\":\"bytes\",\"components\":[]},{\"internalType\":\"bytes\",\"name\":\"sig\",\"type\":\"bytes\",\"components\":[]}],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"isSignatureFromGovernor\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\",\"components\":[]}]},{\"inputs\":[],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"lastGovernorUpdateTime\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\",\"components\":[]}]},{\"inputs\":[],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"numOfProposers\",\"outputs\":[{\"internalType\":\"uint32\",\"name\":\"\",\"type\":\"uint32\",\"components\":[]}]},{\"inputs\":[],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"paused\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\",\"components\":[]}]},{\"inputs\":[],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"proposalNonce\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\",\"components\":[]}]},{\"inputs\":[],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"proposerSetRoot\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\",\"components\":[]}]},{\"inputs\":[],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"proposerSetUpdateNonce\",\"outputs\":[{\"internalType\":\"uint32\",\"name\":\"\",\"type\":\"uint32\",\"components\":[]}]},{\"inputs\":[{\"internalType\":\"bytes\",\"name\":\"data\",\"type\":\"bytes\",\"components\":[]},{\"internalType\":\"bytes\",\"name\":\"sig\",\"type\":\"bytes\",\"components\":[]}],\"stateMutability\":\"pure\",\"type\":\"function\",\"name\":\"recover\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\",\"components\":[]}]},{\"inputs\":[],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"refreshNonce\",\"outputs\":[{\"internalType\":\"uint32\",\"name\":\"\",\"type\":\"uint32\",\"components\":[]}]},{\"inputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\",\"name\":\"renounceOwnership\",\"outputs\":[]},{\"inputs\":[],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"sessionLengthMultiplier\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\",\"components\":[]}]},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"newOwner\",\"type\":\"address\",\"components\":[]},{\"internalType\":\"uint32\",\"name\":\"nonce\",\"type\":\"uint32\",\"components\":[]}],\"stateMutability\":\"nonpayable\",\"type\":\"function\",\"name\":\"transferOwnership\",\"outputs\":[]},{\"inputs\":[{\"internalType\":\"bytes\",\"name\":\"publicKey\",\"type\":\"bytes\",\"components\":[]},{\"internalType\":\"uint32\",\"name\":\"nonce\",\"type\":\"uint32\",\"components\":[]},{\"internalType\":\"bytes\",\"name\":\"sig\",\"type\":\"bytes\",\"components\":[]}],\"stateMutability\":\"nonpayable\",\"type\":\"function\",\"name\":\"transferOwnershipWithSignaturePubKey\",\"outputs\":[]},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"_proposerSetRoot\",\"type\":\"bytes32\",\"components\":[]},{\"internalType\":\"uint64\",\"name\":\"_averageSessionLengthInMillisecs\",\"type\":\"uint64\",\"components\":[]},{\"internalType\":\"uint32\",\"name\":\"_numOfProposers\",\"type\":\"uint32\",\"components\":[]},{\"internalType\":\"uint32\",\"name\":\"_proposerSetUpdateNonce\",\"type\":\"uint32\",\"components\":[]},{\"internalType\":\"bytes\",\"name\":\"_sig\",\"type\":\"bytes\",\"components\":[]}],\"stateMutability\":\"nonpayable\",\"type\":\"function\",\"name\":\"updateProposerSetData\",\"outputs\":[]},{\"inputs\":[{\"internalType\":\"struct Governable.Vote\",\"name\":\"vote\",\"type\":\"tuple\",\"components\":[{\"internalType\":\"uint32\",\"name\":\"leafIndex\",\"type\":\"uint32\",\"components\":[]},{\"internalType\":\"bytes32[]\",\"name\":\"siblingPathNodes\",\"type\":\"bytes32[]\",\"components\":[]},{\"internalType\":\"address\",\"name\":\"proposedGovernor\",\"type\":\"address\",\"components\":[]}]}],\"stateMutability\":\"nonpayable\",\"type\":\"function\",\"name\":\"voteInFavorForceSetGovernor\",\"outputs\":[]}]") . expect ("invalid abi")
     });
-    #[derive(Clone)]
     pub struct SignatureBridgeContract<M>(ethers::contract::Contract<M>);
+    impl<M> Clone for SignatureBridgeContract<M> {
+        fn clone(&self) -> Self {
+            SignatureBridgeContract(self.0.clone())
+        }
+    }
     impl<M> std::ops::Deref for SignatureBridgeContract<M> {
         type Target = ethers::contract::Contract<M>;
         fn deref(&self) -> &Self::Target {
@@ -46,12 +50,12 @@ mod signaturebridgecontract_mod {
             address: T,
             client: ::std::sync::Arc<M>,
         ) -> Self {
-            let contract = ethers::contract::Contract::new(
+            ethers::contract::Contract::new(
                 address.into(),
                 SIGNATUREBRIDGECONTRACT_ABI.clone(),
                 client,
-            );
-            Self(contract)
+            )
+            .into()
         }
         #[doc = "Calls the contract's `EVM_CHAIN_ID_TYPE` (0x8b7e8782) function"]
         pub fn evm_chain_id_type(
@@ -59,15 +63,6 @@ mod signaturebridgecontract_mod {
         ) -> ethers::contract::builders::ContractCall<M, [u8; 2]> {
             self.0
                 .method_hash([139, 126, 135, 130], ())
-                .expect("method not found (this should never happen)")
-        }
-        #[doc = "Calls the contract's `_counts` (0xd75a0683) function"]
-        pub fn counts(
-            &self,
-            p0: ethers::core::types::U256,
-        ) -> ethers::contract::builders::ContractCall<M, u64> {
-            self.0
-                .method_hash([215, 90, 6, 131], p0)
                 .expect("method not found (this should never happen)")
         }
         #[doc = "Calls the contract's `_resourceIDToHandlerAddress` (0x84db809f) function"]
@@ -367,6 +362,13 @@ mod signaturebridgecontract_mod {
             self.0.event_with_filter(Default::default())
         }
     }
+    impl<M: ethers::providers::Middleware> From<ethers::contract::Contract<M>>
+        for SignatureBridgeContract<M>
+    {
+        fn from(contract: ethers::contract::Contract<M>) -> Self {
+            Self(contract)
+        }
+    }
     #[derive(
         Clone,
         Debug,
@@ -434,7 +436,15 @@ mod signaturebridgecontract_mod {
     pub struct UnpausedFilter {
         pub account: ethers::core::types::Address,
     }
-    #[derive(Debug, Clone, PartialEq, Eq, ethers :: contract :: EthAbiType)]
+    #[derive(
+        Debug,
+        Clone,
+        PartialEq,
+        Eq,
+        ethers :: contract :: EthAbiType,
+        serde :: Serialize,
+        serde :: Deserialize,
+    )]
     pub enum SignatureBridgeContractEvents {
         GovernanceOwnershipTransferredFilter(
             GovernanceOwnershipTransferredFilter,
@@ -480,7 +490,7 @@ mod signaturebridgecontract_mod {
             match self { SignatureBridgeContractEvents :: GovernanceOwnershipTransferredFilter (element) => element . fmt (f) , SignatureBridgeContractEvents :: PausedFilter (element) => element . fmt (f) , SignatureBridgeContractEvents :: RecoveredAddressFilter (element) => element . fmt (f) , SignatureBridgeContractEvents :: UnpausedFilter (element) => element . fmt (f) }
         }
     }
-    #[doc = "Container type for all input parameters for the `EVM_CHAIN_ID_TYPE`function with signature `EVM_CHAIN_ID_TYPE()` and selector `[139, 126, 135, 130]`"]
+    #[doc = "Container type for all input parameters for the `EVM_CHAIN_ID_TYPE` function with signature `EVM_CHAIN_ID_TYPE()` and selector `[139, 126, 135, 130]`"]
     #[derive(
         Clone,
         Debug,
@@ -494,21 +504,7 @@ mod signaturebridgecontract_mod {
     )]
     #[ethcall(name = "EVM_CHAIN_ID_TYPE", abi = "EVM_CHAIN_ID_TYPE()")]
     pub struct EvmChainIdTypeCall;
-    #[doc = "Container type for all input parameters for the `_counts`function with signature `_counts(uint256)` and selector `[215, 90, 6, 131]`"]
-    #[derive(
-        Clone,
-        Debug,
-        Default,
-        Eq,
-        PartialEq,
-        ethers :: contract :: EthCall,
-        ethers :: contract :: EthDisplay,
-        serde :: Serialize,
-        serde :: Deserialize,
-    )]
-    #[ethcall(name = "_counts", abi = "_counts(uint256)")]
-    pub struct CountsCall(pub ethers::core::types::U256);
-    #[doc = "Container type for all input parameters for the `_resourceIDToHandlerAddress`function with signature `_resourceIDToHandlerAddress(bytes32)` and selector `[132, 219, 128, 159]`"]
+    #[doc = "Container type for all input parameters for the `_resourceIDToHandlerAddress` function with signature `_resourceIDToHandlerAddress(bytes32)` and selector `[132, 219, 128, 159]`"]
     #[derive(
         Clone,
         Debug,
@@ -525,7 +521,7 @@ mod signaturebridgecontract_mod {
         abi = "_resourceIDToHandlerAddress(bytes32)"
     )]
     pub struct ResourceIDToHandlerAddressCall(pub [u8; 32]);
-    #[doc = "Container type for all input parameters for the `adminSetResourceWithSignature`function with signature `adminSetResourceWithSignature(bytes32,bytes4,uint32,bytes32,address,address,bytes)` and selector `[201, 68, 228, 8]`"]
+    #[doc = "Container type for all input parameters for the `adminSetResourceWithSignature` function with signature `adminSetResourceWithSignature(bytes32,bytes4,uint32,bytes32,address,address,bytes)` and selector `[201, 68, 228, 8]`"]
     #[derive(
         Clone,
         Debug,
@@ -550,7 +546,7 @@ mod signaturebridgecontract_mod {
         pub execution_context_address: ethers::core::types::Address,
         pub sig: ethers::core::types::Bytes,
     }
-    #[doc = "Container type for all input parameters for the `averageSessionLengthInMillisecs`function with signature `averageSessionLengthInMillisecs()` and selector `[1, 103, 55, 187]`"]
+    #[doc = "Container type for all input parameters for the `averageSessionLengthInMillisecs` function with signature `averageSessionLengthInMillisecs()` and selector `[1, 103, 55, 187]`"]
     #[derive(
         Clone,
         Debug,
@@ -567,7 +563,7 @@ mod signaturebridgecontract_mod {
         abi = "averageSessionLengthInMillisecs()"
     )]
     pub struct AverageSessionLengthInMillisecsCall;
-    #[doc = "Container type for all input parameters for the `currentVotingPeriod`function with signature `currentVotingPeriod()` and selector `[58, 4, 158, 2]`"]
+    #[doc = "Container type for all input parameters for the `currentVotingPeriod` function with signature `currentVotingPeriod()` and selector `[58, 4, 158, 2]`"]
     #[derive(
         Clone,
         Debug,
@@ -581,7 +577,7 @@ mod signaturebridgecontract_mod {
     )]
     #[ethcall(name = "currentVotingPeriod", abi = "currentVotingPeriod()")]
     pub struct CurrentVotingPeriodCall;
-    #[doc = "Container type for all input parameters for the `executeProposalWithSignature`function with signature `executeProposalWithSignature(bytes,bytes)` and selector `[157, 43, 30, 215]`"]
+    #[doc = "Container type for all input parameters for the `executeProposalWithSignature` function with signature `executeProposalWithSignature(bytes,bytes)` and selector `[157, 43, 30, 215]`"]
     #[derive(
         Clone,
         Debug,
@@ -601,7 +597,7 @@ mod signaturebridgecontract_mod {
         pub data: ethers::core::types::Bytes,
         pub sig: ethers::core::types::Bytes,
     }
-    #[doc = "Container type for all input parameters for the `getChainId`function with signature `getChainId()` and selector `[52, 8, 228, 112]`"]
+    #[doc = "Container type for all input parameters for the `getChainId` function with signature `getChainId()` and selector `[52, 8, 228, 112]`"]
     #[derive(
         Clone,
         Debug,
@@ -615,7 +611,7 @@ mod signaturebridgecontract_mod {
     )]
     #[ethcall(name = "getChainId", abi = "getChainId()")]
     pub struct GetChainIdCall;
-    #[doc = "Container type for all input parameters for the `getChainIdType`function with signature `getChainIdType()` and selector `[76, 131, 12, 189]`"]
+    #[doc = "Container type for all input parameters for the `getChainIdType` function with signature `getChainIdType()` and selector `[76, 131, 12, 189]`"]
     #[derive(
         Clone,
         Debug,
@@ -629,7 +625,7 @@ mod signaturebridgecontract_mod {
     )]
     #[ethcall(name = "getChainIdType", abi = "getChainIdType()")]
     pub struct GetChainIdTypeCall;
-    #[doc = "Container type for all input parameters for the `governor`function with signature `governor()` and selector `[12, 52, 10, 36]`"]
+    #[doc = "Container type for all input parameters for the `governor` function with signature `governor()` and selector `[12, 52, 10, 36]`"]
     #[derive(
         Clone,
         Debug,
@@ -643,7 +639,7 @@ mod signaturebridgecontract_mod {
     )]
     #[ethcall(name = "governor", abi = "governor()")]
     pub struct GovernorCall;
-    #[doc = "Container type for all input parameters for the `isGovernor`function with signature `isGovernor()` and selector `[199, 175, 51, 82]`"]
+    #[doc = "Container type for all input parameters for the `isGovernor` function with signature `isGovernor()` and selector `[199, 175, 51, 82]`"]
     #[derive(
         Clone,
         Debug,
@@ -657,7 +653,7 @@ mod signaturebridgecontract_mod {
     )]
     #[ethcall(name = "isGovernor", abi = "isGovernor()")]
     pub struct IsGovernorCall;
-    #[doc = "Container type for all input parameters for the `isSignatureFromGovernor`function with signature `isSignatureFromGovernor(bytes,bytes)` and selector `[135, 85, 188, 173]`"]
+    #[doc = "Container type for all input parameters for the `isSignatureFromGovernor` function with signature `isSignatureFromGovernor(bytes,bytes)` and selector `[135, 85, 188, 173]`"]
     #[derive(
         Clone,
         Debug,
@@ -677,7 +673,7 @@ mod signaturebridgecontract_mod {
         pub data: ethers::core::types::Bytes,
         pub sig: ethers::core::types::Bytes,
     }
-    #[doc = "Container type for all input parameters for the `lastGovernorUpdateTime`function with signature `lastGovernorUpdateTime()` and selector `[158, 9, 88, 60]`"]
+    #[doc = "Container type for all input parameters for the `lastGovernorUpdateTime` function with signature `lastGovernorUpdateTime()` and selector `[158, 9, 88, 60]`"]
     #[derive(
         Clone,
         Debug,
@@ -694,7 +690,7 @@ mod signaturebridgecontract_mod {
         abi = "lastGovernorUpdateTime()"
     )]
     pub struct LastGovernorUpdateTimeCall;
-    #[doc = "Container type for all input parameters for the `numOfProposers`function with signature `numOfProposers()` and selector `[186, 193, 99, 162]`"]
+    #[doc = "Container type for all input parameters for the `numOfProposers` function with signature `numOfProposers()` and selector `[186, 193, 99, 162]`"]
     #[derive(
         Clone,
         Debug,
@@ -708,7 +704,7 @@ mod signaturebridgecontract_mod {
     )]
     #[ethcall(name = "numOfProposers", abi = "numOfProposers()")]
     pub struct NumOfProposersCall;
-    #[doc = "Container type for all input parameters for the `paused`function with signature `paused()` and selector `[92, 151, 90, 187]`"]
+    #[doc = "Container type for all input parameters for the `paused` function with signature `paused()` and selector `[92, 151, 90, 187]`"]
     #[derive(
         Clone,
         Debug,
@@ -722,7 +718,7 @@ mod signaturebridgecontract_mod {
     )]
     #[ethcall(name = "paused", abi = "paused()")]
     pub struct PausedCall;
-    #[doc = "Container type for all input parameters for the `proposalNonce`function with signature `proposalNonce()` and selector `[204, 60, 116, 161]`"]
+    #[doc = "Container type for all input parameters for the `proposalNonce` function with signature `proposalNonce()` and selector `[204, 60, 116, 161]`"]
     #[derive(
         Clone,
         Debug,
@@ -736,7 +732,7 @@ mod signaturebridgecontract_mod {
     )]
     #[ethcall(name = "proposalNonce", abi = "proposalNonce()")]
     pub struct ProposalNonceCall;
-    #[doc = "Container type for all input parameters for the `proposerSetRoot`function with signature `proposerSetRoot()` and selector `[197, 235, 107, 31]`"]
+    #[doc = "Container type for all input parameters for the `proposerSetRoot` function with signature `proposerSetRoot()` and selector `[197, 235, 107, 31]`"]
     #[derive(
         Clone,
         Debug,
@@ -750,7 +746,7 @@ mod signaturebridgecontract_mod {
     )]
     #[ethcall(name = "proposerSetRoot", abi = "proposerSetRoot()")]
     pub struct ProposerSetRootCall;
-    #[doc = "Container type for all input parameters for the `proposerSetUpdateNonce`function with signature `proposerSetUpdateNonce()` and selector `[147, 89, 103, 0]`"]
+    #[doc = "Container type for all input parameters for the `proposerSetUpdateNonce` function with signature `proposerSetUpdateNonce()` and selector `[147, 89, 103, 0]`"]
     #[derive(
         Clone,
         Debug,
@@ -767,7 +763,7 @@ mod signaturebridgecontract_mod {
         abi = "proposerSetUpdateNonce()"
     )]
     pub struct ProposerSetUpdateNonceCall;
-    #[doc = "Container type for all input parameters for the `recover`function with signature `recover(bytes,bytes)` and selector `[30, 209, 61, 27]`"]
+    #[doc = "Container type for all input parameters for the `recover` function with signature `recover(bytes,bytes)` and selector `[30, 209, 61, 27]`"]
     #[derive(
         Clone,
         Debug,
@@ -784,7 +780,7 @@ mod signaturebridgecontract_mod {
         pub data: ethers::core::types::Bytes,
         pub sig: ethers::core::types::Bytes,
     }
-    #[doc = "Container type for all input parameters for the `refreshNonce`function with signature `refreshNonce()` and selector `[19, 203, 1, 249]`"]
+    #[doc = "Container type for all input parameters for the `refreshNonce` function with signature `refreshNonce()` and selector `[19, 203, 1, 249]`"]
     #[derive(
         Clone,
         Debug,
@@ -798,7 +794,7 @@ mod signaturebridgecontract_mod {
     )]
     #[ethcall(name = "refreshNonce", abi = "refreshNonce()")]
     pub struct RefreshNonceCall;
-    #[doc = "Container type for all input parameters for the `renounceOwnership`function with signature `renounceOwnership()` and selector `[113, 80, 24, 166]`"]
+    #[doc = "Container type for all input parameters for the `renounceOwnership` function with signature `renounceOwnership()` and selector `[113, 80, 24, 166]`"]
     #[derive(
         Clone,
         Debug,
@@ -812,7 +808,7 @@ mod signaturebridgecontract_mod {
     )]
     #[ethcall(name = "renounceOwnership", abi = "renounceOwnership()")]
     pub struct RenounceOwnershipCall;
-    #[doc = "Container type for all input parameters for the `sessionLengthMultiplier`function with signature `sessionLengthMultiplier()` and selector `[189, 250, 220, 132]`"]
+    #[doc = "Container type for all input parameters for the `sessionLengthMultiplier` function with signature `sessionLengthMultiplier()` and selector `[189, 250, 220, 132]`"]
     #[derive(
         Clone,
         Debug,
@@ -829,7 +825,7 @@ mod signaturebridgecontract_mod {
         abi = "sessionLengthMultiplier()"
     )]
     pub struct SessionLengthMultiplierCall;
-    #[doc = "Container type for all input parameters for the `transferOwnership`function with signature `transferOwnership(address,uint32)` and selector `[166, 233, 76, 145]`"]
+    #[doc = "Container type for all input parameters for the `transferOwnership` function with signature `transferOwnership(address,uint32)` and selector `[166, 233, 76, 145]`"]
     #[derive(
         Clone,
         Debug,
@@ -849,7 +845,7 @@ mod signaturebridgecontract_mod {
         pub new_owner: ethers::core::types::Address,
         pub nonce: u32,
     }
-    #[doc = "Container type for all input parameters for the `transferOwnershipWithSignaturePubKey`function with signature `transferOwnershipWithSignaturePubKey(bytes,uint32,bytes)` and selector `[114, 150, 181, 216]`"]
+    #[doc = "Container type for all input parameters for the `transferOwnershipWithSignaturePubKey` function with signature `transferOwnershipWithSignaturePubKey(bytes,uint32,bytes)` and selector `[114, 150, 181, 216]`"]
     #[derive(
         Clone,
         Debug,
@@ -870,7 +866,7 @@ mod signaturebridgecontract_mod {
         pub nonce: u32,
         pub sig: ethers::core::types::Bytes,
     }
-    #[doc = "Container type for all input parameters for the `updateProposerSetData`function with signature `updateProposerSetData(bytes32,uint64,uint32,uint32,bytes)` and selector `[243, 210, 61, 84]`"]
+    #[doc = "Container type for all input parameters for the `updateProposerSetData` function with signature `updateProposerSetData(bytes32,uint64,uint32,uint32,bytes)` and selector `[243, 210, 61, 84]`"]
     #[derive(
         Clone,
         Debug,
@@ -893,7 +889,7 @@ mod signaturebridgecontract_mod {
         pub proposer_set_update_nonce: u32,
         pub sig: ethers::core::types::Bytes,
     }
-    #[doc = "Container type for all input parameters for the `voteInFavorForceSetGovernor`function with signature `voteInFavorForceSetGovernor((uint32,bytes32[],address))` and selector `[36, 17, 136, 4]`"]
+    #[doc = "Container type for all input parameters for the `voteInFavorForceSetGovernor` function with signature `voteInFavorForceSetGovernor((uint32,bytes32[],address))` and selector `[36, 17, 136, 4]`"]
     #[derive(
         Clone,
         Debug,
@@ -912,10 +908,17 @@ mod signaturebridgecontract_mod {
     pub struct VoteInFavorForceSetGovernorCall {
         pub vote: Vote,
     }
-    #[derive(Debug, Clone, PartialEq, Eq, ethers :: contract :: EthAbiType)]
+    #[derive(
+        Debug,
+        Clone,
+        PartialEq,
+        Eq,
+        ethers :: contract :: EthAbiType,
+        serde :: Serialize,
+        serde :: Deserialize,
+    )]
     pub enum SignatureBridgeContractCalls {
         EvmChainIdType(EvmChainIdTypeCall),
-        Counts(CountsCall),
         ResourceIDToHandlerAddress(ResourceIDToHandlerAddressCall),
         AdminSetResourceWithSignature(AdminSetResourceWithSignatureCall),
         AverageSessionLengthInMillisecs(AverageSessionLengthInMillisecsCall),
@@ -955,13 +958,6 @@ mod signaturebridgecontract_mod {
                 return Ok(SignatureBridgeContractCalls::EvmChainIdType(
                     decoded,
                 ));
-            }
-            if let Ok(decoded) =
-                <CountsCall as ethers::core::abi::AbiDecode>::decode(
-                    data.as_ref(),
-                )
-            {
-                return Ok(SignatureBridgeContractCalls::Counts(decoded));
             }
             if let Ok (decoded) = < ResourceIDToHandlerAddressCall as ethers :: core :: abi :: AbiDecode > :: decode (data . as_ref ()) { return Ok (SignatureBridgeContractCalls :: ResourceIDToHandlerAddress (decoded)) }
             if let Ok (decoded) = < AdminSetResourceWithSignatureCall as ethers :: core :: abi :: AbiDecode > :: decode (data . as_ref ()) { return Ok (SignatureBridgeContractCalls :: AdminSetResourceWithSignature (decoded)) }
@@ -1076,22 +1072,17 @@ mod signaturebridgecontract_mod {
     }
     impl ethers::core::abi::AbiEncode for SignatureBridgeContractCalls {
         fn encode(self) -> Vec<u8> {
-            match self { SignatureBridgeContractCalls :: EvmChainIdType (element) => element . encode () , SignatureBridgeContractCalls :: Counts (element) => element . encode () , SignatureBridgeContractCalls :: ResourceIDToHandlerAddress (element) => element . encode () , SignatureBridgeContractCalls :: AdminSetResourceWithSignature (element) => element . encode () , SignatureBridgeContractCalls :: AverageSessionLengthInMillisecs (element) => element . encode () , SignatureBridgeContractCalls :: CurrentVotingPeriod (element) => element . encode () , SignatureBridgeContractCalls :: ExecuteProposalWithSignature (element) => element . encode () , SignatureBridgeContractCalls :: GetChainId (element) => element . encode () , SignatureBridgeContractCalls :: GetChainIdType (element) => element . encode () , SignatureBridgeContractCalls :: Governor (element) => element . encode () , SignatureBridgeContractCalls :: IsGovernor (element) => element . encode () , SignatureBridgeContractCalls :: IsSignatureFromGovernor (element) => element . encode () , SignatureBridgeContractCalls :: LastGovernorUpdateTime (element) => element . encode () , SignatureBridgeContractCalls :: NumOfProposers (element) => element . encode () , SignatureBridgeContractCalls :: Paused (element) => element . encode () , SignatureBridgeContractCalls :: ProposalNonce (element) => element . encode () , SignatureBridgeContractCalls :: ProposerSetRoot (element) => element . encode () , SignatureBridgeContractCalls :: ProposerSetUpdateNonce (element) => element . encode () , SignatureBridgeContractCalls :: Recover (element) => element . encode () , SignatureBridgeContractCalls :: RefreshNonce (element) => element . encode () , SignatureBridgeContractCalls :: RenounceOwnership (element) => element . encode () , SignatureBridgeContractCalls :: SessionLengthMultiplier (element) => element . encode () , SignatureBridgeContractCalls :: TransferOwnership (element) => element . encode () , SignatureBridgeContractCalls :: TransferOwnershipWithSignaturePubKey (element) => element . encode () , SignatureBridgeContractCalls :: UpdateProposerSetData (element) => element . encode () , SignatureBridgeContractCalls :: VoteInFavorForceSetGovernor (element) => element . encode () }
+            match self { SignatureBridgeContractCalls :: EvmChainIdType (element) => element . encode () , SignatureBridgeContractCalls :: ResourceIDToHandlerAddress (element) => element . encode () , SignatureBridgeContractCalls :: AdminSetResourceWithSignature (element) => element . encode () , SignatureBridgeContractCalls :: AverageSessionLengthInMillisecs (element) => element . encode () , SignatureBridgeContractCalls :: CurrentVotingPeriod (element) => element . encode () , SignatureBridgeContractCalls :: ExecuteProposalWithSignature (element) => element . encode () , SignatureBridgeContractCalls :: GetChainId (element) => element . encode () , SignatureBridgeContractCalls :: GetChainIdType (element) => element . encode () , SignatureBridgeContractCalls :: Governor (element) => element . encode () , SignatureBridgeContractCalls :: IsGovernor (element) => element . encode () , SignatureBridgeContractCalls :: IsSignatureFromGovernor (element) => element . encode () , SignatureBridgeContractCalls :: LastGovernorUpdateTime (element) => element . encode () , SignatureBridgeContractCalls :: NumOfProposers (element) => element . encode () , SignatureBridgeContractCalls :: Paused (element) => element . encode () , SignatureBridgeContractCalls :: ProposalNonce (element) => element . encode () , SignatureBridgeContractCalls :: ProposerSetRoot (element) => element . encode () , SignatureBridgeContractCalls :: ProposerSetUpdateNonce (element) => element . encode () , SignatureBridgeContractCalls :: Recover (element) => element . encode () , SignatureBridgeContractCalls :: RefreshNonce (element) => element . encode () , SignatureBridgeContractCalls :: RenounceOwnership (element) => element . encode () , SignatureBridgeContractCalls :: SessionLengthMultiplier (element) => element . encode () , SignatureBridgeContractCalls :: TransferOwnership (element) => element . encode () , SignatureBridgeContractCalls :: TransferOwnershipWithSignaturePubKey (element) => element . encode () , SignatureBridgeContractCalls :: UpdateProposerSetData (element) => element . encode () , SignatureBridgeContractCalls :: VoteInFavorForceSetGovernor (element) => element . encode () }
         }
     }
     impl ::std::fmt::Display for SignatureBridgeContractCalls {
         fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
-            match self { SignatureBridgeContractCalls :: EvmChainIdType (element) => element . fmt (f) , SignatureBridgeContractCalls :: Counts (element) => element . fmt (f) , SignatureBridgeContractCalls :: ResourceIDToHandlerAddress (element) => element . fmt (f) , SignatureBridgeContractCalls :: AdminSetResourceWithSignature (element) => element . fmt (f) , SignatureBridgeContractCalls :: AverageSessionLengthInMillisecs (element) => element . fmt (f) , SignatureBridgeContractCalls :: CurrentVotingPeriod (element) => element . fmt (f) , SignatureBridgeContractCalls :: ExecuteProposalWithSignature (element) => element . fmt (f) , SignatureBridgeContractCalls :: GetChainId (element) => element . fmt (f) , SignatureBridgeContractCalls :: GetChainIdType (element) => element . fmt (f) , SignatureBridgeContractCalls :: Governor (element) => element . fmt (f) , SignatureBridgeContractCalls :: IsGovernor (element) => element . fmt (f) , SignatureBridgeContractCalls :: IsSignatureFromGovernor (element) => element . fmt (f) , SignatureBridgeContractCalls :: LastGovernorUpdateTime (element) => element . fmt (f) , SignatureBridgeContractCalls :: NumOfProposers (element) => element . fmt (f) , SignatureBridgeContractCalls :: Paused (element) => element . fmt (f) , SignatureBridgeContractCalls :: ProposalNonce (element) => element . fmt (f) , SignatureBridgeContractCalls :: ProposerSetRoot (element) => element . fmt (f) , SignatureBridgeContractCalls :: ProposerSetUpdateNonce (element) => element . fmt (f) , SignatureBridgeContractCalls :: Recover (element) => element . fmt (f) , SignatureBridgeContractCalls :: RefreshNonce (element) => element . fmt (f) , SignatureBridgeContractCalls :: RenounceOwnership (element) => element . fmt (f) , SignatureBridgeContractCalls :: SessionLengthMultiplier (element) => element . fmt (f) , SignatureBridgeContractCalls :: TransferOwnership (element) => element . fmt (f) , SignatureBridgeContractCalls :: TransferOwnershipWithSignaturePubKey (element) => element . fmt (f) , SignatureBridgeContractCalls :: UpdateProposerSetData (element) => element . fmt (f) , SignatureBridgeContractCalls :: VoteInFavorForceSetGovernor (element) => element . fmt (f) }
+            match self { SignatureBridgeContractCalls :: EvmChainIdType (element) => element . fmt (f) , SignatureBridgeContractCalls :: ResourceIDToHandlerAddress (element) => element . fmt (f) , SignatureBridgeContractCalls :: AdminSetResourceWithSignature (element) => element . fmt (f) , SignatureBridgeContractCalls :: AverageSessionLengthInMillisecs (element) => element . fmt (f) , SignatureBridgeContractCalls :: CurrentVotingPeriod (element) => element . fmt (f) , SignatureBridgeContractCalls :: ExecuteProposalWithSignature (element) => element . fmt (f) , SignatureBridgeContractCalls :: GetChainId (element) => element . fmt (f) , SignatureBridgeContractCalls :: GetChainIdType (element) => element . fmt (f) , SignatureBridgeContractCalls :: Governor (element) => element . fmt (f) , SignatureBridgeContractCalls :: IsGovernor (element) => element . fmt (f) , SignatureBridgeContractCalls :: IsSignatureFromGovernor (element) => element . fmt (f) , SignatureBridgeContractCalls :: LastGovernorUpdateTime (element) => element . fmt (f) , SignatureBridgeContractCalls :: NumOfProposers (element) => element . fmt (f) , SignatureBridgeContractCalls :: Paused (element) => element . fmt (f) , SignatureBridgeContractCalls :: ProposalNonce (element) => element . fmt (f) , SignatureBridgeContractCalls :: ProposerSetRoot (element) => element . fmt (f) , SignatureBridgeContractCalls :: ProposerSetUpdateNonce (element) => element . fmt (f) , SignatureBridgeContractCalls :: Recover (element) => element . fmt (f) , SignatureBridgeContractCalls :: RefreshNonce (element) => element . fmt (f) , SignatureBridgeContractCalls :: RenounceOwnership (element) => element . fmt (f) , SignatureBridgeContractCalls :: SessionLengthMultiplier (element) => element . fmt (f) , SignatureBridgeContractCalls :: TransferOwnership (element) => element . fmt (f) , SignatureBridgeContractCalls :: TransferOwnershipWithSignaturePubKey (element) => element . fmt (f) , SignatureBridgeContractCalls :: UpdateProposerSetData (element) => element . fmt (f) , SignatureBridgeContractCalls :: VoteInFavorForceSetGovernor (element) => element . fmt (f) }
         }
     }
     impl ::std::convert::From<EvmChainIdTypeCall> for SignatureBridgeContractCalls {
         fn from(var: EvmChainIdTypeCall) -> Self {
             SignatureBridgeContractCalls::EvmChainIdType(var)
-        }
-    }
-    impl ::std::convert::From<CountsCall> for SignatureBridgeContractCalls {
-        fn from(var: CountsCall) -> Self {
-            SignatureBridgeContractCalls::Counts(var)
         }
     }
     impl ::std::convert::From<ResourceIDToHandlerAddressCall>
@@ -1246,6 +1237,242 @@ mod signaturebridgecontract_mod {
             SignatureBridgeContractCalls::VoteInFavorForceSetGovernor(var)
         }
     }
+    #[doc = "Container type for all return fields from the `EVM_CHAIN_ID_TYPE` function with signature `EVM_CHAIN_ID_TYPE()` and selector `[139, 126, 135, 130]`"]
+    #[derive(
+        Clone,
+        Debug,
+        Default,
+        Eq,
+        PartialEq,
+        ethers :: contract :: EthAbiType,
+        ethers :: contract :: EthAbiCodec,
+        serde :: Serialize,
+        serde :: Deserialize,
+    )]
+    pub struct EvmChainIdTypeReturn(pub [u8; 2]);
+    #[doc = "Container type for all return fields from the `_resourceIDToHandlerAddress` function with signature `_resourceIDToHandlerAddress(bytes32)` and selector `[132, 219, 128, 159]`"]
+    #[derive(
+        Clone,
+        Debug,
+        Default,
+        Eq,
+        PartialEq,
+        ethers :: contract :: EthAbiType,
+        ethers :: contract :: EthAbiCodec,
+        serde :: Serialize,
+        serde :: Deserialize,
+    )]
+    pub struct ResourceIDToHandlerAddressReturn(
+        pub ethers::core::types::Address,
+    );
+    #[doc = "Container type for all return fields from the `averageSessionLengthInMillisecs` function with signature `averageSessionLengthInMillisecs()` and selector `[1, 103, 55, 187]`"]
+    #[derive(
+        Clone,
+        Debug,
+        Default,
+        Eq,
+        PartialEq,
+        ethers :: contract :: EthAbiType,
+        ethers :: contract :: EthAbiCodec,
+        serde :: Serialize,
+        serde :: Deserialize,
+    )]
+    pub struct AverageSessionLengthInMillisecsReturn(pub u64);
+    #[doc = "Container type for all return fields from the `currentVotingPeriod` function with signature `currentVotingPeriod()` and selector `[58, 4, 158, 2]`"]
+    #[derive(
+        Clone,
+        Debug,
+        Default,
+        Eq,
+        PartialEq,
+        ethers :: contract :: EthAbiType,
+        ethers :: contract :: EthAbiCodec,
+        serde :: Serialize,
+        serde :: Deserialize,
+    )]
+    pub struct CurrentVotingPeriodReturn(pub ethers::core::types::U256);
+    #[doc = "Container type for all return fields from the `getChainId` function with signature `getChainId()` and selector `[52, 8, 228, 112]`"]
+    #[derive(
+        Clone,
+        Debug,
+        Default,
+        Eq,
+        PartialEq,
+        ethers :: contract :: EthAbiType,
+        ethers :: contract :: EthAbiCodec,
+        serde :: Serialize,
+        serde :: Deserialize,
+    )]
+    pub struct GetChainIdReturn(pub ethers::core::types::U256);
+    #[doc = "Container type for all return fields from the `getChainIdType` function with signature `getChainIdType()` and selector `[76, 131, 12, 189]`"]
+    #[derive(
+        Clone,
+        Debug,
+        Default,
+        Eq,
+        PartialEq,
+        ethers :: contract :: EthAbiType,
+        ethers :: contract :: EthAbiCodec,
+        serde :: Serialize,
+        serde :: Deserialize,
+    )]
+    pub struct GetChainIdTypeReturn(pub u64);
+    #[doc = "Container type for all return fields from the `governor` function with signature `governor()` and selector `[12, 52, 10, 36]`"]
+    #[derive(
+        Clone,
+        Debug,
+        Default,
+        Eq,
+        PartialEq,
+        ethers :: contract :: EthAbiType,
+        ethers :: contract :: EthAbiCodec,
+        serde :: Serialize,
+        serde :: Deserialize,
+    )]
+    pub struct GovernorReturn(pub ethers::core::types::Address);
+    #[doc = "Container type for all return fields from the `isGovernor` function with signature `isGovernor()` and selector `[199, 175, 51, 82]`"]
+    #[derive(
+        Clone,
+        Debug,
+        Default,
+        Eq,
+        PartialEq,
+        ethers :: contract :: EthAbiType,
+        ethers :: contract :: EthAbiCodec,
+        serde :: Serialize,
+        serde :: Deserialize,
+    )]
+    pub struct IsGovernorReturn(pub bool);
+    #[doc = "Container type for all return fields from the `isSignatureFromGovernor` function with signature `isSignatureFromGovernor(bytes,bytes)` and selector `[135, 85, 188, 173]`"]
+    #[derive(
+        Clone,
+        Debug,
+        Default,
+        Eq,
+        PartialEq,
+        ethers :: contract :: EthAbiType,
+        ethers :: contract :: EthAbiCodec,
+        serde :: Serialize,
+        serde :: Deserialize,
+    )]
+    pub struct IsSignatureFromGovernorReturn(pub bool);
+    #[doc = "Container type for all return fields from the `lastGovernorUpdateTime` function with signature `lastGovernorUpdateTime()` and selector `[158, 9, 88, 60]`"]
+    #[derive(
+        Clone,
+        Debug,
+        Default,
+        Eq,
+        PartialEq,
+        ethers :: contract :: EthAbiType,
+        ethers :: contract :: EthAbiCodec,
+        serde :: Serialize,
+        serde :: Deserialize,
+    )]
+    pub struct LastGovernorUpdateTimeReturn(pub ethers::core::types::U256);
+    #[doc = "Container type for all return fields from the `numOfProposers` function with signature `numOfProposers()` and selector `[186, 193, 99, 162]`"]
+    #[derive(
+        Clone,
+        Debug,
+        Default,
+        Eq,
+        PartialEq,
+        ethers :: contract :: EthAbiType,
+        ethers :: contract :: EthAbiCodec,
+        serde :: Serialize,
+        serde :: Deserialize,
+    )]
+    pub struct NumOfProposersReturn(pub u32);
+    #[doc = "Container type for all return fields from the `paused` function with signature `paused()` and selector `[92, 151, 90, 187]`"]
+    #[derive(
+        Clone,
+        Debug,
+        Default,
+        Eq,
+        PartialEq,
+        ethers :: contract :: EthAbiType,
+        ethers :: contract :: EthAbiCodec,
+        serde :: Serialize,
+        serde :: Deserialize,
+    )]
+    pub struct PausedReturn(pub bool);
+    #[doc = "Container type for all return fields from the `proposalNonce` function with signature `proposalNonce()` and selector `[204, 60, 116, 161]`"]
+    #[derive(
+        Clone,
+        Debug,
+        Default,
+        Eq,
+        PartialEq,
+        ethers :: contract :: EthAbiType,
+        ethers :: contract :: EthAbiCodec,
+        serde :: Serialize,
+        serde :: Deserialize,
+    )]
+    pub struct ProposalNonceReturn(pub ethers::core::types::U256);
+    #[doc = "Container type for all return fields from the `proposerSetRoot` function with signature `proposerSetRoot()` and selector `[197, 235, 107, 31]`"]
+    #[derive(
+        Clone,
+        Debug,
+        Default,
+        Eq,
+        PartialEq,
+        ethers :: contract :: EthAbiType,
+        ethers :: contract :: EthAbiCodec,
+        serde :: Serialize,
+        serde :: Deserialize,
+    )]
+    pub struct ProposerSetRootReturn(pub [u8; 32]);
+    #[doc = "Container type for all return fields from the `proposerSetUpdateNonce` function with signature `proposerSetUpdateNonce()` and selector `[147, 89, 103, 0]`"]
+    #[derive(
+        Clone,
+        Debug,
+        Default,
+        Eq,
+        PartialEq,
+        ethers :: contract :: EthAbiType,
+        ethers :: contract :: EthAbiCodec,
+        serde :: Serialize,
+        serde :: Deserialize,
+    )]
+    pub struct ProposerSetUpdateNonceReturn(pub u32);
+    #[doc = "Container type for all return fields from the `recover` function with signature `recover(bytes,bytes)` and selector `[30, 209, 61, 27]`"]
+    #[derive(
+        Clone,
+        Debug,
+        Default,
+        Eq,
+        PartialEq,
+        ethers :: contract :: EthAbiType,
+        ethers :: contract :: EthAbiCodec,
+        serde :: Serialize,
+        serde :: Deserialize,
+    )]
+    pub struct RecoverReturn(pub ethers::core::types::Address);
+    #[doc = "Container type for all return fields from the `refreshNonce` function with signature `refreshNonce()` and selector `[19, 203, 1, 249]`"]
+    #[derive(
+        Clone,
+        Debug,
+        Default,
+        Eq,
+        PartialEq,
+        ethers :: contract :: EthAbiType,
+        ethers :: contract :: EthAbiCodec,
+        serde :: Serialize,
+        serde :: Deserialize,
+    )]
+    pub struct RefreshNonceReturn(pub u32);
+    #[doc = "Container type for all return fields from the `sessionLengthMultiplier` function with signature `sessionLengthMultiplier()` and selector `[189, 250, 220, 132]`"]
+    #[derive(
+        Clone,
+        Debug,
+        Default,
+        Eq,
+        PartialEq,
+        ethers :: contract :: EthAbiType,
+        ethers :: contract :: EthAbiCodec,
+        serde :: Serialize,
+        serde :: Deserialize,
+    )]
+    pub struct SessionLengthMultiplierReturn(pub ethers::core::types::U256);
     #[doc = "`Vote(uint32,bytes32[],address)`"]
     #[derive(
         Clone,
@@ -1254,6 +1481,7 @@ mod signaturebridgecontract_mod {
         Eq,
         PartialEq,
         ethers :: contract :: EthAbiType,
+        ethers :: contract :: EthAbiCodec,
         serde :: Serialize,
         serde :: Deserialize,
     )]
