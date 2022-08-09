@@ -6,6 +6,9 @@ pub mod substrate;
 #[cfg(feature = "cosmwasm")]
 pub mod cosmwasm;
 
+#[cfg(feature = "ink")]
+pub mod ink;
+
 #[cfg(not(feature = "std"))]
 use alloc::vec::Vec;
 
@@ -73,6 +76,11 @@ impl_proposal_for! {
     crate::proposal::cosmwasm::ResourceIdUpdateProposal,
     crate::proposal::cosmwasm::FeeRecipientUpdateProposal,
     crate::proposal::cosmwasm::SetTreasuryHandlerProposal,
+}
+
+#[cfg(feature = "ink")]
+impl_proposal_for! {
+    crate::proposal::ink::AnchorUpdateProposal,
 }
 
 #[derive(Debug, Clone, Eq, PartialEq)]
