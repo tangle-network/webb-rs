@@ -11,10 +11,6 @@ use alloc::{string::String, vec::Vec};
 #[derive(Debug, Clone, PartialEq, Eq, Hash, typed_builder::TypedBuilder)]
 pub struct TokenAddProposal {
     header: ProposalHeader,
-    #[builder(default = 35)]
-    pallet_index: u8,
-    #[builder(default = 1)]
-    call_index: u8,
     #[builder(setter(transform = |v: String| v.into_bytes()))]
     name: Vec<u8>,
     asset_id: u32,
@@ -43,6 +39,12 @@ impl TokenAddProposal {
     #[must_use]
     pub fn to_bytes(&self) -> Vec<u8> {
         let mut out = Vec::with_capacity(40 + 40 + self.name.len());
+        let target_details = self
+            .header()
+            .resource_id()
+            .target_system()
+            .get_substrate_target_system();
+
         // add proposal header 40B
         out.extend_from_slice(&self.header.to_bytes());
 
@@ -52,9 +54,9 @@ impl TokenAddProposal {
             asset_id: self.asset_id,
         };
         // add pallet index
-        out.push(self.pallet_index);
+        out.push(target_details.pallet_index());
         // add call index
-        out.push(self.call_index);
+        out.push(target_details.call_index());
         scale_codec::Encode::encode_to(&call, &mut out);
         out
     }
@@ -87,14 +89,6 @@ impl TryFrom<Vec<u8>> for TokenAddProposal {
         header_bytes.copy_from_slice(parsed_header);
         let header = ProposalHeader::from(header_bytes);
 
-        let pallet_index = value.get(40).copied().ok_or_else(|| {
-            scale_codec::Error::from("invalid proposal: missing pallet index")
-        })?;
-
-        let call_index = value.get(41).copied().ok_or_else(|| {
-            scale_codec::Error::from("invalid proposal: missing call index")
-        })?;
-
         let call: ExecuteAddTokenToPoolShare =
             scale_codec::Decode::decode(&mut &value[42..])?;
 
@@ -102,8 +96,6 @@ impl TryFrom<Vec<u8>> for TokenAddProposal {
         let asset_id = call.asset_id;
         let proposal = TokenAddProposal {
             header,
-            pallet_index,
-            call_index,
             name,
             asset_id,
         };
@@ -128,7 +120,7 @@ mod tests {
 
     #[test]
     fn encode() {
-        let target_system = TargetSystem::new_tree_id(2);
+        let target_system = TargetSystem::substrate_target_system(35, 1, 2);
         let target_chain = TypedChainId::Substrate(1);
         let resource_id = ResourceId::new(target_system, target_chain);
         let function_signature =
@@ -143,10 +135,10 @@ mod tests {
             .build();
         let bytes = proposal.to_bytes();
         let expected = concat!(
-            "0000000000000000000000000000000000000000000000000002020000000001cafebabe00000001", // header
+            "0000000000000000000000000000000000000000230100000002020000000001cafebabe00000001", // header
             "23", // pallet index
             "01", // call index
-            "0000000000000000000000000000000000000000000000000002020000000001", // resource id
+            "0000000000000000000000000000000000000000230100000002020000000001", // resource id
             "1074657374", // name
             "01000000"    // asset id
         );
@@ -156,10 +148,10 @@ mod tests {
     #[test]
     fn decode() {
         let proposal_bytes = hex_literal::hex!(
-          "0000000000000000000000000000000000000000000000000002020000000001cafebabe00000001" // header
+          "0000000000000000000000000000000000000000230100000002020000000001cafebabe00000001" // header
           "23" // pallet index
           "01" // call index
-          "0000000000000000000000000000000000000000000000000002020000000001" // resource id
+          "0000000000000000000000000000000000000000230100000002020000000001" // resource id
           "1074657374" // name
           "01000000"  // asset id
         );
@@ -169,7 +161,7 @@ mod tests {
         assert_eq!(
             proposal.header.resource_id(),
             ResourceId::new(
-                TargetSystem::new_tree_id(2),
+                TargetSystem::substrate_target_system(35, 1, 2),
                 TypedChainId::Substrate(1)
             )
         );

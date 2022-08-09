@@ -15,10 +15,6 @@ use alloc::vec::Vec;
 )]
 pub struct AnchorUpdateProposal {
     header: ProposalHeader,
-    #[builder(default = 50)]
-    pallet_index: u8,
-    #[builder(default = 1)]
-    call_index: u8,
     src_chain: TypedChainId,
     merkle_root: [u8; 32],
     latest_leaf_index: u32,
@@ -60,6 +56,12 @@ impl AnchorUpdateProposal {
     #[must_use]
     pub fn to_bytes(&self) -> Vec<u8> {
         let mut out = Vec::with_capacity(120);
+        let target_details = self
+            .header()
+            .resource_id()
+            .target_system()
+            .get_substrate_target_system();
+
         // add proposal header 40B
         out.extend_from_slice(&self.header.to_bytes());
 
@@ -74,9 +76,9 @@ impl AnchorUpdateProposal {
         };
 
         // add pallet index
-        out.push(self.pallet_index);
+        out.push(target_details.pallet_index());
         // add call index
-        out.push(self.call_index);
+        out.push(target_details.call_index());
         scale_codec::Encode::encode_to(&call, &mut out);
         out
     }
@@ -109,14 +111,6 @@ impl TryFrom<Vec<u8>> for AnchorUpdateProposal {
         header_bytes.copy_from_slice(parsed_header);
         let header = ProposalHeader::from(header_bytes);
 
-        // parse pallet index
-        let pallet_index = value.get(40).copied().ok_or_else(|| {
-            scale_codec::Error::from("invalid proposal: missing pallet index")
-        })?;
-        // parse call index
-        let call_index = value.get(41).copied().ok_or_else(|| {
-            scale_codec::Error::from("invalid proposal: missing call index")
-        })?;
         // parse encoded proposal call
         let call: ExecuteAnchorUpdateProposal =
             scale_codec::Decode::decode(&mut &value[42..])?;
@@ -126,8 +120,6 @@ impl TryFrom<Vec<u8>> for AnchorUpdateProposal {
         let target = call.anchor_metadata.target.0;
         let proposal = AnchorUpdateProposal {
             header,
-            pallet_index,
-            call_index,
             src_chain,
             merkle_root,
             latest_leaf_index,
@@ -176,7 +168,7 @@ mod tests {
 
     #[test]
     fn encode() {
-        let target_system = TargetSystem::new_tree_id(2);
+        let target_system = TargetSystem::substrate_target_system(50, 1, 2);
         let target_chain = TypedChainId::Substrate(1);
         let resource_id = ResourceId::new(target_system, target_chain);
         let function_signature =
@@ -201,9 +193,9 @@ mod tests {
             .build();
         let bytes = proposal.to_bytes();
         let expected = concat!(
-          "0000000000000000000000000000000000000000000000000002020000000001cafebabe00000001", // header
+          "0000000000000000000000000000000000000000320100000002020000000001cafebabe00000001", // header
           "3201", // pallet index, call index
-          "0000000000000000000000000000000000000000000000000002020000000001", // resource id
+          "0000000000000000000000000000000000000000320100000002020000000001", // resource id
           "0200000000020000000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f01000000", // metadata
           "1111111111111111111111111111111111111111111111111111111111111111" // target
         );
@@ -214,19 +206,17 @@ mod tests {
     #[test]
     fn decode() {
         let bytes = hex_literal::hex!(
-            "0000000000000000000000000000000000000000000000000002020000000001cafebabe00000001" //header
+            "0000000000000000000000000000000000000000320100000002020000000001cafebabe00000001" //header
             "3201" // pallet index, call index
-            "0000000000000000000000000000000000000000000000000002020000000001" // resource id
+            "0000000000000000000000000000000000000000320100000002020000000001" // resource id
             "0200000000020000000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f01000000" // metadata
             "1111111111111111111111111111111111111111111111111111111111111111" // target
         );
 
         let proposal = AnchorUpdateProposal::try_from(bytes.to_vec()).unwrap();
-        assert_eq!(proposal.pallet_index, 0x32);
-        assert_eq!(proposal.call_index, 0x01);
         assert_eq!(
             proposal.header.resource_id().target_system(),
-            TargetSystem::new_tree_id(2)
+            TargetSystem::substrate_target_system(50, 1, 2)
         );
         assert_eq!(
             proposal.header.resource_id().typed_chain_id(),
