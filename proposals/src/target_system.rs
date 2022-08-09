@@ -12,7 +12,7 @@
 pub enum TargetSystem {
     /// Ethereum Contract address (20 bytes).
     ContractAddress([u8; 20]),
-    /// Webb Protocol Merkle `TreeId` (4 bytes).
+    /// Webb Protocol-Substrate 6 bytes (pallet_index, call_index, tree_id ).
     Substrate(SubstrateTargetSystem),
 }
 /// Substrate Target System
