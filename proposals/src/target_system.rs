@@ -1,4 +1,25 @@
 /// The Proposal Target System.
+/// Target system format for Substrate
+/// ┌─────────────────────┬───────┬───────┬─────────────┐
+/// │                     │       │       │             │
+/// │           Zeros     │ Pallet│ Call  │   Tree ID   │
+/// │           (20B)     │  Idx  │  Idx  │    (4B)     │
+/// │                     │       │       │             │
+/// └─────────────────────┴───────┴───────┴─────────────┘
+///                       ▲       ▲       ▲             ▲
+///                       │   20  │   21  │ 22 23 24 25 │
+///                       │       │       │             │
+///
+/// Target system format for Evm
+/// ┌────────────────┬──────────────────────────────────┐
+/// │                │                                  │
+/// │      Zeros     │     Contract Address             │
+/// │      (6B)      │           (20B)                  │
+/// │                │                                  │
+/// └────────────────┘──────────────────────────────────┘
+///                  ▲                                  ▲
+///                  │ 6                             25 │
+///                  │                                  │
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
 #[cfg_attr(
     feature = "scale",
@@ -16,7 +37,9 @@ pub enum TargetSystem {
     Substrate(SubstrateTargetSystem),
 }
 /// Substrate Target System
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
+#[derive(
+    Debug, Clone, Copy, PartialEq, Eq, Hash, typed_builder::TypedBuilder,
+)]
 #[cfg_attr(
     feature = "scale",
     derive(
@@ -28,34 +51,11 @@ pub enum TargetSystem {
 )]
 pub struct SubstrateTargetSystem {
     /// Pallet index of proposal handler pallet
-    pallet_index: u8,
+    pub pallet_index: u8,
     /// Call index of proposal handler pallet
-    call_index: u8,
+    pub call_index: u8,
     /// Webb Protocol Merkle `TreeId` (4 bytes).
-    tree_id: u32,
-}
-
-impl SubstrateTargetSystem {
-    /// create new target system for substrate
-    pub fn new(pallet_index: u8, call_index: u8, tree_id: u32) -> Self {
-        Self {
-            pallet_index,
-            call_index,
-            tree_id,
-        }
-    }
-    /// Get pallet index
-    pub fn pallet_index(&self) -> u8 {
-        self.pallet_index
-    }
-    /// Get call index
-    pub fn call_index(&self) -> u8 {
-        self.call_index
-    }
-    /// Get tree_id
-    pub fn tree_id(&self) -> u32 {
-        self.tree_id
-    }
+    pub tree_id: u32,
 }
 
 impl TargetSystem {
@@ -66,19 +66,6 @@ impl TargetSystem {
     pub fn new_contract_address<T: Into<[u8; 20]>>(address: T) -> Self {
         let bytes = address.into();
         Self::ContractAddress(bytes)
-    }
-    /// Create a new `TargetSystem` for substrate
-    #[must_use]
-    pub fn substrate_target_system(
-        pallet_index: u8,
-        call_index: u8,
-        tree_id: u32,
-    ) -> Self {
-        Self::Substrate(SubstrateTargetSystem::new(
-            pallet_index,
-            call_index,
-            tree_id,
-        ))
     }
 
     /// Get the underlying bytes of the `TargetSystem`.
@@ -113,10 +100,10 @@ impl TargetSystem {
 
     /// Get susbtrate TargetSystem details
     #[must_use]
-    pub fn get_substrate_target_system(self) -> SubstrateTargetSystem {
+    pub fn get_substrate_target_system(self) -> Option<SubstrateTargetSystem> {
         match self {
-            TargetSystem::Substrate(target_system) => target_system,
-            _ => SubstrateTargetSystem::new(0, 0, 0),
+            TargetSystem::Substrate(target_system) => Some(target_system),
+            _ => None,
         }
     }
 
@@ -157,8 +144,11 @@ impl From<[u8; TargetSystem::LENGTH]> for TargetSystem {
             let t = f + core::mem::size_of::<u32>();
             tree_id_bytes.copy_from_slice(&bytes[f..t]);
             let tree_id = u32::from_be_bytes(tree_id_bytes);
-            let target =
-                SubstrateTargetSystem::new(bytes[f - 2], bytes[f - 1], tree_id);
+            let target = SubstrateTargetSystem::builder()
+                .pallet_index(bytes[f - 2])
+                .call_index(bytes[f - 1])
+                .tree_id(tree_id)
+                .build();
             TargetSystem::Substrate(target)
         } else {
             let mut address_bytes = [0u8; 20];
@@ -178,6 +168,11 @@ impl From<TargetSystem> for [u8; TargetSystem::LENGTH] {
 
 impl Default for TargetSystem {
     fn default() -> Self {
-        TargetSystem::Substrate(SubstrateTargetSystem::new(0, 0, 0))
+        let target = SubstrateTargetSystem::builder()
+            .pallet_index(0)
+            .call_index(0)
+            .tree_id(0)
+            .build();
+        TargetSystem::Substrate(target)
     }
 }

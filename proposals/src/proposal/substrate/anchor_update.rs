@@ -1,6 +1,6 @@
 //! Anchor Update Proposal.
+use crate::target_system::TargetSystem;
 use crate::{ProposalHeader, TypedChainId};
-
 #[cfg(not(feature = "std"))]
 use alloc::vec::Vec;
 
@@ -56,11 +56,12 @@ impl AnchorUpdateProposal {
     #[must_use]
     pub fn to_bytes(&self) -> Vec<u8> {
         let mut out = Vec::with_capacity(120);
-        let target_details = self
-            .header()
-            .resource_id()
-            .target_system()
-            .get_substrate_target_system();
+        let target_system = self.header().resource_id().target_system();
+
+        let target_details = match target_system {
+            TargetSystem::Substrate(target) => target,
+            _ => unreachable!("Unexpected target system for substrate"),
+        };
 
         // add proposal header 40B
         out.extend_from_slice(&self.header.to_bytes());
@@ -76,9 +77,9 @@ impl AnchorUpdateProposal {
         };
 
         // add pallet index
-        out.push(target_details.pallet_index());
+        out.push(target_details.pallet_index);
         // add call index
-        out.push(target_details.call_index());
+        out.push(target_details.call_index);
         scale_codec::Encode::encode_to(&call, &mut out);
         out
     }
@@ -162,13 +163,21 @@ struct ExecuteAnchorUpdateProposal {
 
 #[cfg(test)]
 mod tests {
-    use crate::{FunctionSignature, Nonce, ResourceId, TargetSystem};
+    use crate::{
+        FunctionSignature, Nonce, ResourceId, SubstrateTargetSystem,
+        TargetSystem,
+    };
 
     use super::*;
 
     #[test]
     fn encode() {
-        let target_system = TargetSystem::substrate_target_system(50, 1, 2);
+        let target = SubstrateTargetSystem::builder()
+            .pallet_index(50)
+            .call_index(1)
+            .tree_id(2)
+            .build();
+        let target_system = TargetSystem::Substrate(target);
         let target_chain = TypedChainId::Substrate(1);
         let resource_id = ResourceId::new(target_system, target_chain);
         let function_signature =
@@ -214,9 +223,14 @@ mod tests {
         );
 
         let proposal = AnchorUpdateProposal::try_from(bytes.to_vec()).unwrap();
+        let target = SubstrateTargetSystem::builder()
+            .pallet_index(50)
+            .call_index(1)
+            .tree_id(2)
+            .build();
         assert_eq!(
             proposal.header.resource_id().target_system(),
-            TargetSystem::substrate_target_system(50, 1, 2)
+            TargetSystem::Substrate(target)
         );
         assert_eq!(
             proposal.header.resource_id().typed_chain_id(),

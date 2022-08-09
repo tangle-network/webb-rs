@@ -1,4 +1,5 @@
 //! Token Remove Proposal.
+use crate::target_system::TargetSystem;
 use crate::ProposalHeader;
 
 #[cfg(not(feature = "std"))]
@@ -40,11 +41,12 @@ impl TokenRemoveProposal {
     #[must_use]
     pub fn to_bytes(&self) -> Vec<u8> {
         let mut out = Vec::with_capacity(40 + 40 + self.name.len());
-        let target_details = self
-            .header()
-            .resource_id()
-            .target_system()
-            .get_substrate_target_system();
+        let target_system = self.header().resource_id().target_system();
+
+        let target_details = match target_system {
+            TargetSystem::Substrate(target) => target,
+            _ => return Vec::new().into(),
+        };
 
         // add proposal header 40B
         out.extend_from_slice(&self.header.to_bytes());
@@ -55,9 +57,9 @@ impl TokenRemoveProposal {
             asset_id: self.asset_id,
         };
         // add pallet index
-        out.push(target_details.pallet_index());
+        out.push(target_details.pallet_index);
         // add call index
-        out.push(target_details.call_index());
+        out.push(target_details.call_index);
         scale_codec::Encode::encode_to(&call, &mut out);
         out
     }
@@ -114,14 +116,20 @@ struct ExecuteRemoveTokenFromPoolShare {
 #[cfg(test)]
 mod tests {
     use crate::{
-        FunctionSignature, Nonce, ResourceId, TargetSystem, TypedChainId,
+        FunctionSignature, Nonce, ResourceId, SubstrateTargetSystem,
+        TargetSystem, TypedChainId,
     };
 
     use super::*;
 
     #[test]
     fn encode() {
-        let target_system = TargetSystem::substrate_target_system(35, 2, 2);
+        let target = SubstrateTargetSystem::builder()
+            .pallet_index(35)
+            .call_index(2)
+            .tree_id(2)
+            .build();
+        let target_system = TargetSystem::Substrate(target);
         let target_chain = TypedChainId::Substrate(1);
         let resource_id = ResourceId::new(target_system, target_chain);
         let function_signature =
@@ -159,10 +167,15 @@ mod tests {
 
         let proposal =
             TokenRemoveProposal::try_from(proposal_bytes.to_vec()).unwrap();
+        let target = SubstrateTargetSystem::builder()
+            .pallet_index(35)
+            .call_index(2)
+            .tree_id(2)
+            .build();
         assert_eq!(
             proposal.header.resource_id(),
             ResourceId::new(
-                TargetSystem::substrate_target_system(35, 2, 2),
+                TargetSystem::Substrate(target),
                 TypedChainId::Substrate(1)
             )
         );
