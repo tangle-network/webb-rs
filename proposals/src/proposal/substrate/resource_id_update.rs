@@ -44,7 +44,7 @@ impl ResourceIdUpdateProposal {
 
         let target_details = match target_system {
             TargetSystem::Substrate(target) => target,
-            _ => return Vec::new().into(),
+            _ => unreachable!("Unexpected target system for substrate"),
         };
 
         out.extend_from_slice(&self.header.to_bytes());

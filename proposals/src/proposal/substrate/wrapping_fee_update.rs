@@ -51,7 +51,7 @@ impl WrappingFeeUpdateProposal {
 
         let target_details = match target_system {
             TargetSystem::Substrate(target) => target,
-            _ => return Vec::new().into(),
+            _ => unreachable!("Unexpected target system for substrate"),
         };
         // add proposal header 40B
         out.extend_from_slice(&self.header.to_bytes());
