@@ -1,4 +1,5 @@
 //! Wrapping Fee Update Proposal.
+use crate::target_system::TargetSystem;
 use crate::ProposalHeader;
 
 #[cfg(not(feature = "std"))]
@@ -13,10 +14,6 @@ use alloc::vec::Vec;
 )]
 pub struct WrappingFeeUpdateProposal {
     header: ProposalHeader,
-    #[builder(default = 35)]
-    pallet_index: u8,
-    #[builder(default = 0)]
-    call_index: u8,
     #[builder(setter(transform = |v: u128| check_and_validate_wrapping_fee(v)))]
     wrapping_fee_percent: u128,
     into_pool_share_id: u32,
@@ -50,6 +47,12 @@ impl WrappingFeeUpdateProposal {
     #[must_use]
     pub fn to_bytes(&self) -> Vec<u8> {
         let mut out = Vec::with_capacity(80);
+        let target_system = self.header().resource_id().target_system();
+
+        let target_details = match target_system {
+            TargetSystem::Substrate(target) => target,
+            _ => unreachable!("Unexpected target system for substrate"),
+        };
         // add proposal header 40B
         out.extend_from_slice(&self.header.to_bytes());
 
@@ -59,9 +62,9 @@ impl WrappingFeeUpdateProposal {
             into_pool_share_id: self.into_pool_share_id,
         };
         // add pallet index
-        out.push(self.pallet_index);
+        out.push(target_details.pallet_index);
         // add call index
-        out.push(self.call_index);
+        out.push(target_details.call_index);
         scale_codec::Encode::encode_to(&call, &mut out);
         out
     }
@@ -94,14 +97,6 @@ impl TryFrom<Vec<u8>> for WrappingFeeUpdateProposal {
         header_bytes.copy_from_slice(parsed_header);
         let header = ProposalHeader::from(header_bytes);
 
-        let pallet_index = value.get(40).copied().ok_or_else(|| {
-            scale_codec::Error::from("invalid proposal: missing pallet index")
-        })?;
-
-        let call_index = value.get(41).copied().ok_or_else(|| {
-            scale_codec::Error::from("invalid proposal: missing call index")
-        })?;
-
         let call: ExecuteWrappingFeeUpdate =
             scale_codec::Decode::decode(&mut &value[42..])?;
 
@@ -109,8 +104,6 @@ impl TryFrom<Vec<u8>> for WrappingFeeUpdateProposal {
         let into_pool_share_id = call.into_pool_share_id;
         let proposal = WrappingFeeUpdateProposal {
             header,
-            pallet_index,
-            call_index,
             wrapping_fee_percent,
             into_pool_share_id,
         };
@@ -136,14 +129,20 @@ fn check_and_validate_wrapping_fee(wrapping_fee_percent: u128) -> u128 {
 #[cfg(test)]
 mod tests {
     use crate::{
-        FunctionSignature, Nonce, ResourceId, TargetSystem, TypedChainId,
+        FunctionSignature, Nonce, ResourceId, SubstrateTargetSystem,
+        TargetSystem, TypedChainId,
     };
 
     use super::*;
 
     #[test]
     fn encode() {
-        let target_system = TargetSystem::new_tree_id(2);
+        let target = SubstrateTargetSystem::builder()
+            .pallet_index(35)
+            .call_index(0)
+            .tree_id(2)
+            .build();
+        let target_system = TargetSystem::Substrate(target);
         let target_chain = TypedChainId::Substrate(1);
         let resource_id = ResourceId::new(target_system, target_chain);
         let function_signature =
@@ -158,10 +157,10 @@ mod tests {
             .build();
         let bytes = proposal.to_bytes();
         let expected = concat!(
-            "0000000000000000000000000000000000000000000000000002020000000001cafebabe00000001", // header
+            "0000000000000000000000000000000000000000230000000002020000000001cafebabe00000001", // header
             "23", // pallet index
             "00", // call index
-            "0000000000000000000000000000000000000000000000000002020000000001", // resource id
+            "0000000000000000000000000000000000000000230000000002020000000001", // resource id
             "05000000000000000000000000000000", // wrapping fee percent
             "01000000"                          // pool share id
         );
@@ -171,10 +170,10 @@ mod tests {
     #[test]
     fn decode() {
         let proposal_bytes = hex_literal::hex!(
-          "0000000000000000000000000000000000000000000000000002020000000001cafebabe00000001" // header
+          "0000000000000000000000000000000000000000230000000002020000000001cafebabe00000001" // header
           "23" // pallet index
           "00" // call index
-          "0000000000000000000000000000000000000000000000000002020000000001" // resource id
+          "0000000000000000000000000000000000000000230000000002020000000001" // resource id
           "05000000000000000000000000000000" // wrapping fee percent
           "01000000"  // pool share id
         );
@@ -182,10 +181,15 @@ mod tests {
         let proposal =
             WrappingFeeUpdateProposal::try_from(proposal_bytes.to_vec())
                 .unwrap();
+        let target = SubstrateTargetSystem::builder()
+            .pallet_index(35)
+            .call_index(0)
+            .tree_id(2)
+            .build();
         assert_eq!(
             proposal.header.resource_id(),
             ResourceId::new(
-                TargetSystem::new_tree_id(2),
+                TargetSystem::Substrate(target),
                 TypedChainId::Substrate(1)
             )
         );
@@ -197,7 +201,12 @@ mod tests {
     #[should_panic(expected = "wrapping fee percent is too large")]
     #[test]
     fn should_check_wrapping_fee_value() {
-        let target_system = TargetSystem::new_tree_id(2);
+        let target = SubstrateTargetSystem::builder()
+            .pallet_index(35)
+            .call_index(0)
+            .tree_id(2)
+            .build();
+        let target_system = TargetSystem::Substrate(target);
         let target_chain = TypedChainId::Substrate(1);
         let resource_id = ResourceId::new(target_system, target_chain);
         let function_signature =
