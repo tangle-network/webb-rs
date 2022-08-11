@@ -124,9 +124,7 @@ impl TryFrom<Vec<u8>> for AnchorUpdateProposal {
         // parse encoded proposal call
         let call: ExecuteAnchorUpdateProposal =
             scale_codec::Decode::decode(&mut &value[42..])?;
-        let src_chain = TypedChainId::from(call.anchor_metadata.src_chain_id);
         let merkle_root = call.anchor_metadata.root.0;
-        let latest_leaf_index = call.anchor_metadata.latest_leaf_index;
         let target = call.anchor_metadata.target.0;
         let proposal = AnchorUpdateProposal {
             header,
