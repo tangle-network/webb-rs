@@ -55,7 +55,7 @@ impl ResourceIdUpdateProposal {
     pub fn execution_address(&self) -> [u8; 20] {
         self.new_resource_id()
             .target_system()
-            .into_cosmwasm_address_stub()
+            .into_contract_address()
     }
 
     /// Get the proposal as a bytes

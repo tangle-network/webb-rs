@@ -145,9 +145,11 @@ pub extern crate alloc;
 mod header;
 mod nonce;
 mod proposal;
+mod target_system;
 mod traits;
 
 pub use header::*;
 pub use nonce::*;
 pub use proposal::*;
+pub use target_system::*;
 pub use traits::*;
