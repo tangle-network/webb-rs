@@ -21,6 +21,7 @@
 ///                  ▲                                  ▲
 ///                  │ 6                             25 │
 ///                  │                                  │
+#[cfg(not(feature = "std"))]
 use alloc::vec::Vec;
 /// TargetSystem (26 Bytes)
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
