@@ -19,8 +19,6 @@ use crate::{ProposalHeader, TypedChainId};
 #[derive(Debug, Copy, Clone, PartialEq, Eq, Hash)]
 pub struct AnchorUpdateProposal {
     header: ProposalHeader,
-    src_chain: TypedChainId,
-    latest_leaf_index: u32,
     merkle_root: [u8; 32],
     target: [u8; 32],
 }
@@ -28,8 +26,6 @@ pub struct AnchorUpdateProposal {
 impl AnchorUpdateProposal {
     /// Length of the proposal in bytes.
     pub const LENGTH: usize = ProposalHeader::LENGTH
-        + TypedChainId::LENGTH
-        + core::mem::size_of::<u32>() // latest_leaf_index
         + 32 // merkle_root
         + 32; // target
 
@@ -37,15 +33,11 @@ impl AnchorUpdateProposal {
     #[must_use]
     pub const fn new(
         header: ProposalHeader,
-        src_chain: TypedChainId,
-        latest_leaf_index: u32,
         merkle_root: [u8; 32],
         target: [u8; 32],
     ) -> Self {
         Self {
             header,
-            src_chain,
-            latest_leaf_index,
             merkle_root,
             target,
         }
@@ -59,14 +51,16 @@ impl AnchorUpdateProposal {
 
     /// Get the source chain.
     #[must_use]
-    pub const fn src_chain(&self) -> TypedChainId {
-        self.src_chain
+    pub fn src_chain(&self) -> TypedChainId {
+        let mut buf = [0u8; 6];
+        buf.copy_from_slice(self.target[26..32].to_vec().as_slice());
+        TypedChainId::from(buf)
     }
 
     /// Get the latest leaf index.
     #[must_use]
     pub const fn latest_leaf_index(&self) -> u32 {
-        self.latest_leaf_index
+        self.header.nonce.to_u32()
     }
 
     /// Get the merkle root.
@@ -88,12 +82,6 @@ impl AnchorUpdateProposal {
         let f = 0usize;
         let t = ProposalHeader::LENGTH;
         bytes[f..t].copy_from_slice(&self.header.to_bytes());
-        let f = t;
-        let t = t + TypedChainId::LENGTH;
-        bytes[f..t].copy_from_slice(&self.src_chain.to_bytes());
-        let f = t;
-        let t = t + core::mem::size_of::<u32>();
-        bytes[f..t].copy_from_slice(&self.latest_leaf_index.to_be_bytes());
         let f = t;
         let t = t + 32;
         bytes[f..t].copy_from_slice(&self.merkle_root);
@@ -118,16 +106,6 @@ impl From<[u8; AnchorUpdateProposal::LENGTH]> for AnchorUpdateProposal {
         header_bytes.copy_from_slice(&bytes[f..t]);
         let header = ProposalHeader::from(header_bytes);
         let f = t;
-        let t = t + TypedChainId::LENGTH;
-        let mut src_chain_bytes = [0u8; TypedChainId::LENGTH];
-        src_chain_bytes.copy_from_slice(&bytes[f..t]);
-        let src_chain = TypedChainId::from(src_chain_bytes);
-        let f = t;
-        let t = t + core::mem::size_of::<u32>();
-        let mut latest_leaf_index_bytes = [0u8; core::mem::size_of::<u32>()];
-        latest_leaf_index_bytes.copy_from_slice(&bytes[f..t]);
-        let latest_leaf_index = u32::from_be_bytes(latest_leaf_index_bytes);
-        let f = t;
         let t = t + 32;
         let mut merkle_root = [0u8; 32];
         merkle_root.copy_from_slice(&bytes[f..t]);
@@ -135,7 +113,7 @@ impl From<[u8; AnchorUpdateProposal::LENGTH]> for AnchorUpdateProposal {
         let t = t + 32;
         let mut target = [0u8; 32];
         target.copy_from_slice(&bytes[f..t]);
-        Self::new(header, src_chain, latest_leaf_index, merkle_root, target)
+        Self::new(header, merkle_root, target)
     }
 }
 
@@ -160,11 +138,13 @@ mod tests {
         let resource_id = ResourceId::new(target_system, target_chain);
         let function_signature =
             FunctionSignature::new(hex_literal::hex!("cafebabe"));
-        let nonce = Nonce::from(0x0001);
-        let header =
-            ProposalHeader::new(resource_id, function_signature, nonce);
-        let src_chain = TypedChainId::Evm(1);
         let latest_leaf_index = 0x0001;
+        let header = ProposalHeader::new(
+            resource_id,
+            function_signature,
+            Nonce::from(latest_leaf_index),
+        );
+        let src_chain = TypedChainId::Evm(1);
         let merkle_root = [
             0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x0a,
             0x0b, 0x0c, 0x0d, 0x0e, 0x0f, 0x10, 0x11, 0x12, 0x13, 0x14, 0x15,
@@ -172,17 +152,15 @@ mod tests {
         ];
         let proposal = AnchorUpdateProposal::new(
             header,
-            src_chain,
-            latest_leaf_index,
             merkle_root,
             target_system.into_fixed_bytes(),
         );
         let bytes = proposal.to_bytes();
         let expected = hex_literal::hex!(
             "000000000000aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa010000000004"
-            "cafebabe0000000101000000000100000001000102030405060708090a0b0c0d"
+            "cafebabe00000001000102030405060708090a0b0c0d"
             "0e0f101112131415161718191a1b1c1d1e1f"
-            "000000000000000000000000aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+            "000000000000aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa010000000001"
         );
         assert_eq!(bytes, expected);
     }
@@ -191,9 +169,9 @@ mod tests {
     fn decode() {
         let bytes = hex_literal::hex!(
             "000000000000aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa010000000004"
-            "cafebabe0000000101000000000100000001000102030405060708090a0b0c0d"
+            "cafebabe00000001000102030405060708090a0b0c0d"
             "0e0f101112131415161718191a1b1c1d1e1f"
-            "000000000000000000000000aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+            "000000000000aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa010000000001"
         );
         let proposal = AnchorUpdateProposal::from(bytes);
         let target_system = TargetSystem::new_contract_address(
@@ -206,8 +184,6 @@ mod tests {
         let nonce = Nonce::from(0x0001);
         let header =
             ProposalHeader::new(resource_id, function_signature, nonce);
-        let src_chain = TypedChainId::Evm(1);
-        let latest_leaf_index = 0x0001;
         let merkle_root = [
             0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x0a,
             0x0b, 0x0c, 0x0d, 0x0e, 0x0f, 0x10, 0x11, 0x12, 0x13, 0x14, 0x15,
@@ -215,8 +191,6 @@ mod tests {
         ];
         let expected = AnchorUpdateProposal::new(
             header,
-            src_chain,
-            latest_leaf_index,
             merkle_root,
             target_system.into_fixed_bytes(),
         );

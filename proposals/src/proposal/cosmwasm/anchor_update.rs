@@ -15,8 +15,6 @@ use crate::{ProposalHeader, TypedChainId};
 #[derive(Debug, Copy, Clone, PartialEq, Eq, Hash)]
 pub struct AnchorUpdateProposal {
     header: ProposalHeader,
-    src_chain: TypedChainId,
-    latest_leaf_index: u32,
     merkle_root: [u8; 32],
     target: [u8; 32],
 }
@@ -26,15 +24,11 @@ impl AnchorUpdateProposal {
     #[must_use]
     pub const fn new(
         header: ProposalHeader,
-        src_chain: TypedChainId,
-        latest_leaf_index: u32,
         merkle_root: [u8; 32],
         target: [u8; 32],
     ) -> Self {
         Self {
             header,
-            src_chain,
-            latest_leaf_index,
             merkle_root,
             target,
         }
@@ -48,14 +42,16 @@ impl AnchorUpdateProposal {
 
     /// Get the source chain.
     #[must_use]
-    pub const fn src_chain(&self) -> TypedChainId {
-        self.src_chain
+    pub fn src_chain(&self) -> TypedChainId {
+        let mut buf = [0u8; 6];
+        buf.copy_from_slice(self.target[26..32].to_vec().as_slice());
+        TypedChainId::from(buf)
     }
 
     /// Get the latest leaf index.
     #[must_use]
     pub const fn latest_leaf_index(&self) -> u32 {
-        self.latest_leaf_index
+        self.header.nonce.to_u32()
     }
 
     /// Get the merkle root.
@@ -78,9 +74,7 @@ impl AnchorUpdateProposal {
         bytes.extend_from_slice(&self.header.to_bytes());
 
         let message = to_binary(&UpdateEdge {
-            src_chain_id: self.src_chain.chain_id(),
             root: self.merkle_root,
-            latest_leaf_index: self.latest_leaf_index,
             target: self.target,
         })
         .unwrap();
@@ -109,13 +103,7 @@ impl From<Vec<u8>> for AnchorUpdateProposal {
         let msg_bytes = bytes[f..].to_vec();
         let decoded_edge_data: UpdateEdge = from_slice(&msg_bytes).unwrap();
 
-        Self::new(
-            header,
-            TypedChainId::from(decoded_edge_data.src_chain_id),
-            decoded_edge_data.latest_leaf_index,
-            decoded_edge_data.root,
-            decoded_edge_data.target,
-        )
+        Self::new(header, decoded_edge_data.root, decoded_edge_data.target)
     }
 }
 
@@ -131,8 +119,6 @@ impl From<crate::evm::AnchorUpdateProposal> for AnchorUpdateProposal {
     fn from(proposal: crate::evm::AnchorUpdateProposal) -> Self {
         AnchorUpdateProposal::new(
             proposal.header(),
-            proposal.src_chain(),
-            proposal.latest_leaf_index(),
             *proposal.merkle_root(),
             *proposal.target(),
         )
@@ -145,8 +131,6 @@ impl From<crate::substrate::AnchorUpdateProposal> for AnchorUpdateProposal {
     fn from(proposal: crate::substrate::AnchorUpdateProposal) -> Self {
         AnchorUpdateProposal::new(
             proposal.header(),
-            proposal.src_chain(),
-            proposal.latest_leaf_index(),
             *proposal.merkle_root(),
             *proposal.target(),
         )
@@ -156,9 +140,7 @@ impl From<crate::substrate::AnchorUpdateProposal> for AnchorUpdateProposal {
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq, JsonSchema)]
 #[serde(rename_all = "snake_case")]
 struct UpdateEdge {
-    src_chain_id: u64,
     root: [u8; 32],
-    latest_leaf_index: u32,
     target: [u8; 32],
 }
 
@@ -183,11 +165,12 @@ mod tests {
         let resource_id = ResourceId::new(target_system, target_chain);
         let function_signature =
             FunctionSignature::new(hex_literal::hex!("00000000"));
-        let nonce = Nonce::from(0x0001);
+        let latest_leaf_index = 0x0001;
+        let nonce = Nonce::from(latest_leaf_index);
         let header =
             ProposalHeader::new(resource_id, function_signature, nonce);
         let src_chain = TypedChainId::Cosmos(1);
-        let latest_leaf_index = 0x0001;
+        let src_resource_id = ResourceId::new(target_system, src_chain);
         let merkle_root = [
             0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x0a,
             0x0b, 0x0c, 0x0d, 0x0e, 0x0f, 0x10, 0x11, 0x12, 0x13, 0x14, 0x15,
@@ -195,10 +178,8 @@ mod tests {
         ];
         let proposal = AnchorUpdateProposal::new(
             header,
-            src_chain,
-            latest_leaf_index,
             merkle_root,
-            target_system.into_fixed_bytes(),
+            src_resource_id.to_bytes(),
         );
         let bytes = proposal.to_bytes();
         let expected = hex_literal::hex!(
@@ -230,8 +211,6 @@ mod tests {
         ];
         let expected = AnchorUpdateProposal::new(
             header,
-            src_chain,
-            latest_leaf_index,
             merkle_root,
             target_system.into_fixed_bytes(),
         );
