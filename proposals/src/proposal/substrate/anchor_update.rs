@@ -1,14 +1,14 @@
 //! Anchor Update Proposal.
-use crate::{ProposalHeader, TypedChainId};
+use crate::{ProposalHeader, ResourceId, TypedChainId};
 
 #[cfg(not(feature = "std"))]
 use alloc::vec::Vec;
 
 /// Anchor Update Proposal.
 ///
-/// The [`AnchorUpdateProposal`] updates the target Anchor's knowledge of the
+/// The [`AnchorUpdateProposal`] updates a target Anchor's knowledge of the
 /// source Anchor's Merkle roots. This knowledge is necessary to prove
-/// membership in the source Anchor's Merkle tree on the target chain.
+/// membership in the source Anchor's Merkle tree on the src_resource_id chain.
 #[allow(clippy::module_name_repetitions)]
 #[derive(
     Debug, Copy, Clone, PartialEq, Eq, Hash, typed_builder::TypedBuilder,
@@ -20,7 +20,7 @@ pub struct AnchorUpdateProposal {
     #[builder(default = 1)]
     call_index: u8,
     merkle_root: [u8; 32],
-    target: [u8; 32],
+    src_resource_id: ResourceId,
 }
 
 impl AnchorUpdateProposal {
@@ -33,9 +33,13 @@ impl AnchorUpdateProposal {
     /// Get the source chain.
     #[must_use]
     pub fn src_chain(&self) -> TypedChainId {
-        let mut buf = [0u8; 6];
-        buf.copy_from_slice(self.target[26..32].to_vec().as_slice());
-        TypedChainId::from(buf)
+        self.src_resource_id.typed_chain_id()
+    }
+
+    /// Get the src_resource_id identifier.
+    #[must_use]
+    pub const fn src_resource_id(&self) -> ResourceId {
+        self.src_resource_id
     }
 
     /// Get the latest leaf index.
@@ -50,12 +54,6 @@ impl AnchorUpdateProposal {
         &self.merkle_root
     }
 
-    /// Get the target.
-    #[must_use]
-    pub const fn target(&self) -> &[u8; 32] {
-        &self.target
-    }
-
     /// Convert the proposal to a vector of bytes.
     #[must_use]
     pub fn to_bytes(&self) -> Vec<u8> {
@@ -63,17 +61,13 @@ impl AnchorUpdateProposal {
         // add proposal header 40B
         out.extend_from_slice(&self.header.to_bytes());
 
-        let mut src_chain_id_bytes = [0u8; 6];
-        src_chain_id_bytes
-            .copy_from_slice(self.target[26..32].to_vec().as_slice());
-        let src_chain_id = TypedChainId::from(src_chain_id_bytes);
         let call = ExecuteAnchorUpdateProposal {
             r_id: self.header().resource_id().to_bytes(),
             anchor_metadata: EdgeMetadata {
-                src_chain_id: src_chain_id.chain_id(),
+                src_chain_id: self.src_chain().chain_id(),
                 root: Element(self.merkle_root),
                 latest_leaf_index: self.header().nonce().to_u32(),
-                target: Element(self.target),
+                src_resource_id: Element(self.src_resource_id.to_bytes()),
             },
         };
 
@@ -125,13 +119,13 @@ impl TryFrom<Vec<u8>> for AnchorUpdateProposal {
         let call: ExecuteAnchorUpdateProposal =
             scale_codec::Decode::decode(&mut &value[42..])?;
         let merkle_root = call.anchor_metadata.root.0;
-        let target = call.anchor_metadata.target.0;
+        let src_resource_id = call.anchor_metadata.src_resource_id.0;
         let proposal = AnchorUpdateProposal {
             header,
             pallet_index,
             call_index,
             merkle_root,
-            target,
+            src_resource_id: ResourceId(src_resource_id),
         };
         Ok(proposal)
     }
@@ -144,7 +138,7 @@ impl From<crate::evm::AnchorUpdateProposal> for AnchorUpdateProposal {
         AnchorUpdateProposal::builder()
             .header(proposal.header())
             .merkle_root(*proposal.merkle_root())
-            .target(*proposal.target())
+            .src_resource_id(proposal.src_resource_id())
             .build()
     }
 }
@@ -157,7 +151,7 @@ struct EdgeMetadata {
     src_chain_id: u64,
     root: Element,
     latest_leaf_index: u32,
-    target: Element,
+    src_resource_id: Element,
 }
 
 #[derive(scale_codec::Encode, scale_codec::Decode)]
@@ -174,9 +168,10 @@ mod tests {
 
     #[test]
     fn encode() {
-        let target_system = TargetSystem::new_tree_id(2);
-        let target_chain = TypedChainId::Substrate(1);
-        let resource_id = ResourceId::new(target_system, target_chain);
+        let src_resource_id_system = TargetSystem::new_tree_id(2);
+        let src_resource_id_chain = TypedChainId::Substrate(1);
+        let resource_id =
+            ResourceId::new(src_resource_id_system, src_resource_id_chain);
         let function_signature =
             FunctionSignature::new(hex_literal::hex!("cafebabe"));
         let latest_leaf_index = 0x0001;
@@ -190,12 +185,13 @@ mod tests {
             0x0b, 0x0c, 0x0d, 0x0e, 0x0f, 0x10, 0x11, 0x12, 0x13, 0x14, 0x15,
             0x16, 0x17, 0x18, 0x19, 0x1a, 0x1b, 0x1c, 0x1d, 0x1e, 0x1f,
         ];
-        let target = [0x11u8; 32];
-        let src_resource_id = ResourceId::new(target_system, src_chain_id);
+        let src_resource_id = [0x11u8; 32];
+        let src_resource_id =
+            ResourceId::new(src_resource_id_system, src_chain_id);
         let proposal = AnchorUpdateProposal::builder()
             .header(header)
             .merkle_root(merkle_root)
-            .target(src_resource_id.0)
+            .src_resource_id(src_resource_id)
             .build();
         let bytes = proposal.to_bytes();
         let expected = concat!(
@@ -203,7 +199,7 @@ mod tests {
           "3201", // pallet index, call index
           "0000000000000000000000000000000000000000000000000002020000000001", // resource id
           "0200000000020000000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f01000000", // metadata
-          "0000000000000000000000000000000000000000000000000002020000000002" // target
+          "0000000000000000000000000000000000000000000000000002020000000002" // src_resource_id
         );
         let bytes_hex = hex::encode(bytes);
         assert_eq!(bytes_hex, expected);
@@ -216,7 +212,7 @@ mod tests {
             "3201" // pallet index, call index
             "0000000000000000000000000000000000000000000000000002020000000001" // resource id
             "0200000000020000000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f01000000" // metadata
-            "1111111111111111111111111111111111111111111111111111020000000002" // target
+            "1111111111111111111111111111111111111111111111111111020000000002" // src_resource_id
         );
 
         let proposal = AnchorUpdateProposal::try_from(bytes.to_vec()).unwrap();
@@ -230,8 +226,12 @@ mod tests {
             proposal.header.resource_id().typed_chain_id(),
             TypedChainId::Substrate(1)
         );
-        let target_chain_bytes = proposal.target[26..].to_vec();
-        assert_eq!(target_chain_bytes, TypedChainId::Substrate(2).to_bytes());
+        let src_resource_id_chain_bytes =
+            proposal.src_resource_id().typed_chain_id().to_bytes();
+        assert_eq!(
+            src_resource_id_chain_bytes,
+            TypedChainId::Substrate(2).to_bytes()
+        );
         assert_eq!(
             proposal.merkle_root,
             [
@@ -242,6 +242,6 @@ mod tests {
             ]
         );
         assert_eq!(proposal.header().nonce().to_u32(), 0x0001);
-        assert_eq!(proposal.target, hex_literal::hex!("1111111111111111111111111111111111111111111111111111020000000002"));
+        assert_eq!(proposal.src_resource_id().to_bytes(), hex_literal::hex!("1111111111111111111111111111111111111111111111111111020000000002"));
     }
 }

@@ -3,7 +3,7 @@ use cosmwasm_std::{from_slice, to_binary};
 use schemars::JsonSchema;
 use serde::{Deserialize, Serialize};
 
-use crate::{ProposalHeader, TypedChainId};
+use crate::{ProposalHeader, ResourceId, TypedChainId};
 
 /// Anchor Update Proposal.
 ///
@@ -16,7 +16,7 @@ use crate::{ProposalHeader, TypedChainId};
 pub struct AnchorUpdateProposal {
     header: ProposalHeader,
     merkle_root: [u8; 32],
-    target: [u8; 32],
+    src_resource_id: ResourceId,
 }
 
 impl AnchorUpdateProposal {
@@ -25,12 +25,12 @@ impl AnchorUpdateProposal {
     pub const fn new(
         header: ProposalHeader,
         merkle_root: [u8; 32],
-        target: [u8; 32],
+        src_resource_id: ResourceId,
     ) -> Self {
         Self {
             header,
             merkle_root,
-            target,
+            src_resource_id,
         }
     }
 
@@ -43,9 +43,13 @@ impl AnchorUpdateProposal {
     /// Get the source chain.
     #[must_use]
     pub fn src_chain(&self) -> TypedChainId {
-        let mut buf = [0u8; 6];
-        buf.copy_from_slice(self.target[26..32].to_vec().as_slice());
-        TypedChainId::from(buf)
+        self.src_resource_id.typed_chain_id()
+    }
+
+    /// Get the src_resource_id identifier.
+    #[must_use]
+    pub const fn src_resource_id(&self) -> ResourceId {
+        self.src_resource_id
     }
 
     /// Get the latest leaf index.
@@ -60,12 +64,6 @@ impl AnchorUpdateProposal {
         &self.merkle_root
     }
 
-    /// Get the target identifier.
-    #[must_use]
-    pub const fn target(&self) -> &[u8; 32] {
-        &self.target
-    }
-
     /// Get the proposal as a bytes
     #[must_use]
     pub fn to_bytes(&self) -> Vec<u8> {
@@ -75,7 +73,7 @@ impl AnchorUpdateProposal {
 
         let message = to_binary(&UpdateEdge {
             root: self.merkle_root,
-            target: self.target,
+            src_resource_id: self.src_resource_id.to_bytes(),
         })
         .unwrap();
 
@@ -103,7 +101,11 @@ impl From<Vec<u8>> for AnchorUpdateProposal {
         let msg_bytes = bytes[f..].to_vec();
         let decoded_edge_data: UpdateEdge = from_slice(&msg_bytes).unwrap();
 
-        Self::new(header, decoded_edge_data.root, decoded_edge_data.target)
+        Self::new(
+            header,
+            decoded_edge_data.root,
+            ResourceId(decoded_edge_data.src_resource_id),
+        )
     }
 }
 
@@ -120,7 +122,7 @@ impl From<crate::evm::AnchorUpdateProposal> for AnchorUpdateProposal {
         AnchorUpdateProposal::new(
             proposal.header(),
             *proposal.merkle_root(),
-            *proposal.target(),
+            proposal.src_resource_id(),
         )
     }
 }
@@ -132,7 +134,7 @@ impl From<crate::substrate::AnchorUpdateProposal> for AnchorUpdateProposal {
         AnchorUpdateProposal::new(
             proposal.header(),
             *proposal.merkle_root(),
-            *proposal.target(),
+            proposal.src_resource_id(),
         )
     }
 }
@@ -141,7 +143,7 @@ impl From<crate::substrate::AnchorUpdateProposal> for AnchorUpdateProposal {
 #[serde(rename_all = "snake_case")]
 struct UpdateEdge {
     root: [u8; 32],
-    target: [u8; 32],
+    src_resource_id: [u8; 32],
 }
 
 #[cfg(test)]
@@ -176,21 +178,18 @@ mod tests {
             0x0b, 0x0c, 0x0d, 0x0e, 0x0f, 0x10, 0x11, 0x12, 0x13, 0x14, 0x15,
             0x16, 0x17, 0x18, 0x19, 0x1a, 0x1b, 0x1c, 0x1d, 0x1e, 0x1f,
         ];
-        let proposal = AnchorUpdateProposal::new(
-            header,
-            merkle_root,
-            src_resource_id.to_bytes(),
-        );
+        let proposal =
+            AnchorUpdateProposal::new(header, merkle_root, src_resource_id);
         let bytes = proposal.to_bytes();
         let expected = hex_literal::hex!(
-            "000000000000b37383a2ad2de9e68da75f583e7d0ef2eae1184f04000000000400000000000000017b22726f6f74223a5b302c312c322c332c342c352c362c372c382c392c31302c31312c31322c31332c31342c31352c31362c31372c31382c31392c32302c32312c32322c32332c32342c32352c32362c32372c32382c32392c33302c33315d2c22746172676574223a5b302c302c302c302c302c302c3137392c3131352c3133312c3136322c3137332c34352c3233332c3233302c3134312c3136372c39352c38382c36322c3132352c31342c3234322c3233342c3232352c32342c37392c342c302c302c302c302c315d7d"
+            "000000000000b37383a2ad2de9e68da75f583e7d0ef2eae1184f04000000000400000000000000017b22726f6f74223a5b302c312c322c332c342c352c362c372c382c392c31302c31312c31322c31332c31342c31352c31362c31372c31382c31392c32302c32312c32322c32332c32342c32352c32362c32372c32382c32392c33302c33315d2c227372635f7265736f757263655f6964223a5b302c302c302c302c302c302c3137392c3131352c3133312c3136322c3137332c34352c3233332c3233302c3134312c3136372c39352c38382c36322c3132352c31342c3234322c3233342c3232352c32342c37392c342c302c302c302c302c315d7d"
         );
         assert_eq!(bytes, expected);
     }
 
     #[test]
     fn decode() {
-        let bytes = hex_literal::hex!("000000000000b37383a2ad2de9e68da75f583e7d0ef2eae1184f04000000000400000000000000017b22726f6f74223a5b302c312c322c332c342c352c362c372c382c392c31302c31312c31322c31332c31342c31352c31362c31372c31382c31392c32302c32312c32322c32332c32342c32352c32362c32372c32382c32392c33302c33315d2c22746172676574223a5b302c302c302c302c302c302c3137392c3131352c3133312c3136322c3137332c34352c3233332c3233302c3134312c3136372c39352c38382c36322c3132352c31342c3234322c3233342c3232352c32342c37392c342c302c302c302c302c315d7d");
+        let bytes = hex_literal::hex!("000000000000b37383a2ad2de9e68da75f583e7d0ef2eae1184f04000000000400000000000000017b22726f6f74223a5b302c312c322c332c342c352c362c372c382c392c31302c31312c31322c31332c31342c31352c31362c31372c31382c31392c32302c32312c32322c32332c32342c32352c32362c32372c32382c32392c33302c33315d2c227372635f7265736f757263655f6964223a5b302c302c302c302c302c302c3137392c3131352c3133312c3136322c3137332c34352c3233332c3233302c3134312c3136372c39352c38382c36322c3132352c31342c3234322c3233342c3232352c32342c37392c342c302c302c302c302c315d7d");
         let proposal = AnchorUpdateProposal::from(bytes.to_vec());
         let target_addr =
             cosmos_address_to_target_address(TARGET_CONTRACT_ADDR);
@@ -211,7 +210,7 @@ mod tests {
             0x16, 0x17, 0x18, 0x19, 0x1a, 0x1b, 0x1c, 0x1d, 0x1e, 0x1f,
         ];
         let expected =
-            AnchorUpdateProposal::new(header, merkle_root, src_resource_id.0);
+            AnchorUpdateProposal::new(header, merkle_root, src_resource_id);
         assert_eq!(proposal, expected);
     }
 }

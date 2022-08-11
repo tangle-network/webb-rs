@@ -1,5 +1,7 @@
 //! Anchor Update Proposal.
-use crate::{ProposalHeader, TypedChainId};
+use core::any::Any;
+
+use crate::{ProposalHeader, ResourceId, TypedChainId};
 
 /// Anchor Update Proposal.
 ///
@@ -9,37 +11,35 @@ use crate::{ProposalHeader, TypedChainId};
 ///
 /// The format of the proposal is:
 /// ```text
-/// ┌────────────────────┬─────────────────┬───────────────┬────────────────────┬────────────────┬───────────────┐
-/// │                    │                 │               │                    │                │               │
-/// │ ProposalHeader 40B │ SrcChainType 2B │ SrcChainId 4B │ LatestLeafIndex 4B │ MerkleRoot 32B │ Target ID 32B │
-/// │                    │                 │               │                    │                │               │
-/// └────────────────────┴─────────────────┴───────────────┴────────────────────┴────────────────┴───────────────┘
+/// ┌────────────────────┬─────────────────┬─────────────────────┐
+/// │                    │                 │                     │
+/// │ ProposalHeader 40B │  MerkleRoot 32B │ Src Resource ID 32B │
+/// │                    │                 │                     │
+/// └────────────────────┴─────────────────┴─────────────────────┘
 /// ```
 #[allow(clippy::module_name_repetitions)]
 #[derive(Debug, Copy, Clone, PartialEq, Eq, Hash)]
 pub struct AnchorUpdateProposal {
     header: ProposalHeader,
     merkle_root: [u8; 32],
-    target: [u8; 32],
+    src_resource_id: ResourceId,
 }
 
 impl AnchorUpdateProposal {
     /// Length of the proposal in bytes.
-    pub const LENGTH: usize = ProposalHeader::LENGTH
-        + 32    // merkle_root
-        + 32; // src resource id (target of the proposal)
+    pub const LENGTH: usize = ProposalHeader::LENGTH + 32 + ResourceId::LENGTH;
 
     /// Creates a new anchor update proposal.
     #[must_use]
     pub const fn new(
         header: ProposalHeader,
         merkle_root: [u8; 32],
-        target: [u8; 32],
+        src_resource_id: ResourceId,
     ) -> Self {
         Self {
             header,
             merkle_root,
-            target,
+            src_resource_id,
         }
     }
 
@@ -52,9 +52,13 @@ impl AnchorUpdateProposal {
     /// Get the source chain.
     #[must_use]
     pub fn src_chain(&self) -> TypedChainId {
-        let mut buf = [0u8; 6];
-        buf.copy_from_slice(self.target[26..32].to_vec().as_slice());
-        TypedChainId::from(buf)
+        self.src_resource_id.typed_chain_id()
+    }
+
+    /// Get the src_resource_id identifier.
+    #[must_use]
+    pub const fn src_resource_id(&self) -> ResourceId {
+        self.src_resource_id
     }
 
     /// Get the latest leaf index.
@@ -69,12 +73,6 @@ impl AnchorUpdateProposal {
         &self.merkle_root
     }
 
-    /// Get the target identifier.
-    #[must_use]
-    pub const fn target(&self) -> &[u8; 32] {
-        &self.target
-    }
-
     /// Get the proposal as a bytes
     #[must_use]
     pub fn to_bytes(&self) -> [u8; Self::LENGTH] {
@@ -86,8 +84,8 @@ impl AnchorUpdateProposal {
         let t = t + 32;
         bytes[f..t].copy_from_slice(&self.merkle_root);
         let f = t;
-        let t = t + 32;
-        bytes[f..t].copy_from_slice(&self.target);
+        let t = t + ResourceId::LENGTH;
+        bytes[f..t].copy_from_slice(&self.src_resource_id().to_bytes());
         bytes
     }
 
@@ -110,10 +108,10 @@ impl From<[u8; AnchorUpdateProposal::LENGTH]> for AnchorUpdateProposal {
         let mut merkle_root = [0u8; 32];
         merkle_root.copy_from_slice(&bytes[f..t]);
         let f = t;
-        let t = t + 32;
-        let mut target = [0u8; 32];
-        target.copy_from_slice(&bytes[f..t]);
-        Self::new(header, merkle_root, target)
+        let t = t + ResourceId::LENGTH;
+        let mut src_resource_id = [0u8; ResourceId::LENGTH];
+        src_resource_id.copy_from_slice(&bytes[f..t]);
+        Self::new(header, merkle_root, ResourceId(src_resource_id))
     }
 }
 
@@ -152,7 +150,7 @@ mod tests {
         let src_chain_id = TypedChainId::Evm(1);
         let src_resource_id = ResourceId::new(target_system, src_chain_id);
         let proposal =
-            AnchorUpdateProposal::new(header, merkle_root, src_resource_id.0);
+            AnchorUpdateProposal::new(header, merkle_root, src_resource_id);
         let bytes = proposal.to_bytes();
         let expected = hex_literal::hex!(
             "000000000000aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa010000000004"
@@ -190,7 +188,7 @@ mod tests {
         let src_chain = TypedChainId::Evm(1);
         let src_resource_id = ResourceId::new(target_system, src_chain);
         let expected =
-            AnchorUpdateProposal::new(header, merkle_root, src_resource_id.0);
+            AnchorUpdateProposal::new(header, merkle_root, src_resource_id);
         assert_eq!(proposal, expected);
     }
 }
