@@ -1,4 +1,5 @@
 /// The Proposal Target System.
+
 /// Target system format for Substrate
 /// ┌─────────────────────┬───────┬───────┬─────────────┐
 /// │                     │       │       │             │
@@ -20,6 +21,8 @@
 ///                  ▲                                  ▲
 ///                  │ 6                             25 │
 ///                  │                                  │
+use alloc::vec::Vec;
+/// TargetSystem (26 Bytes)
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
 #[cfg_attr(
     feature = "scale",
