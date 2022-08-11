@@ -37,6 +37,32 @@ impl TargetSystem {
             TargetSystem::TreeId(tree_id) => encode(&tree_id.to_be_bytes()),
         }
     }
+
+    /// Tries to turn `self` into a 20-byte EVM address, returns zeroes otherwise
+    #[must_use]
+    pub fn into_evm_address(self) -> [u8; 20] {
+        match self {
+            TargetSystem::ContractAddress(address) => address,
+            TargetSystem::TreeId(_) => [0u8; 20],
+        }
+    }
+
+    /// Tries to turn `self` into a 20-byte EVM address, returns zeroes otherwise
+    /// Note: The stub is mentioned because CW addresses are larger than 20 bytes.
+    /// This is a temporary solution until we have a proper solution.
+    #[must_use]
+    pub fn into_cosmwasm_address_stub(self) -> [u8; 20] {
+        self.into_evm_address()
+    }
+
+    /// Tries to turn `self` into a tree index, returns the max u32 otherwise
+    #[must_use]
+    pub fn into_substrate_tree_index(self) -> u32 {
+        match self {
+            TargetSystem::ContractAddress(_) => u32::MAX,
+            TargetSystem::TreeId(tree_id) => tree_id,
+        }
+    }
 }
 
 /// Proposal Target Function Signature (4 bytes).

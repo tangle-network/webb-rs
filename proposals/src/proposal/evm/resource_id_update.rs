@@ -7,11 +7,11 @@ use crate::{ProposalHeader, ResourceId};
 /// address.
 /// The format of the proposal looks like:
 /// ```text
-/// ┌────────────────────┬───────────────────┬────────────────────┬──────────────────────┐
-/// │                    │                   │                    │                      │
-/// │ ProposalHeader 40B │ NewResourceId 32B │ HandlerAddress 20B │ ExecutionAddress 20B │
-/// │                    │                   │                    │                      │
-/// └────────────────────┴───────────────────┴────────────────────┴──────────────────────┘
+/// ┌────────────────────┬───────────────────┬────────────────────┐
+/// │                    │                   │                    │
+/// │ ProposalHeader 40B │ NewResourceId 32B │ HandlerAddress 20B │
+/// │                    │                   │                    │
+/// └────────────────────┴───────────────────┴────────────────────┘
 /// ```
 #[allow(clippy::module_name_repetitions)]
 #[derive(Debug, Copy, Clone, PartialEq, Eq, Hash)]
@@ -19,15 +19,13 @@ pub struct ResourceIdUpdateProposal {
     header: ProposalHeader,
     new_resource_id: ResourceId,
     handler_address: [u8; 20],
-    execution_address: [u8; 20],
 }
 
 impl ResourceIdUpdateProposal {
     /// Length of the proposal in bytes.
     pub const LENGTH: usize = ProposalHeader::LENGTH
         + ResourceId::LENGTH // new_resource_id
-        + 20 // handler_address
-        + 20; // execution_address
+        + 20; // handler_address
 
     /// Creates a new resource id update proposal.
     #[must_use]
@@ -35,13 +33,11 @@ impl ResourceIdUpdateProposal {
         header: ProposalHeader,
         new_resource_id: ResourceId,
         handler_address: [u8; 20],
-        execution_address: [u8; 20],
     ) -> Self {
         Self {
             header,
             new_resource_id,
             handler_address,
-            execution_address,
         }
     }
 
@@ -65,8 +61,8 @@ impl ResourceIdUpdateProposal {
 
     /// Get the execution address.
     #[must_use]
-    pub const fn execution_address(&self) -> [u8; 20] {
-        self.execution_address
+    pub fn execution_address(&self) -> [u8; 20] {
+        self.new_resource_id().target_system().into_evm_address()
     }
 
     /// Get the proposal as a bytes
@@ -82,9 +78,6 @@ impl ResourceIdUpdateProposal {
         let f = t;
         let t = f + 20;
         bytes[f..t].copy_from_slice(&self.handler_address);
-        let f = t;
-        let t = f + 20;
-        bytes[f..t].copy_from_slice(&self.execution_address);
         bytes
     }
 
@@ -111,15 +104,10 @@ impl From<[u8; ResourceIdUpdateProposal::LENGTH]> for ResourceIdUpdateProposal {
         let t = f + 20;
         let mut handler_address = [0u8; 20];
         handler_address.copy_from_slice(&bytes[f..t]);
-        let f = t;
-        let t = f + 20;
-        let mut execution_address = [0u8; 20];
-        execution_address.copy_from_slice(&bytes[f..t]);
         Self {
             header,
             new_resource_id,
             handler_address,
-            execution_address,
         }
     }
 }
@@ -156,13 +144,10 @@ mod tests {
         let new_resource_id = ResourceId::new(new_target_system, target_chain);
         let handler_address =
             hex_literal::hex!("cccccccccccccccccccccccccccccccccccccccc");
-        let execution_address =
-            hex_literal::hex!("dddddddddddddddddddddddddddddddddddddddd");
         let proposal = ResourceIdUpdateProposal::new(
             header,
             new_resource_id,
             handler_address,
-            execution_address,
         );
         let bytes = proposal.to_bytes();
         let expected = hex_literal::hex!(
@@ -170,7 +155,6 @@ mod tests {
         "cafebabe00000001" // function_signature + nonce
         "000000000000bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb010000000004" // new_resource_id
         "cccccccccccccccccccccccccccccccccccccccc" // handler_address
-        "dddddddddddddddddddddddddddddddddddddddd" // execution_address
         );
         assert_eq!(bytes, expected);
     }
@@ -183,7 +167,6 @@ mod tests {
         "cafebabe00000001" // function_signature + nonce
         "000000000000bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb010000000004" // new_resource_id
         "cccccccccccccccccccccccccccccccccccccccc" // handler_address
-        "dddddddddddddddddddddddddddddddddddddddd" // execution_address
         );
         let proposal = ResourceIdUpdateProposal::from(bytes);
         let target_system = TargetSystem::new_contract_address(
@@ -202,13 +185,10 @@ mod tests {
         let new_resource_id = ResourceId::new(new_target_system, target_chain);
         let handler_address =
             hex_literal::hex!("cccccccccccccccccccccccccccccccccccccccc");
-        let execution_address =
-            hex_literal::hex!("dddddddddddddddddddddddddddddddddddddddd");
         let expected_proposal = ResourceIdUpdateProposal::new(
             header,
             new_resource_id,
             handler_address,
-            execution_address,
         );
         assert_eq!(proposal, expected_proposal);
     }

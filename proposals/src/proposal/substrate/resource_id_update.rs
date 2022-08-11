@@ -14,7 +14,6 @@ use alloc::vec::Vec;
 pub struct ResourceIdUpdateProposal {
     header: ProposalHeader,
     new_resource_id: ResourceId,
-    target_system: TargetSystem,
     #[builder(default = 50)]
     pallet_index: u8,
     #[builder(default = 1)]
@@ -36,8 +35,8 @@ impl ResourceIdUpdateProposal {
 
     /// Get target system.
     #[must_use]
-    pub const fn target_system(&self) -> TargetSystem {
-        self.target_system
+    pub fn target_system(&self) -> TargetSystem {
+        self.new_resource_id().target_system()
     }
 
     /// Get the proposal as a bytes
@@ -47,7 +46,6 @@ impl ResourceIdUpdateProposal {
         out.extend_from_slice(&self.header.to_bytes());
         let call = ExecuteSetResourceProposal {
             r_id: self.new_resource_id(),
-            target: self.target_system(),
         };
         // add pallet index
         out.push(self.pallet_index);
@@ -97,11 +95,9 @@ impl TryFrom<Vec<u8>> for ResourceIdUpdateProposal {
         let call: ExecuteSetResourceProposal =
             scale_codec::Decode::decode(&mut &value[42..])?;
         let new_resource_id = ResourceId::from(call.r_id);
-        let target_system = call.target;
         let proposal = ResourceIdUpdateProposal {
             header,
             new_resource_id,
-            target_system,
             pallet_index,
             call_index,
         };
@@ -112,7 +108,6 @@ impl TryFrom<Vec<u8>> for ResourceIdUpdateProposal {
 #[derive(scale_codec::Encode, scale_codec::Decode)]
 struct ExecuteSetResourceProposal {
     r_id: ResourceId,
-    target: TargetSystem,
 }
 
 #[cfg(test)]
@@ -134,19 +129,17 @@ mod tests {
         let header =
             ProposalHeader::new(resource_id, function_signature, nonce);
         // anchor tree_id
-        let target_system = TargetSystem::new_tree_id(3);
+        let new_target_system = TargetSystem::new_tree_id(3);
+        let new_resource_id = ResourceId::new(new_target_system, target_chain);
         let proposal = ResourceIdUpdateProposal::builder()
             .header(header)
-            .new_resource_id(resource_id)
-            .target_system(target_system)
+            .new_resource_id(new_resource_id)
             .build();
-
         let bytes = proposal.to_bytes();
         let expected = hex_literal::hex!(
         "0000000000000000000000000000000000000000000000000002020000000001cafebabe00000001" // header
         "3201" // pallet call, index call
-        "0000000000000000000000000000000000000000000000000002020000000001" // new_resource_id
-        "0103000000" // anchor target system
+        "0000000000000000000000000000000000000000000000000003020000000001" // new_resource_id
         );
         assert_eq!(bytes, expected);
     }
@@ -157,8 +150,7 @@ mod tests {
         let bytes = hex_literal::hex!(
         "0000000000000000000000000000000000000000000000000002020000000001cafebabe00000001" // header
         "3201" // pallet call, index call
-        "0000000000000000000000000000000000000000000000000002020000000001" // new_resource_id
-        "0103000000" // anchor target system
+        "0000000000000000000000000000000000000000000000000003020000000001" // new_resource_id
         );
         let proposal =
             ResourceIdUpdateProposal::try_from(bytes.to_vec()).unwrap();
@@ -171,11 +163,11 @@ mod tests {
         let header =
             ProposalHeader::new(resource_id, function_signature, nonce);
         // anchor target system
-        let target_system = TargetSystem::new_tree_id(3);
+        let new_target_system = TargetSystem::new_tree_id(3);
+        let new_resource_id = ResourceId::new(new_target_system, target_chain);
         let expected_proposal = ResourceIdUpdateProposal::builder()
             .header(header)
-            .new_resource_id(resource_id)
-            .target_system(target_system)
+            .new_resource_id(new_resource_id)
             .build();
         assert_eq!(proposal, expected_proposal);
     }
