@@ -26,8 +26,8 @@ pub struct AnchorUpdateProposal {
 impl AnchorUpdateProposal {
     /// Length of the proposal in bytes.
     pub const LENGTH: usize = ProposalHeader::LENGTH
-        + 32 // merkle_root
-        + 32; // target
+        + 32    // merkle_root
+        + 32; // src resource id (target of the proposal)
 
     /// Creates a new anchor update proposal.
     #[must_use]
@@ -144,17 +144,15 @@ mod tests {
             function_signature,
             Nonce::from(latest_leaf_index),
         );
-        let src_chain = TypedChainId::Evm(1);
         let merkle_root = [
             0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x0a,
             0x0b, 0x0c, 0x0d, 0x0e, 0x0f, 0x10, 0x11, 0x12, 0x13, 0x14, 0x15,
             0x16, 0x17, 0x18, 0x19, 0x1a, 0x1b, 0x1c, 0x1d, 0x1e, 0x1f,
         ];
-        let proposal = AnchorUpdateProposal::new(
-            header,
-            merkle_root,
-            target_system.into_fixed_bytes(),
-        );
+        let src_chain_id = TypedChainId::Evm(1);
+        let src_resource_id = ResourceId::new(target_system, src_chain_id);
+        let proposal =
+            AnchorUpdateProposal::new(header, merkle_root, src_resource_id.0);
         let bytes = proposal.to_bytes();
         let expected = hex_literal::hex!(
             "000000000000aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa010000000004"
@@ -189,11 +187,10 @@ mod tests {
             0x0b, 0x0c, 0x0d, 0x0e, 0x0f, 0x10, 0x11, 0x12, 0x13, 0x14, 0x15,
             0x16, 0x17, 0x18, 0x19, 0x1a, 0x1b, 0x1c, 0x1d, 0x1e, 0x1f,
         ];
-        let expected = AnchorUpdateProposal::new(
-            header,
-            merkle_root,
-            target_system.into_fixed_bytes(),
-        );
+        let src_chain = TypedChainId::Evm(1);
+        let src_resource_id = ResourceId::new(target_system, src_chain);
+        let expected =
+            AnchorUpdateProposal::new(header, merkle_root, src_resource_id.0);
         assert_eq!(proposal, expected);
     }
 }
