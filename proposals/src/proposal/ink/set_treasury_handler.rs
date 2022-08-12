@@ -1,28 +1,27 @@
-//! Maximum Deposit Limit Proposal.
+//! Set Treasury Handler Proposal.
 use crate::ProposalHeader;
 
-/// Maximum Deposit Limit Proposal.
+/// Set Treasury Handler Proposal.
 ///
-/// The [`MaxDepositLimitProposal`] updates the maximum deposit amount allowed
-/// on the variable anchor system.
+/// The [`SetTreasuryHandlerProposal`] Proposal sets the treasury handler
+/// address.
 ///
-#[allow(clippy::module_name_repetitions)]
 #[allow(clippy::module_name_repetitions)]
 #[derive(
     Debug, Copy, Clone, PartialEq, Eq, Hash, typed_builder::TypedBuilder,
 )]
-pub struct MaxDepositLimitProposal {
+pub struct SetTreasuryHandlerProposal {
     header: ProposalHeader,
-    max_deposit_limit: [u8; 32],
+    handler_address: [u8; 32],
 }
 
-impl MaxDepositLimitProposal {
-    /// Creates a new max deposit limit proposal.
+impl SetTreasuryHandlerProposal {
+    /// Creates a new token add proposal.
     #[must_use]
-    pub const fn new(header: ProposalHeader, max_limit: [u8; 32]) -> Self {
+    pub const fn new(header: ProposalHeader, address: [u8; 32]) -> Self {
         Self {
             header,
-            max_deposit_limit: max_limit,
+            handler_address: address,
         }
     }
 
@@ -32,10 +31,10 @@ impl MaxDepositLimitProposal {
         self.header
     }
 
-    /// Get the min withdrawal limit.
+    /// Get the handler address.
     #[must_use]
-    pub const fn max_deposit_limit(&self) -> [u8; 32] {
-        self.max_deposit_limit
+    pub fn handler_address(&self) -> [u8; 32] {
+        self.handler_address.clone()
     }
 
     /// Get the proposal as a bytes
@@ -44,13 +43,10 @@ impl MaxDepositLimitProposal {
         let mut bytes = vec![];
         bytes.extend_from_slice(&self.header.to_bytes());
 
-        let mut deposit_limit_bytes = [0u8; 16];
-        deposit_limit_bytes
-            .copy_from_slice(self.max_deposit_limit.split_at(16).1);
-        let message = ConfigureMaximumDepositLimit {
-            maximum_deposit_amount: u128::from_be_bytes(deposit_limit_bytes),
+        let message = SetHandler {
+            handler: self.handler_address.clone(),
+            nonce: self.header.nonce().0,
         };
-
         scale_codec::Encode::encode_to(&message, &mut bytes);
 
         bytes
@@ -63,7 +59,7 @@ impl MaxDepositLimitProposal {
     }
 }
 
-impl TryFrom<Vec<u8>> for MaxDepositLimitProposal {
+impl TryFrom<Vec<u8>> for SetTreasuryHandlerProposal {
     type Error = scale_codec::Error;
     fn try_from(bytes: Vec<u8>) -> Result<Self, Self::Error> {
         let mut header_bytes = [0u8; ProposalHeader::LENGTH];
@@ -77,27 +73,23 @@ impl TryFrom<Vec<u8>> for MaxDepositLimitProposal {
         header_bytes.copy_from_slice(parsed_header);
         let header = ProposalHeader::from(header_bytes);
 
-        let mut max_deposit_limit = [0u8; 32];
-
-        let decoded_msg: ConfigureMaximumDepositLimit =
+        let decoded_message: SetHandler =
             scale_codec::Decode::decode(&mut &bytes[40..])?;
 
-        max_deposit_limit[16..]
-            .copy_from_slice(&decoded_msg.maximum_deposit_amount.to_be_bytes());
-
-        Ok(Self::new(header, max_deposit_limit))
+        Ok(Self::new(header, decoded_message.handler))
     }
 }
 
-impl From<MaxDepositLimitProposal> for Vec<u8> {
-    fn from(proposal: MaxDepositLimitProposal) -> Self {
+impl From<SetTreasuryHandlerProposal> for Vec<u8> {
+    fn from(proposal: SetTreasuryHandlerProposal) -> Self {
         proposal.to_bytes()
     }
 }
 
 #[derive(scale_codec::Encode, scale_codec::Decode)]
-struct ConfigureMaximumDepositLimit {
-    maximum_deposit_amount: u128,
+struct SetHandler {
+    handler: [u8; 32],
+    nonce: u32,
 }
 
 #[cfg(test)]
@@ -111,6 +103,7 @@ mod tests {
     use super::*;
 
     const TARGET_CONTRACT_ADDR: [u8; 32] = [0u8; 32];
+    const HANDLER_ADDR: [u8; 32] = [1u8; 32];
 
     #[test]
     fn encode() {
@@ -123,34 +116,32 @@ mod tests {
         let nonce = Nonce::from(0x0001);
         let header =
             ProposalHeader::new(resource_id, function_signature, nonce);
-        let max_deposit_limit = hex_literal::hex!(
-            "00000000000000000000000000000000101112131415161718191a1b1c1d1e1f"
-        );
-        let proposal = MaxDepositLimitProposal::new(header, max_deposit_limit);
+        let proposal = SetTreasuryHandlerProposal::new(header, HANDLER_ADDR);
         let bytes = proposal.to_bytes();
         let expected = hex_literal::hex!(
-            "00000000000088386fc84ba6bc95484008f6362f93160ef3e56306000000000400000000000000011f1e1d1c1b1a19181716151413121110"
+            "00000000000088386fc84ba6bc95484008f6362f93160ef3e5630600000000040000000000000001010101010101010101010101010101010101010101010101010101010101010101000000"
         );
         assert_eq!(bytes, expected);
     }
 
     #[test]
     fn decode() {
-        let bytes = hex_literal::hex!("00000000000088386fc84ba6bc95484008f6362f93160ef3e56306000000000400000000000000011f1e1d1c1b1a19181716151413121110");
+        let bytes = hex_literal::hex!(
+            "00000000000088386fc84ba6bc95484008f6362f93160ef3e5630600000000040000000000000001010101010101010101010101010101010101010101010101010101010101010101000000"
+        );
         let proposal =
-            MaxDepositLimitProposal::try_from(bytes.to_vec()).unwrap();
+            SetTreasuryHandlerProposal::try_from(bytes.to_vec()).unwrap();
         let header = proposal.header();
         let resource_id = header.resource_id();
         let target_system = resource_id.target_system();
         let target_chain = resource_id.typed_chain_id();
         let function_signature = header.function_signature();
         let nonce = header.nonce();
-        let max_deposit_limit = proposal.max_deposit_limit();
         assert_eq!(
             target_system,
             TargetSystem::ContractAddress(ink_address_to_target_address(
                 TARGET_CONTRACT_ADDR
-            ))
+            )),
         );
         assert_eq!(target_chain, TypedChainId::Ink(4));
         assert_eq!(
@@ -158,11 +149,6 @@ mod tests {
             FunctionSignature::new(hex_literal::hex!("00000000"))
         );
         assert_eq!(nonce, Nonce::from(0x0001));
-        assert_eq!(
-            max_deposit_limit,
-            hex_literal::hex!(
-                "00000000000000000000000000000000101112131415161718191a1b1c1d1e1f"
-            )
-        );
+        assert_eq!(proposal.handler_address(), HANDLER_ADDR);
     }
 }

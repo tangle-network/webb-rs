@@ -41,7 +41,7 @@ impl FeeRecipientUpdateProposal {
     /// Get the proposal as a bytes
     #[must_use]
     pub fn to_bytes(&self) -> Vec<u8> {
-        let mut bytes = Vec::with_capacity(120);
+        let mut bytes = vec![];
         bytes.extend_from_slice(&self.header.to_bytes());
 
         let message = UpdateConfigMsg {
