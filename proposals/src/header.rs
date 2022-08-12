@@ -1,43 +1,7 @@
 //! The Proposal Header.
 
 use crate::nonce::Nonce;
-
-/// The Proposal Target System.
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
-#[cfg_attr(
-    feature = "scale",
-    derive(
-        scale_info::TypeInfo,
-        scale_codec::Encode,
-        scale_codec::Decode,
-        scale_codec::MaxEncodedLen
-    )
-)]
-pub enum TargetSystem {
-    /// Ethereum Contract address (20 bytes).
-    ContractAddress([u8; 20]),
-    /// Webb Protocol Merkle `TreeId` (4 bytes).
-    TreeId(u32),
-}
-
-impl TargetSystem {
-    /// Turns `self` into a 32 byte array.
-    #[must_use]
-    pub fn into_fixed_bytes(self) -> [u8; 32] {
-        let encode = |elt: &[u8]| {
-            let mut buf = [0u8; 32];
-            buf.iter_mut()
-                .rev()
-                .zip(elt.iter().rev())
-                .for_each(|(a, b)| *a = *b);
-            buf
-        };
-        match self {
-            TargetSystem::ContractAddress(address) => encode(&address),
-            TargetSystem::TreeId(tree_id) => encode(&tree_id.to_be_bytes()),
-        }
-    }
-}
+use crate::target_system::TargetSystem;
 
 /// Proposal Target Function Signature (4 bytes).
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Ord, PartialOrd)]
@@ -114,9 +78,12 @@ impl Default for TypedChainId {
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Ord, PartialOrd)]
 #[allow(clippy::module_name_repetitions)]
 pub struct ProposalHeader {
-    resource_id: ResourceId,
-    function_signature: FunctionSignature,
-    nonce: Nonce,
+    /// Resource ID of the execution context
+    pub resource_id: ResourceId,
+    /// Function signature / identifier
+    pub function_signature: FunctionSignature,
+    /// Nonce for proposal execution
+    pub nonce: Nonce,
 }
 
 impl TypedChainId {
@@ -318,81 +285,6 @@ impl From<[u8; ResourceId::LENGTH]> for ResourceId {
 impl From<ResourceId> for [u8; ResourceId::LENGTH] {
     fn from(resource_id: ResourceId) -> Self {
         resource_id.0
-    }
-}
-
-impl TargetSystem {
-    /// Length of the `TargetSystem` (26 bytes).
-    pub const LENGTH: usize = 26;
-    /// Create a new `TargetSystem` as a `ContractAddress`.
-    #[must_use]
-    pub fn new_contract_address<T: Into<[u8; 20]>>(address: T) -> Self {
-        let bytes = address.into();
-        Self::ContractAddress(bytes)
-    }
-    /// Create a new `TargetSystem` as a `TreeId`.
-    #[must_use]
-    pub fn new_tree_id(tree_id: u32) -> Self {
-        Self::TreeId(tree_id)
-    }
-
-    /// Get the underlying bytes of the `TargetSystem`.
-    #[must_use]
-    pub fn to_bytes(&self) -> [u8; Self::LENGTH] {
-        match self {
-            TargetSystem::ContractAddress(address) => {
-                let mut bytes = [0u8; TargetSystem::LENGTH];
-                let f = 6usize;
-                let t = f + 20;
-                bytes[f..t].copy_from_slice(address);
-                bytes
-            }
-            TargetSystem::TreeId(tree_id) => {
-                let mut bytes = [0u8; TargetSystem::LENGTH];
-                let f = 22usize;
-                let t = f + core::mem::size_of::<u32>();
-                bytes[f..t].copy_from_slice(&tree_id.to_be_bytes());
-                bytes
-            }
-        }
-    }
-
-    /// Get the underlying bytes of the `TargetSystem` without copying.
-    #[must_use]
-    pub fn into_bytes(self) -> [u8; Self::LENGTH] {
-        self.to_bytes()
-    }
-}
-
-impl From<[u8; TargetSystem::LENGTH]> for TargetSystem {
-    fn from(bytes: [u8; TargetSystem::LENGTH]) -> Self {
-        // check the first 22 bytes are zeros.
-        // if not, it is a contract address.
-        if bytes[0..22].iter().all(|&x| x == 0) {
-            let mut tree_id_bytes = [0u8; 4];
-            let f = 22usize;
-            let t = f + core::mem::size_of::<u32>();
-            tree_id_bytes.copy_from_slice(&bytes[f..t]);
-            TargetSystem::TreeId(u32::from_be_bytes(tree_id_bytes))
-        } else {
-            let mut address_bytes = [0u8; 20];
-            let f = 6usize;
-            let t = f + 20;
-            address_bytes.copy_from_slice(&bytes[f..t]);
-            TargetSystem::ContractAddress(address_bytes)
-        }
-    }
-}
-
-impl From<TargetSystem> for [u8; TargetSystem::LENGTH] {
-    fn from(target_system: TargetSystem) -> Self {
-        target_system.into_bytes()
-    }
-}
-
-impl Default for TargetSystem {
-    fn default() -> Self {
-        TargetSystem::TreeId(0)
     }
 }
 

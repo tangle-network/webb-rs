@@ -14,11 +14,6 @@ use alloc::vec::Vec;
 pub struct ResourceIdUpdateProposal {
     header: ProposalHeader,
     new_resource_id: ResourceId,
-    target_system: TargetSystem,
-    #[builder(default = 50)]
-    pallet_index: u8,
-    #[builder(default = 1)]
-    call_index: u8,
 }
 
 impl ResourceIdUpdateProposal {
@@ -36,23 +31,29 @@ impl ResourceIdUpdateProposal {
 
     /// Get target system.
     #[must_use]
-    pub const fn target_system(&self) -> TargetSystem {
-        self.target_system
+    pub fn target_system(&self) -> TargetSystem {
+        self.new_resource_id().target_system()
     }
 
     /// Get the proposal as a bytes
     #[must_use]
     pub fn to_bytes(&self) -> Vec<u8> {
         let mut out = Vec::with_capacity(40 + 40 + 40 + 40);
+        let target_system = self.header().resource_id().target_system();
+
+        let target_details = match target_system {
+            TargetSystem::Substrate(target) => target,
+            _ => unreachable!("Unexpected target system for substrate"),
+        };
+
         out.extend_from_slice(&self.header.to_bytes());
         let call = ExecuteSetResourceProposal {
             r_id: self.new_resource_id(),
-            target: self.target_system(),
         };
         // add pallet index
-        out.push(self.pallet_index);
+        out.push(target_details.pallet_index);
         // add call index
-        out.push(self.call_index);
+        out.push(target_details.call_index);
         scale_codec::Encode::encode_to(&call, &mut out);
         out
     }
@@ -85,25 +86,13 @@ impl TryFrom<Vec<u8>> for ResourceIdUpdateProposal {
         header_bytes.copy_from_slice(parsed_header);
         let header = ProposalHeader::from(header_bytes);
 
-        // parse pallet index
-        let pallet_index = value.get(40).copied().ok_or_else(|| {
-            scale_codec::Error::from("invalid proposal: missing pallet index")
-        })?;
-        // parse call index
-        let call_index = value.get(41).copied().ok_or_else(|| {
-            scale_codec::Error::from("invalid proposal: missing call index")
-        })?;
         // parse encoded proposal call
         let call: ExecuteSetResourceProposal =
             scale_codec::Decode::decode(&mut &value[42..])?;
         let new_resource_id = ResourceId::from(call.r_id);
-        let target_system = call.target;
         let proposal = ResourceIdUpdateProposal {
             header,
             new_resource_id,
-            target_system,
-            pallet_index,
-            call_index,
         };
         Ok(proposal)
     }
@@ -112,20 +101,25 @@ impl TryFrom<Vec<u8>> for ResourceIdUpdateProposal {
 #[derive(scale_codec::Encode, scale_codec::Decode)]
 struct ExecuteSetResourceProposal {
     r_id: ResourceId,
-    target: TargetSystem,
 }
 
 #[cfg(test)]
 mod tests {
     use crate::{
-        FunctionSignature, Nonce, ResourceId, TargetSystem, TypedChainId,
+        FunctionSignature, Nonce, ResourceId, SubstrateTargetSystem,
+        TargetSystem, TypedChainId,
     };
 
     use super::*;
 
     #[test]
     fn encode() {
-        let target_system = TargetSystem::new_tree_id(2);
+        let target = SubstrateTargetSystem::builder()
+            .pallet_index(50)
+            .call_index(1)
+            .tree_id(2)
+            .build();
+        let target_system = TargetSystem::Substrate(target);
         let target_chain = TypedChainId::Substrate(1);
         let resource_id = ResourceId::new(target_system, target_chain);
         let function_signature =
@@ -134,19 +128,22 @@ mod tests {
         let header =
             ProposalHeader::new(resource_id, function_signature, nonce);
         // anchor tree_id
-        let target_system = TargetSystem::new_tree_id(3);
+        let new_target = SubstrateTargetSystem::builder()
+            .pallet_index(50)
+            .call_index(1)
+            .tree_id(3)
+            .build();
+        let new_target_system = TargetSystem::Substrate(new_target);
+        let new_resource_id = ResourceId::new(new_target_system, target_chain);
         let proposal = ResourceIdUpdateProposal::builder()
             .header(header)
-            .new_resource_id(resource_id)
-            .target_system(target_system)
+            .new_resource_id(new_resource_id)
             .build();
-
         let bytes = proposal.to_bytes();
         let expected = hex_literal::hex!(
-        "0000000000000000000000000000000000000000000000000002020000000001cafebabe00000001" // header
+        "0000000000000000000000000000000000000000320100000002020000000001cafebabe00000001" // header
         "3201" // pallet call, index call
-        "0000000000000000000000000000000000000000000000000002020000000001" // new_resource_id
-        "0103000000" // anchor target system
+        "0000000000000000000000000000000000000000320100000003020000000001" // new_resource_id
         );
         assert_eq!(bytes, expected);
     }
@@ -155,14 +152,18 @@ mod tests {
     fn decode() {
         // do the reverse of encode
         let bytes = hex_literal::hex!(
-        "0000000000000000000000000000000000000000000000000002020000000001cafebabe00000001" // header
+        "0000000000000000000000000000000000000000320100000002020000000001cafebabe00000001" // header
         "3201" // pallet call, index call
-        "0000000000000000000000000000000000000000000000000002020000000001" // new_resource_id
-        "0103000000" // anchor target system
+        "0000000000000000000000000000000000000000320100000003020000000001" // new_resource_id
         );
         let proposal =
             ResourceIdUpdateProposal::try_from(bytes.to_vec()).unwrap();
-        let target_system = TargetSystem::new_tree_id(2);
+        let target = SubstrateTargetSystem::builder()
+            .pallet_index(50)
+            .call_index(1)
+            .tree_id(2)
+            .build();
+        let target_system = TargetSystem::Substrate(target);
         let target_chain = TypedChainId::Substrate(1);
         let resource_id = ResourceId::new(target_system, target_chain);
         let function_signature =
@@ -171,11 +172,16 @@ mod tests {
         let header =
             ProposalHeader::new(resource_id, function_signature, nonce);
         // anchor target system
-        let target_system = TargetSystem::new_tree_id(3);
+        let src_system = SubstrateTargetSystem::builder()
+            .pallet_index(50)
+            .call_index(1)
+            .tree_id(3)
+            .build();
+        let src_target_system = TargetSystem::Substrate(src_system);
+        let new_resource_id = ResourceId::new(src_target_system, target_chain);
         let expected_proposal = ResourceIdUpdateProposal::builder()
             .header(header)
-            .new_resource_id(resource_id)
-            .target_system(target_system)
+            .new_resource_id(new_resource_id)
             .build();
         assert_eq!(proposal, expected_proposal);
     }
