@@ -64,7 +64,7 @@ impl ResourceIdUpdateProposal {
     pub fn execution_address(&self) -> [u8; 20] {
         self.new_resource_id()
             .target_system()
-            .into_contract_address()
+            .into_contract_address_or_default()
     }
 
     /// Get the proposal as a bytes
