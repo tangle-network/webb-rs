@@ -78,9 +78,12 @@ impl Default for TypedChainId {
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Ord, PartialOrd)]
 #[allow(clippy::module_name_repetitions)]
 pub struct ProposalHeader {
-    resource_id: ResourceId,
-    function_signature: FunctionSignature,
-    nonce: Nonce,
+    /// Resource ID of the execution context
+    pub resource_id: ResourceId,
+    /// Function signature / identifier
+    pub function_signature: FunctionSignature,
+    /// Nonce for proposal execution
+    pub nonce: Nonce,
 }
 
 impl TypedChainId {

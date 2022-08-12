@@ -102,12 +102,22 @@ impl TargetSystem {
         self.to_bytes()
     }
 
-    /// Get susbtrate TargetSystem details
+    /// Get substrate TargetSystem details
     #[must_use]
     pub fn get_substrate_target_system(self) -> Option<SubstrateTargetSystem> {
         match self {
             TargetSystem::Substrate(target_system) => Some(target_system),
             _ => None,
+        }
+    }
+
+    /// Get smart contract address from the target system.
+    /// Returns `[0; 20]` if the target system is not a contract address.
+    #[must_use]
+    pub fn into_contract_address_or_default(self) -> [u8; 20] {
+        match self {
+            TargetSystem::ContractAddress(address) => address,
+            _ => [0; 20],
         }
     }
 
