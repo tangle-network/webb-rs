@@ -7,10 +7,9 @@ use crate::{ProposalHeader, ResourceId, TypedChainId};
 /// The [`AnchorUpdateProposal`] updates the target Anchor's knowledge of the
 /// source Anchor's Merkle roots. This knowledge is necessary to prove
 /// membership in the source Anchor's Merkle tree on the target chain.
-///
 #[allow(clippy::module_name_repetitions)]
 #[derive(
-Debug, Copy, Clone, PartialEq, Eq, Hash, typed_builder::TypedBuilder,
+    Debug, Copy, Clone, PartialEq, Eq, Hash, typed_builder::TypedBuilder,
 )]
 pub struct AnchorUpdateProposal {
     header: ProposalHeader,
@@ -100,7 +99,8 @@ impl TryFrom<Vec<u8>> for AnchorUpdateProposal {
         header_bytes.copy_from_slice(parsed_header);
         let header = ProposalHeader::from(header_bytes);
 
-        let decoded_edge_data: UpdateEdge = scale_codec::Decode::decode(&mut &bytes[40..])?;
+        let decoded_edge_data: UpdateEdge =
+            scale_codec::Decode::decode(&mut &bytes[40..])?;
 
         Ok(Self::new(
             header,
@@ -128,7 +128,8 @@ impl From<crate::evm::AnchorUpdateProposal> for AnchorUpdateProposal {
     }
 }
 
-// if we have Substrate available, we can convert the Substrate proposal to a ink proposal
+// if we have Substrate available, we can convert the Substrate proposal to a
+// ink proposal
 #[cfg(feature = "substrate")]
 impl From<crate::substrate::AnchorUpdateProposal> for AnchorUpdateProposal {
     fn from(proposal: crate::substrate::AnchorUpdateProposal) -> Self {
@@ -140,7 +141,8 @@ impl From<crate::substrate::AnchorUpdateProposal> for AnchorUpdateProposal {
     }
 }
 
-// if we have Cosmwasm available, we can convert the Cosmwasm proposal to a ink proposal
+// if we have Cosmwasm available, we can convert the Cosmwasm proposal to a ink
+// proposal
 #[cfg(feature = "cosmwasm")]
 impl From<crate::cosmwasm::AnchorUpdateProposal> for AnchorUpdateProposal {
     fn from(proposal: crate::cosmwasm::AnchorUpdateProposal) -> Self {
@@ -160,11 +162,8 @@ struct UpdateEdge {
 
 #[cfg(test)]
 mod tests {
-    use crate::{
-        FunctionSignature, Nonce,
-        ResourceId, TargetSystem,
-    };
     use crate::ink::ink_address_to_target_address;
+    use crate::{FunctionSignature, Nonce, ResourceId, TargetSystem};
 
     use super::*;
 
@@ -172,8 +171,7 @@ mod tests {
 
     #[test]
     fn encode() {
-        let target_addr =
-            ink_address_to_target_address(TARGET_CONTRACT_ADDR);
+        let target_addr = ink_address_to_target_address(TARGET_CONTRACT_ADDR);
         let target_system = TargetSystem::ContractAddress(target_addr);
         let target_chain = TypedChainId::Ink(4);
         let resource_id = ResourceId::new(target_system, target_chain);
@@ -196,7 +194,14 @@ mod tests {
         let expected = hex_literal::hex!(
             "00000000000088386fc84ba6bc95484008f6362f93160ef3e5630600000000040000000000000001000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f00000000000088386fc84ba6bc95484008f6362f93160ef3e563060000000001"
         );
-        let decoded = hex::encode([0, 0, 0, 0, 0, 0, 136, 56, 111, 200, 75, 166, 188, 149, 72, 64, 8, 246, 54, 47, 147, 22, 14, 243, 229, 99, 6, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 0, 0, 0, 0, 0, 0, 136, 56, 111, 200, 75, 166, 188, 149, 72, 64, 8, 246, 54, 47, 147, 22, 14, 243, 229, 99, 6, 0, 0, 0, 0, 1]);
+        let decoded = hex::encode([
+            0, 0, 0, 0, 0, 0, 136, 56, 111, 200, 75, 166, 188, 149, 72, 64, 8,
+            246, 54, 47, 147, 22, 14, 243, 229, 99, 6, 0, 0, 0, 0, 4, 0, 0, 0,
+            0, 0, 0, 0, 1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14,
+            15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31,
+            0, 0, 0, 0, 0, 0, 136, 56, 111, 200, 75, 166, 188, 149, 72, 64, 8,
+            246, 54, 47, 147, 22, 14, 243, 229, 99, 6, 0, 0, 0, 0, 1,
+        ]);
         dbg!(decoded);
         assert_eq!(bytes, expected);
     }
@@ -205,8 +210,7 @@ mod tests {
     fn decode() {
         let bytes = hex_literal::hex!("00000000000088386fc84ba6bc95484008f6362f93160ef3e5630600000000040000000000000001000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f00000000000088386fc84ba6bc95484008f6362f93160ef3e563060000000001");
         let proposal = AnchorUpdateProposal::try_from(bytes.to_vec()).unwrap();
-        let target_addr =
-            ink_address_to_target_address(TARGET_CONTRACT_ADDR);
+        let target_addr = ink_address_to_target_address(TARGET_CONTRACT_ADDR);
         let target_system = TargetSystem::ContractAddress(target_addr);
         let target_chain = TypedChainId::Ink(4);
         let resource_id = ResourceId::new(target_system, target_chain);

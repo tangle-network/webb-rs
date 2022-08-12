@@ -10,7 +10,6 @@ use crate::{ProposalHeader, ResourceId, TypedChainId};
 /// The [`AnchorUpdateProposal`] updates the target Anchor's knowledge of the
 /// source Anchor's Merkle roots. This knowledge is necessary to prove
 /// membership in the source Anchor's Merkle tree on the target chain.
-///
 #[allow(clippy::module_name_repetitions)]
 #[derive(Debug, Copy, Clone, PartialEq, Eq, Hash)]
 pub struct AnchorUpdateProposal {
@@ -115,7 +114,8 @@ impl From<AnchorUpdateProposal> for Vec<u8> {
     }
 }
 
-// if we have EVM available, we can convert the EVM proposal to a cosmwasm proposal
+// if we have EVM available, we can convert the EVM proposal to a cosmwasm
+// proposal
 #[cfg(feature = "evm")]
 impl From<crate::evm::AnchorUpdateProposal> for AnchorUpdateProposal {
     fn from(proposal: crate::evm::AnchorUpdateProposal) -> Self {
@@ -127,7 +127,8 @@ impl From<crate::evm::AnchorUpdateProposal> for AnchorUpdateProposal {
     }
 }
 
-// if we have Substrate available, we can convert the EVM proposal to a cosmwasm proposal
+// if we have Substrate available, we can convert the EVM proposal to a cosmwasm
+// proposal
 #[cfg(feature = "substrate")]
 impl From<crate::substrate::AnchorUpdateProposal> for AnchorUpdateProposal {
     fn from(proposal: crate::substrate::AnchorUpdateProposal) -> Self {

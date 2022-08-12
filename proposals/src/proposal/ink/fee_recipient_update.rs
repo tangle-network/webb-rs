@@ -5,7 +5,6 @@ use crate::ProposalHeader;
 ///
 /// The [`FeeRecipientUpdateProposal`] updates the recipient of the wrapping
 /// fees.
-///
 #[allow(clippy::module_name_repetitions)]
 #[derive(
     Debug, Copy, Clone, PartialEq, Eq, Hash, typed_builder::TypedBuilder,

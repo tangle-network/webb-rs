@@ -5,7 +5,6 @@ use crate::ProposalHeader;
 ///
 /// The [`SetTreasuryHandlerProposal`] Proposal sets the treasury handler
 /// address.
-///
 #[allow(clippy::module_name_repetitions)]
 #[derive(
     Debug, Copy, Clone, PartialEq, Eq, Hash, typed_builder::TypedBuilder,
@@ -96,8 +95,7 @@ struct SetHandler {
 mod tests {
     use crate::ink::ink_address_to_target_address;
     use crate::{
-        FunctionSignature, Nonce,
-        ResourceId, TargetSystem, TypedChainId,
+        FunctionSignature, Nonce, ResourceId, TargetSystem, TypedChainId,
     };
 
     use super::*;

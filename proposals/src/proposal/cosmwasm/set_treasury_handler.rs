@@ -8,7 +8,6 @@ use serde::{Deserialize, Serialize};
 ///
 /// The [`SetTreasuryHandlerProposal`] Proposal sets the treasury handler
 /// address.
-///
 #[allow(clippy::module_name_repetitions)]
 #[derive(Debug, Clone, PartialEq, Eq, Hash)]
 pub struct SetTreasuryHandlerProposal {

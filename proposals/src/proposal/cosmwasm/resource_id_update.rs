@@ -8,7 +8,6 @@ use serde::{Deserialize, Serialize};
 ///
 /// The [`ResourceIdUpdateProposal`] maps a new resource Id to a handler
 /// address.
-///
 #[allow(clippy::module_name_repetitions)]
 #[derive(Debug, Clone, PartialEq, Eq, Hash)]
 pub struct ResourceIdUpdateProposal {

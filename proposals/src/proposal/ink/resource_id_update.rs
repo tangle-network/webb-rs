@@ -5,7 +5,6 @@ use crate::{ProposalHeader, ResourceId};
 ///
 /// The [`ResourceIdUpdateProposal`] maps a new resource Id to a handler
 /// address.
-///
 #[allow(clippy::module_name_repetitions)]
 #[derive(
     Debug, Copy, Clone, PartialEq, Eq, Hash, typed_builder::TypedBuilder,
@@ -130,8 +129,7 @@ struct ResourceIdUpdateData {
 mod tests {
     use crate::ink::ink_address_to_target_address;
     use crate::{
-        FunctionSignature, Nonce,
-        ResourceId, TargetSystem, TypedChainId,
+        FunctionSignature, Nonce, ResourceId, TargetSystem, TypedChainId,
     };
 
     use super::*;

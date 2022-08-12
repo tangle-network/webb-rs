@@ -5,7 +5,6 @@ use crate::ProposalHeader;
 ///
 /// The [`MinWithdrawalLimitProposal`] updates the minimum withdrawal amount
 /// allowed on the variable anchor system.
-///
 #[allow(clippy::module_name_repetitions)]
 #[allow(clippy::module_name_repetitions)]
 #[derive(
@@ -105,8 +104,7 @@ struct ConfigureMinimalWithdrawalLimit {
 mod tests {
     use crate::ink::ink_address_to_target_address;
     use crate::{
-        FunctionSignature, Nonce,
-        ResourceId, TargetSystem, TypedChainId,
+        FunctionSignature, Nonce, ResourceId, TargetSystem, TypedChainId,
     };
 
     use super::*;

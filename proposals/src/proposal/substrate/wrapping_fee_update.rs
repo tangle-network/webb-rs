@@ -7,7 +7,8 @@ use alloc::vec::Vec;
 
 /// Wrapping Fee Update Proposal.
 ///
-/// The [`WrappingFeeUpdateProposal`] updates the wrapping fee percentage for a specific pool share.
+/// The [`WrappingFeeUpdateProposal`] updates the wrapping fee percentage for a
+/// specific pool share.
 #[allow(clippy::module_name_repetitions)]
 #[derive(
     Debug, Copy, Clone, PartialEq, Eq, Hash, typed_builder::TypedBuilder,
@@ -37,7 +38,8 @@ impl WrappingFeeUpdateProposal {
     }
 
     /// Get the pool share id.
-    /// The pool share id is the id of the pool share that the wrapping fee will be applied to.
+    /// The pool share id is the id of the pool share that the wrapping fee will
+    /// be applied to.
     #[must_use]
     pub const fn pool_share_id(&self) -> u32 {
         self.into_pool_share_id

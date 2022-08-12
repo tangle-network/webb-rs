@@ -3,9 +3,8 @@ use crate::ProposalHeader;
 
 /// Token Remove Proposal.
 ///
-/// The [`TokenRemoveProposal`] allows the token specified by the `TokenAddress` to
-/// be wrapped into the WEBB token.
-///
+/// The [`TokenRemoveProposal`] allows the token specified by the `TokenAddress`
+/// to be wrapped into the WEBB token.
 #[allow(clippy::module_name_repetitions)]
 #[derive(
     Debug, Copy, Clone, PartialEq, Eq, Hash, typed_builder::TypedBuilder,
@@ -96,8 +95,7 @@ struct RemovePsp22TokenAddr {
 mod tests {
     use crate::ink::ink_address_to_target_address;
     use crate::{
-        FunctionSignature, Nonce,
-        ResourceId, TargetSystem, TypedChainId,
+        FunctionSignature, Nonce, ResourceId, TargetSystem, TypedChainId,
     };
 
     use super::*;

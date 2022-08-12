@@ -8,7 +8,6 @@ use serde::{Deserialize, Serialize};
 ///
 /// The [`MaxDepositLimitProposal`] updates the maximum deposit amount allowed
 /// on the variable anchor system.
-///
 #[allow(clippy::module_name_repetitions)]
 #[derive(Debug, Copy, Clone, PartialEq, Eq, Hash)]
 pub struct MaxDepositLimitProposal {

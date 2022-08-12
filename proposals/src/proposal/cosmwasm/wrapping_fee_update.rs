@@ -7,7 +7,6 @@ use serde::{Deserialize, Serialize};
 /// Wrapping Fee Update Proposal.
 ///
 /// The [`WrappingFeeUpdateProposal`] updates the wrapping fee percentage.
-///
 #[allow(clippy::module_name_repetitions)]
 #[derive(Debug, Copy, Clone, PartialEq, Eq, Hash)]
 pub struct WrappingFeeUpdateProposal {

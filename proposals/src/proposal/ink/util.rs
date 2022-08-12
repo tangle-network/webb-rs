@@ -1,13 +1,14 @@
 use tiny_keccak::{Hasher, Keccak};
 
 /// Convert the ink account address(32 bytes)
-/// and contract address(32 bytes) to Webb proposal target system address(20 bytes).
+/// and contract address(32 bytes) to Webb proposal target system address(20
+/// bytes).
 ///
 /// Example:
 ///   Contract/account addr:  juno16e3t7td2wu0wmggnxa3xnyu5whljyed69ptvkp
-///   Keccak256 hash:         7164f72199667ca6301626c67e4dba0a5a2e4cd1703af65d04e3e566845a4f7c
+///   Keccak256 hash:
+/// 7164f72199667ca6301626c67e4dba0a5a2e4cd1703af65d04e3e566845a4f7c
 ///   Target addr(hex):       7e4dba0a5a2e4cd1703af65d04e3e566845a4f7c
-///
 pub fn ink_address_to_target_address(ink_address: [u8; 32]) -> [u8; 20] {
     let mut keccak = Keccak::v256();
     keccak.update(&ink_address);

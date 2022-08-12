@@ -8,7 +8,6 @@ use serde::{Deserialize, Serialize};
 ///
 /// The `RescueTokensProposal` rescues tokens from the treasury to a specified
 /// `to` address.
-///
 #[allow(clippy::module_name_repetitions)]
 #[derive(Debug, Clone, PartialEq, Eq, Hash)]
 pub struct RescueTokensProposal {

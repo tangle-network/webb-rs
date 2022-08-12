@@ -5,7 +5,6 @@ use crate::ProposalHeader;
 ///
 /// The [`MaxDepositLimitProposal`] updates the maximum deposit amount allowed
 /// on the variable anchor system.
-///
 #[allow(clippy::module_name_repetitions)]
 #[allow(clippy::module_name_repetitions)]
 #[derive(
@@ -104,8 +103,7 @@ struct ConfigureMaximumDepositLimit {
 mod tests {
     use crate::ink::ink_address_to_target_address;
     use crate::{
-        FunctionSignature, Nonce,
-        ResourceId, TargetSystem, TypedChainId,
+        FunctionSignature, Nonce, ResourceId, TargetSystem, TypedChainId,
     };
 
     use super::*;

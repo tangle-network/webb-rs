@@ -8,7 +8,6 @@ use serde::{Deserialize, Serialize};
 ///
 /// The [`TokenAddProposal`] allows the token specified by the `TokenAddress` to
 /// be wrapped into the WEBB token.
-///
 #[allow(clippy::module_name_repetitions)]
 #[derive(Debug, Clone, PartialEq, Eq, Hash)]
 pub struct TokenAddProposal {

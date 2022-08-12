@@ -5,7 +5,6 @@ use crate::ProposalHeader;
 ///
 /// The [`TokenAddProposal`] allows the token specified by the `TokenAddress` to
 /// be wrapped into the WEBB token.
-///
 #[allow(clippy::module_name_repetitions)]
 #[derive(
     Debug, Copy, Clone, PartialEq, Eq, Hash, typed_builder::TypedBuilder,
@@ -96,8 +95,7 @@ struct AddPsp22TokenAddr {
 mod tests {
     use crate::ink::ink_address_to_target_address;
     use crate::{
-        FunctionSignature, Nonce,
-        ResourceId, TargetSystem, TypedChainId,
+        FunctionSignature, Nonce, ResourceId, TargetSystem, TypedChainId,
     };
 
     use super::*;
