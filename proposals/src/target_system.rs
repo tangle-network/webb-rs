@@ -111,12 +111,13 @@ impl TargetSystem {
         }
     }
 
-    /// Get smart contract TargetSystem details
+    /// Get smart contract address from the target system.
+    /// Returns [`None`] if the target system is not a contract address.
     #[must_use]
-    pub fn into_contract_address(self) -> [u8; 20] {
+    pub fn into_contract_address(self) -> Option<[u8; 20]> {
         match self {
-            TargetSystem::ContractAddress(address) => address,
-            _ => [0u8; 20],
+            TargetSystem::ContractAddress(address) => Some(address),
+            _ => None,
         }
     }
 
