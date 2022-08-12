@@ -7,7 +7,6 @@ use crate::ProposalHeader;
 /// fees.
 ///
 #[allow(clippy::module_name_repetitions)]
-#[allow(clippy::module_name_repetitions)]
 #[derive(
     Debug, Copy, Clone, PartialEq, Eq, Hash, typed_builder::TypedBuilder,
 )]

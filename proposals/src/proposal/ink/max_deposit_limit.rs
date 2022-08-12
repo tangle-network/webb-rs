@@ -104,7 +104,7 @@ struct ConfigureMaximumDepositLimit {
 mod tests {
     use crate::ink::ink_address_to_target_address;
     use crate::{
-        cosmwasm::cosmos_address_to_target_address, FunctionSignature, Nonce,
+        FunctionSignature, Nonce,
         ResourceId, TargetSystem, TypedChainId,
     };
 
