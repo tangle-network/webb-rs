@@ -1,6 +1,4 @@
 //! Anchor Update Proposal.
-use core::any::Any;
-
 use crate::{ProposalHeader, ResourceId, TypedChainId};
 
 /// Anchor Update Proposal.

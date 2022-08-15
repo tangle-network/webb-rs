@@ -1,6 +1,8 @@
 use core::ops::{Add, Mul};
-
 use num_traits::{Bounded, CheckedMul, One, Saturating, Zero};
+
+#[cfg(feature = "std")]
+use serde::{Deserialize, Serialize};
 
 /// Proposal Nonce (4 bytes).
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Ord, PartialOrd)]
@@ -8,6 +10,7 @@ use num_traits::{Bounded, CheckedMul, One, Saturating, Zero};
     feature = "scale",
     derive(scale_info::TypeInfo, scale_codec::Encode, scale_codec::Decode)
 )]
+#[cfg_attr(feature = "std", derive(Serialize, Deserialize))]
 pub struct Nonce(pub u32);
 
 impl Add for Nonce {

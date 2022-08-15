@@ -3,6 +3,9 @@
 use crate::nonce::Nonce;
 use crate::target_system::TargetSystem;
 
+#[cfg(feature = "std")]
+use serde::{Deserialize, Serialize};
+
 /// Proposal Target Function Signature (4 bytes).
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Ord, PartialOrd)]
 #[cfg_attr(
@@ -14,6 +17,7 @@ use crate::target_system::TargetSystem;
         scale_codec::MaxEncodedLen
     )
 )]
+#[cfg_attr(feature = "std", derive(Serialize, Deserialize))]
 pub struct FunctionSignature(pub [u8; 4]);
 
 /// Proposal Target `ResourceId` (32 bytes).
@@ -27,6 +31,7 @@ pub struct FunctionSignature(pub [u8; 4]);
         scale_codec::MaxEncodedLen
     )
 )]
+#[cfg_attr(feature = "std", derive(Serialize, Deserialize))]
 pub struct ResourceId(pub [u8; 32]);
 
 /// Proposal Target Chain and its type (6 bytes).
@@ -40,6 +45,7 @@ pub struct ResourceId(pub [u8; 32]);
         scale_codec::MaxEncodedLen
     )
 )]
+#[cfg_attr(feature = "std", derive(Serialize, Deserialize))]
 pub enum TypedChainId {
     /// None chain type.
     ///
@@ -77,6 +83,7 @@ impl Default for TypedChainId {
 /// └────────────────────┴─────────────────┴───────────────┘
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Ord, PartialOrd)]
 #[allow(clippy::module_name_repetitions)]
+#[cfg_attr(feature = "std", derive(Serialize, Deserialize))]
 pub struct ProposalHeader {
     /// Resource ID of the execution context
     pub resource_id: ResourceId,
