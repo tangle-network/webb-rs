@@ -115,7 +115,8 @@
 //! - [`FeeRecipientUpdateProposal`]
 //! - [`RescueTokensProposal`]
 //!
-//! The following proposals are implemented for Cosmwasm(Cosmos-SDK)-based chains:
+//! The following proposals are implemented for Cosmwasm(Cosmos-SDK)-based
+//! chains:
 //! - [`AnchorUpdateProposal`]
 //! - [`TokenAddProposal`]
 //! - [`TokenRemoveProposal`]

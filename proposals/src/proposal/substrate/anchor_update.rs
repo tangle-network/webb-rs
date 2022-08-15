@@ -124,7 +124,8 @@ impl TryFrom<Vec<u8>> for AnchorUpdateProposal {
     }
 }
 
-// if we have EVM available, we can convert the EVM proposal to a substrate proposal
+// if we have EVM available, we can convert the EVM proposal to a substrate
+// proposal
 #[cfg(feature = "evm")]
 impl From<crate::evm::AnchorUpdateProposal> for AnchorUpdateProposal {
     fn from(proposal: crate::evm::AnchorUpdateProposal) -> Self {

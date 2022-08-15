@@ -1,7 +1,4 @@
 //! Anchor Update Proposal.
-use cosmwasm_std::{from_slice, to_binary};
-use schemars::JsonSchema;
-use serde::{Deserialize, Serialize};
 
 use crate::{ProposalHeader, ResourceId, TypedChainId};
 
@@ -11,7 +8,9 @@ use crate::{ProposalHeader, ResourceId, TypedChainId};
 /// source Anchor's Merkle roots. This knowledge is necessary to prove
 /// membership in the source Anchor's Merkle tree on the target chain.
 #[allow(clippy::module_name_repetitions)]
-#[derive(Debug, Copy, Clone, PartialEq, Eq, Hash)]
+#[derive(
+    Debug, Copy, Clone, PartialEq, Eq, Hash, typed_builder::TypedBuilder,
+)]
 pub struct AnchorUpdateProposal {
     header: ProposalHeader,
     merkle_root: [u8; 32],
@@ -67,16 +66,14 @@ impl AnchorUpdateProposal {
     #[must_use]
     pub fn to_bytes(&self) -> Vec<u8> {
         let mut bytes = vec![];
-
         bytes.extend_from_slice(&self.header.to_bytes());
 
-        let message = to_binary(&UpdateEdge {
+        let message = UpdateEdge {
             root: self.merkle_root,
             src_resource_id: self.src_resource_id.to_bytes(),
-        })
-        .unwrap();
+        };
 
-        bytes.extend_from_slice(&message.to_vec());
+        scale_codec::Encode::encode_to(&message, &mut bytes);
 
         bytes
     }
@@ -88,23 +85,28 @@ impl AnchorUpdateProposal {
     }
 }
 
-impl From<Vec<u8>> for AnchorUpdateProposal {
-    fn from(bytes: Vec<u8>) -> Self {
-        let f = 0usize;
-        let t = ProposalHeader::LENGTH;
+impl TryFrom<Vec<u8>> for AnchorUpdateProposal {
+    type Error = scale_codec::Error;
+    fn try_from(bytes: Vec<u8>) -> Result<Self, Self::Error> {
         let mut header_bytes = [0u8; ProposalHeader::LENGTH];
-        header_bytes.copy_from_slice(&bytes[f..t]);
+        let parsed_header =
+            bytes.get(0..ProposalHeader::LENGTH).ok_or_else(|| {
+                scale_codec::Error::from(
+                    "invaid proposal: invalid length of proposal",
+                )
+            })?;
+
+        header_bytes.copy_from_slice(parsed_header);
         let header = ProposalHeader::from(header_bytes);
 
-        let f = t;
-        let msg_bytes = bytes[f..].to_vec();
-        let decoded_edge_data: UpdateEdge = from_slice(&msg_bytes).unwrap();
+        let decoded_edge_data: UpdateEdge =
+            scale_codec::Decode::decode(&mut &bytes[40..])?;
 
-        Self::new(
+        Ok(Self::new(
             header,
             decoded_edge_data.root,
             ResourceId(decoded_edge_data.src_resource_id),
-        )
+        ))
     }
 }
 
@@ -114,8 +116,7 @@ impl From<AnchorUpdateProposal> for Vec<u8> {
     }
 }
 
-// if we have EVM available, we can convert the EVM proposal to a cosmwasm
-// proposal
+// if we have EVM available, we can convert the EVM proposal to a ink proposal
 #[cfg(feature = "evm")]
 impl From<crate::evm::AnchorUpdateProposal> for AnchorUpdateProposal {
     fn from(proposal: crate::evm::AnchorUpdateProposal) -> Self {
@@ -127,8 +128,8 @@ impl From<crate::evm::AnchorUpdateProposal> for AnchorUpdateProposal {
     }
 }
 
-// if we have Substrate available, we can convert the EVM proposal to a cosmwasm
-// proposal
+// if we have Substrate available, we can convert the Substrate proposal to a
+// ink proposal
 #[cfg(feature = "substrate")]
 impl From<crate::substrate::AnchorUpdateProposal> for AnchorUpdateProposal {
     fn from(proposal: crate::substrate::AnchorUpdateProposal) -> Self {
@@ -140,8 +141,20 @@ impl From<crate::substrate::AnchorUpdateProposal> for AnchorUpdateProposal {
     }
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, JsonSchema)]
-#[serde(rename_all = "snake_case")]
+// if we have Cosmwasm available, we can convert the Cosmwasm proposal to a ink
+// proposal
+#[cfg(feature = "cosmwasm")]
+impl From<crate::cosmwasm::AnchorUpdateProposal> for AnchorUpdateProposal {
+    fn from(proposal: crate::cosmwasm::AnchorUpdateProposal) -> Self {
+        AnchorUpdateProposal::new(
+            proposal.header(),
+            *proposal.merkle_root(),
+            proposal.src_resource_id(),
+        )
+    }
+}
+
+#[derive(scale_codec::Encode, scale_codec::Decode)]
 struct UpdateEdge {
     root: [u8; 32],
     src_resource_id: [u8; 32],
@@ -149,22 +162,18 @@ struct UpdateEdge {
 
 #[cfg(test)]
 mod tests {
-    use crate::{
-        cosmwasm::cosmos_address_to_target_address, FunctionSignature, Nonce,
-        ResourceId, TargetSystem,
-    };
+    use crate::ink::ink_address_to_target_address;
+    use crate::{FunctionSignature, Nonce, ResourceId, TargetSystem};
 
     use super::*;
 
-    const TARGET_CONTRACT_ADDR: &str =
-        "juno1hset4pny4h8xm4s4lek57msq7j4zwfqwjf7zxqjt4npxyv0lrgnsp8qy9j";
+    const TARGET_CONTRACT_ADDR: [u8; 32] = [0u8; 32];
 
     #[test]
     fn encode() {
-        let target_addr =
-            cosmos_address_to_target_address(TARGET_CONTRACT_ADDR);
+        let target_addr = ink_address_to_target_address(TARGET_CONTRACT_ADDR);
         let target_system = TargetSystem::ContractAddress(target_addr);
-        let target_chain = TypedChainId::Cosmos(4);
+        let target_chain = TypedChainId::Ink(4);
         let resource_id = ResourceId::new(target_system, target_chain);
         let function_signature =
             FunctionSignature::new(hex_literal::hex!("00000000"));
@@ -172,7 +181,7 @@ mod tests {
         let nonce = Nonce::from(latest_leaf_index);
         let header =
             ProposalHeader::new(resource_id, function_signature, nonce);
-        let src_chain = TypedChainId::Cosmos(1);
+        let src_chain = TypedChainId::Ink(1);
         let src_resource_id = ResourceId::new(target_system, src_chain);
         let merkle_root = [
             0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x0a,
@@ -183,19 +192,27 @@ mod tests {
             AnchorUpdateProposal::new(header, merkle_root, src_resource_id);
         let bytes = proposal.to_bytes();
         let expected = hex_literal::hex!(
-            "000000000000b37383a2ad2de9e68da75f583e7d0ef2eae1184f04000000000400000000000000017b22726f6f74223a5b302c312c322c332c342c352c362c372c382c392c31302c31312c31322c31332c31342c31352c31362c31372c31382c31392c32302c32312c32322c32332c32342c32352c32362c32372c32382c32392c33302c33315d2c227372635f7265736f757263655f6964223a5b302c302c302c302c302c302c3137392c3131352c3133312c3136322c3137332c34352c3233332c3233302c3134312c3136372c39352c38382c36322c3132352c31342c3234322c3233342c3232352c32342c37392c342c302c302c302c302c315d7d"
+            "00000000000088386fc84ba6bc95484008f6362f93160ef3e5630600000000040000000000000001000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f00000000000088386fc84ba6bc95484008f6362f93160ef3e563060000000001"
         );
+        let decoded = hex::encode([
+            0, 0, 0, 0, 0, 0, 136, 56, 111, 200, 75, 166, 188, 149, 72, 64, 8,
+            246, 54, 47, 147, 22, 14, 243, 229, 99, 6, 0, 0, 0, 0, 4, 0, 0, 0,
+            0, 0, 0, 0, 1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14,
+            15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31,
+            0, 0, 0, 0, 0, 0, 136, 56, 111, 200, 75, 166, 188, 149, 72, 64, 8,
+            246, 54, 47, 147, 22, 14, 243, 229, 99, 6, 0, 0, 0, 0, 1,
+        ]);
+        dbg!(decoded);
         assert_eq!(bytes, expected);
     }
 
     #[test]
     fn decode() {
-        let bytes = hex_literal::hex!("000000000000b37383a2ad2de9e68da75f583e7d0ef2eae1184f04000000000400000000000000017b22726f6f74223a5b302c312c322c332c342c352c362c372c382c392c31302c31312c31322c31332c31342c31352c31362c31372c31382c31392c32302c32312c32322c32332c32342c32352c32362c32372c32382c32392c33302c33315d2c227372635f7265736f757263655f6964223a5b302c302c302c302c302c302c3137392c3131352c3133312c3136322c3137332c34352c3233332c3233302c3134312c3136372c39352c38382c36322c3132352c31342c3234322c3233342c3232352c32342c37392c342c302c302c302c302c315d7d");
-        let proposal = AnchorUpdateProposal::from(bytes.to_vec());
-        let target_addr =
-            cosmos_address_to_target_address(TARGET_CONTRACT_ADDR);
+        let bytes = hex_literal::hex!("00000000000088386fc84ba6bc95484008f6362f93160ef3e5630600000000040000000000000001000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f00000000000088386fc84ba6bc95484008f6362f93160ef3e563060000000001");
+        let proposal = AnchorUpdateProposal::try_from(bytes.to_vec()).unwrap();
+        let target_addr = ink_address_to_target_address(TARGET_CONTRACT_ADDR);
         let target_system = TargetSystem::ContractAddress(target_addr);
-        let target_chain = TypedChainId::Cosmos(4);
+        let target_chain = TypedChainId::Ink(4);
         let resource_id = ResourceId::new(target_system, target_chain);
         let function_signature =
             FunctionSignature::new(hex_literal::hex!("00000000"));
@@ -203,7 +220,7 @@ mod tests {
         let nonce = Nonce::from(latest_leaf_index);
         let header =
             ProposalHeader::new(resource_id, function_signature, nonce);
-        let src_chain_id = TypedChainId::Cosmos(1);
+        let src_chain_id = TypedChainId::Ink(1);
         let src_resource_id = ResourceId::new(target_system, src_chain_id);
         let merkle_root = [
             0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x0a,

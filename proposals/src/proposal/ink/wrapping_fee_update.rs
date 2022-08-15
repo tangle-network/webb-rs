@@ -1,14 +1,13 @@
 //! Wrapping Fee Update Proposal.
 use crate::ProposalHeader;
-use cosmwasm_std::{from_slice, to_binary, Uint128};
-use schemars::JsonSchema;
-use serde::{Deserialize, Serialize};
 
 /// Wrapping Fee Update Proposal.
 ///
 /// The [`WrappingFeeUpdateProposal`] updates the wrapping fee percentage.
 #[allow(clippy::module_name_repetitions)]
-#[derive(Debug, Copy, Clone, PartialEq, Eq, Hash)]
+#[derive(
+    Debug, Copy, Clone, PartialEq, Eq, Hash, typed_builder::TypedBuilder,
+)]
 pub struct WrappingFeeUpdateProposal {
     header: ProposalHeader,
     wrapping_fee: u8,
@@ -53,15 +52,14 @@ impl WrappingFeeUpdateProposal {
         let mut bytes = vec![];
         bytes.extend_from_slice(&self.header.to_bytes());
 
-        let msg = to_binary(&UpdateConfigMsg {
+        let message = UpdateConfigMsg {
             governor: None,
             is_native_allowed: None,
             wrapping_limit: None,
             fee_percentage: Some(self.wrapping_fee),
             fee_recipient: None,
-        })
-        .unwrap();
-        bytes.extend_from_slice(msg.as_slice());
+        };
+        scale_codec::Encode::encode_to(&message, &mut bytes);
 
         bytes
     }
@@ -73,18 +71,24 @@ impl WrappingFeeUpdateProposal {
     }
 }
 
-impl From<Vec<u8>> for WrappingFeeUpdateProposal {
-    fn from(bytes: Vec<u8>) -> Self {
-        let f = 0usize;
-        let t = ProposalHeader::LENGTH;
+impl TryFrom<Vec<u8>> for WrappingFeeUpdateProposal {
+    type Error = scale_codec::Error;
+    fn try_from(bytes: Vec<u8>) -> Result<Self, Self::Error> {
         let mut header_bytes = [0u8; ProposalHeader::LENGTH];
-        header_bytes.copy_from_slice(&bytes[f..t]);
+        let parsed_header =
+            bytes.get(0..ProposalHeader::LENGTH).ok_or_else(|| {
+                scale_codec::Error::from(
+                    "invaid proposal: invalid length of proposal",
+                )
+            })?;
+
+        header_bytes.copy_from_slice(parsed_header);
         let header = ProposalHeader::from(header_bytes);
 
-        let f = t;
-        let message: UpdateConfigMsg = from_slice(&bytes[f..]).unwrap();
+        let message: UpdateConfigMsg =
+            scale_codec::Decode::decode(&mut &bytes[40..])?;
 
-        Self::new(header, message.fee_percentage.unwrap())
+        Ok(Self::new(header, message.fee_percentage.unwrap()))
     }
 }
 
@@ -94,34 +98,31 @@ impl From<WrappingFeeUpdateProposal> for Vec<u8> {
     }
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Eq, JsonSchema)]
-#[serde(rename_all = "snake_case")]
+#[derive(scale_codec::Encode, scale_codec::Decode)]
 struct UpdateConfigMsg {
-    pub governor: Option<String>,
+    pub governor: Option<[u8; 32]>,
     pub is_native_allowed: Option<bool>,
-    pub wrapping_limit: Option<Uint128>,
+    pub wrapping_limit: Option<u128>,
     pub fee_percentage: Option<u8>,
-    pub fee_recipient: Option<String>,
+    pub fee_recipient: Option<[u8; 32]>,
 }
 
 #[cfg(test)]
 mod tests {
+    use crate::ink::ink_address_to_target_address;
     use crate::{
-        cosmwasm::cosmos_address_to_target_address, FunctionSignature, Nonce,
-        ResourceId, TargetSystem, TypedChainId,
+        FunctionSignature, Nonce, ResourceId, TargetSystem, TypedChainId,
     };
 
     use super::*;
 
-    const TARGET_CONTRACT_ADDR: &str =
-        "juno1hset4pny4h8xm4s4lek57msq7j4zwfqwjf7zxqjt4npxyv0lrgnsp8qy9j";
+    const TARGET_CONTRACT_ADDR: [u8; 32] = [0u8; 32];
 
     #[test]
     fn encode() {
-        let target_addr =
-            cosmos_address_to_target_address(TARGET_CONTRACT_ADDR);
+        let target_addr = ink_address_to_target_address(TARGET_CONTRACT_ADDR);
         let target_system = TargetSystem::ContractAddress(target_addr);
-        let target_chain = TypedChainId::Cosmos(4);
+        let target_chain = TypedChainId::Ink(4);
         let resource_id = ResourceId::new(target_system, target_chain);
         let function_signature =
             FunctionSignature::new(hex_literal::hex!("00000000"));
@@ -131,8 +132,9 @@ mod tests {
         let wrapping_fee = 0x01;
         let proposal = WrappingFeeUpdateProposal::new(header, wrapping_fee);
         let bytes = proposal.to_bytes();
+
         let expected = hex_literal::hex!(
-            "000000000000b37383a2ad2de9e68da75f583e7d0ef2eae1184f04000000000400000000000000017b22676f7665726e6f72223a6e756c6c2c2269735f6e61746976655f616c6c6f776564223a6e756c6c2c227772617070696e675f6c696d6974223a6e756c6c2c226665655f70657263656e74616765223a312c226665655f726563697069656e74223a6e756c6c7d"
+            "00000000000088386fc84ba6bc95484008f6362f93160ef3e5630600000000040000000000000001000000010100"
         );
         assert_eq!(bytes, expected);
     }
@@ -140,14 +142,15 @@ mod tests {
     #[test]
     fn decode() {
         let bytes = hex_literal::hex!(
-            "000000000000b37383a2ad2de9e68da75f583e7d0ef2eae1184f04000000000400000000000000017b22676f7665726e6f72223a6e756c6c2c2269735f6e61746976655f616c6c6f776564223a6e756c6c2c227772617070696e675f6c696d6974223a6e756c6c2c226665655f70657263656e74616765223a312c226665655f726563697069656e74223a6e756c6c7d"
+            "00000000000088386fc84ba6bc95484008f6362f93160ef3e5630600000000040000000000000001000000010100"
         );
-        let proposal = WrappingFeeUpdateProposal::from(bytes.to_vec());
+        let proposal =
+            WrappingFeeUpdateProposal::try_from(bytes.to_vec()).unwrap();
         let header = proposal.header();
         let target_system = TargetSystem::ContractAddress(
-            cosmos_address_to_target_address(TARGET_CONTRACT_ADDR),
+            ink_address_to_target_address(TARGET_CONTRACT_ADDR),
         );
-        let target_chain = TypedChainId::Cosmos(4);
+        let target_chain = TypedChainId::Ink(4);
         let resource_id = ResourceId::new(target_system, target_chain);
         let function_signature =
             FunctionSignature::new(hex_literal::hex!("00000000"));
@@ -163,9 +166,9 @@ mod tests {
     #[should_panic]
     fn should_panic_if_wrapping_fee_out_of_range() {
         let target_system = TargetSystem::ContractAddress(
-            cosmos_address_to_target_address(TARGET_CONTRACT_ADDR),
+            ink_address_to_target_address(TARGET_CONTRACT_ADDR),
         );
-        let target_chain = TypedChainId::Cosmos(4);
+        let target_chain = TypedChainId::Ink(4);
         let resource_id = ResourceId::new(target_system, target_chain);
         let function_signature =
             FunctionSignature::new(hex_literal::hex!("00000000"));

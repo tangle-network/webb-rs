@@ -6,6 +6,9 @@ pub mod substrate;
 #[cfg(feature = "cosmwasm")]
 pub mod cosmwasm;
 
+#[cfg(feature = "ink")]
+pub mod ink;
+
 #[cfg(not(feature = "std"))]
 use alloc::vec::Vec;
 
@@ -75,6 +78,11 @@ impl_proposal_for! {
     crate::proposal::cosmwasm::SetTreasuryHandlerProposal,
 }
 
+#[cfg(feature = "ink")]
+impl_proposal_for! {
+    crate::proposal::ink::AnchorUpdateProposal,
+}
+
 #[derive(Debug, Clone, Eq, PartialEq)]
 #[cfg_attr(
     feature = "scale",
@@ -126,21 +134,27 @@ pub enum ProposalKind {
     TokenAdd,
     /// Token remove proposal for removing tokens from the asset application
     TokenRemove,
-    /// Wrapping fee update proposal for changing the wrapping fee of the asset application
+    /// Wrapping fee update proposal for changing the wrapping fee of the asset
+    /// application
     WrappingFeeUpdate,
     /// Resource id update for any connection or application
     ResourceIdUpdate,
     /// Rescue tokens proposal for rescuing tokens from the asset application
     RescueTokens,
-    /// Max deposit limit proposal for changing the max deposit limit of the asset application
+    /// Max deposit limit proposal for changing the max deposit limit of the
+    /// asset application
     MaxDepositLimitUpdate,
-    /// Min withdrawal limit proposal for changing the min withdrawal limit of the asset application
+    /// Min withdrawal limit proposal for changing the min withdrawal limit of
+    /// the asset application
     MinWithdrawalLimitUpdate,
-    /// Set verifier proposal for changing the zero-knowledge verifier of an application
+    /// Set verifier proposal for changing the zero-knowledge verifier of an
+    /// application
     SetVerifier,
-    /// Set treasury handler proposal for changing the treasury handler of the asset application
+    /// Set treasury handler proposal for changing the treasury handler of the
+    /// asset application
     SetTreasuryHandler,
-    /// Set fee recipient proposal for changing the fee recipient of the asset application
+    /// Set fee recipient proposal for changing the fee recipient of the asset
+    /// application
     FeeRecipientUpdate,
 }
 

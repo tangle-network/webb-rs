@@ -1,19 +1,17 @@
 //! Rescue Tokens Proposal.
 use crate::ProposalHeader;
-use cosmwasm_std::{from_slice, to_binary, Uint128};
-use schemars::JsonSchema;
-use serde::{Deserialize, Serialize};
-
 /// Rescue Tokens Proposal.
 ///
 /// The `RescueTokensProposal` rescues tokens from the treasury to a specified
 /// `to` address.
 #[allow(clippy::module_name_repetitions)]
-#[derive(Debug, Clone, PartialEq, Eq, Hash)]
+#[derive(
+    Debug, Copy, Clone, PartialEq, Eq, Hash, typed_builder::TypedBuilder,
+)]
 pub struct RescueTokensProposal {
     header: ProposalHeader,
-    token_address: String,
-    recipient: String,
+    token_address: [u8; 32],
+    recipient: [u8; 32],
     amount: [u8; 32],
 }
 
@@ -22,8 +20,8 @@ impl RescueTokensProposal {
     #[must_use]
     pub const fn new(
         header: ProposalHeader,
-        token_address: String,
-        recipient: String,
+        token_address: [u8; 32],
+        recipient: [u8; 32],
         amount: [u8; 32],
     ) -> Self {
         Self {
@@ -48,13 +46,13 @@ impl RescueTokensProposal {
 
     /// Get the token address.
     #[must_use]
-    pub fn token_address(&self) -> String {
+    pub fn token_address(&self) -> [u8; 32] {
         self.token_address.clone()
     }
 
     /// Get the to token address.
     #[must_use]
-    pub fn recipient(&self) -> String {
+    pub fn recipient(&self) -> [u8; 32] {
         self.recipient.clone()
     }
 
@@ -66,16 +64,13 @@ impl RescueTokensProposal {
 
         let mut rescue_amt_bytes = [0u8; 16];
         rescue_amt_bytes.copy_from_slice(self.amount.split_at(16).1);
-        let message = to_binary(&RescueTokens {
+        let message = RescueTokens {
             token_address: self.token_address.clone(),
             to: self.recipient.clone(),
-            amount_to_rescue: Uint128::from(u128::from_be_bytes(
-                rescue_amt_bytes,
-            )),
+            amount_to_rescue: u128::from_be_bytes(rescue_amt_bytes),
             nonce: self.header.nonce().0,
-        })
-        .unwrap();
-        bytes.extend_from_slice(&message.as_slice());
+        };
+        scale_codec::Encode::encode_to(&message, &mut bytes);
 
         bytes
     }
@@ -87,29 +82,34 @@ impl RescueTokensProposal {
     }
 }
 
-impl From<Vec<u8>> for RescueTokensProposal {
-    fn from(bytes: Vec<u8>) -> Self {
-        let f = 0usize;
-        let t = ProposalHeader::LENGTH;
+impl TryFrom<Vec<u8>> for RescueTokensProposal {
+    type Error = scale_codec::Error;
+    fn try_from(bytes: Vec<u8>) -> Result<Self, Self::Error> {
         let mut header_bytes = [0u8; ProposalHeader::LENGTH];
-        header_bytes.copy_from_slice(&bytes[f..t]);
+        let parsed_header =
+            bytes.get(0..ProposalHeader::LENGTH).ok_or_else(|| {
+                scale_codec::Error::from(
+                    "invaid proposal: invalid length of proposal",
+                )
+            })?;
+
+        header_bytes.copy_from_slice(parsed_header);
         let header = ProposalHeader::from(header_bytes);
 
-        let f = t;
-        let decoded_message: RescueTokens = from_slice(&bytes[f..]).unwrap();
+        let decoded_message: RescueTokens =
+            scale_codec::Decode::decode(&mut &bytes[40..])?;
         let token_address = decoded_message.token_address;
         let recipient = decoded_message.to;
         let mut amount = [0u8; 32];
-        amount[16..].copy_from_slice(
-            &decoded_message.amount_to_rescue.u128().to_be_bytes(),
-        );
+        amount[16..]
+            .copy_from_slice(&decoded_message.amount_to_rescue.to_be_bytes());
 
-        Self {
+        Ok(Self {
             header,
             token_address,
             recipient,
             amount,
-        }
+        })
     }
 }
 
@@ -119,35 +119,30 @@ impl From<RescueTokensProposal> for Vec<u8> {
     }
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, JsonSchema)]
-#[serde(rename_all = "snake_case")]
+#[derive(scale_codec::Encode, scale_codec::Decode)]
 struct RescueTokens {
-    token_address: String,
-    to: String,
-    amount_to_rescue: Uint128,
+    token_address: [u8; 32],
+    to: [u8; 32],
+    amount_to_rescue: u128,
     nonce: u32,
 }
 
 #[cfg(test)]
 mod tests {
+    use crate::ink::ink_address_to_target_address;
     use crate::{
-        cosmwasm::cosmos_address_to_target_address, FunctionSignature, Nonce,
-        ResourceId, TargetSystem, TypedChainId,
+        FunctionSignature, Nonce, ResourceId, TargetSystem, TypedChainId,
     };
 
     use super::*;
 
-    const TARGET_CONTRACT_ADDR: &str =
-        "juno1hset4pny4h8xm4s4lek57msq7j4zwfqwjf7zxqjt4npxyv0lrgnsp8qy9j";
-    const TOKEN_ADDR: &str =
-        "juno1u235cpgju5vvlzp4w53vu0z5x3etytdpeh78ffekctfcmfc8ezhs9p248h";
-    const RECIPIENT: &str =
-        "juno1afxj87jjd4usd80gsprtq76uykv02egaydwvj62ldhngzj2zdamqxn9an3";
+    const TARGET_CONTRACT_ADDR: [u8; 32] = [0u8; 32];
+    const TOKEN_ADDR: [u8; 32] = [1u8; 32];
+    const RECIPIENT: [u8; 32] = [2u8; 32];
 
     #[test]
     fn encode() {
-        let target_addr =
-            cosmos_address_to_target_address(TARGET_CONTRACT_ADDR);
+        let target_addr = ink_address_to_target_address(TARGET_CONTRACT_ADDR);
         let target_system = TargetSystem::ContractAddress(target_addr);
         let target_chain = TypedChainId::Evm(4);
         let resource_id = ResourceId::new(target_system, target_chain);
@@ -156,16 +151,14 @@ mod tests {
         let nonce = Nonce::from(0x0001);
         let header =
             ProposalHeader::new(resource_id, function_signature, nonce);
-        let token_address = TOKEN_ADDR.to_string();
-        let recipient = RECIPIENT.to_string();
         let amount = hex_literal::hex!(
             "000000000000000000000000000000000000000000000000000000000000000f"
         );
         let proposal =
-            RescueTokensProposal::new(header, token_address, recipient, amount);
+            RescueTokensProposal::new(header, TOKEN_ADDR, RECIPIENT, amount);
         let bytes = proposal.to_bytes();
         let expected = hex_literal::hex!(
-            "000000000000b37383a2ad2de9e68da75f583e7d0ef2eae1184f01000000000400000000000000017b22746f6b656e5f61646472657373223a226a756e6f31753233356370676a753576766c7a70347735337675307a357833657479746470656837386666656b637466636d666338657a6873397032343868222c22746f223a226a756e6f316166786a38376a6a64347573643830677370727471373675796b763032656761796477766a36326c64686e677a6a327a64616d71786e39616e33222c22616d6f756e745f746f5f726573637565223a223135222c226e6f6e6365223a317d"
+            "00000000000088386fc84ba6bc95484008f6362f93160ef3e5630100000000040000000000000001010101010101010101010101010101010101010101010101010101010101010102020202020202020202020202020202020202020202020202020202020202020f00000000000000000000000000000001000000"
         );
         assert_eq!(bytes, expected);
     }
@@ -174,11 +167,11 @@ mod tests {
     fn decode() {
         // the reverse of encode
         let bytes = hex_literal::hex!(
-            "000000000000b37383a2ad2de9e68da75f583e7d0ef2eae1184f01000000000400000000000000017b22746f6b656e5f61646472657373223a226a756e6f31753233356370676a753576766c7a70347735337675307a357833657479746470656837386666656b637466636d666338657a6873397032343868222c22746f223a226a756e6f316166786a38376a6a64347573643830677370727471373675796b763032656761796477766a36326c64686e677a6a327a64616d71786e39616e33222c22616d6f756e745f746f5f726573637565223a223135222c226e6f6e6365223a317d"
+            "00000000000088386fc84ba6bc95484008f6362f93160ef3e5630100000000040000000000000001010101010101010101010101010101010101010101010101010101010101010102020202020202020202020202020202020202020202020202020202020202020f00000000000000000000000000000001000000"
         );
-        let expected_proposal = RescueTokensProposal::from(bytes.to_vec());
-        let target_addr =
-            cosmos_address_to_target_address(TARGET_CONTRACT_ADDR);
+        let expected_proposal =
+            RescueTokensProposal::try_from(bytes.to_vec()).unwrap();
+        let target_addr = ink_address_to_target_address(TARGET_CONTRACT_ADDR);
         let target_system = TargetSystem::ContractAddress(target_addr);
         let target_chain = TypedChainId::Evm(4);
         let resource_id = ResourceId::new(target_system, target_chain);
@@ -187,13 +180,11 @@ mod tests {
         let nonce = Nonce::from(0x0001);
         let header =
             ProposalHeader::new(resource_id, function_signature, nonce);
-        let token_address = TOKEN_ADDR.to_string();
-        let recipient = RECIPIENT.to_string();
         let amount = hex_literal::hex!(
             "000000000000000000000000000000000000000000000000000000000000000f"
         );
         let proposal =
-            RescueTokensProposal::new(header, token_address, recipient, amount);
+            RescueTokensProposal::new(header, TOKEN_ADDR, RECIPIENT, amount);
         assert_eq!(proposal, expected_proposal);
     }
 }

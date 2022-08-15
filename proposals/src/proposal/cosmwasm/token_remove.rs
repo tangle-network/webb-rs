@@ -9,7 +9,6 @@ use serde::{Deserialize, Serialize};
 /// Suppose a token has been allowed to be wrapped into the WEBB token by the
 /// token add proposal. The [`TokenRemoveProposal`] can disallow this added
 /// token from being wrapped into the WEBB token.
-///
 #[allow(clippy::module_name_repetitions)]
 #[derive(Debug, Clone, PartialEq, Eq, Hash)]
 pub struct TokenRemoveProposal {
