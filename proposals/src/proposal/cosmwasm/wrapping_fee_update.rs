@@ -172,7 +172,7 @@ mod tests {
         let nonce = Nonce::from(0x0001);
         let header =
             ProposalHeader::new(resource_id, function_signature, nonce);
-        let wrapping_fee = 101;
+        let wrapping_fee = 10001;
         let _ = WrappingFeeUpdateProposal::new(header, wrapping_fee);
     }
 }
