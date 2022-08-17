@@ -17,21 +17,21 @@ use crate::ProposalHeader;
 #[derive(Debug, Copy, Clone, PartialEq, Eq, Hash)]
 pub struct WrappingFeeUpdateProposal {
     header: ProposalHeader,
-    wrapping_fee: u8,
+    wrapping_fee: u16,
 }
 
 impl WrappingFeeUpdateProposal {
     /// Length of the proposal in bytes.
-    pub const LENGTH: usize = ProposalHeader::LENGTH + 1; // wrapping_fee
+    pub const LENGTH: usize = ProposalHeader::LENGTH + 2; // wrapping_fee
 
     /// Creates a new wrapping fee update proposal.
     ///
-    /// Wrapping fee is in the range of 0 to 100.
+    /// Wrapping fee is in the range of 0 to 10_000.
     ///
     /// **Note:** in debug mode, this may panic if the fee is out of range.
     #[must_use]
-    pub const fn new(header: ProposalHeader, wrapping_fee: u8) -> Self {
-        debug_assert!(wrapping_fee <= 100);
+    pub const fn new(header: ProposalHeader, wrapping_fee: u16) -> Self {
+        debug_assert!(wrapping_fee <= 10_000);
         Self {
             header,
             wrapping_fee,
@@ -46,13 +46,13 @@ impl WrappingFeeUpdateProposal {
 
     /// Get the wrapping fee.
     ///
-    /// Wrapping fees are in the range [0, 100].
+    /// Wrapping fees are in the range [0, 10_000].
     ///
     /// *Note*: In debug builds, this will panic if the wrapping fee is out of
     /// range.
     #[must_use]
-    pub const fn wrapping_fee(&self) -> u8 {
-        debug_assert!(self.wrapping_fee <= 100);
+    pub const fn wrapping_fee(&self) -> u16 {
+        debug_assert!(self.wrapping_fee <= 10_000);
         self.wrapping_fee
     }
 
@@ -63,7 +63,7 @@ impl WrappingFeeUpdateProposal {
         let f = 0usize;
         let t = ProposalHeader::LENGTH;
         bytes[f..t].copy_from_slice(&self.header.to_bytes());
-        bytes[t] = self.wrapping_fee;
+        bytes[t..t + 1].copy_from_slice(&self.wrapping_fee.to_be_bytes());
         bytes
     }
 
@@ -83,7 +83,9 @@ impl From<[u8; WrappingFeeUpdateProposal::LENGTH]>
         let mut header_bytes = [0u8; ProposalHeader::LENGTH];
         header_bytes.copy_from_slice(&bytes[f..t]);
         let header = ProposalHeader::from(header_bytes);
-        let wrapping_fee = bytes[t];
+        let mut wrapping_fee_bytes = [0u8; 2];
+        wrapping_fee_bytes.copy_from_slice(&bytes[t..t + 1]);
+        let wrapping_fee = u16::from_be_bytes(wrapping_fee_bytes);
         Self::new(header, wrapping_fee)
     }
 }
@@ -121,7 +123,7 @@ mod tests {
         let bytes = proposal.to_bytes();
         let expected = hex_literal::hex!(
             "000000000000aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa010000000004"
-            "cafebabe0000000101"
+            "cafebabe000000010001"
         );
         assert_eq!(bytes, expected);
     }
@@ -130,7 +132,7 @@ mod tests {
     fn decode() {
         let bytes = hex_literal::hex!(
             "000000000000aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa010000000004"
-            "cafebabe0000000101"
+            "cafebabe000000010001"
         );
         let proposal = WrappingFeeUpdateProposal::from(bytes);
         let header = proposal.header();
@@ -162,7 +164,7 @@ mod tests {
         let nonce = Nonce::from(0x0001);
         let header =
             ProposalHeader::new(resource_id, function_signature, nonce);
-        let wrapping_fee = 101;
+        let wrapping_fee = 10_001;
         let _ = WrappingFeeUpdateProposal::new(header, wrapping_fee);
     }
 }

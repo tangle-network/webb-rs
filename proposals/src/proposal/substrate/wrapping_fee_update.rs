@@ -31,7 +31,7 @@ impl WrappingFeeUpdateProposal {
     #[must_use]
     pub const fn wrapping_fee_percent(&self) -> u128 {
         debug_assert!(
-            self.wrapping_fee_percent <= 100,
+            self.wrapping_fee_percent <= 10_000,
             "wrapping fee percent is too large"
         );
         self.wrapping_fee_percent
@@ -59,9 +59,9 @@ impl WrappingFeeUpdateProposal {
         out.extend_from_slice(&self.header.to_bytes());
 
         let call = ExecuteWrappingFeeUpdate {
-            r_id: self.header.resource_id().to_bytes(),
             wrapping_fee_percent: self.wrapping_fee_percent,
             into_pool_share_id: self.into_pool_share_id,
+            nonce: self.header().nonce().to_u32(),
         };
         // add pallet index
         out.push(target_details.pallet_index);
@@ -115,14 +115,14 @@ impl TryFrom<Vec<u8>> for WrappingFeeUpdateProposal {
 
 #[derive(scale_codec::Encode, scale_codec::Decode)]
 struct ExecuteWrappingFeeUpdate {
-    r_id: [u8; 32],
     wrapping_fee_percent: u128,
     into_pool_share_id: u32,
+    nonce: u32,
 }
 
 fn check_and_validate_wrapping_fee(wrapping_fee_percent: u128) -> u128 {
     debug_assert!(
-        wrapping_fee_percent <= 100,
+        wrapping_fee_percent <= 10_000,
         "wrapping fee percent is too large"
     );
     wrapping_fee_percent

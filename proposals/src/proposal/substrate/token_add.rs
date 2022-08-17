@@ -50,9 +50,9 @@ impl TokenAddProposal {
         out.extend_from_slice(&self.header.to_bytes());
 
         let call = ExecuteAddTokenToPoolShare {
-            r_id: self.header.resource_id().to_bytes(),
             name: self.name.clone(),
             asset_id: self.asset_id,
+            nonce: self.header().nonce.to_u32(),
         };
         // add pallet index
         out.push(target_details.pallet_index);
@@ -106,9 +106,9 @@ impl TryFrom<Vec<u8>> for TokenAddProposal {
 
 #[derive(scale_codec::Encode, scale_codec::Decode)]
 struct ExecuteAddTokenToPoolShare {
-    r_id: [u8; 32],
     name: Vec<u8>,
     asset_id: u32,
+    nonce: u32,
 }
 
 #[cfg(test)]
