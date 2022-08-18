@@ -52,14 +52,15 @@ impl TokenRemoveProposal {
         out.extend_from_slice(&self.header.to_bytes());
 
         let call = ExecuteRemoveTokenFromPoolShare {
-            r_id: self.header.resource_id().to_bytes(),
             name: self.name.clone(),
             asset_id: self.asset_id,
+            nonce: self.header.nonce.to_u32(),
         };
         // add pallet index
         out.push(target_details.pallet_index);
-        // add call index
-        out.push(target_details.call_index);
+        // add call index, it is big-endian encoded from a u32 (4-bytes)
+        // the last byte should contain the u8 call index
+        out.push(self.header().function_signature().0[3]);
         scale_codec::Encode::encode_to(&call, &mut out);
         out
     }
@@ -108,9 +109,9 @@ impl TryFrom<Vec<u8>> for TokenRemoveProposal {
 
 #[derive(scale_codec::Encode, scale_codec::Decode)]
 struct ExecuteRemoveTokenFromPoolShare {
-    r_id: [u8; 32],
     name: Vec<u8>,
     asset_id: u32,
+    nonce: u32,
 }
 
 #[cfg(test)]
@@ -126,14 +127,12 @@ mod tests {
     fn encode() {
         let target = SubstrateTargetSystem::builder()
             .pallet_index(35)
-            .call_index(2)
             .tree_id(2)
             .build();
         let target_system = TargetSystem::Substrate(target);
         let target_chain = TypedChainId::Substrate(1);
         let resource_id = ResourceId::new(target_system, target_chain);
-        let function_signature =
-            FunctionSignature::new(hex_literal::hex!("cafebabe"));
+        let function_signature = FunctionSignature::new([0, 0, 0, 2]);
         let nonce = Nonce::from(0x0001);
         let header =
             ProposalHeader::new(resource_id, function_signature, nonce);
@@ -144,12 +143,12 @@ mod tests {
             .build();
         let bytes = proposal.to_bytes();
         let expected = concat!(
-            "0000000000000000000000000000000000000000230200000002020000000001cafebabe00000001", // header
-            "23", // pallet index
-            "02", // call index
-            "0000000000000000000000000000000000000000230200000002020000000001", // resource id
-            "1074657374", // name
-            "01000000"    // asset id
+            "00000000000000000000000000000000000000000023000000020200000000010000000200000001", // header
+            "23",                                                               // pallet index
+            "02",                                                               // call index
+            "1074657374",                                                       // name
+            "01000000",                                                         // asset id
+            "01000000"                                                          // nonce
         );
         assert_eq!(expected, hex::encode(bytes));
     }
@@ -157,19 +156,18 @@ mod tests {
     #[test]
     fn decode() {
         let proposal_bytes = hex_literal::hex!(
-            "0000000000000000000000000000000000000000230200000002020000000001cafebabe00000001" // header
-          "23" // pallet index
-          "02" // call index
-          "0000000000000000000000000000000000000000230200000002020000000001" // resource id
-          "1074657374" // name
-          "01000000"  // asset id
+        "00000000000000000000000000000000000000000023000000020200000000010000000000000001" // header
+        "23"                                                                // pallet index
+        "02"                                                                // call index
+        "1074657374"                                                        // name
+        "01000000"                                                          // asset id
+        "01000000"                                                          // nonce
         );
 
         let proposal =
             TokenRemoveProposal::try_from(proposal_bytes.to_vec()).unwrap();
         let target = SubstrateTargetSystem::builder()
             .pallet_index(35)
-            .call_index(2)
             .tree_id(2)
             .build();
         assert_eq!(

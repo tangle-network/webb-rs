@@ -4316,7 +4316,7 @@ dependencies = [
 
 [[package]]
 name = "webb-proposals"
-version = "0.5.3"
+version = "0.5.4"
 dependencies = [
  "cosmwasm-std",
  "hex",

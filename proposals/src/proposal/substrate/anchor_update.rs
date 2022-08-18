@@ -66,18 +66,16 @@ impl AnchorUpdateProposal {
 
         let call = ExecuteAnchorUpdateProposal {
             r_id: self.header().resource_id().to_bytes(),
-            anchor_metadata: EdgeMetadata {
-                src_chain_id: self.src_chain().chain_id(),
-                root: Element(self.merkle_root),
-                latest_leaf_index: self.header().nonce().to_u32(),
-                src_resource_id: Element(self.src_resource_id.to_bytes()),
-            },
+            merkle_root: self.merkle_root,
+            src_resource_id: self.src_resource_id().to_bytes(),
+            nonce: self.header().nonce().to_u32(),
         };
 
         // add pallet index
         out.push(target_details.pallet_index);
-        // add call index
-        out.push(target_details.call_index);
+        // add call index, it is big-endian encoded from a u32 (4-bytes)
+        // the last byte should contain the u8 call index
+        out.push(self.header().function_signature.0[3]);
         scale_codec::Encode::encode_to(&call, &mut out);
         out
     }
@@ -113,8 +111,8 @@ impl TryFrom<Vec<u8>> for AnchorUpdateProposal {
         // parse encoded proposal call
         let call: ExecuteAnchorUpdateProposal =
             scale_codec::Decode::decode(&mut &value[42..])?;
-        let merkle_root = call.anchor_metadata.root.0;
-        let src_resource_id = call.anchor_metadata.src_resource_id.0;
+        let merkle_root = call.merkle_root;
+        let src_resource_id = call.src_resource_id;
         let proposal = AnchorUpdateProposal {
             header,
             merkle_root,
@@ -138,20 +136,11 @@ impl From<crate::evm::AnchorUpdateProposal> for AnchorUpdateProposal {
 }
 
 #[derive(scale_codec::Encode, scale_codec::Decode)]
-struct Element(pub [u8; 32]);
-
-#[derive(scale_codec::Encode, scale_codec::Decode)]
-struct EdgeMetadata {
-    src_chain_id: u64,
-    root: Element,
-    latest_leaf_index: u32,
-    src_resource_id: Element,
-}
-
-#[derive(scale_codec::Encode, scale_codec::Decode)]
 struct ExecuteAnchorUpdateProposal {
     r_id: [u8; 32],
-    anchor_metadata: EdgeMetadata,
+    merkle_root: [u8; 32],
+    src_resource_id: [u8; 32],
+    nonce: u32,
 }
 
 #[cfg(test)]
@@ -167,14 +156,12 @@ mod tests {
     fn encode() {
         let target = SubstrateTargetSystem::builder()
             .pallet_index(50)
-            .call_index(1)
             .tree_id(2)
             .build();
         let target_system = TargetSystem::Substrate(target);
         let target_chain = TypedChainId::Substrate(1);
         let resource_id = ResourceId::new(target_system, target_chain);
-        let function_signature =
-            FunctionSignature::new(hex_literal::hex!("cafebabe"));
+        let function_signature = FunctionSignature::new([0, 0, 0, 1]);
         let latest_leaf_index = 0x0001;
         let nonce = Nonce::from(latest_leaf_index);
         let header =
@@ -188,7 +175,6 @@ mod tests {
         ];
         let src_system = SubstrateTargetSystem::builder()
             .pallet_index(50)
-            .call_index(1)
             .tree_id(3)
             .build();
         let src_target_system = TargetSystem::Substrate(src_system);
@@ -200,11 +186,13 @@ mod tests {
             .build();
         let bytes = proposal.to_bytes();
         let expected = concat!(
-          "0000000000000000000000000000000000000000320100000002020000000001cafebabe00000001", // header
-          "3201", // pallet index, call index
-          "0000000000000000000000000000000000000000320100000002020000000001", // resource id
-          "0200000000020000000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f01000000", // metadata
-          "0000000000000000000000000000000000000000320100000003020000000002" // src_resource_id
+          "00000000000000000000000000000000000000000032000000020200000000010000000100000001", // header
+          "32",                                                               // pallet index
+          "01",                                                               // call index
+          "0000000000000000000000000000000000000000003200000002020000000001", // r_id
+          "000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f", // merkle root"
+          "0000000000000000000000000000000000000000003200000003020000000002", // src resource id
+          "01000000",                                                         // nonce
         );
         let bytes_hex = hex::encode(bytes);
         assert_eq!(bytes_hex, expected);
@@ -213,17 +201,18 @@ mod tests {
     #[test]
     fn decode() {
         let bytes = hex_literal::hex!(
-            "0000000000000000000000000000000000000000320100000002020000000001cafebabe00000001" //header
-            "3201" // pallet index, call index
-            "0000000000000000000000000000000000000000320100000002020000000001" // resource id
-            "0200000000020000000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f01000000" // metadata
-            "1111111111111111111111111111111111111111111111111111020000000002" // src_resource_id
+            "00000000000000000000000000000000000000000032000000020200000000010000000100000001"  // header
+            "32"                                                                // pallet index
+            "01"                                                                // call index
+            "0000000000000000000000000000000000000000003200000002020000000001" // r_id
+            "000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f"  // merkle root"
+            "0000000000000000000000000000000000000000003200000003020000000002"  // src resource id
+            "01000000"                                                          // nonce
         );
 
         let proposal = AnchorUpdateProposal::try_from(bytes.to_vec()).unwrap();
         let target = SubstrateTargetSystem::builder()
             .pallet_index(50)
-            .call_index(1)
             .tree_id(2)
             .build();
         assert_eq!(
@@ -250,6 +239,6 @@ mod tests {
             ]
         );
         assert_eq!(proposal.header().nonce().to_u32(), 0x0001);
-        assert_eq!(proposal.src_resource_id().to_bytes(), hex_literal::hex!("1111111111111111111111111111111111111111111111111111020000000002"));
+        assert_eq!(proposal.src_resource_id().to_bytes(), hex_literal::hex!("0000000000000000000000000000000000000000003200000003020000000002"));
     }
 }

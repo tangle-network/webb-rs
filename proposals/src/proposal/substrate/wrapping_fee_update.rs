@@ -1,6 +1,7 @@
 //! Wrapping Fee Update Proposal.
 use crate::target_system::TargetSystem;
 use crate::ProposalHeader;
+use scale_codec::Encode;
 
 #[cfg(not(feature = "std"))]
 use alloc::vec::Vec;
@@ -31,7 +32,7 @@ impl WrappingFeeUpdateProposal {
     #[must_use]
     pub const fn wrapping_fee_percent(&self) -> u128 {
         debug_assert!(
-            self.wrapping_fee_percent <= 100,
+            self.wrapping_fee_percent <= 10_000,
             "wrapping fee percent is too large"
         );
         self.wrapping_fee_percent
@@ -48,7 +49,7 @@ impl WrappingFeeUpdateProposal {
     /// Convert the proposal to a vector of bytes.
     #[must_use]
     pub fn to_bytes(&self) -> Vec<u8> {
-        let mut out = Vec::with_capacity(80);
+        let mut out = Vec::new();
         let target_system = self.header().resource_id().target_system();
 
         let target_details = match target_system {
@@ -59,15 +60,17 @@ impl WrappingFeeUpdateProposal {
         out.extend_from_slice(&self.header.to_bytes());
 
         let call = ExecuteWrappingFeeUpdate {
-            r_id: self.header.resource_id().to_bytes(),
             wrapping_fee_percent: self.wrapping_fee_percent,
             into_pool_share_id: self.into_pool_share_id,
+            nonce: self.header().nonce().to_u32(),
         };
         // add pallet index
         out.push(target_details.pallet_index);
-        // add call index
-        out.push(target_details.call_index);
-        scale_codec::Encode::encode_to(&call, &mut out);
+        // add call index, it is big-endian encoded from a u32 (4-bytes)
+        // the last byte should contain the u8 call index
+        out.push(self.header().function_signature().0[3]);
+        // encode the rest of the call
+        out.extend_from_slice(&call.encode());
         out
     }
 
@@ -115,14 +118,14 @@ impl TryFrom<Vec<u8>> for WrappingFeeUpdateProposal {
 
 #[derive(scale_codec::Encode, scale_codec::Decode)]
 struct ExecuteWrappingFeeUpdate {
-    r_id: [u8; 32],
     wrapping_fee_percent: u128,
     into_pool_share_id: u32,
+    nonce: u32,
 }
 
 fn check_and_validate_wrapping_fee(wrapping_fee_percent: u128) -> u128 {
     debug_assert!(
-        wrapping_fee_percent <= 100,
+        wrapping_fee_percent <= 10_000,
         "wrapping fee percent is too large"
     );
     wrapping_fee_percent
@@ -141,17 +144,16 @@ mod tests {
     fn encode() {
         let target = SubstrateTargetSystem::builder()
             .pallet_index(35)
-            .call_index(0)
             .tree_id(2)
             .build();
         let target_system = TargetSystem::Substrate(target);
         let target_chain = TypedChainId::Substrate(1);
         let resource_id = ResourceId::new(target_system, target_chain);
-        let function_signature =
-            FunctionSignature::new(hex_literal::hex!("cafebabe"));
+        let function_signature = FunctionSignature::new([0, 0, 0, 0]);
         let nonce = Nonce::from(0x0001);
         let header =
             ProposalHeader::new(resource_id, function_signature, nonce);
+        println!("{:?}", header.to_bytes());
         let proposal = WrappingFeeUpdateProposal::builder()
             .header(header)
             .wrapping_fee_percent(5)
@@ -159,25 +161,25 @@ mod tests {
             .build();
         let bytes = proposal.to_bytes();
         let expected = concat!(
-            "0000000000000000000000000000000000000000230000000002020000000001cafebabe00000001", // header
-            "23", // pallet index
-            "00", // call index
-            "0000000000000000000000000000000000000000230000000002020000000001", // resource id
+            "00000000000000000000000000000000000000000023000000020200000000010000000000000001", // header
+            "23",                               // pallet index
+            "00",                               // call index
             "05000000000000000000000000000000", // wrapping fee percent
-            "01000000"                          // pool share id
+            "01000000",                         // pool share id
+            "01000000"                          // nonce
         );
-        assert_eq!(expected, hex::encode(bytes));
+        assert_eq!(hex::encode(bytes), expected);
     }
 
     #[test]
     fn decode() {
         let proposal_bytes = hex_literal::hex!(
-          "0000000000000000000000000000000000000000230000000002020000000001cafebabe00000001" // header
-          "23" // pallet index
-          "00" // call index
-          "0000000000000000000000000000000000000000230000000002020000000001" // resource id
-          "05000000000000000000000000000000" // wrapping fee percent
-          "01000000"  // pool share id
+          "00000000000000000000000000000000000000000023000000020200000000010000000000000001" // header
+          "23"                                // pallet index
+          "00"                                // call index
+          "05000000000000000000000000000000"  // wrapping fee percent
+          "01000000"                          // pool share id
+          "01000000"                          // nonce
         );
 
         let proposal =
@@ -185,7 +187,6 @@ mod tests {
                 .unwrap();
         let target = SubstrateTargetSystem::builder()
             .pallet_index(35)
-            .call_index(0)
             .tree_id(2)
             .build();
         assert_eq!(
@@ -205,20 +206,18 @@ mod tests {
     fn should_check_wrapping_fee_value() {
         let target = SubstrateTargetSystem::builder()
             .pallet_index(35)
-            .call_index(0)
             .tree_id(2)
             .build();
         let target_system = TargetSystem::Substrate(target);
         let target_chain = TypedChainId::Substrate(1);
         let resource_id = ResourceId::new(target_system, target_chain);
-        let function_signature =
-            FunctionSignature::new(hex_literal::hex!("cafebabe"));
+        let function_signature = FunctionSignature::new([0, 0, 0, 0]);
         let nonce = Nonce::from(0x0001);
         let header =
             ProposalHeader::new(resource_id, function_signature, nonce);
         let _ = WrappingFeeUpdateProposal::builder()
             .header(header)
-            .wrapping_fee_percent(101)
+            .wrapping_fee_percent(10001)
             .into_pool_share_id(1)
             .build();
     }

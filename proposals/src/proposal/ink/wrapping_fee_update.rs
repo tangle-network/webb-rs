@@ -16,12 +16,12 @@ pub struct WrappingFeeUpdateProposal {
 impl WrappingFeeUpdateProposal {
     /// Creates a new wrapping fee update proposal.
     ///
-    /// Wrapping fee is in the range of 0 to 10000.
+    /// Wrapping fee is in the range of 0 to 10_000.
     ///
     /// **Note:** in debug mode, this may panic if the fee is out of range.
     #[must_use]
     pub const fn new(header: ProposalHeader, wrapping_fee: u16) -> Self {
-        debug_assert!(wrapping_fee <= 10000);
+        debug_assert!(wrapping_fee <= 10_000);
         Self {
             header,
             wrapping_fee,
@@ -36,13 +36,13 @@ impl WrappingFeeUpdateProposal {
 
     /// Get the wrapping fee.
     ///
-    /// Wrapping fees are in the range [0, 10000].
+    /// Wrapping fees are in the range [0, 10_000].
     ///
     /// *Note*: In debug builds, this will panic if the wrapping fee is out of
     /// range.
     #[must_use]
     pub const fn wrapping_fee(&self) -> u16 {
-        debug_assert!(self.wrapping_fee <= 10000);
+        debug_assert!(self.wrapping_fee <= 10_000);
         self.wrapping_fee
     }
 
