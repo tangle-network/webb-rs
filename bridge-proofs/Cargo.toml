@@ -3,6 +3,10 @@ name = "bridge-proofs"
 version = "0.1.0"
 edition = "2021"
 
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
-
 [dependencies]
+
+[dev-dependencies]
+ethers = "0.17.0"
+serde_json = "1.0.83"
+tokio = { version = "1.20.1", features = ["full"] }
+hex = "0.4.3"

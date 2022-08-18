@@ -1,5 +1,9 @@
 [workspace]
-members = [".", "proposals"]
+members = [
+    ".",
+    "proposals",
+    "bridge-proofs",
+]
 
 [package]
 name = "webb"
