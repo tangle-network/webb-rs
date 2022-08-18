@@ -56,8 +56,6 @@ pub enum TargetSystem {
 pub struct SubstrateTargetSystem {
     /// Pallet index of proposal handler pallet
     pub pallet_index: u8,
-    /// Call index of proposal handler pallet
-    pub call_index: u8,
     /// Webb Protocol Merkle `TreeId` (4 bytes).
     pub tree_id: u32,
 }
@@ -87,8 +85,7 @@ impl TargetSystem {
                 let mut bytes = [0u8; TargetSystem::LENGTH];
                 let f = 22usize;
                 let t = f + core::mem::size_of::<u32>();
-                bytes[f - 1] = target_system.call_index;
-                bytes[f - 2] = target_system.pallet_index;
+                bytes[f - 1] = target_system.pallet_index;
                 bytes[f..t]
                     .copy_from_slice(&target_system.tree_id.to_be_bytes());
                 bytes
@@ -135,11 +132,9 @@ impl TargetSystem {
         match self {
             TargetSystem::ContractAddress(address) => encode(&address),
             TargetSystem::Substrate(target) => {
-                let mut bytes = Vec::with_capacity(6);
+                let mut bytes = Vec::with_capacity(5);
                 // add pallet index
                 bytes.push(target.pallet_index);
-                // add call index
-                bytes.push(target.call_index);
                 // add tree id
                 bytes.extend_from_slice(&target.tree_id.to_be_bytes());
                 encode(&bytes.as_slice())
@@ -159,8 +154,7 @@ impl From<[u8; TargetSystem::LENGTH]> for TargetSystem {
             tree_id_bytes.copy_from_slice(&bytes[f..t]);
             let tree_id = u32::from_be_bytes(tree_id_bytes);
             let target = SubstrateTargetSystem::builder()
-                .pallet_index(bytes[f - 2])
-                .call_index(bytes[f - 1])
+                .pallet_index(bytes[f - 1])
                 .tree_id(tree_id)
                 .build();
             TargetSystem::Substrate(target)
@@ -184,7 +178,6 @@ impl Default for TargetSystem {
     fn default() -> Self {
         let target = SubstrateTargetSystem::builder()
             .pallet_index(0)
-            .call_index(0)
             .tree_id(0)
             .build();
         TargetSystem::Substrate(target)
