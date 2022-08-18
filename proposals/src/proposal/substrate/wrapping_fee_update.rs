@@ -217,7 +217,7 @@ mod tests {
             ProposalHeader::new(resource_id, function_signature, nonce);
         let _ = WrappingFeeUpdateProposal::builder()
             .header(header)
-            .wrapping_fee_percent(101)
+            .wrapping_fee_percent(10001)
             .into_pool_share_id(1)
             .build();
     }
