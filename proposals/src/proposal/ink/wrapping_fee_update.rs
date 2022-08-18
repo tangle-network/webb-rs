@@ -134,7 +134,7 @@ mod tests {
         let bytes = proposal.to_bytes();
 
         let expected = hex_literal::hex!(
-            "00000000000088386fc84ba6bc95484008f6362f93160ef3e5630600000000040000000000000001000000010100"
+            "00000000000088386fc84ba6bc95484008f6362f93160ef3e563060000000004000000000000000100000001010000"
         );
         assert_eq!(bytes, expected);
     }
@@ -142,7 +142,7 @@ mod tests {
     #[test]
     fn decode() {
         let bytes = hex_literal::hex!(
-            "00000000000088386fc84ba6bc95484008f6362f93160ef3e5630600000000040000000000000001000000010100"
+            "00000000000088386fc84ba6bc95484008f6362f93160ef3e563060000000004000000000000000100000001010000"
         );
         let proposal =
             WrappingFeeUpdateProposal::try_from(bytes.to_vec()).unwrap();
@@ -175,7 +175,7 @@ mod tests {
         let nonce = Nonce::from(0x0001);
         let header =
             ProposalHeader::new(resource_id, function_signature, nonce);
-        let wrapping_fee = 101;
+        let wrapping_fee = 10001;
         let _ = WrappingFeeUpdateProposal::new(header, wrapping_fee);
     }
 }

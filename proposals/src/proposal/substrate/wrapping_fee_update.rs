@@ -1,6 +1,7 @@
 //! Wrapping Fee Update Proposal.
 use crate::target_system::TargetSystem;
 use crate::ProposalHeader;
+use scale_codec::Encode;
 
 #[cfg(not(feature = "std"))]
 use alloc::vec::Vec;
@@ -48,7 +49,7 @@ impl WrappingFeeUpdateProposal {
     /// Convert the proposal to a vector of bytes.
     #[must_use]
     pub fn to_bytes(&self) -> Vec<u8> {
-        let mut out = Vec::with_capacity(80);
+        let mut out = Vec::new();
         let target_system = self.header().resource_id().target_system();
 
         let target_details = match target_system {
@@ -68,7 +69,8 @@ impl WrappingFeeUpdateProposal {
         // add call index, it is big-endian encoded from a u32 (4-bytes)
         // the last byte should contain the u8 call index
         out.push(self.header().function_signature().0[3]);
-        scale_codec::Encode::encode_to(&call, &mut out);
+        // encode the rest of the call
+        out.extend_from_slice(&call.encode());
         out
     }
 
@@ -151,6 +153,7 @@ mod tests {
         let nonce = Nonce::from(0x0001);
         let header =
             ProposalHeader::new(resource_id, function_signature, nonce);
+        println!("{:?}", header.to_bytes());
         let proposal = WrappingFeeUpdateProposal::builder()
             .header(header)
             .wrapping_fee_percent(5)
@@ -158,25 +161,25 @@ mod tests {
             .build();
         let bytes = proposal.to_bytes();
         let expected = concat!(
-            "0000000000000000000000000000000000000000230000000002020000000001cafebabe00000001", // header
-            "23", // pallet index
-            "00", // call index
-            "0000000000000000000000000000000000000000230000000002020000000001", // resource id
+            "00000000000000000000000000000000000000000023000000020200000000010000000000000001", // header
+            "23",                               // pallet index
+            "00",                               // call index
             "05000000000000000000000000000000", // wrapping fee percent
-            "01000000"                          // pool share id
+            "01000000",                         // pool share id
+            "01000000"                          // nonce
         );
-        assert_eq!(expected, hex::encode(bytes));
+        assert_eq!(hex::encode(bytes), expected);
     }
 
     #[test]
     fn decode() {
         let proposal_bytes = hex_literal::hex!(
-          "0000000000000000000000000000000000000000230000000002020000000001cafebabe00000001" // header
-          "23" // pallet index
-          "00" // call index
-          "0000000000000000000000000000000000000000230000000002020000000001" // resource id
-          "05000000000000000000000000000000" // wrapping fee percent
-          "01000000"  // pool share id
+          "00000000000000000000000000000000000000000023000000020200000000010000000000000001" // header
+          "23"                                // pallet index
+          "00"                                // call index
+          "05000000000000000000000000000000"  // wrapping fee percent
+          "01000000"                          // pool share id
+          "01000000"                          // nonce
         );
 
         let proposal =

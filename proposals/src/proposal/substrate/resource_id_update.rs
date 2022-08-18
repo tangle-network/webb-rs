@@ -139,9 +139,10 @@ mod tests {
             .build();
         let bytes = proposal.to_bytes();
         let expected = hex_literal::hex!(
-        "0000000000000000000000000000000000000000320100000002020000000001cafebabe00000001" // header
-        "3201" // pallet call, index call
-        "0000000000000000000000000000000000000000320100000003020000000001" // new_resource_id
+        "00000000000000000000000000000000000000000032000000020200000000010000000100000001" // header
+        "32"                                                               // pallet call
+        "01"                                                               // call index
+        "0000000000000000000000000000000000000000003200000003020000000001" // new_resource_id
         );
         assert_eq!(bytes, expected);
     }
@@ -150,9 +151,10 @@ mod tests {
     fn decode() {
         // do the reverse of encode
         let bytes = hex_literal::hex!(
-        "0000000000000000000000000000000000000000320100000002020000000001cafebabe00000001" // header
-        "3201" // pallet call, index call
-        "0000000000000000000000000000000000000000320100000003020000000001" // new_resource_id
+        "00000000000000000000000000000000000000000032000000020200000000010000000100000001" // header
+        "32"                                                               // pallet call
+        "01"                                                               // call index
+        "0000000000000000000000000000000000000000003200000003020000000001" // new_resource_id
         );
         let proposal =
             ResourceIdUpdateProposal::try_from(bytes.to_vec()).unwrap();

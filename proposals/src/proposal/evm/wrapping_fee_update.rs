@@ -63,7 +63,7 @@ impl WrappingFeeUpdateProposal {
         let f = 0usize;
         let t = ProposalHeader::LENGTH;
         bytes[f..t].copy_from_slice(&self.header.to_bytes());
-        bytes[t..t + 1].copy_from_slice(&self.wrapping_fee.to_be_bytes());
+        bytes[t..t + 2].copy_from_slice(&self.wrapping_fee.to_be_bytes());
         bytes
     }
 
@@ -84,7 +84,7 @@ impl From<[u8; WrappingFeeUpdateProposal::LENGTH]>
         header_bytes.copy_from_slice(&bytes[f..t]);
         let header = ProposalHeader::from(header_bytes);
         let mut wrapping_fee_bytes = [0u8; 2];
-        wrapping_fee_bytes.copy_from_slice(&bytes[t..t + 1]);
+        wrapping_fee_bytes.copy_from_slice(&bytes[t..t + 2]);
         let wrapping_fee = u16::from_be_bytes(wrapping_fee_bytes);
         Self::new(header, wrapping_fee)
     }

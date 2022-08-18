@@ -143,12 +143,12 @@ mod tests {
             .build();
         let bytes = proposal.to_bytes();
         let expected = concat!(
-            "0000000000000000000000000000000000000000230200000002020000000001cafebabe00000001", // header
-            "23", // pallet index
-            "02", // call index
-            "0000000000000000000000000000000000000000230200000002020000000001", // resource id
-            "1074657374", // name
-            "01000000"    // asset id
+            "00000000000000000000000000000000000000000023000000020200000000010000000200000001", // header
+            "23",                                                               // pallet index
+            "02",                                                               // call index
+            "1074657374",                                                       // name
+            "01000000",                                                         // asset id
+            "01000000"                                                          // nonce
         );
         assert_eq!(expected, hex::encode(bytes));
     }
@@ -156,12 +156,12 @@ mod tests {
     #[test]
     fn decode() {
         let proposal_bytes = hex_literal::hex!(
-            "0000000000000000000000000000000000000000230200000002020000000001cafebabe00000001" // header
-          "23" // pallet index
-          "02" // call index
-          "0000000000000000000000000000000000000000230200000002020000000001" // resource id
-          "1074657374" // name
-          "01000000"  // asset id
+        "00000000000000000000000000000000000000000023000000020200000000010000000000000001" // header
+        "23"                                                                // pallet index
+        "02"                                                                // call index
+        "1074657374"                                                        // name
+        "01000000"                                                          // asset id
+        "01000000"                                                          // nonce
         );
 
         let proposal =

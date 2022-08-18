@@ -11,18 +11,18 @@ use serde::{Deserialize, Serialize};
 #[derive(Debug, Copy, Clone, PartialEq, Eq, Hash)]
 pub struct WrappingFeeUpdateProposal {
     header: ProposalHeader,
-    wrapping_fee: u8,
+    wrapping_fee: u16,
 }
 
 impl WrappingFeeUpdateProposal {
     /// Creates a new wrapping fee update proposal.
     ///
-    /// Wrapping fee is in the range of 0 to 100.
+    /// Wrapping fee is in the range of 0 to 10000.
     ///
     /// **Note:** in debug mode, this may panic if the fee is out of range.
     #[must_use]
-    pub const fn new(header: ProposalHeader, wrapping_fee: u8) -> Self {
-        debug_assert!(wrapping_fee <= 100);
+    pub const fn new(header: ProposalHeader, wrapping_fee: u16) -> Self {
+        debug_assert!(wrapping_fee <= 10000);
         Self {
             header,
             wrapping_fee,
@@ -37,13 +37,13 @@ impl WrappingFeeUpdateProposal {
 
     /// Get the wrapping fee.
     ///
-    /// Wrapping fees are in the range [0, 100].
+    /// Wrapping fees are in the range [0, 10000].
     ///
     /// *Note*: In debug builds, this will panic if the wrapping fee is out of
     /// range.
     #[must_use]
-    pub const fn wrapping_fee(&self) -> u8 {
-        debug_assert!(self.wrapping_fee <= 100);
+    pub const fn wrapping_fee(&self) -> u16 {
+        debug_assert!(self.wrapping_fee <= 10000);
         self.wrapping_fee
     }
 
@@ -100,7 +100,7 @@ struct UpdateConfigMsg {
     pub governor: Option<String>,
     pub is_native_allowed: Option<bool>,
     pub wrapping_limit: Option<Uint128>,
-    pub fee_percentage: Option<u8>,
+    pub fee_percentage: Option<u16>,
     pub fee_recipient: Option<String>,
 }
 
@@ -172,7 +172,7 @@ mod tests {
         let nonce = Nonce::from(0x0001);
         let header =
             ProposalHeader::new(resource_id, function_signature, nonce);
-        let wrapping_fee = 101;
+        let wrapping_fee = 10001;
         let _ = WrappingFeeUpdateProposal::new(header, wrapping_fee);
     }
 }
