@@ -1,3 +1,5 @@
+mod evm;
+
 #[cfg(test)]
 mod tests {
     use ethers::prelude::*;
