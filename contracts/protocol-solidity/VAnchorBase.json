@@ -1,7 +1,7 @@
 {
   "_format": "hh-sol-artifact-1",
-  "contractName": "AnchorBase",
-  "sourceName": "contracts/anchors/AnchorBase.sol",
+  "contractName": "VAnchorBase",
+  "sourceName": "contracts/vanchors/VAnchorBase.sol",
   "abi": [
     {
       "anonymous": false,
@@ -92,6 +92,63 @@
       "type": "event"
     },
     {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "bytes32",
+          "name": "commitment",
+          "type": "bytes32"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "index",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "bytes",
+          "name": "encryptedOutput",
+          "type": "bytes"
+        }
+      ],
+      "name": "NewCommitment",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "bytes32",
+          "name": "nullifier",
+          "type": "bytes32"
+        }
+      ],
+      "name": "NewNullifier",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "owner",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "bytes",
+          "name": "key",
+          "type": "bytes"
+        }
+      ],
+      "name": "PublicKey",
+      "type": "event"
+    },
+    {
       "inputs": [],
       "name": "EVM_CHAIN_ID_TYPE",
       "outputs": [
@@ -107,6 +164,32 @@
     {
       "inputs": [],
       "name": "FIELD_SIZE",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "MAX_EXT_AMOUNT",
+      "outputs": [
+        {
+          "internalType": "int256",
+          "name": "",
+          "type": "int256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "MAX_FEE",
       "outputs": [
         {
           "internalType": "uint256",
@@ -146,6 +229,30 @@
     {
       "inputs": [
         {
+          "internalType": "int256",
+          "name": "_extAmount",
+          "type": "int256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_fee",
+          "type": "uint256"
+        }
+      ],
+      "name": "calculatePublicAmount",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "pure",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
           "internalType": "bytes32",
           "name": "",
           "type": "bytes32"
@@ -166,12 +273,12 @@
       "inputs": [
         {
           "internalType": "uint256",
-          "name": "maximumDepositAmount",
+          "name": "_maximumDepositAmount",
           "type": "uint256"
         },
         {
           "internalType": "uint32",
-          "name": "nonce",
+          "name": "_nonce",
           "type": "uint32"
         }
       ],
@@ -184,12 +291,12 @@
       "inputs": [
         {
           "internalType": "uint256",
-          "name": "minimalWithdrawalAmount",
+          "name": "_minimalWithdrawalAmount",
           "type": "uint256"
         },
         {
           "internalType": "uint32",
-          "name": "nonce",
+          "name": "_nonce",
           "type": "uint32"
         }
       ],
@@ -499,6 +606,24 @@
       "inputs": [
         {
           "internalType": "uint256",
+          "name": "_minimalWithdrawalAmount",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_maximumDepositAmount",
+          "type": "uint256"
+        }
+      ],
+      "name": "initialize",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
           "name": "_neighborChainID",
           "type": "uint256"
         },
@@ -597,6 +722,19 @@
     },
     {
       "inputs": [],
+      "name": "lastBalance",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
       "name": "levels",
       "outputs": [
         {
@@ -616,6 +754,32 @@
           "internalType": "uint8",
           "name": "",
           "type": "uint8"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "maximumDepositAmount",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "minimalWithdrawalAmount",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
         }
       ],
       "stateMutability": "view",
@@ -694,6 +858,31 @@
         }
       ],
       "stateMutability": "pure",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "components": [
+            {
+              "internalType": "address",
+              "name": "owner",
+              "type": "address"
+            },
+            {
+              "internalType": "bytes",
+              "name": "publicKey",
+              "type": "bytes"
+            }
+          ],
+          "internalType": "struct VAnchorBase.Account",
+          "name": "_account",
+          "type": "tuple"
+        }
+      ],
+      "name": "register",
+      "outputs": [],
+      "stateMutability": "nonpayable",
       "type": "function"
     },
     {

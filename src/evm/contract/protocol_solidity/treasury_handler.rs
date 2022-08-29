@@ -19,7 +19,7 @@ pub mod treasury_handler_contract {
     pub static TREASURYHANDLERCONTRACT_ABI: ethers::contract::Lazy<
         ethers::core::abi::Abi,
     > = ethers::contract::Lazy::new(|| {
-        ethers :: core :: utils :: __serde_json :: from_str ("[{\"inputs\":[{\"internalType\":\"address\",\"name\":\"bridgeAddress\",\"type\":\"address\",\"components\":[]},{\"internalType\":\"bytes32[]\",\"name\":\"initialResourceIDs\",\"type\":\"bytes32[]\",\"components\":[]},{\"internalType\":\"address[]\",\"name\":\"initialContractAddresses\",\"type\":\"address[]\",\"components\":[]}],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\",\"outputs\":[]},{\"inputs\":[],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"_bridgeAddress\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\",\"components\":[]}]},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\",\"components\":[]}],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"_contractAddressToResourceID\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\",\"components\":[]}]},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\",\"components\":[]}],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"_contractWhitelist\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\",\"components\":[]}]},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\",\"components\":[]}],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"_resourceIDToContractAddress\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\",\"components\":[]}]},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\",\"components\":[]},{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\",\"components\":[]}],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"_updateRecords\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"_treasuryAddress\",\"type\":\"address\",\"components\":[]},{\"internalType\":\"uint256\",\"name\":\"_executionChainID\",\"type\":\"uint256\",\"components\":[]},{\"internalType\":\"uint256\",\"name\":\"_nonce\",\"type\":\"uint256\",\"components\":[]},{\"internalType\":\"bytes4\",\"name\":\"functionSig\",\"type\":\"bytes4\",\"components\":[]},{\"internalType\":\"bytes32\",\"name\":\"_resourceID\",\"type\":\"bytes32\",\"components\":[]},{\"internalType\":\"bytes32\",\"name\":\"_updateValue\",\"type\":\"bytes32\",\"components\":[]}]},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"resourceID\",\"type\":\"bytes32\",\"components\":[]},{\"internalType\":\"bytes\",\"name\":\"data\",\"type\":\"bytes\",\"components\":[]}],\"stateMutability\":\"nonpayable\",\"type\":\"function\",\"name\":\"executeProposal\",\"outputs\":[]},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"updateNonce\",\"type\":\"uint256\",\"components\":[]},{\"internalType\":\"uint256\",\"name\":\"executionChainId\",\"type\":\"uint256\",\"components\":[]}],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"getUpdateRecord\",\"outputs\":[{\"internalType\":\"struct TreasuryHandler.UpdateRecord\",\"name\":\"\",\"type\":\"tuple\",\"components\":[{\"internalType\":\"address\",\"name\":\"_treasuryAddress\",\"type\":\"address\",\"components\":[]},{\"internalType\":\"uint256\",\"name\":\"_executionChainID\",\"type\":\"uint256\",\"components\":[]},{\"internalType\":\"uint256\",\"name\":\"_nonce\",\"type\":\"uint256\",\"components\":[]},{\"internalType\":\"bytes4\",\"name\":\"functionSig\",\"type\":\"bytes4\",\"components\":[]},{\"internalType\":\"bytes32\",\"name\":\"_resourceID\",\"type\":\"bytes32\",\"components\":[]},{\"internalType\":\"bytes32\",\"name\":\"_updateValue\",\"type\":\"bytes32\",\"components\":[]}]}]},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"newBridge\",\"type\":\"address\",\"components\":[]}],\"stateMutability\":\"nonpayable\",\"type\":\"function\",\"name\":\"migrateBridge\",\"outputs\":[]},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"resourceID\",\"type\":\"bytes32\",\"components\":[]},{\"internalType\":\"address\",\"name\":\"contractAddress\",\"type\":\"address\",\"components\":[]}],\"stateMutability\":\"nonpayable\",\"type\":\"function\",\"name\":\"setResource\",\"outputs\":[]}]") . expect ("invalid abi")
+        ethers :: core :: utils :: __serde_json :: from_str ("[{\"inputs\":[{\"internalType\":\"address\",\"name\":\"bridgeAddress\",\"type\":\"address\",\"components\":[]},{\"internalType\":\"bytes32[]\",\"name\":\"initialResourceIDs\",\"type\":\"bytes32[]\",\"components\":[]},{\"internalType\":\"address[]\",\"name\":\"initialContractAddresses\",\"type\":\"address[]\",\"components\":[]}],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\",\"outputs\":[]},{\"inputs\":[],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"_bridgeAddress\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\",\"components\":[]}]},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\",\"components\":[]}],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"_contractAddressToResourceID\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\",\"components\":[]}]},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\",\"components\":[]}],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"_contractWhitelist\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\",\"components\":[]}]},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\",\"components\":[]}],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"_resourceIDToContractAddress\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\",\"components\":[]}]},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"resourceID\",\"type\":\"bytes32\",\"components\":[]},{\"internalType\":\"bytes\",\"name\":\"data\",\"type\":\"bytes\",\"components\":[]}],\"stateMutability\":\"nonpayable\",\"type\":\"function\",\"name\":\"executeProposal\",\"outputs\":[]},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"newBridge\",\"type\":\"address\",\"components\":[]}],\"stateMutability\":\"nonpayable\",\"type\":\"function\",\"name\":\"migrateBridge\",\"outputs\":[]},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"resourceID\",\"type\":\"bytes32\",\"components\":[]},{\"internalType\":\"address\",\"name\":\"contractAddress\",\"type\":\"address\",\"components\":[]}],\"stateMutability\":\"nonpayable\",\"type\":\"function\",\"name\":\"setResource\",\"outputs\":[]}]") . expect ("invalid abi")
     });
     pub struct TreasuryHandlerContract<M>(ethers::contract::Contract<M>);
     impl<M> Clone for TreasuryHandlerContract<M> {
@@ -98,26 +98,6 @@ pub mod treasury_handler_contract {
                 .method_hash([197, 76, 42, 17], p0)
                 .expect("method not found (this should never happen)")
         }
-        #[doc = "Calls the contract's `_updateRecords` (0x0c9e9e14) function"]
-        pub fn update_records(
-            &self,
-            p0: ethers::core::types::U256,
-            p1: ethers::core::types::U256,
-        ) -> ethers::contract::builders::ContractCall<
-            M,
-            (
-                ethers::core::types::Address,
-                ethers::core::types::U256,
-                ethers::core::types::U256,
-                [u8; 4],
-                [u8; 32],
-                [u8; 32],
-            ),
-        > {
-            self.0
-                .method_hash([12, 158, 158, 20], (p0, p1))
-                .expect("method not found (this should never happen)")
-        }
         #[doc = "Calls the contract's `executeProposal` (0xe248cff2) function"]
         pub fn execute_proposal(
             &self,
@@ -126,19 +106,6 @@ pub mod treasury_handler_contract {
         ) -> ethers::contract::builders::ContractCall<M, ()> {
             self.0
                 .method_hash([226, 72, 207, 242], (resource_id, data))
-                .expect("method not found (this should never happen)")
-        }
-        #[doc = "Calls the contract's `getUpdateRecord` (0x6b84724a) function"]
-        pub fn get_update_record(
-            &self,
-            update_nonce: ethers::core::types::U256,
-            execution_chain_id: ethers::core::types::U256,
-        ) -> ethers::contract::builders::ContractCall<M, UpdateRecord> {
-            self.0
-                .method_hash(
-                    [107, 132, 114, 74],
-                    (update_nonce, execution_chain_id),
-                )
                 .expect("method not found (this should never happen)")
         }
         #[doc = "Calls the contract's `migrateBridge` (0xd7f5b359) function"]
@@ -235,23 +202,6 @@ pub mod treasury_handler_contract {
         abi = "_resourceIDToContractAddress(bytes32)"
     )]
     pub struct ResourceIDToContractAddressCall(pub [u8; 32]);
-    #[doc = "Container type for all input parameters for the `_updateRecords` function with signature `_updateRecords(uint256,uint256)` and selector `[12, 158, 158, 20]`"]
-    #[derive(
-        Clone,
-        Debug,
-        Default,
-        Eq,
-        PartialEq,
-        ethers :: contract :: EthCall,
-        ethers :: contract :: EthDisplay,
-        serde :: Serialize,
-        serde :: Deserialize,
-    )]
-    #[ethcall(name = "_updateRecords", abi = "_updateRecords(uint256,uint256)")]
-    pub struct UpdateRecordsCall(
-        pub ethers::core::types::U256,
-        pub ethers::core::types::U256,
-    );
     #[doc = "Container type for all input parameters for the `executeProposal` function with signature `executeProposal(bytes32,bytes)` and selector `[226, 72, 207, 242]`"]
     #[derive(
         Clone,
@@ -268,26 +218,6 @@ pub mod treasury_handler_contract {
     pub struct ExecuteProposalCall {
         pub resource_id: [u8; 32],
         pub data: ethers::core::types::Bytes,
-    }
-    #[doc = "Container type for all input parameters for the `getUpdateRecord` function with signature `getUpdateRecord(uint256,uint256)` and selector `[107, 132, 114, 74]`"]
-    #[derive(
-        Clone,
-        Debug,
-        Default,
-        Eq,
-        PartialEq,
-        ethers :: contract :: EthCall,
-        ethers :: contract :: EthDisplay,
-        serde :: Serialize,
-        serde :: Deserialize,
-    )]
-    #[ethcall(
-        name = "getUpdateRecord",
-        abi = "getUpdateRecord(uint256,uint256)"
-    )]
-    pub struct GetUpdateRecordCall {
-        pub update_nonce: ethers::core::types::U256,
-        pub execution_chain_id: ethers::core::types::U256,
     }
     #[doc = "Container type for all input parameters for the `migrateBridge` function with signature `migrateBridge(address)` and selector `[215, 245, 179, 89]`"]
     #[derive(
@@ -336,9 +266,7 @@ pub mod treasury_handler_contract {
         ContractAddressToResourceID(ContractAddressToResourceIDCall),
         ContractWhitelist(ContractWhitelistCall),
         ResourceIDToContractAddress(ResourceIDToContractAddressCall),
-        UpdateRecords(UpdateRecordsCall),
         ExecuteProposal(ExecuteProposalCall),
-        GetUpdateRecord(GetUpdateRecordCall),
         MigrateBridge(MigrateBridgeCall),
         SetResource(SetResourceCall),
     }
@@ -367,29 +295,11 @@ pub mod treasury_handler_contract {
             }
             if let Ok (decoded) = < ResourceIDToContractAddressCall as ethers :: core :: abi :: AbiDecode > :: decode (data . as_ref ()) { return Ok (TreasuryHandlerContractCalls :: ResourceIDToContractAddress (decoded)) }
             if let Ok(decoded) =
-                <UpdateRecordsCall as ethers::core::abi::AbiDecode>::decode(
-                    data.as_ref(),
-                )
-            {
-                return Ok(TreasuryHandlerContractCalls::UpdateRecords(
-                    decoded,
-                ));
-            }
-            if let Ok(decoded) =
                 <ExecuteProposalCall as ethers::core::abi::AbiDecode>::decode(
                     data.as_ref(),
                 )
             {
                 return Ok(TreasuryHandlerContractCalls::ExecuteProposal(
-                    decoded,
-                ));
-            }
-            if let Ok(decoded) =
-                <GetUpdateRecordCall as ethers::core::abi::AbiDecode>::decode(
-                    data.as_ref(),
-                )
-            {
-                return Ok(TreasuryHandlerContractCalls::GetUpdateRecord(
                     decoded,
                 ));
             }
@@ -427,13 +337,7 @@ pub mod treasury_handler_contract {
                 TreasuryHandlerContractCalls::ResourceIDToContractAddress(
                     element,
                 ) => element.encode(),
-                TreasuryHandlerContractCalls::UpdateRecords(element) => {
-                    element.encode()
-                }
                 TreasuryHandlerContractCalls::ExecuteProposal(element) => {
-                    element.encode()
-                }
-                TreasuryHandlerContractCalls::GetUpdateRecord(element) => {
                     element.encode()
                 }
                 TreasuryHandlerContractCalls::MigrateBridge(element) => {
@@ -460,13 +364,7 @@ pub mod treasury_handler_contract {
                 TreasuryHandlerContractCalls::ResourceIDToContractAddress(
                     element,
                 ) => element.fmt(f),
-                TreasuryHandlerContractCalls::UpdateRecords(element) => {
-                    element.fmt(f)
-                }
                 TreasuryHandlerContractCalls::ExecuteProposal(element) => {
-                    element.fmt(f)
-                }
-                TreasuryHandlerContractCalls::GetUpdateRecord(element) => {
                     element.fmt(f)
                 }
                 TreasuryHandlerContractCalls::MigrateBridge(element) => {
@@ -504,23 +402,11 @@ pub mod treasury_handler_contract {
             TreasuryHandlerContractCalls::ResourceIDToContractAddress(var)
         }
     }
-    impl ::std::convert::From<UpdateRecordsCall> for TreasuryHandlerContractCalls {
-        fn from(var: UpdateRecordsCall) -> Self {
-            TreasuryHandlerContractCalls::UpdateRecords(var)
-        }
-    }
     impl ::std::convert::From<ExecuteProposalCall>
         for TreasuryHandlerContractCalls
     {
         fn from(var: ExecuteProposalCall) -> Self {
             TreasuryHandlerContractCalls::ExecuteProposal(var)
-        }
-    }
-    impl ::std::convert::From<GetUpdateRecordCall>
-        for TreasuryHandlerContractCalls
-    {
-        fn from(var: GetUpdateRecordCall) -> Self {
-            TreasuryHandlerContractCalls::GetUpdateRecord(var)
         }
     }
     impl ::std::convert::From<MigrateBridgeCall> for TreasuryHandlerContractCalls {
@@ -587,66 +473,4 @@ pub mod treasury_handler_contract {
     pub struct ResourceIDToContractAddressReturn(
         pub ethers::core::types::Address,
     );
-    #[doc = "Container type for all return fields from the `_updateRecords` function with signature `_updateRecords(uint256,uint256)` and selector `[12, 158, 158, 20]`"]
-    #[derive(
-        Clone,
-        Debug,
-        Default,
-        Eq,
-        PartialEq,
-        ethers :: contract :: EthAbiType,
-        ethers :: contract :: EthAbiCodec,
-        serde :: Serialize,
-        serde :: Deserialize,
-    )]
-    pub struct UpdateRecordsReturn {
-        pub treasury_address: ethers::core::types::Address,
-        pub execution_chain_id: ethers::core::types::U256,
-        pub nonce: ethers::core::types::U256,
-        pub function_sig: [u8; 4],
-        pub resource_id: [u8; 32],
-        pub update_value: [u8; 32],
-    }
-    #[doc = "Container type for all return fields from the `getUpdateRecord` function with signature `getUpdateRecord(uint256,uint256)` and selector `[107, 132, 114, 74]`"]
-    #[derive(
-        Clone,
-        Debug,
-        Default,
-        Eq,
-        PartialEq,
-        ethers :: contract :: EthAbiType,
-        ethers :: contract :: EthAbiCodec,
-        serde :: Serialize,
-        serde :: Deserialize,
-    )]
-    pub struct GetUpdateRecordReturn(
-        pub  (
-            ethers::core::types::Address,
-            ethers::core::types::U256,
-            ethers::core::types::U256,
-            [u8; 4],
-            [u8; 32],
-            [u8; 32],
-        ),
-    );
-    #[doc = "`UpdateRecord(address,uint256,uint256,bytes4,bytes32,bytes32)`"]
-    #[derive(
-        Clone,
-        Debug,
-        Default,
-        Eq,
-        PartialEq,
-        ethers :: contract :: EthAbiType,
-        ethers :: contract :: EthAbiCodec,
-        serde :: Serialize,
-        serde :: Deserialize,
-    )]
-    pub struct UpdateRecord {
-        pub treasury_address: ethers::core::types::Address,
-        pub execution_chain_id: ethers::core::types::U256,
-        pub nonce: ethers::core::types::U256,
-        pub function_sig: [u8; 4],
-        pub resource_id: [u8; 32],
-        pub update_value: [u8; 32],
-    }
 }

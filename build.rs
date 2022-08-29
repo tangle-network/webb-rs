@@ -30,6 +30,15 @@ mod evm {
         )
     }
 
+    pub fn build_protocol_solidity_vanchor_base() -> Result<(), Box<dyn Error>>
+    {
+        parse_and_write_abigen(
+            "contracts/protocol-solidity/VAnchorBase.json",
+            "src/evm/contract/protocol_solidity/vanchor_base.rs",
+            "VAnchorBaseContract",
+        )
+    }
+
     pub fn build_protocol_solidity_vanchor() -> Result<(), Box<dyn Error>> {
         parse_and_write_abigen(
             "contracts/protocol-solidity/VAnchor.json",
@@ -173,6 +182,7 @@ fn main() -> Result<(), Box<dyn Error>> {
     #[cfg(feature = "generate-contracts")]
     {
         evm::build_protocol_solidity_anchor_base()?;
+        evm::build_protocol_solidity_vanchor_base()?;
         evm::build_protocol_solidity_vanchor()?;
         evm::build_protocol_solidity_anchor_handler()?;
         evm::build_protocol_solidity_signature_bridge()?;
