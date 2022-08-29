@@ -19,7 +19,7 @@ pub mod anchor_handler_contract {
     pub static ANCHORHANDLERCONTRACT_ABI: ethers::contract::Lazy<
         ethers::core::abi::Abi,
     > = ethers::contract::Lazy::new(|| {
-        ethers :: core :: utils :: __serde_json :: from_str ("[{\"inputs\":[{\"internalType\":\"address\",\"name\":\"bridgeAddress\",\"type\":\"address\",\"components\":[]},{\"internalType\":\"bytes32[]\",\"name\":\"initialResourceIDs\",\"type\":\"bytes32[]\",\"components\":[]},{\"internalType\":\"address[]\",\"name\":\"initialContractAddresses\",\"type\":\"address[]\",\"components\":[]}],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\",\"outputs\":[]},{\"inputs\":[],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"_bridgeAddress\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\",\"components\":[]}]},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\",\"components\":[]}],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"_contractAddressToResourceID\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\",\"components\":[]}]},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\",\"components\":[]}],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"_contractWhitelist\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\",\"components\":[]}]},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\",\"components\":[]}],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"_resourceIDToContractAddress\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\",\"components\":[]}]},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\",\"components\":[]},{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\",\"components\":[]}],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"_updateRecords\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"_tokenAddress\",\"type\":\"address\",\"components\":[]},{\"internalType\":\"uint256\",\"name\":\"_sourceChainID\",\"type\":\"uint256\",\"components\":[]},{\"internalType\":\"bytes32\",\"name\":\"_resourceID\",\"type\":\"bytes32\",\"components\":[]},{\"internalType\":\"bytes32\",\"name\":\"_merkleRoot\",\"type\":\"bytes32\",\"components\":[]},{\"internalType\":\"uint256\",\"name\":\"_leafIndex\",\"type\":\"uint256\",\"components\":[]}]},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"resourceID\",\"type\":\"bytes32\",\"components\":[]},{\"internalType\":\"bytes\",\"name\":\"data\",\"type\":\"bytes\",\"components\":[]}],\"stateMutability\":\"nonpayable\",\"type\":\"function\",\"name\":\"executeProposal\",\"outputs\":[]},{\"inputs\":[{\"internalType\":\"uint64\",\"name\":\"updateNonce\",\"type\":\"uint64\",\"components\":[]},{\"internalType\":\"uint256\",\"name\":\"sourceChainId\",\"type\":\"uint256\",\"components\":[]}],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"getUpdateRecord\",\"outputs\":[{\"internalType\":\"struct AnchorHandler.UpdateRecord\",\"name\":\"\",\"type\":\"tuple\",\"components\":[{\"internalType\":\"address\",\"name\":\"_tokenAddress\",\"type\":\"address\",\"components\":[]},{\"internalType\":\"uint256\",\"name\":\"_sourceChainID\",\"type\":\"uint256\",\"components\":[]},{\"internalType\":\"bytes32\",\"name\":\"_resourceID\",\"type\":\"bytes32\",\"components\":[]},{\"internalType\":\"bytes32\",\"name\":\"_merkleRoot\",\"type\":\"bytes32\",\"components\":[]},{\"internalType\":\"uint256\",\"name\":\"_leafIndex\",\"type\":\"uint256\",\"components\":[]}]}]},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"newBridge\",\"type\":\"address\",\"components\":[]}],\"stateMutability\":\"nonpayable\",\"type\":\"function\",\"name\":\"migrateBridge\",\"outputs\":[]},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"resourceID\",\"type\":\"bytes32\",\"components\":[]},{\"internalType\":\"address\",\"name\":\"contractAddress\",\"type\":\"address\",\"components\":[]}],\"stateMutability\":\"nonpayable\",\"type\":\"function\",\"name\":\"setResource\",\"outputs\":[]}]") . expect ("invalid abi")
+        ethers :: core :: utils :: __serde_json :: from_str ("[{\"inputs\":[{\"internalType\":\"address\",\"name\":\"bridgeAddress\",\"type\":\"address\",\"components\":[]},{\"internalType\":\"bytes32[]\",\"name\":\"initialResourceIDs\",\"type\":\"bytes32[]\",\"components\":[]},{\"internalType\":\"address[]\",\"name\":\"initialContractAddresses\",\"type\":\"address[]\",\"components\":[]}],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\",\"outputs\":[]},{\"inputs\":[],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"_bridgeAddress\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\",\"components\":[]}]},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\",\"components\":[]}],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"_contractAddressToResourceID\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\",\"components\":[]}]},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\",\"components\":[]}],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"_contractWhitelist\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\",\"components\":[]}]},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\",\"components\":[]}],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"_resourceIDToContractAddress\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\",\"components\":[]}]},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"resourceID\",\"type\":\"bytes32\",\"components\":[]},{\"internalType\":\"bytes\",\"name\":\"data\",\"type\":\"bytes\",\"components\":[]}],\"stateMutability\":\"nonpayable\",\"type\":\"function\",\"name\":\"executeProposal\",\"outputs\":[]},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"newBridge\",\"type\":\"address\",\"components\":[]}],\"stateMutability\":\"nonpayable\",\"type\":\"function\",\"name\":\"migrateBridge\",\"outputs\":[]},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"resourceID\",\"type\":\"bytes32\",\"components\":[]},{\"internalType\":\"address\",\"name\":\"contractAddress\",\"type\":\"address\",\"components\":[]}],\"stateMutability\":\"nonpayable\",\"type\":\"function\",\"name\":\"setResource\",\"outputs\":[]}]") . expect ("invalid abi")
     });
     pub struct AnchorHandlerContract<M>(ethers::contract::Contract<M>);
     impl<M> Clone for AnchorHandlerContract<M> {
@@ -98,25 +98,6 @@ pub mod anchor_handler_contract {
                 .method_hash([197, 76, 42, 17], p0)
                 .expect("method not found (this should never happen)")
         }
-        #[doc = "Calls the contract's `_updateRecords` (0x0c9e9e14) function"]
-        pub fn update_records(
-            &self,
-            p0: ethers::core::types::U256,
-            p1: ethers::core::types::U256,
-        ) -> ethers::contract::builders::ContractCall<
-            M,
-            (
-                ethers::core::types::Address,
-                ethers::core::types::U256,
-                [u8; 32],
-                [u8; 32],
-                ethers::core::types::U256,
-            ),
-        > {
-            self.0
-                .method_hash([12, 158, 158, 20], (p0, p1))
-                .expect("method not found (this should never happen)")
-        }
         #[doc = "Calls the contract's `executeProposal` (0xe248cff2) function"]
         pub fn execute_proposal(
             &self,
@@ -125,19 +106,6 @@ pub mod anchor_handler_contract {
         ) -> ethers::contract::builders::ContractCall<M, ()> {
             self.0
                 .method_hash([226, 72, 207, 242], (resource_id, data))
-                .expect("method not found (this should never happen)")
-        }
-        #[doc = "Calls the contract's `getUpdateRecord` (0xe07384a8) function"]
-        pub fn get_update_record(
-            &self,
-            update_nonce: u64,
-            source_chain_id: ethers::core::types::U256,
-        ) -> ethers::contract::builders::ContractCall<M, UpdateRecord> {
-            self.0
-                .method_hash(
-                    [224, 115, 132, 168],
-                    (update_nonce, source_chain_id),
-                )
                 .expect("method not found (this should never happen)")
         }
         #[doc = "Calls the contract's `migrateBridge` (0xd7f5b359) function"]
@@ -234,23 +202,6 @@ pub mod anchor_handler_contract {
         abi = "_resourceIDToContractAddress(bytes32)"
     )]
     pub struct ResourceIDToContractAddressCall(pub [u8; 32]);
-    #[doc = "Container type for all input parameters for the `_updateRecords` function with signature `_updateRecords(uint256,uint256)` and selector `[12, 158, 158, 20]`"]
-    #[derive(
-        Clone,
-        Debug,
-        Default,
-        Eq,
-        PartialEq,
-        ethers :: contract :: EthCall,
-        ethers :: contract :: EthDisplay,
-        serde :: Serialize,
-        serde :: Deserialize,
-    )]
-    #[ethcall(name = "_updateRecords", abi = "_updateRecords(uint256,uint256)")]
-    pub struct UpdateRecordsCall(
-        pub ethers::core::types::U256,
-        pub ethers::core::types::U256,
-    );
     #[doc = "Container type for all input parameters for the `executeProposal` function with signature `executeProposal(bytes32,bytes)` and selector `[226, 72, 207, 242]`"]
     #[derive(
         Clone,
@@ -267,26 +218,6 @@ pub mod anchor_handler_contract {
     pub struct ExecuteProposalCall {
         pub resource_id: [u8; 32],
         pub data: ethers::core::types::Bytes,
-    }
-    #[doc = "Container type for all input parameters for the `getUpdateRecord` function with signature `getUpdateRecord(uint64,uint256)` and selector `[224, 115, 132, 168]`"]
-    #[derive(
-        Clone,
-        Debug,
-        Default,
-        Eq,
-        PartialEq,
-        ethers :: contract :: EthCall,
-        ethers :: contract :: EthDisplay,
-        serde :: Serialize,
-        serde :: Deserialize,
-    )]
-    #[ethcall(
-        name = "getUpdateRecord",
-        abi = "getUpdateRecord(uint64,uint256)"
-    )]
-    pub struct GetUpdateRecordCall {
-        pub update_nonce: u64,
-        pub source_chain_id: ethers::core::types::U256,
     }
     #[doc = "Container type for all input parameters for the `migrateBridge` function with signature `migrateBridge(address)` and selector `[215, 245, 179, 89]`"]
     #[derive(
@@ -335,9 +266,7 @@ pub mod anchor_handler_contract {
         ContractAddressToResourceID(ContractAddressToResourceIDCall),
         ContractWhitelist(ContractWhitelistCall),
         ResourceIDToContractAddress(ResourceIDToContractAddressCall),
-        UpdateRecords(UpdateRecordsCall),
         ExecuteProposal(ExecuteProposalCall),
-        GetUpdateRecord(GetUpdateRecordCall),
         MigrateBridge(MigrateBridgeCall),
         SetResource(SetResourceCall),
     }
@@ -364,29 +293,11 @@ pub mod anchor_handler_contract {
             }
             if let Ok (decoded) = < ResourceIDToContractAddressCall as ethers :: core :: abi :: AbiDecode > :: decode (data . as_ref ()) { return Ok (AnchorHandlerContractCalls :: ResourceIDToContractAddress (decoded)) }
             if let Ok(decoded) =
-                <UpdateRecordsCall as ethers::core::abi::AbiDecode>::decode(
-                    data.as_ref(),
-                )
-            {
-                return Ok(AnchorHandlerContractCalls::UpdateRecords(decoded));
-            }
-            if let Ok(decoded) =
                 <ExecuteProposalCall as ethers::core::abi::AbiDecode>::decode(
                     data.as_ref(),
                 )
             {
-                return Ok(AnchorHandlerContractCalls::ExecuteProposal(
-                    decoded,
-                ));
-            }
-            if let Ok(decoded) =
-                <GetUpdateRecordCall as ethers::core::abi::AbiDecode>::decode(
-                    data.as_ref(),
-                )
-            {
-                return Ok(AnchorHandlerContractCalls::GetUpdateRecord(
-                    decoded,
-                ));
+                return Ok(AnchorHandlerContractCalls::ExecuteProposal(decoded));
             }
             if let Ok(decoded) =
                 <MigrateBridgeCall as ethers::core::abi::AbiDecode>::decode(
@@ -420,13 +331,7 @@ pub mod anchor_handler_contract {
                 AnchorHandlerContractCalls::ResourceIDToContractAddress(
                     element,
                 ) => element.encode(),
-                AnchorHandlerContractCalls::UpdateRecords(element) => {
-                    element.encode()
-                }
                 AnchorHandlerContractCalls::ExecuteProposal(element) => {
-                    element.encode()
-                }
-                AnchorHandlerContractCalls::GetUpdateRecord(element) => {
                     element.encode()
                 }
                 AnchorHandlerContractCalls::MigrateBridge(element) => {
@@ -453,13 +358,7 @@ pub mod anchor_handler_contract {
                 AnchorHandlerContractCalls::ResourceIDToContractAddress(
                     element,
                 ) => element.fmt(f),
-                AnchorHandlerContractCalls::UpdateRecords(element) => {
-                    element.fmt(f)
-                }
                 AnchorHandlerContractCalls::ExecuteProposal(element) => {
-                    element.fmt(f)
-                }
-                AnchorHandlerContractCalls::GetUpdateRecord(element) => {
                     element.fmt(f)
                 }
                 AnchorHandlerContractCalls::MigrateBridge(element) => {
@@ -497,19 +396,9 @@ pub mod anchor_handler_contract {
             AnchorHandlerContractCalls::ResourceIDToContractAddress(var)
         }
     }
-    impl ::std::convert::From<UpdateRecordsCall> for AnchorHandlerContractCalls {
-        fn from(var: UpdateRecordsCall) -> Self {
-            AnchorHandlerContractCalls::UpdateRecords(var)
-        }
-    }
     impl ::std::convert::From<ExecuteProposalCall> for AnchorHandlerContractCalls {
         fn from(var: ExecuteProposalCall) -> Self {
             AnchorHandlerContractCalls::ExecuteProposal(var)
-        }
-    }
-    impl ::std::convert::From<GetUpdateRecordCall> for AnchorHandlerContractCalls {
-        fn from(var: GetUpdateRecordCall) -> Self {
-            AnchorHandlerContractCalls::GetUpdateRecord(var)
         }
     }
     impl ::std::convert::From<MigrateBridgeCall> for AnchorHandlerContractCalls {
@@ -576,63 +465,4 @@ pub mod anchor_handler_contract {
     pub struct ResourceIDToContractAddressReturn(
         pub ethers::core::types::Address,
     );
-    #[doc = "Container type for all return fields from the `_updateRecords` function with signature `_updateRecords(uint256,uint256)` and selector `[12, 158, 158, 20]`"]
-    #[derive(
-        Clone,
-        Debug,
-        Default,
-        Eq,
-        PartialEq,
-        ethers :: contract :: EthAbiType,
-        ethers :: contract :: EthAbiCodec,
-        serde :: Serialize,
-        serde :: Deserialize,
-    )]
-    pub struct UpdateRecordsReturn {
-        pub token_address: ethers::core::types::Address,
-        pub source_chain_id: ethers::core::types::U256,
-        pub resource_id: [u8; 32],
-        pub merkle_root: [u8; 32],
-        pub leaf_index: ethers::core::types::U256,
-    }
-    #[doc = "Container type for all return fields from the `getUpdateRecord` function with signature `getUpdateRecord(uint64,uint256)` and selector `[224, 115, 132, 168]`"]
-    #[derive(
-        Clone,
-        Debug,
-        Default,
-        Eq,
-        PartialEq,
-        ethers :: contract :: EthAbiType,
-        ethers :: contract :: EthAbiCodec,
-        serde :: Serialize,
-        serde :: Deserialize,
-    )]
-    pub struct GetUpdateRecordReturn(
-        pub  (
-            ethers::core::types::Address,
-            ethers::core::types::U256,
-            [u8; 32],
-            [u8; 32],
-            ethers::core::types::U256,
-        ),
-    );
-    #[doc = "`UpdateRecord(address,uint256,bytes32,bytes32,uint256)`"]
-    #[derive(
-        Clone,
-        Debug,
-        Default,
-        Eq,
-        PartialEq,
-        ethers :: contract :: EthAbiType,
-        ethers :: contract :: EthAbiCodec,
-        serde :: Serialize,
-        serde :: Deserialize,
-    )]
-    pub struct UpdateRecord {
-        pub token_address: ethers::core::types::Address,
-        pub source_chain_id: ethers::core::types::U256,
-        pub resource_id: [u8; 32],
-        pub merkle_root: [u8; 32],
-        pub leaf_index: ethers::core::types::U256,
-    }
 }
