@@ -1410,7 +1410,9 @@ pub mod token_wrapper_contract {
                     data.as_ref(),
                 )
             {
-                return Ok(TokenWrapperContractCalls::DefaultAdminRole(decoded));
+                return Ok(TokenWrapperContractCalls::DefaultAdminRole(
+                    decoded,
+                ));
             }
             if let Ok(decoded) =
                 <MinterRoleCall as ethers::core::abi::AbiDecode>::decode(
@@ -1496,7 +1498,9 @@ pub mod token_wrapper_contract {
                     data.as_ref(),
                 )
             {
-                return Ok(TokenWrapperContractCalls::GetFeeFromAmount(decoded));
+                return Ok(TokenWrapperContractCalls::GetFeeFromAmount(
+                    decoded,
+                ));
             }
             if let Ok(decoded) =
                 <GetRoleAdminCall as ethers::core::abi::AbiDecode>::decode(
@@ -1677,7 +1681,9 @@ pub mod token_wrapper_contract {
                     data.as_ref(),
                 )
             {
-                return Ok(TokenWrapperContractCalls::WrapForAndSendTo(decoded));
+                return Ok(TokenWrapperContractCalls::WrapForAndSendTo(
+                    decoded,
+                ));
             }
             Err(ethers::core::abi::Error::InvalidData.into())
         }

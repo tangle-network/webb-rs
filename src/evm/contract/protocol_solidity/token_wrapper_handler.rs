@@ -289,9 +289,11 @@ pub mod token_wrapper_handler_contract {
                     data.as_ref(),
                 )
             {
-                return Ok(TokenWrapperHandlerContractCalls::ContractWhitelist(
-                    decoded,
-                ));
+                return Ok(
+                    TokenWrapperHandlerContractCalls::ContractWhitelist(
+                        decoded,
+                    ),
+                );
             }
             if let Ok (decoded) = < ResourceIDToContractAddressCall as ethers :: core :: abi :: AbiDecode > :: decode (data . as_ref ()) { return Ok (TokenWrapperHandlerContractCalls :: ResourceIDToContractAddress (decoded)) }
             if let Ok(decoded) =
