@@ -8,6 +8,7 @@ scale-codec = { package = 'parity-scale-codec', version = '3.0.0', default-featu
 webb-proposals = { path = "../proposals", default-features = true }
 ethers = { git = "https://github.com/gakonst/ethers-rs" }
 trie-eip1186 = { git = "https://github.com/paritytech/trie.git", default-features = false }
+rlp = "0.5.1"
 serde-rlp = "0.1.4"
 serde_json = "1.0.83"
 serde = "1.0.143"

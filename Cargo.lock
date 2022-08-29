@@ -349,6 +349,7 @@ dependencies = [
  "ethers 0.17.0 (git+https://github.com/gakonst/ethers-rs)",
  "hex",
  "parity-scale-codec",
+ "rlp",
  "serde",
  "serde-rlp",
  "serde_json",
