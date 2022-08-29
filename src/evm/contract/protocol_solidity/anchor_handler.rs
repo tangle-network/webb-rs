@@ -297,9 +297,7 @@ pub mod anchor_handler_contract {
                     data.as_ref(),
                 )
             {
-                return Ok(AnchorHandlerContractCalls::ExecuteProposal(
-                    decoded,
-                ));
+                return Ok(AnchorHandlerContractCalls::ExecuteProposal(decoded));
             }
             if let Ok(decoded) =
                 <MigrateBridgeCall as ethers::core::abi::AbiDecode>::decode(
