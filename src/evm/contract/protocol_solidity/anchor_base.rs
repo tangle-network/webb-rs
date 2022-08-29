@@ -578,7 +578,9 @@ pub mod anchor_base_contract {
                 return Ok(AnchorBaseContractEvents::EdgeUpdateFilter(decoded));
             }
             if let Ok(decoded) = InitializedFilter::decode_log(log) {
-                return Ok(AnchorBaseContractEvents::InitializedFilter(decoded));
+                return Ok(AnchorBaseContractEvents::InitializedFilter(
+                    decoded,
+                ));
             }
             if let Ok(decoded) = InsertionFilter::decode_log(log) {
                 return Ok(AnchorBaseContractEvents::InsertionFilter(decoded));
@@ -1287,7 +1289,9 @@ pub mod anchor_base_contract {
                     data.as_ref(),
                 )
             {
-                return Ok(AnchorBaseContractCalls::EdgeExistsForChain(decoded));
+                return Ok(AnchorBaseContractCalls::EdgeExistsForChain(
+                    decoded,
+                ));
             }
             if let Ok(decoded) =
                 <EdgeIndexCall as ethers::core::abi::AbiDecode>::decode(

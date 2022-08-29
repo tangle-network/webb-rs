@@ -1,7 +1,7 @@
 use ethers::types::{
     Bytes, EIP1186ProofResponse, StorageProof, H256, U256, U64,
 };
-use trie_db::proof::verify_proof;
+use trie_eip1186::verify_proof;
 
 fn parse_eth_get_proof(proof: &str) -> EIP1186ProofResponse {
     serde_json::from_str(proof).unwrap()
