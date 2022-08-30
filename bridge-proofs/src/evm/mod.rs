@@ -40,6 +40,7 @@ pub struct EIP1186Proof {
 }
 
 pub fn get_anchor_update_proposal(
+    linked_resource_ids: Vec<ResourceId>,
     log_index: u64,
     log_entry_data: Vec<u8>,
     receipt_index: u64,
