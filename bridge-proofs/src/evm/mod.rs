@@ -1,87 +1,16 @@
-use std::hash::Hash;
-
-use ethers::{
-    prelude::account,
-    types::{Bytes, EIP1186ProofResponse, StorageProof, H160, H256, U256, U64},
-    utils::keccak256,
-};
-use trie_eip1186::verify_proof;
-
-fn parse_eth_get_proof(proof: &str) -> EIP1186ProofResponse {
-    serde_json::from_str(proof).unwrap()
-}
-
-fn verify_account_proof_from_address(
-    state_root: H256,
-    address: H160,
-    proof: &str,
-) -> bool {
-    let hash = keccak256(address.as_bytes());
-    verify_account_proof(state_root, hash.into(), proof)
-}
-
-fn verify_account_proof(
-    state_root: H256,
-    address_hash: H256,
-    proof: &str,
-) -> bool {
-    let parsed_proof = parse_eth_get_proof(proof);
-    return verify_account_proof_eip1186(
-        state_root,
-        address_hash,
-        parsed_proof,
-    );
-}
-
-fn verify_account_proof_eip1186(
-    state_root: H256,
-    address_hash: H256,
-    proof: EIP1186ProofResponse,
-) -> bool {
-    let account_proof = proof.account_proof;
-    let account_proof_as_slice_vec = account_proof
-        .into_iter()
-        .map(|b| b.to_vec())
-        .collect::<Vec<Vec<u8>>>()
-        .as_slice();
-
-    let mut nonce_rlp = rlp::encode(&proof.nonce).to_vec();
-    let mut balance_rlp = rlp::encode(&proof.balance).to_vec();
-    let mut storage_hash_rlp = rlp::encode(&proof.storage_hash).to_vec();
-    let mut code_hash_rlp = rlp::encode(&proof.code_hash).to_vec();
-
-    let mut account_state_rlp = nonce_rlp;
-    account_state_rlp.append(&mut balance_rlp);
-    account_state_rlp.append(&mut storage_hash_rlp);
-    account_state_rlp.append(&mut code_hash_rlp);
-
-    match verify_proof(
-        &state_root,
-        account_proof_as_slice_vec,
-        address_hash.as_bytes(),
-        account_state_rlp.into(),
-    ) {
-        Ok(()) => true,
-        Err(err) => {
-            println!("{:?}", err);
-            false
-        }
-    }
-}
-
-fn verify_storage_proof(proof: &str) -> bool {
-    true
-}
+#[cfg(not(feature = "std"))]
+mod verify_trie_proof;
 
 #[cfg(test)]
 mod tests {
-    use super::{
-        parse_eth_get_proof, verify_account_proof, verify_storage_proof,
-    };
     use ethers::types::EIP1186ProofResponse;
 
+    fn parse_eth_get_proof(proof: &str) -> EIP1186ProofResponse {
+        serde_json::from_str(proof).unwrap()
+    }
+
     #[test]
-    fn test_verify_eth_get_proof() {
+    fn trie_proof_works_for_eip1186_response() {
         // Parse hardcoded Merkle trie proof
         let hardcoded_proof = r#"{
             "address":"0xbfce6b877ebff977bb6e80b24fbbb7bc4ebca4df",
@@ -111,7 +40,7 @@ mod tests {
         .unwrap();
         let mut address_hash_bytes = [0u8; 32];
         address_hash_bytes.copy_from_slice(&address_hash_vec);
-        let hardcoded_address_hash = address_hash_bytes.into();
+        let hardcoded_address_hash = address_hash_bytes;
 
         let state_root_vec = hex::decode(
             "4abc4de1c6dfac1f0b733be3797461bf1b0f7c2f2be11cc9f1137054fc4a1314",
@@ -119,19 +48,9 @@ mod tests {
         .unwrap();
         let mut state_root_bytes = [0u8; 32];
         state_root_bytes.copy_from_slice(&state_root_vec);
-        let hardcoded_state_root = state_root_bytes.into();
+        let hardcoded_state_root = state_root_bytes;
 
         let parsed_proof: EIP1186ProofResponse =
             parse_eth_get_proof(hardcoded_proof);
-
-        println!("{:?}", parsed_proof);
-
-        verify_account_proof(
-            hardcoded_state_root,
-            hardcoded_address_hash,
-            hardcoded_proof,
-        );
-
-        // verify_storage_proof(hardcoded_proof);
     }
 }
