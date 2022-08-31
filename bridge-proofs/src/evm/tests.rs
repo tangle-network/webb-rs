@@ -1,5 +1,6 @@
 mod tests {
     use ethers::types::{EIP1186ProofResponse, U256, U64};
+    use rlp::Encodable;
     use serde::{Deserialize, Serialize};
 
     use ethereum_types::H256;
@@ -69,16 +70,14 @@ mod tests {
         //     storage_hash: parsed_proof.storage_hash,
         //     code_hash: parsed_proof.code_hash,
         // };
-
-        let x = parsed_proof.nonce.as_u64().as_ref();
-
-        let account_state_rlp = rlp::encode_list(&[
-            parsed_proof.nonce.as_usize().to_le_bytes().as_slice(),
-            parsed_proof.balance.as_usize().to_le_bytes().as_slice(),
-            parsed_proof.storage_hash.as_bytes(),
-            parsed_proof.code_hash.as_bytes(),
-        ])
-        .unwrap();
+        use rlp::RlpStream;
+        let mut stream = RlpStream::new_list(4);
+        stream
+            .append(&parsed_proof.nonce)
+            .append(&parsed_proof.balance)
+            .append(&parsed_proof.storage_hash)
+            .append(&parsed_proof.code_hash);
+        let account_state_rlp = stream.out();
 
         // let account_state_rlp = hex::decode("f8440180a019cbdcf7cb8bea9507a1f96a7611d588335446f8ca27802fba36ab7c198fcb44a0887da3cea6169f31edeb72a08a8ddb87ac755b6d39dbd9fe692e64db48d01d39").unwrap();
 
