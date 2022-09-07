@@ -47,6 +47,14 @@ impl TrieProver {
         let header: ethereum::Header =
             rlp::decode(header_data.as_slice()).unwrap();
 
+        println!("log {:?}", log_entry);
+        println!("receipt {:?}", receipt);
+        println!("Header {:?}", rlp::encode(&receipt_index).to_vec());
+
+        for x in &proof {
+            println!("ya {:?}", hex::encode(x));
+        }
+
         // Verify receipt included into header
         let verification_result = Self::verify_trie_proof(
             header.receipts_root,
@@ -54,7 +62,7 @@ impl TrieProver {
             proof,
         );
 
-        return verification_result == receipt_data;
+        return hex::encode(verification_result) == hex::encode(receipt_data);
     }
 
     /// Verify the proof recursively traversing through the key.
@@ -81,6 +89,7 @@ impl TrieProver {
             actual_key.push(el / 16);
             actual_key.push(el % 16);
         }
+
         Self::_verify_trie_proof(
             (expected_root.0).into(),
             &actual_key,
@@ -98,6 +107,8 @@ impl TrieProver {
         proof_index: usize,
     ) -> Vec<u8> {
         let node = &proof[proof_index];
+        println!("node {:?}", hex::encode(Self::near_keccak256(node)));
+        println!("expected root {:?}", hex::encode(&expected_root));
 
         if key_index == 0 {
             // trie root is always a hash
