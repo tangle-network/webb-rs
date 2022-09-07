@@ -47,33 +47,6 @@ impl TrieProver {
         let header: ethereum::Header =
             rlp::decode(header_data.as_slice()).unwrap();
 
-        let r = match receipt {
-            ReceiptV3::EIP1559(r) => {
-                // Verify log_entry included in receipt
-                if r.logs[log_index as usize] == log_entry {
-                    return false;
-                }
-
-                r
-            }
-            ReceiptV3::EIP2930(r) => {
-                // Verify log_entry included in receipt
-                if r.logs[log_index as usize] == log_entry {
-                    return false;
-                }
-
-                r
-            }
-            ReceiptV3::Legacy(r) => {
-                // Verify log_entry included in receipt
-                if r.logs[log_index as usize] == log_entry {
-                    return false;
-                }
-
-                r
-            }
-        };
-
         // Verify receipt included into header
         let verification_result = Self::verify_trie_proof(
             header.receipts_root,
