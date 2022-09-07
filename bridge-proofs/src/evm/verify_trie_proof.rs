@@ -32,7 +32,7 @@ impl TrieProver {
             .collect()
     }
 
-    fn verify_log_entry(
+    pub fn verify_log_entry(
         log_index: u64,
         log_entry_data: Vec<u8>,
         receipt_index: u64,

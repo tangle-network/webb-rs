@@ -12,6 +12,8 @@ mod tests;
 
 mod verify_trie_proof;
 
+mod types;
+
 use webb_proposals::{
     evm::AnchorUpdateProposal, FunctionSignature, Nonce, ProposalHeader,
     ResourceId, TargetSystem, TypedChainId,
