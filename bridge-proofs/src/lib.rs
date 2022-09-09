@@ -25,10 +25,10 @@ mod tests {
 
         let block_number = provider.get_block_number().await.unwrap();
 
-        let block = provider.get_block(H256::from_slice(hex::decode("44c94ae3fb246386a35daf2a0b4f0d8d7c0f6f33f4c03e4f2ce6a78b09738e8d").unwrap().as_slice())).await.unwrap();
+        let block = provider.get_block(H256::from_slice(hex::decode("b24389717b3da1bb292d2e91a11f35278164a27868ffb0899388eeab20f01c2c").unwrap().as_slice())).await.unwrap();
         println!("Got block: {}", serde_json::to_string(&block).unwrap());
 
-        let tx = provider.get_transaction_receipt(H256::from_slice(hex::decode("e6c743ba8232f2ab48bc627b63a0c86b26861ff9d984b5d78b155e8e8497bb74").unwrap().as_slice())).await.unwrap();
+        let tx = provider.get_transaction_receipt(H256::from_slice(hex::decode("352019e5b0b1f6b9a325200db3e65c902381a4c0172081ec35a3499000152c81").unwrap().as_slice())).await.unwrap();
         println!("Got tx: {}", serde_json::to_string(&tx).unwrap());
 
         let logs = provider

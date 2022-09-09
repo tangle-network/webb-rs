@@ -49,7 +49,7 @@ impl TrieProver {
 
         println!("log {:?}", log_entry);
         println!("receipt {:?}", receipt);
-        println!("Header {:?}", rlp::encode(&receipt_index));
+        println!("Header {:?}", header);
 
         for x in &proof {
             println!("ya {:?}", hex::encode(x));
