@@ -39,11 +39,29 @@ mod evm {
         )
     }
 
+    pub fn build_protocol_solidity_open_vanchor_base(
+    ) -> Result<(), Box<dyn Error>> {
+        parse_and_write_abigen(
+            "contracts/protocol-solidity/OpenVAnchorBase.json",
+            "src/evm/contract/protocol_solidity/open_vanchor_base.rs",
+            "OpenVAnchorBaseContract",
+        )
+    }
+
     pub fn build_protocol_solidity_vanchor() -> Result<(), Box<dyn Error>> {
         parse_and_write_abigen(
             "contracts/protocol-solidity/VAnchor.json",
             "src/evm/contract/protocol_solidity/variable_anchor.rs",
             "VAnchorContract",
+        )
+    }
+
+    pub fn build_protocol_solidity_open_vanchor() -> Result<(), Box<dyn Error>>
+    {
+        parse_and_write_abigen(
+            "contracts/protocol-solidity/OpenVAnchor.json",
+            "src/evm/contract/protocol_solidity/open_variable_anchor.rs",
+            "OpenVAnchorContract",
         )
     }
 
@@ -184,6 +202,8 @@ fn main() -> Result<(), Box<dyn Error>> {
         evm::build_protocol_solidity_anchor_base()?;
         evm::build_protocol_solidity_vanchor_base()?;
         evm::build_protocol_solidity_vanchor()?;
+        evm::build_protocol_solidity_open_vanchor_base()?;
+        evm::build_protocol_solidity_open_vanchor()?;
         evm::build_protocol_solidity_anchor_handler()?;
         evm::build_protocol_solidity_signature_bridge()?;
         evm::build_protocol_solidity_token_wrapper()?;
