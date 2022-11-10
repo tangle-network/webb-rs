@@ -8,7 +8,7 @@ use alloc::vec::Vec;
 
 ///  Minimum Withdrawal Limit Proposal.
 ///
-/// The [`MinWithdrawalLimitProposal`]updates the minimum withdrawal amount
+/// The [`MinWithdrawalLimitProposal`] updates the minimum withdrawal amount
 /// on the variable anchor system.
 ///
 /// The format of the proposal looks like:
