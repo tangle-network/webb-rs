@@ -35,7 +35,7 @@ impl FeeRecipientUpdateProposal {
     }
 
     /// Get the pool share id.
-    /// The pool share id is the id of the pool whose fee recipient which 
+    /// The pool share id is the id of the pool whose fee recipient which
     /// will be updated
     #[must_use]
     pub const fn pool_share_id(&self) -> u32 {
@@ -48,7 +48,6 @@ impl FeeRecipientUpdateProposal {
         self.fee_recipient.clone()
     }
 
-    
     /// Convert the proposal to a vector of bytes.
     #[must_use]
     pub fn to_bytes(&self) -> Vec<u8> {
@@ -122,7 +121,7 @@ impl TryFrom<Vec<u8>> for FeeRecipientUpdateProposal {
 
 #[derive(scale_codec::Encode, scale_codec::Decode)]
 struct ExecuteFeeRecipientUpdateProposal {
-    fee_recipient: [u8;32],
+    fee_recipient: [u8; 32],
     pool_share_id: u32,
     nonce: u32,
 }
@@ -180,18 +179,19 @@ mod tests {
             "01000000"                                                             // nonce
         );
 
-        let proposal = FeeRecipientUpdateProposal::try_from(bytes.to_vec()).unwrap();
+        let proposal =
+            FeeRecipientUpdateProposal::try_from(bytes.to_vec()).unwrap();
         let target = SubstrateTargetSystem::builder()
             .pallet_index(50)
             .tree_id(2)
             .build();
-            assert_eq!(
-                proposal.header.resource_id(),
-                ResourceId::new(
-                    TargetSystem::Substrate(target),
-                    TypedChainId::Substrate(1)
-                )
-            );
+        assert_eq!(
+            proposal.header.resource_id(),
+            ResourceId::new(
+                TargetSystem::Substrate(target),
+                TypedChainId::Substrate(1)
+            )
+        );
         assert_eq!(proposal.fee_recipient(), [1u8; 32]);
         assert_eq!(proposal.pool_share_id(), 0x0001);
         assert_eq!(proposal.header().nonce().to_u32(), 0x0001);

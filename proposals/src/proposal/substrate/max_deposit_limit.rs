@@ -14,7 +14,7 @@ use alloc::vec::Vec;
 /// The format of the proposal looks like:
 /// ```text
 /// ┌────────────────────┬──────────┬────────┬─────────────────┬─────────┐
-/// │                    │          │        │                 │         │ 
+/// │                    │          │        │                 │         │
 /// │ ProposalHeader     │ PalletId │ CallId │ MaxDepositLimit │  Nonce  │
 /// │       40B          │     1B   │    1B  │      16B        │    4B   │
 /// └────────────────────┴──────────┴────────┴─────────────────┴─────────┘
@@ -114,7 +114,6 @@ struct ExecuteMaxDepositLimitProposal {
     nonce: u32,
 }
 
-
 #[cfg(test)]
 mod tests {
     use crate::{
@@ -137,7 +136,7 @@ mod tests {
         let nonce = Nonce::from(0x0001);
         let header =
             ProposalHeader::new(resource_id, function_signature, nonce);
-       
+
         let proposal = MaxDepositLimitProposal::builder()
             .header(header)
             .max_deposit_limit(100_000_u128)
@@ -164,8 +163,7 @@ mod tests {
         );
 
         let proposal =
-            MaxDepositLimitProposal::try_from(proposal_bytes.to_vec())
-                .unwrap();
+            MaxDepositLimitProposal::try_from(proposal_bytes.to_vec()).unwrap();
         let target = SubstrateTargetSystem::builder()
             .pallet_index(35)
             .tree_id(2)

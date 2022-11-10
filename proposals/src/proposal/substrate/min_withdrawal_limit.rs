@@ -14,7 +14,7 @@ use alloc::vec::Vec;
 /// The format of the proposal looks like:
 /// ```text
 /// ┌────────────────────┬──────────┬────────┬────────────────────┬─────────┐
-/// │                    │          │        │                    │         │ 
+/// │                    │          │        │                    │         │
 /// │ ProposalHeader     │ PalletId │ CallId │ MinWithdrawalLimit │  Nonce  │
 /// │       40B          │     1B   │    1B  │      16B           │    4B   │
 /// └────────────────────┴──────────┴────────┴────────────────────┴─────────┘
@@ -114,7 +114,6 @@ struct ExecuteMinWithdrawalLimitProposal {
     nonce: u32,
 }
 
-
 #[cfg(test)]
 mod tests {
     use crate::{
@@ -137,7 +136,7 @@ mod tests {
         let nonce = Nonce::from(0x0001);
         let header =
             ProposalHeader::new(resource_id, function_signature, nonce);
-       
+
         let proposal = MinWithdrawalLimitProposal::builder()
             .header(header)
             .min_withdraw_limit(10_u128)

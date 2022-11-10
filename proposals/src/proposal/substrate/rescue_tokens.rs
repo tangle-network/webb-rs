@@ -26,7 +26,7 @@ pub struct RescueTokensProposal {
     pool_share_id: u32,
     asset_id: u32,
     amount: u128,
-    recipient: [u8;32],
+    recipient: [u8; 32],
 }
 
 impl RescueTokensProposal {
@@ -63,7 +63,6 @@ impl RescueTokensProposal {
         self.amount.clone()
     }
 
-    
     /// Convert the proposal to a vector of bytes.
     #[must_use]
     pub fn to_bytes(&self) -> Vec<u8> {
@@ -126,7 +125,7 @@ impl TryFrom<Vec<u8>> for RescueTokensProposal {
         // parse encoded proposal call
         let call: ExecuteRescueTokensProposal =
             scale_codec::Decode::decode(&mut &value[42..])?;
-        
+
         let proposal = RescueTokensProposal {
             header,
             pool_share_id: call.pool_share_id,
@@ -143,7 +142,7 @@ struct ExecuteRescueTokensProposal {
     pool_share_id: u32,
     asset_id: u32,
     amount: u128,
-    recipient: [u8;32],
+    recipient: [u8; 32],
     nonce: u32,
 }
 
@@ -212,13 +211,13 @@ mod tests {
             .pallet_index(50)
             .tree_id(2)
             .build();
-            assert_eq!(
-                proposal.header.resource_id(),
-                ResourceId::new(
-                    TargetSystem::Substrate(target),
-                    TypedChainId::Substrate(1)
-                )
-            );
+        assert_eq!(
+            proposal.header.resource_id(),
+            ResourceId::new(
+                TargetSystem::Substrate(target),
+                TypedChainId::Substrate(1)
+            )
+        );
         assert_eq!(proposal.recipient(), [1u8; 32]);
         assert_eq!(proposal.pool_share_id(), 0x0001);
         assert_eq!(proposal.asset_id(), 0x0002);
