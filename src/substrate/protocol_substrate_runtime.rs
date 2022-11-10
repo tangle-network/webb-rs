@@ -595,7 +595,11 @@ pub mod api {
                         ],
                     )
                 }
+<<<<<<< HEAD
                 #[doc = " The current weight for the block."]                pub fn block_weight (& self ,) -> :: subxt :: storage :: address :: StaticStorageAddress :: < :: subxt :: metadata :: DecodeStaticType < runtime_types :: frame_support :: dispatch :: PerDispatchClass < runtime_types :: sp_weights :: weight_v2 :: Weight > > , :: subxt :: storage :: address :: Yes , :: subxt :: storage :: address :: Yes , () >{
+=======
+                #[doc = " The current weight for the block."]                pub fn block_weight (& self ,) -> :: subxt :: storage :: address :: StaticStorageAddress :: < :: subxt :: metadata :: DecodeStaticType < runtime_types :: frame_support :: weights :: PerDispatchClass < runtime_types :: frame_support :: weights :: weight_v2 :: Weight > > , :: subxt :: storage :: address :: Yes , :: subxt :: storage :: address :: Yes , () >{
+>>>>>>> origin/main
                     ::subxt::storage::address::StaticStorageAddress::new(
                         "System",
                         "BlockWeight",
@@ -711,11 +715,19 @@ pub mod api {
                         "Events",
                         vec![],
                         [
+<<<<<<< HEAD
                             155u8, 102u8, 11u8, 64u8, 100u8, 121u8, 59u8,
                             253u8, 19u8, 68u8, 67u8, 11u8, 148u8, 86u8, 56u8,
                             249u8, 63u8, 246u8, 251u8, 194u8, 147u8, 237u8,
                             105u8, 7u8, 176u8, 150u8, 147u8, 210u8, 237u8,
                             237u8, 155u8, 20u8,
+=======
+                            86u8, 115u8, 126u8, 122u8, 80u8, 135u8, 254u8,
+                            50u8, 47u8, 52u8, 22u8, 47u8, 119u8, 39u8, 25u8,
+                            170u8, 162u8, 209u8, 243u8, 154u8, 153u8, 132u8,
+                            119u8, 253u8, 70u8, 133u8, 99u8, 251u8, 125u8,
+                            68u8, 64u8, 108u8,
+>>>>>>> origin/main
                         ],
                     )
                 }
@@ -3586,6 +3598,7 @@ pub mod api {
                 #[doc = ""]
                 #[doc = " If [`Config::MinerConfig`] is being implemented to submit signed solutions (outside of"]
                 #[doc = " this pallet), then [`MinerConfig::solution_weight`] is used to compare against"]
+<<<<<<< HEAD
                 #[doc = " this value."]
                 pub fn signed_max_weight(
                     &self,
@@ -3594,6 +3607,9 @@ pub mod api {
                         runtime_types::sp_weights::weight_v2::Weight,
                     >,
                 > {
+=======
+                #[doc = " this value."]                pub fn signed_max_weight (& self) -> :: subxt :: constants :: StaticConstantAddress < :: subxt :: metadata :: DecodeStaticType < runtime_types :: frame_support :: weights :: weight_v2 :: Weight >>{
+>>>>>>> origin/main
                     ::subxt::constants::StaticConstantAddress::new(
                         "ElectionProviderMultiPhase",
                         "SignedMaxWeight",
@@ -8223,7 +8239,11 @@ pub mod api {
                 pub index: ::core::primitive::u32,
                 #[codec(compact)]
                 pub proposal_weight_bound:
+<<<<<<< HEAD
                     runtime_types::sp_weights::weight_v2::Weight,
+=======
+                    runtime_types::frame_support::weights::weight_v2::Weight,
+>>>>>>> origin/main
                 #[codec(compact)]
                 pub length_bound: ::core::primitive::u32,
             }
@@ -8323,11 +8343,19 @@ pub mod api {
                             length_bound,
                         },
                         [
+<<<<<<< HEAD
                             119u8, 236u8, 22u8, 197u8, 121u8, 91u8, 50u8,
                             140u8, 212u8, 199u8, 163u8, 19u8, 66u8, 196u8,
                             223u8, 178u8, 127u8, 210u8, 195u8, 189u8, 192u8,
                             231u8, 152u8, 15u8, 72u8, 192u8, 139u8, 184u8,
                             123u8, 207u8, 50u8, 84u8,
+=======
+                            188u8, 0u8, 10u8, 221u8, 110u8, 167u8, 121u8,
+                            147u8, 170u8, 188u8, 249u8, 194u8, 144u8, 91u8,
+                            155u8, 128u8, 31u8, 244u8, 222u8, 184u8, 127u8,
+                            122u8, 37u8, 172u8, 177u8, 210u8, 98u8, 136u8,
+                            188u8, 78u8, 20u8, 216u8,
+>>>>>>> origin/main
                         ],
                     )
                 }
@@ -8373,11 +8401,19 @@ pub mod api {
                             length_bound,
                         },
                         [
+<<<<<<< HEAD
                             1u8, 27u8, 87u8, 195u8, 180u8, 87u8, 2u8, 103u8,
                             65u8, 172u8, 234u8, 16u8, 73u8, 32u8, 34u8, 153u8,
                             74u8, 154u8, 139u8, 156u8, 19u8, 188u8, 127u8,
                             26u8, 119u8, 82u8, 143u8, 241u8, 36u8, 235u8,
                             240u8, 108u8,
+=======
+                            61u8, 23u8, 182u8, 157u8, 91u8, 67u8, 30u8, 86u8,
+                            137u8, 178u8, 0u8, 203u8, 27u8, 157u8, 203u8, 50u8,
+                            13u8, 202u8, 81u8, 86u8, 220u8, 220u8, 144u8,
+                            245u8, 49u8, 198u8, 66u8, 6u8, 239u8, 102u8, 205u8,
+                            252u8,
+>>>>>>> origin/main
                         ],
                     )
                 }
@@ -8455,7 +8491,11 @@ pub mod api {
                     &self,
                     proposal_hash: ::subxt::ext::sp_core::H256,
                     index: ::core::primitive::u32,
+<<<<<<< HEAD
                     proposal_weight_bound : runtime_types :: sp_weights :: weight_v2 :: Weight,
+=======
+                    proposal_weight_bound : runtime_types :: frame_support :: weights :: weight_v2 :: Weight,
+>>>>>>> origin/main
                     length_bound: ::core::primitive::u32,
                 ) -> ::subxt::tx::StaticTxPayload<Close> {
                     ::subxt::tx::StaticTxPayload::new(
@@ -8672,11 +8712,19 @@ pub mod api {
                             ::subxt::storage::address::StorageHasher::Identity,
                         )],
                         [
+<<<<<<< HEAD
                             177u8, 245u8, 2u8, 53u8, 65u8, 127u8, 207u8, 65u8,
                             57u8, 40u8, 140u8, 209u8, 24u8, 231u8, 225u8, 24u8,
                             99u8, 118u8, 223u8, 4u8, 12u8, 247u8, 67u8, 60u8,
                             139u8, 107u8, 21u8, 251u8, 147u8, 122u8, 236u8,
                             80u8,
+=======
+                            247u8, 51u8, 80u8, 201u8, 184u8, 190u8, 35u8, 59u8,
+                            105u8, 50u8, 56u8, 171u8, 109u8, 224u8, 155u8,
+                            248u8, 144u8, 226u8, 24u8, 28u8, 92u8, 80u8, 153u8,
+                            13u8, 29u8, 7u8, 195u8, 223u8, 144u8, 194u8, 186u8,
+                            147u8,
+>>>>>>> origin/main
                         ],
                     )
                 }
@@ -8686,11 +8734,19 @@ pub mod api {
                         "ProposalOf",
                         Vec::new(),
                         [
+<<<<<<< HEAD
                             177u8, 245u8, 2u8, 53u8, 65u8, 127u8, 207u8, 65u8,
                             57u8, 40u8, 140u8, 209u8, 24u8, 231u8, 225u8, 24u8,
                             99u8, 118u8, 223u8, 4u8, 12u8, 247u8, 67u8, 60u8,
                             139u8, 107u8, 21u8, 251u8, 147u8, 122u8, 236u8,
                             80u8,
+=======
+                            247u8, 51u8, 80u8, 201u8, 184u8, 190u8, 35u8, 59u8,
+                            105u8, 50u8, 56u8, 171u8, 109u8, 224u8, 155u8,
+                            248u8, 144u8, 226u8, 24u8, 28u8, 92u8, 80u8, 153u8,
+                            13u8, 29u8, 7u8, 195u8, 223u8, 144u8, 194u8, 186u8,
+                            147u8,
+>>>>>>> origin/main
                         ],
                     )
                 }
@@ -10485,11 +10541,19 @@ pub mod api {
                         "batch",
                         Batch { calls },
                         [
+<<<<<<< HEAD
                             133u8, 252u8, 154u8, 140u8, 56u8, 191u8, 27u8,
                             140u8, 98u8, 57u8, 32u8, 124u8, 176u8, 183u8, 29u8,
                             48u8, 207u8, 66u8, 89u8, 124u8, 191u8, 38u8, 216u8,
                             183u8, 192u8, 199u8, 157u8, 85u8, 3u8, 130u8,
                             174u8, 48u8,
+=======
+                            108u8, 132u8, 75u8, 152u8, 103u8, 195u8, 9u8,
+                            254u8, 71u8, 1u8, 147u8, 6u8, 176u8, 243u8, 191u8,
+                            179u8, 101u8, 228u8, 89u8, 59u8, 71u8, 61u8, 73u8,
+                            233u8, 58u8, 162u8, 179u8, 249u8, 32u8, 212u8,
+                            52u8, 10u8,
+>>>>>>> origin/main
                         ],
                     )
                 }
@@ -10520,11 +10584,19 @@ pub mod api {
                             call: ::std::boxed::Box::new(call),
                         },
                         [
+<<<<<<< HEAD
                             50u8, 66u8, 202u8, 254u8, 10u8, 95u8, 34u8, 201u8,
                             157u8, 243u8, 49u8, 246u8, 131u8, 249u8, 33u8,
                             95u8, 36u8, 57u8, 244u8, 105u8, 100u8, 135u8, 71u8,
                             193u8, 210u8, 43u8, 186u8, 2u8, 159u8, 219u8, 66u8,
                             131u8,
+=======
+                            210u8, 174u8, 52u8, 41u8, 255u8, 81u8, 197u8, 84u8,
+                            79u8, 65u8, 34u8, 181u8, 225u8, 83u8, 110u8, 166u8,
+                            237u8, 251u8, 224u8, 179u8, 150u8, 7u8, 250u8,
+                            133u8, 248u8, 104u8, 80u8, 214u8, 229u8, 117u8,
+                            187u8, 248u8,
+>>>>>>> origin/main
                         ],
                     )
                 }
@@ -10553,11 +10625,19 @@ pub mod api {
                         "batch_all",
                         BatchAll { calls },
                         [
+<<<<<<< HEAD
                             196u8, 120u8, 143u8, 231u8, 66u8, 63u8, 238u8,
                             83u8, 254u8, 149u8, 231u8, 39u8, 135u8, 174u8,
                             246u8, 123u8, 119u8, 180u8, 221u8, 207u8, 133u8,
                             219u8, 129u8, 62u8, 141u8, 26u8, 222u8, 73u8, 55u8,
                             181u8, 132u8, 13u8,
+=======
+                            58u8, 168u8, 220u8, 205u8, 109u8, 129u8, 50u8,
+                            241u8, 180u8, 105u8, 184u8, 104u8, 60u8, 214u8,
+                            151u8, 23u8, 184u8, 182u8, 95u8, 136u8, 185u8,
+                            35u8, 145u8, 38u8, 139u8, 221u8, 221u8, 80u8, 13u8,
+                            22u8, 96u8, 30u8,
+>>>>>>> origin/main
                         ],
                     )
                 }
@@ -10584,11 +10664,19 @@ pub mod api {
                             call: ::std::boxed::Box::new(call),
                         },
                         [
+<<<<<<< HEAD
                             131u8, 105u8, 116u8, 118u8, 186u8, 102u8, 109u8,
                             3u8, 81u8, 18u8, 123u8, 233u8, 218u8, 230u8, 176u8,
                             213u8, 98u8, 249u8, 6u8, 21u8, 97u8, 26u8, 140u8,
                             4u8, 138u8, 233u8, 237u8, 250u8, 142u8, 242u8,
                             141u8, 226u8,
+=======
+                            243u8, 39u8, 40u8, 163u8, 2u8, 49u8, 23u8, 4u8,
+                            117u8, 89u8, 105u8, 62u8, 97u8, 19u8, 125u8, 103u8,
+                            207u8, 104u8, 230u8, 26u8, 101u8, 144u8, 205u8,
+                            109u8, 253u8, 246u8, 116u8, 103u8, 44u8, 24u8,
+                            205u8, 212u8,
+>>>>>>> origin/main
                         ],
                     )
                 }
@@ -10617,11 +10705,19 @@ pub mod api {
                         "force_batch",
                         ForceBatch { calls },
                         [
+<<<<<<< HEAD
                             55u8, 149u8, 107u8, 30u8, 162u8, 97u8, 201u8,
                             180u8, 161u8, 91u8, 172u8, 194u8, 127u8, 165u8,
                             140u8, 52u8, 56u8, 131u8, 204u8, 254u8, 172u8,
                             245u8, 168u8, 64u8, 198u8, 92u8, 232u8, 25u8, 52u8,
                             90u8, 199u8, 247u8,
+=======
+                            195u8, 31u8, 74u8, 220u8, 135u8, 153u8, 239u8,
+                            34u8, 211u8, 166u8, 119u8, 205u8, 18u8, 182u8,
+                            214u8, 3u8, 124u8, 250u8, 97u8, 45u8, 92u8, 43u8,
+                            83u8, 121u8, 41u8, 6u8, 7u8, 90u8, 129u8, 249u8,
+                            162u8, 4u8,
+>>>>>>> origin/main
                         ],
                     )
                 }
@@ -10796,7 +10892,12 @@ pub mod api {
                     runtime_types::webb_standalone_runtime::RuntimeCall,
                 >,
                 pub store_call: ::core::primitive::bool,
+<<<<<<< HEAD
                 pub max_weight: runtime_types::sp_weights::weight_v2::Weight,
+=======
+                pub max_weight:
+                    runtime_types::frame_support::weights::weight_v2::Weight,
+>>>>>>> origin/main
             }
             #[derive(
                 :: subxt :: ext :: codec :: Decode,
@@ -10816,7 +10917,12 @@ pub mod api {
                     >,
                 >,
                 pub call_hash: [::core::primitive::u8; 32usize],
+<<<<<<< HEAD
                 pub max_weight: runtime_types::sp_weights::weight_v2::Weight,
+=======
+                pub max_weight:
+                    runtime_types::frame_support::weights::weight_v2::Weight,
+>>>>>>> origin/main
             }
             #[derive(
                 :: subxt :: ext :: codec :: Decode,
@@ -10869,11 +10975,19 @@ pub mod api {
                             call: ::std::boxed::Box::new(call),
                         },
                         [
+<<<<<<< HEAD
                             35u8, 197u8, 207u8, 98u8, 33u8, 73u8, 60u8, 228u8,
                             186u8, 141u8, 126u8, 212u8, 181u8, 246u8, 54u8,
                             189u8, 83u8, 82u8, 163u8, 53u8, 208u8, 234u8, 93u8,
                             11u8, 51u8, 160u8, 189u8, 13u8, 248u8, 141u8,
                             157u8, 168u8,
+=======
+                            109u8, 182u8, 42u8, 52u8, 195u8, 154u8, 231u8,
+                            55u8, 196u8, 81u8, 197u8, 246u8, 214u8, 27u8,
+                            245u8, 25u8, 58u8, 111u8, 30u8, 175u8, 74u8, 206u8,
+                            131u8, 219u8, 251u8, 91u8, 242u8, 22u8, 229u8,
+                            78u8, 22u8, 17u8,
+>>>>>>> origin/main
                         ],
                     )
                 }
@@ -10937,7 +11051,11 @@ pub mod api {
                         runtime_types::webb_standalone_runtime::RuntimeCall,
                     >,
                     store_call: ::core::primitive::bool,
+<<<<<<< HEAD
                     max_weight: runtime_types::sp_weights::weight_v2::Weight,
+=======
+                    max_weight : runtime_types :: frame_support :: weights :: weight_v2 :: Weight,
+>>>>>>> origin/main
                 ) -> ::subxt::tx::StaticTxPayload<AsMulti> {
                     ::subxt::tx::StaticTxPayload::new(
                         "Multisig",
@@ -10951,11 +11069,19 @@ pub mod api {
                             max_weight,
                         },
                         [
+<<<<<<< HEAD
                             231u8, 145u8, 47u8, 248u8, 201u8, 184u8, 89u8,
                             161u8, 82u8, 139u8, 230u8, 80u8, 211u8, 240u8,
                             238u8, 130u8, 148u8, 149u8, 162u8, 66u8, 44u8,
                             87u8, 64u8, 76u8, 67u8, 88u8, 56u8, 156u8, 173u8,
                             251u8, 146u8, 37u8,
+=======
+                            132u8, 45u8, 134u8, 86u8, 255u8, 185u8, 160u8,
+                            210u8, 235u8, 20u8, 74u8, 212u8, 91u8, 217u8, 93u8,
+                            49u8, 56u8, 75u8, 29u8, 35u8, 255u8, 66u8, 21u8,
+                            236u8, 114u8, 131u8, 227u8, 25u8, 5u8, 251u8,
+                            244u8, 233u8,
+>>>>>>> origin/main
                         ],
                     )
                 }
@@ -11006,7 +11132,11 @@ pub mod api {
                         >,
                     >,
                     call_hash: [::core::primitive::u8; 32usize],
+<<<<<<< HEAD
                     max_weight: runtime_types::sp_weights::weight_v2::Weight,
+=======
+                    max_weight : runtime_types :: frame_support :: weights :: weight_v2 :: Weight,
+>>>>>>> origin/main
                 ) -> ::subxt::tx::StaticTxPayload<ApproveAsMulti>
                 {
                     ::subxt::tx::StaticTxPayload::new(
@@ -11205,11 +11335,19 @@ pub mod api {
                             ::subxt::storage::address::StorageHasher::Identity,
                         )],
                         [
+<<<<<<< HEAD
                             49u8, 224u8, 19u8, 33u8, 129u8, 84u8, 218u8, 255u8,
                             235u8, 116u8, 29u8, 133u8, 209u8, 181u8, 175u8,
                             231u8, 142u8, 61u8, 187u8, 35u8, 144u8, 222u8,
                             219u8, 166u8, 170u8, 142u8, 172u8, 94u8, 168u8,
                             196u8, 219u8, 221u8,
+=======
+                            167u8, 180u8, 0u8, 142u8, 215u8, 17u8, 170u8,
+                            233u8, 42u8, 175u8, 59u8, 148u8, 22u8, 123u8, 83u8,
+                            100u8, 115u8, 102u8, 122u8, 156u8, 46u8, 222u8,
+                            105u8, 63u8, 233u8, 175u8, 248u8, 187u8, 4u8,
+                            204u8, 172u8, 154u8,
+>>>>>>> origin/main
                         ],
                     )
                 }                pub fn calls_root (& self ,) -> :: subxt :: storage :: address :: StaticStorageAddress :: < :: subxt :: metadata :: DecodeStaticType < (:: subxt :: utils :: WrapperKeepOpaque < runtime_types :: webb_standalone_runtime :: RuntimeCall > , :: subxt :: ext :: sp_core :: crypto :: AccountId32 , :: core :: primitive :: u128 ,) > , () , () , :: subxt :: storage :: address :: Yes >{
@@ -11218,11 +11356,19 @@ pub mod api {
                         "Calls",
                         Vec::new(),
                         [
+<<<<<<< HEAD
                             49u8, 224u8, 19u8, 33u8, 129u8, 84u8, 218u8, 255u8,
                             235u8, 116u8, 29u8, 133u8, 209u8, 181u8, 175u8,
                             231u8, 142u8, 61u8, 187u8, 35u8, 144u8, 222u8,
                             219u8, 166u8, 170u8, 142u8, 172u8, 94u8, 168u8,
                             196u8, 219u8, 221u8,
+=======
+                            167u8, 180u8, 0u8, 142u8, 215u8, 17u8, 170u8,
+                            233u8, 42u8, 175u8, 59u8, 148u8, 22u8, 123u8, 83u8,
+                            100u8, 115u8, 102u8, 122u8, 156u8, 46u8, 222u8,
+                            105u8, 63u8, 233u8, 175u8, 248u8, 187u8, 4u8,
+                            204u8, 172u8, 154u8,
+>>>>>>> origin/main
                         ],
                     )
                 }
@@ -11444,11 +11590,19 @@ pub mod api {
                             call: ::std::boxed::Box::new(call),
                         },
                         [
+<<<<<<< HEAD
                             106u8, 206u8, 74u8, 248u8, 251u8, 200u8, 99u8,
                             77u8, 252u8, 204u8, 97u8, 6u8, 214u8, 232u8, 88u8,
                             211u8, 36u8, 229u8, 134u8, 3u8, 135u8, 180u8,
                             220u8, 163u8, 154u8, 92u8, 220u8, 90u8, 180u8,
                             158u8, 111u8, 100u8,
+=======
+                            91u8, 60u8, 86u8, 204u8, 57u8, 240u8, 100u8, 130u8,
+                            41u8, 212u8, 33u8, 104u8, 4u8, 5u8, 101u8, 46u8,
+                            202u8, 98u8, 191u8, 213u8, 187u8, 114u8, 139u8,
+                            112u8, 147u8, 174u8, 249u8, 191u8, 174u8, 114u8,
+                            228u8, 42u8,
+>>>>>>> origin/main
                         ],
                     )
                 }
@@ -11495,11 +11649,19 @@ pub mod api {
                             call: ::std::boxed::Box::new(call),
                         },
                         [
+<<<<<<< HEAD
                             112u8, 179u8, 52u8, 131u8, 40u8, 142u8, 110u8,
                             161u8, 41u8, 124u8, 95u8, 193u8, 61u8, 163u8, 11u8,
                             228u8, 61u8, 216u8, 109u8, 22u8, 160u8, 121u8,
                             149u8, 124u8, 156u8, 205u8, 250u8, 79u8, 52u8,
                             75u8, 169u8, 202u8,
+=======
+                            27u8, 16u8, 201u8, 83u8, 177u8, 187u8, 182u8,
+                            111u8, 25u8, 127u8, 47u8, 8u8, 188u8, 223u8, 138u8,
+                            28u8, 255u8, 85u8, 239u8, 130u8, 197u8, 86u8, 22u8,
+                            33u8, 11u8, 219u8, 31u8, 74u8, 75u8, 115u8, 125u8,
+                            179u8,
+>>>>>>> origin/main
                         ],
                     )
                 }
@@ -11547,11 +11709,19 @@ pub mod api {
                             call: ::std::boxed::Box::new(call),
                         },
                         [
+<<<<<<< HEAD
                             169u8, 215u8, 27u8, 128u8, 189u8, 218u8, 141u8,
                             123u8, 150u8, 132u8, 88u8, 12u8, 48u8, 195u8, 17u8,
                             185u8, 202u8, 24u8, 230u8, 254u8, 14u8, 49u8, 3u8,
                             174u8, 58u8, 80u8, 24u8, 121u8, 217u8, 250u8,
                             118u8, 173u8,
+=======
+                            13u8, 180u8, 233u8, 46u8, 54u8, 12u8, 75u8, 102u8,
+                            30u8, 146u8, 92u8, 243u8, 15u8, 214u8, 103u8, 60u8,
+                            14u8, 163u8, 91u8, 207u8, 221u8, 150u8, 187u8,
+                            60u8, 124u8, 136u8, 198u8, 170u8, 165u8, 36u8,
+                            253u8, 53u8,
+>>>>>>> origin/main
                         ],
                     )
                 }
@@ -11583,11 +11753,19 @@ pub mod api {
                             call: ::std::boxed::Box::new(call),
                         },
                         [
+<<<<<<< HEAD
                             10u8, 15u8, 207u8, 188u8, 115u8, 24u8, 203u8, 13u8,
                             229u8, 150u8, 188u8, 222u8, 128u8, 20u8, 247u8,
                             186u8, 231u8, 255u8, 212u8, 4u8, 27u8, 168u8,
                             197u8, 219u8, 2u8, 253u8, 214u8, 47u8, 180u8, 5u8,
                             226u8, 172u8,
+=======
+                            186u8, 52u8, 76u8, 23u8, 240u8, 60u8, 77u8, 67u8,
+                            254u8, 1u8, 33u8, 31u8, 123u8, 32u8, 215u8, 19u8,
+                            137u8, 58u8, 81u8, 35u8, 237u8, 143u8, 18u8, 211u8,
+                            115u8, 112u8, 144u8, 198u8, 241u8, 14u8, 92u8,
+                            119u8,
+>>>>>>> origin/main
                         ],
                     )
                 }
@@ -11680,8 +11858,13 @@ pub mod api {
             use super::runtime_types;
             pub struct StorageApi;
             impl StorageApi {
+<<<<<<< HEAD
                 #[doc = " Items to be executed, indexed by the block number that they should be executed on."]                pub fn agenda (& self , _0 : impl :: std :: borrow :: Borrow < :: core :: primitive :: u64 > ,) -> :: subxt :: storage :: address :: StaticStorageAddress :: < :: subxt :: metadata :: DecodeStaticType < :: std :: vec :: Vec < :: core :: option :: Option < runtime_types :: pallet_scheduler :: ScheduledV3 < runtime_types :: frame_support :: traits :: schedule :: MaybeHashed < runtime_types :: webb_standalone_runtime :: RuntimeCall , :: subxt :: ext :: sp_core :: H256 > , :: core :: primitive :: u64 , runtime_types :: webb_standalone_runtime :: OriginCaller , :: subxt :: ext :: sp_core :: crypto :: AccountId32 > > > > , :: subxt :: storage :: address :: Yes , :: subxt :: storage :: address :: Yes , :: subxt :: storage :: address :: Yes >{
                     :: subxt :: storage :: address :: StaticStorageAddress :: new ("Scheduler" , "Agenda" , vec ! [:: subxt :: storage :: address :: StorageMapKey :: new (_0 . borrow () , :: subxt :: storage :: address :: StorageHasher :: Twox64Concat)] , [140u8 , 175u8 , 192u8 , 96u8 , 197u8 , 68u8 , 180u8 , 89u8 , 116u8 , 169u8 , 134u8 , 198u8 , 196u8 , 247u8 , 18u8 , 135u8 , 69u8 , 9u8 , 41u8 , 243u8 , 102u8 , 104u8 , 160u8 , 20u8 , 195u8 , 215u8 , 18u8 , 84u8 , 179u8 , 119u8 , 180u8 , 184u8 ,])
+=======
+                #[doc = " Items to be executed, indexed by the block number that they should be executed on."]                pub fn agenda (& self , _0 : impl :: std :: borrow :: Borrow < :: core :: primitive :: u64 > ,) -> :: subxt :: storage :: address :: StaticStorageAddress :: < :: subxt :: metadata :: DecodeStaticType < :: std :: vec :: Vec < :: core :: option :: Option < runtime_types :: pallet_scheduler :: ScheduledV3 < runtime_types :: frame_support :: traits :: schedule :: MaybeHashed < runtime_types :: webb_standalone_runtime :: Call , :: subxt :: ext :: sp_core :: H256 > , :: core :: primitive :: u64 , runtime_types :: webb_standalone_runtime :: OriginCaller , :: subxt :: ext :: sp_core :: crypto :: AccountId32 > > > > , :: subxt :: storage :: address :: Yes , :: subxt :: storage :: address :: Yes , :: subxt :: storage :: address :: Yes >{
+                    :: subxt :: storage :: address :: StaticStorageAddress :: new ("Scheduler" , "Agenda" , vec ! [:: subxt :: storage :: address :: StorageMapKey :: new (_0 . borrow () , :: subxt :: storage :: address :: StorageHasher :: Twox64Concat)] , [163u8 , 177u8 , 96u8 , 249u8 , 204u8 , 15u8 , 245u8 , 148u8 , 226u8 , 127u8 , 170u8 , 236u8 , 253u8 , 240u8 , 23u8 , 117u8 , 186u8 , 85u8 , 215u8 , 106u8 , 223u8 , 70u8 , 65u8 , 194u8 , 233u8 , 94u8 , 174u8 , 34u8 , 37u8 , 116u8 , 103u8 , 186u8 ,])
+>>>>>>> origin/main
                 }
                 #[doc = " Items to be executed, indexed by the block number that they should be executed on."]                pub fn agenda_root (& self ,) -> :: subxt :: storage :: address :: StaticStorageAddress :: < :: subxt :: metadata :: DecodeStaticType < :: std :: vec :: Vec < :: core :: option :: Option < runtime_types :: pallet_scheduler :: ScheduledV3 < runtime_types :: frame_support :: traits :: schedule :: MaybeHashed < runtime_types :: webb_standalone_runtime :: RuntimeCall , :: subxt :: ext :: sp_core :: H256 > , :: core :: primitive :: u64 , runtime_types :: webb_standalone_runtime :: OriginCaller , :: subxt :: ext :: sp_core :: crypto :: AccountId32 > > > > , () , :: subxt :: storage :: address :: Yes , :: subxt :: storage :: address :: Yes >{
                     ::subxt::storage::address::StaticStorageAddress::new(
@@ -11689,11 +11872,19 @@ pub mod api {
                         "Agenda",
                         Vec::new(),
                         [
+<<<<<<< HEAD
                             140u8, 175u8, 192u8, 96u8, 197u8, 68u8, 180u8,
                             89u8, 116u8, 169u8, 134u8, 198u8, 196u8, 247u8,
                             18u8, 135u8, 69u8, 9u8, 41u8, 243u8, 102u8, 104u8,
                             160u8, 20u8, 195u8, 215u8, 18u8, 84u8, 179u8,
                             119u8, 180u8, 184u8,
+=======
+                            163u8, 177u8, 96u8, 249u8, 204u8, 15u8, 245u8,
+                            148u8, 226u8, 127u8, 170u8, 236u8, 253u8, 240u8,
+                            23u8, 117u8, 186u8, 85u8, 215u8, 106u8, 223u8,
+                            70u8, 65u8, 194u8, 233u8, 94u8, 174u8, 34u8, 37u8,
+                            116u8, 103u8, 186u8,
+>>>>>>> origin/main
                         ],
                     )
                 }
@@ -11721,6 +11912,7 @@ pub mod api {
             pub struct ConstantsApi;
             impl ConstantsApi {
                 #[doc = " The maximum weight that may be scheduled per block for any dispatchables of less"]
+<<<<<<< HEAD
                 #[doc = " priority than `schedule::HARD_DEADLINE`."]
                 pub fn maximum_weight(
                     &self,
@@ -11729,6 +11921,9 @@ pub mod api {
                         runtime_types::sp_weights::weight_v2::Weight,
                     >,
                 > {
+=======
+                #[doc = " priority than `schedule::HARD_DEADLINE`."]                pub fn maximum_weight (& self) -> :: subxt :: constants :: StaticConstantAddress < :: subxt :: metadata :: DecodeStaticType < runtime_types :: frame_support :: weights :: weight_v2 :: Weight >>{
+>>>>>>> origin/main
                     ::subxt::constants::StaticConstantAddress::new(
                         "Scheduler",
                         "MaximumWeight",
@@ -12118,7 +12313,11 @@ pub mod api {
                 Eq,
                 PartialEq,
             )]
+<<<<<<< HEAD
             pub struct KillPure {
+=======
+            pub struct KillAnonymous {
+>>>>>>> origin/main
                 pub spawner: ::subxt::ext::sp_runtime::MultiAddress<
                     ::subxt::ext::sp_core::crypto::AccountId32,
                     ::core::primitive::u32,
@@ -12233,11 +12432,19 @@ pub mod api {
                             call: ::std::boxed::Box::new(call),
                         },
                         [
+<<<<<<< HEAD
                             170u8, 248u8, 185u8, 39u8, 61u8, 115u8, 187u8,
                             137u8, 23u8, 237u8, 123u8, 226u8, 237u8, 29u8,
                             43u8, 153u8, 66u8, 26u8, 102u8, 4u8, 213u8, 31u8,
                             8u8, 153u8, 37u8, 243u8, 232u8, 119u8, 77u8, 240u8,
                             238u8, 112u8,
+=======
+                            186u8, 199u8, 244u8, 59u8, 98u8, 123u8, 151u8,
+                            107u8, 62u8, 187u8, 175u8, 218u8, 61u8, 248u8,
+                            241u8, 11u8, 115u8, 53u8, 246u8, 160u8, 213u8,
+                            137u8, 82u8, 215u8, 253u8, 153u8, 78u8, 109u8,
+                            194u8, 208u8, 207u8, 82u8,
+>>>>>>> origin/main
                         ],
                     )
                 }
@@ -12411,11 +12618,19 @@ pub mod api {
                             ext_index,
                         },
                         [
+<<<<<<< HEAD
                             223u8, 158u8, 75u8, 227u8, 188u8, 238u8, 80u8,
                             141u8, 71u8, 63u8, 213u8, 103u8, 235u8, 189u8,
                             177u8, 237u8, 116u8, 5u8, 252u8, 225u8, 240u8,
                             244u8, 205u8, 229u8, 130u8, 62u8, 129u8, 182u8,
                             232u8, 218u8, 205u8, 173u8,
+=======
+                            39u8, 105u8, 81u8, 155u8, 145u8, 135u8, 140u8,
+                            210u8, 111u8, 166u8, 163u8, 20u8, 23u8, 249u8,
+                            191u8, 44u8, 87u8, 172u8, 106u8, 65u8, 178u8,
+                            219u8, 6u8, 247u8, 115u8, 217u8, 129u8, 92u8,
+                            209u8, 227u8, 246u8, 200u8,
+>>>>>>> origin/main
                         ],
                     )
                 }
@@ -12559,11 +12774,19 @@ pub mod api {
                             call: ::std::boxed::Box::new(call),
                         },
                         [
+<<<<<<< HEAD
                             24u8, 152u8, 105u8, 125u8, 208u8, 65u8, 180u8,
                             95u8, 49u8, 226u8, 126u8, 38u8, 45u8, 116u8, 210u8,
                             108u8, 245u8, 165u8, 127u8, 213u8, 20u8, 154u8,
                             167u8, 138u8, 134u8, 214u8, 9u8, 155u8, 238u8,
                             194u8, 137u8, 229u8,
+=======
+                            6u8, 104u8, 39u8, 212u8, 81u8, 21u8, 252u8, 74u8,
+                            124u8, 250u8, 28u8, 0u8, 253u8, 62u8, 131u8, 216u8,
+                            221u8, 38u8, 168u8, 15u8, 210u8, 113u8, 231u8,
+                            189u8, 230u8, 37u8, 141u8, 237u8, 99u8, 164u8,
+                            224u8, 162u8,
+>>>>>>> origin/main
                         ],
                     )
                 }
@@ -14817,7 +15040,12 @@ pub mod api {
                 pub call: ::std::boxed::Box<
                     runtime_types::webb_standalone_runtime::RuntimeCall,
                 >,
+<<<<<<< HEAD
                 pub weight: runtime_types::sp_weights::weight_v2::Weight,
+=======
+                pub weight:
+                    runtime_types::frame_support::weights::weight_v2::Weight,
+>>>>>>> origin/main
             }
             #[derive(
                 :: subxt :: ext :: codec :: Decode,
@@ -14873,11 +15101,19 @@ pub mod api {
                             call: ::std::boxed::Box::new(call),
                         },
                         [
+<<<<<<< HEAD
                             6u8, 150u8, 218u8, 66u8, 20u8, 199u8, 226u8, 248u8,
                             98u8, 248u8, 165u8, 86u8, 110u8, 131u8, 120u8,
                             188u8, 129u8, 170u8, 219u8, 195u8, 90u8, 240u8,
                             113u8, 39u8, 51u8, 32u8, 150u8, 105u8, 224u8, 44u8,
                             58u8, 9u8,
+=======
+                            235u8, 177u8, 5u8, 220u8, 140u8, 72u8, 93u8, 1u8,
+                            0u8, 87u8, 174u8, 239u8, 243u8, 56u8, 172u8, 68u8,
+                            243u8, 88u8, 118u8, 57u8, 204u8, 114u8, 30u8,
+                            154u8, 183u8, 191u8, 248u8, 198u8, 232u8, 95u8,
+                            201u8, 95u8,
+>>>>>>> origin/main
                         ],
                     )
                 }
@@ -14893,8 +15129,13 @@ pub mod api {
                 #[doc = "# </weight>"]
                 pub fn sudo_unchecked_weight(
                     &self,
+<<<<<<< HEAD
                     call: runtime_types::webb_standalone_runtime::RuntimeCall,
                     weight: runtime_types::sp_weights::weight_v2::Weight,
+=======
+                    call: runtime_types::webb_standalone_runtime::Call,
+                    weight : runtime_types :: frame_support :: weights :: weight_v2 :: Weight,
+>>>>>>> origin/main
                 ) -> ::subxt::tx::StaticTxPayload<SudoUncheckedWeight>
                 {
                     ::subxt::tx::StaticTxPayload::new(
@@ -14905,11 +15146,19 @@ pub mod api {
                             weight,
                         },
                         [
+<<<<<<< HEAD
                             80u8, 42u8, 37u8, 249u8, 0u8, 90u8, 209u8, 65u8,
                             45u8, 217u8, 235u8, 39u8, 69u8, 146u8, 33u8, 207u8,
                             52u8, 177u8, 159u8, 145u8, 171u8, 248u8, 52u8,
                             116u8, 203u8, 223u8, 125u8, 194u8, 205u8, 177u8,
                             216u8, 144u8,
+=======
+                            246u8, 170u8, 119u8, 91u8, 242u8, 246u8, 176u8,
+                            197u8, 253u8, 21u8, 151u8, 12u8, 179u8, 133u8,
+                            156u8, 196u8, 36u8, 115u8, 55u8, 111u8, 50u8,
+                            233u8, 60u8, 207u8, 216u8, 232u8, 181u8, 8u8,
+                            154u8, 161u8, 104u8, 39u8,
+>>>>>>> origin/main
                         ],
                     )
                 }
@@ -14970,11 +15219,19 @@ pub mod api {
                             call: ::std::boxed::Box::new(call),
                         },
                         [
+<<<<<<< HEAD
                             205u8, 237u8, 214u8, 177u8, 186u8, 130u8, 222u8,
                             122u8, 198u8, 49u8, 36u8, 40u8, 77u8, 238u8, 23u8,
                             79u8, 167u8, 117u8, 88u8, 243u8, 171u8, 50u8, 9u8,
                             181u8, 129u8, 80u8, 191u8, 49u8, 77u8, 80u8, 140u8,
                             158u8,
+=======
+                            218u8, 58u8, 96u8, 72u8, 41u8, 237u8, 149u8, 66u8,
+                            183u8, 186u8, 2u8, 74u8, 40u8, 122u8, 175u8, 62u8,
+                            160u8, 216u8, 96u8, 37u8, 185u8, 170u8, 249u8,
+                            37u8, 87u8, 18u8, 191u8, 58u8, 181u8, 217u8, 142u8,
+                            235u8,
+>>>>>>> origin/main
                         ],
                     )
                 }
@@ -23032,6 +23289,91 @@ pub mod api {
                     }
                 }
             }
+<<<<<<< HEAD
+=======
+            pub mod weights {
+                use super::runtime_types;
+                pub mod weight_v2 {
+                    use super::runtime_types;
+                    #[derive(
+                        :: subxt :: ext :: codec :: CompactAs,
+                        :: subxt :: ext :: codec :: Decode,
+                        :: subxt :: ext :: codec :: Encode,
+                        Clone,
+                        Debug,
+                        Eq,
+                        PartialEq,
+                    )]
+                    pub struct Weight {
+                        pub ref_time: ::core::primitive::u64,
+                    }
+                }
+                #[derive(
+                    :: subxt :: ext :: codec :: Decode,
+                    :: subxt :: ext :: codec :: Encode,
+                    Clone,
+                    Debug,
+                    Eq,
+                    PartialEq,
+                )]
+                pub enum DispatchClass {
+                    #[codec(index = 0)]
+                    Normal,
+                    #[codec(index = 1)]
+                    Operational,
+                    #[codec(index = 2)]
+                    Mandatory,
+                }
+                #[derive(
+                    :: subxt :: ext :: codec :: Decode,
+                    :: subxt :: ext :: codec :: Encode,
+                    Clone,
+                    Debug,
+                    Eq,
+                    PartialEq,
+                )]
+                pub struct DispatchInfo { pub weight : runtime_types :: frame_support :: weights :: weight_v2 :: Weight , pub class : runtime_types :: frame_support :: weights :: DispatchClass , pub pays_fee : runtime_types :: frame_support :: weights :: Pays , }
+                #[derive(
+                    :: subxt :: ext :: codec :: Decode,
+                    :: subxt :: ext :: codec :: Encode,
+                    Clone,
+                    Debug,
+                    Eq,
+                    PartialEq,
+                )]
+                pub enum Pays {
+                    #[codec(index = 0)]
+                    Yes,
+                    #[codec(index = 1)]
+                    No,
+                }
+                #[derive(
+                    :: subxt :: ext :: codec :: Decode,
+                    :: subxt :: ext :: codec :: Encode,
+                    Clone,
+                    Debug,
+                    Eq,
+                    PartialEq,
+                )]
+                pub struct PerDispatchClass<_0> {
+                    pub normal: _0,
+                    pub operational: _0,
+                    pub mandatory: _0,
+                }
+                #[derive(
+                    :: subxt :: ext :: codec :: Decode,
+                    :: subxt :: ext :: codec :: Encode,
+                    Clone,
+                    Debug,
+                    Eq,
+                    PartialEq,
+                )]
+                pub struct RuntimeDbWeight {
+                    pub read: ::core::primitive::u64,
+                    pub write: ::core::primitive::u64,
+                }
+            }
+>>>>>>> origin/main
             #[derive(
                 :: subxt :: ext :: codec :: Decode,
                 :: subxt :: ext :: codec :: Encode,
@@ -23154,7 +23496,11 @@ pub mod api {
                     Eq,
                     PartialEq,
                 )]
+<<<<<<< HEAD
                 pub struct BlockWeights { pub base_block : runtime_types :: sp_weights :: weight_v2 :: Weight , pub max_block : runtime_types :: sp_weights :: weight_v2 :: Weight , pub per_class : runtime_types :: frame_support :: dispatch :: PerDispatchClass < runtime_types :: frame_system :: limits :: WeightsPerClass > , }
+=======
+                pub struct BlockWeights { pub base_block : runtime_types :: frame_support :: weights :: weight_v2 :: Weight , pub max_block : runtime_types :: frame_support :: weights :: weight_v2 :: Weight , pub per_class : runtime_types :: frame_support :: weights :: PerDispatchClass < runtime_types :: frame_system :: limits :: WeightsPerClass > , }
+>>>>>>> origin/main
                 #[derive(
                     :: subxt :: ext :: codec :: Decode,
                     :: subxt :: ext :: codec :: Encode,
@@ -23163,6 +23509,7 @@ pub mod api {
                     Eq,
                     PartialEq,
                 )]
+<<<<<<< HEAD
                 pub struct WeightsPerClass {
                     pub base_extrinsic:
                         runtime_types::sp_weights::weight_v2::Weight,
@@ -23176,6 +23523,9 @@ pub mod api {
                         runtime_types::sp_weights::weight_v2::Weight,
                     >,
                 }
+=======
+                pub struct WeightsPerClass { pub base_extrinsic : runtime_types :: frame_support :: weights :: weight_v2 :: Weight , pub max_extrinsic : :: core :: option :: Option < runtime_types :: frame_support :: weights :: weight_v2 :: Weight > , pub max_total : :: core :: option :: Option < runtime_types :: frame_support :: weights :: weight_v2 :: Weight > , pub reserved : :: core :: option :: Option < runtime_types :: frame_support :: weights :: weight_v2 :: Weight > , }
+>>>>>>> origin/main
             }
             pub mod pallet {
                 use super::runtime_types;
@@ -25863,6 +26213,7 @@ pub mod api {
                 )]
                 #[doc = "Contains one variant per dispatchable that can be called by an extrinsic."]
                 pub enum Call {
+<<<<<<< HEAD
                     #[codec(index = 0)]
                     #[doc = "Set the collective's membership."]
                     #[doc = ""]
@@ -26045,6 +26396,9 @@ pub mod api {
                         proposal_hash: ::subxt::ext::sp_core::H256,
                     },
                 }
+=======
+                    # [codec (index = 0)] # [doc = "Set the collective's membership."] # [doc = ""] # [doc = "- `new_members`: The new member list. Be nice to the chain and provide it sorted."] # [doc = "- `prime`: The prime member whose vote sets the default."] # [doc = "- `old_count`: The upper bound for the previous number of members in storage. Used for"] # [doc = "  weight estimation."] # [doc = ""] # [doc = "Requires root origin."] # [doc = ""] # [doc = "NOTE: Does not enforce the expected `MaxMembers` limit on the amount of members, but"] # [doc = "      the weight estimations rely on it to estimate dispatchable weight."] # [doc = ""] # [doc = "# WARNING:"] # [doc = ""] # [doc = "The `pallet-collective` can also be managed by logic outside of the pallet through the"] # [doc = "implementation of the trait [`ChangeMembers`]."] # [doc = "Any call to `set_members` must be careful that the member set doesn't get out of sync"] # [doc = "with other logic managing the member set."] # [doc = ""] # [doc = "# <weight>"] # [doc = "## Weight"] # [doc = "- `O(MP + N)` where:"] # [doc = "  - `M` old-members-count (code- and governance-bounded)"] # [doc = "  - `N` new-members-count (code- and governance-bounded)"] # [doc = "  - `P` proposals-count (code-bounded)"] # [doc = "- DB:"] # [doc = "  - 1 storage mutation (codec `O(M)` read, `O(N)` write) for reading and writing the"] # [doc = "    members"] # [doc = "  - 1 storage read (codec `O(P)`) for reading the proposals"] # [doc = "  - `P` storage mutations (codec `O(M)`) for updating the votes for each proposal"] # [doc = "  - 1 storage write (codec `O(1)`) for deleting the old `prime` and setting the new one"] # [doc = "# </weight>"] set_members { new_members : :: std :: vec :: Vec < :: subxt :: ext :: sp_core :: crypto :: AccountId32 > , prime : :: core :: option :: Option < :: subxt :: ext :: sp_core :: crypto :: AccountId32 > , old_count : :: core :: primitive :: u32 , } , # [codec (index = 1)] # [doc = "Dispatch a proposal from a member using the `Member` origin."] # [doc = ""] # [doc = "Origin must be a member of the collective."] # [doc = ""] # [doc = "# <weight>"] # [doc = "## Weight"] # [doc = "- `O(M + P)` where `M` members-count (code-bounded) and `P` complexity of dispatching"] # [doc = "  `proposal`"] # [doc = "- DB: 1 read (codec `O(M)`) + DB access of `proposal`"] # [doc = "- 1 event"] # [doc = "# </weight>"] execute { proposal : :: std :: boxed :: Box < runtime_types :: webb_standalone_runtime :: Call > , # [codec (compact)] length_bound : :: core :: primitive :: u32 , } , # [codec (index = 2)] # [doc = "Add a new proposal to either be voted on or executed directly."] # [doc = ""] # [doc = "Requires the sender to be member."] # [doc = ""] # [doc = "`threshold` determines whether `proposal` is executed directly (`threshold < 2`)"] # [doc = "or put up for voting."] # [doc = ""] # [doc = "# <weight>"] # [doc = "## Weight"] # [doc = "- `O(B + M + P1)` or `O(B + M + P2)` where:"] # [doc = "  - `B` is `proposal` size in bytes (length-fee-bounded)"] # [doc = "  - `M` is members-count (code- and governance-bounded)"] # [doc = "  - branching is influenced by `threshold` where:"] # [doc = "    - `P1` is proposal execution complexity (`threshold < 2`)"] # [doc = "    - `P2` is proposals-count (code-bounded) (`threshold >= 2`)"] # [doc = "- DB:"] # [doc = "  - 1 storage read `is_member` (codec `O(M)`)"] # [doc = "  - 1 storage read `ProposalOf::contains_key` (codec `O(1)`)"] # [doc = "  - DB accesses influenced by `threshold`:"] # [doc = "    - EITHER storage accesses done by `proposal` (`threshold < 2`)"] # [doc = "    - OR proposal insertion (`threshold <= 2`)"] # [doc = "      - 1 storage mutation `Proposals` (codec `O(P2)`)"] # [doc = "      - 1 storage mutation `ProposalCount` (codec `O(1)`)"] # [doc = "      - 1 storage write `ProposalOf` (codec `O(B)`)"] # [doc = "      - 1 storage write `Voting` (codec `O(M)`)"] # [doc = "  - 1 event"] # [doc = "# </weight>"] propose { # [codec (compact)] threshold : :: core :: primitive :: u32 , proposal : :: std :: boxed :: Box < runtime_types :: webb_standalone_runtime :: Call > , # [codec (compact)] length_bound : :: core :: primitive :: u32 , } , # [codec (index = 3)] # [doc = "Add an aye or nay vote for the sender to the given proposal."] # [doc = ""] # [doc = "Requires the sender to be a member."] # [doc = ""] # [doc = "Transaction fees will be waived if the member is voting on any particular proposal"] # [doc = "for the first time and the call is successful. Subsequent vote changes will charge a"] # [doc = "fee."] # [doc = "# <weight>"] # [doc = "## Weight"] # [doc = "- `O(M)` where `M` is members-count (code- and governance-bounded)"] # [doc = "- DB:"] # [doc = "  - 1 storage read `Members` (codec `O(M)`)"] # [doc = "  - 1 storage mutation `Voting` (codec `O(M)`)"] # [doc = "- 1 event"] # [doc = "# </weight>"] vote { proposal : :: subxt :: ext :: sp_core :: H256 , # [codec (compact)] index : :: core :: primitive :: u32 , approve : :: core :: primitive :: bool , } , # [codec (index = 4)] # [doc = "Close a vote that is either approved, disapproved or whose voting period has ended."] # [doc = ""] # [doc = "May be called by any signed account in order to finish voting and close the proposal."] # [doc = ""] # [doc = "If called before the end of the voting period it will only close the vote if it is"] # [doc = "has enough votes to be approved or disapproved."] # [doc = ""] # [doc = "If called after the end of the voting period abstentions are counted as rejections"] # [doc = "unless there is a prime member set and the prime member cast an approval."] # [doc = ""] # [doc = "If the close operation completes successfully with disapproval, the transaction fee will"] # [doc = "be waived. Otherwise execution of the approved operation will be charged to the caller."] # [doc = ""] # [doc = "+ `proposal_weight_bound`: The maximum amount of weight consumed by executing the closed"] # [doc = "proposal."] # [doc = "+ `length_bound`: The upper bound for the length of the proposal in storage. Checked via"] # [doc = "`storage::read` so it is `size_of::<u32>() == 4` larger than the pure length."] # [doc = ""] # [doc = "# <weight>"] # [doc = "## Weight"] # [doc = "- `O(B + M + P1 + P2)` where:"] # [doc = "  - `B` is `proposal` size in bytes (length-fee-bounded)"] # [doc = "  - `M` is members-count (code- and governance-bounded)"] # [doc = "  - `P1` is the complexity of `proposal` preimage."] # [doc = "  - `P2` is proposal-count (code-bounded)"] # [doc = "- DB:"] # [doc = " - 2 storage reads (`Members`: codec `O(M)`, `Prime`: codec `O(1)`)"] # [doc = " - 3 mutations (`Voting`: codec `O(M)`, `ProposalOf`: codec `O(B)`, `Proposals`: codec"] # [doc = "   `O(P2)`)"] # [doc = " - any mutations done while executing `proposal` (`P1`)"] # [doc = "- up to 3 events"] # [doc = "# </weight>"] close { proposal_hash : :: subxt :: ext :: sp_core :: H256 , # [codec (compact)] index : :: core :: primitive :: u32 , # [codec (compact)] proposal_weight_bound : runtime_types :: frame_support :: weights :: weight_v2 :: Weight , # [codec (compact)] length_bound : :: core :: primitive :: u32 , } , # [codec (index = 5)] # [doc = "Disapprove a proposal, close, and remove it from the system, regardless of its current"] # [doc = "state."] # [doc = ""] # [doc = "Must be called by the Root origin."] # [doc = ""] # [doc = "Parameters:"] # [doc = "* `proposal_hash`: The hash of the proposal that should be disapproved."] # [doc = ""] # [doc = "# <weight>"] # [doc = "Complexity: O(P) where P is the number of max proposals"] # [doc = "DB Weight:"] # [doc = "* Reads: Proposals"] # [doc = "* Writes: Voting, Proposals, ProposalOf"] # [doc = "# </weight>"] disapprove_proposal { proposal_hash : :: subxt :: ext :: sp_core :: H256 , } , }
+>>>>>>> origin/main
                 #[derive(
                     :: subxt :: ext :: codec :: Decode,
                     :: subxt :: ext :: codec :: Encode,
@@ -27730,6 +28084,7 @@ pub mod api {
                 )]
                 #[doc = "Contains one variant per dispatchable that can be called by an extrinsic."]
                 pub enum Call {
+<<<<<<< HEAD
                     #[codec(index = 0)]
                     #[doc = "Immediately dispatch a multi-signature call using a single approval from the caller."]
                     #[doc = ""]
@@ -27906,6 +28261,9 @@ pub mod api {
                         call_hash: [::core::primitive::u8; 32usize],
                     },
                 }
+=======
+                    # [codec (index = 0)] # [doc = "Immediately dispatch a multi-signature call using a single approval from the caller."] # [doc = ""] # [doc = "The dispatch origin for this call must be _Signed_."] # [doc = ""] # [doc = "- `other_signatories`: The accounts (other than the sender) who are part of the"] # [doc = "multi-signature, but do not participate in the approval process."] # [doc = "- `call`: The call to be executed."] # [doc = ""] # [doc = "Result is equivalent to the dispatched result."] # [doc = ""] # [doc = "# <weight>"] # [doc = "O(Z + C) where Z is the length of the call and C its execution weight."] # [doc = "-------------------------------"] # [doc = "- DB Weight: None"] # [doc = "- Plus Call Weight"] # [doc = "# </weight>"] as_multi_threshold_1 { other_signatories : :: std :: vec :: Vec < :: subxt :: ext :: sp_core :: crypto :: AccountId32 > , call : :: std :: boxed :: Box < runtime_types :: webb_standalone_runtime :: Call > , } , # [codec (index = 1)] # [doc = "Register approval for a dispatch to be made from a deterministic composite account if"] # [doc = "approved by a total of `threshold - 1` of `other_signatories`."] # [doc = ""] # [doc = "If there are enough, then dispatch the call."] # [doc = ""] # [doc = "Payment: `DepositBase` will be reserved if this is the first approval, plus"] # [doc = "`threshold` times `DepositFactor`. It is returned once this dispatch happens or"] # [doc = "is cancelled."] # [doc = ""] # [doc = "The dispatch origin for this call must be _Signed_."] # [doc = ""] # [doc = "- `threshold`: The total number of approvals for this dispatch before it is executed."] # [doc = "- `other_signatories`: The accounts (other than the sender) who can approve this"] # [doc = "dispatch. May not be empty."] # [doc = "- `maybe_timepoint`: If this is the first approval, then this must be `None`. If it is"] # [doc = "not the first approval, then it must be `Some`, with the timepoint (block number and"] # [doc = "transaction index) of the first approval transaction."] # [doc = "- `call`: The call to be executed."] # [doc = ""] # [doc = "NOTE: Unless this is the final approval, you will generally want to use"] # [doc = "`approve_as_multi` instead, since it only requires a hash of the call."] # [doc = ""] # [doc = "Result is equivalent to the dispatched result if `threshold` is exactly `1`. Otherwise"] # [doc = "on success, result is `Ok` and the result from the interior call, if it was executed,"] # [doc = "may be found in the deposited `MultisigExecuted` event."] # [doc = ""] # [doc = "# <weight>"] # [doc = "- `O(S + Z + Call)`."] # [doc = "- Up to one balance-reserve or unreserve operation."] # [doc = "- One passthrough operation, one insert, both `O(S)` where `S` is the number of"] # [doc = "  signatories. `S` is capped by `MaxSignatories`, with weight being proportional."] # [doc = "- One call encode & hash, both of complexity `O(Z)` where `Z` is tx-len."] # [doc = "- One encode & hash, both of complexity `O(S)`."] # [doc = "- Up to one binary search and insert (`O(logS + S)`)."] # [doc = "- I/O: 1 read `O(S)`, up to 1 mutate `O(S)`. Up to one remove."] # [doc = "- One event."] # [doc = "- The weight of the `call`."] # [doc = "- Storage: inserts one item, value size bounded by `MaxSignatories`, with a deposit"] # [doc = "  taken for its lifetime of `DepositBase + threshold * DepositFactor`."] # [doc = "-------------------------------"] # [doc = "- DB Weight:"] # [doc = "    - Reads: Multisig Storage, [Caller Account], Calls (if `store_call`)"] # [doc = "    - Writes: Multisig Storage, [Caller Account], Calls (if `store_call`)"] # [doc = "- Plus Call Weight"] # [doc = "# </weight>"] as_multi { threshold : :: core :: primitive :: u16 , other_signatories : :: std :: vec :: Vec < :: subxt :: ext :: sp_core :: crypto :: AccountId32 > , maybe_timepoint : :: core :: option :: Option < runtime_types :: pallet_multisig :: Timepoint < :: core :: primitive :: u64 > > , call : :: subxt :: utils :: WrapperKeepOpaque < runtime_types :: webb_standalone_runtime :: Call > , store_call : :: core :: primitive :: bool , max_weight : runtime_types :: frame_support :: weights :: weight_v2 :: Weight , } , # [codec (index = 2)] # [doc = "Register approval for a dispatch to be made from a deterministic composite account if"] # [doc = "approved by a total of `threshold - 1` of `other_signatories`."] # [doc = ""] # [doc = "Payment: `DepositBase` will be reserved if this is the first approval, plus"] # [doc = "`threshold` times `DepositFactor`. It is returned once this dispatch happens or"] # [doc = "is cancelled."] # [doc = ""] # [doc = "The dispatch origin for this call must be _Signed_."] # [doc = ""] # [doc = "- `threshold`: The total number of approvals for this dispatch before it is executed."] # [doc = "- `other_signatories`: The accounts (other than the sender) who can approve this"] # [doc = "dispatch. May not be empty."] # [doc = "- `maybe_timepoint`: If this is the first approval, then this must be `None`. If it is"] # [doc = "not the first approval, then it must be `Some`, with the timepoint (block number and"] # [doc = "transaction index) of the first approval transaction."] # [doc = "- `call_hash`: The hash of the call to be executed."] # [doc = ""] # [doc = "NOTE: If this is the final approval, you will want to use `as_multi` instead."] # [doc = ""] # [doc = "# <weight>"] # [doc = "- `O(S)`."] # [doc = "- Up to one balance-reserve or unreserve operation."] # [doc = "- One passthrough operation, one insert, both `O(S)` where `S` is the number of"] # [doc = "  signatories. `S` is capped by `MaxSignatories`, with weight being proportional."] # [doc = "- One encode & hash, both of complexity `O(S)`."] # [doc = "- Up to one binary search and insert (`O(logS + S)`)."] # [doc = "- I/O: 1 read `O(S)`, up to 1 mutate `O(S)`. Up to one remove."] # [doc = "- One event."] # [doc = "- Storage: inserts one item, value size bounded by `MaxSignatories`, with a deposit"] # [doc = "  taken for its lifetime of `DepositBase + threshold * DepositFactor`."] # [doc = "----------------------------------"] # [doc = "- DB Weight:"] # [doc = "    - Read: Multisig Storage, [Caller Account]"] # [doc = "    - Write: Multisig Storage, [Caller Account]"] # [doc = "# </weight>"] approve_as_multi { threshold : :: core :: primitive :: u16 , other_signatories : :: std :: vec :: Vec < :: subxt :: ext :: sp_core :: crypto :: AccountId32 > , maybe_timepoint : :: core :: option :: Option < runtime_types :: pallet_multisig :: Timepoint < :: core :: primitive :: u64 > > , call_hash : [:: core :: primitive :: u8 ; 32usize] , max_weight : runtime_types :: frame_support :: weights :: weight_v2 :: Weight , } , # [codec (index = 3)] # [doc = "Cancel a pre-existing, on-going multisig transaction. Any deposit reserved previously"] # [doc = "for this operation will be unreserved on success."] # [doc = ""] # [doc = "The dispatch origin for this call must be _Signed_."] # [doc = ""] # [doc = "- `threshold`: The total number of approvals for this dispatch before it is executed."] # [doc = "- `other_signatories`: The accounts (other than the sender) who can approve this"] # [doc = "dispatch. May not be empty."] # [doc = "- `timepoint`: The timepoint (block number and transaction index) of the first approval"] # [doc = "transaction for this dispatch."] # [doc = "- `call_hash`: The hash of the call to be executed."] # [doc = ""] # [doc = "# <weight>"] # [doc = "- `O(S)`."] # [doc = "- Up to one balance-reserve or unreserve operation."] # [doc = "- One passthrough operation, one insert, both `O(S)` where `S` is the number of"] # [doc = "  signatories. `S` is capped by `MaxSignatories`, with weight being proportional."] # [doc = "- One encode & hash, both of complexity `O(S)`."] # [doc = "- One event."] # [doc = "- I/O: 1 read `O(S)`, one remove."] # [doc = "- Storage: removes one item."] # [doc = "----------------------------------"] # [doc = "- DB Weight:"] # [doc = "    - Read: Multisig Storage, [Caller Account], Refund Account, Calls"] # [doc = "    - Write: Multisig Storage, [Caller Account], Refund Account, Calls"] # [doc = "# </weight>"] cancel_as_multi { threshold : :: core :: primitive :: u16 , other_signatories : :: std :: vec :: Vec < :: subxt :: ext :: sp_core :: crypto :: AccountId32 > , timepoint : runtime_types :: pallet_multisig :: Timepoint < :: core :: primitive :: u64 > , call_hash : [:: core :: primitive :: u8 ; 32usize] , } , }
+>>>>>>> origin/main
                 #[derive(
                     :: subxt :: ext :: codec :: Decode,
                     :: subxt :: ext :: codec :: Encode,
@@ -28815,9 +29173,19 @@ pub mod api {
                     #[doc = "- `height`: The height of the chain when the call to `pure` was processed."]
                     #[doc = "- `ext_index`: The extrinsic index in which the call to `pure` was processed."]
                     #[doc = ""]
+<<<<<<< HEAD
                     #[doc = "Fails with `NoPermission` in case the caller is not a previously created pure"]
                     #[doc = "account whose `pure` call has corresponding parameters."]
                     kill_pure {
+=======
+                    #[doc = "Fails with `NoPermission` in case the caller is not a previously created anonymous"]
+                    #[doc = "account whose `anonymous` call has corresponding parameters."]
+                    #[doc = ""]
+                    #[doc = "# <weight>"]
+                    #[doc = "Weight is a function of the number of proxies the user has (P)."]
+                    #[doc = "# </weight>"]
+                    kill_anonymous {
+>>>>>>> origin/main
                         spawner: ::subxt::ext::sp_runtime::MultiAddress<
                             ::subxt::ext::sp_core::crypto::AccountId32,
                             ::core::primitive::u32,
@@ -29960,6 +30328,7 @@ pub mod api {
                 )]
                 #[doc = "Contains one variant per dispatchable that can be called by an extrinsic."]
                 pub enum Call {
+<<<<<<< HEAD
                     #[codec(index = 0)]
                     #[doc = "Authenticates the sudo key and dispatches a function call with `Root` origin."]
                     #[doc = ""]
@@ -30032,6 +30401,9 @@ pub mod api {
                         >,
                     },
                 }
+=======
+                    # [codec (index = 0)] # [doc = "Authenticates the sudo key and dispatches a function call with `Root` origin."] # [doc = ""] # [doc = "The dispatch origin for this call must be _Signed_."] # [doc = ""] # [doc = "# <weight>"] # [doc = "- O(1)."] # [doc = "- Limited storage reads."] # [doc = "- One DB write (event)."] # [doc = "- Weight of derivative `call` execution + 10,000."] # [doc = "# </weight>"] sudo { call : :: std :: boxed :: Box < runtime_types :: webb_standalone_runtime :: Call > , } , # [codec (index = 1)] # [doc = "Authenticates the sudo key and dispatches a function call with `Root` origin."] # [doc = "This function does not check the weight of the call, and instead allows the"] # [doc = "Sudo user to specify the weight of the call."] # [doc = ""] # [doc = "The dispatch origin for this call must be _Signed_."] # [doc = ""] # [doc = "# <weight>"] # [doc = "- O(1)."] # [doc = "- The weight of this call is defined by the caller."] # [doc = "# </weight>"] sudo_unchecked_weight { call : :: std :: boxed :: Box < runtime_types :: webb_standalone_runtime :: Call > , weight : runtime_types :: frame_support :: weights :: weight_v2 :: Weight , } , # [codec (index = 2)] # [doc = "Authenticates the current sudo key and sets the given AccountId (`new`) as the new sudo"] # [doc = "key."] # [doc = ""] # [doc = "The dispatch origin for this call must be _Signed_."] # [doc = ""] # [doc = "# <weight>"] # [doc = "- O(1)."] # [doc = "- Limited storage reads."] # [doc = "- One DB change."] # [doc = "# </weight>"] set_key { new : :: subxt :: ext :: sp_runtime :: MultiAddress < :: subxt :: ext :: sp_core :: crypto :: AccountId32 , :: core :: primitive :: u32 > , } , # [codec (index = 3)] # [doc = "Authenticates the sudo key and dispatches a function call with `Signed` origin from"] # [doc = "a given account."] # [doc = ""] # [doc = "The dispatch origin for this call must be _Signed_."] # [doc = ""] # [doc = "# <weight>"] # [doc = "- O(1)."] # [doc = "- Limited storage reads."] # [doc = "- One DB write (event)."] # [doc = "- Weight of derivative `call` execution + 10,000."] # [doc = "# </weight>"] sudo_as { who : :: subxt :: ext :: sp_runtime :: MultiAddress < :: subxt :: ext :: sp_core :: crypto :: AccountId32 , :: core :: primitive :: u32 > , call : :: std :: boxed :: Box < runtime_types :: webb_standalone_runtime :: Call > , } , }
+>>>>>>> origin/main
                 #[derive(
                     :: subxt :: ext :: codec :: Decode,
                     :: subxt :: ext :: codec :: Encode,
@@ -33129,10 +33501,17 @@ pub mod api {
         let runtime_metadata_hash = client.metadata().metadata_hash(&PALLETS);
         if runtime_metadata_hash
             != [
+<<<<<<< HEAD
                 171u8, 234u8, 160u8, 14u8, 158u8, 97u8, 121u8, 135u8, 69u8,
                 109u8, 185u8, 131u8, 52u8, 252u8, 10u8, 50u8, 125u8, 179u8,
                 141u8, 152u8, 254u8, 93u8, 76u8, 126u8, 142u8, 47u8, 125u8,
                 18u8, 244u8, 31u8, 210u8, 73u8,
+=======
+                47u8, 197u8, 243u8, 222u8, 38u8, 178u8, 37u8, 34u8, 172u8,
+                119u8, 150u8, 125u8, 176u8, 35u8, 247u8, 127u8, 109u8, 42u8,
+                22u8, 247u8, 54u8, 193u8, 233u8, 124u8, 245u8, 253u8, 207u8,
+                62u8, 241u8, 127u8, 225u8, 133u8,
+>>>>>>> origin/main
             ]
         {
             Err(::subxt::error::MetadataError::IncompatibleMetadata)
