@@ -136,7 +136,7 @@ impl From<[u8; RegisterNftTokenProposal::LENGTH]> for RegisterNftTokenProposal {
         let mut salt = [0u8; 32];
         salt.copy_from_slice(&bytes[f..t]);
         let f = t;
-        let t = t + 364;
+        let t = t + 64;
         let mut uri = [0u8; 64];
         uri.copy_from_slice(&bytes[f..t]);
         Self::new(
@@ -251,7 +251,7 @@ mod tests {
         );
         assert_eq!(
             proposal.uri(),
-            hex_literal::hex!("bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb")
+            hex_literal::hex!("bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb")
         );
     }
 }
