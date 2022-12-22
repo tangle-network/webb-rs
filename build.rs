@@ -22,29 +22,12 @@ mod evm {
         Ok(())
     }
 
-    pub fn build_protocol_solidity_anchor_base() -> Result<(), Box<dyn Error>> {
-        parse_and_write_abigen(
-            "contracts/protocol-solidity/AnchorBase.json",
-            "src/evm/contract/protocol_solidity/anchor_base.rs",
-            "AnchorBaseContract",
-        )
-    }
-
     pub fn build_protocol_solidity_vanchor_base() -> Result<(), Box<dyn Error>>
     {
         parse_and_write_abigen(
             "contracts/protocol-solidity/VAnchorBase.json",
             "src/evm/contract/protocol_solidity/vanchor_base.rs",
             "VAnchorBaseContract",
-        )
-    }
-
-    pub fn build_protocol_solidity_open_vanchor_base(
-    ) -> Result<(), Box<dyn Error>> {
-        parse_and_write_abigen(
-            "contracts/protocol-solidity/OpenVAnchorBase.json",
-            "src/evm/contract/protocol_solidity/open_vanchor_base.rs",
-            "OpenVAnchorBaseContract",
         )
     }
 
@@ -83,12 +66,12 @@ mod evm {
         )
     }
 
-    pub fn build_protocol_solidity_governed_token_wrapper(
+    pub fn build_protocol_solidity_fungible_token_wrapper(
     ) -> Result<(), Box<dyn Error>> {
         parse_and_write_abigen(
-            "contracts/protocol-solidity/GovernedTokenWrapper.json",
-            "src/evm/contract/protocol_solidity/governed_token_wrapper.rs",
-            "GovernedTokenWrapperContract",
+            "contracts/protocol-solidity/FungibleTokenWrapper.json",
+            "src/evm/contract/protocol_solidity/fungible_token_wrapper.rs",
+            "FungibleTokenWrapperContract",
         )
     }
 
@@ -199,15 +182,13 @@ fn run_cargo_fmt() -> Result<(), Box<dyn Error>> {
 fn main() -> Result<(), Box<dyn Error>> {
     #[cfg(feature = "generate-contracts")]
     {
-        evm::build_protocol_solidity_anchor_base()?;
         evm::build_protocol_solidity_vanchor_base()?;
         evm::build_protocol_solidity_vanchor()?;
-        evm::build_protocol_solidity_open_vanchor_base()?;
         evm::build_protocol_solidity_open_vanchor()?;
         evm::build_protocol_solidity_anchor_handler()?;
         evm::build_protocol_solidity_signature_bridge()?;
         evm::build_protocol_solidity_token_wrapper()?;
-        evm::build_protocol_solidity_governed_token_wrapper()?;
+        evm::build_protocol_solidity_fungible_token_wrapper()?;
         evm::build_protocol_solidity_token_wrapper_handler()?;
         evm::build_protocol_solidity_treasury()?;
         evm::build_protocol_solidity_treasury_handler()?;

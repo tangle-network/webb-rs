@@ -1,7 +1,7 @@
 {
   "_format": "hh-sol-artifact-1",
   "contractName": "VAnchorBase",
-  "sourceName": "contracts/vanchors/VAnchorBase.sol",
+  "sourceName": "contracts/vanchors/base/VAnchorBase.sol",
   "abi": [
     {
       "anonymous": false,
@@ -20,9 +20,9 @@
         },
         {
           "indexed": false,
-          "internalType": "bytes32",
+          "internalType": "uint256",
           "name": "merkleRoot",
-          "type": "bytes32"
+          "type": "uint256"
         }
       ],
       "name": "EdgeAddition",
@@ -45,9 +45,9 @@
         },
         {
           "indexed": false,
-          "internalType": "bytes32",
+          "internalType": "uint256",
           "name": "merkleRoot",
-          "type": "bytes32"
+          "type": "uint256"
         }
       ],
       "name": "EdgeUpdate",
@@ -57,23 +57,10 @@
       "anonymous": false,
       "inputs": [
         {
-          "indexed": false,
-          "internalType": "uint8",
-          "name": "version",
-          "type": "uint8"
-        }
-      ],
-      "name": "Initialized",
-      "type": "event"
-    },
-    {
-      "anonymous": false,
-      "inputs": [
-        {
           "indexed": true,
-          "internalType": "bytes32",
+          "internalType": "uint256",
           "name": "commitment",
-          "type": "bytes32"
+          "type": "uint256"
         },
         {
           "indexed": false,
@@ -96,14 +83,20 @@
       "inputs": [
         {
           "indexed": false,
-          "internalType": "bytes32",
+          "internalType": "uint256",
           "name": "commitment",
-          "type": "bytes32"
+          "type": "uint256"
         },
         {
           "indexed": false,
           "internalType": "uint256",
-          "name": "index",
+          "name": "subTreeIndex",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "leafIndex",
           "type": "uint256"
         },
         {
@@ -121,9 +114,9 @@
       "inputs": [
         {
           "indexed": false,
-          "internalType": "bytes32",
+          "internalType": "uint256",
           "name": "nullifier",
-          "type": "bytes32"
+          "type": "uint256"
         }
       ],
       "name": "NewNullifier",
@@ -229,6 +222,63 @@
     {
       "inputs": [
         {
+          "internalType": "address",
+          "name": "_fromTokenAddress",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "_toTokenAddress",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_extAmount",
+          "type": "uint256"
+        }
+      ],
+      "name": "_executeWrapping",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "payable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "_fromTokenAddress",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "_toTokenAddress",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "_recipient",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_minusExtAmount",
+          "type": "uint256"
+        }
+      ],
+      "name": "_withdrawAndUnwrap",
+      "outputs": [],
+      "stateMutability": "payable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
           "internalType": "int256",
           "name": "_extAmount",
           "type": "int256"
@@ -253,9 +303,9 @@
     {
       "inputs": [
         {
-          "internalType": "bytes32",
+          "internalType": "uint256",
           "name": "",
-          "type": "bytes32"
+          "type": "uint256"
         }
       ],
       "name": "commitments",
@@ -325,19 +375,6 @@
       "type": "function"
     },
     {
-      "inputs": [],
-      "name": "currentRootIndex",
-      "outputs": [
-        {
-          "internalType": "uint32",
-          "name": "",
-          "type": "uint32"
-        }
-      ],
-      "stateMutability": "view",
-      "type": "function"
-    },
-    {
       "inputs": [
         {
           "internalType": "uint256",
@@ -391,9 +428,9 @@
           "type": "uint256"
         },
         {
-          "internalType": "bytes32",
+          "internalType": "uint256",
           "name": "root",
-          "type": "bytes32"
+          "type": "uint256"
         },
         {
           "internalType": "uint256",
@@ -420,9 +457,9 @@
       "name": "filledSubtrees",
       "outputs": [
         {
-          "internalType": "bytes32",
+          "internalType": "uint256",
           "name": "",
-          "type": "bytes32"
+          "type": "uint256"
         }
       ],
       "stateMutability": "view",
@@ -456,12 +493,25 @@
     },
     {
       "inputs": [],
+      "name": "getHasher",
+      "outputs": [
+        {
+          "internalType": "contract IHasher",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
       "name": "getLastRoot",
       "outputs": [
         {
-          "internalType": "bytes32",
+          "internalType": "uint256",
           "name": "",
-          "type": "bytes32"
+          "type": "uint256"
         }
       ],
       "stateMutability": "view",
@@ -479,9 +529,9 @@
               "type": "uint256"
             },
             {
-              "internalType": "bytes32",
+              "internalType": "uint256",
               "name": "root",
-              "type": "bytes32"
+              "type": "uint256"
             },
             {
               "internalType": "uint256",
@@ -494,7 +544,7 @@
               "type": "bytes32"
             }
           ],
-          "internalType": "struct LinkableAnchor.Edge[]",
+          "internalType": "struct Edge[]",
           "name": "",
           "type": "tuple[]"
         }
@@ -507,9 +557,35 @@
       "name": "getLatestNeighborRoots",
       "outputs": [
         {
-          "internalType": "bytes32[]",
+          "internalType": "uint256[]",
           "name": "",
-          "type": "bytes32[]"
+          "type": "uint256[]"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "getLevels",
+      "outputs": [
+        {
+          "internalType": "uint32",
+          "name": "",
+          "type": "uint32"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "getNextIndex",
+      "outputs": [
+        {
+          "internalType": "uint32",
+          "name": "",
+          "type": "uint32"
         }
       ],
       "stateMutability": "view",
@@ -520,9 +596,28 @@
       "name": "getProposalNonce",
       "outputs": [
         {
-          "internalType": "uint32",
+          "internalType": "uint256",
           "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint32",
+          "name": "index",
           "type": "uint32"
+        }
+      ],
+      "name": "getZeroHash",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
         }
       ],
       "stateMutability": "view",
@@ -563,40 +658,22 @@
     {
       "inputs": [
         {
-          "internalType": "contract IPoseidonT3",
-          "name": "_hasher",
-          "type": "address"
-        },
-        {
-          "internalType": "bytes32",
+          "internalType": "uint256",
           "name": "_left",
-          "type": "bytes32"
+          "type": "uint256"
         },
         {
-          "internalType": "bytes32",
+          "internalType": "uint256",
           "name": "_right",
-          "type": "bytes32"
+          "type": "uint256"
         }
       ],
       "name": "hashLeftRight",
       "outputs": [
         {
-          "internalType": "bytes32",
+          "internalType": "uint256",
           "name": "",
-          "type": "bytes32"
-        }
-      ],
-      "stateMutability": "pure",
-      "type": "function"
-    },
-    {
-      "inputs": [],
-      "name": "hasher",
-      "outputs": [
-        {
-          "internalType": "contract IPoseidonT3",
-          "name": "",
-          "type": "address"
+          "type": "uint256"
         }
       ],
       "stateMutability": "view",
@@ -621,6 +698,19 @@
       "type": "function"
     },
     {
+      "inputs": [],
+      "name": "initialized",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
       "inputs": [
         {
           "internalType": "uint256",
@@ -628,9 +718,9 @@
           "type": "uint256"
         },
         {
-          "internalType": "bytes32",
+          "internalType": "uint256",
           "name": "_root",
-          "type": "bytes32"
+          "type": "uint256"
         }
       ],
       "name": "isKnownNeighborRoot",
@@ -647,9 +737,9 @@
     {
       "inputs": [
         {
-          "internalType": "bytes32",
-          "name": "_root",
-          "type": "bytes32"
+          "internalType": "uint256",
+          "name": "root",
+          "type": "uint256"
         }
       ],
       "name": "isKnownRoot",
@@ -666,9 +756,9 @@
     {
       "inputs": [
         {
-          "internalType": "bytes32",
+          "internalType": "uint256",
           "name": "_nullifierHash",
-          "type": "bytes32"
+          "type": "uint256"
         }
       ],
       "name": "isSpent",
@@ -685,9 +775,9 @@
     {
       "inputs": [
         {
-          "internalType": "bytes32[]",
+          "internalType": "uint256[]",
           "name": "_nullifierHashes",
-          "type": "bytes32[]"
+          "type": "uint256[]"
         }
       ],
       "name": "isSpentArray",
@@ -704,9 +794,9 @@
     {
       "inputs": [
         {
-          "internalType": "bytes32[]",
+          "internalType": "uint256[]",
           "name": "_roots",
-          "type": "bytes32[]"
+          "type": "uint256[]"
         }
       ],
       "name": "isValidRoots",
@@ -728,19 +818,6 @@
           "internalType": "uint256",
           "name": "",
           "type": "uint256"
-        }
-      ],
-      "stateMutability": "view",
-      "type": "function"
-    },
-    {
-      "inputs": [],
-      "name": "levels",
-      "outputs": [
-        {
-          "internalType": "uint32",
-          "name": "",
-          "type": "uint32"
         }
       ],
       "stateMutability": "view",
@@ -801,22 +878,9 @@
       "name": "neighborRoots",
       "outputs": [
         {
-          "internalType": "bytes32",
+          "internalType": "uint256",
           "name": "",
-          "type": "bytes32"
-        }
-      ],
-      "stateMutability": "view",
-      "type": "function"
-    },
-    {
-      "inputs": [],
-      "name": "nextIndex",
-      "outputs": [
-        {
-          "internalType": "uint32",
-          "name": "",
-          "type": "uint32"
+          "type": "uint256"
         }
       ],
       "stateMutability": "view",
@@ -825,9 +889,9 @@
     {
       "inputs": [
         {
-          "internalType": "bytes32",
+          "internalType": "uint256",
           "name": "",
-          "type": "bytes32"
+          "type": "uint256"
         }
       ],
       "name": "nullifierHashes",
@@ -836,6 +900,19 @@
           "internalType": "bool",
           "name": "",
           "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "outerLevels",
+      "outputs": [
+        {
+          "internalType": "uint32",
+          "name": "",
+          "type": "uint32"
         }
       ],
       "stateMutability": "view",
@@ -861,6 +938,19 @@
       "type": "function"
     },
     {
+      "inputs": [],
+      "name": "proposalNonce",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
       "inputs": [
         {
           "components": [
@@ -871,7 +961,7 @@
             },
             {
               "internalType": "bytes",
-              "name": "publicKey",
+              "name": "keyData",
               "type": "bytes"
             }
           ],
@@ -896,9 +986,14 @@
       "name": "roots",
       "outputs": [
         {
-          "internalType": "bytes32",
-          "name": "",
-          "type": "bytes32"
+          "internalType": "uint256",
+          "name": "root",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint32",
+          "name": "latestLeafindex",
+          "type": "uint32"
         }
       ],
       "stateMutability": "view",
@@ -925,56 +1020,9 @@
     {
       "inputs": [
         {
-          "internalType": "address",
-          "name": "_verifier",
-          "type": "address"
-        },
-        {
-          "internalType": "uint32",
-          "name": "_nonce",
-          "type": "uint32"
-        }
-      ],
-      "name": "setVerifier",
-      "outputs": [],
-      "stateMutability": "nonpayable",
-      "type": "function"
-    },
-    {
-      "inputs": [
-        {
-          "internalType": "uint256[8]",
-          "name": "_proof",
-          "type": "uint256[8]"
-        }
-      ],
-      "name": "unpackProof",
-      "outputs": [
-        {
-          "internalType": "uint256[2]",
-          "name": "",
-          "type": "uint256[2]"
-        },
-        {
-          "internalType": "uint256[2][2]",
-          "name": "",
-          "type": "uint256[2][2]"
-        },
-        {
-          "internalType": "uint256[2]",
-          "name": "",
-          "type": "uint256[2]"
-        }
-      ],
-      "stateMutability": "pure",
-      "type": "function"
-    },
-    {
-      "inputs": [
-        {
-          "internalType": "bytes32",
+          "internalType": "uint256",
           "name": "_root",
-          "type": "bytes32"
+          "type": "uint256"
         },
         {
           "internalType": "uint32",
@@ -990,38 +1038,6 @@
       "name": "updateEdge",
       "outputs": [],
       "stateMutability": "payable",
-      "type": "function"
-    },
-    {
-      "inputs": [],
-      "name": "verifier",
-      "outputs": [
-        {
-          "internalType": "contract IAnchorVerifier",
-          "name": "",
-          "type": "address"
-        }
-      ],
-      "stateMutability": "view",
-      "type": "function"
-    },
-    {
-      "inputs": [
-        {
-          "internalType": "uint256",
-          "name": "i",
-          "type": "uint256"
-        }
-      ],
-      "name": "zeros",
-      "outputs": [
-        {
-          "internalType": "bytes32",
-          "name": "",
-          "type": "bytes32"
-        }
-      ],
-      "stateMutability": "pure",
       "type": "function"
     }
   ],

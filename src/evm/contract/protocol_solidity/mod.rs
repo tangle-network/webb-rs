@@ -1,7 +1,5 @@
-pub mod anchor_base;
 pub mod anchor_handler;
-pub mod governed_token_wrapper;
-pub mod open_vanchor_base;
+pub mod fungible_token_wrapper;
 pub mod open_variable_anchor;
 pub mod signature_bridge;
 pub mod token_wrapper;
@@ -11,10 +9,8 @@ pub mod treasury_handler;
 pub mod vanchor_base;
 pub mod variable_anchor;
 
-pub use anchor_base::*;
 pub use anchor_handler::*;
-pub use governed_token_wrapper::*;
-pub use open_vanchor_base::*;
+pub use fungible_token_wrapper::*;
 pub use open_variable_anchor::*;
 pub use signature_bridge::*;
 pub use token_wrapper::*;
