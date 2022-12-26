@@ -3,9 +3,6 @@ pub mod evm;
 #[cfg(feature = "substrate")]
 pub mod substrate;
 
-#[cfg(feature = "cosmwasm")]
-pub mod cosmwasm;
-
 #[cfg(feature = "ink")]
 pub mod ink;
 
@@ -65,19 +62,6 @@ impl_proposal_for! {
     crate::proposal::substrate::TokenAddProposal,
     crate::proposal::substrate::TokenRemoveProposal,
     crate::proposal::substrate::WrappingFeeUpdateProposal,
-}
-
-#[cfg(feature = "cosmwasm")]
-impl_proposal_for! {
-    crate::proposal::cosmwasm::AnchorUpdateProposal,
-    crate::proposal::cosmwasm::TokenAddProposal,
-    crate::proposal::cosmwasm::TokenRemoveProposal,
-    crate::proposal::cosmwasm::WrappingFeeUpdateProposal,
-    crate::proposal::cosmwasm::MinWithdrawalLimitProposal,
-    crate::proposal::cosmwasm::MaxDepositLimitProposal,
-    crate::proposal::cosmwasm::ResourceIdUpdateProposal,
-    crate::proposal::cosmwasm::FeeRecipientUpdateProposal,
-    crate::proposal::cosmwasm::SetTreasuryHandlerProposal,
 }
 
 #[cfg(feature = "ink")]

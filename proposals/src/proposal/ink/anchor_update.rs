@@ -141,19 +141,6 @@ impl From<crate::substrate::AnchorUpdateProposal> for AnchorUpdateProposal {
     }
 }
 
-// if we have Cosmwasm available, we can convert the Cosmwasm proposal to a ink
-// proposal
-#[cfg(feature = "cosmwasm")]
-impl From<crate::cosmwasm::AnchorUpdateProposal> for AnchorUpdateProposal {
-    fn from(proposal: crate::cosmwasm::AnchorUpdateProposal) -> Self {
-        AnchorUpdateProposal::new(
-            proposal.header(),
-            *proposal.merkle_root(),
-            proposal.src_resource_id(),
-        )
-    }
-}
-
 #[derive(scale_codec::Encode, scale_codec::Decode)]
 struct UpdateEdge {
     root: [u8; 32],
