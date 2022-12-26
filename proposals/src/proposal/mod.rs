@@ -51,6 +51,8 @@ impl_proposal_for! {
     crate::proposal::evm::SetVerifierProposal,
     crate::proposal::evm::FeeRecipientUpdateProposal,
     crate::proposal::evm::RescueTokensProposal,
+    crate::proposal::evm::RegisterFungibleTokenProposal,
+    crate::proposal::evm::RegisterNftTokenProposal,
 }
 
 #[cfg(feature = "substrate")]

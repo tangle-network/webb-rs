@@ -6,8 +6,8 @@ use alloc::vec::Vec;
 
 /// Rescue Tokens Proposal.
 ///
-/// The [`RescueTokensProposal`] rescues tokens from the treasury (fee recipient) to a specified
-/// recipient address
+/// The [`RescueTokensProposal`] rescues tokens from the treasury (fee
+/// recipient) to a specified recipient address
 ///
 /// The format of the proposal looks like:
 /// ```text

@@ -19,7 +19,7 @@ pub mod v_anchor_contract {
     pub static VANCHORCONTRACT_ABI: ethers::contract::Lazy<
         ethers::core::abi::Abi,
     > = ethers::contract::Lazy::new(|| {
-        ethers :: core :: utils :: __serde_json :: from_str ("[{\"inputs\":[{\"internalType\":\"contract IAnchorVerifier\",\"name\":\"_verifier\",\"type\":\"address\",\"components\":[]},{\"internalType\":\"uint32\",\"name\":\"_levels\",\"type\":\"uint32\",\"components\":[]},{\"internalType\":\"contract IPoseidonT3\",\"name\":\"_hasher\",\"type\":\"address\",\"components\":[]},{\"internalType\":\"address\",\"name\":\"_handler\",\"type\":\"address\",\"components\":[]},{\"internalType\":\"address\",\"name\":\"_token\",\"type\":\"address\",\"components\":[]},{\"internalType\":\"uint8\",\"name\":\"_maxEdges\",\"type\":\"uint8\",\"components\":[]}],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\",\"outputs\":[]},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"chainID\",\"type\":\"uint256\",\"components\":[],\"indexed\":false},{\"internalType\":\"uint256\",\"name\":\"latestLeafIndex\",\"type\":\"uint256\",\"components\":[],\"indexed\":false},{\"internalType\":\"bytes32\",\"name\":\"merkleRoot\",\"type\":\"bytes32\",\"components\":[],\"indexed\":false}],\"type\":\"event\",\"name\":\"EdgeAddition\",\"outputs\":[],\"anonymous\":false},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"chainID\",\"type\":\"uint256\",\"components\":[],\"indexed\":false},{\"internalType\":\"uint256\",\"name\":\"latestLeafIndex\",\"type\":\"uint256\",\"components\":[],\"indexed\":false},{\"internalType\":\"bytes32\",\"name\":\"merkleRoot\",\"type\":\"bytes32\",\"components\":[],\"indexed\":false}],\"type\":\"event\",\"name\":\"EdgeUpdate\",\"outputs\":[],\"anonymous\":false},{\"inputs\":[{\"internalType\":\"uint8\",\"name\":\"version\",\"type\":\"uint8\",\"components\":[],\"indexed\":false}],\"type\":\"event\",\"name\":\"Initialized\",\"outputs\":[],\"anonymous\":false},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"commitment\",\"type\":\"bytes32\",\"components\":[],\"indexed\":true},{\"internalType\":\"uint32\",\"name\":\"leafIndex\",\"type\":\"uint32\",\"components\":[],\"indexed\":false},{\"internalType\":\"uint256\",\"name\":\"timestamp\",\"type\":\"uint256\",\"components\":[],\"indexed\":false}],\"type\":\"event\",\"name\":\"Insertion\",\"outputs\":[],\"anonymous\":false},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"commitment\",\"type\":\"bytes32\",\"components\":[],\"indexed\":false},{\"internalType\":\"uint256\",\"name\":\"index\",\"type\":\"uint256\",\"components\":[],\"indexed\":false},{\"internalType\":\"bytes\",\"name\":\"encryptedOutput\",\"type\":\"bytes\",\"components\":[],\"indexed\":false}],\"type\":\"event\",\"name\":\"NewCommitment\",\"outputs\":[],\"anonymous\":false},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"nullifier\",\"type\":\"bytes32\",\"components\":[],\"indexed\":false}],\"type\":\"event\",\"name\":\"NewNullifier\",\"outputs\":[],\"anonymous\":false},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\",\"components\":[],\"indexed\":true},{\"internalType\":\"bytes\",\"name\":\"key\",\"type\":\"bytes\",\"components\":[],\"indexed\":false}],\"type\":\"event\",\"name\":\"PublicKey\",\"outputs\":[],\"anonymous\":false},{\"inputs\":[],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"EVM_CHAIN_ID_TYPE\",\"outputs\":[{\"internalType\":\"bytes2\",\"name\":\"\",\"type\":\"bytes2\",\"components\":[]}]},{\"inputs\":[],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"FIELD_SIZE\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\",\"components\":[]}]},{\"inputs\":[],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"MAX_EXT_AMOUNT\",\"outputs\":[{\"internalType\":\"int256\",\"name\":\"\",\"type\":\"int256\",\"components\":[]}]},{\"inputs\":[],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"MAX_FEE\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\",\"components\":[]}]},{\"inputs\":[],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"ROOT_HISTORY_SIZE\",\"outputs\":[{\"internalType\":\"uint32\",\"name\":\"\",\"type\":\"uint32\",\"components\":[]}]},{\"inputs\":[],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"ZERO_VALUE\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\",\"components\":[]}]},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_tokenAddress\",\"type\":\"address\",\"components\":[]},{\"internalType\":\"uint256\",\"name\":\"_extAmount\",\"type\":\"uint256\",\"components\":[]}],\"stateMutability\":\"payable\",\"type\":\"function\",\"name\":\"_executeWrapping\",\"outputs\":[]},{\"inputs\":[{\"internalType\":\"int256\",\"name\":\"_extAmount\",\"type\":\"int256\",\"components\":[]},{\"internalType\":\"uint256\",\"name\":\"_fee\",\"type\":\"uint256\",\"components\":[]}],\"stateMutability\":\"pure\",\"type\":\"function\",\"name\":\"calculatePublicAmount\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\",\"components\":[]}]},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\",\"components\":[]}],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"commitments\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\",\"components\":[]}]},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_maximumDepositAmount\",\"type\":\"uint256\",\"components\":[]},{\"internalType\":\"uint32\",\"name\":\"_nonce\",\"type\":\"uint32\",\"components\":[]}],\"stateMutability\":\"nonpayable\",\"type\":\"function\",\"name\":\"configureMaximumDepositLimit\",\"outputs\":[]},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_minimalWithdrawalAmount\",\"type\":\"uint256\",\"components\":[]},{\"internalType\":\"uint32\",\"name\":\"_nonce\",\"type\":\"uint32\",\"components\":[]}],\"stateMutability\":\"nonpayable\",\"type\":\"function\",\"name\":\"configureMinimalWithdrawalLimit\",\"outputs\":[]},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\",\"components\":[]}],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"currentNeighborRootIndex\",\"outputs\":[{\"internalType\":\"uint32\",\"name\":\"\",\"type\":\"uint32\",\"components\":[]}]},{\"inputs\":[],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"currentRootIndex\",\"outputs\":[{\"internalType\":\"uint32\",\"name\":\"\",\"type\":\"uint32\",\"components\":[]}]},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\",\"components\":[]}],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"edgeExistsForChain\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\",\"components\":[]}]},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\",\"components\":[]}],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"edgeIndex\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\",\"components\":[]}]},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\",\"components\":[]}],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"edgeList\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"chainID\",\"type\":\"uint256\",\"components\":[]},{\"internalType\":\"bytes32\",\"name\":\"root\",\"type\":\"bytes32\",\"components\":[]},{\"internalType\":\"uint256\",\"name\":\"latestLeafIndex\",\"type\":\"uint256\",\"components\":[]},{\"internalType\":\"bytes32\",\"name\":\"srcResourceID\",\"type\":\"bytes32\",\"components\":[]}]},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\",\"components\":[]}],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"filledSubtrees\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\",\"components\":[]}]},{\"inputs\":[],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"getChainId\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\",\"components\":[]}]},{\"inputs\":[],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"getChainIdType\",\"outputs\":[{\"internalType\":\"uint48\",\"name\":\"\",\"type\":\"uint48\",\"components\":[]}]},{\"inputs\":[],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"getLastRoot\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\",\"components\":[]}]},{\"inputs\":[],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"getLatestNeighborEdges\",\"outputs\":[{\"internalType\":\"struct LinkableAnchor.Edge[]\",\"name\":\"\",\"type\":\"tuple[]\",\"components\":[{\"internalType\":\"uint256\",\"name\":\"chainID\",\"type\":\"uint256\",\"components\":[]},{\"internalType\":\"bytes32\",\"name\":\"root\",\"type\":\"bytes32\",\"components\":[]},{\"internalType\":\"uint256\",\"name\":\"latestLeafIndex\",\"type\":\"uint256\",\"components\":[]},{\"internalType\":\"bytes32\",\"name\":\"srcResourceID\",\"type\":\"bytes32\",\"components\":[]}]}]},{\"inputs\":[],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"getLatestNeighborRoots\",\"outputs\":[{\"internalType\":\"bytes32[]\",\"name\":\"\",\"type\":\"bytes32[]\",\"components\":[]}]},{\"inputs\":[],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"getProposalNonce\",\"outputs\":[{\"internalType\":\"uint32\",\"name\":\"\",\"type\":\"uint32\",\"components\":[]}]},{\"inputs\":[],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"handler\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\",\"components\":[]}]},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_chainID\",\"type\":\"uint256\",\"components\":[]}],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"hasEdge\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\",\"components\":[]}]},{\"inputs\":[{\"internalType\":\"contract IPoseidonT3\",\"name\":\"_hasher\",\"type\":\"address\",\"components\":[]},{\"internalType\":\"bytes32\",\"name\":\"_left\",\"type\":\"bytes32\",\"components\":[]},{\"internalType\":\"bytes32\",\"name\":\"_right\",\"type\":\"bytes32\",\"components\":[]}],\"stateMutability\":\"pure\",\"type\":\"function\",\"name\":\"hashLeftRight\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\",\"components\":[]}]},{\"inputs\":[],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"hasher\",\"outputs\":[{\"internalType\":\"contract IPoseidonT3\",\"name\":\"\",\"type\":\"address\",\"components\":[]}]},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_minimalWithdrawalAmount\",\"type\":\"uint256\",\"components\":[]},{\"internalType\":\"uint256\",\"name\":\"_maximumDepositAmount\",\"type\":\"uint256\",\"components\":[]}],\"stateMutability\":\"nonpayable\",\"type\":\"function\",\"name\":\"initialize\",\"outputs\":[]},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_neighborChainID\",\"type\":\"uint256\",\"components\":[]},{\"internalType\":\"bytes32\",\"name\":\"_root\",\"type\":\"bytes32\",\"components\":[]}],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"isKnownNeighborRoot\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\",\"components\":[]}]},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"_root\",\"type\":\"bytes32\",\"components\":[]}],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"isKnownRoot\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\",\"components\":[]}]},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"_nullifierHash\",\"type\":\"bytes32\",\"components\":[]}],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"isSpent\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\",\"components\":[]}]},{\"inputs\":[{\"internalType\":\"bytes32[]\",\"name\":\"_nullifierHashes\",\"type\":\"bytes32[]\",\"components\":[]}],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"isSpentArray\",\"outputs\":[{\"internalType\":\"bool[]\",\"name\":\"\",\"type\":\"bool[]\",\"components\":[]}]},{\"inputs\":[{\"internalType\":\"bytes32[]\",\"name\":\"_roots\",\"type\":\"bytes32[]\",\"components\":[]}],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"isValidRoots\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\",\"components\":[]}]},{\"inputs\":[],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"lastBalance\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\",\"components\":[]}]},{\"inputs\":[],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"levels\",\"outputs\":[{\"internalType\":\"uint32\",\"name\":\"\",\"type\":\"uint32\",\"components\":[]}]},{\"inputs\":[],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"maxEdges\",\"outputs\":[{\"internalType\":\"uint8\",\"name\":\"\",\"type\":\"uint8\",\"components\":[]}]},{\"inputs\":[],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"maximumDepositAmount\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\",\"components\":[]}]},{\"inputs\":[],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"minimalWithdrawalAmount\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\",\"components\":[]}]},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\",\"components\":[]},{\"internalType\":\"uint32\",\"name\":\"\",\"type\":\"uint32\",\"components\":[]}],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"neighborRoots\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\",\"components\":[]}]},{\"inputs\":[],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"nextIndex\",\"outputs\":[{\"internalType\":\"uint32\",\"name\":\"\",\"type\":\"uint32\",\"components\":[]}]},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\",\"components\":[]}],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"nullifierHashes\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\",\"components\":[]}]},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"_resourceId\",\"type\":\"bytes32\",\"components\":[]}],\"stateMutability\":\"pure\",\"type\":\"function\",\"name\":\"parseChainIdFromResourceId\",\"outputs\":[{\"internalType\":\"uint64\",\"name\":\"\",\"type\":\"uint64\",\"components\":[]}]},{\"inputs\":[{\"internalType\":\"struct VAnchorBase.Account\",\"name\":\"_account\",\"type\":\"tuple\",\"components\":[{\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\",\"components\":[]},{\"internalType\":\"bytes\",\"name\":\"publicKey\",\"type\":\"bytes\",\"components\":[]}]}],\"stateMutability\":\"nonpayable\",\"type\":\"function\",\"name\":\"register\",\"outputs\":[]},{\"inputs\":[{\"internalType\":\"struct VAnchorBase.Account\",\"name\":\"_account\",\"type\":\"tuple\",\"components\":[{\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\",\"components\":[]},{\"internalType\":\"bytes\",\"name\":\"publicKey\",\"type\":\"bytes\",\"components\":[]}]},{\"internalType\":\"struct VAnchorEncodeInputs.Proof\",\"name\":\"_proofArgs\",\"type\":\"tuple\",\"components\":[{\"internalType\":\"bytes\",\"name\":\"proof\",\"type\":\"bytes\",\"components\":[]},{\"internalType\":\"bytes\",\"name\":\"roots\",\"type\":\"bytes\",\"components\":[]},{\"internalType\":\"bytes32[]\",\"name\":\"inputNullifiers\",\"type\":\"bytes32[]\",\"components\":[]},{\"internalType\":\"bytes32[2]\",\"name\":\"outputCommitments\",\"type\":\"bytes32[2]\",\"components\":[]},{\"internalType\":\"uint256\",\"name\":\"publicAmount\",\"type\":\"uint256\",\"components\":[]},{\"internalType\":\"bytes32\",\"name\":\"extDataHash\",\"type\":\"bytes32\",\"components\":[]}]},{\"internalType\":\"struct VAnchorBase.ExtData\",\"name\":\"_extData\",\"type\":\"tuple\",\"components\":[{\"internalType\":\"address\",\"name\":\"recipient\",\"type\":\"address\",\"components\":[]},{\"internalType\":\"int256\",\"name\":\"extAmount\",\"type\":\"int256\",\"components\":[]},{\"internalType\":\"address\",\"name\":\"relayer\",\"type\":\"address\",\"components\":[]},{\"internalType\":\"uint256\",\"name\":\"fee\",\"type\":\"uint256\",\"components\":[]},{\"internalType\":\"uint256\",\"name\":\"refund\",\"type\":\"uint256\",\"components\":[]},{\"internalType\":\"address\",\"name\":\"token\",\"type\":\"address\",\"components\":[]},{\"internalType\":\"bytes\",\"name\":\"encryptedOutput1\",\"type\":\"bytes\",\"components\":[]},{\"internalType\":\"bytes\",\"name\":\"encryptedOutput2\",\"type\":\"bytes\",\"components\":[]}]}],\"stateMutability\":\"nonpayable\",\"type\":\"function\",\"name\":\"registerAndTransact\",\"outputs\":[]},{\"inputs\":[{\"internalType\":\"struct VAnchorBase.Account\",\"name\":\"_account\",\"type\":\"tuple\",\"components\":[{\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\",\"components\":[]},{\"internalType\":\"bytes\",\"name\":\"publicKey\",\"type\":\"bytes\",\"components\":[]}]},{\"internalType\":\"struct VAnchorEncodeInputs.Proof\",\"name\":\"_proofArgs\",\"type\":\"tuple\",\"components\":[{\"internalType\":\"bytes\",\"name\":\"proof\",\"type\":\"bytes\",\"components\":[]},{\"internalType\":\"bytes\",\"name\":\"roots\",\"type\":\"bytes\",\"components\":[]},{\"internalType\":\"bytes32[]\",\"name\":\"inputNullifiers\",\"type\":\"bytes32[]\",\"components\":[]},{\"internalType\":\"bytes32[2]\",\"name\":\"outputCommitments\",\"type\":\"bytes32[2]\",\"components\":[]},{\"internalType\":\"uint256\",\"name\":\"publicAmount\",\"type\":\"uint256\",\"components\":[]},{\"internalType\":\"bytes32\",\"name\":\"extDataHash\",\"type\":\"bytes32\",\"components\":[]}]},{\"internalType\":\"struct VAnchorBase.ExtData\",\"name\":\"_extData\",\"type\":\"tuple\",\"components\":[{\"internalType\":\"address\",\"name\":\"recipient\",\"type\":\"address\",\"components\":[]},{\"internalType\":\"int256\",\"name\":\"extAmount\",\"type\":\"int256\",\"components\":[]},{\"internalType\":\"address\",\"name\":\"relayer\",\"type\":\"address\",\"components\":[]},{\"internalType\":\"uint256\",\"name\":\"fee\",\"type\":\"uint256\",\"components\":[]},{\"internalType\":\"uint256\",\"name\":\"refund\",\"type\":\"uint256\",\"components\":[]},{\"internalType\":\"address\",\"name\":\"token\",\"type\":\"address\",\"components\":[]},{\"internalType\":\"bytes\",\"name\":\"encryptedOutput1\",\"type\":\"bytes\",\"components\":[]},{\"internalType\":\"bytes\",\"name\":\"encryptedOutput2\",\"type\":\"bytes\",\"components\":[]}]},{\"internalType\":\"address\",\"name\":\"_tokenAddress\",\"type\":\"address\",\"components\":[]}],\"stateMutability\":\"nonpayable\",\"type\":\"function\",\"name\":\"registerAndTransactWrap\",\"outputs\":[]},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\",\"components\":[]}],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"roots\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\",\"components\":[]}]},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_handler\",\"type\":\"address\",\"components\":[]},{\"internalType\":\"uint32\",\"name\":\"_nonce\",\"type\":\"uint32\",\"components\":[]}],\"stateMutability\":\"nonpayable\",\"type\":\"function\",\"name\":\"setHandler\",\"outputs\":[]},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_verifier\",\"type\":\"address\",\"components\":[]},{\"internalType\":\"uint32\",\"name\":\"_nonce\",\"type\":\"uint32\",\"components\":[]}],\"stateMutability\":\"nonpayable\",\"type\":\"function\",\"name\":\"setVerifier\",\"outputs\":[]},{\"inputs\":[],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"token\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\",\"components\":[]}]},{\"inputs\":[{\"internalType\":\"struct VAnchorEncodeInputs.Proof\",\"name\":\"_args\",\"type\":\"tuple\",\"components\":[{\"internalType\":\"bytes\",\"name\":\"proof\",\"type\":\"bytes\",\"components\":[]},{\"internalType\":\"bytes\",\"name\":\"roots\",\"type\":\"bytes\",\"components\":[]},{\"internalType\":\"bytes32[]\",\"name\":\"inputNullifiers\",\"type\":\"bytes32[]\",\"components\":[]},{\"internalType\":\"bytes32[2]\",\"name\":\"outputCommitments\",\"type\":\"bytes32[2]\",\"components\":[]},{\"internalType\":\"uint256\",\"name\":\"publicAmount\",\"type\":\"uint256\",\"components\":[]},{\"internalType\":\"bytes32\",\"name\":\"extDataHash\",\"type\":\"bytes32\",\"components\":[]}]},{\"internalType\":\"struct VAnchorBase.ExtData\",\"name\":\"_extData\",\"type\":\"tuple\",\"components\":[{\"internalType\":\"address\",\"name\":\"recipient\",\"type\":\"address\",\"components\":[]},{\"internalType\":\"int256\",\"name\":\"extAmount\",\"type\":\"int256\",\"components\":[]},{\"internalType\":\"address\",\"name\":\"relayer\",\"type\":\"address\",\"components\":[]},{\"internalType\":\"uint256\",\"name\":\"fee\",\"type\":\"uint256\",\"components\":[]},{\"internalType\":\"uint256\",\"name\":\"refund\",\"type\":\"uint256\",\"components\":[]},{\"internalType\":\"address\",\"name\":\"token\",\"type\":\"address\",\"components\":[]},{\"internalType\":\"bytes\",\"name\":\"encryptedOutput1\",\"type\":\"bytes\",\"components\":[]},{\"internalType\":\"bytes\",\"name\":\"encryptedOutput2\",\"type\":\"bytes\",\"components\":[]}]}],\"stateMutability\":\"nonpayable\",\"type\":\"function\",\"name\":\"transact\",\"outputs\":[]},{\"inputs\":[{\"internalType\":\"struct VAnchorEncodeInputs.Proof\",\"name\":\"_args\",\"type\":\"tuple\",\"components\":[{\"internalType\":\"bytes\",\"name\":\"proof\",\"type\":\"bytes\",\"components\":[]},{\"internalType\":\"bytes\",\"name\":\"roots\",\"type\":\"bytes\",\"components\":[]},{\"internalType\":\"bytes32[]\",\"name\":\"inputNullifiers\",\"type\":\"bytes32[]\",\"components\":[]},{\"internalType\":\"bytes32[2]\",\"name\":\"outputCommitments\",\"type\":\"bytes32[2]\",\"components\":[]},{\"internalType\":\"uint256\",\"name\":\"publicAmount\",\"type\":\"uint256\",\"components\":[]},{\"internalType\":\"bytes32\",\"name\":\"extDataHash\",\"type\":\"bytes32\",\"components\":[]}]},{\"internalType\":\"struct VAnchorBase.ExtData\",\"name\":\"_extData\",\"type\":\"tuple\",\"components\":[{\"internalType\":\"address\",\"name\":\"recipient\",\"type\":\"address\",\"components\":[]},{\"internalType\":\"int256\",\"name\":\"extAmount\",\"type\":\"int256\",\"components\":[]},{\"internalType\":\"address\",\"name\":\"relayer\",\"type\":\"address\",\"components\":[]},{\"internalType\":\"uint256\",\"name\":\"fee\",\"type\":\"uint256\",\"components\":[]},{\"internalType\":\"uint256\",\"name\":\"refund\",\"type\":\"uint256\",\"components\":[]},{\"internalType\":\"address\",\"name\":\"token\",\"type\":\"address\",\"components\":[]},{\"internalType\":\"bytes\",\"name\":\"encryptedOutput1\",\"type\":\"bytes\",\"components\":[]},{\"internalType\":\"bytes\",\"name\":\"encryptedOutput2\",\"type\":\"bytes\",\"components\":[]}]},{\"internalType\":\"address\",\"name\":\"_tokenAddress\",\"type\":\"address\",\"components\":[]}],\"stateMutability\":\"payable\",\"type\":\"function\",\"name\":\"transactWrap\",\"outputs\":[]},{\"inputs\":[{\"internalType\":\"uint256[8]\",\"name\":\"_proof\",\"type\":\"uint256[8]\",\"components\":[]}],\"stateMutability\":\"pure\",\"type\":\"function\",\"name\":\"unpackProof\",\"outputs\":[{\"internalType\":\"uint256[2]\",\"name\":\"\",\"type\":\"uint256[2]\",\"components\":[]},{\"internalType\":\"uint256[2][2]\",\"name\":\"\",\"type\":\"uint256[2][2]\",\"components\":[]},{\"internalType\":\"uint256[2]\",\"name\":\"\",\"type\":\"uint256[2]\",\"components\":[]}]},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_tokenAddress\",\"type\":\"address\",\"components\":[]},{\"internalType\":\"uint256\",\"name\":\"_amount\",\"type\":\"uint256\",\"components\":[]}],\"stateMutability\":\"nonpayable\",\"type\":\"function\",\"name\":\"unwrapIntoNative\",\"outputs\":[]},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_tokenAddress\",\"type\":\"address\",\"components\":[]},{\"internalType\":\"uint256\",\"name\":\"_amount\",\"type\":\"uint256\",\"components\":[]}],\"stateMutability\":\"nonpayable\",\"type\":\"function\",\"name\":\"unwrapIntoToken\",\"outputs\":[]},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"_root\",\"type\":\"bytes32\",\"components\":[]},{\"internalType\":\"uint32\",\"name\":\"_leafIndex\",\"type\":\"uint32\",\"components\":[]},{\"internalType\":\"bytes32\",\"name\":\"_srcResourceID\",\"type\":\"bytes32\",\"components\":[]}],\"stateMutability\":\"payable\",\"type\":\"function\",\"name\":\"updateEdge\",\"outputs\":[]},{\"inputs\":[],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"verifier\",\"outputs\":[{\"internalType\":\"contract IAnchorVerifier\",\"name\":\"\",\"type\":\"address\",\"components\":[]}]},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_tokenAddress\",\"type\":\"address\",\"components\":[]},{\"internalType\":\"address\",\"name\":\"_recipient\",\"type\":\"address\",\"components\":[]},{\"internalType\":\"uint256\",\"name\":\"_minusExtAmount\",\"type\":\"uint256\",\"components\":[]}],\"stateMutability\":\"payable\",\"type\":\"function\",\"name\":\"withdrawAndUnwrap\",\"outputs\":[]},{\"inputs\":[],\"stateMutability\":\"payable\",\"type\":\"function\",\"name\":\"wrapNative\",\"outputs\":[]},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_tokenAddress\",\"type\":\"address\",\"components\":[]},{\"internalType\":\"uint256\",\"name\":\"_amount\",\"type\":\"uint256\",\"components\":[]}],\"stateMutability\":\"nonpayable\",\"type\":\"function\",\"name\":\"wrapToken\",\"outputs\":[]},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"i\",\"type\":\"uint256\",\"components\":[]}],\"stateMutability\":\"pure\",\"type\":\"function\",\"name\":\"zeros\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\",\"components\":[]}]}]") . expect ("invalid abi")
+        ethers :: core :: utils :: __serde_json :: from_str ("[{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"chainID\",\"type\":\"uint256\",\"components\":[],\"indexed\":false},{\"internalType\":\"uint256\",\"name\":\"latestLeafIndex\",\"type\":\"uint256\",\"components\":[],\"indexed\":false},{\"internalType\":\"uint256\",\"name\":\"merkleRoot\",\"type\":\"uint256\",\"components\":[],\"indexed\":false}],\"type\":\"event\",\"name\":\"EdgeAddition\",\"outputs\":[],\"anonymous\":false},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"chainID\",\"type\":\"uint256\",\"components\":[],\"indexed\":false},{\"internalType\":\"uint256\",\"name\":\"latestLeafIndex\",\"type\":\"uint256\",\"components\":[],\"indexed\":false},{\"internalType\":\"uint256\",\"name\":\"merkleRoot\",\"type\":\"uint256\",\"components\":[],\"indexed\":false}],\"type\":\"event\",\"name\":\"EdgeUpdate\",\"outputs\":[],\"anonymous\":false},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"commitment\",\"type\":\"uint256\",\"components\":[],\"indexed\":true},{\"internalType\":\"uint32\",\"name\":\"leafIndex\",\"type\":\"uint32\",\"components\":[],\"indexed\":false},{\"internalType\":\"uint256\",\"name\":\"timestamp\",\"type\":\"uint256\",\"components\":[],\"indexed\":false}],\"type\":\"event\",\"name\":\"Insertion\",\"outputs\":[],\"anonymous\":false},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"commitment\",\"type\":\"uint256\",\"components\":[],\"indexed\":false},{\"internalType\":\"uint256\",\"name\":\"subTreeIndex\",\"type\":\"uint256\",\"components\":[],\"indexed\":false},{\"internalType\":\"uint256\",\"name\":\"leafIndex\",\"type\":\"uint256\",\"components\":[],\"indexed\":false},{\"internalType\":\"bytes\",\"name\":\"encryptedOutput\",\"type\":\"bytes\",\"components\":[],\"indexed\":false}],\"type\":\"event\",\"name\":\"NewCommitment\",\"outputs\":[],\"anonymous\":false},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"nullifier\",\"type\":\"uint256\",\"components\":[],\"indexed\":false}],\"type\":\"event\",\"name\":\"NewNullifier\",\"outputs\":[],\"anonymous\":false},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\",\"components\":[],\"indexed\":true},{\"internalType\":\"bytes\",\"name\":\"key\",\"type\":\"bytes\",\"components\":[],\"indexed\":false}],\"type\":\"event\",\"name\":\"PublicKey\",\"outputs\":[],\"anonymous\":false},{\"inputs\":[],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"EVM_CHAIN_ID_TYPE\",\"outputs\":[{\"internalType\":\"bytes2\",\"name\":\"\",\"type\":\"bytes2\",\"components\":[]}]},{\"inputs\":[],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"FIELD_SIZE\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\",\"components\":[]}]},{\"inputs\":[],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"MAX_EXT_AMOUNT\",\"outputs\":[{\"internalType\":\"int256\",\"name\":\"\",\"type\":\"int256\",\"components\":[]}]},{\"inputs\":[],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"MAX_FEE\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\",\"components\":[]}]},{\"inputs\":[],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"ROOT_HISTORY_SIZE\",\"outputs\":[{\"internalType\":\"uint32\",\"name\":\"\",\"type\":\"uint32\",\"components\":[]}]},{\"inputs\":[],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"ZERO_VALUE\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\",\"components\":[]}]},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_fromTokenAddress\",\"type\":\"address\",\"components\":[]},{\"internalType\":\"address\",\"name\":\"_toTokenAddress\",\"type\":\"address\",\"components\":[]},{\"internalType\":\"uint256\",\"name\":\"_extAmount\",\"type\":\"uint256\",\"components\":[]}],\"stateMutability\":\"payable\",\"type\":\"function\",\"name\":\"_executeWrapping\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\",\"components\":[]}]},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_fromTokenAddress\",\"type\":\"address\",\"components\":[]},{\"internalType\":\"address\",\"name\":\"_toTokenAddress\",\"type\":\"address\",\"components\":[]},{\"internalType\":\"address\",\"name\":\"_recipient\",\"type\":\"address\",\"components\":[]},{\"internalType\":\"uint256\",\"name\":\"_minusExtAmount\",\"type\":\"uint256\",\"components\":[]}],\"stateMutability\":\"payable\",\"type\":\"function\",\"name\":\"_withdrawAndUnwrap\",\"outputs\":[]},{\"inputs\":[{\"internalType\":\"int256\",\"name\":\"_extAmount\",\"type\":\"int256\",\"components\":[]},{\"internalType\":\"uint256\",\"name\":\"_fee\",\"type\":\"uint256\",\"components\":[]}],\"stateMutability\":\"pure\",\"type\":\"function\",\"name\":\"calculatePublicAmount\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\",\"components\":[]}]},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\",\"components\":[]}],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"commitments\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\",\"components\":[]}]},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_maximumDepositAmount\",\"type\":\"uint256\",\"components\":[]},{\"internalType\":\"uint32\",\"name\":\"_nonce\",\"type\":\"uint32\",\"components\":[]}],\"stateMutability\":\"nonpayable\",\"type\":\"function\",\"name\":\"configureMaximumDepositLimit\",\"outputs\":[]},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_minimalWithdrawalAmount\",\"type\":\"uint256\",\"components\":[]},{\"internalType\":\"uint32\",\"name\":\"_nonce\",\"type\":\"uint32\",\"components\":[]}],\"stateMutability\":\"nonpayable\",\"type\":\"function\",\"name\":\"configureMinimalWithdrawalLimit\",\"outputs\":[]},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\",\"components\":[]}],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"currentNeighborRootIndex\",\"outputs\":[{\"internalType\":\"uint32\",\"name\":\"\",\"type\":\"uint32\",\"components\":[]}]},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\",\"components\":[]}],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"edgeExistsForChain\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\",\"components\":[]}]},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\",\"components\":[]}],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"edgeIndex\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\",\"components\":[]}]},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\",\"components\":[]}],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"edgeList\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"chainID\",\"type\":\"uint256\",\"components\":[]},{\"internalType\":\"uint256\",\"name\":\"root\",\"type\":\"uint256\",\"components\":[]},{\"internalType\":\"uint256\",\"name\":\"latestLeafIndex\",\"type\":\"uint256\",\"components\":[]},{\"internalType\":\"bytes32\",\"name\":\"srcResourceID\",\"type\":\"bytes32\",\"components\":[]}]},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\",\"components\":[]}],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"filledSubtrees\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\",\"components\":[]}]},{\"inputs\":[],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"getChainId\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\",\"components\":[]}]},{\"inputs\":[],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"getChainIdType\",\"outputs\":[{\"internalType\":\"uint48\",\"name\":\"\",\"type\":\"uint48\",\"components\":[]}]},{\"inputs\":[],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"getHasher\",\"outputs\":[{\"internalType\":\"contract IHasher\",\"name\":\"\",\"type\":\"address\",\"components\":[]}]},{\"inputs\":[],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"getLastRoot\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\",\"components\":[]}]},{\"inputs\":[],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"getLatestNeighborEdges\",\"outputs\":[{\"internalType\":\"struct Edge[]\",\"name\":\"\",\"type\":\"tuple[]\",\"components\":[{\"internalType\":\"uint256\",\"name\":\"chainID\",\"type\":\"uint256\",\"components\":[]},{\"internalType\":\"uint256\",\"name\":\"root\",\"type\":\"uint256\",\"components\":[]},{\"internalType\":\"uint256\",\"name\":\"latestLeafIndex\",\"type\":\"uint256\",\"components\":[]},{\"internalType\":\"bytes32\",\"name\":\"srcResourceID\",\"type\":\"bytes32\",\"components\":[]}]}]},{\"inputs\":[],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"getLatestNeighborRoots\",\"outputs\":[{\"internalType\":\"uint256[]\",\"name\":\"\",\"type\":\"uint256[]\",\"components\":[]}]},{\"inputs\":[],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"getLevels\",\"outputs\":[{\"internalType\":\"uint32\",\"name\":\"\",\"type\":\"uint32\",\"components\":[]}]},{\"inputs\":[],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"getNextIndex\",\"outputs\":[{\"internalType\":\"uint32\",\"name\":\"\",\"type\":\"uint32\",\"components\":[]}]},{\"inputs\":[],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"getProposalNonce\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\",\"components\":[]}]},{\"inputs\":[{\"internalType\":\"uint32\",\"name\":\"index\",\"type\":\"uint32\",\"components\":[]}],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"getZeroHash\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\",\"components\":[]}]},{\"inputs\":[],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"handler\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\",\"components\":[]}]},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_chainID\",\"type\":\"uint256\",\"components\":[]}],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"hasEdge\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\",\"components\":[]}]},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_left\",\"type\":\"uint256\",\"components\":[]},{\"internalType\":\"uint256\",\"name\":\"_right\",\"type\":\"uint256\",\"components\":[]}],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"hashLeftRight\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\",\"components\":[]}]},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_minimalWithdrawalAmount\",\"type\":\"uint256\",\"components\":[]},{\"internalType\":\"uint256\",\"name\":\"_maximumDepositAmount\",\"type\":\"uint256\",\"components\":[]}],\"stateMutability\":\"nonpayable\",\"type\":\"function\",\"name\":\"initialize\",\"outputs\":[]},{\"inputs\":[],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"initialized\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\",\"components\":[]}]},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_neighborChainID\",\"type\":\"uint256\",\"components\":[]},{\"internalType\":\"uint256\",\"name\":\"_root\",\"type\":\"uint256\",\"components\":[]}],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"isKnownNeighborRoot\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\",\"components\":[]}]},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"root\",\"type\":\"uint256\",\"components\":[]}],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"isKnownRoot\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\",\"components\":[]}]},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_nullifierHash\",\"type\":\"uint256\",\"components\":[]}],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"isSpent\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\",\"components\":[]}]},{\"inputs\":[{\"internalType\":\"uint256[]\",\"name\":\"_nullifierHashes\",\"type\":\"uint256[]\",\"components\":[]}],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"isSpentArray\",\"outputs\":[{\"internalType\":\"bool[]\",\"name\":\"\",\"type\":\"bool[]\",\"components\":[]}]},{\"inputs\":[{\"internalType\":\"uint256[]\",\"name\":\"_roots\",\"type\":\"uint256[]\",\"components\":[]}],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"isValidRoots\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\",\"components\":[]}]},{\"inputs\":[],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"lastBalance\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\",\"components\":[]}]},{\"inputs\":[],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"maxEdges\",\"outputs\":[{\"internalType\":\"uint8\",\"name\":\"\",\"type\":\"uint8\",\"components\":[]}]},{\"inputs\":[],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"maximumDepositAmount\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\",\"components\":[]}]},{\"inputs\":[],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"minimalWithdrawalAmount\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\",\"components\":[]}]},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\",\"components\":[]},{\"internalType\":\"uint32\",\"name\":\"\",\"type\":\"uint32\",\"components\":[]}],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"neighborRoots\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\",\"components\":[]}]},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\",\"components\":[]}],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"nullifierHashes\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\",\"components\":[]}]},{\"inputs\":[],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"outerLevels\",\"outputs\":[{\"internalType\":\"uint32\",\"name\":\"\",\"type\":\"uint32\",\"components\":[]}]},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"_resourceId\",\"type\":\"bytes32\",\"components\":[]}],\"stateMutability\":\"pure\",\"type\":\"function\",\"name\":\"parseChainIdFromResourceId\",\"outputs\":[{\"internalType\":\"uint64\",\"name\":\"\",\"type\":\"uint64\",\"components\":[]}]},{\"inputs\":[],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"proposalNonce\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\",\"components\":[]}]},{\"inputs\":[{\"internalType\":\"struct VAnchorBase.Account\",\"name\":\"_account\",\"type\":\"tuple\",\"components\":[{\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\",\"components\":[]},{\"internalType\":\"bytes\",\"name\":\"keyData\",\"type\":\"bytes\",\"components\":[]}]}],\"stateMutability\":\"nonpayable\",\"type\":\"function\",\"name\":\"register\",\"outputs\":[]},{\"inputs\":[{\"internalType\":\"struct VAnchorBase.Account\",\"name\":\"_account\",\"type\":\"tuple\",\"components\":[{\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\",\"components\":[]},{\"internalType\":\"bytes\",\"name\":\"keyData\",\"type\":\"bytes\",\"components\":[]}]},{\"internalType\":\"bytes\",\"name\":\"_proof\",\"type\":\"bytes\",\"components\":[]},{\"internalType\":\"bytes\",\"name\":\"_auxPublicInputs\",\"type\":\"bytes\",\"components\":[]},{\"internalType\":\"struct CommonExtData\",\"name\":\"_externalData\",\"type\":\"tuple\",\"components\":[{\"internalType\":\"address\",\"name\":\"recipient\",\"type\":\"address\",\"components\":[]},{\"internalType\":\"int256\",\"name\":\"extAmount\",\"type\":\"int256\",\"components\":[]},{\"internalType\":\"address\",\"name\":\"relayer\",\"type\":\"address\",\"components\":[]},{\"internalType\":\"uint256\",\"name\":\"fee\",\"type\":\"uint256\",\"components\":[]},{\"internalType\":\"uint256\",\"name\":\"refund\",\"type\":\"uint256\",\"components\":[]},{\"internalType\":\"address\",\"name\":\"token\",\"type\":\"address\",\"components\":[]}]},{\"internalType\":\"struct PublicInputs\",\"name\":\"_publicInputs\",\"type\":\"tuple\",\"components\":[{\"internalType\":\"bytes\",\"name\":\"roots\",\"type\":\"bytes\",\"components\":[]},{\"internalType\":\"bytes\",\"name\":\"extensionRoots\",\"type\":\"bytes\",\"components\":[]},{\"internalType\":\"uint256[]\",\"name\":\"inputNullifiers\",\"type\":\"uint256[]\",\"components\":[]},{\"internalType\":\"uint256[2]\",\"name\":\"outputCommitments\",\"type\":\"uint256[2]\",\"components\":[]},{\"internalType\":\"uint256\",\"name\":\"publicAmount\",\"type\":\"uint256\",\"components\":[]},{\"internalType\":\"uint256\",\"name\":\"extDataHash\",\"type\":\"uint256\",\"components\":[]}]},{\"internalType\":\"struct Encryptions\",\"name\":\"_encryptions\",\"type\":\"tuple\",\"components\":[{\"internalType\":\"bytes\",\"name\":\"encryptedOutput1\",\"type\":\"bytes\",\"components\":[]},{\"internalType\":\"bytes\",\"name\":\"encryptedOutput2\",\"type\":\"bytes\",\"components\":[]}]}],\"stateMutability\":\"payable\",\"type\":\"function\",\"name\":\"registerAndTransact\",\"outputs\":[]},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\",\"components\":[]}],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"roots\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"root\",\"type\":\"uint256\",\"components\":[]},{\"internalType\":\"uint32\",\"name\":\"latestLeafindex\",\"type\":\"uint32\",\"components\":[]}]},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_handler\",\"type\":\"address\",\"components\":[]},{\"internalType\":\"uint32\",\"name\":\"_nonce\",\"type\":\"uint32\",\"components\":[]}],\"stateMutability\":\"nonpayable\",\"type\":\"function\",\"name\":\"setHandler\",\"outputs\":[]},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_verifier\",\"type\":\"address\",\"components\":[]},{\"internalType\":\"uint32\",\"name\":\"_nonce\",\"type\":\"uint32\",\"components\":[]}],\"stateMutability\":\"nonpayable\",\"type\":\"function\",\"name\":\"setVerifier\",\"outputs\":[]},{\"inputs\":[],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"token\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\",\"components\":[]}]},{\"inputs\":[{\"internalType\":\"bytes\",\"name\":\"_proof\",\"type\":\"bytes\",\"components\":[]},{\"internalType\":\"bytes\",\"name\":\"_auxPublicInputs\",\"type\":\"bytes\",\"components\":[]},{\"internalType\":\"struct CommonExtData\",\"name\":\"_externalData\",\"type\":\"tuple\",\"components\":[{\"internalType\":\"address\",\"name\":\"recipient\",\"type\":\"address\",\"components\":[]},{\"internalType\":\"int256\",\"name\":\"extAmount\",\"type\":\"int256\",\"components\":[]},{\"internalType\":\"address\",\"name\":\"relayer\",\"type\":\"address\",\"components\":[]},{\"internalType\":\"uint256\",\"name\":\"fee\",\"type\":\"uint256\",\"components\":[]},{\"internalType\":\"uint256\",\"name\":\"refund\",\"type\":\"uint256\",\"components\":[]},{\"internalType\":\"address\",\"name\":\"token\",\"type\":\"address\",\"components\":[]}]},{\"internalType\":\"struct PublicInputs\",\"name\":\"_publicInputs\",\"type\":\"tuple\",\"components\":[{\"internalType\":\"bytes\",\"name\":\"roots\",\"type\":\"bytes\",\"components\":[]},{\"internalType\":\"bytes\",\"name\":\"extensionRoots\",\"type\":\"bytes\",\"components\":[]},{\"internalType\":\"uint256[]\",\"name\":\"inputNullifiers\",\"type\":\"uint256[]\",\"components\":[]},{\"internalType\":\"uint256[2]\",\"name\":\"outputCommitments\",\"type\":\"uint256[2]\",\"components\":[]},{\"internalType\":\"uint256\",\"name\":\"publicAmount\",\"type\":\"uint256\",\"components\":[]},{\"internalType\":\"uint256\",\"name\":\"extDataHash\",\"type\":\"uint256\",\"components\":[]}]},{\"internalType\":\"struct Encryptions\",\"name\":\"_encryptions\",\"type\":\"tuple\",\"components\":[{\"internalType\":\"bytes\",\"name\":\"encryptedOutput1\",\"type\":\"bytes\",\"components\":[]},{\"internalType\":\"bytes\",\"name\":\"encryptedOutput2\",\"type\":\"bytes\",\"components\":[]}]}],\"stateMutability\":\"payable\",\"type\":\"function\",\"name\":\"transact\",\"outputs\":[]},{\"inputs\":[{\"internalType\":\"uint256[8]\",\"name\":\"_proof\",\"type\":\"uint256[8]\",\"components\":[]}],\"stateMutability\":\"pure\",\"type\":\"function\",\"name\":\"unpackProof\",\"outputs\":[{\"internalType\":\"uint256[2]\",\"name\":\"\",\"type\":\"uint256[2]\",\"components\":[]},{\"internalType\":\"uint256[2][2]\",\"name\":\"\",\"type\":\"uint256[2][2]\",\"components\":[]},{\"internalType\":\"uint256[2]\",\"name\":\"\",\"type\":\"uint256[2]\",\"components\":[]}]},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_root\",\"type\":\"uint256\",\"components\":[]},{\"internalType\":\"uint32\",\"name\":\"_leafIndex\",\"type\":\"uint32\",\"components\":[]},{\"internalType\":\"bytes32\",\"name\":\"_srcResourceID\",\"type\":\"bytes32\",\"components\":[]}],\"stateMutability\":\"payable\",\"type\":\"function\",\"name\":\"updateEdge\",\"outputs\":[]},{\"inputs\":[],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"verifier\",\"outputs\":[{\"internalType\":\"contract IAnchorVerifier\",\"name\":\"\",\"type\":\"address\",\"components\":[]}]}]") . expect ("invalid abi")
     });
     pub struct VAnchorContract<M>(ethers::contract::Contract<M>);
     impl<M> Clone for VAnchorContract<M> {
@@ -112,14 +112,41 @@ pub mod v_anchor_contract {
                 .method_hash([236, 115, 41, 89], ())
                 .expect("method not found (this should never happen)")
         }
-        #[doc = "Calls the contract's `_executeWrapping` (0x94eee060) function"]
+        #[doc = "Calls the contract's `_executeWrapping` (0x6338bcbc) function"]
         pub fn execute_wrapping(
             &self,
-            token_address: ethers::core::types::Address,
+            from_token_address: ethers::core::types::Address,
+            to_token_address: ethers::core::types::Address,
             ext_amount: ethers::core::types::U256,
+        ) -> ethers::contract::builders::ContractCall<
+            M,
+            ethers::core::types::U256,
+        > {
+            self.0
+                .method_hash(
+                    [99, 56, 188, 188],
+                    (from_token_address, to_token_address, ext_amount),
+                )
+                .expect("method not found (this should never happen)")
+        }
+        #[doc = "Calls the contract's `_withdrawAndUnwrap` (0x509cd41e) function"]
+        pub fn withdraw_and_unwrap(
+            &self,
+            from_token_address: ethers::core::types::Address,
+            to_token_address: ethers::core::types::Address,
+            recipient: ethers::core::types::Address,
+            minus_ext_amount: ethers::core::types::U256,
         ) -> ethers::contract::builders::ContractCall<M, ()> {
             self.0
-                .method_hash([148, 238, 224, 96], (token_address, ext_amount))
+                .method_hash(
+                    [80, 156, 212, 30],
+                    (
+                        from_token_address,
+                        to_token_address,
+                        recipient,
+                        minus_ext_amount,
+                    ),
+                )
                 .expect("method not found (this should never happen)")
         }
         #[doc = "Calls the contract's `calculatePublicAmount` (0x2570b7b4) function"]
@@ -135,13 +162,13 @@ pub mod v_anchor_contract {
                 .method_hash([37, 112, 183, 180], (ext_amount, fee))
                 .expect("method not found (this should never happen)")
         }
-        #[doc = "Calls the contract's `commitments` (0x839df945) function"]
+        #[doc = "Calls the contract's `commitments` (0x49ce8997) function"]
         pub fn commitments(
             &self,
-            p0: [u8; 32],
+            p0: ethers::core::types::U256,
         ) -> ethers::contract::builders::ContractCall<M, bool> {
             self.0
-                .method_hash([131, 157, 249, 69], p0)
+                .method_hash([73, 206, 137, 151], p0)
                 .expect("method not found (this should never happen)")
         }
         #[doc = "Calls the contract's `configureMaximumDepositLimit` (0x8c832b13) function"]
@@ -179,14 +206,6 @@ pub mod v_anchor_contract {
                 .method_hash([93, 45, 118, 108], p0)
                 .expect("method not found (this should never happen)")
         }
-        #[doc = "Calls the contract's `currentRootIndex` (0x90eeb02b) function"]
-        pub fn current_root_index(
-            &self,
-        ) -> ethers::contract::builders::ContractCall<M, u32> {
-            self.0
-                .method_hash([144, 238, 176, 43], ())
-                .expect("method not found (this should never happen)")
-        }
         #[doc = "Calls the contract's `edgeExistsForChain` (0xfa731687) function"]
         pub fn edge_exists_for_chain(
             &self,
@@ -216,7 +235,7 @@ pub mod v_anchor_contract {
             M,
             (
                 ethers::core::types::U256,
-                [u8; 32],
+                ethers::core::types::U256,
                 ethers::core::types::U256,
                 [u8; 32],
             ),
@@ -229,7 +248,10 @@ pub mod v_anchor_contract {
         pub fn filled_subtrees(
             &self,
             p0: ethers::core::types::U256,
-        ) -> ethers::contract::builders::ContractCall<M, [u8; 32]> {
+        ) -> ethers::contract::builders::ContractCall<
+            M,
+            ethers::core::types::U256,
+        > {
             self.0
                 .method_hash([241, 120, 228, 124], p0)
                 .expect("method not found (this should never happen)")
@@ -253,10 +275,24 @@ pub mod v_anchor_contract {
                 .method_hash([76, 131, 12, 189], ())
                 .expect("method not found (this should never happen)")
         }
+        #[doc = "Calls the contract's `getHasher` (0xea495db0) function"]
+        pub fn get_hasher(
+            &self,
+        ) -> ethers::contract::builders::ContractCall<
+            M,
+            ethers::core::types::Address,
+        > {
+            self.0
+                .method_hash([234, 73, 93, 176], ())
+                .expect("method not found (this should never happen)")
+        }
         #[doc = "Calls the contract's `getLastRoot` (0xba70f757) function"]
         pub fn get_last_root(
             &self,
-        ) -> ethers::contract::builders::ContractCall<M, [u8; 32]> {
+        ) -> ethers::contract::builders::ContractCall<
+            M,
+            ethers::core::types::U256,
+        > {
             self.0
                 .method_hash([186, 112, 247, 87], ())
                 .expect("method not found (this should never happen)")
@@ -275,18 +311,49 @@ pub mod v_anchor_contract {
             &self,
         ) -> ethers::contract::builders::ContractCall<
             M,
-            ::std::vec::Vec<[u8; 32]>,
+            ::std::vec::Vec<ethers::core::types::U256>,
         > {
             self.0
                 .method_hash([30, 98, 118, 23], ())
                 .expect("method not found (this should never happen)")
         }
-        #[doc = "Calls the contract's `getProposalNonce` (0x0b27fb9a) function"]
-        pub fn get_proposal_nonce(
+        #[doc = "Calls the contract's `getLevels` (0x0c394a60) function"]
+        pub fn get_levels(
             &self,
         ) -> ethers::contract::builders::ContractCall<M, u32> {
             self.0
+                .method_hash([12, 57, 74, 96], ())
+                .expect("method not found (this should never happen)")
+        }
+        #[doc = "Calls the contract's `getNextIndex` (0x0eb7606f) function"]
+        pub fn get_next_index(
+            &self,
+        ) -> ethers::contract::builders::ContractCall<M, u32> {
+            self.0
+                .method_hash([14, 183, 96, 111], ())
+                .expect("method not found (this should never happen)")
+        }
+        #[doc = "Calls the contract's `getProposalNonce` (0x0b27fb9a) function"]
+        pub fn get_proposal_nonce(
+            &self,
+        ) -> ethers::contract::builders::ContractCall<
+            M,
+            ethers::core::types::U256,
+        > {
+            self.0
                 .method_hash([11, 39, 251, 154], ())
+                .expect("method not found (this should never happen)")
+        }
+        #[doc = "Calls the contract's `getZeroHash` (0x305e9eac) function"]
+        pub fn get_zero_hash(
+            &self,
+            index: u32,
+        ) -> ethers::contract::builders::ContractCall<
+            M,
+            ethers::core::types::U256,
+        > {
+            self.0
+                .method_hash([48, 94, 158, 172], index)
                 .expect("method not found (this should never happen)")
         }
         #[doc = "Calls the contract's `handler` (0xc80916d4) function"]
@@ -309,26 +376,17 @@ pub mod v_anchor_contract {
                 .method_hash([146, 21, 99, 17], chain_id)
                 .expect("method not found (this should never happen)")
         }
-        #[doc = "Calls the contract's `hashLeftRight` (0x8ea3099e) function"]
+        #[doc = "Calls the contract's `hashLeftRight` (0x5bb93995) function"]
         pub fn hash_left_right(
             &self,
-            hasher: ethers::core::types::Address,
-            left: [u8; 32],
-            right: [u8; 32],
-        ) -> ethers::contract::builders::ContractCall<M, [u8; 32]> {
-            self.0
-                .method_hash([142, 163, 9, 158], (hasher, left, right))
-                .expect("method not found (this should never happen)")
-        }
-        #[doc = "Calls the contract's `hasher` (0xed33639f) function"]
-        pub fn hasher(
-            &self,
+            left: ethers::core::types::U256,
+            right: ethers::core::types::U256,
         ) -> ethers::contract::builders::ContractCall<
             M,
-            ethers::core::types::Address,
+            ethers::core::types::U256,
         > {
             self.0
-                .method_hash([237, 51, 99, 159], ())
+                .method_hash([91, 185, 57, 149], (left, right))
                 .expect("method not found (this should never happen)")
         }
         #[doc = "Calls the contract's `initialize` (0xe4a30116) function"]
@@ -344,51 +402,59 @@ pub mod v_anchor_contract {
                 )
                 .expect("method not found (this should never happen)")
         }
-        #[doc = "Calls the contract's `isKnownNeighborRoot` (0x11e4dcb9) function"]
+        #[doc = "Calls the contract's `initialized` (0x158ef93e) function"]
+        pub fn initialized(
+            &self,
+        ) -> ethers::contract::builders::ContractCall<M, bool> {
+            self.0
+                .method_hash([21, 142, 249, 62], ())
+                .expect("method not found (this should never happen)")
+        }
+        #[doc = "Calls the contract's `isKnownNeighborRoot` (0x3bfa8d7a) function"]
         pub fn is_known_neighbor_root(
             &self,
             neighbor_chain_id: ethers::core::types::U256,
-            root: [u8; 32],
+            root: ethers::core::types::U256,
         ) -> ethers::contract::builders::ContractCall<M, bool> {
             self.0
-                .method_hash([17, 228, 220, 185], (neighbor_chain_id, root))
+                .method_hash([59, 250, 141, 122], (neighbor_chain_id, root))
                 .expect("method not found (this should never happen)")
         }
-        #[doc = "Calls the contract's `isKnownRoot` (0x6d9833e3) function"]
+        #[doc = "Calls the contract's `isKnownRoot` (0xa6232a93) function"]
         pub fn is_known_root(
             &self,
-            root: [u8; 32],
+            root: ethers::core::types::U256,
         ) -> ethers::contract::builders::ContractCall<M, bool> {
             self.0
-                .method_hash([109, 152, 51, 227], root)
+                .method_hash([166, 35, 42, 147], root)
                 .expect("method not found (this should never happen)")
         }
-        #[doc = "Calls the contract's `isSpent` (0xe5285dcc) function"]
+        #[doc = "Calls the contract's `isSpent` (0x5a129efe) function"]
         pub fn is_spent(
             &self,
-            nullifier_hash: [u8; 32],
+            nullifier_hash: ethers::core::types::U256,
         ) -> ethers::contract::builders::ContractCall<M, bool> {
             self.0
-                .method_hash([229, 40, 93, 204], nullifier_hash)
+                .method_hash([90, 18, 158, 254], nullifier_hash)
                 .expect("method not found (this should never happen)")
         }
-        #[doc = "Calls the contract's `isSpentArray` (0x9fa12d0b) function"]
+        #[doc = "Calls the contract's `isSpentArray` (0xea65ba49) function"]
         pub fn is_spent_array(
             &self,
-            nullifier_hashes: ::std::vec::Vec<[u8; 32]>,
+            nullifier_hashes: ::std::vec::Vec<ethers::core::types::U256>,
         ) -> ethers::contract::builders::ContractCall<M, ::std::vec::Vec<bool>>
         {
             self.0
-                .method_hash([159, 161, 45, 11], nullifier_hashes)
+                .method_hash([234, 101, 186, 73], nullifier_hashes)
                 .expect("method not found (this should never happen)")
         }
-        #[doc = "Calls the contract's `isValidRoots` (0x616e0957) function"]
+        #[doc = "Calls the contract's `isValidRoots` (0xb75e6798) function"]
         pub fn is_valid_roots(
             &self,
-            roots: ::std::vec::Vec<[u8; 32]>,
+            roots: ::std::vec::Vec<ethers::core::types::U256>,
         ) -> ethers::contract::builders::ContractCall<M, bool> {
             self.0
-                .method_hash([97, 110, 9, 87], roots)
+                .method_hash([183, 94, 103, 152], roots)
                 .expect("method not found (this should never happen)")
         }
         #[doc = "Calls the contract's `lastBalance` (0x8f1c56bd) function"]
@@ -400,14 +466,6 @@ pub mod v_anchor_contract {
         > {
             self.0
                 .method_hash([143, 28, 86, 189], ())
-                .expect("method not found (this should never happen)")
-        }
-        #[doc = "Calls the contract's `levels` (0x4ecf518b) function"]
-        pub fn levels(
-            &self,
-        ) -> ethers::contract::builders::ContractCall<M, u32> {
-            self.0
-                .method_hash([78, 207, 81, 139], ())
                 .expect("method not found (this should never happen)")
         }
         #[doc = "Calls the contract's `maxEdges` (0x71523c32) function"]
@@ -445,26 +503,29 @@ pub mod v_anchor_contract {
             &self,
             p0: ethers::core::types::U256,
             p1: u32,
-        ) -> ethers::contract::builders::ContractCall<M, [u8; 32]> {
+        ) -> ethers::contract::builders::ContractCall<
+            M,
+            ethers::core::types::U256,
+        > {
             self.0
                 .method_hash([67, 231, 17, 159], (p0, p1))
                 .expect("method not found (this should never happen)")
         }
-        #[doc = "Calls the contract's `nextIndex` (0xfc7e9c6f) function"]
-        pub fn next_index(
+        #[doc = "Calls the contract's `nullifierHashes` (0x1f79a1e9) function"]
+        pub fn nullifier_hashes(
+            &self,
+            p0: ethers::core::types::U256,
+        ) -> ethers::contract::builders::ContractCall<M, bool> {
+            self.0
+                .method_hash([31, 121, 161, 233], p0)
+                .expect("method not found (this should never happen)")
+        }
+        #[doc = "Calls the contract's `outerLevels` (0xbfbc0a39) function"]
+        pub fn outer_levels(
             &self,
         ) -> ethers::contract::builders::ContractCall<M, u32> {
             self.0
-                .method_hash([252, 126, 156, 111], ())
-                .expect("method not found (this should never happen)")
-        }
-        #[doc = "Calls the contract's `nullifierHashes` (0x17cc915c) function"]
-        pub fn nullifier_hashes(
-            &self,
-            p0: [u8; 32],
-        ) -> ethers::contract::builders::ContractCall<M, bool> {
-            self.0
-                .method_hash([23, 204, 145, 92], p0)
+                .method_hash([191, 188, 10, 57], ())
                 .expect("method not found (this should never happen)")
         }
         #[doc = "Calls the contract's `parseChainIdFromResourceId` (0xc2230d6e) function"]
@@ -476,6 +537,17 @@ pub mod v_anchor_contract {
                 .method_hash([194, 35, 13, 110], resource_id)
                 .expect("method not found (this should never happen)")
         }
+        #[doc = "Calls the contract's `proposalNonce` (0xcc3c74a1) function"]
+        pub fn proposal_nonce(
+            &self,
+        ) -> ethers::contract::builders::ContractCall<
+            M,
+            ethers::core::types::U256,
+        > {
+            self.0
+                .method_hash([204, 60, 116, 161], ())
+                .expect("method not found (this should never happen)")
+        }
         #[doc = "Calls the contract's `register` (0xb2bc6e0f) function"]
         pub fn register(
             &self,
@@ -485,29 +557,27 @@ pub mod v_anchor_contract {
                 .method_hash([178, 188, 110, 15], (account,))
                 .expect("method not found (this should never happen)")
         }
-        #[doc = "Calls the contract's `registerAndTransact` (0x08724aff) function"]
+        #[doc = "Calls the contract's `registerAndTransact` (0x38a26a09) function"]
         pub fn register_and_transact(
             &self,
             account: Account,
-            proof_args: Proof,
-            ext_data: ExtData,
-        ) -> ethers::contract::builders::ContractCall<M, ()> {
-            self.0
-                .method_hash([8, 114, 74, 255], (account, proof_args, ext_data))
-                .expect("method not found (this should never happen)")
-        }
-        #[doc = "Calls the contract's `registerAndTransactWrap` (0x5cc5e80b) function"]
-        pub fn register_and_transact_wrap(
-            &self,
-            account: Account,
-            proof_args: Proof,
-            ext_data: ExtData,
-            token_address: ethers::core::types::Address,
+            proof: ethers::core::types::Bytes,
+            aux_public_inputs: ethers::core::types::Bytes,
+            external_data: CommonExtData,
+            public_inputs: PublicInputs,
+            encryptions: Encryptions,
         ) -> ethers::contract::builders::ContractCall<M, ()> {
             self.0
                 .method_hash(
-                    [92, 197, 232, 11],
-                    (account, proof_args, ext_data, token_address),
+                    [56, 162, 106, 9],
+                    (
+                        account,
+                        proof,
+                        aux_public_inputs,
+                        external_data,
+                        public_inputs,
+                        encryptions,
+                    ),
                 )
                 .expect("method not found (this should never happen)")
         }
@@ -515,7 +585,10 @@ pub mod v_anchor_contract {
         pub fn roots(
             &self,
             p0: ethers::core::types::U256,
-        ) -> ethers::contract::builders::ContractCall<M, [u8; 32]> {
+        ) -> ethers::contract::builders::ContractCall<
+            M,
+            (ethers::core::types::U256, u32),
+        > {
             self.0
                 .method_hash([194, 180, 10, 228], p0)
                 .expect("method not found (this should never happen)")
@@ -551,27 +624,25 @@ pub mod v_anchor_contract {
                 .method_hash([252, 12, 84, 106], ())
                 .expect("method not found (this should never happen)")
         }
-        #[doc = "Calls the contract's `transact` (0x99c0148c) function"]
+        #[doc = "Calls the contract's `transact` (0xa38f76e8) function"]
         pub fn transact(
             &self,
-            args: Proof,
-            ext_data: ExtData,
-        ) -> ethers::contract::builders::ContractCall<M, ()> {
-            self.0
-                .method_hash([153, 192, 20, 140], (args, ext_data))
-                .expect("method not found (this should never happen)")
-        }
-        #[doc = "Calls the contract's `transactWrap` (0x25db9a7d) function"]
-        pub fn transact_wrap(
-            &self,
-            args: Proof,
-            ext_data: ExtData,
-            token_address: ethers::core::types::Address,
+            proof: ethers::core::types::Bytes,
+            aux_public_inputs: ethers::core::types::Bytes,
+            external_data: CommonExtData,
+            public_inputs: PublicInputs,
+            encryptions: Encryptions,
         ) -> ethers::contract::builders::ContractCall<M, ()> {
             self.0
                 .method_hash(
-                    [37, 219, 154, 125],
-                    (args, ext_data, token_address),
+                    [163, 143, 118, 232],
+                    (
+                        proof,
+                        aux_public_inputs,
+                        external_data,
+                        public_inputs,
+                        encryptions,
+                    ),
                 )
                 .expect("method not found (this should never happen)")
         }
@@ -591,36 +662,16 @@ pub mod v_anchor_contract {
                 .method_hash([245, 171, 13, 214], proof)
                 .expect("method not found (this should never happen)")
         }
-        #[doc = "Calls the contract's `unwrapIntoNative` (0x9ff80063) function"]
-        pub fn unwrap_into_native(
-            &self,
-            token_address: ethers::core::types::Address,
-            amount: ethers::core::types::U256,
-        ) -> ethers::contract::builders::ContractCall<M, ()> {
-            self.0
-                .method_hash([159, 248, 0, 99], (token_address, amount))
-                .expect("method not found (this should never happen)")
-        }
-        #[doc = "Calls the contract's `unwrapIntoToken` (0x4f401241) function"]
-        pub fn unwrap_into_token(
-            &self,
-            token_address: ethers::core::types::Address,
-            amount: ethers::core::types::U256,
-        ) -> ethers::contract::builders::ContractCall<M, ()> {
-            self.0
-                .method_hash([79, 64, 18, 65], (token_address, amount))
-                .expect("method not found (this should never happen)")
-        }
-        #[doc = "Calls the contract's `updateEdge` (0xa07b7e1d) function"]
+        #[doc = "Calls the contract's `updateEdge` (0xc1922f9e) function"]
         pub fn update_edge(
             &self,
-            root: [u8; 32],
+            root: ethers::core::types::U256,
             leaf_index: u32,
             src_resource_id: [u8; 32],
         ) -> ethers::contract::builders::ContractCall<M, ()> {
             self.0
                 .method_hash(
-                    [160, 123, 126, 29],
+                    [193, 146, 47, 158],
                     (root, leaf_index, src_resource_id),
                 )
                 .expect("method not found (this should never happen)")
@@ -636,47 +687,6 @@ pub mod v_anchor_contract {
                 .method_hash([43, 122, 195, 243], ())
                 .expect("method not found (this should never happen)")
         }
-        #[doc = "Calls the contract's `withdrawAndUnwrap` (0x95c87d1a) function"]
-        pub fn withdraw_and_unwrap(
-            &self,
-            token_address: ethers::core::types::Address,
-            recipient: ethers::core::types::Address,
-            minus_ext_amount: ethers::core::types::U256,
-        ) -> ethers::contract::builders::ContractCall<M, ()> {
-            self.0
-                .method_hash(
-                    [149, 200, 125, 26],
-                    (token_address, recipient, minus_ext_amount),
-                )
-                .expect("method not found (this should never happen)")
-        }
-        #[doc = "Calls the contract's `wrapNative` (0x6ad481f3) function"]
-        pub fn wrap_native(
-            &self,
-        ) -> ethers::contract::builders::ContractCall<M, ()> {
-            self.0
-                .method_hash([106, 212, 129, 243], ())
-                .expect("method not found (this should never happen)")
-        }
-        #[doc = "Calls the contract's `wrapToken` (0x460b53e3) function"]
-        pub fn wrap_token(
-            &self,
-            token_address: ethers::core::types::Address,
-            amount: ethers::core::types::U256,
-        ) -> ethers::contract::builders::ContractCall<M, ()> {
-            self.0
-                .method_hash([70, 11, 83, 227], (token_address, amount))
-                .expect("method not found (this should never happen)")
-        }
-        #[doc = "Calls the contract's `zeros` (0xe8295588) function"]
-        pub fn zeros(
-            &self,
-            i: ethers::core::types::U256,
-        ) -> ethers::contract::builders::ContractCall<M, [u8; 32]> {
-            self.0
-                .method_hash([232, 41, 85, 136], i)
-                .expect("method not found (this should never happen)")
-        }
         #[doc = "Gets the contract's `EdgeAddition` event"]
         pub fn edge_addition_filter(
             &self,
@@ -687,12 +697,6 @@ pub mod v_anchor_contract {
         pub fn edge_update_filter(
             &self,
         ) -> ethers::contract::builders::Event<M, EdgeUpdateFilter> {
-            self.0.event()
-        }
-        #[doc = "Gets the contract's `Initialized` event"]
-        pub fn initialized_filter(
-            &self,
-        ) -> ethers::contract::builders::Event<M, InitializedFilter> {
             self.0.event()
         }
         #[doc = "Gets the contract's `Insertion` event"]
@@ -747,12 +751,12 @@ pub mod v_anchor_contract {
     )]
     #[ethevent(
         name = "EdgeAddition",
-        abi = "EdgeAddition(uint256,uint256,bytes32)"
+        abi = "EdgeAddition(uint256,uint256,uint256)"
     )]
     pub struct EdgeAdditionFilter {
         pub chain_id: ethers::core::types::U256,
         pub latest_leaf_index: ethers::core::types::U256,
-        pub merkle_root: [u8; 32],
+        pub merkle_root: ethers::core::types::U256,
     }
     #[derive(
         Clone,
@@ -767,12 +771,12 @@ pub mod v_anchor_contract {
     )]
     #[ethevent(
         name = "EdgeUpdate",
-        abi = "EdgeUpdate(uint256,uint256,bytes32)"
+        abi = "EdgeUpdate(uint256,uint256,uint256)"
     )]
     pub struct EdgeUpdateFilter {
         pub chain_id: ethers::core::types::U256,
         pub latest_leaf_index: ethers::core::types::U256,
-        pub merkle_root: [u8; 32],
+        pub merkle_root: ethers::core::types::U256,
     }
     #[derive(
         Clone,
@@ -785,25 +789,10 @@ pub mod v_anchor_contract {
         serde :: Serialize,
         serde :: Deserialize,
     )]
-    #[ethevent(name = "Initialized", abi = "Initialized(uint8)")]
-    pub struct InitializedFilter {
-        pub version: u8,
-    }
-    #[derive(
-        Clone,
-        Debug,
-        Default,
-        Eq,
-        PartialEq,
-        ethers :: contract :: EthEvent,
-        ethers :: contract :: EthDisplay,
-        serde :: Serialize,
-        serde :: Deserialize,
-    )]
-    #[ethevent(name = "Insertion", abi = "Insertion(bytes32,uint32,uint256)")]
+    #[ethevent(name = "Insertion", abi = "Insertion(uint256,uint32,uint256)")]
     pub struct InsertionFilter {
         #[ethevent(indexed)]
-        pub commitment: [u8; 32],
+        pub commitment: ethers::core::types::U256,
         pub leaf_index: u32,
         pub timestamp: ethers::core::types::U256,
     }
@@ -820,11 +809,12 @@ pub mod v_anchor_contract {
     )]
     #[ethevent(
         name = "NewCommitment",
-        abi = "NewCommitment(bytes32,uint256,bytes)"
+        abi = "NewCommitment(uint256,uint256,uint256,bytes)"
     )]
     pub struct NewCommitmentFilter {
-        pub commitment: [u8; 32],
-        pub index: ethers::core::types::U256,
+        pub commitment: ethers::core::types::U256,
+        pub sub_tree_index: ethers::core::types::U256,
+        pub leaf_index: ethers::core::types::U256,
         pub encrypted_output: ethers::core::types::Bytes,
     }
     #[derive(
@@ -838,9 +828,9 @@ pub mod v_anchor_contract {
         serde :: Serialize,
         serde :: Deserialize,
     )]
-    #[ethevent(name = "NewNullifier", abi = "NewNullifier(bytes32)")]
+    #[ethevent(name = "NewNullifier", abi = "NewNullifier(uint256)")]
     pub struct NewNullifierFilter {
-        pub nullifier: [u8; 32],
+        pub nullifier: ethers::core::types::U256,
     }
     #[derive(
         Clone,
@@ -871,7 +861,6 @@ pub mod v_anchor_contract {
     pub enum VAnchorContractEvents {
         EdgeAdditionFilter(EdgeAdditionFilter),
         EdgeUpdateFilter(EdgeUpdateFilter),
-        InitializedFilter(InitializedFilter),
         InsertionFilter(InsertionFilter),
         NewCommitmentFilter(NewCommitmentFilter),
         NewNullifierFilter(NewNullifierFilter),
@@ -889,9 +878,6 @@ pub mod v_anchor_contract {
             }
             if let Ok(decoded) = EdgeUpdateFilter::decode_log(log) {
                 return Ok(VAnchorContractEvents::EdgeUpdateFilter(decoded));
-            }
-            if let Ok(decoded) = InitializedFilter::decode_log(log) {
-                return Ok(VAnchorContractEvents::InitializedFilter(decoded));
             }
             if let Ok(decoded) = InsertionFilter::decode_log(log) {
                 return Ok(VAnchorContractEvents::InsertionFilter(decoded));
@@ -915,9 +901,6 @@ pub mod v_anchor_contract {
                     element.fmt(f)
                 }
                 VAnchorContractEvents::EdgeUpdateFilter(element) => {
-                    element.fmt(f)
-                }
-                VAnchorContractEvents::InitializedFilter(element) => {
                     element.fmt(f)
                 }
                 VAnchorContractEvents::InsertionFilter(element) => {
@@ -1019,7 +1002,7 @@ pub mod v_anchor_contract {
     )]
     #[ethcall(name = "ZERO_VALUE", abi = "ZERO_VALUE()")]
     pub struct ZeroValueCall;
-    #[doc = "Container type for all input parameters for the `_executeWrapping` function with signature `_executeWrapping(address,uint256)` and selector `[148, 238, 224, 96]`"]
+    #[doc = "Container type for all input parameters for the `_executeWrapping` function with signature `_executeWrapping(address,address,uint256)` and selector `[99, 56, 188, 188]`"]
     #[derive(
         Clone,
         Debug,
@@ -1033,11 +1016,34 @@ pub mod v_anchor_contract {
     )]
     #[ethcall(
         name = "_executeWrapping",
-        abi = "_executeWrapping(address,uint256)"
+        abi = "_executeWrapping(address,address,uint256)"
     )]
     pub struct ExecuteWrappingCall {
-        pub token_address: ethers::core::types::Address,
+        pub from_token_address: ethers::core::types::Address,
+        pub to_token_address: ethers::core::types::Address,
         pub ext_amount: ethers::core::types::U256,
+    }
+    #[doc = "Container type for all input parameters for the `_withdrawAndUnwrap` function with signature `_withdrawAndUnwrap(address,address,address,uint256)` and selector `[80, 156, 212, 30]`"]
+    #[derive(
+        Clone,
+        Debug,
+        Default,
+        Eq,
+        PartialEq,
+        ethers :: contract :: EthCall,
+        ethers :: contract :: EthDisplay,
+        serde :: Serialize,
+        serde :: Deserialize,
+    )]
+    #[ethcall(
+        name = "_withdrawAndUnwrap",
+        abi = "_withdrawAndUnwrap(address,address,address,uint256)"
+    )]
+    pub struct WithdrawAndUnwrapCall {
+        pub from_token_address: ethers::core::types::Address,
+        pub to_token_address: ethers::core::types::Address,
+        pub recipient: ethers::core::types::Address,
+        pub minus_ext_amount: ethers::core::types::U256,
     }
     #[doc = "Container type for all input parameters for the `calculatePublicAmount` function with signature `calculatePublicAmount(int256,uint256)` and selector `[37, 112, 183, 180]`"]
     #[derive(
@@ -1059,7 +1065,7 @@ pub mod v_anchor_contract {
         pub ext_amount: I256,
         pub fee: ethers::core::types::U256,
     }
-    #[doc = "Container type for all input parameters for the `commitments` function with signature `commitments(bytes32)` and selector `[131, 157, 249, 69]`"]
+    #[doc = "Container type for all input parameters for the `commitments` function with signature `commitments(uint256)` and selector `[73, 206, 137, 151]`"]
     #[derive(
         Clone,
         Debug,
@@ -1071,8 +1077,8 @@ pub mod v_anchor_contract {
         serde :: Serialize,
         serde :: Deserialize,
     )]
-    #[ethcall(name = "commitments", abi = "commitments(bytes32)")]
-    pub struct CommitmentsCall(pub [u8; 32]);
+    #[ethcall(name = "commitments", abi = "commitments(uint256)")]
+    pub struct CommitmentsCall(pub ethers::core::types::U256);
     #[doc = "Container type for all input parameters for the `configureMaximumDepositLimit` function with signature `configureMaximumDepositLimit(uint256,uint32)` and selector `[140, 131, 43, 19]`"]
     #[derive(
         Clone,
@@ -1130,20 +1136,6 @@ pub mod v_anchor_contract {
         abi = "currentNeighborRootIndex(uint256)"
     )]
     pub struct CurrentNeighborRootIndexCall(pub ethers::core::types::U256);
-    #[doc = "Container type for all input parameters for the `currentRootIndex` function with signature `currentRootIndex()` and selector `[144, 238, 176, 43]`"]
-    #[derive(
-        Clone,
-        Debug,
-        Default,
-        Eq,
-        PartialEq,
-        ethers :: contract :: EthCall,
-        ethers :: contract :: EthDisplay,
-        serde :: Serialize,
-        serde :: Deserialize,
-    )]
-    #[ethcall(name = "currentRootIndex", abi = "currentRootIndex()")]
-    pub struct CurrentRootIndexCall;
     #[doc = "Container type for all input parameters for the `edgeExistsForChain` function with signature `edgeExistsForChain(uint256)` and selector `[250, 115, 22, 135]`"]
     #[derive(
         Clone,
@@ -1228,6 +1220,20 @@ pub mod v_anchor_contract {
     )]
     #[ethcall(name = "getChainIdType", abi = "getChainIdType()")]
     pub struct GetChainIdTypeCall;
+    #[doc = "Container type for all input parameters for the `getHasher` function with signature `getHasher()` and selector `[234, 73, 93, 176]`"]
+    #[derive(
+        Clone,
+        Debug,
+        Default,
+        Eq,
+        PartialEq,
+        ethers :: contract :: EthCall,
+        ethers :: contract :: EthDisplay,
+        serde :: Serialize,
+        serde :: Deserialize,
+    )]
+    #[ethcall(name = "getHasher", abi = "getHasher()")]
+    pub struct GetHasherCall;
     #[doc = "Container type for all input parameters for the `getLastRoot` function with signature `getLastRoot()` and selector `[186, 112, 247, 87]`"]
     #[derive(
         Clone,
@@ -1276,6 +1282,34 @@ pub mod v_anchor_contract {
         abi = "getLatestNeighborRoots()"
     )]
     pub struct GetLatestNeighborRootsCall;
+    #[doc = "Container type for all input parameters for the `getLevels` function with signature `getLevels()` and selector `[12, 57, 74, 96]`"]
+    #[derive(
+        Clone,
+        Debug,
+        Default,
+        Eq,
+        PartialEq,
+        ethers :: contract :: EthCall,
+        ethers :: contract :: EthDisplay,
+        serde :: Serialize,
+        serde :: Deserialize,
+    )]
+    #[ethcall(name = "getLevels", abi = "getLevels()")]
+    pub struct GetLevelsCall;
+    #[doc = "Container type for all input parameters for the `getNextIndex` function with signature `getNextIndex()` and selector `[14, 183, 96, 111]`"]
+    #[derive(
+        Clone,
+        Debug,
+        Default,
+        Eq,
+        PartialEq,
+        ethers :: contract :: EthCall,
+        ethers :: contract :: EthDisplay,
+        serde :: Serialize,
+        serde :: Deserialize,
+    )]
+    #[ethcall(name = "getNextIndex", abi = "getNextIndex()")]
+    pub struct GetNextIndexCall;
     #[doc = "Container type for all input parameters for the `getProposalNonce` function with signature `getProposalNonce()` and selector `[11, 39, 251, 154]`"]
     #[derive(
         Clone,
@@ -1290,6 +1324,22 @@ pub mod v_anchor_contract {
     )]
     #[ethcall(name = "getProposalNonce", abi = "getProposalNonce()")]
     pub struct GetProposalNonceCall;
+    #[doc = "Container type for all input parameters for the `getZeroHash` function with signature `getZeroHash(uint32)` and selector `[48, 94, 158, 172]`"]
+    #[derive(
+        Clone,
+        Debug,
+        Default,
+        Eq,
+        PartialEq,
+        ethers :: contract :: EthCall,
+        ethers :: contract :: EthDisplay,
+        serde :: Serialize,
+        serde :: Deserialize,
+    )]
+    #[ethcall(name = "getZeroHash", abi = "getZeroHash(uint32)")]
+    pub struct GetZeroHashCall {
+        pub index: u32,
+    }
     #[doc = "Container type for all input parameters for the `handler` function with signature `handler()` and selector `[200, 9, 22, 212]`"]
     #[derive(
         Clone,
@@ -1320,7 +1370,7 @@ pub mod v_anchor_contract {
     pub struct HasEdgeCall {
         pub chain_id: ethers::core::types::U256,
     }
-    #[doc = "Container type for all input parameters for the `hashLeftRight` function with signature `hashLeftRight(address,bytes32,bytes32)` and selector `[142, 163, 9, 158]`"]
+    #[doc = "Container type for all input parameters for the `hashLeftRight` function with signature `hashLeftRight(uint256,uint256)` and selector `[91, 185, 57, 149]`"]
     #[derive(
         Clone,
         Debug,
@@ -1332,29 +1382,11 @@ pub mod v_anchor_contract {
         serde :: Serialize,
         serde :: Deserialize,
     )]
-    #[ethcall(
-        name = "hashLeftRight",
-        abi = "hashLeftRight(address,bytes32,bytes32)"
-    )]
+    #[ethcall(name = "hashLeftRight", abi = "hashLeftRight(uint256,uint256)")]
     pub struct HashLeftRightCall {
-        pub hasher: ethers::core::types::Address,
-        pub left: [u8; 32],
-        pub right: [u8; 32],
+        pub left: ethers::core::types::U256,
+        pub right: ethers::core::types::U256,
     }
-    #[doc = "Container type for all input parameters for the `hasher` function with signature `hasher()` and selector `[237, 51, 99, 159]`"]
-    #[derive(
-        Clone,
-        Debug,
-        Default,
-        Eq,
-        PartialEq,
-        ethers :: contract :: EthCall,
-        ethers :: contract :: EthDisplay,
-        serde :: Serialize,
-        serde :: Deserialize,
-    )]
-    #[ethcall(name = "hasher", abi = "hasher()")]
-    pub struct HasherCall;
     #[doc = "Container type for all input parameters for the `initialize` function with signature `initialize(uint256,uint256)` and selector `[228, 163, 1, 22]`"]
     #[derive(
         Clone,
@@ -1372,7 +1404,21 @@ pub mod v_anchor_contract {
         pub minimal_withdrawal_amount: ethers::core::types::U256,
         pub maximum_deposit_amount: ethers::core::types::U256,
     }
-    #[doc = "Container type for all input parameters for the `isKnownNeighborRoot` function with signature `isKnownNeighborRoot(uint256,bytes32)` and selector `[17, 228, 220, 185]`"]
+    #[doc = "Container type for all input parameters for the `initialized` function with signature `initialized()` and selector `[21, 142, 249, 62]`"]
+    #[derive(
+        Clone,
+        Debug,
+        Default,
+        Eq,
+        PartialEq,
+        ethers :: contract :: EthCall,
+        ethers :: contract :: EthDisplay,
+        serde :: Serialize,
+        serde :: Deserialize,
+    )]
+    #[ethcall(name = "initialized", abi = "initialized()")]
+    pub struct InitializedCall;
+    #[doc = "Container type for all input parameters for the `isKnownNeighborRoot` function with signature `isKnownNeighborRoot(uint256,uint256)` and selector `[59, 250, 141, 122]`"]
     #[derive(
         Clone,
         Debug,
@@ -1386,13 +1432,13 @@ pub mod v_anchor_contract {
     )]
     #[ethcall(
         name = "isKnownNeighborRoot",
-        abi = "isKnownNeighborRoot(uint256,bytes32)"
+        abi = "isKnownNeighborRoot(uint256,uint256)"
     )]
     pub struct IsKnownNeighborRootCall {
         pub neighbor_chain_id: ethers::core::types::U256,
-        pub root: [u8; 32],
+        pub root: ethers::core::types::U256,
     }
-    #[doc = "Container type for all input parameters for the `isKnownRoot` function with signature `isKnownRoot(bytes32)` and selector `[109, 152, 51, 227]`"]
+    #[doc = "Container type for all input parameters for the `isKnownRoot` function with signature `isKnownRoot(uint256)` and selector `[166, 35, 42, 147]`"]
     #[derive(
         Clone,
         Debug,
@@ -1404,11 +1450,11 @@ pub mod v_anchor_contract {
         serde :: Serialize,
         serde :: Deserialize,
     )]
-    #[ethcall(name = "isKnownRoot", abi = "isKnownRoot(bytes32)")]
+    #[ethcall(name = "isKnownRoot", abi = "isKnownRoot(uint256)")]
     pub struct IsKnownRootCall {
-        pub root: [u8; 32],
+        pub root: ethers::core::types::U256,
     }
-    #[doc = "Container type for all input parameters for the `isSpent` function with signature `isSpent(bytes32)` and selector `[229, 40, 93, 204]`"]
+    #[doc = "Container type for all input parameters for the `isSpent` function with signature `isSpent(uint256)` and selector `[90, 18, 158, 254]`"]
     #[derive(
         Clone,
         Debug,
@@ -1420,11 +1466,11 @@ pub mod v_anchor_contract {
         serde :: Serialize,
         serde :: Deserialize,
     )]
-    #[ethcall(name = "isSpent", abi = "isSpent(bytes32)")]
+    #[ethcall(name = "isSpent", abi = "isSpent(uint256)")]
     pub struct IsSpentCall {
-        pub nullifier_hash: [u8; 32],
+        pub nullifier_hash: ethers::core::types::U256,
     }
-    #[doc = "Container type for all input parameters for the `isSpentArray` function with signature `isSpentArray(bytes32[])` and selector `[159, 161, 45, 11]`"]
+    #[doc = "Container type for all input parameters for the `isSpentArray` function with signature `isSpentArray(uint256[])` and selector `[234, 101, 186, 73]`"]
     #[derive(
         Clone,
         Debug,
@@ -1436,11 +1482,11 @@ pub mod v_anchor_contract {
         serde :: Serialize,
         serde :: Deserialize,
     )]
-    #[ethcall(name = "isSpentArray", abi = "isSpentArray(bytes32[])")]
+    #[ethcall(name = "isSpentArray", abi = "isSpentArray(uint256[])")]
     pub struct IsSpentArrayCall {
-        pub nullifier_hashes: ::std::vec::Vec<[u8; 32]>,
+        pub nullifier_hashes: ::std::vec::Vec<ethers::core::types::U256>,
     }
-    #[doc = "Container type for all input parameters for the `isValidRoots` function with signature `isValidRoots(bytes32[])` and selector `[97, 110, 9, 87]`"]
+    #[doc = "Container type for all input parameters for the `isValidRoots` function with signature `isValidRoots(uint256[])` and selector `[183, 94, 103, 152]`"]
     #[derive(
         Clone,
         Debug,
@@ -1452,9 +1498,9 @@ pub mod v_anchor_contract {
         serde :: Serialize,
         serde :: Deserialize,
     )]
-    #[ethcall(name = "isValidRoots", abi = "isValidRoots(bytes32[])")]
+    #[ethcall(name = "isValidRoots", abi = "isValidRoots(uint256[])")]
     pub struct IsValidRootsCall {
-        pub roots: ::std::vec::Vec<[u8; 32]>,
+        pub roots: ::std::vec::Vec<ethers::core::types::U256>,
     }
     #[doc = "Container type for all input parameters for the `lastBalance` function with signature `lastBalance()` and selector `[143, 28, 86, 189]`"]
     #[derive(
@@ -1470,20 +1516,6 @@ pub mod v_anchor_contract {
     )]
     #[ethcall(name = "lastBalance", abi = "lastBalance()")]
     pub struct LastBalanceCall;
-    #[doc = "Container type for all input parameters for the `levels` function with signature `levels()` and selector `[78, 207, 81, 139]`"]
-    #[derive(
-        Clone,
-        Debug,
-        Default,
-        Eq,
-        PartialEq,
-        ethers :: contract :: EthCall,
-        ethers :: contract :: EthDisplay,
-        serde :: Serialize,
-        serde :: Deserialize,
-    )]
-    #[ethcall(name = "levels", abi = "levels()")]
-    pub struct LevelsCall;
     #[doc = "Container type for all input parameters for the `maxEdges` function with signature `maxEdges()` and selector `[113, 82, 60, 50]`"]
     #[derive(
         Clone,
@@ -1543,7 +1575,7 @@ pub mod v_anchor_contract {
     )]
     #[ethcall(name = "neighborRoots", abi = "neighborRoots(uint256,uint32)")]
     pub struct NeighborRootsCall(pub ethers::core::types::U256, pub u32);
-    #[doc = "Container type for all input parameters for the `nextIndex` function with signature `nextIndex()` and selector `[252, 126, 156, 111]`"]
+    #[doc = "Container type for all input parameters for the `nullifierHashes` function with signature `nullifierHashes(uint256)` and selector `[31, 121, 161, 233]`"]
     #[derive(
         Clone,
         Debug,
@@ -1555,9 +1587,9 @@ pub mod v_anchor_contract {
         serde :: Serialize,
         serde :: Deserialize,
     )]
-    #[ethcall(name = "nextIndex", abi = "nextIndex()")]
-    pub struct NextIndexCall;
-    #[doc = "Container type for all input parameters for the `nullifierHashes` function with signature `nullifierHashes(bytes32)` and selector `[23, 204, 145, 92]`"]
+    #[ethcall(name = "nullifierHashes", abi = "nullifierHashes(uint256)")]
+    pub struct NullifierHashesCall(pub ethers::core::types::U256);
+    #[doc = "Container type for all input parameters for the `outerLevels` function with signature `outerLevels()` and selector `[191, 188, 10, 57]`"]
     #[derive(
         Clone,
         Debug,
@@ -1569,8 +1601,8 @@ pub mod v_anchor_contract {
         serde :: Serialize,
         serde :: Deserialize,
     )]
-    #[ethcall(name = "nullifierHashes", abi = "nullifierHashes(bytes32)")]
-    pub struct NullifierHashesCall(pub [u8; 32]);
+    #[ethcall(name = "outerLevels", abi = "outerLevels()")]
+    pub struct OuterLevelsCall;
     #[doc = "Container type for all input parameters for the `parseChainIdFromResourceId` function with signature `parseChainIdFromResourceId(bytes32)` and selector `[194, 35, 13, 110]`"]
     #[derive(
         Clone,
@@ -1590,6 +1622,20 @@ pub mod v_anchor_contract {
     pub struct ParseChainIdFromResourceIdCall {
         pub resource_id: [u8; 32],
     }
+    #[doc = "Container type for all input parameters for the `proposalNonce` function with signature `proposalNonce()` and selector `[204, 60, 116, 161]`"]
+    #[derive(
+        Clone,
+        Debug,
+        Default,
+        Eq,
+        PartialEq,
+        ethers :: contract :: EthCall,
+        ethers :: contract :: EthDisplay,
+        serde :: Serialize,
+        serde :: Deserialize,
+    )]
+    #[ethcall(name = "proposalNonce", abi = "proposalNonce()")]
+    pub struct ProposalNonceCall;
     #[doc = "Container type for all input parameters for the `register` function with signature `register((address,bytes))` and selector `[178, 188, 110, 15]`"]
     #[derive(
         Clone,
@@ -1606,7 +1652,7 @@ pub mod v_anchor_contract {
     pub struct RegisterCall {
         pub account: Account,
     }
-    #[doc = "Container type for all input parameters for the `registerAndTransact` function with signature `registerAndTransact((address,bytes),(bytes,bytes,bytes32[],bytes32[2],uint256,bytes32),(address,int256,address,uint256,uint256,address,bytes,bytes))` and selector `[8, 114, 74, 255]`"]
+    #[doc = "Container type for all input parameters for the `registerAndTransact` function with signature `registerAndTransact((address,bytes),bytes,bytes,(address,int256,address,uint256,uint256,address),(bytes,bytes,uint256[],uint256[2],uint256,uint256),(bytes,bytes))` and selector `[56, 162, 106, 9]`"]
     #[derive(
         Clone,
         Debug,
@@ -1620,34 +1666,15 @@ pub mod v_anchor_contract {
     )]
     #[ethcall(
         name = "registerAndTransact",
-        abi = "registerAndTransact((address,bytes),(bytes,bytes,bytes32[],bytes32[2],uint256,bytes32),(address,int256,address,uint256,uint256,address,bytes,bytes))"
+        abi = "registerAndTransact((address,bytes),bytes,bytes,(address,int256,address,uint256,uint256,address),(bytes,bytes,uint256[],uint256[2],uint256,uint256),(bytes,bytes))"
     )]
     pub struct RegisterAndTransactCall {
         pub account: Account,
-        pub proof_args: Proof,
-        pub ext_data: ExtData,
-    }
-    #[doc = "Container type for all input parameters for the `registerAndTransactWrap` function with signature `registerAndTransactWrap((address,bytes),(bytes,bytes,bytes32[],bytes32[2],uint256,bytes32),(address,int256,address,uint256,uint256,address,bytes,bytes),address)` and selector `[92, 197, 232, 11]`"]
-    #[derive(
-        Clone,
-        Debug,
-        Default,
-        Eq,
-        PartialEq,
-        ethers :: contract :: EthCall,
-        ethers :: contract :: EthDisplay,
-        serde :: Serialize,
-        serde :: Deserialize,
-    )]
-    #[ethcall(
-        name = "registerAndTransactWrap",
-        abi = "registerAndTransactWrap((address,bytes),(bytes,bytes,bytes32[],bytes32[2],uint256,bytes32),(address,int256,address,uint256,uint256,address,bytes,bytes),address)"
-    )]
-    pub struct RegisterAndTransactWrapCall {
-        pub account: Account,
-        pub proof_args: Proof,
-        pub ext_data: ExtData,
-        pub token_address: ethers::core::types::Address,
+        pub proof: ethers::core::types::Bytes,
+        pub aux_public_inputs: ethers::core::types::Bytes,
+        pub external_data: CommonExtData,
+        pub public_inputs: PublicInputs,
+        pub encryptions: Encryptions,
     }
     #[doc = "Container type for all input parameters for the `roots` function with signature `roots(uint256)` and selector `[194, 180, 10, 228]`"]
     #[derive(
@@ -1711,7 +1738,7 @@ pub mod v_anchor_contract {
     )]
     #[ethcall(name = "token", abi = "token()")]
     pub struct TokenCall;
-    #[doc = "Container type for all input parameters for the `transact` function with signature `transact((bytes,bytes,bytes32[],bytes32[2],uint256,bytes32),(address,int256,address,uint256,uint256,address,bytes,bytes))` and selector `[153, 192, 20, 140]`"]
+    #[doc = "Container type for all input parameters for the `transact` function with signature `transact(bytes,bytes,(address,int256,address,uint256,uint256,address),(bytes,bytes,uint256[],uint256[2],uint256,uint256),(bytes,bytes))` and selector `[163, 143, 118, 232]`"]
     #[derive(
         Clone,
         Debug,
@@ -1725,32 +1752,14 @@ pub mod v_anchor_contract {
     )]
     #[ethcall(
         name = "transact",
-        abi = "transact((bytes,bytes,bytes32[],bytes32[2],uint256,bytes32),(address,int256,address,uint256,uint256,address,bytes,bytes))"
+        abi = "transact(bytes,bytes,(address,int256,address,uint256,uint256,address),(bytes,bytes,uint256[],uint256[2],uint256,uint256),(bytes,bytes))"
     )]
     pub struct TransactCall {
-        pub args: Proof,
-        pub ext_data: ExtData,
-    }
-    #[doc = "Container type for all input parameters for the `transactWrap` function with signature `transactWrap((bytes,bytes,bytes32[],bytes32[2],uint256,bytes32),(address,int256,address,uint256,uint256,address,bytes,bytes),address)` and selector `[37, 219, 154, 125]`"]
-    #[derive(
-        Clone,
-        Debug,
-        Default,
-        Eq,
-        PartialEq,
-        ethers :: contract :: EthCall,
-        ethers :: contract :: EthDisplay,
-        serde :: Serialize,
-        serde :: Deserialize,
-    )]
-    #[ethcall(
-        name = "transactWrap",
-        abi = "transactWrap((bytes,bytes,bytes32[],bytes32[2],uint256,bytes32),(address,int256,address,uint256,uint256,address,bytes,bytes),address)"
-    )]
-    pub struct TransactWrapCall {
-        pub args: Proof,
-        pub ext_data: ExtData,
-        pub token_address: ethers::core::types::Address,
+        pub proof: ethers::core::types::Bytes,
+        pub aux_public_inputs: ethers::core::types::Bytes,
+        pub external_data: CommonExtData,
+        pub public_inputs: PublicInputs,
+        pub encryptions: Encryptions,
     }
     #[doc = "Container type for all input parameters for the `unpackProof` function with signature `unpackProof(uint256[8])` and selector `[245, 171, 13, 214]`"]
     #[derive(
@@ -1768,7 +1777,7 @@ pub mod v_anchor_contract {
     pub struct UnpackProofCall {
         pub proof: [ethers::core::types::U256; 8usize],
     }
-    #[doc = "Container type for all input parameters for the `unwrapIntoNative` function with signature `unwrapIntoNative(address,uint256)` and selector `[159, 248, 0, 99]`"]
+    #[doc = "Container type for all input parameters for the `updateEdge` function with signature `updateEdge(uint256,uint32,bytes32)` and selector `[193, 146, 47, 158]`"]
     #[derive(
         Clone,
         Debug,
@@ -1780,49 +1789,9 @@ pub mod v_anchor_contract {
         serde :: Serialize,
         serde :: Deserialize,
     )]
-    #[ethcall(
-        name = "unwrapIntoNative",
-        abi = "unwrapIntoNative(address,uint256)"
-    )]
-    pub struct UnwrapIntoNativeCall {
-        pub token_address: ethers::core::types::Address,
-        pub amount: ethers::core::types::U256,
-    }
-    #[doc = "Container type for all input parameters for the `unwrapIntoToken` function with signature `unwrapIntoToken(address,uint256)` and selector `[79, 64, 18, 65]`"]
-    #[derive(
-        Clone,
-        Debug,
-        Default,
-        Eq,
-        PartialEq,
-        ethers :: contract :: EthCall,
-        ethers :: contract :: EthDisplay,
-        serde :: Serialize,
-        serde :: Deserialize,
-    )]
-    #[ethcall(
-        name = "unwrapIntoToken",
-        abi = "unwrapIntoToken(address,uint256)"
-    )]
-    pub struct UnwrapIntoTokenCall {
-        pub token_address: ethers::core::types::Address,
-        pub amount: ethers::core::types::U256,
-    }
-    #[doc = "Container type for all input parameters for the `updateEdge` function with signature `updateEdge(bytes32,uint32,bytes32)` and selector `[160, 123, 126, 29]`"]
-    #[derive(
-        Clone,
-        Debug,
-        Default,
-        Eq,
-        PartialEq,
-        ethers :: contract :: EthCall,
-        ethers :: contract :: EthDisplay,
-        serde :: Serialize,
-        serde :: Deserialize,
-    )]
-    #[ethcall(name = "updateEdge", abi = "updateEdge(bytes32,uint32,bytes32)")]
+    #[ethcall(name = "updateEdge", abi = "updateEdge(uint256,uint32,bytes32)")]
     pub struct UpdateEdgeCall {
-        pub root: [u8; 32],
+        pub root: ethers::core::types::U256,
         pub leaf_index: u32,
         pub src_resource_id: [u8; 32],
     }
@@ -1840,74 +1809,6 @@ pub mod v_anchor_contract {
     )]
     #[ethcall(name = "verifier", abi = "verifier()")]
     pub struct VerifierCall;
-    #[doc = "Container type for all input parameters for the `withdrawAndUnwrap` function with signature `withdrawAndUnwrap(address,address,uint256)` and selector `[149, 200, 125, 26]`"]
-    #[derive(
-        Clone,
-        Debug,
-        Default,
-        Eq,
-        PartialEq,
-        ethers :: contract :: EthCall,
-        ethers :: contract :: EthDisplay,
-        serde :: Serialize,
-        serde :: Deserialize,
-    )]
-    #[ethcall(
-        name = "withdrawAndUnwrap",
-        abi = "withdrawAndUnwrap(address,address,uint256)"
-    )]
-    pub struct WithdrawAndUnwrapCall {
-        pub token_address: ethers::core::types::Address,
-        pub recipient: ethers::core::types::Address,
-        pub minus_ext_amount: ethers::core::types::U256,
-    }
-    #[doc = "Container type for all input parameters for the `wrapNative` function with signature `wrapNative()` and selector `[106, 212, 129, 243]`"]
-    #[derive(
-        Clone,
-        Debug,
-        Default,
-        Eq,
-        PartialEq,
-        ethers :: contract :: EthCall,
-        ethers :: contract :: EthDisplay,
-        serde :: Serialize,
-        serde :: Deserialize,
-    )]
-    #[ethcall(name = "wrapNative", abi = "wrapNative()")]
-    pub struct WrapNativeCall;
-    #[doc = "Container type for all input parameters for the `wrapToken` function with signature `wrapToken(address,uint256)` and selector `[70, 11, 83, 227]`"]
-    #[derive(
-        Clone,
-        Debug,
-        Default,
-        Eq,
-        PartialEq,
-        ethers :: contract :: EthCall,
-        ethers :: contract :: EthDisplay,
-        serde :: Serialize,
-        serde :: Deserialize,
-    )]
-    #[ethcall(name = "wrapToken", abi = "wrapToken(address,uint256)")]
-    pub struct WrapTokenCall {
-        pub token_address: ethers::core::types::Address,
-        pub amount: ethers::core::types::U256,
-    }
-    #[doc = "Container type for all input parameters for the `zeros` function with signature `zeros(uint256)` and selector `[232, 41, 85, 136]`"]
-    #[derive(
-        Clone,
-        Debug,
-        Default,
-        Eq,
-        PartialEq,
-        ethers :: contract :: EthCall,
-        ethers :: contract :: EthDisplay,
-        serde :: Serialize,
-        serde :: Deserialize,
-    )]
-    #[ethcall(name = "zeros", abi = "zeros(uint256)")]
-    pub struct ZerosCall {
-        pub i: ethers::core::types::U256,
-    }
     #[derive(
         Debug,
         Clone,
@@ -1925,59 +1826,55 @@ pub mod v_anchor_contract {
         RootHistorySize(RootHistorySizeCall),
         ZeroValue(ZeroValueCall),
         ExecuteWrapping(ExecuteWrappingCall),
+        WithdrawAndUnwrap(WithdrawAndUnwrapCall),
         CalculatePublicAmount(CalculatePublicAmountCall),
         Commitments(CommitmentsCall),
         ConfigureMaximumDepositLimit(ConfigureMaximumDepositLimitCall),
         ConfigureMinimalWithdrawalLimit(ConfigureMinimalWithdrawalLimitCall),
         CurrentNeighborRootIndex(CurrentNeighborRootIndexCall),
-        CurrentRootIndex(CurrentRootIndexCall),
         EdgeExistsForChain(EdgeExistsForChainCall),
         EdgeIndex(EdgeIndexCall),
         EdgeList(EdgeListCall),
         FilledSubtrees(FilledSubtreesCall),
         GetChainId(GetChainIdCall),
         GetChainIdType(GetChainIdTypeCall),
+        GetHasher(GetHasherCall),
         GetLastRoot(GetLastRootCall),
         GetLatestNeighborEdges(GetLatestNeighborEdgesCall),
         GetLatestNeighborRoots(GetLatestNeighborRootsCall),
+        GetLevels(GetLevelsCall),
+        GetNextIndex(GetNextIndexCall),
         GetProposalNonce(GetProposalNonceCall),
+        GetZeroHash(GetZeroHashCall),
         Handler(HandlerCall),
         HasEdge(HasEdgeCall),
         HashLeftRight(HashLeftRightCall),
-        Hasher(HasherCall),
         Initialize(InitializeCall),
+        Initialized(InitializedCall),
         IsKnownNeighborRoot(IsKnownNeighborRootCall),
         IsKnownRoot(IsKnownRootCall),
         IsSpent(IsSpentCall),
         IsSpentArray(IsSpentArrayCall),
         IsValidRoots(IsValidRootsCall),
         LastBalance(LastBalanceCall),
-        Levels(LevelsCall),
         MaxEdges(MaxEdgesCall),
         MaximumDepositAmount(MaximumDepositAmountCall),
         MinimalWithdrawalAmount(MinimalWithdrawalAmountCall),
         NeighborRoots(NeighborRootsCall),
-        NextIndex(NextIndexCall),
         NullifierHashes(NullifierHashesCall),
+        OuterLevels(OuterLevelsCall),
         ParseChainIdFromResourceId(ParseChainIdFromResourceIdCall),
+        ProposalNonce(ProposalNonceCall),
         Register(RegisterCall),
         RegisterAndTransact(RegisterAndTransactCall),
-        RegisterAndTransactWrap(RegisterAndTransactWrapCall),
         Roots(RootsCall),
         SetHandler(SetHandlerCall),
         SetVerifier(SetVerifierCall),
         Token(TokenCall),
         Transact(TransactCall),
-        TransactWrap(TransactWrapCall),
         UnpackProof(UnpackProofCall),
-        UnwrapIntoNative(UnwrapIntoNativeCall),
-        UnwrapIntoToken(UnwrapIntoTokenCall),
         UpdateEdge(UpdateEdgeCall),
         Verifier(VerifierCall),
-        WithdrawAndUnwrap(WithdrawAndUnwrapCall),
-        WrapNative(WrapNativeCall),
-        WrapToken(WrapTokenCall),
-        Zeros(ZerosCall),
     }
     impl ethers::core::abi::AbiDecode for VAnchorContractCalls {
         fn decode(
@@ -2032,6 +1929,13 @@ pub mod v_anchor_contract {
             {
                 return Ok(VAnchorContractCalls::ExecuteWrapping(decoded));
             }
+            if let Ok(decoded) =
+                <WithdrawAndUnwrapCall as ethers::core::abi::AbiDecode>::decode(
+                    data.as_ref(),
+                )
+            {
+                return Ok(VAnchorContractCalls::WithdrawAndUnwrap(decoded));
+            }
             if let Ok (decoded) = < CalculatePublicAmountCall as ethers :: core :: abi :: AbiDecode > :: decode (data . as_ref ()) { return Ok (VAnchorContractCalls :: CalculatePublicAmount (decoded)) }
             if let Ok(decoded) =
                 <CommitmentsCall as ethers::core::abi::AbiDecode>::decode(
@@ -2043,13 +1947,6 @@ pub mod v_anchor_contract {
             if let Ok (decoded) = < ConfigureMaximumDepositLimitCall as ethers :: core :: abi :: AbiDecode > :: decode (data . as_ref ()) { return Ok (VAnchorContractCalls :: ConfigureMaximumDepositLimit (decoded)) }
             if let Ok (decoded) = < ConfigureMinimalWithdrawalLimitCall as ethers :: core :: abi :: AbiDecode > :: decode (data . as_ref ()) { return Ok (VAnchorContractCalls :: ConfigureMinimalWithdrawalLimit (decoded)) }
             if let Ok (decoded) = < CurrentNeighborRootIndexCall as ethers :: core :: abi :: AbiDecode > :: decode (data . as_ref ()) { return Ok (VAnchorContractCalls :: CurrentNeighborRootIndex (decoded)) }
-            if let Ok(decoded) =
-                <CurrentRootIndexCall as ethers::core::abi::AbiDecode>::decode(
-                    data.as_ref(),
-                )
-            {
-                return Ok(VAnchorContractCalls::CurrentRootIndex(decoded));
-            }
             if let Ok(decoded) =
                 <EdgeExistsForChainCall as ethers::core::abi::AbiDecode>::decode(
                     data.as_ref(),
@@ -2093,6 +1990,13 @@ pub mod v_anchor_contract {
                 return Ok(VAnchorContractCalls::GetChainIdType(decoded));
             }
             if let Ok(decoded) =
+                <GetHasherCall as ethers::core::abi::AbiDecode>::decode(
+                    data.as_ref(),
+                )
+            {
+                return Ok(VAnchorContractCalls::GetHasher(decoded));
+            }
+            if let Ok(decoded) =
                 <GetLastRootCall as ethers::core::abi::AbiDecode>::decode(
                     data.as_ref(),
                 )
@@ -2102,11 +2006,32 @@ pub mod v_anchor_contract {
             if let Ok (decoded) = < GetLatestNeighborEdgesCall as ethers :: core :: abi :: AbiDecode > :: decode (data . as_ref ()) { return Ok (VAnchorContractCalls :: GetLatestNeighborEdges (decoded)) }
             if let Ok (decoded) = < GetLatestNeighborRootsCall as ethers :: core :: abi :: AbiDecode > :: decode (data . as_ref ()) { return Ok (VAnchorContractCalls :: GetLatestNeighborRoots (decoded)) }
             if let Ok(decoded) =
+                <GetLevelsCall as ethers::core::abi::AbiDecode>::decode(
+                    data.as_ref(),
+                )
+            {
+                return Ok(VAnchorContractCalls::GetLevels(decoded));
+            }
+            if let Ok(decoded) =
+                <GetNextIndexCall as ethers::core::abi::AbiDecode>::decode(
+                    data.as_ref(),
+                )
+            {
+                return Ok(VAnchorContractCalls::GetNextIndex(decoded));
+            }
+            if let Ok(decoded) =
                 <GetProposalNonceCall as ethers::core::abi::AbiDecode>::decode(
                     data.as_ref(),
                 )
             {
                 return Ok(VAnchorContractCalls::GetProposalNonce(decoded));
+            }
+            if let Ok(decoded) =
+                <GetZeroHashCall as ethers::core::abi::AbiDecode>::decode(
+                    data.as_ref(),
+                )
+            {
+                return Ok(VAnchorContractCalls::GetZeroHash(decoded));
             }
             if let Ok(decoded) =
                 <HandlerCall as ethers::core::abi::AbiDecode>::decode(
@@ -2130,18 +2055,18 @@ pub mod v_anchor_contract {
                 return Ok(VAnchorContractCalls::HashLeftRight(decoded));
             }
             if let Ok(decoded) =
-                <HasherCall as ethers::core::abi::AbiDecode>::decode(
-                    data.as_ref(),
-                )
-            {
-                return Ok(VAnchorContractCalls::Hasher(decoded));
-            }
-            if let Ok(decoded) =
                 <InitializeCall as ethers::core::abi::AbiDecode>::decode(
                     data.as_ref(),
                 )
             {
                 return Ok(VAnchorContractCalls::Initialize(decoded));
+            }
+            if let Ok(decoded) =
+                <InitializedCall as ethers::core::abi::AbiDecode>::decode(
+                    data.as_ref(),
+                )
+            {
+                return Ok(VAnchorContractCalls::Initialized(decoded));
             }
             if let Ok (decoded) = < IsKnownNeighborRootCall as ethers :: core :: abi :: AbiDecode > :: decode (data . as_ref ()) { return Ok (VAnchorContractCalls :: IsKnownNeighborRoot (decoded)) }
             if let Ok(decoded) =
@@ -2180,13 +2105,6 @@ pub mod v_anchor_contract {
                 return Ok(VAnchorContractCalls::LastBalance(decoded));
             }
             if let Ok(decoded) =
-                <LevelsCall as ethers::core::abi::AbiDecode>::decode(
-                    data.as_ref(),
-                )
-            {
-                return Ok(VAnchorContractCalls::Levels(decoded));
-            }
-            if let Ok(decoded) =
                 <MaxEdgesCall as ethers::core::abi::AbiDecode>::decode(
                     data.as_ref(),
                 )
@@ -2203,20 +2121,27 @@ pub mod v_anchor_contract {
                 return Ok(VAnchorContractCalls::NeighborRoots(decoded));
             }
             if let Ok(decoded) =
-                <NextIndexCall as ethers::core::abi::AbiDecode>::decode(
-                    data.as_ref(),
-                )
-            {
-                return Ok(VAnchorContractCalls::NextIndex(decoded));
-            }
-            if let Ok(decoded) =
                 <NullifierHashesCall as ethers::core::abi::AbiDecode>::decode(
                     data.as_ref(),
                 )
             {
                 return Ok(VAnchorContractCalls::NullifierHashes(decoded));
             }
+            if let Ok(decoded) =
+                <OuterLevelsCall as ethers::core::abi::AbiDecode>::decode(
+                    data.as_ref(),
+                )
+            {
+                return Ok(VAnchorContractCalls::OuterLevels(decoded));
+            }
             if let Ok (decoded) = < ParseChainIdFromResourceIdCall as ethers :: core :: abi :: AbiDecode > :: decode (data . as_ref ()) { return Ok (VAnchorContractCalls :: ParseChainIdFromResourceId (decoded)) }
+            if let Ok(decoded) =
+                <ProposalNonceCall as ethers::core::abi::AbiDecode>::decode(
+                    data.as_ref(),
+                )
+            {
+                return Ok(VAnchorContractCalls::ProposalNonce(decoded));
+            }
             if let Ok(decoded) =
                 <RegisterCall as ethers::core::abi::AbiDecode>::decode(
                     data.as_ref(),
@@ -2225,7 +2150,6 @@ pub mod v_anchor_contract {
                 return Ok(VAnchorContractCalls::Register(decoded));
             }
             if let Ok (decoded) = < RegisterAndTransactCall as ethers :: core :: abi :: AbiDecode > :: decode (data . as_ref ()) { return Ok (VAnchorContractCalls :: RegisterAndTransact (decoded)) }
-            if let Ok (decoded) = < RegisterAndTransactWrapCall as ethers :: core :: abi :: AbiDecode > :: decode (data . as_ref ()) { return Ok (VAnchorContractCalls :: RegisterAndTransactWrap (decoded)) }
             if let Ok(decoded) =
                 <RootsCall as ethers::core::abi::AbiDecode>::decode(
                     data.as_ref(),
@@ -2262,32 +2186,11 @@ pub mod v_anchor_contract {
                 return Ok(VAnchorContractCalls::Transact(decoded));
             }
             if let Ok(decoded) =
-                <TransactWrapCall as ethers::core::abi::AbiDecode>::decode(
-                    data.as_ref(),
-                )
-            {
-                return Ok(VAnchorContractCalls::TransactWrap(decoded));
-            }
-            if let Ok(decoded) =
                 <UnpackProofCall as ethers::core::abi::AbiDecode>::decode(
                     data.as_ref(),
                 )
             {
                 return Ok(VAnchorContractCalls::UnpackProof(decoded));
-            }
-            if let Ok(decoded) =
-                <UnwrapIntoNativeCall as ethers::core::abi::AbiDecode>::decode(
-                    data.as_ref(),
-                )
-            {
-                return Ok(VAnchorContractCalls::UnwrapIntoNative(decoded));
-            }
-            if let Ok(decoded) =
-                <UnwrapIntoTokenCall as ethers::core::abi::AbiDecode>::decode(
-                    data.as_ref(),
-                )
-            {
-                return Ok(VAnchorContractCalls::UnwrapIntoToken(decoded));
             }
             if let Ok(decoded) =
                 <UpdateEdgeCall as ethers::core::abi::AbiDecode>::decode(
@@ -2302,34 +2205,6 @@ pub mod v_anchor_contract {
                 )
             {
                 return Ok(VAnchorContractCalls::Verifier(decoded));
-            }
-            if let Ok(decoded) =
-                <WithdrawAndUnwrapCall as ethers::core::abi::AbiDecode>::decode(
-                    data.as_ref(),
-                )
-            {
-                return Ok(VAnchorContractCalls::WithdrawAndUnwrap(decoded));
-            }
-            if let Ok(decoded) =
-                <WrapNativeCall as ethers::core::abi::AbiDecode>::decode(
-                    data.as_ref(),
-                )
-            {
-                return Ok(VAnchorContractCalls::WrapNative(decoded));
-            }
-            if let Ok(decoded) =
-                <WrapTokenCall as ethers::core::abi::AbiDecode>::decode(
-                    data.as_ref(),
-                )
-            {
-                return Ok(VAnchorContractCalls::WrapToken(decoded));
-            }
-            if let Ok(decoded) =
-                <ZerosCall as ethers::core::abi::AbiDecode>::decode(
-                    data.as_ref(),
-                )
-            {
-                return Ok(VAnchorContractCalls::Zeros(decoded));
             }
             Err(ethers::core::abi::Error::InvalidData.into())
         }
@@ -2350,6 +2225,9 @@ pub mod v_anchor_contract {
                 VAnchorContractCalls::ExecuteWrapping(element) => {
                     element.encode()
                 }
+                VAnchorContractCalls::WithdrawAndUnwrap(element) => {
+                    element.encode()
+                }
                 VAnchorContractCalls::CalculatePublicAmount(element) => {
                     element.encode()
                 }
@@ -2361,9 +2239,6 @@ pub mod v_anchor_contract {
                     element,
                 ) => element.encode(),
                 VAnchorContractCalls::CurrentNeighborRootIndex(element) => {
-                    element.encode()
-                }
-                VAnchorContractCalls::CurrentRootIndex(element) => {
                     element.encode()
                 }
                 VAnchorContractCalls::EdgeExistsForChain(element) => {
@@ -2378,6 +2253,7 @@ pub mod v_anchor_contract {
                 VAnchorContractCalls::GetChainIdType(element) => {
                     element.encode()
                 }
+                VAnchorContractCalls::GetHasher(element) => element.encode(),
                 VAnchorContractCalls::GetLastRoot(element) => element.encode(),
                 VAnchorContractCalls::GetLatestNeighborEdges(element) => {
                     element.encode()
@@ -2385,16 +2261,19 @@ pub mod v_anchor_contract {
                 VAnchorContractCalls::GetLatestNeighborRoots(element) => {
                     element.encode()
                 }
+                VAnchorContractCalls::GetLevels(element) => element.encode(),
+                VAnchorContractCalls::GetNextIndex(element) => element.encode(),
                 VAnchorContractCalls::GetProposalNonce(element) => {
                     element.encode()
                 }
+                VAnchorContractCalls::GetZeroHash(element) => element.encode(),
                 VAnchorContractCalls::Handler(element) => element.encode(),
                 VAnchorContractCalls::HasEdge(element) => element.encode(),
                 VAnchorContractCalls::HashLeftRight(element) => {
                     element.encode()
                 }
-                VAnchorContractCalls::Hasher(element) => element.encode(),
                 VAnchorContractCalls::Initialize(element) => element.encode(),
+                VAnchorContractCalls::Initialized(element) => element.encode(),
                 VAnchorContractCalls::IsKnownNeighborRoot(element) => {
                     element.encode()
                 }
@@ -2403,7 +2282,6 @@ pub mod v_anchor_contract {
                 VAnchorContractCalls::IsSpentArray(element) => element.encode(),
                 VAnchorContractCalls::IsValidRoots(element) => element.encode(),
                 VAnchorContractCalls::LastBalance(element) => element.encode(),
-                VAnchorContractCalls::Levels(element) => element.encode(),
                 VAnchorContractCalls::MaxEdges(element) => element.encode(),
                 VAnchorContractCalls::MaximumDepositAmount(element) => {
                     element.encode()
@@ -2414,18 +2292,18 @@ pub mod v_anchor_contract {
                 VAnchorContractCalls::NeighborRoots(element) => {
                     element.encode()
                 }
-                VAnchorContractCalls::NextIndex(element) => element.encode(),
                 VAnchorContractCalls::NullifierHashes(element) => {
                     element.encode()
                 }
+                VAnchorContractCalls::OuterLevels(element) => element.encode(),
                 VAnchorContractCalls::ParseChainIdFromResourceId(element) => {
+                    element.encode()
+                }
+                VAnchorContractCalls::ProposalNonce(element) => {
                     element.encode()
                 }
                 VAnchorContractCalls::Register(element) => element.encode(),
                 VAnchorContractCalls::RegisterAndTransact(element) => {
-                    element.encode()
-                }
-                VAnchorContractCalls::RegisterAndTransactWrap(element) => {
                     element.encode()
                 }
                 VAnchorContractCalls::Roots(element) => element.encode(),
@@ -2433,22 +2311,9 @@ pub mod v_anchor_contract {
                 VAnchorContractCalls::SetVerifier(element) => element.encode(),
                 VAnchorContractCalls::Token(element) => element.encode(),
                 VAnchorContractCalls::Transact(element) => element.encode(),
-                VAnchorContractCalls::TransactWrap(element) => element.encode(),
                 VAnchorContractCalls::UnpackProof(element) => element.encode(),
-                VAnchorContractCalls::UnwrapIntoNative(element) => {
-                    element.encode()
-                }
-                VAnchorContractCalls::UnwrapIntoToken(element) => {
-                    element.encode()
-                }
                 VAnchorContractCalls::UpdateEdge(element) => element.encode(),
                 VAnchorContractCalls::Verifier(element) => element.encode(),
-                VAnchorContractCalls::WithdrawAndUnwrap(element) => {
-                    element.encode()
-                }
-                VAnchorContractCalls::WrapNative(element) => element.encode(),
-                VAnchorContractCalls::WrapToken(element) => element.encode(),
-                VAnchorContractCalls::Zeros(element) => element.encode(),
             }
         }
     }
@@ -2466,6 +2331,9 @@ pub mod v_anchor_contract {
                 VAnchorContractCalls::ExecuteWrapping(element) => {
                     element.fmt(f)
                 }
+                VAnchorContractCalls::WithdrawAndUnwrap(element) => {
+                    element.fmt(f)
+                }
                 VAnchorContractCalls::CalculatePublicAmount(element) => {
                     element.fmt(f)
                 }
@@ -2479,9 +2347,6 @@ pub mod v_anchor_contract {
                 VAnchorContractCalls::CurrentNeighborRootIndex(element) => {
                     element.fmt(f)
                 }
-                VAnchorContractCalls::CurrentRootIndex(element) => {
-                    element.fmt(f)
-                }
                 VAnchorContractCalls::EdgeExistsForChain(element) => {
                     element.fmt(f)
                 }
@@ -2490,6 +2355,7 @@ pub mod v_anchor_contract {
                 VAnchorContractCalls::FilledSubtrees(element) => element.fmt(f),
                 VAnchorContractCalls::GetChainId(element) => element.fmt(f),
                 VAnchorContractCalls::GetChainIdType(element) => element.fmt(f),
+                VAnchorContractCalls::GetHasher(element) => element.fmt(f),
                 VAnchorContractCalls::GetLastRoot(element) => element.fmt(f),
                 VAnchorContractCalls::GetLatestNeighborEdges(element) => {
                     element.fmt(f)
@@ -2497,14 +2363,17 @@ pub mod v_anchor_contract {
                 VAnchorContractCalls::GetLatestNeighborRoots(element) => {
                     element.fmt(f)
                 }
+                VAnchorContractCalls::GetLevels(element) => element.fmt(f),
+                VAnchorContractCalls::GetNextIndex(element) => element.fmt(f),
                 VAnchorContractCalls::GetProposalNonce(element) => {
                     element.fmt(f)
                 }
+                VAnchorContractCalls::GetZeroHash(element) => element.fmt(f),
                 VAnchorContractCalls::Handler(element) => element.fmt(f),
                 VAnchorContractCalls::HasEdge(element) => element.fmt(f),
                 VAnchorContractCalls::HashLeftRight(element) => element.fmt(f),
-                VAnchorContractCalls::Hasher(element) => element.fmt(f),
                 VAnchorContractCalls::Initialize(element) => element.fmt(f),
+                VAnchorContractCalls::Initialized(element) => element.fmt(f),
                 VAnchorContractCalls::IsKnownNeighborRoot(element) => {
                     element.fmt(f)
                 }
@@ -2513,7 +2382,6 @@ pub mod v_anchor_contract {
                 VAnchorContractCalls::IsSpentArray(element) => element.fmt(f),
                 VAnchorContractCalls::IsValidRoots(element) => element.fmt(f),
                 VAnchorContractCalls::LastBalance(element) => element.fmt(f),
-                VAnchorContractCalls::Levels(element) => element.fmt(f),
                 VAnchorContractCalls::MaxEdges(element) => element.fmt(f),
                 VAnchorContractCalls::MaximumDepositAmount(element) => {
                     element.fmt(f)
@@ -2522,18 +2390,16 @@ pub mod v_anchor_contract {
                     element.fmt(f)
                 }
                 VAnchorContractCalls::NeighborRoots(element) => element.fmt(f),
-                VAnchorContractCalls::NextIndex(element) => element.fmt(f),
                 VAnchorContractCalls::NullifierHashes(element) => {
                     element.fmt(f)
                 }
+                VAnchorContractCalls::OuterLevels(element) => element.fmt(f),
                 VAnchorContractCalls::ParseChainIdFromResourceId(element) => {
                     element.fmt(f)
                 }
+                VAnchorContractCalls::ProposalNonce(element) => element.fmt(f),
                 VAnchorContractCalls::Register(element) => element.fmt(f),
                 VAnchorContractCalls::RegisterAndTransact(element) => {
-                    element.fmt(f)
-                }
-                VAnchorContractCalls::RegisterAndTransactWrap(element) => {
                     element.fmt(f)
                 }
                 VAnchorContractCalls::Roots(element) => element.fmt(f),
@@ -2541,22 +2407,9 @@ pub mod v_anchor_contract {
                 VAnchorContractCalls::SetVerifier(element) => element.fmt(f),
                 VAnchorContractCalls::Token(element) => element.fmt(f),
                 VAnchorContractCalls::Transact(element) => element.fmt(f),
-                VAnchorContractCalls::TransactWrap(element) => element.fmt(f),
                 VAnchorContractCalls::UnpackProof(element) => element.fmt(f),
-                VAnchorContractCalls::UnwrapIntoNative(element) => {
-                    element.fmt(f)
-                }
-                VAnchorContractCalls::UnwrapIntoToken(element) => {
-                    element.fmt(f)
-                }
                 VAnchorContractCalls::UpdateEdge(element) => element.fmt(f),
                 VAnchorContractCalls::Verifier(element) => element.fmt(f),
-                VAnchorContractCalls::WithdrawAndUnwrap(element) => {
-                    element.fmt(f)
-                }
-                VAnchorContractCalls::WrapNative(element) => element.fmt(f),
-                VAnchorContractCalls::WrapToken(element) => element.fmt(f),
-                VAnchorContractCalls::Zeros(element) => element.fmt(f),
             }
         }
     }
@@ -2595,6 +2448,11 @@ pub mod v_anchor_contract {
             VAnchorContractCalls::ExecuteWrapping(var)
         }
     }
+    impl ::std::convert::From<WithdrawAndUnwrapCall> for VAnchorContractCalls {
+        fn from(var: WithdrawAndUnwrapCall) -> Self {
+            VAnchorContractCalls::WithdrawAndUnwrap(var)
+        }
+    }
     impl ::std::convert::From<CalculatePublicAmountCall> for VAnchorContractCalls {
         fn from(var: CalculatePublicAmountCall) -> Self {
             VAnchorContractCalls::CalculatePublicAmount(var)
@@ -2624,11 +2482,6 @@ pub mod v_anchor_contract {
     {
         fn from(var: CurrentNeighborRootIndexCall) -> Self {
             VAnchorContractCalls::CurrentNeighborRootIndex(var)
-        }
-    }
-    impl ::std::convert::From<CurrentRootIndexCall> for VAnchorContractCalls {
-        fn from(var: CurrentRootIndexCall) -> Self {
-            VAnchorContractCalls::CurrentRootIndex(var)
         }
     }
     impl ::std::convert::From<EdgeExistsForChainCall> for VAnchorContractCalls {
@@ -2661,6 +2514,11 @@ pub mod v_anchor_contract {
             VAnchorContractCalls::GetChainIdType(var)
         }
     }
+    impl ::std::convert::From<GetHasherCall> for VAnchorContractCalls {
+        fn from(var: GetHasherCall) -> Self {
+            VAnchorContractCalls::GetHasher(var)
+        }
+    }
     impl ::std::convert::From<GetLastRootCall> for VAnchorContractCalls {
         fn from(var: GetLastRootCall) -> Self {
             VAnchorContractCalls::GetLastRoot(var)
@@ -2676,9 +2534,24 @@ pub mod v_anchor_contract {
             VAnchorContractCalls::GetLatestNeighborRoots(var)
         }
     }
+    impl ::std::convert::From<GetLevelsCall> for VAnchorContractCalls {
+        fn from(var: GetLevelsCall) -> Self {
+            VAnchorContractCalls::GetLevels(var)
+        }
+    }
+    impl ::std::convert::From<GetNextIndexCall> for VAnchorContractCalls {
+        fn from(var: GetNextIndexCall) -> Self {
+            VAnchorContractCalls::GetNextIndex(var)
+        }
+    }
     impl ::std::convert::From<GetProposalNonceCall> for VAnchorContractCalls {
         fn from(var: GetProposalNonceCall) -> Self {
             VAnchorContractCalls::GetProposalNonce(var)
+        }
+    }
+    impl ::std::convert::From<GetZeroHashCall> for VAnchorContractCalls {
+        fn from(var: GetZeroHashCall) -> Self {
+            VAnchorContractCalls::GetZeroHash(var)
         }
     }
     impl ::std::convert::From<HandlerCall> for VAnchorContractCalls {
@@ -2696,14 +2569,14 @@ pub mod v_anchor_contract {
             VAnchorContractCalls::HashLeftRight(var)
         }
     }
-    impl ::std::convert::From<HasherCall> for VAnchorContractCalls {
-        fn from(var: HasherCall) -> Self {
-            VAnchorContractCalls::Hasher(var)
-        }
-    }
     impl ::std::convert::From<InitializeCall> for VAnchorContractCalls {
         fn from(var: InitializeCall) -> Self {
             VAnchorContractCalls::Initialize(var)
+        }
+    }
+    impl ::std::convert::From<InitializedCall> for VAnchorContractCalls {
+        fn from(var: InitializedCall) -> Self {
+            VAnchorContractCalls::Initialized(var)
         }
     }
     impl ::std::convert::From<IsKnownNeighborRootCall> for VAnchorContractCalls {
@@ -2736,11 +2609,6 @@ pub mod v_anchor_contract {
             VAnchorContractCalls::LastBalance(var)
         }
     }
-    impl ::std::convert::From<LevelsCall> for VAnchorContractCalls {
-        fn from(var: LevelsCall) -> Self {
-            VAnchorContractCalls::Levels(var)
-        }
-    }
     impl ::std::convert::From<MaxEdgesCall> for VAnchorContractCalls {
         fn from(var: MaxEdgesCall) -> Self {
             VAnchorContractCalls::MaxEdges(var)
@@ -2763,14 +2631,14 @@ pub mod v_anchor_contract {
             VAnchorContractCalls::NeighborRoots(var)
         }
     }
-    impl ::std::convert::From<NextIndexCall> for VAnchorContractCalls {
-        fn from(var: NextIndexCall) -> Self {
-            VAnchorContractCalls::NextIndex(var)
-        }
-    }
     impl ::std::convert::From<NullifierHashesCall> for VAnchorContractCalls {
         fn from(var: NullifierHashesCall) -> Self {
             VAnchorContractCalls::NullifierHashes(var)
+        }
+    }
+    impl ::std::convert::From<OuterLevelsCall> for VAnchorContractCalls {
+        fn from(var: OuterLevelsCall) -> Self {
+            VAnchorContractCalls::OuterLevels(var)
         }
     }
     impl ::std::convert::From<ParseChainIdFromResourceIdCall>
@@ -2778,6 +2646,11 @@ pub mod v_anchor_contract {
     {
         fn from(var: ParseChainIdFromResourceIdCall) -> Self {
             VAnchorContractCalls::ParseChainIdFromResourceId(var)
+        }
+    }
+    impl ::std::convert::From<ProposalNonceCall> for VAnchorContractCalls {
+        fn from(var: ProposalNonceCall) -> Self {
+            VAnchorContractCalls::ProposalNonce(var)
         }
     }
     impl ::std::convert::From<RegisterCall> for VAnchorContractCalls {
@@ -2788,13 +2661,6 @@ pub mod v_anchor_contract {
     impl ::std::convert::From<RegisterAndTransactCall> for VAnchorContractCalls {
         fn from(var: RegisterAndTransactCall) -> Self {
             VAnchorContractCalls::RegisterAndTransact(var)
-        }
-    }
-    impl ::std::convert::From<RegisterAndTransactWrapCall>
-        for VAnchorContractCalls
-    {
-        fn from(var: RegisterAndTransactWrapCall) -> Self {
-            VAnchorContractCalls::RegisterAndTransactWrap(var)
         }
     }
     impl ::std::convert::From<RootsCall> for VAnchorContractCalls {
@@ -2822,24 +2688,9 @@ pub mod v_anchor_contract {
             VAnchorContractCalls::Transact(var)
         }
     }
-    impl ::std::convert::From<TransactWrapCall> for VAnchorContractCalls {
-        fn from(var: TransactWrapCall) -> Self {
-            VAnchorContractCalls::TransactWrap(var)
-        }
-    }
     impl ::std::convert::From<UnpackProofCall> for VAnchorContractCalls {
         fn from(var: UnpackProofCall) -> Self {
             VAnchorContractCalls::UnpackProof(var)
-        }
-    }
-    impl ::std::convert::From<UnwrapIntoNativeCall> for VAnchorContractCalls {
-        fn from(var: UnwrapIntoNativeCall) -> Self {
-            VAnchorContractCalls::UnwrapIntoNative(var)
-        }
-    }
-    impl ::std::convert::From<UnwrapIntoTokenCall> for VAnchorContractCalls {
-        fn from(var: UnwrapIntoTokenCall) -> Self {
-            VAnchorContractCalls::UnwrapIntoToken(var)
         }
     }
     impl ::std::convert::From<UpdateEdgeCall> for VAnchorContractCalls {
@@ -2850,26 +2701,6 @@ pub mod v_anchor_contract {
     impl ::std::convert::From<VerifierCall> for VAnchorContractCalls {
         fn from(var: VerifierCall) -> Self {
             VAnchorContractCalls::Verifier(var)
-        }
-    }
-    impl ::std::convert::From<WithdrawAndUnwrapCall> for VAnchorContractCalls {
-        fn from(var: WithdrawAndUnwrapCall) -> Self {
-            VAnchorContractCalls::WithdrawAndUnwrap(var)
-        }
-    }
-    impl ::std::convert::From<WrapNativeCall> for VAnchorContractCalls {
-        fn from(var: WrapNativeCall) -> Self {
-            VAnchorContractCalls::WrapNative(var)
-        }
-    }
-    impl ::std::convert::From<WrapTokenCall> for VAnchorContractCalls {
-        fn from(var: WrapTokenCall) -> Self {
-            VAnchorContractCalls::WrapToken(var)
-        }
-    }
-    impl ::std::convert::From<ZerosCall> for VAnchorContractCalls {
-        fn from(var: ZerosCall) -> Self {
-            VAnchorContractCalls::Zeros(var)
         }
     }
     #[doc = "Container type for all return fields from the `EVM_CHAIN_ID_TYPE` function with signature `EVM_CHAIN_ID_TYPE()` and selector `[139, 126, 135, 130]`"]
@@ -2950,6 +2781,19 @@ pub mod v_anchor_contract {
         serde :: Deserialize,
     )]
     pub struct ZeroValueReturn(pub ethers::core::types::U256);
+    #[doc = "Container type for all return fields from the `_executeWrapping` function with signature `_executeWrapping(address,address,uint256)` and selector `[99, 56, 188, 188]`"]
+    #[derive(
+        Clone,
+        Debug,
+        Default,
+        Eq,
+        PartialEq,
+        ethers :: contract :: EthAbiType,
+        ethers :: contract :: EthAbiCodec,
+        serde :: Serialize,
+        serde :: Deserialize,
+    )]
+    pub struct ExecuteWrappingReturn(pub ethers::core::types::U256);
     #[doc = "Container type for all return fields from the `calculatePublicAmount` function with signature `calculatePublicAmount(int256,uint256)` and selector `[37, 112, 183, 180]`"]
     #[derive(
         Clone,
@@ -2963,7 +2807,7 @@ pub mod v_anchor_contract {
         serde :: Deserialize,
     )]
     pub struct CalculatePublicAmountReturn(pub ethers::core::types::U256);
-    #[doc = "Container type for all return fields from the `commitments` function with signature `commitments(bytes32)` and selector `[131, 157, 249, 69]`"]
+    #[doc = "Container type for all return fields from the `commitments` function with signature `commitments(uint256)` and selector `[73, 206, 137, 151]`"]
     #[derive(
         Clone,
         Debug,
@@ -2989,19 +2833,6 @@ pub mod v_anchor_contract {
         serde :: Deserialize,
     )]
     pub struct CurrentNeighborRootIndexReturn(pub u32);
-    #[doc = "Container type for all return fields from the `currentRootIndex` function with signature `currentRootIndex()` and selector `[144, 238, 176, 43]`"]
-    #[derive(
-        Clone,
-        Debug,
-        Default,
-        Eq,
-        PartialEq,
-        ethers :: contract :: EthAbiType,
-        ethers :: contract :: EthAbiCodec,
-        serde :: Serialize,
-        serde :: Deserialize,
-    )]
-    pub struct CurrentRootIndexReturn(pub u32);
     #[doc = "Container type for all return fields from the `edgeExistsForChain` function with signature `edgeExistsForChain(uint256)` and selector `[250, 115, 22, 135]`"]
     #[derive(
         Clone,
@@ -3042,7 +2873,7 @@ pub mod v_anchor_contract {
     )]
     pub struct EdgeListReturn {
         pub chain_id: ethers::core::types::U256,
-        pub root: [u8; 32],
+        pub root: ethers::core::types::U256,
         pub latest_leaf_index: ethers::core::types::U256,
         pub src_resource_id: [u8; 32],
     }
@@ -3058,7 +2889,7 @@ pub mod v_anchor_contract {
         serde :: Serialize,
         serde :: Deserialize,
     )]
-    pub struct FilledSubtreesReturn(pub [u8; 32]);
+    pub struct FilledSubtreesReturn(pub ethers::core::types::U256);
     #[doc = "Container type for all return fields from the `getChainId` function with signature `getChainId()` and selector `[52, 8, 228, 112]`"]
     #[derive(
         Clone,
@@ -3085,6 +2916,19 @@ pub mod v_anchor_contract {
         serde :: Deserialize,
     )]
     pub struct GetChainIdTypeReturn(pub u64);
+    #[doc = "Container type for all return fields from the `getHasher` function with signature `getHasher()` and selector `[234, 73, 93, 176]`"]
+    #[derive(
+        Clone,
+        Debug,
+        Default,
+        Eq,
+        PartialEq,
+        ethers :: contract :: EthAbiType,
+        ethers :: contract :: EthAbiCodec,
+        serde :: Serialize,
+        serde :: Deserialize,
+    )]
+    pub struct GetHasherReturn(pub ethers::core::types::Address);
     #[doc = "Container type for all return fields from the `getLastRoot` function with signature `getLastRoot()` and selector `[186, 112, 247, 87]`"]
     #[derive(
         Clone,
@@ -3097,7 +2941,7 @@ pub mod v_anchor_contract {
         serde :: Serialize,
         serde :: Deserialize,
     )]
-    pub struct GetLastRootReturn(pub [u8; 32]);
+    pub struct GetLastRootReturn(pub ethers::core::types::U256);
     #[doc = "Container type for all return fields from the `getLatestNeighborEdges` function with signature `getLatestNeighborEdges()` and selector `[140, 13, 52, 216]`"]
     #[derive(
         Clone,
@@ -3113,7 +2957,7 @@ pub mod v_anchor_contract {
     pub struct GetLatestNeighborEdgesReturn(
         pub  ::std::vec::Vec<(
             ethers::core::types::U256,
-            [u8; 32],
+            ethers::core::types::U256,
             ethers::core::types::U256,
             [u8; 32],
         )>,
@@ -3130,7 +2974,35 @@ pub mod v_anchor_contract {
         serde :: Serialize,
         serde :: Deserialize,
     )]
-    pub struct GetLatestNeighborRootsReturn(pub ::std::vec::Vec<[u8; 32]>);
+    pub struct GetLatestNeighborRootsReturn(
+        pub ::std::vec::Vec<ethers::core::types::U256>,
+    );
+    #[doc = "Container type for all return fields from the `getLevels` function with signature `getLevels()` and selector `[12, 57, 74, 96]`"]
+    #[derive(
+        Clone,
+        Debug,
+        Default,
+        Eq,
+        PartialEq,
+        ethers :: contract :: EthAbiType,
+        ethers :: contract :: EthAbiCodec,
+        serde :: Serialize,
+        serde :: Deserialize,
+    )]
+    pub struct GetLevelsReturn(pub u32);
+    #[doc = "Container type for all return fields from the `getNextIndex` function with signature `getNextIndex()` and selector `[14, 183, 96, 111]`"]
+    #[derive(
+        Clone,
+        Debug,
+        Default,
+        Eq,
+        PartialEq,
+        ethers :: contract :: EthAbiType,
+        ethers :: contract :: EthAbiCodec,
+        serde :: Serialize,
+        serde :: Deserialize,
+    )]
+    pub struct GetNextIndexReturn(pub u32);
     #[doc = "Container type for all return fields from the `getProposalNonce` function with signature `getProposalNonce()` and selector `[11, 39, 251, 154]`"]
     #[derive(
         Clone,
@@ -3143,7 +3015,20 @@ pub mod v_anchor_contract {
         serde :: Serialize,
         serde :: Deserialize,
     )]
-    pub struct GetProposalNonceReturn(pub u32);
+    pub struct GetProposalNonceReturn(pub ethers::core::types::U256);
+    #[doc = "Container type for all return fields from the `getZeroHash` function with signature `getZeroHash(uint32)` and selector `[48, 94, 158, 172]`"]
+    #[derive(
+        Clone,
+        Debug,
+        Default,
+        Eq,
+        PartialEq,
+        ethers :: contract :: EthAbiType,
+        ethers :: contract :: EthAbiCodec,
+        serde :: Serialize,
+        serde :: Deserialize,
+    )]
+    pub struct GetZeroHashReturn(pub ethers::core::types::U256);
     #[doc = "Container type for all return fields from the `handler` function with signature `handler()` and selector `[200, 9, 22, 212]`"]
     #[derive(
         Clone,
@@ -3170,7 +3055,7 @@ pub mod v_anchor_contract {
         serde :: Deserialize,
     )]
     pub struct HasEdgeReturn(pub bool);
-    #[doc = "Container type for all return fields from the `hashLeftRight` function with signature `hashLeftRight(address,bytes32,bytes32)` and selector `[142, 163, 9, 158]`"]
+    #[doc = "Container type for all return fields from the `hashLeftRight` function with signature `hashLeftRight(uint256,uint256)` and selector `[91, 185, 57, 149]`"]
     #[derive(
         Clone,
         Debug,
@@ -3182,8 +3067,8 @@ pub mod v_anchor_contract {
         serde :: Serialize,
         serde :: Deserialize,
     )]
-    pub struct HashLeftRightReturn(pub [u8; 32]);
-    #[doc = "Container type for all return fields from the `hasher` function with signature `hasher()` and selector `[237, 51, 99, 159]`"]
+    pub struct HashLeftRightReturn(pub ethers::core::types::U256);
+    #[doc = "Container type for all return fields from the `initialized` function with signature `initialized()` and selector `[21, 142, 249, 62]`"]
     #[derive(
         Clone,
         Debug,
@@ -3195,8 +3080,8 @@ pub mod v_anchor_contract {
         serde :: Serialize,
         serde :: Deserialize,
     )]
-    pub struct HasherReturn(pub ethers::core::types::Address);
-    #[doc = "Container type for all return fields from the `isKnownNeighborRoot` function with signature `isKnownNeighborRoot(uint256,bytes32)` and selector `[17, 228, 220, 185]`"]
+    pub struct InitializedReturn(pub bool);
+    #[doc = "Container type for all return fields from the `isKnownNeighborRoot` function with signature `isKnownNeighborRoot(uint256,uint256)` and selector `[59, 250, 141, 122]`"]
     #[derive(
         Clone,
         Debug,
@@ -3209,7 +3094,7 @@ pub mod v_anchor_contract {
         serde :: Deserialize,
     )]
     pub struct IsKnownNeighborRootReturn(pub bool);
-    #[doc = "Container type for all return fields from the `isKnownRoot` function with signature `isKnownRoot(bytes32)` and selector `[109, 152, 51, 227]`"]
+    #[doc = "Container type for all return fields from the `isKnownRoot` function with signature `isKnownRoot(uint256)` and selector `[166, 35, 42, 147]`"]
     #[derive(
         Clone,
         Debug,
@@ -3222,7 +3107,7 @@ pub mod v_anchor_contract {
         serde :: Deserialize,
     )]
     pub struct IsKnownRootReturn(pub bool);
-    #[doc = "Container type for all return fields from the `isSpent` function with signature `isSpent(bytes32)` and selector `[229, 40, 93, 204]`"]
+    #[doc = "Container type for all return fields from the `isSpent` function with signature `isSpent(uint256)` and selector `[90, 18, 158, 254]`"]
     #[derive(
         Clone,
         Debug,
@@ -3235,7 +3120,7 @@ pub mod v_anchor_contract {
         serde :: Deserialize,
     )]
     pub struct IsSpentReturn(pub bool);
-    #[doc = "Container type for all return fields from the `isSpentArray` function with signature `isSpentArray(bytes32[])` and selector `[159, 161, 45, 11]`"]
+    #[doc = "Container type for all return fields from the `isSpentArray` function with signature `isSpentArray(uint256[])` and selector `[234, 101, 186, 73]`"]
     #[derive(
         Clone,
         Debug,
@@ -3248,7 +3133,7 @@ pub mod v_anchor_contract {
         serde :: Deserialize,
     )]
     pub struct IsSpentArrayReturn(pub ::std::vec::Vec<bool>);
-    #[doc = "Container type for all return fields from the `isValidRoots` function with signature `isValidRoots(bytes32[])` and selector `[97, 110, 9, 87]`"]
+    #[doc = "Container type for all return fields from the `isValidRoots` function with signature `isValidRoots(uint256[])` and selector `[183, 94, 103, 152]`"]
     #[derive(
         Clone,
         Debug,
@@ -3274,19 +3159,6 @@ pub mod v_anchor_contract {
         serde :: Deserialize,
     )]
     pub struct LastBalanceReturn(pub ethers::core::types::U256);
-    #[doc = "Container type for all return fields from the `levels` function with signature `levels()` and selector `[78, 207, 81, 139]`"]
-    #[derive(
-        Clone,
-        Debug,
-        Default,
-        Eq,
-        PartialEq,
-        ethers :: contract :: EthAbiType,
-        ethers :: contract :: EthAbiCodec,
-        serde :: Serialize,
-        serde :: Deserialize,
-    )]
-    pub struct LevelsReturn(pub u32);
     #[doc = "Container type for all return fields from the `maxEdges` function with signature `maxEdges()` and selector `[113, 82, 60, 50]`"]
     #[derive(
         Clone,
@@ -3338,21 +3210,8 @@ pub mod v_anchor_contract {
         serde :: Serialize,
         serde :: Deserialize,
     )]
-    pub struct NeighborRootsReturn(pub [u8; 32]);
-    #[doc = "Container type for all return fields from the `nextIndex` function with signature `nextIndex()` and selector `[252, 126, 156, 111]`"]
-    #[derive(
-        Clone,
-        Debug,
-        Default,
-        Eq,
-        PartialEq,
-        ethers :: contract :: EthAbiType,
-        ethers :: contract :: EthAbiCodec,
-        serde :: Serialize,
-        serde :: Deserialize,
-    )]
-    pub struct NextIndexReturn(pub u32);
-    #[doc = "Container type for all return fields from the `nullifierHashes` function with signature `nullifierHashes(bytes32)` and selector `[23, 204, 145, 92]`"]
+    pub struct NeighborRootsReturn(pub ethers::core::types::U256);
+    #[doc = "Container type for all return fields from the `nullifierHashes` function with signature `nullifierHashes(uint256)` and selector `[31, 121, 161, 233]`"]
     #[derive(
         Clone,
         Debug,
@@ -3365,6 +3224,19 @@ pub mod v_anchor_contract {
         serde :: Deserialize,
     )]
     pub struct NullifierHashesReturn(pub bool);
+    #[doc = "Container type for all return fields from the `outerLevels` function with signature `outerLevels()` and selector `[191, 188, 10, 57]`"]
+    #[derive(
+        Clone,
+        Debug,
+        Default,
+        Eq,
+        PartialEq,
+        ethers :: contract :: EthAbiType,
+        ethers :: contract :: EthAbiCodec,
+        serde :: Serialize,
+        serde :: Deserialize,
+    )]
+    pub struct OuterLevelsReturn(pub u32);
     #[doc = "Container type for all return fields from the `parseChainIdFromResourceId` function with signature `parseChainIdFromResourceId(bytes32)` and selector `[194, 35, 13, 110]`"]
     #[derive(
         Clone,
@@ -3378,6 +3250,19 @@ pub mod v_anchor_contract {
         serde :: Deserialize,
     )]
     pub struct ParseChainIdFromResourceIdReturn(pub u64);
+    #[doc = "Container type for all return fields from the `proposalNonce` function with signature `proposalNonce()` and selector `[204, 60, 116, 161]`"]
+    #[derive(
+        Clone,
+        Debug,
+        Default,
+        Eq,
+        PartialEq,
+        ethers :: contract :: EthAbiType,
+        ethers :: contract :: EthAbiCodec,
+        serde :: Serialize,
+        serde :: Deserialize,
+    )]
+    pub struct ProposalNonceReturn(pub ethers::core::types::U256);
     #[doc = "Container type for all return fields from the `roots` function with signature `roots(uint256)` and selector `[194, 180, 10, 228]`"]
     #[derive(
         Clone,
@@ -3390,7 +3275,10 @@ pub mod v_anchor_contract {
         serde :: Serialize,
         serde :: Deserialize,
     )]
-    pub struct RootsReturn(pub [u8; 32]);
+    pub struct RootsReturn {
+        pub root: ethers::core::types::U256,
+        pub latest_leafindex: u32,
+    }
     #[doc = "Container type for all return fields from the `token` function with signature `token()` and selector `[252, 12, 84, 106]`"]
     #[derive(
         Clone,
@@ -3434,7 +3322,7 @@ pub mod v_anchor_contract {
         serde :: Deserialize,
     )]
     pub struct VerifierReturn(pub ethers::core::types::Address);
-    #[doc = "Container type for all return fields from the `zeros` function with signature `zeros(uint256)` and selector `[232, 41, 85, 136]`"]
+    #[doc = "`CommonExtData(address,int256,address,uint256,uint256,address)`"]
     #[derive(
         Clone,
         Debug,
@@ -3446,8 +3334,15 @@ pub mod v_anchor_contract {
         serde :: Serialize,
         serde :: Deserialize,
     )]
-    pub struct ZerosReturn(pub [u8; 32]);
-    #[doc = "`Edge(uint256,bytes32,uint256,bytes32)`"]
+    pub struct CommonExtData {
+        pub recipient: ethers::core::types::Address,
+        pub ext_amount: I256,
+        pub relayer: ethers::core::types::Address,
+        pub fee: ethers::core::types::U256,
+        pub refund: ethers::core::types::U256,
+        pub token: ethers::core::types::Address,
+    }
+    #[doc = "`Edge(uint256,uint256,uint256,bytes32)`"]
     #[derive(
         Clone,
         Debug,
@@ -3461,9 +3356,45 @@ pub mod v_anchor_contract {
     )]
     pub struct Edge {
         pub chain_id: ethers::core::types::U256,
-        pub root: [u8; 32],
+        pub root: ethers::core::types::U256,
         pub latest_leaf_index: ethers::core::types::U256,
         pub src_resource_id: [u8; 32],
+    }
+    #[doc = "`Encryptions(bytes,bytes)`"]
+    #[derive(
+        Clone,
+        Debug,
+        Default,
+        Eq,
+        PartialEq,
+        ethers :: contract :: EthAbiType,
+        ethers :: contract :: EthAbiCodec,
+        serde :: Serialize,
+        serde :: Deserialize,
+    )]
+    pub struct Encryptions {
+        pub encrypted_output_1: ethers::core::types::Bytes,
+        pub encrypted_output_2: ethers::core::types::Bytes,
+    }
+    #[doc = "`PublicInputs(bytes,bytes,uint256[],uint256[2],uint256,uint256)`"]
+    #[derive(
+        Clone,
+        Debug,
+        Default,
+        Eq,
+        PartialEq,
+        ethers :: contract :: EthAbiType,
+        ethers :: contract :: EthAbiCodec,
+        serde :: Serialize,
+        serde :: Deserialize,
+    )]
+    pub struct PublicInputs {
+        pub roots: ethers::core::types::Bytes,
+        pub extension_roots: ethers::core::types::Bytes,
+        pub input_nullifiers: Vec<ethers::core::types::U256>,
+        pub output_commitments: [ethers::core::types::U256; 2],
+        pub public_amount: ethers::core::types::U256,
+        pub ext_data_hash: ethers::core::types::U256,
     }
     #[doc = "`Account(address,bytes)`"]
     #[derive(
@@ -3479,48 +3410,6 @@ pub mod v_anchor_contract {
     )]
     pub struct Account {
         pub owner: ethers::core::types::Address,
-        pub public_key: ethers::core::types::Bytes,
-    }
-    #[doc = "`ExtData(address,int256,address,uint256,uint256,address,bytes,bytes)`"]
-    #[derive(
-        Clone,
-        Debug,
-        Default,
-        Eq,
-        PartialEq,
-        ethers :: contract :: EthAbiType,
-        ethers :: contract :: EthAbiCodec,
-        serde :: Serialize,
-        serde :: Deserialize,
-    )]
-    pub struct ExtData {
-        pub recipient: ethers::core::types::Address,
-        pub ext_amount: I256,
-        pub relayer: ethers::core::types::Address,
-        pub fee: ethers::core::types::U256,
-        pub refund: ethers::core::types::U256,
-        pub token: ethers::core::types::Address,
-        pub encrypted_output_1: ethers::core::types::Bytes,
-        pub encrypted_output_2: ethers::core::types::Bytes,
-    }
-    #[doc = "`Proof(bytes,bytes,bytes32[],bytes32[2],uint256,bytes32)`"]
-    #[derive(
-        Clone,
-        Debug,
-        Default,
-        Eq,
-        PartialEq,
-        ethers :: contract :: EthAbiType,
-        ethers :: contract :: EthAbiCodec,
-        serde :: Serialize,
-        serde :: Deserialize,
-    )]
-    pub struct Proof {
-        pub proof: ethers::core::types::Bytes,
-        pub roots: ethers::core::types::Bytes,
-        pub input_nullifiers: Vec<[u8; 32]>,
-        pub output_commitments: [[u8; 32]; 2],
-        pub public_amount: ethers::core::types::U256,
-        pub ext_data_hash: [u8; 32],
+        pub key_data: ethers::core::types::Bytes,
     }
 }

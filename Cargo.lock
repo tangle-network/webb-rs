@@ -4981,7 +4981,7 @@ dependencies = [
 
 [[package]]
 name = "webb"
-version = "0.5.11"
+version = "0.5.12"
 dependencies = [
  "anyhow",
  "async-trait",
