@@ -38,6 +38,7 @@ pub enum TargetSystem {
     /// Ethereum Contract address (20 bytes).
     ContractAddress([u8; 20]),
     /// Webb Protocol-Substrate 6 bytes (pallet_index, call_index, tree_id ).
+    #[cfg(feature = "substrate")]
     Substrate(SubstrateTargetSystem),
 }
 /// Substrate Target System
@@ -53,6 +54,7 @@ pub enum TargetSystem {
         scale_codec::MaxEncodedLen
     )
 )]
+#[cfg(feature = "substrate")]
 pub struct SubstrateTargetSystem {
     /// Pallet index of proposal handler pallet
     pub pallet_index: u8,
@@ -100,6 +102,7 @@ impl TargetSystem {
     }
 
     /// Get substrate TargetSystem details
+    #[cfg(feature = "substrate")]
     #[must_use]
     pub fn get_substrate_target_system(self) -> Option<SubstrateTargetSystem> {
         match self {
@@ -123,7 +126,7 @@ impl From<[u8; TargetSystem::LENGTH]> for TargetSystem {
     fn from(bytes: [u8; TargetSystem::LENGTH]) -> Self {
         // check the first 20 bytes are zeros.
         // if not, it is a contract address.
-        if bytes[0..20].iter().all(|&x| x == 0) {
+        if cfg!(feature = "substrate"){
             let mut tree_id_bytes = [0u8; 4];
             let f = 22usize;
             let t = f + core::mem::size_of::<u32>();
@@ -149,7 +152,7 @@ impl From<TargetSystem> for [u8; TargetSystem::LENGTH] {
         target_system.into_bytes()
     }
 }
-
+#[cfg(feature = "substrate")]
 impl Default for TargetSystem {
     fn default() -> Self {
         let target = SubstrateTargetSystem::builder()
