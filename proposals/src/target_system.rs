@@ -126,7 +126,7 @@ impl From<[u8; TargetSystem::LENGTH]> for TargetSystem {
     fn from(bytes: [u8; TargetSystem::LENGTH]) -> Self {
         // check the first 20 bytes are zeros.
         // if not, it is a contract address.
-        if cfg!(feature = "substrate") {
+        if bytes[0..20].iter().all(|&x| x == 0) {
             let mut tree_id_bytes = [0u8; 4];
             let f = 22usize;
             let t = f + core::mem::size_of::<u32>();
