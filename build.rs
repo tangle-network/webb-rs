@@ -114,10 +114,10 @@ mod evm {
 mod substrate {
     use std::io::Read;
 
+    use super::*;
     use frame_metadata::RuntimeMetadataPrefixed;
     use scale::Decode;
-
-    use super::*;
+    use subxt_codegen::CratePath;
 
     fn parse_and_generate_runtime(
         path: &str,
@@ -134,7 +134,7 @@ mod substrate {
             pub mod api {}
         );
         let mut generated_type_derives =
-            subxt_codegen::DerivesRegistry::default();
+            subxt_codegen::DerivesRegistry::new(&CratePath::default());
         generated_type_derives.extend_for_all(
             vec![
                 syn::parse_quote!(Eq),
@@ -143,8 +143,11 @@ mod substrate {
             ]
             .into_iter(),
         );
-        let runtime_api =
-            generator.generate_runtime(item_mod, generated_type_derives);
+        let runtime_api = generator.generate_runtime(
+            item_mod,
+            generated_type_derives,
+            CratePath::default(),
+        );
         std::fs::write(out, runtime_api.to_string())?;
         Ok(())
     }
