@@ -607,11 +607,11 @@ pub mod api {
                         "Events",
                         vec![],
                         [
-                            217u8, 110u8, 210u8, 165u8, 99u8, 220u8, 170u8,
-                            116u8, 0u8, 235u8, 84u8, 138u8, 173u8, 33u8, 235u8,
-                            151u8, 65u8, 226u8, 194u8, 115u8, 250u8, 44u8,
-                            156u8, 252u8, 73u8, 228u8, 24u8, 241u8, 123u8,
-                            161u8, 124u8, 2u8,
+                            172u8, 160u8, 195u8, 98u8, 109u8, 82u8, 120u8,
+                            216u8, 235u8, 66u8, 197u8, 94u8, 186u8, 238u8,
+                            183u8, 23u8, 92u8, 185u8, 190u8, 5u8, 234u8, 43u8,
+                            106u8, 28u8, 239u8, 199u8, 217u8, 64u8, 86u8, 30u8,
+                            85u8, 57u8,
                         ],
                     )
                 }
@@ -2943,6 +2943,7 @@ pub mod api {
                 pub compressed_pub_key: ::std::vec::Vec<::core::primitive::u8>,
                 pub uncompressed_pub_key:
                     ::std::vec::Vec<::core::primitive::u8>,
+                pub nonce: ::core::primitive::u32,
             }
             impl ::subxt::events::StaticEvent for NextPublicKeySignatureSubmitted {
                 const PALLET: &'static str = "DKG";
@@ -2980,6 +2981,7 @@ pub mod api {
                 pub compressed_pub_key: ::std::vec::Vec<::core::primitive::u8>,
                 pub uncompressed_pub_key:
                     ::std::vec::Vec<::core::primitive::u8>,
+                pub nonce: ::core::primitive::u32,
             }
             impl ::subxt::events::StaticEvent for PublicKeySignatureChanged {
                 const PALLET: &'static str = "DKG";
@@ -3433,7 +3435,7 @@ pub mod api {
                     )
                 }
                 #[doc = " Tracks misbehaviour reports"]                pub fn misbehaviour_reports (& self , _0 : impl :: std :: borrow :: Borrow < runtime_types :: dkg_runtime_primitives :: MisbehaviourType > , _1 : impl :: std :: borrow :: Borrow < :: core :: primitive :: u64 > , _2 : impl :: std :: borrow :: Borrow < runtime_types :: dkg_runtime_primitives :: crypto :: Public > ,) -> :: subxt :: storage :: address :: StaticStorageAddress :: < :: subxt :: metadata :: DecodeStaticType < runtime_types :: dkg_runtime_primitives :: AggregatedMisbehaviourReports < runtime_types :: dkg_runtime_primitives :: crypto :: Public > > , :: subxt :: storage :: address :: Yes , () , :: subxt :: storage :: address :: Yes >{
-                    :: subxt :: storage :: address :: StaticStorageAddress :: new ("DKG" , "MisbehaviourReports" , vec ! [:: subxt :: storage :: address :: StorageMapKey :: new ((_0 . borrow () , _1 . borrow () , _2 . borrow ()) , :: subxt :: storage :: address :: StorageHasher :: Blake2_256)] , [26u8 , 223u8 , 186u8 , 140u8 , 112u8 , 238u8 , 39u8 , 204u8 , 21u8 , 223u8 , 229u8 , 92u8 , 173u8 , 76u8 , 228u8 , 188u8 , 225u8 , 56u8 , 140u8 , 24u8 , 100u8 , 171u8 , 177u8 , 26u8 , 108u8 , 130u8 , 238u8 , 142u8 , 198u8 , 89u8 , 17u8 , 255u8 ,])
+                    :: subxt :: storage :: address :: StaticStorageAddress :: new ("DKG" , "MisbehaviourReports" , vec ! [:: subxt :: storage :: address :: StorageMapKey :: new (& (_0 . borrow () , _1 . borrow () , _2 . borrow ()) , :: subxt :: storage :: address :: StorageHasher :: Blake2_256)] , [26u8 , 223u8 , 186u8 , 140u8 , 112u8 , 238u8 , 39u8 , 204u8 , 21u8 , 223u8 , 229u8 , 92u8 , 173u8 , 76u8 , 228u8 , 188u8 , 225u8 , 56u8 , 140u8 , 24u8 , 100u8 , 171u8 , 177u8 , 26u8 , 108u8 , 130u8 , 238u8 , 142u8 , 198u8 , 89u8 , 17u8 , 255u8 ,])
                 }
                 #[doc = " Tracks misbehaviour reports"]                pub fn misbehaviour_reports_root (& self ,) -> :: subxt :: storage :: address :: StaticStorageAddress :: < :: subxt :: metadata :: DecodeStaticType < runtime_types :: dkg_runtime_primitives :: AggregatedMisbehaviourReports < runtime_types :: dkg_runtime_primitives :: crypto :: Public > > , () , () , :: subxt :: storage :: address :: Yes >{
                     ::subxt::storage::address::StaticStorageAddress::new(
@@ -9503,7 +9505,7 @@ pub mod api {
                 }
                 #[doc = " Records information about the maximum slash of a stash within a slashing span,"]
                 #[doc = " as well as how much reward has been paid out."]                pub fn span_slash (& self , _0 : impl :: std :: borrow :: Borrow < :: subxt :: ext :: sp_core :: crypto :: AccountId32 > , _1 : impl :: std :: borrow :: Borrow < :: core :: primitive :: u32 > ,) -> :: subxt :: storage :: address :: StaticStorageAddress :: < :: subxt :: metadata :: DecodeStaticType < runtime_types :: pallet_staking :: slashing :: SpanRecord < :: core :: primitive :: u128 > > , :: subxt :: storage :: address :: Yes , :: subxt :: storage :: address :: Yes , :: subxt :: storage :: address :: Yes >{
-                    :: subxt :: storage :: address :: StaticStorageAddress :: new ("Staking" , "SpanSlash" , vec ! [:: subxt :: storage :: address :: StorageMapKey :: new ((_0 . borrow () , _1 . borrow ()) , :: subxt :: storage :: address :: StorageHasher :: Twox64Concat)] , [160u8 , 63u8 , 115u8 , 190u8 , 233u8 , 148u8 , 75u8 , 3u8 , 11u8 , 59u8 , 184u8 , 220u8 , 205u8 , 64u8 , 28u8 , 190u8 , 116u8 , 210u8 , 225u8 , 230u8 , 224u8 , 163u8 , 103u8 , 157u8 , 100u8 , 29u8 , 86u8 , 167u8 , 84u8 , 217u8 , 109u8 , 200u8 ,])
+                    :: subxt :: storage :: address :: StaticStorageAddress :: new ("Staking" , "SpanSlash" , vec ! [:: subxt :: storage :: address :: StorageMapKey :: new (& (_0 . borrow () , _1 . borrow ()) , :: subxt :: storage :: address :: StorageHasher :: Twox64Concat)] , [160u8 , 63u8 , 115u8 , 190u8 , 233u8 , 148u8 , 75u8 , 3u8 , 11u8 , 59u8 , 184u8 , 220u8 , 205u8 , 64u8 , 28u8 , 190u8 , 116u8 , 210u8 , 225u8 , 230u8 , 224u8 , 163u8 , 103u8 , 157u8 , 100u8 , 29u8 , 86u8 , 167u8 , 84u8 , 217u8 , 109u8 , 200u8 ,])
                 }
                 #[doc = " Records information about the maximum slash of a stash within a slashing span,"]
                 #[doc = " as well as how much reward has been paid out."]                pub fn span_slash_root (& self ,) -> :: subxt :: storage :: address :: StaticStorageAddress :: < :: subxt :: metadata :: DecodeStaticType < runtime_types :: pallet_staking :: slashing :: SpanRecord < :: core :: primitive :: u128 > > , () , :: subxt :: storage :: address :: Yes , :: subxt :: storage :: address :: Yes >{
@@ -9979,7 +9981,7 @@ pub mod api {
                     )
                 }
                 #[doc = " The owner of a key. The key is the `KeyTypeId` + the encoded key."]                pub fn key_owner (& self , _0 : impl :: std :: borrow :: Borrow < runtime_types :: sp_core :: crypto :: KeyTypeId > , _1 : impl :: std :: borrow :: Borrow < [:: core :: primitive :: u8] > ,) -> :: subxt :: storage :: address :: StaticStorageAddress :: < :: subxt :: metadata :: DecodeStaticType < :: subxt :: ext :: sp_core :: crypto :: AccountId32 > , :: subxt :: storage :: address :: Yes , () , :: subxt :: storage :: address :: Yes >{
-                    :: subxt :: storage :: address :: StaticStorageAddress :: new ("Session" , "KeyOwner" , vec ! [:: subxt :: storage :: address :: StorageMapKey :: new ((_0 . borrow () , _1 . borrow ()) , :: subxt :: storage :: address :: StorageHasher :: Twox64Concat)] , [4u8 , 91u8 , 25u8 , 84u8 , 250u8 , 201u8 , 174u8 , 129u8 , 201u8 , 58u8 , 197u8 , 199u8 , 137u8 , 240u8 , 118u8 , 33u8 , 99u8 , 2u8 , 195u8 , 57u8 , 53u8 , 172u8 , 0u8 , 148u8 , 203u8 , 144u8 , 149u8 , 64u8 , 135u8 , 254u8 , 242u8 , 215u8 ,])
+                    :: subxt :: storage :: address :: StaticStorageAddress :: new ("Session" , "KeyOwner" , vec ! [:: subxt :: storage :: address :: StorageMapKey :: new (& (_0 . borrow () , _1 . borrow ()) , :: subxt :: storage :: address :: StorageHasher :: Twox64Concat)] , [4u8 , 91u8 , 25u8 , 84u8 , 250u8 , 201u8 , 174u8 , 129u8 , 201u8 , 58u8 , 197u8 , 199u8 , 137u8 , 240u8 , 118u8 , 33u8 , 99u8 , 2u8 , 195u8 , 57u8 , 53u8 , 172u8 , 0u8 , 148u8 , 203u8 , 144u8 , 149u8 , 64u8 , 135u8 , 254u8 , 242u8 , 215u8 ,])
                 }
                 #[doc = " The owner of a key. The key is the `KeyTypeId` + the encoded key."]                pub fn key_owner_root (& self ,) -> :: subxt :: storage :: address :: StaticStorageAddress :: < :: subxt :: metadata :: DecodeStaticType < :: subxt :: ext :: sp_core :: crypto :: AccountId32 > , () , () , :: subxt :: storage :: address :: Yes >{
                     ::subxt::storage::address::StaticStorageAddress::new(
@@ -12939,15 +12941,18 @@ pub mod api {
                     #[doc = "Invalid public key signature submission"]
                     InvalidSignature,
                     #[codec(index = 10)]
+                    #[doc = "Invalid Nonece used, must be greater than [`refresh_nonce`]."]
+                    InvalidNonce,
+                    #[codec(index = 11)]
                     #[doc = "Invalid misbehaviour reports"]
                     InvalidMisbehaviourReports,
-                    #[codec(index = 11)]
+                    #[codec(index = 12)]
                     #[doc = "DKG Refresh is already in progress."]
                     RefreshInProgress,
-                    #[codec(index = 12)]
+                    #[codec(index = 13)]
                     #[doc = "No NextPublicKey stored on-chain."]
                     NoNextPublicKey,
-                    #[codec(index = 13)]
+                    #[codec(index = 14)]
                     #[doc = "Must be calling from the controller account"]
                     InvalidControllerAccount,
                 }
@@ -12961,7 +12966,7 @@ pub mod api {
                 )]
                 #[doc = "\n\t\t\tThe [event](https://docs.substrate.io/main-docs/build/events-errors/) emitted\n\t\t\tby this pallet.\n\t\t\t"]
                 pub enum Event {
-                    # [codec (index = 0)] # [doc = "Current public key submitted"] PublicKeySubmitted { compressed_pub_key : :: std :: vec :: Vec < :: core :: primitive :: u8 > , uncompressed_pub_key : :: std :: vec :: Vec < :: core :: primitive :: u8 > , } , # [codec (index = 1)] # [doc = "Next public key submitted"] NextPublicKeySubmitted { compressed_pub_key : :: std :: vec :: Vec < :: core :: primitive :: u8 > , uncompressed_pub_key : :: std :: vec :: Vec < :: core :: primitive :: u8 > , } , # [codec (index = 2)] # [doc = "Next public key signature submitted"] NextPublicKeySignatureSubmitted { pub_key_sig : :: std :: vec :: Vec < :: core :: primitive :: u8 > , compressed_pub_key : :: std :: vec :: Vec < :: core :: primitive :: u8 > , uncompressed_pub_key : :: std :: vec :: Vec < :: core :: primitive :: u8 > , } , # [codec (index = 3)] # [doc = "Current Public Key Changed."] PublicKeyChanged { compressed_pub_key : :: std :: vec :: Vec < :: core :: primitive :: u8 > , uncompressed_pub_key : :: std :: vec :: Vec < :: core :: primitive :: u8 > , } , # [codec (index = 4)] # [doc = "Current Public Key Signature Changed."] PublicKeySignatureChanged { pub_key_sig : :: std :: vec :: Vec < :: core :: primitive :: u8 > , compressed_pub_key : :: std :: vec :: Vec < :: core :: primitive :: u8 > , uncompressed_pub_key : :: std :: vec :: Vec < :: core :: primitive :: u8 > , } , # [codec (index = 5)] # [doc = "Misbehaviour reports submitted"] MisbehaviourReportsSubmitted { misbehaviour_type : runtime_types :: dkg_runtime_primitives :: MisbehaviourType , reporters : :: std :: vec :: Vec < runtime_types :: dkg_runtime_primitives :: crypto :: Public > , } , # [codec (index = 6)] # [doc = "Refresh DKG Keys Finished (forcefully)."] RefreshKeysFinished { next_authority_set_id : :: core :: primitive :: u64 , } , # [codec (index = 7)] # [doc = "NextKeygenThreshold updated"] NextKeygenThresholdUpdated { next_keygen_threshold : :: core :: primitive :: u16 , } , # [codec (index = 8)] # [doc = "NextSignatureThreshold updated"] NextSignatureThresholdUpdated { next_signature_threshold : :: core :: primitive :: u16 , } , # [codec (index = 9)] # [doc = "An Emergency Keygen Protocol was triggered."] EmergencyKeygenTriggered , }
+                    # [codec (index = 0)] # [doc = "Current public key submitted"] PublicKeySubmitted { compressed_pub_key : :: std :: vec :: Vec < :: core :: primitive :: u8 > , uncompressed_pub_key : :: std :: vec :: Vec < :: core :: primitive :: u8 > , } , # [codec (index = 1)] # [doc = "Next public key submitted"] NextPublicKeySubmitted { compressed_pub_key : :: std :: vec :: Vec < :: core :: primitive :: u8 > , uncompressed_pub_key : :: std :: vec :: Vec < :: core :: primitive :: u8 > , } , # [codec (index = 2)] # [doc = "Next public key signature submitted"] NextPublicKeySignatureSubmitted { pub_key_sig : :: std :: vec :: Vec < :: core :: primitive :: u8 > , compressed_pub_key : :: std :: vec :: Vec < :: core :: primitive :: u8 > , uncompressed_pub_key : :: std :: vec :: Vec < :: core :: primitive :: u8 > , nonce : :: core :: primitive :: u32 , } , # [codec (index = 3)] # [doc = "Current Public Key Changed."] PublicKeyChanged { compressed_pub_key : :: std :: vec :: Vec < :: core :: primitive :: u8 > , uncompressed_pub_key : :: std :: vec :: Vec < :: core :: primitive :: u8 > , } , # [codec (index = 4)] # [doc = "Current Public Key Signature Changed."] PublicKeySignatureChanged { pub_key_sig : :: std :: vec :: Vec < :: core :: primitive :: u8 > , compressed_pub_key : :: std :: vec :: Vec < :: core :: primitive :: u8 > , uncompressed_pub_key : :: std :: vec :: Vec < :: core :: primitive :: u8 > , nonce : :: core :: primitive :: u32 , } , # [codec (index = 5)] # [doc = "Misbehaviour reports submitted"] MisbehaviourReportsSubmitted { misbehaviour_type : runtime_types :: dkg_runtime_primitives :: MisbehaviourType , reporters : :: std :: vec :: Vec < runtime_types :: dkg_runtime_primitives :: crypto :: Public > , } , # [codec (index = 6)] # [doc = "Refresh DKG Keys Finished (forcefully)."] RefreshKeysFinished { next_authority_set_id : :: core :: primitive :: u64 , } , # [codec (index = 7)] # [doc = "NextKeygenThreshold updated"] NextKeygenThresholdUpdated { next_keygen_threshold : :: core :: primitive :: u16 , } , # [codec (index = 8)] # [doc = "NextSignatureThreshold updated"] NextSignatureThresholdUpdated { next_signature_threshold : :: core :: primitive :: u16 , } , # [codec (index = 9)] # [doc = "An Emergency Keygen Protocol was triggered."] EmergencyKeygenTriggered , }
             }
             pub mod types {
                 use super::runtime_types;
@@ -16981,10 +16986,10 @@ pub mod api {
         let runtime_metadata_hash = client.metadata().metadata_hash(&PALLETS);
         if runtime_metadata_hash
             != [
-                113u8, 179u8, 131u8, 211u8, 15u8, 8u8, 155u8, 37u8, 220u8,
-                244u8, 236u8, 235u8, 197u8, 252u8, 31u8, 127u8, 115u8, 88u8,
-                69u8, 235u8, 240u8, 44u8, 157u8, 117u8, 71u8, 35u8, 207u8,
-                122u8, 54u8, 57u8, 15u8, 220u8,
+                188u8, 90u8, 177u8, 23u8, 160u8, 236u8, 92u8, 192u8, 7u8,
+                163u8, 212u8, 249u8, 6u8, 223u8, 157u8, 154u8, 152u8, 16u8,
+                146u8, 100u8, 135u8, 134u8, 138u8, 56u8, 28u8, 84u8, 192u8,
+                117u8, 203u8, 178u8, 38u8, 30u8,
             ]
         {
             Err(::subxt::error::MetadataError::IncompatibleMetadata)
