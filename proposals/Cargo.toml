@@ -13,11 +13,11 @@ license = "Apache-2.0"
 scale-codec = { package = 'parity-scale-codec', version = '3.0.0', default-features = false, optional = true, features = ["derive", "max-encoded-len"] }
 scale-info = { version = "2.1.1", default-features = false, optional = true }
 
-num-traits = { version = "0.2.8", default-features = false }
+num-traits = { version = "0.2.15", default-features = false }
 typed-builder = { version = "0.10.0", default-features = false, optional = true }
-tiny-keccak = { version = "2.0.0", features = ["keccak"] }
-schemars = "0.8.1"
-serde = { version = "1.0.103", default-features = false, features = ["derive"], optional = true}
+tiny-keccak = { version = "2.0.2", features = ["keccak"] }
+schemars = "0.8.11"
+serde = { version = "1.0.152", default-features = false, features = ["derive"], optional = true}
 
 [dev-dependencies]
 hex-literal = "0.3"
