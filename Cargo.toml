@@ -38,7 +38,7 @@ rand = { version = "0.8", default-features = false, features = ["getrandom"] }
 thiserror = "1.0.38"
 hex = { workspace = true }
 # EVM crates.
-ethers = { version = "1.0.2", default-features = false, optional = true, features = ["legacy", "abigen"] }
+ethers = { version = "=0.17.0", default-features = false, optional = true, features = ["legacy", "abigen"] }
 serde = { workspace = true }
 serde_json = { version = "1", optional = true }
 
