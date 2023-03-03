@@ -5,8 +5,6 @@ mod tests {
     use crate::evm::verify_trie_proof::*;
     use ethereum_types::H256 as EthTypeH256;
     use ethers::prelude::*;
-    use ethers::types::ValueOrArray::{Array, Value};
-    use ethers_core::k256::elliptic_curve::rand_core::block;
 
     #[tokio::test]
     async fn get_proof_works() {

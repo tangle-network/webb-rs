@@ -1,4 +1,3 @@
-use ethereum::ReceiptV3;
 use ethereum_types::H256;
 use rlp::Rlp;
 
@@ -33,7 +32,7 @@ impl TrieProver {
     }
 
     pub fn verify_log_entry(
-        log_index: u64,
+        _log_index: u64,
         log_entry_data: Vec<u8>,
         receipt_index: u64,
         receipt_data: Vec<u8>,
