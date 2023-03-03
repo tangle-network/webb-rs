@@ -1,13 +1,13 @@
 mod evm;
 
 #[cfg(test)]
-#[ignore = "requires RPC endpoint"]
 mod tests {
     use crate::evm::verify_trie_proof::*;
     use ethereum_types::H256 as EthTypeH256;
     use ethers::prelude::*;
 
     #[tokio::test]
+    #[ignore = "requires RPC endpoint"]
     async fn get_proof_works() {
         let provider = Provider::<Http>::try_from("...").unwrap();
 
