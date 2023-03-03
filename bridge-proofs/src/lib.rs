@@ -1,6 +1,7 @@
 mod evm;
 
 #[cfg(test)]
+#[ignore("requires RPC endpoint")]
 mod tests {
     use crate::evm::verify_trie_proof::*;
     use ethereum_types::H256 as EthTypeH256;
