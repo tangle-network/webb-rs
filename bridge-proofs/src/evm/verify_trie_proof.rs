@@ -2,7 +2,6 @@ use ethereum::ReceiptV3;
 use ethereum_types::H256;
 use ethers::utils::keccak256;
 use rlp::Rlp;
-use serde_rlp::*;
 
 pub struct TrieProver;
 
