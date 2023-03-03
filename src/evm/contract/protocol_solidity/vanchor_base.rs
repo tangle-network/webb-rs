@@ -1,6 +1,6 @@
-pub use v_anchor_contract::*;
+pub use v_anchor_base_contract::*;
 #[allow(clippy::too_many_arguments, non_camel_case_types)]
-pub mod v_anchor_contract {
+pub mod v_anchor_base_contract {
     #![allow(clippy::enum_variant_names)]
     #![allow(dead_code)]
     #![allow(clippy::type_complexity)]
@@ -14,33 +14,35 @@ pub mod v_anchor_contract {
         types::*,
     };
     use ethers::providers::Middleware;
-    #[doc = "VAnchorContract was auto-generated with ethers-rs Abigen. More information at: https://github.com/gakonst/ethers-rs"]
+    #[doc = "VAnchorBaseContract was auto-generated with ethers-rs Abigen. More information at: https://github.com/gakonst/ethers-rs"]
     use std::sync::Arc;
-    pub static VANCHORCONTRACT_ABI: ethers::contract::Lazy<
+    pub static VANCHORBASECONTRACT_ABI: ethers::contract::Lazy<
         ethers::core::abi::Abi,
     > = ethers::contract::Lazy::new(|| {
-        ethers :: core :: utils :: __serde_json :: from_str ("[{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"chainID\",\"type\":\"uint256\",\"components\":[],\"indexed\":false},{\"internalType\":\"uint256\",\"name\":\"latestLeafIndex\",\"type\":\"uint256\",\"components\":[],\"indexed\":false},{\"internalType\":\"uint256\",\"name\":\"merkleRoot\",\"type\":\"uint256\",\"components\":[],\"indexed\":false}],\"type\":\"event\",\"name\":\"EdgeAddition\",\"outputs\":[],\"anonymous\":false},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"chainID\",\"type\":\"uint256\",\"components\":[],\"indexed\":false},{\"internalType\":\"uint256\",\"name\":\"latestLeafIndex\",\"type\":\"uint256\",\"components\":[],\"indexed\":false},{\"internalType\":\"uint256\",\"name\":\"merkleRoot\",\"type\":\"uint256\",\"components\":[],\"indexed\":false}],\"type\":\"event\",\"name\":\"EdgeUpdate\",\"outputs\":[],\"anonymous\":false},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"commitment\",\"type\":\"uint256\",\"components\":[],\"indexed\":true},{\"internalType\":\"uint32\",\"name\":\"leafIndex\",\"type\":\"uint32\",\"components\":[],\"indexed\":false},{\"internalType\":\"uint256\",\"name\":\"timestamp\",\"type\":\"uint256\",\"components\":[],\"indexed\":false}],\"type\":\"event\",\"name\":\"Insertion\",\"outputs\":[],\"anonymous\":false},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"commitment\",\"type\":\"uint256\",\"components\":[],\"indexed\":false},{\"internalType\":\"uint256\",\"name\":\"subTreeIndex\",\"type\":\"uint256\",\"components\":[],\"indexed\":false},{\"internalType\":\"uint256\",\"name\":\"leafIndex\",\"type\":\"uint256\",\"components\":[],\"indexed\":false},{\"internalType\":\"bytes\",\"name\":\"encryptedOutput\",\"type\":\"bytes\",\"components\":[],\"indexed\":false}],\"type\":\"event\",\"name\":\"NewCommitment\",\"outputs\":[],\"anonymous\":false},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"nullifier\",\"type\":\"uint256\",\"components\":[],\"indexed\":false}],\"type\":\"event\",\"name\":\"NewNullifier\",\"outputs\":[],\"anonymous\":false},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\",\"components\":[],\"indexed\":true},{\"internalType\":\"bytes\",\"name\":\"key\",\"type\":\"bytes\",\"components\":[],\"indexed\":false}],\"type\":\"event\",\"name\":\"PublicKey\",\"outputs\":[],\"anonymous\":false},{\"inputs\":[],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"EVM_CHAIN_ID_TYPE\",\"outputs\":[{\"internalType\":\"bytes2\",\"name\":\"\",\"type\":\"bytes2\",\"components\":[]}]},{\"inputs\":[],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"FIELD_SIZE\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\",\"components\":[]}]},{\"inputs\":[],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"MAX_EXT_AMOUNT\",\"outputs\":[{\"internalType\":\"int256\",\"name\":\"\",\"type\":\"int256\",\"components\":[]}]},{\"inputs\":[],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"MAX_FEE\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\",\"components\":[]}]},{\"inputs\":[],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"ROOT_HISTORY_SIZE\",\"outputs\":[{\"internalType\":\"uint32\",\"name\":\"\",\"type\":\"uint32\",\"components\":[]}]},{\"inputs\":[],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"ZERO_VALUE\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\",\"components\":[]}]},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_fromTokenAddress\",\"type\":\"address\",\"components\":[]},{\"internalType\":\"address\",\"name\":\"_toTokenAddress\",\"type\":\"address\",\"components\":[]},{\"internalType\":\"uint256\",\"name\":\"_extAmount\",\"type\":\"uint256\",\"components\":[]}],\"stateMutability\":\"payable\",\"type\":\"function\",\"name\":\"_executeWrapping\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\",\"components\":[]}]},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_fromTokenAddress\",\"type\":\"address\",\"components\":[]},{\"internalType\":\"address\",\"name\":\"_toTokenAddress\",\"type\":\"address\",\"components\":[]},{\"internalType\":\"address\",\"name\":\"_recipient\",\"type\":\"address\",\"components\":[]},{\"internalType\":\"uint256\",\"name\":\"_minusExtAmount\",\"type\":\"uint256\",\"components\":[]}],\"stateMutability\":\"payable\",\"type\":\"function\",\"name\":\"_withdrawAndUnwrap\",\"outputs\":[]},{\"inputs\":[{\"internalType\":\"int256\",\"name\":\"_extAmount\",\"type\":\"int256\",\"components\":[]},{\"internalType\":\"uint256\",\"name\":\"_fee\",\"type\":\"uint256\",\"components\":[]}],\"stateMutability\":\"pure\",\"type\":\"function\",\"name\":\"calculatePublicAmount\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\",\"components\":[]}]},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\",\"components\":[]}],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"commitments\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\",\"components\":[]}]},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_maximumDepositAmount\",\"type\":\"uint256\",\"components\":[]},{\"internalType\":\"uint32\",\"name\":\"_nonce\",\"type\":\"uint32\",\"components\":[]}],\"stateMutability\":\"nonpayable\",\"type\":\"function\",\"name\":\"configureMaximumDepositLimit\",\"outputs\":[]},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_minimalWithdrawalAmount\",\"type\":\"uint256\",\"components\":[]},{\"internalType\":\"uint32\",\"name\":\"_nonce\",\"type\":\"uint32\",\"components\":[]}],\"stateMutability\":\"nonpayable\",\"type\":\"function\",\"name\":\"configureMinimalWithdrawalLimit\",\"outputs\":[]},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\",\"components\":[]}],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"currentNeighborRootIndex\",\"outputs\":[{\"internalType\":\"uint32\",\"name\":\"\",\"type\":\"uint32\",\"components\":[]}]},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\",\"components\":[]}],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"edgeExistsForChain\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\",\"components\":[]}]},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\",\"components\":[]}],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"edgeIndex\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\",\"components\":[]}]},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\",\"components\":[]}],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"edgeList\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"chainID\",\"type\":\"uint256\",\"components\":[]},{\"internalType\":\"uint256\",\"name\":\"root\",\"type\":\"uint256\",\"components\":[]},{\"internalType\":\"uint256\",\"name\":\"latestLeafIndex\",\"type\":\"uint256\",\"components\":[]},{\"internalType\":\"bytes32\",\"name\":\"srcResourceID\",\"type\":\"bytes32\",\"components\":[]}]},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\",\"components\":[]}],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"filledSubtrees\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\",\"components\":[]}]},{\"inputs\":[],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"getChainId\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\",\"components\":[]}]},{\"inputs\":[],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"getChainIdType\",\"outputs\":[{\"internalType\":\"uint48\",\"name\":\"\",\"type\":\"uint48\",\"components\":[]}]},{\"inputs\":[],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"getHasher\",\"outputs\":[{\"internalType\":\"contract IHasher\",\"name\":\"\",\"type\":\"address\",\"components\":[]}]},{\"inputs\":[],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"getLastRoot\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\",\"components\":[]}]},{\"inputs\":[],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"getLatestNeighborEdges\",\"outputs\":[{\"internalType\":\"struct Edge[]\",\"name\":\"\",\"type\":\"tuple[]\",\"components\":[{\"internalType\":\"uint256\",\"name\":\"chainID\",\"type\":\"uint256\",\"components\":[]},{\"internalType\":\"uint256\",\"name\":\"root\",\"type\":\"uint256\",\"components\":[]},{\"internalType\":\"uint256\",\"name\":\"latestLeafIndex\",\"type\":\"uint256\",\"components\":[]},{\"internalType\":\"bytes32\",\"name\":\"srcResourceID\",\"type\":\"bytes32\",\"components\":[]}]}]},{\"inputs\":[],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"getLatestNeighborRoots\",\"outputs\":[{\"internalType\":\"uint256[]\",\"name\":\"\",\"type\":\"uint256[]\",\"components\":[]}]},{\"inputs\":[],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"getLevels\",\"outputs\":[{\"internalType\":\"uint32\",\"name\":\"\",\"type\":\"uint32\",\"components\":[]}]},{\"inputs\":[],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"getNextIndex\",\"outputs\":[{\"internalType\":\"uint32\",\"name\":\"\",\"type\":\"uint32\",\"components\":[]}]},{\"inputs\":[],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"getProposalNonce\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\",\"components\":[]}]},{\"inputs\":[{\"internalType\":\"uint32\",\"name\":\"index\",\"type\":\"uint32\",\"components\":[]}],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"getZeroHash\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\",\"components\":[]}]},{\"inputs\":[],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"handler\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\",\"components\":[]}]},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_chainID\",\"type\":\"uint256\",\"components\":[]}],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"hasEdge\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\",\"components\":[]}]},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_left\",\"type\":\"uint256\",\"components\":[]},{\"internalType\":\"uint256\",\"name\":\"_right\",\"type\":\"uint256\",\"components\":[]}],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"hashLeftRight\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\",\"components\":[]}]},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_minimalWithdrawalAmount\",\"type\":\"uint256\",\"components\":[]},{\"internalType\":\"uint256\",\"name\":\"_maximumDepositAmount\",\"type\":\"uint256\",\"components\":[]}],\"stateMutability\":\"nonpayable\",\"type\":\"function\",\"name\":\"initialize\",\"outputs\":[]},{\"inputs\":[],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"initialized\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\",\"components\":[]}]},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_neighborChainID\",\"type\":\"uint256\",\"components\":[]},{\"internalType\":\"uint256\",\"name\":\"_root\",\"type\":\"uint256\",\"components\":[]}],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"isKnownNeighborRoot\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\",\"components\":[]}]},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"root\",\"type\":\"uint256\",\"components\":[]}],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"isKnownRoot\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\",\"components\":[]}]},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_nullifierHash\",\"type\":\"uint256\",\"components\":[]}],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"isSpent\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\",\"components\":[]}]},{\"inputs\":[{\"internalType\":\"uint256[]\",\"name\":\"_nullifierHashes\",\"type\":\"uint256[]\",\"components\":[]}],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"isSpentArray\",\"outputs\":[{\"internalType\":\"bool[]\",\"name\":\"\",\"type\":\"bool[]\",\"components\":[]}]},{\"inputs\":[{\"internalType\":\"uint256[]\",\"name\":\"_roots\",\"type\":\"uint256[]\",\"components\":[]}],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"isValidRoots\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\",\"components\":[]}]},{\"inputs\":[],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"lastBalance\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\",\"components\":[]}]},{\"inputs\":[],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"maxEdges\",\"outputs\":[{\"internalType\":\"uint8\",\"name\":\"\",\"type\":\"uint8\",\"components\":[]}]},{\"inputs\":[],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"maximumDepositAmount\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\",\"components\":[]}]},{\"inputs\":[],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"minimalWithdrawalAmount\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\",\"components\":[]}]},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\",\"components\":[]},{\"internalType\":\"uint32\",\"name\":\"\",\"type\":\"uint32\",\"components\":[]}],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"neighborRoots\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\",\"components\":[]}]},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\",\"components\":[]}],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"nullifierHashes\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\",\"components\":[]}]},{\"inputs\":[],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"outerLevels\",\"outputs\":[{\"internalType\":\"uint32\",\"name\":\"\",\"type\":\"uint32\",\"components\":[]}]},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"_resourceId\",\"type\":\"bytes32\",\"components\":[]}],\"stateMutability\":\"pure\",\"type\":\"function\",\"name\":\"parseChainIdFromResourceId\",\"outputs\":[{\"internalType\":\"uint64\",\"name\":\"\",\"type\":\"uint64\",\"components\":[]}]},{\"inputs\":[],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"proposalNonce\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\",\"components\":[]}]},{\"inputs\":[{\"internalType\":\"struct VAnchorBase.Account\",\"name\":\"_account\",\"type\":\"tuple\",\"components\":[{\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\",\"components\":[]},{\"internalType\":\"bytes\",\"name\":\"keyData\",\"type\":\"bytes\",\"components\":[]}]}],\"stateMutability\":\"nonpayable\",\"type\":\"function\",\"name\":\"register\",\"outputs\":[]},{\"inputs\":[{\"internalType\":\"struct VAnchorBase.Account\",\"name\":\"_account\",\"type\":\"tuple\",\"components\":[{\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\",\"components\":[]},{\"internalType\":\"bytes\",\"name\":\"keyData\",\"type\":\"bytes\",\"components\":[]}]},{\"internalType\":\"bytes\",\"name\":\"_proof\",\"type\":\"bytes\",\"components\":[]},{\"internalType\":\"bytes\",\"name\":\"_auxPublicInputs\",\"type\":\"bytes\",\"components\":[]},{\"internalType\":\"struct CommonExtData\",\"name\":\"_externalData\",\"type\":\"tuple\",\"components\":[{\"internalType\":\"address\",\"name\":\"recipient\",\"type\":\"address\",\"components\":[]},{\"internalType\":\"int256\",\"name\":\"extAmount\",\"type\":\"int256\",\"components\":[]},{\"internalType\":\"address\",\"name\":\"relayer\",\"type\":\"address\",\"components\":[]},{\"internalType\":\"uint256\",\"name\":\"fee\",\"type\":\"uint256\",\"components\":[]},{\"internalType\":\"uint256\",\"name\":\"refund\",\"type\":\"uint256\",\"components\":[]},{\"internalType\":\"address\",\"name\":\"token\",\"type\":\"address\",\"components\":[]}]},{\"internalType\":\"struct PublicInputs\",\"name\":\"_publicInputs\",\"type\":\"tuple\",\"components\":[{\"internalType\":\"bytes\",\"name\":\"roots\",\"type\":\"bytes\",\"components\":[]},{\"internalType\":\"bytes\",\"name\":\"extensionRoots\",\"type\":\"bytes\",\"components\":[]},{\"internalType\":\"uint256[]\",\"name\":\"inputNullifiers\",\"type\":\"uint256[]\",\"components\":[]},{\"internalType\":\"uint256[2]\",\"name\":\"outputCommitments\",\"type\":\"uint256[2]\",\"components\":[]},{\"internalType\":\"uint256\",\"name\":\"publicAmount\",\"type\":\"uint256\",\"components\":[]},{\"internalType\":\"uint256\",\"name\":\"extDataHash\",\"type\":\"uint256\",\"components\":[]}]},{\"internalType\":\"struct Encryptions\",\"name\":\"_encryptions\",\"type\":\"tuple\",\"components\":[{\"internalType\":\"bytes\",\"name\":\"encryptedOutput1\",\"type\":\"bytes\",\"components\":[]},{\"internalType\":\"bytes\",\"name\":\"encryptedOutput2\",\"type\":\"bytes\",\"components\":[]}]}],\"stateMutability\":\"payable\",\"type\":\"function\",\"name\":\"registerAndTransact\",\"outputs\":[]},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\",\"components\":[]}],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"roots\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"root\",\"type\":\"uint256\",\"components\":[]},{\"internalType\":\"uint32\",\"name\":\"latestLeafindex\",\"type\":\"uint32\",\"components\":[]}]},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_handler\",\"type\":\"address\",\"components\":[]},{\"internalType\":\"uint32\",\"name\":\"_nonce\",\"type\":\"uint32\",\"components\":[]}],\"stateMutability\":\"nonpayable\",\"type\":\"function\",\"name\":\"setHandler\",\"outputs\":[]},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_verifier\",\"type\":\"address\",\"components\":[]},{\"internalType\":\"uint32\",\"name\":\"_nonce\",\"type\":\"uint32\",\"components\":[]}],\"stateMutability\":\"nonpayable\",\"type\":\"function\",\"name\":\"setVerifier\",\"outputs\":[]},{\"inputs\":[],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"token\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\",\"components\":[]}]},{\"inputs\":[{\"internalType\":\"bytes\",\"name\":\"_proof\",\"type\":\"bytes\",\"components\":[]},{\"internalType\":\"bytes\",\"name\":\"_auxPublicInputs\",\"type\":\"bytes\",\"components\":[]},{\"internalType\":\"struct CommonExtData\",\"name\":\"_externalData\",\"type\":\"tuple\",\"components\":[{\"internalType\":\"address\",\"name\":\"recipient\",\"type\":\"address\",\"components\":[]},{\"internalType\":\"int256\",\"name\":\"extAmount\",\"type\":\"int256\",\"components\":[]},{\"internalType\":\"address\",\"name\":\"relayer\",\"type\":\"address\",\"components\":[]},{\"internalType\":\"uint256\",\"name\":\"fee\",\"type\":\"uint256\",\"components\":[]},{\"internalType\":\"uint256\",\"name\":\"refund\",\"type\":\"uint256\",\"components\":[]},{\"internalType\":\"address\",\"name\":\"token\",\"type\":\"address\",\"components\":[]}]},{\"internalType\":\"struct PublicInputs\",\"name\":\"_publicInputs\",\"type\":\"tuple\",\"components\":[{\"internalType\":\"bytes\",\"name\":\"roots\",\"type\":\"bytes\",\"components\":[]},{\"internalType\":\"bytes\",\"name\":\"extensionRoots\",\"type\":\"bytes\",\"components\":[]},{\"internalType\":\"uint256[]\",\"name\":\"inputNullifiers\",\"type\":\"uint256[]\",\"components\":[]},{\"internalType\":\"uint256[2]\",\"name\":\"outputCommitments\",\"type\":\"uint256[2]\",\"components\":[]},{\"internalType\":\"uint256\",\"name\":\"publicAmount\",\"type\":\"uint256\",\"components\":[]},{\"internalType\":\"uint256\",\"name\":\"extDataHash\",\"type\":\"uint256\",\"components\":[]}]},{\"internalType\":\"struct Encryptions\",\"name\":\"_encryptions\",\"type\":\"tuple\",\"components\":[{\"internalType\":\"bytes\",\"name\":\"encryptedOutput1\",\"type\":\"bytes\",\"components\":[]},{\"internalType\":\"bytes\",\"name\":\"encryptedOutput2\",\"type\":\"bytes\",\"components\":[]}]}],\"stateMutability\":\"payable\",\"type\":\"function\",\"name\":\"transact\",\"outputs\":[]},{\"inputs\":[{\"internalType\":\"uint256[8]\",\"name\":\"_proof\",\"type\":\"uint256[8]\",\"components\":[]}],\"stateMutability\":\"pure\",\"type\":\"function\",\"name\":\"unpackProof\",\"outputs\":[{\"internalType\":\"uint256[2]\",\"name\":\"\",\"type\":\"uint256[2]\",\"components\":[]},{\"internalType\":\"uint256[2][2]\",\"name\":\"\",\"type\":\"uint256[2][2]\",\"components\":[]},{\"internalType\":\"uint256[2]\",\"name\":\"\",\"type\":\"uint256[2]\",\"components\":[]}]},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_root\",\"type\":\"uint256\",\"components\":[]},{\"internalType\":\"uint32\",\"name\":\"_leafIndex\",\"type\":\"uint32\",\"components\":[]},{\"internalType\":\"bytes32\",\"name\":\"_srcResourceID\",\"type\":\"bytes32\",\"components\":[]}],\"stateMutability\":\"payable\",\"type\":\"function\",\"name\":\"updateEdge\",\"outputs\":[]},{\"inputs\":[],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"verifier\",\"outputs\":[{\"internalType\":\"contract IAnchorVerifier\",\"name\":\"\",\"type\":\"address\",\"components\":[]}]}]") . expect ("invalid abi")
+        ethers :: core :: utils :: __serde_json :: from_str ("[{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"chainID\",\"type\":\"uint256\",\"components\":[],\"indexed\":false},{\"internalType\":\"uint256\",\"name\":\"latestLeafIndex\",\"type\":\"uint256\",\"components\":[],\"indexed\":false},{\"internalType\":\"uint256\",\"name\":\"merkleRoot\",\"type\":\"uint256\",\"components\":[],\"indexed\":false}],\"type\":\"event\",\"name\":\"EdgeAddition\",\"outputs\":[],\"anonymous\":false},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"chainID\",\"type\":\"uint256\",\"components\":[],\"indexed\":false},{\"internalType\":\"uint256\",\"name\":\"latestLeafIndex\",\"type\":\"uint256\",\"components\":[],\"indexed\":false},{\"internalType\":\"uint256\",\"name\":\"merkleRoot\",\"type\":\"uint256\",\"components\":[],\"indexed\":false}],\"type\":\"event\",\"name\":\"EdgeUpdate\",\"outputs\":[],\"anonymous\":false},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"commitment\",\"type\":\"uint256\",\"components\":[],\"indexed\":true},{\"internalType\":\"uint32\",\"name\":\"leafIndex\",\"type\":\"uint32\",\"components\":[],\"indexed\":false},{\"internalType\":\"uint256\",\"name\":\"timestamp\",\"type\":\"uint256\",\"components\":[],\"indexed\":false}],\"type\":\"event\",\"name\":\"Insertion\",\"outputs\":[],\"anonymous\":false},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"commitment\",\"type\":\"uint256\",\"components\":[],\"indexed\":false},{\"internalType\":\"uint256\",\"name\":\"subTreeIndex\",\"type\":\"uint256\",\"components\":[],\"indexed\":false},{\"internalType\":\"uint256\",\"name\":\"leafIndex\",\"type\":\"uint256\",\"components\":[],\"indexed\":false},{\"internalType\":\"bytes\",\"name\":\"encryptedOutput\",\"type\":\"bytes\",\"components\":[],\"indexed\":false}],\"type\":\"event\",\"name\":\"NewCommitment\",\"outputs\":[],\"anonymous\":false},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"nullifier\",\"type\":\"uint256\",\"components\":[],\"indexed\":false}],\"type\":\"event\",\"name\":\"NewNullifier\",\"outputs\":[],\"anonymous\":false},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\",\"components\":[],\"indexed\":true},{\"internalType\":\"bytes\",\"name\":\"key\",\"type\":\"bytes\",\"components\":[],\"indexed\":false}],\"type\":\"event\",\"name\":\"PublicKey\",\"outputs\":[],\"anonymous\":false},{\"inputs\":[],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"EVM_CHAIN_ID_TYPE\",\"outputs\":[{\"internalType\":\"bytes2\",\"name\":\"\",\"type\":\"bytes2\",\"components\":[]}]},{\"inputs\":[],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"FIELD_SIZE\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\",\"components\":[]}]},{\"inputs\":[],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"MAX_EXT_AMOUNT\",\"outputs\":[{\"internalType\":\"int256\",\"name\":\"\",\"type\":\"int256\",\"components\":[]}]},{\"inputs\":[],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"MAX_FEE\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\",\"components\":[]}]},{\"inputs\":[],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"ROOT_HISTORY_SIZE\",\"outputs\":[{\"internalType\":\"uint32\",\"name\":\"\",\"type\":\"uint32\",\"components\":[]}]},{\"inputs\":[],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"ZERO_VALUE\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\",\"components\":[]}]},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_fromTokenAddress\",\"type\":\"address\",\"components\":[]},{\"internalType\":\"address\",\"name\":\"_toTokenAddress\",\"type\":\"address\",\"components\":[]},{\"internalType\":\"uint256\",\"name\":\"_extAmount\",\"type\":\"uint256\",\"components\":[]}],\"stateMutability\":\"payable\",\"type\":\"function\",\"name\":\"_executeWrapping\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\",\"components\":[]}]},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_fromTokenAddress\",\"type\":\"address\",\"components\":[]},{\"internalType\":\"address\",\"name\":\"_toTokenAddress\",\"type\":\"address\",\"components\":[]},{\"internalType\":\"address\",\"name\":\"_recipient\",\"type\":\"address\",\"components\":[]},{\"internalType\":\"uint256\",\"name\":\"_minusExtAmount\",\"type\":\"uint256\",\"components\":[]}],\"stateMutability\":\"payable\",\"type\":\"function\",\"name\":\"_withdrawAndUnwrap\",\"outputs\":[]},{\"inputs\":[{\"internalType\":\"int256\",\"name\":\"_extAmount\",\"type\":\"int256\",\"components\":[]},{\"internalType\":\"uint256\",\"name\":\"_fee\",\"type\":\"uint256\",\"components\":[]}],\"stateMutability\":\"pure\",\"type\":\"function\",\"name\":\"calculatePublicAmount\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\",\"components\":[]}]},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\",\"components\":[]}],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"commitments\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\",\"components\":[]}]},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_maximumDepositAmount\",\"type\":\"uint256\",\"components\":[]},{\"internalType\":\"uint32\",\"name\":\"_nonce\",\"type\":\"uint32\",\"components\":[]}],\"stateMutability\":\"nonpayable\",\"type\":\"function\",\"name\":\"configureMaximumDepositLimit\",\"outputs\":[]},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_minimalWithdrawalAmount\",\"type\":\"uint256\",\"components\":[]},{\"internalType\":\"uint32\",\"name\":\"_nonce\",\"type\":\"uint32\",\"components\":[]}],\"stateMutability\":\"nonpayable\",\"type\":\"function\",\"name\":\"configureMinimalWithdrawalLimit\",\"outputs\":[]},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\",\"components\":[]}],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"currentNeighborRootIndex\",\"outputs\":[{\"internalType\":\"uint32\",\"name\":\"\",\"type\":\"uint32\",\"components\":[]}]},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\",\"components\":[]}],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"edgeExistsForChain\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\",\"components\":[]}]},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\",\"components\":[]}],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"edgeIndex\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\",\"components\":[]}]},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\",\"components\":[]}],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"edgeList\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"chainID\",\"type\":\"uint256\",\"components\":[]},{\"internalType\":\"uint256\",\"name\":\"root\",\"type\":\"uint256\",\"components\":[]},{\"internalType\":\"uint256\",\"name\":\"latestLeafIndex\",\"type\":\"uint256\",\"components\":[]},{\"internalType\":\"bytes32\",\"name\":\"srcResourceID\",\"type\":\"bytes32\",\"components\":[]}]},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\",\"components\":[]}],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"filledSubtrees\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\",\"components\":[]}]},{\"inputs\":[],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"getChainId\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\",\"components\":[]}]},{\"inputs\":[],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"getChainIdType\",\"outputs\":[{\"internalType\":\"uint48\",\"name\":\"\",\"type\":\"uint48\",\"components\":[]}]},{\"inputs\":[],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"getHasher\",\"outputs\":[{\"internalType\":\"contract IHasher\",\"name\":\"\",\"type\":\"address\",\"components\":[]}]},{\"inputs\":[],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"getLastRoot\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\",\"components\":[]}]},{\"inputs\":[],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"getLatestNeighborEdges\",\"outputs\":[{\"internalType\":\"struct Edge[]\",\"name\":\"\",\"type\":\"tuple[]\",\"components\":[{\"internalType\":\"uint256\",\"name\":\"chainID\",\"type\":\"uint256\",\"components\":[]},{\"internalType\":\"uint256\",\"name\":\"root\",\"type\":\"uint256\",\"components\":[]},{\"internalType\":\"uint256\",\"name\":\"latestLeafIndex\",\"type\":\"uint256\",\"components\":[]},{\"internalType\":\"bytes32\",\"name\":\"srcResourceID\",\"type\":\"bytes32\",\"components\":[]}]}]},{\"inputs\":[],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"getLatestNeighborRoots\",\"outputs\":[{\"internalType\":\"uint256[]\",\"name\":\"\",\"type\":\"uint256[]\",\"components\":[]}]},{\"inputs\":[],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"getLevels\",\"outputs\":[{\"internalType\":\"uint32\",\"name\":\"\",\"type\":\"uint32\",\"components\":[]}]},{\"inputs\":[],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"getNextIndex\",\"outputs\":[{\"internalType\":\"uint32\",\"name\":\"\",\"type\":\"uint32\",\"components\":[]}]},{\"inputs\":[],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"getProposalNonce\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\",\"components\":[]}]},{\"inputs\":[{\"internalType\":\"uint32\",\"name\":\"index\",\"type\":\"uint32\",\"components\":[]}],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"getZeroHash\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\",\"components\":[]}]},{\"inputs\":[],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"handler\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\",\"components\":[]}]},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_chainID\",\"type\":\"uint256\",\"components\":[]}],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"hasEdge\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\",\"components\":[]}]},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_left\",\"type\":\"uint256\",\"components\":[]},{\"internalType\":\"uint256\",\"name\":\"_right\",\"type\":\"uint256\",\"components\":[]}],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"hashLeftRight\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\",\"components\":[]}]},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_minimalWithdrawalAmount\",\"type\":\"uint256\",\"components\":[]},{\"internalType\":\"uint256\",\"name\":\"_maximumDepositAmount\",\"type\":\"uint256\",\"components\":[]}],\"stateMutability\":\"nonpayable\",\"type\":\"function\",\"name\":\"initialize\",\"outputs\":[]},{\"inputs\":[],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"initialized\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\",\"components\":[]}]},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_neighborChainID\",\"type\":\"uint256\",\"components\":[]},{\"internalType\":\"uint256\",\"name\":\"_root\",\"type\":\"uint256\",\"components\":[]}],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"isKnownNeighborRoot\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\",\"components\":[]}]},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"root\",\"type\":\"uint256\",\"components\":[]}],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"isKnownRoot\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\",\"components\":[]}]},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_nullifierHash\",\"type\":\"uint256\",\"components\":[]}],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"isSpent\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\",\"components\":[]}]},{\"inputs\":[{\"internalType\":\"uint256[]\",\"name\":\"_nullifierHashes\",\"type\":\"uint256[]\",\"components\":[]}],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"isSpentArray\",\"outputs\":[{\"internalType\":\"bool[]\",\"name\":\"\",\"type\":\"bool[]\",\"components\":[]}]},{\"inputs\":[{\"internalType\":\"uint256[]\",\"name\":\"_roots\",\"type\":\"uint256[]\",\"components\":[]}],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"isValidRoots\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\",\"components\":[]}]},{\"inputs\":[],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"lastBalance\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\",\"components\":[]}]},{\"inputs\":[],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"maxEdges\",\"outputs\":[{\"internalType\":\"uint8\",\"name\":\"\",\"type\":\"uint8\",\"components\":[]}]},{\"inputs\":[],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"maximumDepositAmount\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\",\"components\":[]}]},{\"inputs\":[],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"minimalWithdrawalAmount\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\",\"components\":[]}]},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\",\"components\":[]},{\"internalType\":\"uint32\",\"name\":\"\",\"type\":\"uint32\",\"components\":[]}],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"neighborRoots\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\",\"components\":[]}]},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\",\"components\":[]}],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"nullifierHashes\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\",\"components\":[]}]},{\"inputs\":[],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"outerLevels\",\"outputs\":[{\"internalType\":\"uint32\",\"name\":\"\",\"type\":\"uint32\",\"components\":[]}]},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"_resourceId\",\"type\":\"bytes32\",\"components\":[]}],\"stateMutability\":\"pure\",\"type\":\"function\",\"name\":\"parseChainIdFromResourceId\",\"outputs\":[{\"internalType\":\"uint64\",\"name\":\"\",\"type\":\"uint64\",\"components\":[]}]},{\"inputs\":[],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"proposalNonce\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\",\"components\":[]}]},{\"inputs\":[{\"internalType\":\"struct VAnchorBase.Account\",\"name\":\"_account\",\"type\":\"tuple\",\"components\":[{\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\",\"components\":[]},{\"internalType\":\"bytes\",\"name\":\"keyData\",\"type\":\"bytes\",\"components\":[]}]}],\"stateMutability\":\"nonpayable\",\"type\":\"function\",\"name\":\"register\",\"outputs\":[]},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\",\"components\":[]}],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"roots\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"root\",\"type\":\"uint256\",\"components\":[]},{\"internalType\":\"uint32\",\"name\":\"latestLeafindex\",\"type\":\"uint32\",\"components\":[]}]},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_handler\",\"type\":\"address\",\"components\":[]},{\"internalType\":\"uint32\",\"name\":\"_nonce\",\"type\":\"uint32\",\"components\":[]}],\"stateMutability\":\"nonpayable\",\"type\":\"function\",\"name\":\"setHandler\",\"outputs\":[]},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_root\",\"type\":\"uint256\",\"components\":[]},{\"internalType\":\"uint32\",\"name\":\"_leafIndex\",\"type\":\"uint32\",\"components\":[]},{\"internalType\":\"bytes32\",\"name\":\"_srcResourceID\",\"type\":\"bytes32\",\"components\":[]}],\"stateMutability\":\"payable\",\"type\":\"function\",\"name\":\"updateEdge\",\"outputs\":[]}]") . expect ("invalid abi")
     });
-    pub struct VAnchorContract<M>(ethers::contract::Contract<M>);
-    impl<M> Clone for VAnchorContract<M> {
+    pub struct VAnchorBaseContract<M>(ethers::contract::Contract<M>);
+    impl<M> Clone for VAnchorBaseContract<M> {
         fn clone(&self) -> Self {
-            VAnchorContract(self.0.clone())
+            VAnchorBaseContract(self.0.clone())
         }
     }
-    impl<M> std::ops::Deref for VAnchorContract<M> {
+    impl<M> std::ops::Deref for VAnchorBaseContract<M> {
         type Target = ethers::contract::Contract<M>;
         fn deref(&self) -> &Self::Target {
             &self.0
         }
     }
-    impl<M: ethers::providers::Middleware> std::fmt::Debug for VAnchorContract<M> {
+    impl<M: ethers::providers::Middleware> std::fmt::Debug
+        for VAnchorBaseContract<M>
+    {
         fn fmt(&self, f: &mut std::fmt::Formatter) -> std::fmt::Result {
-            f.debug_tuple(stringify!(VAnchorContract))
+            f.debug_tuple(stringify!(VAnchorBaseContract))
                 .field(&self.address())
                 .finish()
         }
     }
-    impl<M: ethers::providers::Middleware> VAnchorContract<M> {
+    impl<M: ethers::providers::Middleware> VAnchorBaseContract<M> {
         #[doc = r" Creates a new contract instance with the specified `ethers`"]
         #[doc = r" client at the given `Address`. The contract derefs to a `ethers::Contract`"]
         #[doc = r" object"]
@@ -50,7 +52,7 @@ pub mod v_anchor_contract {
         ) -> Self {
             ethers::contract::Contract::new(
                 address.into(),
-                VANCHORCONTRACT_ABI.clone(),
+                VANCHORBASECONTRACT_ABI.clone(),
                 client,
             )
             .into()
@@ -557,30 +559,6 @@ pub mod v_anchor_contract {
                 .method_hash([178, 188, 110, 15], (account,))
                 .expect("method not found (this should never happen)")
         }
-        #[doc = "Calls the contract's `registerAndTransact` (0x38a26a09) function"]
-        pub fn register_and_transact(
-            &self,
-            account: Account,
-            proof: ethers::core::types::Bytes,
-            aux_public_inputs: ethers::core::types::Bytes,
-            external_data: CommonExtData,
-            public_inputs: PublicInputs,
-            encryptions: Encryptions,
-        ) -> ethers::contract::builders::ContractCall<M, ()> {
-            self.0
-                .method_hash(
-                    [56, 162, 106, 9],
-                    (
-                        account,
-                        proof,
-                        aux_public_inputs,
-                        external_data,
-                        public_inputs,
-                        encryptions,
-                    ),
-                )
-                .expect("method not found (this should never happen)")
-        }
         #[doc = "Calls the contract's `roots` (0xc2b40ae4) function"]
         pub fn roots(
             &self,
@@ -603,65 +581,6 @@ pub mod v_anchor_contract {
                 .method_hash([114, 193, 173, 3], (handler, nonce))
                 .expect("method not found (this should never happen)")
         }
-        #[doc = "Calls the contract's `setVerifier` (0xa0d192f5) function"]
-        pub fn set_verifier(
-            &self,
-            verifier: ethers::core::types::Address,
-            nonce: u32,
-        ) -> ethers::contract::builders::ContractCall<M, ()> {
-            self.0
-                .method_hash([160, 209, 146, 245], (verifier, nonce))
-                .expect("method not found (this should never happen)")
-        }
-        #[doc = "Calls the contract's `token` (0xfc0c546a) function"]
-        pub fn token(
-            &self,
-        ) -> ethers::contract::builders::ContractCall<
-            M,
-            ethers::core::types::Address,
-        > {
-            self.0
-                .method_hash([252, 12, 84, 106], ())
-                .expect("method not found (this should never happen)")
-        }
-        #[doc = "Calls the contract's `transact` (0xa38f76e8) function"]
-        pub fn transact(
-            &self,
-            proof: ethers::core::types::Bytes,
-            aux_public_inputs: ethers::core::types::Bytes,
-            external_data: CommonExtData,
-            public_inputs: PublicInputs,
-            encryptions: Encryptions,
-        ) -> ethers::contract::builders::ContractCall<M, ()> {
-            self.0
-                .method_hash(
-                    [163, 143, 118, 232],
-                    (
-                        proof,
-                        aux_public_inputs,
-                        external_data,
-                        public_inputs,
-                        encryptions,
-                    ),
-                )
-                .expect("method not found (this should never happen)")
-        }
-        #[doc = "Calls the contract's `unpackProof` (0xf5ab0dd6) function"]
-        pub fn unpack_proof(
-            &self,
-            proof: [ethers::core::types::U256; 8usize],
-        ) -> ethers::contract::builders::ContractCall<
-            M,
-            (
-                [ethers::core::types::U256; 2usize],
-                [[ethers::core::types::U256; 2usize]; 2usize],
-                [ethers::core::types::U256; 2usize],
-            ),
-        > {
-            self.0
-                .method_hash([245, 171, 13, 214], proof)
-                .expect("method not found (this should never happen)")
-        }
         #[doc = "Calls the contract's `updateEdge` (0xc1922f9e) function"]
         pub fn update_edge(
             &self,
@@ -674,17 +593,6 @@ pub mod v_anchor_contract {
                     [193, 146, 47, 158],
                     (root, leaf_index, src_resource_id),
                 )
-                .expect("method not found (this should never happen)")
-        }
-        #[doc = "Calls the contract's `verifier` (0x2b7ac3f3) function"]
-        pub fn verifier(
-            &self,
-        ) -> ethers::contract::builders::ContractCall<
-            M,
-            ethers::core::types::Address,
-        > {
-            self.0
-                .method_hash([43, 122, 195, 243], ())
                 .expect("method not found (this should never happen)")
         }
         #[doc = "Gets the contract's `EdgeAddition` event"]
@@ -726,13 +634,13 @@ pub mod v_anchor_contract {
         #[doc = r" Returns an [`Event`](#ethers_contract::builders::Event) builder for all events of this contract"]
         pub fn events(
             &self,
-        ) -> ethers::contract::builders::Event<M, VAnchorContractEvents>
+        ) -> ethers::contract::builders::Event<M, VAnchorBaseContractEvents>
         {
             self.0.event_with_filter(Default::default())
         }
     }
     impl<M: ethers::providers::Middleware> From<ethers::contract::Contract<M>>
-        for VAnchorContract<M>
+        for VAnchorBaseContract<M>
     {
         fn from(contract: ethers::contract::Contract<M>) -> Self {
             Self(contract)
@@ -858,7 +766,7 @@ pub mod v_anchor_contract {
         serde :: Serialize,
         serde :: Deserialize,
     )]
-    pub enum VAnchorContractEvents {
+    pub enum VAnchorBaseContractEvents {
         EdgeAdditionFilter(EdgeAdditionFilter),
         EdgeUpdateFilter(EdgeUpdateFilter),
         InsertionFilter(InsertionFilter),
@@ -866,7 +774,7 @@ pub mod v_anchor_contract {
         NewNullifierFilter(NewNullifierFilter),
         PublicKeyFilter(PublicKeyFilter),
     }
-    impl ethers::contract::EthLogDecode for VAnchorContractEvents {
+    impl ethers::contract::EthLogDecode for VAnchorBaseContractEvents {
         fn decode_log(
             log: &ethers::core::abi::RawLog,
         ) -> Result<Self, ethers::core::abi::Error>
@@ -874,45 +782,53 @@ pub mod v_anchor_contract {
             Self: Sized,
         {
             if let Ok(decoded) = EdgeAdditionFilter::decode_log(log) {
-                return Ok(VAnchorContractEvents::EdgeAdditionFilter(decoded));
+                return Ok(VAnchorBaseContractEvents::EdgeAdditionFilter(
+                    decoded,
+                ));
             }
             if let Ok(decoded) = EdgeUpdateFilter::decode_log(log) {
-                return Ok(VAnchorContractEvents::EdgeUpdateFilter(decoded));
+                return Ok(VAnchorBaseContractEvents::EdgeUpdateFilter(
+                    decoded,
+                ));
             }
             if let Ok(decoded) = InsertionFilter::decode_log(log) {
-                return Ok(VAnchorContractEvents::InsertionFilter(decoded));
+                return Ok(VAnchorBaseContractEvents::InsertionFilter(decoded));
             }
             if let Ok(decoded) = NewCommitmentFilter::decode_log(log) {
-                return Ok(VAnchorContractEvents::NewCommitmentFilter(decoded));
+                return Ok(VAnchorBaseContractEvents::NewCommitmentFilter(
+                    decoded,
+                ));
             }
             if let Ok(decoded) = NewNullifierFilter::decode_log(log) {
-                return Ok(VAnchorContractEvents::NewNullifierFilter(decoded));
+                return Ok(VAnchorBaseContractEvents::NewNullifierFilter(
+                    decoded,
+                ));
             }
             if let Ok(decoded) = PublicKeyFilter::decode_log(log) {
-                return Ok(VAnchorContractEvents::PublicKeyFilter(decoded));
+                return Ok(VAnchorBaseContractEvents::PublicKeyFilter(decoded));
             }
             Err(ethers::core::abi::Error::InvalidData)
         }
     }
-    impl ::std::fmt::Display for VAnchorContractEvents {
+    impl ::std::fmt::Display for VAnchorBaseContractEvents {
         fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
             match self {
-                VAnchorContractEvents::EdgeAdditionFilter(element) => {
+                VAnchorBaseContractEvents::EdgeAdditionFilter(element) => {
                     element.fmt(f)
                 }
-                VAnchorContractEvents::EdgeUpdateFilter(element) => {
+                VAnchorBaseContractEvents::EdgeUpdateFilter(element) => {
                     element.fmt(f)
                 }
-                VAnchorContractEvents::InsertionFilter(element) => {
+                VAnchorBaseContractEvents::InsertionFilter(element) => {
                     element.fmt(f)
                 }
-                VAnchorContractEvents::NewCommitmentFilter(element) => {
+                VAnchorBaseContractEvents::NewCommitmentFilter(element) => {
                     element.fmt(f)
                 }
-                VAnchorContractEvents::NewNullifierFilter(element) => {
+                VAnchorBaseContractEvents::NewNullifierFilter(element) => {
                     element.fmt(f)
                 }
-                VAnchorContractEvents::PublicKeyFilter(element) => {
+                VAnchorBaseContractEvents::PublicKeyFilter(element) => {
                     element.fmt(f)
                 }
             }
@@ -1652,30 +1568,6 @@ pub mod v_anchor_contract {
     pub struct RegisterCall {
         pub account: Account,
     }
-    #[doc = "Container type for all input parameters for the `registerAndTransact` function with signature `registerAndTransact((address,bytes),bytes,bytes,(address,int256,address,uint256,uint256,address),(bytes,bytes,uint256[],uint256[2],uint256,uint256),(bytes,bytes))` and selector `[56, 162, 106, 9]`"]
-    #[derive(
-        Clone,
-        Debug,
-        Default,
-        Eq,
-        PartialEq,
-        ethers :: contract :: EthCall,
-        ethers :: contract :: EthDisplay,
-        serde :: Serialize,
-        serde :: Deserialize,
-    )]
-    #[ethcall(
-        name = "registerAndTransact",
-        abi = "registerAndTransact((address,bytes),bytes,bytes,(address,int256,address,uint256,uint256,address),(bytes,bytes,uint256[],uint256[2],uint256,uint256),(bytes,bytes))"
-    )]
-    pub struct RegisterAndTransactCall {
-        pub account: Account,
-        pub proof: ethers::core::types::Bytes,
-        pub aux_public_inputs: ethers::core::types::Bytes,
-        pub external_data: CommonExtData,
-        pub public_inputs: PublicInputs,
-        pub encryptions: Encryptions,
-    }
     #[doc = "Container type for all input parameters for the `roots` function with signature `roots(uint256)` and selector `[194, 180, 10, 228]`"]
     #[derive(
         Clone,
@@ -1707,76 +1599,6 @@ pub mod v_anchor_contract {
         pub handler: ethers::core::types::Address,
         pub nonce: u32,
     }
-    #[doc = "Container type for all input parameters for the `setVerifier` function with signature `setVerifier(address,uint32)` and selector `[160, 209, 146, 245]`"]
-    #[derive(
-        Clone,
-        Debug,
-        Default,
-        Eq,
-        PartialEq,
-        ethers :: contract :: EthCall,
-        ethers :: contract :: EthDisplay,
-        serde :: Serialize,
-        serde :: Deserialize,
-    )]
-    #[ethcall(name = "setVerifier", abi = "setVerifier(address,uint32)")]
-    pub struct SetVerifierCall {
-        pub verifier: ethers::core::types::Address,
-        pub nonce: u32,
-    }
-    #[doc = "Container type for all input parameters for the `token` function with signature `token()` and selector `[252, 12, 84, 106]`"]
-    #[derive(
-        Clone,
-        Debug,
-        Default,
-        Eq,
-        PartialEq,
-        ethers :: contract :: EthCall,
-        ethers :: contract :: EthDisplay,
-        serde :: Serialize,
-        serde :: Deserialize,
-    )]
-    #[ethcall(name = "token", abi = "token()")]
-    pub struct TokenCall;
-    #[doc = "Container type for all input parameters for the `transact` function with signature `transact(bytes,bytes,(address,int256,address,uint256,uint256,address),(bytes,bytes,uint256[],uint256[2],uint256,uint256),(bytes,bytes))` and selector `[163, 143, 118, 232]`"]
-    #[derive(
-        Clone,
-        Debug,
-        Default,
-        Eq,
-        PartialEq,
-        ethers :: contract :: EthCall,
-        ethers :: contract :: EthDisplay,
-        serde :: Serialize,
-        serde :: Deserialize,
-    )]
-    #[ethcall(
-        name = "transact",
-        abi = "transact(bytes,bytes,(address,int256,address,uint256,uint256,address),(bytes,bytes,uint256[],uint256[2],uint256,uint256),(bytes,bytes))"
-    )]
-    pub struct TransactCall {
-        pub proof: ethers::core::types::Bytes,
-        pub aux_public_inputs: ethers::core::types::Bytes,
-        pub external_data: CommonExtData,
-        pub public_inputs: PublicInputs,
-        pub encryptions: Encryptions,
-    }
-    #[doc = "Container type for all input parameters for the `unpackProof` function with signature `unpackProof(uint256[8])` and selector `[245, 171, 13, 214]`"]
-    #[derive(
-        Clone,
-        Debug,
-        Default,
-        Eq,
-        PartialEq,
-        ethers :: contract :: EthCall,
-        ethers :: contract :: EthDisplay,
-        serde :: Serialize,
-        serde :: Deserialize,
-    )]
-    #[ethcall(name = "unpackProof", abi = "unpackProof(uint256[8])")]
-    pub struct UnpackProofCall {
-        pub proof: [ethers::core::types::U256; 8usize],
-    }
     #[doc = "Container type for all input parameters for the `updateEdge` function with signature `updateEdge(uint256,uint32,bytes32)` and selector `[193, 146, 47, 158]`"]
     #[derive(
         Clone,
@@ -1795,20 +1617,6 @@ pub mod v_anchor_contract {
         pub leaf_index: u32,
         pub src_resource_id: [u8; 32],
     }
-    #[doc = "Container type for all input parameters for the `verifier` function with signature `verifier()` and selector `[43, 122, 195, 243]`"]
-    #[derive(
-        Clone,
-        Debug,
-        Default,
-        Eq,
-        PartialEq,
-        ethers :: contract :: EthCall,
-        ethers :: contract :: EthDisplay,
-        serde :: Serialize,
-        serde :: Deserialize,
-    )]
-    #[ethcall(name = "verifier", abi = "verifier()")]
-    pub struct VerifierCall;
     #[derive(
         Debug,
         Clone,
@@ -1818,7 +1626,7 @@ pub mod v_anchor_contract {
         serde :: Serialize,
         serde :: Deserialize,
     )]
-    pub enum VAnchorContractCalls {
+    pub enum VAnchorBaseContractCalls {
         EvmChainIdType(EvmChainIdTypeCall),
         FieldSize(FieldSizeCall),
         MaxExtAmount(MaxExtAmountCall),
@@ -1866,17 +1674,11 @@ pub mod v_anchor_contract {
         ParseChainIdFromResourceId(ParseChainIdFromResourceIdCall),
         ProposalNonce(ProposalNonceCall),
         Register(RegisterCall),
-        RegisterAndTransact(RegisterAndTransactCall),
         Roots(RootsCall),
         SetHandler(SetHandlerCall),
-        SetVerifier(SetVerifierCall),
-        Token(TokenCall),
-        Transact(TransactCall),
-        UnpackProof(UnpackProofCall),
         UpdateEdge(UpdateEdgeCall),
-        Verifier(VerifierCall),
     }
-    impl ethers::core::abi::AbiDecode for VAnchorContractCalls {
+    impl ethers::core::abi::AbiDecode for VAnchorBaseContractCalls {
         fn decode(
             data: impl AsRef<[u8]>,
         ) -> Result<Self, ethers::core::abi::AbiError> {
@@ -1885,822 +1687,828 @@ pub mod v_anchor_contract {
                     data.as_ref(),
                 )
             {
-                return Ok(VAnchorContractCalls::EvmChainIdType(decoded));
+                return Ok(VAnchorBaseContractCalls::EvmChainIdType(decoded));
             }
             if let Ok(decoded) =
                 <FieldSizeCall as ethers::core::abi::AbiDecode>::decode(
                     data.as_ref(),
                 )
             {
-                return Ok(VAnchorContractCalls::FieldSize(decoded));
+                return Ok(VAnchorBaseContractCalls::FieldSize(decoded));
             }
             if let Ok(decoded) =
                 <MaxExtAmountCall as ethers::core::abi::AbiDecode>::decode(
                     data.as_ref(),
                 )
             {
-                return Ok(VAnchorContractCalls::MaxExtAmount(decoded));
+                return Ok(VAnchorBaseContractCalls::MaxExtAmount(decoded));
             }
             if let Ok(decoded) =
                 <MaxFeeCall as ethers::core::abi::AbiDecode>::decode(
                     data.as_ref(),
                 )
             {
-                return Ok(VAnchorContractCalls::MaxFee(decoded));
+                return Ok(VAnchorBaseContractCalls::MaxFee(decoded));
             }
             if let Ok(decoded) =
                 <RootHistorySizeCall as ethers::core::abi::AbiDecode>::decode(
                     data.as_ref(),
                 )
             {
-                return Ok(VAnchorContractCalls::RootHistorySize(decoded));
+                return Ok(VAnchorBaseContractCalls::RootHistorySize(decoded));
             }
             if let Ok(decoded) =
                 <ZeroValueCall as ethers::core::abi::AbiDecode>::decode(
                     data.as_ref(),
                 )
             {
-                return Ok(VAnchorContractCalls::ZeroValue(decoded));
+                return Ok(VAnchorBaseContractCalls::ZeroValue(decoded));
             }
             if let Ok(decoded) =
                 <ExecuteWrappingCall as ethers::core::abi::AbiDecode>::decode(
                     data.as_ref(),
                 )
             {
-                return Ok(VAnchorContractCalls::ExecuteWrapping(decoded));
+                return Ok(VAnchorBaseContractCalls::ExecuteWrapping(decoded));
             }
             if let Ok(decoded) =
                 <WithdrawAndUnwrapCall as ethers::core::abi::AbiDecode>::decode(
                     data.as_ref(),
                 )
             {
-                return Ok(VAnchorContractCalls::WithdrawAndUnwrap(decoded));
+                return Ok(VAnchorBaseContractCalls::WithdrawAndUnwrap(
+                    decoded,
+                ));
             }
-            if let Ok (decoded) = < CalculatePublicAmountCall as ethers :: core :: abi :: AbiDecode > :: decode (data . as_ref ()) { return Ok (VAnchorContractCalls :: CalculatePublicAmount (decoded)) }
+            if let Ok (decoded) = < CalculatePublicAmountCall as ethers :: core :: abi :: AbiDecode > :: decode (data . as_ref ()) { return Ok (VAnchorBaseContractCalls :: CalculatePublicAmount (decoded)) }
             if let Ok(decoded) =
                 <CommitmentsCall as ethers::core::abi::AbiDecode>::decode(
                     data.as_ref(),
                 )
             {
-                return Ok(VAnchorContractCalls::Commitments(decoded));
+                return Ok(VAnchorBaseContractCalls::Commitments(decoded));
             }
-            if let Ok (decoded) = < ConfigureMaximumDepositLimitCall as ethers :: core :: abi :: AbiDecode > :: decode (data . as_ref ()) { return Ok (VAnchorContractCalls :: ConfigureMaximumDepositLimit (decoded)) }
-            if let Ok (decoded) = < ConfigureMinimalWithdrawalLimitCall as ethers :: core :: abi :: AbiDecode > :: decode (data . as_ref ()) { return Ok (VAnchorContractCalls :: ConfigureMinimalWithdrawalLimit (decoded)) }
-            if let Ok (decoded) = < CurrentNeighborRootIndexCall as ethers :: core :: abi :: AbiDecode > :: decode (data . as_ref ()) { return Ok (VAnchorContractCalls :: CurrentNeighborRootIndex (decoded)) }
+            if let Ok (decoded) = < ConfigureMaximumDepositLimitCall as ethers :: core :: abi :: AbiDecode > :: decode (data . as_ref ()) { return Ok (VAnchorBaseContractCalls :: ConfigureMaximumDepositLimit (decoded)) }
+            if let Ok (decoded) = < ConfigureMinimalWithdrawalLimitCall as ethers :: core :: abi :: AbiDecode > :: decode (data . as_ref ()) { return Ok (VAnchorBaseContractCalls :: ConfigureMinimalWithdrawalLimit (decoded)) }
+            if let Ok (decoded) = < CurrentNeighborRootIndexCall as ethers :: core :: abi :: AbiDecode > :: decode (data . as_ref ()) { return Ok (VAnchorBaseContractCalls :: CurrentNeighborRootIndex (decoded)) }
             if let Ok(decoded) =
                 <EdgeExistsForChainCall as ethers::core::abi::AbiDecode>::decode(
                     data.as_ref(),
                 )
             {
-                return Ok(VAnchorContractCalls::EdgeExistsForChain(decoded));
+                return Ok(VAnchorBaseContractCalls::EdgeExistsForChain(
+                    decoded,
+                ));
             }
             if let Ok(decoded) =
                 <EdgeIndexCall as ethers::core::abi::AbiDecode>::decode(
                     data.as_ref(),
                 )
             {
-                return Ok(VAnchorContractCalls::EdgeIndex(decoded));
+                return Ok(VAnchorBaseContractCalls::EdgeIndex(decoded));
             }
             if let Ok(decoded) =
                 <EdgeListCall as ethers::core::abi::AbiDecode>::decode(
                     data.as_ref(),
                 )
             {
-                return Ok(VAnchorContractCalls::EdgeList(decoded));
+                return Ok(VAnchorBaseContractCalls::EdgeList(decoded));
             }
             if let Ok(decoded) =
                 <FilledSubtreesCall as ethers::core::abi::AbiDecode>::decode(
                     data.as_ref(),
                 )
             {
-                return Ok(VAnchorContractCalls::FilledSubtrees(decoded));
+                return Ok(VAnchorBaseContractCalls::FilledSubtrees(decoded));
             }
             if let Ok(decoded) =
                 <GetChainIdCall as ethers::core::abi::AbiDecode>::decode(
                     data.as_ref(),
                 )
             {
-                return Ok(VAnchorContractCalls::GetChainId(decoded));
+                return Ok(VAnchorBaseContractCalls::GetChainId(decoded));
             }
             if let Ok(decoded) =
                 <GetChainIdTypeCall as ethers::core::abi::AbiDecode>::decode(
                     data.as_ref(),
                 )
             {
-                return Ok(VAnchorContractCalls::GetChainIdType(decoded));
+                return Ok(VAnchorBaseContractCalls::GetChainIdType(decoded));
             }
             if let Ok(decoded) =
                 <GetHasherCall as ethers::core::abi::AbiDecode>::decode(
                     data.as_ref(),
                 )
             {
-                return Ok(VAnchorContractCalls::GetHasher(decoded));
+                return Ok(VAnchorBaseContractCalls::GetHasher(decoded));
             }
             if let Ok(decoded) =
                 <GetLastRootCall as ethers::core::abi::AbiDecode>::decode(
                     data.as_ref(),
                 )
             {
-                return Ok(VAnchorContractCalls::GetLastRoot(decoded));
+                return Ok(VAnchorBaseContractCalls::GetLastRoot(decoded));
             }
-            if let Ok (decoded) = < GetLatestNeighborEdgesCall as ethers :: core :: abi :: AbiDecode > :: decode (data . as_ref ()) { return Ok (VAnchorContractCalls :: GetLatestNeighborEdges (decoded)) }
-            if let Ok (decoded) = < GetLatestNeighborRootsCall as ethers :: core :: abi :: AbiDecode > :: decode (data . as_ref ()) { return Ok (VAnchorContractCalls :: GetLatestNeighborRoots (decoded)) }
+            if let Ok (decoded) = < GetLatestNeighborEdgesCall as ethers :: core :: abi :: AbiDecode > :: decode (data . as_ref ()) { return Ok (VAnchorBaseContractCalls :: GetLatestNeighborEdges (decoded)) }
+            if let Ok (decoded) = < GetLatestNeighborRootsCall as ethers :: core :: abi :: AbiDecode > :: decode (data . as_ref ()) { return Ok (VAnchorBaseContractCalls :: GetLatestNeighborRoots (decoded)) }
             if let Ok(decoded) =
                 <GetLevelsCall as ethers::core::abi::AbiDecode>::decode(
                     data.as_ref(),
                 )
             {
-                return Ok(VAnchorContractCalls::GetLevels(decoded));
+                return Ok(VAnchorBaseContractCalls::GetLevels(decoded));
             }
             if let Ok(decoded) =
                 <GetNextIndexCall as ethers::core::abi::AbiDecode>::decode(
                     data.as_ref(),
                 )
             {
-                return Ok(VAnchorContractCalls::GetNextIndex(decoded));
+                return Ok(VAnchorBaseContractCalls::GetNextIndex(decoded));
             }
             if let Ok(decoded) =
                 <GetProposalNonceCall as ethers::core::abi::AbiDecode>::decode(
                     data.as_ref(),
                 )
             {
-                return Ok(VAnchorContractCalls::GetProposalNonce(decoded));
+                return Ok(VAnchorBaseContractCalls::GetProposalNonce(decoded));
             }
             if let Ok(decoded) =
                 <GetZeroHashCall as ethers::core::abi::AbiDecode>::decode(
                     data.as_ref(),
                 )
             {
-                return Ok(VAnchorContractCalls::GetZeroHash(decoded));
+                return Ok(VAnchorBaseContractCalls::GetZeroHash(decoded));
             }
             if let Ok(decoded) =
                 <HandlerCall as ethers::core::abi::AbiDecode>::decode(
                     data.as_ref(),
                 )
             {
-                return Ok(VAnchorContractCalls::Handler(decoded));
+                return Ok(VAnchorBaseContractCalls::Handler(decoded));
             }
             if let Ok(decoded) =
                 <HasEdgeCall as ethers::core::abi::AbiDecode>::decode(
                     data.as_ref(),
                 )
             {
-                return Ok(VAnchorContractCalls::HasEdge(decoded));
+                return Ok(VAnchorBaseContractCalls::HasEdge(decoded));
             }
             if let Ok(decoded) =
                 <HashLeftRightCall as ethers::core::abi::AbiDecode>::decode(
                     data.as_ref(),
                 )
             {
-                return Ok(VAnchorContractCalls::HashLeftRight(decoded));
+                return Ok(VAnchorBaseContractCalls::HashLeftRight(decoded));
             }
             if let Ok(decoded) =
                 <InitializeCall as ethers::core::abi::AbiDecode>::decode(
                     data.as_ref(),
                 )
             {
-                return Ok(VAnchorContractCalls::Initialize(decoded));
+                return Ok(VAnchorBaseContractCalls::Initialize(decoded));
             }
             if let Ok(decoded) =
                 <InitializedCall as ethers::core::abi::AbiDecode>::decode(
                     data.as_ref(),
                 )
             {
-                return Ok(VAnchorContractCalls::Initialized(decoded));
+                return Ok(VAnchorBaseContractCalls::Initialized(decoded));
             }
-            if let Ok (decoded) = < IsKnownNeighborRootCall as ethers :: core :: abi :: AbiDecode > :: decode (data . as_ref ()) { return Ok (VAnchorContractCalls :: IsKnownNeighborRoot (decoded)) }
+            if let Ok (decoded) = < IsKnownNeighborRootCall as ethers :: core :: abi :: AbiDecode > :: decode (data . as_ref ()) { return Ok (VAnchorBaseContractCalls :: IsKnownNeighborRoot (decoded)) }
             if let Ok(decoded) =
                 <IsKnownRootCall as ethers::core::abi::AbiDecode>::decode(
                     data.as_ref(),
                 )
             {
-                return Ok(VAnchorContractCalls::IsKnownRoot(decoded));
+                return Ok(VAnchorBaseContractCalls::IsKnownRoot(decoded));
             }
             if let Ok(decoded) =
                 <IsSpentCall as ethers::core::abi::AbiDecode>::decode(
                     data.as_ref(),
                 )
             {
-                return Ok(VAnchorContractCalls::IsSpent(decoded));
+                return Ok(VAnchorBaseContractCalls::IsSpent(decoded));
             }
             if let Ok(decoded) =
                 <IsSpentArrayCall as ethers::core::abi::AbiDecode>::decode(
                     data.as_ref(),
                 )
             {
-                return Ok(VAnchorContractCalls::IsSpentArray(decoded));
+                return Ok(VAnchorBaseContractCalls::IsSpentArray(decoded));
             }
             if let Ok(decoded) =
                 <IsValidRootsCall as ethers::core::abi::AbiDecode>::decode(
                     data.as_ref(),
                 )
             {
-                return Ok(VAnchorContractCalls::IsValidRoots(decoded));
+                return Ok(VAnchorBaseContractCalls::IsValidRoots(decoded));
             }
             if let Ok(decoded) =
                 <LastBalanceCall as ethers::core::abi::AbiDecode>::decode(
                     data.as_ref(),
                 )
             {
-                return Ok(VAnchorContractCalls::LastBalance(decoded));
+                return Ok(VAnchorBaseContractCalls::LastBalance(decoded));
             }
             if let Ok(decoded) =
                 <MaxEdgesCall as ethers::core::abi::AbiDecode>::decode(
                     data.as_ref(),
                 )
             {
-                return Ok(VAnchorContractCalls::MaxEdges(decoded));
+                return Ok(VAnchorBaseContractCalls::MaxEdges(decoded));
             }
-            if let Ok (decoded) = < MaximumDepositAmountCall as ethers :: core :: abi :: AbiDecode > :: decode (data . as_ref ()) { return Ok (VAnchorContractCalls :: MaximumDepositAmount (decoded)) }
-            if let Ok (decoded) = < MinimalWithdrawalAmountCall as ethers :: core :: abi :: AbiDecode > :: decode (data . as_ref ()) { return Ok (VAnchorContractCalls :: MinimalWithdrawalAmount (decoded)) }
+            if let Ok (decoded) = < MaximumDepositAmountCall as ethers :: core :: abi :: AbiDecode > :: decode (data . as_ref ()) { return Ok (VAnchorBaseContractCalls :: MaximumDepositAmount (decoded)) }
+            if let Ok (decoded) = < MinimalWithdrawalAmountCall as ethers :: core :: abi :: AbiDecode > :: decode (data . as_ref ()) { return Ok (VAnchorBaseContractCalls :: MinimalWithdrawalAmount (decoded)) }
             if let Ok(decoded) =
                 <NeighborRootsCall as ethers::core::abi::AbiDecode>::decode(
                     data.as_ref(),
                 )
             {
-                return Ok(VAnchorContractCalls::NeighborRoots(decoded));
+                return Ok(VAnchorBaseContractCalls::NeighborRoots(decoded));
             }
             if let Ok(decoded) =
                 <NullifierHashesCall as ethers::core::abi::AbiDecode>::decode(
                     data.as_ref(),
                 )
             {
-                return Ok(VAnchorContractCalls::NullifierHashes(decoded));
+                return Ok(VAnchorBaseContractCalls::NullifierHashes(decoded));
             }
             if let Ok(decoded) =
                 <OuterLevelsCall as ethers::core::abi::AbiDecode>::decode(
                     data.as_ref(),
                 )
             {
-                return Ok(VAnchorContractCalls::OuterLevels(decoded));
+                return Ok(VAnchorBaseContractCalls::OuterLevels(decoded));
             }
-            if let Ok (decoded) = < ParseChainIdFromResourceIdCall as ethers :: core :: abi :: AbiDecode > :: decode (data . as_ref ()) { return Ok (VAnchorContractCalls :: ParseChainIdFromResourceId (decoded)) }
+            if let Ok (decoded) = < ParseChainIdFromResourceIdCall as ethers :: core :: abi :: AbiDecode > :: decode (data . as_ref ()) { return Ok (VAnchorBaseContractCalls :: ParseChainIdFromResourceId (decoded)) }
             if let Ok(decoded) =
                 <ProposalNonceCall as ethers::core::abi::AbiDecode>::decode(
                     data.as_ref(),
                 )
             {
-                return Ok(VAnchorContractCalls::ProposalNonce(decoded));
+                return Ok(VAnchorBaseContractCalls::ProposalNonce(decoded));
             }
             if let Ok(decoded) =
                 <RegisterCall as ethers::core::abi::AbiDecode>::decode(
                     data.as_ref(),
                 )
             {
-                return Ok(VAnchorContractCalls::Register(decoded));
+                return Ok(VAnchorBaseContractCalls::Register(decoded));
             }
-            if let Ok (decoded) = < RegisterAndTransactCall as ethers :: core :: abi :: AbiDecode > :: decode (data . as_ref ()) { return Ok (VAnchorContractCalls :: RegisterAndTransact (decoded)) }
             if let Ok(decoded) =
                 <RootsCall as ethers::core::abi::AbiDecode>::decode(
                     data.as_ref(),
                 )
             {
-                return Ok(VAnchorContractCalls::Roots(decoded));
+                return Ok(VAnchorBaseContractCalls::Roots(decoded));
             }
             if let Ok(decoded) =
                 <SetHandlerCall as ethers::core::abi::AbiDecode>::decode(
                     data.as_ref(),
                 )
             {
-                return Ok(VAnchorContractCalls::SetHandler(decoded));
-            }
-            if let Ok(decoded) =
-                <SetVerifierCall as ethers::core::abi::AbiDecode>::decode(
-                    data.as_ref(),
-                )
-            {
-                return Ok(VAnchorContractCalls::SetVerifier(decoded));
-            }
-            if let Ok(decoded) =
-                <TokenCall as ethers::core::abi::AbiDecode>::decode(
-                    data.as_ref(),
-                )
-            {
-                return Ok(VAnchorContractCalls::Token(decoded));
-            }
-            if let Ok(decoded) =
-                <TransactCall as ethers::core::abi::AbiDecode>::decode(
-                    data.as_ref(),
-                )
-            {
-                return Ok(VAnchorContractCalls::Transact(decoded));
-            }
-            if let Ok(decoded) =
-                <UnpackProofCall as ethers::core::abi::AbiDecode>::decode(
-                    data.as_ref(),
-                )
-            {
-                return Ok(VAnchorContractCalls::UnpackProof(decoded));
+                return Ok(VAnchorBaseContractCalls::SetHandler(decoded));
             }
             if let Ok(decoded) =
                 <UpdateEdgeCall as ethers::core::abi::AbiDecode>::decode(
                     data.as_ref(),
                 )
             {
-                return Ok(VAnchorContractCalls::UpdateEdge(decoded));
-            }
-            if let Ok(decoded) =
-                <VerifierCall as ethers::core::abi::AbiDecode>::decode(
-                    data.as_ref(),
-                )
-            {
-                return Ok(VAnchorContractCalls::Verifier(decoded));
+                return Ok(VAnchorBaseContractCalls::UpdateEdge(decoded));
             }
             Err(ethers::core::abi::Error::InvalidData.into())
         }
     }
-    impl ethers::core::abi::AbiEncode for VAnchorContractCalls {
+    impl ethers::core::abi::AbiEncode for VAnchorBaseContractCalls {
         fn encode(self) -> Vec<u8> {
             match self {
-                VAnchorContractCalls::EvmChainIdType(element) => {
+                VAnchorBaseContractCalls::EvmChainIdType(element) => {
                     element.encode()
                 }
-                VAnchorContractCalls::FieldSize(element) => element.encode(),
-                VAnchorContractCalls::MaxExtAmount(element) => element.encode(),
-                VAnchorContractCalls::MaxFee(element) => element.encode(),
-                VAnchorContractCalls::RootHistorySize(element) => {
+                VAnchorBaseContractCalls::FieldSize(element) => {
                     element.encode()
                 }
-                VAnchorContractCalls::ZeroValue(element) => element.encode(),
-                VAnchorContractCalls::ExecuteWrapping(element) => {
+                VAnchorBaseContractCalls::MaxExtAmount(element) => {
                     element.encode()
                 }
-                VAnchorContractCalls::WithdrawAndUnwrap(element) => {
+                VAnchorBaseContractCalls::MaxFee(element) => element.encode(),
+                VAnchorBaseContractCalls::RootHistorySize(element) => {
                     element.encode()
                 }
-                VAnchorContractCalls::CalculatePublicAmount(element) => {
+                VAnchorBaseContractCalls::ZeroValue(element) => {
                     element.encode()
                 }
-                VAnchorContractCalls::Commitments(element) => element.encode(),
-                VAnchorContractCalls::ConfigureMaximumDepositLimit(element) => {
+                VAnchorBaseContractCalls::ExecuteWrapping(element) => {
                     element.encode()
                 }
-                VAnchorContractCalls::ConfigureMinimalWithdrawalLimit(
+                VAnchorBaseContractCalls::WithdrawAndUnwrap(element) => {
+                    element.encode()
+                }
+                VAnchorBaseContractCalls::CalculatePublicAmount(element) => {
+                    element.encode()
+                }
+                VAnchorBaseContractCalls::Commitments(element) => {
+                    element.encode()
+                }
+                VAnchorBaseContractCalls::ConfigureMaximumDepositLimit(
                     element,
                 ) => element.encode(),
-                VAnchorContractCalls::CurrentNeighborRootIndex(element) => {
+                VAnchorBaseContractCalls::ConfigureMinimalWithdrawalLimit(
+                    element,
+                ) => element.encode(),
+                VAnchorBaseContractCalls::CurrentNeighborRootIndex(element) => {
                     element.encode()
                 }
-                VAnchorContractCalls::EdgeExistsForChain(element) => {
+                VAnchorBaseContractCalls::EdgeExistsForChain(element) => {
                     element.encode()
                 }
-                VAnchorContractCalls::EdgeIndex(element) => element.encode(),
-                VAnchorContractCalls::EdgeList(element) => element.encode(),
-                VAnchorContractCalls::FilledSubtrees(element) => {
+                VAnchorBaseContractCalls::EdgeIndex(element) => {
                     element.encode()
                 }
-                VAnchorContractCalls::GetChainId(element) => element.encode(),
-                VAnchorContractCalls::GetChainIdType(element) => {
+                VAnchorBaseContractCalls::EdgeList(element) => element.encode(),
+                VAnchorBaseContractCalls::FilledSubtrees(element) => {
                     element.encode()
                 }
-                VAnchorContractCalls::GetHasher(element) => element.encode(),
-                VAnchorContractCalls::GetLastRoot(element) => element.encode(),
-                VAnchorContractCalls::GetLatestNeighborEdges(element) => {
+                VAnchorBaseContractCalls::GetChainId(element) => {
                     element.encode()
                 }
-                VAnchorContractCalls::GetLatestNeighborRoots(element) => {
+                VAnchorBaseContractCalls::GetChainIdType(element) => {
                     element.encode()
                 }
-                VAnchorContractCalls::GetLevels(element) => element.encode(),
-                VAnchorContractCalls::GetNextIndex(element) => element.encode(),
-                VAnchorContractCalls::GetProposalNonce(element) => {
+                VAnchorBaseContractCalls::GetHasher(element) => {
                     element.encode()
                 }
-                VAnchorContractCalls::GetZeroHash(element) => element.encode(),
-                VAnchorContractCalls::Handler(element) => element.encode(),
-                VAnchorContractCalls::HasEdge(element) => element.encode(),
-                VAnchorContractCalls::HashLeftRight(element) => {
+                VAnchorBaseContractCalls::GetLastRoot(element) => {
                     element.encode()
                 }
-                VAnchorContractCalls::Initialize(element) => element.encode(),
-                VAnchorContractCalls::Initialized(element) => element.encode(),
-                VAnchorContractCalls::IsKnownNeighborRoot(element) => {
+                VAnchorBaseContractCalls::GetLatestNeighborEdges(element) => {
                     element.encode()
                 }
-                VAnchorContractCalls::IsKnownRoot(element) => element.encode(),
-                VAnchorContractCalls::IsSpent(element) => element.encode(),
-                VAnchorContractCalls::IsSpentArray(element) => element.encode(),
-                VAnchorContractCalls::IsValidRoots(element) => element.encode(),
-                VAnchorContractCalls::LastBalance(element) => element.encode(),
-                VAnchorContractCalls::MaxEdges(element) => element.encode(),
-                VAnchorContractCalls::MaximumDepositAmount(element) => {
+                VAnchorBaseContractCalls::GetLatestNeighborRoots(element) => {
                     element.encode()
                 }
-                VAnchorContractCalls::MinimalWithdrawalAmount(element) => {
+                VAnchorBaseContractCalls::GetLevels(element) => {
                     element.encode()
                 }
-                VAnchorContractCalls::NeighborRoots(element) => {
+                VAnchorBaseContractCalls::GetNextIndex(element) => {
                     element.encode()
                 }
-                VAnchorContractCalls::NullifierHashes(element) => {
+                VAnchorBaseContractCalls::GetProposalNonce(element) => {
                     element.encode()
                 }
-                VAnchorContractCalls::OuterLevels(element) => element.encode(),
-                VAnchorContractCalls::ParseChainIdFromResourceId(element) => {
+                VAnchorBaseContractCalls::GetZeroHash(element) => {
                     element.encode()
                 }
-                VAnchorContractCalls::ProposalNonce(element) => {
+                VAnchorBaseContractCalls::Handler(element) => element.encode(),
+                VAnchorBaseContractCalls::HasEdge(element) => element.encode(),
+                VAnchorBaseContractCalls::HashLeftRight(element) => {
                     element.encode()
                 }
-                VAnchorContractCalls::Register(element) => element.encode(),
-                VAnchorContractCalls::RegisterAndTransact(element) => {
+                VAnchorBaseContractCalls::Initialize(element) => {
                     element.encode()
                 }
-                VAnchorContractCalls::Roots(element) => element.encode(),
-                VAnchorContractCalls::SetHandler(element) => element.encode(),
-                VAnchorContractCalls::SetVerifier(element) => element.encode(),
-                VAnchorContractCalls::Token(element) => element.encode(),
-                VAnchorContractCalls::Transact(element) => element.encode(),
-                VAnchorContractCalls::UnpackProof(element) => element.encode(),
-                VAnchorContractCalls::UpdateEdge(element) => element.encode(),
-                VAnchorContractCalls::Verifier(element) => element.encode(),
+                VAnchorBaseContractCalls::Initialized(element) => {
+                    element.encode()
+                }
+                VAnchorBaseContractCalls::IsKnownNeighborRoot(element) => {
+                    element.encode()
+                }
+                VAnchorBaseContractCalls::IsKnownRoot(element) => {
+                    element.encode()
+                }
+                VAnchorBaseContractCalls::IsSpent(element) => element.encode(),
+                VAnchorBaseContractCalls::IsSpentArray(element) => {
+                    element.encode()
+                }
+                VAnchorBaseContractCalls::IsValidRoots(element) => {
+                    element.encode()
+                }
+                VAnchorBaseContractCalls::LastBalance(element) => {
+                    element.encode()
+                }
+                VAnchorBaseContractCalls::MaxEdges(element) => element.encode(),
+                VAnchorBaseContractCalls::MaximumDepositAmount(element) => {
+                    element.encode()
+                }
+                VAnchorBaseContractCalls::MinimalWithdrawalAmount(element) => {
+                    element.encode()
+                }
+                VAnchorBaseContractCalls::NeighborRoots(element) => {
+                    element.encode()
+                }
+                VAnchorBaseContractCalls::NullifierHashes(element) => {
+                    element.encode()
+                }
+                VAnchorBaseContractCalls::OuterLevels(element) => {
+                    element.encode()
+                }
+                VAnchorBaseContractCalls::ParseChainIdFromResourceId(
+                    element,
+                ) => element.encode(),
+                VAnchorBaseContractCalls::ProposalNonce(element) => {
+                    element.encode()
+                }
+                VAnchorBaseContractCalls::Register(element) => element.encode(),
+                VAnchorBaseContractCalls::Roots(element) => element.encode(),
+                VAnchorBaseContractCalls::SetHandler(element) => {
+                    element.encode()
+                }
+                VAnchorBaseContractCalls::UpdateEdge(element) => {
+                    element.encode()
+                }
             }
         }
     }
-    impl ::std::fmt::Display for VAnchorContractCalls {
+    impl ::std::fmt::Display for VAnchorBaseContractCalls {
         fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
             match self {
-                VAnchorContractCalls::EvmChainIdType(element) => element.fmt(f),
-                VAnchorContractCalls::FieldSize(element) => element.fmt(f),
-                VAnchorContractCalls::MaxExtAmount(element) => element.fmt(f),
-                VAnchorContractCalls::MaxFee(element) => element.fmt(f),
-                VAnchorContractCalls::RootHistorySize(element) => {
+                VAnchorBaseContractCalls::EvmChainIdType(element) => {
                     element.fmt(f)
                 }
-                VAnchorContractCalls::ZeroValue(element) => element.fmt(f),
-                VAnchorContractCalls::ExecuteWrapping(element) => {
+                VAnchorBaseContractCalls::FieldSize(element) => element.fmt(f),
+                VAnchorBaseContractCalls::MaxExtAmount(element) => {
                     element.fmt(f)
                 }
-                VAnchorContractCalls::WithdrawAndUnwrap(element) => {
+                VAnchorBaseContractCalls::MaxFee(element) => element.fmt(f),
+                VAnchorBaseContractCalls::RootHistorySize(element) => {
                     element.fmt(f)
                 }
-                VAnchorContractCalls::CalculatePublicAmount(element) => {
+                VAnchorBaseContractCalls::ZeroValue(element) => element.fmt(f),
+                VAnchorBaseContractCalls::ExecuteWrapping(element) => {
                     element.fmt(f)
                 }
-                VAnchorContractCalls::Commitments(element) => element.fmt(f),
-                VAnchorContractCalls::ConfigureMaximumDepositLimit(element) => {
+                VAnchorBaseContractCalls::WithdrawAndUnwrap(element) => {
                     element.fmt(f)
                 }
-                VAnchorContractCalls::ConfigureMinimalWithdrawalLimit(
+                VAnchorBaseContractCalls::CalculatePublicAmount(element) => {
+                    element.fmt(f)
+                }
+                VAnchorBaseContractCalls::Commitments(element) => {
+                    element.fmt(f)
+                }
+                VAnchorBaseContractCalls::ConfigureMaximumDepositLimit(
                     element,
                 ) => element.fmt(f),
-                VAnchorContractCalls::CurrentNeighborRootIndex(element) => {
+                VAnchorBaseContractCalls::ConfigureMinimalWithdrawalLimit(
+                    element,
+                ) => element.fmt(f),
+                VAnchorBaseContractCalls::CurrentNeighborRootIndex(element) => {
                     element.fmt(f)
                 }
-                VAnchorContractCalls::EdgeExistsForChain(element) => {
+                VAnchorBaseContractCalls::EdgeExistsForChain(element) => {
                     element.fmt(f)
                 }
-                VAnchorContractCalls::EdgeIndex(element) => element.fmt(f),
-                VAnchorContractCalls::EdgeList(element) => element.fmt(f),
-                VAnchorContractCalls::FilledSubtrees(element) => element.fmt(f),
-                VAnchorContractCalls::GetChainId(element) => element.fmt(f),
-                VAnchorContractCalls::GetChainIdType(element) => element.fmt(f),
-                VAnchorContractCalls::GetHasher(element) => element.fmt(f),
-                VAnchorContractCalls::GetLastRoot(element) => element.fmt(f),
-                VAnchorContractCalls::GetLatestNeighborEdges(element) => {
+                VAnchorBaseContractCalls::EdgeIndex(element) => element.fmt(f),
+                VAnchorBaseContractCalls::EdgeList(element) => element.fmt(f),
+                VAnchorBaseContractCalls::FilledSubtrees(element) => {
                     element.fmt(f)
                 }
-                VAnchorContractCalls::GetLatestNeighborRoots(element) => {
+                VAnchorBaseContractCalls::GetChainId(element) => element.fmt(f),
+                VAnchorBaseContractCalls::GetChainIdType(element) => {
                     element.fmt(f)
                 }
-                VAnchorContractCalls::GetLevels(element) => element.fmt(f),
-                VAnchorContractCalls::GetNextIndex(element) => element.fmt(f),
-                VAnchorContractCalls::GetProposalNonce(element) => {
+                VAnchorBaseContractCalls::GetHasher(element) => element.fmt(f),
+                VAnchorBaseContractCalls::GetLastRoot(element) => {
                     element.fmt(f)
                 }
-                VAnchorContractCalls::GetZeroHash(element) => element.fmt(f),
-                VAnchorContractCalls::Handler(element) => element.fmt(f),
-                VAnchorContractCalls::HasEdge(element) => element.fmt(f),
-                VAnchorContractCalls::HashLeftRight(element) => element.fmt(f),
-                VAnchorContractCalls::Initialize(element) => element.fmt(f),
-                VAnchorContractCalls::Initialized(element) => element.fmt(f),
-                VAnchorContractCalls::IsKnownNeighborRoot(element) => {
+                VAnchorBaseContractCalls::GetLatestNeighborEdges(element) => {
                     element.fmt(f)
                 }
-                VAnchorContractCalls::IsKnownRoot(element) => element.fmt(f),
-                VAnchorContractCalls::IsSpent(element) => element.fmt(f),
-                VAnchorContractCalls::IsSpentArray(element) => element.fmt(f),
-                VAnchorContractCalls::IsValidRoots(element) => element.fmt(f),
-                VAnchorContractCalls::LastBalance(element) => element.fmt(f),
-                VAnchorContractCalls::MaxEdges(element) => element.fmt(f),
-                VAnchorContractCalls::MaximumDepositAmount(element) => {
+                VAnchorBaseContractCalls::GetLatestNeighborRoots(element) => {
                     element.fmt(f)
                 }
-                VAnchorContractCalls::MinimalWithdrawalAmount(element) => {
+                VAnchorBaseContractCalls::GetLevels(element) => element.fmt(f),
+                VAnchorBaseContractCalls::GetNextIndex(element) => {
                     element.fmt(f)
                 }
-                VAnchorContractCalls::NeighborRoots(element) => element.fmt(f),
-                VAnchorContractCalls::NullifierHashes(element) => {
+                VAnchorBaseContractCalls::GetProposalNonce(element) => {
                     element.fmt(f)
                 }
-                VAnchorContractCalls::OuterLevels(element) => element.fmt(f),
-                VAnchorContractCalls::ParseChainIdFromResourceId(element) => {
+                VAnchorBaseContractCalls::GetZeroHash(element) => {
                     element.fmt(f)
                 }
-                VAnchorContractCalls::ProposalNonce(element) => element.fmt(f),
-                VAnchorContractCalls::Register(element) => element.fmt(f),
-                VAnchorContractCalls::RegisterAndTransact(element) => {
+                VAnchorBaseContractCalls::Handler(element) => element.fmt(f),
+                VAnchorBaseContractCalls::HasEdge(element) => element.fmt(f),
+                VAnchorBaseContractCalls::HashLeftRight(element) => {
                     element.fmt(f)
                 }
-                VAnchorContractCalls::Roots(element) => element.fmt(f),
-                VAnchorContractCalls::SetHandler(element) => element.fmt(f),
-                VAnchorContractCalls::SetVerifier(element) => element.fmt(f),
-                VAnchorContractCalls::Token(element) => element.fmt(f),
-                VAnchorContractCalls::Transact(element) => element.fmt(f),
-                VAnchorContractCalls::UnpackProof(element) => element.fmt(f),
-                VAnchorContractCalls::UpdateEdge(element) => element.fmt(f),
-                VAnchorContractCalls::Verifier(element) => element.fmt(f),
+                VAnchorBaseContractCalls::Initialize(element) => element.fmt(f),
+                VAnchorBaseContractCalls::Initialized(element) => {
+                    element.fmt(f)
+                }
+                VAnchorBaseContractCalls::IsKnownNeighborRoot(element) => {
+                    element.fmt(f)
+                }
+                VAnchorBaseContractCalls::IsKnownRoot(element) => {
+                    element.fmt(f)
+                }
+                VAnchorBaseContractCalls::IsSpent(element) => element.fmt(f),
+                VAnchorBaseContractCalls::IsSpentArray(element) => {
+                    element.fmt(f)
+                }
+                VAnchorBaseContractCalls::IsValidRoots(element) => {
+                    element.fmt(f)
+                }
+                VAnchorBaseContractCalls::LastBalance(element) => {
+                    element.fmt(f)
+                }
+                VAnchorBaseContractCalls::MaxEdges(element) => element.fmt(f),
+                VAnchorBaseContractCalls::MaximumDepositAmount(element) => {
+                    element.fmt(f)
+                }
+                VAnchorBaseContractCalls::MinimalWithdrawalAmount(element) => {
+                    element.fmt(f)
+                }
+                VAnchorBaseContractCalls::NeighborRoots(element) => {
+                    element.fmt(f)
+                }
+                VAnchorBaseContractCalls::NullifierHashes(element) => {
+                    element.fmt(f)
+                }
+                VAnchorBaseContractCalls::OuterLevels(element) => {
+                    element.fmt(f)
+                }
+                VAnchorBaseContractCalls::ParseChainIdFromResourceId(
+                    element,
+                ) => element.fmt(f),
+                VAnchorBaseContractCalls::ProposalNonce(element) => {
+                    element.fmt(f)
+                }
+                VAnchorBaseContractCalls::Register(element) => element.fmt(f),
+                VAnchorBaseContractCalls::Roots(element) => element.fmt(f),
+                VAnchorBaseContractCalls::SetHandler(element) => element.fmt(f),
+                VAnchorBaseContractCalls::UpdateEdge(element) => element.fmt(f),
             }
         }
     }
-    impl ::std::convert::From<EvmChainIdTypeCall> for VAnchorContractCalls {
+    impl ::std::convert::From<EvmChainIdTypeCall> for VAnchorBaseContractCalls {
         fn from(var: EvmChainIdTypeCall) -> Self {
-            VAnchorContractCalls::EvmChainIdType(var)
+            VAnchorBaseContractCalls::EvmChainIdType(var)
         }
     }
-    impl ::std::convert::From<FieldSizeCall> for VAnchorContractCalls {
+    impl ::std::convert::From<FieldSizeCall> for VAnchorBaseContractCalls {
         fn from(var: FieldSizeCall) -> Self {
-            VAnchorContractCalls::FieldSize(var)
+            VAnchorBaseContractCalls::FieldSize(var)
         }
     }
-    impl ::std::convert::From<MaxExtAmountCall> for VAnchorContractCalls {
+    impl ::std::convert::From<MaxExtAmountCall> for VAnchorBaseContractCalls {
         fn from(var: MaxExtAmountCall) -> Self {
-            VAnchorContractCalls::MaxExtAmount(var)
+            VAnchorBaseContractCalls::MaxExtAmount(var)
         }
     }
-    impl ::std::convert::From<MaxFeeCall> for VAnchorContractCalls {
+    impl ::std::convert::From<MaxFeeCall> for VAnchorBaseContractCalls {
         fn from(var: MaxFeeCall) -> Self {
-            VAnchorContractCalls::MaxFee(var)
+            VAnchorBaseContractCalls::MaxFee(var)
         }
     }
-    impl ::std::convert::From<RootHistorySizeCall> for VAnchorContractCalls {
+    impl ::std::convert::From<RootHistorySizeCall> for VAnchorBaseContractCalls {
         fn from(var: RootHistorySizeCall) -> Self {
-            VAnchorContractCalls::RootHistorySize(var)
+            VAnchorBaseContractCalls::RootHistorySize(var)
         }
     }
-    impl ::std::convert::From<ZeroValueCall> for VAnchorContractCalls {
+    impl ::std::convert::From<ZeroValueCall> for VAnchorBaseContractCalls {
         fn from(var: ZeroValueCall) -> Self {
-            VAnchorContractCalls::ZeroValue(var)
+            VAnchorBaseContractCalls::ZeroValue(var)
         }
     }
-    impl ::std::convert::From<ExecuteWrappingCall> for VAnchorContractCalls {
+    impl ::std::convert::From<ExecuteWrappingCall> for VAnchorBaseContractCalls {
         fn from(var: ExecuteWrappingCall) -> Self {
-            VAnchorContractCalls::ExecuteWrapping(var)
+            VAnchorBaseContractCalls::ExecuteWrapping(var)
         }
     }
-    impl ::std::convert::From<WithdrawAndUnwrapCall> for VAnchorContractCalls {
+    impl ::std::convert::From<WithdrawAndUnwrapCall> for VAnchorBaseContractCalls {
         fn from(var: WithdrawAndUnwrapCall) -> Self {
-            VAnchorContractCalls::WithdrawAndUnwrap(var)
+            VAnchorBaseContractCalls::WithdrawAndUnwrap(var)
         }
     }
-    impl ::std::convert::From<CalculatePublicAmountCall> for VAnchorContractCalls {
+    impl ::std::convert::From<CalculatePublicAmountCall>
+        for VAnchorBaseContractCalls
+    {
         fn from(var: CalculatePublicAmountCall) -> Self {
-            VAnchorContractCalls::CalculatePublicAmount(var)
+            VAnchorBaseContractCalls::CalculatePublicAmount(var)
         }
     }
-    impl ::std::convert::From<CommitmentsCall> for VAnchorContractCalls {
+    impl ::std::convert::From<CommitmentsCall> for VAnchorBaseContractCalls {
         fn from(var: CommitmentsCall) -> Self {
-            VAnchorContractCalls::Commitments(var)
+            VAnchorBaseContractCalls::Commitments(var)
         }
     }
     impl ::std::convert::From<ConfigureMaximumDepositLimitCall>
-        for VAnchorContractCalls
+        for VAnchorBaseContractCalls
     {
         fn from(var: ConfigureMaximumDepositLimitCall) -> Self {
-            VAnchorContractCalls::ConfigureMaximumDepositLimit(var)
+            VAnchorBaseContractCalls::ConfigureMaximumDepositLimit(var)
         }
     }
     impl ::std::convert::From<ConfigureMinimalWithdrawalLimitCall>
-        for VAnchorContractCalls
+        for VAnchorBaseContractCalls
     {
         fn from(var: ConfigureMinimalWithdrawalLimitCall) -> Self {
-            VAnchorContractCalls::ConfigureMinimalWithdrawalLimit(var)
+            VAnchorBaseContractCalls::ConfigureMinimalWithdrawalLimit(var)
         }
     }
     impl ::std::convert::From<CurrentNeighborRootIndexCall>
-        for VAnchorContractCalls
+        for VAnchorBaseContractCalls
     {
         fn from(var: CurrentNeighborRootIndexCall) -> Self {
-            VAnchorContractCalls::CurrentNeighborRootIndex(var)
+            VAnchorBaseContractCalls::CurrentNeighborRootIndex(var)
         }
     }
-    impl ::std::convert::From<EdgeExistsForChainCall> for VAnchorContractCalls {
+    impl ::std::convert::From<EdgeExistsForChainCall> for VAnchorBaseContractCalls {
         fn from(var: EdgeExistsForChainCall) -> Self {
-            VAnchorContractCalls::EdgeExistsForChain(var)
+            VAnchorBaseContractCalls::EdgeExistsForChain(var)
         }
     }
-    impl ::std::convert::From<EdgeIndexCall> for VAnchorContractCalls {
+    impl ::std::convert::From<EdgeIndexCall> for VAnchorBaseContractCalls {
         fn from(var: EdgeIndexCall) -> Self {
-            VAnchorContractCalls::EdgeIndex(var)
+            VAnchorBaseContractCalls::EdgeIndex(var)
         }
     }
-    impl ::std::convert::From<EdgeListCall> for VAnchorContractCalls {
+    impl ::std::convert::From<EdgeListCall> for VAnchorBaseContractCalls {
         fn from(var: EdgeListCall) -> Self {
-            VAnchorContractCalls::EdgeList(var)
+            VAnchorBaseContractCalls::EdgeList(var)
         }
     }
-    impl ::std::convert::From<FilledSubtreesCall> for VAnchorContractCalls {
+    impl ::std::convert::From<FilledSubtreesCall> for VAnchorBaseContractCalls {
         fn from(var: FilledSubtreesCall) -> Self {
-            VAnchorContractCalls::FilledSubtrees(var)
+            VAnchorBaseContractCalls::FilledSubtrees(var)
         }
     }
-    impl ::std::convert::From<GetChainIdCall> for VAnchorContractCalls {
+    impl ::std::convert::From<GetChainIdCall> for VAnchorBaseContractCalls {
         fn from(var: GetChainIdCall) -> Self {
-            VAnchorContractCalls::GetChainId(var)
+            VAnchorBaseContractCalls::GetChainId(var)
         }
     }
-    impl ::std::convert::From<GetChainIdTypeCall> for VAnchorContractCalls {
+    impl ::std::convert::From<GetChainIdTypeCall> for VAnchorBaseContractCalls {
         fn from(var: GetChainIdTypeCall) -> Self {
-            VAnchorContractCalls::GetChainIdType(var)
+            VAnchorBaseContractCalls::GetChainIdType(var)
         }
     }
-    impl ::std::convert::From<GetHasherCall> for VAnchorContractCalls {
+    impl ::std::convert::From<GetHasherCall> for VAnchorBaseContractCalls {
         fn from(var: GetHasherCall) -> Self {
-            VAnchorContractCalls::GetHasher(var)
+            VAnchorBaseContractCalls::GetHasher(var)
         }
     }
-    impl ::std::convert::From<GetLastRootCall> for VAnchorContractCalls {
+    impl ::std::convert::From<GetLastRootCall> for VAnchorBaseContractCalls {
         fn from(var: GetLastRootCall) -> Self {
-            VAnchorContractCalls::GetLastRoot(var)
+            VAnchorBaseContractCalls::GetLastRoot(var)
         }
     }
-    impl ::std::convert::From<GetLatestNeighborEdgesCall> for VAnchorContractCalls {
+    impl ::std::convert::From<GetLatestNeighborEdgesCall>
+        for VAnchorBaseContractCalls
+    {
         fn from(var: GetLatestNeighborEdgesCall) -> Self {
-            VAnchorContractCalls::GetLatestNeighborEdges(var)
+            VAnchorBaseContractCalls::GetLatestNeighborEdges(var)
         }
     }
-    impl ::std::convert::From<GetLatestNeighborRootsCall> for VAnchorContractCalls {
+    impl ::std::convert::From<GetLatestNeighborRootsCall>
+        for VAnchorBaseContractCalls
+    {
         fn from(var: GetLatestNeighborRootsCall) -> Self {
-            VAnchorContractCalls::GetLatestNeighborRoots(var)
+            VAnchorBaseContractCalls::GetLatestNeighborRoots(var)
         }
     }
-    impl ::std::convert::From<GetLevelsCall> for VAnchorContractCalls {
+    impl ::std::convert::From<GetLevelsCall> for VAnchorBaseContractCalls {
         fn from(var: GetLevelsCall) -> Self {
-            VAnchorContractCalls::GetLevels(var)
+            VAnchorBaseContractCalls::GetLevels(var)
         }
     }
-    impl ::std::convert::From<GetNextIndexCall> for VAnchorContractCalls {
+    impl ::std::convert::From<GetNextIndexCall> for VAnchorBaseContractCalls {
         fn from(var: GetNextIndexCall) -> Self {
-            VAnchorContractCalls::GetNextIndex(var)
+            VAnchorBaseContractCalls::GetNextIndex(var)
         }
     }
-    impl ::std::convert::From<GetProposalNonceCall> for VAnchorContractCalls {
+    impl ::std::convert::From<GetProposalNonceCall> for VAnchorBaseContractCalls {
         fn from(var: GetProposalNonceCall) -> Self {
-            VAnchorContractCalls::GetProposalNonce(var)
+            VAnchorBaseContractCalls::GetProposalNonce(var)
         }
     }
-    impl ::std::convert::From<GetZeroHashCall> for VAnchorContractCalls {
+    impl ::std::convert::From<GetZeroHashCall> for VAnchorBaseContractCalls {
         fn from(var: GetZeroHashCall) -> Self {
-            VAnchorContractCalls::GetZeroHash(var)
+            VAnchorBaseContractCalls::GetZeroHash(var)
         }
     }
-    impl ::std::convert::From<HandlerCall> for VAnchorContractCalls {
+    impl ::std::convert::From<HandlerCall> for VAnchorBaseContractCalls {
         fn from(var: HandlerCall) -> Self {
-            VAnchorContractCalls::Handler(var)
+            VAnchorBaseContractCalls::Handler(var)
         }
     }
-    impl ::std::convert::From<HasEdgeCall> for VAnchorContractCalls {
+    impl ::std::convert::From<HasEdgeCall> for VAnchorBaseContractCalls {
         fn from(var: HasEdgeCall) -> Self {
-            VAnchorContractCalls::HasEdge(var)
+            VAnchorBaseContractCalls::HasEdge(var)
         }
     }
-    impl ::std::convert::From<HashLeftRightCall> for VAnchorContractCalls {
+    impl ::std::convert::From<HashLeftRightCall> for VAnchorBaseContractCalls {
         fn from(var: HashLeftRightCall) -> Self {
-            VAnchorContractCalls::HashLeftRight(var)
+            VAnchorBaseContractCalls::HashLeftRight(var)
         }
     }
-    impl ::std::convert::From<InitializeCall> for VAnchorContractCalls {
+    impl ::std::convert::From<InitializeCall> for VAnchorBaseContractCalls {
         fn from(var: InitializeCall) -> Self {
-            VAnchorContractCalls::Initialize(var)
+            VAnchorBaseContractCalls::Initialize(var)
         }
     }
-    impl ::std::convert::From<InitializedCall> for VAnchorContractCalls {
+    impl ::std::convert::From<InitializedCall> for VAnchorBaseContractCalls {
         fn from(var: InitializedCall) -> Self {
-            VAnchorContractCalls::Initialized(var)
+            VAnchorBaseContractCalls::Initialized(var)
         }
     }
-    impl ::std::convert::From<IsKnownNeighborRootCall> for VAnchorContractCalls {
+    impl ::std::convert::From<IsKnownNeighborRootCall>
+        for VAnchorBaseContractCalls
+    {
         fn from(var: IsKnownNeighborRootCall) -> Self {
-            VAnchorContractCalls::IsKnownNeighborRoot(var)
+            VAnchorBaseContractCalls::IsKnownNeighborRoot(var)
         }
     }
-    impl ::std::convert::From<IsKnownRootCall> for VAnchorContractCalls {
+    impl ::std::convert::From<IsKnownRootCall> for VAnchorBaseContractCalls {
         fn from(var: IsKnownRootCall) -> Self {
-            VAnchorContractCalls::IsKnownRoot(var)
+            VAnchorBaseContractCalls::IsKnownRoot(var)
         }
     }
-    impl ::std::convert::From<IsSpentCall> for VAnchorContractCalls {
+    impl ::std::convert::From<IsSpentCall> for VAnchorBaseContractCalls {
         fn from(var: IsSpentCall) -> Self {
-            VAnchorContractCalls::IsSpent(var)
+            VAnchorBaseContractCalls::IsSpent(var)
         }
     }
-    impl ::std::convert::From<IsSpentArrayCall> for VAnchorContractCalls {
+    impl ::std::convert::From<IsSpentArrayCall> for VAnchorBaseContractCalls {
         fn from(var: IsSpentArrayCall) -> Self {
-            VAnchorContractCalls::IsSpentArray(var)
+            VAnchorBaseContractCalls::IsSpentArray(var)
         }
     }
-    impl ::std::convert::From<IsValidRootsCall> for VAnchorContractCalls {
+    impl ::std::convert::From<IsValidRootsCall> for VAnchorBaseContractCalls {
         fn from(var: IsValidRootsCall) -> Self {
-            VAnchorContractCalls::IsValidRoots(var)
+            VAnchorBaseContractCalls::IsValidRoots(var)
         }
     }
-    impl ::std::convert::From<LastBalanceCall> for VAnchorContractCalls {
+    impl ::std::convert::From<LastBalanceCall> for VAnchorBaseContractCalls {
         fn from(var: LastBalanceCall) -> Self {
-            VAnchorContractCalls::LastBalance(var)
+            VAnchorBaseContractCalls::LastBalance(var)
         }
     }
-    impl ::std::convert::From<MaxEdgesCall> for VAnchorContractCalls {
+    impl ::std::convert::From<MaxEdgesCall> for VAnchorBaseContractCalls {
         fn from(var: MaxEdgesCall) -> Self {
-            VAnchorContractCalls::MaxEdges(var)
+            VAnchorBaseContractCalls::MaxEdges(var)
         }
     }
-    impl ::std::convert::From<MaximumDepositAmountCall> for VAnchorContractCalls {
+    impl ::std::convert::From<MaximumDepositAmountCall>
+        for VAnchorBaseContractCalls
+    {
         fn from(var: MaximumDepositAmountCall) -> Self {
-            VAnchorContractCalls::MaximumDepositAmount(var)
+            VAnchorBaseContractCalls::MaximumDepositAmount(var)
         }
     }
     impl ::std::convert::From<MinimalWithdrawalAmountCall>
-        for VAnchorContractCalls
+        for VAnchorBaseContractCalls
     {
         fn from(var: MinimalWithdrawalAmountCall) -> Self {
-            VAnchorContractCalls::MinimalWithdrawalAmount(var)
+            VAnchorBaseContractCalls::MinimalWithdrawalAmount(var)
         }
     }
-    impl ::std::convert::From<NeighborRootsCall> for VAnchorContractCalls {
+    impl ::std::convert::From<NeighborRootsCall> for VAnchorBaseContractCalls {
         fn from(var: NeighborRootsCall) -> Self {
-            VAnchorContractCalls::NeighborRoots(var)
+            VAnchorBaseContractCalls::NeighborRoots(var)
         }
     }
-    impl ::std::convert::From<NullifierHashesCall> for VAnchorContractCalls {
+    impl ::std::convert::From<NullifierHashesCall> for VAnchorBaseContractCalls {
         fn from(var: NullifierHashesCall) -> Self {
-            VAnchorContractCalls::NullifierHashes(var)
+            VAnchorBaseContractCalls::NullifierHashes(var)
         }
     }
-    impl ::std::convert::From<OuterLevelsCall> for VAnchorContractCalls {
+    impl ::std::convert::From<OuterLevelsCall> for VAnchorBaseContractCalls {
         fn from(var: OuterLevelsCall) -> Self {
-            VAnchorContractCalls::OuterLevels(var)
+            VAnchorBaseContractCalls::OuterLevels(var)
         }
     }
     impl ::std::convert::From<ParseChainIdFromResourceIdCall>
-        for VAnchorContractCalls
+        for VAnchorBaseContractCalls
     {
         fn from(var: ParseChainIdFromResourceIdCall) -> Self {
-            VAnchorContractCalls::ParseChainIdFromResourceId(var)
+            VAnchorBaseContractCalls::ParseChainIdFromResourceId(var)
         }
     }
-    impl ::std::convert::From<ProposalNonceCall> for VAnchorContractCalls {
+    impl ::std::convert::From<ProposalNonceCall> for VAnchorBaseContractCalls {
         fn from(var: ProposalNonceCall) -> Self {
-            VAnchorContractCalls::ProposalNonce(var)
+            VAnchorBaseContractCalls::ProposalNonce(var)
         }
     }
-    impl ::std::convert::From<RegisterCall> for VAnchorContractCalls {
+    impl ::std::convert::From<RegisterCall> for VAnchorBaseContractCalls {
         fn from(var: RegisterCall) -> Self {
-            VAnchorContractCalls::Register(var)
+            VAnchorBaseContractCalls::Register(var)
         }
     }
-    impl ::std::convert::From<RegisterAndTransactCall> for VAnchorContractCalls {
-        fn from(var: RegisterAndTransactCall) -> Self {
-            VAnchorContractCalls::RegisterAndTransact(var)
-        }
-    }
-    impl ::std::convert::From<RootsCall> for VAnchorContractCalls {
+    impl ::std::convert::From<RootsCall> for VAnchorBaseContractCalls {
         fn from(var: RootsCall) -> Self {
-            VAnchorContractCalls::Roots(var)
+            VAnchorBaseContractCalls::Roots(var)
         }
     }
-    impl ::std::convert::From<SetHandlerCall> for VAnchorContractCalls {
+    impl ::std::convert::From<SetHandlerCall> for VAnchorBaseContractCalls {
         fn from(var: SetHandlerCall) -> Self {
-            VAnchorContractCalls::SetHandler(var)
+            VAnchorBaseContractCalls::SetHandler(var)
         }
     }
-    impl ::std::convert::From<SetVerifierCall> for VAnchorContractCalls {
-        fn from(var: SetVerifierCall) -> Self {
-            VAnchorContractCalls::SetVerifier(var)
-        }
-    }
-    impl ::std::convert::From<TokenCall> for VAnchorContractCalls {
-        fn from(var: TokenCall) -> Self {
-            VAnchorContractCalls::Token(var)
-        }
-    }
-    impl ::std::convert::From<TransactCall> for VAnchorContractCalls {
-        fn from(var: TransactCall) -> Self {
-            VAnchorContractCalls::Transact(var)
-        }
-    }
-    impl ::std::convert::From<UnpackProofCall> for VAnchorContractCalls {
-        fn from(var: UnpackProofCall) -> Self {
-            VAnchorContractCalls::UnpackProof(var)
-        }
-    }
-    impl ::std::convert::From<UpdateEdgeCall> for VAnchorContractCalls {
+    impl ::std::convert::From<UpdateEdgeCall> for VAnchorBaseContractCalls {
         fn from(var: UpdateEdgeCall) -> Self {
-            VAnchorContractCalls::UpdateEdge(var)
-        }
-    }
-    impl ::std::convert::From<VerifierCall> for VAnchorContractCalls {
-        fn from(var: VerifierCall) -> Self {
-            VAnchorContractCalls::Verifier(var)
+            VAnchorBaseContractCalls::UpdateEdge(var)
         }
     }
     #[doc = "Container type for all return fields from the `EVM_CHAIN_ID_TYPE` function with signature `EVM_CHAIN_ID_TYPE()` and selector `[139, 126, 135, 130]`"]
@@ -3279,69 +3087,6 @@ pub mod v_anchor_contract {
         pub root: ethers::core::types::U256,
         pub latest_leafindex: u32,
     }
-    #[doc = "Container type for all return fields from the `token` function with signature `token()` and selector `[252, 12, 84, 106]`"]
-    #[derive(
-        Clone,
-        Debug,
-        Default,
-        Eq,
-        PartialEq,
-        ethers :: contract :: EthAbiType,
-        ethers :: contract :: EthAbiCodec,
-        serde :: Serialize,
-        serde :: Deserialize,
-    )]
-    pub struct TokenReturn(pub ethers::core::types::Address);
-    #[doc = "Container type for all return fields from the `unpackProof` function with signature `unpackProof(uint256[8])` and selector `[245, 171, 13, 214]`"]
-    #[derive(
-        Clone,
-        Debug,
-        Default,
-        Eq,
-        PartialEq,
-        ethers :: contract :: EthAbiType,
-        ethers :: contract :: EthAbiCodec,
-        serde :: Serialize,
-        serde :: Deserialize,
-    )]
-    pub struct UnpackProofReturn(
-        pub [ethers::core::types::U256; 2usize],
-        pub [[ethers::core::types::U256; 2usize]; 2usize],
-        pub [ethers::core::types::U256; 2usize],
-    );
-    #[doc = "Container type for all return fields from the `verifier` function with signature `verifier()` and selector `[43, 122, 195, 243]`"]
-    #[derive(
-        Clone,
-        Debug,
-        Default,
-        Eq,
-        PartialEq,
-        ethers :: contract :: EthAbiType,
-        ethers :: contract :: EthAbiCodec,
-        serde :: Serialize,
-        serde :: Deserialize,
-    )]
-    pub struct VerifierReturn(pub ethers::core::types::Address);
-    #[doc = "`CommonExtData(address,int256,address,uint256,uint256,address)`"]
-    #[derive(
-        Clone,
-        Debug,
-        Default,
-        Eq,
-        PartialEq,
-        ethers :: contract :: EthAbiType,
-        ethers :: contract :: EthAbiCodec,
-        serde :: Serialize,
-        serde :: Deserialize,
-    )]
-    pub struct CommonExtData {
-        pub recipient: ethers::core::types::Address,
-        pub ext_amount: I256,
-        pub relayer: ethers::core::types::Address,
-        pub fee: ethers::core::types::U256,
-        pub refund: ethers::core::types::U256,
-        pub token: ethers::core::types::Address,
-    }
     #[doc = "`Edge(uint256,uint256,uint256,bytes32)`"]
     #[derive(
         Clone,
@@ -3359,42 +3104,6 @@ pub mod v_anchor_contract {
         pub root: ethers::core::types::U256,
         pub latest_leaf_index: ethers::core::types::U256,
         pub src_resource_id: [u8; 32],
-    }
-    #[doc = "`Encryptions(bytes,bytes)`"]
-    #[derive(
-        Clone,
-        Debug,
-        Default,
-        Eq,
-        PartialEq,
-        ethers :: contract :: EthAbiType,
-        ethers :: contract :: EthAbiCodec,
-        serde :: Serialize,
-        serde :: Deserialize,
-    )]
-    pub struct Encryptions {
-        pub encrypted_output_1: ethers::core::types::Bytes,
-        pub encrypted_output_2: ethers::core::types::Bytes,
-    }
-    #[doc = "`PublicInputs(bytes,bytes,uint256[],uint256[2],uint256,uint256)`"]
-    #[derive(
-        Clone,
-        Debug,
-        Default,
-        Eq,
-        PartialEq,
-        ethers :: contract :: EthAbiType,
-        ethers :: contract :: EthAbiCodec,
-        serde :: Serialize,
-        serde :: Deserialize,
-    )]
-    pub struct PublicInputs {
-        pub roots: ethers::core::types::Bytes,
-        pub extension_roots: ethers::core::types::Bytes,
-        pub input_nullifiers: Vec<ethers::core::types::U256>,
-        pub output_commitments: [ethers::core::types::U256; 2],
-        pub public_amount: ethers::core::types::U256,
-        pub ext_data_hash: ethers::core::types::U256,
     }
     #[doc = "`Account(address,bytes)`"]
     #[derive(

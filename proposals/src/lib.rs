@@ -115,20 +115,6 @@
 //! - [`FeeRecipientUpdateProposal`]
 //! - [`RescueTokensProposal`]
 //!
-//! The following proposals are implemented for Cosmwasm(Cosmos-SDK)-based
-//! chains:
-//! - [`AnchorUpdateProposal`]
-//! - [`TokenAddProposal`]
-//! - [`TokenRemoveProposal`]
-//! - [`WrappingFeeUpdateProposal`]
-//! - [`MinWithdrawalLimitProposal`]
-//! - [`MaxDepositLimitProposal`]
-//! - [`ResourceIdUpdateProposal`]
-//! - [`SetTreasuryHandlerProposal`]
-//! - [`SetVerifierProposal`]
-//! - [`FeeRecipientUpdateProposal`]
-//! - [`RescueTokensProposal`]
-//!
 //! ## Feature Flags
 //!
 //! The following feature flags are used to enable or disable certain features:
@@ -137,7 +123,6 @@
 //! - `std`: Enables the use of the standard library (enabled by default).
 //! - `evm`: Enables EVM proposals (disabled by default).
 //! - `substrate`: Enables Substrate proposals (disabled by default).
-//! - `cosmwasm`: Enables Cosmwasm proposals (disabled by default).
 
 #[cfg(not(feature = "std"))]
 #[doc(hidden)]

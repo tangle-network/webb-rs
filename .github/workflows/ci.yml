@@ -1,6 +1,17 @@
 name: CI
 
-on: [push, pull_request]
+on:
+  push:
+    branches: [main]
+    paths-ignore:
+      - README.md
+      - CHANGELOG.md # Should never be edited anyway
+      - .gitignore
+      - .github/**
+  pull_request:
+    branches: [main]
+    types: [opened, synchronize, closed]
+  workflow_dispatch:
 
 jobs:
   macos:
@@ -26,6 +37,8 @@ jobs:
           toolchain: stable
           override: false
           components: rustfmt
+      - run: cargo build --features generate-substrate
+      - run: cargo build --features generate-contracts
       - run: cargo build --all
       - run: cargo test --all
 
@@ -52,5 +65,7 @@ jobs:
           toolchain: stable
           override: false
           components: rustfmt
+      - run: cargo build --features generate-substrate
+      - run: cargo build --features generate-contracts
       - run: cargo build --all
       - run: cargo test --all
