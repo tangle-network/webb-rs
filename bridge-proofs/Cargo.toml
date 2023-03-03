@@ -6,7 +6,6 @@ edition = "2021"
 [dependencies]
 scale-codec = { package = 'parity-scale-codec', version = '3.0.0', default-features = false, features = ["derive", "max-encoded-len"] }
 scale-info = { version = "2.1.1", default-features = false, features = ["derive"] }
-sp-io = { version = "6.0.0", default-features = false }
 webb-proposals = { path = "../proposals", default-features = true, features = ["scale"]}
 ethereum = { version = "0.12.0", default-features = false, features = ["with-codec"] }
 ethereum-types = { version = "0.13.1", default-features = false, features = ["rlp", "codec", "num-traits"], optional = true }
@@ -27,7 +26,6 @@ ethers-core = { git = "https://github.com/gakonst/ethers-rs" }
 [features]
 default = ["std"]
 std = [
-    "sp-io/std",
     "scale-codec/std",
     "scale-info/std",
     "webb-proposals/std",
