@@ -20,8 +20,8 @@ pub mod verify_trie_proof;
 // };
 
 // #[derive(
-//     Debug, Default, Clone, PartialEq, Eq, Encode, Decode, scale_info::TypeInfo,
-// )]
+//     Debug, Default, Clone, PartialEq, Eq, Encode, Decode,
+// scale_info::TypeInfo, )]
 // #[cfg_attr(feature = "std", derive(Serialize, Deserialize))]
 // pub struct StorageProof {
 //     pub key: H256,

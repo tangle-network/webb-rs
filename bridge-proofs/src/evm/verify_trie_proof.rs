@@ -1,6 +1,8 @@
 use ethereum::ReceiptV3;
 use ethereum_types::H256;
+use ethers::utils::keccak256;
 use rlp::Rlp;
+use serde_rlp::*;
 
 pub struct TrieProver;
 
@@ -65,20 +67,14 @@ impl TrieProver {
         return hex::encode(verification_result) == hex::encode(receipt_data);
     }
 
-    /// Verify the proof recursively traversing through the key.
-    /// Return the value at the end of the key, in case the proof is valid.
-    ///
-    /// @param expected_root is the expected root of the current node.
-    /// @param key is the key for which we are proving the value.
-    /// @param proof contains relevant information to verify data is valid
-    ///
-    /// Patricia Trie: https://eth.wiki/en/fundamentals/patricia-tree
-    /// Patricia Img:  https://ethereum.stackexchange.com/questions/268/ethereum-block-architecture/6413#6413
-    ///
-    /// Verification:  https://github.com/slockit/in3/wiki/Ethereum-Verification-and-MerkleProof#receipt-proof
-    /// Article:       https://medium.com/@ouvrard.pierre.alain/merkle-proof-verification-for-ethereum-patricia-tree-48f29658eec
-    /// Python impl:   https://gist.github.com/mfornet/0ff283274c0162f1cca45966bccf69ee
-    ///
+    pub fn keccak_256(data: &[u8]) -> [u8; 32] {
+        let mut buffer = [0u8; 32];
+        let mut hasher = tiny_keccak::Keccak::v256();
+        tiny_keccak::Hasher::update(&mut hasher, data);
+        tiny_keccak::Hasher::finalize(hasher, &mut buffer);
+        buffer
+    }
+
     pub fn verify_trie_proof(
         expected_root: H256,
         key: Vec<u8>,
@@ -91,7 +87,7 @@ impl TrieProver {
         }
 
         Self::_verify_trie_proof(
-            (expected_root.0).into(),
+            (expected_root.0).to_vec(),
             &actual_key,
             &proof,
             0,
@@ -106,21 +102,18 @@ impl TrieProver {
         key_index: usize,
         proof_index: usize,
     ) -> Vec<u8> {
-        let node = &proof[proof_index];
-        println!("node {:?}", hex::encode(Self::near_keccak256(node)));
-        println!("expected root {:?}", hex::encode(&expected_root));
-
+        let raw_node = proof[proof_index].as_slice();
         if key_index == 0 {
             // trie root is always a hash
-            assert_eq!(Self::near_keccak256(node), expected_root.as_slice());
-        } else if node.len() < 32 {
+            assert_eq!(Self::keccak_256(raw_node), expected_root.as_slice());
+        } else if raw_node.len() < 32 {
             // if rlp < 32 bytes, then it is not hashed
-            assert_eq!(node.as_slice(), expected_root);
+            assert_eq!(raw_node, expected_root);
         } else {
-            assert_eq!(Self::near_keccak256(node), expected_root.as_slice());
+            assert_eq!(Self::keccak_256(raw_node), expected_root.as_slice());
         }
 
-        let node = Rlp::new(&node.as_slice());
+        let node = Rlp::new(raw_node);
 
         if node.iter().count() == 17 {
             // Branch node
@@ -130,6 +123,10 @@ impl TrieProver {
             } else {
                 let new_expected_root =
                     Self::get_vec(&node, key[key_index] as usize);
+                println!(
+                    "new expected root {:?}",
+                    hex::encode(new_expected_root.as_slice())
+                );
                 Self::_verify_trie_proof(
                     new_expected_root,
                     key,
