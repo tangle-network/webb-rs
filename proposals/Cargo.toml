@@ -18,6 +18,7 @@ typed-builder = { version = "0.10.0", default-features = false, optional = true 
 tiny-keccak = { version = "2.0.0", features = ["keccak"] }
 schemars = "0.8.1"
 serde = { version = "1.0.103", default-features = false, features = ["derive"], optional = true}
+frame-support = { default-features = false, git = "https://github.com/paritytech/substrate.git", branch = "polkadot-v0.9.36", optional = true }
 
 [dev-dependencies]
 hex-literal = "0.3"
@@ -28,5 +29,5 @@ default = ["std", "evm", "substrate", "scale", "ink"]
 std = ["scale-codec/std", "scale-info/std", "num-traits/std", "serde"]
 scale = ["scale-codec", "scale-info/derive"]
 evm = []
-substrate = ["scale-codec", "typed-builder"]
+substrate = ["scale-codec", "typed-builder", "frame-support/std"]
 ink = []
