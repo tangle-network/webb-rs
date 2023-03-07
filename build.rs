@@ -1,5 +1,8 @@
 use std::error::Error;
 
+#[cfg(feature = "generate-substrate")]
+use subxt_codegen::TypeSubstitutes;
+
 #[cfg(feature = "generate-contracts")]
 mod evm {
     use super::*;
@@ -14,9 +17,9 @@ mod evm {
         println!("cargo:rerun-if-changed=./{}", out);
 
         Abigen::new(contract_name, path)?
-            .add_event_derive("serde::Serialize")
-            .add_event_derive("serde::Deserialize")
-            .rustfmt(false) // don't use rustfmt for now.
+            .add_derive("serde::Serialize")
+            .add_derive("serde::Deserialize")
+            .format(false) // don't use rustfmt for now.
             .generate()?
             .write_to_file(out)?;
         Ok(())
@@ -127,12 +130,17 @@ mod substrate {
         let mut file = std::fs::File::open(path)?;
         let mut bytes = Vec::new();
         file.read_to_end(&mut bytes)?;
+
         let metadata =
             <RuntimeMetadataPrefixed as Decode>::decode(&mut &bytes[..])?;
-        let generator = subxt_codegen::RuntimeGenerator::new(metadata);
+        // Module under which the API is generated.
         let item_mod = syn::parse_quote!(
             pub mod api {}
         );
+        // Default type substitutes.
+        let substs = TypeSubstitutes::new(&CratePath::default());
+        // Generate the Runtime API.
+        let generator = subxt_codegen::RuntimeGenerator::new(metadata);
         let mut generated_type_derives =
             subxt_codegen::DerivesRegistry::new(&CratePath::default());
         generated_type_derives.extend_for_all(
@@ -146,6 +154,7 @@ mod substrate {
         let runtime_api = generator.generate_runtime(
             item_mod,
             generated_type_derives,
+            substs,
             CratePath::default(),
         );
         std::fs::write(out, runtime_api.to_string())?;
@@ -166,10 +175,10 @@ mod substrate {
         )
     }
 
-    pub fn generate_egg_runtime() -> Result<(), Box<dyn Error>> {
+    pub fn generate_tangle_runtime() -> Result<(), Box<dyn Error>> {
         parse_and_generate_runtime(
-            "metadata/egg-runtime.scale",
-            "src/substrate/egg_runtime.rs",
+            "metadata/tangle-runtime.scale",
+            "src/substrate/tangle_runtime.rs",
         )
     }
 }
@@ -201,7 +210,7 @@ fn main() -> Result<(), Box<dyn Error>> {
     {
         substrate::generate_dkg_runtime()?;
         substrate::generate_protocol_substrate_runtime()?;
-        substrate::generate_egg_runtime()?;
+        substrate::generate_tangle_runtime()?;
         run_cargo_fmt()?;
     }
     Ok(())
