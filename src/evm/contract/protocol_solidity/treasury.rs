@@ -99,7 +99,7 @@ pub mod treasury_contract {
         > {
             let factory = ::ethers::contract::ContractFactory::new(
                 TREASURYCONTRACT_ABI.clone(),
-                TREASURYCONTRACT_BYTECODE.clone(),
+                TREASURYCONTRACT_BYTECODE.clone().into(),
                 client,
             );
             let deployer = factory.deploy(constructor_args)?;

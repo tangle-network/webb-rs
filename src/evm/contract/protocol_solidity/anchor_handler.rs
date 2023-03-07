@@ -99,7 +99,7 @@ pub mod anchor_handler_contract {
         > {
             let factory = ::ethers::contract::ContractFactory::new(
                 ANCHORHANDLERCONTRACT_ABI.clone(),
-                ANCHORHANDLERCONTRACT_BYTECODE.clone(),
+                ANCHORHANDLERCONTRACT_BYTECODE.clone().into(),
                 client,
             );
             let deployer = factory.deploy(constructor_args)?;
