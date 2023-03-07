@@ -2,12 +2,14 @@
 
 use crate::nonce::Nonce;
 use crate::target_system::TargetSystem;
+use core::fmt::Debug;
+use core::fmt::Formatter;
 
 #[cfg(feature = "std")]
 use serde::{Deserialize, Serialize};
 
 /// Proposal Target Function Signature (4 bytes).
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Ord, PartialOrd)]
+#[derive(Clone, Copy, PartialEq, Eq, Hash, Ord, PartialOrd)]
 #[cfg_attr(
     feature = "scale",
     derive(
@@ -21,7 +23,7 @@ use serde::{Deserialize, Serialize};
 pub struct FunctionSignature(pub [u8; 4]);
 
 /// Proposal Target `ResourceId` (32 bytes).
-#[derive(Debug, Default, Clone, Copy, PartialEq, Eq, Hash, Ord, PartialOrd)]
+#[derive(Default, Clone, Copy, PartialEq, Eq, Hash, Ord, PartialOrd)]
 #[cfg_attr(
     feature = "scale",
     derive(
@@ -493,6 +495,26 @@ impl scale_codec::Decode for ProposalHeader {
     fn encoded_fixed_size() -> Option<usize> {
         Some(Self::LENGTH)
     }
+}
+
+impl Debug for ResourceId {
+    fn fmt(&self, f: &mut Formatter<'_>) -> core::fmt::Result {
+        format_bytes(&self.0, f)
+    }
+}
+
+impl Debug for FunctionSignature {
+    fn fmt(&self, f: &mut Formatter<'_>) -> core::fmt::Result {
+        format_bytes(&self.0, f)
+    }
+}
+
+fn format_bytes(bytes: &[u8], f: &mut Formatter<'_>) -> core::fmt::Result {
+    #[cfg(feature = "std")]
+    let res = f.write_str(&hex::encode(bytes));
+    #[cfg(not(feature = "std"))]
+    let res = bytes.fmt(f);
+    res
 }
 
 #[cfg(test)]

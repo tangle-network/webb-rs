@@ -1,6 +1,17 @@
-on: [push, pull_request]
-
 name: Lints
+
+on:
+  push:
+    branches: [main]
+    paths-ignore:
+      - README.md
+      - CHANGELOG.md # Should never be edited anyway
+      - .gitignore
+      - .github/**
+  pull_request:
+    branches: [main]
+    types: [opened, synchronize, closed]
+  workflow_dispatch:
 
 jobs:
   clippy:
