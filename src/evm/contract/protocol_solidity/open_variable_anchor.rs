@@ -99,7 +99,7 @@ pub mod open_v_anchor_contract {
         > {
             let factory = ::ethers::contract::ContractFactory::new(
                 OPENVANCHORCONTRACT_ABI.clone(),
-                OPENVANCHORCONTRACT_BYTECODE.clone().into(),
+                OPENVANCHORCONTRACT_BYTECODE.clone(),
                 client,
             );
             let deployer = factory.deploy(constructor_args)?;

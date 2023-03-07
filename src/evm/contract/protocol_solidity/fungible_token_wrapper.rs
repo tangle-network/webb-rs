@@ -100,7 +100,7 @@ pub mod fungible_token_wrapper_contract {
         > {
             let factory = ::ethers::contract::ContractFactory::new(
                 FUNGIBLETOKENWRAPPERCONTRACT_ABI.clone(),
-                FUNGIBLETOKENWRAPPERCONTRACT_BYTECODE.clone().into(),
+                FUNGIBLETOKENWRAPPERCONTRACT_BYTECODE.clone(),
                 client,
             );
             let deployer = factory.deploy(constructor_args)?;

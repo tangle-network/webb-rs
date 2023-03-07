@@ -99,7 +99,7 @@ pub mod signature_bridge_contract {
         > {
             let factory = ::ethers::contract::ContractFactory::new(
                 SIGNATUREBRIDGECONTRACT_ABI.clone(),
-                SIGNATUREBRIDGECONTRACT_BYTECODE.clone().into(),
+                SIGNATUREBRIDGECONTRACT_BYTECODE.clone(),
                 client,
             );
             let deployer = factory.deploy(constructor_args)?;

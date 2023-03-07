@@ -100,7 +100,7 @@ pub mod token_wrapper_handler_contract {
         > {
             let factory = ::ethers::contract::ContractFactory::new(
                 TOKENWRAPPERHANDLERCONTRACT_ABI.clone(),
-                TOKENWRAPPERHANDLERCONTRACT_BYTECODE.clone().into(),
+                TOKENWRAPPERHANDLERCONTRACT_BYTECODE.clone(),
                 client,
             );
             let deployer = factory.deploy(constructor_args)?;
