@@ -20,7 +20,8 @@ num-traits = { version = "0.2.15", default-features = false }
 typed-builder = { version = "0.10.0", default-features = false, optional = true }
 tiny-keccak = { version = "2.0.2", features = ["keccak"] }
 schemars = "0.8.11"
-serde = { workspace = true, optional = true}
+serde = { workspace = true, optional = true }
+hex = { workspace = true }
 
 [dev-dependencies]
 hex-literal = "0.3"
@@ -28,7 +29,7 @@ hex = { workspace = true }
 
 [features]
 default = ["std", "evm", "substrate", "scale", "ink"]
-std = ["scale-codec/std", "scale-info/std", "num-traits/std", "serde"]
+std = ["scale-codec/std", "scale-info/std", "num-traits/std", "serde", "hex/std"]
 scale = ["scale-codec", "scale-info/derive"]
 evm = []
 substrate = ["scale-codec", "typed-builder"]
