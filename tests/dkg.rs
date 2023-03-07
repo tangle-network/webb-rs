@@ -24,23 +24,13 @@ async fn read_chain_nonce() -> anyhow::Result<()> {
         .dkg_proposals()
         .chain_nonces(chain_id);
 
-    let result = client
-        .storage()
-        .at(None)
-        .await?
-        .fetch(&nonce_addr, None)
-        .await?;
+    let result = client.storage().at(None).await?.fetch(&nonce_addr).await?;
     assert_eq!(result, Some(Nonce(0)));
     let unkonwn_chain_id = TypedChainId::Evm(5000);
     let nonce_addr = dkg_runtime::api::storage()
         .dkg_proposals()
         .chain_nonces(unkonwn_chain_id);
-    let result = client
-        .storage()
-        .at(None)
-        .await?
-        .fetch(&nonce_addr, None)
-        .await?;
+    let result = client.storage().at(None).await?.fetch(&nonce_addr).await?;
     assert_eq!(result, None);
     Ok(())
 }
