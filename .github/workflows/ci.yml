@@ -37,9 +37,7 @@ jobs:
           toolchain: stable
           override: false
           components: rustfmt
-      - run: cargo build --features generate-substrate
-      - run: cargo build --features generate-contracts
-      - run: cargo build --all
+      - run: cargo build --features generate-substrate,generate-contracts
       - run: cargo test --all
 
   linux:
@@ -65,7 +63,5 @@ jobs:
           toolchain: stable
           override: false
           components: rustfmt
-      - run: cargo build --features generate-substrate
-      - run: cargo build --features generate-contracts
-      - run: cargo build --all
+      - run: cargo build --features generate-substrate,generate-contracts
       - run: cargo test --all
