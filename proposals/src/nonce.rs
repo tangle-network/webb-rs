@@ -5,7 +5,17 @@ use num_traits::{Bounded, CheckedMul, One, Saturating, Zero};
 use serde::{Deserialize, Serialize};
 
 /// Proposal Nonce (4 bytes).
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Ord, PartialOrd)]
+#[derive(
+    Debug,
+    Clone,
+    Copy,
+    PartialEq,
+    Eq,
+    Hash,
+    Ord,
+    PartialOrd,
+    scale_codec::MaxEncodedLen,
+)]
 #[cfg_attr(
     feature = "scale",
     derive(scale_info::TypeInfo, scale_codec::Encode, scale_codec::Decode)

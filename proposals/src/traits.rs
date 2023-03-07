@@ -1,6 +1,6 @@
 use crate::Proposal;
 #[cfg(feature = "substrate")]
-use frame_support::{pallet_prelude::Get, BoundedVec};
+use frame_support::pallet_prelude::Get;
 
 /// Trait to be used for handling signed proposals
 pub trait OnSignedProposal<E, MaxLength: Get<u32>> {
