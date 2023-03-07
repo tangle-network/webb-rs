@@ -9,6 +9,9 @@ pub mod ink;
 #[cfg(not(feature = "std"))]
 use alloc::vec::Vec;
 
+#[cfg(feature = "substrate")]
+use frame_support::{pallet_prelude::Get, BoundedVec};
+
 /// The `Proposal` trait is used to abstract over the different proposals for
 /// all the different chains.
 pub trait ProposalTrait {
@@ -72,25 +75,30 @@ impl_proposal_for! {
 #[derive(Debug, Clone, Eq, PartialEq)]
 #[cfg_attr(
     feature = "scale",
-    derive(scale_info::TypeInfo, scale_codec::Encode, scale_codec::Decode)
+    derive(
+        scale_info::TypeInfo,
+        scale_codec::Encode,
+        scale_codec::Decode,
+        scale_codec::MaxEncodedLen
+    )
 )]
 /// Proposal enum
-pub enum Proposal {
+pub enum Proposal<MaxLength: Get<u32>> {
     /// Represents a signed proposal
     Signed {
         /// Kind of the proposal
         kind: ProposalKind,
         /// Proposal data
-        data: Vec<u8>,
+        data: BoundedVec<u8, MaxLength>,
         /// Proposal signature
-        signature: Vec<u8>,
+        signature: BoundedVec<u8, MaxLength>,
     },
     /// Represent an unsigned proposal
     Unsigned {
         /// Kind of the proposal
         kind: ProposalKind,
         /// Proposal data
-        data: Vec<u8>,
+        data: BoundedVec<u8, MaxLength>,
     },
 }
 
@@ -144,7 +152,7 @@ pub enum ProposalKind {
     FeeRecipientUpdate,
 }
 
-impl Proposal {
+impl<MaxLength: Get<u32>> Proposal<MaxLength> {
     /// Returns the proposal data
     pub fn data(&self) -> &Vec<u8> {
         match self {
@@ -157,7 +165,9 @@ impl Proposal {
     /// Returns the proposal signature or None if it is unsigned
     pub fn signature(&self) -> Option<Vec<u8>> {
         match self {
-            Proposal::Signed { signature, .. } => Some(signature.clone()),
+            Proposal::Signed { signature, .. } => {
+                Some(signature.clone().into())
+            }
             Proposal::Unsigned { .. } => None,
         }
     }
