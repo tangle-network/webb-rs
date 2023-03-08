@@ -48,7 +48,7 @@ openssl = { version = "0.10", features = ["vendored"], optional = true }
 [dev-dependencies]
 tokio = { version = "^1", features = ["macros", "rt"] }
 anyhow = "^1"
-sp-keyring = "8.0.0"
+sp-keyring = "18.0.0"
 
 [build-dependencies]
 serde_json = "1"

@@ -1,3 +1,5 @@
+#![allow(clippy::useless_conversion)]
+
 pub mod anchor_handler;
 pub mod fungible_token_wrapper;
 pub mod open_variable_anchor;
