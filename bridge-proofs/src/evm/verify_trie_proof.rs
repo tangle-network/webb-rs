@@ -1,5 +1,8 @@
+#![allow(dead_code)]
+
 use ethereum_types::H256;
 use rlp::Rlp;
+use scale_codec::Decode;
 
 pub struct TrieProver;
 
@@ -42,7 +45,7 @@ impl TrieProver {
         let log_entry: ethereum::Log =
             rlp::decode(log_entry_data.as_slice()).unwrap();
         let receipt: ethereum::ReceiptV3 =
-            rlp::decode(receipt_data.as_slice()).unwrap();
+            ethereum::ReceiptV3::decode(&mut receipt_data.as_slice()).unwrap();
         let header: ethereum::Header =
             rlp::decode(header_data.as_slice()).unwrap();
 

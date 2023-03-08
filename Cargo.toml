@@ -13,7 +13,7 @@ hex = { version = "0.4", default-features = false }
 
 [package]
 name = "webb"
-version = "0.5.16"
+version = "0.5.17"
 description = "Webb SDK"
 keywords = ["webb", "sdk", "blockchain", "webb-tools"]
 include = ["Cargo.toml", "contracts/", "metadata/", "src/**/*.rs", "build.rs", "README.md", "LICENSE"]
@@ -32,13 +32,13 @@ members = [".", "proposals", "bridge-proofs"]
 # Substrate crates.
 scale = { package = "parity-scale-codec", version = "3", default-features = false, optional = true }
 scale-info = { workspace = true, optional = true }
-subxt = { version = "0.25.0", optional = true }
+subxt = { version = "0.27", optional = true }
 async-trait = "0.1"
 rand = { version = "0.8", default-features = false, features = ["getrandom"] }
 thiserror = "1.0.38"
 hex = { workspace = true }
 # EVM crates.
-ethers = { version = "=0.17.0", default-features = false, optional = true, features = ["legacy", "abigen"] }
+ethers = { version = "2.0.0", default-features = false, optional = true, features = ["legacy", "abigen"] }
 serde = { workspace = true }
 serde_json = { version = "1", optional = true }
 
@@ -48,16 +48,16 @@ openssl = { version = "0.10", features = ["vendored"], optional = true }
 [dev-dependencies]
 tokio = { version = "^1", features = ["macros", "rt"] }
 anyhow = "^1"
-sp-keyring = "7.0.0"
+sp-keyring = "18.0.0"
 
 [build-dependencies]
 serde_json = "1"
 tempfile = "3.3"
-ethers = { version = "0.17.0", default-features = false, optional = true, features = ["legacy", "abigen"] }
+ethers = { version = "2.0.0", default-features = false, optional = true, features = ["legacy", "abigen"] }
 syn = { version = "1.0.107", optional = true }
 scale = { package = "parity-scale-codec", version = "3", default-features = false, optional = true }
 frame-metadata = { version = "15.0.0", optional = true, features = ["v14", "std"] }
-subxt-codegen = { version = "0.25.0", optional = true }
+subxt-codegen = { version = "0.27", optional = true }
 
 [features]
 default = ["substrate-runtime", "evm-runtime"]
