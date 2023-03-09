@@ -45,7 +45,7 @@ impl FeeRecipientUpdateProposal {
     /// Get the fee recipient.
     #[must_use]
     pub fn fee_recipient(&self) -> [u8; 32] {
-        self.fee_recipient.clone()
+        self.fee_recipient
     }
 
     /// Convert the proposal to a vector of bytes.
@@ -54,10 +54,7 @@ impl FeeRecipientUpdateProposal {
         let mut out = Vec::with_capacity(120);
         let target_system = self.header().resource_id().target_system();
 
-        let target_details = match target_system {
-            TargetSystem::Substrate(target) => target,
-            _ => unreachable!("Unexpected target system for substrate"),
-        };
+        let TargetSystem::Substrate(target_details) = target_system else { unreachable!("Unexpected target system for substrate") };
 
         // add proposal header 40B
         out.extend_from_slice(&self.header.to_bytes());

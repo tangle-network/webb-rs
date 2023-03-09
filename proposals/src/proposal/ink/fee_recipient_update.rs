@@ -33,7 +33,7 @@ impl FeeRecipientUpdateProposal {
     /// Get the fee recipient address.
     #[must_use]
     pub fn fee_recipient_address(&self) -> [u8; 32] {
-        self.fee_recipient_address.clone()
+        self.fee_recipient_address
     }
 
     /// Get the proposal as a bytes

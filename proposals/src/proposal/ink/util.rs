@@ -9,6 +9,7 @@ use tiny_keccak::{Hasher, Keccak};
 ///   Keccak256 hash:
 /// 7164f72199667ca6301626c67e4dba0a5a2e4cd1703af65d04e3e566845a4f7c
 ///   Target addr(hex):       7e4dba0a5a2e4cd1703af65d04e3e566845a4f7c
+#[must_use]
 pub fn ink_address_to_target_address(ink_address: [u8; 32]) -> [u8; 20] {
     let mut keccak = Keccak::v256();
     keccak.update(&ink_address);
@@ -24,7 +25,6 @@ pub fn ink_address_to_target_address(ink_address: [u8; 32]) -> [u8; 20] {
 
 #[cfg(test)]
 mod tests {
-    use super::*;
     use crate::proposal::ink::util::ink_address_to_target_address;
 
     #[test]
@@ -32,7 +32,7 @@ mod tests {
         let ink_addr = [0u8; 32];
         let expected = "88386fc84ba6bc95484008f6362f93160ef3e563".to_string();
 
-        let decoded = hex::decode(expected.clone()).unwrap();
+        let decoded = hex::decode(expected).unwrap();
 
         let target_addr = ink_address_to_target_address(ink_addr);
 

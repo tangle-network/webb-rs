@@ -47,10 +47,7 @@ impl MaxDepositLimitProposal {
         let mut out = Vec::new();
         let target_system = self.header().resource_id().target_system();
 
-        let target_details = match target_system {
-            TargetSystem::Substrate(target) => target,
-            _ => unreachable!("Unexpected target system for substrate"),
-        };
+        let TargetSystem::Substrate(target_details) = target_system else { unreachable!("Unexpected target system for substrate") };
         // add proposal header 40B
         out.extend_from_slice(&self.header.to_bytes());
 

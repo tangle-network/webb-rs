@@ -41,10 +41,7 @@ impl ResourceIdUpdateProposal {
         let mut out = Vec::with_capacity(40 + 40 + 40 + 40);
         let target_system = self.header().resource_id().target_system();
 
-        let target_details = match target_system {
-            TargetSystem::Substrate(target) => target,
-            _ => unreachable!("Unexpected target system for substrate"),
-        };
+        let TargetSystem::Substrate(target_details) = target_system else { unreachable!("Unexpected target system for substrate") };
 
         out.extend_from_slice(&self.header.to_bytes());
         let call = ExecuteSetResourceProposal {
@@ -90,7 +87,7 @@ impl TryFrom<Vec<u8>> for ResourceIdUpdateProposal {
         // parse encoded proposal call
         let call: ExecuteSetResourceProposal =
             scale_codec::Decode::decode(&mut &value[42..])?;
-        let new_resource_id = ResourceId::from(call.r_id);
+        let new_resource_id = call.r_id;
         let proposal = ResourceIdUpdateProposal {
             header,
             new_resource_id,

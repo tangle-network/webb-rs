@@ -33,7 +33,7 @@ impl SetTreasuryHandlerProposal {
     /// Get the handler address.
     #[must_use]
     pub fn handler_address(&self) -> [u8; 32] {
-        self.handler_address.clone()
+        self.handler_address
     }
 
     /// Get the proposal as a bytes
@@ -43,7 +43,7 @@ impl SetTreasuryHandlerProposal {
         bytes.extend_from_slice(&self.header.to_bytes());
 
         let message = SetHandler {
-            handler: self.handler_address.clone(),
+            handler: self.handler_address,
             nonce: self.header.nonce().0,
         };
         scale_codec::Encode::encode_to(&message, &mut bytes);

@@ -8,7 +8,8 @@ use alloc::vec::Vec;
 ///
 /// The [`AnchorUpdateProposal`] updates a target Anchor's knowledge of the
 /// source Anchor's Merkle roots. This knowledge is necessary to prove
-/// membership in the source Anchor's Merkle tree on the src_resource_id chain.
+/// membership in the source Anchor's Merkle tree on the `src_resource_id`
+/// chain.
 #[allow(clippy::module_name_repetitions)]
 #[derive(
     Debug, Copy, Clone, PartialEq, Eq, Hash, typed_builder::TypedBuilder,
@@ -32,7 +33,7 @@ impl AnchorUpdateProposal {
         self.src_resource_id.typed_chain_id()
     }
 
-    /// Get the src_resource_id identifier.
+    /// Get the `src_resource_id` identifier.
     #[must_use]
     pub const fn src_resource_id(&self) -> ResourceId {
         self.src_resource_id
@@ -56,10 +57,7 @@ impl AnchorUpdateProposal {
         let mut out = Vec::with_capacity(120);
         let target_system = self.header().resource_id().target_system();
 
-        let target_details = match target_system {
-            TargetSystem::Substrate(target) => target,
-            _ => unreachable!("Unexpected target system for substrate"),
-        };
+        let TargetSystem::Substrate(target_details) = target_system else { unreachable!("Unexpected target system for substrate") };
 
         // add proposal header 40B
         out.extend_from_slice(&self.header.to_bytes());

@@ -47,13 +47,13 @@ impl RescueTokensProposal {
     /// Get the token address.
     #[must_use]
     pub fn token_address(&self) -> [u8; 32] {
-        self.token_address.clone()
+        self.token_address
     }
 
     /// Get the to token address.
     #[must_use]
     pub fn recipient(&self) -> [u8; 32] {
-        self.recipient.clone()
+        self.recipient
     }
 
     /// Get the proposal as a bytes
@@ -65,8 +65,8 @@ impl RescueTokensProposal {
         let mut rescue_amt_bytes = [0u8; 16];
         rescue_amt_bytes.copy_from_slice(self.amount.split_at(16).1);
         let message = RescueTokens {
-            token_address: self.token_address.clone(),
-            to: self.recipient.clone(),
+            token_address: self.token_address,
+            to: self.recipient,
             amount_to_rescue: u128::from_be_bytes(rescue_amt_bytes),
             nonce: self.header.nonce().0,
         };
