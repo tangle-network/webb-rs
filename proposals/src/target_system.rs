@@ -1,29 +1,31 @@
-/// The Proposal Target System.
+#![allow(clippy::exhaustive_enums)]
+//! The Proposal Target System.
 
-/// Target system format for Substrate
-/// ┌─────────────────────┬───────┬───────┬─────────────┐
-/// │                     │       │       │             │
-/// │           Zeros     │ Pallet│ Call  │   Tree ID   │
-/// │           (20B)     │  Idx  │  Idx  │    (4B)     │
-/// │                     │       │       │             │
-/// └─────────────────────┴───────┴───────┴─────────────┘
-///                       ▲       ▲       ▲             ▲
-///                       │   20  │   21  │ 22 23 24 25 │
-///                       │       │       │             │
-///
-/// Target system format for Evm
-/// ┌────────────────┬──────────────────────────────────┐
-/// │                │                                  │
-/// │      Zeros     │     Contract Address             │
-/// │      (6B)      │           (20B)                  │
-/// │                │                                  │
-/// └────────────────┘──────────────────────────────────┘
-///                  ▲                                  ▲
-///                  │ 6                             25 │
-///                  │                                  │
+//! Target system format for Substrate
+//! ┌─────────────────────┬───────┬───────┬─────────────┐
+//! │                     │       │       │             │
+//! │           Zeros     │ Pallet│ Call  │   Tree ID   │
+//! │           (20B)     │  Idx  │  Idx  │    (4B)     │
+//! │                     │       │       │             │
+//! └─────────────────────┴───────┴───────┴─────────────┘
+//!                       ▲       ▲       ▲             ▲
+//!                       │   20  │   21  │ 22 23 24 25 │
+//!                       │       │       │             │
+//!
+//! Target system format for Evm
+//! ┌────────────────┬──────────────────────────────────┐
+//! │                │                                  │
+//! │      Zeros     │     Contract Address             │
+//! │      (6B)      │           (20B)                  │
+//! │                │                                  │
+//! └────────────────┘──────────────────────────────────┘
+//!                  ▲                                  ▲
+//!                  │ 6                             25 │
+//!                  │                                  │
+
 #[cfg(not(feature = "std"))]
 use alloc::vec::Vec;
-/// TargetSystem (26 Bytes)
+/// `TargetSystem` (26 Bytes)
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
 #[cfg_attr(
     feature = "scale",
@@ -34,6 +36,7 @@ use alloc::vec::Vec;
         scale_codec::MaxEncodedLen
     )
 )]
+#[non_exhaustive]
 pub enum TargetSystem {
     /// Ethereum Contract address (20 bytes).
     ContractAddress([u8; 20]),
@@ -41,6 +44,7 @@ pub enum TargetSystem {
     #[cfg(feature = "substrate")]
     Substrate(SubstrateTargetSystem),
 }
+
 /// Substrate Target System
 #[derive(
     Debug, Clone, Copy, PartialEq, Eq, Hash, typed_builder::TypedBuilder,
@@ -55,6 +59,7 @@ pub enum TargetSystem {
     )
 )]
 #[cfg(feature = "substrate")]
+#[allow(clippy::module_name_repetitions)]
 pub struct SubstrateTargetSystem {
     /// Pallet index of proposal handler pallet
     pub pallet_index: u8,
@@ -101,7 +106,7 @@ impl TargetSystem {
         self.to_bytes()
     }
 
-    /// Get substrate TargetSystem details
+    /// Get substrate `TargetSystem` details
     #[cfg(feature = "substrate")]
     #[must_use]
     pub fn get_substrate_target_system(self) -> Option<SubstrateTargetSystem> {

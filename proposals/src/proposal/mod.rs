@@ -14,6 +14,7 @@ use frame_support::{pallet_prelude::Get, BoundedVec};
 
 /// The `Proposal` trait is used to abstract over the different proposals for
 /// all the different chains.
+#[allow(clippy::module_name_repetitions)]
 pub trait ProposalTrait {
     /// Get the proposal header.
     fn header(&self) -> crate::ProposalHeader;
@@ -82,9 +83,11 @@ impl_proposal_for! {
         scale_codec::MaxEncodedLen
     )
 )]
+#[allow(clippy::exhaustive_enums)]
 /// Proposal enum
 pub enum Proposal<MaxLength: Get<u32>> {
     /// Represents a signed proposal
+    #[non_exhaustive]
     Signed {
         /// Kind of the proposal
         kind: ProposalKind,
@@ -94,6 +97,7 @@ pub enum Proposal<MaxLength: Get<u32>> {
         signature: BoundedVec<u8, MaxLength>,
     },
     /// Represent an unsigned proposal
+    #[non_exhaustive]
     Unsigned {
         /// Kind of the proposal
         kind: ProposalKind,
@@ -113,6 +117,8 @@ pub enum Proposal<MaxLength: Get<u32>> {
     )
 )]
 /// Proposal kind enum
+#[allow(clippy::module_name_repetitions)]
+#[non_exhaustive]
 pub enum ProposalKind {
     /// Refresh proposal for DKG rotation
     Refresh,
@@ -154,6 +160,7 @@ pub enum ProposalKind {
 
 impl<MaxLength: Get<u32>> Proposal<MaxLength> {
     /// Returns the proposal data
+    #[must_use]
     pub fn data(&self) -> &Vec<u8> {
         match self {
             Proposal::Signed { data, .. } | Proposal::Unsigned { data, .. } => {
@@ -163,6 +170,7 @@ impl<MaxLength: Get<u32>> Proposal<MaxLength> {
     }
 
     /// Returns the proposal signature or None if it is unsigned
+    #[must_use]
     pub fn signature(&self) -> Option<Vec<u8>> {
         match self {
             Proposal::Signed { signature, .. } => {
@@ -173,20 +181,23 @@ impl<MaxLength: Get<u32>> Proposal<MaxLength> {
     }
 
     /// Returns the proposal kind
+    #[must_use]
     pub fn kind(&self) -> ProposalKind {
         match self {
             Proposal::Signed { kind, .. } | Proposal::Unsigned { kind, .. } => {
-                kind.clone()
+                *kind
             }
         }
     }
 
     /// Returns a boolean indicating if the proposal is signed
+    #[must_use]
     pub fn is_signed(&self) -> bool {
         matches!(self, Proposal::Signed { .. })
     }
 
     /// Returns a boolean indicating if the proposal is unsigned
+    #[must_use]
     pub fn is_unsigned(&self) -> bool {
         matches!(self, Proposal::Unsigned { .. })
     }

@@ -5,7 +5,8 @@
     non_shorthand_field_patterns,
     renamed_and_removed_lints,
     private_in_public,
-    unsafe_code
+    unsafe_code,
+    clippy::exhaustive_enums
 )]
 
 #[cfg(feature = "evm-runtime")]

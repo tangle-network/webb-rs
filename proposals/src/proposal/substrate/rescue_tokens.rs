@@ -1,3 +1,4 @@
+#![allow(clippy::exhaustive_enums)]
 //! Rescue Tokens Proposal.
 use crate::target_system::TargetSystem;
 use crate::ProposalHeader;
@@ -48,19 +49,19 @@ impl RescueTokensProposal {
     /// Asset Id is the currency Id of token which will be rescued.
     #[must_use]
     pub fn asset_id(&self) -> u32 {
-        self.asset_id.clone()
+        self.asset_id
     }
 
     /// Get the recipient address where tokens will be transferred.
     #[must_use]
     pub fn recipient(&self) -> [u8; 32] {
-        self.recipient.clone()
+        self.recipient
     }
 
     /// Get the total amount to be rescued.
     #[must_use]
     pub fn rescue_amount(&self) -> u128 {
-        self.amount.clone()
+        self.amount
     }
 
     /// Convert the proposal to a vector of bytes.
@@ -69,10 +70,7 @@ impl RescueTokensProposal {
         let mut out = Vec::with_capacity(120);
         let target_system = self.header().resource_id().target_system();
 
-        let target_details = match target_system {
-            TargetSystem::Substrate(target) => target,
-            _ => unreachable!("Unexpected target system for substrate"),
-        };
+        let TargetSystem::Substrate(target_details) = target_system else { unreachable!("Unexpected target system for substrate") };
 
         // add proposal header 40B
         out.extend_from_slice(&self.header.to_bytes());

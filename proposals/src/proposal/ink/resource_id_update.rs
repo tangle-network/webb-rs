@@ -1,3 +1,4 @@
+#![allow(clippy::exhaustive_enums)]
 //! Resource Id Update Proposal.
 use crate::{ProposalHeader, ResourceId};
 
@@ -48,13 +49,13 @@ impl ResourceIdUpdateProposal {
     /// Get the handler address.
     #[must_use]
     pub fn handler_address(&self) -> [u8; 32] {
-        self.handler_address.clone()
+        self.handler_address
     }
 
     /// Get the execution address.
     #[must_use]
     pub fn execution_address(&self) -> [u8; 32] {
-        self.execution_address.clone()
+        self.execution_address
     }
 
     /// Get the proposal as a bytes
@@ -68,8 +69,8 @@ impl ResourceIdUpdateProposal {
             function_sig: self.header.function_signature().to_bytes(),
             nonce: self.header.nonce().0,
             new_resource_id: self.new_resource_id.to_bytes(),
-            handler_addr: self.handler_address.clone(),
-            execution_context_addr: self.execution_address.clone(),
+            handler_addr: self.handler_address,
+            execution_context_addr: self.execution_address,
         };
         scale_codec::Encode::encode_to(&message, &mut bytes);
 

@@ -1,3 +1,4 @@
+#![allow(clippy::exhaustive_enums)]
 //! Minimum Withdrawal Limit Proposal.
 use crate::ProposalHeader;
 
@@ -5,7 +6,6 @@ use crate::ProposalHeader;
 ///
 /// The [`MinWithdrawalLimitProposal`] updates the minimum withdrawal amount
 /// allowed on the variable anchor system.
-#[allow(clippy::module_name_repetitions)]
 #[allow(clippy::module_name_repetitions)]
 #[derive(
     Debug, Copy, Clone, PartialEq, Eq, Hash, typed_builder::TypedBuilder,

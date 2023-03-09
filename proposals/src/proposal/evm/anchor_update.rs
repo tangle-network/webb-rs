@@ -53,7 +53,7 @@ impl AnchorUpdateProposal {
         self.src_resource_id.typed_chain_id()
     }
 
-    /// Get the src_resource_id identifier.
+    /// Get the `src_resource_id` identifier.
     #[must_use]
     pub const fn src_resource_id(&self) -> ResourceId {
         self.src_resource_id

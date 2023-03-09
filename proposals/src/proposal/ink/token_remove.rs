@@ -1,3 +1,4 @@
+#![allow(clippy::exhaustive_enums)]
 //! Token Remove Proposal.
 use crate::ProposalHeader;
 
@@ -33,7 +34,7 @@ impl TokenRemoveProposal {
     /// Get the token address.
     #[must_use]
     pub fn token_address(&self) -> [u8; 32] {
-        self.token_address.clone()
+        self.token_address
     }
 
     /// Get the proposal as a bytes
@@ -43,8 +44,8 @@ impl TokenRemoveProposal {
         bytes.extend_from_slice(&self.header.to_bytes());
 
         let message = RemovePsp22TokenAddr {
-            token: self.token_address.clone(),
-            nonce: self.header.nonce().0 as u64,
+            token: self.token_address,
+            nonce: u64::from(self.header.nonce().0),
         };
         scale_codec::Encode::encode_to(&message, &mut bytes);
 

@@ -26,7 +26,7 @@ impl WrappingFeeUpdateProposal {
 
     /// Creates a new wrapping fee update proposal.
     ///
-    /// Wrapping fee is in the range of 0 to 10_000.
+    /// Wrapping fee is in the range of 0 to `10_000`.
     ///
     /// **Note:** in debug mode, this may panic if the fee is out of range.
     #[must_use]
@@ -46,7 +46,7 @@ impl WrappingFeeUpdateProposal {
 
     /// Get the wrapping fee.
     ///
-    /// Wrapping fees are in the range [0, 10_000].
+    /// Wrapping fees are in the range [0, `10_000`].
     ///
     /// *Note*: In debug builds, this will panic if the wrapping fee is out of
     /// range.
