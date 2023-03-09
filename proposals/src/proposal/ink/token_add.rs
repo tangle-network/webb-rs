@@ -1,3 +1,4 @@
+#![allow(clippy::exhaustive_enums)]
 //! Token Add Proposal.
 use crate::ProposalHeader;
 

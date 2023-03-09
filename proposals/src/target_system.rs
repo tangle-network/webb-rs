@@ -1,3 +1,4 @@
+#![allow(clippy::exhaustive_enums)]
 //! The Proposal Target System.
 
 //! Target system format for Substrate

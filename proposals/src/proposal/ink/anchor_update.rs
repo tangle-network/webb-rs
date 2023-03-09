@@ -1,3 +1,5 @@
+#![allow(clippy::exhaustive_enums)]
+
 //! Anchor Update Proposal.
 
 use crate::{ProposalHeader, ResourceId, TypedChainId};

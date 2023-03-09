@@ -1,3 +1,4 @@
+#![allow(clippy::exhaustive_enums)]
 //! Fee Recipient Update Proposal.
 use crate::ProposalHeader;
 

@@ -83,9 +83,11 @@ impl_proposal_for! {
         scale_codec::MaxEncodedLen
     )
 )]
+#[allow(clippy::exhaustive_enums)]
 /// Proposal enum
 pub enum Proposal<MaxLength: Get<u32>> {
     /// Represents a signed proposal
+    #[non_exhaustive]
     Signed {
         /// Kind of the proposal
         kind: ProposalKind,
@@ -95,6 +97,7 @@ pub enum Proposal<MaxLength: Get<u32>> {
         signature: BoundedVec<u8, MaxLength>,
     },
     /// Represent an unsigned proposal
+    #[non_exhaustive]
     Unsigned {
         /// Kind of the proposal
         kind: ProposalKind,

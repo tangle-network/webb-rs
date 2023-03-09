@@ -1,3 +1,4 @@
+#![allow(clippy::exhaustive_enums)]
 //! Rescue Tokens Proposal.
 use crate::target_system::TargetSystem;
 use crate::ProposalHeader;

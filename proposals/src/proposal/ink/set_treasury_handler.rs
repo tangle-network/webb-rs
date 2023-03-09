@@ -1,3 +1,4 @@
+#![allow(clippy::exhaustive_enums)]
 //! Set Treasury Handler Proposal.
 use crate::ProposalHeader;
 

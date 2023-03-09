@@ -1,3 +1,4 @@
+#![allow(clippy::exhaustive_enums)]
 //!  Maximum Deposit Limit Proposal.
 use crate::target_system::TargetSystem;
 use crate::ProposalHeader;

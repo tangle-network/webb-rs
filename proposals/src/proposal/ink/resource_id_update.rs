@@ -1,3 +1,4 @@
+#![allow(clippy::exhaustive_enums)]
 //! Resource Id Update Proposal.
 use crate::{ProposalHeader, ResourceId};
 
