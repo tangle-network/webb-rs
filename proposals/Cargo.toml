@@ -26,6 +26,7 @@ hex = { workspace = true }
 [dev-dependencies]
 hex-literal = "0.3"
 hex = { workspace = true }
+toml = { version = "0.7.2" }
 
 [features]
 default = ["std", "evm", "substrate", "scale", "ink"]

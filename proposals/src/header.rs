@@ -37,7 +37,7 @@ pub struct FunctionSignature(pub [u8; 4]);
 pub struct ResourceId(pub [u8; 32]);
 
 /// Proposal Target Chain and its type (6 bytes).
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Ord, PartialOrd)]
+#[derive(Default, Debug, Clone, Copy, PartialEq, Eq, Hash, Ord, PartialOrd)]
 #[cfg_attr(
     feature = "scale",
     derive(
@@ -47,11 +47,17 @@ pub struct ResourceId(pub [u8; 32]);
         scale_codec::MaxEncodedLen
     )
 )]
-#[cfg_attr(feature = "std", derive(Serialize, Deserialize))]
+#[cfg_attr(
+    feature = "std",
+    derive(Serialize, Deserialize),
+    serde(tag = "type", content = "id")
+)]
+#[non_exhaustive]
 pub enum TypedChainId {
     /// None chain type.
     ///
     /// This is used when the chain type is not known.
+    #[default]
     None,
     /// EVM Based Chain (Mainnet, Polygon, ...etc)
     Evm(u32),
@@ -69,12 +75,6 @@ pub enum TypedChainId {
     Solana(u32),
     /// Ink Based Chains
     Ink(u32),
-}
-
-impl Default for TypedChainId {
-    fn default() -> Self {
-        TypedChainId::None
-    }
 }
 
 /// Proposal Header (40 bytes).
@@ -612,5 +612,26 @@ mod tests {
             FunctionSignature::new(hex_literal::hex!("f00dbabe"))
         );
         assert_eq!(header.nonce(), Nonce::from(0x0001));
+    }
+
+    #[cfg(feature = "std")]
+    #[test]
+    fn serde_works() {
+        #[derive(Debug, Clone, Serialize, Deserialize)]
+        #[serde(rename_all = "kebab-case")]
+        struct ConfigExample {
+            typed_chain_id: TypedChainId,
+        }
+        let make_config =
+            |v: &str| -> ConfigExample { toml::from_str(v).unwrap() };
+
+        let v = r#"typed-chain-id = { type = "Evm", id = 42 }"#;
+        assert_eq!(make_config(v).typed_chain_id, TypedChainId::Evm(42));
+
+        let v = r#"typed-chain-id = { type = "Substrate", id = 1080 }"#;
+        assert_eq!(
+            make_config(v).typed_chain_id,
+            TypedChainId::Substrate(1080)
+        );
     }
 }
