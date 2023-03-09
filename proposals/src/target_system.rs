@@ -35,6 +35,7 @@ use alloc::vec::Vec;
         scale_codec::MaxEncodedLen
     )
 )]
+#[non_exhaustive]
 pub enum TargetSystem {
     /// Ethereum Contract address (20 bytes).
     ContractAddress([u8; 20]),
@@ -42,6 +43,7 @@ pub enum TargetSystem {
     #[cfg(feature = "substrate")]
     Substrate(SubstrateTargetSystem),
 }
+
 /// Substrate Target System
 #[derive(
     Debug, Clone, Copy, PartialEq, Eq, Hash, typed_builder::TypedBuilder,

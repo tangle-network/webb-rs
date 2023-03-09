@@ -114,6 +114,8 @@ pub enum Proposal<MaxLength: Get<u32>> {
     )
 )]
 /// Proposal kind enum
+#[allow(clippy::module_name_repetitions)]
+#[non_exhaustive]
 pub enum ProposalKind {
     /// Refresh proposal for DKG rotation
     Refresh,

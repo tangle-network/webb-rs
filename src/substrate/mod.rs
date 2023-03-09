@@ -5,6 +5,7 @@
     clippy::module_inception,
     clippy::large_enum_variant
 )]
+#![warn(clippy::manual_non_exhaustive)]
 
 pub mod dkg_runtime;
 pub mod protocol_substrate_runtime;
