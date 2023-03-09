@@ -1,4 +1,4 @@
-#![allow(clippy::useless_conversion)]
+#![allow(clippy::all, clippy::exhaustive_enums)]
 
 pub mod anchor_handler;
 pub mod fungible_token_wrapper;
