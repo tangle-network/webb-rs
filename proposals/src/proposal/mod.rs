@@ -87,7 +87,6 @@ impl_proposal_for! {
 /// Proposal enum
 pub enum Proposal<MaxLength: Get<u32>> {
     /// Represents a signed proposal
-    #[non_exhaustive]
     Signed {
         /// Kind of the proposal
         kind: ProposalKind,
@@ -97,7 +96,6 @@ pub enum Proposal<MaxLength: Get<u32>> {
         signature: BoundedVec<u8, MaxLength>,
     },
     /// Represent an unsigned proposal
-    #[non_exhaustive]
     Unsigned {
         /// Kind of the proposal
         kind: ProposalKind,
@@ -118,7 +116,6 @@ pub enum Proposal<MaxLength: Get<u32>> {
 )]
 /// Proposal kind enum
 #[allow(clippy::module_name_repetitions)]
-#[non_exhaustive]
 pub enum ProposalKind {
     /// Refresh proposal for DKG rotation
     Refresh,
