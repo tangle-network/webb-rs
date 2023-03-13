@@ -4,6 +4,9 @@
 
 use crate::{ProposalHeader, ResourceId, TypedChainId};
 
+#[cfg(not(feature = "std"))]
+use alloc::vec::Vec;
+
 /// Anchor Update Proposal.
 ///
 /// The [`AnchorUpdateProposal`] updates the target Anchor's knowledge of the
@@ -67,7 +70,7 @@ impl AnchorUpdateProposal {
     /// Get the proposal as a bytes
     #[must_use]
     pub fn to_bytes(&self) -> Vec<u8> {
-        let mut bytes = vec![];
+        let mut bytes = Vec::with_capacity(120);
         bytes.extend_from_slice(&self.header.to_bytes());
 
         let message = UpdateEdge {

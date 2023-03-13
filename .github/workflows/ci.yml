@@ -14,8 +14,14 @@ on:
   workflow_dispatch:
 
 jobs:
-  macos:
-    runs-on: macos-latest
+  ci:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    # Name should be the OS name only (e.g. Linux, macOS, Windows)
+    # This is used to generate the badge
+    name: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v2
         with:
@@ -29,39 +35,15 @@ jobs:
             ~/.cargo/bin
             target
           key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
-      - name: Install stable toolchain
-        id: rust_toolchain
-        uses: actions-rs/toolchain@v1
-        with:
-          profile: minimal
-          toolchain: stable
-          override: false
-          components: rustfmt
-      - run: cargo build --features generate-substrate,generate-contracts
-      - run: cargo test --all
-
-  linux:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-        with:
-          fetch-depth: 50
-      - name: Cache Cargo
-        uses: actions/cache@v2
-        with:
-          path: |
-            ~/.cargo/registry
-            ~/.cargo/git
-            ~/.cargo/bin
-            target
-          key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
-      - name: Install stable toolchain
-        id: rust_toolchain
-        uses: actions-rs/toolchain@v1
-        with:
-          profile: minimal
-          toolchain: stable
-          override: false
-          components: rustfmt
-      - run: cargo build --features generate-substrate,generate-contracts
-      - run: cargo test --all
+      - name: Check Metadata generation
+        run: cargo build --features generate-substrate,generate-contracts
+      - name: Tests
+        run: cargo test --all
+      - name: EVM Proposals
+        run: cargo build -p webb-proposals --no-default-features --features evm,std
+      - name: Substrate Proposals
+        run: cargo build -p webb-proposals --no-default-features --features substrate,std
+      - name: Ink! Proposals
+        run: cargo build -p webb-proposals --no-default-features --features ink,std
+      - name: Rustdoc build
+        run: cargo doc --no-deps --all-features

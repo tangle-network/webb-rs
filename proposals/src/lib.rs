@@ -72,17 +72,20 @@
 //! on the target system):
 //!    - A [`TargetSystem::ContractAddress`] which is actually 20 bytes but is
 //!      left padded with zeroes (in this case, 6 bytes of zeroes).
-//!    - A [`TargetSystem::TreeId`] which is actually 4 bytes but will be left
+#![cfg_attr(
+    features = "substrate",
+    doc = "    - A [`TargetSystem::Substrate`] which is the target system for Substrate based systems"
+)]
 //!      padded with zeroes (in this case, 22 bytes of zeroes).
-//! 2. The [`ChainType`] which is a 2 byte value that identifies the chain type
+//! 2. The `ChainType` which is a 2 byte value that identifies the chain type
 //! of the target system. It can be one of the following:
-//!    - A [`ChainType::Evm`] which is `0x0100`.
-//!    - A [`ChainType::Substrate`] which is `0x0200`.
-//!    - A [`ChainType::PolkadotRelayChain`] which is `0x0301`.
-//!    - A [`ChainType::KusamaRelayChain`] which is `0x0302`.
-//!    - A [`ChainType::Cosmos`] which is `0x0400`.
-//!    - A [`ChainType::Solana`] which is `0x0500`.
-//! 3. The [`ChainId`] which is a 4 byte value that identifies the chain of the
+//!    - A `ChainType::Evm` which is `0x0100`.
+//!    - A `ChainType::Substrate` which is `0x0200`.
+//!    - A `ChainType::PolkadotRelayChain` which is `0x0301`.
+//!    - A `ChainType::KusamaRelayChain` which is `0x0302`.
+//!    - A `ChainType::Cosmos` which is `0x0400`.
+//!    - A `ChainType::Solana` which is `0x0500`.
+//! 3. The `ChainId` which is a 4 byte value that identifies the chain of the
 //! target system.
 //!
 //! ## The `FunctionSignature`
@@ -104,17 +107,17 @@
 //! ## Proposals Implementations
 //!
 //! The following proposals are implemented for EVM-based chains:
-//! - [`AnchorUpdateProposal`]
-//! - [`TokenAddProposal`]
-//! - [`TokenRemoveProposal`]
-//! - [`WrappingFeeUpdateProposal`]
-//! - [`MinWithdrawalLimitProposal`]
-//! - [`MaxDepositLimitProposal`]
-//! - [`ResourceIdUpdateProposal`]
-//! - [`SetTreasuryHandlerProposal`]
-//! - [`SetVerifierProposal`]
-//! - [`FeeRecipientUpdateProposal`]
-//! - [`RescueTokensProposal`]
+//! - `AnchorUpdateProposal`
+//! - `TokenAddProposal`
+//! - `TokenRemoveProposal`
+//! - `WrappingFeeUpdateProposal`
+//! - `MinWithdrawalLimitProposal`
+//! - `MaxDepositLimitProposal`
+//! - `ResourceIdUpdateProposal`
+//! - `SetTreasuryHandlerProposal`
+//! - `SetVerifierProposal`
+//! - `FeeRecipientUpdateProposal`
+//! - `RescueTokensProposal`
 //!
 //! ## Feature Flags
 //!

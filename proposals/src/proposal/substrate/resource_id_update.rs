@@ -7,7 +7,6 @@ use alloc::vec::Vec;
 /// Resource Id Update Proposal.
 ///
 /// The [`ResourceIdUpdateProposal`] maps a new resource Id to a anchor
-/// ```
 #[allow(clippy::module_name_repetitions)]
 #[derive(
     Debug, Copy, Clone, PartialEq, Eq, Hash, typed_builder::TypedBuilder,

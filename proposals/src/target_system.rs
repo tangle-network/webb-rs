@@ -23,7 +23,7 @@
 //!                  │ 6                             25 │
 //!                  │                                  │
 
-#[cfg(not(feature = "std"))]
+#[cfg(all(not(feature = "std"), feature = "substrate"))]
 use alloc::vec::Vec;
 /// `TargetSystem` (26 Bytes)
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
@@ -41,7 +41,7 @@ pub enum TargetSystem {
     /// Ethereum Contract address (20 bytes).
     ContractAddress([u8; 20]),
     /// Webb Protocol-Substrate 6 bytes (pallet_index, call_index, tree_id ).
-    #[cfg(feature = "substrate")]
+    #[cfg(any(feature = "substrate", feature = "ink"))]
     Substrate(SubstrateTargetSystem),
 }
 
@@ -58,7 +58,7 @@ pub enum TargetSystem {
         scale_codec::MaxEncodedLen
     )
 )]
-#[cfg(feature = "substrate")]
+#[cfg(any(feature = "substrate", feature = "ink"))]
 #[allow(clippy::module_name_repetitions)]
 pub struct SubstrateTargetSystem {
     /// Pallet index of proposal handler pallet
@@ -88,6 +88,7 @@ impl TargetSystem {
                 bytes[f..t].copy_from_slice(address);
                 bytes
             }
+            #[cfg(any(feature = "substrate", feature = "ink"))]
             TargetSystem::Substrate(target_system) => {
                 let mut bytes = [0u8; TargetSystem::LENGTH];
                 let f = 22usize;
@@ -107,7 +108,7 @@ impl TargetSystem {
     }
 
     /// Get substrate `TargetSystem` details
-    #[cfg(feature = "substrate")]
+    #[cfg(any(feature = "substrate", feature = "ink"))]
     #[must_use]
     pub fn get_substrate_target_system(self) -> Option<SubstrateTargetSystem> {
         match self {
@@ -122,6 +123,7 @@ impl TargetSystem {
     pub fn into_contract_address_or_default(self) -> [u8; 20] {
         match self {
             TargetSystem::ContractAddress(address) => address,
+            #[cfg(any(feature = "substrate", feature = "ink"))]
             _ => [0; 20],
         }
     }
@@ -130,24 +132,33 @@ impl TargetSystem {
 impl From<[u8; TargetSystem::LENGTH]> for TargetSystem {
     fn from(bytes: [u8; TargetSystem::LENGTH]) -> Self {
         // check the first 20 bytes are zeros.
-        // if not, it is a contract address.
-        if bytes[0..20].iter().all(|&x| x == 0) {
-            let mut tree_id_bytes = [0u8; 4];
-            let f = 22usize;
-            let t = f + core::mem::size_of::<u32>();
-            tree_id_bytes.copy_from_slice(&bytes[f..t]);
-            let tree_id = u32::from_be_bytes(tree_id_bytes);
-            let target = SubstrateTargetSystem::builder()
-                .pallet_index(bytes[f - 1])
-                .tree_id(tree_id)
-                .build();
-            TargetSystem::Substrate(target)
+        // if so, it is a substrate target system.
+        let substrate_based_system =
+            cfg!(feature = "substrate") || cfg!(feature = "ink");
+        if bytes[0..20] == [0u8; 20] && substrate_based_system {
+            #[cfg(any(feature = "substrate", feature = "ink"))]
+            {
+                let mut tree_id_bytes = [0u8; 4];
+                let f = 22usize;
+                let t = f + core::mem::size_of::<u32>();
+                tree_id_bytes.copy_from_slice(&bytes[f..t]);
+                let tree_id = u32::from_be_bytes(tree_id_bytes);
+                let target = SubstrateTargetSystem::builder()
+                    .pallet_index(bytes[f - 1])
+                    .tree_id(tree_id)
+                    .build();
+                TargetSystem::Substrate(target)
+            }
+            #[cfg(not(any(feature = "substrate", feature = "ink")))]
+            {
+                unreachable!("This should not happen, since substrate_based_system is false at compile time");
+            }
         } else {
-            let mut address_bytes = [0u8; 20];
+            let mut address = [0u8; 20];
             let f = 6usize;
             let t = f + 20;
-            address_bytes.copy_from_slice(&bytes[f..t]);
-            TargetSystem::ContractAddress(address_bytes)
+            address.copy_from_slice(&bytes[f..t]);
+            TargetSystem::ContractAddress(address)
         }
     }
 }

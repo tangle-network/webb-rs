@@ -5,20 +5,15 @@ use num_traits::{Bounded, CheckedMul, One, Saturating, Zero};
 use serde::{Deserialize, Serialize};
 
 /// Proposal Nonce (4 bytes).
-#[derive(
-    Debug,
-    Clone,
-    Copy,
-    PartialEq,
-    Eq,
-    Hash,
-    Ord,
-    PartialOrd,
-    scale_codec::MaxEncodedLen,
-)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Ord, PartialOrd)]
 #[cfg_attr(
     feature = "scale",
-    derive(scale_info::TypeInfo, scale_codec::Encode, scale_codec::Decode)
+    derive(
+        scale_info::TypeInfo,
+        scale_codec::Encode,
+        scale_codec::Decode,
+        scale_codec::MaxEncodedLen,
+    )
 )]
 #[cfg_attr(feature = "std", derive(Serialize, Deserialize))]
 pub struct Nonce(pub u32);

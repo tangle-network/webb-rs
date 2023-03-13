@@ -2,6 +2,8 @@
 //! Token Add Proposal.
 use crate::ProposalHeader;
 
+#[cfg(not(feature = "std"))]
+use alloc::vec::Vec;
 /// Token Add Proposal.
 ///
 /// The [`TokenAddProposal`] allows the token specified by the `TokenAddress` to
@@ -40,7 +42,7 @@ impl TokenAddProposal {
     /// Get the proposal as a bytes
     #[must_use]
     pub fn to_bytes(&self) -> Vec<u8> {
-        let mut bytes = vec![];
+        let mut bytes = Vec::with_capacity(ProposalHeader::LENGTH + 40);
         bytes.extend_from_slice(&self.header.to_bytes());
 
         let message = AddPsp22TokenAddr {
