@@ -2,6 +2,8 @@
 //! Minimum Withdrawal Limit Proposal.
 use crate::ProposalHeader;
 
+#[cfg(not(feature = "std"))]
+use alloc::vec::Vec;
 /// Minimum Withdrawal Limit Proposal.
 ///
 /// The [`MinWithdrawalLimitProposal`] updates the minimum withdrawal amount
@@ -40,7 +42,7 @@ impl MinWithdrawalLimitProposal {
     /// Get the proposal as a bytes
     #[must_use]
     pub fn to_bytes(&self) -> Vec<u8> {
-        let mut bytes = vec![];
+        let mut bytes = Vec::new();
         bytes.extend_from_slice(&self.header.to_bytes());
 
         let mut deposit_limit_bytes = [0u8; 16];

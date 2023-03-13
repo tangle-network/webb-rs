@@ -2,6 +2,8 @@
 //! Token Remove Proposal.
 use crate::ProposalHeader;
 
+#[cfg(not(feature = "std"))]
+use alloc::vec::Vec;
 /// Token Remove Proposal.
 ///
 /// The [`TokenRemoveProposal`] allows the token specified by the `TokenAddress`
@@ -40,7 +42,7 @@ impl TokenRemoveProposal {
     /// Get the proposal as a bytes
     #[must_use]
     pub fn to_bytes(&self) -> Vec<u8> {
-        let mut bytes = vec![];
+        let mut bytes = Vec::with_capacity(ProposalHeader::LENGTH + 40);
         bytes.extend_from_slice(&self.header.to_bytes());
 
         let message = RemovePsp22TokenAddr {

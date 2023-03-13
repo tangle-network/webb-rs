@@ -1,6 +1,9 @@
 #![allow(clippy::exhaustive_enums)]
 //! Rescue Tokens Proposal.
 use crate::ProposalHeader;
+
+#[cfg(not(feature = "std"))]
+use alloc::vec::Vec;
 /// Rescue Tokens Proposal.
 ///
 /// The `RescueTokensProposal` rescues tokens from the treasury to a specified
@@ -60,7 +63,7 @@ impl RescueTokensProposal {
     /// Get the proposal as a bytes
     #[must_use]
     pub fn to_bytes(&self) -> Vec<u8> {
-        let mut bytes = vec![];
+        let mut bytes = Vec::with_capacity(ProposalHeader::LENGTH + 104);
         bytes.extend_from_slice(&self.header.to_bytes());
 
         let mut rescue_amt_bytes = [0u8; 16];

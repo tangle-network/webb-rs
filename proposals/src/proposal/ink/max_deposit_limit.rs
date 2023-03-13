@@ -1,6 +1,8 @@
 #![allow(clippy::exhaustive_enums)]
 //! Maximum Deposit Limit Proposal.
 use crate::ProposalHeader;
+#[cfg(not(feature = "std"))]
+use alloc::vec::Vec;
 
 /// Maximum Deposit Limit Proposal.
 ///
@@ -40,7 +42,7 @@ impl MaxDepositLimitProposal {
     /// Get the proposal as a bytes
     #[must_use]
     pub fn to_bytes(&self) -> Vec<u8> {
-        let mut bytes = vec![];
+        let mut bytes = Vec::new();
         bytes.extend_from_slice(&self.header.to_bytes());
 
         let mut deposit_limit_bytes = [0u8; 16];

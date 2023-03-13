@@ -2,6 +2,8 @@
 //! Resource Id Update Proposal.
 use crate::{ProposalHeader, ResourceId};
 
+#[cfg(not(feature = "std"))]
+use alloc::vec::Vec;
 /// Resource Id Update Proposal.
 ///
 /// The [`ResourceIdUpdateProposal`] maps a new resource Id to a handler
@@ -61,7 +63,7 @@ impl ResourceIdUpdateProposal {
     /// Get the proposal as a bytes
     #[must_use]
     pub fn to_bytes(&self) -> Vec<u8> {
-        let mut bytes = vec![];
+        let mut bytes = Vec::with_capacity(ProposalHeader::LENGTH + 96);
         bytes.extend_from_slice(&self.header.to_bytes());
 
         let message = ResourceIdUpdateData {

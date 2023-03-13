@@ -2,6 +2,8 @@
 //! Set Treasury Handler Proposal.
 use crate::ProposalHeader;
 
+#[cfg(not(feature = "std"))]
+use alloc::vec::Vec;
 /// Set Treasury Handler Proposal.
 ///
 /// The [`SetTreasuryHandlerProposal`] Proposal sets the treasury handler
@@ -40,7 +42,7 @@ impl SetTreasuryHandlerProposal {
     /// Get the proposal as a bytes
     #[must_use]
     pub fn to_bytes(&self) -> Vec<u8> {
-        let mut bytes = vec![];
+        let mut bytes = Vec::with_capacity(ProposalHeader::LENGTH + 36);
         bytes.extend_from_slice(&self.header.to_bytes());
 
         let message = SetHandler {
