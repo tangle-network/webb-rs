@@ -76,12 +76,12 @@ impl_proposal_for! {
 #[derive(Debug, Clone, Eq, PartialEq)]
 #[cfg_attr(
     feature = "scale",
-    derive(
-        scale_info::TypeInfo,
-        scale_codec::Encode,
-        scale_codec::Decode,
-        scale_codec::MaxEncodedLen
-    )
+    derive(scale_info::TypeInfo, scale_codec::Encode, scale_codec::Decode,)
+)]
+// only derive `MaxEncodedLen` if both `scale` and `substrate` features are enabled
+#[cfg_attr(
+    all(feature = "scale", feature = "substrate"),
+    derive(scale_codec::MaxEncodedLen)
 )]
 #[allow(clippy::exhaustive_enums)]
 /// Proposal enum
