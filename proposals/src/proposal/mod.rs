@@ -85,22 +85,37 @@ impl_proposal_for! {
 )]
 #[allow(clippy::exhaustive_enums)]
 /// Proposal enum
-pub enum Proposal<MaxLength: Get<u32>> {
+pub enum Proposal<
+    #[cfg(feature = "substrate")]
+    #[rustfmt::ignore] MaxLength: Get<u32>,
+> {
     /// Represents a signed proposal
     Signed {
         /// Kind of the proposal
         kind: ProposalKind,
         /// Proposal data
+        #[cfg(feature = "substrate")]
         data: BoundedVec<u8, MaxLength>,
+        /// Proposal data
+        #[cfg(not(feature = "substrate"))]
+        data: Vec<u8>,
         /// Proposal signature
+        #[cfg(feature = "substrate")]
         signature: BoundedVec<u8, MaxLength>,
+        /// Proposal signature
+        #[cfg(not(feature = "substrate"))]
+        signature: Vec<u8>,
     },
     /// Represent an unsigned proposal
     Unsigned {
         /// Kind of the proposal
         kind: ProposalKind,
         /// Proposal data
+        #[cfg(feature = "substrate")]
         data: BoundedVec<u8, MaxLength>,
+        /// Proposal data
+        #[cfg(not(feature = "substrate"))]
+        data: Vec<u8>,
     },
 }
 
@@ -155,6 +170,7 @@ pub enum ProposalKind {
     FeeRecipientUpdate,
 }
 
+#[cfg(feature = "substrate")]
 impl<MaxLength: Get<u32>> Proposal<MaxLength> {
     /// Returns the proposal data
     #[must_use]
@@ -173,6 +189,50 @@ impl<MaxLength: Get<u32>> Proposal<MaxLength> {
             Proposal::Signed { signature, .. } => {
                 Some(signature.clone().into())
             }
+            Proposal::Unsigned { .. } => None,
+        }
+    }
+
+    /// Returns the proposal kind
+    #[must_use]
+    pub fn kind(&self) -> ProposalKind {
+        match self {
+            Proposal::Signed { kind, .. } | Proposal::Unsigned { kind, .. } => {
+                *kind
+            }
+        }
+    }
+
+    /// Returns a boolean indicating if the proposal is signed
+    #[must_use]
+    pub fn is_signed(&self) -> bool {
+        matches!(self, Proposal::Signed { .. })
+    }
+
+    /// Returns a boolean indicating if the proposal is unsigned
+    #[must_use]
+    pub fn is_unsigned(&self) -> bool {
+        matches!(self, Proposal::Unsigned { .. })
+    }
+}
+
+#[cfg(not(feature = "substrate"))]
+impl Proposal {
+    /// Returns the proposal data
+    #[must_use]
+    pub fn data(&self) -> &Vec<u8> {
+        match self {
+            Proposal::Signed { data, .. } | Proposal::Unsigned { data, .. } => {
+                data
+            }
+        }
+    }
+
+    /// Returns the proposal signature or None if it is unsigned
+    #[must_use]
+    pub fn signature(&self) -> Option<Vec<u8>> {
+        match self {
+            Proposal::Signed { signature, .. } => Some(signature.clone()),
             Proposal::Unsigned { .. } => None,
         }
     }
