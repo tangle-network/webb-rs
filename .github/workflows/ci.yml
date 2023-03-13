@@ -19,6 +19,9 @@ jobs:
       matrix:
         os: [ubuntu-latest, macos-latest]
     runs-on: ${{ matrix.os }}
+    # Name should be the OS name only (e.g. Linux, macOS, Windows)
+    # This is used to generate the badge
+    name: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v2
         with:
