@@ -40,10 +40,10 @@ jobs:
       - name: Tests
         run: cargo test --all
       - name: EVM Proposals
-        run: cargo build --no-default-features --features evm
+        run: cargo build -p webb-proposals --no-default-features --features evm
       - name: Substrate Proposals
-        run: cargo build --no-default-features --features substrate,std
+        run: cargo build -p webb-proposals --no-default-features --features substrate,std
       - name: Ink! Proposals
-        run: cargo build --no-default-features --features ink
+        run: cargo build -p webb-proposals --no-default-features --features ink
       - name: Rustdoc build
         run: cargo doc --no-deps --all-features
