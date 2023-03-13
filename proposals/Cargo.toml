@@ -1,6 +1,6 @@
 [package]
 name = "webb-proposals"
-version = "0.5.19"
+version = "0.5.20"
 description = "Webb Protocol Proposals Specification & Implementation (part of webb-rs SDK)"
 categories = ["encoding", "no-std"]
 keywords = ["webb", "proposals", "protocol", "blockchain"]

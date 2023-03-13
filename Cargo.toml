@@ -13,7 +13,7 @@ hex = { version = "0.4", default-features = false }
 
 [package]
 name = "webb"
-version = "0.5.19"
+version = "0.5.20"
 description = "Webb SDK"
 keywords = ["webb", "sdk", "blockchain", "webb-tools"]
 include = ["Cargo.toml", "contracts/", "metadata/", "src/**/*.rs", "build.rs", "README.md", "LICENSE"]
