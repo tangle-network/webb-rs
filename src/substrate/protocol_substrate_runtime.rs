@@ -7940,11 +7940,11 @@ pub mod api {
                             length_bound,
                         },
                         [
-                            173u8, 108u8, 247u8, 51u8, 161u8, 239u8, 156u8,
-                            151u8, 92u8, 224u8, 77u8, 109u8, 126u8, 21u8, 38u8,
-                            185u8, 130u8, 62u8, 239u8, 186u8, 158u8, 38u8,
-                            77u8, 133u8, 60u8, 110u8, 121u8, 216u8, 97u8,
-                            189u8, 174u8, 32u8,
+                            135u8, 21u8, 244u8, 77u8, 180u8, 129u8, 207u8,
+                            136u8, 166u8, 143u8, 162u8, 157u8, 57u8, 145u8,
+                            0u8, 145u8, 122u8, 19u8, 28u8, 114u8, 47u8, 175u8,
+                            174u8, 110u8, 206u8, 131u8, 125u8, 178u8, 197u8,
+                            43u8, 229u8, 130u8,
                         ],
                     )
                 }
@@ -7990,11 +7990,11 @@ pub mod api {
                             length_bound,
                         },
                         [
-                            22u8, 93u8, 151u8, 209u8, 67u8, 162u8, 96u8, 121u8,
-                            210u8, 242u8, 169u8, 81u8, 230u8, 128u8, 79u8,
-                            172u8, 198u8, 214u8, 129u8, 50u8, 185u8, 227u8,
-                            110u8, 93u8, 170u8, 239u8, 5u8, 54u8, 102u8, 203u8,
-                            48u8, 212u8,
+                            86u8, 219u8, 60u8, 141u8, 103u8, 84u8, 223u8, 12u8,
+                            73u8, 246u8, 226u8, 127u8, 110u8, 177u8, 193u8,
+                            22u8, 111u8, 72u8, 190u8, 47u8, 205u8, 102u8,
+                            103u8, 39u8, 175u8, 145u8, 170u8, 132u8, 43u8,
+                            137u8, 139u8, 110u8,
                         ],
                     )
                 }
@@ -8346,11 +8346,11 @@ pub mod api {
                             ::subxt::storage::address::StorageHasher::Identity,
                         )],
                         [
-                            207u8, 240u8, 108u8, 244u8, 229u8, 179u8, 243u8,
-                            219u8, 197u8, 79u8, 41u8, 106u8, 216u8, 49u8, 6u8,
-                            184u8, 84u8, 125u8, 131u8, 93u8, 92u8, 134u8,
-                            121u8, 203u8, 28u8, 110u8, 14u8, 86u8, 64u8, 113u8,
-                            102u8, 81u8,
+                            198u8, 221u8, 114u8, 185u8, 204u8, 98u8, 201u8,
+                            99u8, 182u8, 174u8, 168u8, 91u8, 132u8, 181u8,
+                            202u8, 126u8, 217u8, 150u8, 60u8, 14u8, 77u8, 34u8,
+                            145u8, 182u8, 46u8, 135u8, 116u8, 143u8, 158u8,
+                            175u8, 157u8, 105u8,
                         ],
                     )
                 }
@@ -8360,11 +8360,11 @@ pub mod api {
                         "ProposalOf",
                         Vec::new(),
                         [
-                            207u8, 240u8, 108u8, 244u8, 229u8, 179u8, 243u8,
-                            219u8, 197u8, 79u8, 41u8, 106u8, 216u8, 49u8, 6u8,
-                            184u8, 84u8, 125u8, 131u8, 93u8, 92u8, 134u8,
-                            121u8, 203u8, 28u8, 110u8, 14u8, 86u8, 64u8, 113u8,
-                            102u8, 81u8,
+                            198u8, 221u8, 114u8, 185u8, 204u8, 98u8, 201u8,
+                            99u8, 182u8, 174u8, 168u8, 91u8, 132u8, 181u8,
+                            202u8, 126u8, 217u8, 150u8, 60u8, 14u8, 77u8, 34u8,
+                            145u8, 182u8, 46u8, 135u8, 116u8, 143u8, 158u8,
+                            175u8, 157u8, 105u8,
                         ],
                     )
                 }
@@ -10184,11 +10184,11 @@ pub mod api {
                         "batch",
                         Batch { calls },
                         [
-                            3u8, 18u8, 47u8, 223u8, 248u8, 77u8, 162u8, 60u8,
-                            25u8, 214u8, 39u8, 132u8, 204u8, 105u8, 110u8,
-                            71u8, 175u8, 245u8, 82u8, 73u8, 42u8, 94u8, 112u8,
-                            162u8, 70u8, 180u8, 93u8, 141u8, 103u8, 24u8,
-                            244u8, 162u8,
+                            215u8, 150u8, 64u8, 23u8, 122u8, 70u8, 186u8,
+                            155u8, 163u8, 17u8, 217u8, 118u8, 138u8, 30u8,
+                            131u8, 111u8, 77u8, 96u8, 218u8, 192u8, 177u8,
+                            91u8, 202u8, 133u8, 64u8, 131u8, 16u8, 167u8,
+                            112u8, 119u8, 44u8, 255u8,
                         ],
                     )
                 }
@@ -10219,11 +10219,11 @@ pub mod api {
                             call: ::std::boxed::Box::new(call),
                         },
                         [
-                            184u8, 69u8, 244u8, 83u8, 234u8, 189u8, 205u8,
-                            188u8, 168u8, 85u8, 88u8, 110u8, 28u8, 199u8,
-                            128u8, 91u8, 61u8, 170u8, 227u8, 100u8, 24u8, 88u8,
-                            95u8, 205u8, 26u8, 143u8, 240u8, 79u8, 171u8,
-                            111u8, 113u8, 173u8,
+                            75u8, 241u8, 19u8, 140u8, 143u8, 49u8, 63u8, 45u8,
+                            19u8, 187u8, 227u8, 244u8, 174u8, 20u8, 253u8,
+                            141u8, 244u8, 110u8, 157u8, 254u8, 184u8, 37u8,
+                            20u8, 230u8, 215u8, 137u8, 43u8, 182u8, 172u8,
+                            202u8, 137u8, 66u8,
                         ],
                     )
                 }
@@ -10252,11 +10252,11 @@ pub mod api {
                         "batch_all",
                         BatchAll { calls },
                         [
-                            105u8, 143u8, 171u8, 67u8, 9u8, 184u8, 137u8,
-                            221u8, 229u8, 122u8, 137u8, 180u8, 249u8, 34u8,
-                            214u8, 48u8, 236u8, 204u8, 199u8, 99u8, 121u8,
-                            186u8, 109u8, 157u8, 172u8, 59u8, 178u8, 3u8,
-                            197u8, 77u8, 177u8, 229u8,
+                            248u8, 176u8, 108u8, 110u8, 211u8, 188u8, 52u8,
+                            248u8, 254u8, 134u8, 160u8, 63u8, 180u8, 119u8,
+                            68u8, 154u8, 243u8, 219u8, 178u8, 51u8, 205u8,
+                            242u8, 248u8, 132u8, 245u8, 9u8, 83u8, 190u8, 66u8,
+                            125u8, 82u8, 39u8,
                         ],
                     )
                 }
@@ -10283,11 +10283,11 @@ pub mod api {
                             call: ::std::boxed::Box::new(call),
                         },
                         [
-                            12u8, 75u8, 49u8, 235u8, 139u8, 249u8, 53u8, 229u8,
-                            231u8, 255u8, 139u8, 77u8, 136u8, 228u8, 32u8,
-                            255u8, 135u8, 143u8, 49u8, 234u8, 36u8, 152u8,
-                            71u8, 252u8, 62u8, 121u8, 211u8, 14u8, 214u8,
-                            149u8, 35u8, 231u8,
+                            199u8, 23u8, 79u8, 111u8, 23u8, 245u8, 43u8, 244u8,
+                            198u8, 33u8, 217u8, 114u8, 135u8, 198u8, 37u8,
+                            71u8, 201u8, 142u8, 27u8, 192u8, 28u8, 249u8, 95u8,
+                            18u8, 41u8, 47u8, 200u8, 34u8, 221u8, 118u8, 30u8,
+                            121u8,
                         ],
                     )
                 }
@@ -10316,11 +10316,11 @@ pub mod api {
                         "force_batch",
                         ForceBatch { calls },
                         [
-                            236u8, 152u8, 38u8, 241u8, 33u8, 24u8, 232u8,
-                            137u8, 226u8, 169u8, 67u8, 170u8, 178u8, 50u8,
-                            138u8, 100u8, 49u8, 223u8, 152u8, 56u8, 235u8,
-                            148u8, 135u8, 215u8, 146u8, 70u8, 19u8, 151u8,
-                            71u8, 90u8, 63u8, 198u8,
+                            88u8, 195u8, 172u8, 234u8, 217u8, 52u8, 90u8, 2u8,
+                            124u8, 107u8, 195u8, 64u8, 192u8, 20u8, 149u8,
+                            166u8, 237u8, 124u8, 201u8, 21u8, 86u8, 220u8,
+                            239u8, 137u8, 17u8, 139u8, 82u8, 161u8, 147u8,
+                            243u8, 100u8, 252u8,
                         ],
                     )
                 }
@@ -10343,11 +10343,11 @@ pub mod api {
                             weight,
                         },
                         [
-                            68u8, 1u8, 142u8, 45u8, 175u8, 196u8, 197u8, 99u8,
-                            193u8, 4u8, 93u8, 192u8, 202u8, 197u8, 196u8,
-                            213u8, 162u8, 84u8, 132u8, 215u8, 232u8, 126u8,
-                            74u8, 57u8, 202u8, 194u8, 230u8, 221u8, 170u8,
-                            67u8, 112u8, 0u8,
+                            94u8, 33u8, 186u8, 164u8, 178u8, 64u8, 14u8, 41u8,
+                            71u8, 7u8, 120u8, 234u8, 136u8, 82u8, 78u8, 6u8,
+                            207u8, 112u8, 250u8, 47u8, 95u8, 185u8, 116u8,
+                            241u8, 207u8, 241u8, 101u8, 109u8, 111u8, 29u8,
+                            113u8, 181u8,
                         ],
                     )
                 }
@@ -10594,11 +10594,11 @@ pub mod api {
                             call: ::std::boxed::Box::new(call),
                         },
                         [
-                            101u8, 106u8, 185u8, 64u8, 114u8, 176u8, 231u8,
-                            160u8, 103u8, 4u8, 249u8, 176u8, 106u8, 154u8,
-                            242u8, 44u8, 140u8, 177u8, 88u8, 132u8, 144u8,
-                            208u8, 59u8, 174u8, 16u8, 81u8, 39u8, 90u8, 217u8,
-                            160u8, 163u8, 215u8,
+                            120u8, 173u8, 237u8, 218u8, 116u8, 207u8, 139u8,
+                            42u8, 184u8, 182u8, 93u8, 79u8, 83u8, 167u8, 24u8,
+                            200u8, 21u8, 162u8, 117u8, 159u8, 37u8, 236u8,
+                            86u8, 118u8, 237u8, 77u8, 184u8, 21u8, 154u8, 15u8,
+                            243u8, 99u8,
                         ],
                     )
                 }
@@ -10672,11 +10672,11 @@ pub mod api {
                             max_weight,
                         },
                         [
-                            172u8, 175u8, 105u8, 203u8, 100u8, 84u8, 14u8,
-                            33u8, 106u8, 15u8, 99u8, 185u8, 44u8, 43u8, 157u8,
-                            102u8, 92u8, 74u8, 246u8, 190u8, 220u8, 30u8, 88u8,
-                            253u8, 16u8, 151u8, 163u8, 171u8, 244u8, 190u8,
-                            152u8, 75u8,
+                            247u8, 128u8, 12u8, 76u8, 66u8, 160u8, 42u8, 98u8,
+                            11u8, 204u8, 70u8, 241u8, 11u8, 199u8, 90u8, 49u8,
+                            131u8, 22u8, 181u8, 228u8, 117u8, 193u8, 101u8,
+                            224u8, 88u8, 202u8, 135u8, 3u8, 133u8, 45u8, 78u8,
+                            223u8,
                         ],
                     )
                 }
@@ -11123,11 +11123,11 @@ pub mod api {
                             call: ::std::boxed::Box::new(call),
                         },
                         [
-                            12u8, 91u8, 82u8, 80u8, 62u8, 49u8, 237u8, 24u8,
-                            160u8, 76u8, 162u8, 136u8, 224u8, 37u8, 197u8,
-                            110u8, 154u8, 114u8, 178u8, 39u8, 197u8, 85u8,
-                            25u8, 217u8, 125u8, 19u8, 39u8, 85u8, 119u8, 251u8,
-                            239u8, 102u8,
+                            144u8, 27u8, 238u8, 77u8, 221u8, 116u8, 56u8,
+                            135u8, 161u8, 194u8, 38u8, 196u8, 182u8, 219u8,
+                            120u8, 40u8, 61u8, 32u8, 13u8, 10u8, 120u8, 237u8,
+                            64u8, 171u8, 138u8, 166u8, 194u8, 68u8, 61u8,
+                            238u8, 53u8, 1u8,
                         ],
                     )
                 }
@@ -11174,11 +11174,11 @@ pub mod api {
                             call: ::std::boxed::Box::new(call),
                         },
                         [
-                            134u8, 139u8, 209u8, 114u8, 31u8, 247u8, 34u8,
-                            76u8, 194u8, 112u8, 124u8, 16u8, 61u8, 145u8,
-                            174u8, 166u8, 24u8, 161u8, 114u8, 62u8, 169u8, 1u8,
-                            235u8, 108u8, 250u8, 246u8, 250u8, 173u8, 201u8,
-                            179u8, 101u8, 113u8,
+                            198u8, 15u8, 204u8, 245u8, 236u8, 203u8, 44u8,
+                            129u8, 234u8, 24u8, 121u8, 4u8, 204u8, 58u8, 141u8,
+                            149u8, 193u8, 182u8, 99u8, 216u8, 159u8, 173u8,
+                            103u8, 91u8, 78u8, 52u8, 40u8, 223u8, 222u8, 247u8,
+                            177u8, 169u8,
                         ],
                     )
                 }
@@ -11226,11 +11226,11 @@ pub mod api {
                             call: ::std::boxed::Box::new(call),
                         },
                         [
-                            155u8, 80u8, 222u8, 12u8, 238u8, 82u8, 157u8,
-                            146u8, 252u8, 165u8, 207u8, 6u8, 184u8, 243u8,
-                            104u8, 255u8, 4u8, 218u8, 44u8, 183u8, 102u8, 38u8,
-                            165u8, 105u8, 0u8, 0u8, 141u8, 213u8, 36u8, 115u8,
-                            125u8, 212u8,
+                            169u8, 200u8, 158u8, 109u8, 115u8, 109u8, 93u8,
+                            242u8, 49u8, 56u8, 113u8, 207u8, 23u8, 196u8, 92u8,
+                            91u8, 254u8, 196u8, 199u8, 214u8, 236u8, 155u8,
+                            185u8, 63u8, 36u8, 154u8, 115u8, 185u8, 144u8,
+                            56u8, 158u8, 82u8,
                         ],
                     )
                 }
@@ -11262,11 +11262,11 @@ pub mod api {
                             call: ::std::boxed::Box::new(call),
                         },
                         [
-                            140u8, 193u8, 248u8, 44u8, 71u8, 95u8, 25u8, 182u8,
-                            165u8, 70u8, 75u8, 217u8, 230u8, 125u8, 169u8,
-                            145u8, 78u8, 57u8, 66u8, 219u8, 220u8, 57u8, 118u8,
-                            4u8, 241u8, 223u8, 247u8, 9u8, 158u8, 214u8, 228u8,
-                            57u8,
+                            240u8, 34u8, 209u8, 204u8, 29u8, 153u8, 93u8,
+                            151u8, 222u8, 179u8, 32u8, 173u8, 208u8, 109u8,
+                            245u8, 17u8, 73u8, 210u8, 205u8, 176u8, 206u8,
+                            22u8, 30u8, 58u8, 127u8, 247u8, 29u8, 42u8, 212u8,
+                            118u8, 124u8, 115u8,
                         ],
                     )
                 }
@@ -11965,11 +11965,11 @@ pub mod api {
                             call: ::std::boxed::Box::new(call),
                         },
                         [
-                            101u8, 10u8, 138u8, 196u8, 152u8, 14u8, 92u8,
-                            142u8, 232u8, 84u8, 173u8, 87u8, 215u8, 148u8,
-                            49u8, 122u8, 0u8, 89u8, 233u8, 43u8, 191u8, 35u8,
-                            55u8, 85u8, 113u8, 119u8, 179u8, 121u8, 75u8, 63u8,
-                            207u8, 187u8,
+                            220u8, 143u8, 127u8, 187u8, 168u8, 118u8, 34u8,
+                            4u8, 216u8, 67u8, 141u8, 179u8, 89u8, 23u8, 131u8,
+                            24u8, 219u8, 104u8, 27u8, 113u8, 196u8, 75u8,
+                            117u8, 39u8, 237u8, 216u8, 217u8, 48u8, 65u8, 89u8,
+                            66u8, 1u8,
                         ],
                     )
                 }
@@ -12291,11 +12291,11 @@ pub mod api {
                             call: ::std::boxed::Box::new(call),
                         },
                         [
-                            4u8, 138u8, 19u8, 243u8, 213u8, 146u8, 194u8,
-                            228u8, 51u8, 240u8, 86u8, 202u8, 31u8, 120u8,
-                            228u8, 143u8, 26u8, 149u8, 13u8, 62u8, 43u8, 204u8,
-                            209u8, 199u8, 18u8, 142u8, 230u8, 169u8, 250u8,
-                            175u8, 164u8, 38u8,
+                            49u8, 251u8, 228u8, 100u8, 122u8, 252u8, 145u8,
+                            101u8, 7u8, 57u8, 83u8, 125u8, 255u8, 113u8, 183u8,
+                            203u8, 234u8, 49u8, 221u8, 203u8, 248u8, 218u8,
+                            41u8, 205u8, 78u8, 130u8, 220u8, 254u8, 118u8,
+                            166u8, 157u8, 83u8,
                         ],
                     )
                 }
@@ -14793,11 +14793,11 @@ pub mod api {
                             call: ::std::boxed::Box::new(call),
                         },
                         [
-                            255u8, 184u8, 82u8, 150u8, 157u8, 177u8, 162u8,
-                            214u8, 153u8, 158u8, 163u8, 10u8, 193u8, 255u8,
-                            21u8, 138u8, 206u8, 96u8, 203u8, 217u8, 14u8,
-                            126u8, 85u8, 155u8, 21u8, 62u8, 124u8, 18u8, 245u8,
-                            219u8, 97u8, 58u8,
+                            191u8, 25u8, 177u8, 200u8, 243u8, 62u8, 131u8,
+                            53u8, 236u8, 119u8, 159u8, 239u8, 197u8, 206u8,
+                            102u8, 210u8, 252u8, 47u8, 244u8, 207u8, 22u8,
+                            171u8, 216u8, 254u8, 149u8, 170u8, 236u8, 32u8,
+                            101u8, 159u8, 223u8, 209u8,
                         ],
                     )
                 }
@@ -14825,11 +14825,11 @@ pub mod api {
                             weight,
                         },
                         [
-                            221u8, 53u8, 9u8, 46u8, 2u8, 6u8, 128u8, 194u8,
-                            139u8, 190u8, 110u8, 245u8, 52u8, 40u8, 64u8,
-                            206u8, 78u8, 65u8, 216u8, 109u8, 168u8, 96u8,
-                            182u8, 224u8, 100u8, 225u8, 241u8, 151u8, 78u8,
-                            195u8, 141u8, 147u8,
+                            233u8, 247u8, 77u8, 35u8, 94u8, 216u8, 233u8,
+                            151u8, 105u8, 183u8, 43u8, 116u8, 83u8, 195u8,
+                            255u8, 222u8, 168u8, 93u8, 34u8, 165u8, 53u8,
+                            203u8, 99u8, 20u8, 178u8, 231u8, 159u8, 174u8,
+                            247u8, 67u8, 184u8, 184u8,
                         ],
                     )
                 }
@@ -14890,11 +14890,11 @@ pub mod api {
                             call: ::std::boxed::Box::new(call),
                         },
                         [
-                            96u8, 24u8, 187u8, 216u8, 231u8, 30u8, 95u8, 4u8,
-                            147u8, 102u8, 69u8, 247u8, 98u8, 139u8, 145u8,
-                            159u8, 126u8, 70u8, 237u8, 223u8, 47u8, 112u8,
-                            16u8, 26u8, 47u8, 148u8, 111u8, 3u8, 14u8, 234u8,
-                            23u8, 10u8,
+                            97u8, 173u8, 153u8, 77u8, 35u8, 5u8, 128u8, 122u8,
+                            68u8, 105u8, 124u8, 92u8, 134u8, 157u8, 21u8, 6u8,
+                            119u8, 196u8, 57u8, 165u8, 188u8, 110u8, 81u8,
+                            16u8, 129u8, 42u8, 229u8, 118u8, 33u8, 143u8,
+                            144u8, 99u8,
                         ],
                     )
                 }
@@ -21711,7 +21711,7 @@ pub mod api {
                 Eq,
                 PartialEq,
             )]
-            pub struct ExecuteSetMinxWithdrawalLimitProposal {
+            pub struct ExecuteSetMinWithdrawalLimitProposal {
                 pub min_withdraw_limit: ::core::primitive::u128,
                 pub nonce: ::core::primitive::u32,
             }
@@ -21826,26 +21826,26 @@ pub mod api {
                 #[doc = "Execute set min withdrawal limit proposal."]
                 #[doc = "The `MinWithdrawalLimitProposal` updates the minimum withdrawal amount allowed on the"]
                 #[doc = "variable anchor system."]
-                pub fn execute_set_minx_withdrawal_limit_proposal(
+                pub fn execute_set_min_withdrawal_limit_proposal(
                     &self,
                     min_withdraw_limit: ::core::primitive::u128,
                     nonce: ::core::primitive::u32,
                 ) -> ::subxt::tx::StaticTxPayload<
-                    ExecuteSetMinxWithdrawalLimitProposal,
+                    ExecuteSetMinWithdrawalLimitProposal,
                 > {
                     ::subxt::tx::StaticTxPayload::new(
                         "VAnchorHandlerBn254",
-                        "execute_set_minx_withdrawal_limit_proposal",
-                        ExecuteSetMinxWithdrawalLimitProposal {
+                        "execute_set_min_withdrawal_limit_proposal",
+                        ExecuteSetMinWithdrawalLimitProposal {
                             min_withdraw_limit,
                             nonce,
                         },
                         [
-                            121u8, 21u8, 36u8, 144u8, 108u8, 159u8, 214u8,
-                            149u8, 125u8, 234u8, 106u8, 167u8, 126u8, 45u8,
-                            105u8, 168u8, 42u8, 14u8, 159u8, 38u8, 118u8,
-                            150u8, 191u8, 13u8, 103u8, 242u8, 158u8, 168u8,
-                            122u8, 137u8, 231u8, 114u8,
+                            53u8, 181u8, 146u8, 2u8, 51u8, 158u8, 29u8, 5u8,
+                            70u8, 72u8, 54u8, 41u8, 190u8, 172u8, 173u8, 239u8,
+                            53u8, 244u8, 186u8, 76u8, 58u8, 162u8, 227u8,
+                            128u8, 174u8, 199u8, 121u8, 162u8, 88u8, 92u8,
+                            207u8, 128u8,
                         ],
                     )
                 }
@@ -21967,6 +21967,7 @@ pub mod api {
                 PartialEq,
             )]
             pub struct ForceSetMaintainer {
+                pub nonce: ::core::primitive::u32,
                 pub new_maintainer:
                     runtime_types::sp_core::bounded::bounded_vec::BoundedVec<
                         ::core::primitive::u8,
@@ -22068,18 +22069,23 @@ pub mod api {
                 }
                 pub fn force_set_maintainer(
                     &self,
+                    nonce: ::core::primitive::u32,
                     new_maintainer : runtime_types :: sp_core :: bounded :: bounded_vec :: BoundedVec < :: core :: primitive :: u8 >,
                 ) -> ::subxt::tx::StaticTxPayload<ForceSetMaintainer>
                 {
                     ::subxt::tx::StaticTxPayload::new(
                         "SignatureBridge",
                         "force_set_maintainer",
-                        ForceSetMaintainer { new_maintainer },
+                        ForceSetMaintainer {
+                            nonce,
+                            new_maintainer,
+                        },
                         [
-                            48u8, 168u8, 9u8, 22u8, 245u8, 245u8, 6u8, 130u8,
-                            126u8, 74u8, 12u8, 96u8, 7u8, 212u8, 91u8, 127u8,
-                            237u8, 185u8, 189u8, 215u8, 21u8, 26u8, 96u8, 4u8,
-                            44u8, 187u8, 41u8, 26u8, 219u8, 56u8, 70u8, 17u8,
+                            172u8, 54u8, 216u8, 12u8, 194u8, 151u8, 209u8,
+                            122u8, 232u8, 194u8, 137u8, 135u8, 126u8, 150u8,
+                            144u8, 41u8, 26u8, 244u8, 43u8, 49u8, 161u8, 209u8,
+                            85u8, 212u8, 86u8, 59u8, 57u8, 120u8, 157u8, 38u8,
+                            180u8, 254u8,
                         ],
                     )
                 }
@@ -29423,7 +29429,7 @@ pub mod api {
                 )]
                 #[doc = "Contains one variant per dispatchable that can be called by an extrinsic."]
                 pub enum Call {
-                    # [codec (index = 0)] # [doc = "Sets the maintainer."] set_maintainer { message : runtime_types :: sp_core :: bounded :: bounded_vec :: BoundedVec < :: core :: primitive :: u8 > , signature : runtime_types :: sp_core :: bounded :: bounded_vec :: BoundedVec < :: core :: primitive :: u8 > , } , # [codec (index = 1)] force_set_maintainer { new_maintainer : runtime_types :: sp_core :: bounded :: bounded_vec :: BoundedVec < :: core :: primitive :: u8 > , } , # [codec (index = 2)] # [doc = "Stores a method name on chain under an associated resource ID."] # [doc = ""] # [doc = "# <weight>"] # [doc = "- O(1) write"] # [doc = "# </weight>"] set_resource { id : runtime_types :: webb_proposals :: header :: ResourceId , } , # [codec (index = 3)] # [doc = "Removes a resource ID from the resource mapping."] # [doc = ""] # [doc = "After this call, bridge transfers with the associated resource ID"] # [doc = "will be rejected."] # [doc = ""] # [doc = "# <weight>"] # [doc = "- O(1) removal"] # [doc = "# </weight>"] remove_resource { id : runtime_types :: webb_proposals :: header :: ResourceId , } , # [codec (index = 4)] # [doc = "Enables a chain ID as a source or destination for a bridge transfer."] # [doc = ""] # [doc = "# <weight>"] # [doc = "- O(1) lookup and insert"] # [doc = "# </weight>"] whitelist_chain { id : :: core :: primitive :: u64 , } , # [codec (index = 5)] # [doc = "@param origin"] # [doc = "@param src_id"] # [doc = "@param proposal_data: (r_id, nonce, 4 bytes of zeroes, call)"] # [doc = "@param signature: a signature over the proposal_data"] # [doc = ""] # [doc = "We check:"] # [doc = "1. That the signature is actually over the proposal data"] # [doc = "2. Add ResourceId to the Storage"] # [doc = "3. That the call from the proposal data and the call input parameter to the function are"] # [doc = "consistent with each other 4. That the execution chain id type parsed from the r_id is"] # [doc = "indeed this chain's id type"] # [doc = ""] # [doc = "If all these checks pass then we call finalize_execution which actually executes the"] # [doc = "dispatchable call. The dispatchable call is usually a handler function, for instance in"] # [doc = "the anchor-handler or token-wrapper-handler pallet."] # [doc = ""] # [doc = "There are a few TODOs left in the function."] # [doc = ""] # [doc = "In the set_resource_with_signature"] # [doc = "# <weight>"] # [doc = "- weight of proposed call, regardless of whether execution is performed"] # [doc = "# </weight>"] set_resource_with_signature { src_id : :: core :: primitive :: u64 , proposal_data : runtime_types :: sp_core :: bounded :: bounded_vec :: BoundedVec < :: core :: primitive :: u8 > , signature : runtime_types :: sp_core :: bounded :: bounded_vec :: BoundedVec < :: core :: primitive :: u8 > , } , # [codec (index = 6)] # [doc = "@param origin"] # [doc = "@param src_id"] # [doc = "@param proposal_data: (r_id, nonce, 4 bytes of zeroes, call)"] # [doc = "@param signature: a signature over the proposal_data"] # [doc = ""] # [doc = "We check:"] # [doc = "1. That the signature is actually over the proposal data"] # [doc = "2. That the r_id parsed from the proposal data exists"] # [doc = "3. That the call from the proposal data and the call input parameter to the function are"] # [doc = "consistent with each other 4. That the execution chain id type parsed from the r_id is"] # [doc = "indeed this chain's id type"] # [doc = ""] # [doc = "If all these checks pass then we call finalize_execution which actually executes the"] # [doc = "dispatchable call. The dispatchable call is usually a handler function, for instance in"] # [doc = "the anchor-handler or token-wrapper-handler pallet."] # [doc = ""] # [doc = "There are a few TODOs left in the function."] # [doc = ""] # [doc = "In the execute_proposal"] # [doc = "# <weight>"] # [doc = "- weight of proposed call, regardless of whether execution is performed"] # [doc = "# </weight>"] execute_proposal { src_id : :: core :: primitive :: u64 , proposal_data : runtime_types :: sp_core :: bounded :: bounded_vec :: BoundedVec < :: core :: primitive :: u8 > , signature : runtime_types :: sp_core :: bounded :: bounded_vec :: BoundedVec < :: core :: primitive :: u8 > , } , }
+                    # [codec (index = 0)] # [doc = "Sets the maintainer."] set_maintainer { message : runtime_types :: sp_core :: bounded :: bounded_vec :: BoundedVec < :: core :: primitive :: u8 > , signature : runtime_types :: sp_core :: bounded :: bounded_vec :: BoundedVec < :: core :: primitive :: u8 > , } , # [codec (index = 1)] force_set_maintainer { nonce : :: core :: primitive :: u32 , new_maintainer : runtime_types :: sp_core :: bounded :: bounded_vec :: BoundedVec < :: core :: primitive :: u8 > , } , # [codec (index = 2)] # [doc = "Stores a method name on chain under an associated resource ID."] # [doc = ""] # [doc = "# <weight>"] # [doc = "- O(1) write"] # [doc = "# </weight>"] set_resource { id : runtime_types :: webb_proposals :: header :: ResourceId , } , # [codec (index = 3)] # [doc = "Removes a resource ID from the resource mapping."] # [doc = ""] # [doc = "After this call, bridge transfers with the associated resource ID"] # [doc = "will be rejected."] # [doc = ""] # [doc = "# <weight>"] # [doc = "- O(1) removal"] # [doc = "# </weight>"] remove_resource { id : runtime_types :: webb_proposals :: header :: ResourceId , } , # [codec (index = 4)] # [doc = "Enables a chain ID as a source or destination for a bridge transfer."] # [doc = ""] # [doc = "# <weight>"] # [doc = "- O(1) lookup and insert"] # [doc = "# </weight>"] whitelist_chain { id : :: core :: primitive :: u64 , } , # [codec (index = 5)] # [doc = "@param origin"] # [doc = "@param src_id"] # [doc = "@param proposal_data: (r_id, nonce, 4 bytes of zeroes, call)"] # [doc = "@param signature: a signature over the proposal_data"] # [doc = ""] # [doc = "We check:"] # [doc = "1. That the signature is actually over the proposal data"] # [doc = "2. Add ResourceId to the Storage"] # [doc = "3. That the call from the proposal data and the call input parameter to the function are"] # [doc = "consistent with each other 4. That the execution chain id type parsed from the r_id is"] # [doc = "indeed this chain's id type"] # [doc = ""] # [doc = "If all these checks pass then we call finalize_execution which actually executes the"] # [doc = "dispatchable call. The dispatchable call is usually a handler function, for instance in"] # [doc = "the anchor-handler or token-wrapper-handler pallet."] # [doc = ""] # [doc = "There are a few TODOs left in the function."] # [doc = ""] # [doc = "In the set_resource_with_signature"] # [doc = "# <weight>"] # [doc = "- weight of proposed call, regardless of whether execution is performed"] # [doc = "# </weight>"] set_resource_with_signature { src_id : :: core :: primitive :: u64 , proposal_data : runtime_types :: sp_core :: bounded :: bounded_vec :: BoundedVec < :: core :: primitive :: u8 > , signature : runtime_types :: sp_core :: bounded :: bounded_vec :: BoundedVec < :: core :: primitive :: u8 > , } , # [codec (index = 6)] # [doc = "@param origin"] # [doc = "@param src_id"] # [doc = "@param proposal_data: (r_id, nonce, 4 bytes of zeroes, call)"] # [doc = "@param signature: a signature over the proposal_data"] # [doc = ""] # [doc = "We check:"] # [doc = "1. That the signature is actually over the proposal data"] # [doc = "2. That the r_id parsed from the proposal data exists"] # [doc = "3. That the call from the proposal data and the call input parameter to the function are"] # [doc = "consistent with each other 4. That the execution chain id type parsed from the r_id is"] # [doc = "indeed this chain's id type"] # [doc = ""] # [doc = "If all these checks pass then we call finalize_execution which actually executes the"] # [doc = "dispatchable call. The dispatchable call is usually a handler function, for instance in"] # [doc = "the anchor-handler or token-wrapper-handler pallet."] # [doc = ""] # [doc = "There are a few TODOs left in the function."] # [doc = ""] # [doc = "In the execute_proposal"] # [doc = "# <weight>"] # [doc = "- weight of proposed call, regardless of whether execution is performed"] # [doc = "# </weight>"] execute_proposal { src_id : :: core :: primitive :: u64 , proposal_data : runtime_types :: sp_core :: bounded :: bounded_vec :: BoundedVec < :: core :: primitive :: u8 > , signature : runtime_types :: sp_core :: bounded :: bounded_vec :: BoundedVec < :: core :: primitive :: u8 > , } , }
                 #[derive(
                     :: subxt :: ext :: codec :: Decode,
                     :: subxt :: ext :: codec :: Encode,
@@ -30721,7 +30727,7 @@ pub mod api {
                     #[doc = "Execute set min withdrawal limit proposal."]
                     #[doc = "The `MinWithdrawalLimitProposal` updates the minimum withdrawal amount allowed on the"]
                     #[doc = "variable anchor system."]
-                    execute_set_minx_withdrawal_limit_proposal {
+                    execute_set_min_withdrawal_limit_proposal {
                         min_withdraw_limit: ::core::primitive::u128,
                         nonce: ::core::primitive::u32,
                     },
@@ -33037,10 +33043,10 @@ pub mod api {
         let runtime_metadata_hash = client.metadata().metadata_hash(&PALLETS);
         if runtime_metadata_hash
             != [
-                89u8, 124u8, 3u8, 105u8, 32u8, 9u8, 69u8, 217u8, 109u8, 45u8,
-                159u8, 153u8, 205u8, 8u8, 47u8, 129u8, 232u8, 51u8, 220u8,
-                185u8, 57u8, 209u8, 119u8, 139u8, 24u8, 134u8, 124u8, 69u8,
-                130u8, 101u8, 113u8, 190u8,
+                82u8, 210u8, 44u8, 130u8, 76u8, 71u8, 26u8, 121u8, 94u8, 139u8,
+                165u8, 218u8, 226u8, 163u8, 245u8, 154u8, 181u8, 178u8, 218u8,
+                91u8, 54u8, 153u8, 180u8, 204u8, 59u8, 124u8, 29u8, 27u8,
+                138u8, 208u8, 171u8, 86u8,
             ]
         {
             Err(::subxt::error::MetadataError::IncompatibleMetadata)
