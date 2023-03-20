@@ -1,0 +1,21 @@
+[package]
+name = "webb-evm-test-utils"
+version = "0.1.0"
+description = "Webb Protocol's EVM test utils (part of webb-sdk)"
+categories = ["blockchain", "utils"]
+keywords = ["webb", "test", "evm-utils", "utils"]
+readme = "../README.md"
+edition = { workspace = true }
+authors = { workspace = true }
+license = { workspace = true }
+repository = { workspace = true }
+documentation = { workspace = true }
+homepage = { workspace = true }
+
+[dependencies]
+anvil = { git = "https://github.com/foundry-rs/foundry.git", rev = "394f217" }
+futures = "0.3"
+hex = { workspace = true }
+webb-proposals = { path = "../proposals", default-features = false }
+webb = { path = "../", default-features = false, features = ["evm-runtime"] }
+tokio = { version = "1", features = ["time"] }
