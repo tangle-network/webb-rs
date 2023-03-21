@@ -111,6 +111,15 @@ mod evm {
             "TokenWrapperHandlerContract",
         )
     }
+
+    pub fn build_protocol_solidity_erc20_preset_minter_pauser(
+    ) -> Result<(), Box<dyn Error>> {
+        parse_and_write_abigen(
+            "contracts/protocol-solidity/ERC20PresetMinterPauser.json",
+            "src/evm/contract/protocol_solidity/erc20_preset_minter_pauser.rs",
+            "ERC20PresetMinterPauserContract",
+        )
+    }
 }
 
 #[cfg(feature = "generate-substrate")]
@@ -204,6 +213,7 @@ fn main() -> Result<(), Box<dyn Error>> {
         evm::build_protocol_solidity_token_wrapper_handler()?;
         evm::build_protocol_solidity_treasury()?;
         evm::build_protocol_solidity_treasury_handler()?;
+        evm::build_protocol_solidity_erc20_preset_minter_pauser()?;
         run_cargo_fmt()?;
     }
     #[cfg(feature = "generate-substrate")]
