@@ -17,8 +17,8 @@ mod evm {
         println!("cargo:rerun-if-changed=./{}", out);
 
         Abigen::new(contract_name, path)?
-            .add_derive("serde::Serialize")
-            .add_derive("serde::Deserialize")
+            .add_derive("serde::Serialize")?
+            .add_derive("serde::Deserialize")?
             .format(false) // don't use rustfmt for now.
             .generate()?
             .write_to_file(out)?;

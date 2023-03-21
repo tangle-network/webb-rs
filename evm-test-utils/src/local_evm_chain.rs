@@ -5,6 +5,7 @@ use webb::evm::contract::protocol_solidity::*;
 use webb::evm::ethers;
 use webb_proposals::TypedChainId;
 
+use crate::deployement_args::VAnchorBridgeDeploymentArgs;
 use crate::errors::Result;
 
 type EthersClient = ethers::providers::Provider<ethers::providers::Http>;
@@ -118,6 +119,13 @@ impl LocalEvmChain {
         .send()
         .map_err(Into::into)
         .await
+    }
+
+    pub async fn deploy_variable_anchor_bridge(
+        &self,
+        args: VAnchorBridgeDeploymentArgs<SignerEthersClient>,
+    ) -> SignatureBridgeContract<SignerEthersClient> {
+        todo!()
     }
 
     async fn spawn_anvil_node(
