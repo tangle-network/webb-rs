@@ -1,11 +1,20 @@
+use std::collections::HashMap;
 use std::sync::Arc;
 
 use futures::prelude::*;
-use webb::evm::contract::protocol_solidity::*;
+use webb::evm::contract::protocol_solidity::{
+    poseidon_hasher, poseidon_t4_contract, AnchorHandlerContract,
+    ERC20PresetMinterPauserContract, PoseidonHasherContract,
+    PoseidonT3Contract, PoseidonT4Contract, PoseidonT6Contract,
+    SignatureBridgeContract, TreasuryContract, TreasuryHandlerContract,
+};
 use webb::evm::ethers;
+use webb::evm::ethers::signers::Signer;
 use webb_proposals::TypedChainId;
 
-use crate::deployement_args::VAnchorBridgeDeploymentArgs;
+use crate::deployement_args::{
+    VAnchorBridgeDeploymentArgs, VBridgeDeploymentArgs,
+};
 use crate::errors::Result;
 
 type EthersClient = ethers::providers::Provider<ethers::providers::Http>;
@@ -96,16 +105,16 @@ impl LocalEvmChain {
 
     pub fn shutdown(mut self) {
         let maybe_signal = self.anvil_node_handle.shutdown_signal_mut().take();
-        match maybe_signal {
-            Some(signal) => {
-                signal.fire().expect("signal fired");
-            }
-            None => {
-                // no signal, maybe the node was already shut down
-            }
+        if let Some(signal) = maybe_signal {
+            signal.fire().expect("signal fired");
         }
     }
 
+    /// Deploy a new ERC20 token.
+    ///
+    /// # Errors
+    ///
+    /// This function will return an error if the deployment fails.
     pub async fn deploy_token(
         &self,
         name: String,
@@ -121,11 +130,101 @@ impl LocalEvmChain {
         .await
     }
 
-    pub async fn deploy_variable_anchor_bridge(
+    /// Deploy a new Signature Bridge.
+    ///
+    /// # Errors
+    ///
+    /// This function will return an error if the deployment fails.
+    pub async fn deploy_signature_bridge(
         &self,
-        args: VAnchorBridgeDeploymentArgs<SignerEthersClient>,
-    ) -> SignatureBridgeContract<SignerEthersClient> {
-        todo!()
+        initial_governor: ethers::types::Address,
+        nonce: u32,
+    ) -> Result<SignatureBridgeContract<SignerEthersClient>> {
+        SignatureBridgeContract::deploy(
+            self.client.clone(),
+            (initial_governor, nonce),
+        )?
+        .confirmations(0usize)
+        .send()
+        .map_err(Into::into)
+        .await
+    }
+
+    /// Deploy a new Anchor Handler.
+    ///
+    /// # Errors
+    ///
+    /// This function will return an error if the deployment fails.
+    pub async fn deploy_anchor_handler(
+        &self,
+        bridge_contract_address: ethers::types::Address,
+        initial_resource_ids: Vec<webb_proposals::ResourceId>,
+        initial_contract_addresses: Vec<ethers::types::Address>,
+    ) -> Result<AnchorHandlerContract<SignerEthersClient>> {
+        let initial_r_ids = initial_resource_ids
+            .iter()
+            .map(webb_proposals::ResourceId::to_bytes)
+            .collect::<Vec<_>>();
+        AnchorHandlerContract::deploy(
+            self.client.clone(),
+            (
+                bridge_contract_address,
+                initial_r_ids,
+                initial_contract_addresses,
+            ),
+        )?
+        .confirmations(0usize)
+        .send()
+        .map_err(Into::into)
+        .await
+    }
+
+    /// Deploy a new Treasury Handler.
+    ///
+    /// # Errors
+    ///
+    /// This function will return an error if the deployment fails.
+    pub async fn deploy_tresury_handler(
+        &self,
+        bridge_contract_address: ethers::types::Address,
+        initial_resource_ids: Vec<webb_proposals::ResourceId>,
+        initial_contract_addresses: Vec<ethers::types::Address>,
+    ) -> Result<TreasuryHandlerContract<SignerEthersClient>> {
+        let initial_r_ids = initial_resource_ids
+            .iter()
+            .map(webb_proposals::ResourceId::to_bytes)
+            .collect::<Vec<_>>();
+        TreasuryHandlerContract::deploy(
+            self.client.clone(),
+            (
+                bridge_contract_address,
+                initial_r_ids,
+                initial_contract_addresses,
+            ),
+        )?
+        .confirmations(0usize)
+        .send()
+        .map_err(Into::into)
+        .await
+    }
+
+    /// Deploy a new Treasury.
+    ///
+    /// # Errors
+    ///
+    /// This function will return an error if the deployment fails.
+    pub async fn deploy_tresury(
+        &self,
+        treasury_handler_contract_address: ethers::types::Address,
+    ) -> Result<TreasuryContract<SignerEthersClient>> {
+        TreasuryContract::deploy(
+            self.client.clone(),
+            treasury_handler_contract_address,
+        )?
+        .confirmations(0usize)
+        .send()
+        .map_err(Into::into)
+        .await
     }
 
     async fn spawn_anvil_node(
