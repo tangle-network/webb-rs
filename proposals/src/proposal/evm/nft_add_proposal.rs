@@ -1,48 +1,53 @@
 //! Token Add Proposal.
 use crate::ProposalHeader;
 
-/// Token Add Proposal.
+/// Wrapped Nft Add Proposal.
 ///
-/// The [`FungibleAssetAddProposal`] allows the token specified by the `TokenAddress` to
+/// The [`WrappedNftAddProposal`] allows the token specified by the `TokenAddress` to
 /// be wrapped into the WEBB token.
 ///
 /// The format of the proposal looks like:
 /// ```text
-/// ┌────────────────────┬──────────────────┬──────────────────┐
-/// │                    │                  │                  │
-/// │ ProposalHeader 40B │ TokenAddress 20B │ TokenAddress 20B │
-/// │                    │                  │                  │
-/// └────────────────────┴──────────────────┴──────────────────┘
+/// ┌────────────────────┬──────────────────┬────────────┬──────────────────────────┬──────────┬─────────┐
+/// │                    │                  │            │                          │          │         │
+/// │ ProposalHeader 40B │ TokenHandler 20B │ AssetId 4B │ NftCollectionAddress 20B │ Salt 32B │ Uri 64B │
+/// │                    │                  │            │                          │          │         │
+/// └────────────────────┴──────────────────┴────────────┴──────────────────────────┴──────────┴─────────┘
 /// ```
 #[allow(clippy::module_name_repetitions)]
-#[derive(Debug, Copy, Clone, PartialEq, Eq, Hash)]
-pub struct FungibleAssetAddProposal {
+#[derive(
+    Debug, Copy, Clone, PartialEq, Eq, Hash, typed_builder::TypedBuilder,
+)]
+pub struct WrappedNftAddProposal {
     header: ProposalHeader,
     token_handler: [u8; 20],
     asset_id: [u8; 4],
-    name: [u8; 32],
-    symbol: [u8; 32],
+    nft_collection_address: [u8; 20],
+    salt: [u8; 32],
+    uri: [u8; 64],
 }
 
-impl FungibleAssetAddProposal {
+impl WrappedNftAddProposal {
     /// Length of the proposal in bytes.
-    pub const LENGTH: usize = ProposalHeader::LENGTH + 20 + 4 + 32 + 32; // token_address
+    pub const LENGTH: usize = ProposalHeader::LENGTH + 20 + 4 + 20 + 32 + 64; // token_address
 
-    /// Creates a new token add proposal.
+    /// Creates a new wrapped NFT add proposal.
     #[must_use]
     pub const fn new(
         header: ProposalHeader,
         token_handler: [u8; 20],
         asset_id: [u8; 4],
-        name: [u8; 32],
-        symbol: [u8; 32],
+        nft_collection_address: [u8; 20],
+        salt: [u8; 32],
+        uri: [u8; 64],
     ) -> Self {
         Self {
             header,
             token_handler,
             asset_id,
-            name,
-            symbol,
+            nft_collection_address,
+            salt,
+            uri,
         }
     }
 
@@ -66,14 +71,19 @@ impl FungibleAssetAddProposal {
 
     /// Get the token name.
     #[must_use]
-    pub const fn name(&self) -> [u8; 32] {
-        self.name
+    pub const fn nft_collection_address(&self) -> [u8; 20] {
+        self.nft_collection_address
     }
 
     /// Get the token symbol.
     #[must_use]
-    pub const fn symbol(&self) -> [u8; 32] {
-        self.symbol
+    pub const fn salt(&self) -> [u8; 32] {
+        self.salt
+    }
+    /// Get the token symbol.
+    #[must_use]
+    pub const fn uri(&self) -> [u8; 64] {
+        self.uri
     }
 
     /// Get the proposal as a bytes
@@ -90,11 +100,15 @@ impl FungibleAssetAddProposal {
         let t = t + 4;
         bytes[f..t].copy_from_slice(&self.asset_id);
         let f = t;
-        let t = t + 32;
-        bytes[f..t].copy_from_slice(&self.name);
+        let t = t + 20;
+        bytes[f..t].copy_from_slice(&self.nft_collection_address);
         let f = t;
         let t = t + 32;
-        bytes[f..t].copy_from_slice(&self.symbol);
+        bytes[f..t].copy_from_slice(&self.salt);
+        let f = t;
+        let t = t + 64;
+        bytes[f..t].copy_from_slice(&self.uri);
+
         bytes
     }
 
@@ -105,8 +119,8 @@ impl FungibleAssetAddProposal {
     }
 }
 
-impl From<[u8; FungibleAssetAddProposal::LENGTH]> for FungibleAssetAddProposal {
-    fn from(bytes: [u8; FungibleAssetAddProposal::LENGTH]) -> Self {
+impl From<[u8; WrappedNftAddProposal::LENGTH]> for WrappedNftAddProposal {
+    fn from(bytes: [u8; WrappedNftAddProposal::LENGTH]) -> Self {
         let f = 0usize;
         let t = ProposalHeader::LENGTH;
         let mut header_bytes = [0u8; ProposalHeader::LENGTH];
@@ -121,20 +135,31 @@ impl From<[u8; FungibleAssetAddProposal::LENGTH]> for FungibleAssetAddProposal {
         let mut asset_id = [0u8; 4];
         asset_id.copy_from_slice(&bytes[f..t]);
         let f = t;
-        let t = t + 32;
-        let mut name = [0u8; 32];
-        name.copy_from_slice(&bytes[f..t]);
+        let t = t + 20;
+        let mut nft_collection_address = [0u8; 20];
+        nft_collection_address.copy_from_slice(&bytes[f..t]);
         let f = t;
         let t = t + 32;
-        let mut symbol = [0u8; 32];
-        symbol.copy_from_slice(&bytes[f..t]);
+        let mut salt = [0u8; 32];
+        salt.copy_from_slice(&bytes[f..t]);
+        let f = t;
+        let t = t + 64;
+        let mut uri = [0u8; 64];
+        uri.copy_from_slice(&bytes[f..t]);
 
-        Self::new(header, token_handler, asset_id, name, symbol)
+        Self::new(
+            header,
+            token_handler,
+            asset_id,
+            nft_collection_address,
+            salt,
+            uri,
+        )
     }
 }
 
-impl From<FungibleAssetAddProposal> for [u8; FungibleAssetAddProposal::LENGTH] {
-    fn from(proposal: FungibleAssetAddProposal) -> Self {
+impl From<WrappedNftAddProposal> for [u8; WrappedNftAddProposal::LENGTH] {
+    fn from(proposal: WrappedNftAddProposal) -> Self {
         proposal.to_bytes()
     }
 }
@@ -163,25 +188,33 @@ mod tests {
         let token_handler =
             hex_literal::hex!("bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb");
         let asset_id = hex_literal::hex!("00000000");
-        let name = hex_literal::hex!(
+
+        let nft_collection_address =
+            hex_literal::hex!("eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee");
+
+        let salt = hex_literal::hex!(
             "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
         );
-        let symbol = hex_literal::hex!(
-            "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"
+
+        let uri = hex_literal::hex!(
+            "cdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcd"
         );
-        let proposal = FungibleAssetAddProposal::new(
+
+        let proposal = WrappedNftAddProposal::new(
             header,
             token_handler,
             asset_id,
-            name,
-            symbol,
+            nft_collection_address,
+            salt,
+            uri,
         );
         let bytes = proposal.to_bytes();
         let expected = hex_literal::hex!(
             "000000000000aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa010000000004"
             "cafebabe00000001bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb00000000"
+            "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"
             "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
-            "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"
+            "cdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcd"
         );
         assert_eq!(bytes, expected);
     }
@@ -191,10 +224,11 @@ mod tests {
         let bytes = hex_literal::hex!(
             "000000000000aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa010000000004"
             "cafebabe00000001bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb00000000"
+            "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"
             "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
-            "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"
+            "cdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcd"
         );
-        let proposal = FungibleAssetAddProposal::from(bytes);
+        let proposal = WrappedNftAddProposal::from(bytes);
 
         let header = proposal.header();
         let resource_id = header.resource_id();
@@ -220,12 +254,16 @@ mod tests {
         );
         assert_eq!(proposal.asset_id(), hex_literal::hex!("00000000"));
         assert_eq!(
-            proposal.name(),
+            proposal.nft_collection_address(),
+            hex_literal::hex!("eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee")
+        );
+        assert_eq!(
+            proposal.salt(),
             hex_literal::hex!("cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc")
         );
         assert_eq!(
-            proposal.symbol(),
-            hex_literal::hex!("dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd")
+            proposal.uri(),
+            hex_literal::hex!("cdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcd")
         );
     }
 }

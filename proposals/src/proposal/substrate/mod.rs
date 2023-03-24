@@ -11,6 +11,7 @@
 
 mod anchor_update;
 mod fee_recipient_update;
+mod fungible_asset_add_proposal;
 mod max_deposit_limit;
 mod min_withdrawal_limit;
 mod rescue_tokens;
@@ -21,6 +22,7 @@ mod wrapping_fee_update;
 
 pub use anchor_update::*;
 pub use fee_recipient_update::*;
+pub use fungible_asset_add_proposal::*;
 pub use max_deposit_limit::*;
 pub use min_withdrawal_limit::*;
 pub use rescue_tokens::*;

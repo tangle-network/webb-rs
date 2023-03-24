@@ -1,21 +1,23 @@
 //! Token Add Proposal.
 use crate::ProposalHeader;
 
-/// Token Add Proposal.
+/// Fungible Asset Add Proposal.
 ///
 /// The [`FungibleAssetAddProposal`] allows the token specified by the `TokenAddress` to
 /// be wrapped into the WEBB token.
 ///
 /// The format of the proposal looks like:
 /// ```text
-/// ┌────────────────────┬──────────────────┬──────────────────┐
-/// │                    │                  │                  │
-/// │ ProposalHeader 40B │ TokenAddress 20B │ TokenAddress 20B │
-/// │                    │                  │                  │
-/// └────────────────────┴──────────────────┴──────────────────┘
+/// ┌────────────────────┬──────────────────┬────────────┬──────────┬────────────┬
+/// │                    │                  │            │          │            │
+/// │ ProposalHeader 40B │ TokenHandler 20B │ AssetId 4B │ Name 32B │ Symbol 32B │
+/// │                    │                  │            │          │            │
+/// └────────────────────┴──────────────────┴────────────┴──────────┴────────────┴
 /// ```
 #[allow(clippy::module_name_repetitions)]
-#[derive(Debug, Copy, Clone, PartialEq, Eq, Hash)]
+#[derive(
+    Debug, Copy, Clone, PartialEq, Eq, Hash, typed_builder::TypedBuilder,
+)]
 pub struct FungibleAssetAddProposal {
     header: ProposalHeader,
     token_handler: [u8; 20],
@@ -28,7 +30,7 @@ impl FungibleAssetAddProposal {
     /// Length of the proposal in bytes.
     pub const LENGTH: usize = ProposalHeader::LENGTH + 20 + 4 + 32 + 32; // token_address
 
-    /// Creates a new token add proposal.
+    /// Creates a new fungible asset add proposal.
     #[must_use]
     pub const fn new(
         header: ProposalHeader,

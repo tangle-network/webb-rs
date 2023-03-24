@@ -56,6 +56,7 @@ impl_proposal_for! {
     crate::proposal::evm::FeeRecipientUpdateProposal,
     crate::proposal::evm::RescueTokensProposal,
     crate::proposal::evm::FungibleAssetAddProposal,
+    crate::proposal::evm::WrappedNftAddProposal,
 }
 
 #[cfg(feature = "substrate")]
@@ -65,6 +66,7 @@ impl_proposal_for! {
     crate::proposal::substrate::TokenAddProposal,
     crate::proposal::substrate::TokenRemoveProposal,
     crate::proposal::substrate::WrappingFeeUpdateProposal,
+    crate::proposal::substrate::FungibleAssetAddProposal,
 }
 
 #[cfg(feature = "ink")]
@@ -167,6 +169,10 @@ pub enum ProposalKind {
     /// Set fee recipient proposal for changing the fee recipient of the asset
     /// application
     FeeRecipientUpdate,
+    /// Wrapped Token add proposal for adding new tokens to the MASP pool
+    WrappedFungibleAssetAdd,
+    /// Wrapped Token add proposal for adding new Wrapped NFT to the MASP pool
+    WrappedNFTAdd,
 }
 
 #[cfg(feature = "substrate")]
