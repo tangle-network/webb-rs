@@ -131,6 +131,7 @@ pub enum Proposal<
 )]
 /// Proposal kind enum
 #[allow(clippy::module_name_repetitions)]
+#[allow(clippy::exhaustive_enums)]
 pub enum ProposalKind {
     /// Refresh proposal for DKG rotation
     Refresh,

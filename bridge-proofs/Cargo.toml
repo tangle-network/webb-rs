@@ -20,8 +20,7 @@ hex = "0.4.3"
 
 [dev-dependencies]
 tokio = { version = "1.20.1", features = ["full"] }
-ethers = { git = "https://github.com/gakonst/ethers-rs" }
-ethers-core = { git = "https://github.com/gakonst/ethers-rs" }
+ethers = { workspace = true }
 
 [features]
 default = ["std"]

@@ -35,6 +35,8 @@ jobs:
             ~/.cargo/bin
             target
           key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
+      - name: Install Mold Linker
+        uses: rui314/setup-mold@v1
       - name: Check Metadata generation
         run: cargo build --features generate-substrate,generate-contracts
       - name: Tests

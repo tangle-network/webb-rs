@@ -17,8 +17,8 @@ mod evm {
         println!("cargo:rerun-if-changed=./{}", out);
 
         Abigen::new(contract_name, path)?
-            .add_derive("serde::Serialize")
-            .add_derive("serde::Deserialize")
+            .add_derive("serde::Serialize")?
+            .add_derive("serde::Deserialize")?
             .format(false) // don't use rustfmt for now.
             .generate()?
             .write_to_file(out)?;
@@ -120,6 +120,39 @@ mod evm {
             "ERC20PresetMinterPauserContract",
         )
     }
+
+    pub fn build_protocol_solidity_poseidon_t3() -> Result<(), Box<dyn Error>> {
+        parse_and_write_abigen(
+            "contracts/protocol-solidity/PoseidonT3.json",
+            "src/evm/contract/protocol_solidity/poseidon_t3.rs",
+            "PoseidonT3Contract",
+        )
+    }
+
+    pub fn build_protocol_solidity_poseidon_t4() -> Result<(), Box<dyn Error>> {
+        parse_and_write_abigen(
+            "contracts/protocol-solidity/PoseidonT4.json",
+            "src/evm/contract/protocol_solidity/poseidon_t4.rs",
+            "PoseidonT4Contract",
+        )
+    }
+
+    pub fn build_protocol_solidity_poseidon_t6() -> Result<(), Box<dyn Error>> {
+        parse_and_write_abigen(
+            "contracts/protocol-solidity/PoseidonT6.json",
+            "src/evm/contract/protocol_solidity/poseidon_t6.rs",
+            "PoseidonT6Contract",
+        )
+    }
+
+    pub fn build_protocol_solidity_poseidon_hasher(
+    ) -> Result<(), Box<dyn Error>> {
+        parse_and_write_abigen(
+            "contracts/protocol-solidity/PoseidonHasher.json",
+            "src/evm/contract/protocol_solidity/poseidon_hasher.rs",
+            "PoseidonHasherContract",
+        )
+    }
 }
 
 #[cfg(feature = "generate-substrate")]
@@ -214,6 +247,10 @@ fn main() -> Result<(), Box<dyn Error>> {
         evm::build_protocol_solidity_treasury()?;
         evm::build_protocol_solidity_treasury_handler()?;
         evm::build_protocol_solidity_erc20_preset_minter_pauser()?;
+        evm::build_protocol_solidity_poseidon_t3()?;
+        evm::build_protocol_solidity_poseidon_t4()?;
+        evm::build_protocol_solidity_poseidon_t6()?;
+        evm::build_protocol_solidity_poseidon_hasher()?;
         run_cargo_fmt()?;
     }
     #[cfg(feature = "generate-substrate")]
