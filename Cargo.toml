@@ -21,7 +21,7 @@ thiserror = "1"
 
 [package]
 name = "webb"
-version = "0.5.20"
+version = "0.5.21"
 description = "Webb SDK"
 keywords = ["webb", "sdk", "blockchain", "webb-tools"]
 include = ["Cargo.toml", "contracts/", "metadata/", "src/**/*.rs", "build.rs", "README.md", "LICENSE"]
