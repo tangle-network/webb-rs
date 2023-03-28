@@ -2514,7 +2514,7 @@ pub mod api {
                 Eq,
                 PartialEq,
             )]
-            pub struct SubmitMisbehaviourReports { pub reports : runtime_types :: dkg_runtime_primitives :: AggregatedMisbehaviourReports < runtime_types :: dkg_runtime_primitives :: crypto :: Public > , }
+            pub struct SubmitMisbehaviourReports { pub reports : runtime_types :: dkg_runtime_primitives :: AggregatedMisbehaviourReports < runtime_types :: dkg_runtime_primitives :: crypto :: Public , runtime_types :: dkg_runtime_primitives :: CustomU32Getter , runtime_types :: dkg_runtime_primitives :: CustomU32Getter > , }
             #[derive(
                 :: subxt :: ext :: codec :: Decode,
                 :: subxt :: ext :: codec :: Encode,
@@ -2758,7 +2758,7 @@ pub mod api {
                 #[doc = "  authority"]
                 pub fn submit_misbehaviour_reports(
                     &self,
-                    reports : runtime_types :: dkg_runtime_primitives :: AggregatedMisbehaviourReports < runtime_types :: dkg_runtime_primitives :: crypto :: Public >,
+                    reports : runtime_types :: dkg_runtime_primitives :: AggregatedMisbehaviourReports < runtime_types :: dkg_runtime_primitives :: crypto :: Public , runtime_types :: dkg_runtime_primitives :: CustomU32Getter , runtime_types :: dkg_runtime_primitives :: CustomU32Getter >,
                 ) -> ::subxt::tx::StaticTxPayload<SubmitMisbehaviourReports>
                 {
                     ::subxt::tx::StaticTxPayload::new(
@@ -2766,11 +2766,11 @@ pub mod api {
                         "submit_misbehaviour_reports",
                         SubmitMisbehaviourReports { reports },
                         [
-                            209u8, 185u8, 221u8, 91u8, 208u8, 171u8, 23u8,
-                            75u8, 150u8, 244u8, 41u8, 196u8, 104u8, 239u8,
-                            164u8, 224u8, 251u8, 233u8, 15u8, 100u8, 26u8,
-                            205u8, 213u8, 70u8, 163u8, 27u8, 245u8, 142u8,
-                            120u8, 250u8, 84u8, 215u8,
+                            217u8, 75u8, 94u8, 66u8, 26u8, 160u8, 229u8, 184u8,
+                            66u8, 97u8, 190u8, 21u8, 127u8, 165u8, 67u8, 85u8,
+                            246u8, 173u8, 133u8, 253u8, 173u8, 33u8, 61u8,
+                            229u8, 148u8, 101u8, 1u8, 210u8, 109u8, 116u8,
+                            251u8, 134u8,
                         ],
                     )
                 }
@@ -3150,17 +3150,17 @@ pub mod api {
             use super::runtime_types;
             pub struct StorageApi;
             impl StorageApi {
-                #[doc = " Public key Signatures for past sessions"]                pub fn used_signatures (& self ,) -> :: subxt :: storage :: address :: StaticStorageAddress :: < :: subxt :: metadata :: DecodeStaticType < :: std :: vec :: Vec < :: std :: vec :: Vec < :: core :: primitive :: u8 > > > , :: subxt :: storage :: address :: Yes , :: subxt :: storage :: address :: Yes , () >{
+                #[doc = " Public key Signatures for past sessions"]                pub fn used_signatures (& self ,) -> :: subxt :: storage :: address :: StaticStorageAddress :: < :: subxt :: metadata :: DecodeStaticType < runtime_types :: sp_core :: bounded :: bounded_vec :: BoundedVec < runtime_types :: sp_core :: bounded :: bounded_vec :: BoundedVec < :: core :: primitive :: u8 > > > , :: subxt :: storage :: address :: Yes , :: subxt :: storage :: address :: Yes , () >{
                     ::subxt::storage::address::StaticStorageAddress::new(
                         "DKG",
                         "UsedSignatures",
                         vec![],
                         [
-                            17u8, 166u8, 71u8, 200u8, 53u8, 132u8, 79u8, 208u8,
-                            187u8, 231u8, 68u8, 227u8, 163u8, 125u8, 235u8,
-                            145u8, 171u8, 160u8, 82u8, 237u8, 170u8, 48u8,
-                            173u8, 104u8, 13u8, 113u8, 12u8, 56u8, 47u8, 42u8,
-                            250u8, 70u8,
+                            46u8, 101u8, 56u8, 181u8, 166u8, 247u8, 210u8,
+                            177u8, 219u8, 97u8, 159u8, 183u8, 246u8, 101u8,
+                            210u8, 242u8, 165u8, 160u8, 106u8, 162u8, 44u8,
+                            46u8, 107u8, 151u8, 156u8, 220u8, 221u8, 229u8,
+                            178u8, 156u8, 73u8, 85u8,
                         ],
                     )
                 }
@@ -3238,89 +3238,90 @@ pub mod api {
                         ],
                     )
                 }
-                #[doc = " Holds public key for next session"]                pub fn next_dkg_public_key (& self ,) -> :: subxt :: storage :: address :: StaticStorageAddress :: < :: subxt :: metadata :: DecodeStaticType < (:: core :: primitive :: u64 , :: std :: vec :: Vec < :: core :: primitive :: u8 > ,) > , :: subxt :: storage :: address :: Yes , () , () >{
+                #[doc = " Holds public key for next session"]                pub fn next_dkg_public_key (& self ,) -> :: subxt :: storage :: address :: StaticStorageAddress :: < :: subxt :: metadata :: DecodeStaticType < (:: core :: primitive :: u64 , runtime_types :: sp_core :: bounded :: bounded_vec :: BoundedVec < :: core :: primitive :: u8 > ,) > , :: subxt :: storage :: address :: Yes , () , () >{
                     ::subxt::storage::address::StaticStorageAddress::new(
                         "DKG",
                         "NextDKGPublicKey",
                         vec![],
                         [
-                            147u8, 213u8, 171u8, 9u8, 247u8, 218u8, 74u8, 10u8,
-                            66u8, 24u8, 52u8, 251u8, 125u8, 28u8, 54u8, 12u8,
-                            243u8, 205u8, 242u8, 48u8, 179u8, 211u8, 178u8,
-                            219u8, 88u8, 247u8, 51u8, 52u8, 27u8, 170u8, 212u8,
-                            181u8,
+                            190u8, 8u8, 19u8, 247u8, 57u8, 79u8, 143u8, 79u8,
+                            251u8, 110u8, 255u8, 86u8, 175u8, 77u8, 78u8,
+                            173u8, 183u8, 5u8, 94u8, 97u8, 12u8, 101u8, 26u8,
+                            75u8, 223u8, 196u8, 22u8, 202u8, 152u8, 67u8,
+                            170u8, 22u8,
                         ],
                     )
                 }
-                #[doc = " Signature of the DKG public key for the next session"]                pub fn next_public_key_signature (& self ,) -> :: subxt :: storage :: address :: StaticStorageAddress :: < :: subxt :: metadata :: DecodeStaticType < :: std :: vec :: Vec < :: core :: primitive :: u8 > > , :: subxt :: storage :: address :: Yes , () , () >{
+                #[doc = " Signature of the DKG public key for the next session"]                pub fn next_public_key_signature (& self ,) -> :: subxt :: storage :: address :: StaticStorageAddress :: < :: subxt :: metadata :: DecodeStaticType < runtime_types :: sp_core :: bounded :: bounded_vec :: BoundedVec < :: core :: primitive :: u8 > > , :: subxt :: storage :: address :: Yes , () , () >{
                     ::subxt::storage::address::StaticStorageAddress::new(
                         "DKG",
                         "NextPublicKeySignature",
                         vec![],
                         [
-                            128u8, 96u8, 220u8, 158u8, 111u8, 181u8, 68u8,
-                            32u8, 33u8, 122u8, 61u8, 99u8, 58u8, 84u8, 110u8,
-                            13u8, 8u8, 179u8, 11u8, 80u8, 5u8, 90u8, 194u8,
-                            230u8, 3u8, 124u8, 27u8, 157u8, 73u8, 143u8, 159u8,
-                            98u8,
+                            7u8, 23u8, 208u8, 171u8, 234u8, 66u8, 219u8, 107u8,
+                            109u8, 127u8, 166u8, 218u8, 179u8, 97u8, 137u8,
+                            57u8, 64u8, 48u8, 104u8, 56u8, 58u8, 93u8, 132u8,
+                            191u8, 206u8, 134u8, 129u8, 107u8, 223u8, 178u8,
+                            87u8, 25u8,
                         ],
                     )
                 }
-                #[doc = " Holds active public key for ongoing session"]                pub fn dkg_public_key (& self ,) -> :: subxt :: storage :: address :: StaticStorageAddress :: < :: subxt :: metadata :: DecodeStaticType < (:: core :: primitive :: u64 , :: std :: vec :: Vec < :: core :: primitive :: u8 > ,) > , :: subxt :: storage :: address :: Yes , :: subxt :: storage :: address :: Yes , () >{
+                #[doc = " Holds active public key for ongoing session"]                pub fn dkg_public_key (& self ,) -> :: subxt :: storage :: address :: StaticStorageAddress :: < :: subxt :: metadata :: DecodeStaticType < (:: core :: primitive :: u64 , runtime_types :: sp_core :: bounded :: bounded_vec :: BoundedVec < :: core :: primitive :: u8 > ,) > , :: subxt :: storage :: address :: Yes , :: subxt :: storage :: address :: Yes , () >{
                     ::subxt::storage::address::StaticStorageAddress::new(
                         "DKG",
                         "DKGPublicKey",
                         vec![],
                         [
-                            134u8, 73u8, 251u8, 94u8, 50u8, 143u8, 130u8, 71u8,
-                            180u8, 91u8, 29u8, 20u8, 105u8, 138u8, 225u8,
-                            205u8, 180u8, 94u8, 203u8, 106u8, 109u8, 101u8,
-                            114u8, 3u8, 182u8, 236u8, 231u8, 124u8, 198u8,
-                            106u8, 102u8, 242u8,
+                            171u8, 148u8, 67u8, 160u8, 252u8, 26u8, 71u8, 2u8,
+                            13u8, 45u8, 214u8, 185u8, 187u8, 219u8, 153u8,
+                            108u8, 240u8, 150u8, 103u8, 59u8, 210u8, 211u8,
+                            218u8, 147u8, 49u8, 223u8, 194u8, 130u8, 69u8,
+                            131u8, 24u8, 81u8,
                         ],
                     )
                 }
-                #[doc = " Signature of the current DKG public key"]                pub fn dkg_public_key_signature (& self ,) -> :: subxt :: storage :: address :: StaticStorageAddress :: < :: subxt :: metadata :: DecodeStaticType < :: std :: vec :: Vec < :: core :: primitive :: u8 > > , :: subxt :: storage :: address :: Yes , :: subxt :: storage :: address :: Yes , () >{
+                #[doc = " Signature of the current DKG public key"]                pub fn dkg_public_key_signature (& self ,) -> :: subxt :: storage :: address :: StaticStorageAddress :: < :: subxt :: metadata :: DecodeStaticType < runtime_types :: sp_core :: bounded :: bounded_vec :: BoundedVec < :: core :: primitive :: u8 > > , :: subxt :: storage :: address :: Yes , :: subxt :: storage :: address :: Yes , () >{
                     ::subxt::storage::address::StaticStorageAddress::new(
                         "DKG",
                         "DKGPublicKeySignature",
                         vec![],
                         [
-                            184u8, 31u8, 185u8, 8u8, 102u8, 120u8, 175u8,
-                            105u8, 106u8, 6u8, 14u8, 197u8, 211u8, 49u8, 192u8,
-                            201u8, 46u8, 42u8, 208u8, 63u8, 234u8, 131u8,
-                            207u8, 131u8, 21u8, 119u8, 39u8, 105u8, 27u8,
-                            174u8, 173u8, 29u8,
+                            63u8, 104u8, 181u8, 61u8, 227u8, 143u8, 48u8, 34u8,
+                            38u8, 3u8, 149u8, 124u8, 90u8, 4u8, 39u8, 253u8,
+                            102u8, 169u8, 179u8, 87u8, 213u8, 132u8, 137u8,
+                            218u8, 216u8, 141u8, 189u8, 159u8, 141u8, 147u8,
+                            101u8, 102u8,
                         ],
                     )
                 }
-                #[doc = " Holds public key for immediate past session"]                pub fn previous_public_key (& self ,) -> :: subxt :: storage :: address :: StaticStorageAddress :: < :: subxt :: metadata :: DecodeStaticType < (:: core :: primitive :: u64 , :: std :: vec :: Vec < :: core :: primitive :: u8 > ,) > , :: subxt :: storage :: address :: Yes , :: subxt :: storage :: address :: Yes , () >{
+                #[doc = " Holds public key for immediate past session"]                pub fn previous_public_key (& self ,) -> :: subxt :: storage :: address :: StaticStorageAddress :: < :: subxt :: metadata :: DecodeStaticType < (:: core :: primitive :: u64 , runtime_types :: sp_core :: bounded :: bounded_vec :: BoundedVec < :: core :: primitive :: u8 > ,) > , :: subxt :: storage :: address :: Yes , :: subxt :: storage :: address :: Yes , () >{
                     ::subxt::storage::address::StaticStorageAddress::new(
                         "DKG",
                         "PreviousPublicKey",
                         vec![],
                         [
-                            254u8, 74u8, 168u8, 47u8, 143u8, 21u8, 245u8,
-                            148u8, 75u8, 45u8, 54u8, 49u8, 22u8, 239u8, 129u8,
-                            250u8, 127u8, 70u8, 231u8, 25u8, 215u8, 229u8,
-                            130u8, 32u8, 137u8, 160u8, 108u8, 183u8, 65u8,
-                            34u8, 241u8, 245u8,
+                            211u8, 151u8, 16u8, 209u8, 65u8, 128u8, 48u8,
+                            209u8, 242u8, 91u8, 253u8, 156u8, 196u8, 190u8,
+                            249u8, 91u8, 59u8, 142u8, 75u8, 72u8, 104u8, 83u8,
+                            42u8, 176u8, 14u8, 147u8, 73u8, 73u8, 194u8, 203u8,
+                            143u8, 86u8,
                         ],
                     )
                 }
-                #[doc = " Tracks current proposer set"]                pub fn historical_rounds (& self , _0 : impl :: std :: borrow :: Borrow < :: core :: primitive :: u64 > ,) -> :: subxt :: storage :: address :: StaticStorageAddress :: < :: subxt :: metadata :: DecodeStaticType < runtime_types :: pallet_dkg_metadata :: types :: RoundMetadata > , :: subxt :: storage :: address :: Yes , :: subxt :: storage :: address :: Yes , :: subxt :: storage :: address :: Yes >{
-                    :: subxt :: storage :: address :: StaticStorageAddress :: new ("DKG" , "HistoricalRounds" , vec ! [:: subxt :: storage :: address :: StorageMapKey :: new (_0 . borrow () , :: subxt :: storage :: address :: StorageHasher :: Blake2_256)] , [90u8 , 80u8 , 198u8 , 169u8 , 195u8 , 242u8 , 59u8 , 14u8 , 1u8 , 166u8 , 88u8 , 136u8 , 37u8 , 51u8 , 49u8 , 82u8 , 37u8 , 211u8 , 235u8 , 163u8 , 50u8 , 60u8 , 87u8 , 108u8 , 21u8 , 77u8 , 21u8 , 177u8 , 245u8 , 102u8 , 73u8 , 242u8 ,])
+                #[doc = " Tracks current proposer set"]                pub fn historical_rounds (& self , _0 : impl :: std :: borrow :: Borrow < :: core :: primitive :: u64 > ,) -> :: subxt :: storage :: address :: StaticStorageAddress :: < :: subxt :: metadata :: DecodeStaticType < runtime_types :: pallet_dkg_metadata :: types :: RoundMetadata < runtime_types :: dkg_runtime_primitives :: CustomU32Getter , runtime_types :: dkg_runtime_primitives :: CustomU32Getter > > , :: subxt :: storage :: address :: Yes , :: subxt :: storage :: address :: Yes , :: subxt :: storage :: address :: Yes >{
+                    :: subxt :: storage :: address :: StaticStorageAddress :: new ("DKG" , "HistoricalRounds" , vec ! [:: subxt :: storage :: address :: StorageMapKey :: new (_0 . borrow () , :: subxt :: storage :: address :: StorageHasher :: Blake2_256)] , [69u8 , 172u8 , 38u8 , 240u8 , 139u8 , 118u8 , 160u8 , 111u8 , 95u8 , 143u8 , 196u8 , 94u8 , 149u8 , 125u8 , 176u8 , 142u8 , 53u8 , 141u8 , 70u8 , 132u8 , 71u8 , 23u8 , 174u8 , 221u8 , 72u8 , 69u8 , 14u8 , 191u8 , 225u8 , 43u8 , 67u8 , 79u8 ,])
                 }
-                #[doc = " Tracks current proposer set"]                pub fn historical_rounds_root (& self ,) -> :: subxt :: storage :: address :: StaticStorageAddress :: < :: subxt :: metadata :: DecodeStaticType < runtime_types :: pallet_dkg_metadata :: types :: RoundMetadata > , () , :: subxt :: storage :: address :: Yes , :: subxt :: storage :: address :: Yes >{
+                #[doc = " Tracks current proposer set"]                pub fn historical_rounds_root (& self ,) -> :: subxt :: storage :: address :: StaticStorageAddress :: < :: subxt :: metadata :: DecodeStaticType < runtime_types :: pallet_dkg_metadata :: types :: RoundMetadata < runtime_types :: dkg_runtime_primitives :: CustomU32Getter , runtime_types :: dkg_runtime_primitives :: CustomU32Getter > > , () , :: subxt :: storage :: address :: Yes , :: subxt :: storage :: address :: Yes >{
                     ::subxt::storage::address::StaticStorageAddress::new(
                         "DKG",
                         "HistoricalRounds",
                         Vec::new(),
                         [
-                            90u8, 80u8, 198u8, 169u8, 195u8, 242u8, 59u8, 14u8,
-                            1u8, 166u8, 88u8, 136u8, 37u8, 51u8, 49u8, 82u8,
-                            37u8, 211u8, 235u8, 163u8, 50u8, 60u8, 87u8, 108u8,
-                            21u8, 77u8, 21u8, 177u8, 245u8, 102u8, 73u8, 242u8,
+                            69u8, 172u8, 38u8, 240u8, 139u8, 118u8, 160u8,
+                            111u8, 95u8, 143u8, 196u8, 94u8, 149u8, 125u8,
+                            176u8, 142u8, 53u8, 141u8, 70u8, 132u8, 71u8, 23u8,
+                            174u8, 221u8, 72u8, 69u8, 14u8, 191u8, 225u8, 43u8,
+                            67u8, 79u8,
                         ],
                     )
                 }
@@ -3407,16 +3408,17 @@ pub mod api {
                         ],
                     )
                 }
-                #[doc = " The current authorities set"]                pub fn authorities (& self ,) -> :: subxt :: storage :: address :: StaticStorageAddress :: < :: subxt :: metadata :: DecodeStaticType < :: std :: vec :: Vec < runtime_types :: dkg_runtime_primitives :: crypto :: Public > > , :: subxt :: storage :: address :: Yes , :: subxt :: storage :: address :: Yes , () >{
+                #[doc = " The current authorities set"]                pub fn authorities (& self ,) -> :: subxt :: storage :: address :: StaticStorageAddress :: < :: subxt :: metadata :: DecodeStaticType < runtime_types :: sp_core :: bounded :: bounded_vec :: BoundedVec < runtime_types :: dkg_runtime_primitives :: crypto :: Public > > , :: subxt :: storage :: address :: Yes , :: subxt :: storage :: address :: Yes , () >{
                     ::subxt::storage::address::StaticStorageAddress::new(
                         "DKG",
                         "Authorities",
                         vec![],
                         [
-                            220u8, 61u8, 168u8, 252u8, 28u8, 159u8, 44u8, 11u8,
-                            58u8, 48u8, 39u8, 136u8, 156u8, 90u8, 195u8, 166u8,
-                            244u8, 243u8, 110u8, 146u8, 168u8, 44u8, 4u8, 19u8,
-                            203u8, 14u8, 209u8, 11u8, 162u8, 87u8, 101u8, 43u8,
+                            180u8, 103u8, 249u8, 204u8, 109u8, 0u8, 211u8,
+                            102u8, 59u8, 184u8, 31u8, 52u8, 140u8, 248u8, 10u8,
+                            127u8, 19u8, 50u8, 254u8, 116u8, 124u8, 5u8, 94u8,
+                            42u8, 9u8, 138u8, 159u8, 94u8, 26u8, 136u8, 236u8,
+                            141u8,
                         ],
                     )
                 }
@@ -3448,45 +3450,45 @@ pub mod api {
                         ],
                     )
                 }
-                #[doc = " Authorities set scheduled to be used with the next session"]                pub fn next_authorities (& self ,) -> :: subxt :: storage :: address :: StaticStorageAddress :: < :: subxt :: metadata :: DecodeStaticType < :: std :: vec :: Vec < runtime_types :: dkg_runtime_primitives :: crypto :: Public > > , :: subxt :: storage :: address :: Yes , :: subxt :: storage :: address :: Yes , () >{
+                #[doc = " Authorities set scheduled to be used with the next session"]                pub fn next_authorities (& self ,) -> :: subxt :: storage :: address :: StaticStorageAddress :: < :: subxt :: metadata :: DecodeStaticType < runtime_types :: sp_core :: bounded :: bounded_vec :: BoundedVec < runtime_types :: dkg_runtime_primitives :: crypto :: Public > > , :: subxt :: storage :: address :: Yes , :: subxt :: storage :: address :: Yes , () >{
                     ::subxt::storage::address::StaticStorageAddress::new(
                         "DKG",
                         "NextAuthorities",
                         vec![],
                         [
-                            40u8, 244u8, 137u8, 129u8, 46u8, 26u8, 80u8, 125u8,
-                            170u8, 230u8, 63u8, 72u8, 127u8, 251u8, 240u8,
-                            247u8, 211u8, 221u8, 6u8, 147u8, 72u8, 6u8, 1u8,
-                            190u8, 6u8, 226u8, 96u8, 81u8, 88u8, 68u8, 218u8,
-                            130u8,
+                            64u8, 174u8, 216u8, 177u8, 95u8, 133u8, 175u8,
+                            16u8, 171u8, 110u8, 7u8, 244u8, 111u8, 89u8, 57u8,
+                            46u8, 52u8, 28u8, 150u8, 117u8, 156u8, 47u8, 91u8,
+                            135u8, 196u8, 102u8, 46u8, 4u8, 224u8, 155u8, 83u8,
+                            36u8,
                         ],
                     )
                 }
-                #[doc = " Accounts for the current authorities"]                pub fn current_authorities_accounts (& self ,) -> :: subxt :: storage :: address :: StaticStorageAddress :: < :: subxt :: metadata :: DecodeStaticType < :: std :: vec :: Vec < :: subxt :: utils :: AccountId32 > > , :: subxt :: storage :: address :: Yes , :: subxt :: storage :: address :: Yes , () >{
+                #[doc = " Accounts for the current authorities"]                pub fn current_authorities_accounts (& self ,) -> :: subxt :: storage :: address :: StaticStorageAddress :: < :: subxt :: metadata :: DecodeStaticType < runtime_types :: sp_core :: bounded :: bounded_vec :: BoundedVec < :: subxt :: utils :: AccountId32 > > , :: subxt :: storage :: address :: Yes , :: subxt :: storage :: address :: Yes , () >{
                     ::subxt::storage::address::StaticStorageAddress::new(
                         "DKG",
                         "CurrentAuthoritiesAccounts",
                         vec![],
                         [
-                            165u8, 136u8, 152u8, 229u8, 185u8, 164u8, 120u8,
-                            192u8, 95u8, 134u8, 168u8, 183u8, 153u8, 117u8,
-                            103u8, 234u8, 47u8, 128u8, 234u8, 17u8, 255u8,
-                            191u8, 65u8, 109u8, 216u8, 208u8, 40u8, 41u8,
-                            161u8, 144u8, 79u8, 182u8,
+                            63u8, 248u8, 43u8, 115u8, 47u8, 190u8, 73u8, 201u8,
+                            191u8, 159u8, 118u8, 31u8, 140u8, 144u8, 242u8,
+                            207u8, 239u8, 39u8, 67u8, 163u8, 111u8, 104u8,
+                            173u8, 254u8, 214u8, 226u8, 133u8, 239u8, 31u8,
+                            134u8, 124u8, 245u8,
                         ],
                     )
                 }
-                #[doc = " Authority account ids scheduled for the next session"]                pub fn next_authorities_accounts (& self ,) -> :: subxt :: storage :: address :: StaticStorageAddress :: < :: subxt :: metadata :: DecodeStaticType < :: std :: vec :: Vec < :: subxt :: utils :: AccountId32 > > , :: subxt :: storage :: address :: Yes , :: subxt :: storage :: address :: Yes , () >{
+                #[doc = " Authority account ids scheduled for the next session"]                pub fn next_authorities_accounts (& self ,) -> :: subxt :: storage :: address :: StaticStorageAddress :: < :: subxt :: metadata :: DecodeStaticType < runtime_types :: sp_core :: bounded :: bounded_vec :: BoundedVec < :: subxt :: utils :: AccountId32 > > , :: subxt :: storage :: address :: Yes , :: subxt :: storage :: address :: Yes , () >{
                     ::subxt::storage::address::StaticStorageAddress::new(
                         "DKG",
                         "NextAuthoritiesAccounts",
                         vec![],
                         [
-                            39u8, 14u8, 0u8, 48u8, 106u8, 89u8, 188u8, 174u8,
-                            231u8, 104u8, 185u8, 177u8, 141u8, 78u8, 143u8,
-                            37u8, 87u8, 227u8, 14u8, 46u8, 113u8, 149u8, 187u8,
-                            147u8, 121u8, 47u8, 79u8, 214u8, 14u8, 130u8,
-                            170u8, 221u8,
+                            189u8, 126u8, 179u8, 166u8, 252u8, 67u8, 141u8,
+                            167u8, 7u8, 113u8, 103u8, 25u8, 152u8, 171u8, 26u8,
+                            0u8, 151u8, 68u8, 167u8, 156u8, 225u8, 66u8, 87u8,
+                            0u8, 119u8, 29u8, 226u8, 16u8, 176u8, 148u8, 153u8,
+                            158u8,
                         ],
                     )
                 }
@@ -3507,20 +3509,20 @@ pub mod api {
                         ],
                     )
                 }
-                #[doc = " Tracks misbehaviour reports"]                pub fn misbehaviour_reports (& self , _0 : impl :: std :: borrow :: Borrow < runtime_types :: dkg_runtime_primitives :: MisbehaviourType > , _1 : impl :: std :: borrow :: Borrow < :: core :: primitive :: u64 > , _2 : impl :: std :: borrow :: Borrow < runtime_types :: dkg_runtime_primitives :: crypto :: Public > ,) -> :: subxt :: storage :: address :: StaticStorageAddress :: < :: subxt :: metadata :: DecodeStaticType < runtime_types :: dkg_runtime_primitives :: AggregatedMisbehaviourReports < runtime_types :: dkg_runtime_primitives :: crypto :: Public > > , :: subxt :: storage :: address :: Yes , () , :: subxt :: storage :: address :: Yes >{
-                    :: subxt :: storage :: address :: StaticStorageAddress :: new ("DKG" , "MisbehaviourReports" , vec ! [:: subxt :: storage :: address :: StorageMapKey :: new (& (_0 . borrow () , _1 . borrow () , _2 . borrow ()) , :: subxt :: storage :: address :: StorageHasher :: Blake2_256)] , [26u8 , 223u8 , 186u8 , 140u8 , 112u8 , 238u8 , 39u8 , 204u8 , 21u8 , 223u8 , 229u8 , 92u8 , 173u8 , 76u8 , 228u8 , 188u8 , 225u8 , 56u8 , 140u8 , 24u8 , 100u8 , 171u8 , 177u8 , 26u8 , 108u8 , 130u8 , 238u8 , 142u8 , 198u8 , 89u8 , 17u8 , 255u8 ,])
+                #[doc = " Tracks misbehaviour reports"]                pub fn misbehaviour_reports (& self , _0 : impl :: std :: borrow :: Borrow < runtime_types :: dkg_runtime_primitives :: MisbehaviourType > , _1 : impl :: std :: borrow :: Borrow < :: core :: primitive :: u64 > , _2 : impl :: std :: borrow :: Borrow < runtime_types :: dkg_runtime_primitives :: crypto :: Public > ,) -> :: subxt :: storage :: address :: StaticStorageAddress :: < :: subxt :: metadata :: DecodeStaticType < runtime_types :: dkg_runtime_primitives :: AggregatedMisbehaviourReports < runtime_types :: dkg_runtime_primitives :: crypto :: Public , runtime_types :: dkg_runtime_primitives :: CustomU32Getter , runtime_types :: dkg_runtime_primitives :: CustomU32Getter > > , :: subxt :: storage :: address :: Yes , () , :: subxt :: storage :: address :: Yes >{
+                    :: subxt :: storage :: address :: StaticStorageAddress :: new ("DKG" , "MisbehaviourReports" , vec ! [:: subxt :: storage :: address :: StorageMapKey :: new (& (_0 . borrow () , _1 . borrow () , _2 . borrow ()) , :: subxt :: storage :: address :: StorageHasher :: Blake2_256)] , [2u8 , 14u8 , 23u8 , 57u8 , 168u8 , 205u8 , 55u8 , 220u8 , 203u8 , 236u8 , 126u8 , 46u8 , 31u8 , 215u8 , 25u8 , 163u8 , 138u8 , 62u8 , 188u8 , 146u8 , 131u8 , 165u8 , 100u8 , 50u8 , 66u8 , 94u8 , 236u8 , 25u8 , 147u8 , 11u8 , 231u8 , 182u8 ,])
                 }
-                #[doc = " Tracks misbehaviour reports"]                pub fn misbehaviour_reports_root (& self ,) -> :: subxt :: storage :: address :: StaticStorageAddress :: < :: subxt :: metadata :: DecodeStaticType < runtime_types :: dkg_runtime_primitives :: AggregatedMisbehaviourReports < runtime_types :: dkg_runtime_primitives :: crypto :: Public > > , () , () , :: subxt :: storage :: address :: Yes >{
+                #[doc = " Tracks misbehaviour reports"]                pub fn misbehaviour_reports_root (& self ,) -> :: subxt :: storage :: address :: StaticStorageAddress :: < :: subxt :: metadata :: DecodeStaticType < runtime_types :: dkg_runtime_primitives :: AggregatedMisbehaviourReports < runtime_types :: dkg_runtime_primitives :: crypto :: Public , runtime_types :: dkg_runtime_primitives :: CustomU32Getter , runtime_types :: dkg_runtime_primitives :: CustomU32Getter > > , () , () , :: subxt :: storage :: address :: Yes >{
                     ::subxt::storage::address::StaticStorageAddress::new(
                         "DKG",
                         "MisbehaviourReports",
                         Vec::new(),
                         [
-                            26u8, 223u8, 186u8, 140u8, 112u8, 238u8, 39u8,
-                            204u8, 21u8, 223u8, 229u8, 92u8, 173u8, 76u8,
-                            228u8, 188u8, 225u8, 56u8, 140u8, 24u8, 100u8,
-                            171u8, 177u8, 26u8, 108u8, 130u8, 238u8, 142u8,
-                            198u8, 89u8, 17u8, 255u8,
+                            2u8, 14u8, 23u8, 57u8, 168u8, 205u8, 55u8, 220u8,
+                            203u8, 236u8, 126u8, 46u8, 31u8, 215u8, 25u8,
+                            163u8, 138u8, 62u8, 188u8, 146u8, 131u8, 165u8,
+                            100u8, 50u8, 66u8, 94u8, 236u8, 25u8, 147u8, 11u8,
+                            231u8, 182u8,
                         ],
                     )
                 }
@@ -3578,30 +3580,31 @@ pub mod api {
                         ],
                     )
                 }
-                #[doc = " The current best authorities of the active keygen set"]                pub fn best_authorities (& self ,) -> :: subxt :: storage :: address :: StaticStorageAddress :: < :: subxt :: metadata :: DecodeStaticType < :: std :: vec :: Vec < (:: core :: primitive :: u16 , runtime_types :: dkg_runtime_primitives :: crypto :: Public ,) > > , :: subxt :: storage :: address :: Yes , :: subxt :: storage :: address :: Yes , () >{
+                #[doc = " The current best authorities of the active keygen set"]                pub fn best_authorities (& self ,) -> :: subxt :: storage :: address :: StaticStorageAddress :: < :: subxt :: metadata :: DecodeStaticType < runtime_types :: sp_core :: bounded :: bounded_vec :: BoundedVec < (:: core :: primitive :: u16 , runtime_types :: dkg_runtime_primitives :: crypto :: Public ,) > > , :: subxt :: storage :: address :: Yes , :: subxt :: storage :: address :: Yes , () >{
                     ::subxt::storage::address::StaticStorageAddress::new(
                         "DKG",
                         "BestAuthorities",
                         vec![],
                         [
-                            89u8, 42u8, 37u8, 123u8, 4u8, 150u8, 194u8, 145u8,
-                            202u8, 252u8, 78u8, 98u8, 192u8, 4u8, 0u8, 7u8,
-                            26u8, 50u8, 9u8, 24u8, 16u8, 175u8, 138u8, 177u8,
-                            171u8, 41u8, 221u8, 240u8, 108u8, 80u8, 12u8,
-                            102u8,
+                            229u8, 47u8, 85u8, 153u8, 16u8, 203u8, 19u8, 51u8,
+                            70u8, 158u8, 223u8, 231u8, 218u8, 68u8, 216u8,
+                            119u8, 55u8, 157u8, 50u8, 82u8, 242u8, 13u8, 185u8,
+                            188u8, 35u8, 85u8, 230u8, 213u8, 110u8, 27u8, 38u8,
+                            86u8,
                         ],
                     )
                 }
-                #[doc = " The next best authorities of the active keygen set"]                pub fn next_best_authorities (& self ,) -> :: subxt :: storage :: address :: StaticStorageAddress :: < :: subxt :: metadata :: DecodeStaticType < :: std :: vec :: Vec < (:: core :: primitive :: u16 , runtime_types :: dkg_runtime_primitives :: crypto :: Public ,) > > , :: subxt :: storage :: address :: Yes , :: subxt :: storage :: address :: Yes , () >{
+                #[doc = " The next best authorities of the active keygen set"]                pub fn next_best_authorities (& self ,) -> :: subxt :: storage :: address :: StaticStorageAddress :: < :: subxt :: metadata :: DecodeStaticType < runtime_types :: sp_core :: bounded :: bounded_vec :: BoundedVec < (:: core :: primitive :: u16 , runtime_types :: dkg_runtime_primitives :: crypto :: Public ,) > > , :: subxt :: storage :: address :: Yes , :: subxt :: storage :: address :: Yes , () >{
                     ::subxt::storage::address::StaticStorageAddress::new(
                         "DKG",
                         "NextBestAuthorities",
                         vec![],
                         [
-                            79u8, 46u8, 76u8, 164u8, 39u8, 181u8, 122u8, 253u8,
-                            149u8, 134u8, 168u8, 88u8, 41u8, 51u8, 183u8, 99u8,
-                            161u8, 28u8, 206u8, 185u8, 18u8, 51u8, 8u8, 50u8,
-                            195u8, 58u8, 82u8, 51u8, 193u8, 218u8, 5u8, 116u8,
+                            243u8, 43u8, 60u8, 70u8, 51u8, 232u8, 171u8, 95u8,
+                            25u8, 228u8, 57u8, 221u8, 51u8, 115u8, 111u8, 19u8,
+                            140u8, 179u8, 245u8, 243u8, 240u8, 145u8, 59u8,
+                            63u8, 75u8, 70u8, 105u8, 22u8, 195u8, 145u8, 47u8,
+                            68u8,
                         ],
                     )
                 }
@@ -3705,6 +3708,78 @@ pub mod api {
                         ],
                     )
                 }
+                #[doc = " MaxLength for keys"]
+                pub fn max_key_length(
+                    &self,
+                ) -> ::subxt::constants::StaticConstantAddress<
+                    ::subxt::metadata::DecodeStaticType<::core::primitive::u32>,
+                > {
+                    ::subxt::constants::StaticConstantAddress::new(
+                        "DKG",
+                        "MaxKeyLength",
+                        [
+                            98u8, 252u8, 116u8, 72u8, 26u8, 180u8, 225u8, 83u8,
+                            200u8, 157u8, 125u8, 151u8, 53u8, 76u8, 168u8,
+                            26u8, 10u8, 9u8, 98u8, 68u8, 9u8, 178u8, 197u8,
+                            113u8, 31u8, 79u8, 200u8, 90u8, 203u8, 100u8, 41u8,
+                            145u8,
+                        ],
+                    )
+                }
+                #[doc = " MaxLength for signature"]
+                pub fn max_signature_length(
+                    &self,
+                ) -> ::subxt::constants::StaticConstantAddress<
+                    ::subxt::metadata::DecodeStaticType<::core::primitive::u32>,
+                > {
+                    ::subxt::constants::StaticConstantAddress::new(
+                        "DKG",
+                        "MaxSignatureLength",
+                        [
+                            98u8, 252u8, 116u8, 72u8, 26u8, 180u8, 225u8, 83u8,
+                            200u8, 157u8, 125u8, 151u8, 53u8, 76u8, 168u8,
+                            26u8, 10u8, 9u8, 98u8, 68u8, 9u8, 178u8, 197u8,
+                            113u8, 31u8, 79u8, 200u8, 90u8, 203u8, 100u8, 41u8,
+                            145u8,
+                        ],
+                    )
+                }
+                #[doc = " Max authorities to store"]
+                pub fn max_authorities(
+                    &self,
+                ) -> ::subxt::constants::StaticConstantAddress<
+                    ::subxt::metadata::DecodeStaticType<::core::primitive::u32>,
+                > {
+                    ::subxt::constants::StaticConstantAddress::new(
+                        "DKG",
+                        "MaxAuthorities",
+                        [
+                            98u8, 252u8, 116u8, 72u8, 26u8, 180u8, 225u8, 83u8,
+                            200u8, 157u8, 125u8, 151u8, 53u8, 76u8, 168u8,
+                            26u8, 10u8, 9u8, 98u8, 68u8, 9u8, 178u8, 197u8,
+                            113u8, 31u8, 79u8, 200u8, 90u8, 203u8, 100u8, 41u8,
+                            145u8,
+                        ],
+                    )
+                }
+                #[doc = " Max reporters to store"]
+                pub fn max_reporters(
+                    &self,
+                ) -> ::subxt::constants::StaticConstantAddress<
+                    ::subxt::metadata::DecodeStaticType<::core::primitive::u32>,
+                > {
+                    ::subxt::constants::StaticConstantAddress::new(
+                        "DKG",
+                        "MaxReporters",
+                        [
+                            98u8, 252u8, 116u8, 72u8, 26u8, 180u8, 225u8, 83u8,
+                            200u8, 157u8, 125u8, 151u8, 53u8, 76u8, 168u8,
+                            26u8, 10u8, 9u8, 98u8, 68u8, 9u8, 178u8, 197u8,
+                            113u8, 31u8, 79u8, 200u8, 90u8, 203u8, 100u8, 41u8,
+                            145u8,
+                        ],
+                    )
+                }
             }
         }
     }
@@ -3799,7 +3874,10 @@ pub mod api {
                 pub src_chain_id:
                     runtime_types::webb_proposals::header::TypedChainId,
                 pub r_id: runtime_types::webb_proposals::header::ResourceId,
-                pub prop: ::std::vec::Vec<::core::primitive::u8>,
+                pub prop:
+                    runtime_types::sp_core::bounded::bounded_vec::BoundedVec<
+                        ::core::primitive::u8,
+                    >,
             }
             #[derive(
                 :: subxt :: ext :: codec :: Decode,
@@ -3814,7 +3892,10 @@ pub mod api {
                 pub src_chain_id:
                     runtime_types::webb_proposals::header::TypedChainId,
                 pub r_id: runtime_types::webb_proposals::header::ResourceId,
-                pub prop: ::std::vec::Vec<::core::primitive::u8>,
+                pub prop:
+                    runtime_types::sp_core::bounded::bounded_vec::BoundedVec<
+                        ::core::primitive::u8,
+                    >,
             }
             #[derive(
                 :: subxt :: ext :: codec :: Decode,
@@ -3828,7 +3909,10 @@ pub mod api {
                 pub nonce: runtime_types::webb_proposals::nonce::Nonce,
                 pub src_chain_id:
                     runtime_types::webb_proposals::header::TypedChainId,
-                pub prop: ::std::vec::Vec<::core::primitive::u8>,
+                pub prop:
+                    runtime_types::sp_core::bounded::bounded_vec::BoundedVec<
+                        ::core::primitive::u8,
+                    >,
             }
             pub struct TransactionApi;
             impl TransactionApi {
@@ -3993,7 +4077,7 @@ pub mod api {
                     nonce: runtime_types::webb_proposals::nonce::Nonce,
                     src_chain_id : runtime_types :: webb_proposals :: header :: TypedChainId,
                     r_id: runtime_types::webb_proposals::header::ResourceId,
-                    prop: ::std::vec::Vec<::core::primitive::u8>,
+                    prop : runtime_types :: sp_core :: bounded :: bounded_vec :: BoundedVec < :: core :: primitive :: u8 >,
                 ) -> ::subxt::tx::StaticTxPayload<AcknowledgeProposal>
                 {
                     ::subxt::tx::StaticTxPayload::new(
@@ -4006,11 +4090,11 @@ pub mod api {
                             prop,
                         },
                         [
-                            78u8, 188u8, 218u8, 122u8, 96u8, 232u8, 139u8,
-                            87u8, 74u8, 5u8, 204u8, 158u8, 14u8, 2u8, 144u8,
-                            215u8, 99u8, 138u8, 106u8, 189u8, 215u8, 176u8,
-                            172u8, 79u8, 154u8, 114u8, 221u8, 70u8, 113u8,
-                            71u8, 24u8, 15u8,
+                            31u8, 67u8, 110u8, 145u8, 53u8, 100u8, 247u8, 82u8,
+                            251u8, 74u8, 218u8, 218u8, 114u8, 49u8, 142u8,
+                            28u8, 45u8, 206u8, 225u8, 148u8, 179u8, 20u8, 78u8,
+                            100u8, 101u8, 30u8, 25u8, 22u8, 193u8, 136u8, 55u8,
+                            252u8,
                         ],
                     )
                 }
@@ -4024,7 +4108,7 @@ pub mod api {
                     nonce: runtime_types::webb_proposals::nonce::Nonce,
                     src_chain_id : runtime_types :: webb_proposals :: header :: TypedChainId,
                     r_id: runtime_types::webb_proposals::header::ResourceId,
-                    prop: ::std::vec::Vec<::core::primitive::u8>,
+                    prop : runtime_types :: sp_core :: bounded :: bounded_vec :: BoundedVec < :: core :: primitive :: u8 >,
                 ) -> ::subxt::tx::StaticTxPayload<RejectProposal>
                 {
                     ::subxt::tx::StaticTxPayload::new(
@@ -4037,11 +4121,10 @@ pub mod api {
                             prop,
                         },
                         [
-                            129u8, 230u8, 170u8, 177u8, 148u8, 77u8, 130u8,
-                            25u8, 109u8, 253u8, 56u8, 113u8, 186u8, 139u8,
-                            233u8, 31u8, 40u8, 100u8, 178u8, 109u8, 51u8,
-                            153u8, 41u8, 236u8, 154u8, 175u8, 34u8, 42u8,
-                            245u8, 241u8, 204u8, 234u8,
+                            158u8, 156u8, 103u8, 19u8, 240u8, 48u8, 75u8, 64u8,
+                            66u8, 132u8, 161u8, 201u8, 1u8, 181u8, 33u8, 66u8,
+                            186u8, 204u8, 192u8, 195u8, 89u8, 14u8, 84u8, 63u8,
+                            8u8, 143u8, 173u8, 40u8, 35u8, 177u8, 154u8, 119u8,
                         ],
                     )
                 }
@@ -4057,7 +4140,7 @@ pub mod api {
                     &self,
                     nonce: runtime_types::webb_proposals::nonce::Nonce,
                     src_chain_id : runtime_types :: webb_proposals :: header :: TypedChainId,
-                    prop: ::std::vec::Vec<::core::primitive::u8>,
+                    prop : runtime_types :: sp_core :: bounded :: bounded_vec :: BoundedVec < :: core :: primitive :: u8 >,
                 ) -> ::subxt::tx::StaticTxPayload<EvalVoteState>
                 {
                     ::subxt::tx::StaticTxPayload::new(
@@ -4069,11 +4152,11 @@ pub mod api {
                             prop,
                         },
                         [
-                            64u8, 67u8, 168u8, 210u8, 157u8, 227u8, 173u8,
-                            217u8, 222u8, 207u8, 157u8, 193u8, 127u8, 132u8,
-                            4u8, 101u8, 209u8, 249u8, 24u8, 214u8, 148u8, 18u8,
-                            155u8, 43u8, 121u8, 166u8, 194u8, 82u8, 30u8,
-                            100u8, 66u8, 179u8,
+                            36u8, 156u8, 102u8, 200u8, 249u8, 134u8, 246u8,
+                            192u8, 136u8, 39u8, 236u8, 150u8, 144u8, 115u8,
+                            123u8, 242u8, 11u8, 209u8, 99u8, 95u8, 113u8,
+                            151u8, 76u8, 200u8, 60u8, 237u8, 215u8, 96u8, 31u8,
+                            72u8, 140u8, 70u8,
                         ],
                     )
                 }
@@ -4343,50 +4426,50 @@ pub mod api {
                     )
                 }
                 #[doc = " Tracks current proposer set external accounts"]
-                #[doc = " Currently meant to store Ethereum compatible 64-bytes ECDSA public keys"]                pub fn external_proposer_accounts (& self , _0 : impl :: std :: borrow :: Borrow < :: subxt :: utils :: AccountId32 > ,) -> :: subxt :: storage :: address :: StaticStorageAddress :: < :: subxt :: metadata :: DecodeStaticType < :: std :: vec :: Vec < :: core :: primitive :: u8 > > , :: subxt :: storage :: address :: Yes , :: subxt :: storage :: address :: Yes , :: subxt :: storage :: address :: Yes >{
-                    :: subxt :: storage :: address :: StaticStorageAddress :: new ("DKGProposals" , "ExternalProposerAccounts" , vec ! [:: subxt :: storage :: address :: StorageMapKey :: new (_0 . borrow () , :: subxt :: storage :: address :: StorageHasher :: Blake2_128Concat)] , [181u8 , 231u8 , 15u8 , 219u8 , 97u8 , 164u8 , 35u8 , 177u8 , 61u8 , 116u8 , 5u8 , 51u8 , 182u8 , 49u8 , 119u8 , 136u8 , 78u8 , 127u8 , 5u8 , 123u8 , 3u8 , 97u8 , 167u8 , 62u8 , 155u8 , 130u8 , 239u8 , 231u8 , 11u8 , 61u8 , 194u8 , 220u8 ,])
+                #[doc = " Currently meant to store Ethereum compatible 64-bytes ECDSA public keys"]                pub fn external_proposer_accounts (& self , _0 : impl :: std :: borrow :: Borrow < :: subxt :: utils :: AccountId32 > ,) -> :: subxt :: storage :: address :: StaticStorageAddress :: < :: subxt :: metadata :: DecodeStaticType < runtime_types :: sp_core :: bounded :: bounded_vec :: BoundedVec < :: core :: primitive :: u8 > > , :: subxt :: storage :: address :: Yes , :: subxt :: storage :: address :: Yes , :: subxt :: storage :: address :: Yes >{
+                    :: subxt :: storage :: address :: StaticStorageAddress :: new ("DKGProposals" , "ExternalProposerAccounts" , vec ! [:: subxt :: storage :: address :: StorageMapKey :: new (_0 . borrow () , :: subxt :: storage :: address :: StorageHasher :: Blake2_128Concat)] , [20u8 , 120u8 , 130u8 , 198u8 , 23u8 , 142u8 , 44u8 , 2u8 , 227u8 , 81u8 , 19u8 , 161u8 , 131u8 , 103u8 , 182u8 , 14u8 , 83u8 , 59u8 , 88u8 , 35u8 , 193u8 , 118u8 , 232u8 , 48u8 , 119u8 , 28u8 , 143u8 , 242u8 , 168u8 , 76u8 , 194u8 , 117u8 ,])
                 }
                 #[doc = " Tracks current proposer set external accounts"]
-                #[doc = " Currently meant to store Ethereum compatible 64-bytes ECDSA public keys"]                pub fn external_proposer_accounts_root (& self ,) -> :: subxt :: storage :: address :: StaticStorageAddress :: < :: subxt :: metadata :: DecodeStaticType < :: std :: vec :: Vec < :: core :: primitive :: u8 > > , () , :: subxt :: storage :: address :: Yes , :: subxt :: storage :: address :: Yes >{
+                #[doc = " Currently meant to store Ethereum compatible 64-bytes ECDSA public keys"]                pub fn external_proposer_accounts_root (& self ,) -> :: subxt :: storage :: address :: StaticStorageAddress :: < :: subxt :: metadata :: DecodeStaticType < runtime_types :: sp_core :: bounded :: bounded_vec :: BoundedVec < :: core :: primitive :: u8 > > , () , :: subxt :: storage :: address :: Yes , :: subxt :: storage :: address :: Yes >{
                     ::subxt::storage::address::StaticStorageAddress::new(
                         "DKGProposals",
                         "ExternalProposerAccounts",
                         Vec::new(),
                         [
-                            181u8, 231u8, 15u8, 219u8, 97u8, 164u8, 35u8,
-                            177u8, 61u8, 116u8, 5u8, 51u8, 182u8, 49u8, 119u8,
-                            136u8, 78u8, 127u8, 5u8, 123u8, 3u8, 97u8, 167u8,
-                            62u8, 155u8, 130u8, 239u8, 231u8, 11u8, 61u8,
-                            194u8, 220u8,
+                            20u8, 120u8, 130u8, 198u8, 23u8, 142u8, 44u8, 2u8,
+                            227u8, 81u8, 19u8, 161u8, 131u8, 103u8, 182u8,
+                            14u8, 83u8, 59u8, 88u8, 35u8, 193u8, 118u8, 232u8,
+                            48u8, 119u8, 28u8, 143u8, 242u8, 168u8, 76u8,
+                            194u8, 117u8,
                         ],
                     )
                 }
                 #[doc = " Tracks the authorities that are proposers so we can properly update the proposer set"]
-                #[doc = " across sessions and authority changes."]                pub fn authority_proposers (& self ,) -> :: subxt :: storage :: address :: StaticStorageAddress :: < :: subxt :: metadata :: DecodeStaticType < :: std :: vec :: Vec < :: subxt :: utils :: AccountId32 > > , :: subxt :: storage :: address :: Yes , :: subxt :: storage :: address :: Yes , () >{
+                #[doc = " across sessions and authority changes."]                pub fn authority_proposers (& self ,) -> :: subxt :: storage :: address :: StaticStorageAddress :: < :: subxt :: metadata :: DecodeStaticType < runtime_types :: sp_core :: bounded :: bounded_vec :: BoundedVec < :: subxt :: utils :: AccountId32 > > , :: subxt :: storage :: address :: Yes , :: subxt :: storage :: address :: Yes , () >{
                     ::subxt::storage::address::StaticStorageAddress::new(
                         "DKGProposals",
                         "AuthorityProposers",
                         vec![],
                         [
-                            151u8, 87u8, 196u8, 10u8, 133u8, 183u8, 9u8, 130u8,
-                            57u8, 0u8, 86u8, 31u8, 253u8, 33u8, 175u8, 239u8,
-                            91u8, 155u8, 179u8, 43u8, 74u8, 159u8, 128u8, 22u8,
-                            16u8, 57u8, 164u8, 239u8, 47u8, 151u8, 251u8,
-                            187u8,
+                            13u8, 39u8, 119u8, 156u8, 19u8, 173u8, 56u8, 139u8,
+                            217u8, 25u8, 136u8, 183u8, 232u8, 196u8, 58u8,
+                            202u8, 155u8, 60u8, 26u8, 153u8, 218u8, 72u8,
+                            108u8, 133u8, 30u8, 11u8, 9u8, 41u8, 145u8, 129u8,
+                            200u8, 248u8,
                         ],
                     )
                 }
-                #[doc = " Tracks current proposer set external accounts"]                pub fn external_authority_proposer_accounts (& self ,) -> :: subxt :: storage :: address :: StaticStorageAddress :: < :: subxt :: metadata :: DecodeStaticType < :: std :: vec :: Vec < :: std :: vec :: Vec < :: core :: primitive :: u8 > > > , :: subxt :: storage :: address :: Yes , :: subxt :: storage :: address :: Yes , () >{
+                #[doc = " Tracks current proposer set external accounts"]                pub fn external_authority_proposer_accounts (& self ,) -> :: subxt :: storage :: address :: StaticStorageAddress :: < :: subxt :: metadata :: DecodeStaticType < runtime_types :: sp_core :: bounded :: bounded_vec :: BoundedVec < runtime_types :: sp_core :: bounded :: bounded_vec :: BoundedVec < :: core :: primitive :: u8 > > > , :: subxt :: storage :: address :: Yes , :: subxt :: storage :: address :: Yes , () >{
                     ::subxt::storage::address::StaticStorageAddress::new(
                         "DKGProposals",
                         "ExternalAuthorityProposerAccounts",
                         vec![],
                         [
-                            180u8, 223u8, 172u8, 35u8, 236u8, 128u8, 207u8,
-                            140u8, 38u8, 75u8, 40u8, 243u8, 244u8, 122u8, 7u8,
-                            25u8, 120u8, 152u8, 240u8, 169u8, 165u8, 208u8,
-                            190u8, 127u8, 189u8, 117u8, 160u8, 34u8, 243u8,
-                            253u8, 223u8, 18u8,
+                            139u8, 28u8, 211u8, 94u8, 127u8, 243u8, 82u8,
+                            237u8, 70u8, 205u8, 243u8, 167u8, 161u8, 98u8,
+                            62u8, 122u8, 118u8, 152u8, 200u8, 230u8, 35u8,
+                            206u8, 120u8, 128u8, 44u8, 216u8, 113u8, 255u8,
+                            110u8, 75u8, 108u8, 1u8,
                         ],
                     )
                 }
@@ -4406,39 +4489,39 @@ pub mod api {
                 }
                 #[doc = " All known proposals."]
                 #[doc = " The key is the hash of the call and the deposit ID, to ensure it's"]
-                #[doc = " unique."]                pub fn votes (& self , _0 : impl :: std :: borrow :: Borrow < runtime_types :: webb_proposals :: header :: TypedChainId > , _1 : impl :: std :: borrow :: Borrow < (runtime_types :: webb_proposals :: nonce :: Nonce , :: std :: vec :: Vec < :: core :: primitive :: u8 > ,) > ,) -> :: subxt :: storage :: address :: StaticStorageAddress :: < :: subxt :: metadata :: DecodeStaticType < runtime_types :: pallet_dkg_proposals :: types :: ProposalVotes < :: subxt :: utils :: AccountId32 , :: core :: primitive :: u32 > > , :: subxt :: storage :: address :: Yes , () , :: subxt :: storage :: address :: Yes >{
-                    :: subxt :: storage :: address :: StaticStorageAddress :: new ("DKGProposals" , "Votes" , vec ! [:: subxt :: storage :: address :: StorageMapKey :: new (_0 . borrow () , :: subxt :: storage :: address :: StorageHasher :: Blake2_256) , :: subxt :: storage :: address :: StorageMapKey :: new (_1 . borrow () , :: subxt :: storage :: address :: StorageHasher :: Blake2_256)] , [218u8 , 110u8 , 32u8 , 203u8 , 246u8 , 231u8 , 137u8 , 45u8 , 110u8 , 72u8 , 218u8 , 232u8 , 162u8 , 253u8 , 159u8 , 65u8 , 155u8 , 129u8 , 203u8 , 37u8 , 18u8 , 61u8 , 135u8 , 190u8 , 5u8 , 55u8 , 88u8 , 175u8 , 86u8 , 56u8 , 249u8 , 107u8 ,])
+                #[doc = " unique."]                pub fn votes (& self , _0 : impl :: std :: borrow :: Borrow < runtime_types :: webb_proposals :: header :: TypedChainId > , _1 : impl :: std :: borrow :: Borrow < (runtime_types :: webb_proposals :: nonce :: Nonce , runtime_types :: sp_core :: bounded :: bounded_vec :: BoundedVec < :: core :: primitive :: u8 > ,) > ,) -> :: subxt :: storage :: address :: StaticStorageAddress :: < :: subxt :: metadata :: DecodeStaticType < runtime_types :: pallet_dkg_proposals :: types :: ProposalVotes < :: subxt :: utils :: AccountId32 , :: core :: primitive :: u32 , runtime_types :: dkg_standalone_runtime :: MaxVotes > > , :: subxt :: storage :: address :: Yes , () , :: subxt :: storage :: address :: Yes >{
+                    :: subxt :: storage :: address :: StaticStorageAddress :: new ("DKGProposals" , "Votes" , vec ! [:: subxt :: storage :: address :: StorageMapKey :: new (_0 . borrow () , :: subxt :: storage :: address :: StorageHasher :: Blake2_256) , :: subxt :: storage :: address :: StorageMapKey :: new (_1 . borrow () , :: subxt :: storage :: address :: StorageHasher :: Blake2_256)] , [75u8 , 254u8 , 1u8 , 75u8 , 188u8 , 119u8 , 42u8 , 136u8 , 232u8 , 20u8 , 216u8 , 3u8 , 162u8 , 140u8 , 72u8 , 228u8 , 161u8 , 130u8 , 132u8 , 248u8 , 72u8 , 10u8 , 213u8 , 163u8 , 212u8 , 79u8 , 245u8 , 46u8 , 169u8 , 71u8 , 165u8 , 10u8 ,])
                 }
                 #[doc = " All known proposals."]
                 #[doc = " The key is the hash of the call and the deposit ID, to ensure it's"]
-                #[doc = " unique."]                pub fn votes_root (& self ,) -> :: subxt :: storage :: address :: StaticStorageAddress :: < :: subxt :: metadata :: DecodeStaticType < runtime_types :: pallet_dkg_proposals :: types :: ProposalVotes < :: subxt :: utils :: AccountId32 , :: core :: primitive :: u32 > > , () , () , :: subxt :: storage :: address :: Yes >{
+                #[doc = " unique."]                pub fn votes_root (& self ,) -> :: subxt :: storage :: address :: StaticStorageAddress :: < :: subxt :: metadata :: DecodeStaticType < runtime_types :: pallet_dkg_proposals :: types :: ProposalVotes < :: subxt :: utils :: AccountId32 , :: core :: primitive :: u32 , runtime_types :: dkg_standalone_runtime :: MaxVotes > > , () , () , :: subxt :: storage :: address :: Yes >{
                     ::subxt::storage::address::StaticStorageAddress::new(
                         "DKGProposals",
                         "Votes",
                         Vec::new(),
                         [
-                            218u8, 110u8, 32u8, 203u8, 246u8, 231u8, 137u8,
-                            45u8, 110u8, 72u8, 218u8, 232u8, 162u8, 253u8,
-                            159u8, 65u8, 155u8, 129u8, 203u8, 37u8, 18u8, 61u8,
-                            135u8, 190u8, 5u8, 55u8, 88u8, 175u8, 86u8, 56u8,
-                            249u8, 107u8,
+                            75u8, 254u8, 1u8, 75u8, 188u8, 119u8, 42u8, 136u8,
+                            232u8, 20u8, 216u8, 3u8, 162u8, 140u8, 72u8, 228u8,
+                            161u8, 130u8, 132u8, 248u8, 72u8, 10u8, 213u8,
+                            163u8, 212u8, 79u8, 245u8, 46u8, 169u8, 71u8,
+                            165u8, 10u8,
                         ],
                     )
                 }
-                #[doc = " Utilized by the bridge software to map resource IDs to actual methods"]                pub fn resources (& self , _0 : impl :: std :: borrow :: Borrow < runtime_types :: webb_proposals :: header :: ResourceId > ,) -> :: subxt :: storage :: address :: StaticStorageAddress :: < :: subxt :: metadata :: DecodeStaticType < :: std :: vec :: Vec < :: core :: primitive :: u8 > > , :: subxt :: storage :: address :: Yes , () , :: subxt :: storage :: address :: Yes >{
-                    :: subxt :: storage :: address :: StaticStorageAddress :: new ("DKGProposals" , "Resources" , vec ! [:: subxt :: storage :: address :: StorageMapKey :: new (_0 . borrow () , :: subxt :: storage :: address :: StorageHasher :: Blake2_256)] , [40u8 , 109u8 , 87u8 , 233u8 , 98u8 , 199u8 , 58u8 , 77u8 , 169u8 , 59u8 , 20u8 , 195u8 , 125u8 , 128u8 , 101u8 , 248u8 , 84u8 , 184u8 , 226u8 , 24u8 , 88u8 , 239u8 , 51u8 , 8u8 , 36u8 , 68u8 , 189u8 , 54u8 , 172u8 , 240u8 , 65u8 , 31u8 ,])
+                #[doc = " Utilized by the bridge software to map resource IDs to actual methods"]                pub fn resources (& self , _0 : impl :: std :: borrow :: Borrow < runtime_types :: webb_proposals :: header :: ResourceId > ,) -> :: subxt :: storage :: address :: StaticStorageAddress :: < :: subxt :: metadata :: DecodeStaticType < runtime_types :: sp_core :: bounded :: bounded_vec :: BoundedVec < :: core :: primitive :: u8 > > , :: subxt :: storage :: address :: Yes , () , :: subxt :: storage :: address :: Yes >{
+                    :: subxt :: storage :: address :: StaticStorageAddress :: new ("DKGProposals" , "Resources" , vec ! [:: subxt :: storage :: address :: StorageMapKey :: new (_0 . borrow () , :: subxt :: storage :: address :: StorageHasher :: Blake2_256)] , [137u8 , 242u8 , 218u8 , 244u8 , 20u8 , 237u8 , 53u8 , 254u8 , 119u8 , 30u8 , 2u8 , 81u8 , 72u8 , 214u8 , 164u8 , 126u8 , 73u8 , 252u8 , 191u8 , 64u8 , 154u8 , 248u8 , 124u8 , 6u8 , 200u8 , 218u8 , 221u8 , 35u8 , 15u8 , 129u8 , 65u8 , 182u8 ,])
                 }
-                #[doc = " Utilized by the bridge software to map resource IDs to actual methods"]                pub fn resources_root (& self ,) -> :: subxt :: storage :: address :: StaticStorageAddress :: < :: subxt :: metadata :: DecodeStaticType < :: std :: vec :: Vec < :: core :: primitive :: u8 > > , () , () , :: subxt :: storage :: address :: Yes >{
+                #[doc = " Utilized by the bridge software to map resource IDs to actual methods"]                pub fn resources_root (& self ,) -> :: subxt :: storage :: address :: StaticStorageAddress :: < :: subxt :: metadata :: DecodeStaticType < runtime_types :: sp_core :: bounded :: bounded_vec :: BoundedVec < :: core :: primitive :: u8 > > , () , () , :: subxt :: storage :: address :: Yes >{
                     ::subxt::storage::address::StaticStorageAddress::new(
                         "DKGProposals",
                         "Resources",
                         Vec::new(),
                         [
-                            40u8, 109u8, 87u8, 233u8, 98u8, 199u8, 58u8, 77u8,
-                            169u8, 59u8, 20u8, 195u8, 125u8, 128u8, 101u8,
-                            248u8, 84u8, 184u8, 226u8, 24u8, 88u8, 239u8, 51u8,
-                            8u8, 36u8, 68u8, 189u8, 54u8, 172u8, 240u8, 65u8,
-                            31u8,
+                            137u8, 242u8, 218u8, 244u8, 20u8, 237u8, 53u8,
+                            254u8, 119u8, 30u8, 2u8, 81u8, 72u8, 214u8, 164u8,
+                            126u8, 73u8, 252u8, 191u8, 64u8, 154u8, 248u8,
+                            124u8, 6u8, 200u8, 218u8, 221u8, 35u8, 15u8, 129u8,
+                            65u8, 182u8,
                         ],
                     )
                 }
@@ -4505,6 +4588,78 @@ pub mod api {
                         ],
                     )
                 }
+                #[doc = " The max votes to store for for and against"]
+                pub fn max_votes(
+                    &self,
+                ) -> ::subxt::constants::StaticConstantAddress<
+                    ::subxt::metadata::DecodeStaticType<::core::primitive::u32>,
+                > {
+                    ::subxt::constants::StaticConstantAddress::new(
+                        "DKGProposals",
+                        "MaxVotes",
+                        [
+                            98u8, 252u8, 116u8, 72u8, 26u8, 180u8, 225u8, 83u8,
+                            200u8, 157u8, 125u8, 151u8, 53u8, 76u8, 168u8,
+                            26u8, 10u8, 9u8, 98u8, 68u8, 9u8, 178u8, 197u8,
+                            113u8, 31u8, 79u8, 200u8, 90u8, 203u8, 100u8, 41u8,
+                            145u8,
+                        ],
+                    )
+                }
+                #[doc = " The max resources that can be stored in storage"]
+                pub fn max_resources(
+                    &self,
+                ) -> ::subxt::constants::StaticConstantAddress<
+                    ::subxt::metadata::DecodeStaticType<::core::primitive::u32>,
+                > {
+                    ::subxt::constants::StaticConstantAddress::new(
+                        "DKGProposals",
+                        "MaxResources",
+                        [
+                            98u8, 252u8, 116u8, 72u8, 26u8, 180u8, 225u8, 83u8,
+                            200u8, 157u8, 125u8, 151u8, 53u8, 76u8, 168u8,
+                            26u8, 10u8, 9u8, 98u8, 68u8, 9u8, 178u8, 197u8,
+                            113u8, 31u8, 79u8, 200u8, 90u8, 203u8, 100u8, 41u8,
+                            145u8,
+                        ],
+                    )
+                }
+                #[doc = " The max authority proposers that can be stored in storage"]
+                pub fn max_authority_proposers(
+                    &self,
+                ) -> ::subxt::constants::StaticConstantAddress<
+                    ::subxt::metadata::DecodeStaticType<::core::primitive::u32>,
+                > {
+                    ::subxt::constants::StaticConstantAddress::new(
+                        "DKGProposals",
+                        "MaxAuthorityProposers",
+                        [
+                            98u8, 252u8, 116u8, 72u8, 26u8, 180u8, 225u8, 83u8,
+                            200u8, 157u8, 125u8, 151u8, 53u8, 76u8, 168u8,
+                            26u8, 10u8, 9u8, 98u8, 68u8, 9u8, 178u8, 197u8,
+                            113u8, 31u8, 79u8, 200u8, 90u8, 203u8, 100u8, 41u8,
+                            145u8,
+                        ],
+                    )
+                }
+                #[doc = " The max external proposer accounts that can be stored in storage"]
+                pub fn max_external_proposer_accounts(
+                    &self,
+                ) -> ::subxt::constants::StaticConstantAddress<
+                    ::subxt::metadata::DecodeStaticType<::core::primitive::u32>,
+                > {
+                    ::subxt::constants::StaticConstantAddress::new(
+                        "DKGProposals",
+                        "MaxExternalProposerAccounts",
+                        [
+                            98u8, 252u8, 116u8, 72u8, 26u8, 180u8, 225u8, 83u8,
+                            200u8, 157u8, 125u8, 151u8, 53u8, 76u8, 168u8,
+                            26u8, 10u8, 9u8, 98u8, 68u8, 9u8, 178u8, 197u8,
+                            113u8, 31u8, 79u8, 200u8, 90u8, 203u8, 100u8, 41u8,
+                            145u8,
+                        ],
+                    )
+                }
             }
         }
     }
@@ -4526,7 +4681,9 @@ pub mod api {
             )]
             pub struct SubmitSignedProposals {
                 pub props: ::std::vec::Vec<
-                    runtime_types::webb_proposals::proposal::Proposal,
+                    runtime_types::webb_proposals::proposal::Proposal<
+                        runtime_types::dkg_runtime_primitives::CustomU32Getter,
+                    >,
                 >,
             }
             #[derive(
@@ -4538,15 +4695,15 @@ pub mod api {
                 PartialEq,
             )]
             pub struct ForceSubmitUnsignedProposal {
-                pub prop: runtime_types::webb_proposals::proposal::Proposal,
+                pub prop: runtime_types::webb_proposals::proposal::Proposal<
+                    runtime_types::dkg_runtime_primitives::CustomU32Getter,
+                >,
             }
             pub struct TransactionApi;
             impl TransactionApi {
                 pub fn submit_signed_proposals(
                     &self,
-                    props: ::std::vec::Vec<
-                        runtime_types::webb_proposals::proposal::Proposal,
-                    >,
+                    props : :: std :: vec :: Vec < runtime_types :: webb_proposals :: proposal :: Proposal < runtime_types :: dkg_runtime_primitives :: CustomU32Getter > >,
                 ) -> ::subxt::tx::StaticTxPayload<SubmitSignedProposals>
                 {
                     ::subxt::tx::StaticTxPayload::new(
@@ -4554,11 +4711,11 @@ pub mod api {
                         "submit_signed_proposals",
                         SubmitSignedProposals { props },
                         [
-                            132u8, 66u8, 83u8, 114u8, 104u8, 101u8, 251u8,
-                            59u8, 8u8, 38u8, 154u8, 186u8, 142u8, 242u8, 122u8,
-                            187u8, 147u8, 144u8, 156u8, 71u8, 143u8, 222u8,
-                            250u8, 65u8, 142u8, 83u8, 73u8, 33u8, 39u8, 150u8,
-                            136u8, 101u8,
+                            40u8, 38u8, 237u8, 6u8, 145u8, 127u8, 224u8, 153u8,
+                            97u8, 77u8, 26u8, 198u8, 143u8, 255u8, 229u8,
+                            178u8, 248u8, 154u8, 41u8, 154u8, 186u8, 56u8,
+                            74u8, 137u8, 120u8, 36u8, 89u8, 224u8, 224u8,
+                            189u8, 97u8, 99u8,
                         ],
                     )
                 }
@@ -4569,7 +4726,9 @@ pub mod api {
                 #[doc = "\t1. Updating"]
                 pub fn force_submit_unsigned_proposal(
                     &self,
-                    prop: runtime_types::webb_proposals::proposal::Proposal,
+                    prop: runtime_types::webb_proposals::proposal::Proposal<
+                        runtime_types::dkg_runtime_primitives::CustomU32Getter,
+                    >,
                 ) -> ::subxt::tx::StaticTxPayload<ForceSubmitUnsignedProposal>
                 {
                     ::subxt::tx::StaticTxPayload::new(
@@ -4577,11 +4736,10 @@ pub mod api {
                         "force_submit_unsigned_proposal",
                         ForceSubmitUnsignedProposal { prop },
                         [
-                            14u8, 118u8, 150u8, 7u8, 47u8, 232u8, 149u8, 216u8,
-                            64u8, 129u8, 39u8, 223u8, 215u8, 109u8, 121u8,
-                            53u8, 208u8, 0u8, 48u8, 153u8, 181u8, 208u8, 148u8,
-                            176u8, 123u8, 38u8, 241u8, 173u8, 107u8, 21u8,
-                            13u8, 86u8,
+                            213u8, 166u8, 49u8, 2u8, 146u8, 30u8, 105u8, 213u8,
+                            119u8, 50u8, 83u8, 22u8, 234u8, 221u8, 92u8, 156u8,
+                            120u8, 5u8, 213u8, 174u8, 17u8, 129u8, 49u8, 196u8,
+                            36u8, 52u8, 59u8, 100u8, 21u8, 204u8, 79u8, 43u8,
                         ],
                     )
                 }
@@ -4663,20 +4821,20 @@ pub mod api {
             use super::runtime_types;
             pub struct StorageApi;
             impl StorageApi {
-                #[doc = " All unsigned proposals."]                pub fn unsigned_proposal_queue (& self , _0 : impl :: std :: borrow :: Borrow < runtime_types :: webb_proposals :: header :: TypedChainId > , _1 : impl :: std :: borrow :: Borrow < runtime_types :: dkg_runtime_primitives :: proposal :: DKGPayloadKey > ,) -> :: subxt :: storage :: address :: StaticStorageAddress :: < :: subxt :: metadata :: DecodeStaticType < runtime_types :: dkg_runtime_primitives :: proposal :: StoredUnsignedProposal < :: core :: primitive :: u32 > > , :: subxt :: storage :: address :: Yes , () , :: subxt :: storage :: address :: Yes >{
-                    :: subxt :: storage :: address :: StaticStorageAddress :: new ("DKGProposalHandler" , "UnsignedProposalQueue" , vec ! [:: subxt :: storage :: address :: StorageMapKey :: new (_0 . borrow () , :: subxt :: storage :: address :: StorageHasher :: Blake2_128Concat) , :: subxt :: storage :: address :: StorageMapKey :: new (_1 . borrow () , :: subxt :: storage :: address :: StorageHasher :: Blake2_128Concat)] , [109u8 , 186u8 , 212u8 , 65u8 , 131u8 , 43u8 , 97u8 , 103u8 , 37u8 , 95u8 , 11u8 , 112u8 , 114u8 , 195u8 , 155u8 , 65u8 , 149u8 , 88u8 , 133u8 , 86u8 , 134u8 , 238u8 , 34u8 , 201u8 , 30u8 , 247u8 , 25u8 , 51u8 , 70u8 , 221u8 , 76u8 , 129u8 ,])
+                #[doc = " All unsigned proposals."]                pub fn unsigned_proposal_queue (& self , _0 : impl :: std :: borrow :: Borrow < runtime_types :: webb_proposals :: header :: TypedChainId > , _1 : impl :: std :: borrow :: Borrow < runtime_types :: dkg_runtime_primitives :: proposal :: DKGPayloadKey > ,) -> :: subxt :: storage :: address :: StaticStorageAddress :: < :: subxt :: metadata :: DecodeStaticType < runtime_types :: dkg_runtime_primitives :: proposal :: StoredUnsignedProposal < :: core :: primitive :: u32 , runtime_types :: dkg_runtime_primitives :: CustomU32Getter > > , :: subxt :: storage :: address :: Yes , () , :: subxt :: storage :: address :: Yes >{
+                    :: subxt :: storage :: address :: StaticStorageAddress :: new ("DKGProposalHandler" , "UnsignedProposalQueue" , vec ! [:: subxt :: storage :: address :: StorageMapKey :: new (_0 . borrow () , :: subxt :: storage :: address :: StorageHasher :: Blake2_128Concat) , :: subxt :: storage :: address :: StorageMapKey :: new (_1 . borrow () , :: subxt :: storage :: address :: StorageHasher :: Blake2_128Concat)] , [180u8 , 168u8 , 253u8 , 235u8 , 22u8 , 205u8 , 104u8 , 231u8 , 206u8 , 162u8 , 69u8 , 53u8 , 120u8 , 242u8 , 94u8 , 192u8 , 63u8 , 147u8 , 54u8 , 66u8 , 54u8 , 195u8 , 19u8 , 252u8 , 129u8 , 118u8 , 114u8 , 37u8 , 231u8 , 137u8 , 66u8 , 228u8 ,])
                 }
-                #[doc = " All unsigned proposals."]                pub fn unsigned_proposal_queue_root (& self ,) -> :: subxt :: storage :: address :: StaticStorageAddress :: < :: subxt :: metadata :: DecodeStaticType < runtime_types :: dkg_runtime_primitives :: proposal :: StoredUnsignedProposal < :: core :: primitive :: u32 > > , () , () , :: subxt :: storage :: address :: Yes >{
+                #[doc = " All unsigned proposals."]                pub fn unsigned_proposal_queue_root (& self ,) -> :: subxt :: storage :: address :: StaticStorageAddress :: < :: subxt :: metadata :: DecodeStaticType < runtime_types :: dkg_runtime_primitives :: proposal :: StoredUnsignedProposal < :: core :: primitive :: u32 , runtime_types :: dkg_runtime_primitives :: CustomU32Getter > > , () , () , :: subxt :: storage :: address :: Yes >{
                     ::subxt::storage::address::StaticStorageAddress::new(
                         "DKGProposalHandler",
                         "UnsignedProposalQueue",
                         Vec::new(),
                         [
-                            109u8, 186u8, 212u8, 65u8, 131u8, 43u8, 97u8,
-                            103u8, 37u8, 95u8, 11u8, 112u8, 114u8, 195u8,
-                            155u8, 65u8, 149u8, 88u8, 133u8, 86u8, 134u8,
-                            238u8, 34u8, 201u8, 30u8, 247u8, 25u8, 51u8, 70u8,
-                            221u8, 76u8, 129u8,
+                            180u8, 168u8, 253u8, 235u8, 22u8, 205u8, 104u8,
+                            231u8, 206u8, 162u8, 69u8, 53u8, 120u8, 242u8,
+                            94u8, 192u8, 63u8, 147u8, 54u8, 66u8, 54u8, 195u8,
+                            19u8, 252u8, 129u8, 118u8, 114u8, 37u8, 231u8,
+                            137u8, 66u8, 228u8,
                         ],
                     )
                 }
@@ -4698,20 +4856,20 @@ pub mod api {
                         ],
                     )
                 }
-                #[doc = " All signed proposals."]                pub fn signed_proposals (& self , _0 : impl :: std :: borrow :: Borrow < runtime_types :: webb_proposals :: header :: TypedChainId > , _1 : impl :: std :: borrow :: Borrow < runtime_types :: dkg_runtime_primitives :: proposal :: DKGPayloadKey > ,) -> :: subxt :: storage :: address :: StaticStorageAddress :: < :: subxt :: metadata :: DecodeStaticType < runtime_types :: webb_proposals :: proposal :: Proposal > , :: subxt :: storage :: address :: Yes , () , :: subxt :: storage :: address :: Yes >{
-                    :: subxt :: storage :: address :: StaticStorageAddress :: new ("DKGProposalHandler" , "SignedProposals" , vec ! [:: subxt :: storage :: address :: StorageMapKey :: new (_0 . borrow () , :: subxt :: storage :: address :: StorageHasher :: Blake2_128Concat) , :: subxt :: storage :: address :: StorageMapKey :: new (_1 . borrow () , :: subxt :: storage :: address :: StorageHasher :: Blake2_128Concat)] , [210u8 , 218u8 , 231u8 , 118u8 , 12u8 , 140u8 , 31u8 , 43u8 , 148u8 , 147u8 , 187u8 , 20u8 , 208u8 , 23u8 , 85u8 , 156u8 , 200u8 , 185u8 , 11u8 , 245u8 , 140u8 , 62u8 , 142u8 , 9u8 , 241u8 , 111u8 , 7u8 , 153u8 , 208u8 , 76u8 , 69u8 , 73u8 ,])
+                #[doc = " All signed proposals."]                pub fn signed_proposals (& self , _0 : impl :: std :: borrow :: Borrow < runtime_types :: webb_proposals :: header :: TypedChainId > , _1 : impl :: std :: borrow :: Borrow < runtime_types :: dkg_runtime_primitives :: proposal :: DKGPayloadKey > ,) -> :: subxt :: storage :: address :: StaticStorageAddress :: < :: subxt :: metadata :: DecodeStaticType < runtime_types :: webb_proposals :: proposal :: Proposal < runtime_types :: dkg_runtime_primitives :: CustomU32Getter > > , :: subxt :: storage :: address :: Yes , () , :: subxt :: storage :: address :: Yes >{
+                    :: subxt :: storage :: address :: StaticStorageAddress :: new ("DKGProposalHandler" , "SignedProposals" , vec ! [:: subxt :: storage :: address :: StorageMapKey :: new (_0 . borrow () , :: subxt :: storage :: address :: StorageHasher :: Blake2_128Concat) , :: subxt :: storage :: address :: StorageMapKey :: new (_1 . borrow () , :: subxt :: storage :: address :: StorageHasher :: Blake2_128Concat)] , [40u8 , 252u8 , 222u8 , 220u8 , 87u8 , 195u8 , 206u8 , 177u8 , 252u8 , 151u8 , 163u8 , 130u8 , 212u8 , 57u8 , 250u8 , 155u8 , 16u8 , 65u8 , 94u8 , 201u8 , 52u8 , 174u8 , 75u8 , 9u8 , 185u8 , 240u8 , 218u8 , 241u8 , 208u8 , 36u8 , 17u8 , 196u8 ,])
                 }
-                #[doc = " All signed proposals."]                pub fn signed_proposals_root (& self ,) -> :: subxt :: storage :: address :: StaticStorageAddress :: < :: subxt :: metadata :: DecodeStaticType < runtime_types :: webb_proposals :: proposal :: Proposal > , () , () , :: subxt :: storage :: address :: Yes >{
+                #[doc = " All signed proposals."]                pub fn signed_proposals_root (& self ,) -> :: subxt :: storage :: address :: StaticStorageAddress :: < :: subxt :: metadata :: DecodeStaticType < runtime_types :: webb_proposals :: proposal :: Proposal < runtime_types :: dkg_runtime_primitives :: CustomU32Getter > > , () , () , :: subxt :: storage :: address :: Yes >{
                     ::subxt::storage::address::StaticStorageAddress::new(
                         "DKGProposalHandler",
                         "SignedProposals",
                         Vec::new(),
                         [
-                            210u8, 218u8, 231u8, 118u8, 12u8, 140u8, 31u8,
-                            43u8, 148u8, 147u8, 187u8, 20u8, 208u8, 23u8, 85u8,
-                            156u8, 200u8, 185u8, 11u8, 245u8, 140u8, 62u8,
-                            142u8, 9u8, 241u8, 111u8, 7u8, 153u8, 208u8, 76u8,
-                            69u8, 73u8,
+                            40u8, 252u8, 222u8, 220u8, 87u8, 195u8, 206u8,
+                            177u8, 252u8, 151u8, 163u8, 130u8, 212u8, 57u8,
+                            250u8, 155u8, 16u8, 65u8, 94u8, 201u8, 52u8, 174u8,
+                            75u8, 9u8, 185u8, 240u8, 218u8, 241u8, 208u8, 36u8,
+                            17u8, 196u8,
                         ],
                     )
                 }
@@ -4748,6 +4906,24 @@ pub mod api {
                     ::subxt::constants::StaticConstantAddress::new(
                         "DKGProposalHandler",
                         "UnsignedProposalExpiry",
+                        [
+                            98u8, 252u8, 116u8, 72u8, 26u8, 180u8, 225u8, 83u8,
+                            200u8, 157u8, 125u8, 151u8, 53u8, 76u8, 168u8,
+                            26u8, 10u8, 9u8, 98u8, 68u8, 9u8, 178u8, 197u8,
+                            113u8, 31u8, 79u8, 200u8, 90u8, 203u8, 100u8, 41u8,
+                            145u8,
+                        ],
+                    )
+                }
+                #[doc = " Max length of a proposal"]
+                pub fn max_proposal_length(
+                    &self,
+                ) -> ::subxt::constants::StaticConstantAddress<
+                    ::subxt::metadata::DecodeStaticType<::core::primitive::u32>,
+                > {
+                    ::subxt::constants::StaticConstantAddress::new(
+                        "DKGProposalHandler",
+                        "MaxProposalLength",
                         [
                             98u8, 252u8, 116u8, 72u8, 26u8, 180u8, 225u8, 83u8,
                             200u8, 157u8, 125u8, 151u8, 53u8, 76u8, 168u8,
@@ -4955,11 +5131,11 @@ pub mod api {
                             call: ::std::boxed::Box::new(call),
                         },
                         [
-                            145u8, 174u8, 191u8, 11u8, 91u8, 237u8, 161u8,
-                            70u8, 74u8, 157u8, 163u8, 181u8, 195u8, 83u8,
-                            127u8, 252u8, 23u8, 220u8, 172u8, 203u8, 102u8,
-                            126u8, 103u8, 130u8, 142u8, 147u8, 192u8, 58u8,
-                            181u8, 33u8, 255u8, 217u8,
+                            152u8, 138u8, 170u8, 238u8, 180u8, 203u8, 75u8,
+                            66u8, 248u8, 12u8, 251u8, 50u8, 199u8, 174u8,
+                            122u8, 118u8, 114u8, 242u8, 238u8, 213u8, 253u8,
+                            248u8, 4u8, 157u8, 2u8, 27u8, 68u8, 2u8, 226u8,
+                            72u8, 12u8, 14u8,
                         ],
                     )
                 }
@@ -4987,11 +5163,11 @@ pub mod api {
                             weight,
                         },
                         [
-                            103u8, 21u8, 24u8, 228u8, 231u8, 1u8, 104u8, 145u8,
-                            5u8, 255u8, 94u8, 139u8, 54u8, 17u8, 8u8, 32u8,
-                            37u8, 17u8, 212u8, 154u8, 40u8, 249u8, 79u8, 234u8,
-                            10u8, 72u8, 141u8, 172u8, 197u8, 238u8, 206u8,
-                            73u8,
+                            235u8, 234u8, 110u8, 255u8, 225u8, 114u8, 112u8,
+                            191u8, 169u8, 148u8, 140u8, 182u8, 209u8, 118u8,
+                            165u8, 156u8, 52u8, 123u8, 79u8, 226u8, 73u8,
+                            113u8, 44u8, 10u8, 232u8, 42u8, 152u8, 218u8,
+                            192u8, 244u8, 195u8, 214u8,
                         ],
                     )
                 }
@@ -5052,11 +5228,11 @@ pub mod api {
                             call: ::std::boxed::Box::new(call),
                         },
                         [
-                            175u8, 78u8, 218u8, 212u8, 82u8, 92u8, 87u8, 243u8,
-                            81u8, 241u8, 37u8, 72u8, 121u8, 144u8, 199u8, 44u8,
-                            56u8, 83u8, 233u8, 245u8, 128u8, 77u8, 244u8,
-                            154u8, 214u8, 176u8, 24u8, 157u8, 67u8, 43u8, 30u8,
-                            136u8,
+                            183u8, 123u8, 221u8, 16u8, 8u8, 186u8, 222u8,
+                            150u8, 162u8, 225u8, 155u8, 237u8, 199u8, 168u8,
+                            92u8, 180u8, 72u8, 245u8, 121u8, 19u8, 238u8, 90u8,
+                            121u8, 224u8, 219u8, 27u8, 218u8, 60u8, 106u8,
+                            199u8, 107u8, 192u8,
                         ],
                     )
                 }
@@ -10220,7 +10396,7 @@ pub mod api {
             use super::runtime_types;
             pub struct StorageApi;
             impl StorageApi {
-                #[doc = " Details of the module's parameters"]                pub fn next_bridge_index (& self ,) -> :: subxt :: storage :: address :: StaticStorageAddress :: < :: subxt :: metadata :: DecodeStaticType < :: core :: primitive :: u32 > , :: subxt :: storage :: address :: Yes , :: subxt :: storage :: address :: Yes , () >{
+                #[doc = " Storage for next bridge index"]                pub fn next_bridge_index (& self ,) -> :: subxt :: storage :: address :: StaticStorageAddress :: < :: subxt :: metadata :: DecodeStaticType < :: core :: primitive :: u32 > , :: subxt :: storage :: address :: Yes , :: subxt :: storage :: address :: Yes , () >{
                     ::subxt::storage::address::StaticStorageAddress::new(
                         "BridgeRegistry",
                         "NextBridgeIndex",
@@ -10234,10 +10410,10 @@ pub mod api {
                         ],
                     )
                 }
-                #[doc = " Details of the module's parameters"]                pub fn bridges (& self , _0 : impl :: std :: borrow :: Borrow < :: core :: primitive :: u32 > ,) -> :: subxt :: storage :: address :: StaticStorageAddress :: < :: subxt :: metadata :: DecodeStaticType < runtime_types :: pallet_bridge_registry :: types :: BridgeMetadata > , :: subxt :: storage :: address :: Yes , () , :: subxt :: storage :: address :: Yes >{
+                #[doc = " Storage for map of all bridges"]                pub fn bridges (& self , _0 : impl :: std :: borrow :: Borrow < :: core :: primitive :: u32 > ,) -> :: subxt :: storage :: address :: StaticStorageAddress :: < :: subxt :: metadata :: DecodeStaticType < runtime_types :: pallet_bridge_registry :: types :: BridgeMetadata > , :: subxt :: storage :: address :: Yes , () , :: subxt :: storage :: address :: Yes >{
                     :: subxt :: storage :: address :: StaticStorageAddress :: new ("BridgeRegistry" , "Bridges" , vec ! [:: subxt :: storage :: address :: StorageMapKey :: new (_0 . borrow () , :: subxt :: storage :: address :: StorageHasher :: Blake2_256)] , [1u8 , 112u8 , 75u8 , 147u8 , 69u8 , 209u8 , 218u8 , 149u8 , 213u8 , 112u8 , 94u8 , 202u8 , 240u8 , 100u8 , 216u8 , 77u8 , 14u8 , 111u8 , 54u8 , 86u8 , 79u8 , 109u8 , 31u8 , 34u8 , 31u8 , 24u8 , 30u8 , 64u8 , 29u8 , 29u8 , 64u8 , 3u8 ,])
                 }
-                #[doc = " Details of the module's parameters"]                pub fn bridges_root (& self ,) -> :: subxt :: storage :: address :: StaticStorageAddress :: < :: subxt :: metadata :: DecodeStaticType < runtime_types :: pallet_bridge_registry :: types :: BridgeMetadata > , () , () , :: subxt :: storage :: address :: Yes >{
+                #[doc = " Storage for map of all bridges"]                pub fn bridges_root (& self ,) -> :: subxt :: storage :: address :: StaticStorageAddress :: < :: subxt :: metadata :: DecodeStaticType < runtime_types :: pallet_bridge_registry :: types :: BridgeMetadata > , () , () , :: subxt :: storage :: address :: Yes >{
                     ::subxt::storage::address::StaticStorageAddress::new(
                         "BridgeRegistry",
                         "Bridges",
@@ -10251,10 +10427,10 @@ pub mod api {
                         ],
                     )
                 }
-                #[doc = " Details of the module's parameters"]                pub fn resource_to_bridge_index (& self , _0 : impl :: std :: borrow :: Borrow < runtime_types :: webb_proposals :: header :: ResourceId > ,) -> :: subxt :: storage :: address :: StaticStorageAddress :: < :: subxt :: metadata :: DecodeStaticType < :: core :: primitive :: u32 > , :: subxt :: storage :: address :: Yes , () , :: subxt :: storage :: address :: Yes >{
+                #[doc = " Mapping of resource to bridge index"]                pub fn resource_to_bridge_index (& self , _0 : impl :: std :: borrow :: Borrow < runtime_types :: webb_proposals :: header :: ResourceId > ,) -> :: subxt :: storage :: address :: StaticStorageAddress :: < :: subxt :: metadata :: DecodeStaticType < :: core :: primitive :: u32 > , :: subxt :: storage :: address :: Yes , () , :: subxt :: storage :: address :: Yes >{
                     :: subxt :: storage :: address :: StaticStorageAddress :: new ("BridgeRegistry" , "ResourceToBridgeIndex" , vec ! [:: subxt :: storage :: address :: StorageMapKey :: new (_0 . borrow () , :: subxt :: storage :: address :: StorageHasher :: Blake2_256)] , [130u8 , 216u8 , 179u8 , 142u8 , 98u8 , 4u8 , 178u8 , 25u8 , 179u8 , 57u8 , 140u8 , 220u8 , 202u8 , 186u8 , 74u8 , 115u8 , 145u8 , 63u8 , 69u8 , 239u8 , 102u8 , 91u8 , 1u8 , 43u8 , 46u8 , 165u8 , 18u8 , 191u8 , 7u8 , 97u8 , 84u8 , 111u8 ,])
                 }
-                #[doc = " Details of the module's parameters"]                pub fn resource_to_bridge_index_root (& self ,) -> :: subxt :: storage :: address :: StaticStorageAddress :: < :: subxt :: metadata :: DecodeStaticType < :: core :: primitive :: u32 > , () , () , :: subxt :: storage :: address :: Yes >{
+                #[doc = " Mapping of resource to bridge index"]                pub fn resource_to_bridge_index_root (& self ,) -> :: subxt :: storage :: address :: StaticStorageAddress :: < :: subxt :: metadata :: DecodeStaticType < :: core :: primitive :: u32 > , () , () , :: subxt :: storage :: address :: Yes >{
                     ::subxt::storage::address::StaticStorageAddress::new(
                         "BridgeRegistry",
                         "ResourceToBridgeIndex",
@@ -10304,6 +10480,24 @@ pub mod api {
                     ::subxt::constants::StaticConstantAddress::new(
                         "BridgeRegistry",
                         "MaxResources",
+                        [
+                            98u8, 252u8, 116u8, 72u8, 26u8, 180u8, 225u8, 83u8,
+                            200u8, 157u8, 125u8, 151u8, 53u8, 76u8, 168u8,
+                            26u8, 10u8, 9u8, 98u8, 68u8, 9u8, 178u8, 197u8,
+                            113u8, 31u8, 79u8, 200u8, 90u8, 203u8, 100u8, 41u8,
+                            145u8,
+                        ],
+                    )
+                }
+                #[doc = " Max length of a proposal"]
+                pub fn max_proposal_length(
+                    &self,
+                ) -> ::subxt::constants::StaticConstantAddress<
+                    ::subxt::metadata::DecodeStaticType<::core::primitive::u32>,
+                > {
+                    ::subxt::constants::StaticConstantAddress::new(
+                        "BridgeRegistry",
+                        "MaxProposalLength",
                         [
                             98u8, 252u8, 116u8, 72u8, 26u8, 180u8, 225u8, 83u8,
                             200u8, 157u8, 125u8, 151u8, 53u8, 76u8, 168u8,
@@ -11768,9 +11962,9 @@ pub mod api {
                     Eq,
                     PartialEq,
                 )]
-                pub struct StoredUnsignedProposal<_0> {
+                pub struct StoredUnsignedProposal<_0, _1> {
                     pub proposal:
-                        runtime_types::webb_proposals::proposal::Proposal,
+                        runtime_types::webb_proposals::proposal::Proposal<_1>,
                     pub timestamp: _0,
                 }
             }
@@ -11782,15 +11976,7 @@ pub mod api {
                 Eq,
                 PartialEq,
             )]
-            pub struct AggregatedMisbehaviourReports<_0> {
-                pub misbehaviour_type:
-                    runtime_types::dkg_runtime_primitives::MisbehaviourType,
-                pub session_id: ::core::primitive::u64,
-                pub offender: _0,
-                pub reporters: ::std::vec::Vec<_0>,
-                pub signatures:
-                    ::std::vec::Vec<::std::vec::Vec<::core::primitive::u8>>,
-            }
+            pub struct AggregatedMisbehaviourReports < _0 , _1 , _2 > { pub misbehaviour_type : runtime_types :: dkg_runtime_primitives :: MisbehaviourType , pub session_id : :: core :: primitive :: u64 , pub offender : _0 , pub reporters : runtime_types :: sp_core :: bounded :: bounded_vec :: BoundedVec < _0 > , pub signatures : runtime_types :: sp_core :: bounded :: bounded_vec :: BoundedVec < runtime_types :: sp_core :: bounded :: bounded_vec :: BoundedVec < :: core :: primitive :: u8 > > , # [codec (skip)] pub __subxt_unused_type_params : :: core :: marker :: PhantomData < (_1 , _2) > }
             #[derive(
                 :: subxt :: ext :: codec :: Decode,
                 :: subxt :: ext :: codec :: Encode,
@@ -11805,6 +11991,15 @@ pub mod api {
                     ::std::vec::Vec<::core::primitive::u8>,
                 )>,
             }
+            #[derive(
+                :: subxt :: ext :: codec :: Decode,
+                :: subxt :: ext :: codec :: Encode,
+                Clone,
+                Debug,
+                Eq,
+                PartialEq,
+            )]
+            pub struct CustomU32Getter;
             #[derive(
                 :: subxt :: ext :: codec :: Decode,
                 :: subxt :: ext :: codec :: Encode,
@@ -11834,6 +12029,15 @@ pub mod api {
                 )]
                 pub struct SessionKeys { pub aura : runtime_types :: sp_consensus_aura :: sr25519 :: app_sr25519 :: Public , pub grandpa : runtime_types :: sp_finality_grandpa :: app :: Public , pub im_online : runtime_types :: pallet_im_online :: sr25519 :: app_sr25519 :: Public , pub dkg : runtime_types :: dkg_runtime_primitives :: crypto :: Public , }
             }
+            #[derive(
+                :: subxt :: ext :: codec :: Decode,
+                :: subxt :: ext :: codec :: Encode,
+                Clone,
+                Debug,
+                Eq,
+                PartialEq,
+            )]
+            pub struct MaxVotes;
             #[derive(
                 :: subxt :: ext :: codec :: Decode,
                 :: subxt :: ext :: codec :: Encode,
@@ -12985,7 +13189,7 @@ pub mod api {
                 )]
                 #[doc = "Contains one variant per dispatchable that can be called by an extrinsic."]
                 pub enum Call {
-                    # [codec (index = 0)] # [doc = "Set the pending signature threshold for the session following the next session."] # [doc = ""] # [doc = "We cannot assume that the next DKG has not already completed keygen."] # [doc = "After all, if we are in a new session the next DKG may have already completed."] # [doc = "Therefore, when we update the thresholds we are updating a threshold"] # [doc = "that will become the next threshold after the next session update."] # [doc = ""] # [doc = "* `origin` - The account origin."] # [doc = "* `new_threshold` - The new signature threshold for the DKG."] set_signature_threshold { new_threshold : :: core :: primitive :: u16 , } , # [codec (index = 1)] # [doc = "Set the pending keygen threshold for the session following the next session."] # [doc = ""] # [doc = "We cannot assume that the next DKG has not already completed keygen."] # [doc = "After all, if we are in a new session the next DKG may have already completed."] # [doc = "Therefore, when we update the thresholds we are updating a threshold"] # [doc = "that will become the next threshold after the next session update."] # [doc = ""] # [doc = "* `origin` - The account origin."] # [doc = "* `new_threshold` - The new keygen threshold for the DKG."] set_keygen_threshold { new_threshold : :: core :: primitive :: u16 , } , # [codec (index = 2)] # [doc = "Sets the delay when a unsigned `RefreshProposal` will be added to the unsigned"] # [doc = "proposal queue."] # [doc = ""] # [doc = "* `origin` - The account origin."] # [doc = "* `new_delay` - The percentage of elapsed session duration to wait before adding an"] # [doc = "  unsigned refresh proposal to the unsigned proposal queue."] set_refresh_delay { new_delay : :: core :: primitive :: u8 , } , # [codec (index = 3)] # [doc = "Submits and stores the active public key for the genesis session into the on-chain"] # [doc = "storage. This is primarily used to separate the genesis public key submission from"] # [doc = "non-genesis rounds."] # [doc = ""] # [doc = "Can only be submitted by the current authorities. It is also required that a"] # [doc = "`SignatureThreshold` of submissions is reached in order to successfully"] # [doc = "store the public key on-chain."] # [doc = ""] # [doc = "* `origin` - The account origin."] # [doc = "* `keys_and_signatures` - The aggregated public keys and signatures for possible current"] # [doc = "  DKG public keys."] submit_public_key { keys_and_signatures : runtime_types :: dkg_runtime_primitives :: AggregatedPublicKeys , } , # [codec (index = 4)] # [doc = "Submits and stores the next public key for the next session into the on-chain storage."] # [doc = ""] # [doc = "Can only be submitted by the next authorities. It is also required that a"] # [doc = "`NextSignatureThreshold` of submissions is reached in order to successfully"] # [doc = "store the public key on-chain."] # [doc = ""] # [doc = "* `origin` - The account origin."] # [doc = "* `keys_and_signatures` - The aggregated public keys and signatures for possible next"] # [doc = "  DKG public keys."] submit_next_public_key { keys_and_signatures : runtime_types :: dkg_runtime_primitives :: AggregatedPublicKeys , } , # [codec (index = 5)] # [doc = "Submits the public key signature for the key refresh/rotation process."] # [doc = ""] # [doc = "The signature is the signature of the next public key `RefreshProposal`, signed by the"] # [doc = "current DKG. It is stored on-chain only if it verifies successfully against the current"] # [doc = "DKG's public key. Successful storage of this public key signature also removes"] # [doc = "the unsigned `RefreshProposal` from the unsigned queue."] # [doc = ""] # [doc = "For manual refreshes, after the signature is submitted and stored on-chain,"] # [doc = "the keys are immediately refreshed and the authority set is immediately rotated"] # [doc = "and incremented."] # [doc = ""] # [doc = "* `origin` - The account origin."] # [doc = "* `signature_proposal` - The signed refresh proposal containing the public key signature"] # [doc = "  and nonce."] submit_public_key_signature { signature_proposal : runtime_types :: dkg_runtime_primitives :: proposal :: RefreshProposalSigned , } , # [codec (index = 6)] # [doc = "Submits misbehaviour reports on chain. Signatures of the offending authority are"] # [doc = "verified against the current or next authorities depending on the type of misbehaviour."] # [doc = "- Keygen: Verifies against the next authorities, since they are doing keygen."] # [doc = "- Signing: Verifies against the current authorities, since they are doing signing."] # [doc = ""] # [doc = "Verifies the reports against the respective thresholds and if enough reports are met"] # [doc = "begins to jail and decrease the reputation of the offending authority."] # [doc = ""] # [doc = "The misbehaviour reputation update is:"] # [doc = "\tAUTHORITY_REPUTATION = DECAY_PERCENTAGE * AUTHORITY_REPUTATION"] # [doc = ""] # [doc = "If there are not enough unjailed keygen authorities to perform a keygen after the next"] # [doc = "session, then we deduct the pending keygen threshold (and pending signing threshold)"] # [doc = "accordingly."] # [doc = ""] # [doc = "* `origin` - The account origin."] # [doc = "* `reports` - The aggregated misbehaviour reports containing signatures of an offending"] # [doc = "  authority"] submit_misbehaviour_reports { reports : runtime_types :: dkg_runtime_primitives :: AggregatedMisbehaviourReports < runtime_types :: dkg_runtime_primitives :: crypto :: Public > , } , # [codec (index = 7)] # [doc = "Attempts to remove an authority from all possible jails (keygen & signing)."] # [doc = "This can only be called by the controller of the authority in jail. The"] # [doc = "origin must map directly to the authority in jail."] # [doc = ""] # [doc = "The authority's jail sentence for either keygen or signing must be elapsed"] # [doc = "for the authority to be removed from the jail."] # [doc = ""] # [doc = "* `origin` - The account origin."] unjail , # [codec (index = 8)] # [doc = "Force removes an authority from keygen jail."] # [doc = ""] # [doc = "Can only be called by DKG"] # [doc = "* `origin` - The account origin."] # [doc = "* `authority` - The authority to be removed from the keygen jail."] force_unjail_keygen { authority : runtime_types :: dkg_runtime_primitives :: crypto :: Public , } , # [codec (index = 9)] # [doc = "Force removes an authority from signing jail."] # [doc = ""] # [doc = "Can only be called by the root origin."] # [doc = ""] # [doc = "* `origin` - The account origin."] # [doc = "* `authority` - The authority to be removed from the signing jail."] force_unjail_signing { authority : runtime_types :: dkg_runtime_primitives :: crypto :: Public , } , # [codec (index = 10)] # [doc = "Forcefully rotate the DKG"] # [doc = ""] # [doc = "This forces the next authorities into the current authority spot and"] # [doc = "automatically increments the authority ID. It uses `change_authorities`"] # [doc = "to execute the rotation forcefully."] force_change_authorities , # [codec (index = 11)] # [doc = "Triggers an Emergency Keygen Porotocol."] # [doc = ""] # [doc = "The keygen protocol will then be executed and the result will be stored in the off chain"] # [doc = "storage, which will be picked up by the on chain worker and stored on chain."] # [doc = ""] # [doc = "Note that, this will clear the next public key and its signature, if any."] trigger_emergency_keygen , }
+                    # [codec (index = 0)] # [doc = "Set the pending signature threshold for the session following the next session."] # [doc = ""] # [doc = "We cannot assume that the next DKG has not already completed keygen."] # [doc = "After all, if we are in a new session the next DKG may have already completed."] # [doc = "Therefore, when we update the thresholds we are updating a threshold"] # [doc = "that will become the next threshold after the next session update."] # [doc = ""] # [doc = "* `origin` - The account origin."] # [doc = "* `new_threshold` - The new signature threshold for the DKG."] set_signature_threshold { new_threshold : :: core :: primitive :: u16 , } , # [codec (index = 1)] # [doc = "Set the pending keygen threshold for the session following the next session."] # [doc = ""] # [doc = "We cannot assume that the next DKG has not already completed keygen."] # [doc = "After all, if we are in a new session the next DKG may have already completed."] # [doc = "Therefore, when we update the thresholds we are updating a threshold"] # [doc = "that will become the next threshold after the next session update."] # [doc = ""] # [doc = "* `origin` - The account origin."] # [doc = "* `new_threshold` - The new keygen threshold for the DKG."] set_keygen_threshold { new_threshold : :: core :: primitive :: u16 , } , # [codec (index = 2)] # [doc = "Sets the delay when a unsigned `RefreshProposal` will be added to the unsigned"] # [doc = "proposal queue."] # [doc = ""] # [doc = "* `origin` - The account origin."] # [doc = "* `new_delay` - The percentage of elapsed session duration to wait before adding an"] # [doc = "  unsigned refresh proposal to the unsigned proposal queue."] set_refresh_delay { new_delay : :: core :: primitive :: u8 , } , # [codec (index = 3)] # [doc = "Submits and stores the active public key for the genesis session into the on-chain"] # [doc = "storage. This is primarily used to separate the genesis public key submission from"] # [doc = "non-genesis rounds."] # [doc = ""] # [doc = "Can only be submitted by the current authorities. It is also required that a"] # [doc = "`SignatureThreshold` of submissions is reached in order to successfully"] # [doc = "store the public key on-chain."] # [doc = ""] # [doc = "* `origin` - The account origin."] # [doc = "* `keys_and_signatures` - The aggregated public keys and signatures for possible current"] # [doc = "  DKG public keys."] submit_public_key { keys_and_signatures : runtime_types :: dkg_runtime_primitives :: AggregatedPublicKeys , } , # [codec (index = 4)] # [doc = "Submits and stores the next public key for the next session into the on-chain storage."] # [doc = ""] # [doc = "Can only be submitted by the next authorities. It is also required that a"] # [doc = "`NextSignatureThreshold` of submissions is reached in order to successfully"] # [doc = "store the public key on-chain."] # [doc = ""] # [doc = "* `origin` - The account origin."] # [doc = "* `keys_and_signatures` - The aggregated public keys and signatures for possible next"] # [doc = "  DKG public keys."] submit_next_public_key { keys_and_signatures : runtime_types :: dkg_runtime_primitives :: AggregatedPublicKeys , } , # [codec (index = 5)] # [doc = "Submits the public key signature for the key refresh/rotation process."] # [doc = ""] # [doc = "The signature is the signature of the next public key `RefreshProposal`, signed by the"] # [doc = "current DKG. It is stored on-chain only if it verifies successfully against the current"] # [doc = "DKG's public key. Successful storage of this public key signature also removes"] # [doc = "the unsigned `RefreshProposal` from the unsigned queue."] # [doc = ""] # [doc = "For manual refreshes, after the signature is submitted and stored on-chain,"] # [doc = "the keys are immediately refreshed and the authority set is immediately rotated"] # [doc = "and incremented."] # [doc = ""] # [doc = "* `origin` - The account origin."] # [doc = "* `signature_proposal` - The signed refresh proposal containing the public key signature"] # [doc = "  and nonce."] submit_public_key_signature { signature_proposal : runtime_types :: dkg_runtime_primitives :: proposal :: RefreshProposalSigned , } , # [codec (index = 6)] # [doc = "Submits misbehaviour reports on chain. Signatures of the offending authority are"] # [doc = "verified against the current or next authorities depending on the type of misbehaviour."] # [doc = "- Keygen: Verifies against the next authorities, since they are doing keygen."] # [doc = "- Signing: Verifies against the current authorities, since they are doing signing."] # [doc = ""] # [doc = "Verifies the reports against the respective thresholds and if enough reports are met"] # [doc = "begins to jail and decrease the reputation of the offending authority."] # [doc = ""] # [doc = "The misbehaviour reputation update is:"] # [doc = "\tAUTHORITY_REPUTATION = DECAY_PERCENTAGE * AUTHORITY_REPUTATION"] # [doc = ""] # [doc = "If there are not enough unjailed keygen authorities to perform a keygen after the next"] # [doc = "session, then we deduct the pending keygen threshold (and pending signing threshold)"] # [doc = "accordingly."] # [doc = ""] # [doc = "* `origin` - The account origin."] # [doc = "* `reports` - The aggregated misbehaviour reports containing signatures of an offending"] # [doc = "  authority"] submit_misbehaviour_reports { reports : runtime_types :: dkg_runtime_primitives :: AggregatedMisbehaviourReports < runtime_types :: dkg_runtime_primitives :: crypto :: Public , runtime_types :: dkg_runtime_primitives :: CustomU32Getter , runtime_types :: dkg_runtime_primitives :: CustomU32Getter > , } , # [codec (index = 7)] # [doc = "Attempts to remove an authority from all possible jails (keygen & signing)."] # [doc = "This can only be called by the controller of the authority in jail. The"] # [doc = "origin must map directly to the authority in jail."] # [doc = ""] # [doc = "The authority's jail sentence for either keygen or signing must be elapsed"] # [doc = "for the authority to be removed from the jail."] # [doc = ""] # [doc = "* `origin` - The account origin."] unjail , # [codec (index = 8)] # [doc = "Force removes an authority from keygen jail."] # [doc = ""] # [doc = "Can only be called by DKG"] # [doc = "* `origin` - The account origin."] # [doc = "* `authority` - The authority to be removed from the keygen jail."] force_unjail_keygen { authority : runtime_types :: dkg_runtime_primitives :: crypto :: Public , } , # [codec (index = 9)] # [doc = "Force removes an authority from signing jail."] # [doc = ""] # [doc = "Can only be called by the root origin."] # [doc = ""] # [doc = "* `origin` - The account origin."] # [doc = "* `authority` - The authority to be removed from the signing jail."] force_unjail_signing { authority : runtime_types :: dkg_runtime_primitives :: crypto :: Public , } , # [codec (index = 10)] # [doc = "Forcefully rotate the DKG"] # [doc = ""] # [doc = "This forces the next authorities into the current authority spot and"] # [doc = "automatically increments the authority ID. It uses `change_authorities`"] # [doc = "to execute the rotation forcefully."] force_change_authorities , # [codec (index = 11)] # [doc = "Triggers an Emergency Keygen Porotocol."] # [doc = ""] # [doc = "The keygen protocol will then be executed and the result will be stored in the off chain"] # [doc = "storage, which will be picked up by the on chain worker and stored on chain."] # [doc = ""] # [doc = "Note that, this will clear the next public key and its signature, if any."] trigger_emergency_keygen , }
                 #[derive(
                     :: subxt :: ext :: codec :: Decode,
                     :: subxt :: ext :: codec :: Encode,
@@ -13041,6 +13245,9 @@ pub mod api {
                     #[codec(index = 14)]
                     #[doc = "Must be calling from the controller account"]
                     InvalidControllerAccount,
+                    #[codec(index = 15)]
+                    #[doc = "Input is out of bounds"]
+                    OutOfBounds,
                 }
                 #[derive(
                     :: subxt :: ext :: codec :: Decode,
@@ -13064,14 +13271,7 @@ pub mod api {
                     Eq,
                     PartialEq,
                 )]
-                pub struct RoundMetadata {
-                    pub curr_round_pub_key:
-                        ::std::vec::Vec<::core::primitive::u8>,
-                    pub next_round_pub_key:
-                        ::std::vec::Vec<::core::primitive::u8>,
-                    pub refresh_signature:
-                        ::std::vec::Vec<::core::primitive::u8>,
-                }
+                pub struct RoundMetadata < _0 , _1 > { pub curr_round_pub_key : runtime_types :: sp_core :: bounded :: bounded_vec :: BoundedVec < :: core :: primitive :: u8 > , pub next_round_pub_key : runtime_types :: sp_core :: bounded :: bounded_vec :: BoundedVec < :: core :: primitive :: u8 > , pub refresh_signature : runtime_types :: sp_core :: bounded :: bounded_vec :: BoundedVec < :: core :: primitive :: u8 > , # [codec (skip)] pub __subxt_unused_type_params : :: core :: marker :: PhantomData < (_0 , _1) > }
             }
         }
         pub mod pallet_dkg_proposal_handler {
@@ -13088,22 +13288,7 @@ pub mod api {
                 )]
                 #[doc = "Contains one variant per dispatchable that can be called by an extrinsic."]
                 pub enum Call {
-                    #[codec(index = 0)]
-                    submit_signed_proposals {
-                        props: ::std::vec::Vec<
-                            runtime_types::webb_proposals::proposal::Proposal,
-                        >,
-                    },
-                    #[codec(index = 1)]
-                    #[doc = "Force submit an unsigned proposal to the DKG"]
-                    #[doc = ""]
-                    #[doc = "There are certain proposals we'd like to be proposable only"]
-                    #[doc = "through root actions. The currently supported proposals are"]
-                    #[doc = "\t1. Updating"]
-                    force_submit_unsigned_proposal {
-                        prop: runtime_types::webb_proposals::proposal::Proposal,
-                    },
-                }
+                    # [codec (index = 0)] submit_signed_proposals { props : :: std :: vec :: Vec < runtime_types :: webb_proposals :: proposal :: Proposal < runtime_types :: dkg_runtime_primitives :: CustomU32Getter > > , } , # [codec (index = 1)] # [doc = "Force submit an unsigned proposal to the DKG"] # [doc = ""] # [doc = "There are certain proposals we'd like to be proposable only"] # [doc = "through root actions. The currently supported proposals are"] # [doc = "\t1. Updating"] force_submit_unsigned_proposal { prop : runtime_types :: webb_proposals :: proposal :: Proposal < runtime_types :: dkg_runtime_primitives :: CustomU32Getter > , } , }
                 #[derive(
                     :: subxt :: ext :: codec :: Decode,
                     :: subxt :: ext :: codec :: Encode,
@@ -13144,6 +13329,9 @@ pub mod api {
                     #[codec(index = 9)]
                     #[doc = "Proposal length exceeds max allowed per batch"]
                     ProposalsLengthOverflow,
+                    #[codec(index = 10)]
+                    #[doc = "Proposal out of bounds"]
+                    ProposalOutOfBounds,
                 }
                 #[derive(
                     :: subxt :: ext :: codec :: Decode,
@@ -13172,112 +13360,7 @@ pub mod api {
                 )]
                 #[doc = "Contains one variant per dispatchable that can be called by an extrinsic."]
                 pub enum Call {
-                    #[codec(index = 0)]
-                    #[doc = "Sets the vote threshold for proposals."]
-                    #[doc = ""]
-                    #[doc = "This threshold is used to determine how many votes are required"]
-                    #[doc = "before a proposal is executed."]
-                    #[doc = ""]
-                    #[doc = "# <weight>"]
-                    #[doc = "- O(1) lookup and insert"]
-                    #[doc = "# </weight>"]
-                    set_threshold { threshold: ::core::primitive::u32 },
-                    #[codec(index = 1)]
-                    #[doc = "Stores a method name on chain under an associated resource ID."]
-                    #[doc = ""]
-                    #[doc = "# <weight>"]
-                    #[doc = "- O(1) write"]
-                    #[doc = "# </weight>"]
-                    set_resource {
-                        id: runtime_types::webb_proposals::header::ResourceId,
-                        method: ::std::vec::Vec<::core::primitive::u8>,
-                    },
-                    #[codec(index = 2)]
-                    #[doc = "Removes a resource ID from the resource mapping."]
-                    #[doc = ""]
-                    #[doc = "After this call, bridge transfers with the associated resource ID"]
-                    #[doc = "will be rejected."]
-                    #[doc = ""]
-                    #[doc = "# <weight>"]
-                    #[doc = "- O(1) removal"]
-                    #[doc = "# </weight>"]
-                    remove_resource {
-                        id: runtime_types::webb_proposals::header::ResourceId,
-                    },
-                    #[codec(index = 3)]
-                    #[doc = "Enables a chain ID as a source or destination for a bridge transfer."]
-                    #[doc = ""]
-                    #[doc = "# <weight>"]
-                    #[doc = "- O(1) lookup and insert"]
-                    #[doc = "# </weight>"]
-                    whitelist_chain {
-                        chain_id:
-                            runtime_types::webb_proposals::header::TypedChainId,
-                    },
-                    #[codec(index = 4)]
-                    #[doc = "Adds a new proposer to the proposer set."]
-                    #[doc = ""]
-                    #[doc = "# <weight>"]
-                    #[doc = "- O(1) lookup and insert"]
-                    #[doc = "# </weight>"]
-                    add_proposer {
-                        native_account: ::subxt::utils::AccountId32,
-                        external_account:
-                            ::std::vec::Vec<::core::primitive::u8>,
-                    },
-                    #[codec(index = 5)]
-                    #[doc = "Removes an existing proposer from the set."]
-                    #[doc = ""]
-                    #[doc = "# <weight>"]
-                    #[doc = "- O(1) lookup and removal"]
-                    #[doc = "# </weight>"]
-                    remove_proposer { v: ::subxt::utils::AccountId32 },
-                    #[codec(index = 6)]
-                    #[doc = "Commits a vote in favour of the provided proposal."]
-                    #[doc = ""]
-                    #[doc = "If a proposal with the given nonce and source chain ID does not"]
-                    #[doc = "already exist, it will be created with an initial vote in favour"]
-                    #[doc = "from the caller."]
-                    #[doc = ""]
-                    #[doc = "# <weight>"]
-                    #[doc = "- weight of proposed call, regardless of whether execution is performed"]
-                    #[doc = "# </weight>"]
-                    acknowledge_proposal {
-                        nonce: runtime_types::webb_proposals::nonce::Nonce,
-                        src_chain_id:
-                            runtime_types::webb_proposals::header::TypedChainId,
-                        r_id: runtime_types::webb_proposals::header::ResourceId,
-                        prop: ::std::vec::Vec<::core::primitive::u8>,
-                    },
-                    #[codec(index = 7)]
-                    #[doc = "Commits a vote against a provided proposal."]
-                    #[doc = ""]
-                    #[doc = "# <weight>"]
-                    #[doc = "- Fixed, since execution of proposal should not be included"]
-                    #[doc = "# </weight>"]
-                    reject_proposal {
-                        nonce: runtime_types::webb_proposals::nonce::Nonce,
-                        src_chain_id:
-                            runtime_types::webb_proposals::header::TypedChainId,
-                        r_id: runtime_types::webb_proposals::header::ResourceId,
-                        prop: ::std::vec::Vec<::core::primitive::u8>,
-                    },
-                    #[codec(index = 8)]
-                    #[doc = "Evaluate the state of a proposal given the current vote threshold."]
-                    #[doc = ""]
-                    #[doc = "A proposal with enough votes will be either executed or cancelled,"]
-                    #[doc = "and the status will be updated accordingly."]
-                    #[doc = ""]
-                    #[doc = "# <weight>"]
-                    #[doc = "- weight of proposed call, regardless of whether execution is performed"]
-                    #[doc = "# </weight>"]
-                    eval_vote_state {
-                        nonce: runtime_types::webb_proposals::nonce::Nonce,
-                        src_chain_id:
-                            runtime_types::webb_proposals::header::TypedChainId,
-                        prop: ::std::vec::Vec<::core::primitive::u8>,
-                    },
-                }
+                    # [codec (index = 0)] # [doc = "Sets the vote threshold for proposals."] # [doc = ""] # [doc = "This threshold is used to determine how many votes are required"] # [doc = "before a proposal is executed."] # [doc = ""] # [doc = "# <weight>"] # [doc = "- O(1) lookup and insert"] # [doc = "# </weight>"] set_threshold { threshold : :: core :: primitive :: u32 , } , # [codec (index = 1)] # [doc = "Stores a method name on chain under an associated resource ID."] # [doc = ""] # [doc = "# <weight>"] # [doc = "- O(1) write"] # [doc = "# </weight>"] set_resource { id : runtime_types :: webb_proposals :: header :: ResourceId , method : :: std :: vec :: Vec < :: core :: primitive :: u8 > , } , # [codec (index = 2)] # [doc = "Removes a resource ID from the resource mapping."] # [doc = ""] # [doc = "After this call, bridge transfers with the associated resource ID"] # [doc = "will be rejected."] # [doc = ""] # [doc = "# <weight>"] # [doc = "- O(1) removal"] # [doc = "# </weight>"] remove_resource { id : runtime_types :: webb_proposals :: header :: ResourceId , } , # [codec (index = 3)] # [doc = "Enables a chain ID as a source or destination for a bridge transfer."] # [doc = ""] # [doc = "# <weight>"] # [doc = "- O(1) lookup and insert"] # [doc = "# </weight>"] whitelist_chain { chain_id : runtime_types :: webb_proposals :: header :: TypedChainId , } , # [codec (index = 4)] # [doc = "Adds a new proposer to the proposer set."] # [doc = ""] # [doc = "# <weight>"] # [doc = "- O(1) lookup and insert"] # [doc = "# </weight>"] add_proposer { native_account : :: subxt :: utils :: AccountId32 , external_account : :: std :: vec :: Vec < :: core :: primitive :: u8 > , } , # [codec (index = 5)] # [doc = "Removes an existing proposer from the set."] # [doc = ""] # [doc = "# <weight>"] # [doc = "- O(1) lookup and removal"] # [doc = "# </weight>"] remove_proposer { v : :: subxt :: utils :: AccountId32 , } , # [codec (index = 6)] # [doc = "Commits a vote in favour of the provided proposal."] # [doc = ""] # [doc = "If a proposal with the given nonce and source chain ID does not"] # [doc = "already exist, it will be created with an initial vote in favour"] # [doc = "from the caller."] # [doc = ""] # [doc = "# <weight>"] # [doc = "- weight of proposed call, regardless of whether execution is performed"] # [doc = "# </weight>"] acknowledge_proposal { nonce : runtime_types :: webb_proposals :: nonce :: Nonce , src_chain_id : runtime_types :: webb_proposals :: header :: TypedChainId , r_id : runtime_types :: webb_proposals :: header :: ResourceId , prop : runtime_types :: sp_core :: bounded :: bounded_vec :: BoundedVec < :: core :: primitive :: u8 > , } , # [codec (index = 7)] # [doc = "Commits a vote against a provided proposal."] # [doc = ""] # [doc = "# <weight>"] # [doc = "- Fixed, since execution of proposal should not be included"] # [doc = "# </weight>"] reject_proposal { nonce : runtime_types :: webb_proposals :: nonce :: Nonce , src_chain_id : runtime_types :: webb_proposals :: header :: TypedChainId , r_id : runtime_types :: webb_proposals :: header :: ResourceId , prop : runtime_types :: sp_core :: bounded :: bounded_vec :: BoundedVec < :: core :: primitive :: u8 > , } , # [codec (index = 8)] # [doc = "Evaluate the state of a proposal given the current vote threshold."] # [doc = ""] # [doc = "A proposal with enough votes will be either executed or cancelled,"] # [doc = "and the status will be updated accordingly."] # [doc = ""] # [doc = "# <weight>"] # [doc = "- weight of proposed call, regardless of whether execution is performed"] # [doc = "# </weight>"] eval_vote_state { nonce : runtime_types :: webb_proposals :: nonce :: Nonce , src_chain_id : runtime_types :: webb_proposals :: header :: TypedChainId , prop : runtime_types :: sp_core :: bounded :: bounded_vec :: BoundedVec < :: core :: primitive :: u8 > , } , }
                 #[derive(
                     :: subxt :: ext :: codec :: Decode,
                     :: subxt :: ext :: codec :: Encode,
@@ -13339,6 +13422,9 @@ pub mod api {
                     #[codec(index = 16)]
                     #[doc = "Proposer Count is Zero"]
                     ProposerCountIsZero,
+                    #[codec(index = 17)]
+                    #[doc = "Input is out of bounds"]
+                    OutOfBounds,
                 }
                 #[derive(
                     :: subxt :: ext :: codec :: Decode,
@@ -13454,7 +13540,7 @@ pub mod api {
                     Eq,
                     PartialEq,
                 )]
-                pub struct ProposalVotes < _0 , _1 > { pub votes_for : :: std :: vec :: Vec < _0 > , pub votes_against : :: std :: vec :: Vec < _0 > , pub status : runtime_types :: pallet_dkg_proposals :: types :: ProposalStatus , pub expiry : _1 , }
+                pub struct ProposalVotes < _0 , _1 , _2 > { pub votes_for : runtime_types :: sp_core :: bounded :: bounded_vec :: BoundedVec < _0 > , pub votes_against : runtime_types :: sp_core :: bounded :: bounded_vec :: BoundedVec < _0 > , pub status : runtime_types :: pallet_dkg_proposals :: types :: ProposalStatus , pub expiry : _1 , # [codec (skip)] pub __subxt_unused_type_params : :: core :: marker :: PhantomData < _2 > }
             }
         }
         pub mod pallet_election_provider_multi_phase {
@@ -16755,8 +16841,8 @@ pub mod api {
                     Eq,
                     PartialEq,
                 )]
-                pub enum Proposal {
-                    # [codec (index = 0)] Signed { kind : runtime_types :: webb_proposals :: proposal :: ProposalKind , data : :: std :: vec :: Vec < :: core :: primitive :: u8 > , signature : :: std :: vec :: Vec < :: core :: primitive :: u8 > , } , # [codec (index = 1)] Unsigned { kind : runtime_types :: webb_proposals :: proposal :: ProposalKind , data : :: std :: vec :: Vec < :: core :: primitive :: u8 > , } , }
+                pub enum Proposal<_0> {
+                    # [codec (index = 0)] Signed { kind : runtime_types :: webb_proposals :: proposal :: ProposalKind , data : runtime_types :: sp_core :: bounded :: bounded_vec :: BoundedVec < :: core :: primitive :: u8 > , signature : runtime_types :: sp_core :: bounded :: bounded_vec :: BoundedVec < :: core :: primitive :: u8 > , } , # [codec (index = 1)] Unsigned { kind : runtime_types :: webb_proposals :: proposal :: ProposalKind , data : runtime_types :: sp_core :: bounded :: bounded_vec :: BoundedVec < :: core :: primitive :: u8 > , } , __Ignore (:: core :: marker :: PhantomData < _0 >) , }
                 #[derive(
                     :: subxt :: ext :: codec :: Decode,
                     :: subxt :: ext :: codec :: Encode,
@@ -17021,10 +17107,10 @@ pub mod api {
         let runtime_metadata_hash = client.metadata().metadata_hash(&PALLETS);
         if runtime_metadata_hash
             != [
-                254u8, 104u8, 199u8, 208u8, 36u8, 17u8, 130u8, 13u8, 109u8,
-                62u8, 139u8, 217u8, 72u8, 116u8, 75u8, 133u8, 84u8, 46u8,
-                140u8, 126u8, 191u8, 10u8, 135u8, 210u8, 211u8, 24u8, 36u8,
-                37u8, 203u8, 87u8, 211u8, 190u8,
+                58u8, 114u8, 248u8, 133u8, 123u8, 22u8, 76u8, 180u8, 165u8,
+                147u8, 247u8, 228u8, 163u8, 153u8, 17u8, 226u8, 161u8, 63u8,
+                105u8, 250u8, 236u8, 159u8, 135u8, 135u8, 175u8, 54u8, 188u8,
+                104u8, 52u8, 230u8, 113u8, 19u8,
             ]
         {
             Err(::subxt::error::MetadataError::IncompatibleMetadata)
