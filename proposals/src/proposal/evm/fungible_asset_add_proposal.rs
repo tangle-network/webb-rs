@@ -1,10 +1,10 @@
-//! Token Add Proposal.
+//! Fungible Token Add Proposal.
 use crate::ProposalHeader;
 
 /// Fungible Asset Add Proposal.
 ///
-/// The [`FungibleAssetAddProposal`] allows the token specified by the `TokenAddress` to
-/// be wrapped into the WEBB token.
+/// The [`FungibleAssetAddProposal`] allows a new wrapped fungible token to be transacted into the
+/// masp pool
 ///
 /// The format of the proposal looks like:
 /// ```text
