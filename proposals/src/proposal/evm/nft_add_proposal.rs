@@ -69,18 +69,18 @@ impl WrappedNftAddProposal {
         self.asset_id
     }
 
-    /// Get the token name.
+    /// Get the nft collection address.
     #[must_use]
     pub const fn nft_collection_address(&self) -> [u8; 20] {
         self.nft_collection_address
     }
 
-    /// Get the token symbol.
+    /// Get the salt for proposal.
     #[must_use]
     pub const fn salt(&self) -> [u8; 32] {
         self.salt
     }
-    /// Get the token symbol.
+    /// Get the NFT URI address.
     #[must_use]
     pub const fn uri(&self) -> [u8; 64] {
         self.uri
