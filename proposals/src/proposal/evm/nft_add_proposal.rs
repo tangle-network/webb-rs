@@ -15,9 +15,10 @@ use crate::ProposalHeader;
 /// └────────────────────┴──────────────────┴────────────┴──────────────────────────┴──────────┴─────────┘
 /// ```
 #[allow(clippy::module_name_repetitions)]
-#[derive(
-    Debug, Copy, Clone, PartialEq, Eq, Hash, typed_builder::TypedBuilder,
-)]
+// #[derive(
+//     Debug, Copy, Clone, PartialEq, Eq, Hash, typed_builder::TypedBuilder,
+// )]
+#[derive(Debug, Copy, Clone, PartialEq, Eq, Hash)]
 pub struct WrappedNftAddProposal {
     header: ProposalHeader,
     token_handler: [u8; 20],
