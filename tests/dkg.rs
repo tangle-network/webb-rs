@@ -4,7 +4,7 @@ use webb::substrate::dkg_runtime::api::dkg_proposals;
 use webb::substrate::dkg_runtime::api::runtime_types::webb_proposals::header::{TypedChainId, ResourceId};
 use webb::substrate::dkg_runtime::api::runtime_types::webb_proposals::nonce::Nonce;
 use webb::substrate::dkg_runtime;
-
+use webb::substrate::dkg_runtime::api::runtime_types::sp_core::bounded::bounded_vec::BoundedVec;
 const URL: &str = "ws://localhost:9944";
 
 async fn get_runtime_api() -> anyhow::Result<subxt::OnlineClient<PolkadotConfig>>
@@ -52,7 +52,7 @@ async fn acknowledge_proposal_works() -> anyhow::Result<()> {
     let signer = PairSigner::new(eve.pair());
     let acknowlege_proposal_tx = dkg_runtime::api::tx()
         .dkg_proposals()
-        .acknowledge_proposal(nonce.clone(), src_id, r_id, prop);
+        .acknowledge_proposal(nonce.clone(), src_id, r_id, BoundedVec(prop));
     let result = client
         .tx()
         .sign_and_submit_then_watch_default(&acknowlege_proposal_tx, &signer)
