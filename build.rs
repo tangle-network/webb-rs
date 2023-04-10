@@ -42,6 +42,22 @@ mod evm {
         )
     }
 
+    pub fn build_protocol_solidity_masp() -> Result<(), Box<dyn Error>> {
+        parse_and_write_abigen(
+            "contracts/protocol-solidity/MultiAssetVAnchorBatchTree.json",
+            "src/evm/contract/protocol_solidity/masp.rs",
+            "MaspContract",
+        )
+    }
+
+    pub fn build_protocol_solidity_masp_proxy() -> Result<(), Box<dyn Error>> {
+        parse_and_write_abigen(
+            "contracts/protocol-solidity/MultiAssetVAnchorProxy.json",
+            "src/evm/contract/protocol_solidity/masp_proxy.rs",
+            "MaspProxyContract",
+        )
+    }
+
     pub fn build_protocol_solidity_open_vanchor() -> Result<(), Box<dyn Error>>
     {
         parse_and_write_abigen(
@@ -236,6 +252,8 @@ fn run_cargo_fmt() -> Result<(), Box<dyn Error>> {
 fn main() -> Result<(), Box<dyn Error>> {
     #[cfg(feature = "generate-contracts")]
     {
+        evm::build_protocol_solidity_masp()?;
+        evm::build_protocol_solidity_masp_proxy()?;
         evm::build_protocol_solidity_vanchor_base()?;
         evm::build_protocol_solidity_vanchor()?;
         evm::build_protocol_solidity_open_vanchor()?;
