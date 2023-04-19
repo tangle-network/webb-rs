@@ -25,6 +25,9 @@
 
 #[cfg(all(not(feature = "std"), feature = "substrate"))]
 use alloc::vec::Vec;
+use core::fmt::{Display, Formatter};
+use frame_support::sp_runtime::app_crypto::sp_core::bytes::to_hex;
+
 /// `TargetSystem` (26 Bytes)
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
 #[cfg_attr(
@@ -176,5 +179,26 @@ impl Default for TargetSystem {
             .tree_id(0)
             .build();
         TargetSystem::Substrate(target)
+    }
+}
+
+impl Display for TargetSystem {
+    fn fmt(&self, f: &mut Formatter<'_>) -> core::fmt::Result {
+        match self {
+            TargetSystem::ContractAddress(address) => {
+                write!(f, "{}", &to_hex(address, false))
+            }
+            TargetSystem::Substrate(system) => write!(f, "{}", system),
+        }
+    }
+}
+
+impl Display for SubstrateTargetSystem {
+    fn fmt(&self, f: &mut Formatter<'_>) -> core::fmt::Result {
+        write!(
+            f,
+            "pallet_index: {}, tree_id: {}",
+            self.pallet_index, self.tree_id
+        )
     }
 }

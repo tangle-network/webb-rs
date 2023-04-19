@@ -2,8 +2,8 @@
 
 use crate::nonce::Nonce;
 use crate::target_system::TargetSystem;
-use core::fmt::Debug;
 use core::fmt::Formatter;
+use core::fmt::{Debug, Display};
 
 #[cfg(feature = "std")]
 use serde::{Deserialize, Serialize};
@@ -517,6 +517,39 @@ fn format_bytes(bytes: &[u8], f: &mut Formatter<'_>) -> core::fmt::Result {
     res
 }
 
+impl Display for TypedChainId {
+    fn fmt(&self, f: &mut Formatter<'_>) -> core::fmt::Result {
+        match self {
+            TypedChainId::None => write!(f, "None"),
+            TypedChainId::Evm(id) => write!(f, "Evm({id})"),
+            TypedChainId::Substrate(id) => write!(f, "Substrate({id})"),
+            TypedChainId::PolkadotParachain(id) => {
+                write!(f, "PolkadotParachain({id})")
+            }
+            TypedChainId::KusamaParachain(id) => {
+                write!(f, "KusamaParachain({id})")
+            }
+            TypedChainId::RococoParachain(id) => {
+                write!(f, "RococoParachain({id})")
+            }
+            TypedChainId::Cosmos(id) => write!(f, "Cosmos({id})"),
+            TypedChainId::Solana(id) => write!(f, "Solana({id})"),
+            TypedChainId::Ink(id) => write!(f, "Ink({id})"),
+        }
+    }
+}
+
+impl Display for ResourceId {
+    fn fmt(&self, f: &mut Formatter<'_>) -> core::fmt::Result {
+        write!(
+            f,
+            "ResourceId({}, {})",
+            self.typed_chain_id(),
+            self.target_system()
+        )
+    }
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -632,6 +665,38 @@ mod tests {
         assert_eq!(
             make_config(v).typed_chain_id,
             TypedChainId::Substrate(1080)
+        );
+    }
+
+    #[test]
+    fn display_typed_chain_id() {
+        let display = format!("{}", TypedChainId::Evm(4));
+        assert_eq!("Evm(4)", display);
+    }
+
+    #[test]
+    fn display_evm_resource_id() {
+        let bytes = hex_literal::hex!(
+            "000000000000aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa010000000004"
+        );
+        let resource_id = ResourceId::from(bytes);
+        let display = format!("{resource_id}");
+        assert_eq!(
+            "ResourceId(Evm(4), 0xaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa)",
+            display
+        );
+    }
+
+    #[test]
+    fn display_substrate_resource_id() {
+        let bytes = hex_literal::hex!(
+            "0000000000000000000000000000000000000000000100000002020000000007"
+        );
+        let resource_id = ResourceId::from(bytes);
+        let display = format!("{}", resource_id);
+        assert_eq!(
+            "ResourceId(Substrate(7), pallet_index: 1, tree_id: 2)",
+            display
         );
     }
 }

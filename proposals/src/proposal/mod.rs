@@ -78,7 +78,8 @@ impl_proposal_for! {
     feature = "scale",
     derive(scale_info::TypeInfo, scale_codec::Encode, scale_codec::Decode,)
 )]
-// only derive `MaxEncodedLen` if both `scale` and `substrate` features are enabled
+// only derive `MaxEncodedLen` if both `scale` and `substrate` features are
+// enabled
 #[cfg_attr(
     all(feature = "scale", feature = "substrate"),
     derive(scale_codec::MaxEncodedLen)
