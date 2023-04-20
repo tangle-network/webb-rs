@@ -25,11 +25,11 @@
 
 #[cfg(all(not(feature = "std"), feature = "substrate"))]
 use alloc::vec::Vec;
-use core::fmt::{Display, Formatter};
+use core::fmt::{Debug, Formatter};
 use frame_support::sp_runtime::app_crypto::sp_core::bytes::to_hex;
 
 /// `TargetSystem` (26 Bytes)
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
+#[derive(Clone, Copy, PartialEq, Eq, Hash)]
 #[cfg_attr(
     feature = "scale",
     derive(
@@ -49,9 +49,7 @@ pub enum TargetSystem {
 }
 
 /// Substrate Target System
-#[derive(
-    Debug, Clone, Copy, PartialEq, Eq, Hash, typed_builder::TypedBuilder,
-)]
+#[derive(Clone, Copy, PartialEq, Eq, Hash, typed_builder::TypedBuilder)]
 #[cfg_attr(
     feature = "scale",
     derive(
@@ -182,18 +180,18 @@ impl Default for TargetSystem {
     }
 }
 
-impl Display for TargetSystem {
+impl Debug for TargetSystem {
     fn fmt(&self, f: &mut Formatter<'_>) -> core::fmt::Result {
         match self {
             TargetSystem::ContractAddress(address) => {
                 write!(f, "{}", &to_hex(address, false))
             }
-            TargetSystem::Substrate(system) => write!(f, "{}", system),
+            TargetSystem::Substrate(system) => write!(f, "{:?}", system),
         }
     }
 }
 
-impl Display for SubstrateTargetSystem {
+impl Debug for SubstrateTargetSystem {
     fn fmt(&self, f: &mut Formatter<'_>) -> core::fmt::Result {
         write!(
             f,
