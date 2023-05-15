@@ -180,25 +180,29 @@ mod substrate {
             pub mod api {}
         );
         // Default type substitutes.
-        let substs = TypeSubstitutes::new(&CratePath::default());
+        let substs =
+            TypeSubstitutes::with_default_substitutes(&CratePath::default());
         // Generate the Runtime API.
         let generator = subxt_codegen::RuntimeGenerator::new(metadata);
         let mut generated_type_derives =
-            subxt_codegen::DerivesRegistry::new(&CratePath::default());
+            subxt_codegen::DerivesRegistry::with_default_derives(
+                &CratePath::default(),
+            );
         generated_type_derives.extend_for_all(
             vec![
                 syn::parse_quote!(Eq),
                 syn::parse_quote!(PartialEq),
                 syn::parse_quote!(Clone),
-            ]
-            .into_iter(),
+            ],
+            vec![],
         );
         let runtime_api = generator.generate_runtime(
             item_mod,
             generated_type_derives,
             substs,
             CratePath::default(),
-        );
+            true,
+        )?;
         std::fs::write(out, runtime_api.to_string())?;
         Ok(())
     }
