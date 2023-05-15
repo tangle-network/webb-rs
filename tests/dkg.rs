@@ -2,12 +2,12 @@ use subxt::config::PolkadotConfig;
 use subxt::ext::sp_core::Pair;
 use subxt::tx:: PairSigner;
 use subxt::ext::sp_core::sr25519::Pair as Sr25519Pair;
-use webb::substrate::dkg_runtime::api::dkg_proposals;
-use webb::substrate::dkg_runtime::api::runtime_types::bounded_collections::bounded_vec::BoundedVec;
-use webb::substrate::dkg_runtime::api::runtime_types::webb_proposals::header::{TypedChainId, ResourceId};
-use webb::substrate::dkg_runtime::api::runtime_types::webb_proposals::nonce::Nonce;
-use webb::substrate::dkg_runtime;
-use webb::substrate::dkg_runtime::api::runtime_types::webb_proposals::proposal::{Proposal, ProposalKind};
+use webb::substrate::tangle_runtime::api::dkg_proposals;
+use webb::substrate::tangle_runtime::api::runtime_types::bounded_collections::bounded_vec::BoundedVec;
+use webb::substrate::tangle_runtime::api::runtime_types::webb_proposals::header::{TypedChainId, ResourceId};
+use webb::substrate::tangle_runtime::api::runtime_types::webb_proposals::nonce::Nonce;
+use webb::substrate::tangle_runtime;
+use webb::substrate::tangle_runtime::api::runtime_types::webb_proposals::proposal::{Proposal, ProposalKind};
 const URL: &str = "ws://localhost:9944";
 
 async fn get_runtime_api() -> anyhow::Result<subxt::OnlineClient<PolkadotConfig>>
@@ -21,7 +21,7 @@ async fn get_runtime_api() -> anyhow::Result<subxt::OnlineClient<PolkadotConfig>
 async fn read_chain_nonce() -> anyhow::Result<()> {
     let client = get_runtime_api().await.unwrap();
     let chain_id = TypedChainId::Evm(5001);
-    let nonce_addr = dkg_runtime::api::storage()
+    let nonce_addr = tangle_runtime::api::storage()
         .dkg_proposals()
         .chain_nonces(chain_id);
 
@@ -33,7 +33,7 @@ async fn read_chain_nonce() -> anyhow::Result<()> {
         .await?;
     assert_eq!(result, Some(Nonce(0)));
     let unkonwn_chain_id = TypedChainId::Evm(5000);
-    let nonce_addr = dkg_runtime::api::storage()
+    let nonce_addr = tangle_runtime::api::storage()
         .dkg_proposals()
         .chain_nonces(unkonwn_chain_id);
     let result = client
@@ -62,8 +62,9 @@ async fn acknowledge_proposal_works() -> anyhow::Result<()> {
     // let eve = sp_keyring::AccountKeyring::Eve;
     let signer: PairSigner<PolkadotConfig, Sr25519Pair> =
         PairSigner::new(Pair::from_string("//Eve", None).unwrap());
-    let acknowlege_proposal_tx =
-        dkg_runtime::api::tx().dkg_proposals().acknowledge_proposal(
+    let acknowlege_proposal_tx = tangle_runtime::api::tx()
+        .dkg_proposals()
+        .acknowledge_proposal(
             nonce.clone(),
             src_id,
             r_id,
