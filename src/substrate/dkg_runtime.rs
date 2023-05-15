@@ -501,69 +501,69 @@ pub mod api {
             let cursor = &mut &pallet_bytes[..];
             if pallet_name == "System" {
                 let variant_error = system::Error::decode_with_metadata(
-                    cursor, 103u32, metadata,
+                    cursor, 106u32, metadata,
                 )?;
                 return Ok(Error::System(variant_error));
             }
             if pallet_name == "Indices" {
                 let variant_error = indices::Error::decode_with_metadata(
-                    cursor, 108u32, metadata,
+                    cursor, 111u32, metadata,
                 )?;
                 return Ok(Error::Indices(variant_error));
             }
             if pallet_name == "Grandpa" {
                 let variant_error = grandpa::Error::decode_with_metadata(
-                    cursor, 132u32, metadata,
+                    cursor, 135u32, metadata,
                 )?;
                 return Ok(Error::Grandpa(variant_error));
             }
             if pallet_name == "Balances" {
                 let variant_error = balances::Error::decode_with_metadata(
-                    cursor, 141u32, metadata,
+                    cursor, 144u32, metadata,
                 )?;
                 return Ok(Error::Balances(variant_error));
             }
             if pallet_name == "DKG" {
                 let variant_error =
-                    dkg::Error::decode_with_metadata(cursor, 161u32, metadata)?;
+                    dkg::Error::decode_with_metadata(cursor, 164u32, metadata)?;
                 return Ok(Error::DKG(variant_error));
             }
             if pallet_name == "DKGProposals" {
                 let variant_error = dkg_proposals::Error::decode_with_metadata(
-                    cursor, 176u32, metadata,
+                    cursor, 181u32, metadata,
                 )?;
                 return Ok(Error::DKGProposals(variant_error));
             }
             if pallet_name == "DKGProposalHandler" {
                 let variant_error =
                     dkg_proposal_handler::Error::decode_with_metadata(
-                        cursor, 183u32, metadata,
+                        cursor, 186u32, metadata,
                     )?;
                 return Ok(Error::DKGProposalHandler(variant_error));
             }
             if pallet_name == "Sudo" {
                 let variant_error = sudo::Error::decode_with_metadata(
-                    cursor, 321u32, metadata,
+                    cursor, 325u32, metadata,
                 )?;
                 return Ok(Error::Sudo(variant_error));
             }
             if pallet_name == "ElectionProviderMultiPhase" {
                 let variant_error =
                     election_provider_multi_phase::Error::decode_with_metadata(
-                        cursor, 334u32, metadata,
+                        cursor, 336u32, metadata,
                     )?;
                 return Ok(Error::ElectionProviderMultiPhase(variant_error));
             }
             if pallet_name == "BagsList" {
                 let variant_error = bags_list::Error::decode_with_metadata(
-                    cursor, 338u32, metadata,
+                    cursor, 340u32, metadata,
                 )?;
                 return Ok(Error::BagsList(variant_error));
             }
             if pallet_name == "NominationPools" {
                 let variant_error =
                     nomination_pools::Error::decode_with_metadata(
-                        cursor, 356u32, metadata,
+                        cursor, 358u32, metadata,
                     )?;
                 return Ok(Error::NominationPools(variant_error));
             }
@@ -833,10 +833,10 @@ pub mod api {
         let runtime_metadata_hash = client.metadata().metadata_hash(&PALLETS);
         if runtime_metadata_hash
             != [
-                58u8, 114u8, 248u8, 133u8, 123u8, 22u8, 76u8, 180u8, 165u8,
-                147u8, 247u8, 228u8, 163u8, 153u8, 17u8, 226u8, 161u8, 63u8,
-                105u8, 250u8, 236u8, 159u8, 135u8, 135u8, 175u8, 54u8, 188u8,
-                104u8, 52u8, 230u8, 113u8, 19u8,
+                107u8, 94u8, 6u8, 38u8, 200u8, 105u8, 151u8, 128u8, 25u8,
+                222u8, 113u8, 57u8, 249u8, 10u8, 7u8, 79u8, 221u8, 214u8,
+                135u8, 36u8, 246u8, 57u8, 189u8, 221u8, 144u8, 203u8, 21u8,
+                215u8, 239u8, 113u8, 144u8, 213u8,
             ]
         {
             Err(::subxt::error::MetadataError::IncompatibleMetadata)
@@ -1060,9 +1060,8 @@ pub mod api {
             impl TransactionApi {
                 #[doc = "Make some on-chain remark."]
                 #[doc = ""]
-                #[doc = "# <weight>"]
+                #[doc = "## Complexity"]
                 #[doc = "- `O(1)`"]
-                #[doc = "# </weight>"]
                 pub fn remark(
                     &self,
                     remark: ::std::vec::Vec<::core::primitive::u8>,
@@ -1100,16 +1099,8 @@ pub mod api {
                 }
                 #[doc = "Set the new runtime code."]
                 #[doc = ""]
-                #[doc = "# <weight>"]
+                #[doc = "## Complexity"]
                 #[doc = "- `O(C + S)` where `C` length of `code` and `S` complexity of `can_set_code`"]
-                #[doc = "- 1 call to `can_set_code`: `O(S)` (calls `sp_io::misc::runtime_version` which is"]
-                #[doc = "  expensive)."]
-                #[doc = "- 1 storage write (codec `O(C)`)."]
-                #[doc = "- 1 digest item."]
-                #[doc = "- 1 event."]
-                #[doc = "The weight of this function is dependent on the runtime, but generally this is very"]
-                #[doc = "expensive. We will treat this as a full block."]
-                #[doc = "# </weight>"]
                 pub fn set_code(
                     &self,
                     code: ::std::vec::Vec<::core::primitive::u8>,
@@ -1129,13 +1120,8 @@ pub mod api {
                 }
                 #[doc = "Set the new runtime code without doing any checks of the given `code`."]
                 #[doc = ""]
-                #[doc = "# <weight>"]
+                #[doc = "## Complexity"]
                 #[doc = "- `O(C)` where `C` length of `code`"]
-                #[doc = "- 1 storage write (codec `O(C)`)."]
-                #[doc = "- 1 digest item."]
-                #[doc = "- 1 event."]
-                #[doc = "The weight of this function is dependent on the runtime. We will treat this as a full"]
-                #[doc = "block. # </weight>"]
                 pub fn set_code_without_checks(
                     &self,
                     code: ::std::vec::Vec<::core::primitive::u8>,
@@ -1659,11 +1645,11 @@ pub mod api {
                         "Events",
                         vec![],
                         [
-                            142u8, 250u8, 58u8, 93u8, 61u8, 91u8, 250u8, 24u8,
-                            109u8, 188u8, 251u8, 75u8, 230u8, 155u8, 129u8,
-                            169u8, 141u8, 70u8, 67u8, 204u8, 47u8, 139u8,
-                            211u8, 38u8, 119u8, 175u8, 172u8, 230u8, 156u8,
-                            214u8, 21u8, 185u8,
+                            179u8, 156u8, 178u8, 132u8, 168u8, 104u8, 192u8,
+                            121u8, 183u8, 200u8, 191u8, 184u8, 232u8, 165u8,
+                            82u8, 225u8, 206u8, 252u8, 0u8, 237u8, 6u8, 4u8,
+                            206u8, 251u8, 216u8, 254u8, 222u8, 148u8, 9u8,
+                            82u8, 105u8, 140u8,
                         ],
                     )
                 }
@@ -2120,14 +2106,8 @@ pub mod api {
                 #[doc = ""]
                 #[doc = "Emits `IndexAssigned` if successful."]
                 #[doc = ""]
-                #[doc = "# <weight>"]
+                #[doc = "## Complexity"]
                 #[doc = "- `O(1)`."]
-                #[doc = "- One storage mutation (codec `O(1)`)."]
-                #[doc = "- One reserve operation."]
-                #[doc = "- One event."]
-                #[doc = "-------------------"]
-                #[doc = "- DB Weight: 1 Read/Write (Accounts)"]
-                #[doc = "# </weight>"]
                 pub fn claim(
                     &self,
                     index: ::core::primitive::u32,
@@ -2155,16 +2135,8 @@ pub mod api {
                 #[doc = ""]
                 #[doc = "Emits `IndexAssigned` if successful."]
                 #[doc = ""]
-                #[doc = "# <weight>"]
+                #[doc = "## Complexity"]
                 #[doc = "- `O(1)`."]
-                #[doc = "- One storage mutation (codec `O(1)`)."]
-                #[doc = "- One transfer operation."]
-                #[doc = "- One event."]
-                #[doc = "-------------------"]
-                #[doc = "- DB Weight:"]
-                #[doc = "   - Reads: Indices Accounts, System Account (recipient)"]
-                #[doc = "   - Writes: Indices Accounts, System Account (recipient)"]
-                #[doc = "# </weight>"]
                 pub fn transfer(
                     &self,
                     new: ::subxt::utils::MultiAddress<
@@ -2196,14 +2168,8 @@ pub mod api {
                 #[doc = ""]
                 #[doc = "Emits `IndexFreed` if successful."]
                 #[doc = ""]
-                #[doc = "# <weight>"]
+                #[doc = "## Complexity"]
                 #[doc = "- `O(1)`."]
-                #[doc = "- One storage mutation (codec `O(1)`)."]
-                #[doc = "- One reserve operation."]
-                #[doc = "- One event."]
-                #[doc = "-------------------"]
-                #[doc = "- DB Weight: 1 Read/Write (Accounts)"]
-                #[doc = "# </weight>"]
                 pub fn free(
                     &self,
                     index: ::core::primitive::u32,
@@ -2232,16 +2198,8 @@ pub mod api {
                 #[doc = ""]
                 #[doc = "Emits `IndexAssigned` if successful."]
                 #[doc = ""]
-                #[doc = "# <weight>"]
+                #[doc = "## Complexity"]
                 #[doc = "- `O(1)`."]
-                #[doc = "- One storage mutation (codec `O(1)`)."]
-                #[doc = "- Up to one reserve operation."]
-                #[doc = "- One event."]
-                #[doc = "-------------------"]
-                #[doc = "- DB Weight:"]
-                #[doc = "   - Reads: Indices Accounts, System Account (original owner)"]
-                #[doc = "   - Writes: Indices Accounts, System Account (original owner)"]
-                #[doc = "# </weight>"]
                 pub fn force_transfer(
                     &self,
                     new: ::subxt::utils::MultiAddress<
@@ -2275,14 +2233,8 @@ pub mod api {
                 #[doc = ""]
                 #[doc = "Emits `IndexFrozen` if successful."]
                 #[doc = ""]
-                #[doc = "# <weight>"]
+                #[doc = "## Complexity"]
                 #[doc = "- `O(1)`."]
-                #[doc = "- One storage mutation (codec `O(1)`)."]
-                #[doc = "- Up to one slash operation."]
-                #[doc = "- One event."]
-                #[doc = "-------------------"]
-                #[doc = "- DB Weight: 1 Read/Write (Accounts)"]
-                #[doc = "# </weight>"]
                 pub fn freeze(
                     &self,
                     index: ::core::primitive::u32,
@@ -2461,7 +2413,7 @@ pub mod api {
                     &self,
                 ) -> ::subxt::storage::address::Address<
                     ::subxt::storage::address::StaticStorageMapKey,
-                    runtime_types::sp_core::bounded::bounded_vec::BoundedVec<
+                    runtime_types::bounded_collections::bounded_vec::BoundedVec<
                         ::subxt::utils::H256,
                     >,
                     ::subxt::storage::address::Yes,
@@ -2533,12 +2485,11 @@ pub mod api {
                 #[doc = ""]
                 #[doc = "The dispatch origin for this call must be `Inherent`."]
                 #[doc = ""]
-                #[doc = "# <weight>"]
+                #[doc = "## Complexity"]
                 #[doc = "- `O(1)` (Note that implementations of `OnTimestampSet` must also be `O(1)`)"]
                 #[doc = "- 1 storage read and 1 storage mutation (codec `O(1)`). (because of `DidUpdate::take` in"]
                 #[doc = "  `on_finalize`)"]
                 #[doc = "- 1 event handler `on_timestamp_set`. Must be `O(1)`."]
-                #[doc = "# </weight>"]
                 pub fn set(
                     &self,
                     now: ::core::primitive::u64,
@@ -2643,7 +2594,7 @@ pub mod api {
             use super::runtime_types;
             pub struct StorageApi;
             impl StorageApi {
-                #[doc = " The current authority set."]                pub fn authorities (& self ,) -> :: subxt :: storage :: address :: Address :: < :: subxt :: storage :: address :: StaticStorageMapKey , runtime_types :: sp_core :: bounded :: bounded_vec :: BoundedVec < runtime_types :: sp_consensus_aura :: sr25519 :: app_sr25519 :: Public > , :: subxt :: storage :: address :: Yes , :: subxt :: storage :: address :: Yes , () >{
+                #[doc = " The current authority set."]                pub fn authorities (& self ,) -> :: subxt :: storage :: address :: Address :: < :: subxt :: storage :: address :: StaticStorageMapKey , runtime_types :: bounded_collections :: bounded_vec :: BoundedVec < runtime_types :: sp_consensus_aura :: sr25519 :: app_sr25519 :: Public > , :: subxt :: storage :: address :: Yes , :: subxt :: storage :: address :: Yes , () >{
                     ::subxt::storage::address::Address::new_static(
                         "Aura",
                         "Authorities",
@@ -3074,6 +3025,12 @@ pub mod api {
                 #[doc = " A mapping from grandpa set ID to the index of the *most recent* session for which its"]
                 #[doc = " members were responsible."]
                 #[doc = ""]
+                #[doc = " This is only used for validating equivocation proofs. An equivocation proof must"]
+                #[doc = " contains a key-ownership proof for a given session, therefore we need a way to tie"]
+                #[doc = " together sessions and GRANDPA set ids, i.e. we need to validate that a validator"]
+                #[doc = " was the owner of a given key on a given session, and what the active set ID was"]
+                #[doc = " during that session."]
+                #[doc = ""]
                 #[doc = " TWOX-NOTE: `SetId` is not under user control."]
                 pub fn set_id_session(
                     &self,
@@ -3089,6 +3046,12 @@ pub mod api {
                 }
                 #[doc = " A mapping from grandpa set ID to the index of the *most recent* session for which its"]
                 #[doc = " members were responsible."]
+                #[doc = ""]
+                #[doc = " This is only used for validating equivocation proofs. An equivocation proof must"]
+                #[doc = " contains a key-ownership proof for a given session, therefore we need a way to tie"]
+                #[doc = " together sessions and GRANDPA set ids, i.e. we need to validate that a validator"]
+                #[doc = " was the owner of a given key on a given session, and what the active set ID was"]
+                #[doc = " during that session."]
                 #[doc = ""]
                 #[doc = " TWOX-NOTE: `SetId` is not under user control."]
                 pub fn set_id_session_root(
@@ -3133,6 +3096,28 @@ pub mod api {
                             26u8, 10u8, 9u8, 98u8, 68u8, 9u8, 178u8, 197u8,
                             113u8, 31u8, 79u8, 200u8, 90u8, 203u8, 100u8, 41u8,
                             145u8,
+                        ],
+                    )
+                }
+                #[doc = " The maximum number of entries to keep in the set id to session index mapping."]
+                #[doc = ""]
+                #[doc = " Since the `SetIdSession` map is only used for validating equivocations this"]
+                #[doc = " value should relate to the bonding duration of whatever staking system is"]
+                #[doc = " being used (if any). If equivocation handling is not enabled then this value"]
+                #[doc = " can be zero."]
+                pub fn max_set_id_session_entries(
+                    &self,
+                ) -> ::subxt::constants::Address<::core::primitive::u64>
+                {
+                    ::subxt::constants::Address::new_static(
+                        "Grandpa",
+                        "MaxSetIdSessionEntries",
+                        [
+                            128u8, 214u8, 205u8, 242u8, 181u8, 142u8, 124u8,
+                            231u8, 190u8, 146u8, 59u8, 226u8, 157u8, 101u8,
+                            103u8, 117u8, 249u8, 65u8, 18u8, 191u8, 103u8,
+                            119u8, 53u8, 85u8, 81u8, 96u8, 220u8, 42u8, 184u8,
+                            239u8, 42u8, 246u8,
                         ],
                     )
                 }
@@ -3341,7 +3326,7 @@ pub mod api {
                 #[doc = ""]
                 #[doc = "The dispatch origin for this call must be `Signed` by the transactor."]
                 #[doc = ""]
-                #[doc = "# <weight>"]
+                #[doc = "## Complexity"]
                 #[doc = "- Dependent on arguments but not critical, given proper implementations for input config"]
                 #[doc = "  types. See related functions below."]
                 #[doc = "- It contains a limited number of reads and writes internally and no complex"]
@@ -3355,9 +3340,6 @@ pub mod api {
                 #[doc = "  - Removing enough funds from an account will trigger `T::DustRemoval::on_unbalanced`."]
                 #[doc = "  - `transfer_keep_alive` works the same way as `transfer`, but has an additional check"]
                 #[doc = "    that the transfer will not kill the origin account."]
-                #[doc = "---------------------------------"]
-                #[doc = "- Origin account is already in memory, so no DB operations for them."]
-                #[doc = "# </weight>"]
                 pub fn transfer(
                     &self,
                     dest: ::subxt::utils::MultiAddress<
@@ -3415,10 +3397,9 @@ pub mod api {
                 }
                 #[doc = "Exactly as `transfer`, except the origin must be root and the source account may be"]
                 #[doc = "specified."]
-                #[doc = "# <weight>"]
+                #[doc = "## Complexity"]
                 #[doc = "- Same as transfer, but additional read and write because the source account is not"]
                 #[doc = "  assumed to be in the overlay."]
-                #[doc = "# </weight>"]
                 pub fn force_transfer(
                     &self,
                     source: ::subxt::utils::MultiAddress<
@@ -3491,9 +3472,8 @@ pub mod api {
                 #[doc = "- `keep_alive`: A boolean to determine if the `transfer_all` operation should send all"]
                 #[doc = "  of the funds the account has, causing the sender account to be killed (false), or"]
                 #[doc = "  transfer everything except at least the existential deposit, which will guarantee to"]
-                #[doc = "  keep the sender account alive (true). # <weight>"]
+                #[doc = "  keep the sender account alive (true). ## Complexity"]
                 #[doc = "- O(1). Just like transfer, but reading the user's transferable balance first."]
-                #[doc = "  #</weight>"]
                 pub fn transfer_all(
                     &self,
                     dest: ::subxt::utils::MultiAddress<
@@ -3905,11 +3885,11 @@ pub mod api {
                     )
                 }
                 #[doc = " Any liquidity locks on some account balances."]
-                #[doc = " NOTE: Should only be accessed when setting, changing and freeing a lock."]                pub fn locks (& self , _0 : impl :: std :: borrow :: Borrow < :: subxt :: utils :: AccountId32 > ,) -> :: subxt :: storage :: address :: Address :: < :: subxt :: storage :: address :: StaticStorageMapKey , runtime_types :: sp_core :: bounded :: weak_bounded_vec :: WeakBoundedVec < runtime_types :: pallet_balances :: BalanceLock < :: core :: primitive :: u128 > > , :: subxt :: storage :: address :: Yes , :: subxt :: storage :: address :: Yes , :: subxt :: storage :: address :: Yes >{
+                #[doc = " NOTE: Should only be accessed when setting, changing and freeing a lock."]                pub fn locks (& self , _0 : impl :: std :: borrow :: Borrow < :: subxt :: utils :: AccountId32 > ,) -> :: subxt :: storage :: address :: Address :: < :: subxt :: storage :: address :: StaticStorageMapKey , runtime_types :: bounded_collections :: weak_bounded_vec :: WeakBoundedVec < runtime_types :: pallet_balances :: BalanceLock < :: core :: primitive :: u128 > > , :: subxt :: storage :: address :: Yes , :: subxt :: storage :: address :: Yes , :: subxt :: storage :: address :: Yes >{
                     :: subxt :: storage :: address :: Address :: new_static ("Balances" , "Locks" , vec ! [:: subxt :: storage :: address :: make_static_storage_map_key (_0 . borrow ())] , [216u8 , 253u8 , 87u8 , 73u8 , 24u8 , 218u8 , 35u8 , 0u8 , 244u8 , 134u8 , 195u8 , 58u8 , 255u8 , 64u8 , 153u8 , 212u8 , 210u8 , 232u8 , 4u8 , 122u8 , 90u8 , 212u8 , 136u8 , 14u8 , 127u8 , 232u8 , 8u8 , 192u8 , 40u8 , 233u8 , 18u8 , 250u8 ,])
                 }
                 #[doc = " Any liquidity locks on some account balances."]
-                #[doc = " NOTE: Should only be accessed when setting, changing and freeing a lock."]                pub fn locks_root (& self ,) -> :: subxt :: storage :: address :: Address :: < :: subxt :: storage :: address :: StaticStorageMapKey , runtime_types :: sp_core :: bounded :: weak_bounded_vec :: WeakBoundedVec < runtime_types :: pallet_balances :: BalanceLock < :: core :: primitive :: u128 > > , () , :: subxt :: storage :: address :: Yes , :: subxt :: storage :: address :: Yes >{
+                #[doc = " NOTE: Should only be accessed when setting, changing and freeing a lock."]                pub fn locks_root (& self ,) -> :: subxt :: storage :: address :: Address :: < :: subxt :: storage :: address :: StaticStorageMapKey , runtime_types :: bounded_collections :: weak_bounded_vec :: WeakBoundedVec < runtime_types :: pallet_balances :: BalanceLock < :: core :: primitive :: u128 > > , () , :: subxt :: storage :: address :: Yes , :: subxt :: storage :: address :: Yes >{
                     ::subxt::storage::address::Address::new_static(
                         "Balances",
                         "Locks",
@@ -3929,7 +3909,7 @@ pub mod api {
                     _0: impl ::std::borrow::Borrow<::subxt::utils::AccountId32>,
                 ) -> ::subxt::storage::address::Address<
                     ::subxt::storage::address::StaticStorageMapKey,
-                    runtime_types::sp_core::bounded::bounded_vec::BoundedVec<
+                    runtime_types::bounded_collections::bounded_vec::BoundedVec<
                         runtime_types::pallet_balances::ReserveData<
                             [::core::primitive::u8; 8usize],
                             ::core::primitive::u128,
@@ -3946,7 +3926,7 @@ pub mod api {
                     &self,
                 ) -> ::subxt::storage::address::Address<
                     ::subxt::storage::address::StaticStorageMapKey,
-                    runtime_types::sp_core::bounded::bounded_vec::BoundedVec<
+                    runtime_types::bounded_collections::bounded_vec::BoundedVec<
                         runtime_types::pallet_balances::ReserveData<
                             [::core::primitive::u8; 8usize],
                             ::core::primitive::u128,
@@ -4977,7 +4957,7 @@ pub mod api {
             use super::runtime_types;
             pub struct StorageApi;
             impl StorageApi {
-                #[doc = " Public key Signatures for past sessions"]                pub fn used_signatures (& self ,) -> :: subxt :: storage :: address :: Address :: < :: subxt :: storage :: address :: StaticStorageMapKey , runtime_types :: sp_core :: bounded :: bounded_vec :: BoundedVec < runtime_types :: sp_core :: bounded :: bounded_vec :: BoundedVec < :: core :: primitive :: u8 > > , :: subxt :: storage :: address :: Yes , :: subxt :: storage :: address :: Yes , () >{
+                #[doc = " Public key Signatures for past sessions"]                pub fn used_signatures (& self ,) -> :: subxt :: storage :: address :: Address :: < :: subxt :: storage :: address :: StaticStorageMapKey , runtime_types :: bounded_collections :: bounded_vec :: BoundedVec < runtime_types :: bounded_collections :: bounded_vec :: BoundedVec < :: core :: primitive :: u8 > > , :: subxt :: storage :: address :: Yes , :: subxt :: storage :: address :: Yes , () >{
                     ::subxt::storage::address::Address::new_static(
                         "DKG",
                         "UsedSignatures",
@@ -5110,7 +5090,7 @@ pub mod api {
                         ],
                     )
                 }
-                #[doc = " Holds public key for next session"]                pub fn next_dkg_public_key (& self ,) -> :: subxt :: storage :: address :: Address :: < :: subxt :: storage :: address :: StaticStorageMapKey , (:: core :: primitive :: u64 , runtime_types :: sp_core :: bounded :: bounded_vec :: BoundedVec < :: core :: primitive :: u8 > ,) , :: subxt :: storage :: address :: Yes , () , () >{
+                #[doc = " Holds public key for next session"]                pub fn next_dkg_public_key (& self ,) -> :: subxt :: storage :: address :: Address :: < :: subxt :: storage :: address :: StaticStorageMapKey , (:: core :: primitive :: u64 , runtime_types :: bounded_collections :: bounded_vec :: BoundedVec < :: core :: primitive :: u8 > ,) , :: subxt :: storage :: address :: Yes , () , () >{
                     ::subxt::storage::address::Address::new_static(
                         "DKG",
                         "NextDKGPublicKey",
@@ -5129,7 +5109,7 @@ pub mod api {
                     &self,
                 ) -> ::subxt::storage::address::Address<
                     ::subxt::storage::address::StaticStorageMapKey,
-                    runtime_types::sp_core::bounded::bounded_vec::BoundedVec<
+                    runtime_types::bounded_collections::bounded_vec::BoundedVec<
                         ::core::primitive::u8,
                     >,
                     ::subxt::storage::address::Yes,
@@ -5149,7 +5129,7 @@ pub mod api {
                         ],
                     )
                 }
-                #[doc = " Holds active public key for ongoing session"]                pub fn dkg_public_key (& self ,) -> :: subxt :: storage :: address :: Address :: < :: subxt :: storage :: address :: StaticStorageMapKey , (:: core :: primitive :: u64 , runtime_types :: sp_core :: bounded :: bounded_vec :: BoundedVec < :: core :: primitive :: u8 > ,) , :: subxt :: storage :: address :: Yes , :: subxt :: storage :: address :: Yes , () >{
+                #[doc = " Holds active public key for ongoing session"]                pub fn dkg_public_key (& self ,) -> :: subxt :: storage :: address :: Address :: < :: subxt :: storage :: address :: StaticStorageMapKey , (:: core :: primitive :: u64 , runtime_types :: bounded_collections :: bounded_vec :: BoundedVec < :: core :: primitive :: u8 > ,) , :: subxt :: storage :: address :: Yes , :: subxt :: storage :: address :: Yes , () >{
                     ::subxt::storage::address::Address::new_static(
                         "DKG",
                         "DKGPublicKey",
@@ -5168,7 +5148,7 @@ pub mod api {
                     &self,
                 ) -> ::subxt::storage::address::Address<
                     ::subxt::storage::address::StaticStorageMapKey,
-                    runtime_types::sp_core::bounded::bounded_vec::BoundedVec<
+                    runtime_types::bounded_collections::bounded_vec::BoundedVec<
                         ::core::primitive::u8,
                     >,
                     ::subxt::storage::address::Yes,
@@ -5188,7 +5168,7 @@ pub mod api {
                         ],
                     )
                 }
-                #[doc = " Holds public key for immediate past session"]                pub fn previous_public_key (& self ,) -> :: subxt :: storage :: address :: Address :: < :: subxt :: storage :: address :: StaticStorageMapKey , (:: core :: primitive :: u64 , runtime_types :: sp_core :: bounded :: bounded_vec :: BoundedVec < :: core :: primitive :: u8 > ,) , :: subxt :: storage :: address :: Yes , :: subxt :: storage :: address :: Yes , () >{
+                #[doc = " Holds public key for immediate past session"]                pub fn previous_public_key (& self ,) -> :: subxt :: storage :: address :: Address :: < :: subxt :: storage :: address :: StaticStorageMapKey , (:: core :: primitive :: u64 , runtime_types :: bounded_collections :: bounded_vec :: BoundedVec < :: core :: primitive :: u8 > ,) , :: subxt :: storage :: address :: Yes , :: subxt :: storage :: address :: Yes , () >{
                     ::subxt::storage::address::Address::new_static(
                         "DKG",
                         "PreviousPublicKey",
@@ -5386,7 +5366,7 @@ pub mod api {
                     &self,
                 ) -> ::subxt::storage::address::Address<
                     ::subxt::storage::address::StaticStorageMapKey,
-                    runtime_types::sp_core::bounded::bounded_vec::BoundedVec<
+                    runtime_types::bounded_collections::bounded_vec::BoundedVec<
                         runtime_types::dkg_runtime_primitives::crypto::Public,
                     >,
                     ::subxt::storage::address::Yes,
@@ -5457,7 +5437,7 @@ pub mod api {
                     &self,
                 ) -> ::subxt::storage::address::Address<
                     ::subxt::storage::address::StaticStorageMapKey,
-                    runtime_types::sp_core::bounded::bounded_vec::BoundedVec<
+                    runtime_types::bounded_collections::bounded_vec::BoundedVec<
                         runtime_types::dkg_runtime_primitives::crypto::Public,
                     >,
                     ::subxt::storage::address::Yes,
@@ -5482,7 +5462,7 @@ pub mod api {
                     &self,
                 ) -> ::subxt::storage::address::Address<
                     ::subxt::storage::address::StaticStorageMapKey,
-                    runtime_types::sp_core::bounded::bounded_vec::BoundedVec<
+                    runtime_types::bounded_collections::bounded_vec::BoundedVec<
                         ::subxt::utils::AccountId32,
                     >,
                     ::subxt::storage::address::Yes,
@@ -5507,7 +5487,7 @@ pub mod api {
                     &self,
                 ) -> ::subxt::storage::address::Address<
                     ::subxt::storage::address::StaticStorageMapKey,
-                    runtime_types::sp_core::bounded::bounded_vec::BoundedVec<
+                    runtime_types::bounded_collections::bounded_vec::BoundedVec<
                         ::subxt::utils::AccountId32,
                     >,
                     ::subxt::storage::address::Yes,
@@ -5697,19 +5677,7 @@ pub mod api {
                         ],
                     )
                 }
-                #[doc = " The current best authorities of the active keygen set"]
-                pub fn best_authorities(
-                    &self,
-                ) -> ::subxt::storage::address::Address<
-                    ::subxt::storage::address::StaticStorageMapKey,
-                    runtime_types::sp_core::bounded::bounded_vec::BoundedVec<(
-                        ::core::primitive::u16,
-                        runtime_types::dkg_runtime_primitives::crypto::Public,
-                    )>,
-                    ::subxt::storage::address::Yes,
-                    ::subxt::storage::address::Yes,
-                    (),
-                > {
+                #[doc = " The current best authorities of the active keygen set"]                pub fn best_authorities (& self ,) -> :: subxt :: storage :: address :: Address :: < :: subxt :: storage :: address :: StaticStorageMapKey , runtime_types :: bounded_collections :: bounded_vec :: BoundedVec < (:: core :: primitive :: u16 , runtime_types :: dkg_runtime_primitives :: crypto :: Public ,) > , :: subxt :: storage :: address :: Yes , :: subxt :: storage :: address :: Yes , () >{
                     ::subxt::storage::address::Address::new_static(
                         "DKG",
                         "BestAuthorities",
@@ -5723,19 +5691,7 @@ pub mod api {
                         ],
                     )
                 }
-                #[doc = " The next best authorities of the active keygen set"]
-                pub fn next_best_authorities(
-                    &self,
-                ) -> ::subxt::storage::address::Address<
-                    ::subxt::storage::address::StaticStorageMapKey,
-                    runtime_types::sp_core::bounded::bounded_vec::BoundedVec<(
-                        ::core::primitive::u16,
-                        runtime_types::dkg_runtime_primitives::crypto::Public,
-                    )>,
-                    ::subxt::storage::address::Yes,
-                    ::subxt::storage::address::Yes,
-                    (),
-                > {
+                #[doc = " The next best authorities of the active keygen set"]                pub fn next_best_authorities (& self ,) -> :: subxt :: storage :: address :: Address :: < :: subxt :: storage :: address :: StaticStorageMapKey , runtime_types :: bounded_collections :: bounded_vec :: BoundedVec < (:: core :: primitive :: u16 , runtime_types :: dkg_runtime_primitives :: crypto :: Public ,) > , :: subxt :: storage :: address :: Yes , :: subxt :: storage :: address :: Yes , () >{
                     ::subxt::storage::address::Address::new_static(
                         "DKG",
                         "NextBestAuthorities",
@@ -6103,7 +6059,15 @@ pub mod api {
                 #[encode_as_type(
                     crate_path = ":: subxt :: ext :: scale_encode"
                 )]
-                pub struct AcknowledgeProposal { pub nonce : runtime_types :: webb_proposals :: nonce :: Nonce , pub src_chain_id : runtime_types :: webb_proposals :: header :: TypedChainId , pub r_id : runtime_types :: webb_proposals :: header :: ResourceId , pub prop : runtime_types :: sp_core :: bounded :: bounded_vec :: BoundedVec < :: core :: primitive :: u8 > , }
+                pub struct AcknowledgeProposal {
+                    pub nonce: runtime_types::webb_proposals::nonce::Nonce,
+                    pub src_chain_id:
+                        runtime_types::webb_proposals::header::TypedChainId,
+                    pub r_id: runtime_types::webb_proposals::header::ResourceId,
+                    pub prop: runtime_types::webb_proposals::proposal::Proposal<
+                        runtime_types::dkg_runtime_primitives::CustomU32Getter,
+                    >,
+                }
                 impl ::subxt::blocks::StaticExtrinsic for AcknowledgeProposal {
                     const PALLET: &'static str = "DKGProposals";
                     const CALL: &'static str = "acknowledge_proposal";
@@ -6125,7 +6089,15 @@ pub mod api {
                 #[encode_as_type(
                     crate_path = ":: subxt :: ext :: scale_encode"
                 )]
-                pub struct RejectProposal { pub nonce : runtime_types :: webb_proposals :: nonce :: Nonce , pub src_chain_id : runtime_types :: webb_proposals :: header :: TypedChainId , pub r_id : runtime_types :: webb_proposals :: header :: ResourceId , pub prop : runtime_types :: sp_core :: bounded :: bounded_vec :: BoundedVec < :: core :: primitive :: u8 > , }
+                pub struct RejectProposal {
+                    pub nonce: runtime_types::webb_proposals::nonce::Nonce,
+                    pub src_chain_id:
+                        runtime_types::webb_proposals::header::TypedChainId,
+                    pub r_id: runtime_types::webb_proposals::header::ResourceId,
+                    pub prop: runtime_types::webb_proposals::proposal::Proposal<
+                        runtime_types::dkg_runtime_primitives::CustomU32Getter,
+                    >,
+                }
                 impl ::subxt::blocks::StaticExtrinsic for RejectProposal {
                     const PALLET: &'static str = "DKGProposals";
                     const CALL: &'static str = "reject_proposal";
@@ -6147,7 +6119,14 @@ pub mod api {
                 #[encode_as_type(
                     crate_path = ":: subxt :: ext :: scale_encode"
                 )]
-                pub struct EvalVoteState { pub nonce : runtime_types :: webb_proposals :: nonce :: Nonce , pub src_chain_id : runtime_types :: webb_proposals :: header :: TypedChainId , pub prop : runtime_types :: sp_core :: bounded :: bounded_vec :: BoundedVec < :: core :: primitive :: u8 > , }
+                pub struct EvalVoteState {
+                    pub nonce: runtime_types::webb_proposals::nonce::Nonce,
+                    pub src_chain_id:
+                        runtime_types::webb_proposals::header::TypedChainId,
+                    pub prop: runtime_types::webb_proposals::proposal::Proposal<
+                        runtime_types::dkg_runtime_primitives::CustomU32Getter,
+                    >,
+                }
                 impl ::subxt::blocks::StaticExtrinsic for EvalVoteState {
                     const PALLET: &'static str = "DKGProposals";
                     const CALL: &'static str = "eval_vote_state";
@@ -6315,7 +6294,9 @@ pub mod api {
                     nonce: runtime_types::webb_proposals::nonce::Nonce,
                     src_chain_id : runtime_types :: webb_proposals :: header :: TypedChainId,
                     r_id: runtime_types::webb_proposals::header::ResourceId,
-                    prop : runtime_types :: sp_core :: bounded :: bounded_vec :: BoundedVec < :: core :: primitive :: u8 >,
+                    prop: runtime_types::webb_proposals::proposal::Proposal<
+                        runtime_types::dkg_runtime_primitives::CustomU32Getter,
+                    >,
                 ) -> ::subxt::tx::Payload<types::AcknowledgeProposal>
                 {
                     ::subxt::tx::Payload::new_static(
@@ -6328,11 +6309,11 @@ pub mod api {
                             prop,
                         },
                         [
-                            31u8, 67u8, 110u8, 145u8, 53u8, 100u8, 247u8, 82u8,
-                            251u8, 74u8, 218u8, 218u8, 114u8, 49u8, 142u8,
-                            28u8, 45u8, 206u8, 225u8, 148u8, 179u8, 20u8, 78u8,
-                            100u8, 101u8, 30u8, 25u8, 22u8, 193u8, 136u8, 55u8,
-                            252u8,
+                            144u8, 178u8, 224u8, 126u8, 92u8, 178u8, 113u8,
+                            91u8, 41u8, 61u8, 192u8, 103u8, 105u8, 37u8, 23u8,
+                            66u8, 122u8, 248u8, 92u8, 7u8, 251u8, 212u8, 99u8,
+                            254u8, 65u8, 117u8, 126u8, 225u8, 131u8, 116u8,
+                            187u8, 212u8,
                         ],
                     )
                 }
@@ -6346,7 +6327,9 @@ pub mod api {
                     nonce: runtime_types::webb_proposals::nonce::Nonce,
                     src_chain_id : runtime_types :: webb_proposals :: header :: TypedChainId,
                     r_id: runtime_types::webb_proposals::header::ResourceId,
-                    prop : runtime_types :: sp_core :: bounded :: bounded_vec :: BoundedVec < :: core :: primitive :: u8 >,
+                    prop: runtime_types::webb_proposals::proposal::Proposal<
+                        runtime_types::dkg_runtime_primitives::CustomU32Getter,
+                    >,
                 ) -> ::subxt::tx::Payload<types::RejectProposal>
                 {
                     ::subxt::tx::Payload::new_static(
@@ -6359,10 +6342,11 @@ pub mod api {
                             prop,
                         },
                         [
-                            158u8, 156u8, 103u8, 19u8, 240u8, 48u8, 75u8, 64u8,
-                            66u8, 132u8, 161u8, 201u8, 1u8, 181u8, 33u8, 66u8,
-                            186u8, 204u8, 192u8, 195u8, 89u8, 14u8, 84u8, 63u8,
-                            8u8, 143u8, 173u8, 40u8, 35u8, 177u8, 154u8, 119u8,
+                            86u8, 225u8, 153u8, 170u8, 61u8, 160u8, 19u8, 23u8,
+                            224u8, 202u8, 159u8, 226u8, 178u8, 49u8, 91u8,
+                            251u8, 220u8, 131u8, 149u8, 175u8, 146u8, 28u8,
+                            67u8, 188u8, 156u8, 246u8, 255u8, 58u8, 181u8, 2u8,
+                            127u8, 255u8,
                         ],
                     )
                 }
@@ -6378,7 +6362,9 @@ pub mod api {
                     &self,
                     nonce: runtime_types::webb_proposals::nonce::Nonce,
                     src_chain_id : runtime_types :: webb_proposals :: header :: TypedChainId,
-                    prop : runtime_types :: sp_core :: bounded :: bounded_vec :: BoundedVec < :: core :: primitive :: u8 >,
+                    prop: runtime_types::webb_proposals::proposal::Proposal<
+                        runtime_types::dkg_runtime_primitives::CustomU32Getter,
+                    >,
                 ) -> ::subxt::tx::Payload<types::EvalVoteState>
                 {
                     ::subxt::tx::Payload::new_static(
@@ -6390,11 +6376,11 @@ pub mod api {
                             prop,
                         },
                         [
-                            36u8, 156u8, 102u8, 200u8, 249u8, 134u8, 246u8,
-                            192u8, 136u8, 39u8, 236u8, 150u8, 144u8, 115u8,
-                            123u8, 242u8, 11u8, 209u8, 99u8, 95u8, 113u8,
-                            151u8, 76u8, 200u8, 60u8, 237u8, 215u8, 96u8, 31u8,
-                            72u8, 140u8, 70u8,
+                            216u8, 162u8, 146u8, 194u8, 180u8, 203u8, 200u8,
+                            87u8, 101u8, 48u8, 152u8, 60u8, 208u8, 57u8, 114u8,
+                            147u8, 210u8, 247u8, 95u8, 217u8, 209u8, 73u8,
+                            54u8, 202u8, 29u8, 82u8, 255u8, 125u8, 188u8,
+                            130u8, 34u8, 77u8,
                         ],
                     )
                 }
@@ -6505,6 +6491,7 @@ pub mod api {
             #[encode_as_type(crate_path = ":: subxt :: ext :: scale_encode")]
             #[doc = "Vote submitted in favour of proposal"]
             pub struct VoteFor {
+                pub kind: runtime_types::webb_proposals::proposal::ProposalKind,
                 pub chain_id:
                     runtime_types::webb_proposals::header::TypedChainId,
                 pub proposal_nonce: runtime_types::webb_proposals::nonce::Nonce,
@@ -6529,6 +6516,7 @@ pub mod api {
             #[encode_as_type(crate_path = ":: subxt :: ext :: scale_encode")]
             #[doc = "Vot submitted against proposal"]
             pub struct VoteAgainst {
+                pub kind: runtime_types::webb_proposals::proposal::ProposalKind,
                 pub chain_id:
                     runtime_types::webb_proposals::header::TypedChainId,
                 pub proposal_nonce: runtime_types::webb_proposals::nonce::Nonce,
@@ -6553,6 +6541,7 @@ pub mod api {
             #[encode_as_type(crate_path = ":: subxt :: ext :: scale_encode")]
             #[doc = "Voting successful for a proposal"]
             pub struct ProposalApproved {
+                pub kind: runtime_types::webb_proposals::proposal::ProposalKind,
                 pub chain_id:
                     runtime_types::webb_proposals::header::TypedChainId,
                 pub proposal_nonce: runtime_types::webb_proposals::nonce::Nonce,
@@ -6576,6 +6565,7 @@ pub mod api {
             #[encode_as_type(crate_path = ":: subxt :: ext :: scale_encode")]
             #[doc = "Voting rejected a proposal"]
             pub struct ProposalRejected {
+                pub kind: runtime_types::webb_proposals::proposal::ProposalKind,
                 pub chain_id:
                     runtime_types::webb_proposals::header::TypedChainId,
                 pub proposal_nonce: runtime_types::webb_proposals::nonce::Nonce,
@@ -6599,6 +6589,7 @@ pub mod api {
             #[encode_as_type(crate_path = ":: subxt :: ext :: scale_encode")]
             #[doc = "Execution of call succeeded"]
             pub struct ProposalSucceeded {
+                pub kind: runtime_types::webb_proposals::proposal::ProposalKind,
                 pub chain_id:
                     runtime_types::webb_proposals::header::TypedChainId,
                 pub proposal_nonce: runtime_types::webb_proposals::nonce::Nonce,
@@ -6622,6 +6613,7 @@ pub mod api {
             #[encode_as_type(crate_path = ":: subxt :: ext :: scale_encode")]
             #[doc = "Execution of call failed"]
             pub struct ProposalFailed {
+                pub kind: runtime_types::webb_proposals::proposal::ProposalKind,
                 pub chain_id:
                     runtime_types::webb_proposals::header::TypedChainId,
                 pub proposal_nonce: runtime_types::webb_proposals::nonce::Nonce,
@@ -6783,7 +6775,7 @@ pub mod api {
                     _0: impl ::std::borrow::Borrow<::subxt::utils::AccountId32>,
                 ) -> ::subxt::storage::address::Address<
                     ::subxt::storage::address::StaticStorageMapKey,
-                    runtime_types::sp_core::bounded::bounded_vec::BoundedVec<
+                    runtime_types::bounded_collections::bounded_vec::BoundedVec<
                         ::core::primitive::u8,
                     >,
                     ::subxt::storage::address::Yes,
@@ -6798,7 +6790,7 @@ pub mod api {
                     &self,
                 ) -> ::subxt::storage::address::Address<
                     ::subxt::storage::address::StaticStorageMapKey,
-                    runtime_types::sp_core::bounded::bounded_vec::BoundedVec<
+                    runtime_types::bounded_collections::bounded_vec::BoundedVec<
                         ::core::primitive::u8,
                     >,
                     (),
@@ -6824,7 +6816,7 @@ pub mod api {
                     &self,
                 ) -> ::subxt::storage::address::Address<
                     ::subxt::storage::address::StaticStorageMapKey,
-                    runtime_types::sp_core::bounded::bounded_vec::BoundedVec<
+                    runtime_types::bounded_collections::bounded_vec::BoundedVec<
                         ::subxt::utils::AccountId32,
                     >,
                     ::subxt::storage::address::Yes,
@@ -6844,7 +6836,7 @@ pub mod api {
                         ],
                     )
                 }
-                #[doc = " Tracks current proposer set external accounts"]                pub fn external_authority_proposer_accounts (& self ,) -> :: subxt :: storage :: address :: Address :: < :: subxt :: storage :: address :: StaticStorageMapKey , runtime_types :: sp_core :: bounded :: bounded_vec :: BoundedVec < runtime_types :: sp_core :: bounded :: bounded_vec :: BoundedVec < :: core :: primitive :: u8 > > , :: subxt :: storage :: address :: Yes , :: subxt :: storage :: address :: Yes , () >{
+                #[doc = " Tracks current proposer set external accounts"]                pub fn external_authority_proposer_accounts (& self ,) -> :: subxt :: storage :: address :: Address :: < :: subxt :: storage :: address :: StaticStorageMapKey , runtime_types :: bounded_collections :: bounded_vec :: BoundedVec < runtime_types :: bounded_collections :: bounded_vec :: BoundedVec < :: core :: primitive :: u8 > > , :: subxt :: storage :: address :: Yes , :: subxt :: storage :: address :: Yes , () >{
                     ::subxt::storage::address::Address::new_static(
                         "DKGProposals",
                         "ExternalAuthorityProposerAccounts",
@@ -6889,7 +6881,7 @@ pub mod api {
                     _0: impl ::std::borrow::Borrow<
                         runtime_types::webb_proposals::header::TypedChainId,
                     >,
-                    _1 : impl :: std :: borrow :: Borrow < (runtime_types :: webb_proposals :: nonce :: Nonce , runtime_types :: sp_core :: bounded :: bounded_vec :: BoundedVec < :: core :: primitive :: u8 > ,) >,
+                    _1 : impl :: std :: borrow :: Borrow < (runtime_types :: webb_proposals :: nonce :: Nonce , runtime_types :: webb_proposals :: proposal :: Proposal < runtime_types :: dkg_runtime_primitives :: CustomU32Getter > ,) >,
                 ) -> ::subxt::storage::address::Address<
                     ::subxt::storage::address::StaticStorageMapKey,
                     runtime_types::pallet_dkg_proposals::types::ProposalVotes<
@@ -6901,7 +6893,7 @@ pub mod api {
                     (),
                     ::subxt::storage::address::Yes,
                 > {
-                    :: subxt :: storage :: address :: Address :: new_static ("DKGProposals" , "Votes" , vec ! [:: subxt :: storage :: address :: make_static_storage_map_key (_0 . borrow ()) , :: subxt :: storage :: address :: make_static_storage_map_key (_1 . borrow ())] , [75u8 , 254u8 , 1u8 , 75u8 , 188u8 , 119u8 , 42u8 , 136u8 , 232u8 , 20u8 , 216u8 , 3u8 , 162u8 , 140u8 , 72u8 , 228u8 , 161u8 , 130u8 , 132u8 , 248u8 , 72u8 , 10u8 , 213u8 , 163u8 , 212u8 , 79u8 , 245u8 , 46u8 , 169u8 , 71u8 , 165u8 , 10u8 ,])
+                    :: subxt :: storage :: address :: Address :: new_static ("DKGProposals" , "Votes" , vec ! [:: subxt :: storage :: address :: make_static_storage_map_key (_0 . borrow ()) , :: subxt :: storage :: address :: make_static_storage_map_key (_1 . borrow ())] , [170u8 , 58u8 , 19u8 , 141u8 , 123u8 , 87u8 , 199u8 , 5u8 , 37u8 , 56u8 , 221u8 , 167u8 , 88u8 , 33u8 , 21u8 , 73u8 , 251u8 , 81u8 , 122u8 , 25u8 , 77u8 , 81u8 , 160u8 , 143u8 , 35u8 , 204u8 , 85u8 , 86u8 , 24u8 , 94u8 , 15u8 , 191u8 ,])
                 }
                 #[doc = " All known proposals."]
                 #[doc = " The key is the hash of the call and the deposit ID, to ensure it's"]
@@ -6924,11 +6916,10 @@ pub mod api {
                         "Votes",
                         Vec::new(),
                         [
-                            75u8, 254u8, 1u8, 75u8, 188u8, 119u8, 42u8, 136u8,
-                            232u8, 20u8, 216u8, 3u8, 162u8, 140u8, 72u8, 228u8,
-                            161u8, 130u8, 132u8, 248u8, 72u8, 10u8, 213u8,
-                            163u8, 212u8, 79u8, 245u8, 46u8, 169u8, 71u8,
-                            165u8, 10u8,
+                            170u8, 58u8, 19u8, 141u8, 123u8, 87u8, 199u8, 5u8,
+                            37u8, 56u8, 221u8, 167u8, 88u8, 33u8, 21u8, 73u8,
+                            251u8, 81u8, 122u8, 25u8, 77u8, 81u8, 160u8, 143u8,
+                            35u8, 204u8, 85u8, 86u8, 24u8, 94u8, 15u8, 191u8,
                         ],
                     )
                 }
@@ -6940,7 +6931,7 @@ pub mod api {
                     >,
                 ) -> ::subxt::storage::address::Address<
                     ::subxt::storage::address::StaticStorageMapKey,
-                    runtime_types::sp_core::bounded::bounded_vec::BoundedVec<
+                    runtime_types::bounded_collections::bounded_vec::BoundedVec<
                         ::core::primitive::u8,
                     >,
                     ::subxt::storage::address::Yes,
@@ -6954,7 +6945,7 @@ pub mod api {
                     &self,
                 ) -> ::subxt::storage::address::Address<
                     ::subxt::storage::address::StaticStorageMapKey,
-                    runtime_types::sp_core::bounded::bounded_vec::BoundedVec<
+                    runtime_types::bounded_collections::bounded_vec::BoundedVec<
                         ::core::primitive::u8,
                     >,
                     (),
@@ -7092,6 +7083,23 @@ pub mod api {
                     ::subxt::constants::Address::new_static(
                         "DKGProposals",
                         "MaxExternalProposerAccounts",
+                        [
+                            98u8, 252u8, 116u8, 72u8, 26u8, 180u8, 225u8, 83u8,
+                            200u8, 157u8, 125u8, 151u8, 53u8, 76u8, 168u8,
+                            26u8, 10u8, 9u8, 98u8, 68u8, 9u8, 178u8, 197u8,
+                            113u8, 31u8, 79u8, 200u8, 90u8, 203u8, 100u8, 41u8,
+                            145u8,
+                        ],
+                    )
+                }
+                #[doc = " Max length of a proposal"]
+                pub fn max_proposal_length(
+                    &self,
+                ) -> ::subxt::constants::Address<::core::primitive::u32>
+                {
+                    ::subxt::constants::Address::new_static(
+                        "DKGProposals",
+                        "MaxProposalLength",
                         [
                             98u8, 252u8, 116u8, 72u8, 26u8, 180u8, 225u8, 83u8,
                             200u8, 157u8, 125u8, 151u8, 53u8, 76u8, 168u8,
@@ -7714,12 +7722,8 @@ pub mod api {
                 #[doc = ""]
                 #[doc = "The dispatch origin for this call must be _Signed_."]
                 #[doc = ""]
-                #[doc = "# <weight>"]
+                #[doc = "## Complexity"]
                 #[doc = "- O(1)."]
-                #[doc = "- Limited storage reads."]
-                #[doc = "- One DB write (event)."]
-                #[doc = "- Weight of derivative `call` execution + 10,000."]
-                #[doc = "# </weight>"]
                 pub fn sudo(
                     &self,
                     call: runtime_types::dkg_standalone_runtime::RuntimeCall,
@@ -7731,11 +7735,11 @@ pub mod api {
                             call: ::std::boxed::Box::new(call),
                         },
                         [
-                            152u8, 138u8, 170u8, 238u8, 180u8, 203u8, 75u8,
-                            66u8, 248u8, 12u8, 251u8, 50u8, 199u8, 174u8,
-                            122u8, 118u8, 114u8, 242u8, 238u8, 213u8, 253u8,
-                            248u8, 4u8, 157u8, 2u8, 27u8, 68u8, 2u8, 226u8,
-                            72u8, 12u8, 14u8,
+                            202u8, 98u8, 94u8, 63u8, 214u8, 23u8, 38u8, 208u8,
+                            196u8, 169u8, 29u8, 232u8, 133u8, 111u8, 153u8,
+                            172u8, 55u8, 79u8, 176u8, 193u8, 95u8, 36u8, 53u8,
+                            33u8, 110u8, 117u8, 52u8, 160u8, 64u8, 133u8,
+                            225u8, 197u8,
                         ],
                     )
                 }
@@ -7745,10 +7749,8 @@ pub mod api {
                 #[doc = ""]
                 #[doc = "The dispatch origin for this call must be _Signed_."]
                 #[doc = ""]
-                #[doc = "# <weight>"]
+                #[doc = "## Complexity"]
                 #[doc = "- O(1)."]
-                #[doc = "- The weight of this call is defined by the caller."]
-                #[doc = "# </weight>"]
                 pub fn sudo_unchecked_weight(
                     &self,
                     call: runtime_types::dkg_standalone_runtime::RuntimeCall,
@@ -7763,11 +7765,11 @@ pub mod api {
                             weight,
                         },
                         [
-                            235u8, 234u8, 110u8, 255u8, 225u8, 114u8, 112u8,
-                            191u8, 169u8, 148u8, 140u8, 182u8, 209u8, 118u8,
-                            165u8, 156u8, 52u8, 123u8, 79u8, 226u8, 73u8,
-                            113u8, 44u8, 10u8, 232u8, 42u8, 152u8, 218u8,
-                            192u8, 244u8, 195u8, 214u8,
+                            237u8, 79u8, 83u8, 45u8, 183u8, 220u8, 36u8, 218u8,
+                            96u8, 78u8, 220u8, 210u8, 185u8, 104u8, 115u8,
+                            148u8, 59u8, 112u8, 78u8, 136u8, 71u8, 40u8, 242u8,
+                            19u8, 99u8, 95u8, 12u8, 0u8, 144u8, 105u8, 130u8,
+                            48u8,
                         ],
                     )
                 }
@@ -7776,11 +7778,8 @@ pub mod api {
                 #[doc = ""]
                 #[doc = "The dispatch origin for this call must be _Signed_."]
                 #[doc = ""]
-                #[doc = "# <weight>"]
+                #[doc = "## Complexity"]
                 #[doc = "- O(1)."]
-                #[doc = "- Limited storage reads."]
-                #[doc = "- One DB change."]
-                #[doc = "# </weight>"]
                 pub fn set_key(
                     &self,
                     new: ::subxt::utils::MultiAddress<
@@ -7806,12 +7805,8 @@ pub mod api {
                 #[doc = ""]
                 #[doc = "The dispatch origin for this call must be _Signed_."]
                 #[doc = ""]
-                #[doc = "# <weight>"]
+                #[doc = "## Complexity"]
                 #[doc = "- O(1)."]
-                #[doc = "- Limited storage reads."]
-                #[doc = "- One DB write (event)."]
-                #[doc = "- Weight of derivative `call` execution + 10,000."]
-                #[doc = "# </weight>"]
                 pub fn sudo_as(
                     &self,
                     who: ::subxt::utils::MultiAddress<
@@ -7828,11 +7823,11 @@ pub mod api {
                             call: ::std::boxed::Box::new(call),
                         },
                         [
-                            183u8, 123u8, 221u8, 16u8, 8u8, 186u8, 222u8,
-                            150u8, 162u8, 225u8, 155u8, 237u8, 199u8, 168u8,
-                            92u8, 180u8, 72u8, 245u8, 121u8, 19u8, 238u8, 90u8,
-                            121u8, 224u8, 219u8, 27u8, 218u8, 60u8, 106u8,
-                            199u8, 107u8, 192u8,
+                            22u8, 234u8, 90u8, 83u8, 195u8, 16u8, 66u8, 158u8,
+                            70u8, 126u8, 218u8, 244u8, 222u8, 35u8, 143u8,
+                            89u8, 169u8, 194u8, 81u8, 242u8, 169u8, 148u8,
+                            63u8, 78u8, 135u8, 178u8, 228u8, 20u8, 72u8, 107u8,
+                            33u8, 79u8,
                         ],
                     )
                 }
@@ -8257,11 +8252,12 @@ pub mod api {
             #[encode_as_type(crate_path = ":: subxt :: ext :: scale_encode")]
             #[doc = "A solution was stored with the given compute."]
             #[doc = ""]
-            #[doc = "If the solution is signed, this means that it hasn't yet been processed. If the"]
-            #[doc = "solution is unsigned, this means that it has also been processed."]
-            #[doc = ""]
-            #[doc = "The `bool` is `true` when a previous solution was ejected to make room for this one."]
-            pub struct SolutionStored { pub compute : runtime_types :: pallet_election_provider_multi_phase :: ElectionCompute , pub prev_ejected : :: core :: primitive :: bool , }
+            #[doc = "The `origin` indicates the origin of the solution. If `origin` is `Some(AccountId)`,"]
+            #[doc = "the stored solution was submited in the signed phase by a miner with the `AccountId`."]
+            #[doc = "Otherwise, the solution was stored either during the unsigned phase or by"]
+            #[doc = "`T::ForceOrigin`. The `bool` is `true` when a previous solution was ejected to make"]
+            #[doc = "room for this one."]
+            pub struct SolutionStored { pub compute : runtime_types :: pallet_election_provider_multi_phase :: ElectionCompute , pub origin : :: core :: option :: Option < :: subxt :: utils :: AccountId32 > , pub prev_ejected : :: core :: primitive :: bool , }
             impl ::subxt::events::StaticEvent for SolutionStored {
                 const PALLET: &'static str = "ElectionProviderMultiPhase";
                 const EVENT: &'static str = "SolutionStored";
@@ -8351,7 +8347,6 @@ pub mod api {
                 const EVENT: &'static str = "Slashed";
             }
             #[derive(
-                :: subxt :: ext :: codec :: CompactAs,
                 :: subxt :: ext :: codec :: Decode,
                 :: subxt :: ext :: codec :: Encode,
                 :: subxt :: ext :: scale_decode :: DecodeAsType,
@@ -8364,35 +8359,21 @@ pub mod api {
             # [codec (crate = :: subxt :: ext :: codec)]
             #[decode_as_type(crate_path = ":: subxt :: ext :: scale_decode")]
             #[encode_as_type(crate_path = ":: subxt :: ext :: scale_encode")]
-            #[doc = "The signed phase of the given round has started."]
-            pub struct SignedPhaseStarted {
+            #[doc = "There was a phase transition in a given round."]
+            pub struct PhaseTransitioned {
+                pub from:
+                    runtime_types::pallet_election_provider_multi_phase::Phase<
+                        ::core::primitive::u32,
+                    >,
+                pub to:
+                    runtime_types::pallet_election_provider_multi_phase::Phase<
+                        ::core::primitive::u32,
+                    >,
                 pub round: ::core::primitive::u32,
             }
-            impl ::subxt::events::StaticEvent for SignedPhaseStarted {
+            impl ::subxt::events::StaticEvent for PhaseTransitioned {
                 const PALLET: &'static str = "ElectionProviderMultiPhase";
-                const EVENT: &'static str = "SignedPhaseStarted";
-            }
-            #[derive(
-                :: subxt :: ext :: codec :: CompactAs,
-                :: subxt :: ext :: codec :: Decode,
-                :: subxt :: ext :: codec :: Encode,
-                :: subxt :: ext :: scale_decode :: DecodeAsType,
-                :: subxt :: ext :: scale_encode :: EncodeAsType,
-                Clone,
-                Debug,
-                Eq,
-                PartialEq,
-            )]
-            # [codec (crate = :: subxt :: ext :: codec)]
-            #[decode_as_type(crate_path = ":: subxt :: ext :: scale_decode")]
-            #[encode_as_type(crate_path = ":: subxt :: ext :: scale_encode")]
-            #[doc = "The unsigned phase of the given round has started."]
-            pub struct UnsignedPhaseStarted {
-                pub round: ::core::primitive::u32,
-            }
-            impl ::subxt::events::StaticEvent for UnsignedPhaseStarted {
-                const PALLET: &'static str = "ElectionProviderMultiPhase";
-                const EVENT: &'static str = "UnsignedPhaseStarted";
+                const EVENT: &'static str = "PhaseTransitioned";
             }
         }
         pub mod storage {
@@ -8563,11 +8544,13 @@ pub mod api {
                     &self,
                 ) -> ::subxt::storage::address::Address<
                     ::subxt::storage::address::StaticStorageMapKey,
-                    runtime_types::sp_core::bounded::bounded_vec::BoundedVec<(
-                        runtime_types::sp_npos_elections::ElectionScore,
-                        ::core::primitive::u32,
-                        ::core::primitive::u32,
-                    )>,
+                    runtime_types::bounded_collections::bounded_vec::BoundedVec<
+                        (
+                            runtime_types::sp_npos_elections::ElectionScore,
+                            ::core::primitive::u32,
+                            ::core::primitive::u32,
+                        ),
+                    >,
                     ::subxt::storage::address::Yes,
                     ::subxt::storage::address::Yes,
                     (),
@@ -9547,7 +9530,7 @@ pub mod api {
                         ::subxt::utils::AccountId32,
                         ::core::primitive::u32,
                     >,
-                    pub state_toggler: ::subxt::utils::MultiAddress<
+                    pub bouncer: ::subxt::utils::MultiAddress<
                         ::subxt::utils::AccountId32,
                         ::core::primitive::u32,
                     >,
@@ -9584,7 +9567,7 @@ pub mod api {
                         ::subxt::utils::AccountId32,
                         ::core::primitive::u32,
                     >,
-                    pub state_toggler: ::subxt::utils::MultiAddress<
+                    pub bouncer: ::subxt::utils::MultiAddress<
                         ::subxt::utils::AccountId32,
                         ::core::primitive::u32,
                     >,
@@ -9741,7 +9724,7 @@ pub mod api {
                         runtime_types::pallet_nomination_pools::ConfigOp<
                             ::subxt::utils::AccountId32,
                         >,
-                    pub new_state_toggler:
+                    pub new_bouncer:
                         runtime_types::pallet_nomination_pools::ConfigOp<
                             ::subxt::utils::AccountId32,
                         >,
@@ -9774,6 +9757,86 @@ pub mod api {
                 impl ::subxt::blocks::StaticExtrinsic for Chill {
                     const PALLET: &'static str = "NominationPools";
                     const CALL: &'static str = "chill";
+                }
+                #[derive(
+                    :: subxt :: ext :: codec :: Decode,
+                    :: subxt :: ext :: codec :: Encode,
+                    :: subxt :: ext :: scale_decode :: DecodeAsType,
+                    :: subxt :: ext :: scale_encode :: EncodeAsType,
+                    Clone,
+                    Debug,
+                    Eq,
+                    PartialEq,
+                )]
+                # [codec (crate = :: subxt :: ext :: codec)]
+                #[decode_as_type(
+                    crate_path = ":: subxt :: ext :: scale_decode"
+                )]
+                #[encode_as_type(
+                    crate_path = ":: subxt :: ext :: scale_encode"
+                )]
+                pub struct BondExtraOther {
+                    pub member: ::subxt::utils::MultiAddress<
+                        ::subxt::utils::AccountId32,
+                        ::core::primitive::u32,
+                    >,
+                    pub extra:
+                        runtime_types::pallet_nomination_pools::BondExtra<
+                            ::core::primitive::u128,
+                        >,
+                }
+                impl ::subxt::blocks::StaticExtrinsic for BondExtraOther {
+                    const PALLET: &'static str = "NominationPools";
+                    const CALL: &'static str = "bond_extra_other";
+                }
+                #[derive(
+                    :: subxt :: ext :: codec :: Decode,
+                    :: subxt :: ext :: codec :: Encode,
+                    :: subxt :: ext :: scale_decode :: DecodeAsType,
+                    :: subxt :: ext :: scale_encode :: EncodeAsType,
+                    Clone,
+                    Debug,
+                    Eq,
+                    PartialEq,
+                )]
+                # [codec (crate = :: subxt :: ext :: codec)]
+                #[decode_as_type(
+                    crate_path = ":: subxt :: ext :: scale_decode"
+                )]
+                #[encode_as_type(
+                    crate_path = ":: subxt :: ext :: scale_encode"
+                )]
+                pub struct SetClaimPermission {
+                    pub permission:
+                        runtime_types::pallet_nomination_pools::ClaimPermission,
+                }
+                impl ::subxt::blocks::StaticExtrinsic for SetClaimPermission {
+                    const PALLET: &'static str = "NominationPools";
+                    const CALL: &'static str = "set_claim_permission";
+                }
+                #[derive(
+                    :: subxt :: ext :: codec :: Decode,
+                    :: subxt :: ext :: codec :: Encode,
+                    :: subxt :: ext :: scale_decode :: DecodeAsType,
+                    :: subxt :: ext :: scale_encode :: EncodeAsType,
+                    Clone,
+                    Debug,
+                    Eq,
+                    PartialEq,
+                )]
+                # [codec (crate = :: subxt :: ext :: codec)]
+                #[decode_as_type(
+                    crate_path = ":: subxt :: ext :: scale_decode"
+                )]
+                #[encode_as_type(
+                    crate_path = ":: subxt :: ext :: scale_encode"
+                )]
+                pub struct ClaimPayoutOther {
+                    pub other: ::subxt::utils::AccountId32,
+                }
+                impl ::subxt::blocks::StaticExtrinsic for ClaimPayoutOther {
+                    const PALLET: &'static str = "NominationPools";
+                    const CALL: &'static str = "claim_payout_other";
                 }
             }
             pub struct TransactionApi;
@@ -9812,6 +9875,7 @@ pub mod api {
                 #[doc = "accumulated rewards, see [`BondExtra`]."]
                 #[doc = ""]
                 #[doc = "Bonding extra funds implies an automatic payout of all pending rewards as well."]
+                #[doc = "See `bond_extra_other` to bond pending rewards of `other` members."]
                 pub fn bond_extra(
                     &self,
                     extra: runtime_types::pallet_nomination_pools::BondExtra<
@@ -9837,6 +9901,8 @@ pub mod api {
                 #[doc = ""]
                 #[doc = "The member will earn rewards pro rata based on the members stake vs the sum of the"]
                 #[doc = "members in the pools stake. Rewards do not \"expire\"."]
+                #[doc = ""]
+                #[doc = "See `claim_payout_other` to caim rewards on bahalf of some `other` pool member."]
                 pub fn claim_payout(
                     &self,
                 ) -> ::subxt::tx::Payload<types::ClaimPayout> {
@@ -9862,8 +9928,8 @@ pub mod api {
                 #[doc = ""]
                 #[doc = "# Conditions for a permissionless dispatch."]
                 #[doc = ""]
-                #[doc = "* The pool is blocked and the caller is either the root or state-toggler. This is"]
-                #[doc = "  refereed to as a kick."]
+                #[doc = "* The pool is blocked and the caller is either the root or bouncer. This is refereed to"]
+                #[doc = "  as a kick."]
                 #[doc = "* The pool is destroying and the member is not the depositor."]
                 #[doc = "* The pool is destroying, the member is the depositor and no other members are in the"]
                 #[doc = "  pool."]
@@ -9946,7 +10012,7 @@ pub mod api {
                 #[doc = ""]
                 #[doc = "* The pool is in destroy mode and the target is not the depositor."]
                 #[doc = "* The target is the depositor and they are the only member in the sub pools."]
-                #[doc = "* The pool is blocked and the caller is either the root or state-toggler."]
+                #[doc = "* The pool is blocked and the caller is either the root or bouncer."]
                 #[doc = ""]
                 #[doc = "# Conditions for permissioned dispatch"]
                 #[doc = ""]
@@ -9991,7 +10057,7 @@ pub mod api {
                 #[doc = "  creating multiple pools in the same extrinsic."]
                 #[doc = "* `root` - The account to set as [`PoolRoles::root`]."]
                 #[doc = "* `nominator` - The account to set as the [`PoolRoles::nominator`]."]
-                #[doc = "* `state_toggler` - The account to set as the [`PoolRoles::state_toggler`]."]
+                #[doc = "* `bouncer` - The account to set as the [`PoolRoles::bouncer`]."]
                 #[doc = ""]
                 #[doc = "# Note"]
                 #[doc = ""]
@@ -10008,7 +10074,7 @@ pub mod api {
                         ::subxt::utils::AccountId32,
                         ::core::primitive::u32,
                     >,
-                    state_toggler: ::subxt::utils::MultiAddress<
+                    bouncer: ::subxt::utils::MultiAddress<
                         ::subxt::utils::AccountId32,
                         ::core::primitive::u32,
                     >,
@@ -10020,14 +10086,14 @@ pub mod api {
                             amount,
                             root,
                             nominator,
-                            state_toggler,
+                            bouncer,
                         },
                         [
-                            73u8, 99u8, 205u8, 59u8, 21u8, 182u8, 163u8, 158u8,
-                            99u8, 182u8, 182u8, 63u8, 212u8, 84u8, 48u8, 244u8,
-                            95u8, 153u8, 86u8, 104u8, 92u8, 93u8, 191u8, 79u8,
-                            163u8, 123u8, 20u8, 121u8, 241u8, 194u8, 79u8,
-                            112u8,
+                            19u8, 83u8, 115u8, 108u8, 192u8, 96u8, 44u8, 77u8,
+                            251u8, 152u8, 61u8, 103u8, 209u8, 17u8, 84u8,
+                            245u8, 153u8, 174u8, 124u8, 92u8, 236u8, 72u8,
+                            225u8, 73u8, 89u8, 236u8, 174u8, 180u8, 60u8,
+                            140u8, 198u8, 59u8,
                         ],
                     )
                 }
@@ -10048,7 +10114,7 @@ pub mod api {
                         ::subxt::utils::AccountId32,
                         ::core::primitive::u32,
                     >,
-                    state_toggler: ::subxt::utils::MultiAddress<
+                    bouncer: ::subxt::utils::MultiAddress<
                         ::subxt::utils::AccountId32,
                         ::core::primitive::u32,
                     >,
@@ -10062,15 +10128,15 @@ pub mod api {
                             amount,
                             root,
                             nominator,
-                            state_toggler,
+                            bouncer,
                             pool_id,
                         },
                         [
-                            113u8, 67u8, 242u8, 175u8, 174u8, 4u8, 116u8, 44u8,
-                            157u8, 35u8, 13u8, 23u8, 55u8, 80u8, 255u8, 103u8,
-                            196u8, 247u8, 105u8, 152u8, 108u8, 145u8, 180u8,
-                            169u8, 252u8, 159u8, 175u8, 241u8, 122u8, 136u8,
-                            252u8, 95u8,
+                            81u8, 185u8, 201u8, 99u8, 26u8, 96u8, 149u8, 43u8,
+                            181u8, 3u8, 149u8, 110u8, 158u8, 178u8, 138u8,
+                            205u8, 79u8, 251u8, 86u8, 18u8, 128u8, 117u8, 66u8,
+                            220u8, 222u8, 238u8, 122u8, 177u8, 63u8, 117u8,
+                            104u8, 54u8,
                         ],
                     )
                 }
@@ -10109,7 +10175,7 @@ pub mod api {
                 #[doc = ""]
                 #[doc = "The dispatch origin of this call must be either:"]
                 #[doc = ""]
-                #[doc = "1. signed by the state toggler, or the root role of the pool,"]
+                #[doc = "1. signed by the bouncer, or the root role of the pool,"]
                 #[doc = "2. if the pool conditions to be open are NOT met (as described by `ok_to_be_open`), and"]
                 #[doc = "   then the state of the pool can be permissionlessly changed to `Destroying`."]
                 pub fn set_state(
@@ -10132,7 +10198,7 @@ pub mod api {
                 }
                 #[doc = "Set a new metadata for the pool."]
                 #[doc = ""]
-                #[doc = "The dispatch origin of this call must be signed by the state toggler, or the root role"]
+                #[doc = "The dispatch origin of this call must be signed by the bouncer, or the root role"]
                 #[doc = "of the pool."]
                 pub fn set_metadata(
                     &self,
@@ -10205,7 +10271,7 @@ pub mod api {
                         ::subxt::utils::AccountId32,
                     >,
                     new_nominator : runtime_types :: pallet_nomination_pools :: ConfigOp < :: subxt :: utils :: AccountId32 >,
-                    new_state_toggler : runtime_types :: pallet_nomination_pools :: ConfigOp < :: subxt :: utils :: AccountId32 >,
+                    new_bouncer : runtime_types :: pallet_nomination_pools :: ConfigOp < :: subxt :: utils :: AccountId32 >,
                 ) -> ::subxt::tx::Payload<types::UpdateRoles> {
                     ::subxt::tx::Payload::new_static(
                         "NominationPools",
@@ -10214,14 +10280,14 @@ pub mod api {
                             pool_id,
                             new_root,
                             new_nominator,
-                            new_state_toggler,
+                            new_bouncer,
                         },
                         [
-                            247u8, 95u8, 234u8, 56u8, 181u8, 229u8, 158u8,
-                            97u8, 69u8, 165u8, 38u8, 17u8, 27u8, 209u8, 204u8,
-                            250u8, 91u8, 193u8, 35u8, 93u8, 215u8, 131u8,
-                            148u8, 73u8, 67u8, 188u8, 92u8, 32u8, 34u8, 37u8,
-                            113u8, 93u8,
+                            15u8, 154u8, 204u8, 28u8, 204u8, 120u8, 174u8,
+                            203u8, 186u8, 33u8, 123u8, 201u8, 143u8, 120u8,
+                            193u8, 49u8, 164u8, 178u8, 55u8, 234u8, 126u8,
+                            247u8, 123u8, 73u8, 147u8, 107u8, 43u8, 72u8,
+                            217u8, 4u8, 199u8, 253u8,
                         ],
                     )
                 }
@@ -10246,6 +10312,91 @@ pub mod api {
                             240u8, 172u8, 229u8, 132u8, 64u8, 175u8, 87u8,
                             217u8, 27u8, 11u8, 124u8, 1u8, 140u8, 40u8, 191u8,
                             187u8, 36u8,
+                        ],
+                    )
+                }
+                #[doc = "`origin` bonds funds from `extra` for some pool member `member` into their respective"]
+                #[doc = "pools."]
+                #[doc = ""]
+                #[doc = "`origin` can bond extra funds from free balance or pending rewards when `origin =="]
+                #[doc = "other`."]
+                #[doc = ""]
+                #[doc = "In the case of `origin != other`, `origin` can only bond extra pending rewards of"]
+                #[doc = "`other` members assuming set_claim_permission for the given member is"]
+                #[doc = "`PermissionlessAll` or `PermissionlessCompound`."]
+                pub fn bond_extra_other(
+                    &self,
+                    member: ::subxt::utils::MultiAddress<
+                        ::subxt::utils::AccountId32,
+                        ::core::primitive::u32,
+                    >,
+                    extra: runtime_types::pallet_nomination_pools::BondExtra<
+                        ::core::primitive::u128,
+                    >,
+                ) -> ::subxt::tx::Payload<types::BondExtraOther>
+                {
+                    ::subxt::tx::Payload::new_static(
+                        "NominationPools",
+                        "bond_extra_other",
+                        types::BondExtraOther { member, extra },
+                        [
+                            1u8, 73u8, 186u8, 39u8, 247u8, 130u8, 155u8, 185u8,
+                            212u8, 110u8, 151u8, 12u8, 18u8, 195u8, 106u8,
+                            28u8, 194u8, 130u8, 54u8, 59u8, 184u8, 192u8,
+                            141u8, 227u8, 102u8, 210u8, 76u8, 41u8, 196u8,
+                            90u8, 215u8, 84u8,
+                        ],
+                    )
+                }
+                #[doc = "Allows a pool member to set a claim permission to allow or disallow permissionless"]
+                #[doc = "bonding and withdrawing."]
+                #[doc = ""]
+                #[doc = "By default, this is `Permissioned`, which implies only the pool member themselves can"]
+                #[doc = "claim their pending rewards. If a pool member wishes so, they can set this to"]
+                #[doc = "`PermissionlessAll` to allow any account to claim their rewards and bond extra to the"]
+                #[doc = "pool."]
+                #[doc = ""]
+                #[doc = "# Arguments"]
+                #[doc = ""]
+                #[doc = "* `origin` - Member of a pool."]
+                #[doc = "* `actor` - Account to claim reward. // improve this"]
+                pub fn set_claim_permission(
+                    &self,
+                    permission : runtime_types :: pallet_nomination_pools :: ClaimPermission,
+                ) -> ::subxt::tx::Payload<types::SetClaimPermission>
+                {
+                    ::subxt::tx::Payload::new_static(
+                        "NominationPools",
+                        "set_claim_permission",
+                        types::SetClaimPermission { permission },
+                        [
+                            23u8, 253u8, 135u8, 53u8, 83u8, 71u8, 182u8, 223u8,
+                            123u8, 57u8, 93u8, 154u8, 110u8, 91u8, 63u8, 241u8,
+                            144u8, 218u8, 129u8, 238u8, 169u8, 9u8, 215u8,
+                            76u8, 65u8, 168u8, 103u8, 44u8, 40u8, 39u8, 34u8,
+                            16u8,
+                        ],
+                    )
+                }
+                #[doc = "`origin` can claim payouts on some pool member `other`'s behalf."]
+                #[doc = ""]
+                #[doc = "Pool member `other` must have a `PermissionlessAll` or `PermissionlessWithdraw` in order"]
+                #[doc = "for this call to be successful."]
+                pub fn claim_payout_other(
+                    &self,
+                    other: ::subxt::utils::AccountId32,
+                ) -> ::subxt::tx::Payload<types::ClaimPayoutOther>
+                {
+                    ::subxt::tx::Payload::new_static(
+                        "NominationPools",
+                        "claim_payout_other",
+                        types::ClaimPayoutOther { other },
+                        [
+                            52u8, 165u8, 191u8, 125u8, 180u8, 54u8, 27u8,
+                            235u8, 195u8, 22u8, 55u8, 183u8, 209u8, 63u8,
+                            116u8, 88u8, 154u8, 74u8, 100u8, 103u8, 88u8, 76u8,
+                            35u8, 14u8, 39u8, 156u8, 219u8, 253u8, 123u8,
+                            104u8, 168u8, 76u8,
                         ],
                     )
                 }
@@ -10474,7 +10625,7 @@ pub mod api {
             #[doc = "can never change."]
             pub struct RolesUpdated {
                 pub root: ::core::option::Option<::subxt::utils::AccountId32>,
-                pub state_toggler:
+                pub bouncer:
                     ::core::option::Option<::subxt::utils::AccountId32>,
                 pub nominator:
                     ::core::option::Option<::subxt::utils::AccountId32>,
@@ -10658,6 +10809,8 @@ pub mod api {
                     )
                 }
                 #[doc = " Active members."]
+                #[doc = ""]
+                #[doc = " TWOX-NOTE: SAFE since `AccountId` is a secure hash."]
                 pub fn pool_members(
                     &self,
                     _0: impl ::std::borrow::Borrow<::subxt::utils::AccountId32>,
@@ -10671,6 +10824,8 @@ pub mod api {
                     :: subxt :: storage :: address :: Address :: new_static ("NominationPools" , "PoolMembers" , vec ! [:: subxt :: storage :: address :: make_static_storage_map_key (_0 . borrow ())] , [252u8 , 236u8 , 201u8 , 127u8 , 219u8 , 1u8 , 19u8 , 144u8 , 5u8 , 108u8 , 70u8 , 30u8 , 177u8 , 232u8 , 253u8 , 237u8 , 211u8 , 91u8 , 63u8 , 62u8 , 155u8 , 151u8 , 153u8 , 165u8 , 206u8 , 53u8 , 111u8 , 31u8 , 60u8 , 120u8 , 100u8 , 249u8 ,])
                 }
                 #[doc = " Active members."]
+                #[doc = ""]
+                #[doc = " TWOX-NOTE: SAFE since `AccountId` is a secure hash."]
                 pub fn pool_members_root(
                     &self,
                 ) -> ::subxt::storage::address::Address<
@@ -10727,7 +10882,7 @@ pub mod api {
                     (),
                     ::subxt::storage::address::Yes,
                 > {
-                    :: subxt :: storage :: address :: Address :: new_static ("NominationPools" , "BondedPools" , vec ! [:: subxt :: storage :: address :: make_static_storage_map_key (_0 . borrow ())] , [34u8 , 51u8 , 86u8 , 95u8 , 237u8 , 118u8 , 40u8 , 212u8 , 128u8 , 227u8 , 113u8 , 6u8 , 116u8 , 28u8 , 96u8 , 223u8 , 63u8 , 249u8 , 33u8 , 152u8 , 61u8 , 7u8 , 205u8 , 220u8 , 221u8 , 174u8 , 207u8 , 39u8 , 53u8 , 176u8 , 13u8 , 74u8 ,])
+                    :: subxt :: storage :: address :: Address :: new_static ("NominationPools" , "BondedPools" , vec ! [:: subxt :: storage :: address :: make_static_storage_map_key (_0 . borrow ())] , [212u8 , 206u8 , 61u8 , 226u8 , 20u8 , 35u8 , 147u8 , 132u8 , 46u8 , 199u8 , 141u8 , 175u8 , 77u8 , 16u8 , 253u8 , 92u8 , 6u8 , 197u8 , 209u8 , 39u8 , 192u8 , 226u8 , 188u8 , 67u8 , 47u8 , 196u8 , 249u8 , 68u8 , 148u8 , 193u8 , 203u8 , 81u8 ,])
                 }
                 #[doc = " Storage for bonded pools."]
                 pub fn bonded_pools_root(
@@ -10744,10 +10899,11 @@ pub mod api {
                         "BondedPools",
                         Vec::new(),
                         [
-                            34u8, 51u8, 86u8, 95u8, 237u8, 118u8, 40u8, 212u8,
-                            128u8, 227u8, 113u8, 6u8, 116u8, 28u8, 96u8, 223u8,
-                            63u8, 249u8, 33u8, 152u8, 61u8, 7u8, 205u8, 220u8,
-                            221u8, 174u8, 207u8, 39u8, 53u8, 176u8, 13u8, 74u8,
+                            212u8, 206u8, 61u8, 226u8, 20u8, 35u8, 147u8,
+                            132u8, 46u8, 199u8, 141u8, 175u8, 77u8, 16u8,
+                            253u8, 92u8, 6u8, 197u8, 209u8, 39u8, 192u8, 226u8,
+                            188u8, 67u8, 47u8, 196u8, 249u8, 68u8, 148u8,
+                            193u8, 203u8, 81u8,
                         ],
                     )
                 }
@@ -10902,7 +11058,7 @@ pub mod api {
                     _0: impl ::std::borrow::Borrow<::core::primitive::u32>,
                 ) -> ::subxt::storage::address::Address<
                     ::subxt::storage::address::StaticStorageMapKey,
-                    runtime_types::sp_core::bounded::bounded_vec::BoundedVec<
+                    runtime_types::bounded_collections::bounded_vec::BoundedVec<
                         ::core::primitive::u8,
                     >,
                     ::subxt::storage::address::Yes,
@@ -10916,7 +11072,7 @@ pub mod api {
                     &self,
                 ) -> ::subxt::storage::address::Address<
                     ::subxt::storage::address::StaticStorageMapKey,
-                    runtime_types::sp_core::bounded::bounded_vec::BoundedVec<
+                    runtime_types::bounded_collections::bounded_vec::BoundedVec<
                         ::core::primitive::u8,
                     >,
                     (),
@@ -11044,6 +11200,42 @@ pub mod api {
                             152u8, 8u8, 217u8, 161u8, 80u8, 226u8, 42u8, 15u8,
                             252u8, 90u8, 197u8, 120u8, 114u8, 144u8, 90u8,
                             199u8, 123u8,
+                        ],
+                    )
+                }
+                #[doc = " Map from a pool member account to their opted claim permission."]
+                pub fn claim_permissions(
+                    &self,
+                    _0: impl ::std::borrow::Borrow<::subxt::utils::AccountId32>,
+                ) -> ::subxt::storage::address::Address<
+                    ::subxt::storage::address::StaticStorageMapKey,
+                    runtime_types::pallet_nomination_pools::ClaimPermission,
+                    ::subxt::storage::address::Yes,
+                    ::subxt::storage::address::Yes,
+                    ::subxt::storage::address::Yes,
+                > {
+                    :: subxt :: storage :: address :: Address :: new_static ("NominationPools" , "ClaimPermissions" , vec ! [:: subxt :: storage :: address :: make_static_storage_map_key (_0 . borrow ())] , [23u8 , 124u8 , 83u8 , 109u8 , 174u8 , 228u8 , 170u8 , 25u8 , 124u8 , 91u8 , 224u8 , 66u8 , 55u8 , 127u8 , 190u8 , 226u8 , 163u8 , 16u8 , 81u8 , 231u8 , 241u8 , 214u8 , 209u8 , 137u8 , 101u8 , 206u8 , 104u8 , 138u8 , 49u8 , 56u8 , 152u8 , 228u8 ,])
+                }
+                #[doc = " Map from a pool member account to their opted claim permission."]
+                pub fn claim_permissions_root(
+                    &self,
+                ) -> ::subxt::storage::address::Address<
+                    ::subxt::storage::address::StaticStorageMapKey,
+                    runtime_types::pallet_nomination_pools::ClaimPermission,
+                    (),
+                    ::subxt::storage::address::Yes,
+                    ::subxt::storage::address::Yes,
+                > {
+                    ::subxt::storage::address::Address::new_static(
+                        "NominationPools",
+                        "ClaimPermissions",
+                        Vec::new(),
+                        [
+                            23u8, 124u8, 83u8, 109u8, 174u8, 228u8, 170u8,
+                            25u8, 124u8, 91u8, 224u8, 66u8, 55u8, 127u8, 190u8,
+                            226u8, 163u8, 16u8, 81u8, 231u8, 241u8, 214u8,
+                            209u8, 137u8, 101u8, 206u8, 104u8, 138u8, 49u8,
+                            56u8, 152u8, 228u8,
                         ],
                     )
                 }
@@ -11765,6 +11957,30 @@ pub mod api {
                     const PALLET: &'static str = "Staking";
                     const CALL: &'static str = "force_apply_min_commission";
                 }
+                #[derive(
+                    :: subxt :: ext :: codec :: Decode,
+                    :: subxt :: ext :: codec :: Encode,
+                    :: subxt :: ext :: scale_decode :: DecodeAsType,
+                    :: subxt :: ext :: scale_encode :: EncodeAsType,
+                    Clone,
+                    Debug,
+                    Eq,
+                    PartialEq,
+                )]
+                # [codec (crate = :: subxt :: ext :: codec)]
+                #[decode_as_type(
+                    crate_path = ":: subxt :: ext :: scale_decode"
+                )]
+                #[encode_as_type(
+                    crate_path = ":: subxt :: ext :: scale_encode"
+                )]
+                pub struct SetMinCommission {
+                    pub new: runtime_types::sp_arithmetic::per_things::Perbill,
+                }
+                impl ::subxt::blocks::StaticExtrinsic for SetMinCommission {
+                    const PALLET: &'static str = "Staking";
+                    const CALL: &'static str = "set_min_commission";
+                }
             }
             pub struct TransactionApi;
             impl TransactionApi {
@@ -11776,15 +11992,13 @@ pub mod api {
                 #[doc = "The dispatch origin for this call must be _Signed_ by the stash account."]
                 #[doc = ""]
                 #[doc = "Emits `Bonded`."]
-                #[doc = "# <weight>"]
+                #[doc = "## Complexity"]
                 #[doc = "- Independent of the arguments. Moderate complexity."]
                 #[doc = "- O(1)."]
                 #[doc = "- Three extra DB entries."]
                 #[doc = ""]
                 #[doc = "NOTE: Two of the storage writes (`Self::bonded`, `Self::payee`) are _never_ cleaned"]
                 #[doc = "unless the `origin` falls below _existential deposit_ and gets removed as dust."]
-                #[doc = "------------------"]
-                #[doc = "# </weight>"]
                 pub fn bond(
                     &self,
                     controller: ::subxt::utils::MultiAddress<
@@ -11824,10 +12038,9 @@ pub mod api {
                 #[doc = ""]
                 #[doc = "Emits `Bonded`."]
                 #[doc = ""]
-                #[doc = "# <weight>"]
+                #[doc = "## Complexity"]
                 #[doc = "- Independent of the arguments. Insignificant complexity."]
                 #[doc = "- O(1)."]
-                #[doc = "# </weight>"]
                 pub fn bond_extra(
                     &self,
                     max_additional: ::core::primitive::u128,
@@ -11891,10 +12104,9 @@ pub mod api {
                 #[doc = ""]
                 #[doc = "See also [`Call::unbond`]."]
                 #[doc = ""]
-                #[doc = "# <weight>"]
-                #[doc = "Complexity O(S) where S is the number of slashing spans to remove"]
+                #[doc = "## Complexity"]
+                #[doc = "O(S) where S is the number of slashing spans to remove"]
                 #[doc = "NOTE: Weight annotation is the kill scenario, we refund otherwise."]
-                #[doc = "# </weight>"]
                 pub fn withdraw_unbonded(
                     &self,
                     num_slashing_spans: ::core::primitive::u32,
@@ -11941,11 +12153,10 @@ pub mod api {
                 #[doc = ""]
                 #[doc = "The dispatch origin for this call must be _Signed_ by the controller, not the stash."]
                 #[doc = ""]
-                #[doc = "# <weight>"]
+                #[doc = "## Complexity"]
                 #[doc = "- The transaction's complexity is proportional to the size of `targets` (N)"]
                 #[doc = "which is capped at CompactAssignments::LIMIT (T::MaxNominations)."]
                 #[doc = "- Both the reads and writes follow a similar pattern."]
-                #[doc = "# </weight>"]
                 pub fn nominate(
                     &self,
                     targets: ::std::vec::Vec<
@@ -11974,11 +12185,10 @@ pub mod api {
                 #[doc = ""]
                 #[doc = "The dispatch origin for this call must be _Signed_ by the controller, not the stash."]
                 #[doc = ""]
-                #[doc = "# <weight>"]
+                #[doc = "## Complexity"]
                 #[doc = "- Independent of the arguments. Insignificant complexity."]
                 #[doc = "- Contains one read."]
                 #[doc = "- Writes are limited to the `origin` account key."]
-                #[doc = "# </weight>"]
                 pub fn chill(&self) -> ::subxt::tx::Payload<types::Chill> {
                     ::subxt::tx::Payload::new_static(
                         "Staking",
@@ -11999,16 +12209,12 @@ pub mod api {
                 #[doc = ""]
                 #[doc = "The dispatch origin for this call must be _Signed_ by the controller, not the stash."]
                 #[doc = ""]
-                #[doc = "# <weight>"]
+                #[doc = "## Complexity"]
+                #[doc = "- O(1)"]
                 #[doc = "- Independent of the arguments. Insignificant complexity."]
                 #[doc = "- Contains a limited number of reads."]
                 #[doc = "- Writes are limited to the `origin` account key."]
                 #[doc = "---------"]
-                #[doc = "- Weight: O(1)"]
-                #[doc = "- DB Weight:"]
-                #[doc = "    - Read: Ledger"]
-                #[doc = "    - Write: Payee"]
-                #[doc = "# </weight>"]
                 pub fn set_payee(
                     &self,
                     payee: runtime_types::pallet_staking::RewardDestination<
@@ -12034,16 +12240,11 @@ pub mod api {
                 #[doc = ""]
                 #[doc = "The dispatch origin for this call must be _Signed_ by the stash, not the controller."]
                 #[doc = ""]
-                #[doc = "# <weight>"]
+                #[doc = "## Complexity"]
+                #[doc = "O(1)"]
                 #[doc = "- Independent of the arguments. Insignificant complexity."]
                 #[doc = "- Contains a limited number of reads."]
                 #[doc = "- Writes are limited to the `origin` account key."]
-                #[doc = "----------"]
-                #[doc = "Weight: O(1)"]
-                #[doc = "DB Weight:"]
-                #[doc = "- Read: Bonded, Ledger New Controller, Ledger Old Controller"]
-                #[doc = "- Write: Bonded, Ledger New Controller, Ledger Old Controller"]
-                #[doc = "# </weight>"]
                 pub fn set_controller(
                     &self,
                     controller: ::subxt::utils::MultiAddress<
@@ -12069,10 +12270,8 @@ pub mod api {
                 #[doc = ""]
                 #[doc = "The dispatch origin must be Root."]
                 #[doc = ""]
-                #[doc = "# <weight>"]
-                #[doc = "Weight: O(1)"]
-                #[doc = "Write: Validator Count"]
-                #[doc = "# </weight>"]
+                #[doc = "## Complexity"]
+                #[doc = "O(1)"]
                 pub fn set_validator_count(
                     &self,
                     new: ::core::primitive::u32,
@@ -12096,9 +12295,8 @@ pub mod api {
                 #[doc = ""]
                 #[doc = "The dispatch origin must be Root."]
                 #[doc = ""]
-                #[doc = "# <weight>"]
+                #[doc = "## Complexity"]
                 #[doc = "Same as [`Self::set_validator_count`]."]
-                #[doc = "# </weight>"]
                 pub fn increase_validator_count(
                     &self,
                     additional: ::core::primitive::u32,
@@ -12122,9 +12320,8 @@ pub mod api {
                 #[doc = ""]
                 #[doc = "The dispatch origin must be Root."]
                 #[doc = ""]
-                #[doc = "# <weight>"]
+                #[doc = "## Complexity"]
                 #[doc = "Same as [`Self::set_validator_count`]."]
-                #[doc = "# </weight>"]
                 pub fn scale_validator_count(
                     &self,
                     factor: runtime_types::sp_arithmetic::per_things::Percent,
@@ -12153,11 +12350,9 @@ pub mod api {
                 #[doc = "Thus the election process may be ongoing when this is called. In this case the"]
                 #[doc = "election will continue until the next era is triggered."]
                 #[doc = ""]
-                #[doc = "# <weight>"]
+                #[doc = "## Complexity"]
                 #[doc = "- No arguments."]
                 #[doc = "- Weight: O(1)"]
-                #[doc = "- Write: ForceEra"]
-                #[doc = "# </weight>"]
                 pub fn force_no_eras(
                     &self,
                 ) -> ::subxt::tx::Payload<types::ForceNoEras> {
@@ -12185,11 +12380,9 @@ pub mod api {
                 #[doc = "If this is called just before a new era is triggered, the election process may not"]
                 #[doc = "have enough blocks to get a result."]
                 #[doc = ""]
-                #[doc = "# <weight>"]
+                #[doc = "## Complexity"]
                 #[doc = "- No arguments."]
                 #[doc = "- Weight: O(1)"]
-                #[doc = "- Write ForceEra"]
-                #[doc = "# </weight>"]
                 pub fn force_new_era(
                     &self,
                 ) -> ::subxt::tx::Payload<types::ForceNewEra> {
@@ -12278,7 +12471,7 @@ pub mod api {
                 }
                 #[doc = "Cancel enactment of a deferred slash."]
                 #[doc = ""]
-                #[doc = "Can be called by the `T::SlashCancelOrigin`."]
+                #[doc = "Can be called by the `T::AdminOrigin`."]
                 #[doc = ""]
                 #[doc = "Parameters: era and indices of the slashes for that era to kill."]
                 pub fn cancel_deferred_slash(
@@ -12309,18 +12502,8 @@ pub mod api {
                 #[doc = "The origin of this call must be _Signed_. Any account can call this function, even if"]
                 #[doc = "it is not one of the stakers."]
                 #[doc = ""]
-                #[doc = "# <weight>"]
-                #[doc = "- Time complexity: at most O(MaxNominatorRewardedPerValidator)."]
-                #[doc = "- Contains a limited number of reads and writes."]
-                #[doc = "-----------"]
-                #[doc = "N is the Number of payouts for the validator (including the validator)"]
-                #[doc = "Weight:"]
-                #[doc = "- Reward Destination Staked: O(N)"]
-                #[doc = "- Reward Destination Controller (Creating): O(N)"]
-                #[doc = ""]
-                #[doc = "  NOTE: weights are assuming that payouts are made to alive stash account (Staked)."]
-                #[doc = "  Paying even a dead controller is cheaper weight-wise. We don't do any refunds here."]
-                #[doc = "# </weight>"]
+                #[doc = "## Complexity"]
+                #[doc = "- At most O(MaxNominatorRewardedPerValidator)."]
                 pub fn payout_stakers(
                     &self,
                     validator_stash: ::subxt::utils::AccountId32,
@@ -12347,11 +12530,9 @@ pub mod api {
                 #[doc = ""]
                 #[doc = "The dispatch origin must be signed by the controller."]
                 #[doc = ""]
-                #[doc = "# <weight>"]
+                #[doc = "## Complexity"]
                 #[doc = "- Time complexity: O(L), where L is unlocking chunks"]
                 #[doc = "- Bounded by `MaxUnlockingChunks`."]
-                #[doc = "- Storage changes: Can't increase storage, only decrease it."]
-                #[doc = "# </weight>"]
                 pub fn rebond(
                     &self,
                     value: ::core::primitive::u128,
@@ -12543,6 +12724,28 @@ pub mod api {
                             78u8, 123u8, 229u8, 135u8, 129u8, 241u8, 119u8,
                             106u8, 41u8, 182u8, 121u8, 181u8, 242u8, 175u8,
                             74u8, 207u8, 64u8, 106u8,
+                        ],
+                    )
+                }
+                #[doc = "Sets the minimum amount of commission that each validators must maintain."]
+                #[doc = ""]
+                #[doc = "This call has lower privilege requirements than `set_staking_config` and can be called"]
+                #[doc = "by the `T::AdminOrigin`. Root can always call this."]
+                pub fn set_min_commission(
+                    &self,
+                    new: runtime_types::sp_arithmetic::per_things::Perbill,
+                ) -> ::subxt::tx::Payload<types::SetMinCommission>
+                {
+                    ::subxt::tx::Payload::new_static(
+                        "Staking",
+                        "set_min_commission",
+                        types::SetMinCommission { new },
+                        [
+                            62u8, 139u8, 175u8, 245u8, 212u8, 113u8, 117u8,
+                            130u8, 191u8, 173u8, 78u8, 97u8, 19u8, 104u8,
+                            185u8, 207u8, 201u8, 14u8, 200u8, 208u8, 184u8,
+                            195u8, 242u8, 175u8, 158u8, 156u8, 51u8, 58u8,
+                            118u8, 154u8, 68u8, 221u8,
                         ],
                     )
                 }
@@ -12862,6 +13065,27 @@ pub mod api {
                 const PALLET: &'static str = "Staking";
                 const EVENT: &'static str = "ValidatorPrefsSet";
             }
+            #[derive(
+                :: subxt :: ext :: codec :: Decode,
+                :: subxt :: ext :: codec :: Encode,
+                :: subxt :: ext :: scale_decode :: DecodeAsType,
+                :: subxt :: ext :: scale_encode :: EncodeAsType,
+                Clone,
+                Debug,
+                Eq,
+                PartialEq,
+            )]
+            # [codec (crate = :: subxt :: ext :: codec)]
+            #[decode_as_type(crate_path = ":: subxt :: ext :: scale_decode")]
+            #[encode_as_type(crate_path = ":: subxt :: ext :: scale_encode")]
+            #[doc = "A new force era mode was set."]
+            pub struct ForceEra {
+                pub mode: runtime_types::pallet_staking::Forcing,
+            }
+            impl ::subxt::events::StaticEvent for ForceEra {
+                const PALLET: &'static str = "Staking";
+                const EVENT: &'static str = "ForceEra";
+            }
         }
         pub mod storage {
             use super::runtime_types;
@@ -12939,6 +13163,8 @@ pub mod api {
                     )
                 }
                 #[doc = " Map from all locked \"stash\" accounts to the controller account."]
+                #[doc = ""]
+                #[doc = " TWOX-NOTE: SAFE since `AccountId` is a secure hash."]
                 pub fn bonded(
                     &self,
                     _0: impl ::std::borrow::Borrow<::subxt::utils::AccountId32>,
@@ -12952,6 +13178,8 @@ pub mod api {
                     :: subxt :: storage :: address :: Address :: new_static ("Staking" , "Bonded" , vec ! [:: subxt :: storage :: address :: make_static_storage_map_key (_0 . borrow ())] , [35u8 , 197u8 , 156u8 , 60u8 , 22u8 , 59u8 , 103u8 , 83u8 , 77u8 , 15u8 , 118u8 , 193u8 , 155u8 , 97u8 , 229u8 , 36u8 , 119u8 , 128u8 , 224u8 , 162u8 , 21u8 , 46u8 , 199u8 , 221u8 , 15u8 , 74u8 , 59u8 , 70u8 , 77u8 , 218u8 , 73u8 , 165u8 ,])
                 }
                 #[doc = " Map from all locked \"stash\" accounts to the controller account."]
+                #[doc = ""]
+                #[doc = " TWOX-NOTE: SAFE since `AccountId` is a secure hash."]
                 pub fn bonded_root(
                     &self,
                 ) -> ::subxt::storage::address::Address<
@@ -13105,6 +13333,8 @@ pub mod api {
                     )
                 }
                 #[doc = " Where the reward payment should be made. Keyed by stash."]
+                #[doc = ""]
+                #[doc = " TWOX-NOTE: SAFE since `AccountId` is a secure hash."]
                 pub fn payee(
                     &self,
                     _0: impl ::std::borrow::Borrow<::subxt::utils::AccountId32>,
@@ -13120,6 +13350,8 @@ pub mod api {
                     :: subxt :: storage :: address :: Address :: new_static ("Staking" , "Payee" , vec ! [:: subxt :: storage :: address :: make_static_storage_map_key (_0 . borrow ())] , [195u8 , 125u8 , 82u8 , 213u8 , 216u8 , 64u8 , 76u8 , 63u8 , 187u8 , 163u8 , 20u8 , 230u8 , 153u8 , 13u8 , 189u8 , 232u8 , 119u8 , 118u8 , 107u8 , 17u8 , 102u8 , 245u8 , 36u8 , 42u8 , 232u8 , 137u8 , 177u8 , 165u8 , 169u8 , 246u8 , 199u8 , 57u8 ,])
                 }
                 #[doc = " Where the reward payment should be made. Keyed by stash."]
+                #[doc = ""]
+                #[doc = " TWOX-NOTE: SAFE since `AccountId` is a secure hash."]
                 pub fn payee_root(
                     &self,
                 ) -> ::subxt::storage::address::Address<
@@ -13145,6 +13377,8 @@ pub mod api {
                     )
                 }
                 #[doc = " The map from (wannabe) validator stash key to the preferences of that validator."]
+                #[doc = ""]
+                #[doc = " TWOX-NOTE: SAFE since `AccountId` is a secure hash."]
                 pub fn validators(
                     &self,
                     _0: impl ::std::borrow::Borrow<::subxt::utils::AccountId32>,
@@ -13158,6 +13392,8 @@ pub mod api {
                     :: subxt :: storage :: address :: Address :: new_static ("Staking" , "Validators" , vec ! [:: subxt :: storage :: address :: make_static_storage_map_key (_0 . borrow ())] , [80u8 , 77u8 , 66u8 , 18u8 , 197u8 , 250u8 , 41u8 , 185u8 , 43u8 , 24u8 , 149u8 , 164u8 , 208u8 , 60u8 , 144u8 , 29u8 , 251u8 , 195u8 , 236u8 , 196u8 , 108u8 , 58u8 , 80u8 , 115u8 , 246u8 , 66u8 , 226u8 , 241u8 , 201u8 , 172u8 , 229u8 , 152u8 ,])
                 }
                 #[doc = " The map from (wannabe) validator stash key to the preferences of that validator."]
+                #[doc = ""]
+                #[doc = " TWOX-NOTE: SAFE since `AccountId` is a secure hash."]
                 pub fn validators_root(
                     &self,
                 ) -> ::subxt::storage::address::Address<
@@ -13243,6 +13479,8 @@ pub mod api {
                 #[doc = ""]
                 #[doc = " Lastly, if any of the nominators become non-decodable, they can be chilled immediately via"]
                 #[doc = " [`Call::chill_other`] dispatchable by anyone."]
+                #[doc = ""]
+                #[doc = " TWOX-NOTE: SAFE since `AccountId` is a secure hash."]
                 pub fn nominators(
                     &self,
                     _0: impl ::std::borrow::Borrow<::subxt::utils::AccountId32>,
@@ -13271,6 +13509,8 @@ pub mod api {
                 #[doc = ""]
                 #[doc = " Lastly, if any of the nominators become non-decodable, they can be chilled immediately via"]
                 #[doc = " [`Call::chill_other`] dispatchable by anyone."]
+                #[doc = ""]
+                #[doc = " TWOX-NOTE: SAFE since `AccountId` is a secure hash."]
                 pub fn nominators_root(
                     &self,
                 ) -> ::subxt::storage::address::Address<
@@ -14081,32 +14321,6 @@ pub mod api {
                         ],
                     )
                 }
-                #[doc = " True if network has been upgraded to this version."]
-                #[doc = " Storage version of the pallet."]
-                #[doc = ""]
-                #[doc = " This is set to v7.0.0 for new networks."]
-                pub fn storage_version(
-                    &self,
-                ) -> ::subxt::storage::address::Address<
-                    ::subxt::storage::address::StaticStorageMapKey,
-                    runtime_types::pallet_staking::Releases,
-                    ::subxt::storage::address::Yes,
-                    ::subxt::storage::address::Yes,
-                    (),
-                > {
-                    ::subxt::storage::address::Address::new_static(
-                        "Staking",
-                        "StorageVersion",
-                        vec![],
-                        [
-                            70u8, 24u8, 179u8, 189u8, 168u8, 164u8, 175u8,
-                            150u8, 215u8, 43u8, 18u8, 110u8, 180u8, 137u8,
-                            237u8, 187u8, 185u8, 50u8, 31u8, 57u8, 16u8, 110u8,
-                            6u8, 170u8, 19u8, 7u8, 160u8, 134u8, 232u8, 227u8,
-                            151u8, 116u8,
-                        ],
-                    )
-                }
                 #[doc = " The threshold for when users can start calling `chill_other` for other validators /"]
                 #[doc = " nominators. The threshold is compared to the actual number of validators / nominators"]
                 #[doc = " (`CountFor*`) in the system compared to the configured max (`Max*Count`)."]
@@ -14360,14 +14574,9 @@ pub mod api {
                 #[doc = ""]
                 #[doc = "The dispatch origin of this function must be signed."]
                 #[doc = ""]
-                #[doc = "# <weight>"]
-                #[doc = "- Complexity: `O(1)`. Actual cost depends on the number of length of"]
-                #[doc = "  `T::Keys::key_ids()` which is fixed."]
-                #[doc = "- DbReads: `origin account`, `T::ValidatorIdOf`, `NextKeys`"]
-                #[doc = "- DbWrites: `origin account`, `NextKeys`"]
-                #[doc = "- DbReads per key id: `KeyOwner`"]
-                #[doc = "- DbWrites per key id: `KeyOwner`"]
-                #[doc = "# </weight>"]
+                #[doc = "## Complexity"]
+                #[doc = "- `O(1)`. Actual cost depends on the number of length of `T::Keys::key_ids()` which is"]
+                #[doc = "  fixed."]
                 pub fn set_keys(
                     &self,
                     keys : runtime_types :: dkg_standalone_runtime :: opaque :: SessionKeys,
@@ -14395,13 +14604,9 @@ pub mod api {
                 #[doc = "means being a controller account) or directly convertible into a validator ID (which"]
                 #[doc = "usually means being a stash account)."]
                 #[doc = ""]
-                #[doc = "# <weight>"]
-                #[doc = "- Complexity: `O(1)` in number of key types. Actual cost depends on the number of length"]
-                #[doc = "  of `T::Keys::key_ids()` which is fixed."]
-                #[doc = "- DbReads: `T::ValidatorIdOf`, `NextKeys`, `origin account`"]
-                #[doc = "- DbWrites: `NextKeys`, `origin account`"]
-                #[doc = "- DbWrites per key id: `KeyOwner`"]
-                #[doc = "# </weight>"]
+                #[doc = "## Complexity"]
+                #[doc = "- `O(1)` in number of key types. Actual cost depends on the number of length of"]
+                #[doc = "  `T::Keys::key_ids()` which is fixed."]
                 pub fn purge_keys(
                     &self,
                 ) -> ::subxt::tx::Payload<types::PurgeKeys> {
@@ -15408,11 +15613,8 @@ pub mod api {
                 #[doc = ""]
                 #[doc = "Emits `RegistrarAdded` if successful."]
                 #[doc = ""]
-                #[doc = "# <weight>"]
+                #[doc = "## Complexity"]
                 #[doc = "- `O(R)` where `R` registrar-count (governance-bounded and code-bounded)."]
-                #[doc = "- One storage mutation (codec `O(R)`)."]
-                #[doc = "- One event."]
-                #[doc = "# </weight>"]
                 pub fn add_registrar(
                     &self,
                     account: ::subxt::utils::MultiAddress<
@@ -15444,14 +15646,10 @@ pub mod api {
                 #[doc = ""]
                 #[doc = "Emits `IdentitySet` if successful."]
                 #[doc = ""]
-                #[doc = "# <weight>"]
+                #[doc = "## Complexity"]
                 #[doc = "- `O(X + X' + R)`"]
                 #[doc = "  - where `X` additional-field-count (deposit-bounded and code-bounded)"]
                 #[doc = "  - where `R` judgements-count (registrar-count-bounded)"]
-                #[doc = "- One balance reserve operation."]
-                #[doc = "- One storage mutation (codec-read `O(X' + R)`, codec-write `O(X + R)`)."]
-                #[doc = "- One event."]
-                #[doc = "# </weight>"]
                 pub fn set_identity(
                     &self,
                     info: runtime_types::pallet_identity::types::IdentityInfo,
@@ -15481,17 +15679,10 @@ pub mod api {
                 #[doc = ""]
                 #[doc = "- `subs`: The identity's (new) sub-accounts."]
                 #[doc = ""]
-                #[doc = "# <weight>"]
+                #[doc = "## Complexity"]
                 #[doc = "- `O(P + S)`"]
                 #[doc = "  - where `P` old-subs-count (hard- and deposit-bounded)."]
                 #[doc = "  - where `S` subs-count (hard- and deposit-bounded)."]
-                #[doc = "- At most one balance operations."]
-                #[doc = "- DB:"]
-                #[doc = "  - `P + S` storage mutations (codec complexity `O(1)`)"]
-                #[doc = "  - One storage read (codec complexity `O(P)`)."]
-                #[doc = "  - One storage write (codec complexity `O(S)`)."]
-                #[doc = "  - One storage-exists (`IdentityOf::contains_key`)."]
-                #[doc = "# </weight>"]
                 pub fn set_subs(
                     &self,
                     subs: ::std::vec::Vec<(
@@ -15521,15 +15712,11 @@ pub mod api {
                 #[doc = ""]
                 #[doc = "Emits `IdentityCleared` if successful."]
                 #[doc = ""]
-                #[doc = "# <weight>"]
+                #[doc = "## Complexity"]
                 #[doc = "- `O(R + S + X)`"]
                 #[doc = "  - where `R` registrar-count (governance-bounded)."]
                 #[doc = "  - where `S` subs-count (hard- and deposit-bounded)."]
                 #[doc = "  - where `X` additional-field-count (deposit-bounded and code-bounded)."]
-                #[doc = "- One balance-unreserve operation."]
-                #[doc = "- `2` storage reads and `S + 2` storage deletions."]
-                #[doc = "- One event."]
-                #[doc = "# </weight>"]
                 pub fn clear_identity(
                     &self,
                 ) -> ::subxt::tx::Payload<types::ClearIdentity>
@@ -15564,12 +15751,10 @@ pub mod api {
                 #[doc = ""]
                 #[doc = "Emits `JudgementRequested` if successful."]
                 #[doc = ""]
-                #[doc = "# <weight>"]
+                #[doc = "## Complexity"]
                 #[doc = "- `O(R + X)`."]
-                #[doc = "- One balance-reserve operation."]
-                #[doc = "- Storage: 1 read `O(R)`, 1 mutate `O(X + R)`."]
-                #[doc = "- One event."]
-                #[doc = "# </weight>"]
+                #[doc = "  - where `R` registrar-count (governance-bounded)."]
+                #[doc = "  - where `X` additional-field-count (deposit-bounded and code-bounded)."]
                 pub fn request_judgement(
                     &self,
                     reg_index: ::core::primitive::u32,
@@ -15600,12 +15785,10 @@ pub mod api {
                 #[doc = ""]
                 #[doc = "Emits `JudgementUnrequested` if successful."]
                 #[doc = ""]
-                #[doc = "# <weight>"]
+                #[doc = "## Complexity"]
                 #[doc = "- `O(R + X)`."]
-                #[doc = "- One balance-reserve operation."]
-                #[doc = "- One storage mutation `O(R + X)`."]
-                #[doc = "- One event"]
-                #[doc = "# </weight>"]
+                #[doc = "  - where `R` registrar-count (governance-bounded)."]
+                #[doc = "  - where `X` additional-field-count (deposit-bounded and code-bounded)."]
                 pub fn cancel_request(
                     &self,
                     reg_index: ::core::primitive::u32,
@@ -15631,11 +15814,9 @@ pub mod api {
                 #[doc = "- `index`: the index of the registrar whose fee is to be set."]
                 #[doc = "- `fee`: the new fee."]
                 #[doc = ""]
-                #[doc = "# <weight>"]
+                #[doc = "## Complexity"]
                 #[doc = "- `O(R)`."]
-                #[doc = "- One storage mutation `O(R)`."]
-                #[doc = "- Benchmark: 7.315 + R * 0.329 µs (min squares analysis)"]
-                #[doc = "# </weight>"]
+                #[doc = "  - where `R` registrar-count (governance-bounded)."]
                 pub fn set_fee(
                     &self,
                     index: ::core::primitive::u32,
@@ -15662,11 +15843,9 @@ pub mod api {
                 #[doc = "- `index`: the index of the registrar whose fee is to be set."]
                 #[doc = "- `new`: the new account ID."]
                 #[doc = ""]
-                #[doc = "# <weight>"]
+                #[doc = "## Complexity"]
                 #[doc = "- `O(R)`."]
-                #[doc = "- One storage mutation `O(R)`."]
-                #[doc = "- Benchmark: 8.823 + R * 0.32 µs (min squares analysis)"]
-                #[doc = "# </weight>"]
+                #[doc = "  - where `R` registrar-count (governance-bounded)."]
                 pub fn set_account_id(
                     &self,
                     index: ::core::primitive::u32,
@@ -15696,11 +15875,9 @@ pub mod api {
                 #[doc = "- `index`: the index of the registrar whose fee is to be set."]
                 #[doc = "- `fields`: the fields that the registrar concerns themselves with."]
                 #[doc = ""]
-                #[doc = "# <weight>"]
+                #[doc = "## Complexity"]
                 #[doc = "- `O(R)`."]
-                #[doc = "- One storage mutation `O(R)`."]
-                #[doc = "- Benchmark: 7.464 + R * 0.325 µs (min squares analysis)"]
-                #[doc = "# </weight>"]
+                #[doc = "  - where `R` registrar-count (governance-bounded)."]
                 pub fn set_fields(
                     &self,
                     index: ::core::primitive::u32,
@@ -15734,13 +15911,10 @@ pub mod api {
                 #[doc = ""]
                 #[doc = "Emits `JudgementGiven` if successful."]
                 #[doc = ""]
-                #[doc = "# <weight>"]
+                #[doc = "## Complexity"]
                 #[doc = "- `O(R + X)`."]
-                #[doc = "- One balance-transfer operation."]
-                #[doc = "- Up to one account-lookup operation."]
-                #[doc = "- Storage: 1 read `O(R)`, 1 mutate `O(R + X)`."]
-                #[doc = "- One event."]
-                #[doc = "# </weight>"]
+                #[doc = "  - where `R` registrar-count (governance-bounded)."]
+                #[doc = "  - where `X` additional-field-count (deposit-bounded and code-bounded)."]
                 pub fn provide_judgement(
                     &self,
                     reg_index: ::core::primitive::u32,
@@ -15785,12 +15959,11 @@ pub mod api {
                 #[doc = ""]
                 #[doc = "Emits `IdentityKilled` if successful."]
                 #[doc = ""]
-                #[doc = "# <weight>"]
-                #[doc = "- `O(R + S + X)`."]
-                #[doc = "- One balance-reserve operation."]
-                #[doc = "- `S + 2` storage mutations."]
-                #[doc = "- One event."]
-                #[doc = "# </weight>"]
+                #[doc = "## Complexity"]
+                #[doc = "- `O(R + S + X)`"]
+                #[doc = "  - where `R` registrar-count (governance-bounded)."]
+                #[doc = "  - where `S` subs-count (hard- and deposit-bounded)."]
+                #[doc = "  - where `X` additional-field-count (deposit-bounded and code-bounded)."]
                 pub fn kill_identity(
                     &self,
                     target: ::subxt::utils::MultiAddress<
@@ -16240,14 +16413,14 @@ pub mod api {
                 #[doc = ""]
                 #[doc = " The first item is the deposit, the second is a vector of the accounts."]
                 #[doc = ""]
-                #[doc = " TWOX-NOTE: OK ― `AccountId` is a secure hash."]                pub fn subs_of (& self , _0 : impl :: std :: borrow :: Borrow < :: subxt :: utils :: AccountId32 > ,) -> :: subxt :: storage :: address :: Address :: < :: subxt :: storage :: address :: StaticStorageMapKey , (:: core :: primitive :: u128 , runtime_types :: sp_core :: bounded :: bounded_vec :: BoundedVec < :: subxt :: utils :: AccountId32 > ,) , :: subxt :: storage :: address :: Yes , :: subxt :: storage :: address :: Yes , :: subxt :: storage :: address :: Yes >{
+                #[doc = " TWOX-NOTE: OK ― `AccountId` is a secure hash."]                pub fn subs_of (& self , _0 : impl :: std :: borrow :: Borrow < :: subxt :: utils :: AccountId32 > ,) -> :: subxt :: storage :: address :: Address :: < :: subxt :: storage :: address :: StaticStorageMapKey , (:: core :: primitive :: u128 , runtime_types :: bounded_collections :: bounded_vec :: BoundedVec < :: subxt :: utils :: AccountId32 > ,) , :: subxt :: storage :: address :: Yes , :: subxt :: storage :: address :: Yes , :: subxt :: storage :: address :: Yes >{
                     :: subxt :: storage :: address :: Address :: new_static ("Identity" , "SubsOf" , vec ! [:: subxt :: storage :: address :: make_static_storage_map_key (_0 . borrow ())] , [128u8 , 15u8 , 175u8 , 155u8 , 216u8 , 225u8 , 200u8 , 169u8 , 215u8 , 206u8 , 110u8 , 22u8 , 204u8 , 89u8 , 212u8 , 210u8 , 159u8 , 169u8 , 53u8 , 7u8 , 44u8 , 164u8 , 91u8 , 151u8 , 7u8 , 227u8 , 38u8 , 230u8 , 175u8 , 84u8 , 6u8 , 4u8 ,])
                 }
                 #[doc = " Alternative \"sub\" identities of this account."]
                 #[doc = ""]
                 #[doc = " The first item is the deposit, the second is a vector of the accounts."]
                 #[doc = ""]
-                #[doc = " TWOX-NOTE: OK ― `AccountId` is a secure hash."]                pub fn subs_of_root (& self ,) -> :: subxt :: storage :: address :: Address :: < :: subxt :: storage :: address :: StaticStorageMapKey , (:: core :: primitive :: u128 , runtime_types :: sp_core :: bounded :: bounded_vec :: BoundedVec < :: subxt :: utils :: AccountId32 > ,) , () , :: subxt :: storage :: address :: Yes , :: subxt :: storage :: address :: Yes >{
+                #[doc = " TWOX-NOTE: OK ― `AccountId` is a secure hash."]                pub fn subs_of_root (& self ,) -> :: subxt :: storage :: address :: Address :: < :: subxt :: storage :: address :: StaticStorageMapKey , (:: core :: primitive :: u128 , runtime_types :: bounded_collections :: bounded_vec :: BoundedVec < :: subxt :: utils :: AccountId32 > ,) , () , :: subxt :: storage :: address :: Yes , :: subxt :: storage :: address :: Yes >{
                     ::subxt::storage::address::Address::new_static(
                         "Identity",
                         "SubsOf",
@@ -16264,7 +16437,7 @@ pub mod api {
                 #[doc = " The set of registrars. Not expected to get very big as can only be added through a"]
                 #[doc = " special origin (likely a council motion)."]
                 #[doc = ""]
-                #[doc = " The index into this can be cast to `RegistrarIndex` to get a valid value."]                pub fn registrars (& self ,) -> :: subxt :: storage :: address :: Address :: < :: subxt :: storage :: address :: StaticStorageMapKey , runtime_types :: sp_core :: bounded :: bounded_vec :: BoundedVec < :: core :: option :: Option < runtime_types :: pallet_identity :: types :: RegistrarInfo < :: core :: primitive :: u128 , :: subxt :: utils :: AccountId32 > > > , :: subxt :: storage :: address :: Yes , :: subxt :: storage :: address :: Yes , () >{
+                #[doc = " The index into this can be cast to `RegistrarIndex` to get a valid value."]                pub fn registrars (& self ,) -> :: subxt :: storage :: address :: Address :: < :: subxt :: storage :: address :: StaticStorageMapKey , runtime_types :: bounded_collections :: bounded_vec :: BoundedVec < :: core :: option :: Option < runtime_types :: pallet_identity :: types :: RegistrarInfo < :: core :: primitive :: u128 , :: subxt :: utils :: AccountId32 > > > , :: subxt :: storage :: address :: Yes , :: subxt :: storage :: address :: Yes , () >{
                     ::subxt::storage::address::Address::new_static(
                         "Identity",
                         "Registrars",
@@ -16431,15 +16604,11 @@ pub mod api {
             }
             pub struct TransactionApi;
             impl TransactionApi {
-                #[doc = "# <weight>"]
-                #[doc = "- Complexity: `O(K + E)` where K is length of `Keys` (heartbeat.validators_len) and E is"]
-                #[doc = "  length of `heartbeat.network_state.external_address`"]
+                #[doc = "## Complexity:"]
+                #[doc = "- `O(K + E)` where K is length of `Keys` (heartbeat.validators_len) and E is length of"]
+                #[doc = "  `heartbeat.network_state.external_address`"]
                 #[doc = "  - `O(K)`: decoding of length `K`"]
                 #[doc = "  - `O(E)`: decoding/encoding of length `E`"]
-                #[doc = "- DbReads: pallet_session `Validators`, pallet_session `CurrentIndex`, `Keys`,"]
-                #[doc = "  `ReceivedHeartbeats`"]
-                #[doc = "- DbWrites: `ReceivedHeartbeats`"]
-                #[doc = "# </weight>"]
                 pub fn heartbeat(
                     &self,
                     heartbeat: runtime_types::pallet_im_online::Heartbeat<
@@ -16572,7 +16741,7 @@ pub mod api {
                         ],
                     )
                 }
-                #[doc = " The current set of keys that may issue a heartbeat."]                pub fn keys (& self ,) -> :: subxt :: storage :: address :: Address :: < :: subxt :: storage :: address :: StaticStorageMapKey , runtime_types :: sp_core :: bounded :: weak_bounded_vec :: WeakBoundedVec < runtime_types :: pallet_im_online :: sr25519 :: app_sr25519 :: Public > , :: subxt :: storage :: address :: Yes , :: subxt :: storage :: address :: Yes , () >{
+                #[doc = " The current set of keys that may issue a heartbeat."]                pub fn keys (& self ,) -> :: subxt :: storage :: address :: Address :: < :: subxt :: storage :: address :: StaticStorageMapKey , runtime_types :: bounded_collections :: weak_bounded_vec :: WeakBoundedVec < runtime_types :: pallet_im_online :: sr25519 :: app_sr25519 :: Public > , :: subxt :: storage :: address :: Yes , :: subxt :: storage :: address :: Yes , () >{
                     ::subxt::storage::address::Address::new_static(
                         "ImOnline",
                         "Keys",
@@ -16675,6 +16844,74 @@ pub mod api {
     }
     pub mod runtime_types {
         use super::runtime_types;
+        pub mod bounded_collections {
+            use super::runtime_types;
+            pub mod bounded_btree_map {
+                use super::runtime_types;
+                #[derive(
+                    :: subxt :: ext :: codec :: Decode,
+                    :: subxt :: ext :: codec :: Encode,
+                    :: subxt :: ext :: scale_decode :: DecodeAsType,
+                    :: subxt :: ext :: scale_encode :: EncodeAsType,
+                    Clone,
+                    Debug,
+                    Eq,
+                    PartialEq,
+                )]
+                # [codec (crate = :: subxt :: ext :: codec)]
+                #[decode_as_type(
+                    crate_path = ":: subxt :: ext :: scale_decode"
+                )]
+                #[encode_as_type(
+                    crate_path = ":: subxt :: ext :: scale_encode"
+                )]
+                pub struct BoundedBTreeMap<_0, _1>(
+                    pub ::subxt::utils::KeyedVec<_0, _1>,
+                );
+            }
+            pub mod bounded_vec {
+                use super::runtime_types;
+                #[derive(
+                    :: subxt :: ext :: codec :: Decode,
+                    :: subxt :: ext :: codec :: Encode,
+                    :: subxt :: ext :: scale_decode :: DecodeAsType,
+                    :: subxt :: ext :: scale_encode :: EncodeAsType,
+                    Clone,
+                    Debug,
+                    Eq,
+                    PartialEq,
+                )]
+                # [codec (crate = :: subxt :: ext :: codec)]
+                #[decode_as_type(
+                    crate_path = ":: subxt :: ext :: scale_decode"
+                )]
+                #[encode_as_type(
+                    crate_path = ":: subxt :: ext :: scale_encode"
+                )]
+                pub struct BoundedVec<_0>(pub ::std::vec::Vec<_0>);
+            }
+            pub mod weak_bounded_vec {
+                use super::runtime_types;
+                #[derive(
+                    :: subxt :: ext :: codec :: Decode,
+                    :: subxt :: ext :: codec :: Encode,
+                    :: subxt :: ext :: scale_decode :: DecodeAsType,
+                    :: subxt :: ext :: scale_encode :: EncodeAsType,
+                    Clone,
+                    Debug,
+                    Eq,
+                    PartialEq,
+                )]
+                # [codec (crate = :: subxt :: ext :: codec)]
+                #[decode_as_type(
+                    crate_path = ":: subxt :: ext :: scale_decode"
+                )]
+                #[encode_as_type(
+                    crate_path = ":: subxt :: ext :: scale_encode"
+                )]
+                pub struct WeakBoundedVec<_0>(pub ::std::vec::Vec<_0>);
+            }
+        }
         pub mod dkg_runtime_primitives {
             use super::runtime_types;
             pub mod crypto {
@@ -16832,7 +17069,7 @@ pub mod api {
             # [codec (crate = :: subxt :: ext :: codec)]
             #[decode_as_type(crate_path = ":: subxt :: ext :: scale_decode")]
             #[encode_as_type(crate_path = ":: subxt :: ext :: scale_encode")]
-            pub struct AggregatedMisbehaviourReports < _0 , _1 , _2 > { pub misbehaviour_type : runtime_types :: dkg_runtime_primitives :: MisbehaviourType , pub session_id : :: core :: primitive :: u64 , pub offender : _0 , pub reporters : runtime_types :: sp_core :: bounded :: bounded_vec :: BoundedVec < _0 > , pub signatures : runtime_types :: sp_core :: bounded :: bounded_vec :: BoundedVec < runtime_types :: sp_core :: bounded :: bounded_vec :: BoundedVec < :: core :: primitive :: u8 > > , # [codec (skip)] pub __subxt_unused_type_params : :: core :: marker :: PhantomData < (_1 , _2) > }
+            pub struct AggregatedMisbehaviourReports < _0 , _1 , _2 > { pub misbehaviour_type : runtime_types :: dkg_runtime_primitives :: MisbehaviourType , pub session_id : :: core :: primitive :: u64 , pub offender : _0 , pub reporters : runtime_types :: bounded_collections :: bounded_vec :: BoundedVec < _0 > , pub signatures : runtime_types :: bounded_collections :: bounded_vec :: BoundedVec < runtime_types :: bounded_collections :: bounded_vec :: BoundedVec < :: core :: primitive :: u8 > > , # [codec (skip)] pub __subxt_unused_type_params : :: core :: marker :: PhantomData < (_1 , _2) > }
             #[derive(
                 :: subxt :: ext :: codec :: Decode,
                 :: subxt :: ext :: codec :: Encode,
@@ -17611,9 +17848,8 @@ pub mod api {
                     #[codec(index = 0)]
                     #[doc = "Make some on-chain remark."]
                     #[doc = ""]
-                    #[doc = "# <weight>"]
+                    #[doc = "## Complexity"]
                     #[doc = "- `O(1)`"]
-                    #[doc = "# </weight>"]
                     remark {
                         remark: ::std::vec::Vec<::core::primitive::u8>,
                     },
@@ -17623,29 +17859,16 @@ pub mod api {
                     #[codec(index = 2)]
                     #[doc = "Set the new runtime code."]
                     #[doc = ""]
-                    #[doc = "# <weight>"]
+                    #[doc = "## Complexity"]
                     #[doc = "- `O(C + S)` where `C` length of `code` and `S` complexity of `can_set_code`"]
-                    #[doc = "- 1 call to `can_set_code`: `O(S)` (calls `sp_io::misc::runtime_version` which is"]
-                    #[doc = "  expensive)."]
-                    #[doc = "- 1 storage write (codec `O(C)`)."]
-                    #[doc = "- 1 digest item."]
-                    #[doc = "- 1 event."]
-                    #[doc = "The weight of this function is dependent on the runtime, but generally this is very"]
-                    #[doc = "expensive. We will treat this as a full block."]
-                    #[doc = "# </weight>"]
                     set_code {
                         code: ::std::vec::Vec<::core::primitive::u8>,
                     },
                     #[codec(index = 3)]
                     #[doc = "Set the new runtime code without doing any checks of the given `code`."]
                     #[doc = ""]
-                    #[doc = "# <weight>"]
+                    #[doc = "## Complexity"]
                     #[doc = "- `O(C)` where `C` length of `code`"]
-                    #[doc = "- 1 storage write (codec `O(C)`)."]
-                    #[doc = "- 1 digest item."]
-                    #[doc = "- 1 event."]
-                    #[doc = "The weight of this function is dependent on the runtime. We will treat this as a full"]
-                    #[doc = "block. # </weight>"]
                     set_code_without_checks {
                         code: ::std::vec::Vec<::core::primitive::u8>,
                     },
@@ -18045,7 +18268,7 @@ pub mod api {
                     #[doc = ""]
                     #[doc = "The dispatch origin for this call must be `Signed` by the transactor."]
                     #[doc = ""]
-                    #[doc = "# <weight>"]
+                    #[doc = "## Complexity"]
                     #[doc = "- Dependent on arguments but not critical, given proper implementations for input config"]
                     #[doc = "  types. See related functions below."]
                     #[doc = "- It contains a limited number of reads and writes internally and no complex"]
@@ -18059,9 +18282,6 @@ pub mod api {
                     #[doc = "  - Removing enough funds from an account will trigger `T::DustRemoval::on_unbalanced`."]
                     #[doc = "  - `transfer_keep_alive` works the same way as `transfer`, but has an additional check"]
                     #[doc = "    that the transfer will not kill the origin account."]
-                    #[doc = "---------------------------------"]
-                    #[doc = "- Origin account is already in memory, so no DB operations for them."]
-                    #[doc = "# </weight>"]
                     transfer {
                         dest: ::subxt::utils::MultiAddress<
                             ::subxt::utils::AccountId32,
@@ -18092,10 +18312,9 @@ pub mod api {
                     #[codec(index = 2)]
                     #[doc = "Exactly as `transfer`, except the origin must be root and the source account may be"]
                     #[doc = "specified."]
-                    #[doc = "# <weight>"]
+                    #[doc = "## Complexity"]
                     #[doc = "- Same as transfer, but additional read and write because the source account is not"]
                     #[doc = "  assumed to be in the overlay."]
-                    #[doc = "# </weight>"]
                     force_transfer {
                         source: ::subxt::utils::MultiAddress<
                             ::subxt::utils::AccountId32,
@@ -18138,9 +18357,8 @@ pub mod api {
                     #[doc = "- `keep_alive`: A boolean to determine if the `transfer_all` operation should send all"]
                     #[doc = "  of the funds the account has, causing the sender account to be killed (false), or"]
                     #[doc = "  transfer everything except at least the existential deposit, which will guarantee to"]
-                    #[doc = "  keep the sender account alive (true). # <weight>"]
+                    #[doc = "  keep the sender account alive (true). ## Complexity"]
                     #[doc = "- O(1). Just like transfer, but reading the user's transferable balance first."]
-                    #[doc = "  #</weight>"]
                     transfer_all {
                         dest: ::subxt::utils::MultiAddress<
                             ::subxt::utils::AccountId32,
@@ -18365,6 +18583,9 @@ pub mod api {
                     #[codec(index = 6)]
                     #[doc = "Too many resources."]
                     TooManyResources,
+                    #[codec(index = 7)]
+                    #[doc = "Input out of bounds"]
+                    OutOfBounds,
                 }
                 #[derive(
                     :: subxt :: ext :: codec :: Decode,
@@ -18405,7 +18626,7 @@ pub mod api {
                 #[encode_as_type(
                     crate_path = ":: subxt :: ext :: scale_encode"
                 )]
-                pub struct BridgeInfo { pub additional : runtime_types :: sp_core :: bounded :: bounded_vec :: BoundedVec < (runtime_types :: pallet_bridge_registry :: types :: SerdeData , runtime_types :: pallet_bridge_registry :: types :: SerdeData ,) > , pub display : runtime_types :: pallet_bridge_registry :: types :: SerdeData , }
+                pub struct BridgeInfo { pub additional : runtime_types :: bounded_collections :: bounded_vec :: BoundedVec < (runtime_types :: pallet_bridge_registry :: types :: SerdeData , runtime_types :: pallet_bridge_registry :: types :: SerdeData ,) > , pub display : runtime_types :: pallet_bridge_registry :: types :: SerdeData , }
                 #[derive(
                     :: subxt :: ext :: codec :: Decode,
                     :: subxt :: ext :: codec :: Encode,
@@ -18423,7 +18644,7 @@ pub mod api {
                 #[encode_as_type(
                     crate_path = ":: subxt :: ext :: scale_encode"
                 )]
-                pub struct BridgeMetadata { pub resource_ids : runtime_types :: sp_core :: bounded :: bounded_vec :: BoundedVec < runtime_types :: webb_proposals :: header :: ResourceId > , pub info : runtime_types :: pallet_bridge_registry :: types :: BridgeInfo , }
+                pub struct BridgeMetadata { pub resource_ids : runtime_types :: bounded_collections :: bounded_vec :: BoundedVec < runtime_types :: webb_proposals :: header :: ResourceId > , pub info : runtime_types :: pallet_bridge_registry :: types :: BridgeInfo , }
                 #[derive(
                     :: subxt :: ext :: codec :: Decode,
                     :: subxt :: ext :: codec :: Encode,
@@ -18537,6 +18758,9 @@ pub mod api {
                     #[codec(index = 15)]
                     #[doc = "Input is out of bounds"]
                     OutOfBounds,
+                    #[codec(index = 16)]
+                    #[doc = "Cannot retreive signer from ecdsa signature"]
+                    CannotRetreiveSigner,
                 }
                 #[derive(
                     :: subxt :: ext :: codec :: Decode,
@@ -18578,7 +18802,7 @@ pub mod api {
                 #[encode_as_type(
                     crate_path = ":: subxt :: ext :: scale_encode"
                 )]
-                pub struct RoundMetadata < _0 , _1 > { pub curr_round_pub_key : runtime_types :: sp_core :: bounded :: bounded_vec :: BoundedVec < :: core :: primitive :: u8 > , pub next_round_pub_key : runtime_types :: sp_core :: bounded :: bounded_vec :: BoundedVec < :: core :: primitive :: u8 > , pub refresh_signature : runtime_types :: sp_core :: bounded :: bounded_vec :: BoundedVec < :: core :: primitive :: u8 > , # [codec (skip)] pub __subxt_unused_type_params : :: core :: marker :: PhantomData < (_0 , _1) > }
+                pub struct RoundMetadata < _0 , _1 > { pub curr_round_pub_key : runtime_types :: bounded_collections :: bounded_vec :: BoundedVec < :: core :: primitive :: u8 > , pub next_round_pub_key : runtime_types :: bounded_collections :: bounded_vec :: BoundedVec < :: core :: primitive :: u8 > , pub refresh_signature : runtime_types :: bounded_collections :: bounded_vec :: BoundedVec < :: core :: primitive :: u8 > , # [codec (skip)] pub __subxt_unused_type_params : :: core :: marker :: PhantomData < (_0 , _1) > }
             }
         }
         pub mod pallet_dkg_proposal_handler {
@@ -18703,7 +18927,7 @@ pub mod api {
                 )]
                 #[doc = "Contains one variant per dispatchable that can be called by an extrinsic."]
                 pub enum Call {
-                    # [codec (index = 0)] # [doc = "Sets the vote threshold for proposals."] # [doc = ""] # [doc = "This threshold is used to determine how many votes are required"] # [doc = "before a proposal is executed."] # [doc = ""] # [doc = "# <weight>"] # [doc = "- O(1) lookup and insert"] # [doc = "# </weight>"] set_threshold { threshold : :: core :: primitive :: u32 , } , # [codec (index = 1)] # [doc = "Stores a method name on chain under an associated resource ID."] # [doc = ""] # [doc = "# <weight>"] # [doc = "- O(1) write"] # [doc = "# </weight>"] set_resource { id : runtime_types :: webb_proposals :: header :: ResourceId , method : :: std :: vec :: Vec < :: core :: primitive :: u8 > , } , # [codec (index = 2)] # [doc = "Removes a resource ID from the resource mapping."] # [doc = ""] # [doc = "After this call, bridge transfers with the associated resource ID"] # [doc = "will be rejected."] # [doc = ""] # [doc = "# <weight>"] # [doc = "- O(1) removal"] # [doc = "# </weight>"] remove_resource { id : runtime_types :: webb_proposals :: header :: ResourceId , } , # [codec (index = 3)] # [doc = "Enables a chain ID as a source or destination for a bridge transfer."] # [doc = ""] # [doc = "# <weight>"] # [doc = "- O(1) lookup and insert"] # [doc = "# </weight>"] whitelist_chain { chain_id : runtime_types :: webb_proposals :: header :: TypedChainId , } , # [codec (index = 4)] # [doc = "Adds a new proposer to the proposer set."] # [doc = ""] # [doc = "# <weight>"] # [doc = "- O(1) lookup and insert"] # [doc = "# </weight>"] add_proposer { native_account : :: subxt :: utils :: AccountId32 , external_account : :: std :: vec :: Vec < :: core :: primitive :: u8 > , } , # [codec (index = 5)] # [doc = "Removes an existing proposer from the set."] # [doc = ""] # [doc = "# <weight>"] # [doc = "- O(1) lookup and removal"] # [doc = "# </weight>"] remove_proposer { v : :: subxt :: utils :: AccountId32 , } , # [codec (index = 6)] # [doc = "Commits a vote in favour of the provided proposal."] # [doc = ""] # [doc = "If a proposal with the given nonce and source chain ID does not"] # [doc = "already exist, it will be created with an initial vote in favour"] # [doc = "from the caller."] # [doc = ""] # [doc = "# <weight>"] # [doc = "- weight of proposed call, regardless of whether execution is performed"] # [doc = "# </weight>"] acknowledge_proposal { nonce : runtime_types :: webb_proposals :: nonce :: Nonce , src_chain_id : runtime_types :: webb_proposals :: header :: TypedChainId , r_id : runtime_types :: webb_proposals :: header :: ResourceId , prop : runtime_types :: sp_core :: bounded :: bounded_vec :: BoundedVec < :: core :: primitive :: u8 > , } , # [codec (index = 7)] # [doc = "Commits a vote against a provided proposal."] # [doc = ""] # [doc = "# <weight>"] # [doc = "- Fixed, since execution of proposal should not be included"] # [doc = "# </weight>"] reject_proposal { nonce : runtime_types :: webb_proposals :: nonce :: Nonce , src_chain_id : runtime_types :: webb_proposals :: header :: TypedChainId , r_id : runtime_types :: webb_proposals :: header :: ResourceId , prop : runtime_types :: sp_core :: bounded :: bounded_vec :: BoundedVec < :: core :: primitive :: u8 > , } , # [codec (index = 8)] # [doc = "Evaluate the state of a proposal given the current vote threshold."] # [doc = ""] # [doc = "A proposal with enough votes will be either executed or cancelled,"] # [doc = "and the status will be updated accordingly."] # [doc = ""] # [doc = "# <weight>"] # [doc = "- weight of proposed call, regardless of whether execution is performed"] # [doc = "# </weight>"] eval_vote_state { nonce : runtime_types :: webb_proposals :: nonce :: Nonce , src_chain_id : runtime_types :: webb_proposals :: header :: TypedChainId , prop : runtime_types :: sp_core :: bounded :: bounded_vec :: BoundedVec < :: core :: primitive :: u8 > , } , }
+                    # [codec (index = 0)] # [doc = "Sets the vote threshold for proposals."] # [doc = ""] # [doc = "This threshold is used to determine how many votes are required"] # [doc = "before a proposal is executed."] # [doc = ""] # [doc = "# <weight>"] # [doc = "- O(1) lookup and insert"] # [doc = "# </weight>"] set_threshold { threshold : :: core :: primitive :: u32 , } , # [codec (index = 1)] # [doc = "Stores a method name on chain under an associated resource ID."] # [doc = ""] # [doc = "# <weight>"] # [doc = "- O(1) write"] # [doc = "# </weight>"] set_resource { id : runtime_types :: webb_proposals :: header :: ResourceId , method : :: std :: vec :: Vec < :: core :: primitive :: u8 > , } , # [codec (index = 2)] # [doc = "Removes a resource ID from the resource mapping."] # [doc = ""] # [doc = "After this call, bridge transfers with the associated resource ID"] # [doc = "will be rejected."] # [doc = ""] # [doc = "# <weight>"] # [doc = "- O(1) removal"] # [doc = "# </weight>"] remove_resource { id : runtime_types :: webb_proposals :: header :: ResourceId , } , # [codec (index = 3)] # [doc = "Enables a chain ID as a source or destination for a bridge transfer."] # [doc = ""] # [doc = "# <weight>"] # [doc = "- O(1) lookup and insert"] # [doc = "# </weight>"] whitelist_chain { chain_id : runtime_types :: webb_proposals :: header :: TypedChainId , } , # [codec (index = 4)] # [doc = "Adds a new proposer to the proposer set."] # [doc = ""] # [doc = "# <weight>"] # [doc = "- O(1) lookup and insert"] # [doc = "# </weight>"] add_proposer { native_account : :: subxt :: utils :: AccountId32 , external_account : :: std :: vec :: Vec < :: core :: primitive :: u8 > , } , # [codec (index = 5)] # [doc = "Removes an existing proposer from the set."] # [doc = ""] # [doc = "# <weight>"] # [doc = "- O(1) lookup and removal"] # [doc = "# </weight>"] remove_proposer { v : :: subxt :: utils :: AccountId32 , } , # [codec (index = 6)] # [doc = "Commits a vote in favour of the provided proposal."] # [doc = ""] # [doc = "If a proposal with the given nonce and source chain ID does not"] # [doc = "already exist, it will be created with an initial vote in favour"] # [doc = "from the caller."] # [doc = ""] # [doc = "# <weight>"] # [doc = "- weight of proposed call, regardless of whether execution is performed"] # [doc = "# </weight>"] acknowledge_proposal { nonce : runtime_types :: webb_proposals :: nonce :: Nonce , src_chain_id : runtime_types :: webb_proposals :: header :: TypedChainId , r_id : runtime_types :: webb_proposals :: header :: ResourceId , prop : runtime_types :: webb_proposals :: proposal :: Proposal < runtime_types :: dkg_runtime_primitives :: CustomU32Getter > , } , # [codec (index = 7)] # [doc = "Commits a vote against a provided proposal."] # [doc = ""] # [doc = "# <weight>"] # [doc = "- Fixed, since execution of proposal should not be included"] # [doc = "# </weight>"] reject_proposal { nonce : runtime_types :: webb_proposals :: nonce :: Nonce , src_chain_id : runtime_types :: webb_proposals :: header :: TypedChainId , r_id : runtime_types :: webb_proposals :: header :: ResourceId , prop : runtime_types :: webb_proposals :: proposal :: Proposal < runtime_types :: dkg_runtime_primitives :: CustomU32Getter > , } , # [codec (index = 8)] # [doc = "Evaluate the state of a proposal given the current vote threshold."] # [doc = ""] # [doc = "A proposal with enough votes will be either executed or cancelled,"] # [doc = "and the status will be updated accordingly."] # [doc = ""] # [doc = "# <weight>"] # [doc = "- weight of proposed call, regardless of whether execution is performed"] # [doc = "# </weight>"] eval_vote_state { nonce : runtime_types :: webb_proposals :: nonce :: Nonce , src_chain_id : runtime_types :: webb_proposals :: header :: TypedChainId , prop : runtime_types :: webb_proposals :: proposal :: Proposal < runtime_types :: dkg_runtime_primitives :: CustomU32Getter > , } , }
                 #[derive(
                     :: subxt :: ext :: codec :: Decode,
                     :: subxt :: ext :: codec :: Encode,
@@ -18797,83 +19021,7 @@ pub mod api {
                 )]
                 #[doc = "\n\t\t\tThe [event](https://docs.substrate.io/main-docs/build/events-errors/) emitted\n\t\t\tby this pallet.\n\t\t\t"]
                 pub enum Event {
-                    #[codec(index = 0)]
-                    #[doc = "Vote threshold has changed (new_threshold)"]
-                    ProposerThresholdChanged {
-                        new_threshold: ::core::primitive::u32,
-                    },
-                    #[codec(index = 1)]
-                    #[doc = "Chain now available for transfers (chain_id)"]
-                    ChainWhitelisted {
-                        chain_id:
-                            runtime_types::webb_proposals::header::TypedChainId,
-                    },
-                    #[codec(index = 2)]
-                    #[doc = "Proposer added to set"]
-                    ProposerAdded {
-                        proposer_id: ::subxt::utils::AccountId32,
-                    },
-                    #[codec(index = 3)]
-                    #[doc = "Proposer removed from set"]
-                    ProposerRemoved {
-                        proposer_id: ::subxt::utils::AccountId32,
-                    },
-                    #[codec(index = 4)]
-                    #[doc = "Vote submitted in favour of proposal"]
-                    VoteFor {
-                        chain_id:
-                            runtime_types::webb_proposals::header::TypedChainId,
-                        proposal_nonce:
-                            runtime_types::webb_proposals::nonce::Nonce,
-                        who: ::subxt::utils::AccountId32,
-                    },
-                    #[codec(index = 5)]
-                    #[doc = "Vot submitted against proposal"]
-                    VoteAgainst {
-                        chain_id:
-                            runtime_types::webb_proposals::header::TypedChainId,
-                        proposal_nonce:
-                            runtime_types::webb_proposals::nonce::Nonce,
-                        who: ::subxt::utils::AccountId32,
-                    },
-                    #[codec(index = 6)]
-                    #[doc = "Voting successful for a proposal"]
-                    ProposalApproved {
-                        chain_id:
-                            runtime_types::webb_proposals::header::TypedChainId,
-                        proposal_nonce:
-                            runtime_types::webb_proposals::nonce::Nonce,
-                    },
-                    #[codec(index = 7)]
-                    #[doc = "Voting rejected a proposal"]
-                    ProposalRejected {
-                        chain_id:
-                            runtime_types::webb_proposals::header::TypedChainId,
-                        proposal_nonce:
-                            runtime_types::webb_proposals::nonce::Nonce,
-                    },
-                    #[codec(index = 8)]
-                    #[doc = "Execution of call succeeded"]
-                    ProposalSucceeded {
-                        chain_id:
-                            runtime_types::webb_proposals::header::TypedChainId,
-                        proposal_nonce:
-                            runtime_types::webb_proposals::nonce::Nonce,
-                    },
-                    #[codec(index = 9)]
-                    #[doc = "Execution of call failed"]
-                    ProposalFailed {
-                        chain_id:
-                            runtime_types::webb_proposals::header::TypedChainId,
-                        proposal_nonce:
-                            runtime_types::webb_proposals::nonce::Nonce,
-                    },
-                    #[codec(index = 10)]
-                    #[doc = "Proposers have been reset"]
-                    AuthorityProposersReset {
-                        proposers: ::std::vec::Vec<::subxt::utils::AccountId32>,
-                    },
-                }
+                    # [codec (index = 0)] # [doc = "Vote threshold has changed (new_threshold)"] ProposerThresholdChanged { new_threshold : :: core :: primitive :: u32 , } , # [codec (index = 1)] # [doc = "Chain now available for transfers (chain_id)"] ChainWhitelisted { chain_id : runtime_types :: webb_proposals :: header :: TypedChainId , } , # [codec (index = 2)] # [doc = "Proposer added to set"] ProposerAdded { proposer_id : :: subxt :: utils :: AccountId32 , } , # [codec (index = 3)] # [doc = "Proposer removed from set"] ProposerRemoved { proposer_id : :: subxt :: utils :: AccountId32 , } , # [codec (index = 4)] # [doc = "Vote submitted in favour of proposal"] VoteFor { kind : runtime_types :: webb_proposals :: proposal :: ProposalKind , chain_id : runtime_types :: webb_proposals :: header :: TypedChainId , proposal_nonce : runtime_types :: webb_proposals :: nonce :: Nonce , who : :: subxt :: utils :: AccountId32 , } , # [codec (index = 5)] # [doc = "Vot submitted against proposal"] VoteAgainst { kind : runtime_types :: webb_proposals :: proposal :: ProposalKind , chain_id : runtime_types :: webb_proposals :: header :: TypedChainId , proposal_nonce : runtime_types :: webb_proposals :: nonce :: Nonce , who : :: subxt :: utils :: AccountId32 , } , # [codec (index = 6)] # [doc = "Voting successful for a proposal"] ProposalApproved { kind : runtime_types :: webb_proposals :: proposal :: ProposalKind , chain_id : runtime_types :: webb_proposals :: header :: TypedChainId , proposal_nonce : runtime_types :: webb_proposals :: nonce :: Nonce , } , # [codec (index = 7)] # [doc = "Voting rejected a proposal"] ProposalRejected { kind : runtime_types :: webb_proposals :: proposal :: ProposalKind , chain_id : runtime_types :: webb_proposals :: header :: TypedChainId , proposal_nonce : runtime_types :: webb_proposals :: nonce :: Nonce , } , # [codec (index = 8)] # [doc = "Execution of call succeeded"] ProposalSucceeded { kind : runtime_types :: webb_proposals :: proposal :: ProposalKind , chain_id : runtime_types :: webb_proposals :: header :: TypedChainId , proposal_nonce : runtime_types :: webb_proposals :: nonce :: Nonce , } , # [codec (index = 9)] # [doc = "Execution of call failed"] ProposalFailed { kind : runtime_types :: webb_proposals :: proposal :: ProposalKind , chain_id : runtime_types :: webb_proposals :: header :: TypedChainId , proposal_nonce : runtime_types :: webb_proposals :: nonce :: Nonce , } , # [codec (index = 10)] # [doc = "Proposers have been reset"] AuthorityProposersReset { proposers : :: std :: vec :: Vec < :: subxt :: utils :: AccountId32 > , } , }
             }
             pub mod types {
                 use super::runtime_types;
@@ -18919,7 +19067,7 @@ pub mod api {
                 #[encode_as_type(
                     crate_path = ":: subxt :: ext :: scale_encode"
                 )]
-                pub struct ProposalVotes < _0 , _1 , _2 > { pub votes_for : runtime_types :: sp_core :: bounded :: bounded_vec :: BoundedVec < _0 > , pub votes_against : runtime_types :: sp_core :: bounded :: bounded_vec :: BoundedVec < _0 > , pub status : runtime_types :: pallet_dkg_proposals :: types :: ProposalStatus , pub expiry : _1 , # [codec (skip)] pub __subxt_unused_type_params : :: core :: marker :: PhantomData < _2 > }
+                pub struct ProposalVotes < _0 , _1 , _2 > { pub votes_for : runtime_types :: bounded_collections :: bounded_vec :: BoundedVec < _0 > , pub votes_against : runtime_types :: bounded_collections :: bounded_vec :: BoundedVec < _0 > , pub status : runtime_types :: pallet_dkg_proposals :: types :: ProposalStatus , pub expiry : _1 , # [codec (skip)] pub __subxt_unused_type_params : :: core :: marker :: PhantomData < _2 > }
             }
         }
         pub mod pallet_election_provider_multi_phase {
@@ -19027,7 +19175,7 @@ pub mod api {
                 )]
                 #[doc = "\n\t\t\tThe [event](https://docs.substrate.io/main-docs/build/events-errors/) emitted\n\t\t\tby this pallet.\n\t\t\t"]
                 pub enum Event {
-                    # [codec (index = 0)] # [doc = "A solution was stored with the given compute."] # [doc = ""] # [doc = "If the solution is signed, this means that it hasn't yet been processed. If the"] # [doc = "solution is unsigned, this means that it has also been processed."] # [doc = ""] # [doc = "The `bool` is `true` when a previous solution was ejected to make room for this one."] SolutionStored { compute : runtime_types :: pallet_election_provider_multi_phase :: ElectionCompute , prev_ejected : :: core :: primitive :: bool , } , # [codec (index = 1)] # [doc = "The election has been finalized, with the given computation and score."] ElectionFinalized { compute : runtime_types :: pallet_election_provider_multi_phase :: ElectionCompute , score : runtime_types :: sp_npos_elections :: ElectionScore , } , # [codec (index = 2)] # [doc = "An election failed."] # [doc = ""] # [doc = "Not much can be said about which computes failed in the process."] ElectionFailed , # [codec (index = 3)] # [doc = "An account has been rewarded for their signed submission being finalized."] Rewarded { account : :: subxt :: utils :: AccountId32 , value : :: core :: primitive :: u128 , } , # [codec (index = 4)] # [doc = "An account has been slashed for submitting an invalid signed submission."] Slashed { account : :: subxt :: utils :: AccountId32 , value : :: core :: primitive :: u128 , } , # [codec (index = 5)] # [doc = "The signed phase of the given round has started."] SignedPhaseStarted { round : :: core :: primitive :: u32 , } , # [codec (index = 6)] # [doc = "The unsigned phase of the given round has started."] UnsignedPhaseStarted { round : :: core :: primitive :: u32 , } , }
+                    # [codec (index = 0)] # [doc = "A solution was stored with the given compute."] # [doc = ""] # [doc = "The `origin` indicates the origin of the solution. If `origin` is `Some(AccountId)`,"] # [doc = "the stored solution was submited in the signed phase by a miner with the `AccountId`."] # [doc = "Otherwise, the solution was stored either during the unsigned phase or by"] # [doc = "`T::ForceOrigin`. The `bool` is `true` when a previous solution was ejected to make"] # [doc = "room for this one."] SolutionStored { compute : runtime_types :: pallet_election_provider_multi_phase :: ElectionCompute , origin : :: core :: option :: Option < :: subxt :: utils :: AccountId32 > , prev_ejected : :: core :: primitive :: bool , } , # [codec (index = 1)] # [doc = "The election has been finalized, with the given computation and score."] ElectionFinalized { compute : runtime_types :: pallet_election_provider_multi_phase :: ElectionCompute , score : runtime_types :: sp_npos_elections :: ElectionScore , } , # [codec (index = 2)] # [doc = "An election failed."] # [doc = ""] # [doc = "Not much can be said about which computes failed in the process."] ElectionFailed , # [codec (index = 3)] # [doc = "An account has been rewarded for their signed submission being finalized."] Rewarded { account : :: subxt :: utils :: AccountId32 , value : :: core :: primitive :: u128 , } , # [codec (index = 4)] # [doc = "An account has been slashed for submitting an invalid signed submission."] Slashed { account : :: subxt :: utils :: AccountId32 , value : :: core :: primitive :: u128 , } , # [codec (index = 5)] # [doc = "There was a phase transition in a given round."] PhaseTransitioned { from : runtime_types :: pallet_election_provider_multi_phase :: Phase < :: core :: primitive :: u32 > , to : runtime_types :: pallet_election_provider_multi_phase :: Phase < :: core :: primitive :: u32 > , round : :: core :: primitive :: u32 , } , }
             }
             pub mod signed {
                 use super::runtime_types;
@@ -19129,7 +19277,7 @@ pub mod api {
             # [codec (crate = :: subxt :: ext :: codec)]
             #[decode_as_type(crate_path = ":: subxt :: ext :: scale_decode")]
             #[encode_as_type(crate_path = ":: subxt :: ext :: scale_encode")]
-            pub struct ReadySolution { pub supports : runtime_types :: sp_core :: bounded :: bounded_vec :: BoundedVec < (:: subxt :: utils :: AccountId32 , runtime_types :: sp_npos_elections :: Support < :: subxt :: utils :: AccountId32 > ,) > , pub score : runtime_types :: sp_npos_elections :: ElectionScore , pub compute : runtime_types :: pallet_election_provider_multi_phase :: ElectionCompute , }
+            pub struct ReadySolution { pub supports : runtime_types :: bounded_collections :: bounded_vec :: BoundedVec < (:: subxt :: utils :: AccountId32 , runtime_types :: sp_npos_elections :: Support < :: subxt :: utils :: AccountId32 > ,) > , pub score : runtime_types :: sp_npos_elections :: ElectionScore , pub compute : runtime_types :: pallet_election_provider_multi_phase :: ElectionCompute , }
             #[derive(
                 :: subxt :: ext :: codec :: Decode,
                 :: subxt :: ext :: codec :: Encode,
@@ -19147,7 +19295,7 @@ pub mod api {
                 pub voters: ::std::vec::Vec<(
                     ::subxt::utils::AccountId32,
                     ::core::primitive::u64,
-                    runtime_types::sp_core::bounded::bounded_vec::BoundedVec<
+                    runtime_types::bounded_collections::bounded_vec::BoundedVec<
                         ::subxt::utils::AccountId32,
                     >,
                 )>,
@@ -19288,7 +19436,7 @@ pub mod api {
             # [codec (crate = :: subxt :: ext :: codec)]
             #[decode_as_type(crate_path = ":: subxt :: ext :: scale_decode")]
             #[encode_as_type(crate_path = ":: subxt :: ext :: scale_encode")]
-            pub struct StoredPendingChange < _0 > { pub scheduled_at : _0 , pub delay : _0 , pub next_authorities : runtime_types :: sp_core :: bounded :: weak_bounded_vec :: WeakBoundedVec < (runtime_types :: sp_finality_grandpa :: app :: Public , :: core :: primitive :: u64 ,) > , pub forced : :: core :: option :: Option < _0 > , }
+            pub struct StoredPendingChange < _0 > { pub scheduled_at : _0 , pub delay : _0 , pub next_authorities : runtime_types :: bounded_collections :: weak_bounded_vec :: WeakBoundedVec < (runtime_types :: sp_finality_grandpa :: app :: Public , :: core :: primitive :: u64 ,) > , pub forced : :: core :: option :: Option < _0 > , }
             #[derive(
                 :: subxt :: ext :: codec :: Decode,
                 :: subxt :: ext :: codec :: Encode,
@@ -19336,7 +19484,7 @@ pub mod api {
                 )]
                 #[doc = "Identity pallet declaration."]
                 pub enum Call {
-                    # [codec (index = 0)] # [doc = "Add a registrar to the system."] # [doc = ""] # [doc = "The dispatch origin for this call must be `T::RegistrarOrigin`."] # [doc = ""] # [doc = "- `account`: the account of the registrar."] # [doc = ""] # [doc = "Emits `RegistrarAdded` if successful."] # [doc = ""] # [doc = "# <weight>"] # [doc = "- `O(R)` where `R` registrar-count (governance-bounded and code-bounded)."] # [doc = "- One storage mutation (codec `O(R)`)."] # [doc = "- One event."] # [doc = "# </weight>"] add_registrar { account : :: subxt :: utils :: MultiAddress < :: subxt :: utils :: AccountId32 , :: core :: primitive :: u32 > , } , # [codec (index = 1)] # [doc = "Set an account's identity information and reserve the appropriate deposit."] # [doc = ""] # [doc = "If the account already has identity information, the deposit is taken as part payment"] # [doc = "for the new deposit."] # [doc = ""] # [doc = "The dispatch origin for this call must be _Signed_."] # [doc = ""] # [doc = "- `info`: The identity information."] # [doc = ""] # [doc = "Emits `IdentitySet` if successful."] # [doc = ""] # [doc = "# <weight>"] # [doc = "- `O(X + X' + R)`"] # [doc = "  - where `X` additional-field-count (deposit-bounded and code-bounded)"] # [doc = "  - where `R` judgements-count (registrar-count-bounded)"] # [doc = "- One balance reserve operation."] # [doc = "- One storage mutation (codec-read `O(X' + R)`, codec-write `O(X + R)`)."] # [doc = "- One event."] # [doc = "# </weight>"] set_identity { info : :: std :: boxed :: Box < runtime_types :: pallet_identity :: types :: IdentityInfo > , } , # [codec (index = 2)] # [doc = "Set the sub-accounts of the sender."] # [doc = ""] # [doc = "Payment: Any aggregate balance reserved by previous `set_subs` calls will be returned"] # [doc = "and an amount `SubAccountDeposit` will be reserved for each item in `subs`."] # [doc = ""] # [doc = "The dispatch origin for this call must be _Signed_ and the sender must have a registered"] # [doc = "identity."] # [doc = ""] # [doc = "- `subs`: The identity's (new) sub-accounts."] # [doc = ""] # [doc = "# <weight>"] # [doc = "- `O(P + S)`"] # [doc = "  - where `P` old-subs-count (hard- and deposit-bounded)."] # [doc = "  - where `S` subs-count (hard- and deposit-bounded)."] # [doc = "- At most one balance operations."] # [doc = "- DB:"] # [doc = "  - `P + S` storage mutations (codec complexity `O(1)`)"] # [doc = "  - One storage read (codec complexity `O(P)`)."] # [doc = "  - One storage write (codec complexity `O(S)`)."] # [doc = "  - One storage-exists (`IdentityOf::contains_key`)."] # [doc = "# </weight>"] set_subs { subs : :: std :: vec :: Vec < (:: subxt :: utils :: AccountId32 , runtime_types :: pallet_identity :: types :: Data ,) > , } , # [codec (index = 3)] # [doc = "Clear an account's identity info and all sub-accounts and return all deposits."] # [doc = ""] # [doc = "Payment: All reserved balances on the account are returned."] # [doc = ""] # [doc = "The dispatch origin for this call must be _Signed_ and the sender must have a registered"] # [doc = "identity."] # [doc = ""] # [doc = "Emits `IdentityCleared` if successful."] # [doc = ""] # [doc = "# <weight>"] # [doc = "- `O(R + S + X)`"] # [doc = "  - where `R` registrar-count (governance-bounded)."] # [doc = "  - where `S` subs-count (hard- and deposit-bounded)."] # [doc = "  - where `X` additional-field-count (deposit-bounded and code-bounded)."] # [doc = "- One balance-unreserve operation."] # [doc = "- `2` storage reads and `S + 2` storage deletions."] # [doc = "- One event."] # [doc = "# </weight>"] clear_identity , # [codec (index = 4)] # [doc = "Request a judgement from a registrar."] # [doc = ""] # [doc = "Payment: At most `max_fee` will be reserved for payment to the registrar if judgement"] # [doc = "given."] # [doc = ""] # [doc = "The dispatch origin for this call must be _Signed_ and the sender must have a"] # [doc = "registered identity."] # [doc = ""] # [doc = "- `reg_index`: The index of the registrar whose judgement is requested."] # [doc = "- `max_fee`: The maximum fee that may be paid. This should just be auto-populated as:"] # [doc = ""] # [doc = "```nocompile"] # [doc = "Self::registrars().get(reg_index).unwrap().fee"] # [doc = "```"] # [doc = ""] # [doc = "Emits `JudgementRequested` if successful."] # [doc = ""] # [doc = "# <weight>"] # [doc = "- `O(R + X)`."] # [doc = "- One balance-reserve operation."] # [doc = "- Storage: 1 read `O(R)`, 1 mutate `O(X + R)`."] # [doc = "- One event."] # [doc = "# </weight>"] request_judgement { # [codec (compact)] reg_index : :: core :: primitive :: u32 , # [codec (compact)] max_fee : :: core :: primitive :: u128 , } , # [codec (index = 5)] # [doc = "Cancel a previous request."] # [doc = ""] # [doc = "Payment: A previously reserved deposit is returned on success."] # [doc = ""] # [doc = "The dispatch origin for this call must be _Signed_ and the sender must have a"] # [doc = "registered identity."] # [doc = ""] # [doc = "- `reg_index`: The index of the registrar whose judgement is no longer requested."] # [doc = ""] # [doc = "Emits `JudgementUnrequested` if successful."] # [doc = ""] # [doc = "# <weight>"] # [doc = "- `O(R + X)`."] # [doc = "- One balance-reserve operation."] # [doc = "- One storage mutation `O(R + X)`."] # [doc = "- One event"] # [doc = "# </weight>"] cancel_request { reg_index : :: core :: primitive :: u32 , } , # [codec (index = 6)] # [doc = "Set the fee required for a judgement to be requested from a registrar."] # [doc = ""] # [doc = "The dispatch origin for this call must be _Signed_ and the sender must be the account"] # [doc = "of the registrar whose index is `index`."] # [doc = ""] # [doc = "- `index`: the index of the registrar whose fee is to be set."] # [doc = "- `fee`: the new fee."] # [doc = ""] # [doc = "# <weight>"] # [doc = "- `O(R)`."] # [doc = "- One storage mutation `O(R)`."] # [doc = "- Benchmark: 7.315 + R * 0.329 µs (min squares analysis)"] # [doc = "# </weight>"] set_fee { # [codec (compact)] index : :: core :: primitive :: u32 , # [codec (compact)] fee : :: core :: primitive :: u128 , } , # [codec (index = 7)] # [doc = "Change the account associated with a registrar."] # [doc = ""] # [doc = "The dispatch origin for this call must be _Signed_ and the sender must be the account"] # [doc = "of the registrar whose index is `index`."] # [doc = ""] # [doc = "- `index`: the index of the registrar whose fee is to be set."] # [doc = "- `new`: the new account ID."] # [doc = ""] # [doc = "# <weight>"] # [doc = "- `O(R)`."] # [doc = "- One storage mutation `O(R)`."] # [doc = "- Benchmark: 8.823 + R * 0.32 µs (min squares analysis)"] # [doc = "# </weight>"] set_account_id { # [codec (compact)] index : :: core :: primitive :: u32 , new : :: subxt :: utils :: MultiAddress < :: subxt :: utils :: AccountId32 , :: core :: primitive :: u32 > , } , # [codec (index = 8)] # [doc = "Set the field information for a registrar."] # [doc = ""] # [doc = "The dispatch origin for this call must be _Signed_ and the sender must be the account"] # [doc = "of the registrar whose index is `index`."] # [doc = ""] # [doc = "- `index`: the index of the registrar whose fee is to be set."] # [doc = "- `fields`: the fields that the registrar concerns themselves with."] # [doc = ""] # [doc = "# <weight>"] # [doc = "- `O(R)`."] # [doc = "- One storage mutation `O(R)`."] # [doc = "- Benchmark: 7.464 + R * 0.325 µs (min squares analysis)"] # [doc = "# </weight>"] set_fields { # [codec (compact)] index : :: core :: primitive :: u32 , fields : runtime_types :: pallet_identity :: types :: BitFlags < runtime_types :: pallet_identity :: types :: IdentityField > , } , # [codec (index = 9)] # [doc = "Provide a judgement for an account's identity."] # [doc = ""] # [doc = "The dispatch origin for this call must be _Signed_ and the sender must be the account"] # [doc = "of the registrar whose index is `reg_index`."] # [doc = ""] # [doc = "- `reg_index`: the index of the registrar whose judgement is being made."] # [doc = "- `target`: the account whose identity the judgement is upon. This must be an account"] # [doc = "  with a registered identity."] # [doc = "- `judgement`: the judgement of the registrar of index `reg_index` about `target`."] # [doc = "- `identity`: The hash of the [`IdentityInfo`] for that the judgement is provided."] # [doc = ""] # [doc = "Emits `JudgementGiven` if successful."] # [doc = ""] # [doc = "# <weight>"] # [doc = "- `O(R + X)`."] # [doc = "- One balance-transfer operation."] # [doc = "- Up to one account-lookup operation."] # [doc = "- Storage: 1 read `O(R)`, 1 mutate `O(R + X)`."] # [doc = "- One event."] # [doc = "# </weight>"] provide_judgement { # [codec (compact)] reg_index : :: core :: primitive :: u32 , target : :: subxt :: utils :: MultiAddress < :: subxt :: utils :: AccountId32 , :: core :: primitive :: u32 > , judgement : runtime_types :: pallet_identity :: types :: Judgement < :: core :: primitive :: u128 > , identity : :: subxt :: utils :: H256 , } , # [codec (index = 10)] # [doc = "Remove an account's identity and sub-account information and slash the deposits."] # [doc = ""] # [doc = "Payment: Reserved balances from `set_subs` and `set_identity` are slashed and handled by"] # [doc = "`Slash`. Verification request deposits are not returned; they should be cancelled"] # [doc = "manually using `cancel_request`."] # [doc = ""] # [doc = "The dispatch origin for this call must match `T::ForceOrigin`."] # [doc = ""] # [doc = "- `target`: the account whose identity the judgement is upon. This must be an account"] # [doc = "  with a registered identity."] # [doc = ""] # [doc = "Emits `IdentityKilled` if successful."] # [doc = ""] # [doc = "# <weight>"] # [doc = "- `O(R + S + X)`."] # [doc = "- One balance-reserve operation."] # [doc = "- `S + 2` storage mutations."] # [doc = "- One event."] # [doc = "# </weight>"] kill_identity { target : :: subxt :: utils :: MultiAddress < :: subxt :: utils :: AccountId32 , :: core :: primitive :: u32 > , } , # [codec (index = 11)] # [doc = "Add the given account to the sender's subs."] # [doc = ""] # [doc = "Payment: Balance reserved by a previous `set_subs` call for one sub will be repatriated"] # [doc = "to the sender."] # [doc = ""] # [doc = "The dispatch origin for this call must be _Signed_ and the sender must have a registered"] # [doc = "sub identity of `sub`."] add_sub { sub : :: subxt :: utils :: MultiAddress < :: subxt :: utils :: AccountId32 , :: core :: primitive :: u32 > , data : runtime_types :: pallet_identity :: types :: Data , } , # [codec (index = 12)] # [doc = "Alter the associated name of the given sub-account."] # [doc = ""] # [doc = "The dispatch origin for this call must be _Signed_ and the sender must have a registered"] # [doc = "sub identity of `sub`."] rename_sub { sub : :: subxt :: utils :: MultiAddress < :: subxt :: utils :: AccountId32 , :: core :: primitive :: u32 > , data : runtime_types :: pallet_identity :: types :: Data , } , # [codec (index = 13)] # [doc = "Remove the given account from the sender's subs."] # [doc = ""] # [doc = "Payment: Balance reserved by a previous `set_subs` call for one sub will be repatriated"] # [doc = "to the sender."] # [doc = ""] # [doc = "The dispatch origin for this call must be _Signed_ and the sender must have a registered"] # [doc = "sub identity of `sub`."] remove_sub { sub : :: subxt :: utils :: MultiAddress < :: subxt :: utils :: AccountId32 , :: core :: primitive :: u32 > , } , # [codec (index = 14)] # [doc = "Remove the sender as a sub-account."] # [doc = ""] # [doc = "Payment: Balance reserved by a previous `set_subs` call for one sub will be repatriated"] # [doc = "to the sender (*not* the original depositor)."] # [doc = ""] # [doc = "The dispatch origin for this call must be _Signed_ and the sender must have a registered"] # [doc = "super-identity."] # [doc = ""] # [doc = "NOTE: This should not normally be used, but is provided in the case that the non-"] # [doc = "controller of an account is maliciously registered as a sub-account."] quit_sub , }
+                    # [codec (index = 0)] # [doc = "Add a registrar to the system."] # [doc = ""] # [doc = "The dispatch origin for this call must be `T::RegistrarOrigin`."] # [doc = ""] # [doc = "- `account`: the account of the registrar."] # [doc = ""] # [doc = "Emits `RegistrarAdded` if successful."] # [doc = ""] # [doc = "## Complexity"] # [doc = "- `O(R)` where `R` registrar-count (governance-bounded and code-bounded)."] add_registrar { account : :: subxt :: utils :: MultiAddress < :: subxt :: utils :: AccountId32 , :: core :: primitive :: u32 > , } , # [codec (index = 1)] # [doc = "Set an account's identity information and reserve the appropriate deposit."] # [doc = ""] # [doc = "If the account already has identity information, the deposit is taken as part payment"] # [doc = "for the new deposit."] # [doc = ""] # [doc = "The dispatch origin for this call must be _Signed_."] # [doc = ""] # [doc = "- `info`: The identity information."] # [doc = ""] # [doc = "Emits `IdentitySet` if successful."] # [doc = ""] # [doc = "## Complexity"] # [doc = "- `O(X + X' + R)`"] # [doc = "  - where `X` additional-field-count (deposit-bounded and code-bounded)"] # [doc = "  - where `R` judgements-count (registrar-count-bounded)"] set_identity { info : :: std :: boxed :: Box < runtime_types :: pallet_identity :: types :: IdentityInfo > , } , # [codec (index = 2)] # [doc = "Set the sub-accounts of the sender."] # [doc = ""] # [doc = "Payment: Any aggregate balance reserved by previous `set_subs` calls will be returned"] # [doc = "and an amount `SubAccountDeposit` will be reserved for each item in `subs`."] # [doc = ""] # [doc = "The dispatch origin for this call must be _Signed_ and the sender must have a registered"] # [doc = "identity."] # [doc = ""] # [doc = "- `subs`: The identity's (new) sub-accounts."] # [doc = ""] # [doc = "## Complexity"] # [doc = "- `O(P + S)`"] # [doc = "  - where `P` old-subs-count (hard- and deposit-bounded)."] # [doc = "  - where `S` subs-count (hard- and deposit-bounded)."] set_subs { subs : :: std :: vec :: Vec < (:: subxt :: utils :: AccountId32 , runtime_types :: pallet_identity :: types :: Data ,) > , } , # [codec (index = 3)] # [doc = "Clear an account's identity info and all sub-accounts and return all deposits."] # [doc = ""] # [doc = "Payment: All reserved balances on the account are returned."] # [doc = ""] # [doc = "The dispatch origin for this call must be _Signed_ and the sender must have a registered"] # [doc = "identity."] # [doc = ""] # [doc = "Emits `IdentityCleared` if successful."] # [doc = ""] # [doc = "## Complexity"] # [doc = "- `O(R + S + X)`"] # [doc = "  - where `R` registrar-count (governance-bounded)."] # [doc = "  - where `S` subs-count (hard- and deposit-bounded)."] # [doc = "  - where `X` additional-field-count (deposit-bounded and code-bounded)."] clear_identity , # [codec (index = 4)] # [doc = "Request a judgement from a registrar."] # [doc = ""] # [doc = "Payment: At most `max_fee` will be reserved for payment to the registrar if judgement"] # [doc = "given."] # [doc = ""] # [doc = "The dispatch origin for this call must be _Signed_ and the sender must have a"] # [doc = "registered identity."] # [doc = ""] # [doc = "- `reg_index`: The index of the registrar whose judgement is requested."] # [doc = "- `max_fee`: The maximum fee that may be paid. This should just be auto-populated as:"] # [doc = ""] # [doc = "```nocompile"] # [doc = "Self::registrars().get(reg_index).unwrap().fee"] # [doc = "```"] # [doc = ""] # [doc = "Emits `JudgementRequested` if successful."] # [doc = ""] # [doc = "## Complexity"] # [doc = "- `O(R + X)`."] # [doc = "  - where `R` registrar-count (governance-bounded)."] # [doc = "  - where `X` additional-field-count (deposit-bounded and code-bounded)."] request_judgement { # [codec (compact)] reg_index : :: core :: primitive :: u32 , # [codec (compact)] max_fee : :: core :: primitive :: u128 , } , # [codec (index = 5)] # [doc = "Cancel a previous request."] # [doc = ""] # [doc = "Payment: A previously reserved deposit is returned on success."] # [doc = ""] # [doc = "The dispatch origin for this call must be _Signed_ and the sender must have a"] # [doc = "registered identity."] # [doc = ""] # [doc = "- `reg_index`: The index of the registrar whose judgement is no longer requested."] # [doc = ""] # [doc = "Emits `JudgementUnrequested` if successful."] # [doc = ""] # [doc = "## Complexity"] # [doc = "- `O(R + X)`."] # [doc = "  - where `R` registrar-count (governance-bounded)."] # [doc = "  - where `X` additional-field-count (deposit-bounded and code-bounded)."] cancel_request { reg_index : :: core :: primitive :: u32 , } , # [codec (index = 6)] # [doc = "Set the fee required for a judgement to be requested from a registrar."] # [doc = ""] # [doc = "The dispatch origin for this call must be _Signed_ and the sender must be the account"] # [doc = "of the registrar whose index is `index`."] # [doc = ""] # [doc = "- `index`: the index of the registrar whose fee is to be set."] # [doc = "- `fee`: the new fee."] # [doc = ""] # [doc = "## Complexity"] # [doc = "- `O(R)`."] # [doc = "  - where `R` registrar-count (governance-bounded)."] set_fee { # [codec (compact)] index : :: core :: primitive :: u32 , # [codec (compact)] fee : :: core :: primitive :: u128 , } , # [codec (index = 7)] # [doc = "Change the account associated with a registrar."] # [doc = ""] # [doc = "The dispatch origin for this call must be _Signed_ and the sender must be the account"] # [doc = "of the registrar whose index is `index`."] # [doc = ""] # [doc = "- `index`: the index of the registrar whose fee is to be set."] # [doc = "- `new`: the new account ID."] # [doc = ""] # [doc = "## Complexity"] # [doc = "- `O(R)`."] # [doc = "  - where `R` registrar-count (governance-bounded)."] set_account_id { # [codec (compact)] index : :: core :: primitive :: u32 , new : :: subxt :: utils :: MultiAddress < :: subxt :: utils :: AccountId32 , :: core :: primitive :: u32 > , } , # [codec (index = 8)] # [doc = "Set the field information for a registrar."] # [doc = ""] # [doc = "The dispatch origin for this call must be _Signed_ and the sender must be the account"] # [doc = "of the registrar whose index is `index`."] # [doc = ""] # [doc = "- `index`: the index of the registrar whose fee is to be set."] # [doc = "- `fields`: the fields that the registrar concerns themselves with."] # [doc = ""] # [doc = "## Complexity"] # [doc = "- `O(R)`."] # [doc = "  - where `R` registrar-count (governance-bounded)."] set_fields { # [codec (compact)] index : :: core :: primitive :: u32 , fields : runtime_types :: pallet_identity :: types :: BitFlags < runtime_types :: pallet_identity :: types :: IdentityField > , } , # [codec (index = 9)] # [doc = "Provide a judgement for an account's identity."] # [doc = ""] # [doc = "The dispatch origin for this call must be _Signed_ and the sender must be the account"] # [doc = "of the registrar whose index is `reg_index`."] # [doc = ""] # [doc = "- `reg_index`: the index of the registrar whose judgement is being made."] # [doc = "- `target`: the account whose identity the judgement is upon. This must be an account"] # [doc = "  with a registered identity."] # [doc = "- `judgement`: the judgement of the registrar of index `reg_index` about `target`."] # [doc = "- `identity`: The hash of the [`IdentityInfo`] for that the judgement is provided."] # [doc = ""] # [doc = "Emits `JudgementGiven` if successful."] # [doc = ""] # [doc = "## Complexity"] # [doc = "- `O(R + X)`."] # [doc = "  - where `R` registrar-count (governance-bounded)."] # [doc = "  - where `X` additional-field-count (deposit-bounded and code-bounded)."] provide_judgement { # [codec (compact)] reg_index : :: core :: primitive :: u32 , target : :: subxt :: utils :: MultiAddress < :: subxt :: utils :: AccountId32 , :: core :: primitive :: u32 > , judgement : runtime_types :: pallet_identity :: types :: Judgement < :: core :: primitive :: u128 > , identity : :: subxt :: utils :: H256 , } , # [codec (index = 10)] # [doc = "Remove an account's identity and sub-account information and slash the deposits."] # [doc = ""] # [doc = "Payment: Reserved balances from `set_subs` and `set_identity` are slashed and handled by"] # [doc = "`Slash`. Verification request deposits are not returned; they should be cancelled"] # [doc = "manually using `cancel_request`."] # [doc = ""] # [doc = "The dispatch origin for this call must match `T::ForceOrigin`."] # [doc = ""] # [doc = "- `target`: the account whose identity the judgement is upon. This must be an account"] # [doc = "  with a registered identity."] # [doc = ""] # [doc = "Emits `IdentityKilled` if successful."] # [doc = ""] # [doc = "## Complexity"] # [doc = "- `O(R + S + X)`"] # [doc = "  - where `R` registrar-count (governance-bounded)."] # [doc = "  - where `S` subs-count (hard- and deposit-bounded)."] # [doc = "  - where `X` additional-field-count (deposit-bounded and code-bounded)."] kill_identity { target : :: subxt :: utils :: MultiAddress < :: subxt :: utils :: AccountId32 , :: core :: primitive :: u32 > , } , # [codec (index = 11)] # [doc = "Add the given account to the sender's subs."] # [doc = ""] # [doc = "Payment: Balance reserved by a previous `set_subs` call for one sub will be repatriated"] # [doc = "to the sender."] # [doc = ""] # [doc = "The dispatch origin for this call must be _Signed_ and the sender must have a registered"] # [doc = "sub identity of `sub`."] add_sub { sub : :: subxt :: utils :: MultiAddress < :: subxt :: utils :: AccountId32 , :: core :: primitive :: u32 > , data : runtime_types :: pallet_identity :: types :: Data , } , # [codec (index = 12)] # [doc = "Alter the associated name of the given sub-account."] # [doc = ""] # [doc = "The dispatch origin for this call must be _Signed_ and the sender must have a registered"] # [doc = "sub identity of `sub`."] rename_sub { sub : :: subxt :: utils :: MultiAddress < :: subxt :: utils :: AccountId32 , :: core :: primitive :: u32 > , data : runtime_types :: pallet_identity :: types :: Data , } , # [codec (index = 13)] # [doc = "Remove the given account from the sender's subs."] # [doc = ""] # [doc = "Payment: Balance reserved by a previous `set_subs` call for one sub will be repatriated"] # [doc = "to the sender."] # [doc = ""] # [doc = "The dispatch origin for this call must be _Signed_ and the sender must have a registered"] # [doc = "sub identity of `sub`."] remove_sub { sub : :: subxt :: utils :: MultiAddress < :: subxt :: utils :: AccountId32 , :: core :: primitive :: u32 > , } , # [codec (index = 14)] # [doc = "Remove the sender as a sub-account."] # [doc = ""] # [doc = "Payment: Balance reserved by a previous `set_subs` call for one sub will be repatriated"] # [doc = "to the sender (*not* the original depositor)."] # [doc = ""] # [doc = "The dispatch origin for this call must be _Signed_ and the sender must have a registered"] # [doc = "super-identity."] # [doc = ""] # [doc = "NOTE: This should not normally be used, but is provided in the case that the non-"] # [doc = "controller of an account is maliciously registered as a sub-account."] quit_sub , }
                 #[derive(
                     :: subxt :: ext :: codec :: Decode,
                     :: subxt :: ext :: codec :: Encode,
@@ -19663,7 +19811,7 @@ pub mod api {
                 #[encode_as_type(
                     crate_path = ":: subxt :: ext :: scale_encode"
                 )]
-                pub struct IdentityInfo { pub additional : runtime_types :: sp_core :: bounded :: bounded_vec :: BoundedVec < (runtime_types :: pallet_identity :: types :: Data , runtime_types :: pallet_identity :: types :: Data ,) > , pub display : runtime_types :: pallet_identity :: types :: Data , pub legal : runtime_types :: pallet_identity :: types :: Data , pub web : runtime_types :: pallet_identity :: types :: Data , pub riot : runtime_types :: pallet_identity :: types :: Data , pub email : runtime_types :: pallet_identity :: types :: Data , pub pgp_fingerprint : :: core :: option :: Option < [:: core :: primitive :: u8 ; 20usize] > , pub image : runtime_types :: pallet_identity :: types :: Data , pub twitter : runtime_types :: pallet_identity :: types :: Data , }
+                pub struct IdentityInfo { pub additional : runtime_types :: bounded_collections :: bounded_vec :: BoundedVec < (runtime_types :: pallet_identity :: types :: Data , runtime_types :: pallet_identity :: types :: Data ,) > , pub display : runtime_types :: pallet_identity :: types :: Data , pub legal : runtime_types :: pallet_identity :: types :: Data , pub web : runtime_types :: pallet_identity :: types :: Data , pub riot : runtime_types :: pallet_identity :: types :: Data , pub email : runtime_types :: pallet_identity :: types :: Data , pub pgp_fingerprint : :: core :: option :: Option < [:: core :: primitive :: u8 ; 20usize] > , pub image : runtime_types :: pallet_identity :: types :: Data , pub twitter : runtime_types :: pallet_identity :: types :: Data , }
                 #[derive(
                     :: subxt :: ext :: codec :: Decode,
                     :: subxt :: ext :: codec :: Encode,
@@ -19738,7 +19886,7 @@ pub mod api {
                 #[encode_as_type(
                     crate_path = ":: subxt :: ext :: scale_encode"
                 )]
-                pub struct Registration < _0 > { pub judgements : runtime_types :: sp_core :: bounded :: bounded_vec :: BoundedVec < (:: core :: primitive :: u32 , runtime_types :: pallet_identity :: types :: Judgement < _0 > ,) > , pub deposit : _0 , pub info : runtime_types :: pallet_identity :: types :: IdentityInfo , }
+                pub struct Registration < _0 > { pub judgements : runtime_types :: bounded_collections :: bounded_vec :: BoundedVec < (:: core :: primitive :: u32 , runtime_types :: pallet_identity :: types :: Judgement < _0 > ,) > , pub deposit : _0 , pub info : runtime_types :: pallet_identity :: types :: IdentityInfo , }
             }
         }
         pub mod pallet_im_online {
@@ -19764,7 +19912,7 @@ pub mod api {
                 )]
                 #[doc = "Contains one variant per dispatchable that can be called by an extrinsic."]
                 pub enum Call {
-                    # [codec (index = 0)] # [doc = "# <weight>"] # [doc = "- Complexity: `O(K + E)` where K is length of `Keys` (heartbeat.validators_len) and E is"] # [doc = "  length of `heartbeat.network_state.external_address`"] # [doc = "  - `O(K)`: decoding of length `K`"] # [doc = "  - `O(E)`: decoding/encoding of length `E`"] # [doc = "- DbReads: pallet_session `Validators`, pallet_session `CurrentIndex`, `Keys`,"] # [doc = "  `ReceivedHeartbeats`"] # [doc = "- DbWrites: `ReceivedHeartbeats`"] # [doc = "# </weight>"] heartbeat { heartbeat : runtime_types :: pallet_im_online :: Heartbeat < :: core :: primitive :: u32 > , signature : runtime_types :: pallet_im_online :: sr25519 :: app_sr25519 :: Signature , } , }
+                    # [codec (index = 0)] # [doc = "## Complexity:"] # [doc = "- `O(K + E)` where K is length of `Keys` (heartbeat.validators_len) and E is length of"] # [doc = "  `heartbeat.network_state.external_address`"] # [doc = "  - `O(K)`: decoding of length `K`"] # [doc = "  - `O(E)`: decoding/encoding of length `E`"] heartbeat { heartbeat : runtime_types :: pallet_im_online :: Heartbeat < :: core :: primitive :: u32 > , signature : runtime_types :: pallet_im_online :: sr25519 :: app_sr25519 :: Signature , } , }
                 #[derive(
                     :: subxt :: ext :: codec :: Decode,
                     :: subxt :: ext :: codec :: Encode,
@@ -19871,7 +20019,7 @@ pub mod api {
             # [codec (crate = :: subxt :: ext :: codec)]
             #[decode_as_type(crate_path = ":: subxt :: ext :: scale_decode")]
             #[encode_as_type(crate_path = ":: subxt :: ext :: scale_encode")]
-            pub struct BoundedOpaqueNetworkState { pub peer_id : runtime_types :: sp_core :: bounded :: weak_bounded_vec :: WeakBoundedVec < :: core :: primitive :: u8 > , pub external_addresses : runtime_types :: sp_core :: bounded :: weak_bounded_vec :: WeakBoundedVec < runtime_types :: sp_core :: bounded :: weak_bounded_vec :: WeakBoundedVec < :: core :: primitive :: u8 > > , }
+            pub struct BoundedOpaqueNetworkState { pub peer_id : runtime_types :: bounded_collections :: weak_bounded_vec :: WeakBoundedVec < :: core :: primitive :: u8 > , pub external_addresses : runtime_types :: bounded_collections :: weak_bounded_vec :: WeakBoundedVec < runtime_types :: bounded_collections :: weak_bounded_vec :: WeakBoundedVec < :: core :: primitive :: u8 > > , }
             #[derive(
                 :: subxt :: ext :: codec :: Decode,
                 :: subxt :: ext :: codec :: Encode,
@@ -19928,14 +20076,8 @@ pub mod api {
                     #[doc = ""]
                     #[doc = "Emits `IndexAssigned` if successful."]
                     #[doc = ""]
-                    #[doc = "# <weight>"]
+                    #[doc = "## Complexity"]
                     #[doc = "- `O(1)`."]
-                    #[doc = "- One storage mutation (codec `O(1)`)."]
-                    #[doc = "- One reserve operation."]
-                    #[doc = "- One event."]
-                    #[doc = "-------------------"]
-                    #[doc = "- DB Weight: 1 Read/Write (Accounts)"]
-                    #[doc = "# </weight>"]
                     claim { index: ::core::primitive::u32 },
                     #[codec(index = 1)]
                     #[doc = "Assign an index already owned by the sender to another account. The balance reservation"]
@@ -19948,16 +20090,8 @@ pub mod api {
                     #[doc = ""]
                     #[doc = "Emits `IndexAssigned` if successful."]
                     #[doc = ""]
-                    #[doc = "# <weight>"]
+                    #[doc = "## Complexity"]
                     #[doc = "- `O(1)`."]
-                    #[doc = "- One storage mutation (codec `O(1)`)."]
-                    #[doc = "- One transfer operation."]
-                    #[doc = "- One event."]
-                    #[doc = "-------------------"]
-                    #[doc = "- DB Weight:"]
-                    #[doc = "   - Reads: Indices Accounts, System Account (recipient)"]
-                    #[doc = "   - Writes: Indices Accounts, System Account (recipient)"]
-                    #[doc = "# </weight>"]
                     transfer {
                         new: ::subxt::utils::MultiAddress<
                             ::subxt::utils::AccountId32,
@@ -19976,14 +20110,8 @@ pub mod api {
                     #[doc = ""]
                     #[doc = "Emits `IndexFreed` if successful."]
                     #[doc = ""]
-                    #[doc = "# <weight>"]
+                    #[doc = "## Complexity"]
                     #[doc = "- `O(1)`."]
-                    #[doc = "- One storage mutation (codec `O(1)`)."]
-                    #[doc = "- One reserve operation."]
-                    #[doc = "- One event."]
-                    #[doc = "-------------------"]
-                    #[doc = "- DB Weight: 1 Read/Write (Accounts)"]
-                    #[doc = "# </weight>"]
                     free { index: ::core::primitive::u32 },
                     #[codec(index = 3)]
                     #[doc = "Force an index to an account. This doesn't require a deposit. If the index is already"]
@@ -19997,16 +20125,8 @@ pub mod api {
                     #[doc = ""]
                     #[doc = "Emits `IndexAssigned` if successful."]
                     #[doc = ""]
-                    #[doc = "# <weight>"]
+                    #[doc = "## Complexity"]
                     #[doc = "- `O(1)`."]
-                    #[doc = "- One storage mutation (codec `O(1)`)."]
-                    #[doc = "- Up to one reserve operation."]
-                    #[doc = "- One event."]
-                    #[doc = "-------------------"]
-                    #[doc = "- DB Weight:"]
-                    #[doc = "   - Reads: Indices Accounts, System Account (original owner)"]
-                    #[doc = "   - Writes: Indices Accounts, System Account (original owner)"]
-                    #[doc = "# </weight>"]
                     force_transfer {
                         new: ::subxt::utils::MultiAddress<
                             ::subxt::utils::AccountId32,
@@ -20026,14 +20146,8 @@ pub mod api {
                     #[doc = ""]
                     #[doc = "Emits `IndexFrozen` if successful."]
                     #[doc = ""]
-                    #[doc = "# <weight>"]
+                    #[doc = "## Complexity"]
                     #[doc = "- `O(1)`."]
-                    #[doc = "- One storage mutation (codec `O(1)`)."]
-                    #[doc = "- Up to one slash operation."]
-                    #[doc = "- One event."]
-                    #[doc = "-------------------"]
-                    #[doc = "- DB Weight: 1 Read/Write (Accounts)"]
-                    #[doc = "# </weight>"]
                     freeze { index: ::core::primitive::u32 },
                 }
                 #[derive(
@@ -20131,283 +20245,7 @@ pub mod api {
                 )]
                 #[doc = "Contains one variant per dispatchable that can be called by an extrinsic."]
                 pub enum Call {
-                    #[codec(index = 0)]
-                    #[doc = "Stake funds with a pool. The amount to bond is transferred from the member to the"]
-                    #[doc = "pools account and immediately increases the pools bond."]
-                    #[doc = ""]
-                    #[doc = "# Note"]
-                    #[doc = ""]
-                    #[doc = "* An account can only be a member of a single pool."]
-                    #[doc = "* An account cannot join the same pool multiple times."]
-                    #[doc = "* This call will *not* dust the member account, so the member must have at least"]
-                    #[doc = "  `existential deposit + amount` in their account."]
-                    #[doc = "* Only a pool with [`PoolState::Open`] can be joined"]
-                    join {
-                        #[codec(compact)]
-                        amount: ::core::primitive::u128,
-                        pool_id: ::core::primitive::u32,
-                    },
-                    #[codec(index = 1)]
-                    #[doc = "Bond `extra` more funds from `origin` into the pool to which they already belong."]
-                    #[doc = ""]
-                    #[doc = "Additional funds can come from either the free balance of the account, of from the"]
-                    #[doc = "accumulated rewards, see [`BondExtra`]."]
-                    #[doc = ""]
-                    #[doc = "Bonding extra funds implies an automatic payout of all pending rewards as well."]
-                    bond_extra {
-                        extra:
-                            runtime_types::pallet_nomination_pools::BondExtra<
-                                ::core::primitive::u128,
-                            >,
-                    },
-                    #[codec(index = 2)]
-                    #[doc = "A bonded member can use this to claim their payout based on the rewards that the pool"]
-                    #[doc = "has accumulated since their last claimed payout (OR since joining if this is there first"]
-                    #[doc = "time claiming rewards). The payout will be transferred to the member's account."]
-                    #[doc = ""]
-                    #[doc = "The member will earn rewards pro rata based on the members stake vs the sum of the"]
-                    #[doc = "members in the pools stake. Rewards do not \"expire\"."]
-                    claim_payout,
-                    #[codec(index = 3)]
-                    #[doc = "Unbond up to `unbonding_points` of the `member_account`'s funds from the pool. It"]
-                    #[doc = "implicitly collects the rewards one last time, since not doing so would mean some"]
-                    #[doc = "rewards would be forfeited."]
-                    #[doc = ""]
-                    #[doc = "Under certain conditions, this call can be dispatched permissionlessly (i.e. by any"]
-                    #[doc = "account)."]
-                    #[doc = ""]
-                    #[doc = "# Conditions for a permissionless dispatch."]
-                    #[doc = ""]
-                    #[doc = "* The pool is blocked and the caller is either the root or state-toggler. This is"]
-                    #[doc = "  refereed to as a kick."]
-                    #[doc = "* The pool is destroying and the member is not the depositor."]
-                    #[doc = "* The pool is destroying, the member is the depositor and no other members are in the"]
-                    #[doc = "  pool."]
-                    #[doc = ""]
-                    #[doc = "## Conditions for permissioned dispatch (i.e. the caller is also the"]
-                    #[doc = "`member_account`):"]
-                    #[doc = ""]
-                    #[doc = "* The caller is not the depositor."]
-                    #[doc = "* The caller is the depositor, the pool is destroying and no other members are in the"]
-                    #[doc = "  pool."]
-                    #[doc = ""]
-                    #[doc = "# Note"]
-                    #[doc = ""]
-                    #[doc = "If there are too many unlocking chunks to unbond with the pool account,"]
-                    #[doc = "[`Call::pool_withdraw_unbonded`] can be called to try and minimize unlocking chunks."]
-                    #[doc = "The [`StakingInterface::unbond`] will implicitly call [`Call::pool_withdraw_unbonded`]"]
-                    #[doc = "to try to free chunks if necessary (ie. if unbound was called and no unlocking chunks"]
-                    #[doc = "are available). However, it may not be possible to release the current unlocking chunks,"]
-                    #[doc = "in which case, the result of this call will likely be the `NoMoreChunks` error from the"]
-                    #[doc = "staking system."]
-                    unbond {
-                        member_account: ::subxt::utils::MultiAddress<
-                            ::subxt::utils::AccountId32,
-                            ::core::primitive::u32,
-                        >,
-                        #[codec(compact)]
-                        unbonding_points: ::core::primitive::u128,
-                    },
-                    #[codec(index = 4)]
-                    #[doc = "Call `withdraw_unbonded` for the pools account. This call can be made by any account."]
-                    #[doc = ""]
-                    #[doc = "This is useful if their are too many unlocking chunks to call `unbond`, and some"]
-                    #[doc = "can be cleared by withdrawing. In the case there are too many unlocking chunks, the user"]
-                    #[doc = "would probably see an error like `NoMoreChunks` emitted from the staking system when"]
-                    #[doc = "they attempt to unbond."]
-                    pool_withdraw_unbonded {
-                        pool_id: ::core::primitive::u32,
-                        num_slashing_spans: ::core::primitive::u32,
-                    },
-                    #[codec(index = 5)]
-                    #[doc = "Withdraw unbonded funds from `member_account`. If no bonded funds can be unbonded, an"]
-                    #[doc = "error is returned."]
-                    #[doc = ""]
-                    #[doc = "Under certain conditions, this call can be dispatched permissionlessly (i.e. by any"]
-                    #[doc = "account)."]
-                    #[doc = ""]
-                    #[doc = "# Conditions for a permissionless dispatch"]
-                    #[doc = ""]
-                    #[doc = "* The pool is in destroy mode and the target is not the depositor."]
-                    #[doc = "* The target is the depositor and they are the only member in the sub pools."]
-                    #[doc = "* The pool is blocked and the caller is either the root or state-toggler."]
-                    #[doc = ""]
-                    #[doc = "# Conditions for permissioned dispatch"]
-                    #[doc = ""]
-                    #[doc = "* The caller is the target and they are not the depositor."]
-                    #[doc = ""]
-                    #[doc = "# Note"]
-                    #[doc = ""]
-                    #[doc = "If the target is the depositor, the pool will be destroyed."]
-                    withdraw_unbonded {
-                        member_account: ::subxt::utils::MultiAddress<
-                            ::subxt::utils::AccountId32,
-                            ::core::primitive::u32,
-                        >,
-                        num_slashing_spans: ::core::primitive::u32,
-                    },
-                    #[codec(index = 6)]
-                    #[doc = "Create a new delegation pool."]
-                    #[doc = ""]
-                    #[doc = "# Arguments"]
-                    #[doc = ""]
-                    #[doc = "* `amount` - The amount of funds to delegate to the pool. This also acts of a sort of"]
-                    #[doc = "  deposit since the pools creator cannot fully unbond funds until the pool is being"]
-                    #[doc = "  destroyed."]
-                    #[doc = "* `index` - A disambiguation index for creating the account. Likely only useful when"]
-                    #[doc = "  creating multiple pools in the same extrinsic."]
-                    #[doc = "* `root` - The account to set as [`PoolRoles::root`]."]
-                    #[doc = "* `nominator` - The account to set as the [`PoolRoles::nominator`]."]
-                    #[doc = "* `state_toggler` - The account to set as the [`PoolRoles::state_toggler`]."]
-                    #[doc = ""]
-                    #[doc = "# Note"]
-                    #[doc = ""]
-                    #[doc = "In addition to `amount`, the caller will transfer the existential deposit; so the caller"]
-                    #[doc = "needs at have at least `amount + existential_deposit` transferrable."]
-                    create {
-                        #[codec(compact)]
-                        amount: ::core::primitive::u128,
-                        root: ::subxt::utils::MultiAddress<
-                            ::subxt::utils::AccountId32,
-                            ::core::primitive::u32,
-                        >,
-                        nominator: ::subxt::utils::MultiAddress<
-                            ::subxt::utils::AccountId32,
-                            ::core::primitive::u32,
-                        >,
-                        state_toggler: ::subxt::utils::MultiAddress<
-                            ::subxt::utils::AccountId32,
-                            ::core::primitive::u32,
-                        >,
-                    },
-                    #[codec(index = 7)]
-                    #[doc = "Create a new delegation pool with a previously used pool id"]
-                    #[doc = ""]
-                    #[doc = "# Arguments"]
-                    #[doc = ""]
-                    #[doc = "same as `create` with the inclusion of"]
-                    #[doc = "* `pool_id` - `A valid PoolId."]
-                    create_with_pool_id {
-                        #[codec(compact)]
-                        amount: ::core::primitive::u128,
-                        root: ::subxt::utils::MultiAddress<
-                            ::subxt::utils::AccountId32,
-                            ::core::primitive::u32,
-                        >,
-                        nominator: ::subxt::utils::MultiAddress<
-                            ::subxt::utils::AccountId32,
-                            ::core::primitive::u32,
-                        >,
-                        state_toggler: ::subxt::utils::MultiAddress<
-                            ::subxt::utils::AccountId32,
-                            ::core::primitive::u32,
-                        >,
-                        pool_id: ::core::primitive::u32,
-                    },
-                    #[codec(index = 8)]
-                    #[doc = "Nominate on behalf of the pool."]
-                    #[doc = ""]
-                    #[doc = "The dispatch origin of this call must be signed by the pool nominator or the pool"]
-                    #[doc = "root role."]
-                    #[doc = ""]
-                    #[doc = "This directly forward the call to the staking pallet, on behalf of the pool bonded"]
-                    #[doc = "account."]
-                    nominate {
-                        pool_id: ::core::primitive::u32,
-                        validators:
-                            ::std::vec::Vec<::subxt::utils::AccountId32>,
-                    },
-                    #[codec(index = 9)]
-                    #[doc = "Set a new state for the pool."]
-                    #[doc = ""]
-                    #[doc = "If a pool is already in the `Destroying` state, then under no condition can its state"]
-                    #[doc = "change again."]
-                    #[doc = ""]
-                    #[doc = "The dispatch origin of this call must be either:"]
-                    #[doc = ""]
-                    #[doc = "1. signed by the state toggler, or the root role of the pool,"]
-                    #[doc = "2. if the pool conditions to be open are NOT met (as described by `ok_to_be_open`), and"]
-                    #[doc = "   then the state of the pool can be permissionlessly changed to `Destroying`."]
-                    set_state {
-                        pool_id: ::core::primitive::u32,
-                        state:
-                            runtime_types::pallet_nomination_pools::PoolState,
-                    },
-                    #[codec(index = 10)]
-                    #[doc = "Set a new metadata for the pool."]
-                    #[doc = ""]
-                    #[doc = "The dispatch origin of this call must be signed by the state toggler, or the root role"]
-                    #[doc = "of the pool."]
-                    set_metadata {
-                        pool_id: ::core::primitive::u32,
-                        metadata: ::std::vec::Vec<::core::primitive::u8>,
-                    },
-                    #[codec(index = 11)]
-                    #[doc = "Update configurations for the nomination pools. The origin for this call must be"]
-                    #[doc = "Root."]
-                    #[doc = ""]
-                    #[doc = "# Arguments"]
-                    #[doc = ""]
-                    #[doc = "* `min_join_bond` - Set [`MinJoinBond`]."]
-                    #[doc = "* `min_create_bond` - Set [`MinCreateBond`]."]
-                    #[doc = "* `max_pools` - Set [`MaxPools`]."]
-                    #[doc = "* `max_members` - Set [`MaxPoolMembers`]."]
-                    #[doc = "* `max_members_per_pool` - Set [`MaxPoolMembersPerPool`]."]
-                    set_configs {
-                        min_join_bond:
-                            runtime_types::pallet_nomination_pools::ConfigOp<
-                                ::core::primitive::u128,
-                            >,
-                        min_create_bond:
-                            runtime_types::pallet_nomination_pools::ConfigOp<
-                                ::core::primitive::u128,
-                            >,
-                        max_pools:
-                            runtime_types::pallet_nomination_pools::ConfigOp<
-                                ::core::primitive::u32,
-                            >,
-                        max_members:
-                            runtime_types::pallet_nomination_pools::ConfigOp<
-                                ::core::primitive::u32,
-                            >,
-                        max_members_per_pool:
-                            runtime_types::pallet_nomination_pools::ConfigOp<
-                                ::core::primitive::u32,
-                            >,
-                    },
-                    #[codec(index = 12)]
-                    #[doc = "Update the roles of the pool."]
-                    #[doc = ""]
-                    #[doc = "The root is the only entity that can change any of the roles, including itself,"]
-                    #[doc = "excluding the depositor, who can never change."]
-                    #[doc = ""]
-                    #[doc = "It emits an event, notifying UIs of the role change. This event is quite relevant to"]
-                    #[doc = "most pool members and they should be informed of changes to pool roles."]
-                    update_roles {
-                        pool_id: ::core::primitive::u32,
-                        new_root:
-                            runtime_types::pallet_nomination_pools::ConfigOp<
-                                ::subxt::utils::AccountId32,
-                            >,
-                        new_nominator:
-                            runtime_types::pallet_nomination_pools::ConfigOp<
-                                ::subxt::utils::AccountId32,
-                            >,
-                        new_state_toggler:
-                            runtime_types::pallet_nomination_pools::ConfigOp<
-                                ::subxt::utils::AccountId32,
-                            >,
-                    },
-                    #[codec(index = 13)]
-                    #[doc = "Chill on behalf of the pool."]
-                    #[doc = ""]
-                    #[doc = "The dispatch origin of this call must be signed by the pool nominator or the pool"]
-                    #[doc = "root role, same as [`Pallet::nominate`]."]
-                    #[doc = ""]
-                    #[doc = "This directly forward the call to the staking pallet, on behalf of the pool bonded"]
-                    #[doc = "account."]
-                    chill { pool_id: ::core::primitive::u32 },
-                }
+                    # [codec (index = 0)] # [doc = "Stake funds with a pool. The amount to bond is transferred from the member to the"] # [doc = "pools account and immediately increases the pools bond."] # [doc = ""] # [doc = "# Note"] # [doc = ""] # [doc = "* An account can only be a member of a single pool."] # [doc = "* An account cannot join the same pool multiple times."] # [doc = "* This call will *not* dust the member account, so the member must have at least"] # [doc = "  `existential deposit + amount` in their account."] # [doc = "* Only a pool with [`PoolState::Open`] can be joined"] join { # [codec (compact)] amount : :: core :: primitive :: u128 , pool_id : :: core :: primitive :: u32 , } , # [codec (index = 1)] # [doc = "Bond `extra` more funds from `origin` into the pool to which they already belong."] # [doc = ""] # [doc = "Additional funds can come from either the free balance of the account, of from the"] # [doc = "accumulated rewards, see [`BondExtra`]."] # [doc = ""] # [doc = "Bonding extra funds implies an automatic payout of all pending rewards as well."] # [doc = "See `bond_extra_other` to bond pending rewards of `other` members."] bond_extra { extra : runtime_types :: pallet_nomination_pools :: BondExtra < :: core :: primitive :: u128 > , } , # [codec (index = 2)] # [doc = "A bonded member can use this to claim their payout based on the rewards that the pool"] # [doc = "has accumulated since their last claimed payout (OR since joining if this is there first"] # [doc = "time claiming rewards). The payout will be transferred to the member's account."] # [doc = ""] # [doc = "The member will earn rewards pro rata based on the members stake vs the sum of the"] # [doc = "members in the pools stake. Rewards do not \"expire\"."] # [doc = ""] # [doc = "See `claim_payout_other` to caim rewards on bahalf of some `other` pool member."] claim_payout , # [codec (index = 3)] # [doc = "Unbond up to `unbonding_points` of the `member_account`'s funds from the pool. It"] # [doc = "implicitly collects the rewards one last time, since not doing so would mean some"] # [doc = "rewards would be forfeited."] # [doc = ""] # [doc = "Under certain conditions, this call can be dispatched permissionlessly (i.e. by any"] # [doc = "account)."] # [doc = ""] # [doc = "# Conditions for a permissionless dispatch."] # [doc = ""] # [doc = "* The pool is blocked and the caller is either the root or bouncer. This is refereed to"] # [doc = "  as a kick."] # [doc = "* The pool is destroying and the member is not the depositor."] # [doc = "* The pool is destroying, the member is the depositor and no other members are in the"] # [doc = "  pool."] # [doc = ""] # [doc = "## Conditions for permissioned dispatch (i.e. the caller is also the"] # [doc = "`member_account`):"] # [doc = ""] # [doc = "* The caller is not the depositor."] # [doc = "* The caller is the depositor, the pool is destroying and no other members are in the"] # [doc = "  pool."] # [doc = ""] # [doc = "# Note"] # [doc = ""] # [doc = "If there are too many unlocking chunks to unbond with the pool account,"] # [doc = "[`Call::pool_withdraw_unbonded`] can be called to try and minimize unlocking chunks."] # [doc = "The [`StakingInterface::unbond`] will implicitly call [`Call::pool_withdraw_unbonded`]"] # [doc = "to try to free chunks if necessary (ie. if unbound was called and no unlocking chunks"] # [doc = "are available). However, it may not be possible to release the current unlocking chunks,"] # [doc = "in which case, the result of this call will likely be the `NoMoreChunks` error from the"] # [doc = "staking system."] unbond { member_account : :: subxt :: utils :: MultiAddress < :: subxt :: utils :: AccountId32 , :: core :: primitive :: u32 > , # [codec (compact)] unbonding_points : :: core :: primitive :: u128 , } , # [codec (index = 4)] # [doc = "Call `withdraw_unbonded` for the pools account. This call can be made by any account."] # [doc = ""] # [doc = "This is useful if their are too many unlocking chunks to call `unbond`, and some"] # [doc = "can be cleared by withdrawing. In the case there are too many unlocking chunks, the user"] # [doc = "would probably see an error like `NoMoreChunks` emitted from the staking system when"] # [doc = "they attempt to unbond."] pool_withdraw_unbonded { pool_id : :: core :: primitive :: u32 , num_slashing_spans : :: core :: primitive :: u32 , } , # [codec (index = 5)] # [doc = "Withdraw unbonded funds from `member_account`. If no bonded funds can be unbonded, an"] # [doc = "error is returned."] # [doc = ""] # [doc = "Under certain conditions, this call can be dispatched permissionlessly (i.e. by any"] # [doc = "account)."] # [doc = ""] # [doc = "# Conditions for a permissionless dispatch"] # [doc = ""] # [doc = "* The pool is in destroy mode and the target is not the depositor."] # [doc = "* The target is the depositor and they are the only member in the sub pools."] # [doc = "* The pool is blocked and the caller is either the root or bouncer."] # [doc = ""] # [doc = "# Conditions for permissioned dispatch"] # [doc = ""] # [doc = "* The caller is the target and they are not the depositor."] # [doc = ""] # [doc = "# Note"] # [doc = ""] # [doc = "If the target is the depositor, the pool will be destroyed."] withdraw_unbonded { member_account : :: subxt :: utils :: MultiAddress < :: subxt :: utils :: AccountId32 , :: core :: primitive :: u32 > , num_slashing_spans : :: core :: primitive :: u32 , } , # [codec (index = 6)] # [doc = "Create a new delegation pool."] # [doc = ""] # [doc = "# Arguments"] # [doc = ""] # [doc = "* `amount` - The amount of funds to delegate to the pool. This also acts of a sort of"] # [doc = "  deposit since the pools creator cannot fully unbond funds until the pool is being"] # [doc = "  destroyed."] # [doc = "* `index` - A disambiguation index for creating the account. Likely only useful when"] # [doc = "  creating multiple pools in the same extrinsic."] # [doc = "* `root` - The account to set as [`PoolRoles::root`]."] # [doc = "* `nominator` - The account to set as the [`PoolRoles::nominator`]."] # [doc = "* `bouncer` - The account to set as the [`PoolRoles::bouncer`]."] # [doc = ""] # [doc = "# Note"] # [doc = ""] # [doc = "In addition to `amount`, the caller will transfer the existential deposit; so the caller"] # [doc = "needs at have at least `amount + existential_deposit` transferrable."] create { # [codec (compact)] amount : :: core :: primitive :: u128 , root : :: subxt :: utils :: MultiAddress < :: subxt :: utils :: AccountId32 , :: core :: primitive :: u32 > , nominator : :: subxt :: utils :: MultiAddress < :: subxt :: utils :: AccountId32 , :: core :: primitive :: u32 > , bouncer : :: subxt :: utils :: MultiAddress < :: subxt :: utils :: AccountId32 , :: core :: primitive :: u32 > , } , # [codec (index = 7)] # [doc = "Create a new delegation pool with a previously used pool id"] # [doc = ""] # [doc = "# Arguments"] # [doc = ""] # [doc = "same as `create` with the inclusion of"] # [doc = "* `pool_id` - `A valid PoolId."] create_with_pool_id { # [codec (compact)] amount : :: core :: primitive :: u128 , root : :: subxt :: utils :: MultiAddress < :: subxt :: utils :: AccountId32 , :: core :: primitive :: u32 > , nominator : :: subxt :: utils :: MultiAddress < :: subxt :: utils :: AccountId32 , :: core :: primitive :: u32 > , bouncer : :: subxt :: utils :: MultiAddress < :: subxt :: utils :: AccountId32 , :: core :: primitive :: u32 > , pool_id : :: core :: primitive :: u32 , } , # [codec (index = 8)] # [doc = "Nominate on behalf of the pool."] # [doc = ""] # [doc = "The dispatch origin of this call must be signed by the pool nominator or the pool"] # [doc = "root role."] # [doc = ""] # [doc = "This directly forward the call to the staking pallet, on behalf of the pool bonded"] # [doc = "account."] nominate { pool_id : :: core :: primitive :: u32 , validators : :: std :: vec :: Vec < :: subxt :: utils :: AccountId32 > , } , # [codec (index = 9)] # [doc = "Set a new state for the pool."] # [doc = ""] # [doc = "If a pool is already in the `Destroying` state, then under no condition can its state"] # [doc = "change again."] # [doc = ""] # [doc = "The dispatch origin of this call must be either:"] # [doc = ""] # [doc = "1. signed by the bouncer, or the root role of the pool,"] # [doc = "2. if the pool conditions to be open are NOT met (as described by `ok_to_be_open`), and"] # [doc = "   then the state of the pool can be permissionlessly changed to `Destroying`."] set_state { pool_id : :: core :: primitive :: u32 , state : runtime_types :: pallet_nomination_pools :: PoolState , } , # [codec (index = 10)] # [doc = "Set a new metadata for the pool."] # [doc = ""] # [doc = "The dispatch origin of this call must be signed by the bouncer, or the root role"] # [doc = "of the pool."] set_metadata { pool_id : :: core :: primitive :: u32 , metadata : :: std :: vec :: Vec < :: core :: primitive :: u8 > , } , # [codec (index = 11)] # [doc = "Update configurations for the nomination pools. The origin for this call must be"] # [doc = "Root."] # [doc = ""] # [doc = "# Arguments"] # [doc = ""] # [doc = "* `min_join_bond` - Set [`MinJoinBond`]."] # [doc = "* `min_create_bond` - Set [`MinCreateBond`]."] # [doc = "* `max_pools` - Set [`MaxPools`]."] # [doc = "* `max_members` - Set [`MaxPoolMembers`]."] # [doc = "* `max_members_per_pool` - Set [`MaxPoolMembersPerPool`]."] set_configs { min_join_bond : runtime_types :: pallet_nomination_pools :: ConfigOp < :: core :: primitive :: u128 > , min_create_bond : runtime_types :: pallet_nomination_pools :: ConfigOp < :: core :: primitive :: u128 > , max_pools : runtime_types :: pallet_nomination_pools :: ConfigOp < :: core :: primitive :: u32 > , max_members : runtime_types :: pallet_nomination_pools :: ConfigOp < :: core :: primitive :: u32 > , max_members_per_pool : runtime_types :: pallet_nomination_pools :: ConfigOp < :: core :: primitive :: u32 > , } , # [codec (index = 12)] # [doc = "Update the roles of the pool."] # [doc = ""] # [doc = "The root is the only entity that can change any of the roles, including itself,"] # [doc = "excluding the depositor, who can never change."] # [doc = ""] # [doc = "It emits an event, notifying UIs of the role change. This event is quite relevant to"] # [doc = "most pool members and they should be informed of changes to pool roles."] update_roles { pool_id : :: core :: primitive :: u32 , new_root : runtime_types :: pallet_nomination_pools :: ConfigOp < :: subxt :: utils :: AccountId32 > , new_nominator : runtime_types :: pallet_nomination_pools :: ConfigOp < :: subxt :: utils :: AccountId32 > , new_bouncer : runtime_types :: pallet_nomination_pools :: ConfigOp < :: subxt :: utils :: AccountId32 > , } , # [codec (index = 13)] # [doc = "Chill on behalf of the pool."] # [doc = ""] # [doc = "The dispatch origin of this call must be signed by the pool nominator or the pool"] # [doc = "root role, same as [`Pallet::nominate`]."] # [doc = ""] # [doc = "This directly forward the call to the staking pallet, on behalf of the pool bonded"] # [doc = "account."] chill { pool_id : :: core :: primitive :: u32 , } , # [codec (index = 14)] # [doc = "`origin` bonds funds from `extra` for some pool member `member` into their respective"] # [doc = "pools."] # [doc = ""] # [doc = "`origin` can bond extra funds from free balance or pending rewards when `origin =="] # [doc = "other`."] # [doc = ""] # [doc = "In the case of `origin != other`, `origin` can only bond extra pending rewards of"] # [doc = "`other` members assuming set_claim_permission for the given member is"] # [doc = "`PermissionlessAll` or `PermissionlessCompound`."] bond_extra_other { member : :: subxt :: utils :: MultiAddress < :: subxt :: utils :: AccountId32 , :: core :: primitive :: u32 > , extra : runtime_types :: pallet_nomination_pools :: BondExtra < :: core :: primitive :: u128 > , } , # [codec (index = 15)] # [doc = "Allows a pool member to set a claim permission to allow or disallow permissionless"] # [doc = "bonding and withdrawing."] # [doc = ""] # [doc = "By default, this is `Permissioned`, which implies only the pool member themselves can"] # [doc = "claim their pending rewards. If a pool member wishes so, they can set this to"] # [doc = "`PermissionlessAll` to allow any account to claim their rewards and bond extra to the"] # [doc = "pool."] # [doc = ""] # [doc = "# Arguments"] # [doc = ""] # [doc = "* `origin` - Member of a pool."] # [doc = "* `actor` - Account to claim reward. // improve this"] set_claim_permission { permission : runtime_types :: pallet_nomination_pools :: ClaimPermission , } , # [codec (index = 16)] # [doc = "`origin` can claim payouts on some pool member `other`'s behalf."] # [doc = ""] # [doc = "Pool member `other` must have a `PermissionlessAll` or `PermissionlessWithdraw` in order"] # [doc = "for this call to be successful."] claim_payout_other { other : :: subxt :: utils :: AccountId32 , } , }
                 #[derive(
                     :: subxt :: ext :: codec :: Decode,
                     :: subxt :: ext :: codec :: Encode,
@@ -20456,7 +20294,7 @@ pub mod api {
                 )]
                 #[doc = "\n\t\t\tCustom [dispatch errors](https://docs.substrate.io/main-docs/build/events-errors/)\n\t\t\tof this pallet.\n\t\t\t"]
                 pub enum Error {
-                    # [codec (index = 0)] # [doc = "A (bonded) pool id does not exist."] PoolNotFound , # [codec (index = 1)] # [doc = "An account is not a member."] PoolMemberNotFound , # [codec (index = 2)] # [doc = "A reward pool does not exist. In all cases this is a system logic error."] RewardPoolNotFound , # [codec (index = 3)] # [doc = "A sub pool does not exist."] SubPoolsNotFound , # [codec (index = 4)] # [doc = "An account is already delegating in another pool. An account may only belong to one"] # [doc = "pool at a time."] AccountBelongsToOtherPool , # [codec (index = 5)] # [doc = "The member is fully unbonded (and thus cannot access the bonded and reward pool"] # [doc = "anymore to, for example, collect rewards)."] FullyUnbonding , # [codec (index = 6)] # [doc = "The member cannot unbond further chunks due to reaching the limit."] MaxUnbondingLimit , # [codec (index = 7)] # [doc = "None of the funds can be withdrawn yet because the bonding duration has not passed."] CannotWithdrawAny , # [codec (index = 8)] # [doc = "The amount does not meet the minimum bond to either join or create a pool."] # [doc = ""] # [doc = "The depositor can never unbond to a value less than"] # [doc = "`Pallet::depositor_min_bond`. The caller does not have nominating"] # [doc = "permissions for the pool. Members can never unbond to a value below `MinJoinBond`."] MinimumBondNotMet , # [codec (index = 9)] # [doc = "The transaction could not be executed due to overflow risk for the pool."] OverflowRisk , # [codec (index = 10)] # [doc = "A pool must be in [`PoolState::Destroying`] in order for the depositor to unbond or for"] # [doc = "other members to be permissionlessly unbonded."] NotDestroying , # [codec (index = 11)] # [doc = "The caller does not have nominating permissions for the pool."] NotNominator , # [codec (index = 12)] # [doc = "Either a) the caller cannot make a valid kick or b) the pool is not destroying."] NotKickerOrDestroying , # [codec (index = 13)] # [doc = "The pool is not open to join"] NotOpen , # [codec (index = 14)] # [doc = "The system is maxed out on pools."] MaxPools , # [codec (index = 15)] # [doc = "Too many members in the pool or system."] MaxPoolMembers , # [codec (index = 16)] # [doc = "The pools state cannot be changed."] CanNotChangeState , # [codec (index = 17)] # [doc = "The caller does not have adequate permissions."] DoesNotHavePermission , # [codec (index = 18)] # [doc = "Metadata exceeds [`Config::MaxMetadataLen`]"] MetadataExceedsMaxLen , # [codec (index = 19)] # [doc = "Some error occurred that should never happen. This should be reported to the"] # [doc = "maintainers."] Defensive (runtime_types :: pallet_nomination_pools :: pallet :: DefensiveError ,) , # [codec (index = 20)] # [doc = "Partial unbonding now allowed permissionlessly."] PartialUnbondNotAllowedPermissionlessly , # [codec (index = 21)] # [doc = "Pool id currently in use."] PoolIdInUse , # [codec (index = 22)] # [doc = "Pool id provided is not correct/usable."] InvalidPoolId , }
+                    # [codec (index = 0)] # [doc = "A (bonded) pool id does not exist."] PoolNotFound , # [codec (index = 1)] # [doc = "An account is not a member."] PoolMemberNotFound , # [codec (index = 2)] # [doc = "A reward pool does not exist. In all cases this is a system logic error."] RewardPoolNotFound , # [codec (index = 3)] # [doc = "A sub pool does not exist."] SubPoolsNotFound , # [codec (index = 4)] # [doc = "An account is already delegating in another pool. An account may only belong to one"] # [doc = "pool at a time."] AccountBelongsToOtherPool , # [codec (index = 5)] # [doc = "The member is fully unbonded (and thus cannot access the bonded and reward pool"] # [doc = "anymore to, for example, collect rewards)."] FullyUnbonding , # [codec (index = 6)] # [doc = "The member cannot unbond further chunks due to reaching the limit."] MaxUnbondingLimit , # [codec (index = 7)] # [doc = "None of the funds can be withdrawn yet because the bonding duration has not passed."] CannotWithdrawAny , # [codec (index = 8)] # [doc = "The amount does not meet the minimum bond to either join or create a pool."] # [doc = ""] # [doc = "The depositor can never unbond to a value less than"] # [doc = "`Pallet::depositor_min_bond`. The caller does not have nominating"] # [doc = "permissions for the pool. Members can never unbond to a value below `MinJoinBond`."] MinimumBondNotMet , # [codec (index = 9)] # [doc = "The transaction could not be executed due to overflow risk for the pool."] OverflowRisk , # [codec (index = 10)] # [doc = "A pool must be in [`PoolState::Destroying`] in order for the depositor to unbond or for"] # [doc = "other members to be permissionlessly unbonded."] NotDestroying , # [codec (index = 11)] # [doc = "The caller does not have nominating permissions for the pool."] NotNominator , # [codec (index = 12)] # [doc = "Either a) the caller cannot make a valid kick or b) the pool is not destroying."] NotKickerOrDestroying , # [codec (index = 13)] # [doc = "The pool is not open to join"] NotOpen , # [codec (index = 14)] # [doc = "The system is maxed out on pools."] MaxPools , # [codec (index = 15)] # [doc = "Too many members in the pool or system."] MaxPoolMembers , # [codec (index = 16)] # [doc = "The pools state cannot be changed."] CanNotChangeState , # [codec (index = 17)] # [doc = "The caller does not have adequate permissions."] DoesNotHavePermission , # [codec (index = 18)] # [doc = "Metadata exceeds [`Config::MaxMetadataLen`]"] MetadataExceedsMaxLen , # [codec (index = 19)] # [doc = "Some error occurred that should never happen. This should be reported to the"] # [doc = "maintainers."] Defensive (runtime_types :: pallet_nomination_pools :: pallet :: DefensiveError ,) , # [codec (index = 20)] # [doc = "Partial unbonding now allowed permissionlessly."] PartialUnbondNotAllowedPermissionlessly , # [codec (index = 21)] # [doc = "Pool id currently in use."] PoolIdInUse , # [codec (index = 22)] # [doc = "Pool id provided is not correct/usable."] InvalidPoolId , # [codec (index = 23)] # [doc = "Bonding extra is restricted to the exact pending reward amount."] BondExtraRestricted , }
                 #[derive(
                     :: subxt :: ext :: codec :: Decode,
                     :: subxt :: ext :: codec :: Encode,
@@ -20553,7 +20391,7 @@ pub mod api {
                     RolesUpdated {
                         root:
                             ::core::option::Option<::subxt::utils::AccountId32>,
-                        state_toggler:
+                        bouncer:
                             ::core::option::Option<::subxt::utils::AccountId32>,
                         nominator:
                             ::core::option::Option<::subxt::utils::AccountId32>,
@@ -20626,6 +20464,29 @@ pub mod api {
             # [codec (crate = :: subxt :: ext :: codec)]
             #[decode_as_type(crate_path = ":: subxt :: ext :: scale_decode")]
             #[encode_as_type(crate_path = ":: subxt :: ext :: scale_encode")]
+            pub enum ClaimPermission {
+                #[codec(index = 0)]
+                Permissioned,
+                #[codec(index = 1)]
+                PermissionlessCompound,
+                #[codec(index = 2)]
+                PermissionlessWithdraw,
+                #[codec(index = 3)]
+                PermissionlessAll,
+            }
+            #[derive(
+                :: subxt :: ext :: codec :: Decode,
+                :: subxt :: ext :: codec :: Encode,
+                :: subxt :: ext :: scale_decode :: DecodeAsType,
+                :: subxt :: ext :: scale_encode :: EncodeAsType,
+                Clone,
+                Debug,
+                Eq,
+                PartialEq,
+            )]
+            # [codec (crate = :: subxt :: ext :: codec)]
+            #[decode_as_type(crate_path = ":: subxt :: ext :: scale_decode")]
+            #[encode_as_type(crate_path = ":: subxt :: ext :: scale_encode")]
             pub enum ConfigOp<_0> {
                 #[codec(index = 0)]
                 Noop,
@@ -20647,7 +20508,7 @@ pub mod api {
             # [codec (crate = :: subxt :: ext :: codec)]
             #[decode_as_type(crate_path = ":: subxt :: ext :: scale_decode")]
             #[encode_as_type(crate_path = ":: subxt :: ext :: scale_encode")]
-            pub struct PoolMember { pub pool_id : :: core :: primitive :: u32 , pub points : :: core :: primitive :: u128 , pub last_recorded_reward_counter : runtime_types :: sp_arithmetic :: fixed_point :: FixedU128 , pub unbonding_eras : runtime_types :: sp_core :: bounded :: bounded_btree_map :: BoundedBTreeMap < :: core :: primitive :: u32 , :: core :: primitive :: u128 > , }
+            pub struct PoolMember { pub pool_id : :: core :: primitive :: u32 , pub points : :: core :: primitive :: u128 , pub last_recorded_reward_counter : runtime_types :: sp_arithmetic :: fixed_point :: FixedU128 , pub unbonding_eras : runtime_types :: bounded_collections :: bounded_btree_map :: BoundedBTreeMap < :: core :: primitive :: u32 , :: core :: primitive :: u128 > , }
             #[derive(
                 :: subxt :: ext :: codec :: Decode,
                 :: subxt :: ext :: codec :: Encode,
@@ -20665,7 +20526,7 @@ pub mod api {
                 pub depositor: _0,
                 pub root: ::core::option::Option<_0>,
                 pub nominator: ::core::option::Option<_0>,
-                pub state_toggler: ::core::option::Option<_0>,
+                pub bouncer: ::core::option::Option<_0>,
             }
             #[derive(
                 :: subxt :: ext :: codec :: Decode,
@@ -20720,7 +20581,7 @@ pub mod api {
             # [codec (crate = :: subxt :: ext :: codec)]
             #[decode_as_type(crate_path = ":: subxt :: ext :: scale_decode")]
             #[encode_as_type(crate_path = ":: subxt :: ext :: scale_encode")]
-            pub struct SubPools { pub no_era : runtime_types :: pallet_nomination_pools :: UnbondPool , pub with_era : runtime_types :: sp_core :: bounded :: bounded_btree_map :: BoundedBTreeMap < :: core :: primitive :: u32 , runtime_types :: pallet_nomination_pools :: UnbondPool > , }
+            pub struct SubPools { pub no_era : runtime_types :: pallet_nomination_pools :: UnbondPool , pub with_era : runtime_types :: bounded_collections :: bounded_btree_map :: BoundedBTreeMap < :: core :: primitive :: u32 , runtime_types :: pallet_nomination_pools :: UnbondPool > , }
             #[derive(
                 :: subxt :: ext :: codec :: Decode,
                 :: subxt :: ext :: codec :: Encode,
@@ -20762,7 +20623,7 @@ pub mod api {
                 )]
                 #[doc = "Contains one variant per dispatchable that can be called by an extrinsic."]
                 pub enum Call {
-                    # [codec (index = 0)] # [doc = "Sets the session key(s) of the function caller to `keys`."] # [doc = "Allows an account to set its session key prior to becoming a validator."] # [doc = "This doesn't take effect until the next session."] # [doc = ""] # [doc = "The dispatch origin of this function must be signed."] # [doc = ""] # [doc = "# <weight>"] # [doc = "- Complexity: `O(1)`. Actual cost depends on the number of length of"] # [doc = "  `T::Keys::key_ids()` which is fixed."] # [doc = "- DbReads: `origin account`, `T::ValidatorIdOf`, `NextKeys`"] # [doc = "- DbWrites: `origin account`, `NextKeys`"] # [doc = "- DbReads per key id: `KeyOwner`"] # [doc = "- DbWrites per key id: `KeyOwner`"] # [doc = "# </weight>"] set_keys { keys : runtime_types :: dkg_standalone_runtime :: opaque :: SessionKeys , proof : :: std :: vec :: Vec < :: core :: primitive :: u8 > , } , # [codec (index = 1)] # [doc = "Removes any session key(s) of the function caller."] # [doc = ""] # [doc = "This doesn't take effect until the next session."] # [doc = ""] # [doc = "The dispatch origin of this function must be Signed and the account must be either be"] # [doc = "convertible to a validator ID using the chain's typical addressing system (this usually"] # [doc = "means being a controller account) or directly convertible into a validator ID (which"] # [doc = "usually means being a stash account)."] # [doc = ""] # [doc = "# <weight>"] # [doc = "- Complexity: `O(1)` in number of key types. Actual cost depends on the number of length"] # [doc = "  of `T::Keys::key_ids()` which is fixed."] # [doc = "- DbReads: `T::ValidatorIdOf`, `NextKeys`, `origin account`"] # [doc = "- DbWrites: `NextKeys`, `origin account`"] # [doc = "- DbWrites per key id: `KeyOwner`"] # [doc = "# </weight>"] purge_keys , }
+                    # [codec (index = 0)] # [doc = "Sets the session key(s) of the function caller to `keys`."] # [doc = "Allows an account to set its session key prior to becoming a validator."] # [doc = "This doesn't take effect until the next session."] # [doc = ""] # [doc = "The dispatch origin of this function must be signed."] # [doc = ""] # [doc = "## Complexity"] # [doc = "- `O(1)`. Actual cost depends on the number of length of `T::Keys::key_ids()` which is"] # [doc = "  fixed."] set_keys { keys : runtime_types :: dkg_standalone_runtime :: opaque :: SessionKeys , proof : :: std :: vec :: Vec < :: core :: primitive :: u8 > , } , # [codec (index = 1)] # [doc = "Removes any session key(s) of the function caller."] # [doc = ""] # [doc = "This doesn't take effect until the next session."] # [doc = ""] # [doc = "The dispatch origin of this function must be Signed and the account must be either be"] # [doc = "convertible to a validator ID using the chain's typical addressing system (this usually"] # [doc = "means being a controller account) or directly convertible into a validator ID (which"] # [doc = "usually means being a stash account)."] # [doc = ""] # [doc = "## Complexity"] # [doc = "- `O(1)` in number of key types. Actual cost depends on the number of length of"] # [doc = "  `T::Keys::key_ids()` which is fixed."] purge_keys , }
                 #[derive(
                     :: subxt :: ext :: codec :: Decode,
                     :: subxt :: ext :: codec :: Encode,
@@ -20851,7 +20712,7 @@ pub mod api {
                     )]
                     #[doc = "Contains one variant per dispatchable that can be called by an extrinsic."]
                     pub enum Call {
-                        # [codec (index = 0)] # [doc = "Take the origin account as a stash and lock up `value` of its balance. `controller` will"] # [doc = "be the account that controls it."] # [doc = ""] # [doc = "`value` must be more than the `minimum_balance` specified by `T::Currency`."] # [doc = ""] # [doc = "The dispatch origin for this call must be _Signed_ by the stash account."] # [doc = ""] # [doc = "Emits `Bonded`."] # [doc = "# <weight>"] # [doc = "- Independent of the arguments. Moderate complexity."] # [doc = "- O(1)."] # [doc = "- Three extra DB entries."] # [doc = ""] # [doc = "NOTE: Two of the storage writes (`Self::bonded`, `Self::payee`) are _never_ cleaned"] # [doc = "unless the `origin` falls below _existential deposit_ and gets removed as dust."] # [doc = "------------------"] # [doc = "# </weight>"] bond { controller : :: subxt :: utils :: MultiAddress < :: subxt :: utils :: AccountId32 , :: core :: primitive :: u32 > , # [codec (compact)] value : :: core :: primitive :: u128 , payee : runtime_types :: pallet_staking :: RewardDestination < :: subxt :: utils :: AccountId32 > , } , # [codec (index = 1)] # [doc = "Add some extra amount that have appeared in the stash `free_balance` into the balance up"] # [doc = "for staking."] # [doc = ""] # [doc = "The dispatch origin for this call must be _Signed_ by the stash, not the controller."] # [doc = ""] # [doc = "Use this if there are additional funds in your stash account that you wish to bond."] # [doc = "Unlike [`bond`](Self::bond) or [`unbond`](Self::unbond) this function does not impose"] # [doc = "any limitation on the amount that can be added."] # [doc = ""] # [doc = "Emits `Bonded`."] # [doc = ""] # [doc = "# <weight>"] # [doc = "- Independent of the arguments. Insignificant complexity."] # [doc = "- O(1)."] # [doc = "# </weight>"] bond_extra { # [codec (compact)] max_additional : :: core :: primitive :: u128 , } , # [codec (index = 2)] # [doc = "Schedule a portion of the stash to be unlocked ready for transfer out after the bond"] # [doc = "period ends. If this leaves an amount actively bonded less than"] # [doc = "T::Currency::minimum_balance(), then it is increased to the full amount."] # [doc = ""] # [doc = "The dispatch origin for this call must be _Signed_ by the controller, not the stash."] # [doc = ""] # [doc = "Once the unlock period is done, you can call `withdraw_unbonded` to actually move"] # [doc = "the funds out of management ready for transfer."] # [doc = ""] # [doc = "No more than a limited number of unlocking chunks (see `MaxUnlockingChunks`)"] # [doc = "can co-exists at the same time. If there are no unlocking chunks slots available"] # [doc = "[`Call::withdraw_unbonded`] is called to remove some of the chunks (if possible)."] # [doc = ""] # [doc = "If a user encounters the `InsufficientBond` error when calling this extrinsic,"] # [doc = "they should call `chill` first in order to free up their bonded funds."] # [doc = ""] # [doc = "Emits `Unbonded`."] # [doc = ""] # [doc = "See also [`Call::withdraw_unbonded`]."] unbond { # [codec (compact)] value : :: core :: primitive :: u128 , } , # [codec (index = 3)] # [doc = "Remove any unlocked chunks from the `unlocking` queue from our management."] # [doc = ""] # [doc = "This essentially frees up that balance to be used by the stash account to do"] # [doc = "whatever it wants."] # [doc = ""] # [doc = "The dispatch origin for this call must be _Signed_ by the controller."] # [doc = ""] # [doc = "Emits `Withdrawn`."] # [doc = ""] # [doc = "See also [`Call::unbond`]."] # [doc = ""] # [doc = "# <weight>"] # [doc = "Complexity O(S) where S is the number of slashing spans to remove"] # [doc = "NOTE: Weight annotation is the kill scenario, we refund otherwise."] # [doc = "# </weight>"] withdraw_unbonded { num_slashing_spans : :: core :: primitive :: u32 , } , # [codec (index = 4)] # [doc = "Declare the desire to validate for the origin controller."] # [doc = ""] # [doc = "Effects will be felt at the beginning of the next era."] # [doc = ""] # [doc = "The dispatch origin for this call must be _Signed_ by the controller, not the stash."] validate { prefs : runtime_types :: pallet_staking :: ValidatorPrefs , } , # [codec (index = 5)] # [doc = "Declare the desire to nominate `targets` for the origin controller."] # [doc = ""] # [doc = "Effects will be felt at the beginning of the next era."] # [doc = ""] # [doc = "The dispatch origin for this call must be _Signed_ by the controller, not the stash."] # [doc = ""] # [doc = "# <weight>"] # [doc = "- The transaction's complexity is proportional to the size of `targets` (N)"] # [doc = "which is capped at CompactAssignments::LIMIT (T::MaxNominations)."] # [doc = "- Both the reads and writes follow a similar pattern."] # [doc = "# </weight>"] nominate { targets : :: std :: vec :: Vec < :: subxt :: utils :: MultiAddress < :: subxt :: utils :: AccountId32 , :: core :: primitive :: u32 > > , } , # [codec (index = 6)] # [doc = "Declare no desire to either validate or nominate."] # [doc = ""] # [doc = "Effects will be felt at the beginning of the next era."] # [doc = ""] # [doc = "The dispatch origin for this call must be _Signed_ by the controller, not the stash."] # [doc = ""] # [doc = "# <weight>"] # [doc = "- Independent of the arguments. Insignificant complexity."] # [doc = "- Contains one read."] # [doc = "- Writes are limited to the `origin` account key."] # [doc = "# </weight>"] chill , # [codec (index = 7)] # [doc = "(Re-)set the payment target for a controller."] # [doc = ""] # [doc = "Effects will be felt instantly (as soon as this function is completed successfully)."] # [doc = ""] # [doc = "The dispatch origin for this call must be _Signed_ by the controller, not the stash."] # [doc = ""] # [doc = "# <weight>"] # [doc = "- Independent of the arguments. Insignificant complexity."] # [doc = "- Contains a limited number of reads."] # [doc = "- Writes are limited to the `origin` account key."] # [doc = "---------"] # [doc = "- Weight: O(1)"] # [doc = "- DB Weight:"] # [doc = "    - Read: Ledger"] # [doc = "    - Write: Payee"] # [doc = "# </weight>"] set_payee { payee : runtime_types :: pallet_staking :: RewardDestination < :: subxt :: utils :: AccountId32 > , } , # [codec (index = 8)] # [doc = "(Re-)set the controller of a stash."] # [doc = ""] # [doc = "Effects will be felt instantly (as soon as this function is completed successfully)."] # [doc = ""] # [doc = "The dispatch origin for this call must be _Signed_ by the stash, not the controller."] # [doc = ""] # [doc = "# <weight>"] # [doc = "- Independent of the arguments. Insignificant complexity."] # [doc = "- Contains a limited number of reads."] # [doc = "- Writes are limited to the `origin` account key."] # [doc = "----------"] # [doc = "Weight: O(1)"] # [doc = "DB Weight:"] # [doc = "- Read: Bonded, Ledger New Controller, Ledger Old Controller"] # [doc = "- Write: Bonded, Ledger New Controller, Ledger Old Controller"] # [doc = "# </weight>"] set_controller { controller : :: subxt :: utils :: MultiAddress < :: subxt :: utils :: AccountId32 , :: core :: primitive :: u32 > , } , # [codec (index = 9)] # [doc = "Sets the ideal number of validators."] # [doc = ""] # [doc = "The dispatch origin must be Root."] # [doc = ""] # [doc = "# <weight>"] # [doc = "Weight: O(1)"] # [doc = "Write: Validator Count"] # [doc = "# </weight>"] set_validator_count { # [codec (compact)] new : :: core :: primitive :: u32 , } , # [codec (index = 10)] # [doc = "Increments the ideal number of validators upto maximum of"] # [doc = "`ElectionProviderBase::MaxWinners`."] # [doc = ""] # [doc = "The dispatch origin must be Root."] # [doc = ""] # [doc = "# <weight>"] # [doc = "Same as [`Self::set_validator_count`]."] # [doc = "# </weight>"] increase_validator_count { # [codec (compact)] additional : :: core :: primitive :: u32 , } , # [codec (index = 11)] # [doc = "Scale up the ideal number of validators by a factor upto maximum of"] # [doc = "`ElectionProviderBase::MaxWinners`."] # [doc = ""] # [doc = "The dispatch origin must be Root."] # [doc = ""] # [doc = "# <weight>"] # [doc = "Same as [`Self::set_validator_count`]."] # [doc = "# </weight>"] scale_validator_count { factor : runtime_types :: sp_arithmetic :: per_things :: Percent , } , # [codec (index = 12)] # [doc = "Force there to be no new eras indefinitely."] # [doc = ""] # [doc = "The dispatch origin must be Root."] # [doc = ""] # [doc = "# Warning"] # [doc = ""] # [doc = "The election process starts multiple blocks before the end of the era."] # [doc = "Thus the election process may be ongoing when this is called. In this case the"] # [doc = "election will continue until the next era is triggered."] # [doc = ""] # [doc = "# <weight>"] # [doc = "- No arguments."] # [doc = "- Weight: O(1)"] # [doc = "- Write: ForceEra"] # [doc = "# </weight>"] force_no_eras , # [codec (index = 13)] # [doc = "Force there to be a new era at the end of the next session. After this, it will be"] # [doc = "reset to normal (non-forced) behaviour."] # [doc = ""] # [doc = "The dispatch origin must be Root."] # [doc = ""] # [doc = "# Warning"] # [doc = ""] # [doc = "The election process starts multiple blocks before the end of the era."] # [doc = "If this is called just before a new era is triggered, the election process may not"] # [doc = "have enough blocks to get a result."] # [doc = ""] # [doc = "# <weight>"] # [doc = "- No arguments."] # [doc = "- Weight: O(1)"] # [doc = "- Write ForceEra"] # [doc = "# </weight>"] force_new_era , # [codec (index = 14)] # [doc = "Set the validators who cannot be slashed (if any)."] # [doc = ""] # [doc = "The dispatch origin must be Root."] set_invulnerables { invulnerables : :: std :: vec :: Vec < :: subxt :: utils :: AccountId32 > , } , # [codec (index = 15)] # [doc = "Force a current staker to become completely unstaked, immediately."] # [doc = ""] # [doc = "The dispatch origin must be Root."] force_unstake { stash : :: subxt :: utils :: AccountId32 , num_slashing_spans : :: core :: primitive :: u32 , } , # [codec (index = 16)] # [doc = "Force there to be a new era at the end of sessions indefinitely."] # [doc = ""] # [doc = "The dispatch origin must be Root."] # [doc = ""] # [doc = "# Warning"] # [doc = ""] # [doc = "The election process starts multiple blocks before the end of the era."] # [doc = "If this is called just before a new era is triggered, the election process may not"] # [doc = "have enough blocks to get a result."] force_new_era_always , # [codec (index = 17)] # [doc = "Cancel enactment of a deferred slash."] # [doc = ""] # [doc = "Can be called by the `T::SlashCancelOrigin`."] # [doc = ""] # [doc = "Parameters: era and indices of the slashes for that era to kill."] cancel_deferred_slash { era : :: core :: primitive :: u32 , slash_indices : :: std :: vec :: Vec < :: core :: primitive :: u32 > , } , # [codec (index = 18)] # [doc = "Pay out all the stakers behind a single validator for a single era."] # [doc = ""] # [doc = "- `validator_stash` is the stash account of the validator. Their nominators, up to"] # [doc = "  `T::MaxNominatorRewardedPerValidator`, will also receive their rewards."] # [doc = "- `era` may be any era between `[current_era - history_depth; current_era]`."] # [doc = ""] # [doc = "The origin of this call must be _Signed_. Any account can call this function, even if"] # [doc = "it is not one of the stakers."] # [doc = ""] # [doc = "# <weight>"] # [doc = "- Time complexity: at most O(MaxNominatorRewardedPerValidator)."] # [doc = "- Contains a limited number of reads and writes."] # [doc = "-----------"] # [doc = "N is the Number of payouts for the validator (including the validator)"] # [doc = "Weight:"] # [doc = "- Reward Destination Staked: O(N)"] # [doc = "- Reward Destination Controller (Creating): O(N)"] # [doc = ""] # [doc = "  NOTE: weights are assuming that payouts are made to alive stash account (Staked)."] # [doc = "  Paying even a dead controller is cheaper weight-wise. We don't do any refunds here."] # [doc = "# </weight>"] payout_stakers { validator_stash : :: subxt :: utils :: AccountId32 , era : :: core :: primitive :: u32 , } , # [codec (index = 19)] # [doc = "Rebond a portion of the stash scheduled to be unlocked."] # [doc = ""] # [doc = "The dispatch origin must be signed by the controller."] # [doc = ""] # [doc = "# <weight>"] # [doc = "- Time complexity: O(L), where L is unlocking chunks"] # [doc = "- Bounded by `MaxUnlockingChunks`."] # [doc = "- Storage changes: Can't increase storage, only decrease it."] # [doc = "# </weight>"] rebond { # [codec (compact)] value : :: core :: primitive :: u128 , } , # [codec (index = 20)] # [doc = "Remove all data structures concerning a staker/stash once it is at a state where it can"] # [doc = "be considered `dust` in the staking system. The requirements are:"] # [doc = ""] # [doc = "1. the `total_balance` of the stash is below existential deposit."] # [doc = "2. or, the `ledger.total` of the stash is below existential deposit."] # [doc = ""] # [doc = "The former can happen in cases like a slash; the latter when a fully unbonded account"] # [doc = "is still receiving staking rewards in `RewardDestination::Staked`."] # [doc = ""] # [doc = "It can be called by anyone, as long as `stash` meets the above requirements."] # [doc = ""] # [doc = "Refunds the transaction fees upon successful execution."] reap_stash { stash : :: subxt :: utils :: AccountId32 , num_slashing_spans : :: core :: primitive :: u32 , } , # [codec (index = 21)] # [doc = "Remove the given nominations from the calling validator."] # [doc = ""] # [doc = "Effects will be felt at the beginning of the next era."] # [doc = ""] # [doc = "The dispatch origin for this call must be _Signed_ by the controller, not the stash."] # [doc = ""] # [doc = "- `who`: A list of nominator stash accounts who are nominating this validator which"] # [doc = "  should no longer be nominating this validator."] # [doc = ""] # [doc = "Note: Making this call only makes sense if you first set the validator preferences to"] # [doc = "block any further nominations."] kick { who : :: std :: vec :: Vec < :: subxt :: utils :: MultiAddress < :: subxt :: utils :: AccountId32 , :: core :: primitive :: u32 > > , } , # [codec (index = 22)] # [doc = "Update the various staking configurations ."] # [doc = ""] # [doc = "* `min_nominator_bond`: The minimum active bond needed to be a nominator."] # [doc = "* `min_validator_bond`: The minimum active bond needed to be a validator."] # [doc = "* `max_nominator_count`: The max number of users who can be a nominator at once. When"] # [doc = "  set to `None`, no limit is enforced."] # [doc = "* `max_validator_count`: The max number of users who can be a validator at once. When"] # [doc = "  set to `None`, no limit is enforced."] # [doc = "* `chill_threshold`: The ratio of `max_nominator_count` or `max_validator_count` which"] # [doc = "  should be filled in order for the `chill_other` transaction to work."] # [doc = "* `min_commission`: The minimum amount of commission that each validators must maintain."] # [doc = "  This is checked only upon calling `validate`. Existing validators are not affected."] # [doc = ""] # [doc = "RuntimeOrigin must be Root to call this function."] # [doc = ""] # [doc = "NOTE: Existing nominators and validators will not be affected by this update."] # [doc = "to kick people under the new limits, `chill_other` should be called."] set_staking_configs { min_nominator_bond : runtime_types :: pallet_staking :: pallet :: pallet :: ConfigOp < :: core :: primitive :: u128 > , min_validator_bond : runtime_types :: pallet_staking :: pallet :: pallet :: ConfigOp < :: core :: primitive :: u128 > , max_nominator_count : runtime_types :: pallet_staking :: pallet :: pallet :: ConfigOp < :: core :: primitive :: u32 > , max_validator_count : runtime_types :: pallet_staking :: pallet :: pallet :: ConfigOp < :: core :: primitive :: u32 > , chill_threshold : runtime_types :: pallet_staking :: pallet :: pallet :: ConfigOp < runtime_types :: sp_arithmetic :: per_things :: Percent > , min_commission : runtime_types :: pallet_staking :: pallet :: pallet :: ConfigOp < runtime_types :: sp_arithmetic :: per_things :: Perbill > , } , # [codec (index = 23)] # [doc = "Declare a `controller` to stop participating as either a validator or nominator."] # [doc = ""] # [doc = "Effects will be felt at the beginning of the next era."] # [doc = ""] # [doc = "The dispatch origin for this call must be _Signed_, but can be called by anyone."] # [doc = ""] # [doc = "If the caller is the same as the controller being targeted, then no further checks are"] # [doc = "enforced, and this function behaves just like `chill`."] # [doc = ""] # [doc = "If the caller is different than the controller being targeted, the following conditions"] # [doc = "must be met:"] # [doc = ""] # [doc = "* `controller` must belong to a nominator who has become non-decodable,"] # [doc = ""] # [doc = "Or:"] # [doc = ""] # [doc = "* A `ChillThreshold` must be set and checked which defines how close to the max"] # [doc = "  nominators or validators we must reach before users can start chilling one-another."] # [doc = "* A `MaxNominatorCount` and `MaxValidatorCount` must be set which is used to determine"] # [doc = "  how close we are to the threshold."] # [doc = "* A `MinNominatorBond` and `MinValidatorBond` must be set and checked, which determines"] # [doc = "  if this is a person that should be chilled because they have not met the threshold"] # [doc = "  bond required."] # [doc = ""] # [doc = "This can be helpful if bond requirements are updated, and we need to remove old users"] # [doc = "who do not satisfy these requirements."] chill_other { controller : :: subxt :: utils :: AccountId32 , } , # [codec (index = 24)] # [doc = "Force a validator to have at least the minimum commission. This will not affect a"] # [doc = "validator who already has a commission greater than or equal to the minimum. Any account"] # [doc = "can call this."] force_apply_min_commission { validator_stash : :: subxt :: utils :: AccountId32 , } , }
+                        # [codec (index = 0)] # [doc = "Take the origin account as a stash and lock up `value` of its balance. `controller` will"] # [doc = "be the account that controls it."] # [doc = ""] # [doc = "`value` must be more than the `minimum_balance` specified by `T::Currency`."] # [doc = ""] # [doc = "The dispatch origin for this call must be _Signed_ by the stash account."] # [doc = ""] # [doc = "Emits `Bonded`."] # [doc = "## Complexity"] # [doc = "- Independent of the arguments. Moderate complexity."] # [doc = "- O(1)."] # [doc = "- Three extra DB entries."] # [doc = ""] # [doc = "NOTE: Two of the storage writes (`Self::bonded`, `Self::payee`) are _never_ cleaned"] # [doc = "unless the `origin` falls below _existential deposit_ and gets removed as dust."] bond { controller : :: subxt :: utils :: MultiAddress < :: subxt :: utils :: AccountId32 , :: core :: primitive :: u32 > , # [codec (compact)] value : :: core :: primitive :: u128 , payee : runtime_types :: pallet_staking :: RewardDestination < :: subxt :: utils :: AccountId32 > , } , # [codec (index = 1)] # [doc = "Add some extra amount that have appeared in the stash `free_balance` into the balance up"] # [doc = "for staking."] # [doc = ""] # [doc = "The dispatch origin for this call must be _Signed_ by the stash, not the controller."] # [doc = ""] # [doc = "Use this if there are additional funds in your stash account that you wish to bond."] # [doc = "Unlike [`bond`](Self::bond) or [`unbond`](Self::unbond) this function does not impose"] # [doc = "any limitation on the amount that can be added."] # [doc = ""] # [doc = "Emits `Bonded`."] # [doc = ""] # [doc = "## Complexity"] # [doc = "- Independent of the arguments. Insignificant complexity."] # [doc = "- O(1)."] bond_extra { # [codec (compact)] max_additional : :: core :: primitive :: u128 , } , # [codec (index = 2)] # [doc = "Schedule a portion of the stash to be unlocked ready for transfer out after the bond"] # [doc = "period ends. If this leaves an amount actively bonded less than"] # [doc = "T::Currency::minimum_balance(), then it is increased to the full amount."] # [doc = ""] # [doc = "The dispatch origin for this call must be _Signed_ by the controller, not the stash."] # [doc = ""] # [doc = "Once the unlock period is done, you can call `withdraw_unbonded` to actually move"] # [doc = "the funds out of management ready for transfer."] # [doc = ""] # [doc = "No more than a limited number of unlocking chunks (see `MaxUnlockingChunks`)"] # [doc = "can co-exists at the same time. If there are no unlocking chunks slots available"] # [doc = "[`Call::withdraw_unbonded`] is called to remove some of the chunks (if possible)."] # [doc = ""] # [doc = "If a user encounters the `InsufficientBond` error when calling this extrinsic,"] # [doc = "they should call `chill` first in order to free up their bonded funds."] # [doc = ""] # [doc = "Emits `Unbonded`."] # [doc = ""] # [doc = "See also [`Call::withdraw_unbonded`]."] unbond { # [codec (compact)] value : :: core :: primitive :: u128 , } , # [codec (index = 3)] # [doc = "Remove any unlocked chunks from the `unlocking` queue from our management."] # [doc = ""] # [doc = "This essentially frees up that balance to be used by the stash account to do"] # [doc = "whatever it wants."] # [doc = ""] # [doc = "The dispatch origin for this call must be _Signed_ by the controller."] # [doc = ""] # [doc = "Emits `Withdrawn`."] # [doc = ""] # [doc = "See also [`Call::unbond`]."] # [doc = ""] # [doc = "## Complexity"] # [doc = "O(S) where S is the number of slashing spans to remove"] # [doc = "NOTE: Weight annotation is the kill scenario, we refund otherwise."] withdraw_unbonded { num_slashing_spans : :: core :: primitive :: u32 , } , # [codec (index = 4)] # [doc = "Declare the desire to validate for the origin controller."] # [doc = ""] # [doc = "Effects will be felt at the beginning of the next era."] # [doc = ""] # [doc = "The dispatch origin for this call must be _Signed_ by the controller, not the stash."] validate { prefs : runtime_types :: pallet_staking :: ValidatorPrefs , } , # [codec (index = 5)] # [doc = "Declare the desire to nominate `targets` for the origin controller."] # [doc = ""] # [doc = "Effects will be felt at the beginning of the next era."] # [doc = ""] # [doc = "The dispatch origin for this call must be _Signed_ by the controller, not the stash."] # [doc = ""] # [doc = "## Complexity"] # [doc = "- The transaction's complexity is proportional to the size of `targets` (N)"] # [doc = "which is capped at CompactAssignments::LIMIT (T::MaxNominations)."] # [doc = "- Both the reads and writes follow a similar pattern."] nominate { targets : :: std :: vec :: Vec < :: subxt :: utils :: MultiAddress < :: subxt :: utils :: AccountId32 , :: core :: primitive :: u32 > > , } , # [codec (index = 6)] # [doc = "Declare no desire to either validate or nominate."] # [doc = ""] # [doc = "Effects will be felt at the beginning of the next era."] # [doc = ""] # [doc = "The dispatch origin for this call must be _Signed_ by the controller, not the stash."] # [doc = ""] # [doc = "## Complexity"] # [doc = "- Independent of the arguments. Insignificant complexity."] # [doc = "- Contains one read."] # [doc = "- Writes are limited to the `origin` account key."] chill , # [codec (index = 7)] # [doc = "(Re-)set the payment target for a controller."] # [doc = ""] # [doc = "Effects will be felt instantly (as soon as this function is completed successfully)."] # [doc = ""] # [doc = "The dispatch origin for this call must be _Signed_ by the controller, not the stash."] # [doc = ""] # [doc = "## Complexity"] # [doc = "- O(1)"] # [doc = "- Independent of the arguments. Insignificant complexity."] # [doc = "- Contains a limited number of reads."] # [doc = "- Writes are limited to the `origin` account key."] # [doc = "---------"] set_payee { payee : runtime_types :: pallet_staking :: RewardDestination < :: subxt :: utils :: AccountId32 > , } , # [codec (index = 8)] # [doc = "(Re-)set the controller of a stash."] # [doc = ""] # [doc = "Effects will be felt instantly (as soon as this function is completed successfully)."] # [doc = ""] # [doc = "The dispatch origin for this call must be _Signed_ by the stash, not the controller."] # [doc = ""] # [doc = "## Complexity"] # [doc = "O(1)"] # [doc = "- Independent of the arguments. Insignificant complexity."] # [doc = "- Contains a limited number of reads."] # [doc = "- Writes are limited to the `origin` account key."] set_controller { controller : :: subxt :: utils :: MultiAddress < :: subxt :: utils :: AccountId32 , :: core :: primitive :: u32 > , } , # [codec (index = 9)] # [doc = "Sets the ideal number of validators."] # [doc = ""] # [doc = "The dispatch origin must be Root."] # [doc = ""] # [doc = "## Complexity"] # [doc = "O(1)"] set_validator_count { # [codec (compact)] new : :: core :: primitive :: u32 , } , # [codec (index = 10)] # [doc = "Increments the ideal number of validators upto maximum of"] # [doc = "`ElectionProviderBase::MaxWinners`."] # [doc = ""] # [doc = "The dispatch origin must be Root."] # [doc = ""] # [doc = "## Complexity"] # [doc = "Same as [`Self::set_validator_count`]."] increase_validator_count { # [codec (compact)] additional : :: core :: primitive :: u32 , } , # [codec (index = 11)] # [doc = "Scale up the ideal number of validators by a factor upto maximum of"] # [doc = "`ElectionProviderBase::MaxWinners`."] # [doc = ""] # [doc = "The dispatch origin must be Root."] # [doc = ""] # [doc = "## Complexity"] # [doc = "Same as [`Self::set_validator_count`]."] scale_validator_count { factor : runtime_types :: sp_arithmetic :: per_things :: Percent , } , # [codec (index = 12)] # [doc = "Force there to be no new eras indefinitely."] # [doc = ""] # [doc = "The dispatch origin must be Root."] # [doc = ""] # [doc = "# Warning"] # [doc = ""] # [doc = "The election process starts multiple blocks before the end of the era."] # [doc = "Thus the election process may be ongoing when this is called. In this case the"] # [doc = "election will continue until the next era is triggered."] # [doc = ""] # [doc = "## Complexity"] # [doc = "- No arguments."] # [doc = "- Weight: O(1)"] force_no_eras , # [codec (index = 13)] # [doc = "Force there to be a new era at the end of the next session. After this, it will be"] # [doc = "reset to normal (non-forced) behaviour."] # [doc = ""] # [doc = "The dispatch origin must be Root."] # [doc = ""] # [doc = "# Warning"] # [doc = ""] # [doc = "The election process starts multiple blocks before the end of the era."] # [doc = "If this is called just before a new era is triggered, the election process may not"] # [doc = "have enough blocks to get a result."] # [doc = ""] # [doc = "## Complexity"] # [doc = "- No arguments."] # [doc = "- Weight: O(1)"] force_new_era , # [codec (index = 14)] # [doc = "Set the validators who cannot be slashed (if any)."] # [doc = ""] # [doc = "The dispatch origin must be Root."] set_invulnerables { invulnerables : :: std :: vec :: Vec < :: subxt :: utils :: AccountId32 > , } , # [codec (index = 15)] # [doc = "Force a current staker to become completely unstaked, immediately."] # [doc = ""] # [doc = "The dispatch origin must be Root."] force_unstake { stash : :: subxt :: utils :: AccountId32 , num_slashing_spans : :: core :: primitive :: u32 , } , # [codec (index = 16)] # [doc = "Force there to be a new era at the end of sessions indefinitely."] # [doc = ""] # [doc = "The dispatch origin must be Root."] # [doc = ""] # [doc = "# Warning"] # [doc = ""] # [doc = "The election process starts multiple blocks before the end of the era."] # [doc = "If this is called just before a new era is triggered, the election process may not"] # [doc = "have enough blocks to get a result."] force_new_era_always , # [codec (index = 17)] # [doc = "Cancel enactment of a deferred slash."] # [doc = ""] # [doc = "Can be called by the `T::AdminOrigin`."] # [doc = ""] # [doc = "Parameters: era and indices of the slashes for that era to kill."] cancel_deferred_slash { era : :: core :: primitive :: u32 , slash_indices : :: std :: vec :: Vec < :: core :: primitive :: u32 > , } , # [codec (index = 18)] # [doc = "Pay out all the stakers behind a single validator for a single era."] # [doc = ""] # [doc = "- `validator_stash` is the stash account of the validator. Their nominators, up to"] # [doc = "  `T::MaxNominatorRewardedPerValidator`, will also receive their rewards."] # [doc = "- `era` may be any era between `[current_era - history_depth; current_era]`."] # [doc = ""] # [doc = "The origin of this call must be _Signed_. Any account can call this function, even if"] # [doc = "it is not one of the stakers."] # [doc = ""] # [doc = "## Complexity"] # [doc = "- At most O(MaxNominatorRewardedPerValidator)."] payout_stakers { validator_stash : :: subxt :: utils :: AccountId32 , era : :: core :: primitive :: u32 , } , # [codec (index = 19)] # [doc = "Rebond a portion of the stash scheduled to be unlocked."] # [doc = ""] # [doc = "The dispatch origin must be signed by the controller."] # [doc = ""] # [doc = "## Complexity"] # [doc = "- Time complexity: O(L), where L is unlocking chunks"] # [doc = "- Bounded by `MaxUnlockingChunks`."] rebond { # [codec (compact)] value : :: core :: primitive :: u128 , } , # [codec (index = 20)] # [doc = "Remove all data structures concerning a staker/stash once it is at a state where it can"] # [doc = "be considered `dust` in the staking system. The requirements are:"] # [doc = ""] # [doc = "1. the `total_balance` of the stash is below existential deposit."] # [doc = "2. or, the `ledger.total` of the stash is below existential deposit."] # [doc = ""] # [doc = "The former can happen in cases like a slash; the latter when a fully unbonded account"] # [doc = "is still receiving staking rewards in `RewardDestination::Staked`."] # [doc = ""] # [doc = "It can be called by anyone, as long as `stash` meets the above requirements."] # [doc = ""] # [doc = "Refunds the transaction fees upon successful execution."] reap_stash { stash : :: subxt :: utils :: AccountId32 , num_slashing_spans : :: core :: primitive :: u32 , } , # [codec (index = 21)] # [doc = "Remove the given nominations from the calling validator."] # [doc = ""] # [doc = "Effects will be felt at the beginning of the next era."] # [doc = ""] # [doc = "The dispatch origin for this call must be _Signed_ by the controller, not the stash."] # [doc = ""] # [doc = "- `who`: A list of nominator stash accounts who are nominating this validator which"] # [doc = "  should no longer be nominating this validator."] # [doc = ""] # [doc = "Note: Making this call only makes sense if you first set the validator preferences to"] # [doc = "block any further nominations."] kick { who : :: std :: vec :: Vec < :: subxt :: utils :: MultiAddress < :: subxt :: utils :: AccountId32 , :: core :: primitive :: u32 > > , } , # [codec (index = 22)] # [doc = "Update the various staking configurations ."] # [doc = ""] # [doc = "* `min_nominator_bond`: The minimum active bond needed to be a nominator."] # [doc = "* `min_validator_bond`: The minimum active bond needed to be a validator."] # [doc = "* `max_nominator_count`: The max number of users who can be a nominator at once. When"] # [doc = "  set to `None`, no limit is enforced."] # [doc = "* `max_validator_count`: The max number of users who can be a validator at once. When"] # [doc = "  set to `None`, no limit is enforced."] # [doc = "* `chill_threshold`: The ratio of `max_nominator_count` or `max_validator_count` which"] # [doc = "  should be filled in order for the `chill_other` transaction to work."] # [doc = "* `min_commission`: The minimum amount of commission that each validators must maintain."] # [doc = "  This is checked only upon calling `validate`. Existing validators are not affected."] # [doc = ""] # [doc = "RuntimeOrigin must be Root to call this function."] # [doc = ""] # [doc = "NOTE: Existing nominators and validators will not be affected by this update."] # [doc = "to kick people under the new limits, `chill_other` should be called."] set_staking_configs { min_nominator_bond : runtime_types :: pallet_staking :: pallet :: pallet :: ConfigOp < :: core :: primitive :: u128 > , min_validator_bond : runtime_types :: pallet_staking :: pallet :: pallet :: ConfigOp < :: core :: primitive :: u128 > , max_nominator_count : runtime_types :: pallet_staking :: pallet :: pallet :: ConfigOp < :: core :: primitive :: u32 > , max_validator_count : runtime_types :: pallet_staking :: pallet :: pallet :: ConfigOp < :: core :: primitive :: u32 > , chill_threshold : runtime_types :: pallet_staking :: pallet :: pallet :: ConfigOp < runtime_types :: sp_arithmetic :: per_things :: Percent > , min_commission : runtime_types :: pallet_staking :: pallet :: pallet :: ConfigOp < runtime_types :: sp_arithmetic :: per_things :: Perbill > , } , # [codec (index = 23)] # [doc = "Declare a `controller` to stop participating as either a validator or nominator."] # [doc = ""] # [doc = "Effects will be felt at the beginning of the next era."] # [doc = ""] # [doc = "The dispatch origin for this call must be _Signed_, but can be called by anyone."] # [doc = ""] # [doc = "If the caller is the same as the controller being targeted, then no further checks are"] # [doc = "enforced, and this function behaves just like `chill`."] # [doc = ""] # [doc = "If the caller is different than the controller being targeted, the following conditions"] # [doc = "must be met:"] # [doc = ""] # [doc = "* `controller` must belong to a nominator who has become non-decodable,"] # [doc = ""] # [doc = "Or:"] # [doc = ""] # [doc = "* A `ChillThreshold` must be set and checked which defines how close to the max"] # [doc = "  nominators or validators we must reach before users can start chilling one-another."] # [doc = "* A `MaxNominatorCount` and `MaxValidatorCount` must be set which is used to determine"] # [doc = "  how close we are to the threshold."] # [doc = "* A `MinNominatorBond` and `MinValidatorBond` must be set and checked, which determines"] # [doc = "  if this is a person that should be chilled because they have not met the threshold"] # [doc = "  bond required."] # [doc = ""] # [doc = "This can be helpful if bond requirements are updated, and we need to remove old users"] # [doc = "who do not satisfy these requirements."] chill_other { controller : :: subxt :: utils :: AccountId32 , } , # [codec (index = 24)] # [doc = "Force a validator to have at least the minimum commission. This will not affect a"] # [doc = "validator who already has a commission greater than or equal to the minimum. Any account"] # [doc = "can call this."] force_apply_min_commission { validator_stash : :: subxt :: utils :: AccountId32 , } , # [codec (index = 25)] # [doc = "Sets the minimum amount of commission that each validators must maintain."] # [doc = ""] # [doc = "This call has lower privilege requirements than `set_staking_config` and can be called"] # [doc = "by the `T::AdminOrigin`. Root can always call this."] set_min_commission { new : runtime_types :: sp_arithmetic :: per_things :: Perbill , } , }
                     #[derive(
                         :: subxt :: ext :: codec :: Decode,
                         :: subxt :: ext :: codec :: Encode,
@@ -20995,7 +20856,7 @@ pub mod api {
                     )]
                     #[doc = "\n\t\t\tThe [event](https://docs.substrate.io/main-docs/build/events-errors/) emitted\n\t\t\tby this pallet.\n\t\t\t"]
                     pub enum Event {
-                        # [codec (index = 0)] # [doc = "The era payout has been set; the first balance is the validator-payout; the second is"] # [doc = "the remainder from the maximum amount of reward."] EraPaid { era_index : :: core :: primitive :: u32 , validator_payout : :: core :: primitive :: u128 , remainder : :: core :: primitive :: u128 , } , # [codec (index = 1)] # [doc = "The nominator has been rewarded by this amount."] Rewarded { stash : :: subxt :: utils :: AccountId32 , amount : :: core :: primitive :: u128 , } , # [codec (index = 2)] # [doc = "A staker (validator or nominator) has been slashed by the given amount."] Slashed { staker : :: subxt :: utils :: AccountId32 , amount : :: core :: primitive :: u128 , } , # [codec (index = 3)] # [doc = "A slash for the given validator, for the given percentage of their stake, at the given"] # [doc = "era as been reported."] SlashReported { validator : :: subxt :: utils :: AccountId32 , fraction : runtime_types :: sp_arithmetic :: per_things :: Perbill , slash_era : :: core :: primitive :: u32 , } , # [codec (index = 4)] # [doc = "An old slashing report from a prior era was discarded because it could"] # [doc = "not be processed."] OldSlashingReportDiscarded { session_index : :: core :: primitive :: u32 , } , # [codec (index = 5)] # [doc = "A new set of stakers was elected."] StakersElected , # [codec (index = 6)] # [doc = "An account has bonded this amount. \\[stash, amount\\]"] # [doc = ""] # [doc = "NOTE: This event is only emitted when funds are bonded via a dispatchable. Notably,"] # [doc = "it will not be emitted for staking rewards when they are added to stake."] Bonded { stash : :: subxt :: utils :: AccountId32 , amount : :: core :: primitive :: u128 , } , # [codec (index = 7)] # [doc = "An account has unbonded this amount."] Unbonded { stash : :: subxt :: utils :: AccountId32 , amount : :: core :: primitive :: u128 , } , # [codec (index = 8)] # [doc = "An account has called `withdraw_unbonded` and removed unbonding chunks worth `Balance`"] # [doc = "from the unlocking queue."] Withdrawn { stash : :: subxt :: utils :: AccountId32 , amount : :: core :: primitive :: u128 , } , # [codec (index = 9)] # [doc = "A nominator has been kicked from a validator."] Kicked { nominator : :: subxt :: utils :: AccountId32 , stash : :: subxt :: utils :: AccountId32 , } , # [codec (index = 10)] # [doc = "The election failed. No new era is planned."] StakingElectionFailed , # [codec (index = 11)] # [doc = "An account has stopped participating as either a validator or nominator."] Chilled { stash : :: subxt :: utils :: AccountId32 , } , # [codec (index = 12)] # [doc = "The stakers' rewards are getting paid."] PayoutStarted { era_index : :: core :: primitive :: u32 , validator_stash : :: subxt :: utils :: AccountId32 , } , # [codec (index = 13)] # [doc = "A validator has set their preferences."] ValidatorPrefsSet { stash : :: subxt :: utils :: AccountId32 , prefs : runtime_types :: pallet_staking :: ValidatorPrefs , } , }
+                        # [codec (index = 0)] # [doc = "The era payout has been set; the first balance is the validator-payout; the second is"] # [doc = "the remainder from the maximum amount of reward."] EraPaid { era_index : :: core :: primitive :: u32 , validator_payout : :: core :: primitive :: u128 , remainder : :: core :: primitive :: u128 , } , # [codec (index = 1)] # [doc = "The nominator has been rewarded by this amount."] Rewarded { stash : :: subxt :: utils :: AccountId32 , amount : :: core :: primitive :: u128 , } , # [codec (index = 2)] # [doc = "A staker (validator or nominator) has been slashed by the given amount."] Slashed { staker : :: subxt :: utils :: AccountId32 , amount : :: core :: primitive :: u128 , } , # [codec (index = 3)] # [doc = "A slash for the given validator, for the given percentage of their stake, at the given"] # [doc = "era as been reported."] SlashReported { validator : :: subxt :: utils :: AccountId32 , fraction : runtime_types :: sp_arithmetic :: per_things :: Perbill , slash_era : :: core :: primitive :: u32 , } , # [codec (index = 4)] # [doc = "An old slashing report from a prior era was discarded because it could"] # [doc = "not be processed."] OldSlashingReportDiscarded { session_index : :: core :: primitive :: u32 , } , # [codec (index = 5)] # [doc = "A new set of stakers was elected."] StakersElected , # [codec (index = 6)] # [doc = "An account has bonded this amount. \\[stash, amount\\]"] # [doc = ""] # [doc = "NOTE: This event is only emitted when funds are bonded via a dispatchable. Notably,"] # [doc = "it will not be emitted for staking rewards when they are added to stake."] Bonded { stash : :: subxt :: utils :: AccountId32 , amount : :: core :: primitive :: u128 , } , # [codec (index = 7)] # [doc = "An account has unbonded this amount."] Unbonded { stash : :: subxt :: utils :: AccountId32 , amount : :: core :: primitive :: u128 , } , # [codec (index = 8)] # [doc = "An account has called `withdraw_unbonded` and removed unbonding chunks worth `Balance`"] # [doc = "from the unlocking queue."] Withdrawn { stash : :: subxt :: utils :: AccountId32 , amount : :: core :: primitive :: u128 , } , # [codec (index = 9)] # [doc = "A nominator has been kicked from a validator."] Kicked { nominator : :: subxt :: utils :: AccountId32 , stash : :: subxt :: utils :: AccountId32 , } , # [codec (index = 10)] # [doc = "The election failed. No new era is planned."] StakingElectionFailed , # [codec (index = 11)] # [doc = "An account has stopped participating as either a validator or nominator."] Chilled { stash : :: subxt :: utils :: AccountId32 , } , # [codec (index = 12)] # [doc = "The stakers' rewards are getting paid."] PayoutStarted { era_index : :: core :: primitive :: u32 , validator_stash : :: subxt :: utils :: AccountId32 , } , # [codec (index = 13)] # [doc = "A validator has set their preferences."] ValidatorPrefsSet { stash : :: subxt :: utils :: AccountId32 , prefs : runtime_types :: pallet_staking :: ValidatorPrefs , } , # [codec (index = 14)] # [doc = "A new force era mode was set."] ForceEra { mode : runtime_types :: pallet_staking :: Forcing , } , }
                 }
             }
             pub mod slashing {
@@ -21158,50 +21019,11 @@ pub mod api {
             #[encode_as_type(crate_path = ":: subxt :: ext :: scale_encode")]
             pub struct Nominations {
                 pub targets:
-                    runtime_types::sp_core::bounded::bounded_vec::BoundedVec<
+                    runtime_types::bounded_collections::bounded_vec::BoundedVec<
                         ::subxt::utils::AccountId32,
                     >,
                 pub submitted_in: ::core::primitive::u32,
                 pub suppressed: ::core::primitive::bool,
-            }
-            #[derive(
-                :: subxt :: ext :: codec :: Decode,
-                :: subxt :: ext :: codec :: Encode,
-                :: subxt :: ext :: scale_decode :: DecodeAsType,
-                :: subxt :: ext :: scale_encode :: EncodeAsType,
-                Clone,
-                Debug,
-                Eq,
-                PartialEq,
-            )]
-            # [codec (crate = :: subxt :: ext :: codec)]
-            #[decode_as_type(crate_path = ":: subxt :: ext :: scale_decode")]
-            #[encode_as_type(crate_path = ":: subxt :: ext :: scale_encode")]
-            pub enum Releases {
-                #[codec(index = 0)]
-                V1_0_0Ancient,
-                #[codec(index = 1)]
-                V2_0_0,
-                #[codec(index = 2)]
-                V3_0_0,
-                #[codec(index = 3)]
-                V4_0_0,
-                #[codec(index = 4)]
-                V5_0_0,
-                #[codec(index = 5)]
-                V6_0_0,
-                #[codec(index = 6)]
-                V7_0_0,
-                #[codec(index = 7)]
-                V8_0_0,
-                #[codec(index = 8)]
-                V9_0_0,
-                #[codec(index = 9)]
-                V10_0_0,
-                #[codec(index = 10)]
-                V11_0_0,
-                #[codec(index = 11)]
-                V12_0_0,
             }
             #[derive(
                 :: subxt :: ext :: codec :: Decode,
@@ -21248,13 +21070,13 @@ pub mod api {
                 #[codec(compact)]
                 pub active: ::core::primitive::u128,
                 pub unlocking:
-                    runtime_types::sp_core::bounded::bounded_vec::BoundedVec<
+                    runtime_types::bounded_collections::bounded_vec::BoundedVec<
                         runtime_types::pallet_staking::UnlockChunk<
                             ::core::primitive::u128,
                         >,
                     >,
                 pub claimed_rewards:
-                    runtime_types::sp_core::bounded::bounded_vec::BoundedVec<
+                    runtime_types::bounded_collections::bounded_vec::BoundedVec<
                         ::core::primitive::u32,
                     >,
             }
@@ -21345,12 +21167,8 @@ pub mod api {
                     #[doc = ""]
                     #[doc = "The dispatch origin for this call must be _Signed_."]
                     #[doc = ""]
-                    #[doc = "# <weight>"]
+                    #[doc = "## Complexity"]
                     #[doc = "- O(1)."]
-                    #[doc = "- Limited storage reads."]
-                    #[doc = "- One DB write (event)."]
-                    #[doc = "- Weight of derivative `call` execution + 10,000."]
-                    #[doc = "# </weight>"]
                     sudo {
                         call: ::std::boxed::Box<
                             runtime_types::dkg_standalone_runtime::RuntimeCall,
@@ -21363,10 +21181,8 @@ pub mod api {
                     #[doc = ""]
                     #[doc = "The dispatch origin for this call must be _Signed_."]
                     #[doc = ""]
-                    #[doc = "# <weight>"]
+                    #[doc = "## Complexity"]
                     #[doc = "- O(1)."]
-                    #[doc = "- The weight of this call is defined by the caller."]
-                    #[doc = "# </weight>"]
                     sudo_unchecked_weight {
                         call: ::std::boxed::Box<
                             runtime_types::dkg_standalone_runtime::RuntimeCall,
@@ -21379,11 +21195,8 @@ pub mod api {
                     #[doc = ""]
                     #[doc = "The dispatch origin for this call must be _Signed_."]
                     #[doc = ""]
-                    #[doc = "# <weight>"]
+                    #[doc = "## Complexity"]
                     #[doc = "- O(1)."]
-                    #[doc = "- Limited storage reads."]
-                    #[doc = "- One DB change."]
-                    #[doc = "# </weight>"]
                     set_key {
                         new: ::subxt::utils::MultiAddress<
                             ::subxt::utils::AccountId32,
@@ -21396,12 +21209,8 @@ pub mod api {
                     #[doc = ""]
                     #[doc = "The dispatch origin for this call must be _Signed_."]
                     #[doc = ""]
-                    #[doc = "# <weight>"]
+                    #[doc = "## Complexity"]
                     #[doc = "- O(1)."]
-                    #[doc = "- Limited storage reads."]
-                    #[doc = "- One DB write (event)."]
-                    #[doc = "- Weight of derivative `call` execution + 10,000."]
-                    #[doc = "# </weight>"]
                     sudo_as {
                         who: ::subxt::utils::MultiAddress<
                             ::subxt::utils::AccountId32,
@@ -21513,12 +21322,11 @@ pub mod api {
                     #[doc = ""]
                     #[doc = "The dispatch origin for this call must be `Inherent`."]
                     #[doc = ""]
-                    #[doc = "# <weight>"]
+                    #[doc = "## Complexity"]
                     #[doc = "- `O(1)` (Note that implementations of `OnTimestampSet` must also be `O(1)`)"]
                     #[doc = "- 1 storage read and 1 storage mutation (codec `O(1)`). (because of `DidUpdate::take` in"]
                     #[doc = "  `on_finalize`)"]
                     #[doc = "- 1 event handler `on_timestamp_set`. Must be `O(1)`."]
-                    #[doc = "# </weight>"]
                     set {
                         #[codec(compact)]
                         now: ::core::primitive::u64,
@@ -21698,6 +21506,27 @@ pub mod api {
                 )]
                 pub struct Permill(pub ::core::primitive::u32);
             }
+            #[derive(
+                :: subxt :: ext :: codec :: Decode,
+                :: subxt :: ext :: codec :: Encode,
+                :: subxt :: ext :: scale_decode :: DecodeAsType,
+                :: subxt :: ext :: scale_encode :: EncodeAsType,
+                Clone,
+                Debug,
+                Eq,
+                PartialEq,
+            )]
+            # [codec (crate = :: subxt :: ext :: codec)]
+            #[decode_as_type(crate_path = ":: subxt :: ext :: scale_decode")]
+            #[encode_as_type(crate_path = ":: subxt :: ext :: scale_encode")]
+            pub enum ArithmeticError {
+                #[codec(index = 0)]
+                Underflow,
+                #[codec(index = 1)]
+                Overflow,
+                #[codec(index = 2)]
+                DivisionByZero,
+            }
         }
         pub mod sp_consensus_aura {
             use super::runtime_types;
@@ -21748,74 +21577,6 @@ pub mod api {
         }
         pub mod sp_core {
             use super::runtime_types;
-            pub mod bounded {
-                use super::runtime_types;
-                pub mod bounded_btree_map {
-                    use super::runtime_types;
-                    #[derive(
-                        :: subxt :: ext :: codec :: Decode,
-                        :: subxt :: ext :: codec :: Encode,
-                        :: subxt :: ext :: scale_decode :: DecodeAsType,
-                        :: subxt :: ext :: scale_encode :: EncodeAsType,
-                        Clone,
-                        Debug,
-                        Eq,
-                        PartialEq,
-                    )]
-                    # [codec (crate = :: subxt :: ext :: codec)]
-                    #[decode_as_type(
-                        crate_path = ":: subxt :: ext :: scale_decode"
-                    )]
-                    #[encode_as_type(
-                        crate_path = ":: subxt :: ext :: scale_encode"
-                    )]
-                    pub struct BoundedBTreeMap<_0, _1>(
-                        pub ::subxt::utils::KeyedVec<_0, _1>,
-                    );
-                }
-                pub mod bounded_vec {
-                    use super::runtime_types;
-                    #[derive(
-                        :: subxt :: ext :: codec :: Decode,
-                        :: subxt :: ext :: codec :: Encode,
-                        :: subxt :: ext :: scale_decode :: DecodeAsType,
-                        :: subxt :: ext :: scale_encode :: EncodeAsType,
-                        Clone,
-                        Debug,
-                        Eq,
-                        PartialEq,
-                    )]
-                    # [codec (crate = :: subxt :: ext :: codec)]
-                    #[decode_as_type(
-                        crate_path = ":: subxt :: ext :: scale_decode"
-                    )]
-                    #[encode_as_type(
-                        crate_path = ":: subxt :: ext :: scale_encode"
-                    )]
-                    pub struct BoundedVec<_0>(pub ::std::vec::Vec<_0>);
-                }
-                pub mod weak_bounded_vec {
-                    use super::runtime_types;
-                    #[derive(
-                        :: subxt :: ext :: codec :: Decode,
-                        :: subxt :: ext :: codec :: Encode,
-                        :: subxt :: ext :: scale_decode :: DecodeAsType,
-                        :: subxt :: ext :: scale_encode :: EncodeAsType,
-                        Clone,
-                        Debug,
-                        Eq,
-                        PartialEq,
-                    )]
-                    # [codec (crate = :: subxt :: ext :: codec)]
-                    #[decode_as_type(
-                        crate_path = ":: subxt :: ext :: scale_decode"
-                    )]
-                    #[encode_as_type(
-                        crate_path = ":: subxt :: ext :: scale_encode"
-                    )]
-                    pub struct WeakBoundedVec<_0>(pub ::std::vec::Vec<_0>);
-                }
-            }
             pub mod crypto {
                 use super::runtime_types;
                 #[derive(
@@ -22796,27 +22557,6 @@ pub mod api {
             # [codec (crate = :: subxt :: ext :: codec)]
             #[decode_as_type(crate_path = ":: subxt :: ext :: scale_decode")]
             #[encode_as_type(crate_path = ":: subxt :: ext :: scale_encode")]
-            pub enum ArithmeticError {
-                #[codec(index = 0)]
-                Underflow,
-                #[codec(index = 1)]
-                Overflow,
-                #[codec(index = 2)]
-                DivisionByZero,
-            }
-            #[derive(
-                :: subxt :: ext :: codec :: Decode,
-                :: subxt :: ext :: codec :: Encode,
-                :: subxt :: ext :: scale_decode :: DecodeAsType,
-                :: subxt :: ext :: scale_encode :: EncodeAsType,
-                Clone,
-                Debug,
-                Eq,
-                PartialEq,
-            )]
-            # [codec (crate = :: subxt :: ext :: codec)]
-            #[decode_as_type(crate_path = ":: subxt :: ext :: scale_decode")]
-            #[encode_as_type(crate_path = ":: subxt :: ext :: scale_encode")]
             pub enum DispatchError {
                 #[codec(index = 0)]
                 Other,
@@ -22835,7 +22575,7 @@ pub mod api {
                 #[codec(index = 7)]
                 Token(runtime_types::sp_runtime::TokenError),
                 #[codec(index = 8)]
-                Arithmetic(runtime_types::sp_runtime::ArithmeticError),
+                Arithmetic(runtime_types::sp_arithmetic::ArithmeticError),
                 #[codec(index = 9)]
                 Transactional(runtime_types::sp_runtime::TransactionalError),
                 #[codec(index = 10)]
@@ -23109,7 +22849,7 @@ pub mod api {
                     crate_path = ":: subxt :: ext :: scale_encode"
                 )]
                 pub enum Proposal<_0> {
-                    # [codec (index = 0)] Signed { kind : runtime_types :: webb_proposals :: proposal :: ProposalKind , data : runtime_types :: sp_core :: bounded :: bounded_vec :: BoundedVec < :: core :: primitive :: u8 > , signature : runtime_types :: sp_core :: bounded :: bounded_vec :: BoundedVec < :: core :: primitive :: u8 > , } , # [codec (index = 1)] Unsigned { kind : runtime_types :: webb_proposals :: proposal :: ProposalKind , data : runtime_types :: sp_core :: bounded :: bounded_vec :: BoundedVec < :: core :: primitive :: u8 > , } , __Ignore (:: core :: marker :: PhantomData < _0 >) , }
+                    # [codec (index = 0)] Signed { kind : runtime_types :: webb_proposals :: proposal :: ProposalKind , data : runtime_types :: bounded_collections :: bounded_vec :: BoundedVec < :: core :: primitive :: u8 > , signature : runtime_types :: bounded_collections :: bounded_vec :: BoundedVec < :: core :: primitive :: u8 > , } , # [codec (index = 1)] Unsigned { kind : runtime_types :: webb_proposals :: proposal :: ProposalKind , data : runtime_types :: bounded_collections :: bounded_vec :: BoundedVec < :: core :: primitive :: u8 > , } , __Ignore (:: core :: marker :: PhantomData < _0 >) , }
                 #[derive(
                     :: subxt :: ext :: codec :: Decode,
                     :: subxt :: ext :: codec :: Encode,
