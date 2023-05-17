@@ -13,7 +13,7 @@ documentation = { workspace = true }
 homepage = { workspace = true }
 
 [dependencies]
-anvil = { git = "https://github.com/foundry-rs/foundry.git", rev = "394f217" }
+anvil = { git = "https://github.com/foundry-rs/foundry.git", rev = "6570a4c" }
 futures = "0.3"
 hex = { workspace = true }
 webb-proposals = { path = "../proposals", default-features = false }
