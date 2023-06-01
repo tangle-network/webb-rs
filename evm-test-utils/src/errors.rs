@@ -2,6 +2,9 @@ use webb::evm::ethers;
 
 #[derive(Debug, thiserror::Error)]
 pub enum Error {
+    /// IO error.
+    #[error(transparent)]
+    Io(#[from] std::io::Error),
     /// Smart contract error.
     #[error(transparent)]
     EthersContract(

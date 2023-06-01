@@ -1,15 +1,13 @@
-use std::collections::HashMap;
 use std::sync::Arc;
 
 use futures::prelude::*;
 use webb::evm::contract::protocol_solidity::{
-    poseidon_hasher, poseidon_t4_contract, AnchorHandlerContract,
+    poseidon_hasher_factory, AnchorHandlerContract,
     ERC20PresetMinterPauserContract, PoseidonHasherContract,
     PoseidonT3Contract, PoseidonT4Contract, PoseidonT6Contract,
     SignatureBridgeContract, TreasuryContract, TreasuryHandlerContract,
 };
 use webb::evm::ethers;
-use webb::evm::ethers::signers::Signer;
 use webb_proposals::TypedChainId;
 
 use crate::deployement_args::{
@@ -151,6 +149,40 @@ impl LocalEvmChain {
         .await
     }
 
+    pub async fn deploy_poseidon_hasher(
+        &self,
+    ) -> Result<PoseidonHasherContract<SignerEthersClient>> {
+        let t3 = PoseidonT3Contract::deploy(self.client.clone(), ())?
+            .confirmations(0usize)
+            .send()
+            .await?;
+        let t4 = PoseidonT4Contract::deploy(self.client.clone(), ())?
+            .confirmations(0usize)
+            .send()
+            .await?;
+        let t6 = PoseidonT6Contract::deploy(self.client.clone(), ())?
+            .confirmations(0usize)
+            .send()
+            .await?;
+
+        let hasher_factory = poseidon_hasher_factory::create(
+            t3.address(),
+            t4.address(),
+            t6.address(),
+            self.client.clone(),
+        )?;
+        let contract = hasher_factory
+            .deploy(())?
+            .confirmations(0usize)
+            .send()
+            .await?;
+        let hasher = PoseidonHasherContract::new(
+            contract.address(),
+            self.client.clone(),
+        );
+        Ok(hasher)
+    }
+
     /// Deploy a new Anchor Handler.
     ///
     /// # Errors
@@ -255,6 +287,8 @@ impl LocalEvmChain {
 
 #[cfg(test)]
 mod tests {
+    use webb::evm::ethers::types::U256;
+
     use super::*;
 
     #[tokio::test]
@@ -268,6 +302,22 @@ mod tests {
         let symbol = token.symbol().call().await?;
         assert_eq!(symbol, "TST");
         chain.shutdown();
+        Ok(())
+    }
+
+    #[tokio::test]
+    async fn should_be_able_to_deploy_hasher() -> Result<()> {
+        let chain = LocalEvmChain::new(5001, String::from("Hermes")).await;
+        let hasher = chain.deploy_poseidon_hasher().await?;
+        let hash = hasher
+            .hash_left_right(U256::from(1), U256::from(2))
+            .call()
+            .await?;
+        let expected_result = U256::from_str_radix(
+            "115cc0f5e7d690413df64c6b9662e9cf2a3617f2743245519e19607a4417189a",
+            16,
+        );
+        assert_eq!(hash, expected_result.unwrap());
         Ok(())
     }
 
