@@ -104,7 +104,8 @@ impl LocalEvmChain {
     }
 
     pub fn shutdown(mut self) {
-        let maybe_signal = self.anvil_node_handle.shutdown_signal_mut().take();
+        let maybe_signal =
+            Option::take(self.anvil_node_handle.shutdown_signal_mut());
         if let Some(signal) = maybe_signal {
             signal.fire().expect("signal fired");
         }
