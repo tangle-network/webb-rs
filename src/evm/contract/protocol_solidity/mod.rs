@@ -36,16 +36,14 @@ pub mod poseidon_hasher_factory {
     use std::sync::Arc;
 
     use ethers::prelude::*;
-    use ethers::solc::{
-        artifacts::ContractBytecode, ConfigurableContractArtifact,
-    };
+    use ethers::solc::artifacts::ContractBytecode;
 
-    pub const ARTIFACT_PATH: &str =
-        "../../../../contracts/protocol-solidity/PoseidonHasher.json";
+    pub const ARTIFACT: &str = include_str!(
+        "../../../../contracts/protocol-solidity/PoseidonHasher.json"
+    );
 
     fn contract_bytecode() -> std::io::Result<ContractBytecode> {
-        let s = std::fs::read_to_string(ARTIFACT_PATH)?;
-        let artifact = serde_json::from_str::<ConfigurableContractArtifact>(&s)
+        let artifact = serde_json::from_str::<HardhatArtifact>(&ARTIFACT)
             .map_err(|e| std::io::Error::new(std::io::ErrorKind::Other, e))?;
         let contract = artifact.into_contract_bytecode();
         let bytecode: ContractBytecode = contract.into();
