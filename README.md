@@ -56,6 +56,14 @@ cargo build --features generate-contracts
 > Tip: See the [build.rs](./build.rs) file to see how everything is being generated.
 
 
+### Using Nix (with flakes)
+
+1. Install [Nix](https://nixos.org/download.html)
+2. Enable [flakes](https://nixos.wiki/wiki/Flakes) (if you haven't already)
+3. Run `nix develop` to enter a shell with all the dependencies installed
+
+Additionally, if you have [direnv](https://direnv.net/) installed, you can run `direnv allow` to automatically enter the shell whenever you enter the directory.
+
 ## Safety
 
 This crate uses `#![deny(unsafe_code)]` to ensure everything is implemented in
