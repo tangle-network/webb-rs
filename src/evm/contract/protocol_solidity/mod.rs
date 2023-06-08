@@ -31,3 +31,57 @@ pub use treasury::*;
 pub use treasury_handler::*;
 pub use vanchor_base::*;
 pub use variable_anchor::*;
+
+pub mod poseidon_hasher_factory {
+    use std::sync::Arc;
+
+    use ethers::prelude::*;
+    use ethers::solc::artifacts::ContractBytecode;
+
+    pub const ARTIFACT: &str = include_str!(
+        "../../../../contracts/protocol-solidity/PoseidonHasher.json"
+    );
+
+    fn contract_bytecode() -> std::io::Result<ContractBytecode> {
+        let artifact = serde_json::from_str::<HardhatArtifact>(&ARTIFACT)
+            .map_err(|e| std::io::Error::new(std::io::ErrorKind::Other, e))?;
+        let contract = artifact.into_contract_bytecode();
+        let bytecode: ContractBytecode = contract.into();
+        Ok(bytecode)
+    }
+
+    pub fn create<M>(
+        t3: Address,
+        t4: Address,
+        t6: Address,
+        client: Arc<M>,
+    ) -> std::io::Result<ContractFactory<M>>
+    where
+        M: Middleware,
+    {
+        let abi = super::POSEIDONHASHERCONTRACT_ABI.clone();
+        let mut bytecode_unlinked = contract_bytecode()?;
+        if let Some(ref mut bytecode) = bytecode_unlinked.bytecode {
+            bytecode.link_all_fully_qualified([
+                ("contracts/hashers/Poseidon.sol:PoseidonT3", t3),
+                ("contracts/hashers/Poseidon.sol:PoseidonT4", t4),
+                ("contracts/hashers/Poseidon.sol:PoseidonT6", t6),
+            ]);
+        }
+        let bytecode = bytecode_unlinked.bytecode.ok_or_else(|| {
+            std::io::Error::new(std::io::ErrorKind::Other, "missing bytecode")
+        })?;
+        debug_assert!(
+            bytecode.object.is_bytecode(),
+            "bytecode is not fully linked"
+        );
+        let raw_bytecode = bytecode.object.into_bytes().ok_or_else(|| {
+            std::io::Error::new(
+                std::io::ErrorKind::Other,
+                "bytecode is not fully linked",
+            )
+        })?;
+        let factory = ContractFactory::new(abi, raw_bytecode, client);
+        Ok(factory)
+    }
+}
