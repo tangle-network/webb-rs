@@ -2,17 +2,16 @@ use std::sync::Arc;
 
 use futures::prelude::*;
 use webb::evm::contract::protocol_solidity::{
-    poseidon_hasher_factory, AnchorHandlerContract,
-    ERC20PresetMinterPauserContract, PoseidonHasherContract,
-    PoseidonT3Contract, PoseidonT4Contract, PoseidonT6Contract,
-    SignatureBridgeContract, TreasuryContract, TreasuryHandlerContract,
+    anchor_handler::AnchorHandlerContract,
+    erc20_preset_minter_pauser::ERC20PresetMinterPauserContract,
+    poseidon_hasher::PoseidonHasherContract, poseidon_hasher_factory,
+    poseidon_t3::PoseidonT3Contract, poseidon_t4::PoseidonT4Contract,
+    poseidon_t6::PoseidonT6Contract, signature_bridge::SignatureBridgeContract,
+    treasury::TreasuryContract, treasury_handler::TreasuryHandlerContract,
 };
 use webb::evm::ethers;
 use webb_proposals::TypedChainId;
 
-use crate::deployement_args::{
-    VAnchorBridgeDeploymentArgs, VBridgeDeploymentArgs,
-};
 use crate::errors::Result;
 
 type EthersClient = ethers::providers::Provider<ethers::providers::Http>;

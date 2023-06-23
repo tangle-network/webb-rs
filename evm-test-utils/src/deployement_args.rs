@@ -1,8 +1,10 @@
 use std::collections::HashMap;
 
-use webb::evm::contract::protocol_solidity::ERC20PresetMinterPauserContract;
 use webb::evm::{
-    contract::protocol_solidity::FungibleTokenWrapperContract,
+    contract::protocol_solidity::{
+        erc20_preset_minter_pauser::ERC20PresetMinterPauserContract,
+        fungible_token_wrapper::FungibleTokenWrapperContract,
+    },
     ethers::{signers::LocalWallet, types::Address},
 };
 use webb_proposals::TypedChainId;

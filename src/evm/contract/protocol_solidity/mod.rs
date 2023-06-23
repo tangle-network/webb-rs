@@ -16,33 +16,18 @@ pub mod treasury_handler;
 pub mod vanchor_base;
 pub mod variable_anchor;
 
-pub use anchor_handler::*;
-pub use erc20_preset_minter_pauser::*;
-pub use fungible_token_wrapper::*;
-pub use open_variable_anchor::*;
-pub use poseidon_hasher::*;
-pub use poseidon_t3::*;
-pub use poseidon_t4::*;
-pub use poseidon_t6::*;
-pub use signature_bridge::*;
-pub use token_wrapper::*;
-pub use token_wrapper_handler::*;
-pub use treasury::*;
-pub use treasury_handler::*;
-pub use vanchor_base::*;
-pub use variable_anchor::*;
-
 pub mod poseidon_hasher_factory {
     use std::sync::Arc;
 
     use ethers::prelude::*;
     use ethers::solc::artifacts::ContractBytecode;
 
-    pub const ARTIFACT: &str = include_str!(
-        "../../../../contracts/protocol-solidity/PoseidonHasher.json"
-    );
+    use super::poseidon_hasher::POSEIDONHASHERCONTRACT_ABI;
 
     fn contract_bytecode() -> std::io::Result<ContractBytecode> {
+        const ARTIFACT: &str = include_str!(
+            "../../../../contracts/protocol-solidity/PoseidonHasher.json"
+        );
         let artifact = serde_json::from_str::<HardhatArtifact>(&ARTIFACT)
             .map_err(|e| std::io::Error::new(std::io::ErrorKind::Other, e))?;
         let contract = artifact.into_contract_bytecode();
@@ -59,7 +44,7 @@ pub mod poseidon_hasher_factory {
     where
         M: Middleware,
     {
-        let abi = super::POSEIDONHASHERCONTRACT_ABI.clone();
+        let abi = POSEIDONHASHERCONTRACT_ABI.clone();
         let mut bytecode_unlinked = contract_bytecode()?;
         if let Some(ref mut bytecode) = bytecode_unlinked.bytecode {
             bytecode.link_all_fully_qualified([

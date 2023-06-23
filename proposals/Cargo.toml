@@ -17,14 +17,14 @@ scale-codec = { package = 'parity-scale-codec', version = '3.0.0', default-featu
 scale-info = { version = "2.1.1", default-features = false, optional = true }
 frame-support = { default-features = false, git = "https://github.com/paritytech/substrate.git", branch = "polkadot-v0.9.39", optional = true }
 num-traits = { version = "0.2.15", default-features = false }
-typed-builder = { version = "0.10.0", default-features = false, optional = true }
+typed-builder = { version = "0.14.0", default-features = false, optional = true }
 tiny-keccak = { version = "2.0.2", features = ["keccak"] }
 schemars = "0.8.11"
 serde = { workspace = true, optional = true }
 hex = { workspace = true }
 
 [dev-dependencies]
-hex-literal = "0.3"
+hex-literal = "0.4"
 hex = { workspace = true }
 toml = { version = "0.7.2" }
 
