@@ -15,7 +15,6 @@ rlp-derive = { version = "0.1.0", default-features = false }
 
 serde_json = { version = "1.0.83", optional = true }
 serde = { version = "1.0.143", optional = true }
-serde-rlp = "0.1.4"
 hex = "0.4.3"
 
 [dev-dependencies]
