@@ -42,6 +42,14 @@ mod evm {
         )
     }
 
+    pub fn build_protocol_solidity_vanchor_tree() -> Result<(), Box<dyn Error>>
+    {
+        parse_and_write_abigen(
+            "contracts/protocol-solidity/VAnchorTree.json",
+            "src/evm/contract/protocol_solidity/variable_anchor_tree.rs",
+            "VAnchorTreeContract",
+        )
+    }
     pub fn build_protocol_solidity_open_vanchor() -> Result<(), Box<dyn Error>>
     {
         parse_and_write_abigen(
@@ -224,6 +232,7 @@ fn main() -> Result<(), Box<dyn Error>> {
     {
         evm::build_protocol_solidity_vanchor_base()?;
         evm::build_protocol_solidity_vanchor()?;
+        evm::build_protocol_solidity_vanchor_tree()?;
         evm::build_protocol_solidity_open_vanchor()?;
         evm::build_protocol_solidity_anchor_handler()?;
         evm::build_protocol_solidity_signature_bridge()?;
