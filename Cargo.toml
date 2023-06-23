@@ -1,7 +1,7 @@
 [workspace.package]
 edition = "2021"
 authors = ["Webb Developers"]
-license = "GPL-3.0"
+license = "Apache-2.0"
 repository = "https://github.com/webb-tools/webb-rs"
 documentation = "https://docs.rs/webb"
 homepage = "https://www.webb.tools"
