@@ -21,7 +21,7 @@ name = "webb"
 version = "0.5.25"
 description = "Webb SDK"
 keywords = ["webb", "sdk", "blockchain", "webb-tools"]
-include = ["Cargo.toml", "contracts/", "metadata/", "src/**/*.rs", "build.rs", "README.md", "LICENSE"]
+include = ["Cargo.toml", "contracts/", "metadata/", "src/**/*.rs", "build.rs"]
 build = "build.rs"
 edition = { workspace = true }
 authors = { workspace = true }
