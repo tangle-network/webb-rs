@@ -680,11 +680,11 @@ pub mod api {
                         "Events",
                         vec![],
                         [
-                            16u8, 173u8, 18u8, 248u8, 211u8, 135u8, 133u8,
-                            139u8, 99u8, 237u8, 9u8, 244u8, 16u8, 172u8, 188u8,
-                            182u8, 106u8, 251u8, 131u8, 105u8, 117u8, 125u8,
-                            52u8, 68u8, 112u8, 143u8, 66u8, 67u8, 110u8, 138u8,
-                            64u8, 5u8,
+                            116u8, 31u8, 2u8, 241u8, 146u8, 133u8, 184u8,
+                            187u8, 47u8, 134u8, 181u8, 203u8, 173u8, 122u8,
+                            15u8, 154u8, 158u8, 137u8, 58u8, 179u8, 191u8,
+                            30u8, 243u8, 25u8, 42u8, 186u8, 208u8, 72u8, 18u8,
+                            75u8, 119u8, 183u8,
                         ],
                     )
                 }
@@ -1125,11 +1125,11 @@ pub mod api {
                             call: ::std::boxed::Box::new(call),
                         },
                         [
-                            54u8, 134u8, 26u8, 184u8, 173u8, 215u8, 143u8,
-                            18u8, 247u8, 77u8, 241u8, 9u8, 168u8, 12u8, 235u8,
-                            254u8, 212u8, 28u8, 152u8, 195u8, 204u8, 144u8,
-                            73u8, 58u8, 18u8, 216u8, 240u8, 248u8, 37u8, 132u8,
-                            186u8, 135u8,
+                            160u8, 252u8, 249u8, 45u8, 57u8, 74u8, 141u8,
+                            218u8, 161u8, 107u8, 174u8, 98u8, 177u8, 205u8,
+                            24u8, 116u8, 55u8, 47u8, 89u8, 10u8, 109u8, 129u8,
+                            184u8, 215u8, 181u8, 79u8, 222u8, 216u8, 207u8,
+                            168u8, 233u8, 19u8,
                         ],
                     )
                 }
@@ -1155,11 +1155,11 @@ pub mod api {
                             weight,
                         },
                         [
-                            81u8, 225u8, 216u8, 81u8, 216u8, 254u8, 232u8,
-                            147u8, 28u8, 2u8, 124u8, 132u8, 107u8, 77u8, 167u8,
-                            33u8, 90u8, 217u8, 197u8, 153u8, 177u8, 2u8, 207u8,
-                            68u8, 36u8, 57u8, 22u8, 187u8, 202u8, 231u8, 4u8,
-                            116u8,
+                            203u8, 78u8, 212u8, 149u8, 164u8, 73u8, 243u8,
+                            196u8, 107u8, 174u8, 219u8, 50u8, 90u8, 126u8,
+                            207u8, 84u8, 135u8, 161u8, 40u8, 64u8, 165u8, 1u8,
+                            88u8, 179u8, 81u8, 124u8, 209u8, 158u8, 160u8,
+                            204u8, 171u8, 206u8,
                         ],
                     )
                 }
@@ -1213,11 +1213,11 @@ pub mod api {
                             call: ::std::boxed::Box::new(call),
                         },
                         [
-                            85u8, 74u8, 152u8, 56u8, 200u8, 161u8, 85u8, 32u8,
-                            148u8, 2u8, 127u8, 149u8, 244u8, 127u8, 85u8,
-                            188u8, 4u8, 68u8, 146u8, 224u8, 46u8, 69u8, 59u8,
-                            66u8, 29u8, 220u8, 62u8, 183u8, 89u8, 88u8, 94u8,
-                            212u8,
+                            225u8, 186u8, 252u8, 199u8, 95u8, 72u8, 109u8,
+                            190u8, 102u8, 215u8, 123u8, 141u8, 41u8, 67u8, 9u8,
+                            248u8, 28u8, 196u8, 92u8, 185u8, 250u8, 255u8,
+                            56u8, 159u8, 37u8, 113u8, 151u8, 161u8, 15u8,
+                            226u8, 96u8, 138u8,
                         ],
                     )
                 }
@@ -4368,7 +4368,7 @@ pub mod api {
             #[doc = "Vote submitted in favour of proposal"]
             pub struct VoteFor {
                 pub kind: runtime_types::webb_proposals::proposal::ProposalKind,
-                pub chain_id:
+                pub src_chain_id:
                     runtime_types::webb_proposals::header::TypedChainId,
                 pub proposal_nonce: runtime_types::webb_proposals::nonce::Nonce,
                 pub who: ::subxt::utils::AccountId32,
@@ -4388,7 +4388,7 @@ pub mod api {
             #[doc = "Vot submitted against proposal"]
             pub struct VoteAgainst {
                 pub kind: runtime_types::webb_proposals::proposal::ProposalKind,
-                pub chain_id:
+                pub src_chain_id:
                     runtime_types::webb_proposals::header::TypedChainId,
                 pub proposal_nonce: runtime_types::webb_proposals::nonce::Nonce,
                 pub who: ::subxt::utils::AccountId32,
@@ -4408,7 +4408,7 @@ pub mod api {
             #[doc = "Voting successful for a proposal"]
             pub struct ProposalApproved {
                 pub kind: runtime_types::webb_proposals::proposal::ProposalKind,
-                pub chain_id:
+                pub src_chain_id:
                     runtime_types::webb_proposals::header::TypedChainId,
                 pub proposal_nonce: runtime_types::webb_proposals::nonce::Nonce,
             }
@@ -4427,7 +4427,7 @@ pub mod api {
             #[doc = "Voting rejected a proposal"]
             pub struct ProposalRejected {
                 pub kind: runtime_types::webb_proposals::proposal::ProposalKind,
-                pub chain_id:
+                pub src_chain_id:
                     runtime_types::webb_proposals::header::TypedChainId,
                 pub proposal_nonce: runtime_types::webb_proposals::nonce::Nonce,
             }
@@ -4446,7 +4446,7 @@ pub mod api {
             #[doc = "Execution of call succeeded"]
             pub struct ProposalSucceeded {
                 pub kind: runtime_types::webb_proposals::proposal::ProposalKind,
-                pub chain_id:
+                pub src_chain_id:
                     runtime_types::webb_proposals::header::TypedChainId,
                 pub proposal_nonce: runtime_types::webb_proposals::nonce::Nonce,
             }
@@ -4465,7 +4465,7 @@ pub mod api {
             #[doc = "Execution of call failed"]
             pub struct ProposalFailed {
                 pub kind: runtime_types::webb_proposals::proposal::ProposalKind,
-                pub chain_id:
+                pub src_chain_id:
                     runtime_types::webb_proposals::header::TypedChainId,
                 pub proposal_nonce: runtime_types::webb_proposals::nonce::Nonce,
             }
@@ -4827,13 +4827,7 @@ pub mod api {
                 Eq,
                 PartialEq,
             )]
-            pub struct SubmitSignedProposals {
-                pub props: ::std::vec::Vec<
-                    runtime_types::webb_proposals::proposal::Proposal<
-                        runtime_types::dkg_runtime_primitives::CustomU32Getter,
-                    >,
-                >,
-            }
+            pub struct SubmitSignedProposals { pub props : :: std :: vec :: Vec < runtime_types :: dkg_runtime_primitives :: proposal :: SignedProposalBatch < :: core :: primitive :: u32 , runtime_types :: dkg_runtime_primitives :: CustomU32Getter , runtime_types :: dkg_runtime_primitives :: CustomU32Getter , runtime_types :: dkg_runtime_primitives :: CustomU32Getter > > , }
             #[derive(
                 :: subxt :: ext :: codec :: Decode,
                 :: subxt :: ext :: codec :: Encode,
@@ -4851,7 +4845,7 @@ pub mod api {
             impl TransactionApi {
                 pub fn submit_signed_proposals(
                     &self,
-                    props : :: std :: vec :: Vec < runtime_types :: webb_proposals :: proposal :: Proposal < runtime_types :: dkg_runtime_primitives :: CustomU32Getter > >,
+                    props : :: std :: vec :: Vec < runtime_types :: dkg_runtime_primitives :: proposal :: SignedProposalBatch < :: core :: primitive :: u32 , runtime_types :: dkg_runtime_primitives :: CustomU32Getter , runtime_types :: dkg_runtime_primitives :: CustomU32Getter , runtime_types :: dkg_runtime_primitives :: CustomU32Getter > >,
                 ) -> ::subxt::tx::StaticTxPayload<SubmitSignedProposals>
                 {
                     ::subxt::tx::StaticTxPayload::new(
@@ -4859,11 +4853,11 @@ pub mod api {
                         "submit_signed_proposals",
                         SubmitSignedProposals { props },
                         [
-                            40u8, 38u8, 237u8, 6u8, 145u8, 127u8, 224u8, 153u8,
-                            97u8, 77u8, 26u8, 198u8, 143u8, 255u8, 229u8,
-                            178u8, 248u8, 154u8, 41u8, 154u8, 186u8, 56u8,
-                            74u8, 137u8, 120u8, 36u8, 89u8, 224u8, 224u8,
-                            189u8, 97u8, 99u8,
+                            252u8, 120u8, 137u8, 56u8, 175u8, 118u8, 70u8,
+                            130u8, 236u8, 37u8, 5u8, 51u8, 254u8, 63u8, 174u8,
+                            86u8, 221u8, 217u8, 159u8, 250u8, 2u8, 62u8, 66u8,
+                            142u8, 252u8, 195u8, 188u8, 77u8, 36u8, 88u8, 98u8,
+                            223u8,
                         ],
                     )
                 }
@@ -4907,20 +4901,10 @@ pub mod api {
                 PartialEq,
             )]
             #[doc = "RuntimeEvent Emitted when we encounter a Proposal with invalid Signature."]
-            pub struct InvalidProposalSignature {
-                pub kind: runtime_types::webb_proposals::proposal::ProposalKind,
-                pub data: ::std::vec::Vec<::core::primitive::u8>,
-                pub invalid_signature: ::std::vec::Vec<::core::primitive::u8>,
-                pub expected_public_key: ::core::option::Option<
-                    ::std::vec::Vec<::core::primitive::u8>,
-                >,
-                pub actual_public_key: ::core::option::Option<
-                    ::std::vec::Vec<::core::primitive::u8>,
-                >,
-            }
-            impl ::subxt::events::StaticEvent for InvalidProposalSignature {
+            pub struct InvalidProposalBatchSignature { pub proposals : runtime_types :: dkg_runtime_primitives :: proposal :: SignedProposalBatch < :: core :: primitive :: u32 , runtime_types :: dkg_runtime_primitives :: CustomU32Getter , runtime_types :: dkg_runtime_primitives :: CustomU32Getter , runtime_types :: dkg_runtime_primitives :: CustomU32Getter > , pub data : :: std :: vec :: Vec < :: core :: primitive :: u8 > , pub invalid_signature : :: std :: vec :: Vec < :: core :: primitive :: u8 > , pub expected_public_key : :: core :: option :: Option < :: std :: vec :: Vec < :: core :: primitive :: u8 > > , pub actual_public_key : :: core :: option :: Option < :: std :: vec :: Vec < :: core :: primitive :: u8 > > , }
+            impl ::subxt::events::StaticEvent for InvalidProposalBatchSignature {
                 const PALLET: &'static str = "DKGProposalHandler";
-                const EVENT: &'static str = "InvalidProposalSignature";
+                const EVENT: &'static str = "InvalidProposalBatchSignature";
             }
             #[derive(
                 :: subxt :: ext :: codec :: Decode,
@@ -4959,65 +4943,78 @@ pub mod api {
                 PartialEq,
             )]
             #[doc = "RuntimeEvent When a Proposal Gets Signed by DKG."]
-            pub struct ProposalSigned { pub key : runtime_types :: dkg_runtime_primitives :: proposal :: DKGPayloadKey , pub target_chain : runtime_types :: webb_proposals :: header :: TypedChainId , pub data : :: std :: vec :: Vec < :: core :: primitive :: u8 > , pub signature : :: std :: vec :: Vec < :: core :: primitive :: u8 > , }
-            impl ::subxt::events::StaticEvent for ProposalSigned {
+            pub struct ProposalBatchSigned { pub target_chain : runtime_types :: webb_proposals :: header :: TypedChainId , pub proposals : runtime_types :: dkg_runtime_primitives :: proposal :: SignedProposalBatch < :: core :: primitive :: u32 , runtime_types :: dkg_runtime_primitives :: CustomU32Getter , runtime_types :: dkg_runtime_primitives :: CustomU32Getter , runtime_types :: dkg_runtime_primitives :: CustomU32Getter > , pub data : :: std :: vec :: Vec < :: core :: primitive :: u8 > , pub signature : :: std :: vec :: Vec < :: core :: primitive :: u8 > , }
+            impl ::subxt::events::StaticEvent for ProposalBatchSigned {
                 const PALLET: &'static str = "DKGProposalHandler";
-                const EVENT: &'static str = "ProposalSigned";
+                const EVENT: &'static str = "ProposalBatchSigned";
             }
         }
         pub mod storage {
             use super::runtime_types;
             pub struct StorageApi;
             impl StorageApi {
-                #[doc = " All unsigned proposals."]                pub fn unsigned_proposal_queue (& self , _0 : impl :: std :: borrow :: Borrow < runtime_types :: webb_proposals :: header :: TypedChainId > , _1 : impl :: std :: borrow :: Borrow < runtime_types :: dkg_runtime_primitives :: proposal :: DKGPayloadKey > ,) -> :: subxt :: storage :: address :: StaticStorageAddress :: < :: subxt :: metadata :: DecodeStaticType < runtime_types :: dkg_runtime_primitives :: proposal :: StoredUnsignedProposal < :: core :: primitive :: u32 , runtime_types :: dkg_runtime_primitives :: CustomU32Getter > > , :: subxt :: storage :: address :: Yes , () , :: subxt :: storage :: address :: Yes >{
-                    :: subxt :: storage :: address :: StaticStorageAddress :: new ("DKGProposalHandler" , "UnsignedProposalQueue" , vec ! [:: subxt :: storage :: address :: StorageMapKey :: new (_0 . borrow () , :: subxt :: storage :: address :: StorageHasher :: Blake2_128Concat) , :: subxt :: storage :: address :: StorageMapKey :: new (_1 . borrow () , :: subxt :: storage :: address :: StorageHasher :: Blake2_128Concat)] , [180u8 , 168u8 , 253u8 , 235u8 , 22u8 , 205u8 , 104u8 , 231u8 , 206u8 , 162u8 , 69u8 , 53u8 , 120u8 , 242u8 , 94u8 , 192u8 , 63u8 , 147u8 , 54u8 , 66u8 , 54u8 , 195u8 , 19u8 , 252u8 , 129u8 , 118u8 , 114u8 , 37u8 , 231u8 , 137u8 , 66u8 , 228u8 ,])
+                #[doc = " All unsigned proposals."]                pub fn unsigned_proposal_queue (& self , _0 : impl :: std :: borrow :: Borrow < runtime_types :: webb_proposals :: header :: TypedChainId > , _1 : impl :: std :: borrow :: Borrow < :: core :: primitive :: u32 > ,) -> :: subxt :: storage :: address :: StaticStorageAddress :: < :: subxt :: metadata :: DecodeStaticType < runtime_types :: dkg_runtime_primitives :: proposal :: StoredUnsignedProposalBatch < :: core :: primitive :: u32 , runtime_types :: dkg_runtime_primitives :: CustomU32Getter , runtime_types :: dkg_runtime_primitives :: CustomU32Getter , :: core :: primitive :: u32 > > , :: subxt :: storage :: address :: Yes , () , :: subxt :: storage :: address :: Yes >{
+                    :: subxt :: storage :: address :: StaticStorageAddress :: new ("DKGProposalHandler" , "UnsignedProposalQueue" , vec ! [:: subxt :: storage :: address :: StorageMapKey :: new (_0 . borrow () , :: subxt :: storage :: address :: StorageHasher :: Blake2_128Concat) , :: subxt :: storage :: address :: StorageMapKey :: new (_1 . borrow () , :: subxt :: storage :: address :: StorageHasher :: Blake2_128Concat)] , [111u8 , 222u8 , 244u8 , 171u8 , 194u8 , 236u8 , 117u8 , 194u8 , 134u8 , 76u8 , 192u8 , 129u8 , 228u8 , 17u8 , 221u8 , 35u8 , 201u8 , 9u8 , 68u8 , 95u8 , 13u8 , 116u8 , 193u8 , 24u8 , 168u8 , 44u8 , 224u8 , 94u8 , 221u8 , 205u8 , 77u8 , 115u8 ,])
                 }
-                #[doc = " All unsigned proposals."]                pub fn unsigned_proposal_queue_root (& self ,) -> :: subxt :: storage :: address :: StaticStorageAddress :: < :: subxt :: metadata :: DecodeStaticType < runtime_types :: dkg_runtime_primitives :: proposal :: StoredUnsignedProposal < :: core :: primitive :: u32 , runtime_types :: dkg_runtime_primitives :: CustomU32Getter > > , () , () , :: subxt :: storage :: address :: Yes >{
+                #[doc = " All unsigned proposals."]                pub fn unsigned_proposal_queue_root (& self ,) -> :: subxt :: storage :: address :: StaticStorageAddress :: < :: subxt :: metadata :: DecodeStaticType < runtime_types :: dkg_runtime_primitives :: proposal :: StoredUnsignedProposalBatch < :: core :: primitive :: u32 , runtime_types :: dkg_runtime_primitives :: CustomU32Getter , runtime_types :: dkg_runtime_primitives :: CustomU32Getter , :: core :: primitive :: u32 > > , () , () , :: subxt :: storage :: address :: Yes >{
                     ::subxt::storage::address::StaticStorageAddress::new(
                         "DKGProposalHandler",
                         "UnsignedProposalQueue",
                         Vec::new(),
                         [
-                            180u8, 168u8, 253u8, 235u8, 22u8, 205u8, 104u8,
-                            231u8, 206u8, 162u8, 69u8, 53u8, 120u8, 242u8,
-                            94u8, 192u8, 63u8, 147u8, 54u8, 66u8, 54u8, 195u8,
-                            19u8, 252u8, 129u8, 118u8, 114u8, 37u8, 231u8,
-                            137u8, 66u8, 228u8,
+                            111u8, 222u8, 244u8, 171u8, 194u8, 236u8, 117u8,
+                            194u8, 134u8, 76u8, 192u8, 129u8, 228u8, 17u8,
+                            221u8, 35u8, 201u8, 9u8, 68u8, 95u8, 13u8, 116u8,
+                            193u8, 24u8, 168u8, 44u8, 224u8, 94u8, 221u8,
+                            205u8, 77u8, 115u8,
                         ],
                     )
                 }
-                #[doc = " Defines the block when next unsigned transaction will be accepted."]
-                #[doc = ""]
-                #[doc = " To prevent spam of unsigned (and unpayed!) transactions on the network,"]
-                #[doc = " we only allow one transaction every `T::UnsignedInterval` blocks."]
-                #[doc = " This storage entry defines when new transaction is going to be accepted."]                pub fn next_unsigned_at (& self ,) -> :: subxt :: storage :: address :: StaticStorageAddress :: < :: subxt :: metadata :: DecodeStaticType < :: core :: primitive :: u32 > , :: subxt :: storage :: address :: Yes , :: subxt :: storage :: address :: Yes , () >{
+                #[doc = " Defines the next batch id available"]                pub fn next_batch_id (& self ,) -> :: subxt :: storage :: address :: StaticStorageAddress :: < :: subxt :: metadata :: DecodeStaticType < :: core :: primitive :: u32 > , :: subxt :: storage :: address :: Yes , :: subxt :: storage :: address :: Yes , () >{
                     ::subxt::storage::address::StaticStorageAddress::new(
                         "DKGProposalHandler",
-                        "NextUnsignedAt",
+                        "NextBatchId",
                         vec![],
                         [
-                            175u8, 176u8, 254u8, 20u8, 27u8, 31u8, 70u8, 46u8,
-                            201u8, 118u8, 22u8, 200u8, 95u8, 116u8, 223u8,
-                            63u8, 191u8, 85u8, 55u8, 21u8, 70u8, 24u8, 225u8,
-                            203u8, 66u8, 213u8, 94u8, 229u8, 234u8, 223u8,
-                            255u8, 28u8,
+                            155u8, 56u8, 124u8, 133u8, 203u8, 78u8, 6u8, 90u8,
+                            200u8, 130u8, 11u8, 208u8, 192u8, 253u8, 32u8,
+                            206u8, 238u8, 51u8, 225u8, 59u8, 66u8, 55u8, 80u8,
+                            146u8, 43u8, 138u8, 8u8, 117u8, 114u8, 177u8,
+                            214u8, 248u8,
                         ],
                     )
                 }
-                #[doc = " All signed proposals."]                pub fn signed_proposals (& self , _0 : impl :: std :: borrow :: Borrow < runtime_types :: webb_proposals :: header :: TypedChainId > , _1 : impl :: std :: borrow :: Borrow < runtime_types :: dkg_runtime_primitives :: proposal :: DKGPayloadKey > ,) -> :: subxt :: storage :: address :: StaticStorageAddress :: < :: subxt :: metadata :: DecodeStaticType < runtime_types :: webb_proposals :: proposal :: Proposal < runtime_types :: dkg_runtime_primitives :: CustomU32Getter > > , :: subxt :: storage :: address :: Yes , () , :: subxt :: storage :: address :: Yes >{
-                    :: subxt :: storage :: address :: StaticStorageAddress :: new ("DKGProposalHandler" , "SignedProposals" , vec ! [:: subxt :: storage :: address :: StorageMapKey :: new (_0 . borrow () , :: subxt :: storage :: address :: StorageHasher :: Blake2_128Concat) , :: subxt :: storage :: address :: StorageMapKey :: new (_1 . borrow () , :: subxt :: storage :: address :: StorageHasher :: Blake2_128Concat)] , [40u8 , 252u8 , 222u8 , 220u8 , 87u8 , 195u8 , 206u8 , 177u8 , 252u8 , 151u8 , 163u8 , 130u8 , 212u8 , 57u8 , 250u8 , 155u8 , 16u8 , 65u8 , 94u8 , 201u8 , 52u8 , 174u8 , 75u8 , 9u8 , 185u8 , 240u8 , 218u8 , 241u8 , 208u8 , 36u8 , 17u8 , 196u8 ,])
+                #[doc = " Staging queue for unsigned proposals"]                pub fn unsigned_proposals (& self , _0 : impl :: std :: borrow :: Borrow < runtime_types :: webb_proposals :: header :: TypedChainId > ,) -> :: subxt :: storage :: address :: StaticStorageAddress :: < :: subxt :: metadata :: DecodeStaticType < runtime_types :: bounded_collections :: bounded_vec :: BoundedVec < runtime_types :: dkg_runtime_primitives :: UnsignedProposal < runtime_types :: dkg_runtime_primitives :: CustomU32Getter > > > , :: subxt :: storage :: address :: Yes , () , :: subxt :: storage :: address :: Yes >{
+                    :: subxt :: storage :: address :: StaticStorageAddress :: new ("DKGProposalHandler" , "UnsignedProposals" , vec ! [:: subxt :: storage :: address :: StorageMapKey :: new (_0 . borrow () , :: subxt :: storage :: address :: StorageHasher :: Blake2_128Concat)] , [28u8 , 20u8 , 97u8 , 50u8 , 17u8 , 79u8 , 3u8 , 241u8 , 202u8 , 247u8 , 59u8 , 243u8 , 206u8 , 53u8 , 153u8 , 80u8 , 123u8 , 91u8 , 170u8 , 101u8 , 10u8 , 208u8 , 182u8 , 26u8 , 232u8 , 176u8 , 236u8 , 241u8 , 102u8 , 58u8 , 214u8 , 142u8 ,])
                 }
-                #[doc = " All signed proposals."]                pub fn signed_proposals_root (& self ,) -> :: subxt :: storage :: address :: StaticStorageAddress :: < :: subxt :: metadata :: DecodeStaticType < runtime_types :: webb_proposals :: proposal :: Proposal < runtime_types :: dkg_runtime_primitives :: CustomU32Getter > > , () , () , :: subxt :: storage :: address :: Yes >{
+                #[doc = " Staging queue for unsigned proposals"]                pub fn unsigned_proposals_root (& self ,) -> :: subxt :: storage :: address :: StaticStorageAddress :: < :: subxt :: metadata :: DecodeStaticType < runtime_types :: bounded_collections :: bounded_vec :: BoundedVec < runtime_types :: dkg_runtime_primitives :: UnsignedProposal < runtime_types :: dkg_runtime_primitives :: CustomU32Getter > > > , () , () , :: subxt :: storage :: address :: Yes >{
+                    ::subxt::storage::address::StaticStorageAddress::new(
+                        "DKGProposalHandler",
+                        "UnsignedProposals",
+                        Vec::new(),
+                        [
+                            28u8, 20u8, 97u8, 50u8, 17u8, 79u8, 3u8, 241u8,
+                            202u8, 247u8, 59u8, 243u8, 206u8, 53u8, 153u8,
+                            80u8, 123u8, 91u8, 170u8, 101u8, 10u8, 208u8,
+                            182u8, 26u8, 232u8, 176u8, 236u8, 241u8, 102u8,
+                            58u8, 214u8, 142u8,
+                        ],
+                    )
+                }
+                #[doc = " All signed proposals."]                pub fn signed_proposals (& self , _0 : impl :: std :: borrow :: Borrow < runtime_types :: webb_proposals :: header :: TypedChainId > , _1 : impl :: std :: borrow :: Borrow < :: core :: primitive :: u32 > ,) -> :: subxt :: storage :: address :: StaticStorageAddress :: < :: subxt :: metadata :: DecodeStaticType < runtime_types :: dkg_runtime_primitives :: proposal :: SignedProposalBatch < :: core :: primitive :: u32 , runtime_types :: dkg_runtime_primitives :: CustomU32Getter , runtime_types :: dkg_runtime_primitives :: CustomU32Getter , runtime_types :: dkg_runtime_primitives :: CustomU32Getter > > , :: subxt :: storage :: address :: Yes , () , :: subxt :: storage :: address :: Yes >{
+                    :: subxt :: storage :: address :: StaticStorageAddress :: new ("DKGProposalHandler" , "SignedProposals" , vec ! [:: subxt :: storage :: address :: StorageMapKey :: new (_0 . borrow () , :: subxt :: storage :: address :: StorageHasher :: Blake2_128Concat) , :: subxt :: storage :: address :: StorageMapKey :: new (_1 . borrow () , :: subxt :: storage :: address :: StorageHasher :: Blake2_128Concat)] , [130u8 , 189u8 , 220u8 , 169u8 , 76u8 , 166u8 , 254u8 , 201u8 , 220u8 , 79u8 , 82u8 , 7u8 , 247u8 , 63u8 , 217u8 , 104u8 , 90u8 , 178u8 , 123u8 , 255u8 , 125u8 , 33u8 , 227u8 , 88u8 , 4u8 , 89u8 , 123u8 , 60u8 , 159u8 , 73u8 , 64u8 , 82u8 ,])
+                }
+                #[doc = " All signed proposals."]                pub fn signed_proposals_root (& self ,) -> :: subxt :: storage :: address :: StaticStorageAddress :: < :: subxt :: metadata :: DecodeStaticType < runtime_types :: dkg_runtime_primitives :: proposal :: SignedProposalBatch < :: core :: primitive :: u32 , runtime_types :: dkg_runtime_primitives :: CustomU32Getter , runtime_types :: dkg_runtime_primitives :: CustomU32Getter , runtime_types :: dkg_runtime_primitives :: CustomU32Getter > > , () , () , :: subxt :: storage :: address :: Yes >{
                     ::subxt::storage::address::StaticStorageAddress::new(
                         "DKGProposalHandler",
                         "SignedProposals",
                         Vec::new(),
                         [
-                            40u8, 252u8, 222u8, 220u8, 87u8, 195u8, 206u8,
-                            177u8, 252u8, 151u8, 163u8, 130u8, 212u8, 57u8,
-                            250u8, 155u8, 16u8, 65u8, 94u8, 201u8, 52u8, 174u8,
-                            75u8, 9u8, 185u8, 240u8, 218u8, 241u8, 208u8, 36u8,
-                            17u8, 196u8,
+                            130u8, 189u8, 220u8, 169u8, 76u8, 166u8, 254u8,
+                            201u8, 220u8, 79u8, 82u8, 7u8, 247u8, 63u8, 217u8,
+                            104u8, 90u8, 178u8, 123u8, 255u8, 125u8, 33u8,
+                            227u8, 88u8, 4u8, 89u8, 123u8, 60u8, 159u8, 73u8,
+                            64u8, 82u8,
                         ],
                     )
                 }
@@ -5028,20 +5025,20 @@ pub mod api {
             pub struct ConstantsApi;
             impl ConstantsApi {
                 #[doc = " Max number of signed proposal submissions per batch;"]
-                pub fn max_submissions_per_batch(
+                pub fn max_proposals_per_batch(
                     &self,
                 ) -> ::subxt::constants::StaticConstantAddress<
-                    ::subxt::metadata::DecodeStaticType<::core::primitive::u16>,
+                    ::subxt::metadata::DecodeStaticType<::core::primitive::u32>,
                 > {
                     ::subxt::constants::StaticConstantAddress::new(
                         "DKGProposalHandler",
-                        "MaxSubmissionsPerBatch",
+                        "MaxProposalsPerBatch",
                         [
-                            116u8, 33u8, 2u8, 170u8, 181u8, 147u8, 171u8,
-                            169u8, 167u8, 227u8, 41u8, 144u8, 11u8, 236u8,
-                            82u8, 100u8, 74u8, 60u8, 184u8, 72u8, 169u8, 90u8,
-                            208u8, 135u8, 15u8, 117u8, 10u8, 123u8, 128u8,
-                            193u8, 29u8, 70u8,
+                            98u8, 252u8, 116u8, 72u8, 26u8, 180u8, 225u8, 83u8,
+                            200u8, 157u8, 125u8, 151u8, 53u8, 76u8, 168u8,
+                            26u8, 10u8, 9u8, 98u8, 68u8, 9u8, 178u8, 197u8,
+                            113u8, 31u8, 79u8, 200u8, 90u8, 203u8, 100u8, 41u8,
+                            145u8,
                         ],
                     )
                 }
@@ -7440,11 +7437,11 @@ pub mod api {
                             length_bound,
                         },
                         [
-                            160u8, 225u8, 0u8, 26u8, 33u8, 24u8, 217u8, 21u8,
-                            87u8, 126u8, 182u8, 70u8, 202u8, 231u8, 167u8,
-                            145u8, 84u8, 200u8, 75u8, 194u8, 239u8, 202u8,
-                            176u8, 9u8, 58u8, 234u8, 207u8, 136u8, 248u8,
-                            126u8, 219u8, 175u8,
+                            114u8, 226u8, 154u8, 76u8, 255u8, 149u8, 121u8,
+                            61u8, 63u8, 11u8, 210u8, 108u8, 139u8, 161u8,
+                            145u8, 37u8, 195u8, 106u8, 128u8, 151u8, 133u8,
+                            93u8, 51u8, 194u8, 118u8, 98u8, 249u8, 223u8, 28u8,
+                            181u8, 38u8, 249u8,
                         ],
                     )
                 }
@@ -7477,11 +7474,11 @@ pub mod api {
                             length_bound,
                         },
                         [
-                            36u8, 208u8, 176u8, 11u8, 68u8, 53u8, 167u8, 171u8,
-                            74u8, 249u8, 241u8, 206u8, 241u8, 16u8, 184u8,
-                            94u8, 32u8, 44u8, 210u8, 86u8, 54u8, 210u8, 47u8,
-                            165u8, 192u8, 158u8, 6u8, 224u8, 173u8, 162u8,
-                            242u8, 27u8,
+                            178u8, 28u8, 149u8, 46u8, 33u8, 43u8, 146u8, 115u8,
+                            177u8, 48u8, 252u8, 73u8, 28u8, 178u8, 61u8, 121u8,
+                            73u8, 50u8, 43u8, 67u8, 159u8, 155u8, 158u8, 187u8,
+                            84u8, 244u8, 50u8, 123u8, 223u8, 247u8, 46u8,
+                            114u8,
                         ],
                     )
                 }
@@ -7807,11 +7804,11 @@ pub mod api {
                             ::subxt::storage::address::StorageHasher::Identity,
                         )],
                         [
-                            252u8, 13u8, 199u8, 6u8, 39u8, 164u8, 245u8, 158u8,
-                            93u8, 153u8, 90u8, 160u8, 98u8, 4u8, 36u8, 186u8,
-                            64u8, 46u8, 210u8, 53u8, 24u8, 34u8, 122u8, 36u8,
-                            13u8, 126u8, 197u8, 191u8, 97u8, 166u8, 44u8,
-                            138u8,
+                            32u8, 182u8, 22u8, 13u8, 232u8, 255u8, 188u8, 45u8,
+                            196u8, 130u8, 141u8, 252u8, 88u8, 108u8, 236u8,
+                            199u8, 216u8, 108u8, 45u8, 48u8, 116u8, 155u8,
+                            214u8, 169u8, 36u8, 26u8, 140u8, 39u8, 170u8,
+                            178u8, 231u8, 214u8,
                         ],
                     )
                 }
@@ -7821,11 +7818,11 @@ pub mod api {
                         "ProposalOf",
                         Vec::new(),
                         [
-                            252u8, 13u8, 199u8, 6u8, 39u8, 164u8, 245u8, 158u8,
-                            93u8, 153u8, 90u8, 160u8, 98u8, 4u8, 36u8, 186u8,
-                            64u8, 46u8, 210u8, 53u8, 24u8, 34u8, 122u8, 36u8,
-                            13u8, 126u8, 197u8, 191u8, 97u8, 166u8, 44u8,
-                            138u8,
+                            32u8, 182u8, 22u8, 13u8, 232u8, 255u8, 188u8, 45u8,
+                            196u8, 130u8, 141u8, 252u8, 88u8, 108u8, 236u8,
+                            199u8, 216u8, 108u8, 45u8, 48u8, 116u8, 155u8,
+                            214u8, 169u8, 36u8, 26u8, 140u8, 39u8, 170u8,
+                            178u8, 231u8, 214u8,
                         ],
                     )
                 }
@@ -16762,11 +16759,11 @@ pub mod api {
                             call: ::std::boxed::Box::new(call),
                         },
                         [
-                            125u8, 9u8, 140u8, 235u8, 141u8, 83u8, 76u8, 211u8,
-                            67u8, 188u8, 79u8, 131u8, 202u8, 60u8, 219u8,
-                            115u8, 140u8, 50u8, 212u8, 165u8, 26u8, 137u8,
-                            201u8, 83u8, 243u8, 227u8, 57u8, 175u8, 202u8,
-                            72u8, 236u8, 117u8,
+                            225u8, 70u8, 188u8, 110u8, 54u8, 115u8, 162u8,
+                            188u8, 249u8, 188u8, 226u8, 23u8, 12u8, 77u8,
+                            211u8, 50u8, 35u8, 19u8, 203u8, 237u8, 223u8,
+                            209u8, 41u8, 41u8, 32u8, 220u8, 162u8, 242u8,
+                            213u8, 135u8, 218u8, 124u8,
                         ],
                     )
                 }
@@ -16813,11 +16810,11 @@ pub mod api {
                             call: ::std::boxed::Box::new(call),
                         },
                         [
-                            0u8, 26u8, 255u8, 209u8, 138u8, 36u8, 157u8, 14u8,
-                            243u8, 53u8, 206u8, 170u8, 3u8, 103u8, 228u8, 11u8,
-                            176u8, 245u8, 102u8, 106u8, 138u8, 73u8, 174u8,
-                            61u8, 213u8, 194u8, 80u8, 71u8, 15u8, 42u8, 168u8,
-                            79u8,
+                            254u8, 124u8, 236u8, 32u8, 82u8, 67u8, 244u8, 96u8,
+                            219u8, 110u8, 237u8, 11u8, 184u8, 13u8, 16u8, 8u8,
+                            133u8, 210u8, 246u8, 210u8, 11u8, 179u8, 48u8,
+                            220u8, 141u8, 88u8, 115u8, 33u8, 170u8, 214u8,
+                            19u8, 119u8,
                         ],
                     )
                 }
@@ -16861,11 +16858,11 @@ pub mod api {
                             call: ::std::boxed::Box::new(call),
                         },
                         [
-                            201u8, 73u8, 254u8, 138u8, 209u8, 177u8, 84u8,
-                            178u8, 121u8, 88u8, 206u8, 52u8, 130u8, 132u8,
-                            178u8, 179u8, 95u8, 95u8, 85u8, 152u8, 3u8, 53u8,
-                            255u8, 43u8, 180u8, 229u8, 211u8, 68u8, 10u8, 9u8,
-                            210u8, 145u8,
+                            63u8, 140u8, 141u8, 51u8, 18u8, 192u8, 104u8,
+                            231u8, 192u8, 101u8, 21u8, 68u8, 52u8, 201u8, 12u8,
+                            209u8, 70u8, 45u8, 41u8, 29u8, 168u8, 29u8, 174u8,
+                            113u8, 141u8, 222u8, 193u8, 214u8, 188u8, 168u8,
+                            175u8, 9u8,
                         ],
                     )
                 }
@@ -16893,11 +16890,11 @@ pub mod api {
                             call: ::std::boxed::Box::new(call),
                         },
                         [
-                            215u8, 217u8, 155u8, 97u8, 105u8, 29u8, 5u8, 179u8,
-                            108u8, 92u8, 130u8, 162u8, 23u8, 227u8, 149u8,
-                            215u8, 70u8, 239u8, 34u8, 135u8, 127u8, 50u8,
-                            237u8, 147u8, 238u8, 99u8, 3u8, 254u8, 184u8,
-                            245u8, 89u8, 176u8,
+                            217u8, 163u8, 192u8, 167u8, 192u8, 38u8, 241u8,
+                            162u8, 167u8, 40u8, 97u8, 10u8, 132u8, 6u8, 244u8,
+                            235u8, 213u8, 22u8, 146u8, 218u8, 183u8, 223u8,
+                            118u8, 61u8, 248u8, 249u8, 144u8, 93u8, 205u8,
+                            66u8, 72u8, 51u8,
                         ],
                     )
                 }
@@ -23353,11 +23350,11 @@ pub mod api {
                         "batch",
                         Batch { calls },
                         [
-                            158u8, 178u8, 167u8, 206u8, 156u8, 246u8, 129u8,
-                            234u8, 14u8, 129u8, 105u8, 225u8, 210u8, 104u8,
-                            119u8, 215u8, 153u8, 8u8, 156u8, 105u8, 226u8,
-                            143u8, 90u8, 60u8, 145u8, 58u8, 67u8, 210u8, 252u8,
-                            153u8, 32u8, 90u8,
+                            139u8, 87u8, 228u8, 109u8, 94u8, 173u8, 189u8,
+                            177u8, 48u8, 92u8, 32u8, 220u8, 225u8, 130u8,
+                            235u8, 162u8, 230u8, 13u8, 127u8, 22u8, 0u8, 210u8,
+                            223u8, 211u8, 152u8, 45u8, 156u8, 218u8, 172u8,
+                            72u8, 85u8, 10u8,
                         ],
                     )
                 }
@@ -23388,11 +23385,11 @@ pub mod api {
                             call: ::std::boxed::Box::new(call),
                         },
                         [
-                            189u8, 10u8, 36u8, 89u8, 191u8, 206u8, 235u8, 67u8,
-                            215u8, 49u8, 94u8, 175u8, 240u8, 54u8, 164u8,
-                            180u8, 206u8, 29u8, 25u8, 44u8, 121u8, 45u8, 4u8,
-                            60u8, 94u8, 70u8, 196u8, 83u8, 137u8, 235u8, 248u8,
-                            214u8,
+                            201u8, 33u8, 157u8, 243u8, 50u8, 205u8, 93u8, 16u8,
+                            219u8, 118u8, 244u8, 203u8, 232u8, 134u8, 189u8,
+                            132u8, 163u8, 155u8, 157u8, 170u8, 66u8, 253u8,
+                            87u8, 251u8, 230u8, 102u8, 91u8, 177u8, 40u8, 67u8,
+                            34u8, 108u8,
                         ],
                     )
                 }
@@ -23420,10 +23417,11 @@ pub mod api {
                         "batch_all",
                         BatchAll { calls },
                         [
-                            216u8, 165u8, 34u8, 3u8, 178u8, 186u8, 225u8, 68u8,
-                            6u8, 157u8, 135u8, 42u8, 180u8, 126u8, 50u8, 230u8,
-                            216u8, 246u8, 115u8, 3u8, 83u8, 57u8, 217u8, 228u8,
-                            14u8, 144u8, 131u8, 75u8, 227u8, 199u8, 50u8, 11u8,
+                            231u8, 61u8, 149u8, 54u8, 228u8, 35u8, 132u8,
+                            247u8, 19u8, 177u8, 39u8, 193u8, 12u8, 112u8, 42u8,
+                            52u8, 59u8, 58u8, 84u8, 180u8, 17u8, 113u8, 116u8,
+                            62u8, 227u8, 99u8, 69u8, 253u8, 115u8, 141u8,
+                            152u8, 203u8,
                         ],
                     )
                 }
@@ -23446,11 +23444,10 @@ pub mod api {
                             call: ::std::boxed::Box::new(call),
                         },
                         [
-                            71u8, 209u8, 144u8, 247u8, 216u8, 110u8, 234u8,
-                            53u8, 182u8, 75u8, 74u8, 124u8, 112u8, 186u8,
-                            154u8, 134u8, 57u8, 177u8, 249u8, 169u8, 201u8,
-                            96u8, 155u8, 237u8, 181u8, 68u8, 115u8, 197u8,
-                            153u8, 227u8, 198u8, 204u8,
+                            69u8, 42u8, 109u8, 184u8, 177u8, 173u8, 98u8, 77u8,
+                            186u8, 255u8, 51u8, 1u8, 172u8, 47u8, 118u8, 254u8,
+                            38u8, 143u8, 111u8, 77u8, 121u8, 95u8, 46u8, 220u8,
+                            44u8, 76u8, 221u8, 92u8, 144u8, 37u8, 174u8, 131u8,
                         ],
                     )
                 }
@@ -23478,11 +23475,11 @@ pub mod api {
                         "force_batch",
                         ForceBatch { calls },
                         [
-                            12u8, 63u8, 90u8, 131u8, 217u8, 112u8, 202u8,
-                            242u8, 90u8, 188u8, 203u8, 195u8, 251u8, 155u8,
-                            137u8, 129u8, 150u8, 62u8, 139u8, 142u8, 102u8,
-                            223u8, 116u8, 80u8, 183u8, 163u8, 47u8, 81u8, 68u8,
-                            49u8, 50u8, 230u8,
+                            132u8, 7u8, 212u8, 36u8, 80u8, 199u8, 196u8, 193u8,
+                            46u8, 22u8, 143u8, 16u8, 117u8, 69u8, 103u8, 170u8,
+                            218u8, 252u8, 171u8, 171u8, 142u8, 99u8, 241u8,
+                            122u8, 53u8, 246u8, 169u8, 245u8, 153u8, 182u8,
+                            189u8, 240u8,
                         ],
                     )
                 }
@@ -23505,11 +23502,11 @@ pub mod api {
                             weight,
                         },
                         [
-                            11u8, 254u8, 223u8, 220u8, 248u8, 87u8, 236u8,
-                            183u8, 166u8, 240u8, 62u8, 104u8, 240u8, 174u8,
-                            83u8, 67u8, 214u8, 188u8, 167u8, 146u8, 195u8,
-                            176u8, 222u8, 159u8, 242u8, 50u8, 141u8, 5u8,
-                            236u8, 95u8, 31u8, 114u8,
+                            15u8, 120u8, 102u8, 0u8, 76u8, 41u8, 135u8, 252u8,
+                            175u8, 208u8, 4u8, 36u8, 82u8, 247u8, 44u8, 209u8,
+                            116u8, 146u8, 124u8, 116u8, 215u8, 51u8, 97u8,
+                            55u8, 238u8, 93u8, 104u8, 99u8, 214u8, 18u8, 100u8,
+                            3u8,
                         ],
                     )
                 }
@@ -24431,11 +24428,16 @@ pub mod api {
                     Eq,
                     PartialEq,
                 )]
-                pub struct StoredUnsignedProposal<_0, _1> {
-                    pub proposal:
-                        runtime_types::webb_proposals::proposal::Proposal<_1>,
-                    pub timestamp: _0,
-                }
+                pub struct SignedProposalBatch < _0 , _1 , _2 , _3 > { pub batch_id : _0 , pub proposals : runtime_types :: bounded_collections :: bounded_vec :: BoundedVec < runtime_types :: webb_proposals :: proposal :: Proposal < _1 > > , pub signature : runtime_types :: bounded_collections :: bounded_vec :: BoundedVec < :: core :: primitive :: u8 > , # [codec (skip)] pub __subxt_unused_type_params : :: core :: marker :: PhantomData < (_2 , _3) > }
+                #[derive(
+                    :: subxt :: ext :: codec :: Decode,
+                    :: subxt :: ext :: codec :: Encode,
+                    Clone,
+                    Debug,
+                    Eq,
+                    PartialEq,
+                )]
+                pub struct StoredUnsignedProposalBatch < _0 , _1 , _2 , _3 > { pub batch_id : _0 , pub proposals : runtime_types :: bounded_collections :: bounded_vec :: BoundedVec < runtime_types :: dkg_runtime_primitives :: UnsignedProposal < _1 > > , pub timestamp : _0 , # [codec (skip)] pub __subxt_unused_type_params : :: core :: marker :: PhantomData < (_3 , _2) > }
             }
             #[derive(
                 :: subxt :: ext :: codec :: Decode,
@@ -24483,6 +24485,15 @@ pub mod api {
                 #[codec(index = 1)]
                 Sign,
             }
+            #[derive(
+                :: subxt :: ext :: codec :: Decode,
+                :: subxt :: ext :: codec :: Encode,
+                Clone,
+                Debug,
+                Eq,
+                PartialEq,
+            )]
+            pub struct UnsignedProposal < _0 > { pub typed_chain_id : runtime_types :: webb_proposals :: header :: TypedChainId , pub key : runtime_types :: dkg_runtime_primitives :: proposal :: DKGPayloadKey , pub proposal : runtime_types :: webb_proposals :: proposal :: Proposal < _0 > , }
         }
         pub mod eth_types {
             use super::runtime_types;
@@ -27278,7 +27289,7 @@ pub mod api {
                 )]
                 #[doc = "Contains one variant per dispatchable that can be called by an extrinsic."]
                 pub enum Call {
-                    # [codec (index = 0)] submit_signed_proposals { props : :: std :: vec :: Vec < runtime_types :: webb_proposals :: proposal :: Proposal < runtime_types :: dkg_runtime_primitives :: CustomU32Getter > > , } , # [codec (index = 1)] # [doc = "Force submit an unsigned proposal to the DKG"] # [doc = ""] # [doc = "There are certain proposals we'd like to be proposable only"] # [doc = "through root actions. The currently supported proposals are"] # [doc = "\t1. Updating"] force_submit_unsigned_proposal { prop : runtime_types :: webb_proposals :: proposal :: Proposal < runtime_types :: dkg_runtime_primitives :: CustomU32Getter > , } , }
+                    # [codec (index = 0)] submit_signed_proposals { props : :: std :: vec :: Vec < runtime_types :: dkg_runtime_primitives :: proposal :: SignedProposalBatch < :: core :: primitive :: u32 , runtime_types :: dkg_runtime_primitives :: CustomU32Getter , runtime_types :: dkg_runtime_primitives :: CustomU32Getter , runtime_types :: dkg_runtime_primitives :: CustomU32Getter > > , } , # [codec (index = 1)] # [doc = "Force submit an unsigned proposal to the DKG"] # [doc = ""] # [doc = "There are certain proposals we'd like to be proposable only"] # [doc = "through root actions. The currently supported proposals are"] # [doc = "\t1. Updating"] force_submit_unsigned_proposal { prop : runtime_types :: webb_proposals :: proposal :: Proposal < runtime_types :: dkg_runtime_primitives :: CustomU32Getter > , } , }
                 #[derive(
                     :: subxt :: ext :: codec :: Decode,
                     :: subxt :: ext :: codec :: Encode,
@@ -27322,6 +27333,18 @@ pub mod api {
                     #[codec(index = 10)]
                     #[doc = "Proposal out of bounds"]
                     ProposalOutOfBounds,
+                    #[codec(index = 11)]
+                    #[doc = "Duplicate signed proposal"]
+                    CannotOverwriteSignedProposal,
+                    #[codec(index = 12)]
+                    #[doc = "Unable to accept new unsigned proposal"]
+                    UnsignedProposalQueueOverflow,
+                    #[codec(index = 13)]
+                    #[doc = "Math overflow"]
+                    ArithmeticOverflow,
+                    #[codec(index = 14)]
+                    #[doc = "Batch does not contain proposals"]
+                    EmptyBatch,
                 }
                 #[derive(
                     :: subxt :: ext :: codec :: Decode,
@@ -27333,7 +27356,7 @@ pub mod api {
                 )]
                 #[doc = "\n\t\t\tThe [event](https://docs.substrate.io/main-docs/build/events-errors/) emitted\n\t\t\tby this pallet.\n\t\t\t"]
                 pub enum Event {
-                    # [codec (index = 0)] # [doc = "RuntimeEvent Emitted when we encounter a Proposal with invalid Signature."] InvalidProposalSignature { kind : runtime_types :: webb_proposals :: proposal :: ProposalKind , data : :: std :: vec :: Vec < :: core :: primitive :: u8 > , invalid_signature : :: std :: vec :: Vec < :: core :: primitive :: u8 > , expected_public_key : :: core :: option :: Option < :: std :: vec :: Vec < :: core :: primitive :: u8 > > , actual_public_key : :: core :: option :: Option < :: std :: vec :: Vec < :: core :: primitive :: u8 > > , } , # [codec (index = 1)] # [doc = "RuntimeEvent When a Proposal is added to UnsignedProposalQueue."] ProposalAdded { key : runtime_types :: dkg_runtime_primitives :: proposal :: DKGPayloadKey , target_chain : runtime_types :: webb_proposals :: header :: TypedChainId , data : :: std :: vec :: Vec < :: core :: primitive :: u8 > , } , # [codec (index = 2)] # [doc = "RuntimeEvent When a Proposal is removed from UnsignedProposalQueue."] ProposalRemoved { key : runtime_types :: dkg_runtime_primitives :: proposal :: DKGPayloadKey , target_chain : runtime_types :: webb_proposals :: header :: TypedChainId , expired : :: core :: primitive :: bool , } , # [codec (index = 3)] # [doc = "RuntimeEvent When a Proposal Gets Signed by DKG."] ProposalSigned { key : runtime_types :: dkg_runtime_primitives :: proposal :: DKGPayloadKey , target_chain : runtime_types :: webb_proposals :: header :: TypedChainId , data : :: std :: vec :: Vec < :: core :: primitive :: u8 > , signature : :: std :: vec :: Vec < :: core :: primitive :: u8 > , } , }
+                    # [codec (index = 0)] # [doc = "RuntimeEvent Emitted when we encounter a Proposal with invalid Signature."] InvalidProposalBatchSignature { proposals : runtime_types :: dkg_runtime_primitives :: proposal :: SignedProposalBatch < :: core :: primitive :: u32 , runtime_types :: dkg_runtime_primitives :: CustomU32Getter , runtime_types :: dkg_runtime_primitives :: CustomU32Getter , runtime_types :: dkg_runtime_primitives :: CustomU32Getter > , data : :: std :: vec :: Vec < :: core :: primitive :: u8 > , invalid_signature : :: std :: vec :: Vec < :: core :: primitive :: u8 > , expected_public_key : :: core :: option :: Option < :: std :: vec :: Vec < :: core :: primitive :: u8 > > , actual_public_key : :: core :: option :: Option < :: std :: vec :: Vec < :: core :: primitive :: u8 > > , } , # [codec (index = 1)] # [doc = "RuntimeEvent When a Proposal is added to UnsignedProposalQueue."] ProposalAdded { key : runtime_types :: dkg_runtime_primitives :: proposal :: DKGPayloadKey , target_chain : runtime_types :: webb_proposals :: header :: TypedChainId , data : :: std :: vec :: Vec < :: core :: primitive :: u8 > , } , # [codec (index = 2)] # [doc = "RuntimeEvent When a Proposal is removed from UnsignedProposalQueue."] ProposalRemoved { key : runtime_types :: dkg_runtime_primitives :: proposal :: DKGPayloadKey , target_chain : runtime_types :: webb_proposals :: header :: TypedChainId , expired : :: core :: primitive :: bool , } , # [codec (index = 3)] # [doc = "RuntimeEvent When a Proposal Gets Signed by DKG."] ProposalBatchSigned { target_chain : runtime_types :: webb_proposals :: header :: TypedChainId , proposals : runtime_types :: dkg_runtime_primitives :: proposal :: SignedProposalBatch < :: core :: primitive :: u32 , runtime_types :: dkg_runtime_primitives :: CustomU32Getter , runtime_types :: dkg_runtime_primitives :: CustomU32Getter , runtime_types :: dkg_runtime_primitives :: CustomU32Getter > , data : :: std :: vec :: Vec < :: core :: primitive :: u8 > , signature : :: std :: vec :: Vec < :: core :: primitive :: u8 > , } , }
             }
         }
         pub mod pallet_dkg_proposals {
@@ -27426,7 +27449,7 @@ pub mod api {
                 )]
                 #[doc = "\n\t\t\tThe [event](https://docs.substrate.io/main-docs/build/events-errors/) emitted\n\t\t\tby this pallet.\n\t\t\t"]
                 pub enum Event {
-                    # [codec (index = 0)] # [doc = "Vote threshold has changed (new_threshold)"] ProposerThresholdChanged { new_threshold : :: core :: primitive :: u32 , } , # [codec (index = 1)] # [doc = "Chain now available for transfers (chain_id)"] ChainWhitelisted { chain_id : runtime_types :: webb_proposals :: header :: TypedChainId , } , # [codec (index = 2)] # [doc = "Proposer added to set"] ProposerAdded { proposer_id : :: subxt :: utils :: AccountId32 , } , # [codec (index = 3)] # [doc = "Proposer removed from set"] ProposerRemoved { proposer_id : :: subxt :: utils :: AccountId32 , } , # [codec (index = 4)] # [doc = "Vote submitted in favour of proposal"] VoteFor { kind : runtime_types :: webb_proposals :: proposal :: ProposalKind , chain_id : runtime_types :: webb_proposals :: header :: TypedChainId , proposal_nonce : runtime_types :: webb_proposals :: nonce :: Nonce , who : :: subxt :: utils :: AccountId32 , } , # [codec (index = 5)] # [doc = "Vot submitted against proposal"] VoteAgainst { kind : runtime_types :: webb_proposals :: proposal :: ProposalKind , chain_id : runtime_types :: webb_proposals :: header :: TypedChainId , proposal_nonce : runtime_types :: webb_proposals :: nonce :: Nonce , who : :: subxt :: utils :: AccountId32 , } , # [codec (index = 6)] # [doc = "Voting successful for a proposal"] ProposalApproved { kind : runtime_types :: webb_proposals :: proposal :: ProposalKind , chain_id : runtime_types :: webb_proposals :: header :: TypedChainId , proposal_nonce : runtime_types :: webb_proposals :: nonce :: Nonce , } , # [codec (index = 7)] # [doc = "Voting rejected a proposal"] ProposalRejected { kind : runtime_types :: webb_proposals :: proposal :: ProposalKind , chain_id : runtime_types :: webb_proposals :: header :: TypedChainId , proposal_nonce : runtime_types :: webb_proposals :: nonce :: Nonce , } , # [codec (index = 8)] # [doc = "Execution of call succeeded"] ProposalSucceeded { kind : runtime_types :: webb_proposals :: proposal :: ProposalKind , chain_id : runtime_types :: webb_proposals :: header :: TypedChainId , proposal_nonce : runtime_types :: webb_proposals :: nonce :: Nonce , } , # [codec (index = 9)] # [doc = "Execution of call failed"] ProposalFailed { kind : runtime_types :: webb_proposals :: proposal :: ProposalKind , chain_id : runtime_types :: webb_proposals :: header :: TypedChainId , proposal_nonce : runtime_types :: webb_proposals :: nonce :: Nonce , } , # [codec (index = 10)] # [doc = "Proposers have been reset"] AuthorityProposersReset { proposers : :: std :: vec :: Vec < :: subxt :: utils :: AccountId32 > , } , }
+                    # [codec (index = 0)] # [doc = "Vote threshold has changed (new_threshold)"] ProposerThresholdChanged { new_threshold : :: core :: primitive :: u32 , } , # [codec (index = 1)] # [doc = "Chain now available for transfers (chain_id)"] ChainWhitelisted { chain_id : runtime_types :: webb_proposals :: header :: TypedChainId , } , # [codec (index = 2)] # [doc = "Proposer added to set"] ProposerAdded { proposer_id : :: subxt :: utils :: AccountId32 , } , # [codec (index = 3)] # [doc = "Proposer removed from set"] ProposerRemoved { proposer_id : :: subxt :: utils :: AccountId32 , } , # [codec (index = 4)] # [doc = "Vote submitted in favour of proposal"] VoteFor { kind : runtime_types :: webb_proposals :: proposal :: ProposalKind , src_chain_id : runtime_types :: webb_proposals :: header :: TypedChainId , proposal_nonce : runtime_types :: webb_proposals :: nonce :: Nonce , who : :: subxt :: utils :: AccountId32 , } , # [codec (index = 5)] # [doc = "Vot submitted against proposal"] VoteAgainst { kind : runtime_types :: webb_proposals :: proposal :: ProposalKind , src_chain_id : runtime_types :: webb_proposals :: header :: TypedChainId , proposal_nonce : runtime_types :: webb_proposals :: nonce :: Nonce , who : :: subxt :: utils :: AccountId32 , } , # [codec (index = 6)] # [doc = "Voting successful for a proposal"] ProposalApproved { kind : runtime_types :: webb_proposals :: proposal :: ProposalKind , src_chain_id : runtime_types :: webb_proposals :: header :: TypedChainId , proposal_nonce : runtime_types :: webb_proposals :: nonce :: Nonce , } , # [codec (index = 7)] # [doc = "Voting rejected a proposal"] ProposalRejected { kind : runtime_types :: webb_proposals :: proposal :: ProposalKind , src_chain_id : runtime_types :: webb_proposals :: header :: TypedChainId , proposal_nonce : runtime_types :: webb_proposals :: nonce :: Nonce , } , # [codec (index = 8)] # [doc = "Execution of call succeeded"] ProposalSucceeded { kind : runtime_types :: webb_proposals :: proposal :: ProposalKind , src_chain_id : runtime_types :: webb_proposals :: header :: TypedChainId , proposal_nonce : runtime_types :: webb_proposals :: nonce :: Nonce , } , # [codec (index = 9)] # [doc = "Execution of call failed"] ProposalFailed { kind : runtime_types :: webb_proposals :: proposal :: ProposalKind , src_chain_id : runtime_types :: webb_proposals :: header :: TypedChainId , proposal_nonce : runtime_types :: webb_proposals :: nonce :: Nonce , } , # [codec (index = 10)] # [doc = "Proposers have been reset"] AuthorityProposersReset { proposers : :: std :: vec :: Vec < :: subxt :: utils :: AccountId32 > , } , }
             }
             pub mod types {
                 use super::runtime_types;
@@ -33326,10 +33349,10 @@ pub mod api {
         let runtime_metadata_hash = client.metadata().metadata_hash(&PALLETS);
         if runtime_metadata_hash
             != [
-                181u8, 23u8, 191u8, 84u8, 236u8, 160u8, 187u8, 159u8, 81u8,
-                49u8, 121u8, 90u8, 4u8, 183u8, 68u8, 126u8, 115u8, 59u8, 202u8,
-                213u8, 128u8, 190u8, 42u8, 173u8, 243u8, 135u8, 50u8, 4u8,
-                27u8, 132u8, 240u8, 47u8,
+                48u8, 125u8, 4u8, 186u8, 78u8, 164u8, 148u8, 49u8, 157u8, 27u8,
+                174u8, 66u8, 94u8, 183u8, 88u8, 102u8, 232u8, 51u8, 228u8,
+                181u8, 38u8, 35u8, 233u8, 81u8, 95u8, 255u8, 92u8, 11u8, 111u8,
+                74u8, 193u8, 224u8,
             ]
         {
             Err(::subxt::error::MetadataError::IncompatibleMetadata)
