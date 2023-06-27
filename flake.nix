@@ -45,7 +45,7 @@
           # Environment variables
           RUST_SRC_PATH = "${toolchain}/lib/rustlib/src/rust/library";
           # Needed for running DKG/Tangle locally
-          LD_LIBRARY_PATH = "${pkgs.gmp}/lib";
+          LD_LIBRARY_PATH = lib.makeLibraryPath [ pkgs.gmp ];
         };
       });
 }
