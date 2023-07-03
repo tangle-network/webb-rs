@@ -16,12 +16,15 @@ mod evm {
         println!("cargo:rerun-if-changed=./{}", path);
         println!("cargo:rerun-if-changed=./{}", out);
 
-        Abigen::new(contract_name, path)?
+        let generated_tokens = Abigen::new(contract_name, path)?
             .add_derive("serde::Serialize")?
             .add_derive("serde::Deserialize")?
             .format(false) // don't use rustfmt for now.
             .generate()?
-            .write_to_file(out)?;
+            .to_string();
+        let syntax_tree = syn::parse_file(&generated_tokens).unwrap();
+        let formatted = prettyplease::unparse(&syntax_tree);
+        std::fs::write(out, formatted)?;
         Ok(())
     }
 
@@ -165,10 +168,7 @@ mod evm {
 
 #[cfg(feature = "generate-substrate")]
 mod substrate {
-    use std::io::Read;
-
     use super::*;
-    use frame_metadata::RuntimeMetadataPrefixed;
     use scale::Decode;
     use subxt_codegen::CratePath;
 
@@ -177,37 +177,44 @@ mod substrate {
         out: &str,
     ) -> Result<(), Box<dyn Error>> {
         println!("cargo:rerun-if-changed=./{}", path);
-        let mut file = std::fs::File::open(path)?;
-        let mut bytes = Vec::new();
-        file.read_to_end(&mut bytes)?;
+        let bytes = std::fs::read(path)?;
 
         let metadata =
-            <RuntimeMetadataPrefixed as Decode>::decode(&mut &bytes[..])?;
+            <subxt_metadata::Metadata as Decode>::decode(&mut &bytes[..])?;
+        let crate_path = CratePath::default();
         // Module under which the API is generated.
         let item_mod = syn::parse_quote!(
             pub mod api {}
         );
         // Default type substitutes.
-        let substs = TypeSubstitutes::new(&CratePath::default());
+        let substs = TypeSubstitutes::with_default_substitutes(&crate_path);
         // Generate the Runtime API.
         let generator = subxt_codegen::RuntimeGenerator::new(metadata);
         let mut generated_type_derives =
-            subxt_codegen::DerivesRegistry::new(&CratePath::default());
+            subxt_codegen::DerivesRegistry::with_default_derives(&crate_path);
+
         generated_type_derives.extend_for_all(
-            vec![
+            [
                 syn::parse_quote!(Eq),
                 syn::parse_quote!(PartialEq),
                 syn::parse_quote!(Clone),
             ]
             .into_iter(),
+            [],
         );
+
+        // Include metadata documentation in the Runtime API.
+        let generate_docs = true;
         let runtime_api = generator.generate_runtime(
             item_mod,
             generated_type_derives,
             substs,
-            CratePath::default(),
-        );
-        std::fs::write(out, runtime_api.to_string())?;
+            crate_path,
+            generate_docs,
+        )?;
+        let syntax_tree = syn::parse_file(&runtime_api.to_string()).unwrap();
+        let formatted = prettyplease::unparse(&syntax_tree);
+        std::fs::write(out, formatted)?;
         Ok(())
     }
 
@@ -217,14 +224,6 @@ mod substrate {
             "src/substrate/tangle_runtime.rs",
         )
     }
-}
-
-#[cfg(any(feature = "generate-substrate", feature = "generate-contracts"))]
-fn run_cargo_fmt() -> Result<(), Box<dyn Error>> {
-    // Run rustfmt on all files in the `src` directory.
-    let mut cmd = std::process::Command::new("cargo");
-    cmd.arg("fmt").status()?;
-    Ok(())
 }
 
 fn main() -> Result<(), Box<dyn Error>> {
@@ -246,12 +245,10 @@ fn main() -> Result<(), Box<dyn Error>> {
         evm::build_protocol_solidity_poseidon_t4()?;
         evm::build_protocol_solidity_poseidon_t6()?;
         evm::build_protocol_solidity_poseidon_hasher()?;
-        run_cargo_fmt()?;
     }
     #[cfg(feature = "generate-substrate")]
     {
         substrate::generate_tangle_runtime()?;
-        run_cargo_fmt()?;
     }
     Ok(())
 }
