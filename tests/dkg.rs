@@ -1,3 +1,4 @@
+use subxt::client::OfflineClientT;
 use subxt::config::PolkadotConfig;
 use subxt::tx:: PairSigner;
 use webb::substrate::tangle_runtime::api::dkg_proposals;
@@ -6,6 +7,7 @@ use webb::substrate::tangle_runtime::api::runtime_types::webb_proposals::header:
 use webb::substrate::tangle_runtime::api::runtime_types::webb_proposals::nonce::Nonce;
 use webb::substrate::tangle_runtime;
 use webb::substrate::tangle_runtime::api::runtime_types::webb_proposals::proposal::{Proposal, ProposalKind};
+
 const URL: &str = "ws://localhost:9944";
 
 async fn get_runtime_api() -> anyhow::Result<subxt::OnlineClient<PolkadotConfig>>
@@ -23,13 +25,23 @@ async fn read_chain_nonce() -> anyhow::Result<()> {
         .dkg_proposals()
         .chain_nonces(chain_id);
 
-    let result = client.storage().at(None).await?.fetch(&nonce_addr).await?;
+    let result = client
+        .storage()
+        .at_latest()
+        .await?
+        .fetch(&nonce_addr)
+        .await?;
     assert_eq!(result, Some(Nonce(0)));
     let unkonwn_chain_id = TypedChainId::Evm(5000);
     let nonce_addr = tangle_runtime::api::storage()
         .dkg_proposals()
         .chain_nonces(unkonwn_chain_id);
-    let result = client.storage().at(None).await?.fetch(&nonce_addr).await?;
+    let result = client
+        .storage()
+        .at_latest()
+        .await?
+        .fetch(&nonce_addr)
+        .await?;
     assert_eq!(result, None);
     Ok(())
 }
