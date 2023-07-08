@@ -18,7 +18,7 @@ thiserror = "1"
 
 [package]
 name = "webb"
-version = "0.6.1"
+version = "0.7.0"
 description = "Webb SDK"
 keywords = ["webb", "sdk", "blockchain", "webb-tools"]
 include = ["Cargo.toml", "contracts/", "metadata/", "src/**/*.rs", "build.rs"]
@@ -73,5 +73,5 @@ evm-runtime = ["ethers", "serde_json"]
 # Tests
 integration-tests = []
 # Build
-generate-contracts = ["evm-runtime"]
+generate-contracts = ["evm-runtime", "syn"]
 generate-substrate = ["subxt-codegen", "syn", "subxt-metadata", "scale"]
