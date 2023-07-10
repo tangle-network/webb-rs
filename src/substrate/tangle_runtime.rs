@@ -1410,7 +1410,7 @@ pub mod api {
             if pallet_name == "System" {
                 let variant_error = system::Error::decode_with_metadata(
                     cursor,
-                    168u32,
+                    157u32,
                     metadata,
                 )?;
                 return Ok(Error::System(variant_error));
@@ -1418,7 +1418,7 @@ pub mod api {
             if pallet_name == "Sudo" {
                 let variant_error = sudo::Error::decode_with_metadata(
                     cursor,
-                    416u32,
+                    410u32,
                     metadata,
                 )?;
                 return Ok(Error::Sudo(variant_error));
@@ -1426,7 +1426,7 @@ pub mod api {
             if pallet_name == "Balances" {
                 let variant_error = balances::Error::decode_with_metadata(
                     cursor,
-                    425u32,
+                    419u32,
                     metadata,
                 )?;
                 return Ok(Error::Balances(variant_error));
@@ -1434,7 +1434,7 @@ pub mod api {
             if pallet_name == "Grandpa" {
                 let variant_error = grandpa::Error::decode_with_metadata(
                     cursor,
-                    434u32,
+                    428u32,
                     metadata,
                 )?;
                 return Ok(Error::Grandpa(variant_error));
@@ -1442,7 +1442,7 @@ pub mod api {
             if pallet_name == "DKG" {
                 let variant_error = dkg::Error::decode_with_metadata(
                     cursor,
-                    445u32,
+                    438u32,
                     metadata,
                 )?;
                 return Ok(Error::DKG(variant_error));
@@ -1450,7 +1450,7 @@ pub mod api {
             if pallet_name == "DKGProposals" {
                 let variant_error = dkg_proposals::Error::decode_with_metadata(
                     cursor,
-                    457u32,
+                    450u32,
                     metadata,
                 )?;
                 return Ok(Error::DKGProposals(variant_error));
@@ -1458,7 +1458,7 @@ pub mod api {
             if pallet_name == "DKGProposalHandler" {
                 let variant_error = dkg_proposal_handler::Error::decode_with_metadata(
                     cursor,
-                    463u32,
+                    453u32,
                     metadata,
                 )?;
                 return Ok(Error::DKGProposalHandler(variant_error));
@@ -1466,7 +1466,7 @@ pub mod api {
             if pallet_name == "BridgeRegistry" {
                 let variant_error = bridge_registry::Error::decode_with_metadata(
                     cursor,
-                    466u32,
+                    456u32,
                     metadata,
                 )?;
                 return Ok(Error::BridgeRegistry(variant_error));
@@ -1474,7 +1474,7 @@ pub mod api {
             if pallet_name == "Indices" {
                 let variant_error = indices::Error::decode_with_metadata(
                     cursor,
-                    468u32,
+                    458u32,
                     metadata,
                 )?;
                 return Ok(Error::Indices(variant_error));
@@ -1482,7 +1482,7 @@ pub mod api {
             if pallet_name == "Democracy" {
                 let variant_error = democracy::Error::decode_with_metadata(
                     cursor,
-                    485u32,
+                    475u32,
                     metadata,
                 )?;
                 return Ok(Error::Democracy(variant_error));
@@ -1490,7 +1490,7 @@ pub mod api {
             if pallet_name == "Council" {
                 let variant_error = council::Error::decode_with_metadata(
                     cursor,
-                    488u32,
+                    478u32,
                     metadata,
                 )?;
                 return Ok(Error::Council(variant_error));
@@ -1498,7 +1498,7 @@ pub mod api {
             if pallet_name == "Vesting" {
                 let variant_error = vesting::Error::decode_with_metadata(
                     cursor,
-                    492u32,
+                    482u32,
                     metadata,
                 )?;
                 return Ok(Error::Vesting(variant_error));
@@ -1506,7 +1506,7 @@ pub mod api {
             if pallet_name == "Claims" {
                 let variant_error = claims::Error::decode_with_metadata(
                     cursor,
-                    494u32,
+                    484u32,
                     metadata,
                 )?;
                 return Ok(Error::Claims(variant_error));
@@ -1514,7 +1514,7 @@ pub mod api {
             if pallet_name == "Elections" {
                 let variant_error = elections::Error::decode_with_metadata(
                     cursor,
-                    498u32,
+                    488u32,
                     metadata,
                 )?;
                 return Ok(Error::Elections(variant_error));
@@ -1522,7 +1522,7 @@ pub mod api {
             if pallet_name == "ElectionProviderMultiPhase" {
                 let variant_error = election_provider_multi_phase::Error::decode_with_metadata(
                     cursor,
-                    509u32,
+                    499u32,
                     metadata,
                 )?;
                 return Ok(Error::ElectionProviderMultiPhase(variant_error));
@@ -1530,7 +1530,7 @@ pub mod api {
             if pallet_name == "Staking" {
                 let variant_error = staking::Error::decode_with_metadata(
                     cursor,
-                    529u32,
+                    519u32,
                     metadata,
                 )?;
                 return Ok(Error::Staking(variant_error));
@@ -1538,7 +1538,7 @@ pub mod api {
             if pallet_name == "Session" {
                 let variant_error = session::Error::decode_with_metadata(
                     cursor,
-                    534u32,
+                    524u32,
                     metadata,
                 )?;
                 return Ok(Error::Session(variant_error));
@@ -1546,7 +1546,7 @@ pub mod api {
             if pallet_name == "Treasury" {
                 let variant_error = treasury::Error::decode_with_metadata(
                     cursor,
-                    538u32,
+                    528u32,
                     metadata,
                 )?;
                 return Ok(Error::Treasury(variant_error));
@@ -1554,7 +1554,7 @@ pub mod api {
             if pallet_name == "Bounties" {
                 let variant_error = bounties::Error::decode_with_metadata(
                     cursor,
-                    542u32,
+                    532u32,
                     metadata,
                 )?;
                 return Ok(Error::Bounties(variant_error));
@@ -1562,7 +1562,7 @@ pub mod api {
             if pallet_name == "ChildBounties" {
                 let variant_error = child_bounties::Error::decode_with_metadata(
                     cursor,
-                    545u32,
+                    535u32,
                     metadata,
                 )?;
                 return Ok(Error::ChildBounties(variant_error));
@@ -1570,7 +1570,7 @@ pub mod api {
             if pallet_name == "BagsList" {
                 let variant_error = bags_list::Error::decode_with_metadata(
                     cursor,
-                    549u32,
+                    539u32,
                     metadata,
                 )?;
                 return Ok(Error::BagsList(variant_error));
@@ -1578,7 +1578,7 @@ pub mod api {
             if pallet_name == "NominationPools" {
                 let variant_error = nomination_pools::Error::decode_with_metadata(
                     cursor,
-                    566u32,
+                    556u32,
                     metadata,
                 )?;
                 return Ok(Error::NominationPools(variant_error));
@@ -1586,7 +1586,7 @@ pub mod api {
             if pallet_name == "Scheduler" {
                 let variant_error = scheduler::Error::decode_with_metadata(
                     cursor,
-                    572u32,
+                    562u32,
                     metadata,
                 )?;
                 return Ok(Error::Scheduler(variant_error));
@@ -1594,7 +1594,7 @@ pub mod api {
             if pallet_name == "Preimage" {
                 let variant_error = preimage::Error::decode_with_metadata(
                     cursor,
-                    577u32,
+                    567u32,
                     metadata,
                 )?;
                 return Ok(Error::Preimage(variant_error));
@@ -1602,7 +1602,7 @@ pub mod api {
             if pallet_name == "HasherBn254" {
                 let variant_error = hasher_bn254::Error::decode_with_metadata(
                     cursor,
-                    580u32,
+                    570u32,
                     metadata,
                 )?;
                 return Ok(Error::HasherBn254(variant_error));
@@ -1610,7 +1610,7 @@ pub mod api {
             if pallet_name == "AssetRegistry" {
                 let variant_error = asset_registry::Error::decode_with_metadata(
                     cursor,
-                    583u32,
+                    573u32,
                     metadata,
                 )?;
                 return Ok(Error::AssetRegistry(variant_error));
@@ -1618,7 +1618,7 @@ pub mod api {
             if pallet_name == "Currencies" {
                 let variant_error = currencies::Error::decode_with_metadata(
                     cursor,
-                    584u32,
+                    574u32,
                     metadata,
                 )?;
                 return Ok(Error::Currencies(variant_error));
@@ -1626,7 +1626,7 @@ pub mod api {
             if pallet_name == "Tokens" {
                 let variant_error = tokens::Error::decode_with_metadata(
                     cursor,
-                    592u32,
+                    582u32,
                     metadata,
                 )?;
                 return Ok(Error::Tokens(variant_error));
@@ -1634,7 +1634,7 @@ pub mod api {
             if pallet_name == "TokenWrapper" {
                 let variant_error = token_wrapper::Error::decode_with_metadata(
                     cursor,
-                    593u32,
+                    583u32,
                     metadata,
                 )?;
                 return Ok(Error::TokenWrapper(variant_error));
@@ -1642,7 +1642,7 @@ pub mod api {
             if pallet_name == "MixerVerifierBn254" {
                 let variant_error = mixer_verifier_bn254::Error::decode_with_metadata(
                     cursor,
-                    594u32,
+                    584u32,
                     metadata,
                 )?;
                 return Ok(Error::MixerVerifierBn254(variant_error));
@@ -1650,7 +1650,7 @@ pub mod api {
             if pallet_name == "MerkleTreeBn254" {
                 let variant_error = merkle_tree_bn254::Error::decode_with_metadata(
                     cursor,
-                    599u32,
+                    589u32,
                     metadata,
                 )?;
                 return Ok(Error::MerkleTreeBn254(variant_error));
@@ -1658,7 +1658,7 @@ pub mod api {
             if pallet_name == "LinkableTreeBn254" {
                 let variant_error = linkable_tree_bn254::Error::decode_with_metadata(
                     cursor,
-                    603u32,
+                    593u32,
                     metadata,
                 )?;
                 return Ok(Error::LinkableTreeBn254(variant_error));
@@ -1666,7 +1666,7 @@ pub mod api {
             if pallet_name == "MixerBn254" {
                 let variant_error = mixer_bn254::Error::decode_with_metadata(
                     cursor,
-                    606u32,
+                    596u32,
                     metadata,
                 )?;
                 return Ok(Error::MixerBn254(variant_error));
@@ -1674,7 +1674,7 @@ pub mod api {
             if pallet_name == "SignatureBridge" {
                 let variant_error = signature_bridge::Error::decode_with_metadata(
                     cursor,
-                    607u32,
+                    597u32,
                     metadata,
                 )?;
                 return Ok(Error::SignatureBridge(variant_error));
@@ -1682,7 +1682,7 @@ pub mod api {
             if pallet_name == "VAnchorBn254" {
                 let variant_error = v_anchor_bn254::Error::decode_with_metadata(
                     cursor,
-                    609u32,
+                    599u32,
                     metadata,
                 )?;
                 return Ok(Error::VAnchorBn254(variant_error));
@@ -1690,7 +1690,7 @@ pub mod api {
             if pallet_name == "VAnchorHandlerBn254" {
                 let variant_error = v_anchor_handler_bn254::Error::decode_with_metadata(
                     cursor,
-                    610u32,
+                    600u32,
                     metadata,
                 )?;
                 return Ok(Error::VAnchorHandlerBn254(variant_error));
@@ -1698,7 +1698,7 @@ pub mod api {
             if pallet_name == "TokenWrapperHandler" {
                 let variant_error = token_wrapper_handler::Error::decode_with_metadata(
                     cursor,
-                    611u32,
+                    601u32,
                     metadata,
                 )?;
                 return Ok(Error::TokenWrapperHandler(variant_error));
@@ -1706,7 +1706,7 @@ pub mod api {
             if pallet_name == "KeyStorage" {
                 let variant_error = key_storage::Error::decode_with_metadata(
                     cursor,
-                    615u32,
+                    605u32,
                     metadata,
                 )?;
                 return Ok(Error::KeyStorage(variant_error));
@@ -1714,7 +1714,7 @@ pub mod api {
             if pallet_name == "VAnchorVerifier" {
                 let variant_error = v_anchor_verifier::Error::decode_with_metadata(
                     cursor,
-                    616u32,
+                    606u32,
                     metadata,
                 )?;
                 return Ok(Error::VAnchorVerifier(variant_error));
@@ -1722,7 +1722,7 @@ pub mod api {
             if pallet_name == "TransactionPause" {
                 let variant_error = transaction_pause::Error::decode_with_metadata(
                     cursor,
-                    617u32,
+                    607u32,
                     metadata,
                 )?;
                 return Ok(Error::TransactionPause(variant_error));
@@ -1730,7 +1730,7 @@ pub mod api {
             if pallet_name == "ImOnline" {
                 let variant_error = im_online::Error::decode_with_metadata(
                     cursor,
-                    625u32,
+                    615u32,
                     metadata,
                 )?;
                 return Ok(Error::ImOnline(variant_error));
@@ -1738,7 +1738,7 @@ pub mod api {
             if pallet_name == "Identity" {
                 let variant_error = identity::Error::decode_with_metadata(
                     cursor,
-                    636u32,
+                    626u32,
                     metadata,
                 )?;
                 return Ok(Error::Identity(variant_error));
@@ -1746,7 +1746,7 @@ pub mod api {
             if pallet_name == "Utility" {
                 let variant_error = utility::Error::decode_with_metadata(
                     cursor,
-                    637u32,
+                    627u32,
                     metadata,
                 )?;
                 return Ok(Error::Utility(variant_error));
@@ -1754,7 +1754,7 @@ pub mod api {
             if pallet_name == "Eth2Client" {
                 let variant_error = eth2_client::Error::decode_with_metadata(
                     cursor,
-                    641u32,
+                    631u32,
                     metadata,
                 )?;
                 return Ok(Error::Eth2Client(variant_error));
@@ -2215,38 +2215,38 @@ pub mod api {
             .hash();
         if runtime_metadata_hash
             != [
-                43u8,
-                124u8,
-                216u8,
-                14u8,
-                81u8,
-                201u8,
-                187u8,
-                22u8,
-                255u8,
-                254u8,
-                35u8,
-                144u8,
-                31u8,
-                205u8,
-                228u8,
-                127u8,
+                26u8,
+                154u8,
+                173u8,
+                181u8,
+                239u8,
+                53u8,
+                173u8,
+                137u8,
+                118u8,
+                170u8,
+                125u8,
+                118u8,
                 116u8,
-                22u8,
-                87u8,
-                231u8,
-                252u8,
-                193u8,
-                240u8,
-                177u8,
-                203u8,
-                27u8,
-                28u8,
-                144u8,
-                29u8,
-                39u8,
-                150u8,
+                45u8,
+                154u8,
                 188u8,
+                91u8,
+                115u8,
+                239u8,
+                4u8,
+                243u8,
+                3u8,
+                101u8,
+                188u8,
+                207u8,
+                124u8,
+                96u8,
+                38u8,
+                127u8,
+                79u8,
+                103u8,
+                56u8,
             ]
         {
             Err(::subxt::error::MetadataError::IncompatibleCodegen)
@@ -3607,38 +3607,38 @@ pub mod api {
                         "Events",
                         vec![],
                         [
-                            94u8,
-                            191u8,
-                            242u8,
-                            103u8,
-                            237u8,
-                            161u8,
-                            139u8,
-                            132u8,
-                            0u8,
-                            159u8,
-                            10u8,
-                            162u8,
-                            94u8,
-                            30u8,
-                            74u8,
-                            62u8,
-                            180u8,
+                            227u8,
+                            65u8,
                             164u8,
-                            138u8,
-                            253u8,
-                            115u8,
-                            98u8,
-                            255u8,
-                            202u8,
+                            36u8,
+                            92u8,
                             189u8,
-                            37u8,
-                            57u8,
-                            99u8,
-                            121u8,
+                            91u8,
+                            34u8,
                             134u8,
-                            181u8,
-                            89u8,
+                            113u8,
+                            43u8,
+                            102u8,
+                            138u8,
+                            47u8,
+                            172u8,
+                            49u8,
+                            226u8,
+                            133u8,
+                            114u8,
+                            229u8,
+                            11u8,
+                            123u8,
+                            163u8,
+                            36u8,
+                            53u8,
+                            221u8,
+                            93u8,
+                            96u8,
+                            88u8,
+                            68u8,
+                            66u8,
+                            217u8,
                         ],
                     )
                 }
@@ -4676,38 +4676,38 @@ pub mod api {
                             call: ::std::boxed::Box::new(call),
                         },
                         [
+                            110u8,
+                            50u8,
+                            127u8,
                             217u8,
-                            230u8,
-                            16u8,
-                            30u8,
-                            189u8,
-                            233u8,
-                            239u8,
-                            203u8,
-                            155u8,
-                            70u8,
-                            21u8,
-                            83u8,
                             111u8,
-                            122u8,
-                            255u8,
-                            170u8,
-                            253u8,
-                            192u8,
+                            48u8,
+                            1u8,
                             118u8,
-                            126u8,
-                            30u8,
-                            154u8,
-                            249u8,
-                            132u8,
-                            154u8,
-                            233u8,
-                            242u8,
-                            219u8,
-                            119u8,
-                            153u8,
-                            217u8,
-                            249u8,
+                            145u8,
+                            122u8,
+                            156u8,
+                            105u8,
+                            209u8,
+                            152u8,
+                            181u8,
+                            241u8,
+                            0u8,
+                            162u8,
+                            152u8,
+                            67u8,
+                            53u8,
+                            75u8,
+                            195u8,
+                            145u8,
+                            245u8,
+                            206u8,
+                            90u8,
+                            185u8,
+                            88u8,
+                            170u8,
+                            42u8,
+                            121u8,
                         ],
                     )
                 }
@@ -4732,38 +4732,38 @@ pub mod api {
                             weight,
                         },
                         [
-                            72u8,
-                            252u8,
-                            76u8,
-                            122u8,
-                            103u8,
-                            127u8,
-                            169u8,
-                            47u8,
-                            194u8,
-                            64u8,
-                            54u8,
-                            180u8,
-                            60u8,
-                            49u8,
-                            25u8,
+                            102u8,
                             3u8,
-                            27u8,
-                            143u8,
-                            226u8,
-                            14u8,
-                            228u8,
-                            114u8,
-                            110u8,
-                            143u8,
-                            232u8,
-                            207u8,
-                            223u8,
-                            150u8,
-                            176u8,
-                            163u8,
-                            105u8,
+                            245u8,
+                            135u8,
+                            247u8,
+                            210u8,
+                            60u8,
                             151u8,
+                            47u8,
+                            19u8,
+                            202u8,
+                            254u8,
+                            198u8,
+                            238u8,
+                            196u8,
+                            77u8,
+                            51u8,
+                            151u8,
+                            84u8,
+                            217u8,
+                            122u8,
+                            165u8,
+                            106u8,
+                            197u8,
+                            122u8,
+                            66u8,
+                            185u8,
+                            59u8,
+                            219u8,
+                            232u8,
+                            192u8,
+                            2u8,
                         ],
                     )
                 }
@@ -4844,38 +4844,38 @@ pub mod api {
                             call: ::std::boxed::Box::new(call),
                         },
                         [
-                            251u8,
-                            63u8,
-                            131u8,
-                            27u8,
-                            129u8,
-                            35u8,
-                            231u8,
-                            113u8,
-                            251u8,
-                            174u8,
-                            157u8,
+                            235u8,
+                            141u8,
+                            57u8,
+                            56u8,
+                            222u8,
+                            196u8,
+                            242u8,
+                            114u8,
+                            216u8,
+                            186u8,
+                            8u8,
                             107u8,
-                            168u8,
-                            2u8,
-                            157u8,
-                            249u8,
-                            166u8,
-                            201u8,
-                            89u8,
-                            72u8,
-                            132u8,
-                            236u8,
-                            202u8,
-                            98u8,
-                            182u8,
-                            189u8,
+                            65u8,
+                            106u8,
+                            6u8,
+                            133u8,
+                            111u8,
+                            83u8,
+                            140u8,
+                            73u8,
+                            160u8,
                             126u8,
-                            26u8,
-                            170u8,
-                            109u8,
+                            140u8,
+                            177u8,
+                            198u8,
+                            205u8,
                             34u8,
-                            238u8,
+                            150u8,
+                            31u8,
+                            12u8,
+                            109u8,
+                            202u8,
                         ],
                     )
                 }
@@ -7841,8 +7841,8 @@ pub mod api {
                 pub struct SubmitMisbehaviourReports {
                     pub reports: runtime_types::dkg_runtime_primitives::AggregatedMisbehaviourReports<
                         runtime_types::dkg_runtime_primitives::crypto::Public,
-                        runtime_types::dkg_runtime_primitives::CustomU32Getter3,
-                        runtime_types::dkg_runtime_primitives::CustomU32Getter4,
+                        runtime_types::dkg_runtime_primitives::CustomU32Getter,
+                        runtime_types::dkg_runtime_primitives::CustomU32Getter2,
                     >,
                 }
                 impl ::subxt::blocks::StaticExtrinsic for SubmitMisbehaviourReports {
@@ -8302,8 +8302,8 @@ pub mod api {
                     &self,
                     reports: runtime_types::dkg_runtime_primitives::AggregatedMisbehaviourReports<
                         runtime_types::dkg_runtime_primitives::crypto::Public,
-                        runtime_types::dkg_runtime_primitives::CustomU32Getter3,
-                        runtime_types::dkg_runtime_primitives::CustomU32Getter4,
+                        runtime_types::dkg_runtime_primitives::CustomU32Getter,
+                        runtime_types::dkg_runtime_primitives::CustomU32Getter2,
                     >,
                 ) -> ::subxt::tx::Payload<types::SubmitMisbehaviourReports> {
                     ::subxt::tx::Payload::new_static(
@@ -9185,7 +9185,7 @@ pub mod api {
                     &self,
                 ) -> ::subxt::storage::address::Address<
                     ::subxt::storage::address::StaticStorageMapKey,
-                    (::core::primitive::bool, ::core::primitive::bool),
+                    ::core::primitive::bool,
                     ::subxt::storage::address::Yes,
                     ::subxt::storage::address::Yes,
                     (),
@@ -9195,38 +9195,38 @@ pub mod api {
                         "ShouldExecuteNewKeygen",
                         vec![],
                         [
-                            144u8,
-                            13u8,
-                            44u8,
-                            55u8,
-                            75u8,
-                            7u8,
-                            211u8,
-                            236u8,
-                            151u8,
-                            254u8,
-                            214u8,
-                            201u8,
-                            53u8,
-                            10u8,
+                            157u8,
+                            127u8,
+                            186u8,
+                            235u8,
+                            108u8,
+                            213u8,
+                            178u8,
+                            110u8,
+                            157u8,
+                            187u8,
+                            107u8,
+                            69u8,
+                            156u8,
+                            252u8,
+                            141u8,
+                            20u8,
+                            179u8,
+                            16u8,
+                            247u8,
+                            137u8,
+                            102u8,
                             47u8,
-                            160u8,
+                            251u8,
+                            127u8,
+                            70u8,
+                            225u8,
                             123u8,
-                            37u8,
-                            151u8,
-                            172u8,
-                            43u8,
-                            245u8,
-                            52u8,
-                            237u8,
-                            52u8,
-                            57u8,
-                            120u8,
-                            226u8,
-                            6u8,
-                            119u8,
-                            105u8,
-                            208u8,
+                            229u8,
+                            16u8,
+                            116u8,
+                            62u8,
+                            125u8,
                         ],
                     )
                 }
@@ -9506,8 +9506,8 @@ pub mod api {
                 ) -> ::subxt::storage::address::Address<
                     ::subxt::storage::address::StaticStorageMapKey,
                     runtime_types::pallet_dkg_metadata::types::RoundMetadata<
-                        runtime_types::dkg_runtime_primitives::CustomU32Getter3,
-                        runtime_types::dkg_runtime_primitives::CustomU32Getter3,
+                        runtime_types::dkg_runtime_primitives::CustomU32Getter,
+                        runtime_types::dkg_runtime_primitives::CustomU32Getter,
                     >,
                     ::subxt::storage::address::Yes,
                     ::subxt::storage::address::Yes,
@@ -9562,8 +9562,8 @@ pub mod api {
                 ) -> ::subxt::storage::address::Address<
                     ::subxt::storage::address::StaticStorageMapKey,
                     runtime_types::pallet_dkg_metadata::types::RoundMetadata<
-                        runtime_types::dkg_runtime_primitives::CustomU32Getter3,
-                        runtime_types::dkg_runtime_primitives::CustomU32Getter3,
+                        runtime_types::dkg_runtime_primitives::CustomU32Getter,
+                        runtime_types::dkg_runtime_primitives::CustomU32Getter,
                     >,
                     (),
                     ::subxt::storage::address::Yes,
@@ -10335,8 +10335,8 @@ pub mod api {
                     ::subxt::storage::address::StaticStorageMapKey,
                     runtime_types::dkg_runtime_primitives::AggregatedMisbehaviourReports<
                         runtime_types::dkg_runtime_primitives::crypto::Public,
-                        runtime_types::dkg_runtime_primitives::CustomU32Getter3,
-                        runtime_types::dkg_runtime_primitives::CustomU32Getter4,
+                        runtime_types::dkg_runtime_primitives::CustomU32Getter,
+                        runtime_types::dkg_runtime_primitives::CustomU32Getter2,
                     >,
                     ::subxt::storage::address::Yes,
                     (),
@@ -10396,8 +10396,8 @@ pub mod api {
                     ::subxt::storage::address::StaticStorageMapKey,
                     runtime_types::dkg_runtime_primitives::AggregatedMisbehaviourReports<
                         runtime_types::dkg_runtime_primitives::crypto::Public,
-                        runtime_types::dkg_runtime_primitives::CustomU32Getter3,
-                        runtime_types::dkg_runtime_primitives::CustomU32Getter4,
+                        runtime_types::dkg_runtime_primitives::CustomU32Getter,
+                        runtime_types::dkg_runtime_primitives::CustomU32Getter2,
                     >,
                     (),
                     (),
@@ -11443,7 +11443,7 @@ pub mod api {
                     pub src_chain_id: runtime_types::webb_proposals::header::TypedChainId,
                     pub r_id: runtime_types::webb_proposals::header::ResourceId,
                     pub prop: runtime_types::webb_proposals::proposal::Proposal<
-                        runtime_types::dkg_runtime_primitives::CustomU32Getter,
+                        runtime_types::dkg_runtime_primitives::CustomU32Getter3,
                     >,
                 }
                 impl ::subxt::blocks::StaticExtrinsic for AcknowledgeProposal {
@@ -11468,7 +11468,7 @@ pub mod api {
                     pub src_chain_id: runtime_types::webb_proposals::header::TypedChainId,
                     pub r_id: runtime_types::webb_proposals::header::ResourceId,
                     pub prop: runtime_types::webb_proposals::proposal::Proposal<
-                        runtime_types::dkg_runtime_primitives::CustomU32Getter,
+                        runtime_types::dkg_runtime_primitives::CustomU32Getter3,
                     >,
                 }
                 impl ::subxt::blocks::StaticExtrinsic for RejectProposal {
@@ -11492,7 +11492,7 @@ pub mod api {
                     pub nonce: runtime_types::webb_proposals::nonce::Nonce,
                     pub src_chain_id: runtime_types::webb_proposals::header::TypedChainId,
                     pub prop: runtime_types::webb_proposals::proposal::Proposal<
-                        runtime_types::dkg_runtime_primitives::CustomU32Getter,
+                        runtime_types::dkg_runtime_primitives::CustomU32Getter3,
                     >,
                 }
                 impl ::subxt::blocks::StaticExtrinsic for EvalVoteState {
@@ -11822,7 +11822,7 @@ pub mod api {
                     src_chain_id: runtime_types::webb_proposals::header::TypedChainId,
                     r_id: runtime_types::webb_proposals::header::ResourceId,
                     prop: runtime_types::webb_proposals::proposal::Proposal<
-                        runtime_types::dkg_runtime_primitives::CustomU32Getter,
+                        runtime_types::dkg_runtime_primitives::CustomU32Getter3,
                     >,
                 ) -> ::subxt::tx::Payload<types::AcknowledgeProposal> {
                     ::subxt::tx::Payload::new_static(
@@ -11881,7 +11881,7 @@ pub mod api {
                     src_chain_id: runtime_types::webb_proposals::header::TypedChainId,
                     r_id: runtime_types::webb_proposals::header::ResourceId,
                     prop: runtime_types::webb_proposals::proposal::Proposal<
-                        runtime_types::dkg_runtime_primitives::CustomU32Getter,
+                        runtime_types::dkg_runtime_primitives::CustomU32Getter3,
                     >,
                 ) -> ::subxt::tx::Payload<types::RejectProposal> {
                     ::subxt::tx::Payload::new_static(
@@ -11942,7 +11942,7 @@ pub mod api {
                     nonce: runtime_types::webb_proposals::nonce::Nonce,
                     src_chain_id: runtime_types::webb_proposals::header::TypedChainId,
                     prop: runtime_types::webb_proposals::proposal::Proposal<
-                        runtime_types::dkg_runtime_primitives::CustomU32Getter,
+                        runtime_types::dkg_runtime_primitives::CustomU32Getter3,
                     >,
                 ) -> ::subxt::tx::Payload<types::EvalVoteState> {
                     ::subxt::tx::Payload::new_static(
@@ -12099,7 +12099,7 @@ pub mod api {
             ///Vote submitted in favour of proposal
             pub struct VoteFor {
                 pub kind: runtime_types::webb_proposals::proposal::ProposalKind,
-                pub src_chain_id: runtime_types::webb_proposals::header::TypedChainId,
+                pub chain_id: runtime_types::webb_proposals::header::TypedChainId,
                 pub proposal_nonce: runtime_types::webb_proposals::nonce::Nonce,
                 pub who: ::subxt::utils::AccountId32,
             }
@@ -12123,7 +12123,7 @@ pub mod api {
             ///Vot submitted against proposal
             pub struct VoteAgainst {
                 pub kind: runtime_types::webb_proposals::proposal::ProposalKind,
-                pub src_chain_id: runtime_types::webb_proposals::header::TypedChainId,
+                pub chain_id: runtime_types::webb_proposals::header::TypedChainId,
                 pub proposal_nonce: runtime_types::webb_proposals::nonce::Nonce,
                 pub who: ::subxt::utils::AccountId32,
             }
@@ -12147,7 +12147,7 @@ pub mod api {
             ///Voting successful for a proposal
             pub struct ProposalApproved {
                 pub kind: runtime_types::webb_proposals::proposal::ProposalKind,
-                pub src_chain_id: runtime_types::webb_proposals::header::TypedChainId,
+                pub chain_id: runtime_types::webb_proposals::header::TypedChainId,
                 pub proposal_nonce: runtime_types::webb_proposals::nonce::Nonce,
             }
             impl ::subxt::events::StaticEvent for ProposalApproved {
@@ -12170,7 +12170,7 @@ pub mod api {
             ///Voting rejected a proposal
             pub struct ProposalRejected {
                 pub kind: runtime_types::webb_proposals::proposal::ProposalKind,
-                pub src_chain_id: runtime_types::webb_proposals::header::TypedChainId,
+                pub chain_id: runtime_types::webb_proposals::header::TypedChainId,
                 pub proposal_nonce: runtime_types::webb_proposals::nonce::Nonce,
             }
             impl ::subxt::events::StaticEvent for ProposalRejected {
@@ -12193,7 +12193,7 @@ pub mod api {
             ///Execution of call succeeded
             pub struct ProposalSucceeded {
                 pub kind: runtime_types::webb_proposals::proposal::ProposalKind,
-                pub src_chain_id: runtime_types::webb_proposals::header::TypedChainId,
+                pub chain_id: runtime_types::webb_proposals::header::TypedChainId,
                 pub proposal_nonce: runtime_types::webb_proposals::nonce::Nonce,
             }
             impl ::subxt::events::StaticEvent for ProposalSucceeded {
@@ -12216,7 +12216,7 @@ pub mod api {
             ///Execution of call failed
             pub struct ProposalFailed {
                 pub kind: runtime_types::webb_proposals::proposal::ProposalKind,
-                pub src_chain_id: runtime_types::webb_proposals::header::TypedChainId,
+                pub chain_id: runtime_types::webb_proposals::header::TypedChainId,
                 pub proposal_nonce: runtime_types::webb_proposals::nonce::Nonce,
             }
             impl ::subxt::events::StaticEvent for ProposalFailed {
@@ -12838,7 +12838,7 @@ pub mod api {
                         (
                             runtime_types::webb_proposals::nonce::Nonce,
                             runtime_types::webb_proposals::proposal::Proposal<
-                                runtime_types::dkg_runtime_primitives::CustomU32Getter,
+                                runtime_types::dkg_runtime_primitives::CustomU32Getter3,
                             >,
                         ),
                     >,
@@ -13451,10 +13451,7 @@ pub mod api {
                 #[encode_as_type(crate_path = ":: subxt :: ext :: scale_encode")]
                 pub struct SubmitSignedProposals {
                     pub props: ::std::vec::Vec<
-                        runtime_types::dkg_runtime_primitives::proposal::SignedProposalBatch<
-                            ::core::primitive::u32,
-                            runtime_types::dkg_runtime_primitives::CustomU32Getter,
-                            runtime_types::dkg_runtime_primitives::CustomU32Getter2,
+                        runtime_types::webb_proposals::proposal::Proposal<
                             runtime_types::dkg_runtime_primitives::CustomU32Getter3,
                         >,
                     >,
@@ -13478,7 +13475,7 @@ pub mod api {
                 #[encode_as_type(crate_path = ":: subxt :: ext :: scale_encode")]
                 pub struct ForceSubmitUnsignedProposal {
                     pub prop: runtime_types::webb_proposals::proposal::Proposal<
-                        runtime_types::dkg_runtime_primitives::CustomU32Getter,
+                        runtime_types::dkg_runtime_primitives::CustomU32Getter3,
                     >,
                 }
                 impl ::subxt::blocks::StaticExtrinsic for ForceSubmitUnsignedProposal {
@@ -13491,10 +13488,7 @@ pub mod api {
                 pub fn submit_signed_proposals(
                     &self,
                     props: ::std::vec::Vec<
-                        runtime_types::dkg_runtime_primitives::proposal::SignedProposalBatch<
-                            ::core::primitive::u32,
-                            runtime_types::dkg_runtime_primitives::CustomU32Getter,
-                            runtime_types::dkg_runtime_primitives::CustomU32Getter2,
+                        runtime_types::webb_proposals::proposal::Proposal<
                             runtime_types::dkg_runtime_primitives::CustomU32Getter3,
                         >,
                     >,
@@ -13506,38 +13500,38 @@ pub mod api {
                             props,
                         },
                         [
-                            147u8,
+                            159u8,
+                            62u8,
+                            250u8,
+                            44u8,
+                            32u8,
+                            115u8,
+                            169u8,
+                            164u8,
+                            248u8,
+                            172u8,
+                            15u8,
+                            179u8,
+                            27u8,
+                            182u8,
+                            163u8,
+                            247u8,
+                            234u8,
+                            221u8,
+                            37u8,
+                            237u8,
+                            4u8,
+                            151u8,
+                            13u8,
+                            199u8,
+                            27u8,
+                            122u8,
+                            121u8,
+                            57u8,
+                            177u8,
+                            226u8,
                             155u8,
-                            98u8,
-                            133u8,
-                            252u8,
-                            28u8,
-                            100u8,
-                            153u8,
-                            205u8,
-                            199u8,
-                            244u8,
-                            199u8,
-                            200u8,
-                            253u8,
-                            132u8,
-                            104u8,
-                            0u8,
-                            241u8,
-                            199u8,
-                            173u8,
-                            48u8,
-                            231u8,
-                            42u8,
-                            123u8,
-                            156u8,
-                            83u8,
-                            193u8,
-                            54u8,
-                            95u8,
-                            199u8,
-                            51u8,
-                            10u8,
+                            116u8,
                         ],
                     )
                 }
@@ -13549,7 +13543,7 @@ pub mod api {
                 pub fn force_submit_unsigned_proposal(
                     &self,
                     prop: runtime_types::webb_proposals::proposal::Proposal<
-                        runtime_types::dkg_runtime_primitives::CustomU32Getter,
+                        runtime_types::dkg_runtime_primitives::CustomU32Getter3,
                     >,
                 ) -> ::subxt::tx::Payload<types::ForceSubmitUnsignedProposal> {
                     ::subxt::tx::Payload::new_static(
@@ -13617,13 +13611,8 @@ pub mod api {
             #[decode_as_type(crate_path = ":: subxt :: ext :: scale_decode")]
             #[encode_as_type(crate_path = ":: subxt :: ext :: scale_encode")]
             ///RuntimeEvent Emitted when we encounter a Proposal with invalid Signature.
-            pub struct InvalidProposalBatchSignature {
-                pub proposals: runtime_types::dkg_runtime_primitives::proposal::SignedProposalBatch<
-                    ::core::primitive::u32,
-                    runtime_types::dkg_runtime_primitives::CustomU32Getter,
-                    runtime_types::dkg_runtime_primitives::CustomU32Getter2,
-                    runtime_types::dkg_runtime_primitives::CustomU32Getter3,
-                >,
+            pub struct InvalidProposalSignature {
+                pub kind: runtime_types::webb_proposals::proposal::ProposalKind,
                 pub data: ::std::vec::Vec<::core::primitive::u8>,
                 pub invalid_signature: ::std::vec::Vec<::core::primitive::u8>,
                 pub expected_public_key: ::core::option::Option<
@@ -13633,9 +13622,9 @@ pub mod api {
                     ::std::vec::Vec<::core::primitive::u8>,
                 >,
             }
-            impl ::subxt::events::StaticEvent for InvalidProposalBatchSignature {
+            impl ::subxt::events::StaticEvent for InvalidProposalSignature {
                 const PALLET: &'static str = "DKGProposalHandler";
-                const EVENT: &'static str = "InvalidProposalBatchSignature";
+                const EVENT: &'static str = "InvalidProposalSignature";
             }
             #[derive(
                 ::subxt::ext::codec::Decode,
@@ -13697,17 +13686,15 @@ pub mod api {
             #[decode_as_type(crate_path = ":: subxt :: ext :: scale_decode")]
             #[encode_as_type(crate_path = ":: subxt :: ext :: scale_encode")]
             ///RuntimeEvent When a Proposal Gets Signed by DKG.
-            pub struct ProposalBatchSigned {
+            pub struct ProposalSigned {
+                pub key: runtime_types::dkg_runtime_primitives::proposal::DKGPayloadKey,
                 pub target_chain: runtime_types::webb_proposals::header::TypedChainId,
-                pub batch_id: ::core::primitive::u32,
-                pub proposals: ::std::vec::Vec<
-                    runtime_types::pallet_dkg_proposal_handler::pallet::SignedProposalEventData,
-                >,
+                pub data: ::std::vec::Vec<::core::primitive::u8>,
                 pub signature: ::std::vec::Vec<::core::primitive::u8>,
             }
-            impl ::subxt::events::StaticEvent for ProposalBatchSigned {
+            impl ::subxt::events::StaticEvent for ProposalSigned {
                 const PALLET: &'static str = "DKGProposalHandler";
-                const EVENT: &'static str = "ProposalBatchSigned";
+                const EVENT: &'static str = "ProposalSigned";
             }
         }
         pub mod storage {
@@ -13720,14 +13707,14 @@ pub mod api {
                     _0: impl ::std::borrow::Borrow<
                         runtime_types::webb_proposals::header::TypedChainId,
                     >,
-                    _1: impl ::std::borrow::Borrow<::core::primitive::u32>,
+                    _1: impl ::std::borrow::Borrow<
+                        runtime_types::dkg_runtime_primitives::proposal::DKGPayloadKey,
+                    >,
                 ) -> ::subxt::storage::address::Address<
                     ::subxt::storage::address::StaticStorageMapKey,
-                    runtime_types::dkg_runtime_primitives::proposal::StoredUnsignedProposalBatch<
+                    runtime_types::dkg_runtime_primitives::proposal::StoredUnsignedProposal<
                         ::core::primitive::u32,
-                        runtime_types::dkg_runtime_primitives::CustomU32Getter,
-                        runtime_types::dkg_runtime_primitives::CustomU32Getter2,
-                        ::core::primitive::u32,
+                        runtime_types::dkg_runtime_primitives::CustomU32Getter3,
                     >,
                     ::subxt::storage::address::Yes,
                     (),
@@ -13743,38 +13730,38 @@ pub mod api {
                             .borrow())
                         ],
                         [
-                            57u8,
-                            117u8,
-                            191u8,
-                            97u8,
-                            7u8,
-                            81u8,
-                            47u8,
-                            253u8,
-                            164u8,
-                            42u8,
+                            249u8,
+                            33u8,
+                            115u8,
+                            23u8,
+                            25u8,
+                            102u8,
+                            20u8,
+                            190u8,
+                            207u8,
+                            131u8,
+                            197u8,
+                            216u8,
+                            122u8,
+                            194u8,
+                            234u8,
+                            12u8,
+                            6u8,
+                            110u8,
+                            124u8,
+                            31u8,
+                            25u8,
+                            133u8,
+                            178u8,
+                            250u8,
+                            29u8,
+                            95u8,
+                            250u8,
                             90u8,
-                            100u8,
-                            83u8,
-                            252u8,
-                            86u8,
-                            193u8,
-                            104u8,
-                            66u8,
-                            229u8,
-                            8u8,
-                            214u8,
-                            89u8,
-                            228u8,
-                            192u8,
-                            91u8,
-                            176u8,
-                            154u8,
-                            78u8,
-                            184u8,
-                            125u8,
-                            51u8,
-                            165u8,
+                            253u8,
+                            215u8,
+                            187u8,
+                            242u8,
                         ],
                     )
                 }
@@ -13783,11 +13770,9 @@ pub mod api {
                     &self,
                 ) -> ::subxt::storage::address::Address<
                     ::subxt::storage::address::StaticStorageMapKey,
-                    runtime_types::dkg_runtime_primitives::proposal::StoredUnsignedProposalBatch<
+                    runtime_types::dkg_runtime_primitives::proposal::StoredUnsignedProposal<
                         ::core::primitive::u32,
-                        runtime_types::dkg_runtime_primitives::CustomU32Getter,
-                        runtime_types::dkg_runtime_primitives::CustomU32Getter2,
-                        ::core::primitive::u32,
+                        runtime_types::dkg_runtime_primitives::CustomU32Getter3,
                     >,
                     (),
                     (),
@@ -13798,43 +13783,47 @@ pub mod api {
                         "UnsignedProposalQueue",
                         Vec::new(),
                         [
-                            57u8,
-                            117u8,
-                            191u8,
-                            97u8,
-                            7u8,
-                            81u8,
-                            47u8,
-                            253u8,
-                            164u8,
-                            42u8,
+                            249u8,
+                            33u8,
+                            115u8,
+                            23u8,
+                            25u8,
+                            102u8,
+                            20u8,
+                            190u8,
+                            207u8,
+                            131u8,
+                            197u8,
+                            216u8,
+                            122u8,
+                            194u8,
+                            234u8,
+                            12u8,
+                            6u8,
+                            110u8,
+                            124u8,
+                            31u8,
+                            25u8,
+                            133u8,
+                            178u8,
+                            250u8,
+                            29u8,
+                            95u8,
+                            250u8,
                             90u8,
-                            100u8,
-                            83u8,
-                            252u8,
-                            86u8,
-                            193u8,
-                            104u8,
-                            66u8,
-                            229u8,
-                            8u8,
-                            214u8,
-                            89u8,
-                            228u8,
-                            192u8,
-                            91u8,
-                            176u8,
-                            154u8,
-                            78u8,
-                            184u8,
-                            125u8,
-                            51u8,
-                            165u8,
+                            253u8,
+                            215u8,
+                            187u8,
+                            242u8,
                         ],
                     )
                 }
-                /// Defines the next batch id available
-                pub fn next_batch_id(
+                /// Defines the block when next unsigned transaction will be accepted.
+                ///
+                /// To prevent spam of unsigned (and unpayed!) transactions on the network,
+                /// we only allow one transaction every `T::UnsignedInterval` blocks.
+                /// This storage entry defines when new transaction is going to be accepted.
+                pub fn next_unsigned_at(
                     &self,
                 ) -> ::subxt::storage::address::Address<
                     ::subxt::storage::address::StaticStorageMapKey,
@@ -13845,155 +13834,41 @@ pub mod api {
                 > {
                     ::subxt::storage::address::Address::new_static(
                         "DKGProposalHandler",
-                        "NextBatchId",
+                        "NextUnsignedAt",
                         vec![],
                         [
-                            194u8,
-                            36u8,
-                            199u8,
-                            34u8,
-                            76u8,
-                            252u8,
-                            109u8,
-                            61u8,
-                            79u8,
-                            109u8,
-                            152u8,
-                            67u8,
-                            74u8,
-                            153u8,
-                            11u8,
                             128u8,
-                            158u8,
-                            145u8,
-                            53u8,
-                            226u8,
-                            57u8,
+                            69u8,
+                            217u8,
+                            175u8,
+                            94u8,
+                            131u8,
                             228u8,
-                            106u8,
-                            111u8,
-                            99u8,
-                            241u8,
+                            97u8,
+                            2u8,
+                            91u8,
+                            12u8,
+                            95u8,
+                            35u8,
+                            105u8,
+                            136u8,
+                            55u8,
+                            49u8,
+                            3u8,
+                            224u8,
+                            213u8,
                             96u8,
-                            78u8,
-                            164u8,
+                            45u8,
+                            19u8,
+                            217u8,
+                            5u8,
+                            6u8,
+                            20u8,
+                            51u8,
+                            219u8,
                             66u8,
-                            253u8,
-                            16u8,
-                        ],
-                    )
-                }
-                /// Staging queue for unsigned proposals
-                pub fn unsigned_proposals(
-                    &self,
-                    _0: impl ::std::borrow::Borrow<
-                        runtime_types::webb_proposals::header::TypedChainId,
-                    >,
-                ) -> ::subxt::storage::address::Address<
-                    ::subxt::storage::address::StaticStorageMapKey,
-                    runtime_types::bounded_collections::bounded_vec::BoundedVec<
-                        runtime_types::dkg_runtime_primitives::UnsignedProposal<
-                            runtime_types::dkg_runtime_primitives::CustomU32Getter,
-                        >,
-                    >,
-                    ::subxt::storage::address::Yes,
-                    (),
-                    ::subxt::storage::address::Yes,
-                > {
-                    ::subxt::storage::address::Address::new_static(
-                        "DKGProposalHandler",
-                        "UnsignedProposals",
-                        vec![
-                            ::subxt::storage::address::make_static_storage_map_key(_0
-                            .borrow())
-                        ],
-                        [
-                            254u8,
-                            108u8,
-                            217u8,
-                            135u8,
-                            41u8,
-                            102u8,
-                            227u8,
-                            197u8,
-                            92u8,
-                            24u8,
-                            187u8,
-                            68u8,
-                            54u8,
-                            224u8,
-                            192u8,
-                            121u8,
-                            29u8,
-                            71u8,
-                            145u8,
-                            233u8,
-                            174u8,
-                            196u8,
-                            250u8,
-                            23u8,
-                            110u8,
-                            62u8,
-                            28u8,
-                            75u8,
-                            2u8,
-                            118u8,
-                            15u8,
-                            229u8,
-                        ],
-                    )
-                }
-                /// Staging queue for unsigned proposals
-                pub fn unsigned_proposals_root(
-                    &self,
-                ) -> ::subxt::storage::address::Address<
-                    ::subxt::storage::address::StaticStorageMapKey,
-                    runtime_types::bounded_collections::bounded_vec::BoundedVec<
-                        runtime_types::dkg_runtime_primitives::UnsignedProposal<
-                            runtime_types::dkg_runtime_primitives::CustomU32Getter,
-                        >,
-                    >,
-                    (),
-                    (),
-                    ::subxt::storage::address::Yes,
-                > {
-                    ::subxt::storage::address::Address::new_static(
-                        "DKGProposalHandler",
-                        "UnsignedProposals",
-                        Vec::new(),
-                        [
-                            254u8,
-                            108u8,
-                            217u8,
-                            135u8,
-                            41u8,
-                            102u8,
-                            227u8,
-                            197u8,
-                            92u8,
-                            24u8,
-                            187u8,
-                            68u8,
-                            54u8,
-                            224u8,
-                            192u8,
-                            121u8,
-                            29u8,
-                            71u8,
-                            145u8,
-                            233u8,
-                            174u8,
-                            196u8,
-                            250u8,
-                            23u8,
-                            110u8,
-                            62u8,
-                            28u8,
-                            75u8,
-                            2u8,
-                            118u8,
-                            15u8,
-                            229u8,
+                            143u8,
+                            50u8,
                         ],
                     )
                 }
@@ -14003,13 +13878,12 @@ pub mod api {
                     _0: impl ::std::borrow::Borrow<
                         runtime_types::webb_proposals::header::TypedChainId,
                     >,
-                    _1: impl ::std::borrow::Borrow<::core::primitive::u32>,
+                    _1: impl ::std::borrow::Borrow<
+                        runtime_types::dkg_runtime_primitives::proposal::DKGPayloadKey,
+                    >,
                 ) -> ::subxt::storage::address::Address<
                     ::subxt::storage::address::StaticStorageMapKey,
-                    runtime_types::dkg_runtime_primitives::proposal::SignedProposalBatch<
-                        ::core::primitive::u32,
-                        runtime_types::dkg_runtime_primitives::CustomU32Getter,
-                        runtime_types::dkg_runtime_primitives::CustomU32Getter2,
+                    runtime_types::webb_proposals::proposal::Proposal<
                         runtime_types::dkg_runtime_primitives::CustomU32Getter3,
                     >,
                     ::subxt::storage::address::Yes,
@@ -14026,38 +13900,38 @@ pub mod api {
                             .borrow())
                         ],
                         [
-                            1u8,
-                            250u8,
-                            224u8,
-                            184u8,
-                            208u8,
-                            2u8,
-                            38u8,
                             243u8,
-                            21u8,
-                            33u8,
-                            46u8,
-                            14u8,
-                            190u8,
-                            205u8,
-                            144u8,
-                            41u8,
-                            175u8,
-                            253u8,
-                            106u8,
-                            165u8,
-                            2u8,
-                            161u8,
-                            33u8,
-                            208u8,
-                            86u8,
-                            64u8,
-                            237u8,
-                            220u8,
-                            203u8,
+                            74u8,
                             83u8,
-                            205u8,
-                            98u8,
+                            216u8,
+                            248u8,
+                            156u8,
+                            69u8,
+                            82u8,
+                            254u8,
+                            233u8,
+                            255u8,
+                            203u8,
+                            231u8,
+                            232u8,
+                            30u8,
+                            254u8,
+                            35u8,
+                            41u8,
+                            215u8,
+                            31u8,
+                            158u8,
+                            184u8,
+                            129u8,
+                            23u8,
+                            76u8,
+                            84u8,
+                            206u8,
+                            198u8,
+                            65u8,
+                            22u8,
+                            102u8,
+                            236u8,
                         ],
                     )
                 }
@@ -14066,10 +13940,7 @@ pub mod api {
                     &self,
                 ) -> ::subxt::storage::address::Address<
                     ::subxt::storage::address::StaticStorageMapKey,
-                    runtime_types::dkg_runtime_primitives::proposal::SignedProposalBatch<
-                        ::core::primitive::u32,
-                        runtime_types::dkg_runtime_primitives::CustomU32Getter,
-                        runtime_types::dkg_runtime_primitives::CustomU32Getter2,
+                    runtime_types::webb_proposals::proposal::Proposal<
                         runtime_types::dkg_runtime_primitives::CustomU32Getter3,
                     >,
                     (),
@@ -14081,38 +13952,38 @@ pub mod api {
                         "SignedProposals",
                         Vec::new(),
                         [
-                            1u8,
-                            250u8,
-                            224u8,
-                            184u8,
-                            208u8,
-                            2u8,
-                            38u8,
                             243u8,
-                            21u8,
-                            33u8,
-                            46u8,
-                            14u8,
-                            190u8,
-                            205u8,
-                            144u8,
-                            41u8,
-                            175u8,
-                            253u8,
-                            106u8,
-                            165u8,
-                            2u8,
-                            161u8,
-                            33u8,
-                            208u8,
-                            86u8,
-                            64u8,
-                            237u8,
-                            220u8,
-                            203u8,
+                            74u8,
                             83u8,
-                            205u8,
-                            98u8,
+                            216u8,
+                            248u8,
+                            156u8,
+                            69u8,
+                            82u8,
+                            254u8,
+                            233u8,
+                            255u8,
+                            203u8,
+                            231u8,
+                            232u8,
+                            30u8,
+                            254u8,
+                            35u8,
+                            41u8,
+                            215u8,
+                            31u8,
+                            158u8,
+                            184u8,
+                            129u8,
+                            23u8,
+                            76u8,
+                            84u8,
+                            206u8,
+                            198u8,
+                            65u8,
+                            22u8,
+                            102u8,
+                            236u8,
                         ],
                     )
                 }
@@ -14123,45 +13994,45 @@ pub mod api {
             pub struct ConstantsApi;
             impl ConstantsApi {
                 /// Max number of signed proposal submissions per batch;
-                pub fn max_proposals_per_batch(
+                pub fn max_submissions_per_batch(
                     &self,
-                ) -> ::subxt::constants::Address<::core::primitive::u32> {
+                ) -> ::subxt::constants::Address<::core::primitive::u16> {
                     ::subxt::constants::Address::new_static(
                         "DKGProposalHandler",
-                        "MaxProposalsPerBatch",
+                        "MaxSubmissionsPerBatch",
                         [
-                            98u8,
-                            252u8,
                             116u8,
-                            72u8,
-                            26u8,
-                            180u8,
-                            225u8,
-                            83u8,
-                            200u8,
-                            157u8,
-                            125u8,
-                            151u8,
-                            53u8,
-                            76u8,
-                            168u8,
-                            26u8,
-                            10u8,
-                            9u8,
-                            98u8,
-                            68u8,
-                            9u8,
-                            178u8,
-                            197u8,
-                            113u8,
-                            31u8,
-                            79u8,
-                            200u8,
-                            90u8,
-                            203u8,
-                            100u8,
+                            33u8,
+                            2u8,
+                            170u8,
+                            181u8,
+                            147u8,
+                            171u8,
+                            169u8,
+                            167u8,
+                            227u8,
                             41u8,
-                            145u8,
+                            144u8,
+                            11u8,
+                            236u8,
+                            82u8,
+                            100u8,
+                            74u8,
+                            60u8,
+                            184u8,
+                            72u8,
+                            169u8,
+                            90u8,
+                            208u8,
+                            135u8,
+                            15u8,
+                            117u8,
+                            10u8,
+                            123u8,
+                            128u8,
+                            193u8,
+                            29u8,
+                            70u8,
                         ],
                     )
                 }
@@ -19257,38 +19128,38 @@ pub mod api {
                             length_bound,
                         },
                         [
-                            152u8,
-                            86u8,
-                            239u8,
-                            65u8,
-                            172u8,
-                            146u8,
-                            156u8,
-                            34u8,
-                            191u8,
-                            128u8,
-                            158u8,
-                            147u8,
-                            194u8,
-                            82u8,
-                            34u8,
-                            254u8,
-                            246u8,
-                            167u8,
-                            137u8,
                             208u8,
-                            168u8,
-                            1u8,
-                            223u8,
-                            19u8,
-                            42u8,
-                            32u8,
-                            11u8,
+                            240u8,
+                            171u8,
+                            85u8,
                             219u8,
+                            227u8,
+                            254u8,
+                            228u8,
+                            153u8,
+                            96u8,
+                            150u8,
+                            230u8,
+                            40u8,
+                            228u8,
+                            44u8,
+                            86u8,
+                            44u8,
                             156u8,
-                            162u8,
-                            88u8,
-                            246u8,
+                            167u8,
+                            127u8,
+                            149u8,
+                            157u8,
+                            85u8,
+                            177u8,
+                            194u8,
+                            168u8,
+                            127u8,
+                            98u8,
+                            110u8,
+                            9u8,
+                            177u8,
+                            106u8,
                         ],
                     )
                 }
@@ -19321,38 +19192,38 @@ pub mod api {
                             length_bound,
                         },
                         [
-                            58u8,
-                            30u8,
-                            166u8,
-                            255u8,
-                            74u8,
-                            113u8,
-                            100u8,
-                            183u8,
-                            72u8,
-                            84u8,
-                            17u8,
-                            67u8,
-                            241u8,
-                            232u8,
-                            248u8,
-                            10u8,
-                            25u8,
-                            78u8,
-                            127u8,
-                            207u8,
-                            184u8,
-                            72u8,
-                            45u8,
-                            59u8,
-                            76u8,
-                            116u8,
-                            23u8,
-                            163u8,
-                            114u8,
-                            161u8,
+                            146u8,
+                            212u8,
+                            200u8,
+                            253u8,
+                            180u8,
+                            104u8,
+                            81u8,
+                            36u8,
+                            98u8,
+                            144u8,
+                            162u8,
                             50u8,
-                            88u8,
+                            250u8,
+                            118u8,
+                            34u8,
+                            253u8,
+                            244u8,
+                            23u8,
+                            104u8,
+                            101u8,
+                            251u8,
+                            129u8,
+                            133u8,
+                            107u8,
+                            30u8,
+                            85u8,
+                            160u8,
+                            249u8,
+                            153u8,
+                            160u8,
+                            148u8,
+                            71u8,
                         ],
                     )
                 }
@@ -19874,38 +19745,38 @@ pub mod api {
                             .borrow())
                         ],
                         [
-                            215u8,
-                            159u8,
-                            171u8,
-                            9u8,
-                            92u8,
-                            85u8,
-                            105u8,
-                            52u8,
-                            23u8,
-                            151u8,
-                            81u8,
-                            57u8,
-                            58u8,
-                            152u8,
-                            204u8,
-                            243u8,
-                            37u8,
-                            82u8,
-                            173u8,
-                            60u8,
-                            215u8,
-                            255u8,
-                            208u8,
+                            209u8,
+                            146u8,
+                            226u8,
+                            196u8,
+                            119u8,
+                            88u8,
+                            21u8,
+                            77u8,
+                            213u8,
+                            253u8,
+                            222u8,
+                            146u8,
+                            35u8,
+                            194u8,
+                            70u8,
+                            55u8,
                             100u8,
-                            50u8,
+                            184u8,
+                            101u8,
+                            235u8,
+                            35u8,
+                            57u8,
+                            224u8,
+                            181u8,
+                            99u8,
                             7u8,
-                            47u8,
-                            186u8,
-                            32u8,
-                            90u8,
-                            54u8,
-                            171u8,
+                            60u8,
+                            247u8,
+                            61u8,
+                            18u8,
+                            110u8,
+                            196u8,
                         ],
                     )
                 }
@@ -19924,38 +19795,38 @@ pub mod api {
                         "ProposalOf",
                         Vec::new(),
                         [
-                            215u8,
-                            159u8,
-                            171u8,
-                            9u8,
-                            92u8,
-                            85u8,
-                            105u8,
-                            52u8,
-                            23u8,
-                            151u8,
-                            81u8,
-                            57u8,
-                            58u8,
-                            152u8,
-                            204u8,
-                            243u8,
-                            37u8,
-                            82u8,
-                            173u8,
-                            60u8,
-                            215u8,
-                            255u8,
-                            208u8,
+                            209u8,
+                            146u8,
+                            226u8,
+                            196u8,
+                            119u8,
+                            88u8,
+                            21u8,
+                            77u8,
+                            213u8,
+                            253u8,
+                            222u8,
+                            146u8,
+                            35u8,
+                            194u8,
+                            70u8,
+                            55u8,
                             100u8,
-                            50u8,
+                            184u8,
+                            101u8,
+                            235u8,
+                            35u8,
+                            57u8,
+                            224u8,
+                            181u8,
+                            99u8,
                             7u8,
-                            47u8,
-                            186u8,
-                            32u8,
-                            90u8,
-                            54u8,
-                            171u8,
+                            60u8,
+                            247u8,
+                            61u8,
+                            18u8,
+                            110u8,
+                            196u8,
                         ],
                     )
                 }
@@ -40252,38 +40123,38 @@ pub mod api {
                             call: ::std::boxed::Box::new(call),
                         },
                         [
-                            13u8,
-                            236u8,
-                            27u8,
-                            141u8,
-                            217u8,
-                            20u8,
-                            233u8,
-                            197u8,
-                            117u8,
-                            163u8,
-                            199u8,
-                            250u8,
-                            174u8,
-                            195u8,
-                            58u8,
-                            251u8,
+                            33u8,
+                            215u8,
+                            52u8,
+                            181u8,
+                            29u8,
+                            181u8,
                             81u8,
-                            126u8,
-                            227u8,
-                            67u8,
-                            39u8,
-                            4u8,
-                            179u8,
+                            119u8,
+                            169u8,
+                            246u8,
+                            73u8,
+                            45u8,
+                            156u8,
+                            66u8,
                             88u8,
-                            151u8,
-                            146u8,
-                            140u8,
-                            135u8,
-                            162u8,
-                            218u8,
-                            103u8,
-                            91u8,
+                            52u8,
+                            238u8,
+                            49u8,
+                            136u8,
+                            114u8,
+                            144u8,
+                            203u8,
+                            79u8,
+                            23u8,
+                            93u8,
+                            126u8,
+                            105u8,
+                            87u8,
+                            206u8,
+                            122u8,
+                            109u8,
+                            119u8,
                         ],
                     )
                 }
@@ -40355,38 +40226,38 @@ pub mod api {
                             call: ::std::boxed::Box::new(call),
                         },
                         [
-                            82u8,
-                            166u8,
-                            229u8,
-                            6u8,
-                            16u8,
-                            186u8,
-                            218u8,
-                            68u8,
-                            46u8,
-                            90u8,
-                            154u8,
-                            113u8,
-                            64u8,
+                            181u8,
+                            15u8,
+                            18u8,
+                            95u8,
+                            45u8,
+                            41u8,
+                            60u8,
+                            105u8,
+                            244u8,
+                            135u8,
+                            72u8,
+                            208u8,
+                            183u8,
+                            202u8,
+                            36u8,
                             235u8,
-                            50u8,
-                            106u8,
-                            74u8,
-                            138u8,
-                            134u8,
-                            117u8,
-                            16u8,
-                            7u8,
-                            190u8,
-                            240u8,
-                            159u8,
-                            54u8,
-                            33u8,
-                            210u8,
-                            153u8,
-                            23u8,
-                            178u8,
-                            243u8,
+                            19u8,
+                            120u8,
+                            230u8,
+                            81u8,
+                            67u8,
+                            22u8,
+                            1u8,
+                            161u8,
+                            202u8,
+                            158u8,
+                            39u8,
+                            113u8,
+                            245u8,
+                            91u8,
+                            94u8,
+                            48u8,
                         ],
                     )
                 }
@@ -40455,38 +40326,38 @@ pub mod api {
                             call: ::std::boxed::Box::new(call),
                         },
                         [
-                            29u8,
-                            214u8,
-                            96u8,
-                            100u8,
-                            105u8,
-                            121u8,
-                            16u8,
-                            106u8,
-                            235u8,
-                            89u8,
-                            85u8,
-                            70u8,
-                            62u8,
-                            12u8,
-                            81u8,
-                            8u8,
-                            206u8,
-                            144u8,
-                            69u8,
-                            53u8,
-                            95u8,
+                            72u8,
+                            111u8,
+                            113u8,
+                            238u8,
+                            245u8,
+                            198u8,
+                            219u8,
+                            204u8,
+                            253u8,
+                            112u8,
+                            254u8,
                             227u8,
-                            200u8,
-                            246u8,
-                            44u8,
-                            202u8,
-                            233u8,
-                            49u8,
-                            216u8,
-                            105u8,
-                            239u8,
-                            115u8,
+                            234u8,
+                            244u8,
+                            37u8,
+                            221u8,
+                            41u8,
+                            139u8,
+                            110u8,
+                            143u8,
+                            15u8,
+                            134u8,
+                            133u8,
+                            66u8,
+                            41u8,
+                            181u8,
+                            42u8,
+                            191u8,
+                            128u8,
+                            230u8,
+                            57u8,
+                            187u8,
                         ],
                     )
                 }
@@ -40512,38 +40383,38 @@ pub mod api {
                             call: ::std::boxed::Box::new(call),
                         },
                         [
-                            92u8,
-                            85u8,
-                            126u8,
-                            151u8,
-                            203u8,
-                            217u8,
-                            194u8,
-                            90u8,
-                            61u8,
-                            197u8,
-                            24u8,
-                            40u8,
-                            23u8,
+                            84u8,
+                            181u8,
+                            208u8,
+                            152u8,
+                            33u8,
+                            143u8,
                             127u8,
-                            157u8,
-                            37u8,
-                            193u8,
-                            178u8,
-                            77u8,
-                            98u8,
-                            20u8,
-                            80u8,
-                            72u8,
-                            180u8,
-                            159u8,
-                            177u8,
-                            193u8,
-                            224u8,
+                            247u8,
+                            25u8,
+                            123u8,
+                            123u8,
                             50u8,
-                            159u8,
-                            164u8,
-                            83u8,
+                            105u8,
+                            251u8,
+                            6u8,
+                            139u8,
+                            145u8,
+                            233u8,
+                            243u8,
+                            94u8,
+                            149u8,
+                            231u8,
+                            21u8,
+                            86u8,
+                            71u8,
+                            244u8,
+                            176u8,
+                            233u8,
+                            227u8,
+                            189u8,
+                            200u8,
+                            194u8,
                         ],
                     )
                 }
@@ -55623,38 +55494,38 @@ pub mod api {
                         "batch",
                         types::Batch { calls },
                         [
-                            35u8,
-                            52u8,
-                            171u8,
-                            209u8,
-                            104u8,
-                            208u8,
-                            90u8,
-                            142u8,
-                            140u8,
-                            145u8,
-                            92u8,
-                            123u8,
-                            58u8,
-                            186u8,
-                            26u8,
-                            131u8,
-                            115u8,
-                            172u8,
-                            73u8,
-                            150u8,
-                            128u8,
-                            67u8,
+                            9u8,
+                            248u8,
+                            16u8,
                             15u8,
-                            242u8,
-                            254u8,
-                            136u8,
-                            218u8,
-                            148u8,
-                            61u8,
-                            4u8,
-                            70u8,
-                            231u8,
+                            202u8,
+                            102u8,
+                            165u8,
+                            42u8,
+                            171u8,
+                            141u8,
+                            165u8,
+                            7u8,
+                            35u8,
+                            80u8,
+                            49u8,
+                            118u8,
+                            2u8,
+                            228u8,
+                            132u8,
+                            172u8,
+                            23u8,
+                            158u8,
+                            34u8,
+                            68u8,
+                            178u8,
+                            203u8,
+                            211u8,
+                            76u8,
+                            125u8,
+                            166u8,
+                            131u8,
+                            185u8,
                         ],
                     )
                 }
@@ -55684,38 +55555,38 @@ pub mod api {
                             call: ::std::boxed::Box::new(call),
                         },
                         [
-                            41u8,
-                            157u8,
-                            32u8,
+                            101u8,
+                            211u8,
+                            246u8,
+                            186u8,
                             13u8,
-                            191u8,
-                            56u8,
-                            10u8,
-                            66u8,
-                            156u8,
-                            77u8,
-                            177u8,
-                            245u8,
-                            43u8,
-                            241u8,
-                            59u8,
-                            74u8,
-                            166u8,
-                            180u8,
-                            25u8,
-                            45u8,
+                            193u8,
+                            246u8,
+                            195u8,
+                            179u8,
+                            179u8,
+                            224u8,
+                            46u8,
+                            134u8,
+                            182u8,
+                            18u8,
                             183u8,
-                            145u8,
-                            75u8,
-                            100u8,
-                            172u8,
-                            232u8,
+                            111u8,
+                            144u8,
+                            251u8,
                             6u8,
-                            250u8,
-                            44u8,
-                            178u8,
-                            196u8,
-                            249u8,
+                            35u8,
+                            5u8,
+                            237u8,
+                            46u8,
+                            49u8,
+                            6u8,
+                            195u8,
+                            159u8,
+                            229u8,
+                            182u8,
+                            20u8,
+                            106u8,
                         ],
                     )
                 }
@@ -55743,38 +55614,38 @@ pub mod api {
                         "batch_all",
                         types::BatchAll { calls },
                         [
-                            52u8,
-                            193u8,
-                            248u8,
-                            58u8,
+                            138u8,
+                            183u8,
+                            107u8,
+                            114u8,
+                            33u8,
+                            163u8,
+                            171u8,
+                            29u8,
                             40u8,
-                            55u8,
-                            23u8,
-                            230u8,
-                            62u8,
-                            62u8,
-                            25u8,
+                            162u8,
+                            250u8,
+                            168u8,
+                            242u8,
+                            223u8,
+                            160u8,
+                            185u8,
+                            247u8,
+                            35u8,
+                            3u8,
+                            100u8,
+                            21u8,
+                            110u8,
                             252u8,
-                            13u8,
-                            118u8,
-                            98u8,
-                            67u8,
-                            93u8,
-                            66u8,
-                            126u8,
-                            157u8,
-                            61u8,
-                            83u8,
-                            50u8,
-                            139u8,
-                            202u8,
-                            144u8,
-                            40u8,
-                            46u8,
-                            0u8,
-                            176u8,
-                            45u8,
-                            30u8,
+                            117u8,
+                            247u8,
+                            186u8,
+                            58u8,
+                            87u8,
+                            164u8,
+                            255u8,
+                            211u8,
+                            163u8,
                         ],
                     )
                 }
@@ -55797,38 +55668,38 @@ pub mod api {
                             call: ::std::boxed::Box::new(call),
                         },
                         [
-                            136u8,
-                            159u8,
-                            22u8,
-                            68u8,
-                            65u8,
-                            36u8,
-                            130u8,
-                            145u8,
-                            58u8,
-                            163u8,
-                            83u8,
-                            218u8,
-                            207u8,
-                            59u8,
-                            233u8,
-                            27u8,
-                            10u8,
-                            112u8,
-                            141u8,
-                            17u8,
-                            106u8,
-                            199u8,
-                            178u8,
+                            76u8,
+                            118u8,
+                            167u8,
+                            230u8,
+                            179u8,
+                            242u8,
+                            60u8,
+                            231u8,
+                            166u8,
+                            174u8,
+                            252u8,
+                            86u8,
+                            235u8,
+                            161u8,
                             239u8,
-                            248u8,
-                            222u8,
-                            107u8,
-                            119u8,
-                            65u8,
-                            80u8,
+                            225u8,
+                            178u8,
+                            71u8,
+                            71u8,
+                            41u8,
+                            110u8,
+                            41u8,
+                            223u8,
+                            56u8,
+                            169u8,
+                            196u8,
                             201u8,
-                            29u8,
+                            166u8,
+                            94u8,
+                            55u8,
+                            230u8,
+                            177u8,
                         ],
                     )
                 }
@@ -55856,38 +55727,38 @@ pub mod api {
                         "force_batch",
                         types::ForceBatch { calls },
                         [
-                            125u8,
-                            106u8,
-                            199u8,
-                            216u8,
-                            179u8,
-                            65u8,
-                            87u8,
-                            140u8,
-                            98u8,
-                            132u8,
-                            24u8,
-                            47u8,
-                            10u8,
-                            140u8,
-                            232u8,
-                            1u8,
-                            248u8,
-                            82u8,
-                            151u8,
-                            84u8,
-                            156u8,
-                            197u8,
-                            28u8,
-                            180u8,
-                            137u8,
-                            83u8,
-                            254u8,
-                            162u8,
-                            242u8,
-                            28u8,
-                            210u8,
-                            16u8,
+                            195u8,
+                            93u8,
+                            188u8,
+                            4u8,
+                            244u8,
+                            26u8,
+                            224u8,
+                            182u8,
+                            131u8,
+                            23u8,
+                            184u8,
+                            56u8,
+                            115u8,
+                            104u8,
+                            214u8,
+                            208u8,
+                            13u8,
+                            147u8,
+                            160u8,
+                            174u8,
+                            57u8,
+                            157u8,
+                            181u8,
+                            42u8,
+                            191u8,
+                            209u8,
+                            175u8,
+                            204u8,
+                            56u8,
+                            130u8,
+                            121u8,
+                            96u8,
                         ],
                     )
                 }
@@ -55910,38 +55781,38 @@ pub mod api {
                             weight,
                         },
                         [
-                            117u8,
-                            147u8,
-                            220u8,
-                            23u8,
-                            116u8,
-                            254u8,
-                            77u8,
-                            5u8,
-                            146u8,
-                            123u8,
-                            195u8,
-                            91u8,
+                            139u8,
+                            206u8,
+                            231u8,
+                            240u8,
                             37u8,
-                            116u8,
-                            81u8,
-                            21u8,
-                            179u8,
-                            154u8,
-                            160u8,
-                            27u8,
-                            71u8,
-                            6u8,
-                            100u8,
-                            4u8,
-                            243u8,
-                            171u8,
                             2u8,
-                            13u8,
-                            196u8,
-                            126u8,
+                            219u8,
+                            208u8,
+                            86u8,
+                            163u8,
+                            84u8,
+                            80u8,
+                            185u8,
+                            203u8,
+                            188u8,
+                            135u8,
+                            66u8,
+                            165u8,
+                            198u8,
+                            136u8,
+                            136u8,
+                            25u8,
+                            226u8,
+                            82u8,
                             27u8,
-                            132u8,
+                            192u8,
+                            211u8,
+                            29u8,
+                            75u8,
+                            113u8,
+                            136u8,
+                            169u8,
                         ],
                     )
                 }
@@ -58693,42 +58564,9 @@ pub mod api {
                 #[codec(crate = ::subxt::ext::codec)]
                 #[decode_as_type(crate_path = ":: subxt :: ext :: scale_decode")]
                 #[encode_as_type(crate_path = ":: subxt :: ext :: scale_encode")]
-                pub struct SignedProposalBatch<_0, _1, _2, _3> {
-                    pub batch_id: _0,
-                    pub proposals: runtime_types::bounded_collections::bounded_vec::BoundedVec<
-                        runtime_types::webb_proposals::proposal::Proposal<_1>,
-                    >,
-                    pub signature: runtime_types::bounded_collections::bounded_vec::BoundedVec<
-                        ::core::primitive::u8,
-                    >,
-                    #[codec(skip)]
-                    pub __subxt_unused_type_params: ::core::marker::PhantomData<
-                        (_2, _3),
-                    >,
-                }
-                #[derive(
-                    ::subxt::ext::codec::Decode,
-                    ::subxt::ext::codec::Encode,
-                    ::subxt::ext::scale_decode::DecodeAsType,
-                    ::subxt::ext::scale_encode::EncodeAsType,
-                    Clone,
-                    Debug,
-                    Eq,
-                    PartialEq
-                )]
-                #[codec(crate = ::subxt::ext::codec)]
-                #[decode_as_type(crate_path = ":: subxt :: ext :: scale_decode")]
-                #[encode_as_type(crate_path = ":: subxt :: ext :: scale_encode")]
-                pub struct StoredUnsignedProposalBatch<_0, _1, _2, _3> {
-                    pub batch_id: _0,
-                    pub proposals: runtime_types::bounded_collections::bounded_vec::BoundedVec<
-                        runtime_types::dkg_runtime_primitives::UnsignedProposal<_1>,
-                    >,
+                pub struct StoredUnsignedProposal<_0, _1> {
+                    pub proposal: runtime_types::webb_proposals::proposal::Proposal<_1>,
                     pub timestamp: _0,
-                    #[codec(skip)]
-                    pub __subxt_unused_type_params: ::core::marker::PhantomData<
-                        (_3, _2),
-                    >,
                 }
             }
             #[derive(
@@ -58835,43 +58673,11 @@ pub mod api {
             #[codec(crate = ::subxt::ext::codec)]
             #[decode_as_type(crate_path = ":: subxt :: ext :: scale_decode")]
             #[encode_as_type(crate_path = ":: subxt :: ext :: scale_encode")]
-            pub struct CustomU32Getter4;
-            #[derive(
-                ::subxt::ext::codec::Decode,
-                ::subxt::ext::codec::Encode,
-                ::subxt::ext::scale_decode::DecodeAsType,
-                ::subxt::ext::scale_encode::EncodeAsType,
-                Clone,
-                Debug,
-                Eq,
-                PartialEq
-            )]
-            #[codec(crate = ::subxt::ext::codec)]
-            #[decode_as_type(crate_path = ":: subxt :: ext :: scale_decode")]
-            #[encode_as_type(crate_path = ":: subxt :: ext :: scale_encode")]
             pub enum MisbehaviourType {
                 #[codec(index = 0)]
                 Keygen,
                 #[codec(index = 1)]
                 Sign,
-            }
-            #[derive(
-                ::subxt::ext::codec::Decode,
-                ::subxt::ext::codec::Encode,
-                ::subxt::ext::scale_decode::DecodeAsType,
-                ::subxt::ext::scale_encode::EncodeAsType,
-                Clone,
-                Debug,
-                Eq,
-                PartialEq
-            )]
-            #[codec(crate = ::subxt::ext::codec)]
-            #[decode_as_type(crate_path = ":: subxt :: ext :: scale_decode")]
-            #[encode_as_type(crate_path = ":: subxt :: ext :: scale_encode")]
-            pub struct UnsignedProposal<_0> {
-                pub typed_chain_id: runtime_types::webb_proposals::header::TypedChainId,
-                pub key: runtime_types::dkg_runtime_primitives::proposal::DKGPayloadKey,
-                pub proposal: runtime_types::webb_proposals::proposal::Proposal<_0>,
             }
         }
         pub mod eth_types {
@@ -63240,8 +63046,8 @@ pub mod api {
                     submit_misbehaviour_reports {
                         reports: runtime_types::dkg_runtime_primitives::AggregatedMisbehaviourReports<
                             runtime_types::dkg_runtime_primitives::crypto::Public,
-                            runtime_types::dkg_runtime_primitives::CustomU32Getter3,
-                            runtime_types::dkg_runtime_primitives::CustomU32Getter4,
+                            runtime_types::dkg_runtime_primitives::CustomU32Getter,
+                            runtime_types::dkg_runtime_primitives::CustomU32Getter2,
                         >,
                     },
                     #[codec(index = 7)]
@@ -63358,15 +63164,6 @@ pub mod api {
                     #[codec(index = 16)]
                     ///Cannot retreive signer from ecdsa signature
                     CannotRetreiveSigner,
-                    #[codec(index = 17)]
-                    ///Reported misbehaviour against a non authority
-                    OffenderNotAuthority,
-                    #[codec(index = 18)]
-                    ///Authority is already jailed
-                    AlreadyJailed,
-                    #[codec(index = 19)]
-                    ///We do not have authorities to jail
-                    NotEnoughAuthoritiesToJail,
                 }
                 #[derive(
                     ::subxt::ext::codec::Decode,
@@ -63524,10 +63321,7 @@ pub mod api {
                     #[codec(index = 0)]
                     submit_signed_proposals {
                         props: ::std::vec::Vec<
-                            runtime_types::dkg_runtime_primitives::proposal::SignedProposalBatch<
-                                ::core::primitive::u32,
-                                runtime_types::dkg_runtime_primitives::CustomU32Getter,
-                                runtime_types::dkg_runtime_primitives::CustomU32Getter2,
+                            runtime_types::webb_proposals::proposal::Proposal<
                                 runtime_types::dkg_runtime_primitives::CustomU32Getter3,
                             >,
                         >,
@@ -63540,7 +63334,7 @@ pub mod api {
                     ///	1. Updating
                     force_submit_unsigned_proposal {
                         prop: runtime_types::webb_proposals::proposal::Proposal<
-                            runtime_types::dkg_runtime_primitives::CustomU32Getter,
+                            runtime_types::dkg_runtime_primitives::CustomU32Getter3,
                         >,
                     },
                 }
@@ -63595,18 +63389,6 @@ pub mod api {
                     #[codec(index = 10)]
                     ///Proposal out of bounds
                     ProposalOutOfBounds,
-                    #[codec(index = 11)]
-                    ///Duplicate signed proposal
-                    CannotOverwriteSignedProposal,
-                    #[codec(index = 12)]
-                    ///Unable to accept new unsigned proposal
-                    UnsignedProposalQueueOverflow,
-                    #[codec(index = 13)]
-                    ///Math overflow
-                    ArithmeticOverflow,
-                    #[codec(index = 14)]
-                    ///Batch does not contain proposals
-                    EmptyBatch,
                 }
                 #[derive(
                     ::subxt::ext::codec::Decode,
@@ -63628,13 +63410,8 @@ pub mod api {
                 pub enum Event {
                     #[codec(index = 0)]
                     ///RuntimeEvent Emitted when we encounter a Proposal with invalid Signature.
-                    InvalidProposalBatchSignature {
-                        proposals: runtime_types::dkg_runtime_primitives::proposal::SignedProposalBatch<
-                            ::core::primitive::u32,
-                            runtime_types::dkg_runtime_primitives::CustomU32Getter,
-                            runtime_types::dkg_runtime_primitives::CustomU32Getter2,
-                            runtime_types::dkg_runtime_primitives::CustomU32Getter3,
-                        >,
+                    InvalidProposalSignature {
+                        kind: runtime_types::webb_proposals::proposal::ProposalKind,
                         data: ::std::vec::Vec<::core::primitive::u8>,
                         invalid_signature: ::std::vec::Vec<::core::primitive::u8>,
                         expected_public_key: ::core::option::Option<
@@ -63660,31 +63437,12 @@ pub mod api {
                     },
                     #[codec(index = 3)]
                     ///RuntimeEvent When a Proposal Gets Signed by DKG.
-                    ProposalBatchSigned {
+                    ProposalSigned {
+                        key: runtime_types::dkg_runtime_primitives::proposal::DKGPayloadKey,
                         target_chain: runtime_types::webb_proposals::header::TypedChainId,
-                        batch_id: ::core::primitive::u32,
-                        proposals: ::std::vec::Vec<
-                            runtime_types::pallet_dkg_proposal_handler::pallet::SignedProposalEventData,
-                        >,
+                        data: ::std::vec::Vec<::core::primitive::u8>,
                         signature: ::std::vec::Vec<::core::primitive::u8>,
                     },
-                }
-                #[derive(
-                    ::subxt::ext::codec::Decode,
-                    ::subxt::ext::codec::Encode,
-                    ::subxt::ext::scale_decode::DecodeAsType,
-                    ::subxt::ext::scale_encode::EncodeAsType,
-                    Clone,
-                    Debug,
-                    Eq,
-                    PartialEq
-                )]
-                #[codec(crate = ::subxt::ext::codec)]
-                #[decode_as_type(crate_path = ":: subxt :: ext :: scale_decode")]
-                #[encode_as_type(crate_path = ":: subxt :: ext :: scale_encode")]
-                pub struct SignedProposalEventData {
-                    pub kind: runtime_types::webb_proposals::proposal::ProposalKind,
-                    pub data: ::std::vec::Vec<::core::primitive::u8>,
                 }
             }
         }
@@ -63780,7 +63538,7 @@ pub mod api {
                         src_chain_id: runtime_types::webb_proposals::header::TypedChainId,
                         r_id: runtime_types::webb_proposals::header::ResourceId,
                         prop: runtime_types::webb_proposals::proposal::Proposal<
-                            runtime_types::dkg_runtime_primitives::CustomU32Getter,
+                            runtime_types::dkg_runtime_primitives::CustomU32Getter3,
                         >,
                     },
                     #[codec(index = 7)]
@@ -63794,7 +63552,7 @@ pub mod api {
                         src_chain_id: runtime_types::webb_proposals::header::TypedChainId,
                         r_id: runtime_types::webb_proposals::header::ResourceId,
                         prop: runtime_types::webb_proposals::proposal::Proposal<
-                            runtime_types::dkg_runtime_primitives::CustomU32Getter,
+                            runtime_types::dkg_runtime_primitives::CustomU32Getter3,
                         >,
                     },
                     #[codec(index = 8)]
@@ -63810,7 +63568,7 @@ pub mod api {
                         nonce: runtime_types::webb_proposals::nonce::Nonce,
                         src_chain_id: runtime_types::webb_proposals::header::TypedChainId,
                         prop: runtime_types::webb_proposals::proposal::Proposal<
-                            runtime_types::dkg_runtime_primitives::CustomU32Getter,
+                            runtime_types::dkg_runtime_primitives::CustomU32Getter3,
                         >,
                     },
                 }
@@ -63886,9 +63644,6 @@ pub mod api {
                     #[codec(index = 17)]
                     ///Input is out of bounds
                     OutOfBounds,
-                    #[codec(index = 18)]
-                    ///Invalid proposal
-                    InvalidProposal,
                 }
                 #[derive(
                     ::subxt::ext::codec::Decode,
@@ -63926,7 +63681,7 @@ pub mod api {
                     ///Vote submitted in favour of proposal
                     VoteFor {
                         kind: runtime_types::webb_proposals::proposal::ProposalKind,
-                        src_chain_id: runtime_types::webb_proposals::header::TypedChainId,
+                        chain_id: runtime_types::webb_proposals::header::TypedChainId,
                         proposal_nonce: runtime_types::webb_proposals::nonce::Nonce,
                         who: ::subxt::utils::AccountId32,
                     },
@@ -63934,7 +63689,7 @@ pub mod api {
                     ///Vot submitted against proposal
                     VoteAgainst {
                         kind: runtime_types::webb_proposals::proposal::ProposalKind,
-                        src_chain_id: runtime_types::webb_proposals::header::TypedChainId,
+                        chain_id: runtime_types::webb_proposals::header::TypedChainId,
                         proposal_nonce: runtime_types::webb_proposals::nonce::Nonce,
                         who: ::subxt::utils::AccountId32,
                     },
@@ -63942,28 +63697,28 @@ pub mod api {
                     ///Voting successful for a proposal
                     ProposalApproved {
                         kind: runtime_types::webb_proposals::proposal::ProposalKind,
-                        src_chain_id: runtime_types::webb_proposals::header::TypedChainId,
+                        chain_id: runtime_types::webb_proposals::header::TypedChainId,
                         proposal_nonce: runtime_types::webb_proposals::nonce::Nonce,
                     },
                     #[codec(index = 7)]
                     ///Voting rejected a proposal
                     ProposalRejected {
                         kind: runtime_types::webb_proposals::proposal::ProposalKind,
-                        src_chain_id: runtime_types::webb_proposals::header::TypedChainId,
+                        chain_id: runtime_types::webb_proposals::header::TypedChainId,
                         proposal_nonce: runtime_types::webb_proposals::nonce::Nonce,
                     },
                     #[codec(index = 8)]
                     ///Execution of call succeeded
                     ProposalSucceeded {
                         kind: runtime_types::webb_proposals::proposal::ProposalKind,
-                        src_chain_id: runtime_types::webb_proposals::header::TypedChainId,
+                        chain_id: runtime_types::webb_proposals::header::TypedChainId,
                         proposal_nonce: runtime_types::webb_proposals::nonce::Nonce,
                     },
                     #[codec(index = 9)]
                     ///Execution of call failed
                     ProposalFailed {
                         kind: runtime_types::webb_proposals::proposal::ProposalKind,
-                        src_chain_id: runtime_types::webb_proposals::header::TypedChainId,
+                        chain_id: runtime_types::webb_proposals::header::TypedChainId,
                         proposal_nonce: runtime_types::webb_proposals::nonce::Nonce,
                     },
                     #[codec(index = 10)]
