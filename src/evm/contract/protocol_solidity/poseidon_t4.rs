@@ -7,7 +7,7 @@ pub use poseidon_t4_contract::*;
     clippy::upper_case_acronyms,
     clippy::type_complexity,
     dead_code,
-    non_camel_case_types
+    non_camel_case_types,
 )]
 pub mod poseidon_t4_contract {
     #[rustfmt::skip]
@@ -12498,8 +12498,9 @@ pub mod poseidon_t4_contract {
         86,
     ];
     ///The bytecode of the contract.
-    pub static POSEIDONT4CONTRACT_BYTECODE: ::ethers::core::types::Bytes =
-        ::ethers::core::types::Bytes::from_static(__BYTECODE);
+    pub static POSEIDONT4CONTRACT_BYTECODE: ::ethers::core::types::Bytes = ::ethers::core::types::Bytes::from_static(
+        __BYTECODE,
+    );
     #[rustfmt::skip]
     const __DEPLOYED_BYTECODE: &[u8] = &[
         115,
@@ -12797,9 +12798,9 @@ pub mod poseidon_t4_contract {
         51,
     ];
     ///The deployed bytecode of the contract.
-    pub static POSEIDONT4CONTRACT_DEPLOYED_BYTECODE:
-        ::ethers::core::types::Bytes =
-        ::ethers::core::types::Bytes::from_static(__DEPLOYED_BYTECODE);
+    pub static POSEIDONT4CONTRACT_DEPLOYED_BYTECODE: ::ethers::core::types::Bytes = ::ethers::core::types::Bytes::from_static(
+        __DEPLOYED_BYTECODE,
+    );
     pub struct PoseidonT4Contract<M>(::ethers::contract::Contract<M>);
     impl<M> ::core::clone::Clone for PoseidonT4Contract<M> {
         fn clone(&self) -> Self {
@@ -12818,13 +12819,8 @@ pub mod poseidon_t4_contract {
         }
     }
     impl<M> ::core::fmt::Debug for PoseidonT4Contract<M> {
-        fn fmt(
-            &self,
-            f: &mut ::core::fmt::Formatter<'_>,
-        ) -> ::core::fmt::Result {
-            f.debug_tuple(stringify!(PoseidonT4Contract))
-                .field(&self.address())
-                .finish()
+        fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
+            f.debug_tuple(stringify!(PoseidonT4Contract)).field(&self.address()).finish()
         }
     }
     impl<M: ::ethers::providers::Middleware> PoseidonT4Contract<M> {
@@ -12834,11 +12830,13 @@ pub mod poseidon_t4_contract {
             address: T,
             client: ::std::sync::Arc<M>,
         ) -> Self {
-            Self(::ethers::contract::Contract::new(
-                address.into(),
-                POSEIDONT4CONTRACT_ABI.clone(),
-                client,
-            ))
+            Self(
+                ::ethers::contract::Contract::new(
+                    address.into(),
+                    POSEIDONT4CONTRACT_ABI.clone(),
+                    client,
+                ),
+            )
         }
         /// Constructs the general purpose `Deployer` instance based on the provided constructor arguments and sends it.
         /// Returns a new instance of a deployer that returns an instance of this contract after sending the transaction
@@ -12883,18 +12881,14 @@ pub mod poseidon_t4_contract {
         pub fn poseidon(
             &self,
             input: [::ethers::core::types::U256; 3],
-        ) -> ::ethers::contract::builders::ContractCall<
-            M,
-            ::ethers::core::types::U256,
-        > {
+        ) -> ::ethers::contract::builders::ContractCall<M, ::ethers::core::types::U256> {
             self.0
                 .method_hash([37, 204, 112, 232], input)
                 .expect("method not found (this should never happen)")
         }
     }
-    impl<M: ::ethers::providers::Middleware>
-        From<::ethers::contract::Contract<M>> for PoseidonT4Contract<M>
-    {
+    impl<M: ::ethers::providers::Middleware> From<::ethers::contract::Contract<M>>
+    for PoseidonT4Contract<M> {
         fn from(contract: ::ethers::contract::Contract<M>) -> Self {
             Self::new(contract.address(), contract.client())
         }
@@ -12910,7 +12904,7 @@ pub mod poseidon_t4_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash,
+        Hash
     )]
     #[ethcall(name = "poseidon", abi = "poseidon(uint256[3])")]
     pub struct PoseidonCall {
@@ -12927,7 +12921,7 @@ pub mod poseidon_t4_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash,
+        Hash
     )]
     pub struct PoseidonReturn(pub ::ethers::core::types::U256);
 }
