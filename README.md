@@ -17,20 +17,12 @@ Use the [`subxt-cli`](https://lib.rs/crates/subxt-cli) tool to download the meta
 cargo install subxt-cli
 ```
 
-2. To Save the metadata of `protocol-substrate`:
-Run the release build of the `protocol-substrate` node, then on another terminal run:
+2. To Save the metadata of `tangle`:
+Run the release build of the `tangle` node, then on another terminal run:
 
 ```bash
-subxt metadata -f bytes > ./metadata/protocol-substrate-runtime.scale
+subxt metadata -f bytes > ./metadata/tangle-runtime.scale
 ```
-
-3. To Save the metadata of `dkg`:
-Run the release build of the `dkg` node, then on another terminal run:
-
-```bash
-subxt metadata -f bytes > ./metadata/dkg-runtime.scale
-```
-
 Same goes for any future runtimes.
 
 > Note: This defaults to querying the metadata of a locally running node on the default `http://localhost:9933/`. If querying
