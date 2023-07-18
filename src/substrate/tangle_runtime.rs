@@ -1104,7 +1104,7 @@ pub mod api {
             if pallet_name == "System" {
                 let variant_error = system::Error::decode_with_metadata(
                     cursor,
-                    164u32,
+                    163u32,
                     metadata,
                 )?;
                 return Ok(Error::System(variant_error));
@@ -1112,7 +1112,7 @@ pub mod api {
             if pallet_name == "Sudo" {
                 let variant_error = sudo::Error::decode_with_metadata(
                     cursor,
-                    404u32,
+                    403u32,
                     metadata,
                 )?;
                 return Ok(Error::Sudo(variant_error));
@@ -1120,7 +1120,7 @@ pub mod api {
             if pallet_name == "Balances" {
                 let variant_error = balances::Error::decode_with_metadata(
                     cursor,
-                    416u32,
+                    415u32,
                     metadata,
                 )?;
                 return Ok(Error::Balances(variant_error));
@@ -1128,7 +1128,7 @@ pub mod api {
             if pallet_name == "Grandpa" {
                 let variant_error = grandpa::Error::decode_with_metadata(
                     cursor,
-                    425u32,
+                    424u32,
                     metadata,
                 )?;
                 return Ok(Error::Grandpa(variant_error));
@@ -1726,38 +1726,38 @@ pub mod api {
             .hash();
         if runtime_metadata_hash
             != [
-                86u8,
-                230u8,
-                120u8,
-                240u8,
-                186u8,
+                55u8,
+                103u8,
+                74u8,
+                189u8,
+                219u8,
+                176u8,
+                77u8,
+                118u8,
+                125u8,
                 31u8,
-                53u8,
-                239u8,
-                159u8,
-                121u8,
-                250u8,
-                162u8,
-                112u8,
-                239u8,
-                42u8,
-                123u8,
-                107u8,
-                192u8,
-                99u8,
-                199u8,
-                37u8,
-                80u8,
-                64u8,
-                35u8,
-                59u8,
-                136u8,
-                37u8,
-                61u8,
+                15u8,
+                246u8,
+                178u8,
+                184u8,
+                169u8,
+                62u8,
+                187u8,
+                13u8,
+                124u8,
+                47u8,
+                188u8,
+                208u8,
+                164u8,
                 48u8,
-                128u8,
-                243u8,
-                160u8,
+                242u8,
+                146u8,
+                42u8,
+                75u8,
+                47u8,
+                59u8,
+                215u8,
+                157u8,
             ]
         {
             Err(::subxt::error::MetadataError::IncompatibleCodegen)
@@ -3111,38 +3111,38 @@ pub mod api {
                         "Events",
                         vec![],
                         [
-                            133u8,
-                            169u8,
-                            128u8,
-                            14u8,
-                            98u8,
-                            154u8,
-                            14u8,
+                            17u8,
+                            132u8,
+                            208u8,
+                            42u8,
+                            131u8,
+                            220u8,
+                            75u8,
+                            19u8,
+                            44u8,
+                            13u8,
+                            120u8,
+                            137u8,
+                            194u8,
+                            248u8,
+                            174u8,
+                            202u8,
+                            129u8,
+                            30u8,
+                            1u8,
+                            88u8,
+                            25u8,
                             31u8,
-                            158u8,
+                            34u8,
+                            193u8,
+                            1u8,
+                            36u8,
+                            89u8,
+                            170u8,
                             227u8,
-                            125u8,
-                            187u8,
-                            255u8,
-                            238u8,
-                            21u8,
-                            114u8,
-                            40u8,
-                            149u8,
-                            54u8,
-                            64u8,
-                            221u8,
-                            216u8,
-                            85u8,
-                            128u8,
-                            55u8,
-                            71u8,
-                            181u8,
-                            150u8,
-                            184u8,
-                            141u8,
-                            113u8,
-                            210u8,
+                            195u8,
+                            227u8,
+                            212u8,
                         ],
                     )
                 }
@@ -8788,8 +8788,12 @@ pub mod api {
             #[encode_as_type(crate_path = ":: subxt :: ext :: scale_encode")]
             ///Next public key signature submitted
             pub struct NextPublicKeySignatureSubmitted {
+                pub voter_merkle_root: [::core::primitive::u8; 32usize],
+                pub session_length: ::core::primitive::u64,
+                pub voter_count: ::core::primitive::u32,
+                pub nonce: runtime_types::webb_proposals::nonce::Nonce,
+                pub pub_key: ::std::vec::Vec<::core::primitive::u8>,
                 pub signature: ::std::vec::Vec<::core::primitive::u8>,
-                pub refresh_proposal: runtime_types::dkg_runtime_primitives::proposal::RefreshProposal,
             }
             impl ::subxt::events::StaticEvent for NextPublicKeySignatureSubmitted {
                 const PALLET: &'static str = "DKG";
@@ -8831,8 +8835,12 @@ pub mod api {
             #[encode_as_type(crate_path = ":: subxt :: ext :: scale_encode")]
             ///Current Public Key Signature Changed.
             pub struct PublicKeySignatureChanged {
+                pub voter_merkle_root: [::core::primitive::u8; 32usize],
+                pub session_length: ::core::primitive::u64,
+                pub voter_count: ::core::primitive::u32,
+                pub nonce: runtime_types::webb_proposals::nonce::Nonce,
+                pub pub_key: ::std::vec::Vec<::core::primitive::u8>,
                 pub signature: ::std::vec::Vec<::core::primitive::u8>,
-                pub refresh_proposal: runtime_types::dkg_runtime_primitives::proposal::RefreshProposal,
             }
             impl ::subxt::events::StaticEvent for PublicKeySignatureChanged {
                 const PALLET: &'static str = "DKG";
@@ -55133,8 +55141,12 @@ pub mod api {
                     #[codec(index = 2)]
                     ///Next public key signature submitted
                     NextPublicKeySignatureSubmitted {
+                        voter_merkle_root: [::core::primitive::u8; 32usize],
+                        session_length: ::core::primitive::u64,
+                        voter_count: ::core::primitive::u32,
+                        nonce: runtime_types::webb_proposals::nonce::Nonce,
+                        pub_key: ::std::vec::Vec<::core::primitive::u8>,
                         signature: ::std::vec::Vec<::core::primitive::u8>,
-                        refresh_proposal: runtime_types::dkg_runtime_primitives::proposal::RefreshProposal,
                     },
                     #[codec(index = 3)]
                     ///Current Public Key Changed.
@@ -55144,8 +55156,12 @@ pub mod api {
                     #[codec(index = 4)]
                     ///Current Public Key Signature Changed.
                     PublicKeySignatureChanged {
+                        voter_merkle_root: [::core::primitive::u8; 32usize],
+                        session_length: ::core::primitive::u64,
+                        voter_count: ::core::primitive::u32,
+                        nonce: runtime_types::webb_proposals::nonce::Nonce,
+                        pub_key: ::std::vec::Vec<::core::primitive::u8>,
                         signature: ::std::vec::Vec<::core::primitive::u8>,
-                        refresh_proposal: runtime_types::dkg_runtime_primitives::proposal::RefreshProposal,
                     },
                     #[codec(index = 5)]
                     ///Misbehaviour reports submitted
