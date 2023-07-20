@@ -1,10 +1,5 @@
 #[cfg(feature = "evm")]
 pub mod evm;
-#[cfg(feature = "substrate")]
-pub mod substrate;
-
-#[cfg(feature = "ink")]
-pub mod ink;
 
 #[cfg(not(feature = "std"))]
 use alloc::vec::Vec;
@@ -57,20 +52,6 @@ impl_proposal_for! {
     crate::proposal::evm::RescueTokensProposal,
     crate::proposal::evm::RegisterFungibleTokenProposal,
     crate::proposal::evm::RegisterNftTokenProposal,
-}
-
-#[cfg(feature = "substrate")]
-impl_proposal_for! {
-    crate::proposal::substrate::AnchorUpdateProposal,
-    crate::proposal::substrate::ResourceIdUpdateProposal,
-    crate::proposal::substrate::TokenAddProposal,
-    crate::proposal::substrate::TokenRemoveProposal,
-    crate::proposal::substrate::WrappingFeeUpdateProposal,
-}
-
-#[cfg(feature = "ink")]
-impl_proposal_for! {
-    crate::proposal::ink::AnchorUpdateProposal,
 }
 
 #[derive(Debug, Clone, Eq, PartialEq)]
