@@ -54,20 +54,6 @@ impl_proposal_for! {
     crate::proposal::evm::RegisterNftTokenProposal,
 }
 
-#[cfg(feature = "substrate")]
-impl_proposal_for! {
-    crate::proposal::substrate::AnchorUpdateProposal,
-    crate::proposal::substrate::ResourceIdUpdateProposal,
-    crate::proposal::substrate::TokenAddProposal,
-    crate::proposal::substrate::TokenRemoveProposal,
-    crate::proposal::substrate::WrappingFeeUpdateProposal,
-}
-
-#[cfg(feature = "ink")]
-impl_proposal_for! {
-    crate::proposal::ink::AnchorUpdateProposal,
-}
-
 #[derive(Debug, Clone, Eq, PartialEq)]
 #[cfg_attr(
     feature = "scale",
