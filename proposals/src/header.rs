@@ -33,11 +33,23 @@ pub struct FunctionSignature(pub [u8; 4]);
         scale_codec::MaxEncodedLen
     )
 )]
-#[cfg_attr(feature = "std", derive(Serialize, Deserialize))]
+#[derive(serde::Serialize, serde::Deserialize)]
 pub struct ResourceId(pub [u8; 32]);
 
 /// Proposal Target Chain and its type (6 bytes).
-#[derive(Default, Debug, Clone, Copy, PartialEq, Eq, Hash, Ord, PartialOrd)]
+#[derive(
+    Default,
+    Debug,
+    Clone,
+    Copy,
+    PartialEq,
+    Eq,
+    Hash,
+    Ord,
+    PartialOrd,
+    serde::Serialize,
+    serde::Deserialize,
+)]
 #[cfg_attr(
     feature = "scale",
     derive(
@@ -47,11 +59,7 @@ pub struct ResourceId(pub [u8; 32]);
         scale_codec::MaxEncodedLen
     )
 )]
-#[cfg_attr(
-    feature = "std",
-    derive(Serialize, Deserialize),
-    serde(tag = "type", content = "id")
-)]
+#[serde(tag = "type", content = "id")]
 #[non_exhaustive]
 pub enum TypedChainId {
     /// None chain type.
@@ -614,7 +622,6 @@ mod tests {
         assert_eq!(header.nonce(), Nonce::from(0x0001));
     }
 
-    #[cfg(feature = "std")]
     #[test]
     fn serde_works() {
         #[derive(Debug, Clone, Serialize, Deserialize)]
