@@ -7,7 +7,7 @@ pub use treasury_contract::*;
     clippy::upper_case_acronyms,
     clippy::type_complexity,
     dead_code,
-    non_camel_case_types,
+    non_camel_case_types
 )]
 pub mod treasury_contract {
     #[rustfmt::skip]
@@ -2854,9 +2854,8 @@ pub mod treasury_contract {
         51,
     ];
     ///The bytecode of the contract.
-    pub static TREASURYCONTRACT_BYTECODE: ::ethers::core::types::Bytes = ::ethers::core::types::Bytes::from_static(
-        __BYTECODE,
-    );
+    pub static TREASURYCONTRACT_BYTECODE: ::ethers::core::types::Bytes =
+        ::ethers::core::types::Bytes::from_static(__BYTECODE);
     #[rustfmt::skip]
     const __DEPLOYED_BYTECODE: &[u8] = &[
         96,
@@ -5441,9 +5440,9 @@ pub mod treasury_contract {
         51,
     ];
     ///The deployed bytecode of the contract.
-    pub static TREASURYCONTRACT_DEPLOYED_BYTECODE: ::ethers::core::types::Bytes = ::ethers::core::types::Bytes::from_static(
-        __DEPLOYED_BYTECODE,
-    );
+    pub static TREASURYCONTRACT_DEPLOYED_BYTECODE:
+        ::ethers::core::types::Bytes =
+        ::ethers::core::types::Bytes::from_static(__DEPLOYED_BYTECODE);
     pub struct TreasuryContract<M>(::ethers::contract::Contract<M>);
     impl<M> ::core::clone::Clone for TreasuryContract<M> {
         fn clone(&self) -> Self {
@@ -5462,8 +5461,13 @@ pub mod treasury_contract {
         }
     }
     impl<M> ::core::fmt::Debug for TreasuryContract<M> {
-        fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-            f.debug_tuple(stringify!(TreasuryContract)).field(&self.address()).finish()
+        fn fmt(
+            &self,
+            f: &mut ::core::fmt::Formatter<'_>,
+        ) -> ::core::fmt::Result {
+            f.debug_tuple(stringify!(TreasuryContract))
+                .field(&self.address())
+                .finish()
         }
     }
     impl<M: ::ethers::providers::Middleware> TreasuryContract<M> {
@@ -5473,13 +5477,11 @@ pub mod treasury_contract {
             address: T,
             client: ::std::sync::Arc<M>,
         ) -> Self {
-            Self(
-                ::ethers::contract::Contract::new(
-                    address.into(),
-                    TREASURYCONTRACT_ABI.clone(),
-                    client,
-                ),
-            )
+            Self(::ethers::contract::Contract::new(
+                address.into(),
+                TREASURYCONTRACT_ABI.clone(),
+                client,
+            ))
         }
         /// Constructs the general purpose `Deployer` instance based on the provided constructor arguments and sends it.
         /// Returns a new instance of a deployer that returns an instance of this contract after sending the transaction
@@ -5523,7 +5525,10 @@ pub mod treasury_contract {
         ///Calls the contract's `getProposalNonce` (0x0b27fb9a) function
         pub fn get_proposal_nonce(
             &self,
-        ) -> ::ethers::contract::builders::ContractCall<M, ::ethers::core::types::U256> {
+        ) -> ::ethers::contract::builders::ContractCall<
+            M,
+            ::ethers::core::types::U256,
+        > {
             self.0
                 .method_hash([11, 39, 251, 154], ())
                 .expect("method not found (this should never happen)")
@@ -5531,7 +5536,10 @@ pub mod treasury_contract {
         ///Calls the contract's `proposalNonce` (0xcc3c74a1) function
         pub fn proposal_nonce(
             &self,
-        ) -> ::ethers::contract::builders::ContractCall<M, ::ethers::core::types::U256> {
+        ) -> ::ethers::contract::builders::ContractCall<
+            M,
+            ::ethers::core::types::U256,
+        > {
             self.0
                 .method_hash([204, 60, 116, 161], ())
                 .expect("method not found (this should never happen)")
@@ -5579,11 +5587,13 @@ pub mod treasury_contract {
             M,
             TreasuryHandlerUpdatedFilter,
         > {
-            self.0.event_with_filter(::core::default::Default::default())
+            self.0
+                .event_with_filter(::core::default::Default::default())
         }
     }
-    impl<M: ::ethers::providers::Middleware> From<::ethers::contract::Contract<M>>
-    for TreasuryContract<M> {
+    impl<M: ::ethers::providers::Middleware>
+        From<::ethers::contract::Contract<M>> for TreasuryContract<M>
+    {
         fn from(contract: ::ethers::contract::Contract<M>) -> Self {
             Self::new(contract.address(), contract.client())
         }
@@ -5598,9 +5608,12 @@ pub mod treasury_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
-    #[ethevent(name = "TreasuryHandlerUpdated", abi = "TreasuryHandlerUpdated(address)")]
+    #[ethevent(
+        name = "TreasuryHandlerUpdated",
+        abi = "TreasuryHandlerUpdated(address)"
+    )]
     pub struct TreasuryHandlerUpdatedFilter {
         pub handler: ::ethers::core::types::Address,
     }
@@ -5615,7 +5628,7 @@ pub mod treasury_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
     #[ethcall(name = "getProposalNonce", abi = "getProposalNonce()")]
     pub struct GetProposalNonceCall;
@@ -5630,7 +5643,7 @@ pub mod treasury_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
     #[ethcall(name = "proposalNonce", abi = "proposalNonce()")]
     pub struct ProposalNonceCall;
@@ -5645,7 +5658,7 @@ pub mod treasury_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
     #[ethcall(
         name = "rescueTokens",
@@ -5668,7 +5681,7 @@ pub mod treasury_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
     #[ethcall(name = "setHandler", abi = "setHandler(address,uint32)")]
     pub struct SetHandlerCall {
@@ -5684,7 +5697,7 @@ pub mod treasury_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
     pub enum TreasuryContractCalls {
         GetProposalNonce(GetProposalNonceCall),
@@ -5695,24 +5708,33 @@ pub mod treasury_contract {
     impl ::ethers::core::abi::AbiDecode for TreasuryContractCalls {
         fn decode(
             data: impl AsRef<[u8]>,
-        ) -> ::core::result::Result<Self, ::ethers::core::abi::AbiError> {
+        ) -> ::core::result::Result<Self, ::ethers::core::abi::AbiError>
+        {
             let data = data.as_ref();
-            if let Ok(decoded)
-                = <GetProposalNonceCall as ::ethers::core::abi::AbiDecode>::decode(
+            if let Ok(decoded) =
+                <GetProposalNonceCall as ::ethers::core::abi::AbiDecode>::decode(
                     data,
-                ) {
+                )
+            {
                 return Ok(Self::GetProposalNonce(decoded));
             }
-            if let Ok(decoded)
-                = <ProposalNonceCall as ::ethers::core::abi::AbiDecode>::decode(data) {
+            if let Ok(decoded) =
+                <ProposalNonceCall as ::ethers::core::abi::AbiDecode>::decode(
+                    data,
+                )
+            {
                 return Ok(Self::ProposalNonce(decoded));
             }
-            if let Ok(decoded)
-                = <RescueTokensCall as ::ethers::core::abi::AbiDecode>::decode(data) {
+            if let Ok(decoded) =
+                <RescueTokensCall as ::ethers::core::abi::AbiDecode>::decode(
+                    data,
+                )
+            {
                 return Ok(Self::RescueTokens(decoded));
             }
-            if let Ok(decoded)
-                = <SetHandlerCall as ::ethers::core::abi::AbiDecode>::decode(data) {
+            if let Ok(decoded) =
+                <SetHandlerCall as ::ethers::core::abi::AbiDecode>::decode(data)
+            {
                 return Ok(Self::SetHandler(decoded));
             }
             Err(::ethers::core::abi::Error::InvalidData.into())
@@ -5737,12 +5759,23 @@ pub mod treasury_contract {
         }
     }
     impl ::core::fmt::Display for TreasuryContractCalls {
-        fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
+        fn fmt(
+            &self,
+            f: &mut ::core::fmt::Formatter<'_>,
+        ) -> ::core::fmt::Result {
             match self {
-                Self::GetProposalNonce(element) => ::core::fmt::Display::fmt(element, f),
-                Self::ProposalNonce(element) => ::core::fmt::Display::fmt(element, f),
-                Self::RescueTokens(element) => ::core::fmt::Display::fmt(element, f),
-                Self::SetHandler(element) => ::core::fmt::Display::fmt(element, f),
+                Self::GetProposalNonce(element) => {
+                    ::core::fmt::Display::fmt(element, f)
+                }
+                Self::ProposalNonce(element) => {
+                    ::core::fmt::Display::fmt(element, f)
+                }
+                Self::RescueTokens(element) => {
+                    ::core::fmt::Display::fmt(element, f)
+                }
+                Self::SetHandler(element) => {
+                    ::core::fmt::Display::fmt(element, f)
+                }
             }
         }
     }
@@ -5777,7 +5810,7 @@ pub mod treasury_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
     pub struct GetProposalNonceReturn(pub ::ethers::core::types::U256);
     ///Container type for all return fields from the `proposalNonce` function with signature `proposalNonce()` and selector `0xcc3c74a1`
@@ -5791,7 +5824,7 @@ pub mod treasury_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
     pub struct ProposalNonceReturn(pub ::ethers::core::types::U256);
 }
