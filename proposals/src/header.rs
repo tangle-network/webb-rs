@@ -33,7 +33,7 @@ pub struct FunctionSignature(pub [u8; 4]);
         scale_codec::MaxEncodedLen
     )
 )]
-#[cfg_attr(feature = "std", derive(Serialize, Deserialize))]
+#[derive(Serialize, Deserialize)]
 pub struct ResourceId(pub [u8; 32]);
 
 /// Proposal Target Chain and its type (6 bytes).
