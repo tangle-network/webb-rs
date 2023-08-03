@@ -7,7 +7,7 @@ pub use signature_bridge_contract::*;
     clippy::upper_case_acronyms,
     clippy::type_complexity,
     dead_code,
-    non_camel_case_types
+    non_camel_case_types,
 )]
 pub mod signature_bridge_contract {
     #[rustfmt::skip]
@@ -11958,8 +11958,9 @@ pub mod signature_bridge_contract {
         51,
     ];
     ///The bytecode of the contract.
-    pub static SIGNATUREBRIDGECONTRACT_BYTECODE: ::ethers::core::types::Bytes =
-        ::ethers::core::types::Bytes::from_static(__BYTECODE);
+    pub static SIGNATUREBRIDGECONTRACT_BYTECODE: ::ethers::core::types::Bytes = ::ethers::core::types::Bytes::from_static(
+        __BYTECODE,
+    );
     #[rustfmt::skip]
     const __DEPLOYED_BYTECODE: &[u8] = &[
         96,
@@ -23584,9 +23585,9 @@ pub mod signature_bridge_contract {
         51,
     ];
     ///The deployed bytecode of the contract.
-    pub static SIGNATUREBRIDGECONTRACT_DEPLOYED_BYTECODE:
-        ::ethers::core::types::Bytes =
-        ::ethers::core::types::Bytes::from_static(__DEPLOYED_BYTECODE);
+    pub static SIGNATUREBRIDGECONTRACT_DEPLOYED_BYTECODE: ::ethers::core::types::Bytes = ::ethers::core::types::Bytes::from_static(
+        __DEPLOYED_BYTECODE,
+    );
     pub struct SignatureBridgeContract<M>(::ethers::contract::Contract<M>);
     impl<M> ::core::clone::Clone for SignatureBridgeContract<M> {
         fn clone(&self) -> Self {
@@ -23605,10 +23606,7 @@ pub mod signature_bridge_contract {
         }
     }
     impl<M> ::core::fmt::Debug for SignatureBridgeContract<M> {
-        fn fmt(
-            &self,
-            f: &mut ::core::fmt::Formatter<'_>,
-        ) -> ::core::fmt::Result {
+        fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
             f.debug_tuple(stringify!(SignatureBridgeContract))
                 .field(&self.address())
                 .finish()
@@ -23621,11 +23619,13 @@ pub mod signature_bridge_contract {
             address: T,
             client: ::std::sync::Arc<M>,
         ) -> Self {
-            Self(::ethers::contract::Contract::new(
-                address.into(),
-                SIGNATUREBRIDGECONTRACT_ABI.clone(),
-                client,
-            ))
+            Self(
+                ::ethers::contract::Contract::new(
+                    address.into(),
+                    SIGNATUREBRIDGECONTRACT_ABI.clone(),
+                    client,
+                ),
+            )
         }
         /// Constructs the general purpose `Deployer` instance based on the provided constructor arguments and sends it.
         /// Returns a new instance of a deployer that returns an instance of this contract after sending the transaction
@@ -23771,10 +23771,7 @@ pub mod signature_bridge_contract {
         ///Calls the contract's `currentVotingPeriod` (0x3a049e02) function
         pub fn current_voting_period(
             &self,
-        ) -> ::ethers::contract::builders::ContractCall<
-            M,
-            ::ethers::core::types::U256,
-        > {
+        ) -> ::ethers::contract::builders::ContractCall<M, ::ethers::core::types::U256> {
             self.0
                 .method_hash([58, 4, 158, 2], ())
                 .expect("method not found (this should never happen)")
@@ -23802,10 +23799,7 @@ pub mod signature_bridge_contract {
         ///Calls the contract's `getChainId` (0x3408e470) function
         pub fn get_chain_id(
             &self,
-        ) -> ::ethers::contract::builders::ContractCall<
-            M,
-            ::ethers::core::types::U256,
-        > {
+        ) -> ::ethers::contract::builders::ContractCall<M, ::ethers::core::types::U256> {
             self.0
                 .method_hash([52, 8, 228, 112], ())
                 .expect("method not found (this should never happen)")
@@ -23821,10 +23815,7 @@ pub mod signature_bridge_contract {
         ///Calls the contract's `getProposalNonce` (0x0b27fb9a) function
         pub fn get_proposal_nonce(
             &self,
-        ) -> ::ethers::contract::builders::ContractCall<
-            M,
-            ::ethers::core::types::U256,
-        > {
+        ) -> ::ethers::contract::builders::ContractCall<M, ::ethers::core::types::U256> {
             self.0
                 .method_hash([11, 39, 251, 154], ())
                 .expect("method not found (this should never happen)")
@@ -23889,10 +23880,7 @@ pub mod signature_bridge_contract {
         ///Calls the contract's `lastGovernorUpdateTime` (0x9e09583c) function
         pub fn last_governor_update_time(
             &self,
-        ) -> ::ethers::contract::builders::ContractCall<
-            M,
-            ::ethers::core::types::U256,
-        > {
+        ) -> ::ethers::contract::builders::ContractCall<M, ::ethers::core::types::U256> {
             self.0
                 .method_hash([158, 9, 88, 60], ())
                 .expect("method not found (this should never happen)")
@@ -23909,10 +23897,7 @@ pub mod signature_bridge_contract {
         ///Calls the contract's `proposalNonce` (0xcc3c74a1) function
         pub fn proposal_nonce(
             &self,
-        ) -> ::ethers::contract::builders::ContractCall<
-            M,
-            ::ethers::core::types::U256,
-        > {
+        ) -> ::ethers::contract::builders::ContractCall<M, ::ethers::core::types::U256> {
             self.0
                 .method_hash([204, 60, 116, 161], ())
                 .expect("method not found (this should never happen)")
@@ -23949,10 +23934,7 @@ pub mod signature_bridge_contract {
         ///Calls the contract's `sessionLengthMultiplier` (0xbdfadc84) function
         pub fn session_length_multiplier(
             &self,
-        ) -> ::ethers::contract::builders::ContractCall<
-            M,
-            ::ethers::core::types::U256,
-        > {
+        ) -> ::ethers::contract::builders::ContractCall<M, ::ethers::core::types::U256> {
             self.0
                 .method_hash([189, 250, 220, 132], ())
                 .expect("method not found (this should never happen)")
@@ -24011,9 +23993,7 @@ pub mod signature_bridge_contract {
                 .expect("method not found (this should never happen)")
         }
         ///Calls the contract's `voterCount` (0x42169e48) function
-        pub fn voter_count(
-            &self,
-        ) -> ::ethers::contract::builders::ContractCall<M, u32> {
+        pub fn voter_count(&self) -> ::ethers::contract::builders::ContractCall<M, u32> {
             self.0
                 .method_hash([66, 22, 158, 72], ())
                 .expect("method not found (this should never happen)")
@@ -24054,13 +24034,11 @@ pub mod signature_bridge_contract {
             M,
             SignatureBridgeContractEvents,
         > {
-            self.0
-                .event_with_filter(::core::default::Default::default())
+            self.0.event_with_filter(::core::default::Default::default())
         }
     }
-    impl<M: ::ethers::providers::Middleware>
-        From<::ethers::contract::Contract<M>> for SignatureBridgeContract<M>
-    {
+    impl<M: ::ethers::providers::Middleware> From<::ethers::contract::Contract<M>>
+    for SignatureBridgeContract<M> {
         fn from(contract: ::ethers::contract::Contract<M>) -> Self {
             Self::new(contract.address(), contract.client())
         }
@@ -24075,7 +24053,7 @@ pub mod signature_bridge_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash,
+        Hash
     )]
     #[ethevent(
         name = "GovernanceOwnershipTransferred",
@@ -24098,7 +24076,7 @@ pub mod signature_bridge_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash,
+        Hash
     )]
     #[ethevent(name = "RecoveredAddress", abi = "RecoveredAddress(address)")]
     pub struct RecoveredAddressFilter {
@@ -24114,21 +24092,17 @@ pub mod signature_bridge_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash,
+        Hash
     )]
     pub enum SignatureBridgeContractEvents {
-        GovernanceOwnershipTransferredFilter(
-            GovernanceOwnershipTransferredFilter,
-        ),
+        GovernanceOwnershipTransferredFilter(GovernanceOwnershipTransferredFilter),
         RecoveredAddressFilter(RecoveredAddressFilter),
     }
     impl ::ethers::contract::EthLogDecode for SignatureBridgeContractEvents {
         fn decode_log(
             log: &::ethers::core::abi::RawLog,
         ) -> ::core::result::Result<Self, ::ethers::core::abi::Error> {
-            if let Ok(decoded) =
-                GovernanceOwnershipTransferredFilter::decode_log(log)
-            {
+            if let Ok(decoded) = GovernanceOwnershipTransferredFilter::decode_log(log) {
                 return Ok(
                     SignatureBridgeContractEvents::GovernanceOwnershipTransferredFilter(
                         decoded,
@@ -24137,19 +24111,14 @@ pub mod signature_bridge_contract {
             }
             if let Ok(decoded) = RecoveredAddressFilter::decode_log(log) {
                 return Ok(
-                    SignatureBridgeContractEvents::RecoveredAddressFilter(
-                        decoded,
-                    ),
+                    SignatureBridgeContractEvents::RecoveredAddressFilter(decoded),
                 );
             }
             Err(::ethers::core::abi::Error::InvalidData)
         }
     }
     impl ::core::fmt::Display for SignatureBridgeContractEvents {
-        fn fmt(
-            &self,
-            f: &mut ::core::fmt::Formatter<'_>,
-        ) -> ::core::fmt::Result {
+        fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
             match self {
                 Self::GovernanceOwnershipTransferredFilter(element) => {
                     ::core::fmt::Display::fmt(element, f)
@@ -24161,15 +24130,13 @@ pub mod signature_bridge_contract {
         }
     }
     impl ::core::convert::From<GovernanceOwnershipTransferredFilter>
-        for SignatureBridgeContractEvents
-    {
+    for SignatureBridgeContractEvents {
         fn from(value: GovernanceOwnershipTransferredFilter) -> Self {
             Self::GovernanceOwnershipTransferredFilter(value)
         }
     }
     impl ::core::convert::From<RecoveredAddressFilter>
-        for SignatureBridgeContractEvents
-    {
+    for SignatureBridgeContractEvents {
         fn from(value: RecoveredAddressFilter) -> Self {
             Self::RecoveredAddressFilter(value)
         }
@@ -24185,7 +24152,7 @@ pub mod signature_bridge_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash,
+        Hash
     )]
     #[ethcall(name = "EVM_CHAIN_ID_TYPE", abi = "EVM_CHAIN_ID_TYPE()")]
     pub struct EvmChainIdTypeCall;
@@ -24200,7 +24167,7 @@ pub mod signature_bridge_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash,
+        Hash
     )]
     #[ethcall(
         name = "_resourceIdToHandlerAddress",
@@ -24218,7 +24185,7 @@ pub mod signature_bridge_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash,
+        Hash
     )]
     #[ethcall(
         name = "adminSetResourceWithSignature",
@@ -24243,7 +24210,7 @@ pub mod signature_bridge_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash,
+        Hash
     )]
     #[ethcall(
         name = "averageSessionLengthInMillisecs",
@@ -24261,7 +24228,7 @@ pub mod signature_bridge_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash,
+        Hash
     )]
     #[ethcall(
         name = "batchAdminSetResourceWithSignature",
@@ -24287,7 +24254,7 @@ pub mod signature_bridge_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash,
+        Hash
     )]
     #[ethcall(
         name = "batchExecuteProposalsWithSignature",
@@ -24308,12 +24275,9 @@ pub mod signature_bridge_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash,
+        Hash
     )]
-    #[ethcall(
-        name = "createVote",
-        abi = "createVote(uint32,address,bytes32[])"
-    )]
+    #[ethcall(name = "createVote", abi = "createVote(uint32,address,bytes32[])")]
     pub struct CreateVoteCall {
         pub leaf_index: u32,
         pub proposed_governor: ::ethers::core::types::Address,
@@ -24330,7 +24294,7 @@ pub mod signature_bridge_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash,
+        Hash
     )]
     #[ethcall(name = "currentVotingPeriod", abi = "currentVotingPeriod()")]
     pub struct CurrentVotingPeriodCall;
@@ -24345,7 +24309,7 @@ pub mod signature_bridge_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash,
+        Hash
     )]
     #[ethcall(
         name = "executeManyProposalsWithSignature",
@@ -24366,7 +24330,7 @@ pub mod signature_bridge_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash,
+        Hash
     )]
     #[ethcall(
         name = "executeProposalWithSignature",
@@ -24387,7 +24351,7 @@ pub mod signature_bridge_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash,
+        Hash
     )]
     #[ethcall(name = "getChainId", abi = "getChainId()")]
     pub struct GetChainIdCall;
@@ -24402,7 +24366,7 @@ pub mod signature_bridge_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash,
+        Hash
     )]
     #[ethcall(name = "getChainIdType", abi = "getChainIdType()")]
     pub struct GetChainIdTypeCall;
@@ -24417,7 +24381,7 @@ pub mod signature_bridge_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash,
+        Hash
     )]
     #[ethcall(name = "getProposalNonce", abi = "getProposalNonce()")]
     pub struct GetProposalNonceCall;
@@ -24432,7 +24396,7 @@ pub mod signature_bridge_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash,
+        Hash
     )]
     #[ethcall(name = "governor", abi = "governor()")]
     pub struct GovernorCall;
@@ -24447,7 +24411,7 @@ pub mod signature_bridge_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash,
+        Hash
     )]
     #[ethcall(
         name = "isCorrectExecutionChain",
@@ -24467,7 +24431,7 @@ pub mod signature_bridge_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash,
+        Hash
     )]
     #[ethcall(
         name = "isCorrectExecutionContext",
@@ -24487,7 +24451,7 @@ pub mod signature_bridge_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash,
+        Hash
     )]
     #[ethcall(name = "isGovernor", abi = "isGovernor()")]
     pub struct IsGovernorCall;
@@ -24502,7 +24466,7 @@ pub mod signature_bridge_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash,
+        Hash
     )]
     #[ethcall(
         name = "isSignatureFromGovernor",
@@ -24523,7 +24487,7 @@ pub mod signature_bridge_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash,
+        Hash
     )]
     #[ethcall(
         name = "isSignatureFromGovernorPrehashed",
@@ -24544,12 +24508,9 @@ pub mod signature_bridge_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash,
+        Hash
     )]
-    #[ethcall(
-        name = "lastGovernorUpdateTime",
-        abi = "lastGovernorUpdateTime()"
-    )]
+    #[ethcall(name = "lastGovernorUpdateTime", abi = "lastGovernorUpdateTime()")]
     pub struct LastGovernorUpdateTimeCall;
     ///Container type for all input parameters for the `parseChainIdFromResourceId` function with signature `parseChainIdFromResourceId(bytes32)` and selector `0xc2230d6e`
     #[derive(
@@ -24562,7 +24523,7 @@ pub mod signature_bridge_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash,
+        Hash
     )]
     #[ethcall(
         name = "parseChainIdFromResourceId",
@@ -24582,7 +24543,7 @@ pub mod signature_bridge_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash,
+        Hash
     )]
     #[ethcall(name = "proposalNonce", abi = "proposalNonce()")]
     pub struct ProposalNonceCall;
@@ -24597,7 +24558,7 @@ pub mod signature_bridge_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash,
+        Hash
     )]
     #[ethcall(name = "recover", abi = "recover(bytes,bytes)")]
     pub struct RecoverCall {
@@ -24615,7 +24576,7 @@ pub mod signature_bridge_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash,
+        Hash
     )]
     #[ethcall(name = "refreshNonce", abi = "refreshNonce()")]
     pub struct RefreshNonceCall;
@@ -24630,7 +24591,7 @@ pub mod signature_bridge_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash,
+        Hash
     )]
     #[ethcall(name = "renounceOwnership", abi = "renounceOwnership()")]
     pub struct RenounceOwnershipCall;
@@ -24645,12 +24606,9 @@ pub mod signature_bridge_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash,
+        Hash
     )]
-    #[ethcall(
-        name = "sessionLengthMultiplier",
-        abi = "sessionLengthMultiplier()"
-    )]
+    #[ethcall(name = "sessionLengthMultiplier", abi = "sessionLengthMultiplier()")]
     pub struct SessionLengthMultiplierCall;
     ///Container type for all input parameters for the `transferOwnership` function with signature `transferOwnership(address,uint32)` and selector `0xa6e94c91`
     #[derive(
@@ -24663,12 +24621,9 @@ pub mod signature_bridge_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash,
+        Hash
     )]
-    #[ethcall(
-        name = "transferOwnership",
-        abi = "transferOwnership(address,uint32)"
-    )]
+    #[ethcall(name = "transferOwnership", abi = "transferOwnership(address,uint32)")]
     pub struct TransferOwnershipCall {
         pub new_owner: ::ethers::core::types::Address,
         pub nonce: u32,
@@ -24684,7 +24639,7 @@ pub mod signature_bridge_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash,
+        Hash
     )]
     #[ethcall(
         name = "transferOwnershipWithSignature",
@@ -24709,7 +24664,7 @@ pub mod signature_bridge_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash,
+        Hash
     )]
     #[ethcall(
         name = "voteInFavorForceSetGovernor",
@@ -24729,7 +24684,7 @@ pub mod signature_bridge_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash,
+        Hash
     )]
     #[ethcall(
         name = "voteInFavorForceSetGovernorWithSig",
@@ -24750,7 +24705,7 @@ pub mod signature_bridge_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash,
+        Hash
     )]
     #[ethcall(name = "voterCount", abi = "voterCount()")]
     pub struct VoterCountCall;
@@ -24765,7 +24720,7 @@ pub mod signature_bridge_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash,
+        Hash
     )]
     #[ethcall(name = "voterMerkleRoot", abi = "voterMerkleRoot()")]
     pub struct VoterMerkleRootCall;
@@ -24778,24 +24733,18 @@ pub mod signature_bridge_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash,
+        Hash
     )]
     pub enum SignatureBridgeContractCalls {
         EvmChainIdType(EvmChainIdTypeCall),
         ResourceIdToHandlerAddress(ResourceIdToHandlerAddressCall),
         AdminSetResourceWithSignature(AdminSetResourceWithSignatureCall),
         AverageSessionLengthInMillisecs(AverageSessionLengthInMillisecsCall),
-        BatchAdminSetResourceWithSignature(
-            BatchAdminSetResourceWithSignatureCall,
-        ),
-        BatchExecuteProposalsWithSignature(
-            BatchExecuteProposalsWithSignatureCall,
-        ),
+        BatchAdminSetResourceWithSignature(BatchAdminSetResourceWithSignatureCall),
+        BatchExecuteProposalsWithSignature(BatchExecuteProposalsWithSignatureCall),
         CreateVote(CreateVoteCall),
         CurrentVotingPeriod(CurrentVotingPeriodCall),
-        ExecuteManyProposalsWithSignature(
-            ExecuteManyProposalsWithSignatureCall,
-        ),
+        ExecuteManyProposalsWithSignature(ExecuteManyProposalsWithSignatureCall),
         ExecuteProposalWithSignature(ExecuteProposalWithSignatureCall),
         GetChainId(GetChainIdCall),
         GetChainIdType(GetChainIdTypeCall),
@@ -24816,23 +24765,17 @@ pub mod signature_bridge_contract {
         TransferOwnership(TransferOwnershipCall),
         TransferOwnershipWithSignature(TransferOwnershipWithSignatureCall),
         VoteInFavorForceSetGovernor(VoteInFavorForceSetGovernorCall),
-        VoteInFavorForceSetGovernorWithSig(
-            VoteInFavorForceSetGovernorWithSigCall,
-        ),
+        VoteInFavorForceSetGovernorWithSig(VoteInFavorForceSetGovernorWithSigCall),
         VoterCount(VoterCountCall),
         VoterMerkleRoot(VoterMerkleRootCall),
     }
     impl ::ethers::core::abi::AbiDecode for SignatureBridgeContractCalls {
         fn decode(
             data: impl AsRef<[u8]>,
-        ) -> ::core::result::Result<Self, ::ethers::core::abi::AbiError>
-        {
+        ) -> ::core::result::Result<Self, ::ethers::core::abi::AbiError> {
             let data = data.as_ref();
-            if let Ok(decoded) =
-                <EvmChainIdTypeCall as ::ethers::core::abi::AbiDecode>::decode(
-                    data,
-                )
-            {
+            if let Ok(decoded)
+                = <EvmChainIdTypeCall as ::ethers::core::abi::AbiDecode>::decode(data) {
                 return Ok(Self::EvmChainIdType(decoded));
             }
             if let Ok(decoded)
@@ -24865,9 +24808,8 @@ pub mod signature_bridge_contract {
                 ) {
                 return Ok(Self::BatchExecuteProposalsWithSignature(decoded));
             }
-            if let Ok(decoded) =
-                <CreateVoteCall as ::ethers::core::abi::AbiDecode>::decode(data)
-            {
+            if let Ok(decoded)
+                = <CreateVoteCall as ::ethers::core::abi::AbiDecode>::decode(data) {
                 return Ok(Self::CreateVote(decoded));
             }
             if let Ok(decoded)
@@ -24888,28 +24830,22 @@ pub mod signature_bridge_contract {
                 ) {
                 return Ok(Self::ExecuteProposalWithSignature(decoded));
             }
-            if let Ok(decoded) =
-                <GetChainIdCall as ::ethers::core::abi::AbiDecode>::decode(data)
-            {
+            if let Ok(decoded)
+                = <GetChainIdCall as ::ethers::core::abi::AbiDecode>::decode(data) {
                 return Ok(Self::GetChainId(decoded));
             }
-            if let Ok(decoded) =
-                <GetChainIdTypeCall as ::ethers::core::abi::AbiDecode>::decode(
-                    data,
-                )
-            {
+            if let Ok(decoded)
+                = <GetChainIdTypeCall as ::ethers::core::abi::AbiDecode>::decode(data) {
                 return Ok(Self::GetChainIdType(decoded));
             }
-            if let Ok(decoded) =
-                <GetProposalNonceCall as ::ethers::core::abi::AbiDecode>::decode(
+            if let Ok(decoded)
+                = <GetProposalNonceCall as ::ethers::core::abi::AbiDecode>::decode(
                     data,
-                )
-            {
+                ) {
                 return Ok(Self::GetProposalNonce(decoded));
             }
-            if let Ok(decoded) =
-                <GovernorCall as ::ethers::core::abi::AbiDecode>::decode(data)
-            {
+            if let Ok(decoded)
+                = <GovernorCall as ::ethers::core::abi::AbiDecode>::decode(data) {
                 return Ok(Self::Governor(decoded));
             }
             if let Ok(decoded)
@@ -24924,9 +24860,8 @@ pub mod signature_bridge_contract {
                 ) {
                 return Ok(Self::IsCorrectExecutionContext(decoded));
             }
-            if let Ok(decoded) =
-                <IsGovernorCall as ::ethers::core::abi::AbiDecode>::decode(data)
-            {
+            if let Ok(decoded)
+                = <IsGovernorCall as ::ethers::core::abi::AbiDecode>::decode(data) {
                 return Ok(Self::IsGovernor(decoded));
             }
             if let Ok(decoded)
@@ -24953,23 +24888,16 @@ pub mod signature_bridge_contract {
                 ) {
                 return Ok(Self::ParseChainIdFromResourceId(decoded));
             }
-            if let Ok(decoded) =
-                <ProposalNonceCall as ::ethers::core::abi::AbiDecode>::decode(
-                    data,
-                )
-            {
+            if let Ok(decoded)
+                = <ProposalNonceCall as ::ethers::core::abi::AbiDecode>::decode(data) {
                 return Ok(Self::ProposalNonce(decoded));
             }
-            if let Ok(decoded) =
-                <RecoverCall as ::ethers::core::abi::AbiDecode>::decode(data)
-            {
+            if let Ok(decoded)
+                = <RecoverCall as ::ethers::core::abi::AbiDecode>::decode(data) {
                 return Ok(Self::Recover(decoded));
             }
-            if let Ok(decoded) =
-                <RefreshNonceCall as ::ethers::core::abi::AbiDecode>::decode(
-                    data,
-                )
-            {
+            if let Ok(decoded)
+                = <RefreshNonceCall as ::ethers::core::abi::AbiDecode>::decode(data) {
                 return Ok(Self::RefreshNonce(decoded));
             }
             if let Ok(decoded)
@@ -25008,16 +24936,12 @@ pub mod signature_bridge_contract {
                 ) {
                 return Ok(Self::VoteInFavorForceSetGovernorWithSig(decoded));
             }
-            if let Ok(decoded) =
-                <VoterCountCall as ::ethers::core::abi::AbiDecode>::decode(data)
-            {
+            if let Ok(decoded)
+                = <VoterCountCall as ::ethers::core::abi::AbiDecode>::decode(data) {
                 return Ok(Self::VoterCount(decoded));
             }
-            if let Ok(decoded) =
-                <VoterMerkleRootCall as ::ethers::core::abi::AbiDecode>::decode(
-                    data,
-                )
-            {
+            if let Ok(decoded)
+                = <VoterMerkleRootCall as ::ethers::core::abi::AbiDecode>::decode(data) {
                 return Ok(Self::VoterMerkleRoot(decoded));
             }
             Err(::ethers::core::abi::Error::InvalidData.into())
@@ -25092,9 +25016,7 @@ pub mod signature_bridge_contract {
                 Self::ProposalNonce(element) => {
                     ::ethers::core::abi::AbiEncode::encode(element)
                 }
-                Self::Recover(element) => {
-                    ::ethers::core::abi::AbiEncode::encode(element)
-                }
+                Self::Recover(element) => ::ethers::core::abi::AbiEncode::encode(element),
                 Self::RefreshNonce(element) => {
                     ::ethers::core::abi::AbiEncode::encode(element)
                 }
@@ -25126,14 +25048,9 @@ pub mod signature_bridge_contract {
         }
     }
     impl ::core::fmt::Display for SignatureBridgeContractCalls {
-        fn fmt(
-            &self,
-            f: &mut ::core::fmt::Formatter<'_>,
-        ) -> ::core::fmt::Result {
+        fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
             match self {
-                Self::EvmChainIdType(element) => {
-                    ::core::fmt::Display::fmt(element, f)
-                }
+                Self::EvmChainIdType(element) => ::core::fmt::Display::fmt(element, f),
                 Self::ResourceIdToHandlerAddress(element) => {
                     ::core::fmt::Display::fmt(element, f)
                 }
@@ -25149,9 +25066,7 @@ pub mod signature_bridge_contract {
                 Self::BatchExecuteProposalsWithSignature(element) => {
                     ::core::fmt::Display::fmt(element, f)
                 }
-                Self::CreateVote(element) => {
-                    ::core::fmt::Display::fmt(element, f)
-                }
+                Self::CreateVote(element) => ::core::fmt::Display::fmt(element, f),
                 Self::CurrentVotingPeriod(element) => {
                     ::core::fmt::Display::fmt(element, f)
                 }
@@ -25161,27 +25076,17 @@ pub mod signature_bridge_contract {
                 Self::ExecuteProposalWithSignature(element) => {
                     ::core::fmt::Display::fmt(element, f)
                 }
-                Self::GetChainId(element) => {
-                    ::core::fmt::Display::fmt(element, f)
-                }
-                Self::GetChainIdType(element) => {
-                    ::core::fmt::Display::fmt(element, f)
-                }
-                Self::GetProposalNonce(element) => {
-                    ::core::fmt::Display::fmt(element, f)
-                }
-                Self::Governor(element) => {
-                    ::core::fmt::Display::fmt(element, f)
-                }
+                Self::GetChainId(element) => ::core::fmt::Display::fmt(element, f),
+                Self::GetChainIdType(element) => ::core::fmt::Display::fmt(element, f),
+                Self::GetProposalNonce(element) => ::core::fmt::Display::fmt(element, f),
+                Self::Governor(element) => ::core::fmt::Display::fmt(element, f),
                 Self::IsCorrectExecutionChain(element) => {
                     ::core::fmt::Display::fmt(element, f)
                 }
                 Self::IsCorrectExecutionContext(element) => {
                     ::core::fmt::Display::fmt(element, f)
                 }
-                Self::IsGovernor(element) => {
-                    ::core::fmt::Display::fmt(element, f)
-                }
+                Self::IsGovernor(element) => ::core::fmt::Display::fmt(element, f),
                 Self::IsSignatureFromGovernor(element) => {
                     ::core::fmt::Display::fmt(element, f)
                 }
@@ -25194,22 +25099,14 @@ pub mod signature_bridge_contract {
                 Self::ParseChainIdFromResourceId(element) => {
                     ::core::fmt::Display::fmt(element, f)
                 }
-                Self::ProposalNonce(element) => {
-                    ::core::fmt::Display::fmt(element, f)
-                }
+                Self::ProposalNonce(element) => ::core::fmt::Display::fmt(element, f),
                 Self::Recover(element) => ::core::fmt::Display::fmt(element, f),
-                Self::RefreshNonce(element) => {
-                    ::core::fmt::Display::fmt(element, f)
-                }
-                Self::RenounceOwnership(element) => {
-                    ::core::fmt::Display::fmt(element, f)
-                }
+                Self::RefreshNonce(element) => ::core::fmt::Display::fmt(element, f),
+                Self::RenounceOwnership(element) => ::core::fmt::Display::fmt(element, f),
                 Self::SessionLengthMultiplier(element) => {
                     ::core::fmt::Display::fmt(element, f)
                 }
-                Self::TransferOwnership(element) => {
-                    ::core::fmt::Display::fmt(element, f)
-                }
+                Self::TransferOwnership(element) => ::core::fmt::Display::fmt(element, f),
                 Self::TransferOwnershipWithSignature(element) => {
                     ::core::fmt::Display::fmt(element, f)
                 }
@@ -25219,53 +25116,42 @@ pub mod signature_bridge_contract {
                 Self::VoteInFavorForceSetGovernorWithSig(element) => {
                     ::core::fmt::Display::fmt(element, f)
                 }
-                Self::VoterCount(element) => {
-                    ::core::fmt::Display::fmt(element, f)
-                }
-                Self::VoterMerkleRoot(element) => {
-                    ::core::fmt::Display::fmt(element, f)
-                }
+                Self::VoterCount(element) => ::core::fmt::Display::fmt(element, f),
+                Self::VoterMerkleRoot(element) => ::core::fmt::Display::fmt(element, f),
             }
         }
     }
-    impl ::core::convert::From<EvmChainIdTypeCall>
-        for SignatureBridgeContractCalls
-    {
+    impl ::core::convert::From<EvmChainIdTypeCall> for SignatureBridgeContractCalls {
         fn from(value: EvmChainIdTypeCall) -> Self {
             Self::EvmChainIdType(value)
         }
     }
     impl ::core::convert::From<ResourceIdToHandlerAddressCall>
-        for SignatureBridgeContractCalls
-    {
+    for SignatureBridgeContractCalls {
         fn from(value: ResourceIdToHandlerAddressCall) -> Self {
             Self::ResourceIdToHandlerAddress(value)
         }
     }
     impl ::core::convert::From<AdminSetResourceWithSignatureCall>
-        for SignatureBridgeContractCalls
-    {
+    for SignatureBridgeContractCalls {
         fn from(value: AdminSetResourceWithSignatureCall) -> Self {
             Self::AdminSetResourceWithSignature(value)
         }
     }
     impl ::core::convert::From<AverageSessionLengthInMillisecsCall>
-        for SignatureBridgeContractCalls
-    {
+    for SignatureBridgeContractCalls {
         fn from(value: AverageSessionLengthInMillisecsCall) -> Self {
             Self::AverageSessionLengthInMillisecs(value)
         }
     }
     impl ::core::convert::From<BatchAdminSetResourceWithSignatureCall>
-        for SignatureBridgeContractCalls
-    {
+    for SignatureBridgeContractCalls {
         fn from(value: BatchAdminSetResourceWithSignatureCall) -> Self {
             Self::BatchAdminSetResourceWithSignature(value)
         }
     }
     impl ::core::convert::From<BatchExecuteProposalsWithSignatureCall>
-        for SignatureBridgeContractCalls
-    {
+    for SignatureBridgeContractCalls {
         fn from(value: BatchExecuteProposalsWithSignatureCall) -> Self {
             Self::BatchExecuteProposalsWithSignature(value)
         }
@@ -25276,22 +25162,19 @@ pub mod signature_bridge_contract {
         }
     }
     impl ::core::convert::From<CurrentVotingPeriodCall>
-        for SignatureBridgeContractCalls
-    {
+    for SignatureBridgeContractCalls {
         fn from(value: CurrentVotingPeriodCall) -> Self {
             Self::CurrentVotingPeriod(value)
         }
     }
     impl ::core::convert::From<ExecuteManyProposalsWithSignatureCall>
-        for SignatureBridgeContractCalls
-    {
+    for SignatureBridgeContractCalls {
         fn from(value: ExecuteManyProposalsWithSignatureCall) -> Self {
             Self::ExecuteManyProposalsWithSignature(value)
         }
     }
     impl ::core::convert::From<ExecuteProposalWithSignatureCall>
-        for SignatureBridgeContractCalls
-    {
+    for SignatureBridgeContractCalls {
         fn from(value: ExecuteProposalWithSignatureCall) -> Self {
             Self::ExecuteProposalWithSignature(value)
         }
@@ -25301,16 +25184,12 @@ pub mod signature_bridge_contract {
             Self::GetChainId(value)
         }
     }
-    impl ::core::convert::From<GetChainIdTypeCall>
-        for SignatureBridgeContractCalls
-    {
+    impl ::core::convert::From<GetChainIdTypeCall> for SignatureBridgeContractCalls {
         fn from(value: GetChainIdTypeCall) -> Self {
             Self::GetChainIdType(value)
         }
     }
-    impl ::core::convert::From<GetProposalNonceCall>
-        for SignatureBridgeContractCalls
-    {
+    impl ::core::convert::From<GetProposalNonceCall> for SignatureBridgeContractCalls {
         fn from(value: GetProposalNonceCall) -> Self {
             Self::GetProposalNonce(value)
         }
@@ -25321,15 +25200,13 @@ pub mod signature_bridge_contract {
         }
     }
     impl ::core::convert::From<IsCorrectExecutionChainCall>
-        for SignatureBridgeContractCalls
-    {
+    for SignatureBridgeContractCalls {
         fn from(value: IsCorrectExecutionChainCall) -> Self {
             Self::IsCorrectExecutionChain(value)
         }
     }
     impl ::core::convert::From<IsCorrectExecutionContextCall>
-        for SignatureBridgeContractCalls
-    {
+    for SignatureBridgeContractCalls {
         fn from(value: IsCorrectExecutionContextCall) -> Self {
             Self::IsCorrectExecutionContext(value)
         }
@@ -25340,29 +25217,25 @@ pub mod signature_bridge_contract {
         }
     }
     impl ::core::convert::From<IsSignatureFromGovernorCall>
-        for SignatureBridgeContractCalls
-    {
+    for SignatureBridgeContractCalls {
         fn from(value: IsSignatureFromGovernorCall) -> Self {
             Self::IsSignatureFromGovernor(value)
         }
     }
     impl ::core::convert::From<IsSignatureFromGovernorPrehashedCall>
-        for SignatureBridgeContractCalls
-    {
+    for SignatureBridgeContractCalls {
         fn from(value: IsSignatureFromGovernorPrehashedCall) -> Self {
             Self::IsSignatureFromGovernorPrehashed(value)
         }
     }
     impl ::core::convert::From<LastGovernorUpdateTimeCall>
-        for SignatureBridgeContractCalls
-    {
+    for SignatureBridgeContractCalls {
         fn from(value: LastGovernorUpdateTimeCall) -> Self {
             Self::LastGovernorUpdateTime(value)
         }
     }
     impl ::core::convert::From<ParseChainIdFromResourceIdCall>
-        for SignatureBridgeContractCalls
-    {
+    for SignatureBridgeContractCalls {
         fn from(value: ParseChainIdFromResourceIdCall) -> Self {
             Self::ParseChainIdFromResourceId(value)
         }
@@ -25382,44 +25255,36 @@ pub mod signature_bridge_contract {
             Self::RefreshNonce(value)
         }
     }
-    impl ::core::convert::From<RenounceOwnershipCall>
-        for SignatureBridgeContractCalls
-    {
+    impl ::core::convert::From<RenounceOwnershipCall> for SignatureBridgeContractCalls {
         fn from(value: RenounceOwnershipCall) -> Self {
             Self::RenounceOwnership(value)
         }
     }
     impl ::core::convert::From<SessionLengthMultiplierCall>
-        for SignatureBridgeContractCalls
-    {
+    for SignatureBridgeContractCalls {
         fn from(value: SessionLengthMultiplierCall) -> Self {
             Self::SessionLengthMultiplier(value)
         }
     }
-    impl ::core::convert::From<TransferOwnershipCall>
-        for SignatureBridgeContractCalls
-    {
+    impl ::core::convert::From<TransferOwnershipCall> for SignatureBridgeContractCalls {
         fn from(value: TransferOwnershipCall) -> Self {
             Self::TransferOwnership(value)
         }
     }
     impl ::core::convert::From<TransferOwnershipWithSignatureCall>
-        for SignatureBridgeContractCalls
-    {
+    for SignatureBridgeContractCalls {
         fn from(value: TransferOwnershipWithSignatureCall) -> Self {
             Self::TransferOwnershipWithSignature(value)
         }
     }
     impl ::core::convert::From<VoteInFavorForceSetGovernorCall>
-        for SignatureBridgeContractCalls
-    {
+    for SignatureBridgeContractCalls {
         fn from(value: VoteInFavorForceSetGovernorCall) -> Self {
             Self::VoteInFavorForceSetGovernor(value)
         }
     }
     impl ::core::convert::From<VoteInFavorForceSetGovernorWithSigCall>
-        for SignatureBridgeContractCalls
-    {
+    for SignatureBridgeContractCalls {
         fn from(value: VoteInFavorForceSetGovernorWithSigCall) -> Self {
             Self::VoteInFavorForceSetGovernorWithSig(value)
         }
@@ -25429,9 +25294,7 @@ pub mod signature_bridge_contract {
             Self::VoterCount(value)
         }
     }
-    impl ::core::convert::From<VoterMerkleRootCall>
-        for SignatureBridgeContractCalls
-    {
+    impl ::core::convert::From<VoterMerkleRootCall> for SignatureBridgeContractCalls {
         fn from(value: VoterMerkleRootCall) -> Self {
             Self::VoterMerkleRoot(value)
         }
@@ -25447,7 +25310,7 @@ pub mod signature_bridge_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash,
+        Hash
     )]
     pub struct EvmChainIdTypeReturn(pub [u8; 2]);
     ///Container type for all return fields from the `_resourceIdToHandlerAddress` function with signature `_resourceIdToHandlerAddress(bytes32)` and selector `0xf2dd0bb7`
@@ -25461,11 +25324,9 @@ pub mod signature_bridge_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash,
+        Hash
     )]
-    pub struct ResourceIdToHandlerAddressReturn(
-        pub ::ethers::core::types::Address,
-    );
+    pub struct ResourceIdToHandlerAddressReturn(pub ::ethers::core::types::Address);
     ///Container type for all return fields from the `averageSessionLengthInMillisecs` function with signature `averageSessionLengthInMillisecs()` and selector `0x016737bb`
     #[derive(
         Clone,
@@ -25477,7 +25338,7 @@ pub mod signature_bridge_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash,
+        Hash
     )]
     pub struct AverageSessionLengthInMillisecsReturn(pub u64);
     ///Container type for all return fields from the `createVote` function with signature `createVote(uint32,address,bytes32[])` and selector `0xfecb9553`
@@ -25491,7 +25352,7 @@ pub mod signature_bridge_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash,
+        Hash
     )]
     pub struct CreateVoteReturn(pub Vote);
     ///Container type for all return fields from the `currentVotingPeriod` function with signature `currentVotingPeriod()` and selector `0x3a049e02`
@@ -25505,7 +25366,7 @@ pub mod signature_bridge_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash,
+        Hash
     )]
     pub struct CurrentVotingPeriodReturn(pub ::ethers::core::types::U256);
     ///Container type for all return fields from the `getChainId` function with signature `getChainId()` and selector `0x3408e470`
@@ -25519,7 +25380,7 @@ pub mod signature_bridge_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash,
+        Hash
     )]
     pub struct GetChainIdReturn(pub ::ethers::core::types::U256);
     ///Container type for all return fields from the `getChainIdType` function with signature `getChainIdType()` and selector `0x4c830cbd`
@@ -25533,7 +25394,7 @@ pub mod signature_bridge_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash,
+        Hash
     )]
     pub struct GetChainIdTypeReturn(pub u64);
     ///Container type for all return fields from the `getProposalNonce` function with signature `getProposalNonce()` and selector `0x0b27fb9a`
@@ -25547,7 +25408,7 @@ pub mod signature_bridge_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash,
+        Hash
     )]
     pub struct GetProposalNonceReturn(pub ::ethers::core::types::U256);
     ///Container type for all return fields from the `governor` function with signature `governor()` and selector `0x0c340a24`
@@ -25561,7 +25422,7 @@ pub mod signature_bridge_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash,
+        Hash
     )]
     pub struct GovernorReturn(pub ::ethers::core::types::Address);
     ///Container type for all return fields from the `isCorrectExecutionChain` function with signature `isCorrectExecutionChain(bytes32)` and selector `0x830b2f57`
@@ -25575,7 +25436,7 @@ pub mod signature_bridge_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash,
+        Hash
     )]
     pub struct IsCorrectExecutionChainReturn(pub bool);
     ///Container type for all return fields from the `isCorrectExecutionContext` function with signature `isCorrectExecutionContext(bytes32)` and selector `0xf5fc3d6b`
@@ -25589,7 +25450,7 @@ pub mod signature_bridge_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash,
+        Hash
     )]
     pub struct IsCorrectExecutionContextReturn(pub bool);
     ///Container type for all return fields from the `isGovernor` function with signature `isGovernor()` and selector `0xc7af3352`
@@ -25603,7 +25464,7 @@ pub mod signature_bridge_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash,
+        Hash
     )]
     pub struct IsGovernorReturn(pub bool);
     ///Container type for all return fields from the `isSignatureFromGovernor` function with signature `isSignatureFromGovernor(bytes,bytes)` and selector `0x8755bcad`
@@ -25617,7 +25478,7 @@ pub mod signature_bridge_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash,
+        Hash
     )]
     pub struct IsSignatureFromGovernorReturn(pub bool);
     ///Container type for all return fields from the `isSignatureFromGovernorPrehashed` function with signature `isSignatureFromGovernorPrehashed(bytes32,bytes)` and selector `0x6c6f4846`
@@ -25631,7 +25492,7 @@ pub mod signature_bridge_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash,
+        Hash
     )]
     pub struct IsSignatureFromGovernorPrehashedReturn(pub bool);
     ///Container type for all return fields from the `lastGovernorUpdateTime` function with signature `lastGovernorUpdateTime()` and selector `0x9e09583c`
@@ -25645,7 +25506,7 @@ pub mod signature_bridge_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash,
+        Hash
     )]
     pub struct LastGovernorUpdateTimeReturn(pub ::ethers::core::types::U256);
     ///Container type for all return fields from the `parseChainIdFromResourceId` function with signature `parseChainIdFromResourceId(bytes32)` and selector `0xc2230d6e`
@@ -25659,7 +25520,7 @@ pub mod signature_bridge_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash,
+        Hash
     )]
     pub struct ParseChainIdFromResourceIdReturn(pub u64);
     ///Container type for all return fields from the `proposalNonce` function with signature `proposalNonce()` and selector `0xcc3c74a1`
@@ -25673,7 +25534,7 @@ pub mod signature_bridge_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash,
+        Hash
     )]
     pub struct ProposalNonceReturn(pub ::ethers::core::types::U256);
     ///Container type for all return fields from the `recover` function with signature `recover(bytes,bytes)` and selector `0x1ed13d1b`
@@ -25687,7 +25548,7 @@ pub mod signature_bridge_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash,
+        Hash
     )]
     pub struct RecoverReturn(pub ::ethers::core::types::Address);
     ///Container type for all return fields from the `refreshNonce` function with signature `refreshNonce()` and selector `0x13cb01f9`
@@ -25701,7 +25562,7 @@ pub mod signature_bridge_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash,
+        Hash
     )]
     pub struct RefreshNonceReturn(pub u32);
     ///Container type for all return fields from the `sessionLengthMultiplier` function with signature `sessionLengthMultiplier()` and selector `0xbdfadc84`
@@ -25715,7 +25576,7 @@ pub mod signature_bridge_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash,
+        Hash
     )]
     pub struct SessionLengthMultiplierReturn(pub ::ethers::core::types::U256);
     ///Container type for all return fields from the `voterCount` function with signature `voterCount()` and selector `0x42169e48`
@@ -25729,7 +25590,7 @@ pub mod signature_bridge_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash,
+        Hash
     )]
     pub struct VoterCountReturn(pub u32);
     ///Container type for all return fields from the `voterMerkleRoot` function with signature `voterMerkleRoot()` and selector `0x2a69fb46`
@@ -25743,7 +25604,7 @@ pub mod signature_bridge_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash,
+        Hash
     )]
     pub struct VoterMerkleRootReturn(pub [u8; 32]);
     ///`Vote(uint32,address,bytes32[])`
@@ -25757,7 +25618,7 @@ pub mod signature_bridge_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash,
+        Hash
     )]
     pub struct Vote {
         pub leaf_index: u32,

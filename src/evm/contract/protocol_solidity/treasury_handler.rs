@@ -7,7 +7,7 @@ pub use treasury_handler_contract::*;
     clippy::upper_case_acronyms,
     clippy::type_complexity,
     dead_code,
-    non_camel_case_types
+    non_camel_case_types,
 )]
 pub mod treasury_handler_contract {
     #[rustfmt::skip]
@@ -2987,8 +2987,9 @@ pub mod treasury_handler_contract {
         51,
     ];
     ///The bytecode of the contract.
-    pub static TREASURYHANDLERCONTRACT_BYTECODE: ::ethers::core::types::Bytes =
-        ::ethers::core::types::Bytes::from_static(__BYTECODE);
+    pub static TREASURYHANDLERCONTRACT_BYTECODE: ::ethers::core::types::Bytes = ::ethers::core::types::Bytes::from_static(
+        __BYTECODE,
+    );
     #[rustfmt::skip]
     const __DEPLOYED_BYTECODE: &[u8] = &[
         96,
@@ -4869,9 +4870,9 @@ pub mod treasury_handler_contract {
         51,
     ];
     ///The deployed bytecode of the contract.
-    pub static TREASURYHANDLERCONTRACT_DEPLOYED_BYTECODE:
-        ::ethers::core::types::Bytes =
-        ::ethers::core::types::Bytes::from_static(__DEPLOYED_BYTECODE);
+    pub static TREASURYHANDLERCONTRACT_DEPLOYED_BYTECODE: ::ethers::core::types::Bytes = ::ethers::core::types::Bytes::from_static(
+        __DEPLOYED_BYTECODE,
+    );
     pub struct TreasuryHandlerContract<M>(::ethers::contract::Contract<M>);
     impl<M> ::core::clone::Clone for TreasuryHandlerContract<M> {
         fn clone(&self) -> Self {
@@ -4890,10 +4891,7 @@ pub mod treasury_handler_contract {
         }
     }
     impl<M> ::core::fmt::Debug for TreasuryHandlerContract<M> {
-        fn fmt(
-            &self,
-            f: &mut ::core::fmt::Formatter<'_>,
-        ) -> ::core::fmt::Result {
+        fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
             f.debug_tuple(stringify!(TreasuryHandlerContract))
                 .field(&self.address())
                 .finish()
@@ -4906,11 +4904,13 @@ pub mod treasury_handler_contract {
             address: T,
             client: ::std::sync::Arc<M>,
         ) -> Self {
-            Self(::ethers::contract::Contract::new(
-                address.into(),
-                TREASURYHANDLERCONTRACT_ABI.clone(),
-                client,
-            ))
+            Self(
+                ::ethers::contract::Contract::new(
+                    address.into(),
+                    TREASURYHANDLERCONTRACT_ABI.clone(),
+                    client,
+                ),
+            )
         }
         /// Constructs the general purpose `Deployer` instance based on the provided constructor arguments and sends it.
         /// Returns a new instance of a deployer that returns an instance of this contract after sending the transaction
@@ -5018,16 +5018,12 @@ pub mod treasury_handler_contract {
             contract_address: ::ethers::core::types::Address,
         ) -> ::ethers::contract::builders::ContractCall<M, ()> {
             self.0
-                .method_hash(
-                    [184, 250, 55, 54],
-                    (resource_id, contract_address),
-                )
+                .method_hash([184, 250, 55, 54], (resource_id, contract_address))
                 .expect("method not found (this should never happen)")
         }
     }
-    impl<M: ::ethers::providers::Middleware>
-        From<::ethers::contract::Contract<M>> for TreasuryHandlerContract<M>
-    {
+    impl<M: ::ethers::providers::Middleware> From<::ethers::contract::Contract<M>>
+    for TreasuryHandlerContract<M> {
         fn from(contract: ::ethers::contract::Contract<M>) -> Self {
             Self::new(contract.address(), contract.client())
         }
@@ -5043,7 +5039,7 @@ pub mod treasury_handler_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash,
+        Hash
     )]
     #[ethcall(name = "_bridgeAddress", abi = "_bridgeAddress()")]
     pub struct BridgeAddressCall;
@@ -5058,15 +5054,13 @@ pub mod treasury_handler_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash,
+        Hash
     )]
     #[ethcall(
         name = "_contractAddressToResourceID",
         abi = "_contractAddressToResourceID(address)"
     )]
-    pub struct ContractAddressToResourceIDCall(
-        pub ::ethers::core::types::Address,
-    );
+    pub struct ContractAddressToResourceIDCall(pub ::ethers::core::types::Address);
     ///Container type for all input parameters for the `_contractWhitelist` function with signature `_contractWhitelist(address)` and selector `0x7f79bea8`
     #[derive(
         Clone,
@@ -5078,7 +5072,7 @@ pub mod treasury_handler_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash,
+        Hash
     )]
     #[ethcall(name = "_contractWhitelist", abi = "_contractWhitelist(address)")]
     pub struct ContractWhitelistCall(pub ::ethers::core::types::Address);
@@ -5093,7 +5087,7 @@ pub mod treasury_handler_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash,
+        Hash
     )]
     #[ethcall(
         name = "_resourceIDToContractAddress",
@@ -5111,7 +5105,7 @@ pub mod treasury_handler_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash,
+        Hash
     )]
     #[ethcall(name = "executeProposal", abi = "executeProposal(bytes32,bytes)")]
     pub struct ExecuteProposalCall {
@@ -5129,7 +5123,7 @@ pub mod treasury_handler_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash,
+        Hash
     )]
     #[ethcall(name = "migrateBridge", abi = "migrateBridge(address)")]
     pub struct MigrateBridgeCall {
@@ -5146,7 +5140,7 @@ pub mod treasury_handler_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash,
+        Hash
     )]
     #[ethcall(name = "setResource", abi = "setResource(bytes32,address)")]
     pub struct SetResourceCall {
@@ -5162,7 +5156,7 @@ pub mod treasury_handler_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash,
+        Hash
     )]
     pub enum TreasuryHandlerContractCalls {
         BridgeAddress(BridgeAddressCall),
@@ -5176,14 +5170,10 @@ pub mod treasury_handler_contract {
     impl ::ethers::core::abi::AbiDecode for TreasuryHandlerContractCalls {
         fn decode(
             data: impl AsRef<[u8]>,
-        ) -> ::core::result::Result<Self, ::ethers::core::abi::AbiError>
-        {
+        ) -> ::core::result::Result<Self, ::ethers::core::abi::AbiError> {
             let data = data.as_ref();
-            if let Ok(decoded) =
-                <BridgeAddressCall as ::ethers::core::abi::AbiDecode>::decode(
-                    data,
-                )
-            {
+            if let Ok(decoded)
+                = <BridgeAddressCall as ::ethers::core::abi::AbiDecode>::decode(data) {
                 return Ok(Self::BridgeAddress(decoded));
             }
             if let Ok(decoded)
@@ -5204,25 +5194,16 @@ pub mod treasury_handler_contract {
                 ) {
                 return Ok(Self::ResourceIDToContractAddress(decoded));
             }
-            if let Ok(decoded) =
-                <ExecuteProposalCall as ::ethers::core::abi::AbiDecode>::decode(
-                    data,
-                )
-            {
+            if let Ok(decoded)
+                = <ExecuteProposalCall as ::ethers::core::abi::AbiDecode>::decode(data) {
                 return Ok(Self::ExecuteProposal(decoded));
             }
-            if let Ok(decoded) =
-                <MigrateBridgeCall as ::ethers::core::abi::AbiDecode>::decode(
-                    data,
-                )
-            {
+            if let Ok(decoded)
+                = <MigrateBridgeCall as ::ethers::core::abi::AbiDecode>::decode(data) {
                 return Ok(Self::MigrateBridge(decoded));
             }
-            if let Ok(decoded) =
-                <SetResourceCall as ::ethers::core::abi::AbiDecode>::decode(
-                    data,
-                )
-            {
+            if let Ok(decoded)
+                = <SetResourceCall as ::ethers::core::abi::AbiDecode>::decode(data) {
                 return Ok(Self::SetResource(decoded));
             }
             Err(::ethers::core::abi::Error::InvalidData.into())
@@ -5256,32 +5237,19 @@ pub mod treasury_handler_contract {
         }
     }
     impl ::core::fmt::Display for TreasuryHandlerContractCalls {
-        fn fmt(
-            &self,
-            f: &mut ::core::fmt::Formatter<'_>,
-        ) -> ::core::fmt::Result {
+        fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
             match self {
-                Self::BridgeAddress(element) => {
-                    ::core::fmt::Display::fmt(element, f)
-                }
+                Self::BridgeAddress(element) => ::core::fmt::Display::fmt(element, f),
                 Self::ContractAddressToResourceID(element) => {
                     ::core::fmt::Display::fmt(element, f)
                 }
-                Self::ContractWhitelist(element) => {
-                    ::core::fmt::Display::fmt(element, f)
-                }
+                Self::ContractWhitelist(element) => ::core::fmt::Display::fmt(element, f),
                 Self::ResourceIDToContractAddress(element) => {
                     ::core::fmt::Display::fmt(element, f)
                 }
-                Self::ExecuteProposal(element) => {
-                    ::core::fmt::Display::fmt(element, f)
-                }
-                Self::MigrateBridge(element) => {
-                    ::core::fmt::Display::fmt(element, f)
-                }
-                Self::SetResource(element) => {
-                    ::core::fmt::Display::fmt(element, f)
-                }
+                Self::ExecuteProposal(element) => ::core::fmt::Display::fmt(element, f),
+                Self::MigrateBridge(element) => ::core::fmt::Display::fmt(element, f),
+                Self::SetResource(element) => ::core::fmt::Display::fmt(element, f),
             }
         }
     }
@@ -5291,29 +5259,23 @@ pub mod treasury_handler_contract {
         }
     }
     impl ::core::convert::From<ContractAddressToResourceIDCall>
-        for TreasuryHandlerContractCalls
-    {
+    for TreasuryHandlerContractCalls {
         fn from(value: ContractAddressToResourceIDCall) -> Self {
             Self::ContractAddressToResourceID(value)
         }
     }
-    impl ::core::convert::From<ContractWhitelistCall>
-        for TreasuryHandlerContractCalls
-    {
+    impl ::core::convert::From<ContractWhitelistCall> for TreasuryHandlerContractCalls {
         fn from(value: ContractWhitelistCall) -> Self {
             Self::ContractWhitelist(value)
         }
     }
     impl ::core::convert::From<ResourceIDToContractAddressCall>
-        for TreasuryHandlerContractCalls
-    {
+    for TreasuryHandlerContractCalls {
         fn from(value: ResourceIDToContractAddressCall) -> Self {
             Self::ResourceIDToContractAddress(value)
         }
     }
-    impl ::core::convert::From<ExecuteProposalCall>
-        for TreasuryHandlerContractCalls
-    {
+    impl ::core::convert::From<ExecuteProposalCall> for TreasuryHandlerContractCalls {
         fn from(value: ExecuteProposalCall) -> Self {
             Self::ExecuteProposal(value)
         }
@@ -5339,7 +5301,7 @@ pub mod treasury_handler_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash,
+        Hash
     )]
     pub struct BridgeAddressReturn(pub ::ethers::core::types::Address);
     ///Container type for all return fields from the `_contractAddressToResourceID` function with signature `_contractAddressToResourceID(address)` and selector `0xec97d3b4`
@@ -5353,7 +5315,7 @@ pub mod treasury_handler_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash,
+        Hash
     )]
     pub struct ContractAddressToResourceIDReturn(pub [u8; 32]);
     ///Container type for all return fields from the `_contractWhitelist` function with signature `_contractWhitelist(address)` and selector `0x7f79bea8`
@@ -5367,7 +5329,7 @@ pub mod treasury_handler_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash,
+        Hash
     )]
     pub struct ContractWhitelistReturn(pub bool);
     ///Container type for all return fields from the `_resourceIDToContractAddress` function with signature `_resourceIDToContractAddress(bytes32)` and selector `0xc54c2a11`
@@ -5381,9 +5343,7 @@ pub mod treasury_handler_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash,
+        Hash
     )]
-    pub struct ResourceIDToContractAddressReturn(
-        pub ::ethers::core::types::Address,
-    );
+    pub struct ResourceIDToContractAddressReturn(pub ::ethers::core::types::Address);
 }

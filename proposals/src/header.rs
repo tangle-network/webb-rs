@@ -59,6 +59,7 @@ pub struct ResourceId(pub [u8; 32]);
         scale_codec::MaxEncodedLen
     )
 )]
+#[serde(tag = "type", content = "id")]
 #[non_exhaustive]
 pub enum TypedChainId {
     /// None chain type.
@@ -621,7 +622,6 @@ mod tests {
         assert_eq!(header.nonce(), Nonce::from(0x0001));
     }
 
-    #[cfg(feature = "std")]
     #[test]
     fn serde_works() {
         #[derive(Debug, Clone, Serialize, Deserialize)]
