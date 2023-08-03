@@ -33,7 +33,6 @@ pub struct FunctionSignature(pub [u8; 4]);
         scale_codec::MaxEncodedLen
     )
 )]
-
 #[derive(serde::Serialize, serde::Deserialize)]
 pub struct ResourceId(pub [u8; 32]);
 
