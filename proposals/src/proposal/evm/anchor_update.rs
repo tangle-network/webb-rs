@@ -1,6 +1,6 @@
 //! Anchor Update Proposal.
-use proposal_derive::Proposal;
 use crate::{ProposalHeader, ResourceId, TypedChainId};
+use proposal_derive::Proposal;
 
 /// Anchor Update Proposal.
 ///
@@ -18,7 +18,9 @@ use crate::{ProposalHeader, ResourceId, TypedChainId};
 /// ```
 #[allow(clippy::module_name_repetitions)]
 #[derive(Proposal, Debug, Copy, Clone, PartialEq, Eq, Hash)]
-#[proposal(function_sig = "function updateEdge()")]
+#[proposal(
+    function_sig = "function updateEdge(uint256 root, uint32 latestLeafIndex, bytes32 srcResourceID)"
+)]
 pub struct AnchorUpdateProposal {
     header: ProposalHeader,
     merkle_root: [u8; 32],
