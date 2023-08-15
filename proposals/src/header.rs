@@ -20,6 +20,8 @@ use serde::{Deserialize, Serialize};
     )
 )]
 #[cfg_attr(feature = "std", derive(Serialize, Deserialize))]
+#[cfg_attr(feature = "std", serde(transparent))]
+#[repr(transparent)]
 pub struct FunctionSignature(pub [u8; 4]);
 
 /// Proposal Target `ResourceId` (32 bytes).
@@ -33,23 +35,11 @@ pub struct FunctionSignature(pub [u8; 4]);
         scale_codec::MaxEncodedLen
     )
 )]
-#[derive(serde::Serialize, serde::Deserialize)]
+#[cfg_attr(feature = "std", derive(Serialize, Deserialize))]
 pub struct ResourceId(pub [u8; 32]);
 
 /// Proposal Target Chain and its type (6 bytes).
-#[derive(
-    Default,
-    Debug,
-    Clone,
-    Copy,
-    PartialEq,
-    Eq,
-    Hash,
-    Ord,
-    PartialOrd,
-    serde::Serialize,
-    serde::Deserialize,
-)]
+#[derive(Default, Debug, Clone, Copy, PartialEq, Eq, Hash, Ord, PartialOrd)]
 #[cfg_attr(
     feature = "scale",
     derive(
@@ -59,7 +49,8 @@ pub struct ResourceId(pub [u8; 32]);
         scale_codec::MaxEncodedLen
     )
 )]
-#[serde(tag = "type", content = "id")]
+#[cfg_attr(feature = "std", derive(Serialize, Deserialize))]
+#[cfg_attr(feature = "std", serde(tag = "type", content = "id"))]
 #[non_exhaustive]
 pub enum TypedChainId {
     /// None chain type.
@@ -86,11 +77,14 @@ pub enum TypedChainId {
 }
 
 /// Proposal Header (40 bytes).
+///
+/// ```text
 /// ┌────────────────────┬─────────────────┬───────────────┐
 /// │                    │                 │               │
 /// │   Resource ID 32B  │ Function Sig 4B │    Nonce 4B   │
 /// │                    │                 │               │
 /// └────────────────────┴─────────────────┴───────────────┘
+/// ```
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Ord, PartialOrd)]
 #[allow(clippy::module_name_repetitions)]
 #[cfg_attr(feature = "std", derive(Serialize, Deserialize))]

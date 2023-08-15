@@ -1,4 +1,5 @@
 //! Anchor Update Proposal.
+use proposal_derive::Proposal;
 use crate::{ProposalHeader, ResourceId, TypedChainId};
 
 /// Anchor Update Proposal.
@@ -16,7 +17,8 @@ use crate::{ProposalHeader, ResourceId, TypedChainId};
 /// └────────────────────┴─────────────────┴─────────────────────┘
 /// ```
 #[allow(clippy::module_name_repetitions)]
-#[derive(Debug, Copy, Clone, PartialEq, Eq, Hash)]
+#[derive(Proposal, Debug, Copy, Clone, PartialEq, Eq, Hash)]
+#[proposal(function_sig = "function updateEdge()")]
 pub struct AnchorUpdateProposal {
     header: ProposalHeader,
     merkle_root: [u8; 32],
@@ -24,51 +26,16 @@ pub struct AnchorUpdateProposal {
 }
 
 impl AnchorUpdateProposal {
-    /// Length of the proposal in bytes.
-    pub const LENGTH: usize = ProposalHeader::LENGTH + 32 + ResourceId::LENGTH;
-
-    /// Creates a new anchor update proposal.
-    #[must_use]
-    pub const fn new(
-        header: ProposalHeader,
-        merkle_root: [u8; 32],
-        src_resource_id: ResourceId,
-    ) -> Self {
-        Self {
-            header,
-            merkle_root,
-            src_resource_id,
-        }
-    }
-
-    /// Get the proposal header.
-    #[must_use]
-    pub const fn header(&self) -> ProposalHeader {
-        self.header
-    }
-
     /// Get the source chain.
     #[must_use]
     pub fn src_chain(&self) -> TypedChainId {
         self.src_resource_id.typed_chain_id()
     }
 
-    /// Get the `src_resource_id` identifier.
-    #[must_use]
-    pub const fn src_resource_id(&self) -> ResourceId {
-        self.src_resource_id
-    }
-
     /// Get the latest leaf index.
     #[must_use]
     pub const fn latest_leaf_index(&self) -> u32 {
         self.header.nonce.to_u32()
-    }
-
-    /// Get the merkle root.
-    #[must_use]
-    pub const fn merkle_root(&self) -> &[u8; 32] {
-        &self.merkle_root
     }
 
     /// Get the proposal as a bytes

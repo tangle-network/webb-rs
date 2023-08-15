@@ -11,6 +11,8 @@ use frame_support::{pallet_prelude::Get, BoundedVec};
 /// all the different chains.
 #[allow(clippy::module_name_repetitions)]
 pub trait ProposalTrait {
+    /// Get the function signature.
+    fn function_sig() -> crate::FunctionSignature;
     /// Get the proposal header.
     fn header(&self) -> crate::ProposalHeader;
     /// Convert the proposal into bytes.
@@ -30,6 +32,10 @@ macro_rules! impl_proposal_for  {
             fn to_vec(&self) -> Vec<u8> {
                 self.to_bytes().into()
             }
+
+            fn function_sig() -> $crate::FunctionSignature {
+                $crate::FunctionSignature([0u8; 4])
+            }
         }
     };
     ($($rest:path),* $(,)?) => {
@@ -39,7 +45,6 @@ macro_rules! impl_proposal_for  {
 
 #[cfg(feature = "evm")]
 impl_proposal_for! {
-    crate::proposal::evm::AnchorUpdateProposal,
     crate::proposal::evm::TokenAddProposal,
     crate::proposal::evm::TokenRemoveProposal,
     crate::proposal::evm::WrappingFeeUpdateProposal,
