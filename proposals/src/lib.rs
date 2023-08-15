@@ -137,6 +137,8 @@ mod nonce;
 mod proposal;
 mod target_system;
 mod traits;
+mod ser;
+mod de;
 
 pub use header::*;
 pub use nonce::*;
