@@ -22,6 +22,7 @@ tiny-keccak = { version = "2.0.2", features = ["keccak"] }
 serde = { workspace = true, optional = true }
 hex = { workspace = true }
 proposal-derive = { path = "../proposal-derive" }
+thiserror = { workspace = true }
 
 [dev-dependencies]
 hex-literal = "0.4"

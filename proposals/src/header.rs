@@ -511,6 +511,87 @@ impl Debug for FunctionSignature {
     }
 }
 
+/// Serde `serialize_with` function to serialize [`ProposalHeader`] efficiently.
+/// This function will serialize the [`ProposalHeader`] into bytes.
+///
+/// This function can be used with either of the following Serde attributes:
+/// * `#[serde(serialize_with = "crate::header::serialize")]`
+/// * `#[serde(with = "crate::header")]`
+///
+/// # Example
+/// ```no_run
+/// use serde::{Serialize, Deserialize};
+///
+/// #[derive(Serialize, Deserialize)]
+/// struct MyProposal {
+///   #[serde(with = "crate::header")]
+///   pub header: crate::header::ProposalHeader,
+///   // ...
+/// }
+/// ```
+/// # Errors
+/// This function will return an error if it fails to serialize the
+/// proposal header.
+#[cfg(feature = "std")]
+pub fn serialize<S>(
+    header: &ProposalHeader,
+    serializer: S,
+) -> Result<S::Ok, S::Error>
+where
+    S: serde::Serializer,
+{
+    serializer.serialize_bytes(&header.to_bytes())
+}
+
+/// Serde `deserialize_with` function to deserialize [`ProposalHeader`] efficiently.
+/// This function will deserialize the [`ProposalHeader`] by reading bytes from the input.
+///
+/// This function can be used with either of the following Serde attributes:
+/// * `#[serde(deserialize_with = "crate::header::deserialize")]`
+/// * `#[serde(with = "crate::header")]`
+///
+/// # Example
+/// ```no_run
+/// use serde::{Serialize, Deserialize};
+/// #[derive(Serialize, Deserialize)]
+/// struct MyProposal {
+///   #[serde(with = "crate::header")]
+///   pub header: crate::header::ProposalHeader,
+///   // ...
+/// }
+/// ```
+/// # Errors
+/// This function will return an error if it fails to deserialize the
+/// proposal header. For example, if the input is not a valid proposal header or no
+/// enough bytes are available.
+pub fn deserialize<'de, D>(deserializer: D) -> Result<ProposalHeader, D::Error>
+where
+    D: serde::Deserializer<'de>,
+{
+    struct ProposalHeaderVisitor;
+    impl<'de> serde::de::Visitor<'de> for ProposalHeaderVisitor {
+        type Value = ProposalHeader;
+        fn expecting(&self, formatter: &mut Formatter) -> core::fmt::Result {
+            formatter.write_str("a valid proposal header")
+        }
+        fn visit_bytes<E>(self, bytes: &[u8]) -> Result<Self::Value, E>
+        where
+            E: serde::de::Error,
+        {
+            if bytes.len() < ProposalHeader::LENGTH {
+                return Err(E::invalid_length(
+                    bytes.len(),
+                    &"ProposalHeader::LENGTH",
+                ));
+            }
+            let mut bytes_array = [0u8; ProposalHeader::LENGTH];
+            bytes_array.copy_from_slice(bytes);
+            Ok(ProposalHeader::from(bytes_array))
+        }
+    }
+    deserializer.deserialize_bytes(ProposalHeaderVisitor)
+}
+
 fn format_bytes(bytes: &[u8], f: &mut Formatter<'_>) -> core::fmt::Result {
     #[cfg(feature = "std")]
     let res = f.write_str(&hex::encode(bytes));
