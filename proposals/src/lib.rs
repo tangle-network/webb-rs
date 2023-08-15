@@ -132,13 +132,13 @@
 #[doc(hidden)]
 pub extern crate alloc;
 
+mod de;
 mod header;
 mod nonce;
 mod proposal;
+mod ser;
 mod target_system;
 mod traits;
-mod ser;
-mod de;
 
 pub use header::*;
 pub use nonce::*;
