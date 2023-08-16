@@ -46,11 +46,10 @@ mod tests {
         let nonce = Nonce::from(0x0001);
         let header =
             ProposalHeader::new(resource_id, function_signature, nonce);
-        let max_deposit_limit = hex_literal::hex!(
+        let limit = hex_literal::hex!(
             "000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f"
         );
-        let proposal =
-            SetDailyWithdrawalLimitProposal::new(header, max_deposit_limit);
+        let proposal = SetDailyWithdrawalLimitProposal::new(header, limit);
         let bytes = crate::to_vec(&proposal).unwrap();
         let expected = hex_literal::hex!(
             "000000000000aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa010000000004"
@@ -74,7 +73,7 @@ mod tests {
         let target_chain = resource_id.typed_chain_id();
         let function_signature = header.function_signature();
         let nonce = header.nonce();
-        let max_deposit_limit = proposal.daily_withdrawal_limit();
+        let limit = proposal.daily_withdrawal_limit();
         assert_eq!(
             target_system,
             TargetSystem::new_contract_address(hex_literal::hex!(
@@ -88,7 +87,7 @@ mod tests {
         );
         assert_eq!(nonce, Nonce::from(0x0001));
         assert_eq!(
-            max_deposit_limit,
+            limit,
             &hex_literal::hex!(
                 "000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f"
             )
