@@ -1,4 +1,6 @@
 //! Rescue Tokens Proposal.
+use proposal_derive::Proposal;
+
 use crate::ProposalHeader;
 
 /// Rescue Tokens Proposal.
@@ -14,120 +16,16 @@ use crate::ProposalHeader;
 /// │                    │                   │               │            │
 /// └────────────────────┴───────────────────┴───────────────┴────────────┘
 /// ```
-#[allow(clippy::module_name_repetitions)]
-#[derive(Debug, Copy, Clone, PartialEq, Eq, Hash)]
+#[derive(Proposal, Debug, Copy, Clone, PartialEq, Eq, Hash)]
+#[cfg_attr(feature = "std", derive(serde::Serialize, serde::Deserialize))]
+#[proposal(
+    function_sig = "function rescueTokens(address _tokenAddress, address _to, uint256 _amountToRescue, uint32 _nonce)"
+)]
 pub struct RescueTokensProposal {
     header: ProposalHeader,
     token_address: [u8; 20],
     recipient: [u8; 20],
     amount: [u8; 32],
-}
-
-impl RescueTokensProposal {
-    /// Length of the proposal in bytes.
-    pub const LENGTH: usize = ProposalHeader::LENGTH
-        + 20 // token_address
-        + 20 // recipient
-        + 32; // amount
-
-    /// Creates a new resource id update proposal.
-    #[must_use]
-    pub const fn new(
-        header: ProposalHeader,
-        token_address: [u8; 20],
-        recipient: [u8; 20],
-        amount: [u8; 32],
-    ) -> Self {
-        Self {
-            header,
-            token_address,
-            recipient,
-            amount,
-        }
-    }
-
-    /// Get the proposal header.
-    #[must_use]
-    pub const fn header(&self) -> ProposalHeader {
-        self.header
-    }
-
-    /// Get the amount.
-    #[must_use]
-    pub const fn amount(&self) -> [u8; 32] {
-        self.amount
-    }
-
-    /// Get the token address.
-    #[must_use]
-    pub const fn token_address(&self) -> [u8; 20] {
-        self.token_address
-    }
-
-    /// Get the to token address.
-    #[must_use]
-    pub const fn recipient(&self) -> [u8; 20] {
-        self.recipient
-    }
-
-    /// Get the proposal as a bytes
-    #[must_use]
-    pub fn to_bytes(&self) -> [u8; Self::LENGTH] {
-        let mut bytes = [0u8; Self::LENGTH];
-        let f = 0usize;
-        let t = ProposalHeader::LENGTH;
-        bytes[f..t].copy_from_slice(&self.header.to_bytes());
-        let f = t;
-        let t = f + 20;
-        bytes[f..t].copy_from_slice(&self.token_address);
-        let f = t;
-        let t = f + 20;
-        bytes[f..t].copy_from_slice(&self.recipient);
-        let f = t;
-        let t = f + 32;
-        bytes[f..t].copy_from_slice(&self.amount);
-        bytes
-    }
-
-    /// Get the proposal as a bytes without copying.
-    #[must_use]
-    pub fn into_bytes(self) -> [u8; Self::LENGTH] {
-        self.to_bytes()
-    }
-}
-
-impl From<[u8; RescueTokensProposal::LENGTH]> for RescueTokensProposal {
-    fn from(bytes: [u8; RescueTokensProposal::LENGTH]) -> Self {
-        let f = 0usize;
-        let t = ProposalHeader::LENGTH;
-        let mut header_bytes = [0u8; ProposalHeader::LENGTH];
-        header_bytes.copy_from_slice(&bytes[f..t]);
-        let header = ProposalHeader::from(header_bytes);
-        let f = t;
-        let t = f + 20;
-        let mut token_address = [0u8; 20];
-        token_address.copy_from_slice(&bytes[f..t]);
-        let f = t;
-        let t = f + 20;
-        let mut recipient = [0u8; 20];
-        recipient.copy_from_slice(&bytes[f..t]);
-        let f = t;
-        let t = f + 32;
-        let mut amount = [0u8; 32];
-        amount.copy_from_slice(&bytes[f..t]);
-        Self {
-            header,
-            token_address,
-            recipient,
-            amount,
-        }
-    }
-}
-
-impl From<RescueTokensProposal> for [u8; RescueTokensProposal::LENGTH] {
-    fn from(proposal: RescueTokensProposal) -> Self {
-        proposal.to_bytes()
-    }
 }
 
 #[cfg(test)]
@@ -161,7 +59,7 @@ mod tests {
         ];
         let proposal =
             RescueTokensProposal::new(header, token_address, recipient, amount);
-        let bytes = proposal.to_bytes();
+        let bytes = crate::to_vec(&proposal).unwrap();
         let expected = hex_literal::hex!(
         "000000000000aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa010000000004" // resource_id
         "cafebabe00000001" // function_signature + nonce
@@ -182,7 +80,8 @@ mod tests {
         "dddddddddddddddddddddddddddddddddddddddd" // new_token_address
         "000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f" // amount
         );
-        let expected_proposal = RescueTokensProposal::from(bytes);
+        let expected_proposal =
+            crate::from_slice::<RescueTokensProposal>(&bytes).unwrap();
         let target_system = TargetSystem::new_contract_address(
             hex_literal::hex!("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"),
         );

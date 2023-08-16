@@ -16,6 +16,8 @@ use serde::{Deserialize, Serialize};
     )
 )]
 #[cfg_attr(feature = "std", derive(Serialize, Deserialize))]
+#[cfg_attr(feature = "std", serde(transparent))]
+#[repr(transparent)]
 pub struct Nonce(pub u32);
 
 impl Add for Nonce {

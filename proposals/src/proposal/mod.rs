@@ -11,47 +11,14 @@ use frame_support::{pallet_prelude::Get, BoundedVec};
 /// all the different chains.
 #[allow(clippy::module_name_repetitions)]
 pub trait ProposalTrait {
+    /// Get the function signature.
+    fn function_sig() -> crate::FunctionSignature;
     /// Get the proposal header.
     fn header(&self) -> crate::ProposalHeader;
     /// Convert the proposal into bytes.
     ///
     /// Note: This also includes the proposal header.
     fn to_vec(&self) -> Vec<u8>;
-}
-
-/// a helper macro to implement the `Proposal` trait for a given proposal.
-macro_rules! impl_proposal_for  {
-    ($t:path) => {
-        impl $crate::proposal::ProposalTrait for $t {
-            fn header(&self) -> $crate::ProposalHeader {
-                self.header()
-            }
-
-            fn to_vec(&self) -> Vec<u8> {
-                self.to_bytes().into()
-            }
-        }
-    };
-    ($($rest:path),* $(,)?) => {
-        $(impl_proposal_for!($rest);)*
-    };
-}
-
-#[cfg(feature = "evm")]
-impl_proposal_for! {
-    crate::proposal::evm::AnchorUpdateProposal,
-    crate::proposal::evm::TokenAddProposal,
-    crate::proposal::evm::TokenRemoveProposal,
-    crate::proposal::evm::WrappingFeeUpdateProposal,
-    crate::proposal::evm::MinWithdrawalLimitProposal,
-    crate::proposal::evm::MaxDepositLimitProposal,
-    crate::proposal::evm::ResourceIdUpdateProposal,
-    crate::proposal::evm::SetTreasuryHandlerProposal,
-    crate::proposal::evm::SetVerifierProposal,
-    crate::proposal::evm::FeeRecipientUpdateProposal,
-    crate::proposal::evm::RescueTokensProposal,
-    crate::proposal::evm::RegisterFungibleTokenProposal,
-    crate::proposal::evm::RegisterNftTokenProposal,
 }
 
 #[derive(Debug, Clone, Eq, PartialEq)]
@@ -150,6 +117,10 @@ pub enum ProposalKind {
     /// Set fee recipient proposal for changing the fee recipient of the asset
     /// application
     FeeRecipientUpdate,
+    /// Toggles whether or not the native token is allowed to be wrapped.
+    SetNativeAllowed,
+    /// Set daily withdrawal limit proposal for changing the daily withdrawal limits.
+    SetDailyWithdrawalLimit,
 }
 
 #[cfg(feature = "substrate")]

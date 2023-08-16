@@ -132,9 +132,11 @@
 #[doc(hidden)]
 pub extern crate alloc;
 
+mod de;
 mod header;
 mod nonce;
 mod proposal;
+mod ser;
 mod target_system;
 mod traits;
 
@@ -143,3 +145,8 @@ pub use nonce::*;
 pub use proposal::*;
 pub use target_system::*;
 pub use traits::*;
+
+#[cfg(feature = "std")]
+pub use de::{from_slice, DeserializationError};
+#[cfg(feature = "std")]
+pub use ser::{to_vec, SerializationError};

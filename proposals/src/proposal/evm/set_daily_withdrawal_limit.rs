@@ -1,27 +1,29 @@
-//! Token Add Proposal.
+//! Set Daily Withdrawal Limit Proposal.
 use proposal_derive::Proposal;
 
 use crate::ProposalHeader;
 
-/// Token Add Proposal.
+/// Updates the daily withdrawal limit on the variable anchor system.
 ///
-/// The [`TokenAddProposal`] allows the token specified by the `TokenAddress` to
-/// be wrapped into the WEBB token.
+/// The [`SetDailyWithdrawalLimitProposal`] updates the daily withdrawal limit
+/// amount allowed on the variable anchor system.
 ///
 /// The format of the proposal looks like:
 /// ```text
-/// ┌────────────────────┬──────────────────┐
-/// │                    │                  │
-/// │ ProposalHeader 40B │ TokenAddress 20B │
-/// │                    │                  │
-/// └────────────────────┴──────────────────┘
+/// ┌────────────────────┬───────────────────────────┐
+/// │                    │                           │
+/// │ ProposalHeader 40B │ DailyWithdrawalLimit 32B  │
+/// │                    │                           │
+/// └────────────────────┴───────────────────────────┘
 /// ```
 #[derive(Proposal, Debug, Copy, Clone, PartialEq, Eq, Hash)]
 #[cfg_attr(feature = "std", derive(serde::Serialize, serde::Deserialize))]
-#[proposal(function_sig = "function add(address _tokenAddress, uint32 _nonce)")]
-pub struct TokenAddProposal {
+#[proposal(
+    function_sig = "function setDailyWithdrawalLimit(uint256 _limit, uint32 _nonce)"
+)]
+pub struct SetDailyWithdrawalLimitProposal {
     header: ProposalHeader,
-    token_address: [u8; 20],
+    daily_withdrawal_limit: [u8; 32],
 }
 
 #[cfg(test)]
@@ -44,13 +46,14 @@ mod tests {
         let nonce = Nonce::from(0x0001);
         let header =
             ProposalHeader::new(resource_id, function_signature, nonce);
-        let token_address =
-            hex_literal::hex!("bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb");
-        let proposal = TokenAddProposal::new(header, token_address);
+        let limit = hex_literal::hex!(
+            "000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f"
+        );
+        let proposal = SetDailyWithdrawalLimitProposal::new(header, limit);
         let bytes = crate::to_vec(&proposal).unwrap();
         let expected = hex_literal::hex!(
             "000000000000aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa010000000004"
-            "cafebabe00000001bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+            "cafebabe00000001000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f"
         );
         assert_eq!(bytes, expected);
     }
@@ -59,15 +62,18 @@ mod tests {
     fn decode() {
         let bytes = hex_literal::hex!(
             "000000000000aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa010000000004"
-            "cafebabe00000001bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+            "cafebabe00000001000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f"
         );
-        let proposal = crate::from_slice::<TokenAddProposal>(&bytes).unwrap();
+        let proposal =
+            crate::from_slice::<SetDailyWithdrawalLimitProposal>(&bytes)
+                .unwrap();
         let header = proposal.header();
         let resource_id = header.resource_id();
         let target_system = resource_id.target_system();
         let target_chain = resource_id.typed_chain_id();
         let function_signature = header.function_signature();
         let nonce = header.nonce();
+        let limit = proposal.daily_withdrawal_limit();
         assert_eq!(
             target_system,
             TargetSystem::new_contract_address(hex_literal::hex!(
@@ -81,8 +87,10 @@ mod tests {
         );
         assert_eq!(nonce, Nonce::from(0x0001));
         assert_eq!(
-            proposal.token_address(),
-            &hex_literal::hex!("bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb")
+            limit,
+            &hex_literal::hex!(
+                "000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f"
+            )
         );
     }
 }

@@ -1,5 +1,6 @@
 //! Anchor Update Proposal.
 use crate::{ProposalHeader, ResourceId, TypedChainId};
+use proposal_derive::Proposal;
 
 /// Anchor Update Proposal.
 ///
@@ -15,8 +16,11 @@ use crate::{ProposalHeader, ResourceId, TypedChainId};
 /// │                    │                 │                     │
 /// └────────────────────┴─────────────────┴─────────────────────┘
 /// ```
-#[allow(clippy::module_name_repetitions)]
-#[derive(Debug, Copy, Clone, PartialEq, Eq, Hash)]
+#[derive(Proposal, Debug, Copy, Clone, PartialEq, Eq, Hash)]
+#[cfg_attr(feature = "std", derive(serde::Serialize, serde::Deserialize))]
+#[proposal(
+    function_sig = "function updateEdge(uint256 root, uint32 latestLeafIndex, bytes32 srcResourceID)"
+)]
 pub struct AnchorUpdateProposal {
     header: ProposalHeader,
     merkle_root: [u8; 32],
@@ -24,98 +28,16 @@ pub struct AnchorUpdateProposal {
 }
 
 impl AnchorUpdateProposal {
-    /// Length of the proposal in bytes.
-    pub const LENGTH: usize = ProposalHeader::LENGTH + 32 + ResourceId::LENGTH;
-
-    /// Creates a new anchor update proposal.
-    #[must_use]
-    pub const fn new(
-        header: ProposalHeader,
-        merkle_root: [u8; 32],
-        src_resource_id: ResourceId,
-    ) -> Self {
-        Self {
-            header,
-            merkle_root,
-            src_resource_id,
-        }
-    }
-
-    /// Get the proposal header.
-    #[must_use]
-    pub const fn header(&self) -> ProposalHeader {
-        self.header
-    }
-
     /// Get the source chain.
     #[must_use]
     pub fn src_chain(&self) -> TypedChainId {
         self.src_resource_id.typed_chain_id()
     }
 
-    /// Get the `src_resource_id` identifier.
-    #[must_use]
-    pub const fn src_resource_id(&self) -> ResourceId {
-        self.src_resource_id
-    }
-
     /// Get the latest leaf index.
     #[must_use]
     pub const fn latest_leaf_index(&self) -> u32 {
         self.header.nonce.to_u32()
-    }
-
-    /// Get the merkle root.
-    #[must_use]
-    pub const fn merkle_root(&self) -> &[u8; 32] {
-        &self.merkle_root
-    }
-
-    /// Get the proposal as a bytes
-    #[must_use]
-    pub fn to_bytes(&self) -> [u8; Self::LENGTH] {
-        let mut bytes = [0u8; Self::LENGTH];
-        let f = 0usize;
-        let t = ProposalHeader::LENGTH;
-        bytes[f..t].copy_from_slice(&self.header.to_bytes());
-        let f = t;
-        let t = t + 32;
-        bytes[f..t].copy_from_slice(&self.merkle_root);
-        let f = t;
-        let t = t + ResourceId::LENGTH;
-        bytes[f..t].copy_from_slice(&self.src_resource_id().to_bytes());
-        bytes
-    }
-
-    /// Get the proposal as a bytes without copying.
-    #[must_use]
-    pub fn into_bytes(self) -> [u8; Self::LENGTH] {
-        self.to_bytes()
-    }
-}
-
-impl From<[u8; AnchorUpdateProposal::LENGTH]> for AnchorUpdateProposal {
-    fn from(bytes: [u8; AnchorUpdateProposal::LENGTH]) -> Self {
-        let f = 0usize;
-        let t = ProposalHeader::LENGTH;
-        let mut header_bytes = [0u8; ProposalHeader::LENGTH];
-        header_bytes.copy_from_slice(&bytes[f..t]);
-        let header = ProposalHeader::from(header_bytes);
-        let f = t;
-        let t = t + 32;
-        let mut merkle_root = [0u8; 32];
-        merkle_root.copy_from_slice(&bytes[f..t]);
-        let f = t;
-        let t = t + ResourceId::LENGTH;
-        let mut src_resource_id = [0u8; ResourceId::LENGTH];
-        src_resource_id.copy_from_slice(&bytes[f..t]);
-        Self::new(header, merkle_root, ResourceId(src_resource_id))
-    }
-}
-
-impl From<AnchorUpdateProposal> for [u8; AnchorUpdateProposal::LENGTH] {
-    fn from(proposal: AnchorUpdateProposal) -> Self {
-        proposal.to_bytes()
     }
 }
 
@@ -149,7 +71,7 @@ mod tests {
         let src_resource_id = ResourceId::new(target_system, src_chain_id);
         let proposal =
             AnchorUpdateProposal::new(header, merkle_root, src_resource_id);
-        let bytes = proposal.to_bytes();
+        let bytes = crate::to_vec(&proposal).unwrap();
         let expected = hex_literal::hex!(
             "000000000000aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa010000000004"
             "cafebabe00000001000102030405060708090a0b0c0d"
@@ -167,7 +89,8 @@ mod tests {
             "0e0f101112131415161718191a1b1c1d1e1f"
             "000000000000aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa010000000001"
         );
-        let proposal = AnchorUpdateProposal::from(bytes);
+        let proposal =
+            crate::from_slice::<AnchorUpdateProposal>(&bytes).unwrap();
         let target_system = TargetSystem::new_contract_address(
             hex_literal::hex!("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"),
         );
