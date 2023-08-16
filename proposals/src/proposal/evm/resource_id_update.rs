@@ -1,4 +1,6 @@
 //! Resource Id Update Proposal.
+use proposal_derive::Proposal;
+
 use crate::{ProposalHeader, ResourceId};
 
 /// Resource Id Update Proposal.
@@ -13,8 +15,16 @@ use crate::{ProposalHeader, ResourceId};
 /// │                    │                   │                    │
 /// └────────────────────┴───────────────────┴────────────────────┘
 /// ```
-#[allow(clippy::module_name_repetitions)]
-#[derive(Debug, Copy, Clone, PartialEq, Eq, Hash)]
+#[derive(Proposal, Debug, Copy, Clone, PartialEq, Eq, Hash)]
+#[cfg_attr(feature = "std", derive(serde::Serialize, serde::Deserialize))]
+#[proposal(function_sig = "function adminSetResourceWithSignature(
+		bytes32 resourceID,
+		bytes4 functionSig,
+		uint32 nonce,
+		bytes32 newResourceID,
+		address handlerAddress,
+		bytes memory sig
+	)")]
 pub struct ResourceIdUpdateProposal {
     header: ProposalHeader,
     new_resource_id: ResourceId,
@@ -22,101 +32,12 @@ pub struct ResourceIdUpdateProposal {
 }
 
 impl ResourceIdUpdateProposal {
-    /// Length of the proposal in bytes.
-    pub const LENGTH: usize = ProposalHeader::LENGTH
-        + ResourceId::LENGTH // new_resource_id
-        + 20; // handler_address
-
-    /// Creates a new resource id update proposal.
-    #[must_use]
-    pub const fn new(
-        header: ProposalHeader,
-        new_resource_id: ResourceId,
-        handler_address: [u8; 20],
-    ) -> Self {
-        Self {
-            header,
-            new_resource_id,
-            handler_address,
-        }
-    }
-
-    /// Get the proposal header.
-    #[must_use]
-    pub const fn header(&self) -> ProposalHeader {
-        self.header
-    }
-
-    /// Get the new resource id.
-    #[must_use]
-    pub const fn new_resource_id(&self) -> ResourceId {
-        self.new_resource_id
-    }
-
-    /// Get the handler address.
-    #[must_use]
-    pub const fn handler_address(&self) -> [u8; 20] {
-        self.handler_address
-    }
-
     /// Get the execution address.
     #[must_use]
     pub fn execution_address(&self) -> [u8; 20] {
         self.new_resource_id()
             .target_system()
             .into_contract_address_or_default()
-    }
-
-    /// Get the proposal as a bytes
-    #[must_use]
-    pub fn to_bytes(&self) -> [u8; Self::LENGTH] {
-        let mut bytes = [0u8; Self::LENGTH];
-        let f = 0usize;
-        let t = ProposalHeader::LENGTH;
-        bytes[f..t].copy_from_slice(&self.header.to_bytes());
-        let f = t;
-        let t = f + ResourceId::LENGTH;
-        bytes[f..t].copy_from_slice(&self.new_resource_id.to_bytes());
-        let f = t;
-        let t = f + 20;
-        bytes[f..t].copy_from_slice(&self.handler_address);
-        bytes
-    }
-
-    /// Get the proposal as a bytes without copying.
-    #[must_use]
-    pub fn into_bytes(self) -> [u8; Self::LENGTH] {
-        self.to_bytes()
-    }
-}
-
-impl From<[u8; ResourceIdUpdateProposal::LENGTH]> for ResourceIdUpdateProposal {
-    fn from(bytes: [u8; ResourceIdUpdateProposal::LENGTH]) -> Self {
-        let f = 0usize;
-        let t = ProposalHeader::LENGTH;
-        let mut header_bytes = [0u8; ProposalHeader::LENGTH];
-        header_bytes.copy_from_slice(&bytes[f..t]);
-        let header = ProposalHeader::from(header_bytes);
-        let f = t;
-        let t = f + ResourceId::LENGTH;
-        let mut new_resource_id = [0u8; 32];
-        new_resource_id.copy_from_slice(&bytes[f..t]);
-        let new_resource_id = ResourceId::from(new_resource_id);
-        let f = t;
-        let t = f + 20;
-        let mut handler_address = [0u8; 20];
-        handler_address.copy_from_slice(&bytes[f..t]);
-        Self {
-            header,
-            new_resource_id,
-            handler_address,
-        }
-    }
-}
-
-impl From<ResourceIdUpdateProposal> for [u8; ResourceIdUpdateProposal::LENGTH] {
-    fn from(proposal: ResourceIdUpdateProposal) -> Self {
-        proposal.to_bytes()
     }
 }
 
@@ -151,7 +72,7 @@ mod tests {
             new_resource_id,
             handler_address,
         );
-        let bytes = proposal.to_bytes();
+        let bytes = crate::to_vec(&proposal).unwrap();
         let expected = hex_literal::hex!(
         "000000000000aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa010000000004" // resource_id
         "cafebabe00000001" // function_signature + nonce
@@ -170,7 +91,8 @@ mod tests {
         "000000000000bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb010000000004" // new_resource_id
         "cccccccccccccccccccccccccccccccccccccccc" // handler_address
         );
-        let proposal = ResourceIdUpdateProposal::from(bytes);
+        let proposal =
+            crate::from_slice::<ResourceIdUpdateProposal>(&bytes).unwrap();
         let target_system = TargetSystem::new_contract_address(
             hex_literal::hex!("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"),
         );

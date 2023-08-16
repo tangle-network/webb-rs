@@ -94,7 +94,9 @@ fn derive_proposal_trait(
                 crate::FunctionSignature(#computed_function_sig)
             }
 
-            fn to_vec(&self) -> Vec<u8> { unimplemented!() }
+            fn to_vec(&self) -> Vec<u8> {
+                crate::to_vec(self).expect("never fails to serialize")
+            }
         }
     };
 

@@ -1,3 +1,4 @@
+#![allow(clippy::module_name_repetitions)]
 //! ### Proposals Implemented:
 //! - [x] `AnchorUpdateProposal`
 //! - [x] `TokenAddProposal`

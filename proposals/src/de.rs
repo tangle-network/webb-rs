@@ -350,8 +350,9 @@ fn test_struct_de() {
     use crate::ProposalHeader;
     use proposal_derive::Proposal;
     use serde::Deserialize;
+    use serde::Serialize;
 
-    #[derive(Debug, Clone, Eq, PartialEq, Deserialize, Proposal)]
+    #[derive(Debug, Clone, Eq, PartialEq, Serialize, Deserialize, Proposal)]
     #[proposal(function_sig = "test(bytes32)")]
     struct MyProposal {
         header: ProposalHeader,
