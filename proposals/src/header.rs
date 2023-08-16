@@ -515,17 +515,17 @@ impl Debug for FunctionSignature {
 /// This function will serialize the [`ProposalHeader`] into bytes.
 ///
 /// This function can be used with either of the following Serde attributes:
-/// * `#[serde(serialize_with = "crate::header::serialize")]`
-/// * `#[serde(with = "crate::header")]`
+/// * `#[serde(serialize_with = "webb_proposals::header::serialize")]`
+/// * `#[serde(with = "webb_proposals::header")]`
 ///
 /// # Example
-/// ```no_run
+/// ```ignore
 /// use serde::{Serialize, Deserialize};
 ///
 /// #[derive(Serialize, Deserialize)]
 /// struct MyProposal {
-///   #[serde(with = "crate::header")]
-///   pub header: crate::header::ProposalHeader,
+///   #[serde(with = "webb_proposals::header")]
+///   pub header: webb_proposals::header::ProposalHeader,
 ///   // ...
 /// }
 /// ```
@@ -547,16 +547,16 @@ where
 /// This function will deserialize the [`ProposalHeader`] by reading bytes from the input.
 ///
 /// This function can be used with either of the following Serde attributes:
-/// * `#[serde(deserialize_with = "crate::header::deserialize")]`
-/// * `#[serde(with = "crate::header")]`
+/// * `#[serde(deserialize_with = "webb_proposals::header::deserialize")]`
+/// * `#[serde(with = "webb_proposals::header")]`
 ///
 /// # Example
-/// ```no_run
+/// ```ignore
 /// use serde::{Serialize, Deserialize};
 /// #[derive(Serialize, Deserialize)]
 /// struct MyProposal {
-///   #[serde(with = "crate::header")]
-///   pub header: crate::header::ProposalHeader,
+///   #[serde(with = "webb_proposals::header")]
+///   pub header: webb_proposals::header::ProposalHeader,
 ///   // ...
 /// }
 /// ```

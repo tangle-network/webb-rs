@@ -1,13 +1,18 @@
 //! Serializer for Webb Proposals Foramt.
 use serde::ser::{self, Serialize};
 
+/// Error that can occur during serialization.
 #[derive(Debug, Clone, PartialEq, Eq, thiserror::Error)]
+#[non_exhaustive]
 pub enum SerializationError {
+    /// Custom error message from [serde].
     #[error("{0}")]
     Custom(String),
+    /// Unsupported type encountered.
     #[error("Unsupported type")]
     Unspported,
 }
+
 impl ser::Error for SerializationError {
     fn custom<T: core::fmt::Display>(msg: T) -> Self {
         Self::Custom(msg.to_string())
@@ -275,9 +280,10 @@ impl<'a> ser::SerializeStructVariant for &'a mut Serializer {
 }
 
 /// Serialize `T` into `Vec<u8>`.
-pub fn to_bytes<T: Serialize>(
-    value: &T,
-) -> Result<Vec<u8>, SerializationError> {
+///
+/// # Errors
+/// If `T` cannot be serialized into `Vec<u8>`, an error is returned.
+pub fn to_vec<T: Serialize>(value: &T) -> Result<Vec<u8>, SerializationError> {
     let mut serializer = Serializer {
         output: Vec::with_capacity(4096),
     };
@@ -314,7 +320,7 @@ fn test_struct_ser() {
         e: [6u8; 32],
     };
 
-    let bytes = to_bytes(&proposal).unwrap();
+    let bytes = to_vec(&proposal).unwrap();
     let expected = hex_literal::hex! {
         "0101010101010101010101010101010101010101010101010101010101010101" // rid
         "99372321" // function sig
