@@ -11,6 +11,8 @@
 //! - [x] `SetVerifierProposal`
 //! - [x] `FeeRecipientUpdateProposal`
 //! - [x] `RescueTokensProposal`
+//! - [x] `SetDailyWithdrawalLimitProposal`
+//! - [ ] `SetNativeAllowedProposal`
 
 mod anchor_update;
 mod fee_recipient_update;
@@ -20,6 +22,7 @@ mod register_fungible_token;
 mod register_nft_token;
 mod rescue_tokens;
 mod resource_id_update;
+mod set_daily_withdrawal_limit;
 mod set_treasury_handler;
 mod set_verifier;
 mod token_add;
@@ -34,6 +37,7 @@ pub use register_fungible_token::*;
 pub use register_nft_token::*;
 pub use rescue_tokens::*;
 pub use resource_id_update::*;
+pub use set_daily_withdrawal_limit::*;
 pub use set_treasury_handler::*;
 pub use set_verifier::*;
 pub use token_add::*;

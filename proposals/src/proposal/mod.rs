@@ -119,6 +119,8 @@ pub enum ProposalKind {
     FeeRecipientUpdate,
     /// Toggles whether or not the native token is allowed to be wrapped.
     SetNativeAllowed,
+    /// Set daily withdrawal limit proposal for changing the daily withdrawal limits.
+    SetDailyWithdrawalLimit,
 }
 
 #[cfg(feature = "substrate")]
