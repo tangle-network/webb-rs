@@ -925,198 +925,198 @@ pub mod api {
             let cursor = &mut &pallet_bytes[..];
             if pallet_name == "System" {
                 let variant_error = system::Error::decode_with_metadata(
-                    cursor, 163u32, metadata,
+                    cursor, 175u32, metadata,
                 )?;
                 return Ok(Error::System(variant_error));
             }
             if pallet_name == "Sudo" {
                 let variant_error = sudo::Error::decode_with_metadata(
-                    cursor, 403u32, metadata,
+                    cursor, 402u32, metadata,
                 )?;
                 return Ok(Error::Sudo(variant_error));
             }
             if pallet_name == "Balances" {
                 let variant_error = balances::Error::decode_with_metadata(
-                    cursor, 415u32, metadata,
+                    cursor, 418u32, metadata,
                 )?;
                 return Ok(Error::Balances(variant_error));
             }
             if pallet_name == "Grandpa" {
                 let variant_error = grandpa::Error::decode_with_metadata(
-                    cursor, 424u32, metadata,
+                    cursor, 427u32, metadata,
                 )?;
                 return Ok(Error::Grandpa(variant_error));
             }
             if pallet_name == "DKG" {
                 let variant_error =
-                    dkg::Error::decode_with_metadata(cursor, 436u32, metadata)?;
+                    dkg::Error::decode_with_metadata(cursor, 439u32, metadata)?;
                 return Ok(Error::DKG(variant_error));
             }
             if pallet_name == "DKGProposals" {
                 let variant_error = dkg_proposals::Error::decode_with_metadata(
-                    cursor, 448u32, metadata,
+                    cursor, 451u32, metadata,
                 )?;
                 return Ok(Error::DKGProposals(variant_error));
             }
             if pallet_name == "DKGProposalHandler" {
                 let variant_error =
                     dkg_proposal_handler::Error::decode_with_metadata(
-                        cursor, 454u32, metadata,
+                        cursor, 457u32, metadata,
                     )?;
                 return Ok(Error::DKGProposalHandler(variant_error));
             }
             if pallet_name == "BridgeRegistry" {
                 let variant_error =
                     bridge_registry::Error::decode_with_metadata(
-                        cursor, 457u32, metadata,
+                        cursor, 460u32, metadata,
                     )?;
                 return Ok(Error::BridgeRegistry(variant_error));
             }
             if pallet_name == "Indices" {
                 let variant_error = indices::Error::decode_with_metadata(
-                    cursor, 459u32, metadata,
+                    cursor, 462u32, metadata,
                 )?;
                 return Ok(Error::Indices(variant_error));
             }
             if pallet_name == "Democracy" {
                 let variant_error = democracy::Error::decode_with_metadata(
-                    cursor, 476u32, metadata,
+                    cursor, 479u32, metadata,
                 )?;
                 return Ok(Error::Democracy(variant_error));
             }
             if pallet_name == "Council" {
                 let variant_error = council::Error::decode_with_metadata(
-                    cursor, 479u32, metadata,
+                    cursor, 482u32, metadata,
                 )?;
                 return Ok(Error::Council(variant_error));
             }
             if pallet_name == "Vesting" {
                 let variant_error = vesting::Error::decode_with_metadata(
-                    cursor, 483u32, metadata,
+                    cursor, 486u32, metadata,
                 )?;
                 return Ok(Error::Vesting(variant_error));
             }
             if pallet_name == "Claims" {
                 let variant_error = claims::Error::decode_with_metadata(
-                    cursor, 485u32, metadata,
+                    cursor, 488u32, metadata,
                 )?;
                 return Ok(Error::Claims(variant_error));
             }
             if pallet_name == "Elections" {
                 let variant_error = elections::Error::decode_with_metadata(
-                    cursor, 489u32, metadata,
+                    cursor, 492u32, metadata,
                 )?;
                 return Ok(Error::Elections(variant_error));
             }
             if pallet_name == "ElectionProviderMultiPhase" {
                 let variant_error =
                     election_provider_multi_phase::Error::decode_with_metadata(
-                        cursor, 500u32, metadata,
+                        cursor, 503u32, metadata,
                     )?;
                 return Ok(Error::ElectionProviderMultiPhase(variant_error));
             }
             if pallet_name == "Staking" {
                 let variant_error = staking::Error::decode_with_metadata(
-                    cursor, 520u32, metadata,
+                    cursor, 522u32, metadata,
                 )?;
                 return Ok(Error::Staking(variant_error));
             }
             if pallet_name == "Session" {
                 let variant_error = session::Error::decode_with_metadata(
-                    cursor, 525u32, metadata,
+                    cursor, 527u32, metadata,
                 )?;
                 return Ok(Error::Session(variant_error));
             }
             if pallet_name == "Treasury" {
                 let variant_error = treasury::Error::decode_with_metadata(
-                    cursor, 531u32, metadata,
+                    cursor, 533u32, metadata,
                 )?;
                 return Ok(Error::Treasury(variant_error));
             }
             if pallet_name == "Bounties" {
                 let variant_error = bounties::Error::decode_with_metadata(
-                    cursor, 535u32, metadata,
+                    cursor, 537u32, metadata,
                 )?;
                 return Ok(Error::Bounties(variant_error));
             }
             if pallet_name == "ChildBounties" {
                 let variant_error =
                     child_bounties::Error::decode_with_metadata(
-                        cursor, 538u32, metadata,
+                        cursor, 540u32, metadata,
                     )?;
                 return Ok(Error::ChildBounties(variant_error));
             }
             if pallet_name == "BagsList" {
                 let variant_error = bags_list::Error::decode_with_metadata(
-                    cursor, 542u32, metadata,
+                    cursor, 544u32, metadata,
                 )?;
                 return Ok(Error::BagsList(variant_error));
             }
             if pallet_name == "NominationPools" {
                 let variant_error =
                     nomination_pools::Error::decode_with_metadata(
-                        cursor, 562u32, metadata,
+                        cursor, 564u32, metadata,
                     )?;
                 return Ok(Error::NominationPools(variant_error));
             }
             if pallet_name == "Scheduler" {
                 let variant_error = scheduler::Error::decode_with_metadata(
-                    cursor, 568u32, metadata,
+                    cursor, 570u32, metadata,
                 )?;
                 return Ok(Error::Scheduler(variant_error));
             }
             if pallet_name == "Preimage" {
                 let variant_error = preimage::Error::decode_with_metadata(
-                    cursor, 572u32, metadata,
+                    cursor, 574u32, metadata,
                 )?;
                 return Ok(Error::Preimage(variant_error));
             }
             if pallet_name == "TransactionPause" {
                 let variant_error =
                     transaction_pause::Error::decode_with_metadata(
-                        cursor, 575u32, metadata,
+                        cursor, 577u32, metadata,
                     )?;
                 return Ok(Error::TransactionPause(variant_error));
             }
             if pallet_name == "ImOnline" {
                 let variant_error = im_online::Error::decode_with_metadata(
-                    cursor, 583u32, metadata,
+                    cursor, 580u32, metadata,
                 )?;
                 return Ok(Error::ImOnline(variant_error));
             }
             if pallet_name == "Identity" {
                 let variant_error = identity::Error::decode_with_metadata(
-                    cursor, 594u32, metadata,
+                    cursor, 591u32, metadata,
                 )?;
                 return Ok(Error::Identity(variant_error));
             }
             if pallet_name == "Utility" {
                 let variant_error = utility::Error::decode_with_metadata(
-                    cursor, 595u32, metadata,
+                    cursor, 592u32, metadata,
                 )?;
                 return Ok(Error::Utility(variant_error));
             }
             if pallet_name == "Ethereum" {
                 let variant_error = ethereum::Error::decode_with_metadata(
-                    cursor, 609u32, metadata,
+                    cursor, 606u32, metadata,
                 )?;
                 return Ok(Error::Ethereum(variant_error));
             }
             if pallet_name == "EVM" {
                 let variant_error =
-                    evm::Error::decode_with_metadata(cursor, 612u32, metadata)?;
+                    evm::Error::decode_with_metadata(cursor, 609u32, metadata)?;
                 return Ok(Error::EVM(variant_error));
             }
             if pallet_name == "HotfixSufficients" {
                 let variant_error =
                     hotfix_sufficients::Error::decode_with_metadata(
-                        cursor, 613u32, metadata,
+                        cursor, 610u32, metadata,
                     )?;
                 return Ok(Error::HotfixSufficients(variant_error));
             }
             if pallet_name == "Eth2Client" {
                 let variant_error = eth2_client::Error::decode_with_metadata(
-                    cursor, 617u32, metadata,
+                    cursor, 614u32, metadata,
                 )?;
                 return Ok(Error::Eth2Client(variant_error));
             }
@@ -1511,10 +1511,10 @@ pub mod api {
             .hash();
         if runtime_metadata_hash
             != [
-                55u8, 103u8, 74u8, 189u8, 219u8, 176u8, 77u8, 118u8, 125u8,
-                31u8, 15u8, 246u8, 178u8, 184u8, 169u8, 62u8, 187u8, 13u8,
-                124u8, 47u8, 188u8, 208u8, 164u8, 48u8, 242u8, 146u8, 42u8,
-                75u8, 47u8, 59u8, 215u8, 157u8,
+                236u8, 246u8, 32u8, 233u8, 180u8, 185u8, 30u8, 252u8, 254u8,
+                180u8, 177u8, 91u8, 159u8, 218u8, 68u8, 178u8, 150u8, 156u8,
+                20u8, 33u8, 124u8, 9u8, 23u8, 163u8, 104u8, 67u8, 105u8, 93u8,
+                172u8, 40u8, 117u8, 143u8,
             ]
         {
             Err(::subxt::error::MetadataError::IncompatibleCodegen)
@@ -1527,7 +1527,7 @@ pub mod api {
         use super::runtime_types;
         ///Error for the System pallet
         pub type Error = runtime_types::frame_system::pallet::Error;
-        ///Contains one variant per dispatchable that can be called by an extrinsic.
+        ///Contains a variant per dispatchable extrinsic that this pallet has.
         pub type Call = runtime_types::frame_system::pallet::Call;
         pub mod calls {
             use super::root_mod;
@@ -1736,9 +1736,7 @@ pub mod api {
             }
             pub struct TransactionApi;
             impl TransactionApi {
-                ///Make some on-chain remark.
-                ///
-                ///- `O(1)`
+                ///See [`Pallet::remark`].
                 pub fn remark(
                     &self,
                     remark: ::std::vec::Vec<::core::primitive::u8>,
@@ -1756,7 +1754,7 @@ pub mod api {
                         ],
                     )
                 }
-                ///Set the number of pages in the WebAssembly environment's heap.
+                ///See [`Pallet::set_heap_pages`].
                 pub fn set_heap_pages(
                     &self,
                     pages: ::core::primitive::u64,
@@ -1774,7 +1772,7 @@ pub mod api {
                         ],
                     )
                 }
-                ///Set the new runtime code.
+                ///See [`Pallet::set_code`].
                 pub fn set_code(
                     &self,
                     code: ::std::vec::Vec<::core::primitive::u8>,
@@ -1792,7 +1790,7 @@ pub mod api {
                         ],
                     )
                 }
-                ///Set the new runtime code without doing any checks of the given `code`.
+                ///See [`Pallet::set_code_without_checks`].
                 pub fn set_code_without_checks(
                     &self,
                     code: ::std::vec::Vec<::core::primitive::u8>,
@@ -1811,7 +1809,7 @@ pub mod api {
                         ],
                     )
                 }
-                ///Set some items of storage.
+                ///See [`Pallet::set_storage`].
                 pub fn set_storage(
                     &self,
                     items: ::std::vec::Vec<(
@@ -1832,7 +1830,7 @@ pub mod api {
                         ],
                     )
                 }
-                ///Kill some items from storage.
+                ///See [`Pallet::kill_storage`].
                 pub fn kill_storage(
                     &self,
                     keys: ::std::vec::Vec<
@@ -1852,10 +1850,7 @@ pub mod api {
                         ],
                     )
                 }
-                ///Kill all storage items with a key that starts with the given prefix.
-                ///
-                ///**NOTE:** We rely on the Root origin to provide us the number of subkeys under
-                ///the prefix we are removing to accurately calculate the weight of this function.
+                ///See [`Pallet::kill_prefix`].
                 pub fn kill_prefix(
                     &self,
                     prefix: ::std::vec::Vec<::core::primitive::u8>,
@@ -1874,7 +1869,7 @@ pub mod api {
                         ],
                     )
                 }
-                ///Make some on-chain remark and emit event.
+                ///See [`Pallet::remark_with_event`].
                 pub fn remark_with_event(
                     &self,
                     remark: ::std::vec::Vec<::core::primitive::u8>,
@@ -2439,11 +2434,11 @@ pub mod api {
                         "Events",
                         vec![],
                         [
-                            17u8, 132u8, 208u8, 42u8, 131u8, 220u8, 75u8, 19u8,
-                            44u8, 13u8, 120u8, 137u8, 194u8, 248u8, 174u8,
-                            202u8, 129u8, 30u8, 1u8, 88u8, 25u8, 31u8, 34u8,
-                            193u8, 1u8, 36u8, 89u8, 170u8, 227u8, 195u8, 227u8,
-                            212u8,
+                            160u8, 92u8, 143u8, 29u8, 184u8, 218u8, 179u8, 8u8,
+                            243u8, 44u8, 221u8, 32u8, 112u8, 143u8, 84u8,
+                            107u8, 145u8, 92u8, 178u8, 223u8, 173u8, 155u8,
+                            164u8, 51u8, 76u8, 225u8, 30u8, 155u8, 68u8, 183u8,
+                            59u8, 76u8,
                         ],
                     )
                 }
@@ -2477,7 +2472,7 @@ pub mod api {
                 /// allows light-clients to leverage the changes trie storage tracking mechanism and
                 /// in case of changes fetch the list of events of interest.
                 ///
-                /// The value has the type `(T::BlockNumber, EventIndex)` because if we used only just
+                /// The value has the type `(BlockNumberFor<T>, EventIndex)` because if we used only just
                 /// the `EventIndex` then in case if the topic has the same contents on the next block
                 /// no notification will be triggered thus the event might be lost.
                 pub fn event_topics(
@@ -2543,7 +2538,7 @@ pub mod api {
                 /// allows light-clients to leverage the changes trie storage tracking mechanism and
                 /// in case of changes fetch the list of events of interest.
                 ///
-                /// The value has the type `(T::BlockNumber, EventIndex)` because if we used only just
+                /// The value has the type `(BlockNumberFor<T>, EventIndex)` because if we used only just
                 /// the `EventIndex` then in case if the topic has the same contents on the next block
                 /// no notification will be triggered thus the event might be lost.
                 pub fn event_topics_root(
@@ -2786,7 +2781,7 @@ pub mod api {
     pub mod timestamp {
         use super::root_mod;
         use super::runtime_types;
-        ///Contains one variant per dispatchable that can be called by an extrinsic.
+        ///Contains a variant per dispatchable extrinsic that this pallet has.
         pub type Call = runtime_types::pallet_timestamp::pallet::Call;
         pub mod calls {
             use super::root_mod;
@@ -2822,21 +2817,7 @@ pub mod api {
             }
             pub struct TransactionApi;
             impl TransactionApi {
-                ///Set the current time.
-                ///
-                ///This call should be invoked exactly once per block. It will panic at the finalization
-                ///phase, if this call hasn't been invoked by that time.
-                ///
-                ///The timestamp should be greater than the previous one by the amount specified by
-                ///`MinimumPeriod`.
-                ///
-                ///The dispatch origin for this call must be `Inherent`.
-                ///
-                ///## Complexity
-                ///- `O(1)` (Note that implementations of `OnTimestampSet` must also be `O(1)`)
-                ///- 1 storage read and 1 storage mutation (codec `O(1)`). (because of `DidUpdate::take` in
-                ///  `on_finalize`)
-                ///- 1 event handler `on_timestamp_set`. Must be `O(1)`.
+                ///See [`Pallet::set`].
                 pub fn set(
                     &self,
                     now: ::core::primitive::u64,
@@ -2940,7 +2921,7 @@ pub mod api {
         use super::runtime_types;
         ///Error for the Sudo pallet
         pub type Error = runtime_types::pallet_sudo::pallet::Error;
-        ///Contains one variant per dispatchable that can be called by an extrinsic.
+        ///Contains a variant per dispatchable extrinsic that this pallet has.
         pub type Call = runtime_types::pallet_sudo::pallet::Call;
         pub mod calls {
             use super::root_mod;
@@ -3061,12 +3042,7 @@ pub mod api {
             }
             pub struct TransactionApi;
             impl TransactionApi {
-                ///Authenticates the sudo key and dispatches a function call with `Root` origin.
-                ///
-                ///The dispatch origin for this call must be _Signed_.
-                ///
-                ///## Complexity
-                ///- O(1).
+                ///See [`Pallet::sudo`].
                 pub fn sudo(
                     &self,
                     call: runtime_types::tangle_standalone_runtime::RuntimeCall,
@@ -3078,22 +3054,15 @@ pub mod api {
                             call: ::std::boxed::Box::new(call),
                         },
                         [
-                            22u8, 67u8, 184u8, 94u8, 251u8, 64u8, 140u8, 143u8,
-                            179u8, 80u8, 221u8, 59u8, 12u8, 36u8, 32u8, 63u8,
-                            87u8, 246u8, 14u8, 104u8, 168u8, 208u8, 74u8,
-                            203u8, 254u8, 235u8, 226u8, 198u8, 10u8, 251u8,
-                            222u8, 253u8,
+                            250u8, 99u8, 186u8, 116u8, 14u8, 109u8, 178u8,
+                            25u8, 172u8, 34u8, 80u8, 24u8, 205u8, 180u8, 68u8,
+                            106u8, 232u8, 210u8, 115u8, 105u8, 232u8, 152u8,
+                            209u8, 44u8, 205u8, 215u8, 229u8, 176u8, 16u8,
+                            157u8, 87u8, 28u8,
                         ],
                     )
                 }
-                ///Authenticates the sudo key and dispatches a function call with `Root` origin.
-                ///This function does not check the weight of the call, and instead allows the
-                ///Sudo user to specify the weight of the call.
-                ///
-                ///The dispatch origin for this call must be _Signed_.
-                ///
-                ///## Complexity
-                ///- O(1).
+                ///See [`Pallet::sudo_unchecked_weight`].
                 pub fn sudo_unchecked_weight(
                     &self,
                     call: runtime_types::tangle_standalone_runtime::RuntimeCall,
@@ -3108,21 +3077,15 @@ pub mod api {
                             weight,
                         },
                         [
-                            165u8, 186u8, 12u8, 210u8, 46u8, 155u8, 106u8,
-                            230u8, 42u8, 188u8, 233u8, 30u8, 103u8, 222u8,
-                            29u8, 70u8, 148u8, 217u8, 219u8, 51u8, 223u8,
-                            254u8, 39u8, 102u8, 209u8, 235u8, 177u8, 141u8,
-                            74u8, 25u8, 172u8, 62u8,
+                            176u8, 149u8, 61u8, 184u8, 109u8, 1u8, 133u8,
+                            208u8, 170u8, 133u8, 252u8, 55u8, 165u8, 32u8,
+                            252u8, 81u8, 179u8, 215u8, 127u8, 157u8, 99u8,
+                            78u8, 9u8, 41u8, 147u8, 39u8, 243u8, 194u8, 160u8,
+                            188u8, 247u8, 114u8,
                         ],
                     )
                 }
-                ///Authenticates the current sudo key and sets the given AccountId (`new`) as the new sudo
-                ///key.
-                ///
-                ///The dispatch origin for this call must be _Signed_.
-                ///
-                ///## Complexity
-                ///- O(1).
+                ///See [`Pallet::set_key`].
                 pub fn set_key(
                     &self,
                     new: ::subxt::utils::MultiAddress<
@@ -3143,13 +3106,7 @@ pub mod api {
                         ],
                     )
                 }
-                ///Authenticates the sudo key and dispatches a function call with `Signed` origin from
-                ///a given account.
-                ///
-                ///The dispatch origin for this call must be _Signed_.
-                ///
-                ///## Complexity
-                ///- O(1).
+                ///See [`Pallet::sudo_as`].
                 pub fn sudo_as(
                     &self,
                     who: ::subxt::utils::MultiAddress<
@@ -3166,19 +3123,17 @@ pub mod api {
                             call: ::std::boxed::Box::new(call),
                         },
                         [
-                            16u8, 144u8, 209u8, 214u8, 43u8, 83u8, 11u8, 97u8,
-                            56u8, 26u8, 97u8, 86u8, 122u8, 206u8, 221u8, 151u8,
-                            108u8, 189u8, 99u8, 216u8, 55u8, 18u8, 98u8, 108u8,
-                            139u8, 54u8, 136u8, 78u8, 58u8, 197u8, 92u8, 156u8,
+                            63u8, 195u8, 8u8, 52u8, 232u8, 31u8, 104u8, 110u8,
+                            51u8, 133u8, 93u8, 248u8, 215u8, 214u8, 26u8,
+                            148u8, 101u8, 15u8, 56u8, 118u8, 95u8, 14u8, 9u8,
+                            189u8, 99u8, 133u8, 59u8, 113u8, 55u8, 87u8, 168u8,
+                            43u8,
                         ],
                     )
                 }
             }
         }
-        /**
-        The [event](https://docs.substrate.io/main-docs/build/events-errors/) emitted
-        by this pallet.
-        */
+        ///The `Event` enum of this pallet
         pub type Event = runtime_types::pallet_sudo::pallet::Event;
         pub mod events {
             use super::runtime_types;
@@ -3323,12 +3278,9 @@ pub mod api {
     pub mod balances {
         use super::root_mod;
         use super::runtime_types;
-        /**
-        Custom [dispatch errors](https://docs.substrate.io/main-docs/build/events-errors/)
-        of this pallet.
-        */
+        ///The `Error` enum of this pallet.
         pub type Error = runtime_types::pallet_balances::pallet::Error;
-        ///Contains one variant per dispatchable that can be called by an extrinsic.
+        ///Contains a variant per dispatchable extrinsic that this pallet has.
         pub type Call = runtime_types::pallet_balances::pallet::Call;
         pub mod calls {
             use super::root_mod;
@@ -3599,13 +3551,7 @@ pub mod api {
             }
             pub struct TransactionApi;
             impl TransactionApi {
-                ///Transfer some liquid free balance to another account.
-                ///
-                ///`transfer_allow_death` will set the `FreeBalance` of the sender and receiver.
-                ///If the sender's account is below the existential deposit as a result
-                ///of the transfer, the account will be reaped.
-                ///
-                ///The dispatch origin for this call must be `Signed` by the transactor.
+                ///See [`Pallet::transfer_allow_death`].
                 pub fn transfer_allow_death(
                     &self,
                     dest: ::subxt::utils::MultiAddress<
@@ -3628,12 +3574,7 @@ pub mod api {
                         ],
                     )
                 }
-                ///Set the regular balance of a given account; it also takes a reserved balance but this
-                ///must be the same as the account's current reserved balance.
-                ///
-                ///The dispatch origin for this call is `root`.
-                ///
-                ///WARNING: This call is DEPRECATED! Use `force_set_balance` instead.
+                ///See [`Pallet::set_balance_deprecated`].
                 pub fn set_balance_deprecated(
                     &self,
                     who: ::subxt::utils::MultiAddress<
@@ -3661,8 +3602,7 @@ pub mod api {
                         ],
                     )
                 }
-                ///Exactly as `transfer_allow_death`, except the origin must be root and the source account
-                ///may be specified.
+                ///See [`Pallet::force_transfer`].
                 pub fn force_transfer(
                     &self,
                     source: ::subxt::utils::MultiAddress<
@@ -3693,12 +3633,7 @@ pub mod api {
                         ],
                     )
                 }
-                ///Same as the [`transfer_allow_death`] call, but with a check that the transfer will not
-                ///kill the origin account.
-                ///
-                ///99% of the time you want [`transfer_allow_death`] instead.
-                ///
-                ///[`transfer_allow_death`]: struct.Pallet.html#method.transfer
+                ///See [`Pallet::transfer_keep_alive`].
                 pub fn transfer_keep_alive(
                     &self,
                     dest: ::subxt::utils::MultiAddress<
@@ -3721,21 +3656,7 @@ pub mod api {
                         ],
                     )
                 }
-                ///Transfer the entire transferable balance from the caller account.
-                ///
-                ///NOTE: This function only attempts to transfer _transferable_ balances. This means that
-                ///any locked, reserved, or existential deposits (when `keep_alive` is `true`), will not be
-                ///transferred by this function. To ensure that this function results in a killed account,
-                ///you might need to prepare the account by removing any reference counters, storage
-                ///deposits, etc...
-                ///
-                ///The dispatch origin of this call must be Signed.
-                ///
-                ///- `dest`: The recipient of the transfer.
-                ///- `keep_alive`: A boolean to determine if the `transfer_all` operation should send all
-                ///  of the funds the account has, causing the sender account to be killed (false), or
-                ///  transfer everything except at least the existential deposit, which will guarantee to
-                ///  keep the sender account alive (true).
+                ///See [`Pallet::transfer_all`].
                 pub fn transfer_all(
                     &self,
                     dest: ::subxt::utils::MultiAddress<
@@ -3757,9 +3678,7 @@ pub mod api {
                         ],
                     )
                 }
-                ///Unreserve some balance from a user by force.
-                ///
-                ///Can only be called by ROOT.
+                ///See [`Pallet::force_unreserve`].
                 pub fn force_unreserve(
                     &self,
                     who: ::subxt::utils::MultiAddress<
@@ -3782,14 +3701,7 @@ pub mod api {
                         ],
                     )
                 }
-                ///Upgrade a specified account.
-                ///
-                ///- `origin`: Must be `Signed`.
-                ///- `who`: The account to be upgraded.
-                ///
-                ///This will waive the transaction fee if at least all but 10% of the accounts needed to
-                ///be upgraded. (We let some not have to be upgraded just in order to allow for the
-                ///possibililty of churn).
+                ///See [`Pallet::upgrade_accounts`].
                 pub fn upgrade_accounts(
                     &self,
                     who: ::std::vec::Vec<::subxt::utils::AccountId32>,
@@ -3808,9 +3720,7 @@ pub mod api {
                         ],
                     )
                 }
-                ///Alias for `transfer_allow_death`, provided only for name-wise compatibility.
-                ///
-                ///WARNING: DEPRECATED! Will be released in approximately 3 months.
+                ///See [`Pallet::transfer`].
                 pub fn transfer(
                     &self,
                     dest: ::subxt::utils::MultiAddress<
@@ -3832,9 +3742,7 @@ pub mod api {
                         ],
                     )
                 }
-                ///Set the regular balance of a given account.
-                ///
-                ///The dispatch origin for this call is `root`.
+                ///See [`Pallet::force_set_balance`].
                 pub fn force_set_balance(
                     &self,
                     who: ::subxt::utils::MultiAddress<
@@ -3859,10 +3767,7 @@ pub mod api {
                 }
             }
         }
-        /**
-        The [event](https://docs.substrate.io/main-docs/build/events-errors/) emitted
-        by this pallet.
-        */
+        ///The `Event` enum of this pallet
         pub type Event = runtime_types::pallet_balances::pallet::Event;
         pub mod events {
             use super::runtime_types;
@@ -4692,14 +4597,14 @@ pub mod api {
                     ::subxt::storage::address::StaticStorageMapKey,
                     runtime_types::bounded_collections::bounded_vec::BoundedVec<
                         runtime_types::pallet_balances::types::IdAmount<
-                            (),
+                            runtime_types::tangle_standalone_runtime::RuntimeHoldReason,
                             ::core::primitive::u128,
                         >,
                     >,
                     ::subxt::storage::address::Yes,
                     ::subxt::storage::address::Yes,
                     ::subxt::storage::address::Yes,
-                > {
+                >{
                     ::subxt::storage::address::Address::new_static(
                         "Balances",
                         "Holds",
@@ -4708,38 +4613,38 @@ pub mod api {
                             .borrow())
                         ],
                         [
-                            53u8,
-                            126u8,
-                            215u8,
-                            237u8,
-                            42u8,
-                            223u8,
-                            188u8,
-                            150u8,
-                            230u8,
-                            107u8,
-                            95u8,
-                            24u8,
+                            37u8,
+                            176u8,
+                            2u8,
+                            18u8,
+                            109u8,
                             26u8,
-                            235u8,
-                            158u8,
+                            66u8,
+                            81u8,
+                            28u8,
+                            104u8,
                             149u8,
-                            193u8,
-                            191u8,
-                            10u8,
-                            194u8,
-                            231u8,
-                            59u8,
-                            35u8,
-                            167u8,
-                            186u8,
-                            89u8,
-                            43u8,
-                            126u8,
-                            215u8,
                             117u8,
-                            1u8,
-                            202u8,
+                            119u8,
+                            114u8,
+                            196u8,
+                            35u8,
+                            172u8,
+                            155u8,
+                            66u8,
+                            195u8,
+                            98u8,
+                            37u8,
+                            134u8,
+                            22u8,
+                            106u8,
+                            221u8,
+                            215u8,
+                            97u8,
+                            25u8,
+                            28u8,
+                            21u8,
+                            206u8,
                         ],
                     )
                 }
@@ -4750,24 +4655,24 @@ pub mod api {
                     ::subxt::storage::address::StaticStorageMapKey,
                     runtime_types::bounded_collections::bounded_vec::BoundedVec<
                         runtime_types::pallet_balances::types::IdAmount<
-                            (),
+                            runtime_types::tangle_standalone_runtime::RuntimeHoldReason,
                             ::core::primitive::u128,
                         >,
                     >,
                     (),
                     ::subxt::storage::address::Yes,
                     ::subxt::storage::address::Yes,
-                > {
+                >{
                     ::subxt::storage::address::Address::new_static(
                         "Balances",
                         "Holds",
                         Vec::new(),
                         [
-                            53u8, 126u8, 215u8, 237u8, 42u8, 223u8, 188u8,
-                            150u8, 230u8, 107u8, 95u8, 24u8, 26u8, 235u8,
-                            158u8, 149u8, 193u8, 191u8, 10u8, 194u8, 231u8,
-                            59u8, 35u8, 167u8, 186u8, 89u8, 43u8, 126u8, 215u8,
-                            117u8, 1u8, 202u8,
+                            37u8, 176u8, 2u8, 18u8, 109u8, 26u8, 66u8, 81u8,
+                            28u8, 104u8, 149u8, 117u8, 119u8, 114u8, 196u8,
+                            35u8, 172u8, 155u8, 66u8, 195u8, 98u8, 37u8, 134u8,
+                            22u8, 106u8, 221u8, 215u8, 97u8, 25u8, 28u8, 21u8,
+                            206u8,
                         ],
                     )
                 }
@@ -4963,10 +4868,7 @@ pub mod api {
     pub mod transaction_payment {
         use super::root_mod;
         use super::runtime_types;
-        /**
-        The [event](https://docs.substrate.io/main-docs/build/events-errors/) emitted
-        by this pallet.
-        */
+        ///The `Event` enum of this pallet
         pub type Event =
             runtime_types::pallet_transaction_payment::pallet::Event;
         pub mod events {
@@ -5186,12 +5088,9 @@ pub mod api {
     pub mod grandpa {
         use super::root_mod;
         use super::runtime_types;
-        /**
-        Custom [dispatch errors](https://docs.substrate.io/main-docs/build/events-errors/)
-        of this pallet.
-        */
+        ///The `Error` enum of this pallet.
         pub type Error = runtime_types::pallet_grandpa::pallet::Error;
-        ///Contains one variant per dispatchable that can be called by an extrinsic.
+        ///Contains a variant per dispatchable extrinsic that this pallet has.
         pub type Call = runtime_types::pallet_grandpa::pallet::Call;
         pub mod calls {
             use super::root_mod;
@@ -5287,10 +5186,7 @@ pub mod api {
             }
             pub struct TransactionApi;
             impl TransactionApi {
-                ///Report voter equivocation/misbehavior. This method will verify the
-                ///equivocation proof and validate the given key ownership proof
-                ///against the extracted offender. If both are valid, the offence
-                ///will be reported.
+                ///See [`Pallet::report_equivocation`].
                 pub fn report_equivocation(
                     &self,
                     equivocation_proof: runtime_types::sp_consensus_grandpa::EquivocationProof<
@@ -5318,15 +5214,7 @@ pub mod api {
                         ],
                     )
                 }
-                ///Report voter equivocation/misbehavior. This method will verify the
-                ///equivocation proof and validate the given key ownership proof
-                ///against the extracted offender. If both are valid, the offence
-                ///will be reported.
-                ///
-                ///This extrinsic must be called unsigned and it is expected that only
-                ///block authors will call it (validated in `ValidateUnsigned`), as such
-                ///if the block author is defined it will be defined as the equivocation
-                ///reporter.
+                ///See [`Pallet::report_equivocation_unsigned`].
                 pub fn report_equivocation_unsigned(
                     &self,
                     equivocation_proof: runtime_types::sp_consensus_grandpa::EquivocationProof<
@@ -5354,18 +5242,7 @@ pub mod api {
                         ],
                     )
                 }
-                ///Note that the current authority set of the GRANDPA finality gadget has stalled.
-                ///
-                ///This will trigger a forced authority set change at the beginning of the next session, to
-                ///be enacted `delay` blocks after that. The `delay` should be high enough to safely assume
-                ///that the block signalling the forced change will not be re-orged e.g. 1000 blocks.
-                ///The block production rate (which may be slowed down because of finality lagging) should
-                ///be taken into account when choosing the `delay`. The GRANDPA voters based on the new
-                ///authority will start voting on top of `best_finalized_block_number` for new finalized
-                ///blocks. `best_finalized_block_number` should be the highest of the latest finalized
-                ///block of all validators of the new authority set.
-                ///
-                ///Only callable by root.
+                ///See [`Pallet::note_stalled`].
                 pub fn note_stalled(
                     &self,
                     delay: ::core::primitive::u32,
@@ -5389,10 +5266,7 @@ pub mod api {
                 }
             }
         }
-        /**
-        The [event](https://docs.substrate.io/main-docs/build/events-errors/) emitted
-        by this pallet.
-        */
+        ///The `Event` enum of this pallet
         pub type Event = runtime_types::pallet_grandpa::pallet::Event;
         pub mod events {
             use super::runtime_types;
@@ -5728,12 +5602,9 @@ pub mod api {
     pub mod dkg {
         use super::root_mod;
         use super::runtime_types;
-        /**
-        Custom [dispatch errors](https://docs.substrate.io/main-docs/build/events-errors/)
-        of this pallet.
-        */
+        ///The `Error` enum of this pallet.
         pub type Error = runtime_types::pallet_dkg_metadata::pallet::Error;
-        ///Contains one variant per dispatchable that can be called by an extrinsic.
+        ///Contains a variant per dispatchable extrinsic that this pallet has.
         pub type Call = runtime_types::pallet_dkg_metadata::pallet::Call;
         pub mod calls {
             use super::root_mod;
@@ -5986,15 +5857,7 @@ pub mod api {
             }
             pub struct TransactionApi;
             impl TransactionApi {
-                ///Set the pending signature threshold for the session following the next session.
-                ///
-                ///We cannot assume that the next DKG has not already completed keygen.
-                ///After all, if we are in a new session the next DKG may have already completed.
-                ///Therefore, when we update the thresholds we are updating a threshold
-                ///that will become the next threshold after the next session update.
-                ///
-                ///* `origin` - The account origin.
-                ///* `new_threshold` - The new signature threshold for the DKG.
+                ///See [`Pallet::set_signature_threshold`].
                 pub fn set_signature_threshold(
                     &self,
                     new_threshold: ::core::primitive::u16,
@@ -6013,15 +5876,7 @@ pub mod api {
                         ],
                     )
                 }
-                ///Set the pending keygen threshold for the session following the next session.
-                ///
-                ///We cannot assume that the next DKG has not already completed keygen.
-                ///After all, if we are in a new session the next DKG may have already completed.
-                ///Therefore, when we update the thresholds we are updating a threshold
-                ///that will become the next threshold after the next session update.
-                ///
-                ///* `origin` - The account origin.
-                ///* `new_threshold` - The new keygen threshold for the DKG.
+                ///See [`Pallet::set_keygen_threshold`].
                 pub fn set_keygen_threshold(
                     &self,
                     new_threshold: ::core::primitive::u16,
@@ -6040,17 +5895,7 @@ pub mod api {
                         ],
                     )
                 }
-                ///Submits and stores the active public key for the genesis session into the on-chain
-                ///storage. This is primarily used to separate the genesis public key submission from
-                ///non-genesis rounds.
-                ///
-                ///Can only be submitted by the current authorities. It is also required that a
-                ///`SignatureThreshold` of submissions is reached in order to successfully
-                ///store the public key on-chain.
-                ///
-                ///* `origin` - The account origin.
-                ///* `keys_and_signatures` - The aggregated public keys and signatures for possible current
-                ///  DKG public keys.
+                ///See [`Pallet::submit_public_key`].
                 pub fn submit_public_key(
                     &self,
                     keys_and_signatures: runtime_types::dkg_runtime_primitives::AggregatedPublicKeys,
@@ -6071,15 +5916,7 @@ pub mod api {
                         ],
                     )
                 }
-                ///Submits and stores the next public key for the next session into the on-chain storage.
-                ///
-                ///Can only be submitted by the next authorities. It is also required that a
-                ///`NextSignatureThreshold` of submissions is reached in order to successfully
-                ///store the public key on-chain.
-                ///
-                ///* `origin` - The account origin.
-                ///* `keys_and_signatures` - The aggregated public keys and signatures for possible next
-                ///  DKG public keys.
+                ///See [`Pallet::submit_next_public_key`].
                 pub fn submit_next_public_key(
                     &self,
                     keys_and_signatures: runtime_types::dkg_runtime_primitives::AggregatedPublicKeys,
@@ -6100,24 +5937,7 @@ pub mod api {
                         ],
                     )
                 }
-                ///Submits misbehaviour reports on chain. Signatures of the offending authority are
-                ///verified against the current or next authorities depending on the type of misbehaviour.
-                ///- Keygen: Verifies against the next authorities, since they are doing keygen.
-                ///- Signing: Verifies against the current authorities, since they are doing signing.
-                ///
-                ///Verifies the reports against the respective thresholds and if enough reports are met
-                ///begins to jail and decrease the reputation of the offending authority.
-                ///
-                ///The misbehaviour reputation update is:
-                ///	AUTHORITY_REPUTATION = DECAY_PERCENTAGE * AUTHORITY_REPUTATION
-                ///
-                ///If there are not enough unjailed keygen authorities to perform a keygen after the next
-                ///session, then we deduct the pending keygen threshold (and pending signing threshold)
-                ///accordingly.
-                ///
-                ///* `origin` - The account origin.
-                ///* `reports` - The aggregated misbehaviour reports containing signatures of an offending
-                ///  authority
+                ///See [`Pallet::submit_misbehaviour_reports`].
                 pub fn submit_misbehaviour_reports(
                     &self,
                     reports: runtime_types::dkg_runtime_primitives::AggregatedMisbehaviourReports<
@@ -6140,14 +5960,7 @@ pub mod api {
                         ],
                     )
                 }
-                ///Attempts to remove an authority from all possible jails (keygen & signing).
-                ///This can only be called by the controller of the authority in jail. The
-                ///origin must map directly to the authority in jail.
-                ///
-                ///The authority's jail sentence for either keygen or signing must be elapsed
-                ///for the authority to be removed from the jail.
-                ///
-                ///* `origin` - The account origin.
+                ///See [`Pallet::unjail`].
                 pub fn unjail(&self) -> ::subxt::tx::Payload<types::Unjail> {
                     ::subxt::tx::Payload::new_static(
                         "DKG",
@@ -6162,11 +5975,7 @@ pub mod api {
                         ],
                     )
                 }
-                ///Force removes an authority from keygen jail.
-                ///
-                ///Can only be called by DKG
-                ///* `origin` - The account origin.
-                ///* `authority` - The authority to be removed from the keygen jail.
+                ///See [`Pallet::force_unjail_keygen`].
                 pub fn force_unjail_keygen(
                     &self,
                     authority: runtime_types::dkg_runtime_primitives::crypto::Public,
@@ -6185,12 +5994,7 @@ pub mod api {
                         ],
                     )
                 }
-                ///Force removes an authority from signing jail.
-                ///
-                ///Can only be called by the root origin.
-                ///
-                ///* `origin` - The account origin.
-                ///* `authority` - The authority to be removed from the signing jail.
+                ///See [`Pallet::force_unjail_signing`].
                 pub fn force_unjail_signing(
                     &self,
                     authority: runtime_types::dkg_runtime_primitives::crypto::Public,
@@ -6209,11 +6013,7 @@ pub mod api {
                         ],
                     )
                 }
-                ///Forcefully rotate the DKG
-                ///
-                ///This forces the next authorities into the current authority spot and
-                ///automatically increments the authority ID. It uses `change_authorities`
-                ///to execute the rotation forcefully.
+                ///See [`Pallet::force_change_authorities`].
                 pub fn force_change_authorities(
                     &self,
                 ) -> ::subxt::tx::Payload<types::ForceChangeAuthorities>
@@ -6231,12 +6031,7 @@ pub mod api {
                         ],
                     )
                 }
-                ///Triggers an Emergency Keygen Protocol.
-                ///
-                ///The keygen protocol will then be executed and the result will be stored in the off chain
-                ///storage, which will be picked up by the on chain worker and stored on chain.
-                ///
-                ///Note that, this will clear the next public key and its signature, if any.
+                ///See [`Pallet::trigger_emergency_keygen`].
                 pub fn trigger_emergency_keygen(
                     &self,
                 ) -> ::subxt::tx::Payload<types::TriggerEmergencyKeygen>
@@ -6256,10 +6051,7 @@ pub mod api {
                 }
             }
         }
-        /**
-        The [event](https://docs.substrate.io/main-docs/build/events-errors/) emitted
-        by this pallet.
-        */
+        ///The `Event` enum of this pallet
         pub type Event = runtime_types::pallet_dkg_metadata::pallet::Event;
         pub mod events {
             use super::runtime_types;
@@ -7964,12 +7756,9 @@ pub mod api {
     pub mod dkg_proposals {
         use super::root_mod;
         use super::runtime_types;
-        /**
-        Custom [dispatch errors](https://docs.substrate.io/main-docs/build/events-errors/)
-        of this pallet.
-        */
+        ///The `Error` enum of this pallet.
         pub type Error = runtime_types::pallet_dkg_proposals::pallet::Error;
-        ///Contains one variant per dispatchable that can be called by an extrinsic.
+        ///Contains a variant per dispatchable extrinsic that this pallet has.
         pub type Call = runtime_types::pallet_dkg_proposals::pallet::Call;
         pub mod calls {
             use super::root_mod;
@@ -8160,14 +7949,7 @@ pub mod api {
             }
             pub struct TransactionApi;
             impl TransactionApi {
-                ///Sets the vote threshold for proposals.
-                ///
-                ///This threshold is used to determine how many votes are required
-                ///before a proposal is executed.
-                ///
-                ///# <weight>
-                ///- O(1) lookup and insert
-                ///# </weight>
+                ///See [`Pallet::set_threshold`].
                 pub fn set_threshold(
                     &self,
                     threshold: ::core::primitive::u32,
@@ -8185,11 +7967,7 @@ pub mod api {
                         ],
                     )
                 }
-                ///Stores a method name on chain under an associated resource ID.
-                ///
-                ///# <weight>
-                ///- O(1) write
-                ///# </weight>
+                ///See [`Pallet::set_resource`].
                 pub fn set_resource(
                     &self,
                     id: runtime_types::webb_proposals::header::ResourceId,
@@ -8208,14 +7986,7 @@ pub mod api {
                         ],
                     )
                 }
-                ///Removes a resource ID from the resource mapping.
-                ///
-                ///After this call, bridge transfers with the associated resource ID
-                ///will be rejected.
-                ///
-                ///# <weight>
-                ///- O(1) removal
-                ///# </weight>
+                ///See [`Pallet::remove_resource`].
                 pub fn remove_resource(
                     &self,
                     id: runtime_types::webb_proposals::header::ResourceId,
@@ -8234,11 +8005,7 @@ pub mod api {
                         ],
                     )
                 }
-                ///Enables a chain ID as a source or destination for a bridge transfer.
-                ///
-                ///# <weight>
-                ///- O(1) lookup and insert
-                ///# </weight>
+                ///See [`Pallet::whitelist_chain`].
                 pub fn whitelist_chain(
                     &self,
                     chain_id: runtime_types::webb_proposals::header::TypedChainId,
@@ -8257,15 +8024,7 @@ pub mod api {
                         ],
                     )
                 }
-                ///Commits a vote in favour of the provided proposal.
-                ///
-                ///If a proposal with the given nonce and source chain ID does not
-                ///already exist, it will be created with an initial vote in favour
-                ///from the caller.
-                ///
-                ///# <weight>
-                ///- weight of proposed call, regardless of whether execution is performed
-                ///# </weight>
+                ///See [`Pallet::acknowledge_proposal`].
                 pub fn acknowledge_proposal(
                     &self,
                     prop: runtime_types::webb_proposals::proposal::Proposal<
@@ -8286,11 +8045,7 @@ pub mod api {
                         ],
                     )
                 }
-                ///Commits a vote against a provided proposal.
-                ///
-                ///# <weight>
-                ///- Fixed, since execution of proposal should not be included
-                ///# </weight>
+                ///See [`Pallet::reject_proposal`].
                 pub fn reject_proposal(
                     &self,
                     prop: runtime_types::webb_proposals::proposal::Proposal<
@@ -8311,14 +8066,7 @@ pub mod api {
                         ],
                     )
                 }
-                ///Evaluate the state of a proposal given the current vote threshold.
-                ///
-                ///A proposal with enough votes will be either executed or cancelled,
-                ///and the status will be updated accordingly.
-                ///
-                ///# <weight>
-                ///- weight of proposed call, regardless of whether execution is performed
-                ///# </weight>
+                ///See [`Pallet::eval_vote_state`].
                 pub fn eval_vote_state(
                     &self,
                     nonce: runtime_types::webb_proposals::nonce::Nonce,
@@ -8347,10 +8095,7 @@ pub mod api {
                 }
             }
         }
-        /**
-        The [event](https://docs.substrate.io/main-docs/build/events-errors/) emitted
-        by this pallet.
-        */
+        ///The `Event` enum of this pallet
         pub type Event = runtime_types::pallet_dkg_proposals::pallet::Event;
         pub mod events {
             use super::runtime_types;
@@ -9083,13 +8828,10 @@ pub mod api {
     pub mod dkg_proposal_handler {
         use super::root_mod;
         use super::runtime_types;
-        /**
-        Custom [dispatch errors](https://docs.substrate.io/main-docs/build/events-errors/)
-        of this pallet.
-        */
+        ///The `Error` enum of this pallet.
         pub type Error =
             runtime_types::pallet_dkg_proposal_handler::pallet::Error;
-        ///Contains one variant per dispatchable that can be called by an extrinsic.
+        ///Contains a variant per dispatchable extrinsic that this pallet has.
         pub type Call =
             runtime_types::pallet_dkg_proposal_handler::pallet::Call;
         pub mod calls {
@@ -9155,9 +8897,66 @@ pub mod api {
                     const PALLET: &'static str = "DKGProposalHandler";
                     const CALL: &'static str = "force_submit_unsigned_proposal";
                 }
+                #[derive(
+                    ::subxt::ext::codec::Decode,
+                    ::subxt::ext::codec::Encode,
+                    ::subxt::ext::scale_decode::DecodeAsType,
+                    ::subxt::ext::scale_encode::EncodeAsType,
+                    Clone,
+                    Debug,
+                    Eq,
+                    PartialEq,
+                )]
+                #[codec(crate = ::subxt::ext::codec)]
+                #[decode_as_type(
+                    crate_path = ":: subxt :: ext :: scale_decode"
+                )]
+                #[encode_as_type(
+                    crate_path = ":: subxt :: ext :: scale_encode"
+                )]
+                pub struct SubmitDkgSigningOffence {
+                    pub signed_data: runtime_types::dkg_runtime_primitives::proposal::SignedProposalBatch<
+                        ::core::primitive::u32,
+                        runtime_types::dkg_runtime_primitives::CustomU32Getter,
+                        runtime_types::dkg_runtime_primitives::CustomU32Getter2,
+                        runtime_types::dkg_runtime_primitives::CustomU32Getter3,
+                    >,
+                }
+                impl ::subxt::blocks::StaticExtrinsic for SubmitDkgSigningOffence {
+                    const PALLET: &'static str = "DKGProposalHandler";
+                    const CALL: &'static str = "submit_dkg_signing_offence";
+                }
+                #[derive(
+                    ::subxt::ext::codec::Decode,
+                    ::subxt::ext::codec::Encode,
+                    ::subxt::ext::scale_decode::DecodeAsType,
+                    ::subxt::ext::scale_encode::EncodeAsType,
+                    Clone,
+                    Debug,
+                    Eq,
+                    PartialEq,
+                )]
+                #[codec(crate = ::subxt::ext::codec)]
+                #[decode_as_type(
+                    crate_path = ":: subxt :: ext :: scale_decode"
+                )]
+                #[encode_as_type(
+                    crate_path = ":: subxt :: ext :: scale_encode"
+                )]
+                pub struct ForceRemoveUnsignedProposalBatch {
+                    pub typed_chain_id:
+                        runtime_types::webb_proposals::header::TypedChainId,
+                    pub batch_id: ::core::primitive::u32,
+                }
+                impl ::subxt::blocks::StaticExtrinsic for ForceRemoveUnsignedProposalBatch {
+                    const PALLET: &'static str = "DKGProposalHandler";
+                    const CALL: &'static str =
+                        "force_remove_unsigned_proposal_batch";
+                }
             }
             pub struct TransactionApi;
             impl TransactionApi {
+                ///See [`Pallet::submit_signed_proposals`].
                 pub fn submit_signed_proposals(
                     &self,
                     props: ::std::vec::Vec<
@@ -9183,11 +8982,7 @@ pub mod api {
                         ],
                     )
                 }
-                ///Force submit an unsigned proposal to the DKG
-                ///
-                ///There are certain proposals we'd like to be proposable only
-                ///through root actions. The currently supported proposals are
-                ///	1. Updating
+                ///See [`Pallet::force_submit_unsigned_proposal`].
                 pub fn force_submit_unsigned_proposal(
                     &self,
                     prop: runtime_types::webb_proposals::proposal::Proposal<
@@ -9208,12 +9003,56 @@ pub mod api {
                         ],
                     )
                 }
+                ///See [`Pallet::submit_dkg_signing_offence`].
+                pub fn submit_dkg_signing_offence(
+                    &self,
+                    signed_data: runtime_types::dkg_runtime_primitives::proposal::SignedProposalBatch<
+                        ::core::primitive::u32,
+                        runtime_types::dkg_runtime_primitives::CustomU32Getter,
+                        runtime_types::dkg_runtime_primitives::CustomU32Getter2,
+                        runtime_types::dkg_runtime_primitives::CustomU32Getter3,
+                    >,
+                ) -> ::subxt::tx::Payload<types::SubmitDkgSigningOffence>
+                {
+                    ::subxt::tx::Payload::new_static(
+                        "DKGProposalHandler",
+                        "submit_dkg_signing_offence",
+                        types::SubmitDkgSigningOffence { signed_data },
+                        [
+                            24u8, 159u8, 76u8, 31u8, 98u8, 28u8, 110u8, 82u8,
+                            95u8, 215u8, 244u8, 59u8, 226u8, 142u8, 27u8, 78u8,
+                            137u8, 211u8, 7u8, 6u8, 167u8, 34u8, 67u8, 140u8,
+                            74u8, 167u8, 208u8, 222u8, 81u8, 178u8, 76u8,
+                            117u8,
+                        ],
+                    )
+                }
+                ///See [`Pallet::force_remove_unsigned_proposal_batch`].
+                pub fn force_remove_unsigned_proposal_batch(
+                    &self,
+                    typed_chain_id: runtime_types::webb_proposals::header::TypedChainId,
+                    batch_id: ::core::primitive::u32,
+                ) -> ::subxt::tx::Payload<types::ForceRemoveUnsignedProposalBatch>
+                {
+                    ::subxt::tx::Payload::new_static(
+                        "DKGProposalHandler",
+                        "force_remove_unsigned_proposal_batch",
+                        types::ForceRemoveUnsignedProposalBatch {
+                            typed_chain_id,
+                            batch_id,
+                        },
+                        [
+                            127u8, 174u8, 145u8, 8u8, 33u8, 219u8, 124u8,
+                            173u8, 198u8, 54u8, 154u8, 191u8, 51u8, 157u8,
+                            161u8, 213u8, 139u8, 139u8, 128u8, 85u8, 218u8,
+                            1u8, 90u8, 198u8, 33u8, 18u8, 229u8, 62u8, 19u8,
+                            110u8, 14u8, 99u8,
+                        ],
+                    )
+                }
             }
         }
-        /**
-        The [event](https://docs.substrate.io/main-docs/build/events-errors/) emitted
-        by this pallet.
-        */
+        ///The `Event` enum of this pallet
         pub type Event =
             runtime_types::pallet_dkg_proposal_handler::pallet::Event;
         pub mod events {
@@ -9289,14 +9128,37 @@ pub mod api {
             #[decode_as_type(crate_path = ":: subxt :: ext :: scale_decode")]
             #[encode_as_type(crate_path = ":: subxt :: ext :: scale_encode")]
             ///RuntimeEvent When a Proposal is removed from UnsignedProposalQueue.
-            pub struct ProposalRemoved {
-                pub key: runtime_types::dkg_runtime_primitives::proposal::DKGPayloadKey,
-                pub target_chain: runtime_types::webb_proposals::header::TypedChainId,
-                pub expired: ::core::primitive::bool,
+            pub struct ProposalBatchRemoved {
+                pub target_chain:
+                    runtime_types::webb_proposals::header::TypedChainId,
+                pub batch_id: ::core::primitive::u32,
             }
-            impl ::subxt::events::StaticEvent for ProposalRemoved {
+            impl ::subxt::events::StaticEvent for ProposalBatchRemoved {
                 const PALLET: &'static str = "DKGProposalHandler";
-                const EVENT: &'static str = "ProposalRemoved";
+                const EVENT: &'static str = "ProposalBatchRemoved";
+            }
+            #[derive(
+                ::subxt::ext::codec::Decode,
+                ::subxt::ext::codec::Encode,
+                ::subxt::ext::scale_decode::DecodeAsType,
+                ::subxt::ext::scale_encode::EncodeAsType,
+                Clone,
+                Debug,
+                Eq,
+                PartialEq,
+            )]
+            #[codec(crate = ::subxt::ext::codec)]
+            #[decode_as_type(crate_path = ":: subxt :: ext :: scale_decode")]
+            #[encode_as_type(crate_path = ":: subxt :: ext :: scale_encode")]
+            ///RuntimeEvent When a Proposal is expired and removed from UnsignedProposalQueue.
+            pub struct ProposalBatchExpired {
+                pub target_chain:
+                    runtime_types::webb_proposals::header::TypedChainId,
+                pub batch_id: ::core::primitive::u32,
+            }
+            impl ::subxt::events::StaticEvent for ProposalBatchExpired {
+                const PALLET: &'static str = "DKGProposalHandler";
+                const EVENT: &'static str = "ProposalBatchExpired";
             }
             #[derive(
                 ::subxt::ext::codec::Decode,
@@ -9323,6 +9185,33 @@ pub mod api {
             impl ::subxt::events::StaticEvent for ProposalBatchSigned {
                 const PALLET: &'static str = "DKGProposalHandler";
                 const EVENT: &'static str = "ProposalBatchSigned";
+            }
+            #[derive(
+                ::subxt::ext::codec::Decode,
+                ::subxt::ext::codec::Encode,
+                ::subxt::ext::scale_decode::DecodeAsType,
+                ::subxt::ext::scale_encode::EncodeAsType,
+                Clone,
+                Debug,
+                Eq,
+                PartialEq,
+            )]
+            #[codec(crate = ::subxt::ext::codec)]
+            #[decode_as_type(crate_path = ":: subxt :: ext :: scale_decode")]
+            #[encode_as_type(crate_path = ":: subxt :: ext :: scale_encode")]
+            ///Offence reported against current DKG
+            pub struct SigningOffenceReported {
+                pub offence: runtime_types::pallet_dkg_proposal_handler::offences::DKGMisbehaviorOffenceType,
+                pub signed_data: runtime_types::dkg_runtime_primitives::proposal::SignedProposalBatch<
+                    ::core::primitive::u32,
+                    runtime_types::dkg_runtime_primitives::CustomU32Getter,
+                    runtime_types::dkg_runtime_primitives::CustomU32Getter2,
+                    runtime_types::dkg_runtime_primitives::CustomU32Getter3,
+                >,
+            }
+            impl ::subxt::events::StaticEvent for SigningOffenceReported {
+                const PALLET: &'static str = "DKGProposalHandler";
+                const EVENT: &'static str = "SigningOffenceReported";
             }
         }
         pub mod storage {
@@ -9669,12 +9558,9 @@ pub mod api {
     pub mod bridge_registry {
         use super::root_mod;
         use super::runtime_types;
-        /**
-        Custom [dispatch errors](https://docs.substrate.io/main-docs/build/events-errors/)
-        of this pallet.
-        */
+        ///The `Error` enum of this pallet.
         pub type Error = runtime_types::pallet_bridge_registry::pallet::Error;
-        ///Contains one variant per dispatchable that can be called by an extrinsic.
+        ///Contains a variant per dispatchable extrinsic that this pallet has.
         pub type Call = runtime_types::pallet_bridge_registry::pallet::Call;
         pub mod calls {
             use super::root_mod;
@@ -9737,16 +9623,7 @@ pub mod api {
             }
             pub struct TransactionApi;
             impl TransactionApi {
-                ///Set an account's identity information and reserve the appropriate deposit.
-                ///
-                ///If the account already has identity information, the deposit is taken as part payment
-                ///for the new deposit.
-                ///
-                ///The dispatch origin for this call must be _Signed_.
-                ///
-                ///- `info`: The identity information.
-                ///
-                ///Emits `ResourceSet` if successful.
+                ///See [`Pallet::set_metadata`].
                 pub fn set_metadata(
                     &self,
                     bridge_index: ::core::primitive::u32,
@@ -9765,6 +9642,7 @@ pub mod api {
                         ],
                     )
                 }
+                ///See [`Pallet::force_reset_indices`].
                 pub fn force_reset_indices(
                     &self,
                     resource_ids: ::std::vec::Vec<
@@ -9791,10 +9669,7 @@ pub mod api {
                 }
             }
         }
-        /**
-        The [event](https://docs.substrate.io/main-docs/build/events-errors/) emitted
-        by this pallet.
-        */
+        ///The `Event` enum of this pallet
         pub type Event = runtime_types::pallet_bridge_registry::pallet::Event;
         pub mod events {
             use super::runtime_types;
@@ -10048,12 +9923,9 @@ pub mod api {
     pub mod indices {
         use super::root_mod;
         use super::runtime_types;
-        /**
-        Custom [dispatch errors](https://docs.substrate.io/main-docs/build/events-errors/)
-        of this pallet.
-        */
+        ///The `Error` enum of this pallet.
         pub type Error = runtime_types::pallet_indices::pallet::Error;
-        ///Contains one variant per dispatchable that can be called by an extrinsic.
+        ///Contains a variant per dispatchable extrinsic that this pallet has.
         pub type Call = runtime_types::pallet_indices::pallet::Call;
         pub mod calls {
             use super::root_mod;
@@ -10196,18 +10068,7 @@ pub mod api {
             }
             pub struct TransactionApi;
             impl TransactionApi {
-                ///Assign an previously unassigned index.
-                ///
-                ///Payment: `Deposit` is reserved from the sender account.
-                ///
-                ///The dispatch origin for this call must be _Signed_.
-                ///
-                ///- `index`: the index to be claimed. This must not be in use.
-                ///
-                ///Emits `IndexAssigned` if successful.
-                ///
-                ///## Complexity
-                ///- `O(1)`.
+                ///See [`Pallet::claim`].
                 pub fn claim(
                     &self,
                     index: ::core::primitive::u32,
@@ -10225,18 +10086,7 @@ pub mod api {
                         ],
                     )
                 }
-                ///Assign an index already owned by the sender to another account. The balance reservation
-                ///is effectively transferred to the new account.
-                ///
-                ///The dispatch origin for this call must be _Signed_.
-                ///
-                ///- `index`: the index to be re-assigned. This must be owned by the sender.
-                ///- `new`: the new owner of the index. This function is a no-op if it is equal to sender.
-                ///
-                ///Emits `IndexAssigned` if successful.
-                ///
-                ///## Complexity
-                ///- `O(1)`.
+                ///See [`Pallet::transfer`].
                 pub fn transfer(
                     &self,
                     new: ::subxt::utils::MultiAddress<
@@ -10258,18 +10108,7 @@ pub mod api {
                         ],
                     )
                 }
-                ///Free up an index owned by the sender.
-                ///
-                ///Payment: Any previous deposit placed for the index is unreserved in the sender account.
-                ///
-                ///The dispatch origin for this call must be _Signed_ and the sender must own the index.
-                ///
-                ///- `index`: the index to be freed. This must be owned by the sender.
-                ///
-                ///Emits `IndexFreed` if successful.
-                ///
-                ///## Complexity
-                ///- `O(1)`.
+                ///See [`Pallet::free`].
                 pub fn free(
                     &self,
                     index: ::core::primitive::u32,
@@ -10287,19 +10126,7 @@ pub mod api {
                         ],
                     )
                 }
-                ///Force an index to an account. This doesn't require a deposit. If the index is already
-                ///held, then any deposit is reimbursed to its current owner.
-                ///
-                ///The dispatch origin for this call must be _Root_.
-                ///
-                ///- `index`: the index to be (re-)assigned.
-                ///- `new`: the new owner of the index. This function is a no-op if it is equal to sender.
-                ///- `freeze`: if set to `true`, will freeze the index so it cannot be transferred.
-                ///
-                ///Emits `IndexAssigned` if successful.
-                ///
-                ///## Complexity
-                ///- `O(1)`.
+                ///See [`Pallet::force_transfer`].
                 pub fn force_transfer(
                     &self,
                     new: ::subxt::utils::MultiAddress<
@@ -10323,18 +10150,7 @@ pub mod api {
                         ],
                     )
                 }
-                ///Freeze an index so it will always point to the sender account. This consumes the
-                ///deposit.
-                ///
-                ///The dispatch origin for this call must be _Signed_ and the signing account must have a
-                ///non-frozen account `index`.
-                ///
-                ///- `index`: the index to be frozen in place.
-                ///
-                ///Emits `IndexFrozen` if successful.
-                ///
-                ///## Complexity
-                ///- `O(1)`.
+                ///See [`Pallet::freeze`].
                 pub fn freeze(
                     &self,
                     index: ::core::primitive::u32,
@@ -10354,10 +10170,7 @@ pub mod api {
                 }
             }
         }
-        /**
-        The [event](https://docs.substrate.io/main-docs/build/events-errors/) emitted
-        by this pallet.
-        */
+        ///The `Event` enum of this pallet
         pub type Event = runtime_types::pallet_indices::pallet::Event;
         pub mod events {
             use super::runtime_types;
@@ -10546,12 +10359,9 @@ pub mod api {
     pub mod democracy {
         use super::root_mod;
         use super::runtime_types;
-        /**
-        Custom [dispatch errors](https://docs.substrate.io/main-docs/build/events-errors/)
-        of this pallet.
-        */
+        ///The `Error` enum of this pallet.
         pub type Error = runtime_types::pallet_democracy::pallet::Error;
-        ///Contains one variant per dispatchable that can be called by an extrinsic.
+        ///Contains a variant per dispatchable extrinsic that this pallet has.
         pub type Call = runtime_types::pallet_democracy::pallet::Call;
         pub mod calls {
             use super::root_mod;
@@ -11054,15 +10864,7 @@ pub mod api {
             }
             pub struct TransactionApi;
             impl TransactionApi {
-                ///Propose a sensitive action to be taken.
-                ///
-                ///The dispatch origin of this call must be _Signed_ and the sender must
-                ///have funds to cover the deposit.
-                ///
-                ///- `proposal_hash`: The hash of the proposal preimage.
-                ///- `value`: The amount of deposit (must be at least `MinimumDeposit`).
-                ///
-                ///Emits `Proposed`.
+                ///See [`Pallet::propose`].
                 pub fn propose(
                     &self,
                     proposal: runtime_types::frame_support::traits::preimages::Bounded<
@@ -11083,12 +10885,7 @@ pub mod api {
                         ],
                     )
                 }
-                ///Signals agreement with a particular proposal.
-                ///
-                ///The dispatch origin of this call must be _Signed_ and the sender
-                ///must have funds to cover the deposit, equal to the original deposit.
-                ///
-                ///- `proposal`: The index of the proposal to second.
+                ///See [`Pallet::second`].
                 pub fn second(
                     &self,
                     proposal: ::core::primitive::u32,
@@ -11106,13 +10903,7 @@ pub mod api {
                         ],
                     )
                 }
-                ///Vote in a referendum. If `vote.is_aye()`, the vote is to enact the proposal;
-                ///otherwise it is a vote to keep the status quo.
-                ///
-                ///The dispatch origin of this call must be _Signed_.
-                ///
-                ///- `ref_index`: The index of the referendum to vote for.
-                ///- `vote`: The vote configuration.
+                ///See [`Pallet::vote`].
                 pub fn vote(
                     &self,
                     ref_index: ::core::primitive::u32,
@@ -11133,14 +10924,7 @@ pub mod api {
                         ],
                     )
                 }
-                ///Schedule an emergency cancellation of a referendum. Cannot happen twice to the same
-                ///referendum.
-                ///
-                ///The dispatch origin of this call must be `CancellationOrigin`.
-                ///
-                ///-`ref_index`: The index of the referendum to cancel.
-                ///
-                ///Weight: `O(1)`.
+                ///See [`Pallet::emergency_cancel`].
                 pub fn emergency_cancel(
                     &self,
                     ref_index: ::core::primitive::u32,
@@ -11158,12 +10942,7 @@ pub mod api {
                         ],
                     )
                 }
-                ///Schedule a referendum to be tabled once it is legal to schedule an external
-                ///referendum.
-                ///
-                ///The dispatch origin of this call must be `ExternalOrigin`.
-                ///
-                ///- `proposal_hash`: The preimage hash of the proposal.
+                ///See [`Pallet::external_propose`].
                 pub fn external_propose(
                     &self,
                     proposal: runtime_types::frame_support::traits::preimages::Bounded<
@@ -11184,17 +10963,7 @@ pub mod api {
                         ],
                     )
                 }
-                ///Schedule a majority-carries referendum to be tabled next once it is legal to schedule
-                ///an external referendum.
-                ///
-                ///The dispatch of this call must be `ExternalMajorityOrigin`.
-                ///
-                ///- `proposal_hash`: The preimage hash of the proposal.
-                ///
-                ///Unlike `external_propose`, blacklisting has no effect on this and it may replace a
-                ///pre-scheduled `external_propose` call.
-                ///
-                ///Weight: `O(1)`
+                ///See [`Pallet::external_propose_majority`].
                 pub fn external_propose_majority(
                     &self,
                     proposal: runtime_types::frame_support::traits::preimages::Bounded<
@@ -11215,17 +10984,7 @@ pub mod api {
                         ],
                     )
                 }
-                ///Schedule a negative-turnout-bias referendum to be tabled next once it is legal to
-                ///schedule an external referendum.
-                ///
-                ///The dispatch of this call must be `ExternalDefaultOrigin`.
-                ///
-                ///- `proposal_hash`: The preimage hash of the proposal.
-                ///
-                ///Unlike `external_propose`, blacklisting has no effect on this and it may replace a
-                ///pre-scheduled `external_propose` call.
-                ///
-                ///Weight: `O(1)`
+                ///See [`Pallet::external_propose_default`].
                 pub fn external_propose_default(
                     &self,
                     proposal: runtime_types::frame_support::traits::preimages::Bounded<
@@ -11246,22 +11005,7 @@ pub mod api {
                         ],
                     )
                 }
-                ///Schedule the currently externally-proposed majority-carries referendum to be tabled
-                ///immediately. If there is no externally-proposed referendum currently, or if there is one
-                ///but it is not a majority-carries referendum then it fails.
-                ///
-                ///The dispatch of this call must be `FastTrackOrigin`.
-                ///
-                ///- `proposal_hash`: The hash of the current external proposal.
-                ///- `voting_period`: The period that is allowed for voting on this proposal. Increased to
-                ///	Must be always greater than zero.
-                ///	For `FastTrackOrigin` must be equal or greater than `FastTrackVotingPeriod`.
-                ///- `delay`: The number of block after voting has ended in approval and this should be
-                ///  enacted. This doesn't have a minimum amount.
-                ///
-                ///Emits `Started`.
-                ///
-                ///Weight: `O(1)`
+                ///See [`Pallet::fast_track`].
                 pub fn fast_track(
                     &self,
                     proposal_hash: ::subxt::utils::H256,
@@ -11285,15 +11029,7 @@ pub mod api {
                         ],
                     )
                 }
-                ///Veto and blacklist the external proposal hash.
-                ///
-                ///The dispatch origin of this call must be `VetoOrigin`.
-                ///
-                ///- `proposal_hash`: The preimage hash of the proposal to veto and blacklist.
-                ///
-                ///Emits `Vetoed`.
-                ///
-                ///Weight: `O(V + log(V))` where V is number of `existing vetoers`
+                ///See [`Pallet::veto_external`].
                 pub fn veto_external(
                     &self,
                     proposal_hash: ::subxt::utils::H256,
@@ -11311,13 +11047,7 @@ pub mod api {
                         ],
                     )
                 }
-                ///Remove a referendum.
-                ///
-                ///The dispatch origin of this call must be _Root_.
-                ///
-                ///- `ref_index`: The index of the referendum to cancel.
-                ///
-                ///# Weight: `O(1)`.
+                ///See [`Pallet::cancel_referendum`].
                 pub fn cancel_referendum(
                     &self,
                     ref_index: ::core::primitive::u32,
@@ -11336,26 +11066,7 @@ pub mod api {
                         ],
                     )
                 }
-                ///Delegate the voting power (with some given conviction) of the sending account.
-                ///
-                ///The balance delegated is locked for as long as it's delegated, and thereafter for the
-                ///time appropriate for the conviction's lock period.
-                ///
-                ///The dispatch origin of this call must be _Signed_, and the signing account must either:
-                ///  - be delegating already; or
-                ///  - have no voting activity (if there is, then it will need to be removed/consolidated
-                ///    through `reap_vote` or `unvote`).
-                ///
-                ///- `to`: The account whose voting the `target` account's voting power will follow.
-                ///- `conviction`: The conviction that will be attached to the delegated votes. When the
-                ///  account is undelegated, the funds will be locked for the corresponding period.
-                ///- `balance`: The amount of the account's balance to be used in delegating. This must not
-                ///  be more than the account's current balance.
-                ///
-                ///Emits `Delegated`.
-                ///
-                ///Weight: `O(R)` where R is the number of referendums the voter delegating to has
-                ///  voted on. Weight is charged as if maximum votes.
+                ///See [`Pallet::delegate`].
                 pub fn delegate(
                     &self,
                     to: ::subxt::utils::MultiAddress<
@@ -11381,18 +11092,7 @@ pub mod api {
                         ],
                     )
                 }
-                ///Undelegate the voting power of the sending account.
-                ///
-                ///Tokens may be unlocked following once an amount of time consistent with the lock period
-                ///of the conviction with which the delegation was issued.
-                ///
-                ///The dispatch origin of this call must be _Signed_ and the signing account must be
-                ///currently delegating.
-                ///
-                ///Emits `Undelegated`.
-                ///
-                ///Weight: `O(R)` where R is the number of referendums the voter delegating to has
-                ///  voted on. Weight is charged as if maximum votes.
+                ///See [`Pallet::undelegate`].
                 pub fn undelegate(
                     &self,
                 ) -> ::subxt::tx::Payload<types::Undelegate> {
@@ -11409,11 +11109,7 @@ pub mod api {
                         ],
                     )
                 }
-                ///Clears all public proposals.
-                ///
-                ///The dispatch origin of this call must be _Root_.
-                ///
-                ///Weight: `O(1)`.
+                ///See [`Pallet::clear_public_proposals`].
                 pub fn clear_public_proposals(
                     &self,
                 ) -> ::subxt::tx::Payload<types::ClearPublicProposals>
@@ -11431,13 +11127,7 @@ pub mod api {
                         ],
                     )
                 }
-                ///Unlock tokens that have an expired lock.
-                ///
-                ///The dispatch origin of this call must be _Signed_.
-                ///
-                ///- `target`: The account to remove the lock on.
-                ///
-                ///Weight: `O(R)` with R number of vote of target.
+                ///See [`Pallet::unlock`].
                 pub fn unlock(
                     &self,
                     target: ::subxt::utils::MultiAddress<
@@ -11458,33 +11148,7 @@ pub mod api {
                         ],
                     )
                 }
-                ///Remove a vote for a referendum.
-                ///
-                ///If:
-                ///- the referendum was cancelled, or
-                ///- the referendum is ongoing, or
-                ///- the referendum has ended such that
-                ///  - the vote of the account was in opposition to the result; or
-                ///  - there was no conviction to the account's vote; or
-                ///  - the account made a split vote
-                ///...then the vote is removed cleanly and a following call to `unlock` may result in more
-                ///funds being available.
-                ///
-                ///If, however, the referendum has ended and:
-                ///- it finished corresponding to the vote of the account, and
-                ///- the account made a standard vote with conviction, and
-                ///- the lock period of the conviction is not over
-                ///...then the lock will be aggregated into the overall account's lock, which may involve
-                ///*overlocking* (where the two locks are combined into a single lock that is the maximum
-                ///of both the amount locked and the time is it locked for).
-                ///
-                ///The dispatch origin of this call must be _Signed_, and the signer must have a vote
-                ///registered for referendum `index`.
-                ///
-                ///- `index`: The index of referendum of the vote to be removed.
-                ///
-                ///Weight: `O(R + log R)` where R is the number of referenda that `target` has voted on.
-                ///  Weight is calculated for the maximum number of vote.
+                ///See [`Pallet::remove_vote`].
                 pub fn remove_vote(
                     &self,
                     index: ::core::primitive::u32,
@@ -11502,21 +11166,7 @@ pub mod api {
                         ],
                     )
                 }
-                ///Remove a vote for a referendum.
-                ///
-                ///If the `target` is equal to the signer, then this function is exactly equivalent to
-                ///`remove_vote`. If not equal to the signer, then the vote must have expired,
-                ///either because the referendum was cancelled, because the voter lost the referendum or
-                ///because the conviction period is over.
-                ///
-                ///The dispatch origin of this call must be _Signed_.
-                ///
-                ///- `target`: The account of the vote to be removed; this account must have voted for
-                ///  referendum `index`.
-                ///- `index`: The index of referendum of the vote to be removed.
-                ///
-                ///Weight: `O(R + log R)` where R is the number of referenda that `target` has voted on.
-                ///  Weight is calculated for the maximum number of vote.
+                ///See [`Pallet::remove_other_vote`].
                 pub fn remove_other_vote(
                     &self,
                     target: ::subxt::utils::MultiAddress<
@@ -11539,21 +11189,7 @@ pub mod api {
                         ],
                     )
                 }
-                ///Permanently place a proposal into the blacklist. This prevents it from ever being
-                ///proposed again.
-                ///
-                ///If called on a queued public or external proposal, then this will result in it being
-                ///removed. If the `ref_index` supplied is an active referendum with the proposal hash,
-                ///then it will be cancelled.
-                ///
-                ///The dispatch origin of this call must be `BlacklistOrigin`.
-                ///
-                ///- `proposal_hash`: The proposal hash to blacklist permanently.
-                ///- `ref_index`: An ongoing referendum whose hash is `proposal_hash`, which will be
-                ///cancelled.
-                ///
-                ///Weight: `O(p)` (though as this is an high-privilege dispatch, we assume it has a
-                ///  reasonable value).
+                ///See [`Pallet::blacklist`].
                 pub fn blacklist(
                     &self,
                     proposal_hash: ::subxt::utils::H256,
@@ -11577,13 +11213,7 @@ pub mod api {
                         ],
                     )
                 }
-                ///Remove a proposal.
-                ///
-                ///The dispatch origin of this call must be `CancelProposalOrigin`.
-                ///
-                ///- `prop_index`: The index of the proposal to cancel.
-                ///
-                ///Weight: `O(p)` where `p = PublicProps::<T>::decode_len()`
+                ///See [`Pallet::cancel_proposal`].
                 pub fn cancel_proposal(
                     &self,
                     prop_index: ::core::primitive::u32,
@@ -11602,21 +11232,7 @@ pub mod api {
                         ],
                     )
                 }
-                ///Set or clear a metadata of a proposal or a referendum.
-                ///
-                ///Parameters:
-                ///- `origin`: Must correspond to the `MetadataOwner`.
-                ///    - `ExternalOrigin` for an external proposal with the `SuperMajorityApprove`
-                ///      threshold.
-                ///    - `ExternalDefaultOrigin` for an external proposal with the `SuperMajorityAgainst`
-                ///      threshold.
-                ///    - `ExternalMajorityOrigin` for an external proposal with the `SimpleMajority`
-                ///      threshold.
-                ///    - `Signed` by a creator for a public proposal.
-                ///    - `Signed` to clear a metadata for a finished referendum.
-                ///    - `Root` to set a metadata for an ongoing referendum.
-                ///- `owner`: an identifier of a metadata owner.
-                ///- `maybe_hash`: The hash of an on-chain stored preimage. `None` to clear a metadata.
+                ///See [`Pallet::set_metadata`].
                 pub fn set_metadata(
                     &self,
                     owner: runtime_types::pallet_democracy::types::MetadataOwner,
@@ -11637,10 +11253,7 @@ pub mod api {
                 }
             }
         }
-        /**
-        The [event](https://docs.substrate.io/main-docs/build/events-errors/) emitted
-        by this pallet.
-        */
+        ///The `Event` enum of this pallet
         pub type Event = runtime_types::pallet_democracy::pallet::Event;
         pub mod events {
             use super::runtime_types;
@@ -12940,12 +12553,9 @@ pub mod api {
     pub mod council {
         use super::root_mod;
         use super::runtime_types;
-        /**
-        Custom [dispatch errors](https://docs.substrate.io/main-docs/build/events-errors/)
-        of this pallet.
-        */
+        ///The `Error` enum of this pallet.
         pub type Error = runtime_types::pallet_collective::pallet::Error;
-        ///Contains one variant per dispatchable that can be called by an extrinsic.
+        ///Contains a variant per dispatchable extrinsic that this pallet has.
         pub type Call = runtime_types::pallet_collective::pallet::Call;
         pub mod calls {
             use super::root_mod;
@@ -13123,30 +12733,7 @@ pub mod api {
             }
             pub struct TransactionApi;
             impl TransactionApi {
-                ///Set the collective's membership.
-                ///
-                ///- `new_members`: The new member list. Be nice to the chain and provide it sorted.
-                ///- `prime`: The prime member whose vote sets the default.
-                ///- `old_count`: The upper bound for the previous number of members in storage. Used for
-                ///  weight estimation.
-                ///
-                ///The dispatch of this call must be `SetMembersOrigin`.
-                ///
-                ///NOTE: Does not enforce the expected `MaxMembers` limit on the amount of members, but
-                ///      the weight estimations rely on it to estimate dispatchable weight.
-                ///
-                ///# WARNING:
-                ///
-                ///The `pallet-collective` can also be managed by logic outside of the pallet through the
-                ///implementation of the trait [`ChangeMembers`].
-                ///Any call to `set_members` must be careful that the member set doesn't get out of sync
-                ///with other logic managing the member set.
-                ///
-                ///## Complexity:
-                ///- `O(MP + N)` where:
-                ///  - `M` old-members-count (code- and governance-bounded)
-                ///  - `N` new-members-count (code- and governance-bounded)
-                ///  - `P` proposals-count (code-bounded)
+                ///See [`Pallet::set_members`].
                 pub fn set_members(
                     &self,
                     new_members: ::std::vec::Vec<::subxt::utils::AccountId32>,
@@ -13170,15 +12757,7 @@ pub mod api {
                         ],
                     )
                 }
-                ///Dispatch a proposal from a member using the `Member` origin.
-                ///
-                ///Origin must be a member of the collective.
-                ///
-                ///## Complexity:
-                ///- `O(B + M + P)` where:
-                ///- `B` is `proposal` size in bytes (length-fee-bounded)
-                ///- `M` members-count (code-bounded)
-                ///- `P` complexity of dispatching `proposal`
+                ///See [`Pallet::execute`].
                 pub fn execute(
                     &self,
                     proposal: runtime_types::tangle_standalone_runtime::RuntimeCall,
@@ -13192,28 +12771,15 @@ pub mod api {
                             length_bound,
                         },
                         [
-                            106u8, 30u8, 217u8, 144u8, 246u8, 60u8, 62u8, 44u8,
-                            41u8, 154u8, 127u8, 196u8, 0u8, 113u8, 179u8,
-                            190u8, 112u8, 95u8, 211u8, 187u8, 33u8, 205u8,
-                            99u8, 94u8, 143u8, 45u8, 9u8, 66u8, 228u8, 3u8,
-                            202u8, 180u8,
+                            102u8, 161u8, 222u8, 38u8, 190u8, 195u8, 69u8,
+                            98u8, 73u8, 245u8, 118u8, 89u8, 33u8, 79u8, 147u8,
+                            72u8, 184u8, 207u8, 114u8, 107u8, 169u8, 195u8,
+                            68u8, 0u8, 194u8, 153u8, 158u8, 2u8, 230u8, 153u8,
+                            9u8, 253u8,
                         ],
                     )
                 }
-                ///Add a new proposal to either be voted on or executed directly.
-                ///
-                ///Requires the sender to be member.
-                ///
-                ///`threshold` determines whether `proposal` is executed directly (`threshold < 2`)
-                ///or put up for voting.
-                ///
-                ///## Complexity
-                ///- `O(B + M + P1)` or `O(B + M + P2)` where:
-                ///  - `B` is `proposal` size in bytes (length-fee-bounded)
-                ///  - `M` is members-count (code- and governance-bounded)
-                ///  - branching is influenced by `threshold` where:
-                ///    - `P1` is proposal execution complexity (`threshold < 2`)
-                ///    - `P2` is proposals-count (code-bounded) (`threshold >= 2`)
+                ///See [`Pallet::propose`].
                 pub fn propose(
                     &self,
                     threshold: ::core::primitive::u32,
@@ -13229,23 +12795,15 @@ pub mod api {
                             length_bound,
                         },
                         [
-                            25u8, 107u8, 142u8, 100u8, 87u8, 244u8, 101u8,
-                            88u8, 144u8, 93u8, 193u8, 115u8, 50u8, 230u8,
-                            236u8, 13u8, 66u8, 110u8, 223u8, 88u8, 73u8, 104u8,
-                            1u8, 251u8, 210u8, 183u8, 13u8, 228u8, 100u8, 72u8,
-                            217u8, 85u8,
+                            105u8, 148u8, 141u8, 35u8, 44u8, 150u8, 171u8,
+                            72u8, 153u8, 232u8, 17u8, 156u8, 68u8, 229u8, 93u8,
+                            251u8, 165u8, 1u8, 97u8, 166u8, 60u8, 135u8, 111u8,
+                            144u8, 116u8, 82u8, 77u8, 198u8, 211u8, 123u8,
+                            125u8, 176u8,
                         ],
                     )
                 }
-                ///Add an aye or nay vote for the sender to the given proposal.
-                ///
-                ///Requires the sender to be a member.
-                ///
-                ///Transaction fees will be waived if the member is voting on any particular proposal
-                ///for the first time and the call is successful. Subsequent vote changes will charge a
-                ///fee.
-                ///## Complexity
-                ///- `O(M)` where `M` is members-count (code- and governance-bounded)
+                ///See [`Pallet::vote`].
                 pub fn vote(
                     &self,
                     proposal: ::subxt::utils::H256,
@@ -13269,16 +12827,7 @@ pub mod api {
                         ],
                     )
                 }
-                ///Disapprove a proposal, close, and remove it from the system, regardless of its current
-                ///state.
-                ///
-                ///Must be called by the Root origin.
-                ///
-                ///Parameters:
-                ///* `proposal_hash`: The hash of the proposal that should be disapproved.
-                ///
-                ///## Complexity
-                ///O(P) where P is the number of max proposals
+                ///See [`Pallet::disapprove_proposal`].
                 pub fn disapprove_proposal(
                     &self,
                     proposal_hash: ::subxt::utils::H256,
@@ -13297,30 +12846,7 @@ pub mod api {
                         ],
                     )
                 }
-                ///Close a vote that is either approved, disapproved or whose voting period has ended.
-                ///
-                ///May be called by any signed account in order to finish voting and close the proposal.
-                ///
-                ///If called before the end of the voting period it will only close the vote if it is
-                ///has enough votes to be approved or disapproved.
-                ///
-                ///If called after the end of the voting period abstentions are counted as rejections
-                ///unless there is a prime member set and the prime member cast an approval.
-                ///
-                ///If the close operation completes successfully with disapproval, the transaction fee will
-                ///be waived. Otherwise execution of the approved operation will be charged to the caller.
-                ///
-                ///+ `proposal_weight_bound`: The maximum amount of weight consumed by executing the closed
-                ///proposal.
-                ///+ `length_bound`: The upper bound for the length of the proposal in storage. Checked via
-                ///`storage::read` so it is `size_of::<u32>() == 4` larger than the pure length.
-                ///
-                ///## Complexity
-                ///- `O(B + M + P1 + P2)` where:
-                ///  - `B` is `proposal` size in bytes (length-fee-bounded)
-                ///  - `M` is members-count (code- and governance-bounded)
-                ///  - `P1` is the complexity of `proposal` preimage.
-                ///  - `P2` is proposal-count (code-bounded)
+                ///See [`Pallet::close`].
                 pub fn close(
                     &self,
                     proposal_hash: ::subxt::utils::H256,
@@ -13347,10 +12873,7 @@ pub mod api {
                 }
             }
         }
-        /**
-        The [event](https://docs.substrate.io/main-docs/build/events-errors/) emitted
-        by this pallet.
-        */
+        ///The `Event` enum of this pallet
         pub type Event = runtime_types::pallet_collective::pallet::Event;
         pub mod events {
             use super::runtime_types;
@@ -13569,38 +13092,38 @@ pub mod api {
                             .borrow())
                         ],
                         [
-                            20u8,
-                            149u8,
-                            181u8,
-                            18u8,
-                            142u8,
-                            218u8,
-                            244u8,
-                            38u8,
+                            140u8,
+                            4u8,
+                            61u8,
+                            165u8,
+                            81u8,
+                            84u8,
+                            69u8,
+                            114u8,
+                            162u8,
+                            193u8,
+                            27u8,
+                            28u8,
                             65u8,
-                            204u8,
-                            60u8,
-                            107u8,
-                            226u8,
-                            233u8,
-                            0u8,
-                            39u8,
-                            137u8,
-                            167u8,
-                            83u8,
-                            33u8,
+                            240u8,
+                            94u8,
+                            130u8,
+                            220u8,
+                            192u8,
+                            36u8,
+                            208u8,
+                            77u8,
                             25u8,
-                            92u8,
-                            87u8,
-                            168u8,
-                            151u8,
-                            60u8,
-                            230u8,
-                            221u8,
-                            48u8,
-                            155u8,
-                            135u8,
-                            66u8,
+                            62u8,
+                            7u8,
+                            103u8,
+                            29u8,
+                            71u8,
+                            72u8,
+                            193u8,
+                            2u8,
+                            13u8,
+                            46u8,
                         ],
                     )
                 }
@@ -13619,11 +13142,10 @@ pub mod api {
                         "ProposalOf",
                         Vec::new(),
                         [
-                            20u8, 149u8, 181u8, 18u8, 142u8, 218u8, 244u8,
-                            38u8, 65u8, 204u8, 60u8, 107u8, 226u8, 233u8, 0u8,
-                            39u8, 137u8, 167u8, 83u8, 33u8, 25u8, 92u8, 87u8,
-                            168u8, 151u8, 60u8, 230u8, 221u8, 48u8, 155u8,
-                            135u8, 66u8,
+                            140u8, 4u8, 61u8, 165u8, 81u8, 84u8, 69u8, 114u8,
+                            162u8, 193u8, 27u8, 28u8, 65u8, 240u8, 94u8, 130u8,
+                            220u8, 192u8, 36u8, 208u8, 77u8, 25u8, 62u8, 7u8,
+                            103u8, 29u8, 71u8, 72u8, 193u8, 2u8, 13u8, 46u8,
                         ],
                     )
                 }
@@ -13811,7 +13333,7 @@ pub mod api {
         use super::runtime_types;
         ///Error for the vesting pallet.
         pub type Error = runtime_types::pallet_vesting::pallet::Error;
-        ///Contains one variant per dispatchable that can be called by an extrinsic.
+        ///Contains a variant per dispatchable extrinsic that this pallet has.
         pub type Call = runtime_types::pallet_vesting::pallet::Call;
         pub mod calls {
             use super::root_mod;
@@ -13962,15 +13484,7 @@ pub mod api {
             }
             pub struct TransactionApi;
             impl TransactionApi {
-                ///Unlock any vested funds of the sender account.
-                ///
-                ///The dispatch origin for this call must be _Signed_ and the sender must have funds still
-                ///locked under this pallet.
-                ///
-                ///Emits either `VestingCompleted` or `VestingUpdated`.
-                ///
-                ///## Complexity
-                ///- `O(1)`.
+                ///See [`Pallet::vest`].
                 pub fn vest(&self) -> ::subxt::tx::Payload<types::Vest> {
                     ::subxt::tx::Payload::new_static(
                         "Vesting",
@@ -13985,17 +13499,7 @@ pub mod api {
                         ],
                     )
                 }
-                ///Unlock any vested funds of a `target` account.
-                ///
-                ///The dispatch origin for this call must be _Signed_.
-                ///
-                ///- `target`: The account whose vested funds should be unlocked. Must have funds still
-                ///locked under this pallet.
-                ///
-                ///Emits either `VestingCompleted` or `VestingUpdated`.
-                ///
-                ///## Complexity
-                ///- `O(1)`.
+                ///See [`Pallet::vest_other`].
                 pub fn vest_other(
                     &self,
                     target: ::subxt::utils::MultiAddress<
@@ -14016,19 +13520,7 @@ pub mod api {
                         ],
                     )
                 }
-                ///Create a vested transfer.
-                ///
-                ///The dispatch origin for this call must be _Signed_.
-                ///
-                ///- `target`: The account receiving the vested funds.
-                ///- `schedule`: The vesting schedule attached to the transfer.
-                ///
-                ///Emits `VestingCreated`.
-                ///
-                ///NOTE: This will unlock all schedules through the current block.
-                ///
-                ///## Complexity
-                ///- `O(1)`.
+                ///See [`Pallet::vested_transfer`].
                 pub fn vested_transfer(
                     &self,
                     target: ::subxt::utils::MultiAddress<
@@ -14054,20 +13546,7 @@ pub mod api {
                         ],
                     )
                 }
-                ///Force a vested transfer.
-                ///
-                ///The dispatch origin for this call must be _Root_.
-                ///
-                ///- `source`: The account whose funds should be transferred.
-                ///- `target`: The account that should be transferred the vested funds.
-                ///- `schedule`: The vesting schedule attached to the transfer.
-                ///
-                ///Emits `VestingCreated`.
-                ///
-                ///NOTE: This will unlock all schedules through the current block.
-                ///
-                ///## Complexity
-                ///- `O(1)`.
+                ///See [`Pallet::force_vested_transfer`].
                 pub fn force_vested_transfer(
                     &self,
                     source: ::subxt::utils::MultiAddress<
@@ -14101,27 +13580,7 @@ pub mod api {
                         ],
                     )
                 }
-                ///Merge two vesting schedules together, creating a new vesting schedule that unlocks over
-                ///the highest possible start and end blocks. If both schedules have already started the
-                ///current block will be used as the schedule start; with the caveat that if one schedule
-                ///is finished by the current block, the other will be treated as the new merged schedule,
-                ///unmodified.
-                ///
-                ///NOTE: If `schedule1_index == schedule2_index` this is a no-op.
-                ///NOTE: This will unlock all schedules through the current block prior to merging.
-                ///NOTE: If both schedules have ended by the current block, no new schedule will be created
-                ///and both will be removed.
-                ///
-                ///Merged schedule attributes:
-                ///- `starting_block`: `MAX(schedule1.starting_block, scheduled2.starting_block,
-                ///  current_block)`.
-                ///- `ending_block`: `MAX(schedule1.ending_block, schedule2.ending_block)`.
-                ///- `locked`: `schedule1.locked_at(current_block) + schedule2.locked_at(current_block)`.
-                ///
-                ///The dispatch origin for this call must be _Signed_.
-                ///
-                ///- `schedule1_index`: index of the first schedule to merge.
-                ///- `schedule2_index`: index of the second schedule to merge.
+                ///See [`Pallet::merge_schedules`].
                 pub fn merge_schedules(
                     &self,
                     schedule1_index: ::core::primitive::u32,
@@ -14146,10 +13605,7 @@ pub mod api {
                 }
             }
         }
-        /**
-        The [event](https://docs.substrate.io/main-docs/build/events-errors/) emitted
-        by this pallet.
-        */
+        ///The `Event` enum of this pallet
         pub type Event = runtime_types::pallet_vesting::pallet::Event;
         pub mod events {
             use super::runtime_types;
@@ -14359,12 +13815,9 @@ pub mod api {
     pub mod claims {
         use super::root_mod;
         use super::runtime_types;
-        /**
-        Custom [dispatch errors](https://docs.substrate.io/main-docs/build/events-errors/)
-        of this pallet.
-        */
+        ///The `Error` enum of this pallet.
         pub type Error = runtime_types::pallet_ecdsa_claims::pallet::Error;
-        ///Contains one variant per dispatchable that can be called by an extrinsic.
+        ///Contains a variant per dispatchable extrinsic that this pallet has.
         pub type Call = runtime_types::pallet_ecdsa_claims::pallet::Call;
         pub mod calls {
             use super::root_mod;
@@ -14540,30 +13993,7 @@ pub mod api {
             }
             pub struct TransactionApi;
             impl TransactionApi {
-                ///Make a claim to collect your WEBBs.
-                ///
-                ///The dispatch origin for this call must be _None_.
-                ///
-                ///Unsigned Validation:
-                ///A call to claim is deemed valid if the signature provided matches
-                ///the expected signed message of:
-                ///
-                ///> Ethereum Signed Message:
-                ///> (configured prefix string)(address)
-                ///
-                ///and `address` matches the `dest` account.
-                ///
-                ///Parameters:
-                ///- `dest`: The destination account to payout the claim.
-                ///- `ethereum_signature`: The signature of an ethereum signed message matching the format
-                ///  described above.
-                ///
-                ///<weight>
-                ///The weight of this call is invariant over the input parameters.
-                ///Weight includes logic to validate unsigned `claim` call.
-                ///
-                ///Total Complexity: O(1)
-                ///</weight>
+                ///See [`Pallet::claim`].
                 pub fn claim(
                     &self,
                     dest: ::subxt::utils::AccountId32,
@@ -14585,21 +14015,7 @@ pub mod api {
                         ],
                     )
                 }
-                ///Mint a new claim to collect WEBBs.
-                ///
-                ///The dispatch origin for this call must be _Root_.
-                ///
-                ///Parameters:
-                ///- `who`: The Ethereum address allowed to collect this claim.
-                ///- `value`: The number of WEBBs that will be claimed.
-                ///- `vesting_schedule`: An optional vesting schedule for these WEBBs.
-                ///
-                ///<weight>
-                ///The weight of this call is invariant over the input parameters.
-                ///We assume worst case that both vesting and statement is being inserted.
-                ///
-                ///Total Complexity: O(1)
-                ///</weight>
+                ///See [`Pallet::mint_claim`].
                 pub fn mint_claim(
                     &self,
                     who: runtime_types::pallet_ecdsa_claims::EthereumAddress,
@@ -14631,33 +14047,7 @@ pub mod api {
                         ],
                     )
                 }
-                ///Make a claim to collect your WEBBs by signing a statement.
-                ///
-                ///The dispatch origin for this call must be _None_.
-                ///
-                ///Unsigned Validation:
-                ///A call to `claim_attest` is deemed valid if the signature provided matches
-                ///the expected signed message of:
-                ///
-                ///> Ethereum Signed Message:
-                ///> (configured prefix string)(address)(statement)
-                ///
-                ///and `address` matches the `dest` account; the `statement` must match that which is
-                ///expected according to your purchase arrangement.
-                ///
-                ///Parameters:
-                ///- `dest`: The destination account to payout the claim.
-                ///- `ethereum_signature`: The signature of an ethereum signed message matching the format
-                ///  described above.
-                ///- `statement`: The identity of the statement which is being attested to in the
-                ///  signature.
-                ///
-                ///<weight>
-                ///The weight of this call is invariant over the input parameters.
-                ///Weight includes logic to validate unsigned `claim_attest` call.
-                ///
-                ///Total Complexity: O(1)
-                ///</weight>
+                ///See [`Pallet::claim_attest`].
                 pub fn claim_attest(
                     &self,
                     dest: ::subxt::utils::AccountId32,
@@ -14681,25 +14071,7 @@ pub mod api {
                         ],
                     )
                 }
-                ///Attest to a statement, needed to finalize the claims process.
-                ///
-                ///WARNING: Insecure unless your chain includes `PrevalidateAttests` as a
-                ///`SignedExtension`.
-                ///
-                ///Unsigned Validation:
-                ///A call to attest is deemed valid if the sender has a `Preclaim` registered
-                ///and provides a `statement` which is expected for the account.
-                ///
-                ///Parameters:
-                ///- `statement`: The identity of the statement which is being attested to in the
-                ///  signature.
-                ///
-                ///<weight>
-                ///The weight of this call is invariant over the input parameters.
-                ///Weight includes logic to do pre-validation on `attest` call.
-                ///
-                ///Total Complexity: O(1)
-                ///</weight>
+                ///See [`Pallet::attest`].
                 pub fn attest(
                     &self,
                     statement: ::std::vec::Vec<::core::primitive::u8>,
@@ -14717,6 +14089,7 @@ pub mod api {
                         ],
                     )
                 }
+                ///See [`Pallet::move_claim`].
                 pub fn move_claim(
                     &self,
                     old: runtime_types::pallet_ecdsa_claims::EthereumAddress,
@@ -14742,8 +14115,7 @@ pub mod api {
                         ],
                     )
                 }
-                ///Set the value for expiryconfig
-                ///Can only be called by ForceOrigin
+                ///See [`Pallet::force_set_expiry_config`].
                 pub fn force_set_expiry_config(
                     &self,
                     expiry_block: ::core::primitive::u32,
@@ -14765,10 +14137,7 @@ pub mod api {
                 }
             }
         }
-        /**
-        The [event](https://docs.substrate.io/main-docs/build/events-errors/) emitted
-        by this pallet.
-        */
+        ///The `Event` enum of this pallet
         pub type Event = runtime_types::pallet_ecdsa_claims::pallet::Event;
         pub mod events {
             use super::runtime_types;
@@ -15201,13 +14570,10 @@ pub mod api {
     pub mod elections {
         use super::root_mod;
         use super::runtime_types;
-        /**
-        Custom [dispatch errors](https://docs.substrate.io/main-docs/build/events-errors/)
-        of this pallet.
-        */
+        ///The `Error` enum of this pallet.
         pub type Error =
             runtime_types::pallet_elections_phragmen::pallet::Error;
-        ///Contains one variant per dispatchable that can be called by an extrinsic.
+        ///Contains a variant per dispatchable extrinsic that this pallet has.
         pub type Call = runtime_types::pallet_elections_phragmen::pallet::Call;
         pub mod calls {
             use super::root_mod;
@@ -15370,25 +14736,7 @@ pub mod api {
             }
             pub struct TransactionApi;
             impl TransactionApi {
-                ///Vote for a set of candidates for the upcoming round of election. This can be called to
-                ///set the initial votes, or update already existing votes.
-                ///
-                ///Upon initial voting, `value` units of `who`'s balance is locked and a deposit amount is
-                ///reserved. The deposit is based on the number of votes and can be updated over time.
-                ///
-                ///The `votes` should:
-                ///  - not be empty.
-                ///  - be less than the number of possible candidates. Note that all current members and
-                ///    runners-up are also automatically candidates for the next round.
-                ///
-                ///If `value` is more than `who`'s free balance, then the maximum of the two is used.
-                ///
-                ///The dispatch origin of this call must be signed.
-                ///
-                ///### Warning
-                ///
-                ///It is the responsibility of the caller to **NOT** place all of their balance into the
-                ///lock and keep some for further operations.
+                ///See [`Pallet::vote`].
                 pub fn vote(
                     &self,
                     votes: ::std::vec::Vec<::subxt::utils::AccountId32>,
@@ -15407,11 +14755,7 @@ pub mod api {
                         ],
                     )
                 }
-                ///Remove `origin` as a voter.
-                ///
-                ///This removes the lock and returns the deposit.
-                ///
-                ///The dispatch origin of this call must be signed and be a voter.
+                ///See [`Pallet::remove_voter`].
                 pub fn remove_voter(
                     &self,
                 ) -> ::subxt::tx::Payload<types::RemoveVoter> {
@@ -15428,21 +14772,7 @@ pub mod api {
                         ],
                     )
                 }
-                ///Submit oneself for candidacy. A fixed amount of deposit is recorded.
-                ///
-                ///All candidates are wiped at the end of the term. They either become a member/runner-up,
-                ///or leave the system while their deposit is slashed.
-                ///
-                ///The dispatch origin of this call must be signed.
-                ///
-                ///### Warning
-                ///
-                ///Even if a candidate ends up being a member, they must call [`Call::renounce_candidacy`]
-                ///to get their deposit back. Losing the spot in an election will always lead to a slash.
-                ///
-                ///The number of current candidates must be provided as witness data.
-                ///## Complexity
-                ///O(C + log(C)) where C is candidate_count.
+                ///See [`Pallet::submit_candidacy`].
                 pub fn submit_candidacy(
                     &self,
                     candidate_count: ::core::primitive::u32,
@@ -15461,26 +14791,7 @@ pub mod api {
                         ],
                     )
                 }
-                ///Renounce one's intention to be a candidate for the next election round. 3 potential
-                ///outcomes exist:
-                ///
-                ///- `origin` is a candidate and not elected in any set. In this case, the deposit is
-                ///  unreserved, returned and origin is removed as a candidate.
-                ///- `origin` is a current runner-up. In this case, the deposit is unreserved, returned and
-                ///  origin is removed as a runner-up.
-                ///- `origin` is a current member. In this case, the deposit is unreserved and origin is
-                ///  removed as a member, consequently not being a candidate for the next round anymore.
-                ///  Similar to [`remove_member`](Self::remove_member), if replacement runners exists, they
-                ///  are immediately used. If the prime is renouncing, then no prime will exist until the
-                ///  next round.
-                ///
-                ///The dispatch origin of this call must be signed, and have one of the above roles.
-                ///The type of renouncing must be provided as witness data.
-                ///
-                ///## Complexity
-                ///  - Renouncing::Candidate(count): O(count + log(count))
-                ///  - Renouncing::Member: O(1)
-                ///  - Renouncing::RunnerUp: O(1)
+                ///See [`Pallet::renounce_candidacy`].
                 pub fn renounce_candidacy(
                     &self,
                     renouncing: runtime_types::pallet_elections_phragmen::Renouncing,
@@ -15499,22 +14810,7 @@ pub mod api {
                         ],
                     )
                 }
-                ///Remove a particular member from the set. This is effective immediately and the bond of
-                ///the outgoing member is slashed.
-                ///
-                ///If a runner-up is available, then the best runner-up will be removed and replaces the
-                ///outgoing member. Otherwise, if `rerun_election` is `true`, a new phragmen election is
-                ///started, else, nothing happens.
-                ///
-                ///If `slash_bond` is set to true, the bond of the member being removed is slashed. Else,
-                ///it is returned.
-                ///
-                ///The dispatch origin of this call must be root.
-                ///
-                ///Note that this does not affect the designated block number of the next election.
-                ///
-                ///## Complexity
-                ///- Check details of remove_and_replace_member() and do_phragmen().
+                ///See [`Pallet::remove_member`].
                 pub fn remove_member(
                     &self,
                     who: ::subxt::utils::MultiAddress<
@@ -15541,15 +14837,7 @@ pub mod api {
                         ],
                     )
                 }
-                ///Clean all voters who are defunct (i.e. they do not serve any purpose at all). The
-                ///deposit of the removed voters are returned.
-                ///
-                ///This is an root function to be used only for cleaning the state.
-                ///
-                ///The dispatch origin of this call must be root.
-                ///
-                ///## Complexity
-                ///- Check is_defunct_voter() details.
+                ///See [`Pallet::clean_defunct_voters`].
                 pub fn clean_defunct_voters(
                     &self,
                     num_voters: ::core::primitive::u32,
@@ -15574,10 +14862,7 @@ pub mod api {
                 }
             }
         }
-        /**
-        The [event](https://docs.substrate.io/main-docs/build/events-errors/) emitted
-        by this pallet.
-        */
+        ///The `Event` enum of this pallet
         pub type Event =
             runtime_types::pallet_elections_phragmen::pallet::Event;
         pub mod events {
@@ -16148,7 +15433,7 @@ pub mod api {
         ///Error of the pallet that can be returned in response to dispatches.
         pub type Error =
             runtime_types::pallet_election_provider_multi_phase::pallet::Error;
-        ///Contains one variant per dispatchable that can be called by an extrinsic.
+        ///Contains a variant per dispatchable extrinsic that this pallet has.
         pub type Call =
             runtime_types::pallet_election_provider_multi_phase::pallet::Call;
         pub mod calls {
@@ -16299,20 +15584,7 @@ pub mod api {
             }
             pub struct TransactionApi;
             impl TransactionApi {
-                ///Submit a solution for the unsigned phase.
-                ///
-                ///The dispatch origin fo this call must be __none__.
-                ///
-                ///This submission is checked on the fly. Moreover, this unsigned solution is only
-                ///validated when submitted to the pool from the **local** node. Effectively, this means
-                ///that only active validators can submit this transaction when authoring a block (similar
-                ///to an inherent).
-                ///
-                ///To prevent any incorrect solution (and thus wasted time/weight), this transaction will
-                ///panic if the solution submitted by the validator is invalid in any way, effectively
-                ///putting their authoring reward at risk.
-                ///
-                ///No deposit or reward is associated with this submission.
+                ///See [`Pallet::submit_unsigned`].
                 pub fn submit_unsigned(
                     &self,
                     raw_solution: runtime_types::pallet_election_provider_multi_phase::RawSolution<
@@ -16337,11 +15609,7 @@ pub mod api {
                         ],
                     )
                 }
-                ///Set a new value for `MinimumUntrustedScore`.
-                ///
-                ///Dispatch origin must be aligned with `T::ForceOrigin`.
-                ///
-                ///This check can be turned off by setting the value to `None`.
+                ///See [`Pallet::set_minimum_untrusted_score`].
                 pub fn set_minimum_untrusted_score(
                     &self,
                     maybe_next_score: ::core::option::Option<
@@ -16362,14 +15630,7 @@ pub mod api {
                         ],
                     )
                 }
-                ///Set a solution in the queue, to be handed out to the client of this pallet in the next
-                ///call to `ElectionProvider::elect`.
-                ///
-                ///This can only be set by `T::ForceOrigin`, and only when the phase is `Emergency`.
-                ///
-                ///The solution is not checked for any feasibility and is assumed to be trustworthy, as any
-                ///feasibility check itself can in principle cause the election process to fail (due to
-                ///memory/weight constrains).
+                ///See [`Pallet::set_emergency_election_result`].
                 pub fn set_emergency_election_result(
                     &self,
                     supports: ::std::vec::Vec<(
@@ -16393,15 +15654,7 @@ pub mod api {
                         ],
                     )
                 }
-                ///Submit a solution for the signed phase.
-                ///
-                ///The dispatch origin fo this call must be __signed__.
-                ///
-                ///The solution is potentially queued, based on the claimed score and processed at the end
-                ///of the signed phase.
-                ///
-                ///A deposit is reserved and recorded for the solution. Based on the outcome, the solution
-                ///might be rewarded, slashed, or get all or a part of the deposit back.
+                ///See [`Pallet::submit`].
                 pub fn submit(
                     &self,
                     raw_solution: runtime_types::pallet_election_provider_multi_phase::RawSolution<
@@ -16423,10 +15676,7 @@ pub mod api {
                         ],
                     )
                 }
-                ///Trigger the governance fallback.
-                ///
-                ///This can only be called when [`Phase::Emergency`] is enabled, as an alternative to
-                ///calling [`Call::set_emergency_election_result`].
+                ///See [`Pallet::governance_fallback`].
                 pub fn governance_fallback(
                     &self,
                     maybe_max_voters: ::core::option::Option<
@@ -16455,10 +15705,7 @@ pub mod api {
                 }
             }
         }
-        /**
-        The [event](https://docs.substrate.io/main-docs/build/events-errors/) emitted
-        by this pallet.
-        */
+        ///The `Event` enum of this pallet
         pub type Event =
             runtime_types::pallet_election_provider_multi_phase::pallet::Event;
         pub mod events {
@@ -17334,12 +16581,9 @@ pub mod api {
     pub mod staking {
         use super::root_mod;
         use super::runtime_types;
-        /**
-        Custom [dispatch errors](https://docs.substrate.io/main-docs/build/events-errors/)
-        of this pallet.
-        */
+        ///The `Error` enum of this pallet.
         pub type Error = runtime_types::pallet_staking::pallet::pallet::Error;
-        ///Contains one variant per dispatchable that can be called by an extrinsic.
+        ///Contains a variant per dispatchable extrinsic that this pallet has.
         pub type Call = runtime_types::pallet_staking::pallet::pallet::Call;
         pub mod calls {
             use super::root_mod;
@@ -18015,21 +17259,7 @@ pub mod api {
             }
             pub struct TransactionApi;
             impl TransactionApi {
-                ///Take the origin account as a stash and lock up `value` of its balance. `controller` will
-                ///be the account that controls it.
-                ///
-                ///`value` must be more than the `minimum_balance` specified by `T::Currency`.
-                ///
-                ///The dispatch origin for this call must be _Signed_ by the stash account.
-                ///
-                ///Emits `Bonded`.
-                ///## Complexity
-                ///- Independent of the arguments. Moderate complexity.
-                ///- O(1).
-                ///- Three extra DB entries.
-                ///
-                ///NOTE: Two of the storage writes (`Self::bonded`, `Self::payee`) are _never_ cleaned
-                ///unless the `origin` falls below _existential deposit_ and gets removed as dust.
+                ///See [`Pallet::bond`].
                 pub fn bond(
                     &self,
                     value: ::core::primitive::u128,
@@ -18050,20 +17280,7 @@ pub mod api {
                         ],
                     )
                 }
-                ///Add some extra amount that have appeared in the stash `free_balance` into the balance up
-                ///for staking.
-                ///
-                ///The dispatch origin for this call must be _Signed_ by the stash, not the controller.
-                ///
-                ///Use this if there are additional funds in your stash account that you wish to bond.
-                ///Unlike [`bond`](Self::bond) or [`unbond`](Self::unbond) this function does not impose
-                ///any limitation on the amount that can be added.
-                ///
-                ///Emits `Bonded`.
-                ///
-                ///## Complexity
-                ///- Independent of the arguments. Insignificant complexity.
-                ///- O(1).
+                ///See [`Pallet::bond_extra`].
                 pub fn bond_extra(
                     &self,
                     max_additional: ::core::primitive::u128,
@@ -18081,25 +17298,7 @@ pub mod api {
                         ],
                     )
                 }
-                ///Schedule a portion of the stash to be unlocked ready for transfer out after the bond
-                ///period ends. If this leaves an amount actively bonded less than
-                ///T::Currency::minimum_balance(), then it is increased to the full amount.
-                ///
-                ///The dispatch origin for this call must be _Signed_ by the controller, not the stash.
-                ///
-                ///Once the unlock period is done, you can call `withdraw_unbonded` to actually move
-                ///the funds out of management ready for transfer.
-                ///
-                ///No more than a limited number of unlocking chunks (see `MaxUnlockingChunks`)
-                ///can co-exists at the same time. If there are no unlocking chunks slots available
-                ///[`Call::withdraw_unbonded`] is called to remove some of the chunks (if possible).
-                ///
-                ///If a user encounters the `InsufficientBond` error when calling this extrinsic,
-                ///they should call `chill` first in order to free up their bonded funds.
-                ///
-                ///Emits `Unbonded`.
-                ///
-                ///See also [`Call::withdraw_unbonded`].
+                ///See [`Pallet::unbond`].
                 pub fn unbond(
                     &self,
                     value: ::core::primitive::u128,
@@ -18117,20 +17316,7 @@ pub mod api {
                         ],
                     )
                 }
-                ///Remove any unlocked chunks from the `unlocking` queue from our management.
-                ///
-                ///This essentially frees up that balance to be used by the stash account to do
-                ///whatever it wants.
-                ///
-                ///The dispatch origin for this call must be _Signed_ by the controller.
-                ///
-                ///Emits `Withdrawn`.
-                ///
-                ///See also [`Call::unbond`].
-                ///
-                ///## Complexity
-                ///O(S) where S is the number of slashing spans to remove
-                ///NOTE: Weight annotation is the kill scenario, we refund otherwise.
+                ///See [`Pallet::withdraw_unbonded`].
                 pub fn withdraw_unbonded(
                     &self,
                     num_slashing_spans: ::core::primitive::u32,
@@ -18149,11 +17335,7 @@ pub mod api {
                         ],
                     )
                 }
-                ///Declare the desire to validate for the origin controller.
-                ///
-                ///Effects will be felt at the beginning of the next era.
-                ///
-                ///The dispatch origin for this call must be _Signed_ by the controller, not the stash.
+                ///See [`Pallet::validate`].
                 pub fn validate(
                     &self,
                     prefs: runtime_types::pallet_staking::ValidatorPrefs,
@@ -18171,16 +17353,7 @@ pub mod api {
                         ],
                     )
                 }
-                ///Declare the desire to nominate `targets` for the origin controller.
-                ///
-                ///Effects will be felt at the beginning of the next era.
-                ///
-                ///The dispatch origin for this call must be _Signed_ by the controller, not the stash.
-                ///
-                ///## Complexity
-                ///- The transaction's complexity is proportional to the size of `targets` (N)
-                ///which is capped at CompactAssignments::LIMIT (T::MaxNominations).
-                ///- Both the reads and writes follow a similar pattern.
+                ///See [`Pallet::nominate`].
                 pub fn nominate(
                     &self,
                     targets: ::std::vec::Vec<
@@ -18203,16 +17376,7 @@ pub mod api {
                         ],
                     )
                 }
-                ///Declare no desire to either validate or nominate.
-                ///
-                ///Effects will be felt at the beginning of the next era.
-                ///
-                ///The dispatch origin for this call must be _Signed_ by the controller, not the stash.
-                ///
-                ///## Complexity
-                ///- Independent of the arguments. Insignificant complexity.
-                ///- Contains one read.
-                ///- Writes are limited to the `origin` account key.
+                ///See [`Pallet::chill`].
                 pub fn chill(&self) -> ::subxt::tx::Payload<types::Chill> {
                     ::subxt::tx::Payload::new_static(
                         "Staking",
@@ -18226,18 +17390,7 @@ pub mod api {
                         ],
                     )
                 }
-                ///(Re-)set the payment target for a controller.
-                ///
-                ///Effects will be felt instantly (as soon as this function is completed successfully).
-                ///
-                ///The dispatch origin for this call must be _Signed_ by the controller, not the stash.
-                ///
-                ///## Complexity
-                ///- O(1)
-                ///- Independent of the arguments. Insignificant complexity.
-                ///- Contains a limited number of reads.
-                ///- Writes are limited to the `origin` account key.
-                ///---------
+                ///See [`Pallet::set_payee`].
                 pub fn set_payee(
                     &self,
                     payee: runtime_types::pallet_staking::RewardDestination<
@@ -18257,20 +17410,7 @@ pub mod api {
                         ],
                     )
                 }
-                ///(Re-)sets the controller of a stash to the stash itself. This function previously
-                ///accepted a `controller` argument to set the controller to an account other than the
-                ///stash itself. This functionality has now been removed, now only setting the controller
-                ///to the stash, if it is not already.
-                ///
-                ///Effects will be felt instantly (as soon as this function is completed successfully).
-                ///
-                ///The dispatch origin for this call must be _Signed_ by the stash, not the controller.
-                ///
-                ///## Complexity
-                ///O(1)
-                ///- Independent of the arguments. Insignificant complexity.
-                ///- Contains a limited number of reads.
-                ///- Writes are limited to the `origin` account key.
+                ///See [`Pallet::set_controller`].
                 pub fn set_controller(
                     &self,
                 ) -> ::subxt::tx::Payload<types::SetController>
@@ -18288,12 +17428,7 @@ pub mod api {
                         ],
                     )
                 }
-                ///Sets the ideal number of validators.
-                ///
-                ///The dispatch origin must be Root.
-                ///
-                ///## Complexity
-                ///O(1)
+                ///See [`Pallet::set_validator_count`].
                 pub fn set_validator_count(
                     &self,
                     new: ::core::primitive::u32,
@@ -18312,13 +17447,7 @@ pub mod api {
                         ],
                     )
                 }
-                ///Increments the ideal number of validators upto maximum of
-                ///`ElectionProviderBase::MaxWinners`.
-                ///
-                ///The dispatch origin must be Root.
-                ///
-                ///## Complexity
-                ///Same as [`Self::set_validator_count`].
+                ///See [`Pallet::increase_validator_count`].
                 pub fn increase_validator_count(
                     &self,
                     additional: ::core::primitive::u32,
@@ -18337,13 +17466,7 @@ pub mod api {
                         ],
                     )
                 }
-                ///Scale up the ideal number of validators by a factor upto maximum of
-                ///`ElectionProviderBase::MaxWinners`.
-                ///
-                ///The dispatch origin must be Root.
-                ///
-                ///## Complexity
-                ///Same as [`Self::set_validator_count`].
+                ///See [`Pallet::scale_validator_count`].
                 pub fn scale_validator_count(
                     &self,
                     factor: runtime_types::sp_arithmetic::per_things::Percent,
@@ -18362,19 +17485,7 @@ pub mod api {
                         ],
                     )
                 }
-                ///Force there to be no new eras indefinitely.
-                ///
-                ///The dispatch origin must be Root.
-                ///
-                ///# Warning
-                ///
-                ///The election process starts multiple blocks before the end of the era.
-                ///Thus the election process may be ongoing when this is called. In this case the
-                ///election will continue until the next era is triggered.
-                ///
-                ///## Complexity
-                ///- No arguments.
-                ///- Weight: O(1)
+                ///See [`Pallet::force_no_eras`].
                 pub fn force_no_eras(
                     &self,
                 ) -> ::subxt::tx::Payload<types::ForceNoEras> {
@@ -18391,20 +17502,7 @@ pub mod api {
                         ],
                     )
                 }
-                ///Force there to be a new era at the end of the next session. After this, it will be
-                ///reset to normal (non-forced) behaviour.
-                ///
-                ///The dispatch origin must be Root.
-                ///
-                ///# Warning
-                ///
-                ///The election process starts multiple blocks before the end of the era.
-                ///If this is called just before a new era is triggered, the election process may not
-                ///have enough blocks to get a result.
-                ///
-                ///## Complexity
-                ///- No arguments.
-                ///- Weight: O(1)
+                ///See [`Pallet::force_new_era`].
                 pub fn force_new_era(
                     &self,
                 ) -> ::subxt::tx::Payload<types::ForceNewEra> {
@@ -18421,9 +17519,7 @@ pub mod api {
                         ],
                     )
                 }
-                ///Set the validators who cannot be slashed (if any).
-                ///
-                ///The dispatch origin must be Root.
+                ///See [`Pallet::set_invulnerables`].
                 pub fn set_invulnerables(
                     &self,
                     invulnerables: ::std::vec::Vec<::subxt::utils::AccountId32>,
@@ -18442,9 +17538,7 @@ pub mod api {
                         ],
                     )
                 }
-                ///Force a current staker to become completely unstaked, immediately.
-                ///
-                ///The dispatch origin must be Root.
+                ///See [`Pallet::force_unstake`].
                 pub fn force_unstake(
                     &self,
                     stash: ::subxt::utils::AccountId32,
@@ -18466,15 +17560,7 @@ pub mod api {
                         ],
                     )
                 }
-                ///Force there to be a new era at the end of sessions indefinitely.
-                ///
-                ///The dispatch origin must be Root.
-                ///
-                ///# Warning
-                ///
-                ///The election process starts multiple blocks before the end of the era.
-                ///If this is called just before a new era is triggered, the election process may not
-                ///have enough blocks to get a result.
+                ///See [`Pallet::force_new_era_always`].
                 pub fn force_new_era_always(
                     &self,
                 ) -> ::subxt::tx::Payload<types::ForceNewEraAlways>
@@ -18492,11 +17578,7 @@ pub mod api {
                         ],
                     )
                 }
-                ///Cancel enactment of a deferred slash.
-                ///
-                ///Can be called by the `T::AdminOrigin`.
-                ///
-                ///Parameters: era and indices of the slashes for that era to kill.
+                ///See [`Pallet::cancel_deferred_slash`].
                 pub fn cancel_deferred_slash(
                     &self,
                     era: ::core::primitive::u32,
@@ -18516,17 +17598,7 @@ pub mod api {
                         ],
                     )
                 }
-                ///Pay out all the stakers behind a single validator for a single era.
-                ///
-                ///- `validator_stash` is the stash account of the validator. Their nominators, up to
-                ///  `T::MaxNominatorRewardedPerValidator`, will also receive their rewards.
-                ///- `era` may be any era between `[current_era - history_depth; current_era]`.
-                ///
-                ///The origin of this call must be _Signed_. Any account can call this function, even if
-                ///it is not one of the stakers.
-                ///
-                ///## Complexity
-                ///- At most O(MaxNominatorRewardedPerValidator).
+                ///See [`Pallet::payout_stakers`].
                 pub fn payout_stakers(
                     &self,
                     validator_stash: ::subxt::utils::AccountId32,
@@ -18549,13 +17621,7 @@ pub mod api {
                         ],
                     )
                 }
-                ///Rebond a portion of the stash scheduled to be unlocked.
-                ///
-                ///The dispatch origin must be signed by the controller.
-                ///
-                ///## Complexity
-                ///- Time complexity: O(L), where L is unlocking chunks
-                ///- Bounded by `MaxUnlockingChunks`.
+                ///See [`Pallet::rebond`].
                 pub fn rebond(
                     &self,
                     value: ::core::primitive::u128,
@@ -18573,18 +17639,7 @@ pub mod api {
                         ],
                     )
                 }
-                ///Remove all data structures concerning a staker/stash once it is at a state where it can
-                ///be considered `dust` in the staking system. The requirements are:
-                ///
-                ///1. the `total_balance` of the stash is below existential deposit.
-                ///2. or, the `ledger.total` of the stash is below existential deposit.
-                ///
-                ///The former can happen in cases like a slash; the latter when a fully unbonded account
-                ///is still receiving staking rewards in `RewardDestination::Staked`.
-                ///
-                ///It can be called by anyone, as long as `stash` meets the above requirements.
-                ///
-                ///Refunds the transaction fees upon successful execution.
+                ///See [`Pallet::reap_stash`].
                 pub fn reap_stash(
                     &self,
                     stash: ::subxt::utils::AccountId32,
@@ -18606,17 +17661,7 @@ pub mod api {
                         ],
                     )
                 }
-                ///Remove the given nominations from the calling validator.
-                ///
-                ///Effects will be felt at the beginning of the next era.
-                ///
-                ///The dispatch origin for this call must be _Signed_ by the controller, not the stash.
-                ///
-                ///- `who`: A list of nominator stash accounts who are nominating this validator which
-                ///  should no longer be nominating this validator.
-                ///
-                ///Note: Making this call only makes sense if you first set the validator preferences to
-                ///block any further nominations.
+                ///See [`Pallet::kick`].
                 pub fn kick(
                     &self,
                     who: ::std::vec::Vec<
@@ -18639,23 +17684,7 @@ pub mod api {
                         ],
                     )
                 }
-                ///Update the various staking configurations .
-                ///
-                ///* `min_nominator_bond`: The minimum active bond needed to be a nominator.
-                ///* `min_validator_bond`: The minimum active bond needed to be a validator.
-                ///* `max_nominator_count`: The max number of users who can be a nominator at once. When
-                ///  set to `None`, no limit is enforced.
-                ///* `max_validator_count`: The max number of users who can be a validator at once. When
-                ///  set to `None`, no limit is enforced.
-                ///* `chill_threshold`: The ratio of `max_nominator_count` or `max_validator_count` which
-                ///  should be filled in order for the `chill_other` transaction to work.
-                ///* `min_commission`: The minimum amount of commission that each validators must maintain.
-                ///  This is checked only upon calling `validate`. Existing validators are not affected.
-                ///
-                ///RuntimeOrigin must be Root to call this function.
-                ///
-                ///NOTE: Existing nominators and validators will not be affected by this update.
-                ///to kick people under the new limits, `chill_other` should be called.
+                ///See [`Pallet::set_staking_configs`].
                 pub fn set_staking_configs(
                     &self,
                     min_nominator_bond: runtime_types::pallet_staking::pallet::pallet::ConfigOp<
@@ -18698,32 +17727,7 @@ pub mod api {
                         ],
                     )
                 }
-                ///Declare a `controller` to stop participating as either a validator or nominator.
-                ///
-                ///Effects will be felt at the beginning of the next era.
-                ///
-                ///The dispatch origin for this call must be _Signed_, but can be called by anyone.
-                ///
-                ///If the caller is the same as the controller being targeted, then no further checks are
-                ///enforced, and this function behaves just like `chill`.
-                ///
-                ///If the caller is different than the controller being targeted, the following conditions
-                ///must be met:
-                ///
-                ///* `controller` must belong to a nominator who has become non-decodable,
-                ///
-                ///Or:
-                ///
-                ///* A `ChillThreshold` must be set and checked which defines how close to the max
-                ///  nominators or validators we must reach before users can start chilling one-another.
-                ///* A `MaxNominatorCount` and `MaxValidatorCount` must be set which is used to determine
-                ///  how close we are to the threshold.
-                ///* A `MinNominatorBond` and `MinValidatorBond` must be set and checked, which determines
-                ///  if this is a person that should be chilled because they have not met the threshold
-                ///  bond required.
-                ///
-                ///This can be helpful if bond requirements are updated, and we need to remove old users
-                ///who do not satisfy these requirements.
+                ///See [`Pallet::chill_other`].
                 pub fn chill_other(
                     &self,
                     controller: ::subxt::utils::AccountId32,
@@ -18741,9 +17745,7 @@ pub mod api {
                         ],
                     )
                 }
-                ///Force a validator to have at least the minimum commission. This will not affect a
-                ///validator who already has a commission greater than or equal to the minimum. Any account
-                ///can call this.
+                ///See [`Pallet::force_apply_min_commission`].
                 pub fn force_apply_min_commission(
                     &self,
                     validator_stash: ::subxt::utils::AccountId32,
@@ -18762,10 +17764,7 @@ pub mod api {
                         ],
                     )
                 }
-                ///Sets the minimum amount of commission that each validators must maintain.
-                ///
-                ///This call has lower privilege requirements than `set_staking_config` and can be called
-                ///by the `T::AdminOrigin`. Root can always call this.
+                ///See [`Pallet::set_min_commission`].
                 pub fn set_min_commission(
                     &self,
                     new: runtime_types::sp_arithmetic::per_things::Perbill,
@@ -18786,10 +17785,7 @@ pub mod api {
                 }
             }
         }
-        /**
-        The [event](https://docs.substrate.io/main-docs/build/events-errors/) emitted
-        by this pallet.
-        */
+        ///The `Event` enum of this pallet
         pub type Event = runtime_types::pallet_staking::pallet::pallet::Event;
         pub mod events {
             use super::runtime_types;
@@ -21262,7 +20258,7 @@ pub mod api {
         use super::runtime_types;
         ///Error for the session pallet.
         pub type Error = runtime_types::pallet_session::pallet::Error;
-        ///Contains one variant per dispatchable that can be called by an extrinsic.
+        ///Contains a variant per dispatchable extrinsic that this pallet has.
         pub type Call = runtime_types::pallet_session::pallet::Call;
         pub mod calls {
             use super::root_mod;
@@ -21320,15 +20316,7 @@ pub mod api {
             }
             pub struct TransactionApi;
             impl TransactionApi {
-                ///Sets the session key(s) of the function caller to `keys`.
-                ///Allows an account to set its session key prior to becoming a validator.
-                ///This doesn't take effect until the next session.
-                ///
-                ///The dispatch origin of this function must be signed.
-                ///
-                ///## Complexity
-                ///- `O(1)`. Actual cost depends on the number of length of `T::Keys::key_ids()` which is
-                ///  fixed.
+                ///See [`Pallet::set_keys`].
                 pub fn set_keys(
                     &self,
                     keys: runtime_types::tangle_standalone_runtime::opaque::SessionKeys,
@@ -21347,18 +20335,7 @@ pub mod api {
                         ],
                     )
                 }
-                ///Removes any session key(s) of the function caller.
-                ///
-                ///This doesn't take effect until the next session.
-                ///
-                ///The dispatch origin of this function must be Signed and the account must be either be
-                ///convertible to a validator ID using the chain's typical addressing system (this usually
-                ///means being a controller account) or directly convertible into a validator ID (which
-                ///usually means being a stash account).
-                ///
-                ///## Complexity
-                ///- `O(1)` in number of key types. Actual cost depends on the number of length of
-                ///  `T::Keys::key_ids()` which is fixed.
+                ///See [`Pallet::purge_keys`].
                 pub fn purge_keys(
                     &self,
                 ) -> ::subxt::tx::Payload<types::PurgeKeys> {
@@ -21377,10 +20354,7 @@ pub mod api {
                 }
             }
         }
-        /**
-        The [event](https://docs.substrate.io/main-docs/build/events-errors/) emitted
-        by this pallet.
-        */
+        ///The `Event` enum of this pallet
         pub type Event = runtime_types::pallet_session::pallet::Event;
         pub mod events {
             use super::runtime_types;
@@ -21814,7 +20788,7 @@ pub mod api {
         use super::runtime_types;
         ///Error for the treasury pallet.
         pub type Error = runtime_types::pallet_treasury::pallet::Error;
-        ///Contains one variant per dispatchable that can be called by an extrinsic.
+        ///Contains a variant per dispatchable extrinsic that this pallet has.
         pub type Call = runtime_types::pallet_treasury::pallet::Call;
         pub mod calls {
             use super::root_mod;
@@ -21958,12 +20932,7 @@ pub mod api {
             }
             pub struct TransactionApi;
             impl TransactionApi {
-                ///Put forward a suggestion for spending. A deposit proportional to the value
-                ///is reserved and slashed if the proposal is rejected. It is returned once the
-                ///proposal is awarded.
-                ///
-                ///## Complexity
-                ///- O(1)
+                ///See [`Pallet::propose_spend`].
                 pub fn propose_spend(
                     &self,
                     value: ::core::primitive::u128,
@@ -21985,12 +20954,7 @@ pub mod api {
                         ],
                     )
                 }
-                ///Reject a proposed spend. The original deposit will be slashed.
-                ///
-                ///May only be called from `T::RejectOrigin`.
-                ///
-                ///## Complexity
-                ///- O(1)
+                ///See [`Pallet::reject_proposal`].
                 pub fn reject_proposal(
                     &self,
                     proposal_id: ::core::primitive::u32,
@@ -22009,13 +20973,7 @@ pub mod api {
                         ],
                     )
                 }
-                ///Approve a proposal. At a later time, the proposal will be allocated to the beneficiary
-                ///and the original deposit will be returned.
-                ///
-                ///May only be called from `T::ApproveOrigin`.
-                ///
-                ///## Complexity
-                /// - O(1).
+                ///See [`Pallet::approve_proposal`].
                 pub fn approve_proposal(
                     &self,
                     proposal_id: ::core::primitive::u32,
@@ -22033,14 +20991,7 @@ pub mod api {
                         ],
                     )
                 }
-                ///Propose and approve a spend of treasury funds.
-                ///
-                ///- `origin`: Must be `SpendOrigin` with the `Success` value being at least `amount`.
-                ///- `amount`: The amount to be transferred from the treasury to the `beneficiary`.
-                ///- `beneficiary`: The destination account for the transfer.
-                ///
-                ///NOTE: For record-keeping purposes, the proposer is deemed to be equivalent to the
-                ///beneficiary.
+                ///See [`Pallet::spend`].
                 pub fn spend(
                     &self,
                     amount: ::core::primitive::u128,
@@ -22065,19 +21016,7 @@ pub mod api {
                         ],
                     )
                 }
-                ///Force a previously approved proposal to be removed from the approval queue.
-                ///The original deposit will no longer be returned.
-                ///
-                ///May only be called from `T::RejectOrigin`.
-                ///- `proposal_id`: The index of a proposal
-                ///
-                ///## Complexity
-                ///- O(A) where `A` is the number of approvals
-                ///
-                ///Errors:
-                ///- `ProposalNotApproved`: The `proposal_id` supplied was not found in the approval queue,
-                ///i.e., the proposal has not been approved. This could also mean the proposal does not
-                ///exist altogether, thus there is no way it would have been approved in the first place.
+                ///See [`Pallet::remove_approval`].
                 pub fn remove_approval(
                     &self,
                     proposal_id: ::core::primitive::u32,
@@ -22098,10 +21037,7 @@ pub mod api {
                 }
             }
         }
-        /**
-        The [event](https://docs.substrate.io/main-docs/build/events-errors/) emitted
-        by this pallet.
-        */
+        ///The `Event` enum of this pallet
         pub type Event = runtime_types::pallet_treasury::pallet::Event;
         pub mod events {
             use super::runtime_types;
@@ -22602,12 +21538,9 @@ pub mod api {
     pub mod bounties {
         use super::root_mod;
         use super::runtime_types;
-        /**
-        Custom [dispatch errors](https://docs.substrate.io/main-docs/build/events-errors/)
-        of this pallet.
-        */
+        ///The `Error` enum of this pallet.
         pub type Error = runtime_types::pallet_bounties::pallet::Error;
-        ///Contains one variant per dispatchable that can be called by an extrinsic.
+        ///Contains a variant per dispatchable extrinsic that this pallet has.
         pub type Call = runtime_types::pallet_bounties::pallet::Call;
         pub mod calls {
             use super::root_mod;
@@ -22855,18 +21788,7 @@ pub mod api {
             }
             pub struct TransactionApi;
             impl TransactionApi {
-                ///Propose a new bounty.
-                ///
-                ///The dispatch origin for this call must be _Signed_.
-                ///
-                ///Payment: `TipReportDepositBase` will be reserved from the origin account, as well as
-                ///`DataDepositPerByte` for each byte in `reason`. It will be unreserved upon approval,
-                ///or slashed when rejected.
-                ///
-                ///- `curator`: The curator account whom will manage this bounty.
-                ///- `fee`: The curator fee.
-                ///- `value`: The total payment amount of this bounty, curator fee included.
-                ///- `description`: The description of this bounty.
+                ///See [`Pallet::propose_bounty`].
                 pub fn propose_bounty(
                     &self,
                     value: ::core::primitive::u128,
@@ -22886,13 +21808,7 @@ pub mod api {
                         ],
                     )
                 }
-                ///Approve a bounty proposal. At a later time, the bounty will be funded and become active
-                ///and the original deposit will be returned.
-                ///
-                ///May only be called from `T::SpendOrigin`.
-                ///
-                ///## Complexity
-                ///- O(1).
+                ///See [`Pallet::approve_bounty`].
                 pub fn approve_bounty(
                     &self,
                     bounty_id: ::core::primitive::u32,
@@ -22911,12 +21827,7 @@ pub mod api {
                         ],
                     )
                 }
-                ///Assign a curator to a funded bounty.
-                ///
-                ///May only be called from `T::SpendOrigin`.
-                ///
-                ///## Complexity
-                ///- O(1).
+                ///See [`Pallet::propose_curator`].
                 pub fn propose_curator(
                     &self,
                     bounty_id: ::core::primitive::u32,
@@ -22944,23 +21855,7 @@ pub mod api {
                         ],
                     )
                 }
-                ///Unassign curator from a bounty.
-                ///
-                ///This function can only be called by the `RejectOrigin` a signed origin.
-                ///
-                ///If this function is called by the `RejectOrigin`, we assume that the curator is
-                ///malicious or inactive. As a result, we will slash the curator when possible.
-                ///
-                ///If the origin is the curator, we take this as a sign they are unable to do their job and
-                ///they willingly give up. We could slash them, but for now we allow them to recover their
-                ///deposit and exit without issue. (We may want to change this if it is abused.)
-                ///
-                ///Finally, the origin can be anyone if and only if the curator is "inactive". This allows
-                ///anyone in the community to call out that a curator is not doing their due diligence, and
-                ///we should pick a new curator. In this case the curator should also be slashed.
-                ///
-                ///## Complexity
-                ///- O(1).
+                ///See [`Pallet::unassign_curator`].
                 pub fn unassign_curator(
                     &self,
                     bounty_id: ::core::primitive::u32,
@@ -22979,13 +21874,7 @@ pub mod api {
                         ],
                     )
                 }
-                ///Accept the curator role for a bounty.
-                ///A deposit will be reserved from curator and refund upon successful payout.
-                ///
-                ///May only be called from the curator.
-                ///
-                ///## Complexity
-                ///- O(1).
+                ///See [`Pallet::accept_curator`].
                 pub fn accept_curator(
                     &self,
                     bounty_id: ::core::primitive::u32,
@@ -23004,16 +21893,7 @@ pub mod api {
                         ],
                     )
                 }
-                ///Award bounty to a beneficiary account. The beneficiary will be able to claim the funds
-                ///after a delay.
-                ///
-                ///The dispatch origin for this call must be the curator of this bounty.
-                ///
-                ///- `bounty_id`: Bounty ID to award.
-                ///- `beneficiary`: The beneficiary account whom will receive the payout.
-                ///
-                ///## Complexity
-                ///- O(1).
+                ///See [`Pallet::award_bounty`].
                 pub fn award_bounty(
                     &self,
                     bounty_id: ::core::primitive::u32,
@@ -23038,14 +21918,7 @@ pub mod api {
                         ],
                     )
                 }
-                ///Claim the payout from an awarded bounty after payout delay.
-                ///
-                ///The dispatch origin for this call must be the beneficiary of this bounty.
-                ///
-                ///- `bounty_id`: Bounty ID to claim.
-                ///
-                ///## Complexity
-                ///- O(1).
+                ///See [`Pallet::claim_bounty`].
                 pub fn claim_bounty(
                     &self,
                     bounty_id: ::core::primitive::u32,
@@ -23063,15 +21936,7 @@ pub mod api {
                         ],
                     )
                 }
-                ///Cancel a proposed or active bounty. All the funds will be sent to treasury and
-                ///the curator deposit will be unreserved if possible.
-                ///
-                ///Only `T::RejectOrigin` is able to cancel a bounty.
-                ///
-                ///- `bounty_id`: Bounty ID to cancel.
-                ///
-                ///## Complexity
-                ///- O(1).
+                ///See [`Pallet::close_bounty`].
                 pub fn close_bounty(
                     &self,
                     bounty_id: ::core::primitive::u32,
@@ -23089,15 +21954,7 @@ pub mod api {
                         ],
                     )
                 }
-                ///Extend the expiry time of an active bounty.
-                ///
-                ///The dispatch origin for this call must be the curator of this bounty.
-                ///
-                ///- `bounty_id`: Bounty ID to extend.
-                ///- `remark`: additional information.
-                ///
-                ///## Complexity
-                ///- O(1).
+                ///See [`Pallet::extend_bounty_expiry`].
                 pub fn extend_bounty_expiry(
                     &self,
                     bounty_id: ::core::primitive::u32,
@@ -23119,10 +21976,7 @@ pub mod api {
                 }
             }
         }
-        /**
-        The [event](https://docs.substrate.io/main-docs/build/events-errors/) emitted
-        by this pallet.
-        */
+        ///The `Event` enum of this pallet
         pub type Event = runtime_types::pallet_bounties::pallet::Event;
         pub mod events {
             use super::runtime_types;
@@ -23673,12 +22527,9 @@ pub mod api {
     pub mod child_bounties {
         use super::root_mod;
         use super::runtime_types;
-        /**
-        Custom [dispatch errors](https://docs.substrate.io/main-docs/build/events-errors/)
-        of this pallet.
-        */
+        ///The `Error` enum of this pallet.
         pub type Error = runtime_types::pallet_child_bounties::pallet::Error;
-        ///Contains one variant per dispatchable that can be called by an extrinsic.
+        ///Contains a variant per dispatchable extrinsic that this pallet has.
         pub type Call = runtime_types::pallet_child_bounties::pallet::Call;
         pub mod calls {
             use super::root_mod;
@@ -23889,25 +22740,7 @@ pub mod api {
             }
             pub struct TransactionApi;
             impl TransactionApi {
-                ///Add a new child-bounty.
-                ///
-                ///The dispatch origin for this call must be the curator of parent
-                ///bounty and the parent bounty must be in "active" state.
-                ///
-                ///Child-bounty gets added successfully & fund gets transferred from
-                ///parent bounty to child-bounty account, if parent bounty has enough
-                ///funds, else the call fails.
-                ///
-                ///Upper bound to maximum number of active  child bounties that can be
-                ///added are managed via runtime trait config
-                ///[`Config::MaxActiveChildBountyCount`].
-                ///
-                ///If the call is success, the status of child-bounty is updated to
-                ///"Added".
-                ///
-                ///- `parent_bounty_id`: Index of parent bounty for which child-bounty is being added.
-                ///- `value`: Value for executing the proposal.
-                ///- `description`: Text description for the child-bounty.
+                ///See [`Pallet::add_child_bounty`].
                 pub fn add_child_bounty(
                     &self,
                     parent_bounty_id: ::core::primitive::u32,
@@ -23932,21 +22765,7 @@ pub mod api {
                         ],
                     )
                 }
-                ///Propose curator for funded child-bounty.
-                ///
-                ///The dispatch origin for this call must be curator of parent bounty.
-                ///
-                ///Parent bounty must be in active state, for this child-bounty call to
-                ///work.
-                ///
-                ///Child-bounty must be in "Added" state, for processing the call. And
-                ///state of child-bounty is moved to "CuratorProposed" on successful
-                ///call completion.
-                ///
-                ///- `parent_bounty_id`: Index of parent bounty.
-                ///- `child_bounty_id`: Index of child bounty.
-                ///- `curator`: Address of child-bounty curator.
-                ///- `fee`: payment fee to child-bounty curator for execution.
+                ///See [`Pallet::propose_curator`].
                 pub fn propose_curator(
                     &self,
                     parent_bounty_id: ::core::primitive::u32,
@@ -23976,25 +22795,7 @@ pub mod api {
                         ],
                     )
                 }
-                ///Accept the curator role for the child-bounty.
-                ///
-                ///The dispatch origin for this call must be the curator of this
-                ///child-bounty.
-                ///
-                ///A deposit will be reserved from the curator and refund upon
-                ///successful payout or cancellation.
-                ///
-                ///Fee for curator is deducted from curator fee of parent bounty.
-                ///
-                ///Parent bounty must be in active state, for this child-bounty call to
-                ///work.
-                ///
-                ///Child-bounty must be in "CuratorProposed" state, for processing the
-                ///call. And state of child-bounty is moved to "Active" on successful
-                ///call completion.
-                ///
-                ///- `parent_bounty_id`: Index of parent bounty.
-                ///- `child_bounty_id`: Index of child bounty.
+                ///See [`Pallet::accept_curator`].
                 pub fn accept_curator(
                     &self,
                     parent_bounty_id: ::core::primitive::u32,
@@ -24017,40 +22818,7 @@ pub mod api {
                         ],
                     )
                 }
-                ///Unassign curator from a child-bounty.
-                ///
-                ///The dispatch origin for this call can be either `RejectOrigin`, or
-                ///the curator of the parent bounty, or any signed origin.
-                ///
-                ///For the origin other than T::RejectOrigin and the child-bounty
-                ///curator, parent bounty must be in active state, for this call to
-                ///work. We allow child-bounty curator and T::RejectOrigin to execute
-                ///this call irrespective of the parent bounty state.
-                ///
-                ///If this function is called by the `RejectOrigin` or the
-                ///parent bounty curator, we assume that the child-bounty curator is
-                ///malicious or inactive. As a result, child-bounty curator deposit is
-                ///slashed.
-                ///
-                ///If the origin is the child-bounty curator, we take this as a sign
-                ///that they are unable to do their job, and are willingly giving up.
-                ///We could slash the deposit, but for now we allow them to unreserve
-                ///their deposit and exit without issue. (We may want to change this if
-                ///it is abused.)
-                ///
-                ///Finally, the origin can be anyone iff the child-bounty curator is
-                ///"inactive". Expiry update due of parent bounty is used to estimate
-                ///inactive state of child-bounty curator.
-                ///
-                ///This allows anyone in the community to call out that a child-bounty
-                ///curator is not doing their due diligence, and we should pick a new
-                ///one. In this case the child-bounty curator deposit is slashed.
-                ///
-                ///State of child-bounty is moved to Added state on successful call
-                ///completion.
-                ///
-                ///- `parent_bounty_id`: Index of parent bounty.
-                ///- `child_bounty_id`: Index of child bounty.
+                ///See [`Pallet::unassign_curator`].
                 pub fn unassign_curator(
                     &self,
                     parent_bounty_id: ::core::primitive::u32,
@@ -24073,23 +22841,7 @@ pub mod api {
                         ],
                     )
                 }
-                ///Award child-bounty to a beneficiary.
-                ///
-                ///The beneficiary will be able to claim the funds after a delay.
-                ///
-                ///The dispatch origin for this call must be the parent curator or
-                ///curator of this child-bounty.
-                ///
-                ///Parent bounty must be in active state, for this child-bounty call to
-                ///work.
-                ///
-                ///Child-bounty must be in active state, for processing the call. And
-                ///state of child-bounty is moved to "PendingPayout" on successful call
-                ///completion.
-                ///
-                ///- `parent_bounty_id`: Index of parent bounty.
-                ///- `child_bounty_id`: Index of child bounty.
-                ///- `beneficiary`: Beneficiary account.
+                ///See [`Pallet::award_child_bounty`].
                 pub fn award_child_bounty(
                     &self,
                     parent_bounty_id: ::core::primitive::u32,
@@ -24117,22 +22869,7 @@ pub mod api {
                         ],
                     )
                 }
-                ///Claim the payout from an awarded child-bounty after payout delay.
-                ///
-                ///The dispatch origin for this call may be any signed origin.
-                ///
-                ///Call works independent of parent bounty state, No need for parent
-                ///bounty to be in active state.
-                ///
-                ///The Beneficiary is paid out with agreed bounty value. Curator fee is
-                ///paid & curator deposit is unreserved.
-                ///
-                ///Child-bounty must be in "PendingPayout" state, for processing the
-                ///call. And instance of child-bounty is removed from the state on
-                ///successful call completion.
-                ///
-                ///- `parent_bounty_id`: Index of parent bounty.
-                ///- `child_bounty_id`: Index of child bounty.
+                ///See [`Pallet::claim_child_bounty`].
                 pub fn claim_child_bounty(
                     &self,
                     parent_bounty_id: ::core::primitive::u32,
@@ -24155,28 +22892,7 @@ pub mod api {
                         ],
                     )
                 }
-                ///Cancel a proposed or active child-bounty. Child-bounty account funds
-                ///are transferred to parent bounty account. The child-bounty curator
-                ///deposit may be unreserved if possible.
-                ///
-                ///The dispatch origin for this call must be either parent curator or
-                ///`T::RejectOrigin`.
-                ///
-                ///If the state of child-bounty is `Active`, curator deposit is
-                ///unreserved.
-                ///
-                ///If the state of child-bounty is `PendingPayout`, call fails &
-                ///returns `PendingPayout` error.
-                ///
-                ///For the origin other than T::RejectOrigin, parent bounty must be in
-                ///active state, for this child-bounty call to work. For origin
-                ///T::RejectOrigin execution is forced.
-                ///
-                ///Instance of child-bounty is removed from the state on successful
-                ///call completion.
-                ///
-                ///- `parent_bounty_id`: Index of parent bounty.
-                ///- `child_bounty_id`: Index of child bounty.
+                ///See [`Pallet::close_child_bounty`].
                 pub fn close_child_bounty(
                     &self,
                     parent_bounty_id: ::core::primitive::u32,
@@ -24201,10 +22917,7 @@ pub mod api {
                 }
             }
         }
-        /**
-        The [event](https://docs.substrate.io/main-docs/build/events-errors/) emitted
-        by this pallet.
-        */
+        ///The `Event` enum of this pallet
         pub type Event = runtime_types::pallet_child_bounties::pallet::Event;
         pub mod events {
             use super::runtime_types;
@@ -24697,12 +23410,9 @@ pub mod api {
     pub mod bags_list {
         use super::root_mod;
         use super::runtime_types;
-        /**
-        Custom [dispatch errors](https://docs.substrate.io/main-docs/build/events-errors/)
-        of this pallet.
-        */
+        ///The `Error` enum of this pallet.
         pub type Error = runtime_types::pallet_bags_list::pallet::Error;
-        ///Contains one variant per dispatchable that can be called by an extrinsic.
+        ///Contains a variant per dispatchable extrinsic that this pallet has.
         pub type Call = runtime_types::pallet_bags_list::pallet::Call;
         pub mod calls {
             use super::root_mod;
@@ -24767,16 +23477,7 @@ pub mod api {
             }
             pub struct TransactionApi;
             impl TransactionApi {
-                ///Declare that some `dislocated` account has, through rewards or penalties, sufficiently
-                ///changed its score that it should properly fall into a different bag than its current
-                ///one.
-                ///
-                ///Anyone can call this function about any potentially dislocated account.
-                ///
-                ///Will always update the stored score of `dislocated` to the correct score, based on
-                ///`ScoreProvider`.
-                ///
-                ///If `dislocated` does not exists, it returns an error.
+                ///See [`Pallet::rebag`].
                 pub fn rebag(
                     &self,
                     dislocated: ::subxt::utils::MultiAddress<
@@ -24797,14 +23498,7 @@ pub mod api {
                         ],
                     )
                 }
-                ///Move the caller's Id directly in front of `lighter`.
-                ///
-                ///The dispatch origin for this call must be _Signed_ and can only be called by the Id of
-                ///the account going in front of `lighter`.
-                ///
-                ///Only works if
-                ///- both nodes are within the same bag,
-                ///- and `origin` has a greater `Score` than `lighter`.
+                ///See [`Pallet::put_in_front_of`].
                 pub fn put_in_front_of(
                     &self,
                     lighter: ::subxt::utils::MultiAddress<
@@ -24827,10 +23521,7 @@ pub mod api {
                 }
             }
         }
-        /**
-        The [event](https://docs.substrate.io/main-docs/build/events-errors/) emitted
-        by this pallet.
-        */
+        ///The `Event` enum of this pallet
         pub type Event = runtime_types::pallet_bags_list::pallet::Event;
         pub mod events {
             use super::runtime_types;
@@ -25141,12 +23832,9 @@ pub mod api {
     pub mod nomination_pools {
         use super::root_mod;
         use super::runtime_types;
-        /**
-        Custom [dispatch errors](https://docs.substrate.io/main-docs/build/events-errors/)
-        of this pallet.
-        */
+        ///The `Error` enum of this pallet.
         pub type Error = runtime_types::pallet_nomination_pools::pallet::Error;
-        ///Contains one variant per dispatchable that can be called by an extrinsic.
+        ///Contains a variant per dispatchable extrinsic that this pallet has.
         pub type Call = runtime_types::pallet_nomination_pools::pallet::Call;
         pub mod calls {
             use super::root_mod;
@@ -25760,16 +24448,7 @@ pub mod api {
             }
             pub struct TransactionApi;
             impl TransactionApi {
-                ///Stake funds with a pool. The amount to bond is transferred from the member to the
-                ///pools account and immediately increases the pools bond.
-                ///
-                ///# Note
-                ///
-                ///* An account can only be a member of a single pool.
-                ///* An account cannot join the same pool multiple times.
-                ///* This call will *not* dust the member account, so the member must have at least
-                ///  `existential deposit + amount` in their account.
-                ///* Only a pool with [`PoolState::Open`] can be joined
+                ///See [`Pallet::join`].
                 pub fn join(
                     &self,
                     amount: ::core::primitive::u128,
@@ -25788,13 +24467,7 @@ pub mod api {
                         ],
                     )
                 }
-                ///Bond `extra` more funds from `origin` into the pool to which they already belong.
-                ///
-                ///Additional funds can come from either the free balance of the account, of from the
-                ///accumulated rewards, see [`BondExtra`].
-                ///
-                ///Bonding extra funds implies an automatic payout of all pending rewards as well.
-                ///See `bond_extra_other` to bond pending rewards of `other` members.
+                ///See [`Pallet::bond_extra`].
                 pub fn bond_extra(
                     &self,
                     extra: runtime_types::pallet_nomination_pools::BondExtra<
@@ -25814,14 +24487,7 @@ pub mod api {
                         ],
                     )
                 }
-                ///A bonded member can use this to claim their payout based on the rewards that the pool
-                ///has accumulated since their last claimed payout (OR since joining if this is their first
-                ///time claiming rewards). The payout will be transferred to the member's account.
-                ///
-                ///The member will earn rewards pro rata based on the members stake vs the sum of the
-                ///members in the pools stake. Rewards do not "expire".
-                ///
-                ///See `claim_payout_other` to caim rewards on bahalf of some `other` pool member.
+                ///See [`Pallet::claim_payout`].
                 pub fn claim_payout(
                     &self,
                 ) -> ::subxt::tx::Payload<types::ClaimPayout> {
@@ -25838,37 +24504,7 @@ pub mod api {
                         ],
                     )
                 }
-                ///Unbond up to `unbonding_points` of the `member_account`'s funds from the pool. It
-                ///implicitly collects the rewards one last time, since not doing so would mean some
-                ///rewards would be forfeited.
-                ///
-                ///Under certain conditions, this call can be dispatched permissionlessly (i.e. by any
-                ///account).
-                ///
-                ///# Conditions for a permissionless dispatch.
-                ///
-                ///* The pool is blocked and the caller is either the root or bouncer. This is refereed to
-                ///  as a kick.
-                ///* The pool is destroying and the member is not the depositor.
-                ///* The pool is destroying, the member is the depositor and no other members are in the
-                ///  pool.
-                ///
-                ///## Conditions for permissioned dispatch (i.e. the caller is also the
-                ///`member_account`):
-                ///
-                ///* The caller is not the depositor.
-                ///* The caller is the depositor, the pool is destroying and no other members are in the
-                ///  pool.
-                ///
-                ///# Note
-                ///
-                ///If there are too many unlocking chunks to unbond with the pool account,
-                ///[`Call::pool_withdraw_unbonded`] can be called to try and minimize unlocking chunks.
-                ///The [`StakingInterface::unbond`] will implicitly call [`Call::pool_withdraw_unbonded`]
-                ///to try to free chunks if necessary (ie. if unbound was called and no unlocking chunks
-                ///are available). However, it may not be possible to release the current unlocking chunks,
-                ///in which case, the result of this call will likely be the `NoMoreChunks` error from the
-                ///staking system.
+                ///See [`Pallet::unbond`].
                 pub fn unbond(
                     &self,
                     member_account: ::subxt::utils::MultiAddress<
@@ -25893,12 +24529,7 @@ pub mod api {
                         ],
                     )
                 }
-                ///Call `withdraw_unbonded` for the pools account. This call can be made by any account.
-                ///
-                ///This is useful if their are too many unlocking chunks to call `unbond`, and some
-                ///can be cleared by withdrawing. In the case there are too many unlocking chunks, the user
-                ///would probably see an error like `NoMoreChunks` emitted from the staking system when
-                ///they attempt to unbond.
+                ///See [`Pallet::pool_withdraw_unbonded`].
                 pub fn pool_withdraw_unbonded(
                     &self,
                     pool_id: ::core::primitive::u32,
@@ -25921,25 +24552,7 @@ pub mod api {
                         ],
                     )
                 }
-                ///Withdraw unbonded funds from `member_account`. If no bonded funds can be unbonded, an
-                ///error is returned.
-                ///
-                ///Under certain conditions, this call can be dispatched permissionlessly (i.e. by any
-                ///account).
-                ///
-                ///# Conditions for a permissionless dispatch
-                ///
-                ///* The pool is in destroy mode and the target is not the depositor.
-                ///* The target is the depositor and they are the only member in the sub pools.
-                ///* The pool is blocked and the caller is either the root or bouncer.
-                ///
-                ///# Conditions for permissioned dispatch
-                ///
-                ///* The caller is the target and they are not the depositor.
-                ///
-                ///# Note
-                ///
-                ///If the target is the depositor, the pool will be destroyed.
+                ///See [`Pallet::withdraw_unbonded`].
                 pub fn withdraw_unbonded(
                     &self,
                     member_account: ::subxt::utils::MultiAddress<
@@ -25965,23 +24578,7 @@ pub mod api {
                         ],
                     )
                 }
-                ///Create a new delegation pool.
-                ///
-                ///# Arguments
-                ///
-                ///* `amount` - The amount of funds to delegate to the pool. This also acts of a sort of
-                ///  deposit since the pools creator cannot fully unbond funds until the pool is being
-                ///  destroyed.
-                ///* `index` - A disambiguation index for creating the account. Likely only useful when
-                ///  creating multiple pools in the same extrinsic.
-                ///* `root` - The account to set as [`PoolRoles::root`].
-                ///* `nominator` - The account to set as the [`PoolRoles::nominator`].
-                ///* `bouncer` - The account to set as the [`PoolRoles::bouncer`].
-                ///
-                ///# Note
-                ///
-                ///In addition to `amount`, the caller will transfer the existential deposit; so the caller
-                ///needs at have at least `amount + existential_deposit` transferrable.
+                ///See [`Pallet::create`].
                 pub fn create(
                     &self,
                     amount: ::core::primitive::u128,
@@ -26016,12 +24613,7 @@ pub mod api {
                         ],
                     )
                 }
-                ///Create a new delegation pool with a previously used pool id
-                ///
-                ///# Arguments
-                ///
-                ///same as `create` with the inclusion of
-                ///* `pool_id` - `A valid PoolId.
+                ///See [`Pallet::create_with_pool_id`].
                 pub fn create_with_pool_id(
                     &self,
                     amount: ::core::primitive::u128,
@@ -26059,13 +24651,7 @@ pub mod api {
                         ],
                     )
                 }
-                ///Nominate on behalf of the pool.
-                ///
-                ///The dispatch origin of this call must be signed by the pool nominator or the pool
-                ///root role.
-                ///
-                ///This directly forward the call to the staking pallet, on behalf of the pool bonded
-                ///account.
+                ///See [`Pallet::nominate`].
                 pub fn nominate(
                     &self,
                     pool_id: ::core::primitive::u32,
@@ -26087,16 +24673,7 @@ pub mod api {
                         ],
                     )
                 }
-                ///Set a new state for the pool.
-                ///
-                ///If a pool is already in the `Destroying` state, then under no condition can its state
-                ///change again.
-                ///
-                ///The dispatch origin of this call must be either:
-                ///
-                ///1. signed by the bouncer, or the root role of the pool,
-                ///2. if the pool conditions to be open are NOT met (as described by `ok_to_be_open`), and
-                ///   then the state of the pool can be permissionlessly changed to `Destroying`.
+                ///See [`Pallet::set_state`].
                 pub fn set_state(
                     &self,
                     pool_id: ::core::primitive::u32,
@@ -26115,10 +24692,7 @@ pub mod api {
                         ],
                     )
                 }
-                ///Set a new metadata for the pool.
-                ///
-                ///The dispatch origin of this call must be signed by the bouncer, or the root role of the
-                ///pool.
+                ///See [`Pallet::set_metadata`].
                 pub fn set_metadata(
                     &self,
                     pool_id: ::core::primitive::u32,
@@ -26137,17 +24711,7 @@ pub mod api {
                         ],
                     )
                 }
-                ///Update configurations for the nomination pools. The origin for this call must be
-                ///Root.
-                ///
-                ///# Arguments
-                ///
-                ///* `min_join_bond` - Set [`MinJoinBond`].
-                ///* `min_create_bond` - Set [`MinCreateBond`].
-                ///* `max_pools` - Set [`MaxPools`].
-                ///* `max_members` - Set [`MaxPoolMembers`].
-                ///* `max_members_per_pool` - Set [`MaxPoolMembersPerPool`].
-                ///* `global_max_commission` - Set [`GlobalMaxCommission`].
+                ///See [`Pallet::set_configs`].
                 pub fn set_configs(
                     &self,
                     min_join_bond: runtime_types::pallet_nomination_pools::ConfigOp<
@@ -26189,13 +24753,7 @@ pub mod api {
                         ],
                     )
                 }
-                ///Update the roles of the pool.
-                ///
-                ///The root is the only entity that can change any of the roles, including itself,
-                ///excluding the depositor, who can never change.
-                ///
-                ///It emits an event, notifying UIs of the role change. This event is quite relevant to
-                ///most pool members and they should be informed of changes to pool roles.
+                ///See [`Pallet::update_roles`].
                 pub fn update_roles(
                     &self,
                     pool_id: ::core::primitive::u32,
@@ -26227,13 +24785,7 @@ pub mod api {
                         ],
                     )
                 }
-                ///Chill on behalf of the pool.
-                ///
-                ///The dispatch origin of this call must be signed by the pool nominator or the pool
-                ///root role, same as [`Pallet::nominate`].
-                ///
-                ///This directly forward the call to the staking pallet, on behalf of the pool bonded
-                ///account.
+                ///See [`Pallet::chill`].
                 pub fn chill(
                     &self,
                     pool_id: ::core::primitive::u32,
@@ -26251,15 +24803,7 @@ pub mod api {
                         ],
                     )
                 }
-                ///`origin` bonds funds from `extra` for some pool member `member` into their respective
-                ///pools.
-                ///
-                ///`origin` can bond extra funds from free balance or pending rewards when `origin ==
-                ///other`.
-                ///
-                ///In the case of `origin != other`, `origin` can only bond extra pending rewards of
-                ///`other` members assuming set_claim_permission for the given member is
-                ///`PermissionlessAll` or `PermissionlessCompound`.
+                ///See [`Pallet::bond_extra_other`].
                 pub fn bond_extra_other(
                     &self,
                     member: ::subxt::utils::MultiAddress<
@@ -26284,18 +24828,7 @@ pub mod api {
                         ],
                     )
                 }
-                ///Allows a pool member to set a claim permission to allow or disallow permissionless
-                ///bonding and withdrawing.
-                ///
-                ///By default, this is `Permissioned`, which implies only the pool member themselves can
-                ///claim their pending rewards. If a pool member wishes so, they can set this to
-                ///`PermissionlessAll` to allow any account to claim their rewards and bond extra to the
-                ///pool.
-                ///
-                ///# Arguments
-                ///
-                ///* `origin` - Member of a pool.
-                ///* `actor` - Account to claim reward. // improve this
+                ///See [`Pallet::set_claim_permission`].
                 pub fn set_claim_permission(
                     &self,
                     permission: runtime_types::pallet_nomination_pools::ClaimPermission,
@@ -26314,10 +24847,7 @@ pub mod api {
                         ],
                     )
                 }
-                ///`origin` can claim payouts on some pool member `other`'s behalf.
-                ///
-                ///Pool member `other` must have a `PermissionlessAll` or `PermissionlessWithdraw` in order
-                ///for this call to be successful.
+                ///See [`Pallet::claim_payout_other`].
                 pub fn claim_payout_other(
                     &self,
                     other: ::subxt::utils::AccountId32,
@@ -26336,11 +24866,7 @@ pub mod api {
                         ],
                     )
                 }
-                ///Set the commission of a pool.
-                ///Both a commission percentage and a commission payee must be provided in the `current`
-                ///tuple. Where a `current` of `None` is provided, any current commission will be removed.
-                ///
-                ///- If a `None` is supplied to `new_commission`, existing commission will be removed.
+                ///See [`Pallet::set_commission`].
                 pub fn set_commission(
                     &self,
                     pool_id: ::core::primitive::u32,
@@ -26366,11 +24892,7 @@ pub mod api {
                         ],
                     )
                 }
-                ///Set the maximum commission of a pool.
-                ///
-                ///- Initial max can be set to any `Perbill`, and only smaller values thereafter.
-                ///- Current commission will be lowered in the event it is higher than a new max
-                ///  commission.
+                ///See [`Pallet::set_commission_max`].
                 pub fn set_commission_max(
                     &self,
                     pool_id: ::core::primitive::u32,
@@ -26393,10 +24915,7 @@ pub mod api {
                         ],
                     )
                 }
-                ///Set the commission change rate for a pool.
-                ///
-                ///Initial change rate is not bounded, whereas subsequent updates can only be more
-                ///restrictive than the current.
+                ///See [`Pallet::set_commission_change_rate`].
                 pub fn set_commission_change_rate(
                     &self,
                     pool_id: ::core::primitive::u32,
@@ -26421,11 +24940,7 @@ pub mod api {
                         ],
                     )
                 }
-                ///Claim pending commission.
-                ///
-                ///The dispatch origin of this call must be signed by the `root` role of the pool. Pending
-                ///commission is paid out and added to total claimed commission`. Total pending commission
-                ///is reset to zero. the current.
+                ///See [`Pallet::claim_commission`].
                 pub fn claim_commission(
                     &self,
                     pool_id: ::core::primitive::u32,
@@ -27746,12 +26261,9 @@ pub mod api {
     pub mod scheduler {
         use super::root_mod;
         use super::runtime_types;
-        /**
-        Custom [dispatch errors](https://docs.substrate.io/main-docs/build/events-errors/)
-        of this pallet.
-        */
+        ///The `Error` enum of this pallet.
         pub type Error = runtime_types::pallet_scheduler::pallet::Error;
-        ///Contains one variant per dispatchable that can be called by an extrinsic.
+        ///Contains a variant per dispatchable extrinsic that this pallet has.
         pub type Call = runtime_types::pallet_scheduler::pallet::Call;
         pub mod calls {
             use super::root_mod;
@@ -27941,7 +26453,7 @@ pub mod api {
             }
             pub struct TransactionApi;
             impl TransactionApi {
-                ///Anonymously schedule a task.
+                ///See [`Pallet::schedule`].
                 pub fn schedule(
                     &self,
                     when: ::core::primitive::u32,
@@ -27962,15 +26474,15 @@ pub mod api {
                             call: ::std::boxed::Box::new(call),
                         },
                         [
-                            107u8, 109u8, 135u8, 115u8, 235u8, 111u8, 10u8,
-                            181u8, 145u8, 195u8, 19u8, 145u8, 53u8, 199u8,
-                            128u8, 213u8, 237u8, 137u8, 41u8, 191u8, 184u8,
-                            49u8, 122u8, 102u8, 105u8, 66u8, 115u8, 86u8, 90u8,
-                            59u8, 40u8, 14u8,
+                            43u8, 180u8, 151u8, 100u8, 140u8, 1u8, 167u8, 72u8,
+                            23u8, 176u8, 8u8, 172u8, 14u8, 110u8, 153u8, 176u8,
+                            166u8, 112u8, 190u8, 201u8, 167u8, 5u8, 71u8,
+                            114u8, 1u8, 124u8, 146u8, 110u8, 106u8, 120u8,
+                            225u8, 134u8,
                         ],
                     )
                 }
-                ///Cancel an anonymously scheduled task.
+                ///See [`Pallet::cancel`].
                 pub fn cancel(
                     &self,
                     when: ::core::primitive::u32,
@@ -27989,7 +26501,7 @@ pub mod api {
                         ],
                     )
                 }
-                ///Schedule a named task.
+                ///See [`Pallet::schedule_named`].
                 pub fn schedule_named(
                     &self,
                     id: [::core::primitive::u8; 32usize],
@@ -28013,15 +26525,15 @@ pub mod api {
                             call: ::std::boxed::Box::new(call),
                         },
                         [
-                            189u8, 129u8, 68u8, 252u8, 227u8, 128u8, 91u8,
-                            137u8, 19u8, 33u8, 131u8, 94u8, 93u8, 62u8, 125u8,
-                            202u8, 209u8, 190u8, 188u8, 184u8, 148u8, 8u8,
-                            25u8, 252u8, 102u8, 178u8, 199u8, 229u8, 15u8,
-                            212u8, 225u8, 31u8,
+                            101u8, 87u8, 43u8, 58u8, 102u8, 51u8, 46u8, 146u8,
+                            63u8, 166u8, 83u8, 220u8, 213u8, 163u8, 216u8,
+                            51u8, 77u8, 34u8, 23u8, 116u8, 55u8, 92u8, 53u8,
+                            220u8, 13u8, 168u8, 101u8, 124u8, 56u8, 2u8, 161u8,
+                            27u8,
                         ],
                     )
                 }
-                ///Cancel a named scheduled task.
+                ///See [`Pallet::cancel_named`].
                 pub fn cancel_named(
                     &self,
                     id: [::core::primitive::u8; 32usize],
@@ -28039,7 +26551,7 @@ pub mod api {
                         ],
                     )
                 }
-                ///Anonymously schedule a task after a delay.
+                ///See [`Pallet::schedule_after`].
                 pub fn schedule_after(
                     &self,
                     after: ::core::primitive::u32,
@@ -28061,15 +26573,15 @@ pub mod api {
                             call: ::std::boxed::Box::new(call),
                         },
                         [
-                            133u8, 35u8, 208u8, 152u8, 254u8, 69u8, 162u8,
-                            189u8, 197u8, 32u8, 2u8, 255u8, 190u8, 70u8, 87u8,
-                            173u8, 164u8, 159u8, 205u8, 83u8, 52u8, 228u8,
-                            225u8, 150u8, 87u8, 229u8, 101u8, 173u8, 121u8,
-                            253u8, 107u8, 202u8,
+                            30u8, 164u8, 155u8, 80u8, 205u8, 143u8, 104u8,
+                            233u8, 180u8, 166u8, 86u8, 112u8, 130u8, 26u8,
+                            180u8, 172u8, 118u8, 54u8, 64u8, 235u8, 134u8,
+                            52u8, 97u8, 205u8, 6u8, 96u8, 98u8, 82u8, 223u8,
+                            88u8, 39u8, 134u8,
                         ],
                     )
                 }
-                ///Schedule a named task after a delay.
+                ///See [`Pallet::schedule_named_after`].
                 pub fn schedule_named_after(
                     &self,
                     id: [::core::primitive::u8; 32usize],
@@ -28093,11 +26605,11 @@ pub mod api {
                             call: ::std::boxed::Box::new(call),
                         },
                         [
-                            221u8, 126u8, 113u8, 228u8, 234u8, 245u8, 188u8,
-                            183u8, 198u8, 208u8, 32u8, 207u8, 147u8, 210u8,
-                            80u8, 219u8, 85u8, 129u8, 170u8, 201u8, 74u8, 82u8,
-                            145u8, 20u8, 223u8, 114u8, 47u8, 133u8, 109u8,
-                            110u8, 233u8, 203u8,
+                            87u8, 9u8, 250u8, 173u8, 240u8, 50u8, 9u8, 192u8,
+                            180u8, 95u8, 55u8, 153u8, 31u8, 145u8, 97u8, 30u8,
+                            227u8, 199u8, 202u8, 202u8, 129u8, 190u8, 101u8,
+                            228u8, 22u8, 71u8, 23u8, 220u8, 24u8, 203u8, 29u8,
+                            222u8,
                         ],
                     )
                 }
@@ -28509,12 +27021,9 @@ pub mod api {
     pub mod preimage {
         use super::root_mod;
         use super::runtime_types;
-        /**
-        Custom [dispatch errors](https://docs.substrate.io/main-docs/build/events-errors/)
-        of this pallet.
-        */
+        ///The `Error` enum of this pallet.
         pub type Error = runtime_types::pallet_preimage::pallet::Error;
-        ///Contains one variant per dispatchable that can be called by an extrinsic.
+        ///Contains a variant per dispatchable extrinsic that this pallet has.
         pub type Call = runtime_types::pallet_preimage::pallet::Call;
         pub mod calls {
             use super::root_mod;
@@ -28621,10 +27130,7 @@ pub mod api {
             }
             pub struct TransactionApi;
             impl TransactionApi {
-                ///Register a preimage on-chain.
-                ///
-                ///If the preimage was previously requested, no fees or deposits are taken for providing
-                ///the preimage. Otherwise, a deposit is taken proportional to the size of the preimage.
+                ///See [`Pallet::note_preimage`].
                 pub fn note_preimage(
                     &self,
                     bytes: ::std::vec::Vec<::core::primitive::u8>,
@@ -28642,12 +27148,7 @@ pub mod api {
                         ],
                     )
                 }
-                ///Clear an unrequested preimage from the runtime storage.
-                ///
-                ///If `len` is provided, then it will be a much cheaper operation.
-                ///
-                ///- `hash`: The hash of the preimage to be removed from the store.
-                ///- `len`: The length of the preimage of `hash`.
+                ///See [`Pallet::unnote_preimage`].
                 pub fn unnote_preimage(
                     &self,
                     hash: ::subxt::utils::H256,
@@ -28666,10 +27167,7 @@ pub mod api {
                         ],
                     )
                 }
-                ///Request a preimage be uploaded to the chain without paying any fees or deposits.
-                ///
-                ///If the preimage requests has already been provided on-chain, we unreserve any deposit
-                ///a user may have paid, and take the control of the preimage out of their hands.
+                ///See [`Pallet::request_preimage`].
                 pub fn request_preimage(
                     &self,
                     hash: ::subxt::utils::H256,
@@ -28688,9 +27186,7 @@ pub mod api {
                         ],
                     )
                 }
-                ///Clear a previously made request for a preimage.
-                ///
-                ///NOTE: THIS MUST NOT BE CALLED ON `hash` MORE TIMES THAN `request_preimage`.
+                ///See [`Pallet::unrequest_preimage`].
                 pub fn unrequest_preimage(
                     &self,
                     hash: ::subxt::utils::H256,
@@ -28711,10 +27207,7 @@ pub mod api {
                 }
             }
         }
-        /**
-        The [event](https://docs.substrate.io/main-docs/build/events-errors/) emitted
-        by this pallet.
-        */
+        ///The `Event` enum of this pallet
         pub type Event = runtime_types::pallet_preimage::pallet::Event;
         pub mod events {
             use super::runtime_types;
@@ -29171,12 +27664,9 @@ pub mod api {
     pub mod transaction_pause {
         use super::root_mod;
         use super::runtime_types;
-        /**
-        Custom [dispatch errors](https://docs.substrate.io/main-docs/build/events-errors/)
-        of this pallet.
-        */
+        ///The `Error` enum of this pallet.
         pub type Error = runtime_types::pallet_transaction_pause::module::Error;
-        ///Contains one variant per dispatchable that can be called by an extrinsic.
+        ///Contains a variant per dispatchable extrinsic that this pallet has.
         pub type Call = runtime_types::pallet_transaction_pause::module::Call;
         pub mod calls {
             use super::root_mod;
@@ -29237,6 +27727,7 @@ pub mod api {
             }
             pub struct TransactionApi;
             impl TransactionApi {
+                ///See [`Pallet::pause_transaction`].
                 pub fn pause_transaction(
                     &self,
                     pallet_name: ::std::vec::Vec<::core::primitive::u8>,
@@ -29259,6 +27750,7 @@ pub mod api {
                         ],
                     )
                 }
+                ///See [`Pallet::unpause_transaction`].
                 pub fn unpause_transaction(
                     &self,
                     pallet_name: ::std::vec::Vec<::core::primitive::u8>,
@@ -29283,10 +27775,7 @@ pub mod api {
                 }
             }
         }
-        /**
-        The [event](https://docs.substrate.io/main-docs/build/events-errors/) emitted
-        by this pallet.
-        */
+        ///The `Event` enum of this pallet
         pub type Event = runtime_types::pallet_transaction_pause::module::Event;
         pub mod events {
             use super::runtime_types;
@@ -29429,12 +27918,9 @@ pub mod api {
     pub mod im_online {
         use super::root_mod;
         use super::runtime_types;
-        /**
-        Custom [dispatch errors](https://docs.substrate.io/main-docs/build/events-errors/)
-        of this pallet.
-        */
+        ///The `Error` enum of this pallet.
         pub type Error = runtime_types::pallet_im_online::pallet::Error;
-        ///Contains one variant per dispatchable that can be called by an extrinsic.
+        ///Contains a variant per dispatchable extrinsic that this pallet has.
         pub type Call = runtime_types::pallet_im_online::pallet::Call;
         pub mod calls {
             use super::root_mod;
@@ -29472,11 +27958,7 @@ pub mod api {
             }
             pub struct TransactionApi;
             impl TransactionApi {
-                ///## Complexity:
-                ///- `O(K + E)` where K is length of `Keys` (heartbeat.validators_len) and E is length of
-                ///  `heartbeat.network_state.external_address`
-                ///  - `O(K)`: decoding of length `K`
-                ///  - `O(E)`: decoding/encoding of length `E`
+                ///See [`Pallet::heartbeat`].
                 pub fn heartbeat(
                     &self,
                     heartbeat: runtime_types::pallet_im_online::Heartbeat<
@@ -29492,20 +27974,17 @@ pub mod api {
                             signature,
                         },
                         [
-                            191u8, 155u8, 217u8, 65u8, 8u8, 34u8, 41u8, 185u8,
-                            187u8, 199u8, 164u8, 48u8, 76u8, 123u8, 235u8,
-                            182u8, 85u8, 107u8, 48u8, 158u8, 110u8, 206u8,
-                            145u8, 119u8, 165u8, 253u8, 27u8, 59u8, 0u8, 112u8,
-                            241u8, 242u8,
+                            145u8, 227u8, 53u8, 178u8, 195u8, 173u8, 7u8,
+                            209u8, 148u8, 82u8, 125u8, 236u8, 128u8, 10u8,
+                            134u8, 114u8, 95u8, 104u8, 111u8, 202u8, 59u8,
+                            192u8, 178u8, 182u8, 102u8, 86u8, 88u8, 50u8, 92u8,
+                            66u8, 144u8, 131u8,
                         ],
                     )
                 }
             }
         }
-        /**
-        The [event](https://docs.substrate.io/main-docs/build/events-errors/) emitted
-        by this pallet.
-        */
+        ///The `Event` enum of this pallet
         pub type Event = runtime_types::pallet_im_online::pallet::Event;
         pub mod events {
             use super::runtime_types;
@@ -29639,21 +28118,18 @@ pub mod api {
                         ],
                     )
                 }
-                /// For each session index, we keep a mapping of `SessionIndex` and `AuthIndex` to
-                /// `WrapperOpaque<BoundedOpaqueNetworkState>`.
+                /// For each session index, we keep a mapping of `SessionIndex` and `AuthIndex`.
                 pub fn received_heartbeats(
                     &self,
                     _0: impl ::std::borrow::Borrow<::core::primitive::u32>,
                     _1: impl ::std::borrow::Borrow<::core::primitive::u32>,
                 ) -> ::subxt::storage::address::Address<
                     ::subxt::storage::address::StaticStorageMapKey,
-                    runtime_types::frame_support::traits::misc::WrapperOpaque<
-                        runtime_types::pallet_im_online::BoundedOpaqueNetworkState,
-                    >,
+                    ::core::primitive::bool,
                     ::subxt::storage::address::Yes,
                     (),
                     ::subxt::storage::address::Yes,
-                >{
+                > {
                     ::subxt::storage::address::Address::new_static(
                         "ImOnline",
                         "ReceivedHeartbeats",
@@ -29664,64 +28140,61 @@ pub mod api {
                             .borrow())
                         ],
                         [
-                            244u8,
-                            195u8,
-                            226u8,
-                            146u8,
-                            31u8,
-                            109u8,
-                            70u8,
-                            31u8,
-                            198u8,
-                            97u8,
-                            116u8,
-                            249u8,
-                            115u8,
-                            191u8,
-                            13u8,
-                            96u8,
-                            12u8,
-                            200u8,
-                            235u8,
-                            254u8,
-                            3u8,
-                            36u8,
-                            51u8,
-                            43u8,
-                            224u8,
-                            251u8,
-                            76u8,
-                            197u8,
-                            157u8,
+                            123u8,
+                            182u8,
+                            145u8,
+                            49u8,
+                            90u8,
+                            110u8,
+                            80u8,
+                            53u8,
+                            62u8,
+                            45u8,
                             173u8,
-                            125u8,
-                            161u8,
+                            252u8,
+                            126u8,
+                            163u8,
+                            229u8,
+                            173u8,
+                            54u8,
+                            169u8,
+                            61u8,
+                            128u8,
+                            10u8,
+                            33u8,
+                            254u8,
+                            78u8,
+                            145u8,
+                            134u8,
+                            235u8,
+                            26u8,
+                            177u8,
+                            55u8,
+                            7u8,
+                            75u8,
                         ],
                     )
                 }
-                /// For each session index, we keep a mapping of `SessionIndex` and `AuthIndex` to
-                /// `WrapperOpaque<BoundedOpaqueNetworkState>`.
+                /// For each session index, we keep a mapping of `SessionIndex` and `AuthIndex`.
                 pub fn received_heartbeats_root(
                     &self,
                 ) -> ::subxt::storage::address::Address<
                     ::subxt::storage::address::StaticStorageMapKey,
-                    runtime_types::frame_support::traits::misc::WrapperOpaque<
-                        runtime_types::pallet_im_online::BoundedOpaqueNetworkState,
-                    >,
+                    ::core::primitive::bool,
                     (),
                     (),
                     ::subxt::storage::address::Yes,
-                >{
+                > {
                     ::subxt::storage::address::Address::new_static(
                         "ImOnline",
                         "ReceivedHeartbeats",
                         Vec::new(),
                         [
-                            244u8, 195u8, 226u8, 146u8, 31u8, 109u8, 70u8,
-                            31u8, 198u8, 97u8, 116u8, 249u8, 115u8, 191u8,
-                            13u8, 96u8, 12u8, 200u8, 235u8, 254u8, 3u8, 36u8,
-                            51u8, 43u8, 224u8, 251u8, 76u8, 197u8, 157u8,
-                            173u8, 125u8, 161u8,
+                            123u8, 182u8, 145u8, 49u8, 90u8, 110u8, 80u8, 53u8,
+                            62u8, 45u8, 173u8, 252u8, 126u8, 163u8, 229u8,
+                            173u8, 54u8, 169u8, 61u8, 128u8, 10u8, 33u8, 254u8,
+                            78u8, 145u8, 134u8, 235u8, 26u8, 177u8, 55u8, 7u8,
+                            75u8,
                         ],
                     )
                 }
@@ -29839,10 +28312,7 @@ pub mod api {
     pub mod identity {
         use super::root_mod;
         use super::runtime_types;
-        /**
-        Custom [dispatch errors](https://docs.substrate.io/main-docs/build/events-errors/)
-        of this pallet.
-        */
+        ///The `Error` enum of this pallet.
         pub type Error = runtime_types::pallet_identity::pallet::Error;
         ///Identity pallet declaration.
         pub type Call = runtime_types::pallet_identity::pallet::Call;
@@ -30259,16 +28729,7 @@ pub mod api {
             }
             pub struct TransactionApi;
             impl TransactionApi {
-                ///Add a registrar to the system.
-                ///
-                ///The dispatch origin for this call must be `T::RegistrarOrigin`.
-                ///
-                ///- `account`: the account of the registrar.
-                ///
-                ///Emits `RegistrarAdded` if successful.
-                ///
-                ///## Complexity
-                ///- `O(R)` where `R` registrar-count (governance-bounded and code-bounded).
+                ///See [`Pallet::add_registrar`].
                 pub fn add_registrar(
                     &self,
                     account: ::subxt::utils::MultiAddress<
@@ -30289,21 +28750,7 @@ pub mod api {
                         ],
                     )
                 }
-                ///Set an account's identity information and reserve the appropriate deposit.
-                ///
-                ///If the account already has identity information, the deposit is taken as part payment
-                ///for the new deposit.
-                ///
-                ///The dispatch origin for this call must be _Signed_.
-                ///
-                ///- `info`: The identity information.
-                ///
-                ///Emits `IdentitySet` if successful.
-                ///
-                ///## Complexity
-                ///- `O(X + X' + R)`
-                ///  - where `X` additional-field-count (deposit-bounded and code-bounded)
-                ///  - where `R` judgements-count (registrar-count-bounded)
+                ///See [`Pallet::set_identity`].
                 pub fn set_identity(
                     &self,
                     info: runtime_types::pallet_identity::types::IdentityInfo,
@@ -30323,20 +28770,7 @@ pub mod api {
                         ],
                     )
                 }
-                ///Set the sub-accounts of the sender.
-                ///
-                ///Payment: Any aggregate balance reserved by previous `set_subs` calls will be returned
-                ///and an amount `SubAccountDeposit` will be reserved for each item in `subs`.
-                ///
-                ///The dispatch origin for this call must be _Signed_ and the sender must have a registered
-                ///identity.
-                ///
-                ///- `subs`: The identity's (new) sub-accounts.
-                ///
-                ///## Complexity
-                ///- `O(P + S)`
-                ///  - where `P` old-subs-count (hard- and deposit-bounded).
-                ///  - where `S` subs-count (hard- and deposit-bounded).
+                ///See [`Pallet::set_subs`].
                 pub fn set_subs(
                     &self,
                     subs: ::std::vec::Vec<(
@@ -30357,20 +28791,7 @@ pub mod api {
                         ],
                     )
                 }
-                ///Clear an account's identity info and all sub-accounts and return all deposits.
-                ///
-                ///Payment: All reserved balances on the account are returned.
-                ///
-                ///The dispatch origin for this call must be _Signed_ and the sender must have a registered
-                ///identity.
-                ///
-                ///Emits `IdentityCleared` if successful.
-                ///
-                ///## Complexity
-                ///- `O(R + S + X)`
-                ///  - where `R` registrar-count (governance-bounded).
-                ///  - where `S` subs-count (hard- and deposit-bounded).
-                ///  - where `X` additional-field-count (deposit-bounded and code-bounded).
+                ///See [`Pallet::clear_identity`].
                 pub fn clear_identity(
                     &self,
                 ) -> ::subxt::tx::Payload<types::ClearIdentity>
@@ -30388,27 +28809,7 @@ pub mod api {
                         ],
                     )
                 }
-                ///Request a judgement from a registrar.
-                ///
-                ///Payment: At most `max_fee` will be reserved for payment to the registrar if judgement
-                ///given.
-                ///
-                ///The dispatch origin for this call must be _Signed_ and the sender must have a
-                ///registered identity.
-                ///
-                ///- `reg_index`: The index of the registrar whose judgement is requested.
-                ///- `max_fee`: The maximum fee that may be paid. This should just be auto-populated as:
-                ///
-                ///```nocompile
-                ///Self::registrars().get(reg_index).unwrap().fee
-                ///```
-                ///
-                ///Emits `JudgementRequested` if successful.
-                ///
-                ///## Complexity
-                ///- `O(R + X)`.
-                ///  - where `R` registrar-count (governance-bounded).
-                ///  - where `X` additional-field-count (deposit-bounded and code-bounded).
+                ///See [`Pallet::request_judgement`].
                 pub fn request_judgement(
                     &self,
                     reg_index: ::core::primitive::u32,
@@ -30428,21 +28829,7 @@ pub mod api {
                         ],
                     )
                 }
-                ///Cancel a previous request.
-                ///
-                ///Payment: A previously reserved deposit is returned on success.
-                ///
-                ///The dispatch origin for this call must be _Signed_ and the sender must have a
-                ///registered identity.
-                ///
-                ///- `reg_index`: The index of the registrar whose judgement is no longer requested.
-                ///
-                ///Emits `JudgementUnrequested` if successful.
-                ///
-                ///## Complexity
-                ///- `O(R + X)`.
-                ///  - where `R` registrar-count (governance-bounded).
-                ///  - where `X` additional-field-count (deposit-bounded and code-bounded).
+                ///See [`Pallet::cancel_request`].
                 pub fn cancel_request(
                     &self,
                     reg_index: ::core::primitive::u32,
@@ -30461,17 +28848,7 @@ pub mod api {
                         ],
                     )
                 }
-                ///Set the fee required for a judgement to be requested from a registrar.
-                ///
-                ///The dispatch origin for this call must be _Signed_ and the sender must be the account
-                ///of the registrar whose index is `index`.
-                ///
-                ///- `index`: the index of the registrar whose fee is to be set.
-                ///- `fee`: the new fee.
-                ///
-                ///## Complexity
-                ///- `O(R)`.
-                ///  - where `R` registrar-count (governance-bounded).
+                ///See [`Pallet::set_fee`].
                 pub fn set_fee(
                     &self,
                     index: ::core::primitive::u32,
@@ -30490,17 +28867,7 @@ pub mod api {
                         ],
                     )
                 }
-                ///Change the account associated with a registrar.
-                ///
-                ///The dispatch origin for this call must be _Signed_ and the sender must be the account
-                ///of the registrar whose index is `index`.
-                ///
-                ///- `index`: the index of the registrar whose fee is to be set.
-                ///- `new`: the new account ID.
-                ///
-                ///## Complexity
-                ///- `O(R)`.
-                ///  - where `R` registrar-count (governance-bounded).
+                ///See [`Pallet::set_account_id`].
                 pub fn set_account_id(
                     &self,
                     index: ::core::primitive::u32,
@@ -30522,17 +28889,7 @@ pub mod api {
                         ],
                     )
                 }
-                ///Set the field information for a registrar.
-                ///
-                ///The dispatch origin for this call must be _Signed_ and the sender must be the account
-                ///of the registrar whose index is `index`.
-                ///
-                ///- `index`: the index of the registrar whose fee is to be set.
-                ///- `fields`: the fields that the registrar concerns themselves with.
-                ///
-                ///## Complexity
-                ///- `O(R)`.
-                ///  - where `R` registrar-count (governance-bounded).
+                ///See [`Pallet::set_fields`].
                 pub fn set_fields(
                     &self,
                     index: ::core::primitive::u32,
@@ -30553,23 +28910,7 @@ pub mod api {
                         ],
                     )
                 }
-                ///Provide a judgement for an account's identity.
-                ///
-                ///The dispatch origin for this call must be _Signed_ and the sender must be the account
-                ///of the registrar whose index is `reg_index`.
-                ///
-                ///- `reg_index`: the index of the registrar whose judgement is being made.
-                ///- `target`: the account whose identity the judgement is upon. This must be an account
-                ///  with a registered identity.
-                ///- `judgement`: the judgement of the registrar of index `reg_index` about `target`.
-                ///- `identity`: The hash of the [`IdentityInfo`] for that the judgement is provided.
-                ///
-                ///Emits `JudgementGiven` if successful.
-                ///
-                ///## Complexity
-                ///- `O(R + X)`.
-                ///  - where `R` registrar-count (governance-bounded).
-                ///  - where `X` additional-field-count (deposit-bounded and code-bounded).
+                ///See [`Pallet::provide_judgement`].
                 pub fn provide_judgement(
                     &self,
                     reg_index: ::core::primitive::u32,
@@ -30601,24 +28942,7 @@ pub mod api {
                         ],
                     )
                 }
-                ///Remove an account's identity and sub-account information and slash the deposits.
-                ///
-                ///Payment: Reserved balances from `set_subs` and `set_identity` are slashed and handled by
-                ///`Slash`. Verification request deposits are not returned; they should be cancelled
-                ///manually using `cancel_request`.
-                ///
-                ///The dispatch origin for this call must match `T::ForceOrigin`.
-                ///
-                ///- `target`: the account whose identity the judgement is upon. This must be an account
-                ///  with a registered identity.
-                ///
-                ///Emits `IdentityKilled` if successful.
-                ///
-                ///## Complexity
-                ///- `O(R + S + X)`
-                ///  - where `R` registrar-count (governance-bounded).
-                ///  - where `S` subs-count (hard- and deposit-bounded).
-                ///  - where `X` additional-field-count (deposit-bounded and code-bounded).
+                ///See [`Pallet::kill_identity`].
                 pub fn kill_identity(
                     &self,
                     target: ::subxt::utils::MultiAddress<
@@ -30639,13 +28963,7 @@ pub mod api {
                         ],
                     )
                 }
-                ///Add the given account to the sender's subs.
-                ///
-                ///Payment: Balance reserved by a previous `set_subs` call for one sub will be repatriated
-                ///to the sender.
-                ///
-                ///The dispatch origin for this call must be _Signed_ and the sender must have a registered
-                ///sub identity of `sub`.
+                ///See [`Pallet::add_sub`].
                 pub fn add_sub(
                     &self,
                     sub: ::subxt::utils::MultiAddress<
@@ -30667,10 +28985,7 @@ pub mod api {
                         ],
                     )
                 }
-                ///Alter the associated name of the given sub-account.
-                ///
-                ///The dispatch origin for this call must be _Signed_ and the sender must have a registered
-                ///sub identity of `sub`.
+                ///See [`Pallet::rename_sub`].
                 pub fn rename_sub(
                     &self,
                     sub: ::subxt::utils::MultiAddress<
@@ -30692,13 +29007,7 @@ pub mod api {
                         ],
                     )
                 }
-                ///Remove the given account from the sender's subs.
-                ///
-                ///Payment: Balance reserved by a previous `set_subs` call for one sub will be repatriated
-                ///to the sender.
-                ///
-                ///The dispatch origin for this call must be _Signed_ and the sender must have a registered
-                ///sub identity of `sub`.
+                ///See [`Pallet::remove_sub`].
                 pub fn remove_sub(
                     &self,
                     sub: ::subxt::utils::MultiAddress<
@@ -30719,16 +29028,7 @@ pub mod api {
                         ],
                     )
                 }
-                ///Remove the sender as a sub-account.
-                ///
-                ///Payment: Balance reserved by a previous `set_subs` call for one sub will be repatriated
-                ///to the sender (*not* the original depositor).
-                ///
-                ///The dispatch origin for this call must be _Signed_ and the sender must have a registered
-                ///super-identity.
-                ///
-                ///NOTE: This should not normally be used, but is provided in the case that the non-
-                ///controller of an account is maliciously registered as a sub-account.
+                ///See [`Pallet::quit_sub`].
                 pub fn quit_sub(&self) -> ::subxt::tx::Payload<types::QuitSub> {
                     ::subxt::tx::Payload::new_static(
                         "Identity",
@@ -30745,10 +29045,7 @@ pub mod api {
                 }
             }
         }
-        /**
-        The [event](https://docs.substrate.io/main-docs/build/events-errors/) emitted
-        by this pallet.
-        */
+        ///The `Event` enum of this pallet
         pub type Event = runtime_types::pallet_identity::pallet::Event;
         pub mod events {
             use super::runtime_types;
@@ -31395,12 +29692,9 @@ pub mod api {
     pub mod utility {
         use super::root_mod;
         use super::runtime_types;
-        /**
-        Custom [dispatch errors](https://docs.substrate.io/main-docs/build/events-errors/)
-        of this pallet.
-        */
+        ///The `Error` enum of this pallet.
         pub type Error = runtime_types::pallet_utility::pallet::Error;
-        ///Contains one variant per dispatchable that can be called by an extrinsic.
+        ///Contains a variant per dispatchable extrinsic that this pallet has.
         pub type Call = runtime_types::pallet_utility::pallet::Call;
         pub mod calls {
             use super::root_mod;
@@ -31572,24 +29866,7 @@ pub mod api {
             }
             pub struct TransactionApi;
             impl TransactionApi {
-                ///Send a batch of dispatch calls.
-                ///
-                ///May be called from any origin except `None`.
-                ///
-                ///- `calls`: The calls to be dispatched from the same origin. The number of call must not
-                ///  exceed the constant: `batched_calls_limit` (available in constant metadata).
-                ///
-                ///If origin is root then the calls are dispatched without checking origin filter. (This
-                ///includes bypassing `frame_system::Config::BaseCallFilter`).
-                ///
-                ///## Complexity
-                ///- O(C) where C is the number of calls to be batched.
-                ///
-                ///This will return `Ok` in all circumstances. To determine the success of the batch, an
-                ///event is deposited. If a call failed and the batch was interrupted, then the
-                ///`BatchInterrupted` event is deposited, along with the number of successful calls made
-                ///and the error of the failed call. If all were successful, then the `BatchCompleted`
-                ///event is deposited.
+                ///See [`Pallet::batch`].
                 pub fn batch(
                     &self,
                     calls: ::std::vec::Vec<
@@ -31601,27 +29878,15 @@ pub mod api {
                         "batch",
                         types::Batch { calls },
                         [
-                            148u8, 82u8, 203u8, 239u8, 130u8, 141u8, 20u8,
-                            115u8, 21u8, 138u8, 121u8, 169u8, 214u8, 64u8,
-                            206u8, 55u8, 93u8, 177u8, 77u8, 157u8, 239u8, 80u8,
-                            221u8, 96u8, 160u8, 170u8, 241u8, 110u8, 101u8,
-                            185u8, 198u8, 180u8,
+                            159u8, 240u8, 137u8, 49u8, 77u8, 124u8, 117u8,
+                            136u8, 147u8, 31u8, 243u8, 18u8, 25u8, 59u8, 65u8,
+                            33u8, 233u8, 205u8, 88u8, 130u8, 145u8, 120u8,
+                            66u8, 48u8, 178u8, 87u8, 92u8, 126u8, 58u8, 103u8,
+                            176u8, 217u8,
                         ],
                     )
                 }
-                ///Send a call through an indexed pseudonym of the sender.
-                ///
-                ///Filter from origin are passed along. The call will be dispatched with an origin which
-                ///use the same filter as the origin of this call.
-                ///
-                ///NOTE: If you need to ensure that any account-based filtering is not honored (i.e.
-                ///because you expect `proxy` to have been used prior in the call stack and you do not want
-                ///the call restrictions to apply to any sub-accounts), then use `as_multi_threshold_1`
-                ///in the Multisig pallet instead.
-                ///
-                ///NOTE: Prior to version *12, this was called `as_limited_sub`.
-                ///
-                ///The dispatch origin for this call must be _Signed_.
+                ///See [`Pallet::as_derivative`].
                 pub fn as_derivative(
                     &self,
                     index: ::core::primitive::u16,
@@ -31635,27 +29900,15 @@ pub mod api {
                             call: ::std::boxed::Box::new(call),
                         },
                         [
-                            86u8, 82u8, 212u8, 155u8, 84u8, 70u8, 176u8, 46u8,
-                            85u8, 98u8, 70u8, 26u8, 219u8, 231u8, 211u8, 83u8,
-                            176u8, 181u8, 21u8, 95u8, 106u8, 108u8, 81u8, 13u8,
-                            43u8, 25u8, 230u8, 128u8, 26u8, 101u8, 230u8,
-                            251u8,
+                            226u8, 134u8, 217u8, 42u8, 27u8, 157u8, 182u8,
+                            106u8, 109u8, 83u8, 101u8, 129u8, 173u8, 167u8,
+                            191u8, 208u8, 6u8, 53u8, 204u8, 34u8, 19u8, 196u8,
+                            198u8, 53u8, 202u8, 95u8, 188u8, 131u8, 28u8,
+                            127u8, 254u8, 254u8,
                         ],
                     )
                 }
-                ///Send a batch of dispatch calls and atomically execute them.
-                ///The whole transaction will rollback and fail if any of the calls failed.
-                ///
-                ///May be called from any origin except `None`.
-                ///
-                ///- `calls`: The calls to be dispatched from the same origin. The number of call must not
-                ///  exceed the constant: `batched_calls_limit` (available in constant metadata).
-                ///
-                ///If origin is root then the calls are dispatched without checking origin filter. (This
-                ///includes bypassing `frame_system::Config::BaseCallFilter`).
-                ///
-                ///## Complexity
-                ///- O(C) where C is the number of calls to be batched.
+                ///See [`Pallet::batch_all`].
                 pub fn batch_all(
                     &self,
                     calls: ::std::vec::Vec<
@@ -31667,20 +29920,15 @@ pub mod api {
                         "batch_all",
                         types::BatchAll { calls },
                         [
-                            35u8, 207u8, 179u8, 93u8, 242u8, 219u8, 248u8,
-                            226u8, 40u8, 28u8, 191u8, 137u8, 91u8, 232u8,
-                            195u8, 148u8, 170u8, 80u8, 162u8, 117u8, 56u8,
-                            212u8, 229u8, 158u8, 36u8, 166u8, 173u8, 163u8,
-                            108u8, 104u8, 37u8, 215u8,
+                            188u8, 15u8, 139u8, 1u8, 106u8, 225u8, 119u8, 16u8,
+                            81u8, 129u8, 25u8, 230u8, 225u8, 39u8, 94u8, 11u8,
+                            255u8, 12u8, 108u8, 173u8, 118u8, 194u8, 117u8,
+                            120u8, 27u8, 78u8, 74u8, 207u8, 144u8, 147u8, 31u8,
+                            72u8,
                         ],
                     )
                 }
-                ///Dispatches a function call with a provided origin.
-                ///
-                ///The dispatch origin for this call must be _Root_.
-                ///
-                ///## Complexity
-                ///- O(1).
+                ///See [`Pallet::dispatch_as`].
                 pub fn dispatch_as(
                     &self,
                     as_origin: runtime_types::tangle_standalone_runtime::OriginCaller,
@@ -31694,27 +29942,14 @@ pub mod api {
                             call: ::std::boxed::Box::new(call),
                         },
                         [
-                            12u8, 13u8, 162u8, 248u8, 48u8, 78u8, 61u8, 43u8,
-                            219u8, 12u8, 16u8, 60u8, 128u8, 229u8, 93u8, 175u8,
-                            242u8, 199u8, 25u8, 58u8, 102u8, 25u8, 89u8, 57u8,
-                            123u8, 81u8, 230u8, 210u8, 200u8, 193u8, 28u8,
-                            146u8,
+                            154u8, 40u8, 231u8, 125u8, 236u8, 164u8, 3u8, 98u8,
+                            181u8, 252u8, 39u8, 124u8, 89u8, 153u8, 19u8, 63u8,
+                            214u8, 138u8, 128u8, 78u8, 0u8, 122u8, 207u8, 39u8,
+                            58u8, 36u8, 42u8, 170u8, 188u8, 169u8, 249u8, 0u8,
                         ],
                     )
                 }
-                ///Send a batch of dispatch calls.
-                ///Unlike `batch`, it allows errors and won't interrupt.
-                ///
-                ///May be called from any origin except `None`.
-                ///
-                ///- `calls`: The calls to be dispatched from the same origin. The number of call must not
-                ///  exceed the constant: `batched_calls_limit` (available in constant metadata).
-                ///
-                ///If origin is root then the calls are dispatch without checking origin filter. (This
-                ///includes bypassing `frame_system::Config::BaseCallFilter`).
-                ///
-                ///## Complexity
-                ///- O(C) where C is the number of calls to be batched.
+                ///See [`Pallet::force_batch`].
                 pub fn force_batch(
                     &self,
                     calls: ::std::vec::Vec<
@@ -31726,20 +29961,15 @@ pub mod api {
                         "force_batch",
                         types::ForceBatch { calls },
                         [
-                            229u8, 153u8, 249u8, 130u8, 228u8, 60u8, 221u8,
-                            82u8, 243u8, 223u8, 178u8, 13u8, 160u8, 142u8,
-                            173u8, 194u8, 95u8, 19u8, 63u8, 33u8, 8u8, 239u8,
-                            107u8, 191u8, 21u8, 1u8, 8u8, 135u8, 141u8, 63u8,
-                            69u8, 252u8,
+                            79u8, 125u8, 246u8, 107u8, 214u8, 108u8, 83u8,
+                            216u8, 12u8, 213u8, 49u8, 129u8, 102u8, 146u8,
+                            161u8, 72u8, 216u8, 10u8, 106u8, 47u8, 154u8,
+                            222u8, 218u8, 159u8, 43u8, 115u8, 15u8, 6u8, 238u8,
+                            15u8, 180u8, 217u8,
                         ],
                     )
                 }
-                ///Dispatch a function call with a specified weight.
-                ///
-                ///This function does not check the weight of the call, and instead allows the
-                ///Root origin to specify the weight of the call.
-                ///
-                ///The dispatch origin for this call must be _Root_.
+                ///See [`Pallet::with_weight`].
                 pub fn with_weight(
                     &self,
                     call: runtime_types::tangle_standalone_runtime::RuntimeCall,
@@ -31753,20 +29983,17 @@ pub mod api {
                             weight,
                         },
                         [
-                            189u8, 119u8, 168u8, 39u8, 189u8, 161u8, 150u8,
-                            250u8, 39u8, 166u8, 3u8, 48u8, 216u8, 253u8, 129u8,
-                            179u8, 39u8, 15u8, 30u8, 35u8, 191u8, 96u8, 135u8,
-                            171u8, 198u8, 149u8, 45u8, 9u8, 251u8, 198u8, 78u8,
-                            7u8,
+                            71u8, 217u8, 200u8, 197u8, 134u8, 153u8, 15u8,
+                            243u8, 157u8, 178u8, 153u8, 177u8, 109u8, 212u8,
+                            149u8, 226u8, 113u8, 205u8, 20u8, 76u8, 194u8,
+                            231u8, 57u8, 200u8, 6u8, 184u8, 131u8, 28u8, 70u8,
+                            34u8, 31u8, 24u8,
                         ],
                     )
                 }
             }
         }
-        /**
-        The [event](https://docs.substrate.io/main-docs/build/events-errors/) emitted
-        by this pallet.
-        */
+        ///The `Event` enum of this pallet
         pub type Event = runtime_types::pallet_utility::pallet::Event;
         pub mod events {
             use super::runtime_types;
@@ -31923,12 +30150,9 @@ pub mod api {
     pub mod ethereum {
         use super::root_mod;
         use super::runtime_types;
-        /**
-        Custom [dispatch errors](https://docs.substrate.io/main-docs/build/events-errors/)
-        of this pallet.
-        */
+        ///The `Error` enum of this pallet.
         pub type Error = runtime_types::pallet_ethereum::pallet::Error;
-        ///Contains one variant per dispatchable that can be called by an extrinsic.
+        ///Contains a variant per dispatchable extrinsic that this pallet has.
         pub type Call = runtime_types::pallet_ethereum::pallet::Call;
         pub mod calls {
             use super::root_mod;
@@ -31964,7 +30188,7 @@ pub mod api {
             }
             pub struct TransactionApi;
             impl TransactionApi {
-                ///Transact an Ethereum transaction.
+                ///See [`Pallet::transact`].
                 pub fn transact(
                     &self,
                     transaction: runtime_types::ethereum::transaction::TransactionV2,
@@ -31984,10 +30208,7 @@ pub mod api {
                 }
             }
         }
-        /**
-        The [event](https://docs.substrate.io/main-docs/build/events-errors/) emitted
-        by this pallet.
-        */
+        ///The `Event` enum of this pallet
         pub type Event = runtime_types::pallet_ethereum::pallet::Event;
         pub mod events {
             use super::runtime_types;
@@ -32204,12 +30425,9 @@ pub mod api {
     pub mod evm {
         use super::root_mod;
         use super::runtime_types;
-        /**
-        Custom [dispatch errors](https://docs.substrate.io/main-docs/build/events-errors/)
-        of this pallet.
-        */
+        ///The `Error` enum of this pallet.
         pub type Error = runtime_types::pallet_evm::pallet::Error;
-        ///Contains one variant per dispatchable that can be called by an extrinsic.
+        ///Contains a variant per dispatchable extrinsic that this pallet has.
         pub type Call = runtime_types::pallet_evm::pallet::Call;
         pub mod calls {
             use super::root_mod;
@@ -32361,7 +30579,7 @@ pub mod api {
             }
             pub struct TransactionApi;
             impl TransactionApi {
-                ///Withdraw balance from EVM into currency/balances pallet.
+                ///See [`Pallet::withdraw`].
                 pub fn withdraw(
                     &self,
                     address: ::subxt::utils::H160,
@@ -32380,7 +30598,7 @@ pub mod api {
                         ],
                     )
                 }
-                ///Issue an EVM call operation. This is similar to a message call transaction in Ethereum.
+                ///See [`Pallet::call`].
                 pub fn call(
                     &self,
                     source: ::subxt::utils::H160,
@@ -32423,8 +30641,7 @@ pub mod api {
                         ],
                     )
                 }
-                ///Issue an EVM create operation. This is similar to a contract creation transaction in
-                ///Ethereum.
+                ///See [`Pallet::create`].
                 pub fn create(
                     &self,
                     source: ::subxt::utils::H160,
@@ -32465,7 +30682,7 @@ pub mod api {
                         ],
                     )
                 }
-                ///Issue an EVM create2 operation.
+                ///See [`Pallet::create2`].
                 pub fn create2(
                     &self,
                     source: ::subxt::utils::H160,
@@ -32509,10 +30726,7 @@ pub mod api {
                 }
             }
         }
-        /**
-        The [event](https://docs.substrate.io/main-docs/build/events-errors/) emitted
-        by this pallet.
-        */
+        ///The `Event` enum of this pallet
         pub type Event = runtime_types::pallet_evm::pallet::Event;
         pub mod events {
             use super::runtime_types;
@@ -32893,7 +31107,7 @@ pub mod api {
     pub mod dynamic_fee {
         use super::root_mod;
         use super::runtime_types;
-        ///Contains one variant per dispatchable that can be called by an extrinsic.
+        ///Contains a variant per dispatchable extrinsic that this pallet has.
         pub type Call = runtime_types::pallet_dynamic_fee::pallet::Call;
         pub mod calls {
             use super::root_mod;
@@ -32928,6 +31142,7 @@ pub mod api {
             }
             pub struct TransactionApi;
             impl TransactionApi {
+                ///See [`Pallet::note_min_gas_price_target`].
                 pub fn note_min_gas_price_target(
                     &self,
                     target: runtime_types::primitive_types::U256,
@@ -33002,7 +31217,7 @@ pub mod api {
     pub mod base_fee {
         use super::root_mod;
         use super::runtime_types;
-        ///Contains one variant per dispatchable that can be called by an extrinsic.
+        ///Contains a variant per dispatchable extrinsic that this pallet has.
         pub type Call = runtime_types::pallet_base_fee::pallet::Call;
         pub mod calls {
             use super::root_mod;
@@ -33062,6 +31277,7 @@ pub mod api {
             }
             pub struct TransactionApi;
             impl TransactionApi {
+                ///See [`Pallet::set_base_fee_per_gas`].
                 pub fn set_base_fee_per_gas(
                     &self,
                     fee: runtime_types::primitive_types::U256,
@@ -33080,6 +31296,7 @@ pub mod api {
                         ],
                     )
                 }
+                ///See [`Pallet::set_elasticity`].
                 pub fn set_elasticity(
                     &self,
                     elasticity: runtime_types::sp_arithmetic::per_things::Permill,
@@ -33100,10 +31317,7 @@ pub mod api {
                 }
             }
         }
-        /**
-        The [event](https://docs.substrate.io/main-docs/build/events-errors/) emitted
-        by this pallet.
-        */
+        ///The `Event` enum of this pallet
         pub type Event = runtime_types::pallet_base_fee::pallet::Event;
         pub mod events {
             use super::runtime_types;
@@ -33207,11 +31421,10 @@ pub mod api {
                         "Elasticity",
                         vec![],
                         [
-                            196u8, 184u8, 245u8, 90u8, 25u8, 50u8, 66u8, 69u8,
-                            140u8, 128u8, 179u8, 63u8, 197u8, 133u8, 135u8,
-                            141u8, 56u8, 0u8, 143u8, 241u8, 200u8, 114u8, 73u8,
-                            157u8, 85u8, 190u8, 1u8, 2u8, 208u8, 235u8, 62u8,
-                            16u8,
+                            219u8, 23u8, 184u8, 17u8, 59u8, 152u8, 197u8, 61u8,
+                            167u8, 131u8, 124u8, 42u8, 70u8, 42u8, 101u8, 54u8,
+                            11u8, 206u8, 96u8, 165u8, 30u8, 76u8, 2u8, 64u8,
+                            58u8, 49u8, 74u8, 97u8, 109u8, 222u8, 75u8, 234u8,
                         ],
                     )
                 }
@@ -33221,13 +31434,10 @@ pub mod api {
     pub mod hotfix_sufficients {
         use super::root_mod;
         use super::runtime_types;
-        /**
-        Custom [dispatch errors](https://docs.substrate.io/main-docs/build/events-errors/)
-        of this pallet.
-        */
+        ///The `Error` enum of this pallet.
         pub type Error =
             runtime_types::pallet_hotfix_sufficients::pallet::Error;
-        ///Contains one variant per dispatchable that can be called by an extrinsic.
+        ///Contains a variant per dispatchable extrinsic that this pallet has.
         pub type Call = runtime_types::pallet_hotfix_sufficients::pallet::Call;
         pub mod calls {
             use super::root_mod;
@@ -33262,10 +31472,7 @@ pub mod api {
             }
             pub struct TransactionApi;
             impl TransactionApi {
-                ///Increment `sufficients` for existing accounts having a nonzero `nonce` but zero `sufficients`, `consumers` and `providers` value.
-                ///This state was caused by a previous bug in EVM create account dispatchable.
-                ///
-                ///Any accounts in the input list not satisfying the above condition will remain unaffected.
+                ///See [`Pallet::hotfix_inc_account_sufficients`].
                 pub fn hotfix_inc_account_sufficients(
                     &self,
                     addresses: ::std::vec::Vec<::subxt::utils::H160>,
@@ -33290,12 +31497,9 @@ pub mod api {
     pub mod eth2_client {
         use super::root_mod;
         use super::runtime_types;
-        /**
-        Custom [dispatch errors](https://docs.substrate.io/main-docs/build/events-errors/)
-        of this pallet.
-        */
+        ///The `Error` enum of this pallet.
         pub type Error = runtime_types::pallet_eth2_light_client::pallet::Error;
-        ///Contains one variant per dispatchable that can be called by an extrinsic.
+        ///Contains a variant per dispatchable extrinsic that this pallet has.
         pub type Call = runtime_types::pallet_eth2_light_client::pallet::Call;
         pub mod calls {
             use super::root_mod;
@@ -33322,7 +31526,7 @@ pub mod api {
                 )]
                 pub struct Init {
                     pub typed_chain_id:
-                        runtime_types::webb_proposals::header::TypedChainId,
+                        runtime_types::webb_proposals::header::TypedChainId2,
                     pub args: ::std::boxed::Box<
                         runtime_types::eth_types::pallet::InitInput<
                             ::subxt::utils::AccountId32,
@@ -33350,59 +31554,9 @@ pub mod api {
                 #[encode_as_type(
                     crate_path = ":: subxt :: ext :: scale_encode"
                 )]
-                pub struct RegisterSubmitter {
-                    pub typed_chain_id:
-                        runtime_types::webb_proposals::header::TypedChainId,
-                }
-                impl ::subxt::blocks::StaticExtrinsic for RegisterSubmitter {
-                    const PALLET: &'static str = "Eth2Client";
-                    const CALL: &'static str = "register_submitter";
-                }
-                #[derive(
-                    ::subxt::ext::codec::Decode,
-                    ::subxt::ext::codec::Encode,
-                    ::subxt::ext::scale_decode::DecodeAsType,
-                    ::subxt::ext::scale_encode::EncodeAsType,
-                    Clone,
-                    Debug,
-                    Eq,
-                    PartialEq,
-                )]
-                #[codec(crate = ::subxt::ext::codec)]
-                #[decode_as_type(
-                    crate_path = ":: subxt :: ext :: scale_decode"
-                )]
-                #[encode_as_type(
-                    crate_path = ":: subxt :: ext :: scale_encode"
-                )]
-                pub struct UnregisterSubmitter {
-                    pub typed_chain_id:
-                        runtime_types::webb_proposals::header::TypedChainId,
-                }
-                impl ::subxt::blocks::StaticExtrinsic for UnregisterSubmitter {
-                    const PALLET: &'static str = "Eth2Client";
-                    const CALL: &'static str = "unregister_submitter";
-                }
-                #[derive(
-                    ::subxt::ext::codec::Decode,
-                    ::subxt::ext::codec::Encode,
-                    ::subxt::ext::scale_decode::DecodeAsType,
-                    ::subxt::ext::scale_encode::EncodeAsType,
-                    Clone,
-                    Debug,
-                    Eq,
-                    PartialEq,
-                )]
-                #[codec(crate = ::subxt::ext::codec)]
-                #[decode_as_type(
-                    crate_path = ":: subxt :: ext :: scale_decode"
-                )]
-                #[encode_as_type(
-                    crate_path = ":: subxt :: ext :: scale_encode"
-                )]
                 pub struct SubmitBeaconChainLightClientUpdate {
                     pub typed_chain_id:
-                        runtime_types::webb_proposals::header::TypedChainId,
+                        runtime_types::webb_proposals::header::TypedChainId2,
                     pub light_client_update:
                         runtime_types::eth_types::eth2::LightClientUpdate,
                 }
@@ -33430,7 +31584,7 @@ pub mod api {
                 )]
                 pub struct SubmitExecutionHeader {
                     pub typed_chain_id:
-                        runtime_types::webb_proposals::header::TypedChainId,
+                        runtime_types::webb_proposals::header::TypedChainId2,
                     pub block_header: runtime_types::eth_types::BlockHeader,
                 }
                 impl ::subxt::blocks::StaticExtrinsic for SubmitExecutionHeader {
@@ -33464,9 +31618,10 @@ pub mod api {
             }
             pub struct TransactionApi;
             impl TransactionApi {
+                ///See [`Pallet::init`].
                 pub fn init(
                     &self,
-                    typed_chain_id: runtime_types::webb_proposals::header::TypedChainId,
+                    typed_chain_id: runtime_types::webb_proposals::header::TypedChainId2,
                     args: runtime_types::eth_types::pallet::InitInput<
                         ::subxt::utils::AccountId32,
                     >,
@@ -33479,53 +31634,18 @@ pub mod api {
                             args: ::std::boxed::Box::new(args),
                         },
                         [
-                            224u8, 172u8, 34u8, 87u8, 94u8, 27u8, 77u8, 137u8,
-                            199u8, 116u8, 185u8, 165u8, 132u8, 142u8, 118u8,
-                            110u8, 85u8, 138u8, 217u8, 166u8, 109u8, 37u8,
-                            233u8, 224u8, 204u8, 88u8, 194u8, 87u8, 199u8,
-                            145u8, 158u8, 195u8,
+                            155u8, 255u8, 129u8, 86u8, 42u8, 93u8, 230u8,
+                            127u8, 157u8, 57u8, 102u8, 177u8, 141u8, 204u8,
+                            98u8, 222u8, 14u8, 251u8, 44u8, 67u8, 114u8, 5u8,
+                            203u8, 134u8, 36u8, 68u8, 8u8, 29u8, 252u8, 194u8,
+                            8u8, 79u8,
                         ],
                     )
                 }
-                pub fn register_submitter(
-                    &self,
-                    typed_chain_id: runtime_types::webb_proposals::header::TypedChainId,
-                ) -> ::subxt::tx::Payload<types::RegisterSubmitter>
-                {
-                    ::subxt::tx::Payload::new_static(
-                        "Eth2Client",
-                        "register_submitter",
-                        types::RegisterSubmitter { typed_chain_id },
-                        [
-                            222u8, 7u8, 60u8, 184u8, 244u8, 96u8, 213u8, 235u8,
-                            150u8, 244u8, 87u8, 155u8, 244u8, 201u8, 42u8,
-                            234u8, 86u8, 150u8, 19u8, 116u8, 130u8, 62u8,
-                            224u8, 153u8, 199u8, 0u8, 124u8, 226u8, 241u8,
-                            87u8, 230u8, 48u8,
-                        ],
-                    )
-                }
-                pub fn unregister_submitter(
-                    &self,
-                    typed_chain_id: runtime_types::webb_proposals::header::TypedChainId,
-                ) -> ::subxt::tx::Payload<types::UnregisterSubmitter>
-                {
-                    ::subxt::tx::Payload::new_static(
-                        "Eth2Client",
-                        "unregister_submitter",
-                        types::UnregisterSubmitter { typed_chain_id },
-                        [
-                            165u8, 108u8, 239u8, 19u8, 128u8, 122u8, 250u8,
-                            180u8, 87u8, 236u8, 36u8, 175u8, 85u8, 5u8, 77u8,
-                            129u8, 42u8, 63u8, 185u8, 116u8, 89u8, 246u8,
-                            119u8, 72u8, 227u8, 132u8, 100u8, 216u8, 250u8,
-                            120u8, 178u8, 128u8,
-                        ],
-                    )
-                }
+                ///See [`Pallet::submit_beacon_chain_light_client_update`].
                 pub fn submit_beacon_chain_light_client_update(
                     &self,
-                    typed_chain_id: runtime_types::webb_proposals::header::TypedChainId,
+                    typed_chain_id: runtime_types::webb_proposals::header::TypedChainId2,
                     light_client_update: runtime_types::eth_types::eth2::LightClientUpdate,
                 ) -> ::subxt::tx::Payload<
                     types::SubmitBeaconChainLightClientUpdate,
@@ -33546,9 +31666,10 @@ pub mod api {
                         ],
                     )
                 }
+                ///See [`Pallet::submit_execution_header`].
                 pub fn submit_execution_header(
                     &self,
-                    typed_chain_id: runtime_types::webb_proposals::header::TypedChainId,
+                    typed_chain_id: runtime_types::webb_proposals::header::TypedChainId2,
                     block_header: runtime_types::eth_types::BlockHeader,
                 ) -> ::subxt::tx::Payload<types::SubmitExecutionHeader>
                 {
@@ -33560,14 +31681,15 @@ pub mod api {
                             block_header,
                         },
                         [
-                            38u8, 118u8, 239u8, 79u8, 229u8, 71u8, 163u8,
-                            234u8, 175u8, 198u8, 140u8, 174u8, 121u8, 139u8,
-                            55u8, 0u8, 11u8, 133u8, 224u8, 31u8, 253u8, 178u8,
-                            14u8, 233u8, 103u8, 208u8, 232u8, 211u8, 218u8,
-                            68u8, 151u8, 26u8,
+                            129u8, 48u8, 39u8, 119u8, 240u8, 26u8, 202u8,
+                            215u8, 112u8, 23u8, 247u8, 54u8, 65u8, 222u8,
+                            116u8, 104u8, 89u8, 93u8, 84u8, 215u8, 87u8, 153u8,
+                            38u8, 206u8, 180u8, 142u8, 200u8, 124u8, 173u8,
+                            120u8, 60u8, 108u8,
                         ],
                     )
                 }
+                ///See [`Pallet::update_trusted_signer`].
                 pub fn update_trusted_signer(
                     &self,
                     trusted_signer: ::subxt::utils::AccountId32,
@@ -33588,10 +31710,7 @@ pub mod api {
                 }
             }
         }
-        /**
-        The [event](https://docs.substrate.io/main-docs/build/events-errors/) emitted
-        by this pallet.
-        */
+        ///The `Event` enum of this pallet
         pub type Event = runtime_types::pallet_eth2_light_client::pallet::Event;
         pub mod events {
             use super::runtime_types;
@@ -33610,7 +31729,7 @@ pub mod api {
             #[encode_as_type(crate_path = ":: subxt :: ext :: scale_encode")]
             pub struct Init {
                 pub typed_chain_id:
-                    runtime_types::webb_proposals::header::TypedChainId,
+                    runtime_types::webb_proposals::header::TypedChainId2,
                 pub header_info:
                     runtime_types::eth_types::pallet::ExecutionHeaderInfo<
                         ::subxt::utils::AccountId32,
@@ -33633,53 +31752,9 @@ pub mod api {
             #[codec(crate = ::subxt::ext::codec)]
             #[decode_as_type(crate_path = ":: subxt :: ext :: scale_decode")]
             #[encode_as_type(crate_path = ":: subxt :: ext :: scale_encode")]
-            pub struct RegisterSubmitter {
-                pub typed_chain_id:
-                    runtime_types::webb_proposals::header::TypedChainId,
-                pub submitter: ::subxt::utils::AccountId32,
-            }
-            impl ::subxt::events::StaticEvent for RegisterSubmitter {
-                const PALLET: &'static str = "Eth2Client";
-                const EVENT: &'static str = "RegisterSubmitter";
-            }
-            #[derive(
-                ::subxt::ext::codec::Decode,
-                ::subxt::ext::codec::Encode,
-                ::subxt::ext::scale_decode::DecodeAsType,
-                ::subxt::ext::scale_encode::EncodeAsType,
-                Clone,
-                Debug,
-                Eq,
-                PartialEq,
-            )]
-            #[codec(crate = ::subxt::ext::codec)]
-            #[decode_as_type(crate_path = ":: subxt :: ext :: scale_decode")]
-            #[encode_as_type(crate_path = ":: subxt :: ext :: scale_encode")]
-            pub struct UnregisterSubmitter {
-                pub typed_chain_id:
-                    runtime_types::webb_proposals::header::TypedChainId,
-                pub submitter: ::subxt::utils::AccountId32,
-            }
-            impl ::subxt::events::StaticEvent for UnregisterSubmitter {
-                const PALLET: &'static str = "Eth2Client";
-                const EVENT: &'static str = "UnregisterSubmitter";
-            }
-            #[derive(
-                ::subxt::ext::codec::Decode,
-                ::subxt::ext::codec::Encode,
-                ::subxt::ext::scale_decode::DecodeAsType,
-                ::subxt::ext::scale_encode::EncodeAsType,
-                Clone,
-                Debug,
-                Eq,
-                PartialEq,
-            )]
-            #[codec(crate = ::subxt::ext::codec)]
-            #[decode_as_type(crate_path = ":: subxt :: ext :: scale_decode")]
-            #[encode_as_type(crate_path = ":: subxt :: ext :: scale_encode")]
             pub struct SubmitBeaconChainLightClientUpdate {
                 pub typed_chain_id:
-                    runtime_types::webb_proposals::header::TypedChainId,
+                    runtime_types::webb_proposals::header::TypedChainId2,
                 pub submitter: ::subxt::utils::AccountId32,
                 pub beacon_block_header:
                     runtime_types::eth_types::eth2::BeaconBlockHeader,
@@ -33704,11 +31779,9 @@ pub mod api {
             #[encode_as_type(crate_path = ":: subxt :: ext :: scale_encode")]
             pub struct SubmitExecutionHeader {
                 pub typed_chain_id:
-                    runtime_types::webb_proposals::header::TypedChainId,
+                    runtime_types::webb_proposals::header::TypedChainId2,
                 pub header_info:
-                    runtime_types::eth_types::pallet::ExecutionHeaderInfo<
-                        ::subxt::utils::AccountId32,
-                    >,
+                    ::std::boxed::Box<runtime_types::eth_types::BlockHeader>,
             }
             impl ::subxt::events::StaticEvent for SubmitExecutionHeader {
                 const PALLET: &'static str = "Eth2Client";
@@ -33766,7 +31839,7 @@ pub mod api {
                 pub fn paused(
                     &self,
                     _0: impl ::std::borrow::Borrow<
-                        runtime_types::webb_proposals::header::TypedChainId,
+                        runtime_types::webb_proposals::header::TypedChainId2,
                     >,
                 ) -> ::subxt::storage::address::Address<
                     ::subxt::storage::address::StaticStorageMapKey,
@@ -33846,7 +31919,7 @@ pub mod api {
                 pub fn validate_updates(
                     &self,
                     _0: impl ::std::borrow::Borrow<
-                        runtime_types::webb_proposals::header::TypedChainId,
+                        runtime_types::webb_proposals::header::TypedChainId2,
                     >,
                 ) -> ::subxt::storage::address::Address<
                     ::subxt::storage::address::StaticStorageMapKey,
@@ -33926,7 +31999,7 @@ pub mod api {
                 pub fn verify_bls_signatures(
                     &self,
                     _0: impl ::std::borrow::Borrow<
-                        runtime_types::webb_proposals::header::TypedChainId,
+                        runtime_types::webb_proposals::header::TypedChainId2,
                     >,
                 ) -> ::subxt::storage::address::Address<
                     ::subxt::storage::address::StaticStorageMapKey,
@@ -34008,7 +32081,7 @@ pub mod api {
                 pub fn hashes_gc_threshold(
                     &self,
                     _0: impl ::std::borrow::Borrow<
-                        runtime_types::webb_proposals::header::TypedChainId,
+                        runtime_types::webb_proposals::header::TypedChainId2,
                     >,
                 ) -> ::subxt::storage::address::Address<
                     ::subxt::storage::address::StaticStorageMapKey,
@@ -34091,7 +32164,7 @@ pub mod api {
                 pub fn finalized_execution_blocks(
                     &self,
                     _0: impl ::std::borrow::Borrow<
-                        runtime_types::webb_proposals::header::TypedChainId,
+                        runtime_types::webb_proposals::header::TypedChainId2,
                     >,
                     _1: impl ::std::borrow::Borrow<::core::primitive::u64>,
                 ) -> ::subxt::storage::address::Address<
@@ -34170,343 +32243,11 @@ pub mod api {
                         ],
                     )
                 }
-                /// All unfinalized execution blocks' headers hashes mapped to their `HeaderInfo`.
-                /// Execution block hash -> ExecutionHeaderInfo object
-                pub fn unfinalized_headers(
-                    &self,
-                    _0: impl ::std::borrow::Borrow<
-                        runtime_types::webb_proposals::header::TypedChainId,
-                    >,
-                    _1: impl ::std::borrow::Borrow<runtime_types::eth_types::H256>,
-                ) -> ::subxt::storage::address::Address<
-                    ::subxt::storage::address::StaticStorageMapKey,
-                    runtime_types::eth_types::pallet::ExecutionHeaderInfo<
-                        ::subxt::utils::AccountId32,
-                    >,
-                    ::subxt::storage::address::Yes,
-                    (),
-                    ::subxt::storage::address::Yes,
-                > {
-                    ::subxt::storage::address::Address::new_static(
-                        "Eth2Client",
-                        "UnfinalizedHeaders",
-                        vec![
-                            ::subxt::storage::address::make_static_storage_map_key(_0
-                            .borrow()),
-                            ::subxt::storage::address::make_static_storage_map_key(_1
-                            .borrow())
-                        ],
-                        [
-                            129u8,
-                            60u8,
-                            100u8,
-                            53u8,
-                            242u8,
-                            2u8,
-                            223u8,
-                            237u8,
-                            18u8,
-                            205u8,
-                            47u8,
-                            93u8,
-                            193u8,
-                            153u8,
-                            25u8,
-                            0u8,
-                            149u8,
-                            5u8,
-                            165u8,
-                            124u8,
-                            2u8,
-                            255u8,
-                            108u8,
-                            109u8,
-                            196u8,
-                            157u8,
-                            183u8,
-                            131u8,
-                            178u8,
-                            79u8,
-                            94u8,
-                            232u8,
-                        ],
-                    )
-                }
-                /// All unfinalized execution blocks' headers hashes mapped to their `HeaderInfo`.
-                /// Execution block hash -> ExecutionHeaderInfo object
-                pub fn unfinalized_headers_root(
-                    &self,
-                ) -> ::subxt::storage::address::Address<
-                    ::subxt::storage::address::StaticStorageMapKey,
-                    runtime_types::eth_types::pallet::ExecutionHeaderInfo<
-                        ::subxt::utils::AccountId32,
-                    >,
-                    (),
-                    (),
-                    ::subxt::storage::address::Yes,
-                > {
-                    ::subxt::storage::address::Address::new_static(
-                        "Eth2Client",
-                        "UnfinalizedHeaders",
-                        Vec::new(),
-                        [
-                            129u8, 60u8, 100u8, 53u8, 242u8, 2u8, 223u8, 237u8,
-                            18u8, 205u8, 47u8, 93u8, 193u8, 153u8, 25u8, 0u8,
-                            149u8, 5u8, 165u8, 124u8, 2u8, 255u8, 108u8, 109u8,
-                            196u8, 157u8, 183u8, 131u8, 178u8, 79u8, 94u8,
-                            232u8,
-                        ],
-                    )
-                }
-                /// `AccountId`s mapped to their number of submitted headers.
-                /// Submitter account -> Num of submitted headers
-                pub fn submitters(
-                    &self,
-                    _0: impl ::std::borrow::Borrow<
-                        runtime_types::webb_proposals::header::TypedChainId,
-                    >,
-                    _1: impl ::std::borrow::Borrow<::subxt::utils::AccountId32>,
-                ) -> ::subxt::storage::address::Address<
-                    ::subxt::storage::address::StaticStorageMapKey,
-                    ::core::primitive::u32,
-                    ::subxt::storage::address::Yes,
-                    (),
-                    ::subxt::storage::address::Yes,
-                > {
-                    ::subxt::storage::address::Address::new_static(
-                        "Eth2Client",
-                        "Submitters",
-                        vec![
-                            ::subxt::storage::address::make_static_storage_map_key(_0
-                            .borrow()),
-                            ::subxt::storage::address::make_static_storage_map_key(_1
-                            .borrow())
-                        ],
-                        [
-                            59u8,
-                            140u8,
-                            198u8,
-                            164u8,
-                            176u8,
-                            105u8,
-                            237u8,
-                            249u8,
-                            77u8,
-                            243u8,
-                            29u8,
-                            13u8,
-                            152u8,
-                            202u8,
-                            158u8,
-                            203u8,
-                            81u8,
-                            118u8,
-                            248u8,
-                            241u8,
-                            89u8,
-                            193u8,
-                            70u8,
-                            78u8,
-                            56u8,
-                            164u8,
-                            40u8,
-                            33u8,
-                            103u8,
-                            17u8,
-                            250u8,
-                            118u8,
-                        ],
-                    )
-                }
-                /// `AccountId`s mapped to their number of submitted headers.
-                /// Submitter account -> Num of submitted headers
-                pub fn submitters_root(
-                    &self,
-                ) -> ::subxt::storage::address::Address<
-                    ::subxt::storage::address::StaticStorageMapKey,
-                    ::core::primitive::u32,
-                    (),
-                    (),
-                    ::subxt::storage::address::Yes,
-                > {
-                    ::subxt::storage::address::Address::new_static(
-                        "Eth2Client",
-                        "Submitters",
-                        Vec::new(),
-                        [
-                            59u8, 140u8, 198u8, 164u8, 176u8, 105u8, 237u8,
-                            249u8, 77u8, 243u8, 29u8, 13u8, 152u8, 202u8,
-                            158u8, 203u8, 81u8, 118u8, 248u8, 241u8, 89u8,
-                            193u8, 70u8, 78u8, 56u8, 164u8, 40u8, 33u8, 103u8,
-                            17u8, 250u8, 118u8,
-                        ],
-                    )
-                }
-                /// Max number of unfinalized blocks allowed to be stored by one submitter account
-                /// This value should be at least 32 blocks (1 epoch), but the recommended value is 1024 (32
-                /// epochs
-                pub fn max_unfinalized_blocks_per_submitter(
-                    &self,
-                    _0: impl ::std::borrow::Borrow<
-                        runtime_types::webb_proposals::header::TypedChainId,
-                    >,
-                ) -> ::subxt::storage::address::Address<
-                    ::subxt::storage::address::StaticStorageMapKey,
-                    ::core::primitive::u32,
-                    ::subxt::storage::address::Yes,
-                    ::subxt::storage::address::Yes,
-                    ::subxt::storage::address::Yes,
-                > {
-                    ::subxt::storage::address::Address::new_static(
-                        "Eth2Client",
-                        "MaxUnfinalizedBlocksPerSubmitter",
-                        vec![
-                            ::subxt::storage::address::make_static_storage_map_key(_0
-                            .borrow())
-                        ],
-                        [
-                            92u8,
-                            16u8,
-                            141u8,
-                            155u8,
-                            234u8,
-                            201u8,
-                            38u8,
-                            45u8,
-                            34u8,
-                            90u8,
-                            7u8,
-                            82u8,
-                            40u8,
-                            224u8,
-                            31u8,
-                            135u8,
-                            201u8,
-                            205u8,
-                            31u8,
-                            193u8,
-                            227u8,
-                            1u8,
-                            125u8,
-                            32u8,
-                            134u8,
-                            43u8,
-                            236u8,
-                            224u8,
-                            31u8,
-                            12u8,
-                            79u8,
-                            75u8,
-                        ],
-                    )
-                }
-                /// Max number of unfinalized blocks allowed to be stored by one submitter account
-                /// This value should be at least 32 blocks (1 epoch), but the recommended value is 1024 (32
-                /// epochs
-                pub fn max_unfinalized_blocks_per_submitter_root(
-                    &self,
-                ) -> ::subxt::storage::address::Address<
-                    ::subxt::storage::address::StaticStorageMapKey,
-                    ::core::primitive::u32,
-                    (),
-                    ::subxt::storage::address::Yes,
-                    ::subxt::storage::address::Yes,
-                > {
-                    ::subxt::storage::address::Address::new_static(
-                        "Eth2Client",
-                        "MaxUnfinalizedBlocksPerSubmitter",
-                        Vec::new(),
-                        [
-                            92u8, 16u8, 141u8, 155u8, 234u8, 201u8, 38u8, 45u8,
-                            34u8, 90u8, 7u8, 82u8, 40u8, 224u8, 31u8, 135u8,
-                            201u8, 205u8, 31u8, 193u8, 227u8, 1u8, 125u8, 32u8,
-                            134u8, 43u8, 236u8, 224u8, 31u8, 12u8, 79u8, 75u8,
-                        ],
-                    )
-                }
-                /// The minimum balance that should be attached to register a new submitter account
-                pub fn min_submitter_balance(
-                    &self,
-                    _0: impl ::std::borrow::Borrow<
-                        runtime_types::webb_proposals::header::TypedChainId,
-                    >,
-                ) -> ::subxt::storage::address::Address<
-                    ::subxt::storage::address::StaticStorageMapKey,
-                    ::core::primitive::u128,
-                    ::subxt::storage::address::Yes,
-                    ::subxt::storage::address::Yes,
-                    ::subxt::storage::address::Yes,
-                > {
-                    ::subxt::storage::address::Address::new_static(
-                        "Eth2Client",
-                        "MinSubmitterBalance",
-                        vec![
-                            ::subxt::storage::address::make_static_storage_map_key(_0
-                            .borrow())
-                        ],
-                        [
-                            235u8,
-                            98u8,
-                            223u8,
-                            184u8,
-                            115u8,
-                            57u8,
-                            22u8,
-                            25u8,
-                            38u8,
-                            173u8,
-                            108u8,
-                            116u8,
-                            37u8,
-                            3u8,
-                            16u8,
-                            106u8,
-                            32u8,
-                            81u8,
-                            121u8,
-                            18u8,
-                            49u8,
-                            33u8,
-                            19u8,
-                            53u8,
-                            41u8,
-                            172u8,
-                            99u8,
-                            120u8,
-                            231u8,
-                            80u8,
-                            238u8,
-                            20u8,
-                        ],
-                    )
-                }
-                /// The minimum balance that should be attached to register a new submitter account
-                pub fn min_submitter_balance_root(
-                    &self,
-                ) -> ::subxt::storage::address::Address<
-                    ::subxt::storage::address::StaticStorageMapKey,
-                    ::core::primitive::u128,
-                    (),
-                    ::subxt::storage::address::Yes,
-                    ::subxt::storage::address::Yes,
-                > {
-                    ::subxt::storage::address::Address::new_static(
-                        "Eth2Client",
-                        "MinSubmitterBalance",
-                        Vec::new(),
-                        [
-                            235u8, 98u8, 223u8, 184u8, 115u8, 57u8, 22u8, 25u8,
-                            38u8, 173u8, 108u8, 116u8, 37u8, 3u8, 16u8, 106u8,
-                            32u8, 81u8, 121u8, 18u8, 49u8, 33u8, 19u8, 53u8,
-                            41u8, 172u8, 99u8, 120u8, 231u8, 80u8, 238u8, 20u8,
-                        ],
-                    )
-                }
                 /// Light client state
                 pub fn finalized_beacon_header(
                     &self,
                     _0: impl ::std::borrow::Borrow<
-                        runtime_types::webb_proposals::header::TypedChainId,
+                        runtime_types::webb_proposals::header::TypedChainId2,
                     >,
                 ) -> ::subxt::storage::address::Address<
                     ::subxt::storage::address::StaticStorageMapKey,
@@ -34584,7 +32325,7 @@ pub mod api {
                 pub fn finalized_execution_header(
                     &self,
                     _0: impl ::std::borrow::Borrow<
-                        runtime_types::webb_proposals::header::TypedChainId,
+                        runtime_types::webb_proposals::header::TypedChainId2,
                     >,
                 ) -> ::subxt::storage::address::Address<
                     ::subxt::storage::address::StaticStorageMapKey,
@@ -34603,38 +32344,38 @@ pub mod api {
                             .borrow())
                         ],
                         [
-                            134u8,
-                            98u8,
-                            58u8,
-                            100u8,
-                            221u8,
-                            62u8,
-                            31u8,
-                            13u8,
-                            224u8,
-                            124u8,
-                            10u8,
-                            244u8,
-                            135u8,
-                            14u8,
-                            29u8,
-                            161u8,
-                            64u8,
-                            11u8,
+                            119u8,
+                            0u8,
+                            203u8,
+                            83u8,
+                            233u8,
+                            128u8,
+                            231u8,
+                            21u8,
+                            206u8,
+                            54u8,
+                            52u8,
+                            61u8,
+                            199u8,
+                            75u8,
+                            152u8,
+                            214u8,
+                            228u8,
+                            83u8,
+                            253u8,
+                            33u8,
+                            155u8,
+                            130u8,
+                            208u8,
+                            111u8,
+                            213u8,
+                            25u8,
+                            210u8,
                             104u8,
-                            171u8,
-                            25u8,
-                            29u8,
-                            178u8,
-                            58u8,
-                            87u8,
-                            56u8,
-                            48u8,
-                            240u8,
-                            105u8,
-                            89u8,
-                            25u8,
-                            225u8,
+                            179u8,
+                            196u8,
+                            254u8,
+                            72u8,
                         ],
                     )
                 }
@@ -34654,18 +32395,18 @@ pub mod api {
                         "FinalizedExecutionHeader",
                         Vec::new(),
                         [
-                            134u8, 98u8, 58u8, 100u8, 221u8, 62u8, 31u8, 13u8,
-                            224u8, 124u8, 10u8, 244u8, 135u8, 14u8, 29u8,
-                            161u8, 64u8, 11u8, 104u8, 171u8, 25u8, 29u8, 178u8,
-                            58u8, 87u8, 56u8, 48u8, 240u8, 105u8, 89u8, 25u8,
-                            225u8,
+                            119u8, 0u8, 203u8, 83u8, 233u8, 128u8, 231u8, 21u8,
+                            206u8, 54u8, 52u8, 61u8, 199u8, 75u8, 152u8, 214u8,
+                            228u8, 83u8, 253u8, 33u8, 155u8, 130u8, 208u8,
+                            111u8, 213u8, 25u8, 210u8, 104u8, 179u8, 196u8,
+                            254u8, 72u8,
                         ],
                     )
                 }
                 pub fn current_sync_committee(
                     &self,
                     _0: impl ::std::borrow::Borrow<
-                        runtime_types::webb_proposals::header::TypedChainId,
+                        runtime_types::webb_proposals::header::TypedChainId2,
                     >,
                 ) -> ::subxt::storage::address::Address<
                     ::subxt::storage::address::StaticStorageMapKey,
@@ -34742,7 +32483,7 @@ pub mod api {
                 pub fn next_sync_committee(
                     &self,
                     _0: impl ::std::borrow::Borrow<
-                        runtime_types::webb_proposals::header::TypedChainId,
+                        runtime_types::webb_proposals::header::TypedChainId2,
                     >,
                 ) -> ::subxt::storage::address::Address<
                     ::subxt::storage::address::StaticStorageMapKey,
@@ -34816,234 +32557,319 @@ pub mod api {
                         ],
                     )
                 }
-                pub fn genesis_validators_root(
+                pub fn unfinalized_head_execution_header(
                     &self,
                     _0: impl ::std::borrow::Borrow<
-                        runtime_types::webb_proposals::header::TypedChainId,
+                        runtime_types::webb_proposals::header::TypedChainId2,
                     >,
                 ) -> ::subxt::storage::address::Address<
                     ::subxt::storage::address::StaticStorageMapKey,
-                    [::core::primitive::u8; 32usize],
+                    runtime_types::eth_types::pallet::ExecutionHeaderInfo<
+                        ::subxt::utils::AccountId32,
+                    >,
                     ::subxt::storage::address::Yes,
                     (),
                     ::subxt::storage::address::Yes,
                 > {
                     ::subxt::storage::address::Address::new_static(
                         "Eth2Client",
-                        "GenesisValidatorsRoot",
+                        "UnfinalizedHeadExecutionHeader",
                         vec![
                             ::subxt::storage::address::make_static_storage_map_key(_0
                             .borrow())
                         ],
                         [
-                            22u8,
-                            246u8,
-                            23u8,
-                            170u8,
-                            76u8,
-                            154u8,
-                            63u8,
-                            7u8,
-                            13u8,
-                            138u8,
-                            226u8,
-                            165u8,
-                            178u8,
-                            249u8,
-                            45u8,
-                            181u8,
-                            237u8,
-                            145u8,
-                            150u8,
-                            47u8,
-                            219u8,
-                            108u8,
-                            243u8,
-                            192u8,
-                            245u8,
-                            82u8,
-                            34u8,
-                            85u8,
-                            86u8,
-                            234u8,
-                            64u8,
-                            181u8,
-                        ],
-                    )
-                }
-                pub fn genesis_validators_root_root(
-                    &self,
-                ) -> ::subxt::storage::address::Address<
-                    ::subxt::storage::address::StaticStorageMapKey,
-                    [::core::primitive::u8; 32usize],
-                    (),
-                    (),
-                    ::subxt::storage::address::Yes,
-                > {
-                    ::subxt::storage::address::Address::new_static(
-                        "Eth2Client",
-                        "GenesisValidatorsRoot",
-                        Vec::new(),
-                        [
-                            22u8, 246u8, 23u8, 170u8, 76u8, 154u8, 63u8, 7u8,
-                            13u8, 138u8, 226u8, 165u8, 178u8, 249u8, 45u8,
-                            181u8, 237u8, 145u8, 150u8, 47u8, 219u8, 108u8,
-                            243u8, 192u8, 245u8, 82u8, 34u8, 85u8, 86u8, 234u8,
-                            64u8, 181u8,
-                        ],
-                    )
-                }
-                pub fn bellatrix_fork_version(
-                    &self,
-                    _0: impl ::std::borrow::Borrow<
-                        runtime_types::webb_proposals::header::TypedChainId,
-                    >,
-                ) -> ::subxt::storage::address::Address<
-                    ::subxt::storage::address::StaticStorageMapKey,
-                    [::core::primitive::u8; 4usize],
-                    ::subxt::storage::address::Yes,
-                    (),
-                    ::subxt::storage::address::Yes,
-                > {
-                    ::subxt::storage::address::Address::new_static(
-                        "Eth2Client",
-                        "BellatrixForkVersion",
-                        vec![
-                            ::subxt::storage::address::make_static_storage_map_key(_0
-                            .borrow())
-                        ],
-                        [
-                            29u8,
-                            130u8,
-                            38u8,
-                            233u8,
-                            229u8,
-                            221u8,
-                            100u8,
-                            210u8,
-                            123u8,
+                            65u8,
                             131u8,
-                            211u8,
-                            94u8,
-                            163u8,
-                            66u8,
-                            192u8,
-                            210u8,
-                            42u8,
-                            6u8,
-                            4u8,
+                            47u8,
+                            174u8,
+                            177u8,
+                            157u8,
+                            91u8,
+                            169u8,
+                            99u8,
+                            11u8,
+                            226u8,
+                            247u8,
+                            219u8,
+                            150u8,
+                            103u8,
+                            125u8,
+                            34u8,
+                            37u8,
+                            249u8,
+                            57u8,
+                            16u8,
+                            181u8,
                             166u8,
-                            107u8,
-                            176u8,
-                            234u8,
-                            117u8,
-                            40u8,
-                            178u8,
-                            84u8,
-                            136u8,
-                            79u8,
-                            201u8,
-                            190u8,
-                            6u8,
+                            247u8,
+                            7u8,
+                            179u8,
+                            69u8,
+                            226u8,
+                            128u8,
+                            111u8,
+                            222u8,
+                            134u8,
                         ],
                     )
                 }
-                pub fn bellatrix_fork_version_root(
+                pub fn unfinalized_head_execution_header_root(
                     &self,
                 ) -> ::subxt::storage::address::Address<
                     ::subxt::storage::address::StaticStorageMapKey,
-                    [::core::primitive::u8; 4usize],
+                    runtime_types::eth_types::pallet::ExecutionHeaderInfo<
+                        ::subxt::utils::AccountId32,
+                    >,
                     (),
                     (),
                     ::subxt::storage::address::Yes,
                 > {
                     ::subxt::storage::address::Address::new_static(
                         "Eth2Client",
-                        "BellatrixForkVersion",
+                        "UnfinalizedHeadExecutionHeader",
                         Vec::new(),
                         [
-                            29u8, 130u8, 38u8, 233u8, 229u8, 221u8, 100u8,
-                            210u8, 123u8, 131u8, 211u8, 94u8, 163u8, 66u8,
-                            192u8, 210u8, 42u8, 6u8, 4u8, 166u8, 107u8, 176u8,
-                            234u8, 117u8, 40u8, 178u8, 84u8, 136u8, 79u8,
-                            201u8, 190u8, 6u8,
+                            65u8, 131u8, 47u8, 174u8, 177u8, 157u8, 91u8,
+                            169u8, 99u8, 11u8, 226u8, 247u8, 219u8, 150u8,
+                            103u8, 125u8, 34u8, 37u8, 249u8, 57u8, 16u8, 181u8,
+                            166u8, 247u8, 7u8, 179u8, 69u8, 226u8, 128u8,
+                            111u8, 222u8, 134u8,
                         ],
                     )
                 }
-                pub fn bellatrix_fork_epoch(
+                pub fn unfinalized_tail_execution_header(
                     &self,
                     _0: impl ::std::borrow::Borrow<
-                        runtime_types::webb_proposals::header::TypedChainId,
+                        runtime_types::webb_proposals::header::TypedChainId2,
                     >,
                 ) -> ::subxt::storage::address::Address<
                     ::subxt::storage::address::StaticStorageMapKey,
-                    ::core::primitive::u64,
+                    runtime_types::eth_types::pallet::ExecutionHeaderInfo<
+                        ::subxt::utils::AccountId32,
+                    >,
                     ::subxt::storage::address::Yes,
                     (),
                     ::subxt::storage::address::Yes,
                 > {
                     ::subxt::storage::address::Address::new_static(
                         "Eth2Client",
-                        "BellatrixForkEpoch",
+                        "UnfinalizedTailExecutionHeader",
                         vec![
                             ::subxt::storage::address::make_static_storage_map_key(_0
                             .borrow())
                         ],
                         [
-                            87u8,
-                            55u8,
-                            13u8,
-                            246u8,
-                            134u8,
-                            53u8,
-                            165u8,
-                            86u8,
-                            195u8,
+                            250u8,
+                            227u8,
                             249u8,
-                            9u8,
-                            47u8,
-                            204u8,
-                            189u8,
-                            167u8,
-                            159u8,
-                            59u8,
-                            44u8,
-                            9u8,
-                            84u8,
-                            27u8,
-                            107u8,
-                            161u8,
-                            171u8,
-                            46u8,
-                            110u8,
-                            166u8,
+                            148u8,
+                            69u8,
+                            124u8,
+                            205u8,
+                            31u8,
+                            172u8,
+                            14u8,
+                            67u8,
+                            75u8,
+                            233u8,
+                            49u8,
                             199u8,
-                            103u8,
-                            47u8,
-                            46u8,
                             174u8,
+                            16u8,
+                            71u8,
+                            44u8,
+                            187u8,
+                            145u8,
+                            177u8,
+                            140u8,
+                            143u8,
+                            143u8,
+                            60u8,
+                            249u8,
+                            154u8,
+                            59u8,
+                            97u8,
+                            68u8,
+                            119u8,
                         ],
                     )
                 }
-                pub fn bellatrix_fork_epoch_root(
+                pub fn unfinalized_tail_execution_header_root(
                     &self,
                 ) -> ::subxt::storage::address::Address<
                     ::subxt::storage::address::StaticStorageMapKey,
-                    ::core::primitive::u64,
+                    runtime_types::eth_types::pallet::ExecutionHeaderInfo<
+                        ::subxt::utils::AccountId32,
+                    >,
                     (),
                     (),
                     ::subxt::storage::address::Yes,
                 > {
                     ::subxt::storage::address::Address::new_static(
                         "Eth2Client",
-                        "BellatrixForkEpoch",
+                        "UnfinalizedTailExecutionHeader",
                         Vec::new(),
                         [
-                            87u8, 55u8, 13u8, 246u8, 134u8, 53u8, 165u8, 86u8,
-                            195u8, 249u8, 9u8, 47u8, 204u8, 189u8, 167u8,
-                            159u8, 59u8, 44u8, 9u8, 84u8, 27u8, 107u8, 161u8,
-                            171u8, 46u8, 110u8, 166u8, 199u8, 103u8, 47u8,
-                            46u8, 174u8,
+                            250u8, 227u8, 249u8, 148u8, 69u8, 124u8, 205u8,
+                            31u8, 172u8, 14u8, 67u8, 75u8, 233u8, 49u8, 199u8,
+                            174u8, 16u8, 71u8, 44u8, 187u8, 145u8, 177u8,
+                            140u8, 143u8, 143u8, 60u8, 249u8, 154u8, 59u8,
+                            97u8, 68u8, 119u8,
+                        ],
+                    )
+                }
+                pub fn client_mode_for_chain(
+                    &self,
+                    _0: impl ::std::borrow::Borrow<
+                        runtime_types::webb_proposals::header::TypedChainId2,
+                    >,
+                ) -> ::subxt::storage::address::Address<
+                    ::subxt::storage::address::StaticStorageMapKey,
+                    runtime_types::eth_types::pallet::ClientMode,
+                    ::subxt::storage::address::Yes,
+                    (),
+                    ::subxt::storage::address::Yes,
+                > {
+                    ::subxt::storage::address::Address::new_static(
+                        "Eth2Client",
+                        "ClientModeForChain",
+                        vec![
+                            ::subxt::storage::address::make_static_storage_map_key(_0
+                            .borrow())
+                        ],
+                        [
+                            233u8,
+                            169u8,
+                            141u8,
+                            112u8,
+                            78u8,
+                            71u8,
+                            182u8,
+                            73u8,
+                            98u8,
+                            102u8,
+                            114u8,
+                            98u8,
+                            190u8,
+                            228u8,
+                            15u8,
+                            236u8,
+                            201u8,
+                            52u8,
+                            69u8,
+                            165u8,
+                            74u8,
+                            251u8,
+                            186u8,
+                            18u8,
+                            172u8,
+                            228u8,
+                            59u8,
+                            166u8,
+                            100u8,
+                            130u8,
+                            220u8,
+                            50u8,
+                        ],
+                    )
+                }
+                pub fn client_mode_for_chain_root(
+                    &self,
+                ) -> ::subxt::storage::address::Address<
+                    ::subxt::storage::address::StaticStorageMapKey,
+                    runtime_types::eth_types::pallet::ClientMode,
+                    (),
+                    (),
+                    ::subxt::storage::address::Yes,
+                > {
+                    ::subxt::storage::address::Address::new_static(
+                        "Eth2Client",
+                        "ClientModeForChain",
+                        Vec::new(),
+                        [
+                            233u8, 169u8, 141u8, 112u8, 78u8, 71u8, 182u8,
+                            73u8, 98u8, 102u8, 114u8, 98u8, 190u8, 228u8, 15u8,
+                            236u8, 201u8, 52u8, 69u8, 165u8, 74u8, 251u8,
+                            186u8, 18u8, 172u8, 228u8, 59u8, 166u8, 100u8,
+                            130u8, 220u8, 50u8,
+                        ],
+                    )
+                }
+                pub fn network_config_for_chain(
+                    &self,
+                    _0: impl ::std::borrow::Borrow<
+                        runtime_types::webb_proposals::header::TypedChainId2,
+                    >,
+                ) -> ::subxt::storage::address::Address<
+                    ::subxt::storage::address::StaticStorageMapKey,
+                    runtime_types::webb_consensus_types::network_config::NetworkConfig,
+                    ::subxt::storage::address::Yes,
+                    (),
+                    ::subxt::storage::address::Yes,
+                >{
+                    ::subxt::storage::address::Address::new_static(
+                        "Eth2Client",
+                        "NetworkConfigForChain",
+                        vec![
+                            ::subxt::storage::address::make_static_storage_map_key(_0
+                            .borrow())
+                        ],
+                        [
+                            33u8,
+                            43u8,
+                            227u8,
+                            125u8,
+                            181u8,
+                            98u8,
+                            147u8,
+                            137u8,
+                            143u8,
+                            236u8,
+                            86u8,
+                            71u8,
+                            252u8,
+                            47u8,
+                            157u8,
+                            155u8,
+                            41u8,
+                            91u8,
+                            33u8,
+                            237u8,
+                            253u8,
+                            95u8,
+                            245u8,
+                            141u8,
+                            38u8,
+                            106u8,
+                            228u8,
+                            76u8,
+                            60u8,
+                            183u8,
+                            191u8,
+                            76u8,
+                        ],
+                    )
+                }
+                pub fn network_config_for_chain_root(
+                    &self,
+                ) -> ::subxt::storage::address::Address<
+                    ::subxt::storage::address::StaticStorageMapKey,
+                    runtime_types::webb_consensus_types::network_config::NetworkConfig,
+                    (),
+                    (),
+                    ::subxt::storage::address::Yes,
+                >{
+                    ::subxt::storage::address::Address::new_static(
+                        "Eth2Client",
+                        "NetworkConfigForChain",
+                        Vec::new(),
+                        [
+                            33u8, 43u8, 227u8, 125u8, 181u8, 98u8, 147u8,
+                            137u8, 143u8, 236u8, 86u8, 71u8, 252u8, 47u8,
+                            157u8, 155u8, 41u8, 91u8, 33u8, 237u8, 253u8, 95u8,
+                            245u8, 141u8, 38u8, 106u8, 228u8, 76u8, 60u8,
+                            183u8, 191u8, 76u8,
                         ],
                     )
                 }
@@ -35759,8 +33585,31 @@ pub mod api {
                 #[encode_as_type(
                     crate_path = ":: subxt :: ext :: scale_encode"
                 )]
+                pub enum ClientMode {
+                    #[codec(index = 0)]
+                    SubmitLightClientUpdate,
+                    #[codec(index = 1)]
+                    SubmitHeader,
+                }
+                #[derive(
+                    ::subxt::ext::codec::Decode,
+                    ::subxt::ext::codec::Encode,
+                    ::subxt::ext::scale_decode::DecodeAsType,
+                    ::subxt::ext::scale_encode::EncodeAsType,
+                    Clone,
+                    Debug,
+                    Eq,
+                    PartialEq,
+                )]
+                #[codec(crate = ::subxt::ext::codec)]
+                #[decode_as_type(
+                    crate_path = ":: subxt :: ext :: scale_decode"
+                )]
+                #[encode_as_type(
+                    crate_path = ":: subxt :: ext :: scale_encode"
+                )]
                 pub struct ExecutionHeaderInfo<_0> {
-                    pub parent_hash: ::subxt::utils::H256,
+                    pub parent_hash: runtime_types::eth_types::H256,
                     pub block_number: ::core::primitive::u64,
                     pub submitter: _0,
                 }
@@ -35789,7 +33638,6 @@ pub mod api {
                     pub validate_updates: ::core::primitive::bool,
                     pub verify_bls_signatures: ::core::primitive::bool,
                     pub hashes_gc_threshold: ::core::primitive::u64,
-                    pub max_submitted_blocks_by_account: ::core::primitive::u32,
                     pub trusted_signer: ::core::option::Option<_0>,
                 }
             }
@@ -35822,7 +33670,10 @@ pub mod api {
                 pub extra_data: ::std::vec::Vec<::core::primitive::u8>,
                 pub mix_hash: runtime_types::eth_types::H256,
                 pub nonce: runtime_types::eth_types::H64,
-                pub base_fee_per_gas: ::core::primitive::u64,
+                pub base_fee_per_gas:
+                    ::core::option::Option<::core::primitive::u64>,
+                pub withdrawals_root:
+                    ::core::option::Option<runtime_types::eth_types::H256>,
                 pub hash:
                     ::core::option::Option<runtime_types::eth_types::H256>,
                 pub partial_hash:
@@ -36712,30 +34563,6 @@ pub mod api {
             }
             pub mod traits {
                 use super::runtime_types;
-                pub mod misc {
-                    use super::runtime_types;
-                    #[derive(
-                        ::subxt::ext::codec::Decode,
-                        ::subxt::ext::codec::Encode,
-                        ::subxt::ext::scale_decode::DecodeAsType,
-                        ::subxt::ext::scale_encode::EncodeAsType,
-                        Clone,
-                        Debug,
-                        Eq,
-                        PartialEq,
-                    )]
-                    #[codec(crate = ::subxt::ext::codec)]
-                    #[decode_as_type(
-                        crate_path = ":: subxt :: ext :: scale_decode"
-                    )]
-                    #[encode_as_type(
-                        crate_path = ":: subxt :: ext :: scale_encode"
-                    )]
-                    pub struct WrapperOpaque<_0>(
-                        #[codec(compact)] pub ::core::primitive::u32,
-                        pub _0,
-                    );
-                }
                 pub mod preimages {
                     use super::runtime_types;
                     #[derive(
@@ -37071,30 +34898,28 @@ pub mod api {
                 #[encode_as_type(
                     crate_path = ":: subxt :: ext :: scale_encode"
                 )]
-                ///Contains one variant per dispatchable that can be called by an extrinsic.
+                ///Contains a variant per dispatchable extrinsic that this pallet has.
                 pub enum Call {
                     #[codec(index = 0)]
-                    ///Make some on-chain remark.
-                    ///
-                    ///- `O(1)`
+                    ///See [`Pallet::remark`].
                     remark {
                         remark: ::std::vec::Vec<::core::primitive::u8>,
                     },
                     #[codec(index = 1)]
-                    ///Set the number of pages in the WebAssembly environment's heap.
+                    ///See [`Pallet::set_heap_pages`].
                     set_heap_pages { pages: ::core::primitive::u64 },
                     #[codec(index = 2)]
-                    ///Set the new runtime code.
+                    ///See [`Pallet::set_code`].
                     set_code {
                         code: ::std::vec::Vec<::core::primitive::u8>,
                     },
                     #[codec(index = 3)]
-                    ///Set the new runtime code without doing any checks of the given `code`.
+                    ///See [`Pallet::set_code_without_checks`].
                     set_code_without_checks {
                         code: ::std::vec::Vec<::core::primitive::u8>,
                     },
                     #[codec(index = 4)]
-                    ///Set some items of storage.
+                    ///See [`Pallet::set_storage`].
                     set_storage {
                         items: ::std::vec::Vec<(
                             ::std::vec::Vec<::core::primitive::u8>,
@@ -37102,23 +34927,20 @@ pub mod api {
                         )>,
                     },
                     #[codec(index = 5)]
-                    ///Kill some items from storage.
+                    ///See [`Pallet::kill_storage`].
                     kill_storage {
                         keys: ::std::vec::Vec<
                             ::std::vec::Vec<::core::primitive::u8>,
                         >,
                     },
                     #[codec(index = 6)]
-                    ///Kill all storage items with a key that starts with the given prefix.
-                    ///
-                    ///**NOTE:** We rely on the Root origin to provide us the number of subkeys under
-                    ///the prefix we are removing to accurately calculate the weight of this function.
+                    ///See [`Pallet::kill_prefix`].
                     kill_prefix {
                         prefix: ::std::vec::Vec<::core::primitive::u8>,
                         subkeys: ::core::primitive::u32,
                     },
                     #[codec(index = 7)]
-                    ///Make some on-chain remark and emit event.
+                    ///See [`Pallet::remark_with_event`].
                     remark_with_event {
                         remark: ::std::vec::Vec<::core::primitive::u8>,
                     },
@@ -37390,19 +35212,10 @@ pub mod api {
                 #[encode_as_type(
                     crate_path = ":: subxt :: ext :: scale_encode"
                 )]
-                ///Contains one variant per dispatchable that can be called by an extrinsic.
+                ///Contains a variant per dispatchable extrinsic that this pallet has.
                 pub enum Call {
                     #[codec(index = 0)]
-                    ///Declare that some `dislocated` account has, through rewards or penalties, sufficiently
-                    ///changed its score that it should properly fall into a different bag than its current
-                    ///one.
-                    ///
-                    ///Anyone can call this function about any potentially dislocated account.
-                    ///
-                    ///Will always update the stored score of `dislocated` to the correct score, based on
-                    ///`ScoreProvider`.
-                    ///
-                    ///If `dislocated` does not exists, it returns an error.
+                    ///See [`Pallet::rebag`].
                     rebag {
                         dislocated: ::subxt::utils::MultiAddress<
                             ::subxt::utils::AccountId32,
@@ -37410,14 +35223,7 @@ pub mod api {
                         >,
                     },
                     #[codec(index = 1)]
-                    ///Move the caller's Id directly in front of `lighter`.
-                    ///
-                    ///The dispatch origin for this call must be _Signed_ and can only be called by the Id of
-                    ///the account going in front of `lighter`.
-                    ///
-                    ///Only works if
-                    ///- both nodes are within the same bag,
-                    ///- and `origin` has a greater `Score` than `lighter`.
+                    ///See [`Pallet::put_in_front_of`].
                     put_in_front_of {
                         lighter: ::subxt::utils::MultiAddress<
                             ::subxt::utils::AccountId32,
@@ -37442,10 +35248,7 @@ pub mod api {
                 #[encode_as_type(
                     crate_path = ":: subxt :: ext :: scale_encode"
                 )]
-                /**
-                Custom [dispatch errors](https://docs.substrate.io/main-docs/build/events-errors/)
-                of this pallet.
-                */
+                ///The `Error` enum of this pallet.
                 pub enum Error {
                     #[codec(index = 0)]
                     ///A error in the list interface implementation.
@@ -37468,10 +35271,7 @@ pub mod api {
                 #[encode_as_type(
                     crate_path = ":: subxt :: ext :: scale_encode"
                 )]
-                /**
-                The [event](https://docs.substrate.io/main-docs/build/events-errors/) emitted
-                by this pallet.
-                */
+                ///The `Event` enum of this pallet
                 pub enum Event {
                     #[codec(index = 0)]
                     ///Moved an account from one bag to another.
@@ -37510,16 +35310,10 @@ pub mod api {
                 #[encode_as_type(
                     crate_path = ":: subxt :: ext :: scale_encode"
                 )]
-                ///Contains one variant per dispatchable that can be called by an extrinsic.
+                ///Contains a variant per dispatchable extrinsic that this pallet has.
                 pub enum Call {
                     #[codec(index = 0)]
-                    ///Transfer some liquid free balance to another account.
-                    ///
-                    ///`transfer_allow_death` will set the `FreeBalance` of the sender and receiver.
-                    ///If the sender's account is below the existential deposit as a result
-                    ///of the transfer, the account will be reaped.
-                    ///
-                    ///The dispatch origin for this call must be `Signed` by the transactor.
+                    ///See [`Pallet::transfer_allow_death`].
                     transfer_allow_death {
                         dest: ::subxt::utils::MultiAddress<
                             ::subxt::utils::AccountId32,
@@ -37529,12 +35323,7 @@ pub mod api {
                         value: ::core::primitive::u128,
                     },
                     #[codec(index = 1)]
-                    ///Set the regular balance of a given account; it also takes a reserved balance but this
-                    ///must be the same as the account's current reserved balance.
-                    ///
-                    ///The dispatch origin for this call is `root`.
-                    ///
-                    ///WARNING: This call is DEPRECATED! Use `force_set_balance` instead.
+                    ///See [`Pallet::set_balance_deprecated`].
                     set_balance_deprecated {
                         who: ::subxt::utils::MultiAddress<
                             ::subxt::utils::AccountId32,
@@ -37546,8 +35335,7 @@ pub mod api {
                         old_reserved: ::core::primitive::u128,
                     },
                     #[codec(index = 2)]
-                    ///Exactly as `transfer_allow_death`, except the origin must be root and the source account
-                    ///may be specified.
+                    ///See [`Pallet::force_transfer`].
                     force_transfer {
                         source: ::subxt::utils::MultiAddress<
                             ::subxt::utils::AccountId32,
@@ -37561,12 +35349,7 @@ pub mod api {
                         value: ::core::primitive::u128,
                     },
                     #[codec(index = 3)]
-                    ///Same as the [`transfer_allow_death`] call, but with a check that the transfer will not
-                    ///kill the origin account.
-                    ///
-                    ///99% of the time you want [`transfer_allow_death`] instead.
-                    ///
-                    ///[`transfer_allow_death`]: struct.Pallet.html#method.transfer
+                    ///See [`Pallet::transfer_keep_alive`].
                     transfer_keep_alive {
                         dest: ::subxt::utils::MultiAddress<
                             ::subxt::utils::AccountId32,
@@ -37576,21 +35359,7 @@ pub mod api {
                         value: ::core::primitive::u128,
                     },
                     #[codec(index = 4)]
-                    ///Transfer the entire transferable balance from the caller account.
-                    ///
-                    ///NOTE: This function only attempts to transfer _transferable_ balances. This means that
-                    ///any locked, reserved, or existential deposits (when `keep_alive` is `true`), will not be
-                    ///transferred by this function. To ensure that this function results in a killed account,
-                    ///you might need to prepare the account by removing any reference counters, storage
-                    ///deposits, etc...
-                    ///
-                    ///The dispatch origin of this call must be Signed.
-                    ///
-                    ///- `dest`: The recipient of the transfer.
-                    ///- `keep_alive`: A boolean to determine if the `transfer_all` operation should send all
-                    ///  of the funds the account has, causing the sender account to be killed (false), or
-                    ///  transfer everything except at least the existential deposit, which will guarantee to
-                    ///  keep the sender account alive (true).
+                    ///See [`Pallet::transfer_all`].
                     transfer_all {
                         dest: ::subxt::utils::MultiAddress<
                             ::subxt::utils::AccountId32,
@@ -37599,9 +35368,7 @@ pub mod api {
                         keep_alive: ::core::primitive::bool,
                     },
                     #[codec(index = 5)]
-                    ///Unreserve some balance from a user by force.
-                    ///
-                    ///Can only be called by ROOT.
+                    ///See [`Pallet::force_unreserve`].
                     force_unreserve {
                         who: ::subxt::utils::MultiAddress<
                             ::subxt::utils::AccountId32,
@@ -37610,21 +35377,12 @@ pub mod api {
                         amount: ::core::primitive::u128,
                     },
                     #[codec(index = 6)]
-                    ///Upgrade a specified account.
-                    ///
-                    ///- `origin`: Must be `Signed`.
-                    ///- `who`: The account to be upgraded.
-                    ///
-                    ///This will waive the transaction fee if at least all but 10% of the accounts needed to
-                    ///be upgraded. (We let some not have to be upgraded just in order to allow for the
-                    ///possibililty of churn).
+                    ///See [`Pallet::upgrade_accounts`].
                     upgrade_accounts {
                         who: ::std::vec::Vec<::subxt::utils::AccountId32>,
                     },
                     #[codec(index = 7)]
-                    ///Alias for `transfer_allow_death`, provided only for name-wise compatibility.
-                    ///
-                    ///WARNING: DEPRECATED! Will be released in approximately 3 months.
+                    ///See [`Pallet::transfer`].
                     transfer {
                         dest: ::subxt::utils::MultiAddress<
                             ::subxt::utils::AccountId32,
@@ -37634,9 +35392,7 @@ pub mod api {
                         value: ::core::primitive::u128,
                     },
                     #[codec(index = 8)]
-                    ///Set the regular balance of a given account.
-                    ///
-                    ///The dispatch origin for this call is `root`.
+                    ///See [`Pallet::force_set_balance`].
                     force_set_balance {
                         who: ::subxt::utils::MultiAddress<
                             ::subxt::utils::AccountId32,
@@ -37663,10 +35419,7 @@ pub mod api {
                 #[encode_as_type(
                     crate_path = ":: subxt :: ext :: scale_encode"
                 )]
-                /**
-                Custom [dispatch errors](https://docs.substrate.io/main-docs/build/events-errors/)
-                of this pallet.
-                */
+                ///The `Error` enum of this pallet.
                 pub enum Error {
                     #[codec(index = 0)]
                     ///Vesting balance too high to send value.
@@ -37716,10 +35469,7 @@ pub mod api {
                 #[encode_as_type(
                     crate_path = ":: subxt :: ext :: scale_encode"
                 )]
-                /**
-                The [event](https://docs.substrate.io/main-docs/build/events-errors/) emitted
-                by this pallet.
-                */
+                ///The `Event` enum of this pallet
                 pub enum Event {
                     #[codec(index = 0)]
                     ///An account was created with some free balance.
@@ -38002,13 +35752,15 @@ pub mod api {
                 #[encode_as_type(
                     crate_path = ":: subxt :: ext :: scale_encode"
                 )]
-                ///Contains one variant per dispatchable that can be called by an extrinsic.
+                ///Contains a variant per dispatchable extrinsic that this pallet has.
                 pub enum Call {
                     #[codec(index = 0)]
+                    ///See [`Pallet::set_base_fee_per_gas`].
                     set_base_fee_per_gas {
                         fee: runtime_types::primitive_types::U256,
                     },
                     #[codec(index = 1)]
+                    ///See [`Pallet::set_elasticity`].
                     set_elasticity {
                         elasticity:
                             runtime_types::sp_arithmetic::per_things::Permill,
@@ -38031,10 +35783,7 @@ pub mod api {
                 #[encode_as_type(
                     crate_path = ":: subxt :: ext :: scale_encode"
                 )]
-                /**
-                The [event](https://docs.substrate.io/main-docs/build/events-errors/) emitted
-                by this pallet.
-                */
+                ///The `Event` enum of this pallet
                 pub enum Event {
                     #[codec(index = 0)]
                     NewBaseFeePerGas {
@@ -38071,45 +35820,23 @@ pub mod api {
                 #[encode_as_type(
                     crate_path = ":: subxt :: ext :: scale_encode"
                 )]
-                ///Contains one variant per dispatchable that can be called by an extrinsic.
+                ///Contains a variant per dispatchable extrinsic that this pallet has.
                 pub enum Call {
                     #[codec(index = 0)]
-                    ///Propose a new bounty.
-                    ///
-                    ///The dispatch origin for this call must be _Signed_.
-                    ///
-                    ///Payment: `TipReportDepositBase` will be reserved from the origin account, as well as
-                    ///`DataDepositPerByte` for each byte in `reason`. It will be unreserved upon approval,
-                    ///or slashed when rejected.
-                    ///
-                    ///- `curator`: The curator account whom will manage this bounty.
-                    ///- `fee`: The curator fee.
-                    ///- `value`: The total payment amount of this bounty, curator fee included.
-                    ///- `description`: The description of this bounty.
+                    ///See [`Pallet::propose_bounty`].
                     propose_bounty {
                         #[codec(compact)]
                         value: ::core::primitive::u128,
                         description: ::std::vec::Vec<::core::primitive::u8>,
                     },
                     #[codec(index = 1)]
-                    ///Approve a bounty proposal. At a later time, the bounty will be funded and become active
-                    ///and the original deposit will be returned.
-                    ///
-                    ///May only be called from `T::SpendOrigin`.
-                    ///
-                    ///## Complexity
-                    ///- O(1).
+                    ///See [`Pallet::approve_bounty`].
                     approve_bounty {
                         #[codec(compact)]
                         bounty_id: ::core::primitive::u32,
                     },
                     #[codec(index = 2)]
-                    ///Assign a curator to a funded bounty.
-                    ///
-                    ///May only be called from `T::SpendOrigin`.
-                    ///
-                    ///## Complexity
-                    ///- O(1).
+                    ///See [`Pallet::propose_curator`].
                     propose_curator {
                         #[codec(compact)]
                         bounty_id: ::core::primitive::u32,
@@ -38121,50 +35848,19 @@ pub mod api {
                         fee: ::core::primitive::u128,
                     },
                     #[codec(index = 3)]
-                    ///Unassign curator from a bounty.
-                    ///
-                    ///This function can only be called by the `RejectOrigin` a signed origin.
-                    ///
-                    ///If this function is called by the `RejectOrigin`, we assume that the curator is
-                    ///malicious or inactive. As a result, we will slash the curator when possible.
-                    ///
-                    ///If the origin is the curator, we take this as a sign they are unable to do their job and
-                    ///they willingly give up. We could slash them, but for now we allow them to recover their
-                    ///deposit and exit without issue. (We may want to change this if it is abused.)
-                    ///
-                    ///Finally, the origin can be anyone if and only if the curator is "inactive". This allows
-                    ///anyone in the community to call out that a curator is not doing their due diligence, and
-                    ///we should pick a new curator. In this case the curator should also be slashed.
-                    ///
-                    ///## Complexity
-                    ///- O(1).
+                    ///See [`Pallet::unassign_curator`].
                     unassign_curator {
                         #[codec(compact)]
                         bounty_id: ::core::primitive::u32,
                     },
                     #[codec(index = 4)]
-                    ///Accept the curator role for a bounty.
-                    ///A deposit will be reserved from curator and refund upon successful payout.
-                    ///
-                    ///May only be called from the curator.
-                    ///
-                    ///## Complexity
-                    ///- O(1).
+                    ///See [`Pallet::accept_curator`].
                     accept_curator {
                         #[codec(compact)]
                         bounty_id: ::core::primitive::u32,
                     },
                     #[codec(index = 5)]
-                    ///Award bounty to a beneficiary account. The beneficiary will be able to claim the funds
-                    ///after a delay.
-                    ///
-                    ///The dispatch origin for this call must be the curator of this bounty.
-                    ///
-                    ///- `bounty_id`: Bounty ID to award.
-                    ///- `beneficiary`: The beneficiary account whom will receive the payout.
-                    ///
-                    ///## Complexity
-                    ///- O(1).
+                    ///See [`Pallet::award_bounty`].
                     award_bounty {
                         #[codec(compact)]
                         bounty_id: ::core::primitive::u32,
@@ -38174,42 +35870,19 @@ pub mod api {
                         >,
                     },
                     #[codec(index = 6)]
-                    ///Claim the payout from an awarded bounty after payout delay.
-                    ///
-                    ///The dispatch origin for this call must be the beneficiary of this bounty.
-                    ///
-                    ///- `bounty_id`: Bounty ID to claim.
-                    ///
-                    ///## Complexity
-                    ///- O(1).
+                    ///See [`Pallet::claim_bounty`].
                     claim_bounty {
                         #[codec(compact)]
                         bounty_id: ::core::primitive::u32,
                     },
                     #[codec(index = 7)]
-                    ///Cancel a proposed or active bounty. All the funds will be sent to treasury and
-                    ///the curator deposit will be unreserved if possible.
-                    ///
-                    ///Only `T::RejectOrigin` is able to cancel a bounty.
-                    ///
-                    ///- `bounty_id`: Bounty ID to cancel.
-                    ///
-                    ///## Complexity
-                    ///- O(1).
+                    ///See [`Pallet::close_bounty`].
                     close_bounty {
                         #[codec(compact)]
                         bounty_id: ::core::primitive::u32,
                     },
                     #[codec(index = 8)]
-                    ///Extend the expiry time of an active bounty.
-                    ///
-                    ///The dispatch origin for this call must be the curator of this bounty.
-                    ///
-                    ///- `bounty_id`: Bounty ID to extend.
-                    ///- `remark`: additional information.
-                    ///
-                    ///## Complexity
-                    ///- O(1).
+                    ///See [`Pallet::extend_bounty_expiry`].
                     extend_bounty_expiry {
                         #[codec(compact)]
                         bounty_id: ::core::primitive::u32,
@@ -38233,10 +35906,7 @@ pub mod api {
                 #[encode_as_type(
                     crate_path = ":: subxt :: ext :: scale_encode"
                 )]
-                /**
-                Custom [dispatch errors](https://docs.substrate.io/main-docs/build/events-errors/)
-                of this pallet.
-                */
+                ///The `Error` enum of this pallet.
                 pub enum Error {
                     #[codec(index = 0)]
                     ///Proposer's balance is too low.
@@ -38290,10 +35960,7 @@ pub mod api {
                 #[encode_as_type(
                     crate_path = ":: subxt :: ext :: scale_encode"
                 )]
-                /**
-                The [event](https://docs.substrate.io/main-docs/build/events-errors/) emitted
-                by this pallet.
-                */
+                ///The `Event` enum of this pallet
                 pub enum Event {
                     #[codec(index = 0)]
                     ///New bounty proposal.
@@ -38403,24 +36070,16 @@ pub mod api {
                 #[encode_as_type(
                     crate_path = ":: subxt :: ext :: scale_encode"
                 )]
-                ///Contains one variant per dispatchable that can be called by an extrinsic.
+                ///Contains a variant per dispatchable extrinsic that this pallet has.
                 pub enum Call {
                     #[codec(index = 0)]
-                    ///Set an account's identity information and reserve the appropriate deposit.
-                    ///
-                    ///If the account already has identity information, the deposit is taken as part payment
-                    ///for the new deposit.
-                    ///
-                    ///The dispatch origin for this call must be _Signed_.
-                    ///
-                    ///- `info`: The identity information.
-                    ///
-                    ///Emits `ResourceSet` if successful.
+                    ///See [`Pallet::set_metadata`].
                     set_metadata {
                         bridge_index: ::core::primitive::u32,
                         info: runtime_types::pallet_bridge_registry::types::BridgeInfo,
                     },
                     #[codec(index = 1)]
+                    ///See [`Pallet::force_reset_indices`].
                     force_reset_indices {
                         resource_ids: ::std::vec::Vec<
                             runtime_types::webb_proposals::header::ResourceId,
@@ -38445,10 +36104,7 @@ pub mod api {
                 #[encode_as_type(
                     crate_path = ":: subxt :: ext :: scale_encode"
                 )]
-                /**
-                Custom [dispatch errors](https://docs.substrate.io/main-docs/build/events-errors/)
-                of this pallet.
-                */
+                ///The `Error` enum of this pallet.
                 pub enum Error {
                     #[codec(index = 0)]
                     ///Parameters haven't been initialized
@@ -38492,10 +36148,7 @@ pub mod api {
                 #[encode_as_type(
                     crate_path = ":: subxt :: ext :: scale_encode"
                 )]
-                /**
-                The [event](https://docs.substrate.io/main-docs/build/events-errors/) emitted
-                by this pallet.
-                */
+                ///The `Event` enum of this pallet
                 pub enum Event {}
             }
             pub mod types {
@@ -38592,28 +36245,10 @@ pub mod api {
                 #[encode_as_type(
                     crate_path = ":: subxt :: ext :: scale_encode"
                 )]
-                ///Contains one variant per dispatchable that can be called by an extrinsic.
+                ///Contains a variant per dispatchable extrinsic that this pallet has.
                 pub enum Call {
                     #[codec(index = 0)]
-                    ///Add a new child-bounty.
-                    ///
-                    ///The dispatch origin for this call must be the curator of parent
-                    ///bounty and the parent bounty must be in "active" state.
-                    ///
-                    ///Child-bounty gets added successfully & fund gets transferred from
-                    ///parent bounty to child-bounty account, if parent bounty has enough
-                    ///funds, else the call fails.
-                    ///
-                    ///Upper bound to maximum number of active  child bounties that can be
-                    ///added are managed via runtime trait config
-                    ///[`Config::MaxActiveChildBountyCount`].
-                    ///
-                    ///If the call is success, the status of child-bounty is updated to
-                    ///"Added".
-                    ///
-                    ///- `parent_bounty_id`: Index of parent bounty for which child-bounty is being added.
-                    ///- `value`: Value for executing the proposal.
-                    ///- `description`: Text description for the child-bounty.
+                    ///See [`Pallet::add_child_bounty`].
                     add_child_bounty {
                         #[codec(compact)]
                         parent_bounty_id: ::core::primitive::u32,
@@ -38622,21 +36257,7 @@ pub mod api {
                         description: ::std::vec::Vec<::core::primitive::u8>,
                     },
                     #[codec(index = 1)]
-                    ///Propose curator for funded child-bounty.
-                    ///
-                    ///The dispatch origin for this call must be curator of parent bounty.
-                    ///
-                    ///Parent bounty must be in active state, for this child-bounty call to
-                    ///work.
-                    ///
-                    ///Child-bounty must be in "Added" state, for processing the call. And
-                    ///state of child-bounty is moved to "CuratorProposed" on successful
-                    ///call completion.
-                    ///
-                    ///- `parent_bounty_id`: Index of parent bounty.
-                    ///- `child_bounty_id`: Index of child bounty.
-                    ///- `curator`: Address of child-bounty curator.
-                    ///- `fee`: payment fee to child-bounty curator for execution.
+                    ///See [`Pallet::propose_curator`].
                     propose_curator {
                         #[codec(compact)]
                         parent_bounty_id: ::core::primitive::u32,
@@ -38650,25 +36271,7 @@ pub mod api {
                         fee: ::core::primitive::u128,
                     },
                     #[codec(index = 2)]
-                    ///Accept the curator role for the child-bounty.
-                    ///
-                    ///The dispatch origin for this call must be the curator of this
-                    ///child-bounty.
-                    ///
-                    ///A deposit will be reserved from the curator and refund upon
-                    ///successful payout or cancellation.
-                    ///
-                    ///Fee for curator is deducted from curator fee of parent bounty.
-                    ///
-                    ///Parent bounty must be in active state, for this child-bounty call to
-                    ///work.
-                    ///
-                    ///Child-bounty must be in "CuratorProposed" state, for processing the
-                    ///call. And state of child-bounty is moved to "Active" on successful
-                    ///call completion.
-                    ///
-                    ///- `parent_bounty_id`: Index of parent bounty.
-                    ///- `child_bounty_id`: Index of child bounty.
+                    ///See [`Pallet::accept_curator`].
                     accept_curator {
                         #[codec(compact)]
                         parent_bounty_id: ::core::primitive::u32,
@@ -38676,40 +36279,7 @@ pub mod api {
                         child_bounty_id: ::core::primitive::u32,
                     },
                     #[codec(index = 3)]
-                    ///Unassign curator from a child-bounty.
-                    ///
-                    ///The dispatch origin for this call can be either `RejectOrigin`, or
-                    ///the curator of the parent bounty, or any signed origin.
-                    ///
-                    ///For the origin other than T::RejectOrigin and the child-bounty
-                    ///curator, parent bounty must be in active state, for this call to
-                    ///work. We allow child-bounty curator and T::RejectOrigin to execute
-                    ///this call irrespective of the parent bounty state.
-                    ///
-                    ///If this function is called by the `RejectOrigin` or the
-                    ///parent bounty curator, we assume that the child-bounty curator is
-                    ///malicious or inactive. As a result, child-bounty curator deposit is
-                    ///slashed.
-                    ///
-                    ///If the origin is the child-bounty curator, we take this as a sign
-                    ///that they are unable to do their job, and are willingly giving up.
-                    ///We could slash the deposit, but for now we allow them to unreserve
-                    ///their deposit and exit without issue. (We may want to change this if
-                    ///it is abused.)
-                    ///
-                    ///Finally, the origin can be anyone iff the child-bounty curator is
-                    ///"inactive". Expiry update due of parent bounty is used to estimate
-                    ///inactive state of child-bounty curator.
-                    ///
-                    ///This allows anyone in the community to call out that a child-bounty
-                    ///curator is not doing their due diligence, and we should pick a new
-                    ///one. In this case the child-bounty curator deposit is slashed.
-                    ///
-                    ///State of child-bounty is moved to Added state on successful call
-                    ///completion.
-                    ///
-                    ///- `parent_bounty_id`: Index of parent bounty.
-                    ///- `child_bounty_id`: Index of child bounty.
+                    ///See [`Pallet::unassign_curator`].
                     unassign_curator {
                         #[codec(compact)]
                         parent_bounty_id: ::core::primitive::u32,
@@ -38717,23 +36287,7 @@ pub mod api {
                         child_bounty_id: ::core::primitive::u32,
                     },
                     #[codec(index = 4)]
-                    ///Award child-bounty to a beneficiary.
-                    ///
-                    ///The beneficiary will be able to claim the funds after a delay.
-                    ///
-                    ///The dispatch origin for this call must be the parent curator or
-                    ///curator of this child-bounty.
-                    ///
-                    ///Parent bounty must be in active state, for this child-bounty call to
-                    ///work.
-                    ///
-                    ///Child-bounty must be in active state, for processing the call. And
-                    ///state of child-bounty is moved to "PendingPayout" on successful call
-                    ///completion.
-                    ///
-                    ///- `parent_bounty_id`: Index of parent bounty.
-                    ///- `child_bounty_id`: Index of child bounty.
-                    ///- `beneficiary`: Beneficiary account.
+                    ///See [`Pallet::award_child_bounty`].
                     award_child_bounty {
                         #[codec(compact)]
                         parent_bounty_id: ::core::primitive::u32,
@@ -38745,22 +36299,7 @@ pub mod api {
                         >,
                     },
                     #[codec(index = 5)]
-                    ///Claim the payout from an awarded child-bounty after payout delay.
-                    ///
-                    ///The dispatch origin for this call may be any signed origin.
-                    ///
-                    ///Call works independent of parent bounty state, No need for parent
-                    ///bounty to be in active state.
-                    ///
-                    ///The Beneficiary is paid out with agreed bounty value. Curator fee is
-                    ///paid & curator deposit is unreserved.
-                    ///
-                    ///Child-bounty must be in "PendingPayout" state, for processing the
-                    ///call. And instance of child-bounty is removed from the state on
-                    ///successful call completion.
-                    ///
-                    ///- `parent_bounty_id`: Index of parent bounty.
-                    ///- `child_bounty_id`: Index of child bounty.
+                    ///See [`Pallet::claim_child_bounty`].
                     claim_child_bounty {
                         #[codec(compact)]
                         parent_bounty_id: ::core::primitive::u32,
@@ -38768,28 +36307,7 @@ pub mod api {
                         child_bounty_id: ::core::primitive::u32,
                     },
                     #[codec(index = 6)]
-                    ///Cancel a proposed or active child-bounty. Child-bounty account funds
-                    ///are transferred to parent bounty account. The child-bounty curator
-                    ///deposit may be unreserved if possible.
-                    ///
-                    ///The dispatch origin for this call must be either parent curator or
-                    ///`T::RejectOrigin`.
-                    ///
-                    ///If the state of child-bounty is `Active`, curator deposit is
-                    ///unreserved.
-                    ///
-                    ///If the state of child-bounty is `PendingPayout`, call fails &
-                    ///returns `PendingPayout` error.
-                    ///
-                    ///For the origin other than T::RejectOrigin, parent bounty must be in
-                    ///active state, for this child-bounty call to work. For origin
-                    ///T::RejectOrigin execution is forced.
-                    ///
-                    ///Instance of child-bounty is removed from the state on successful
-                    ///call completion.
-                    ///
-                    ///- `parent_bounty_id`: Index of parent bounty.
-                    ///- `child_bounty_id`: Index of child bounty.
+                    ///See [`Pallet::close_child_bounty`].
                     close_child_bounty {
                         #[codec(compact)]
                         parent_bounty_id: ::core::primitive::u32,
@@ -38814,10 +36332,7 @@ pub mod api {
                 #[encode_as_type(
                     crate_path = ":: subxt :: ext :: scale_encode"
                 )]
-                /**
-                Custom [dispatch errors](https://docs.substrate.io/main-docs/build/events-errors/)
-                of this pallet.
-                */
+                ///The `Error` enum of this pallet.
                 pub enum Error {
                     #[codec(index = 0)]
                     ///The parent bounty is not in active state.
@@ -38846,10 +36361,7 @@ pub mod api {
                 #[encode_as_type(
                     crate_path = ":: subxt :: ext :: scale_encode"
                 )]
-                /**
-                The [event](https://docs.substrate.io/main-docs/build/events-errors/) emitted
-                by this pallet.
-                */
+                ///The `Event` enum of this pallet
                 pub enum Event {
                     #[codec(index = 0)]
                     ///A child-bounty is added.
@@ -38953,48 +36465,17 @@ pub mod api {
                 #[encode_as_type(
                     crate_path = ":: subxt :: ext :: scale_encode"
                 )]
-                ///Contains one variant per dispatchable that can be called by an extrinsic.
+                ///Contains a variant per dispatchable extrinsic that this pallet has.
                 pub enum Call {
                     #[codec(index = 0)]
-                    ///Set the collective's membership.
-                    ///
-                    ///- `new_members`: The new member list. Be nice to the chain and provide it sorted.
-                    ///- `prime`: The prime member whose vote sets the default.
-                    ///- `old_count`: The upper bound for the previous number of members in storage. Used for
-                    ///  weight estimation.
-                    ///
-                    ///The dispatch of this call must be `SetMembersOrigin`.
-                    ///
-                    ///NOTE: Does not enforce the expected `MaxMembers` limit on the amount of members, but
-                    ///      the weight estimations rely on it to estimate dispatchable weight.
-                    ///
-                    ///# WARNING:
-                    ///
-                    ///The `pallet-collective` can also be managed by logic outside of the pallet through the
-                    ///implementation of the trait [`ChangeMembers`].
-                    ///Any call to `set_members` must be careful that the member set doesn't get out of sync
-                    ///with other logic managing the member set.
-                    ///
-                    ///## Complexity:
-                    ///- `O(MP + N)` where:
-                    ///  - `M` old-members-count (code- and governance-bounded)
-                    ///  - `N` new-members-count (code- and governance-bounded)
-                    ///  - `P` proposals-count (code-bounded)
+                    ///See [`Pallet::set_members`].
                     set_members {
                         new_members: ::std::vec::Vec<::subxt::utils::AccountId32>,
                         prime: ::core::option::Option<::subxt::utils::AccountId32>,
                         old_count: ::core::primitive::u32,
                     },
                     #[codec(index = 1)]
-                    ///Dispatch a proposal from a member using the `Member` origin.
-                    ///
-                    ///Origin must be a member of the collective.
-                    ///
-                    ///## Complexity:
-                    ///- `O(B + M + P)` where:
-                    ///- `B` is `proposal` size in bytes (length-fee-bounded)
-                    ///- `M` members-count (code-bounded)
-                    ///- `P` complexity of dispatching `proposal`
+                    ///See [`Pallet::execute`].
                     execute {
                         proposal: ::std::boxed::Box<
                             runtime_types::tangle_standalone_runtime::RuntimeCall,
@@ -39003,20 +36484,7 @@ pub mod api {
                         length_bound: ::core::primitive::u32,
                     },
                     #[codec(index = 2)]
-                    ///Add a new proposal to either be voted on or executed directly.
-                    ///
-                    ///Requires the sender to be member.
-                    ///
-                    ///`threshold` determines whether `proposal` is executed directly (`threshold < 2`)
-                    ///or put up for voting.
-                    ///
-                    ///## Complexity
-                    ///- `O(B + M + P1)` or `O(B + M + P2)` where:
-                    ///  - `B` is `proposal` size in bytes (length-fee-bounded)
-                    ///  - `M` is members-count (code- and governance-bounded)
-                    ///  - branching is influenced by `threshold` where:
-                    ///    - `P1` is proposal execution complexity (`threshold < 2`)
-                    ///    - `P2` is proposals-count (code-bounded) (`threshold >= 2`)
+                    ///See [`Pallet::propose`].
                     propose {
                         #[codec(compact)]
                         threshold: ::core::primitive::u32,
@@ -39027,15 +36495,7 @@ pub mod api {
                         length_bound: ::core::primitive::u32,
                     },
                     #[codec(index = 3)]
-                    ///Add an aye or nay vote for the sender to the given proposal.
-                    ///
-                    ///Requires the sender to be a member.
-                    ///
-                    ///Transaction fees will be waived if the member is voting on any particular proposal
-                    ///for the first time and the call is successful. Subsequent vote changes will charge a
-                    ///fee.
-                    ///## Complexity
-                    ///- `O(M)` where `M` is members-count (code- and governance-bounded)
+                    ///See [`Pallet::vote`].
                     vote {
                         proposal: ::subxt::utils::H256,
                         #[codec(compact)]
@@ -39043,42 +36503,10 @@ pub mod api {
                         approve: ::core::primitive::bool,
                     },
                     #[codec(index = 5)]
-                    ///Disapprove a proposal, close, and remove it from the system, regardless of its current
-                    ///state.
-                    ///
-                    ///Must be called by the Root origin.
-                    ///
-                    ///Parameters:
-                    ///* `proposal_hash`: The hash of the proposal that should be disapproved.
-                    ///
-                    ///## Complexity
-                    ///O(P) where P is the number of max proposals
+                    ///See [`Pallet::disapprove_proposal`].
                     disapprove_proposal { proposal_hash: ::subxt::utils::H256 },
                     #[codec(index = 6)]
-                    ///Close a vote that is either approved, disapproved or whose voting period has ended.
-                    ///
-                    ///May be called by any signed account in order to finish voting and close the proposal.
-                    ///
-                    ///If called before the end of the voting period it will only close the vote if it is
-                    ///has enough votes to be approved or disapproved.
-                    ///
-                    ///If called after the end of the voting period abstentions are counted as rejections
-                    ///unless there is a prime member set and the prime member cast an approval.
-                    ///
-                    ///If the close operation completes successfully with disapproval, the transaction fee will
-                    ///be waived. Otherwise execution of the approved operation will be charged to the caller.
-                    ///
-                    ///+ `proposal_weight_bound`: The maximum amount of weight consumed by executing the closed
-                    ///proposal.
-                    ///+ `length_bound`: The upper bound for the length of the proposal in storage. Checked via
-                    ///`storage::read` so it is `size_of::<u32>() == 4` larger than the pure length.
-                    ///
-                    ///## Complexity
-                    ///- `O(B + M + P1 + P2)` where:
-                    ///  - `B` is `proposal` size in bytes (length-fee-bounded)
-                    ///  - `M` is members-count (code- and governance-bounded)
-                    ///  - `P1` is the complexity of `proposal` preimage.
-                    ///  - `P2` is proposal-count (code-bounded)
+                    ///See [`Pallet::close`].
                     close {
                         proposal_hash: ::subxt::utils::H256,
                         #[codec(compact)]
@@ -39105,10 +36533,7 @@ pub mod api {
                 #[encode_as_type(
                     crate_path = ":: subxt :: ext :: scale_encode"
                 )]
-                /**
-                Custom [dispatch errors](https://docs.substrate.io/main-docs/build/events-errors/)
-                of this pallet.
-                */
+                ///The `Error` enum of this pallet.
                 pub enum Error {
                     #[codec(index = 0)]
                     ///Account is not a member
@@ -39158,10 +36583,7 @@ pub mod api {
                 #[encode_as_type(
                     crate_path = ":: subxt :: ext :: scale_encode"
                 )]
-                /**
-                The [event](https://docs.substrate.io/main-docs/build/events-errors/) emitted
-                by this pallet.
-                */
+                ///The `Event` enum of this pallet
                 pub enum Event {
                     #[codec(index = 0)]
                     ///A motion (given hash) has been proposed (by given account) with a threshold (given
@@ -39314,18 +36736,10 @@ pub mod api {
                 #[encode_as_type(
                     crate_path = ":: subxt :: ext :: scale_encode"
                 )]
-                ///Contains one variant per dispatchable that can be called by an extrinsic.
+                ///Contains a variant per dispatchable extrinsic that this pallet has.
                 pub enum Call {
                     #[codec(index = 0)]
-                    ///Propose a sensitive action to be taken.
-                    ///
-                    ///The dispatch origin of this call must be _Signed_ and the sender must
-                    ///have funds to cover the deposit.
-                    ///
-                    ///- `proposal_hash`: The hash of the proposal preimage.
-                    ///- `value`: The amount of deposit (must be at least `MinimumDeposit`).
-                    ///
-                    ///Emits `Proposed`.
+                    ///See [`Pallet::propose`].
                     propose {
                         proposal: runtime_types::frame_support::traits::preimages::Bounded<
                             runtime_types::tangle_standalone_runtime::RuntimeCall,
@@ -39334,21 +36748,10 @@ pub mod api {
                         value: ::core::primitive::u128,
                     },
                     #[codec(index = 1)]
-                    ///Signals agreement with a particular proposal.
-                    ///
-                    ///The dispatch origin of this call must be _Signed_ and the sender
-                    ///must have funds to cover the deposit, equal to the original deposit.
-                    ///
-                    ///- `proposal`: The index of the proposal to second.
+                    ///See [`Pallet::second`].
                     second { #[codec(compact)] proposal: ::core::primitive::u32 },
                     #[codec(index = 2)]
-                    ///Vote in a referendum. If `vote.is_aye()`, the vote is to enact the proposal;
-                    ///otherwise it is a vote to keep the status quo.
-                    ///
-                    ///The dispatch origin of this call must be _Signed_.
-                    ///
-                    ///- `ref_index`: The index of the referendum to vote for.
-                    ///- `vote`: The vote configuration.
+                    ///See [`Pallet::vote`].
                     vote {
                         #[codec(compact)]
                         ref_index: ::core::primitive::u32,
@@ -39357,127 +36760,47 @@ pub mod api {
                         >,
                     },
                     #[codec(index = 3)]
-                    ///Schedule an emergency cancellation of a referendum. Cannot happen twice to the same
-                    ///referendum.
-                    ///
-                    ///The dispatch origin of this call must be `CancellationOrigin`.
-                    ///
-                    ///-`ref_index`: The index of the referendum to cancel.
-                    ///
-                    ///Weight: `O(1)`.
+                    ///See [`Pallet::emergency_cancel`].
                     emergency_cancel { ref_index: ::core::primitive::u32 },
                     #[codec(index = 4)]
-                    ///Schedule a referendum to be tabled once it is legal to schedule an external
-                    ///referendum.
-                    ///
-                    ///The dispatch origin of this call must be `ExternalOrigin`.
-                    ///
-                    ///- `proposal_hash`: The preimage hash of the proposal.
+                    ///See [`Pallet::external_propose`].
                     external_propose {
                         proposal: runtime_types::frame_support::traits::preimages::Bounded<
                             runtime_types::tangle_standalone_runtime::RuntimeCall,
                         >,
                     },
                     #[codec(index = 5)]
-                    ///Schedule a majority-carries referendum to be tabled next once it is legal to schedule
-                    ///an external referendum.
-                    ///
-                    ///The dispatch of this call must be `ExternalMajorityOrigin`.
-                    ///
-                    ///- `proposal_hash`: The preimage hash of the proposal.
-                    ///
-                    ///Unlike `external_propose`, blacklisting has no effect on this and it may replace a
-                    ///pre-scheduled `external_propose` call.
-                    ///
-                    ///Weight: `O(1)`
+                    ///See [`Pallet::external_propose_majority`].
                     external_propose_majority {
                         proposal: runtime_types::frame_support::traits::preimages::Bounded<
                             runtime_types::tangle_standalone_runtime::RuntimeCall,
                         >,
                     },
                     #[codec(index = 6)]
-                    ///Schedule a negative-turnout-bias referendum to be tabled next once it is legal to
-                    ///schedule an external referendum.
-                    ///
-                    ///The dispatch of this call must be `ExternalDefaultOrigin`.
-                    ///
-                    ///- `proposal_hash`: The preimage hash of the proposal.
-                    ///
-                    ///Unlike `external_propose`, blacklisting has no effect on this and it may replace a
-                    ///pre-scheduled `external_propose` call.
-                    ///
-                    ///Weight: `O(1)`
+                    ///See [`Pallet::external_propose_default`].
                     external_propose_default {
                         proposal: runtime_types::frame_support::traits::preimages::Bounded<
                             runtime_types::tangle_standalone_runtime::RuntimeCall,
                         >,
                     },
                     #[codec(index = 7)]
-                    ///Schedule the currently externally-proposed majority-carries referendum to be tabled
-                    ///immediately. If there is no externally-proposed referendum currently, or if there is one
-                    ///but it is not a majority-carries referendum then it fails.
-                    ///
-                    ///The dispatch of this call must be `FastTrackOrigin`.
-                    ///
-                    ///- `proposal_hash`: The hash of the current external proposal.
-                    ///- `voting_period`: The period that is allowed for voting on this proposal. Increased to
-                    ///	Must be always greater than zero.
-                    ///	For `FastTrackOrigin` must be equal or greater than `FastTrackVotingPeriod`.
-                    ///- `delay`: The number of block after voting has ended in approval and this should be
-                    ///  enacted. This doesn't have a minimum amount.
-                    ///
-                    ///Emits `Started`.
-                    ///
-                    ///Weight: `O(1)`
+                    ///See [`Pallet::fast_track`].
                     fast_track {
                         proposal_hash: ::subxt::utils::H256,
                         voting_period: ::core::primitive::u32,
                         delay: ::core::primitive::u32,
                     },
                     #[codec(index = 8)]
-                    ///Veto and blacklist the external proposal hash.
-                    ///
-                    ///The dispatch origin of this call must be `VetoOrigin`.
-                    ///
-                    ///- `proposal_hash`: The preimage hash of the proposal to veto and blacklist.
-                    ///
-                    ///Emits `Vetoed`.
-                    ///
-                    ///Weight: `O(V + log(V))` where V is number of `existing vetoers`
+                    ///See [`Pallet::veto_external`].
                     veto_external { proposal_hash: ::subxt::utils::H256 },
                     #[codec(index = 9)]
-                    ///Remove a referendum.
-                    ///
-                    ///The dispatch origin of this call must be _Root_.
-                    ///
-                    ///- `ref_index`: The index of the referendum to cancel.
-                    ///
-                    ///# Weight: `O(1)`.
+                    ///See [`Pallet::cancel_referendum`].
                     cancel_referendum {
                         #[codec(compact)]
                         ref_index: ::core::primitive::u32,
                     },
                     #[codec(index = 10)]
-                    ///Delegate the voting power (with some given conviction) of the sending account.
-                    ///
-                    ///The balance delegated is locked for as long as it's delegated, and thereafter for the
-                    ///time appropriate for the conviction's lock period.
-                    ///
-                    ///The dispatch origin of this call must be _Signed_, and the signing account must either:
-                    ///  - be delegating already; or
-                    ///  - have no voting activity (if there is, then it will need to be removed/consolidated
-                    ///    through `reap_vote` or `unvote`).
-                    ///
-                    ///- `to`: The account whose voting the `target` account's voting power will follow.
-                    ///- `conviction`: The conviction that will be attached to the delegated votes. When the
-                    ///  account is undelegated, the funds will be locked for the corresponding period.
-                    ///- `balance`: The amount of the account's balance to be used in delegating. This must not
-                    ///  be more than the account's current balance.
-                    ///
-                    ///Emits `Delegated`.
-                    ///
-                    ///Weight: `O(R)` where R is the number of referendums the voter delegating to has
-                    ///  voted on. Weight is charged as if maximum votes.
+                    ///See [`Pallet::delegate`].
                     delegate {
                         to: ::subxt::utils::MultiAddress<
                             ::subxt::utils::AccountId32,
@@ -39487,34 +36810,13 @@ pub mod api {
                         balance: ::core::primitive::u128,
                     },
                     #[codec(index = 11)]
-                    ///Undelegate the voting power of the sending account.
-                    ///
-                    ///Tokens may be unlocked following once an amount of time consistent with the lock period
-                    ///of the conviction with which the delegation was issued.
-                    ///
-                    ///The dispatch origin of this call must be _Signed_ and the signing account must be
-                    ///currently delegating.
-                    ///
-                    ///Emits `Undelegated`.
-                    ///
-                    ///Weight: `O(R)` where R is the number of referendums the voter delegating to has
-                    ///  voted on. Weight is charged as if maximum votes.
+                    ///See [`Pallet::undelegate`].
                     undelegate,
                     #[codec(index = 12)]
-                    ///Clears all public proposals.
-                    ///
-                    ///The dispatch origin of this call must be _Root_.
-                    ///
-                    ///Weight: `O(1)`.
+                    ///See [`Pallet::clear_public_proposals`].
                     clear_public_proposals,
                     #[codec(index = 13)]
-                    ///Unlock tokens that have an expired lock.
-                    ///
-                    ///The dispatch origin of this call must be _Signed_.
-                    ///
-                    ///- `target`: The account to remove the lock on.
-                    ///
-                    ///Weight: `O(R)` with R number of vote of target.
+                    ///See [`Pallet::unlock`].
                     unlock {
                         target: ::subxt::utils::MultiAddress<
                             ::subxt::utils::AccountId32,
@@ -39522,50 +36824,10 @@ pub mod api {
                         >,
                     },
                     #[codec(index = 14)]
-                    ///Remove a vote for a referendum.
-                    ///
-                    ///If:
-                    ///- the referendum was cancelled, or
-                    ///- the referendum is ongoing, or
-                    ///- the referendum has ended such that
-                    ///  - the vote of the account was in opposition to the result; or
-                    ///  - there was no conviction to the account's vote; or
-                    ///  - the account made a split vote
-                    ///...then the vote is removed cleanly and a following call to `unlock` may result in more
-                    ///funds being available.
-                    ///
-                    ///If, however, the referendum has ended and:
-                    ///- it finished corresponding to the vote of the account, and
-                    ///- the account made a standard vote with conviction, and
-                    ///- the lock period of the conviction is not over
-                    ///...then the lock will be aggregated into the overall account's lock, which may involve
-                    ///*overlocking* (where the two locks are combined into a single lock that is the maximum
-                    ///of both the amount locked and the time is it locked for).
-                    ///
-                    ///The dispatch origin of this call must be _Signed_, and the signer must have a vote
-                    ///registered for referendum `index`.
-                    ///
-                    ///- `index`: The index of referendum of the vote to be removed.
-                    ///
-                    ///Weight: `O(R + log R)` where R is the number of referenda that `target` has voted on.
-                    ///  Weight is calculated for the maximum number of vote.
+                    ///See [`Pallet::remove_vote`].
                     remove_vote { index: ::core::primitive::u32 },
                     #[codec(index = 15)]
-                    ///Remove a vote for a referendum.
-                    ///
-                    ///If the `target` is equal to the signer, then this function is exactly equivalent to
-                    ///`remove_vote`. If not equal to the signer, then the vote must have expired,
-                    ///either because the referendum was cancelled, because the voter lost the referendum or
-                    ///because the conviction period is over.
-                    ///
-                    ///The dispatch origin of this call must be _Signed_.
-                    ///
-                    ///- `target`: The account of the vote to be removed; this account must have voted for
-                    ///  referendum `index`.
-                    ///- `index`: The index of referendum of the vote to be removed.
-                    ///
-                    ///Weight: `O(R + log R)` where R is the number of referenda that `target` has voted on.
-                    ///  Weight is calculated for the maximum number of vote.
+                    ///See [`Pallet::remove_other_vote`].
                     remove_other_vote {
                         target: ::subxt::utils::MultiAddress<
                             ::subxt::utils::AccountId32,
@@ -39574,53 +36836,19 @@ pub mod api {
                         index: ::core::primitive::u32,
                     },
                     #[codec(index = 16)]
-                    ///Permanently place a proposal into the blacklist. This prevents it from ever being
-                    ///proposed again.
-                    ///
-                    ///If called on a queued public or external proposal, then this will result in it being
-                    ///removed. If the `ref_index` supplied is an active referendum with the proposal hash,
-                    ///then it will be cancelled.
-                    ///
-                    ///The dispatch origin of this call must be `BlacklistOrigin`.
-                    ///
-                    ///- `proposal_hash`: The proposal hash to blacklist permanently.
-                    ///- `ref_index`: An ongoing referendum whose hash is `proposal_hash`, which will be
-                    ///cancelled.
-                    ///
-                    ///Weight: `O(p)` (though as this is an high-privilege dispatch, we assume it has a
-                    ///  reasonable value).
+                    ///See [`Pallet::blacklist`].
                     blacklist {
                         proposal_hash: ::subxt::utils::H256,
                         maybe_ref_index: ::core::option::Option<::core::primitive::u32>,
                     },
                     #[codec(index = 17)]
-                    ///Remove a proposal.
-                    ///
-                    ///The dispatch origin of this call must be `CancelProposalOrigin`.
-                    ///
-                    ///- `prop_index`: The index of the proposal to cancel.
-                    ///
-                    ///Weight: `O(p)` where `p = PublicProps::<T>::decode_len()`
+                    ///See [`Pallet::cancel_proposal`].
                     cancel_proposal {
                         #[codec(compact)]
                         prop_index: ::core::primitive::u32,
                     },
                     #[codec(index = 18)]
-                    ///Set or clear a metadata of a proposal or a referendum.
-                    ///
-                    ///Parameters:
-                    ///- `origin`: Must correspond to the `MetadataOwner`.
-                    ///    - `ExternalOrigin` for an external proposal with the `SuperMajorityApprove`
-                    ///      threshold.
-                    ///    - `ExternalDefaultOrigin` for an external proposal with the `SuperMajorityAgainst`
-                    ///      threshold.
-                    ///    - `ExternalMajorityOrigin` for an external proposal with the `SimpleMajority`
-                    ///      threshold.
-                    ///    - `Signed` by a creator for a public proposal.
-                    ///    - `Signed` to clear a metadata for a finished referendum.
-                    ///    - `Root` to set a metadata for an ongoing referendum.
-                    ///- `owner`: an identifier of a metadata owner.
-                    ///- `maybe_hash`: The hash of an on-chain stored preimage. `None` to clear a metadata.
+                    ///See [`Pallet::set_metadata`].
                     set_metadata {
                         owner: runtime_types::pallet_democracy::types::MetadataOwner,
                         maybe_hash: ::core::option::Option<::subxt::utils::H256>,
@@ -39643,10 +36871,7 @@ pub mod api {
                 #[encode_as_type(
                     crate_path = ":: subxt :: ext :: scale_encode"
                 )]
-                /**
-                Custom [dispatch errors](https://docs.substrate.io/main-docs/build/events-errors/)
-                of this pallet.
-                */
+                ///The `Error` enum of this pallet.
                 pub enum Error {
                     #[codec(index = 0)]
                     ///Value too low
@@ -39739,10 +36964,7 @@ pub mod api {
                 #[encode_as_type(
                     crate_path = ":: subxt :: ext :: scale_encode"
                 )]
-                /**
-                The [event](https://docs.substrate.io/main-docs/build/events-errors/) emitted
-                by this pallet.
-                */
+                ///The `Event` enum of this pallet
                 pub enum Event {
                     #[codec(index = 0)]
                     ///A motion has been proposed by a public account.
@@ -40111,77 +37333,26 @@ pub mod api {
                 #[encode_as_type(
                     crate_path = ":: subxt :: ext :: scale_encode"
                 )]
-                ///Contains one variant per dispatchable that can be called by an extrinsic.
+                ///Contains a variant per dispatchable extrinsic that this pallet has.
                 pub enum Call {
                     #[codec(index = 0)]
-                    ///Set the pending signature threshold for the session following the next session.
-                    ///
-                    ///We cannot assume that the next DKG has not already completed keygen.
-                    ///After all, if we are in a new session the next DKG may have already completed.
-                    ///Therefore, when we update the thresholds we are updating a threshold
-                    ///that will become the next threshold after the next session update.
-                    ///
-                    ///* `origin` - The account origin.
-                    ///* `new_threshold` - The new signature threshold for the DKG.
+                    ///See [`Pallet::set_signature_threshold`].
                     set_signature_threshold { new_threshold: ::core::primitive::u16 },
                     #[codec(index = 1)]
-                    ///Set the pending keygen threshold for the session following the next session.
-                    ///
-                    ///We cannot assume that the next DKG has not already completed keygen.
-                    ///After all, if we are in a new session the next DKG may have already completed.
-                    ///Therefore, when we update the thresholds we are updating a threshold
-                    ///that will become the next threshold after the next session update.
-                    ///
-                    ///* `origin` - The account origin.
-                    ///* `new_threshold` - The new keygen threshold for the DKG.
+                    ///See [`Pallet::set_keygen_threshold`].
                     set_keygen_threshold { new_threshold: ::core::primitive::u16 },
                     #[codec(index = 2)]
-                    ///Submits and stores the active public key for the genesis session into the on-chain
-                    ///storage. This is primarily used to separate the genesis public key submission from
-                    ///non-genesis rounds.
-                    ///
-                    ///Can only be submitted by the current authorities. It is also required that a
-                    ///`SignatureThreshold` of submissions is reached in order to successfully
-                    ///store the public key on-chain.
-                    ///
-                    ///* `origin` - The account origin.
-                    ///* `keys_and_signatures` - The aggregated public keys and signatures for possible current
-                    ///  DKG public keys.
+                    ///See [`Pallet::submit_public_key`].
                     submit_public_key {
                         keys_and_signatures: runtime_types::dkg_runtime_primitives::AggregatedPublicKeys,
                     },
                     #[codec(index = 3)]
-                    ///Submits and stores the next public key for the next session into the on-chain storage.
-                    ///
-                    ///Can only be submitted by the next authorities. It is also required that a
-                    ///`NextSignatureThreshold` of submissions is reached in order to successfully
-                    ///store the public key on-chain.
-                    ///
-                    ///* `origin` - The account origin.
-                    ///* `keys_and_signatures` - The aggregated public keys and signatures for possible next
-                    ///  DKG public keys.
+                    ///See [`Pallet::submit_next_public_key`].
                     submit_next_public_key {
                         keys_and_signatures: runtime_types::dkg_runtime_primitives::AggregatedPublicKeys,
                     },
                     #[codec(index = 5)]
-                    ///Submits misbehaviour reports on chain. Signatures of the offending authority are
-                    ///verified against the current or next authorities depending on the type of misbehaviour.
-                    ///- Keygen: Verifies against the next authorities, since they are doing keygen.
-                    ///- Signing: Verifies against the current authorities, since they are doing signing.
-                    ///
-                    ///Verifies the reports against the respective thresholds and if enough reports are met
-                    ///begins to jail and decrease the reputation of the offending authority.
-                    ///
-                    ///The misbehaviour reputation update is:
-                    ///	AUTHORITY_REPUTATION = DECAY_PERCENTAGE * AUTHORITY_REPUTATION
-                    ///
-                    ///If there are not enough unjailed keygen authorities to perform a keygen after the next
-                    ///session, then we deduct the pending keygen threshold (and pending signing threshold)
-                    ///accordingly.
-                    ///
-                    ///* `origin` - The account origin.
-                    ///* `reports` - The aggregated misbehaviour reports containing signatures of an offending
-                    ///  authority
+                    ///See [`Pallet::submit_misbehaviour_reports`].
                     submit_misbehaviour_reports {
                         reports: runtime_types::dkg_runtime_primitives::AggregatedMisbehaviourReports<
                             runtime_types::dkg_runtime_primitives::crypto::Public,
@@ -40190,48 +37361,23 @@ pub mod api {
                         >,
                     },
                     #[codec(index = 6)]
-                    ///Attempts to remove an authority from all possible jails (keygen & signing).
-                    ///This can only be called by the controller of the authority in jail. The
-                    ///origin must map directly to the authority in jail.
-                    ///
-                    ///The authority's jail sentence for either keygen or signing must be elapsed
-                    ///for the authority to be removed from the jail.
-                    ///
-                    ///* `origin` - The account origin.
+                    ///See [`Pallet::unjail`].
                     unjail,
                     #[codec(index = 7)]
-                    ///Force removes an authority from keygen jail.
-                    ///
-                    ///Can only be called by DKG
-                    ///* `origin` - The account origin.
-                    ///* `authority` - The authority to be removed from the keygen jail.
+                    ///See [`Pallet::force_unjail_keygen`].
                     force_unjail_keygen {
                         authority: runtime_types::dkg_runtime_primitives::crypto::Public,
                     },
                     #[codec(index = 8)]
-                    ///Force removes an authority from signing jail.
-                    ///
-                    ///Can only be called by the root origin.
-                    ///
-                    ///* `origin` - The account origin.
-                    ///* `authority` - The authority to be removed from the signing jail.
+                    ///See [`Pallet::force_unjail_signing`].
                     force_unjail_signing {
                         authority: runtime_types::dkg_runtime_primitives::crypto::Public,
                     },
                     #[codec(index = 9)]
-                    ///Forcefully rotate the DKG
-                    ///
-                    ///This forces the next authorities into the current authority spot and
-                    ///automatically increments the authority ID. It uses `change_authorities`
-                    ///to execute the rotation forcefully.
+                    ///See [`Pallet::force_change_authorities`].
                     force_change_authorities,
                     #[codec(index = 10)]
-                    ///Triggers an Emergency Keygen Protocol.
-                    ///
-                    ///The keygen protocol will then be executed and the result will be stored in the off chain
-                    ///storage, which will be picked up by the on chain worker and stored on chain.
-                    ///
-                    ///Note that, this will clear the next public key and its signature, if any.
+                    ///See [`Pallet::trigger_emergency_keygen`].
                     trigger_emergency_keygen,
                 }
                 #[derive(
@@ -40251,10 +37397,7 @@ pub mod api {
                 #[encode_as_type(
                     crate_path = ":: subxt :: ext :: scale_encode"
                 )]
-                /**
-                Custom [dispatch errors](https://docs.substrate.io/main-docs/build/events-errors/)
-                of this pallet.
-                */
+                ///The `Error` enum of this pallet.
                 pub enum Error {
                     #[codec(index = 0)]
                     ///No mapped account to authority
@@ -40340,10 +37483,7 @@ pub mod api {
                 #[encode_as_type(
                     crate_path = ":: subxt :: ext :: scale_encode"
                 )]
-                /**
-                The [event](https://docs.substrate.io/main-docs/build/events-errors/) emitted
-                by this pallet.
-                */
+                ///The `Event` enum of this pallet
                 pub enum Event {
                     #[codec(index = 0)]
                     ///Current public key submitted
@@ -40479,6 +37619,32 @@ pub mod api {
         }
         pub mod pallet_dkg_proposal_handler {
             use super::runtime_types;
+            pub mod offences {
+                use super::runtime_types;
+                #[derive(
+                    ::subxt::ext::codec::Decode,
+                    ::subxt::ext::codec::Encode,
+                    ::subxt::ext::scale_decode::DecodeAsType,
+                    ::subxt::ext::scale_encode::EncodeAsType,
+                    Clone,
+                    Debug,
+                    Eq,
+                    PartialEq,
+                )]
+                #[codec(crate = ::subxt::ext::codec)]
+                #[decode_as_type(
+                    crate_path = ":: subxt :: ext :: scale_decode"
+                )]
+                #[encode_as_type(
+                    crate_path = ":: subxt :: ext :: scale_encode"
+                )]
+                pub enum DKGMisbehaviorOffenceType {
+                    #[codec(index = 0)]
+                    SignedProposalNotInQueue,
+                    #[codec(index = 1)]
+                    SignedMalformedProposal,
+                }
+            }
             pub mod pallet {
                 use super::runtime_types;
                 #[derive(
@@ -40498,9 +37664,10 @@ pub mod api {
                 #[encode_as_type(
                     crate_path = ":: subxt :: ext :: scale_encode"
                 )]
-                ///Contains one variant per dispatchable that can be called by an extrinsic.
+                ///Contains a variant per dispatchable extrinsic that this pallet has.
                 pub enum Call {
                     #[codec(index = 0)]
+                    ///See [`Pallet::submit_signed_proposals`].
                     submit_signed_proposals {
                         props: ::std::vec::Vec<
                             runtime_types::dkg_runtime_primitives::proposal::SignedProposalBatch<
@@ -40512,15 +37679,27 @@ pub mod api {
                         >,
                     },
                     #[codec(index = 1)]
-                    ///Force submit an unsigned proposal to the DKG
-                    ///
-                    ///There are certain proposals we'd like to be proposable only
-                    ///through root actions. The currently supported proposals are
-                    ///	1. Updating
+                    ///See [`Pallet::force_submit_unsigned_proposal`].
                     force_submit_unsigned_proposal {
                         prop: runtime_types::webb_proposals::proposal::Proposal<
                             runtime_types::dkg_runtime_primitives::CustomU32Getter,
                         >,
+                    },
+                    #[codec(index = 2)]
+                    ///See [`Pallet::submit_dkg_signing_offence`].
+                    submit_dkg_signing_offence {
+                        signed_data: runtime_types::dkg_runtime_primitives::proposal::SignedProposalBatch<
+                            ::core::primitive::u32,
+                            runtime_types::dkg_runtime_primitives::CustomU32Getter,
+                            runtime_types::dkg_runtime_primitives::CustomU32Getter2,
+                            runtime_types::dkg_runtime_primitives::CustomU32Getter3,
+                        >,
+                    },
+                    #[codec(index = 3)]
+                    ///See [`Pallet::force_remove_unsigned_proposal_batch`].
+                    force_remove_unsigned_proposal_batch {
+                        typed_chain_id: runtime_types::webb_proposals::header::TypedChainId,
+                        batch_id: ::core::primitive::u32,
                     },
                 }
                 #[derive(
@@ -40540,10 +37719,7 @@ pub mod api {
                 #[encode_as_type(
                     crate_path = ":: subxt :: ext :: scale_encode"
                 )]
-                /**
-                Custom [dispatch errors](https://docs.substrate.io/main-docs/build/events-errors/)
-                of this pallet.
-                */
+                ///The `Error` enum of this pallet.
                 pub enum Error {
                     #[codec(index = 0)]
                     ///Error names should be descriptive.
@@ -40590,6 +37766,18 @@ pub mod api {
                     #[codec(index = 14)]
                     ///Batch does not contain proposals
                     EmptyBatch,
+                    #[codec(index = 15)]
+                    ///The signature does not match current active key
+                    NotSignedByCurrentDKG,
+                    #[codec(index = 16)]
+                    ///the signed data is invalid
+                    InvalidSignedData,
+                    #[codec(index = 17)]
+                    ///the prposal exists on runtime and is valid
+                    ProposalExistsAndIsValid,
+                    #[codec(index = 18)]
+                    ///Proposal batch does not exist
+                    ProposalBatchNotFound,
                 }
                 #[derive(
                     ::subxt::ext::codec::Decode,
@@ -40608,10 +37796,7 @@ pub mod api {
                 #[encode_as_type(
                     crate_path = ":: subxt :: ext :: scale_encode"
                 )]
-                /**
-                The [event](https://docs.substrate.io/main-docs/build/events-errors/) emitted
-                by this pallet.
-                */
+                ///The `Event` enum of this pallet
                 pub enum Event {
                     #[codec(index = 0)]
                     ///RuntimeEvent Emitted when we encounter a Proposal with invalid Signature.
@@ -40640,12 +37825,17 @@ pub mod api {
                     },
                     #[codec(index = 2)]
                     ///RuntimeEvent When a Proposal is removed from UnsignedProposalQueue.
-                    ProposalRemoved {
-                        key: runtime_types::dkg_runtime_primitives::proposal::DKGPayloadKey,
+                    ProposalBatchRemoved {
                         target_chain: runtime_types::webb_proposals::header::TypedChainId,
-                        expired: ::core::primitive::bool,
+                        batch_id: ::core::primitive::u32,
                     },
                     #[codec(index = 3)]
+                    ///RuntimeEvent When a Proposal is expired and removed from UnsignedProposalQueue.
+                    ProposalBatchExpired {
+                        target_chain: runtime_types::webb_proposals::header::TypedChainId,
+                        batch_id: ::core::primitive::u32,
+                    },
+                    #[codec(index = 4)]
                     ///RuntimeEvent When a Proposal Gets Signed by DKG.
                     ProposalBatchSigned {
                         target_chain: runtime_types::webb_proposals::header::TypedChainId,
@@ -40654,6 +37844,17 @@ pub mod api {
                             runtime_types::pallet_dkg_proposal_handler::pallet::SignedProposalEventData,
                         >,
                         signature: ::std::vec::Vec<::core::primitive::u8>,
+                    },
+                    #[codec(index = 5)]
+                    ///Offence reported against current DKG
+                    SigningOffenceReported {
+                        offence: runtime_types::pallet_dkg_proposal_handler::offences::DKGMisbehaviorOffenceType,
+                        signed_data: runtime_types::dkg_runtime_primitives::proposal::SignedProposalBatch<
+                            ::core::primitive::u32,
+                            runtime_types::dkg_runtime_primitives::CustomU32Getter,
+                            runtime_types::dkg_runtime_primitives::CustomU32Getter2,
+                            runtime_types::dkg_runtime_primitives::CustomU32Getter3,
+                        >,
                     },
                 }
                 #[derive(
@@ -40701,84 +37902,43 @@ pub mod api {
                 #[encode_as_type(
                     crate_path = ":: subxt :: ext :: scale_encode"
                 )]
-                ///Contains one variant per dispatchable that can be called by an extrinsic.
+                ///Contains a variant per dispatchable extrinsic that this pallet has.
                 pub enum Call {
                     #[codec(index = 0)]
-                    ///Sets the vote threshold for proposals.
-                    ///
-                    ///This threshold is used to determine how many votes are required
-                    ///before a proposal is executed.
-                    ///
-                    ///# <weight>
-                    ///- O(1) lookup and insert
-                    ///# </weight>
+                    ///See [`Pallet::set_threshold`].
                     set_threshold { threshold: ::core::primitive::u32 },
                     #[codec(index = 1)]
-                    ///Stores a method name on chain under an associated resource ID.
-                    ///
-                    ///# <weight>
-                    ///- O(1) write
-                    ///# </weight>
+                    ///See [`Pallet::set_resource`].
                     set_resource {
                         id: runtime_types::webb_proposals::header::ResourceId,
                         method: ::std::vec::Vec<::core::primitive::u8>,
                     },
                     #[codec(index = 2)]
-                    ///Removes a resource ID from the resource mapping.
-                    ///
-                    ///After this call, bridge transfers with the associated resource ID
-                    ///will be rejected.
-                    ///
-                    ///# <weight>
-                    ///- O(1) removal
-                    ///# </weight>
+                    ///See [`Pallet::remove_resource`].
                     remove_resource {
                         id: runtime_types::webb_proposals::header::ResourceId,
                     },
                     #[codec(index = 3)]
-                    ///Enables a chain ID as a source or destination for a bridge transfer.
-                    ///
-                    ///# <weight>
-                    ///- O(1) lookup and insert
-                    ///# </weight>
+                    ///See [`Pallet::whitelist_chain`].
                     whitelist_chain {
                         chain_id: runtime_types::webb_proposals::header::TypedChainId,
                     },
                     #[codec(index = 4)]
-                    ///Commits a vote in favour of the provided proposal.
-                    ///
-                    ///If a proposal with the given nonce and source chain ID does not
-                    ///already exist, it will be created with an initial vote in favour
-                    ///from the caller.
-                    ///
-                    ///# <weight>
-                    ///- weight of proposed call, regardless of whether execution is performed
-                    ///# </weight>
+                    ///See [`Pallet::acknowledge_proposal`].
                     acknowledge_proposal {
                         prop: runtime_types::webb_proposals::proposal::Proposal<
                             runtime_types::dkg_runtime_primitives::CustomU32Getter,
                         >,
                     },
                     #[codec(index = 5)]
-                    ///Commits a vote against a provided proposal.
-                    ///
-                    ///# <weight>
-                    ///- Fixed, since execution of proposal should not be included
-                    ///# </weight>
+                    ///See [`Pallet::reject_proposal`].
                     reject_proposal {
                         prop: runtime_types::webb_proposals::proposal::Proposal<
                             runtime_types::dkg_runtime_primitives::CustomU32Getter,
                         >,
                     },
                     #[codec(index = 6)]
-                    ///Evaluate the state of a proposal given the current vote threshold.
-                    ///
-                    ///A proposal with enough votes will be either executed or cancelled,
-                    ///and the status will be updated accordingly.
-                    ///
-                    ///# <weight>
-                    ///- weight of proposed call, regardless of whether execution is performed
-                    ///# </weight>
+                    ///See [`Pallet::eval_vote_state`].
                     eval_vote_state {
                         nonce: runtime_types::webb_proposals::nonce::Nonce,
                         src_chain_id: runtime_types::webb_proposals::header::TypedChainId,
@@ -40804,10 +37964,7 @@ pub mod api {
                 #[encode_as_type(
                     crate_path = ":: subxt :: ext :: scale_encode"
                 )]
-                /**
-                Custom [dispatch errors](https://docs.substrate.io/main-docs/build/events-errors/)
-                of this pallet.
-                */
+                ///The `Error` enum of this pallet.
                 pub enum Error {
                     #[codec(index = 0)]
                     ///Account does not have correct permissions
@@ -40884,10 +38041,7 @@ pub mod api {
                 #[encode_as_type(
                     crate_path = ":: subxt :: ext :: scale_encode"
                 )]
-                /**
-                The [event](https://docs.substrate.io/main-docs/build/events-errors/) emitted
-                by this pallet.
-                */
+                ///The `Event` enum of this pallet
                 pub enum Event {
                     #[codec(index = 0)]
                     ///Vote threshold has changed (new_threshold)
@@ -41027,9 +38181,10 @@ pub mod api {
                 #[encode_as_type(
                     crate_path = ":: subxt :: ext :: scale_encode"
                 )]
-                ///Contains one variant per dispatchable that can be called by an extrinsic.
+                ///Contains a variant per dispatchable extrinsic that this pallet has.
                 pub enum Call {
                     #[codec(index = 0)]
+                    ///See [`Pallet::note_min_gas_price_target`].
                     note_min_gas_price_target {
                         target: runtime_types::primitive_types::U256,
                     },
@@ -41057,54 +38212,17 @@ pub mod api {
                 #[encode_as_type(
                     crate_path = ":: subxt :: ext :: scale_encode"
                 )]
-                ///Contains one variant per dispatchable that can be called by an extrinsic.
+                ///Contains a variant per dispatchable extrinsic that this pallet has.
                 pub enum Call {
                     #[codec(index = 0)]
-                    ///Make a claim to collect your WEBBs.
-                    ///
-                    ///The dispatch origin for this call must be _None_.
-                    ///
-                    ///Unsigned Validation:
-                    ///A call to claim is deemed valid if the signature provided matches
-                    ///the expected signed message of:
-                    ///
-                    ///> Ethereum Signed Message:
-                    ///> (configured prefix string)(address)
-                    ///
-                    ///and `address` matches the `dest` account.
-                    ///
-                    ///Parameters:
-                    ///- `dest`: The destination account to payout the claim.
-                    ///- `ethereum_signature`: The signature of an ethereum signed message matching the format
-                    ///  described above.
-                    ///
-                    ///<weight>
-                    ///The weight of this call is invariant over the input parameters.
-                    ///Weight includes logic to validate unsigned `claim` call.
-                    ///
-                    ///Total Complexity: O(1)
-                    ///</weight>
+                    ///See [`Pallet::claim`].
                     claim {
                         dest: ::subxt::utils::AccountId32,
                         ethereum_signature:
                             runtime_types::pallet_ecdsa_claims::EcdsaSignature,
                     },
                     #[codec(index = 1)]
-                    ///Mint a new claim to collect WEBBs.
-                    ///
-                    ///The dispatch origin for this call must be _Root_.
-                    ///
-                    ///Parameters:
-                    ///- `who`: The Ethereum address allowed to collect this claim.
-                    ///- `value`: The number of WEBBs that will be claimed.
-                    ///- `vesting_schedule`: An optional vesting schedule for these WEBBs.
-                    ///
-                    ///<weight>
-                    ///The weight of this call is invariant over the input parameters.
-                    ///We assume worst case that both vesting and statement is being inserted.
-                    ///
-                    ///Total Complexity: O(1)
-                    ///</weight>
+                    ///See [`Pallet::mint_claim`].
                     mint_claim {
                         who:
                             runtime_types::pallet_ecdsa_claims::EthereumAddress,
@@ -41119,33 +38237,7 @@ pub mod api {
                         >,
                     },
                     #[codec(index = 2)]
-                    ///Make a claim to collect your WEBBs by signing a statement.
-                    ///
-                    ///The dispatch origin for this call must be _None_.
-                    ///
-                    ///Unsigned Validation:
-                    ///A call to `claim_attest` is deemed valid if the signature provided matches
-                    ///the expected signed message of:
-                    ///
-                    ///> Ethereum Signed Message:
-                    ///> (configured prefix string)(address)(statement)
-                    ///
-                    ///and `address` matches the `dest` account; the `statement` must match that which is
-                    ///expected according to your purchase arrangement.
-                    ///
-                    ///Parameters:
-                    ///- `dest`: The destination account to payout the claim.
-                    ///- `ethereum_signature`: The signature of an ethereum signed message matching the format
-                    ///  described above.
-                    ///- `statement`: The identity of the statement which is being attested to in the
-                    ///  signature.
-                    ///
-                    ///<weight>
-                    ///The weight of this call is invariant over the input parameters.
-                    ///Weight includes logic to validate unsigned `claim_attest` call.
-                    ///
-                    ///Total Complexity: O(1)
-                    ///</weight>
+                    ///See [`Pallet::claim_attest`].
                     claim_attest {
                         dest: ::subxt::utils::AccountId32,
                         ethereum_signature:
@@ -41153,29 +38245,12 @@ pub mod api {
                         statement: ::std::vec::Vec<::core::primitive::u8>,
                     },
                     #[codec(index = 3)]
-                    ///Attest to a statement, needed to finalize the claims process.
-                    ///
-                    ///WARNING: Insecure unless your chain includes `PrevalidateAttests` as a
-                    ///`SignedExtension`.
-                    ///
-                    ///Unsigned Validation:
-                    ///A call to attest is deemed valid if the sender has a `Preclaim` registered
-                    ///and provides a `statement` which is expected for the account.
-                    ///
-                    ///Parameters:
-                    ///- `statement`: The identity of the statement which is being attested to in the
-                    ///  signature.
-                    ///
-                    ///<weight>
-                    ///The weight of this call is invariant over the input parameters.
-                    ///Weight includes logic to do pre-validation on `attest` call.
-                    ///
-                    ///Total Complexity: O(1)
-                    ///</weight>
+                    ///See [`Pallet::attest`].
                     attest {
                         statement: ::std::vec::Vec<::core::primitive::u8>,
                     },
                     #[codec(index = 4)]
+                    ///See [`Pallet::move_claim`].
                     move_claim {
                         old:
                             runtime_types::pallet_ecdsa_claims::EthereumAddress,
@@ -41185,8 +38260,7 @@ pub mod api {
                             ::core::option::Option<::subxt::utils::AccountId32>,
                     },
                     #[codec(index = 5)]
-                    ///Set the value for expiryconfig
-                    ///Can only be called by ForceOrigin
+                    ///See [`Pallet::force_set_expiry_config`].
                     force_set_expiry_config {
                         expiry_block: ::core::primitive::u32,
                         dest: ::subxt::utils::AccountId32,
@@ -41209,10 +38283,7 @@ pub mod api {
                 #[encode_as_type(
                     crate_path = ":: subxt :: ext :: scale_encode"
                 )]
-                /**
-                Custom [dispatch errors](https://docs.substrate.io/main-docs/build/events-errors/)
-                of this pallet.
-                */
+                ///The `Error` enum of this pallet.
                 pub enum Error {
                     #[codec(index = 0)]
                     ///Invalid Ethereum signature.
@@ -41251,10 +38322,7 @@ pub mod api {
                 #[encode_as_type(
                     crate_path = ":: subxt :: ext :: scale_encode"
                 )]
-                /**
-                The [event](https://docs.substrate.io/main-docs/build/events-errors/) emitted
-                by this pallet.
-                */
+                ///The `Event` enum of this pallet
                 pub enum Event {
                     #[codec(index = 0)]
                     ///Someone claimed some WEBBs.
@@ -41335,23 +38403,10 @@ pub mod api {
                 #[encode_as_type(
                     crate_path = ":: subxt :: ext :: scale_encode"
                 )]
-                ///Contains one variant per dispatchable that can be called by an extrinsic.
+                ///Contains a variant per dispatchable extrinsic that this pallet has.
                 pub enum Call {
                     #[codec(index = 0)]
-                    ///Submit a solution for the unsigned phase.
-                    ///
-                    ///The dispatch origin fo this call must be __none__.
-                    ///
-                    ///This submission is checked on the fly. Moreover, this unsigned solution is only
-                    ///validated when submitted to the pool from the **local** node. Effectively, this means
-                    ///that only active validators can submit this transaction when authoring a block (similar
-                    ///to an inherent).
-                    ///
-                    ///To prevent any incorrect solution (and thus wasted time/weight), this transaction will
-                    ///panic if the solution submitted by the validator is invalid in any way, effectively
-                    ///putting their authoring reward at risk.
-                    ///
-                    ///No deposit or reward is associated with this submission.
+                    ///See [`Pallet::submit_unsigned`].
                     submit_unsigned {
                         raw_solution: ::std::boxed::Box<
                             runtime_types::pallet_election_provider_multi_phase::RawSolution<
@@ -41361,25 +38416,14 @@ pub mod api {
                         witness: runtime_types::pallet_election_provider_multi_phase::SolutionOrSnapshotSize,
                     },
                     #[codec(index = 1)]
-                    ///Set a new value for `MinimumUntrustedScore`.
-                    ///
-                    ///Dispatch origin must be aligned with `T::ForceOrigin`.
-                    ///
-                    ///This check can be turned off by setting the value to `None`.
+                    ///See [`Pallet::set_minimum_untrusted_score`].
                     set_minimum_untrusted_score {
                         maybe_next_score: ::core::option::Option<
                             runtime_types::sp_npos_elections::ElectionScore,
                         >,
                     },
                     #[codec(index = 2)]
-                    ///Set a solution in the queue, to be handed out to the client of this pallet in the next
-                    ///call to `ElectionProvider::elect`.
-                    ///
-                    ///This can only be set by `T::ForceOrigin`, and only when the phase is `Emergency`.
-                    ///
-                    ///The solution is not checked for any feasibility and is assumed to be trustworthy, as any
-                    ///feasibility check itself can in principle cause the election process to fail (due to
-                    ///memory/weight constrains).
+                    ///See [`Pallet::set_emergency_election_result`].
                     set_emergency_election_result {
                         supports: ::std::vec::Vec<
                             (
@@ -41391,15 +38435,7 @@ pub mod api {
                         >,
                     },
                     #[codec(index = 3)]
-                    ///Submit a solution for the signed phase.
-                    ///
-                    ///The dispatch origin fo this call must be __signed__.
-                    ///
-                    ///The solution is potentially queued, based on the claimed score and processed at the end
-                    ///of the signed phase.
-                    ///
-                    ///A deposit is reserved and recorded for the solution. Based on the outcome, the solution
-                    ///might be rewarded, slashed, or get all or a part of the deposit back.
+                    ///See [`Pallet::submit`].
                     submit {
                         raw_solution: ::std::boxed::Box<
                             runtime_types::pallet_election_provider_multi_phase::RawSolution<
@@ -41408,10 +38444,7 @@ pub mod api {
                         >,
                     },
                     #[codec(index = 4)]
-                    ///Trigger the governance fallback.
-                    ///
-                    ///This can only be called when [`Phase::Emergency`] is enabled, as an alternative to
-                    ///calling [`Call::set_emergency_election_result`].
+                    ///See [`Pallet::governance_fallback`].
                     governance_fallback {
                         maybe_max_voters: ::core::option::Option<::core::primitive::u32>,
                         maybe_max_targets: ::core::option::Option<::core::primitive::u32>,
@@ -41496,10 +38529,7 @@ pub mod api {
                 #[encode_as_type(
                     crate_path = ":: subxt :: ext :: scale_encode"
                 )]
-                /**
-                The [event](https://docs.substrate.io/main-docs/build/events-errors/) emitted
-                by this pallet.
-                */
+                ///The `Event` enum of this pallet
                 pub enum Event {
                     #[codec(index = 0)]
                     ///A solution was stored with the given compute.
@@ -41727,101 +38757,31 @@ pub mod api {
                 #[encode_as_type(
                     crate_path = ":: subxt :: ext :: scale_encode"
                 )]
-                ///Contains one variant per dispatchable that can be called by an extrinsic.
+                ///Contains a variant per dispatchable extrinsic that this pallet has.
                 pub enum Call {
                     #[codec(index = 0)]
-                    ///Vote for a set of candidates for the upcoming round of election. This can be called to
-                    ///set the initial votes, or update already existing votes.
-                    ///
-                    ///Upon initial voting, `value` units of `who`'s balance is locked and a deposit amount is
-                    ///reserved. The deposit is based on the number of votes and can be updated over time.
-                    ///
-                    ///The `votes` should:
-                    ///  - not be empty.
-                    ///  - be less than the number of possible candidates. Note that all current members and
-                    ///    runners-up are also automatically candidates for the next round.
-                    ///
-                    ///If `value` is more than `who`'s free balance, then the maximum of the two is used.
-                    ///
-                    ///The dispatch origin of this call must be signed.
-                    ///
-                    ///### Warning
-                    ///
-                    ///It is the responsibility of the caller to **NOT** place all of their balance into the
-                    ///lock and keep some for further operations.
+                    ///See [`Pallet::vote`].
                     vote {
                         votes: ::std::vec::Vec<::subxt::utils::AccountId32>,
                         #[codec(compact)]
                         value: ::core::primitive::u128,
                     },
                     #[codec(index = 1)]
-                    ///Remove `origin` as a voter.
-                    ///
-                    ///This removes the lock and returns the deposit.
-                    ///
-                    ///The dispatch origin of this call must be signed and be a voter.
+                    ///See [`Pallet::remove_voter`].
                     remove_voter,
                     #[codec(index = 2)]
-                    ///Submit oneself for candidacy. A fixed amount of deposit is recorded.
-                    ///
-                    ///All candidates are wiped at the end of the term. They either become a member/runner-up,
-                    ///or leave the system while their deposit is slashed.
-                    ///
-                    ///The dispatch origin of this call must be signed.
-                    ///
-                    ///### Warning
-                    ///
-                    ///Even if a candidate ends up being a member, they must call [`Call::renounce_candidacy`]
-                    ///to get their deposit back. Losing the spot in an election will always lead to a slash.
-                    ///
-                    ///The number of current candidates must be provided as witness data.
-                    ///## Complexity
-                    ///O(C + log(C)) where C is candidate_count.
+                    ///See [`Pallet::submit_candidacy`].
                     submit_candidacy {
                         #[codec(compact)]
                         candidate_count: ::core::primitive::u32,
                     },
                     #[codec(index = 3)]
-                    ///Renounce one's intention to be a candidate for the next election round. 3 potential
-                    ///outcomes exist:
-                    ///
-                    ///- `origin` is a candidate and not elected in any set. In this case, the deposit is
-                    ///  unreserved, returned and origin is removed as a candidate.
-                    ///- `origin` is a current runner-up. In this case, the deposit is unreserved, returned and
-                    ///  origin is removed as a runner-up.
-                    ///- `origin` is a current member. In this case, the deposit is unreserved and origin is
-                    ///  removed as a member, consequently not being a candidate for the next round anymore.
-                    ///  Similar to [`remove_member`](Self::remove_member), if replacement runners exists, they
-                    ///  are immediately used. If the prime is renouncing, then no prime will exist until the
-                    ///  next round.
-                    ///
-                    ///The dispatch origin of this call must be signed, and have one of the above roles.
-                    ///The type of renouncing must be provided as witness data.
-                    ///
-                    ///## Complexity
-                    ///  - Renouncing::Candidate(count): O(count + log(count))
-                    ///  - Renouncing::Member: O(1)
-                    ///  - Renouncing::RunnerUp: O(1)
+                    ///See [`Pallet::renounce_candidacy`].
                     renounce_candidacy {
                         renouncing: runtime_types::pallet_elections_phragmen::Renouncing,
                     },
                     #[codec(index = 4)]
-                    ///Remove a particular member from the set. This is effective immediately and the bond of
-                    ///the outgoing member is slashed.
-                    ///
-                    ///If a runner-up is available, then the best runner-up will be removed and replaces the
-                    ///outgoing member. Otherwise, if `rerun_election` is `true`, a new phragmen election is
-                    ///started, else, nothing happens.
-                    ///
-                    ///If `slash_bond` is set to true, the bond of the member being removed is slashed. Else,
-                    ///it is returned.
-                    ///
-                    ///The dispatch origin of this call must be root.
-                    ///
-                    ///Note that this does not affect the designated block number of the next election.
-                    ///
-                    ///## Complexity
-                    ///- Check details of remove_and_replace_member() and do_phragmen().
+                    ///See [`Pallet::remove_member`].
                     remove_member {
                         who: ::subxt::utils::MultiAddress<
                             ::subxt::utils::AccountId32,
@@ -41831,15 +38791,7 @@ pub mod api {
                         rerun_election: ::core::primitive::bool,
                     },
                     #[codec(index = 5)]
-                    ///Clean all voters who are defunct (i.e. they do not serve any purpose at all). The
-                    ///deposit of the removed voters are returned.
-                    ///
-                    ///This is an root function to be used only for cleaning the state.
-                    ///
-                    ///The dispatch origin of this call must be root.
-                    ///
-                    ///## Complexity
-                    ///- Check is_defunct_voter() details.
+                    ///See [`Pallet::clean_defunct_voters`].
                     clean_defunct_voters {
                         num_voters: ::core::primitive::u32,
                         num_defunct: ::core::primitive::u32,
@@ -41862,10 +38814,7 @@ pub mod api {
                 #[encode_as_type(
                     crate_path = ":: subxt :: ext :: scale_encode"
                 )]
-                /**
-                Custom [dispatch errors](https://docs.substrate.io/main-docs/build/events-errors/)
-                of this pallet.
-                */
+                ///The `Error` enum of this pallet.
                 pub enum Error {
                     #[codec(index = 0)]
                     ///Cannot vote when no candidates or members exist.
@@ -41936,10 +38885,7 @@ pub mod api {
                 #[encode_as_type(
                     crate_path = ":: subxt :: ext :: scale_encode"
                 )]
-                /**
-                The [event](https://docs.substrate.io/main-docs/build/events-errors/) emitted
-                by this pallet.
-                */
+                ///The `Event` enum of this pallet
                 pub enum Event {
                     #[codec(index = 0)]
                     ///A new term with new_members. This indicates that enough candidates existed to run
@@ -42065,42 +39011,32 @@ pub mod api {
                 #[encode_as_type(
                     crate_path = ":: subxt :: ext :: scale_encode"
                 )]
-                ///Contains one variant per dispatchable that can be called by an extrinsic.
+                ///Contains a variant per dispatchable extrinsic that this pallet has.
                 pub enum Call {
                     #[codec(index = 0)]
+                    ///See [`Pallet::init`].
                     init {
-                        typed_chain_id:
-                            runtime_types::webb_proposals::header::TypedChainId,
+                        typed_chain_id: runtime_types::webb_proposals::header::TypedChainId2,
                         args: ::std::boxed::Box<
                             runtime_types::eth_types::pallet::InitInput<
                                 ::subxt::utils::AccountId32,
                             >,
                         >,
                     },
-                    #[codec(index = 1)]
-                    register_submitter {
-                        typed_chain_id:
-                            runtime_types::webb_proposals::header::TypedChainId,
-                    },
                     #[codec(index = 2)]
-                    unregister_submitter {
-                        typed_chain_id:
-                            runtime_types::webb_proposals::header::TypedChainId,
-                    },
-                    #[codec(index = 3)]
+                    ///See [`Pallet::submit_beacon_chain_light_client_update`].
                     submit_beacon_chain_light_client_update {
-                        typed_chain_id:
-                            runtime_types::webb_proposals::header::TypedChainId,
-                        light_client_update:
-                            runtime_types::eth_types::eth2::LightClientUpdate,
+                        typed_chain_id: runtime_types::webb_proposals::header::TypedChainId2,
+                        light_client_update: runtime_types::eth_types::eth2::LightClientUpdate,
                     },
                     #[codec(index = 4)]
+                    ///See [`Pallet::submit_execution_header`].
                     submit_execution_header {
-                        typed_chain_id:
-                            runtime_types::webb_proposals::header::TypedChainId,
+                        typed_chain_id: runtime_types::webb_proposals::header::TypedChainId2,
                         block_header: runtime_types::eth_types::BlockHeader,
                     },
                     #[codec(index = 5)]
+                    ///See [`Pallet::update_trusted_signer`].
                     update_trusted_signer {
                         trusted_signer: ::subxt::utils::AccountId32,
                     },
@@ -42122,88 +39058,91 @@ pub mod api {
                 #[encode_as_type(
                     crate_path = ":: subxt :: ext :: scale_encode"
                 )]
-                /**
-                Custom [dispatch errors](https://docs.substrate.io/main-docs/build/events-errors/)
-                of this pallet.
-                */
+                ///The `Error` enum of this pallet.
                 pub enum Error {
                     #[codec(index = 0)]
                     ///The light client is already initialized for the typed chain ID
                     AlreadyInitialized,
                     #[codec(index = 1)]
-                    ///For attempting to register
-                    SubmitterAlreadyRegistered,
-                    #[codec(index = 2)]
-                    ///For attempting to unregister
-                    SubmitterNotRegistered,
-                    #[codec(index = 3)]
-                    ///For attempting to unregister
-                    SubmitterHasUsedStorage,
-                    #[codec(index = 4)]
                     ///For attempting to update the light client
                     LightClientUpdateNotAllowed,
-                    #[codec(index = 5)]
+                    #[codec(index = 2)]
                     ///Block already submitted
                     BlockAlreadySubmitted,
-                    #[codec(index = 6)]
+                    #[codec(index = 3)]
                     ///Unknown parent block header hash
                     UnknownParentHeader,
-                    #[codec(index = 7)]
+                    #[codec(index = 4)]
                     ///Self-explanatory
                     NotTrustedSigner,
-                    #[codec(index = 8)]
+                    #[codec(index = 5)]
                     ///The updates validation can't be disabled for mainnet
                     ValidateUpdatesParameterError,
-                    #[codec(index = 9)]
+                    #[codec(index = 6)]
                     ///The client can't be executed in the trustless mode without BLS sigs verification on
                     ///Mainnet
                     TrustlessModeError,
-                    #[codec(index = 10)]
+                    #[codec(index = 7)]
                     InvalidSyncCommitteeBitsSum,
-                    #[codec(index = 11)]
+                    #[codec(index = 8)]
                     SyncCommitteeBitsSumLessThanThreshold,
-                    #[codec(index = 12)]
-                    ForkVersionNotFound,
-                    #[codec(index = 13)]
-                    ForkEpochNotFound,
-                    #[codec(index = 14)]
-                    GenesisValidatorsRootNotFound,
-                    #[codec(index = 15)]
+                    #[codec(index = 9)]
+                    InvalidNetworkConfig,
+                    #[codec(index = 10)]
+                    ///Failed to verify the bls signature
                     InvalidBlsSignature,
-                    #[codec(index = 16)]
+                    #[codec(index = 11)]
                     InvalidExecutionBlock,
-                    #[codec(index = 17)]
-                    ActiveHeaderSlotNumberLessThanFinalizedSlot,
-                    #[codec(index = 18)]
+                    #[codec(index = 12)]
+                    ///The active header slot number should be higher than the finalized slot
+                    ActiveHeaderSlotLessThanFinalizedSlot,
+                    #[codec(index = 13)]
+                    ///The attested header slot should be equal to or higher than the finalized header slot
+                    UpdateHeaderSlotLessThanFinalizedHeaderSlot,
+                    #[codec(index = 14)]
+                    ///The signature slot should be higher than the attested header slot
+                    UpdateSignatureSlotLessThanAttestedHeaderSlot,
+                    #[codec(index = 15)]
+                    ///The acceptable update periods are not met.
                     InvalidUpdatePeriod,
-                    #[codec(index = 19)]
+                    #[codec(index = 16)]
+                    ///Invalid finality proof
                     InvalidFinalityProof,
-                    #[codec(index = 20)]
+                    #[codec(index = 17)]
+                    ///Invalid execution block hash proof
                     InvalidExecutionBlockHashProof,
-                    #[codec(index = 21)]
+                    #[codec(index = 18)]
                     NextSyncCommitteeNotPresent,
-                    #[codec(index = 22)]
+                    #[codec(index = 19)]
                     InvalidNextSyncCommitteeProof,
-                    #[codec(index = 23)]
+                    #[codec(index = 20)]
                     FinalizedExecutionHeaderNotPresent,
-                    #[codec(index = 24)]
+                    #[codec(index = 21)]
                     FinalizedBeaconHeaderNotPresent,
-                    #[codec(index = 25)]
+                    #[codec(index = 22)]
                     UnfinalizedHeaderNotPresent,
-                    #[codec(index = 26)]
+                    #[codec(index = 23)]
                     SyncCommitteeUpdateNotPresent,
-                    #[codec(index = 27)]
-                    SubmitterExhaustedLimit,
-                    #[codec(index = 28)]
+                    #[codec(index = 24)]
                     HeaderHashDoesNotExist,
-                    #[codec(index = 29)]
+                    #[codec(index = 25)]
+                    ///The block hash does not match the expected block hash
                     BlockHashesDoNotMatch,
-                    #[codec(index = 30)]
+                    #[codec(index = 26)]
                     InvalidSignaturePeriod,
-                    #[codec(index = 31)]
+                    #[codec(index = 27)]
                     CurrentSyncCommitteeNotSet,
-                    #[codec(index = 32)]
+                    #[codec(index = 28)]
                     NextSyncCommitteeNotSet,
+                    #[codec(index = 29)]
+                    ///The current client mode is invalid for the action.
+                    InvalidClientMode,
+                    #[codec(index = 30)]
+                    ///"The `hashes_gc_threshold` is not enough to be able to apply gc correctly"
+                    HashesGcThresholdInsufficient,
+                    #[codec(index = 31)]
+                    ///The chain cannot be closed
+                    ChainCannotBeClosed,
                 }
                 #[derive(
                     ::subxt::ext::codec::Decode,
@@ -42222,42 +39161,29 @@ pub mod api {
                 #[encode_as_type(
                     crate_path = ":: subxt :: ext :: scale_encode"
                 )]
-                /**
-                The [event](https://docs.substrate.io/main-docs/build/events-errors/) emitted
-                by this pallet.
-                */
+                ///The `Event` enum of this pallet
                 pub enum Event {
                     #[codec(index = 0)]
                     Init {
-                        typed_chain_id: runtime_types::webb_proposals::header::TypedChainId,
+                        typed_chain_id: runtime_types::webb_proposals::header::TypedChainId2,
                         header_info: runtime_types::eth_types::pallet::ExecutionHeaderInfo<
                             ::subxt::utils::AccountId32,
                         >,
                     },
                     #[codec(index = 1)]
-                    RegisterSubmitter {
-                        typed_chain_id: runtime_types::webb_proposals::header::TypedChainId,
-                        submitter: ::subxt::utils::AccountId32,
-                    },
-                    #[codec(index = 2)]
-                    UnregisterSubmitter {
-                        typed_chain_id: runtime_types::webb_proposals::header::TypedChainId,
-                        submitter: ::subxt::utils::AccountId32,
-                    },
-                    #[codec(index = 3)]
                     SubmitBeaconChainLightClientUpdate {
-                        typed_chain_id: runtime_types::webb_proposals::header::TypedChainId,
+                        typed_chain_id: runtime_types::webb_proposals::header::TypedChainId2,
                         submitter: ::subxt::utils::AccountId32,
                         beacon_block_header: runtime_types::eth_types::eth2::BeaconBlockHeader,
                     },
-                    #[codec(index = 4)]
+                    #[codec(index = 2)]
                     SubmitExecutionHeader {
-                        typed_chain_id: runtime_types::webb_proposals::header::TypedChainId,
-                        header_info: runtime_types::eth_types::pallet::ExecutionHeaderInfo<
-                            ::subxt::utils::AccountId32,
+                        typed_chain_id: runtime_types::webb_proposals::header::TypedChainId2,
+                        header_info: ::std::boxed::Box<
+                            runtime_types::eth_types::BlockHeader,
                         >,
                     },
-                    #[codec(index = 5)]
+                    #[codec(index = 3)]
                     UpdateTrustedSigner { trusted_signer: ::subxt::utils::AccountId32 },
                 }
             }
@@ -42283,10 +39209,10 @@ pub mod api {
                 #[encode_as_type(
                     crate_path = ":: subxt :: ext :: scale_encode"
                 )]
-                ///Contains one variant per dispatchable that can be called by an extrinsic.
+                ///Contains a variant per dispatchable extrinsic that this pallet has.
                 pub enum Call {
                     #[codec(index = 0)]
-                    ///Transact an Ethereum transaction.
+                    ///See [`Pallet::transact`].
                     transact {
                         transaction:
                             runtime_types::ethereum::transaction::TransactionV2,
@@ -42309,10 +39235,7 @@ pub mod api {
                 #[encode_as_type(
                     crate_path = ":: subxt :: ext :: scale_encode"
                 )]
-                /**
-                Custom [dispatch errors](https://docs.substrate.io/main-docs/build/events-errors/)
-                of this pallet.
-                */
+                ///The `Error` enum of this pallet.
                 pub enum Error {
                     #[codec(index = 0)]
                     ///Signature is invalid.
@@ -42338,10 +39261,7 @@ pub mod api {
                 #[encode_as_type(
                     crate_path = ":: subxt :: ext :: scale_encode"
                 )]
-                /**
-                The [event](https://docs.substrate.io/main-docs/build/events-errors/) emitted
-                by this pallet.
-                */
+                ///The `Event` enum of this pallet
                 pub enum Event {
                     #[codec(index = 0)]
                     ///An ethereum transaction was successfully executed.
@@ -42393,16 +39313,16 @@ pub mod api {
                 #[encode_as_type(
                     crate_path = ":: subxt :: ext :: scale_encode"
                 )]
-                ///Contains one variant per dispatchable that can be called by an extrinsic.
+                ///Contains a variant per dispatchable extrinsic that this pallet has.
                 pub enum Call {
                     #[codec(index = 0)]
-                    ///Withdraw balance from EVM into currency/balances pallet.
+                    ///See [`Pallet::withdraw`].
                     withdraw {
                         address: ::subxt::utils::H160,
                         value: ::core::primitive::u128,
                     },
                     #[codec(index = 1)]
-                    ///Issue an EVM call operation. This is similar to a message call transaction in Ethereum.
+                    ///See [`Pallet::call`].
                     call {
                         source: ::subxt::utils::H160,
                         target: ::subxt::utils::H160,
@@ -42422,8 +39342,7 @@ pub mod api {
                         )>,
                     },
                     #[codec(index = 2)]
-                    ///Issue an EVM create operation. This is similar to a contract creation transaction in
-                    ///Ethereum.
+                    ///See [`Pallet::create`].
                     create {
                         source: ::subxt::utils::H160,
                         init: ::std::vec::Vec<::core::primitive::u8>,
@@ -42442,7 +39361,7 @@ pub mod api {
                         )>,
                     },
                     #[codec(index = 3)]
-                    ///Issue an EVM create2 operation.
+                    ///See [`Pallet::create2`].
                     create2 {
                         source: ::subxt::utils::H160,
                         init: ::std::vec::Vec<::core::primitive::u8>,
@@ -42479,10 +39398,7 @@ pub mod api {
                 #[encode_as_type(
                     crate_path = ":: subxt :: ext :: scale_encode"
                 )]
-                /**
-                Custom [dispatch errors](https://docs.substrate.io/main-docs/build/events-errors/)
-                of this pallet.
-                */
+                ///The `Error` enum of this pallet.
                 pub enum Error {
                     #[codec(index = 0)]
                     ///Not enough balance to perform action
@@ -42535,10 +39451,7 @@ pub mod api {
                 #[encode_as_type(
                     crate_path = ":: subxt :: ext :: scale_encode"
                 )]
-                /**
-                The [event](https://docs.substrate.io/main-docs/build/events-errors/) emitted
-                by this pallet.
-                */
+                ///The `Event` enum of this pallet
                 pub enum Event {
                     #[codec(index = 0)]
                     ///Ethereum events from contracts.
@@ -42598,13 +39511,10 @@ pub mod api {
                 #[encode_as_type(
                     crate_path = ":: subxt :: ext :: scale_encode"
                 )]
-                ///Contains one variant per dispatchable that can be called by an extrinsic.
+                ///Contains a variant per dispatchable extrinsic that this pallet has.
                 pub enum Call {
                     #[codec(index = 0)]
-                    ///Report voter equivocation/misbehavior. This method will verify the
-                    ///equivocation proof and validate the given key ownership proof
-                    ///against the extracted offender. If both are valid, the offence
-                    ///will be reported.
+                    ///See [`Pallet::report_equivocation`].
                     report_equivocation {
                         equivocation_proof: ::std::boxed::Box<
                             runtime_types::sp_consensus_grandpa::EquivocationProof<
@@ -42615,15 +39525,7 @@ pub mod api {
                         key_owner_proof: runtime_types::sp_core::Void,
                     },
                     #[codec(index = 1)]
-                    ///Report voter equivocation/misbehavior. This method will verify the
-                    ///equivocation proof and validate the given key ownership proof
-                    ///against the extracted offender. If both are valid, the offence
-                    ///will be reported.
-                    ///
-                    ///This extrinsic must be called unsigned and it is expected that only
-                    ///block authors will call it (validated in `ValidateUnsigned`), as such
-                    ///if the block author is defined it will be defined as the equivocation
-                    ///reporter.
+                    ///See [`Pallet::report_equivocation_unsigned`].
                     report_equivocation_unsigned {
                         equivocation_proof: ::std::boxed::Box<
                             runtime_types::sp_consensus_grandpa::EquivocationProof<
@@ -42634,18 +39536,7 @@ pub mod api {
                         key_owner_proof: runtime_types::sp_core::Void,
                     },
                     #[codec(index = 2)]
-                    ///Note that the current authority set of the GRANDPA finality gadget has stalled.
-                    ///
-                    ///This will trigger a forced authority set change at the beginning of the next session, to
-                    ///be enacted `delay` blocks after that. The `delay` should be high enough to safely assume
-                    ///that the block signalling the forced change will not be re-orged e.g. 1000 blocks.
-                    ///The block production rate (which may be slowed down because of finality lagging) should
-                    ///be taken into account when choosing the `delay`. The GRANDPA voters based on the new
-                    ///authority will start voting on top of `best_finalized_block_number` for new finalized
-                    ///blocks. `best_finalized_block_number` should be the highest of the latest finalized
-                    ///block of all validators of the new authority set.
-                    ///
-                    ///Only callable by root.
+                    ///See [`Pallet::note_stalled`].
                     note_stalled {
                         delay: ::core::primitive::u32,
                         best_finalized_block_number: ::core::primitive::u32,
@@ -42668,10 +39559,7 @@ pub mod api {
                 #[encode_as_type(
                     crate_path = ":: subxt :: ext :: scale_encode"
                 )]
-                /**
-                Custom [dispatch errors](https://docs.substrate.io/main-docs/build/events-errors/)
-                of this pallet.
-                */
+                ///The `Error` enum of this pallet.
                 pub enum Error {
                     #[codec(index = 0)]
                     ///Attempt to signal GRANDPA pause when the authority set isn't live
@@ -42714,10 +39602,7 @@ pub mod api {
                 #[encode_as_type(
                     crate_path = ":: subxt :: ext :: scale_encode"
                 )]
-                /**
-                The [event](https://docs.substrate.io/main-docs/build/events-errors/) emitted
-                by this pallet.
-                */
+                ///The `Event` enum of this pallet
                 pub enum Event {
                     #[codec(index = 0)]
                     ///New authority set has been applied.
@@ -42804,13 +39689,10 @@ pub mod api {
                 #[encode_as_type(
                     crate_path = ":: subxt :: ext :: scale_encode"
                 )]
-                ///Contains one variant per dispatchable that can be called by an extrinsic.
+                ///Contains a variant per dispatchable extrinsic that this pallet has.
                 pub enum Call {
                     #[codec(index = 0)]
-                    ///Increment `sufficients` for existing accounts having a nonzero `nonce` but zero `sufficients`, `consumers` and `providers` value.
-                    ///This state was caused by a previous bug in EVM create account dispatchable.
-                    ///
-                    ///Any accounts in the input list not satisfying the above condition will remain unaffected.
+                    ///See [`Pallet::hotfix_inc_account_sufficients`].
                     hotfix_inc_account_sufficients {
                         addresses: ::std::vec::Vec<::subxt::utils::H160>,
                     },
@@ -42832,10 +39714,7 @@ pub mod api {
                 #[encode_as_type(
                     crate_path = ":: subxt :: ext :: scale_encode"
                 )]
-                /**
-                Custom [dispatch errors](https://docs.substrate.io/main-docs/build/events-errors/)
-                of this pallet.
-                */
+                ///The `Error` enum of this pallet.
                 pub enum Error {
                     #[codec(index = 0)]
                     ///Maximum address count exceeded
@@ -42867,16 +39746,7 @@ pub mod api {
                 ///Identity pallet declaration.
                 pub enum Call {
                     #[codec(index = 0)]
-                    ///Add a registrar to the system.
-                    ///
-                    ///The dispatch origin for this call must be `T::RegistrarOrigin`.
-                    ///
-                    ///- `account`: the account of the registrar.
-                    ///
-                    ///Emits `RegistrarAdded` if successful.
-                    ///
-                    ///## Complexity
-                    ///- `O(R)` where `R` registrar-count (governance-bounded and code-bounded).
+                    ///See [`Pallet::add_registrar`].
                     add_registrar {
                         account: ::subxt::utils::MultiAddress<
                             ::subxt::utils::AccountId32,
@@ -42884,41 +39754,14 @@ pub mod api {
                         >,
                     },
                     #[codec(index = 1)]
-                    ///Set an account's identity information and reserve the appropriate deposit.
-                    ///
-                    ///If the account already has identity information, the deposit is taken as part payment
-                    ///for the new deposit.
-                    ///
-                    ///The dispatch origin for this call must be _Signed_.
-                    ///
-                    ///- `info`: The identity information.
-                    ///
-                    ///Emits `IdentitySet` if successful.
-                    ///
-                    ///## Complexity
-                    ///- `O(X + X' + R)`
-                    ///  - where `X` additional-field-count (deposit-bounded and code-bounded)
-                    ///  - where `R` judgements-count (registrar-count-bounded)
+                    ///See [`Pallet::set_identity`].
                     set_identity {
                         info: ::std::boxed::Box<
                             runtime_types::pallet_identity::types::IdentityInfo,
                         >,
                     },
                     #[codec(index = 2)]
-                    ///Set the sub-accounts of the sender.
-                    ///
-                    ///Payment: Any aggregate balance reserved by previous `set_subs` calls will be returned
-                    ///and an amount `SubAccountDeposit` will be reserved for each item in `subs`.
-                    ///
-                    ///The dispatch origin for this call must be _Signed_ and the sender must have a registered
-                    ///identity.
-                    ///
-                    ///- `subs`: The identity's (new) sub-accounts.
-                    ///
-                    ///## Complexity
-                    ///- `O(P + S)`
-                    ///  - where `P` old-subs-count (hard- and deposit-bounded).
-                    ///  - where `S` subs-count (hard- and deposit-bounded).
+                    ///See [`Pallet::set_subs`].
                     set_subs {
                         subs: ::std::vec::Vec<
                             (
@@ -42928,43 +39771,10 @@ pub mod api {
                         >,
                     },
                     #[codec(index = 3)]
-                    ///Clear an account's identity info and all sub-accounts and return all deposits.
-                    ///
-                    ///Payment: All reserved balances on the account are returned.
-                    ///
-                    ///The dispatch origin for this call must be _Signed_ and the sender must have a registered
-                    ///identity.
-                    ///
-                    ///Emits `IdentityCleared` if successful.
-                    ///
-                    ///## Complexity
-                    ///- `O(R + S + X)`
-                    ///  - where `R` registrar-count (governance-bounded).
-                    ///  - where `S` subs-count (hard- and deposit-bounded).
-                    ///  - where `X` additional-field-count (deposit-bounded and code-bounded).
+                    ///See [`Pallet::clear_identity`].
                     clear_identity,
                     #[codec(index = 4)]
-                    ///Request a judgement from a registrar.
-                    ///
-                    ///Payment: At most `max_fee` will be reserved for payment to the registrar if judgement
-                    ///given.
-                    ///
-                    ///The dispatch origin for this call must be _Signed_ and the sender must have a
-                    ///registered identity.
-                    ///
-                    ///- `reg_index`: The index of the registrar whose judgement is requested.
-                    ///- `max_fee`: The maximum fee that may be paid. This should just be auto-populated as:
-                    ///
-                    ///```nocompile
-                    ///Self::registrars().get(reg_index).unwrap().fee
-                    ///```
-                    ///
-                    ///Emits `JudgementRequested` if successful.
-                    ///
-                    ///## Complexity
-                    ///- `O(R + X)`.
-                    ///  - where `R` registrar-count (governance-bounded).
-                    ///  - where `X` additional-field-count (deposit-bounded and code-bounded).
+                    ///See [`Pallet::request_judgement`].
                     request_judgement {
                         #[codec(compact)]
                         reg_index: ::core::primitive::u32,
@@ -42972,34 +39782,10 @@ pub mod api {
                         max_fee: ::core::primitive::u128,
                     },
                     #[codec(index = 5)]
-                    ///Cancel a previous request.
-                    ///
-                    ///Payment: A previously reserved deposit is returned on success.
-                    ///
-                    ///The dispatch origin for this call must be _Signed_ and the sender must have a
-                    ///registered identity.
-                    ///
-                    ///- `reg_index`: The index of the registrar whose judgement is no longer requested.
-                    ///
-                    ///Emits `JudgementUnrequested` if successful.
-                    ///
-                    ///## Complexity
-                    ///- `O(R + X)`.
-                    ///  - where `R` registrar-count (governance-bounded).
-                    ///  - where `X` additional-field-count (deposit-bounded and code-bounded).
+                    ///See [`Pallet::cancel_request`].
                     cancel_request { reg_index: ::core::primitive::u32 },
                     #[codec(index = 6)]
-                    ///Set the fee required for a judgement to be requested from a registrar.
-                    ///
-                    ///The dispatch origin for this call must be _Signed_ and the sender must be the account
-                    ///of the registrar whose index is `index`.
-                    ///
-                    ///- `index`: the index of the registrar whose fee is to be set.
-                    ///- `fee`: the new fee.
-                    ///
-                    ///## Complexity
-                    ///- `O(R)`.
-                    ///  - where `R` registrar-count (governance-bounded).
+                    ///See [`Pallet::set_fee`].
                     set_fee {
                         #[codec(compact)]
                         index: ::core::primitive::u32,
@@ -43007,17 +39793,7 @@ pub mod api {
                         fee: ::core::primitive::u128,
                     },
                     #[codec(index = 7)]
-                    ///Change the account associated with a registrar.
-                    ///
-                    ///The dispatch origin for this call must be _Signed_ and the sender must be the account
-                    ///of the registrar whose index is `index`.
-                    ///
-                    ///- `index`: the index of the registrar whose fee is to be set.
-                    ///- `new`: the new account ID.
-                    ///
-                    ///## Complexity
-                    ///- `O(R)`.
-                    ///  - where `R` registrar-count (governance-bounded).
+                    ///See [`Pallet::set_account_id`].
                     set_account_id {
                         #[codec(compact)]
                         index: ::core::primitive::u32,
@@ -43027,17 +39803,7 @@ pub mod api {
                         >,
                     },
                     #[codec(index = 8)]
-                    ///Set the field information for a registrar.
-                    ///
-                    ///The dispatch origin for this call must be _Signed_ and the sender must be the account
-                    ///of the registrar whose index is `index`.
-                    ///
-                    ///- `index`: the index of the registrar whose fee is to be set.
-                    ///- `fields`: the fields that the registrar concerns themselves with.
-                    ///
-                    ///## Complexity
-                    ///- `O(R)`.
-                    ///  - where `R` registrar-count (governance-bounded).
+                    ///See [`Pallet::set_fields`].
                     set_fields {
                         #[codec(compact)]
                         index: ::core::primitive::u32,
@@ -43046,23 +39812,7 @@ pub mod api {
                         >,
                     },
                     #[codec(index = 9)]
-                    ///Provide a judgement for an account's identity.
-                    ///
-                    ///The dispatch origin for this call must be _Signed_ and the sender must be the account
-                    ///of the registrar whose index is `reg_index`.
-                    ///
-                    ///- `reg_index`: the index of the registrar whose judgement is being made.
-                    ///- `target`: the account whose identity the judgement is upon. This must be an account
-                    ///  with a registered identity.
-                    ///- `judgement`: the judgement of the registrar of index `reg_index` about `target`.
-                    ///- `identity`: The hash of the [`IdentityInfo`] for that the judgement is provided.
-                    ///
-                    ///Emits `JudgementGiven` if successful.
-                    ///
-                    ///## Complexity
-                    ///- `O(R + X)`.
-                    ///  - where `R` registrar-count (governance-bounded).
-                    ///  - where `X` additional-field-count (deposit-bounded and code-bounded).
+                    ///See [`Pallet::provide_judgement`].
                     provide_judgement {
                         #[codec(compact)]
                         reg_index: ::core::primitive::u32,
@@ -43076,24 +39826,7 @@ pub mod api {
                         identity: ::subxt::utils::H256,
                     },
                     #[codec(index = 10)]
-                    ///Remove an account's identity and sub-account information and slash the deposits.
-                    ///
-                    ///Payment: Reserved balances from `set_subs` and `set_identity` are slashed and handled by
-                    ///`Slash`. Verification request deposits are not returned; they should be cancelled
-                    ///manually using `cancel_request`.
-                    ///
-                    ///The dispatch origin for this call must match `T::ForceOrigin`.
-                    ///
-                    ///- `target`: the account whose identity the judgement is upon. This must be an account
-                    ///  with a registered identity.
-                    ///
-                    ///Emits `IdentityKilled` if successful.
-                    ///
-                    ///## Complexity
-                    ///- `O(R + S + X)`
-                    ///  - where `R` registrar-count (governance-bounded).
-                    ///  - where `S` subs-count (hard- and deposit-bounded).
-                    ///  - where `X` additional-field-count (deposit-bounded and code-bounded).
+                    ///See [`Pallet::kill_identity`].
                     kill_identity {
                         target: ::subxt::utils::MultiAddress<
                             ::subxt::utils::AccountId32,
@@ -43101,13 +39834,7 @@ pub mod api {
                         >,
                     },
                     #[codec(index = 11)]
-                    ///Add the given account to the sender's subs.
-                    ///
-                    ///Payment: Balance reserved by a previous `set_subs` call for one sub will be repatriated
-                    ///to the sender.
-                    ///
-                    ///The dispatch origin for this call must be _Signed_ and the sender must have a registered
-                    ///sub identity of `sub`.
+                    ///See [`Pallet::add_sub`].
                     add_sub {
                         sub: ::subxt::utils::MultiAddress<
                             ::subxt::utils::AccountId32,
@@ -43116,10 +39843,7 @@ pub mod api {
                         data: runtime_types::pallet_identity::types::Data,
                     },
                     #[codec(index = 12)]
-                    ///Alter the associated name of the given sub-account.
-                    ///
-                    ///The dispatch origin for this call must be _Signed_ and the sender must have a registered
-                    ///sub identity of `sub`.
+                    ///See [`Pallet::rename_sub`].
                     rename_sub {
                         sub: ::subxt::utils::MultiAddress<
                             ::subxt::utils::AccountId32,
@@ -43128,13 +39852,7 @@ pub mod api {
                         data: runtime_types::pallet_identity::types::Data,
                     },
                     #[codec(index = 13)]
-                    ///Remove the given account from the sender's subs.
-                    ///
-                    ///Payment: Balance reserved by a previous `set_subs` call for one sub will be repatriated
-                    ///to the sender.
-                    ///
-                    ///The dispatch origin for this call must be _Signed_ and the sender must have a registered
-                    ///sub identity of `sub`.
+                    ///See [`Pallet::remove_sub`].
                     remove_sub {
                         sub: ::subxt::utils::MultiAddress<
                             ::subxt::utils::AccountId32,
@@ -43142,16 +39860,7 @@ pub mod api {
                         >,
                     },
                     #[codec(index = 14)]
-                    ///Remove the sender as a sub-account.
-                    ///
-                    ///Payment: Balance reserved by a previous `set_subs` call for one sub will be repatriated
-                    ///to the sender (*not* the original depositor).
-                    ///
-                    ///The dispatch origin for this call must be _Signed_ and the sender must have a registered
-                    ///super-identity.
-                    ///
-                    ///NOTE: This should not normally be used, but is provided in the case that the non-
-                    ///controller of an account is maliciously registered as a sub-account.
+                    ///See [`Pallet::quit_sub`].
                     quit_sub,
                 }
                 #[derive(
@@ -43171,10 +39880,7 @@ pub mod api {
                 #[encode_as_type(
                     crate_path = ":: subxt :: ext :: scale_encode"
                 )]
-                /**
-                Custom [dispatch errors](https://docs.substrate.io/main-docs/build/events-errors/)
-                of this pallet.
-                */
+                ///The `Error` enum of this pallet.
                 pub enum Error {
                     #[codec(index = 0)]
                     ///Too many subs-accounts.
@@ -43248,10 +39954,7 @@ pub mod api {
                 #[encode_as_type(
                     crate_path = ":: subxt :: ext :: scale_encode"
                 )]
-                /**
-                The [event](https://docs.substrate.io/main-docs/build/events-errors/) emitted
-                by this pallet.
-                */
+                ///The `Event` enum of this pallet
                 pub enum Event {
                     #[codec(index = 0)]
                     ///A name was set or reset (which will remove all judgements).
@@ -43611,14 +40314,10 @@ pub mod api {
                 #[encode_as_type(
                     crate_path = ":: subxt :: ext :: scale_encode"
                 )]
-                ///Contains one variant per dispatchable that can be called by an extrinsic.
+                ///Contains a variant per dispatchable extrinsic that this pallet has.
                 pub enum Call {
                     #[codec(index = 0)]
-                    ///## Complexity:
-                    ///- `O(K + E)` where K is length of `Keys` (heartbeat.validators_len) and E is length of
-                    ///  `heartbeat.network_state.external_address`
-                    ///  - `O(K)`: decoding of length `K`
-                    ///  - `O(E)`: decoding/encoding of length `E`
+                    ///See [`Pallet::heartbeat`].
                     heartbeat {
                         heartbeat: runtime_types::pallet_im_online::Heartbeat<
                             ::core::primitive::u32,
@@ -43643,10 +40342,7 @@ pub mod api {
                 #[encode_as_type(
                     crate_path = ":: subxt :: ext :: scale_encode"
                 )]
-                /**
-                Custom [dispatch errors](https://docs.substrate.io/main-docs/build/events-errors/)
-                of this pallet.
-                */
+                ///The `Error` enum of this pallet.
                 pub enum Error {
                     #[codec(index = 0)]
                     ///Non existent public key.
@@ -43672,10 +40368,7 @@ pub mod api {
                 #[encode_as_type(
                     crate_path = ":: subxt :: ext :: scale_encode"
                 )]
-                /**
-                The [event](https://docs.substrate.io/main-docs/build/events-errors/) emitted
-                by this pallet.
-                */
+                ///The `Event` enum of this pallet
                 pub enum Event {
                     #[codec(index = 0)]
                     ///A new heartbeat was received from `AuthorityId`.
@@ -43759,33 +40452,8 @@ pub mod api {
             #[codec(crate = ::subxt::ext::codec)]
             #[decode_as_type(crate_path = ":: subxt :: ext :: scale_decode")]
             #[encode_as_type(crate_path = ":: subxt :: ext :: scale_encode")]
-            pub struct BoundedOpaqueNetworkState {
-                pub peer_id: runtime_types::bounded_collections::weak_bounded_vec::WeakBoundedVec<
-                    ::core::primitive::u8,
-                >,
-                pub external_addresses: runtime_types::bounded_collections::weak_bounded_vec::WeakBoundedVec<
-                    runtime_types::bounded_collections::weak_bounded_vec::WeakBoundedVec<
-                        ::core::primitive::u8,
-                    >,
-                >,
-            }
-            #[derive(
-                ::subxt::ext::codec::Decode,
-                ::subxt::ext::codec::Encode,
-                ::subxt::ext::scale_decode::DecodeAsType,
-                ::subxt::ext::scale_encode::EncodeAsType,
-                Clone,
-                Debug,
-                Eq,
-                PartialEq,
-            )]
-            #[codec(crate = ::subxt::ext::codec)]
-            #[decode_as_type(crate_path = ":: subxt :: ext :: scale_decode")]
-            #[encode_as_type(crate_path = ":: subxt :: ext :: scale_encode")]
             pub struct Heartbeat<_0> {
                 pub block_number: _0,
-                pub network_state:
-                    runtime_types::sp_core::offchain::OpaqueNetworkState,
                 pub session_index: _0,
                 pub authority_index: _0,
                 pub validators_len: _0,
@@ -43812,35 +40480,13 @@ pub mod api {
                 #[encode_as_type(
                     crate_path = ":: subxt :: ext :: scale_encode"
                 )]
-                ///Contains one variant per dispatchable that can be called by an extrinsic.
+                ///Contains a variant per dispatchable extrinsic that this pallet has.
                 pub enum Call {
                     #[codec(index = 0)]
-                    ///Assign an previously unassigned index.
-                    ///
-                    ///Payment: `Deposit` is reserved from the sender account.
-                    ///
-                    ///The dispatch origin for this call must be _Signed_.
-                    ///
-                    ///- `index`: the index to be claimed. This must not be in use.
-                    ///
-                    ///Emits `IndexAssigned` if successful.
-                    ///
-                    ///## Complexity
-                    ///- `O(1)`.
+                    ///See [`Pallet::claim`].
                     claim { index: ::core::primitive::u32 },
                     #[codec(index = 1)]
-                    ///Assign an index already owned by the sender to another account. The balance reservation
-                    ///is effectively transferred to the new account.
-                    ///
-                    ///The dispatch origin for this call must be _Signed_.
-                    ///
-                    ///- `index`: the index to be re-assigned. This must be owned by the sender.
-                    ///- `new`: the new owner of the index. This function is a no-op if it is equal to sender.
-                    ///
-                    ///Emits `IndexAssigned` if successful.
-                    ///
-                    ///## Complexity
-                    ///- `O(1)`.
+                    ///See [`Pallet::transfer`].
                     transfer {
                         new: ::subxt::utils::MultiAddress<
                             ::subxt::utils::AccountId32,
@@ -43849,33 +40495,10 @@ pub mod api {
                         index: ::core::primitive::u32,
                     },
                     #[codec(index = 2)]
-                    ///Free up an index owned by the sender.
-                    ///
-                    ///Payment: Any previous deposit placed for the index is unreserved in the sender account.
-                    ///
-                    ///The dispatch origin for this call must be _Signed_ and the sender must own the index.
-                    ///
-                    ///- `index`: the index to be freed. This must be owned by the sender.
-                    ///
-                    ///Emits `IndexFreed` if successful.
-                    ///
-                    ///## Complexity
-                    ///- `O(1)`.
+                    ///See [`Pallet::free`].
                     free { index: ::core::primitive::u32 },
                     #[codec(index = 3)]
-                    ///Force an index to an account. This doesn't require a deposit. If the index is already
-                    ///held, then any deposit is reimbursed to its current owner.
-                    ///
-                    ///The dispatch origin for this call must be _Root_.
-                    ///
-                    ///- `index`: the index to be (re-)assigned.
-                    ///- `new`: the new owner of the index. This function is a no-op if it is equal to sender.
-                    ///- `freeze`: if set to `true`, will freeze the index so it cannot be transferred.
-                    ///
-                    ///Emits `IndexAssigned` if successful.
-                    ///
-                    ///## Complexity
-                    ///- `O(1)`.
+                    ///See [`Pallet::force_transfer`].
                     force_transfer {
                         new: ::subxt::utils::MultiAddress<
                             ::subxt::utils::AccountId32,
@@ -43885,18 +40508,7 @@ pub mod api {
                         freeze: ::core::primitive::bool,
                     },
                     #[codec(index = 4)]
-                    ///Freeze an index so it will always point to the sender account. This consumes the
-                    ///deposit.
-                    ///
-                    ///The dispatch origin for this call must be _Signed_ and the signing account must have a
-                    ///non-frozen account `index`.
-                    ///
-                    ///- `index`: the index to be frozen in place.
-                    ///
-                    ///Emits `IndexFrozen` if successful.
-                    ///
-                    ///## Complexity
-                    ///- `O(1)`.
+                    ///See [`Pallet::freeze`].
                     freeze { index: ::core::primitive::u32 },
                 }
                 #[derive(
@@ -43916,10 +40528,7 @@ pub mod api {
                 #[encode_as_type(
                     crate_path = ":: subxt :: ext :: scale_encode"
                 )]
-                /**
-                Custom [dispatch errors](https://docs.substrate.io/main-docs/build/events-errors/)
-                of this pallet.
-                */
+                ///The `Error` enum of this pallet.
                 pub enum Error {
                     #[codec(index = 0)]
                     ///The index was not already assigned.
@@ -43954,10 +40563,7 @@ pub mod api {
                 #[encode_as_type(
                     crate_path = ":: subxt :: ext :: scale_encode"
                 )]
-                /**
-                The [event](https://docs.substrate.io/main-docs/build/events-errors/) emitted
-                by this pallet.
-                */
+                ///The `Event` enum of this pallet
                 pub enum Event {
                     #[codec(index = 0)]
                     ///A account index was assigned.
@@ -43998,79 +40604,27 @@ pub mod api {
                 #[encode_as_type(
                     crate_path = ":: subxt :: ext :: scale_encode"
                 )]
-                ///Contains one variant per dispatchable that can be called by an extrinsic.
+                ///Contains a variant per dispatchable extrinsic that this pallet has.
                 pub enum Call {
                     #[codec(index = 0)]
-                    ///Stake funds with a pool. The amount to bond is transferred from the member to the
-                    ///pools account and immediately increases the pools bond.
-                    ///
-                    ///# Note
-                    ///
-                    ///* An account can only be a member of a single pool.
-                    ///* An account cannot join the same pool multiple times.
-                    ///* This call will *not* dust the member account, so the member must have at least
-                    ///  `existential deposit + amount` in their account.
-                    ///* Only a pool with [`PoolState::Open`] can be joined
+                    ///See [`Pallet::join`].
                     join {
                         #[codec(compact)]
                         amount: ::core::primitive::u128,
                         pool_id: ::core::primitive::u32,
                     },
                     #[codec(index = 1)]
-                    ///Bond `extra` more funds from `origin` into the pool to which they already belong.
-                    ///
-                    ///Additional funds can come from either the free balance of the account, of from the
-                    ///accumulated rewards, see [`BondExtra`].
-                    ///
-                    ///Bonding extra funds implies an automatic payout of all pending rewards as well.
-                    ///See `bond_extra_other` to bond pending rewards of `other` members.
+                    ///See [`Pallet::bond_extra`].
                     bond_extra {
                         extra: runtime_types::pallet_nomination_pools::BondExtra<
                             ::core::primitive::u128,
                         >,
                     },
                     #[codec(index = 2)]
-                    ///A bonded member can use this to claim their payout based on the rewards that the pool
-                    ///has accumulated since their last claimed payout (OR since joining if this is their first
-                    ///time claiming rewards). The payout will be transferred to the member's account.
-                    ///
-                    ///The member will earn rewards pro rata based on the members stake vs the sum of the
-                    ///members in the pools stake. Rewards do not "expire".
-                    ///
-                    ///See `claim_payout_other` to caim rewards on bahalf of some `other` pool member.
+                    ///See [`Pallet::claim_payout`].
                     claim_payout,
                     #[codec(index = 3)]
-                    ///Unbond up to `unbonding_points` of the `member_account`'s funds from the pool. It
-                    ///implicitly collects the rewards one last time, since not doing so would mean some
-                    ///rewards would be forfeited.
-                    ///
-                    ///Under certain conditions, this call can be dispatched permissionlessly (i.e. by any
-                    ///account).
-                    ///
-                    ///# Conditions for a permissionless dispatch.
-                    ///
-                    ///* The pool is blocked and the caller is either the root or bouncer. This is refereed to
-                    ///  as a kick.
-                    ///* The pool is destroying and the member is not the depositor.
-                    ///* The pool is destroying, the member is the depositor and no other members are in the
-                    ///  pool.
-                    ///
-                    ///## Conditions for permissioned dispatch (i.e. the caller is also the
-                    ///`member_account`):
-                    ///
-                    ///* The caller is not the depositor.
-                    ///* The caller is the depositor, the pool is destroying and no other members are in the
-                    ///  pool.
-                    ///
-                    ///# Note
-                    ///
-                    ///If there are too many unlocking chunks to unbond with the pool account,
-                    ///[`Call::pool_withdraw_unbonded`] can be called to try and minimize unlocking chunks.
-                    ///The [`StakingInterface::unbond`] will implicitly call [`Call::pool_withdraw_unbonded`]
-                    ///to try to free chunks if necessary (ie. if unbound was called and no unlocking chunks
-                    ///are available). However, it may not be possible to release the current unlocking chunks,
-                    ///in which case, the result of this call will likely be the `NoMoreChunks` error from the
-                    ///staking system.
+                    ///See [`Pallet::unbond`].
                     unbond {
                         member_account: ::subxt::utils::MultiAddress<
                             ::subxt::utils::AccountId32,
@@ -44080,36 +40634,13 @@ pub mod api {
                         unbonding_points: ::core::primitive::u128,
                     },
                     #[codec(index = 4)]
-                    ///Call `withdraw_unbonded` for the pools account. This call can be made by any account.
-                    ///
-                    ///This is useful if their are too many unlocking chunks to call `unbond`, and some
-                    ///can be cleared by withdrawing. In the case there are too many unlocking chunks, the user
-                    ///would probably see an error like `NoMoreChunks` emitted from the staking system when
-                    ///they attempt to unbond.
+                    ///See [`Pallet::pool_withdraw_unbonded`].
                     pool_withdraw_unbonded {
                         pool_id: ::core::primitive::u32,
                         num_slashing_spans: ::core::primitive::u32,
                     },
                     #[codec(index = 5)]
-                    ///Withdraw unbonded funds from `member_account`. If no bonded funds can be unbonded, an
-                    ///error is returned.
-                    ///
-                    ///Under certain conditions, this call can be dispatched permissionlessly (i.e. by any
-                    ///account).
-                    ///
-                    ///# Conditions for a permissionless dispatch
-                    ///
-                    ///* The pool is in destroy mode and the target is not the depositor.
-                    ///* The target is the depositor and they are the only member in the sub pools.
-                    ///* The pool is blocked and the caller is either the root or bouncer.
-                    ///
-                    ///# Conditions for permissioned dispatch
-                    ///
-                    ///* The caller is the target and they are not the depositor.
-                    ///
-                    ///# Note
-                    ///
-                    ///If the target is the depositor, the pool will be destroyed.
+                    ///See [`Pallet::withdraw_unbonded`].
                     withdraw_unbonded {
                         member_account: ::subxt::utils::MultiAddress<
                             ::subxt::utils::AccountId32,
@@ -44118,23 +40649,7 @@ pub mod api {
                         num_slashing_spans: ::core::primitive::u32,
                     },
                     #[codec(index = 6)]
-                    ///Create a new delegation pool.
-                    ///
-                    ///# Arguments
-                    ///
-                    ///* `amount` - The amount of funds to delegate to the pool. This also acts of a sort of
-                    ///  deposit since the pools creator cannot fully unbond funds until the pool is being
-                    ///  destroyed.
-                    ///* `index` - A disambiguation index for creating the account. Likely only useful when
-                    ///  creating multiple pools in the same extrinsic.
-                    ///* `root` - The account to set as [`PoolRoles::root`].
-                    ///* `nominator` - The account to set as the [`PoolRoles::nominator`].
-                    ///* `bouncer` - The account to set as the [`PoolRoles::bouncer`].
-                    ///
-                    ///# Note
-                    ///
-                    ///In addition to `amount`, the caller will transfer the existential deposit; so the caller
-                    ///needs at have at least `amount + existential_deposit` transferrable.
+                    ///See [`Pallet::create`].
                     create {
                         #[codec(compact)]
                         amount: ::core::primitive::u128,
@@ -44152,12 +40667,7 @@ pub mod api {
                         >,
                     },
                     #[codec(index = 7)]
-                    ///Create a new delegation pool with a previously used pool id
-                    ///
-                    ///# Arguments
-                    ///
-                    ///same as `create` with the inclusion of
-                    ///* `pool_id` - `A valid PoolId.
+                    ///See [`Pallet::create_with_pool_id`].
                     create_with_pool_id {
                         #[codec(compact)]
                         amount: ::core::primitive::u128,
@@ -44176,53 +40686,25 @@ pub mod api {
                         pool_id: ::core::primitive::u32,
                     },
                     #[codec(index = 8)]
-                    ///Nominate on behalf of the pool.
-                    ///
-                    ///The dispatch origin of this call must be signed by the pool nominator or the pool
-                    ///root role.
-                    ///
-                    ///This directly forward the call to the staking pallet, on behalf of the pool bonded
-                    ///account.
+                    ///See [`Pallet::nominate`].
                     nominate {
                         pool_id: ::core::primitive::u32,
                         validators: ::std::vec::Vec<::subxt::utils::AccountId32>,
                     },
                     #[codec(index = 9)]
-                    ///Set a new state for the pool.
-                    ///
-                    ///If a pool is already in the `Destroying` state, then under no condition can its state
-                    ///change again.
-                    ///
-                    ///The dispatch origin of this call must be either:
-                    ///
-                    ///1. signed by the bouncer, or the root role of the pool,
-                    ///2. if the pool conditions to be open are NOT met (as described by `ok_to_be_open`), and
-                    ///   then the state of the pool can be permissionlessly changed to `Destroying`.
+                    ///See [`Pallet::set_state`].
                     set_state {
                         pool_id: ::core::primitive::u32,
                         state: runtime_types::pallet_nomination_pools::PoolState,
                     },
                     #[codec(index = 10)]
-                    ///Set a new metadata for the pool.
-                    ///
-                    ///The dispatch origin of this call must be signed by the bouncer, or the root role of the
-                    ///pool.
+                    ///See [`Pallet::set_metadata`].
                     set_metadata {
                         pool_id: ::core::primitive::u32,
                         metadata: ::std::vec::Vec<::core::primitive::u8>,
                     },
                     #[codec(index = 11)]
-                    ///Update configurations for the nomination pools. The origin for this call must be
-                    ///Root.
-                    ///
-                    ///# Arguments
-                    ///
-                    ///* `min_join_bond` - Set [`MinJoinBond`].
-                    ///* `min_create_bond` - Set [`MinCreateBond`].
-                    ///* `max_pools` - Set [`MaxPools`].
-                    ///* `max_members` - Set [`MaxPoolMembers`].
-                    ///* `max_members_per_pool` - Set [`MaxPoolMembersPerPool`].
-                    ///* `global_max_commission` - Set [`GlobalMaxCommission`].
+                    ///See [`Pallet::set_configs`].
                     set_configs {
                         min_join_bond: runtime_types::pallet_nomination_pools::ConfigOp<
                             ::core::primitive::u128,
@@ -44244,13 +40726,7 @@ pub mod api {
                         >,
                     },
                     #[codec(index = 12)]
-                    ///Update the roles of the pool.
-                    ///
-                    ///The root is the only entity that can change any of the roles, including itself,
-                    ///excluding the depositor, who can never change.
-                    ///
-                    ///It emits an event, notifying UIs of the role change. This event is quite relevant to
-                    ///most pool members and they should be informed of changes to pool roles.
+                    ///See [`Pallet::update_roles`].
                     update_roles {
                         pool_id: ::core::primitive::u32,
                         new_root: runtime_types::pallet_nomination_pools::ConfigOp<
@@ -44264,24 +40740,10 @@ pub mod api {
                         >,
                     },
                     #[codec(index = 13)]
-                    ///Chill on behalf of the pool.
-                    ///
-                    ///The dispatch origin of this call must be signed by the pool nominator or the pool
-                    ///root role, same as [`Pallet::nominate`].
-                    ///
-                    ///This directly forward the call to the staking pallet, on behalf of the pool bonded
-                    ///account.
+                    ///See [`Pallet::chill`].
                     chill { pool_id: ::core::primitive::u32 },
                     #[codec(index = 14)]
-                    ///`origin` bonds funds from `extra` for some pool member `member` into their respective
-                    ///pools.
-                    ///
-                    ///`origin` can bond extra funds from free balance or pending rewards when `origin ==
-                    ///other`.
-                    ///
-                    ///In the case of `origin != other`, `origin` can only bond extra pending rewards of
-                    ///`other` members assuming set_claim_permission for the given member is
-                    ///`PermissionlessAll` or `PermissionlessCompound`.
+                    ///See [`Pallet::bond_extra_other`].
                     bond_extra_other {
                         member: ::subxt::utils::MultiAddress<
                             ::subxt::utils::AccountId32,
@@ -44292,33 +40754,15 @@ pub mod api {
                         >,
                     },
                     #[codec(index = 15)]
-                    ///Allows a pool member to set a claim permission to allow or disallow permissionless
-                    ///bonding and withdrawing.
-                    ///
-                    ///By default, this is `Permissioned`, which implies only the pool member themselves can
-                    ///claim their pending rewards. If a pool member wishes so, they can set this to
-                    ///`PermissionlessAll` to allow any account to claim their rewards and bond extra to the
-                    ///pool.
-                    ///
-                    ///# Arguments
-                    ///
-                    ///* `origin` - Member of a pool.
-                    ///* `actor` - Account to claim reward. // improve this
+                    ///See [`Pallet::set_claim_permission`].
                     set_claim_permission {
                         permission: runtime_types::pallet_nomination_pools::ClaimPermission,
                     },
                     #[codec(index = 16)]
-                    ///`origin` can claim payouts on some pool member `other`'s behalf.
-                    ///
-                    ///Pool member `other` must have a `PermissionlessAll` or `PermissionlessWithdraw` in order
-                    ///for this call to be successful.
+                    ///See [`Pallet::claim_payout_other`].
                     claim_payout_other { other: ::subxt::utils::AccountId32 },
                     #[codec(index = 17)]
-                    ///Set the commission of a pool.
-                    ///Both a commission percentage and a commission payee must be provided in the `current`
-                    ///tuple. Where a `current` of `None` is provided, any current commission will be removed.
-                    ///
-                    ///- If a `None` is supplied to `new_commission`, existing commission will be removed.
+                    ///See [`Pallet::set_commission`].
                     set_commission {
                         pool_id: ::core::primitive::u32,
                         new_commission: ::core::option::Option<
@@ -44329,20 +40773,13 @@ pub mod api {
                         >,
                     },
                     #[codec(index = 18)]
-                    ///Set the maximum commission of a pool.
-                    ///
-                    ///- Initial max can be set to any `Perbill`, and only smaller values thereafter.
-                    ///- Current commission will be lowered in the event it is higher than a new max
-                    ///  commission.
+                    ///See [`Pallet::set_commission_max`].
                     set_commission_max {
                         pool_id: ::core::primitive::u32,
                         max_commission: runtime_types::sp_arithmetic::per_things::Perbill,
                     },
                     #[codec(index = 19)]
-                    ///Set the commission change rate for a pool.
-                    ///
-                    ///Initial change rate is not bounded, whereas subsequent updates can only be more
-                    ///restrictive than the current.
+                    ///See [`Pallet::set_commission_change_rate`].
                     set_commission_change_rate {
                         pool_id: ::core::primitive::u32,
                         change_rate: runtime_types::pallet_nomination_pools::CommissionChangeRate<
@@ -44350,11 +40787,7 @@ pub mod api {
                         >,
                     },
                     #[codec(index = 20)]
-                    ///Claim pending commission.
-                    ///
-                    ///The dispatch origin of this call must be signed by the `root` role of the pool. Pending
-                    ///commission is paid out and added to total claimed commission`. Total pending commission
-                    ///is reset to zero. the current.
+                    ///See [`Pallet::claim_commission`].
                     claim_commission { pool_id: ::core::primitive::u32 },
                 }
                 #[derive(
@@ -44403,10 +40836,7 @@ pub mod api {
                 #[encode_as_type(
                     crate_path = ":: subxt :: ext :: scale_encode"
                 )]
-                /**
-                Custom [dispatch errors](https://docs.substrate.io/main-docs/build/events-errors/)
-                of this pallet.
-                */
+                ///The `Error` enum of this pallet.
                 pub enum Error {
                     #[codec(index = 0)]
                     ///A (bonded) pool id does not exist.
@@ -44488,24 +40918,27 @@ pub mod api {
                     ///The supplied commission exceeds the max allowed commission.
                     CommissionExceedsMaximum,
                     #[codec(index = 23)]
+                    ///The supplied commission exceeds global maximum commission.
+                    CommissionExceedsGlobalMaximum,
+                    #[codec(index = 24)]
                     ///Not enough blocks have surpassed since the last commission update.
                     CommissionChangeThrottled,
-                    #[codec(index = 24)]
+                    #[codec(index = 25)]
                     ///The submitted changes to commission change rate are not allowed.
                     CommissionChangeRateNotAllowed,
-                    #[codec(index = 25)]
+                    #[codec(index = 26)]
                     ///There is no pending commission to claim.
                     NoPendingCommission,
-                    #[codec(index = 26)]
+                    #[codec(index = 27)]
                     ///No commission current has been set.
                     NoCommissionCurrentSet,
-                    #[codec(index = 27)]
+                    #[codec(index = 28)]
                     ///Pool id currently in use.
                     PoolIdInUse,
-                    #[codec(index = 28)]
+                    #[codec(index = 29)]
                     ///Pool id provided is not correct/usable.
                     InvalidPoolId,
-                    #[codec(index = 29)]
+                    #[codec(index = 30)]
                     ///Bonding extra is restricted to the exact pending reward amount.
                     BondExtraRestricted,
                 }
@@ -44962,34 +41395,21 @@ pub mod api {
                 #[encode_as_type(
                     crate_path = ":: subxt :: ext :: scale_encode"
                 )]
-                ///Contains one variant per dispatchable that can be called by an extrinsic.
+                ///Contains a variant per dispatchable extrinsic that this pallet has.
                 pub enum Call {
                     #[codec(index = 0)]
-                    ///Register a preimage on-chain.
-                    ///
-                    ///If the preimage was previously requested, no fees or deposits are taken for providing
-                    ///the preimage. Otherwise, a deposit is taken proportional to the size of the preimage.
+                    ///See [`Pallet::note_preimage`].
                     note_preimage {
                         bytes: ::std::vec::Vec<::core::primitive::u8>,
                     },
                     #[codec(index = 1)]
-                    ///Clear an unrequested preimage from the runtime storage.
-                    ///
-                    ///If `len` is provided, then it will be a much cheaper operation.
-                    ///
-                    ///- `hash`: The hash of the preimage to be removed from the store.
-                    ///- `len`: The length of the preimage of `hash`.
+                    ///See [`Pallet::unnote_preimage`].
                     unnote_preimage { hash: ::subxt::utils::H256 },
                     #[codec(index = 2)]
-                    ///Request a preimage be uploaded to the chain without paying any fees or deposits.
-                    ///
-                    ///If the preimage requests has already been provided on-chain, we unreserve any deposit
-                    ///a user may have paid, and take the control of the preimage out of their hands.
+                    ///See [`Pallet::request_preimage`].
                     request_preimage { hash: ::subxt::utils::H256 },
                     #[codec(index = 3)]
-                    ///Clear a previously made request for a preimage.
-                    ///
-                    ///NOTE: THIS MUST NOT BE CALLED ON `hash` MORE TIMES THAN `request_preimage`.
+                    ///See [`Pallet::unrequest_preimage`].
                     unrequest_preimage { hash: ::subxt::utils::H256 },
                 }
                 #[derive(
@@ -45009,10 +41429,7 @@ pub mod api {
                 #[encode_as_type(
                     crate_path = ":: subxt :: ext :: scale_encode"
                 )]
-                /**
-                Custom [dispatch errors](https://docs.substrate.io/main-docs/build/events-errors/)
-                of this pallet.
-                */
+                ///The `Error` enum of this pallet.
                 pub enum Error {
                     #[codec(index = 0)]
                     ///Preimage is too large to store on-chain.
@@ -45050,10 +41467,7 @@ pub mod api {
                 #[encode_as_type(
                     crate_path = ":: subxt :: ext :: scale_encode"
                 )]
-                /**
-                The [event](https://docs.substrate.io/main-docs/build/events-errors/) emitted
-                by this pallet.
-                */
+                ///The `Event` enum of this pallet
                 pub enum Event {
                     #[codec(index = 0)]
                     ///A preimage has been noted.
@@ -45114,10 +41528,10 @@ pub mod api {
                 #[encode_as_type(
                     crate_path = ":: subxt :: ext :: scale_encode"
                 )]
-                ///Contains one variant per dispatchable that can be called by an extrinsic.
+                ///Contains a variant per dispatchable extrinsic that this pallet has.
                 pub enum Call {
                     #[codec(index = 0)]
-                    ///Anonymously schedule a task.
+                    ///See [`Pallet::schedule`].
                     schedule {
                         when: ::core::primitive::u32,
                         maybe_periodic: ::core::option::Option<
@@ -45129,13 +41543,13 @@ pub mod api {
                         >,
                     },
                     #[codec(index = 1)]
-                    ///Cancel an anonymously scheduled task.
+                    ///See [`Pallet::cancel`].
                     cancel {
                         when: ::core::primitive::u32,
                         index: ::core::primitive::u32,
                     },
                     #[codec(index = 2)]
-                    ///Schedule a named task.
+                    ///See [`Pallet::schedule_named`].
                     schedule_named {
                         id: [::core::primitive::u8; 32usize],
                         when: ::core::primitive::u32,
@@ -45148,10 +41562,10 @@ pub mod api {
                         >,
                     },
                     #[codec(index = 3)]
-                    ///Cancel a named scheduled task.
+                    ///See [`Pallet::cancel_named`].
                     cancel_named { id: [::core::primitive::u8; 32usize] },
                     #[codec(index = 4)]
-                    ///Anonymously schedule a task after a delay.
+                    ///See [`Pallet::schedule_after`].
                     schedule_after {
                         after: ::core::primitive::u32,
                         maybe_periodic: ::core::option::Option<
@@ -45163,7 +41577,7 @@ pub mod api {
                         >,
                     },
                     #[codec(index = 5)]
-                    ///Schedule a named task after a delay.
+                    ///See [`Pallet::schedule_named_after`].
                     schedule_named_after {
                         id: [::core::primitive::u8; 32usize],
                         after: ::core::primitive::u32,
@@ -45193,10 +41607,7 @@ pub mod api {
                 #[encode_as_type(
                     crate_path = ":: subxt :: ext :: scale_encode"
                 )]
-                /**
-                Custom [dispatch errors](https://docs.substrate.io/main-docs/build/events-errors/)
-                of this pallet.
-                */
+                ///The `Error` enum of this pallet.
                 pub enum Error {
                     #[codec(index = 0)]
                     ///Failed to schedule a call
@@ -45327,35 +41738,16 @@ pub mod api {
                 #[encode_as_type(
                     crate_path = ":: subxt :: ext :: scale_encode"
                 )]
-                ///Contains one variant per dispatchable that can be called by an extrinsic.
+                ///Contains a variant per dispatchable extrinsic that this pallet has.
                 pub enum Call {
                     #[codec(index = 0)]
-                    ///Sets the session key(s) of the function caller to `keys`.
-                    ///Allows an account to set its session key prior to becoming a validator.
-                    ///This doesn't take effect until the next session.
-                    ///
-                    ///The dispatch origin of this function must be signed.
-                    ///
-                    ///## Complexity
-                    ///- `O(1)`. Actual cost depends on the number of length of `T::Keys::key_ids()` which is
-                    ///  fixed.
+                    ///See [`Pallet::set_keys`].
                     set_keys {
                         keys: runtime_types::tangle_standalone_runtime::opaque::SessionKeys,
                         proof: ::std::vec::Vec<::core::primitive::u8>,
                     },
                     #[codec(index = 1)]
-                    ///Removes any session key(s) of the function caller.
-                    ///
-                    ///This doesn't take effect until the next session.
-                    ///
-                    ///The dispatch origin of this function must be Signed and the account must be either be
-                    ///convertible to a validator ID using the chain's typical addressing system (this usually
-                    ///means being a controller account) or directly convertible into a validator ID (which
-                    ///usually means being a stash account).
-                    ///
-                    ///## Complexity
-                    ///- `O(1)` in number of key types. Actual cost depends on the number of length of
-                    ///  `T::Keys::key_ids()` which is fixed.
+                    ///See [`Pallet::purge_keys`].
                     purge_keys,
                 }
                 #[derive(
@@ -45410,10 +41802,7 @@ pub mod api {
                 #[encode_as_type(
                     crate_path = ":: subxt :: ext :: scale_encode"
                 )]
-                /**
-                The [event](https://docs.substrate.io/main-docs/build/events-errors/) emitted
-                by this pallet.
-                */
+                ///The `Event` enum of this pallet
                 pub enum Event {
                     #[codec(index = 0)]
                     ///New session has happened. Note that the argument is the session index, not the
@@ -45447,24 +41836,10 @@ pub mod api {
                     #[encode_as_type(
                         crate_path = ":: subxt :: ext :: scale_encode"
                     )]
-                    ///Contains one variant per dispatchable that can be called by an extrinsic.
+                    ///Contains a variant per dispatchable extrinsic that this pallet has.
                     pub enum Call {
                         #[codec(index = 0)]
-                        ///Take the origin account as a stash and lock up `value` of its balance. `controller` will
-                        ///be the account that controls it.
-                        ///
-                        ///`value` must be more than the `minimum_balance` specified by `T::Currency`.
-                        ///
-                        ///The dispatch origin for this call must be _Signed_ by the stash account.
-                        ///
-                        ///Emits `Bonded`.
-                        ///## Complexity
-                        ///- Independent of the arguments. Moderate complexity.
-                        ///- O(1).
-                        ///- Three extra DB entries.
-                        ///
-                        ///NOTE: Two of the storage writes (`Self::bonded`, `Self::payee`) are _never_ cleaned
-                        ///unless the `origin` falls below _existential deposit_ and gets removed as dust.
+                        ///See [`Pallet::bond`].
                         bond {
                             #[codec(compact)]
                             value: ::core::primitive::u128,
@@ -45473,81 +41848,24 @@ pub mod api {
                             >,
                         },
                         #[codec(index = 1)]
-                        ///Add some extra amount that have appeared in the stash `free_balance` into the balance up
-                        ///for staking.
-                        ///
-                        ///The dispatch origin for this call must be _Signed_ by the stash, not the controller.
-                        ///
-                        ///Use this if there are additional funds in your stash account that you wish to bond.
-                        ///Unlike [`bond`](Self::bond) or [`unbond`](Self::unbond) this function does not impose
-                        ///any limitation on the amount that can be added.
-                        ///
-                        ///Emits `Bonded`.
-                        ///
-                        ///## Complexity
-                        ///- Independent of the arguments. Insignificant complexity.
-                        ///- O(1).
+                        ///See [`Pallet::bond_extra`].
                         bond_extra {
                             #[codec(compact)]
                             max_additional: ::core::primitive::u128,
                         },
                         #[codec(index = 2)]
-                        ///Schedule a portion of the stash to be unlocked ready for transfer out after the bond
-                        ///period ends. If this leaves an amount actively bonded less than
-                        ///T::Currency::minimum_balance(), then it is increased to the full amount.
-                        ///
-                        ///The dispatch origin for this call must be _Signed_ by the controller, not the stash.
-                        ///
-                        ///Once the unlock period is done, you can call `withdraw_unbonded` to actually move
-                        ///the funds out of management ready for transfer.
-                        ///
-                        ///No more than a limited number of unlocking chunks (see `MaxUnlockingChunks`)
-                        ///can co-exists at the same time. If there are no unlocking chunks slots available
-                        ///[`Call::withdraw_unbonded`] is called to remove some of the chunks (if possible).
-                        ///
-                        ///If a user encounters the `InsufficientBond` error when calling this extrinsic,
-                        ///they should call `chill` first in order to free up their bonded funds.
-                        ///
-                        ///Emits `Unbonded`.
-                        ///
-                        ///See also [`Call::withdraw_unbonded`].
+                        ///See [`Pallet::unbond`].
                         unbond { #[codec(compact)] value: ::core::primitive::u128 },
                         #[codec(index = 3)]
-                        ///Remove any unlocked chunks from the `unlocking` queue from our management.
-                        ///
-                        ///This essentially frees up that balance to be used by the stash account to do
-                        ///whatever it wants.
-                        ///
-                        ///The dispatch origin for this call must be _Signed_ by the controller.
-                        ///
-                        ///Emits `Withdrawn`.
-                        ///
-                        ///See also [`Call::unbond`].
-                        ///
-                        ///## Complexity
-                        ///O(S) where S is the number of slashing spans to remove
-                        ///NOTE: Weight annotation is the kill scenario, we refund otherwise.
+                        ///See [`Pallet::withdraw_unbonded`].
                         withdraw_unbonded { num_slashing_spans: ::core::primitive::u32 },
                         #[codec(index = 4)]
-                        ///Declare the desire to validate for the origin controller.
-                        ///
-                        ///Effects will be felt at the beginning of the next era.
-                        ///
-                        ///The dispatch origin for this call must be _Signed_ by the controller, not the stash.
+                        ///See [`Pallet::validate`].
                         validate {
                             prefs: runtime_types::pallet_staking::ValidatorPrefs,
                         },
                         #[codec(index = 5)]
-                        ///Declare the desire to nominate `targets` for the origin controller.
-                        ///
-                        ///Effects will be felt at the beginning of the next era.
-                        ///
-                        ///The dispatch origin for this call must be _Signed_ by the controller, not the stash.
-                        ///
-                        ///## Complexity
-                        ///- The transaction's complexity is proportional to the size of `targets` (N)
-                        ///which is capped at CompactAssignments::LIMIT (T::MaxNominations).
-                        ///- Both the reads and writes follow a similar pattern.
+                        ///See [`Pallet::nominate`].
                         nominate {
                             targets: ::std::vec::Vec<
                                 ::subxt::utils::MultiAddress<
@@ -45557,206 +41875,78 @@ pub mod api {
                             >,
                         },
                         #[codec(index = 6)]
-                        ///Declare no desire to either validate or nominate.
-                        ///
-                        ///Effects will be felt at the beginning of the next era.
-                        ///
-                        ///The dispatch origin for this call must be _Signed_ by the controller, not the stash.
-                        ///
-                        ///## Complexity
-                        ///- Independent of the arguments. Insignificant complexity.
-                        ///- Contains one read.
-                        ///- Writes are limited to the `origin` account key.
+                        ///See [`Pallet::chill`].
                         chill,
                         #[codec(index = 7)]
-                        ///(Re-)set the payment target for a controller.
-                        ///
-                        ///Effects will be felt instantly (as soon as this function is completed successfully).
-                        ///
-                        ///The dispatch origin for this call must be _Signed_ by the controller, not the stash.
-                        ///
-                        ///## Complexity
-                        ///- O(1)
-                        ///- Independent of the arguments. Insignificant complexity.
-                        ///- Contains a limited number of reads.
-                        ///- Writes are limited to the `origin` account key.
-                        ///---------
+                        ///See [`Pallet::set_payee`].
                         set_payee {
                             payee: runtime_types::pallet_staking::RewardDestination<
                                 ::subxt::utils::AccountId32,
                             >,
                         },
                         #[codec(index = 8)]
-                        ///(Re-)sets the controller of a stash to the stash itself. This function previously
-                        ///accepted a `controller` argument to set the controller to an account other than the
-                        ///stash itself. This functionality has now been removed, now only setting the controller
-                        ///to the stash, if it is not already.
-                        ///
-                        ///Effects will be felt instantly (as soon as this function is completed successfully).
-                        ///
-                        ///The dispatch origin for this call must be _Signed_ by the stash, not the controller.
-                        ///
-                        ///## Complexity
-                        ///O(1)
-                        ///- Independent of the arguments. Insignificant complexity.
-                        ///- Contains a limited number of reads.
-                        ///- Writes are limited to the `origin` account key.
+                        ///See [`Pallet::set_controller`].
                         set_controller,
                         #[codec(index = 9)]
-                        ///Sets the ideal number of validators.
-                        ///
-                        ///The dispatch origin must be Root.
-                        ///
-                        ///## Complexity
-                        ///O(1)
+                        ///See [`Pallet::set_validator_count`].
                         set_validator_count {
                             #[codec(compact)]
                             new: ::core::primitive::u32,
                         },
                         #[codec(index = 10)]
-                        ///Increments the ideal number of validators upto maximum of
-                        ///`ElectionProviderBase::MaxWinners`.
-                        ///
-                        ///The dispatch origin must be Root.
-                        ///
-                        ///## Complexity
-                        ///Same as [`Self::set_validator_count`].
+                        ///See [`Pallet::increase_validator_count`].
                         increase_validator_count {
                             #[codec(compact)]
                             additional: ::core::primitive::u32,
                         },
                         #[codec(index = 11)]
-                        ///Scale up the ideal number of validators by a factor upto maximum of
-                        ///`ElectionProviderBase::MaxWinners`.
-                        ///
-                        ///The dispatch origin must be Root.
-                        ///
-                        ///## Complexity
-                        ///Same as [`Self::set_validator_count`].
+                        ///See [`Pallet::scale_validator_count`].
                         scale_validator_count {
                             factor: runtime_types::sp_arithmetic::per_things::Percent,
                         },
                         #[codec(index = 12)]
-                        ///Force there to be no new eras indefinitely.
-                        ///
-                        ///The dispatch origin must be Root.
-                        ///
-                        ///# Warning
-                        ///
-                        ///The election process starts multiple blocks before the end of the era.
-                        ///Thus the election process may be ongoing when this is called. In this case the
-                        ///election will continue until the next era is triggered.
-                        ///
-                        ///## Complexity
-                        ///- No arguments.
-                        ///- Weight: O(1)
+                        ///See [`Pallet::force_no_eras`].
                         force_no_eras,
                         #[codec(index = 13)]
-                        ///Force there to be a new era at the end of the next session. After this, it will be
-                        ///reset to normal (non-forced) behaviour.
-                        ///
-                        ///The dispatch origin must be Root.
-                        ///
-                        ///# Warning
-                        ///
-                        ///The election process starts multiple blocks before the end of the era.
-                        ///If this is called just before a new era is triggered, the election process may not
-                        ///have enough blocks to get a result.
-                        ///
-                        ///## Complexity
-                        ///- No arguments.
-                        ///- Weight: O(1)
+                        ///See [`Pallet::force_new_era`].
                         force_new_era,
                         #[codec(index = 14)]
-                        ///Set the validators who cannot be slashed (if any).
-                        ///
-                        ///The dispatch origin must be Root.
+                        ///See [`Pallet::set_invulnerables`].
                         set_invulnerables {
                             invulnerables: ::std::vec::Vec<::subxt::utils::AccountId32>,
                         },
                         #[codec(index = 15)]
-                        ///Force a current staker to become completely unstaked, immediately.
-                        ///
-                        ///The dispatch origin must be Root.
+                        ///See [`Pallet::force_unstake`].
                         force_unstake {
                             stash: ::subxt::utils::AccountId32,
                             num_slashing_spans: ::core::primitive::u32,
                         },
                         #[codec(index = 16)]
-                        ///Force there to be a new era at the end of sessions indefinitely.
-                        ///
-                        ///The dispatch origin must be Root.
-                        ///
-                        ///# Warning
-                        ///
-                        ///The election process starts multiple blocks before the end of the era.
-                        ///If this is called just before a new era is triggered, the election process may not
-                        ///have enough blocks to get a result.
+                        ///See [`Pallet::force_new_era_always`].
                         force_new_era_always,
                         #[codec(index = 17)]
-                        ///Cancel enactment of a deferred slash.
-                        ///
-                        ///Can be called by the `T::AdminOrigin`.
-                        ///
-                        ///Parameters: era and indices of the slashes for that era to kill.
+                        ///See [`Pallet::cancel_deferred_slash`].
                         cancel_deferred_slash {
                             era: ::core::primitive::u32,
                             slash_indices: ::std::vec::Vec<::core::primitive::u32>,
                         },
                         #[codec(index = 18)]
-                        ///Pay out all the stakers behind a single validator for a single era.
-                        ///
-                        ///- `validator_stash` is the stash account of the validator. Their nominators, up to
-                        ///  `T::MaxNominatorRewardedPerValidator`, will also receive their rewards.
-                        ///- `era` may be any era between `[current_era - history_depth; current_era]`.
-                        ///
-                        ///The origin of this call must be _Signed_. Any account can call this function, even if
-                        ///it is not one of the stakers.
-                        ///
-                        ///## Complexity
-                        ///- At most O(MaxNominatorRewardedPerValidator).
+                        ///See [`Pallet::payout_stakers`].
                         payout_stakers {
                             validator_stash: ::subxt::utils::AccountId32,
                             era: ::core::primitive::u32,
                         },
                         #[codec(index = 19)]
-                        ///Rebond a portion of the stash scheduled to be unlocked.
-                        ///
-                        ///The dispatch origin must be signed by the controller.
-                        ///
-                        ///## Complexity
-                        ///- Time complexity: O(L), where L is unlocking chunks
-                        ///- Bounded by `MaxUnlockingChunks`.
+                        ///See [`Pallet::rebond`].
                         rebond { #[codec(compact)] value: ::core::primitive::u128 },
                         #[codec(index = 20)]
-                        ///Remove all data structures concerning a staker/stash once it is at a state where it can
-                        ///be considered `dust` in the staking system. The requirements are:
-                        ///
-                        ///1. the `total_balance` of the stash is below existential deposit.
-                        ///2. or, the `ledger.total` of the stash is below existential deposit.
-                        ///
-                        ///The former can happen in cases like a slash; the latter when a fully unbonded account
-                        ///is still receiving staking rewards in `RewardDestination::Staked`.
-                        ///
-                        ///It can be called by anyone, as long as `stash` meets the above requirements.
-                        ///
-                        ///Refunds the transaction fees upon successful execution.
+                        ///See [`Pallet::reap_stash`].
                         reap_stash {
                             stash: ::subxt::utils::AccountId32,
                             num_slashing_spans: ::core::primitive::u32,
                         },
                         #[codec(index = 21)]
-                        ///Remove the given nominations from the calling validator.
-                        ///
-                        ///Effects will be felt at the beginning of the next era.
-                        ///
-                        ///The dispatch origin for this call must be _Signed_ by the controller, not the stash.
-                        ///
-                        ///- `who`: A list of nominator stash accounts who are nominating this validator which
-                        ///  should no longer be nominating this validator.
-                        ///
-                        ///Note: Making this call only makes sense if you first set the validator preferences to
-                        ///block any further nominations.
+                        ///See [`Pallet::kick`].
                         kick {
                             who: ::std::vec::Vec<
                                 ::subxt::utils::MultiAddress<
@@ -45766,23 +41956,7 @@ pub mod api {
                             >,
                         },
                         #[codec(index = 22)]
-                        ///Update the various staking configurations .
-                        ///
-                        ///* `min_nominator_bond`: The minimum active bond needed to be a nominator.
-                        ///* `min_validator_bond`: The minimum active bond needed to be a validator.
-                        ///* `max_nominator_count`: The max number of users who can be a nominator at once. When
-                        ///  set to `None`, no limit is enforced.
-                        ///* `max_validator_count`: The max number of users who can be a validator at once. When
-                        ///  set to `None`, no limit is enforced.
-                        ///* `chill_threshold`: The ratio of `max_nominator_count` or `max_validator_count` which
-                        ///  should be filled in order for the `chill_other` transaction to work.
-                        ///* `min_commission`: The minimum amount of commission that each validators must maintain.
-                        ///  This is checked only upon calling `validate`. Existing validators are not affected.
-                        ///
-                        ///RuntimeOrigin must be Root to call this function.
-                        ///
-                        ///NOTE: Existing nominators and validators will not be affected by this update.
-                        ///to kick people under the new limits, `chill_other` should be called.
+                        ///See [`Pallet::set_staking_configs`].
                         set_staking_configs {
                             min_nominator_bond: runtime_types::pallet_staking::pallet::pallet::ConfigOp<
                                 ::core::primitive::u128,
@@ -45804,45 +41978,15 @@ pub mod api {
                             >,
                         },
                         #[codec(index = 23)]
-                        ///Declare a `controller` to stop participating as either a validator or nominator.
-                        ///
-                        ///Effects will be felt at the beginning of the next era.
-                        ///
-                        ///The dispatch origin for this call must be _Signed_, but can be called by anyone.
-                        ///
-                        ///If the caller is the same as the controller being targeted, then no further checks are
-                        ///enforced, and this function behaves just like `chill`.
-                        ///
-                        ///If the caller is different than the controller being targeted, the following conditions
-                        ///must be met:
-                        ///
-                        ///* `controller` must belong to a nominator who has become non-decodable,
-                        ///
-                        ///Or:
-                        ///
-                        ///* A `ChillThreshold` must be set and checked which defines how close to the max
-                        ///  nominators or validators we must reach before users can start chilling one-another.
-                        ///* A `MaxNominatorCount` and `MaxValidatorCount` must be set which is used to determine
-                        ///  how close we are to the threshold.
-                        ///* A `MinNominatorBond` and `MinValidatorBond` must be set and checked, which determines
-                        ///  if this is a person that should be chilled because they have not met the threshold
-                        ///  bond required.
-                        ///
-                        ///This can be helpful if bond requirements are updated, and we need to remove old users
-                        ///who do not satisfy these requirements.
+                        ///See [`Pallet::chill_other`].
                         chill_other { controller: ::subxt::utils::AccountId32 },
                         #[codec(index = 24)]
-                        ///Force a validator to have at least the minimum commission. This will not affect a
-                        ///validator who already has a commission greater than or equal to the minimum. Any account
-                        ///can call this.
+                        ///See [`Pallet::force_apply_min_commission`].
                         force_apply_min_commission {
                             validator_stash: ::subxt::utils::AccountId32,
                         },
                         #[codec(index = 25)]
-                        ///Sets the minimum amount of commission that each validators must maintain.
-                        ///
-                        ///This call has lower privilege requirements than `set_staking_config` and can be called
-                        ///by the `T::AdminOrigin`. Root can always call this.
+                        ///See [`Pallet::set_min_commission`].
                         set_min_commission {
                             new: runtime_types::sp_arithmetic::per_things::Perbill,
                         },
@@ -45889,10 +42033,7 @@ pub mod api {
                     #[encode_as_type(
                         crate_path = ":: subxt :: ext :: scale_encode"
                     )]
-                    /**
-                    Custom [dispatch errors](https://docs.substrate.io/main-docs/build/events-errors/)
-                    of this pallet.
-                    */
+                    ///The `Error` enum of this pallet.
                     pub enum Error {
                         #[codec(index = 0)]
                         ///Not a controller account.
@@ -45991,10 +42132,7 @@ pub mod api {
                     #[encode_as_type(
                         crate_path = ":: subxt :: ext :: scale_encode"
                     )]
-                    /**
-                    The [event](https://docs.substrate.io/main-docs/build/events-errors/) emitted
-                    by this pallet.
-                    */
+                    ///The `Event` enum of this pallet
                     pub enum Event {
                         #[codec(index = 0)]
                         ///The era payout has been set; the first balance is the validator-payout; the second is
@@ -46386,29 +42524,17 @@ pub mod api {
                 #[encode_as_type(
                     crate_path = ":: subxt :: ext :: scale_encode"
                 )]
-                ///Contains one variant per dispatchable that can be called by an extrinsic.
+                ///Contains a variant per dispatchable extrinsic that this pallet has.
                 pub enum Call {
                     #[codec(index = 0)]
-                    ///Authenticates the sudo key and dispatches a function call with `Root` origin.
-                    ///
-                    ///The dispatch origin for this call must be _Signed_.
-                    ///
-                    ///## Complexity
-                    ///- O(1).
+                    ///See [`Pallet::sudo`].
                     sudo {
                         call: ::std::boxed::Box<
                             runtime_types::tangle_standalone_runtime::RuntimeCall,
                         >,
                     },
                     #[codec(index = 1)]
-                    ///Authenticates the sudo key and dispatches a function call with `Root` origin.
-                    ///This function does not check the weight of the call, and instead allows the
-                    ///Sudo user to specify the weight of the call.
-                    ///
-                    ///The dispatch origin for this call must be _Signed_.
-                    ///
-                    ///## Complexity
-                    ///- O(1).
+                    ///See [`Pallet::sudo_unchecked_weight`].
                     sudo_unchecked_weight {
                         call: ::std::boxed::Box<
                             runtime_types::tangle_standalone_runtime::RuntimeCall,
@@ -46416,13 +42542,7 @@ pub mod api {
                         weight: runtime_types::sp_weights::weight_v2::Weight,
                     },
                     #[codec(index = 2)]
-                    ///Authenticates the current sudo key and sets the given AccountId (`new`) as the new sudo
-                    ///key.
-                    ///
-                    ///The dispatch origin for this call must be _Signed_.
-                    ///
-                    ///## Complexity
-                    ///- O(1).
+                    ///See [`Pallet::set_key`].
                     set_key {
                         new: ::subxt::utils::MultiAddress<
                             ::subxt::utils::AccountId32,
@@ -46430,13 +42550,7 @@ pub mod api {
                         >,
                     },
                     #[codec(index = 3)]
-                    ///Authenticates the sudo key and dispatches a function call with `Signed` origin from
-                    ///a given account.
-                    ///
-                    ///The dispatch origin for this call must be _Signed_.
-                    ///
-                    ///## Complexity
-                    ///- O(1).
+                    ///See [`Pallet::sudo_as`].
                     sudo_as {
                         who: ::subxt::utils::MultiAddress<
                             ::subxt::utils::AccountId32,
@@ -46487,10 +42601,7 @@ pub mod api {
                 #[encode_as_type(
                     crate_path = ":: subxt :: ext :: scale_encode"
                 )]
-                /**
-                The [event](https://docs.substrate.io/main-docs/build/events-errors/) emitted
-                by this pallet.
-                */
+                ///The `Event` enum of this pallet
                 pub enum Event {
                     #[codec(index = 0)]
                     ///A sudo just took place. \[result\]
@@ -46538,24 +42649,10 @@ pub mod api {
                 #[encode_as_type(
                     crate_path = ":: subxt :: ext :: scale_encode"
                 )]
-                ///Contains one variant per dispatchable that can be called by an extrinsic.
+                ///Contains a variant per dispatchable extrinsic that this pallet has.
                 pub enum Call {
                     #[codec(index = 0)]
-                    ///Set the current time.
-                    ///
-                    ///This call should be invoked exactly once per block. It will panic at the finalization
-                    ///phase, if this call hasn't been invoked by that time.
-                    ///
-                    ///The timestamp should be greater than the previous one by the amount specified by
-                    ///`MinimumPeriod`.
-                    ///
-                    ///The dispatch origin for this call must be `Inherent`.
-                    ///
-                    ///## Complexity
-                    ///- `O(1)` (Note that implementations of `OnTimestampSet` must also be `O(1)`)
-                    ///- 1 storage read and 1 storage mutation (codec `O(1)`). (because of `DidUpdate::take` in
-                    ///  `on_finalize`)
-                    ///- 1 event handler `on_timestamp_set`. Must be `O(1)`.
+                    ///See [`Pallet::set`].
                     set {
                         #[codec(compact)]
                         now: ::core::primitive::u64,
@@ -46584,14 +42681,16 @@ pub mod api {
                 #[encode_as_type(
                     crate_path = ":: subxt :: ext :: scale_encode"
                 )]
-                ///Contains one variant per dispatchable that can be called by an extrinsic.
+                ///Contains a variant per dispatchable extrinsic that this pallet has.
                 pub enum Call {
                     #[codec(index = 0)]
+                    ///See [`Pallet::pause_transaction`].
                     pause_transaction {
                         pallet_name: ::std::vec::Vec<::core::primitive::u8>,
                         function_name: ::std::vec::Vec<::core::primitive::u8>,
                     },
                     #[codec(index = 1)]
+                    ///See [`Pallet::unpause_transaction`].
                     unpause_transaction {
                         pallet_name: ::std::vec::Vec<::core::primitive::u8>,
                         function_name: ::std::vec::Vec<::core::primitive::u8>,
@@ -46614,10 +42713,7 @@ pub mod api {
                 #[encode_as_type(
                     crate_path = ":: subxt :: ext :: scale_encode"
                 )]
-                /**
-                Custom [dispatch errors](https://docs.substrate.io/main-docs/build/events-errors/)
-                of this pallet.
-                */
+                ///The `Error` enum of this pallet.
                 pub enum Error {
                     #[codec(index = 0)]
                     ///can not pause
@@ -46643,10 +42739,7 @@ pub mod api {
                 #[encode_as_type(
                     crate_path = ":: subxt :: ext :: scale_encode"
                 )]
-                /**
-                The [event](https://docs.substrate.io/main-docs/build/events-errors/) emitted
-                by this pallet.
-                */
+                ///The `Event` enum of this pallet
                 pub enum Event {
                     #[codec(index = 0)]
                     ///Paused transaction
@@ -46688,10 +42781,7 @@ pub mod api {
                 #[encode_as_type(
                     crate_path = ":: subxt :: ext :: scale_encode"
                 )]
-                /**
-                The [event](https://docs.substrate.io/main-docs/build/events-errors/) emitted
-                by this pallet.
-                */
+                ///The `Event` enum of this pallet
                 pub enum Event {
                     #[codec(index = 0)]
                     ///A transaction fee `actual_fee`, of which `tip` was added to the minimum inclusion fee,
@@ -46760,15 +42850,10 @@ pub mod api {
                 #[encode_as_type(
                     crate_path = ":: subxt :: ext :: scale_encode"
                 )]
-                ///Contains one variant per dispatchable that can be called by an extrinsic.
+                ///Contains a variant per dispatchable extrinsic that this pallet has.
                 pub enum Call {
                     #[codec(index = 0)]
-                    ///Put forward a suggestion for spending. A deposit proportional to the value
-                    ///is reserved and slashed if the proposal is rejected. It is returned once the
-                    ///proposal is awarded.
-                    ///
-                    ///## Complexity
-                    ///- O(1)
+                    ///See [`Pallet::propose_spend`].
                     propose_spend {
                         #[codec(compact)]
                         value: ::core::primitive::u128,
@@ -46778,37 +42863,19 @@ pub mod api {
                         >,
                     },
                     #[codec(index = 1)]
-                    ///Reject a proposed spend. The original deposit will be slashed.
-                    ///
-                    ///May only be called from `T::RejectOrigin`.
-                    ///
-                    ///## Complexity
-                    ///- O(1)
+                    ///See [`Pallet::reject_proposal`].
                     reject_proposal {
                         #[codec(compact)]
                         proposal_id: ::core::primitive::u32,
                     },
                     #[codec(index = 2)]
-                    ///Approve a proposal. At a later time, the proposal will be allocated to the beneficiary
-                    ///and the original deposit will be returned.
-                    ///
-                    ///May only be called from `T::ApproveOrigin`.
-                    ///
-                    ///## Complexity
-                    /// - O(1).
+                    ///See [`Pallet::approve_proposal`].
                     approve_proposal {
                         #[codec(compact)]
                         proposal_id: ::core::primitive::u32,
                     },
                     #[codec(index = 3)]
-                    ///Propose and approve a spend of treasury funds.
-                    ///
-                    ///- `origin`: Must be `SpendOrigin` with the `Success` value being at least `amount`.
-                    ///- `amount`: The amount to be transferred from the treasury to the `beneficiary`.
-                    ///- `beneficiary`: The destination account for the transfer.
-                    ///
-                    ///NOTE: For record-keeping purposes, the proposer is deemed to be equivalent to the
-                    ///beneficiary.
+                    ///See [`Pallet::spend`].
                     spend {
                         #[codec(compact)]
                         amount: ::core::primitive::u128,
@@ -46818,19 +42885,7 @@ pub mod api {
                         >,
                     },
                     #[codec(index = 4)]
-                    ///Force a previously approved proposal to be removed from the approval queue.
-                    ///The original deposit will no longer be returned.
-                    ///
-                    ///May only be called from `T::RejectOrigin`.
-                    ///- `proposal_id`: The index of a proposal
-                    ///
-                    ///## Complexity
-                    ///- O(A) where `A` is the number of approvals
-                    ///
-                    ///Errors:
-                    ///- `ProposalNotApproved`: The `proposal_id` supplied was not found in the approval queue,
-                    ///i.e., the proposal has not been approved. This could also mean the proposal does not
-                    ///exist altogether, thus there is no way it would have been approved in the first place.
+                    ///See [`Pallet::remove_approval`].
                     remove_approval {
                         #[codec(compact)]
                         proposal_id: ::core::primitive::u32,
@@ -46889,10 +42944,7 @@ pub mod api {
                 #[encode_as_type(
                     crate_path = ":: subxt :: ext :: scale_encode"
                 )]
-                /**
-                The [event](https://docs.substrate.io/main-docs/build/events-errors/) emitted
-                by this pallet.
-                */
+                ///The `Event` enum of this pallet
                 pub enum Event {
                     #[codec(index = 0)]
                     ///New proposal.
@@ -46986,46 +43038,17 @@ pub mod api {
                 #[encode_as_type(
                     crate_path = ":: subxt :: ext :: scale_encode"
                 )]
-                ///Contains one variant per dispatchable that can be called by an extrinsic.
+                ///Contains a variant per dispatchable extrinsic that this pallet has.
                 pub enum Call {
                     #[codec(index = 0)]
-                    ///Send a batch of dispatch calls.
-                    ///
-                    ///May be called from any origin except `None`.
-                    ///
-                    ///- `calls`: The calls to be dispatched from the same origin. The number of call must not
-                    ///  exceed the constant: `batched_calls_limit` (available in constant metadata).
-                    ///
-                    ///If origin is root then the calls are dispatched without checking origin filter. (This
-                    ///includes bypassing `frame_system::Config::BaseCallFilter`).
-                    ///
-                    ///## Complexity
-                    ///- O(C) where C is the number of calls to be batched.
-                    ///
-                    ///This will return `Ok` in all circumstances. To determine the success of the batch, an
-                    ///event is deposited. If a call failed and the batch was interrupted, then the
-                    ///`BatchInterrupted` event is deposited, along with the number of successful calls made
-                    ///and the error of the failed call. If all were successful, then the `BatchCompleted`
-                    ///event is deposited.
+                    ///See [`Pallet::batch`].
                     batch {
                         calls: ::std::vec::Vec<
                             runtime_types::tangle_standalone_runtime::RuntimeCall,
                         >,
                     },
                     #[codec(index = 1)]
-                    ///Send a call through an indexed pseudonym of the sender.
-                    ///
-                    ///Filter from origin are passed along. The call will be dispatched with an origin which
-                    ///use the same filter as the origin of this call.
-                    ///
-                    ///NOTE: If you need to ensure that any account-based filtering is not honored (i.e.
-                    ///because you expect `proxy` to have been used prior in the call stack and you do not want
-                    ///the call restrictions to apply to any sub-accounts), then use `as_multi_threshold_1`
-                    ///in the Multisig pallet instead.
-                    ///
-                    ///NOTE: Prior to version *12, this was called `as_limited_sub`.
-                    ///
-                    ///The dispatch origin for this call must be _Signed_.
+                    ///See [`Pallet::as_derivative`].
                     as_derivative {
                         index: ::core::primitive::u16,
                         call: ::std::boxed::Box<
@@ -47033,31 +43056,14 @@ pub mod api {
                         >,
                     },
                     #[codec(index = 2)]
-                    ///Send a batch of dispatch calls and atomically execute them.
-                    ///The whole transaction will rollback and fail if any of the calls failed.
-                    ///
-                    ///May be called from any origin except `None`.
-                    ///
-                    ///- `calls`: The calls to be dispatched from the same origin. The number of call must not
-                    ///  exceed the constant: `batched_calls_limit` (available in constant metadata).
-                    ///
-                    ///If origin is root then the calls are dispatched without checking origin filter. (This
-                    ///includes bypassing `frame_system::Config::BaseCallFilter`).
-                    ///
-                    ///## Complexity
-                    ///- O(C) where C is the number of calls to be batched.
+                    ///See [`Pallet::batch_all`].
                     batch_all {
                         calls: ::std::vec::Vec<
                             runtime_types::tangle_standalone_runtime::RuntimeCall,
                         >,
                     },
                     #[codec(index = 3)]
-                    ///Dispatches a function call with a provided origin.
-                    ///
-                    ///The dispatch origin for this call must be _Root_.
-                    ///
-                    ///## Complexity
-                    ///- O(1).
+                    ///See [`Pallet::dispatch_as`].
                     dispatch_as {
                         as_origin: ::std::boxed::Box<
                             runtime_types::tangle_standalone_runtime::OriginCaller,
@@ -47067,31 +43073,14 @@ pub mod api {
                         >,
                     },
                     #[codec(index = 4)]
-                    ///Send a batch of dispatch calls.
-                    ///Unlike `batch`, it allows errors and won't interrupt.
-                    ///
-                    ///May be called from any origin except `None`.
-                    ///
-                    ///- `calls`: The calls to be dispatched from the same origin. The number of call must not
-                    ///  exceed the constant: `batched_calls_limit` (available in constant metadata).
-                    ///
-                    ///If origin is root then the calls are dispatch without checking origin filter. (This
-                    ///includes bypassing `frame_system::Config::BaseCallFilter`).
-                    ///
-                    ///## Complexity
-                    ///- O(C) where C is the number of calls to be batched.
+                    ///See [`Pallet::force_batch`].
                     force_batch {
                         calls: ::std::vec::Vec<
                             runtime_types::tangle_standalone_runtime::RuntimeCall,
                         >,
                     },
                     #[codec(index = 5)]
-                    ///Dispatch a function call with a specified weight.
-                    ///
-                    ///This function does not check the weight of the call, and instead allows the
-                    ///Root origin to specify the weight of the call.
-                    ///
-                    ///The dispatch origin for this call must be _Root_.
+                    ///See [`Pallet::with_weight`].
                     with_weight {
                         call: ::std::boxed::Box<
                             runtime_types::tangle_standalone_runtime::RuntimeCall,
@@ -47116,10 +43105,7 @@ pub mod api {
                 #[encode_as_type(
                     crate_path = ":: subxt :: ext :: scale_encode"
                 )]
-                /**
-                Custom [dispatch errors](https://docs.substrate.io/main-docs/build/events-errors/)
-                of this pallet.
-                */
+                ///The `Error` enum of this pallet.
                 pub enum Error {
                     #[codec(index = 0)]
                     ///Too many calls batched.
@@ -47142,10 +43128,7 @@ pub mod api {
                 #[encode_as_type(
                     crate_path = ":: subxt :: ext :: scale_encode"
                 )]
-                /**
-                The [event](https://docs.substrate.io/main-docs/build/events-errors/) emitted
-                by this pallet.
-                */
+                ///The `Event` enum of this pallet
                 pub enum Event {
                     #[codec(index = 0)]
                     ///Batch of dispatches did not complete fully. Index of first failing dispatch given, as
@@ -47200,31 +43183,13 @@ pub mod api {
                 #[encode_as_type(
                     crate_path = ":: subxt :: ext :: scale_encode"
                 )]
-                ///Contains one variant per dispatchable that can be called by an extrinsic.
+                ///Contains a variant per dispatchable extrinsic that this pallet has.
                 pub enum Call {
                     #[codec(index = 0)]
-                    ///Unlock any vested funds of the sender account.
-                    ///
-                    ///The dispatch origin for this call must be _Signed_ and the sender must have funds still
-                    ///locked under this pallet.
-                    ///
-                    ///Emits either `VestingCompleted` or `VestingUpdated`.
-                    ///
-                    ///## Complexity
-                    ///- `O(1)`.
+                    ///See [`Pallet::vest`].
                     vest,
                     #[codec(index = 1)]
-                    ///Unlock any vested funds of a `target` account.
-                    ///
-                    ///The dispatch origin for this call must be _Signed_.
-                    ///
-                    ///- `target`: The account whose vested funds should be unlocked. Must have funds still
-                    ///locked under this pallet.
-                    ///
-                    ///Emits either `VestingCompleted` or `VestingUpdated`.
-                    ///
-                    ///## Complexity
-                    ///- `O(1)`.
+                    ///See [`Pallet::vest_other`].
                     vest_other {
                         target: ::subxt::utils::MultiAddress<
                             ::subxt::utils::AccountId32,
@@ -47232,19 +43197,7 @@ pub mod api {
                         >,
                     },
                     #[codec(index = 2)]
-                    ///Create a vested transfer.
-                    ///
-                    ///The dispatch origin for this call must be _Signed_.
-                    ///
-                    ///- `target`: The account receiving the vested funds.
-                    ///- `schedule`: The vesting schedule attached to the transfer.
-                    ///
-                    ///Emits `VestingCreated`.
-                    ///
-                    ///NOTE: This will unlock all schedules through the current block.
-                    ///
-                    ///## Complexity
-                    ///- `O(1)`.
+                    ///See [`Pallet::vested_transfer`].
                     vested_transfer {
                         target: ::subxt::utils::MultiAddress<
                             ::subxt::utils::AccountId32,
@@ -47256,20 +43209,7 @@ pub mod api {
                         >,
                     },
                     #[codec(index = 3)]
-                    ///Force a vested transfer.
-                    ///
-                    ///The dispatch origin for this call must be _Root_.
-                    ///
-                    ///- `source`: The account whose funds should be transferred.
-                    ///- `target`: The account that should be transferred the vested funds.
-                    ///- `schedule`: The vesting schedule attached to the transfer.
-                    ///
-                    ///Emits `VestingCreated`.
-                    ///
-                    ///NOTE: This will unlock all schedules through the current block.
-                    ///
-                    ///## Complexity
-                    ///- `O(1)`.
+                    ///See [`Pallet::force_vested_transfer`].
                     force_vested_transfer {
                         source: ::subxt::utils::MultiAddress<
                             ::subxt::utils::AccountId32,
@@ -47285,27 +43225,7 @@ pub mod api {
                         >,
                     },
                     #[codec(index = 4)]
-                    ///Merge two vesting schedules together, creating a new vesting schedule that unlocks over
-                    ///the highest possible start and end blocks. If both schedules have already started the
-                    ///current block will be used as the schedule start; with the caveat that if one schedule
-                    ///is finished by the current block, the other will be treated as the new merged schedule,
-                    ///unmodified.
-                    ///
-                    ///NOTE: If `schedule1_index == schedule2_index` this is a no-op.
-                    ///NOTE: This will unlock all schedules through the current block prior to merging.
-                    ///NOTE: If both schedules have ended by the current block, no new schedule will be created
-                    ///and both will be removed.
-                    ///
-                    ///Merged schedule attributes:
-                    ///- `starting_block`: `MAX(schedule1.starting_block, scheduled2.starting_block,
-                    ///  current_block)`.
-                    ///- `ending_block`: `MAX(schedule1.ending_block, schedule2.ending_block)`.
-                    ///- `locked`: `schedule1.locked_at(current_block) + schedule2.locked_at(current_block)`.
-                    ///
-                    ///The dispatch origin for this call must be _Signed_.
-                    ///
-                    ///- `schedule1_index`: index of the first schedule to merge.
-                    ///- `schedule2_index`: index of the second schedule to merge.
+                    ///See [`Pallet::merge_schedules`].
                     merge_schedules {
                         schedule1_index: ::core::primitive::u32,
                         schedule2_index: ::core::primitive::u32,
@@ -47364,10 +43284,7 @@ pub mod api {
                 #[encode_as_type(
                     crate_path = ":: subxt :: ext :: scale_encode"
                 )]
-                /**
-                The [event](https://docs.substrate.io/main-docs/build/events-errors/) emitted
-                by this pallet.
-                */
+                ///The `Event` enum of this pallet
                 pub enum Event {
                     #[codec(index = 0)]
                     ///The amount vested has been updated. This could indicate a change in funds available.
@@ -47811,52 +43728,6 @@ pub mod api {
                 )]
                 pub struct Signature(pub [::core::primitive::u8; 64usize]);
             }
-            pub mod offchain {
-                use super::runtime_types;
-                #[derive(
-                    ::subxt::ext::codec::Decode,
-                    ::subxt::ext::codec::Encode,
-                    ::subxt::ext::scale_decode::DecodeAsType,
-                    ::subxt::ext::scale_encode::EncodeAsType,
-                    Clone,
-                    Debug,
-                    Eq,
-                    PartialEq,
-                )]
-                #[codec(crate = ::subxt::ext::codec)]
-                #[decode_as_type(
-                    crate_path = ":: subxt :: ext :: scale_decode"
-                )]
-                #[encode_as_type(
-                    crate_path = ":: subxt :: ext :: scale_encode"
-                )]
-                pub struct OpaqueMultiaddr(
-                    pub ::std::vec::Vec<::core::primitive::u8>,
-                );
-                #[derive(
-                    ::subxt::ext::codec::Decode,
-                    ::subxt::ext::codec::Encode,
-                    ::subxt::ext::scale_decode::DecodeAsType,
-                    ::subxt::ext::scale_encode::EncodeAsType,
-                    Clone,
-                    Debug,
-                    Eq,
-                    PartialEq,
-                )]
-                #[codec(crate = ::subxt::ext::codec)]
-                #[decode_as_type(
-                    crate_path = ":: subxt :: ext :: scale_decode"
-                )]
-                #[encode_as_type(
-                    crate_path = ":: subxt :: ext :: scale_encode"
-                )]
-                pub struct OpaqueNetworkState {
-                    pub peer_id: runtime_types::sp_core::OpaquePeerId,
-                    pub external_addresses: ::std::vec::Vec<
-                        runtime_types::sp_core::offchain::OpaqueMultiaddr,
-                    >,
-                }
-            }
             pub mod sr25519 {
                 use super::runtime_types;
                 #[derive(
@@ -47896,20 +43767,6 @@ pub mod api {
                 )]
                 pub struct Signature(pub [::core::primitive::u8; 64usize]);
             }
-            #[derive(
-                ::subxt::ext::codec::Decode,
-                ::subxt::ext::codec::Encode,
-                ::subxt::ext::scale_decode::DecodeAsType,
-                ::subxt::ext::scale_encode::EncodeAsType,
-                Clone,
-                Debug,
-                Eq,
-                PartialEq,
-            )]
-            #[codec(crate = ::subxt::ext::codec)]
-            #[decode_as_type(crate_path = ":: subxt :: ext :: scale_decode")]
-            #[encode_as_type(crate_path = ":: subxt :: ext :: scale_encode")]
-            pub struct OpaquePeerId(pub ::std::vec::Vec<::core::primitive::u8>);
             #[derive(
                 ::subxt::ext::codec::Decode,
                 ::subxt::ext::codec::Encode,
@@ -49264,6 +45121,51 @@ pub mod api {
                 #[codec(index = 41)]
                 Eth2Client(runtime_types::pallet_eth2_light_client::pallet::Event),
             }
+            #[derive(
+                ::subxt::ext::codec::Decode,
+                ::subxt::ext::codec::Encode,
+                ::subxt::ext::scale_decode::DecodeAsType,
+                ::subxt::ext::scale_encode::EncodeAsType,
+                Clone,
+                Debug,
+                Eq,
+                PartialEq,
+            )]
+            #[codec(crate = ::subxt::ext::codec)]
+            #[decode_as_type(crate_path = ":: subxt :: ext :: scale_decode")]
+            #[encode_as_type(crate_path = ":: subxt :: ext :: scale_encode")]
+            pub enum RuntimeHoldReason {}
+        }
+        pub mod webb_consensus_types {
+            use super::runtime_types;
+            pub mod network_config {
+                use super::runtime_types;
+                #[derive(
+                    ::subxt::ext::codec::Decode,
+                    ::subxt::ext::codec::Encode,
+                    ::subxt::ext::scale_decode::DecodeAsType,
+                    ::subxt::ext::scale_encode::EncodeAsType,
+                    Clone,
+                    Debug,
+                    Eq,
+                    PartialEq,
+                )]
+                #[codec(crate = ::subxt::ext::codec)]
+                #[decode_as_type(
+                    crate_path = ":: subxt :: ext :: scale_decode"
+                )]
+                #[encode_as_type(
+                    crate_path = ":: subxt :: ext :: scale_encode"
+                )]
+                pub struct NetworkConfig {
+                    pub genesis_validators_root:
+                        [::core::primitive::u8; 32usize],
+                    pub bellatrix_fork_version: [::core::primitive::u8; 4usize],
+                    pub bellatrix_fork_epoch: ::core::primitive::u64,
+                    pub capella_fork_version: [::core::primitive::u8; 4usize],
+                    pub capella_fork_epoch: ::core::primitive::u64,
+                }
+            }
         }
         pub mod webb_proposals {
             use super::runtime_types;
@@ -49305,6 +45207,43 @@ pub mod api {
                     crate_path = ":: subxt :: ext :: scale_encode"
                 )]
                 pub enum TypedChainId {
+                    #[codec(index = 0)]
+                    None,
+                    #[codec(index = 1)]
+                    Evm(::core::primitive::u32),
+                    #[codec(index = 2)]
+                    Substrate(::core::primitive::u32),
+                    #[codec(index = 3)]
+                    PolkadotParachain(::core::primitive::u32),
+                    #[codec(index = 4)]
+                    KusamaParachain(::core::primitive::u32),
+                    #[codec(index = 5)]
+                    RococoParachain(::core::primitive::u32),
+                    #[codec(index = 6)]
+                    Cosmos(::core::primitive::u32),
+                    #[codec(index = 7)]
+                    Solana(::core::primitive::u32),
+                    #[codec(index = 8)]
+                    Ink(::core::primitive::u32),
+                }
+                #[derive(
+                    ::subxt::ext::codec::Decode,
+                    ::subxt::ext::codec::Encode,
+                    ::subxt::ext::scale_decode::DecodeAsType,
+                    ::subxt::ext::scale_encode::EncodeAsType,
+                    Clone,
+                    Debug,
+                    Eq,
+                    PartialEq,
+                )]
+                #[codec(crate = ::subxt::ext::codec)]
+                #[decode_as_type(
+                    crate_path = ":: subxt :: ext :: scale_decode"
+                )]
+                #[encode_as_type(
+                    crate_path = ":: subxt :: ext :: scale_encode"
+                )]
+                pub enum TypedChainId2 {
                     #[codec(index = 0)]
                     None,
                     #[codec(index = 1)]
