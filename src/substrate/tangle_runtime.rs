@@ -5,7 +5,7 @@ pub mod api {
     mod root_mod {
         pub use super::*;
     }
-    pub static PALLETS: [&str; 42usize] = [
+    pub static PALLETS: [&str; 41usize] = [
         "System",
         "Timestamp",
         "Sudo",
@@ -23,7 +23,6 @@ pub mod api {
         "Democracy",
         "Council",
         "Vesting",
-        "Claims",
         "Elections",
         "ElectionProviderMultiPhase",
         "Staking",
@@ -92,46 +91,44 @@ pub mod api {
         #[codec(index = 16)]
         Vesting(vesting::Event),
         #[codec(index = 17)]
-        Claims(claims::Event),
-        #[codec(index = 18)]
         Elections(elections::Event),
-        #[codec(index = 19)]
+        #[codec(index = 18)]
         ElectionProviderMultiPhase(election_provider_multi_phase::Event),
-        #[codec(index = 20)]
+        #[codec(index = 19)]
         Staking(staking::Event),
-        #[codec(index = 21)]
+        #[codec(index = 20)]
         Session(session::Event),
-        #[codec(index = 23)]
+        #[codec(index = 22)]
         Treasury(treasury::Event),
-        #[codec(index = 24)]
+        #[codec(index = 23)]
         Bounties(bounties::Event),
-        #[codec(index = 25)]
+        #[codec(index = 24)]
         ChildBounties(child_bounties::Event),
-        #[codec(index = 26)]
+        #[codec(index = 25)]
         BagsList(bags_list::Event),
-        #[codec(index = 27)]
+        #[codec(index = 26)]
         NominationPools(nomination_pools::Event),
-        #[codec(index = 28)]
+        #[codec(index = 27)]
         Scheduler(scheduler::Event),
-        #[codec(index = 29)]
+        #[codec(index = 28)]
         Preimage(preimage::Event),
-        #[codec(index = 30)]
+        #[codec(index = 29)]
         Offences(offences::Event),
-        #[codec(index = 31)]
+        #[codec(index = 30)]
         TransactionPause(transaction_pause::Event),
-        #[codec(index = 32)]
+        #[codec(index = 31)]
         ImOnline(im_online::Event),
-        #[codec(index = 33)]
+        #[codec(index = 32)]
         Identity(identity::Event),
-        #[codec(index = 34)]
+        #[codec(index = 33)]
         Utility(utility::Event),
-        #[codec(index = 35)]
+        #[codec(index = 34)]
         Ethereum(ethereum::Event),
-        #[codec(index = 36)]
+        #[codec(index = 35)]
         EVM(evm::Event),
-        #[codec(index = 39)]
+        #[codec(index = 38)]
         BaseFee(base_fee::Event),
-        #[codec(index = 41)]
+        #[codec(index = 40)]
         Eth2Client(eth2_client::Event),
     }
     impl ::subxt::events::RootEvent for Event {
@@ -252,13 +249,6 @@ pub mod api {
                         metadata,
                     )?,
                 ));
-            }
-            if pallet_name == "Claims" {
-                return Ok(Event::Claims(claims::Event::decode_with_metadata(
-                    &mut &*pallet_bytes,
-                    pallet_ty,
-                    metadata,
-                )?));
             }
             if pallet_name == "Elections" {
                 return Ok(Event::Elections(
@@ -486,48 +476,46 @@ pub mod api {
         #[codec(index = 16)]
         Vesting(vesting::Call),
         #[codec(index = 17)]
-        Claims(claims::Call),
-        #[codec(index = 18)]
         Elections(elections::Call),
-        #[codec(index = 19)]
+        #[codec(index = 18)]
         ElectionProviderMultiPhase(election_provider_multi_phase::Call),
-        #[codec(index = 20)]
+        #[codec(index = 19)]
         Staking(staking::Call),
-        #[codec(index = 21)]
+        #[codec(index = 20)]
         Session(session::Call),
-        #[codec(index = 23)]
+        #[codec(index = 22)]
         Treasury(treasury::Call),
-        #[codec(index = 24)]
+        #[codec(index = 23)]
         Bounties(bounties::Call),
-        #[codec(index = 25)]
+        #[codec(index = 24)]
         ChildBounties(child_bounties::Call),
-        #[codec(index = 26)]
+        #[codec(index = 25)]
         BagsList(bags_list::Call),
-        #[codec(index = 27)]
+        #[codec(index = 26)]
         NominationPools(nomination_pools::Call),
-        #[codec(index = 28)]
+        #[codec(index = 27)]
         Scheduler(scheduler::Call),
-        #[codec(index = 29)]
+        #[codec(index = 28)]
         Preimage(preimage::Call),
-        #[codec(index = 31)]
+        #[codec(index = 30)]
         TransactionPause(transaction_pause::Call),
-        #[codec(index = 32)]
+        #[codec(index = 31)]
         ImOnline(im_online::Call),
-        #[codec(index = 33)]
+        #[codec(index = 32)]
         Identity(identity::Call),
-        #[codec(index = 34)]
+        #[codec(index = 33)]
         Utility(utility::Call),
-        #[codec(index = 35)]
+        #[codec(index = 34)]
         Ethereum(ethereum::Call),
-        #[codec(index = 36)]
+        #[codec(index = 35)]
         EVM(evm::Call),
-        #[codec(index = 38)]
+        #[codec(index = 37)]
         DynamicFee(dynamic_fee::Call),
-        #[codec(index = 39)]
+        #[codec(index = 38)]
         BaseFee(base_fee::Call),
-        #[codec(index = 40)]
+        #[codec(index = 39)]
         HotfixSufficients(hotfix_sufficients::Call),
-        #[codec(index = 41)]
+        #[codec(index = 40)]
         Eth2Client(eth2_client::Call),
     }
     impl ::subxt::blocks::RootExtrinsic for Call {
@@ -636,13 +624,6 @@ pub mod api {
             }
             if pallet_name == "Vesting" {
                 return Ok(Call::Vesting(vesting::Call::decode_with_metadata(
-                    &mut &*pallet_bytes,
-                    pallet_ty,
-                    metadata,
-                )?));
-            }
-            if pallet_name == "Claims" {
-                return Ok(Call::Claims(claims::Call::decode_with_metadata(
                     &mut &*pallet_bytes,
                     pallet_ty,
                     metadata,
@@ -875,44 +856,42 @@ pub mod api {
         #[codec(index = 16)]
         Vesting(vesting::Error),
         #[codec(index = 17)]
-        Claims(claims::Error),
-        #[codec(index = 18)]
         Elections(elections::Error),
-        #[codec(index = 19)]
+        #[codec(index = 18)]
         ElectionProviderMultiPhase(election_provider_multi_phase::Error),
-        #[codec(index = 20)]
+        #[codec(index = 19)]
         Staking(staking::Error),
-        #[codec(index = 21)]
+        #[codec(index = 20)]
         Session(session::Error),
-        #[codec(index = 23)]
+        #[codec(index = 22)]
         Treasury(treasury::Error),
-        #[codec(index = 24)]
+        #[codec(index = 23)]
         Bounties(bounties::Error),
-        #[codec(index = 25)]
+        #[codec(index = 24)]
         ChildBounties(child_bounties::Error),
-        #[codec(index = 26)]
+        #[codec(index = 25)]
         BagsList(bags_list::Error),
-        #[codec(index = 27)]
+        #[codec(index = 26)]
         NominationPools(nomination_pools::Error),
-        #[codec(index = 28)]
+        #[codec(index = 27)]
         Scheduler(scheduler::Error),
-        #[codec(index = 29)]
+        #[codec(index = 28)]
         Preimage(preimage::Error),
-        #[codec(index = 31)]
+        #[codec(index = 30)]
         TransactionPause(transaction_pause::Error),
-        #[codec(index = 32)]
+        #[codec(index = 31)]
         ImOnline(im_online::Error),
-        #[codec(index = 33)]
+        #[codec(index = 32)]
         Identity(identity::Error),
-        #[codec(index = 34)]
+        #[codec(index = 33)]
         Utility(utility::Error),
-        #[codec(index = 35)]
+        #[codec(index = 34)]
         Ethereum(ethereum::Error),
-        #[codec(index = 36)]
+        #[codec(index = 35)]
         EVM(evm::Error),
-        #[codec(index = 40)]
+        #[codec(index = 39)]
         HotfixSufficients(hotfix_sufficients::Error),
-        #[codec(index = 41)]
+        #[codec(index = 40)]
         Eth2Client(eth2_client::Error),
     }
     impl ::subxt::error::RootError for Error {
@@ -925,198 +904,192 @@ pub mod api {
             let cursor = &mut &pallet_bytes[..];
             if pallet_name == "System" {
                 let variant_error = system::Error::decode_with_metadata(
-                    cursor, 174u32, metadata,
+                    cursor, 172u32, metadata,
                 )?;
                 return Ok(Error::System(variant_error));
             }
             if pallet_name == "Sudo" {
                 let variant_error = sudo::Error::decode_with_metadata(
-                    cursor, 401u32, metadata,
+                    cursor, 392u32, metadata,
                 )?;
                 return Ok(Error::Sudo(variant_error));
             }
             if pallet_name == "Balances" {
                 let variant_error = balances::Error::decode_with_metadata(
-                    cursor, 417u32, metadata,
+                    cursor, 408u32, metadata,
                 )?;
                 return Ok(Error::Balances(variant_error));
             }
             if pallet_name == "Grandpa" {
                 let variant_error = grandpa::Error::decode_with_metadata(
-                    cursor, 426u32, metadata,
+                    cursor, 417u32, metadata,
                 )?;
                 return Ok(Error::Grandpa(variant_error));
             }
             if pallet_name == "DKG" {
                 let variant_error =
-                    dkg::Error::decode_with_metadata(cursor, 438u32, metadata)?;
+                    dkg::Error::decode_with_metadata(cursor, 429u32, metadata)?;
                 return Ok(Error::DKG(variant_error));
             }
             if pallet_name == "DKGProposals" {
                 let variant_error = dkg_proposals::Error::decode_with_metadata(
-                    cursor, 450u32, metadata,
+                    cursor, 441u32, metadata,
                 )?;
                 return Ok(Error::DKGProposals(variant_error));
             }
             if pallet_name == "DKGProposalHandler" {
                 let variant_error =
                     dkg_proposal_handler::Error::decode_with_metadata(
-                        cursor, 456u32, metadata,
+                        cursor, 447u32, metadata,
                     )?;
                 return Ok(Error::DKGProposalHandler(variant_error));
             }
             if pallet_name == "BridgeRegistry" {
                 let variant_error =
                     bridge_registry::Error::decode_with_metadata(
-                        cursor, 459u32, metadata,
+                        cursor, 450u32, metadata,
                     )?;
                 return Ok(Error::BridgeRegistry(variant_error));
             }
             if pallet_name == "Indices" {
                 let variant_error = indices::Error::decode_with_metadata(
-                    cursor, 461u32, metadata,
+                    cursor, 452u32, metadata,
                 )?;
                 return Ok(Error::Indices(variant_error));
             }
             if pallet_name == "Democracy" {
                 let variant_error = democracy::Error::decode_with_metadata(
-                    cursor, 478u32, metadata,
+                    cursor, 469u32, metadata,
                 )?;
                 return Ok(Error::Democracy(variant_error));
             }
             if pallet_name == "Council" {
                 let variant_error = council::Error::decode_with_metadata(
-                    cursor, 481u32, metadata,
+                    cursor, 472u32, metadata,
                 )?;
                 return Ok(Error::Council(variant_error));
             }
             if pallet_name == "Vesting" {
                 let variant_error = vesting::Error::decode_with_metadata(
-                    cursor, 485u32, metadata,
+                    cursor, 476u32, metadata,
                 )?;
                 return Ok(Error::Vesting(variant_error));
             }
-            if pallet_name == "Claims" {
-                let variant_error = claims::Error::decode_with_metadata(
-                    cursor, 487u32, metadata,
-                )?;
-                return Ok(Error::Claims(variant_error));
-            }
             if pallet_name == "Elections" {
                 let variant_error = elections::Error::decode_with_metadata(
-                    cursor, 491u32, metadata,
+                    cursor, 480u32, metadata,
                 )?;
                 return Ok(Error::Elections(variant_error));
             }
             if pallet_name == "ElectionProviderMultiPhase" {
                 let variant_error =
                     election_provider_multi_phase::Error::decode_with_metadata(
-                        cursor, 502u32, metadata,
+                        cursor, 491u32, metadata,
                     )?;
                 return Ok(Error::ElectionProviderMultiPhase(variant_error));
             }
             if pallet_name == "Staking" {
                 let variant_error = staking::Error::decode_with_metadata(
-                    cursor, 521u32, metadata,
+                    cursor, 511u32, metadata,
                 )?;
                 return Ok(Error::Staking(variant_error));
             }
             if pallet_name == "Session" {
                 let variant_error = session::Error::decode_with_metadata(
-                    cursor, 526u32, metadata,
+                    cursor, 516u32, metadata,
                 )?;
                 return Ok(Error::Session(variant_error));
             }
             if pallet_name == "Treasury" {
                 let variant_error = treasury::Error::decode_with_metadata(
-                    cursor, 532u32, metadata,
+                    cursor, 522u32, metadata,
                 )?;
                 return Ok(Error::Treasury(variant_error));
             }
             if pallet_name == "Bounties" {
                 let variant_error = bounties::Error::decode_with_metadata(
-                    cursor, 536u32, metadata,
+                    cursor, 526u32, metadata,
                 )?;
                 return Ok(Error::Bounties(variant_error));
             }
             if pallet_name == "ChildBounties" {
                 let variant_error =
                     child_bounties::Error::decode_with_metadata(
-                        cursor, 539u32, metadata,
+                        cursor, 529u32, metadata,
                     )?;
                 return Ok(Error::ChildBounties(variant_error));
             }
             if pallet_name == "BagsList" {
                 let variant_error = bags_list::Error::decode_with_metadata(
-                    cursor, 543u32, metadata,
+                    cursor, 533u32, metadata,
                 )?;
                 return Ok(Error::BagsList(variant_error));
             }
             if pallet_name == "NominationPools" {
                 let variant_error =
                     nomination_pools::Error::decode_with_metadata(
-                        cursor, 563u32, metadata,
+                        cursor, 553u32, metadata,
                     )?;
                 return Ok(Error::NominationPools(variant_error));
             }
             if pallet_name == "Scheduler" {
                 let variant_error = scheduler::Error::decode_with_metadata(
-                    cursor, 569u32, metadata,
+                    cursor, 559u32, metadata,
                 )?;
                 return Ok(Error::Scheduler(variant_error));
             }
             if pallet_name == "Preimage" {
                 let variant_error = preimage::Error::decode_with_metadata(
-                    cursor, 573u32, metadata,
+                    cursor, 563u32, metadata,
                 )?;
                 return Ok(Error::Preimage(variant_error));
             }
             if pallet_name == "TransactionPause" {
                 let variant_error =
                     transaction_pause::Error::decode_with_metadata(
-                        cursor, 576u32, metadata,
+                        cursor, 566u32, metadata,
                     )?;
                 return Ok(Error::TransactionPause(variant_error));
             }
             if pallet_name == "ImOnline" {
                 let variant_error = im_online::Error::decode_with_metadata(
-                    cursor, 579u32, metadata,
+                    cursor, 569u32, metadata,
                 )?;
                 return Ok(Error::ImOnline(variant_error));
             }
             if pallet_name == "Identity" {
                 let variant_error = identity::Error::decode_with_metadata(
-                    cursor, 590u32, metadata,
+                    cursor, 580u32, metadata,
                 )?;
                 return Ok(Error::Identity(variant_error));
             }
             if pallet_name == "Utility" {
                 let variant_error = utility::Error::decode_with_metadata(
-                    cursor, 591u32, metadata,
+                    cursor, 581u32, metadata,
                 )?;
                 return Ok(Error::Utility(variant_error));
             }
             if pallet_name == "Ethereum" {
                 let variant_error = ethereum::Error::decode_with_metadata(
-                    cursor, 605u32, metadata,
+                    cursor, 595u32, metadata,
                 )?;
                 return Ok(Error::Ethereum(variant_error));
             }
             if pallet_name == "EVM" {
                 let variant_error =
-                    evm::Error::decode_with_metadata(cursor, 608u32, metadata)?;
+                    evm::Error::decode_with_metadata(cursor, 598u32, metadata)?;
                 return Ok(Error::EVM(variant_error));
             }
             if pallet_name == "HotfixSufficients" {
                 let variant_error =
                     hotfix_sufficients::Error::decode_with_metadata(
-                        cursor, 609u32, metadata,
+                        cursor, 599u32, metadata,
                     )?;
                 return Ok(Error::HotfixSufficients(variant_error));
             }
             if pallet_name == "Eth2Client" {
                 let variant_error = eth2_client::Error::decode_with_metadata(
-                    cursor, 613u32, metadata,
+                    cursor, 603u32, metadata,
                 )?;
                 return Ok(Error::Eth2Client(variant_error));
             }
@@ -1192,9 +1165,6 @@ pub mod api {
         }
         pub fn vesting(&self) -> vesting::constants::ConstantsApi {
             vesting::constants::ConstantsApi
-        }
-        pub fn claims(&self) -> claims::constants::ConstantsApi {
-            claims::constants::ConstantsApi
         }
         pub fn elections(&self) -> elections::constants::ConstantsApi {
             elections::constants::ConstantsApi
@@ -1300,9 +1270,6 @@ pub mod api {
         }
         pub fn vesting(&self) -> vesting::storage::StorageApi {
             vesting::storage::StorageApi
-        }
-        pub fn claims(&self) -> claims::storage::StorageApi {
-            claims::storage::StorageApi
         }
         pub fn elections(&self) -> elections::storage::StorageApi {
             elections::storage::StorageApi
@@ -1422,9 +1389,6 @@ pub mod api {
         pub fn vesting(&self) -> vesting::calls::TransactionApi {
             vesting::calls::TransactionApi
         }
-        pub fn claims(&self) -> claims::calls::TransactionApi {
-            claims::calls::TransactionApi
-        }
         pub fn elections(&self) -> elections::calls::TransactionApi {
             elections::calls::TransactionApi
         }
@@ -1511,10 +1475,10 @@ pub mod api {
             .hash();
         if runtime_metadata_hash
             != [
-                66u8, 7u8, 171u8, 94u8, 196u8, 45u8, 237u8, 62u8, 59u8, 36u8,
-                182u8, 117u8, 23u8, 175u8, 243u8, 240u8, 100u8, 73u8, 13u8,
-                23u8, 91u8, 237u8, 180u8, 25u8, 136u8, 106u8, 30u8, 130u8,
-                50u8, 166u8, 5u8, 26u8,
+                88u8, 205u8, 188u8, 80u8, 128u8, 235u8, 52u8, 202u8, 175u8,
+                227u8, 56u8, 157u8, 146u8, 119u8, 195u8, 197u8, 62u8, 0u8,
+                92u8, 160u8, 39u8, 90u8, 245u8, 211u8, 160u8, 194u8, 224u8,
+                142u8, 160u8, 212u8, 52u8, 125u8,
             ]
         {
             Err(::subxt::error::MetadataError::IncompatibleCodegen)
@@ -2434,11 +2398,11 @@ pub mod api {
                         "Events",
                         vec![],
                         [
-                            41u8, 115u8, 0u8, 84u8, 175u8, 97u8, 28u8, 198u8,
-                            36u8, 47u8, 18u8, 13u8, 162u8, 79u8, 166u8, 173u8,
-                            76u8, 180u8, 176u8, 98u8, 66u8, 239u8, 207u8,
-                            105u8, 27u8, 72u8, 221u8, 80u8, 95u8, 117u8, 228u8,
-                            196u8,
+                            28u8, 165u8, 77u8, 87u8, 48u8, 209u8, 50u8, 53u8,
+                            229u8, 56u8, 234u8, 14u8, 15u8, 24u8, 218u8, 45u8,
+                            246u8, 244u8, 148u8, 230u8, 247u8, 82u8, 13u8,
+                            62u8, 20u8, 236u8, 86u8, 244u8, 182u8, 216u8,
+                            243u8, 35u8,
                         ],
                     )
                 }
@@ -3054,11 +3018,11 @@ pub mod api {
                             call: ::std::boxed::Box::new(call),
                         },
                         [
-                            76u8, 95u8, 125u8, 225u8, 121u8, 222u8, 80u8,
-                            157u8, 119u8, 161u8, 145u8, 2u8, 125u8, 147u8,
-                            115u8, 224u8, 23u8, 178u8, 162u8, 226u8, 183u8,
-                            137u8, 1u8, 203u8, 247u8, 229u8, 53u8, 108u8,
-                            187u8, 230u8, 121u8, 61u8,
+                            152u8, 220u8, 130u8, 59u8, 170u8, 153u8, 5u8,
+                            207u8, 72u8, 199u8, 39u8, 240u8, 190u8, 209u8,
+                            132u8, 22u8, 89u8, 213u8, 167u8, 191u8, 158u8,
+                            232u8, 64u8, 53u8, 159u8, 10u8, 58u8, 227u8, 182u8,
+                            149u8, 52u8, 205u8,
                         ],
                     )
                 }
@@ -3077,11 +3041,11 @@ pub mod api {
                             weight,
                         },
                         [
-                            216u8, 221u8, 135u8, 184u8, 70u8, 22u8, 153u8,
-                            196u8, 186u8, 152u8, 180u8, 145u8, 253u8, 44u8,
-                            103u8, 2u8, 5u8, 141u8, 42u8, 40u8, 201u8, 83u8,
-                            76u8, 29u8, 228u8, 13u8, 32u8, 226u8, 88u8, 55u8,
-                            21u8, 71u8,
+                            52u8, 30u8, 153u8, 122u8, 146u8, 203u8, 211u8,
+                            110u8, 86u8, 214u8, 193u8, 252u8, 125u8, 166u8,
+                            41u8, 153u8, 78u8, 50u8, 206u8, 251u8, 235u8, 25u8,
+                            2u8, 28u8, 29u8, 74u8, 45u8, 65u8, 33u8, 245u8,
+                            173u8, 161u8,
                         ],
                     )
                 }
@@ -3123,11 +3087,11 @@ pub mod api {
                             call: ::std::boxed::Box::new(call),
                         },
                         [
-                            47u8, 204u8, 219u8, 249u8, 150u8, 152u8, 125u8,
-                            110u8, 114u8, 197u8, 148u8, 6u8, 100u8, 179u8, 8u8,
-                            243u8, 229u8, 103u8, 220u8, 10u8, 72u8, 83u8,
-                            182u8, 155u8, 142u8, 102u8, 134u8, 64u8, 65u8,
-                            67u8, 56u8, 79u8,
+                            81u8, 138u8, 24u8, 170u8, 51u8, 90u8, 41u8, 225u8,
+                            143u8, 116u8, 220u8, 160u8, 246u8, 61u8, 8u8,
+                            221u8, 132u8, 214u8, 248u8, 18u8, 135u8, 34u8, 1u8,
+                            8u8, 28u8, 34u8, 110u8, 244u8, 88u8, 8u8, 109u8,
+                            80u8,
                         ],
                     )
                 }
@@ -12773,11 +12737,11 @@ pub mod api {
                             length_bound,
                         },
                         [
-                            106u8, 61u8, 44u8, 121u8, 195u8, 255u8, 1u8, 116u8,
-                            232u8, 186u8, 178u8, 218u8, 241u8, 225u8, 34u8,
-                            4u8, 149u8, 245u8, 249u8, 62u8, 119u8, 21u8, 53u8,
-                            137u8, 7u8, 46u8, 107u8, 203u8, 145u8, 132u8, 49u8,
-                            209u8,
+                            237u8, 148u8, 197u8, 16u8, 230u8, 165u8, 29u8,
+                            159u8, 137u8, 113u8, 200u8, 178u8, 130u8, 89u8,
+                            95u8, 72u8, 80u8, 54u8, 134u8, 144u8, 4u8, 69u8,
+                            172u8, 125u8, 206u8, 229u8, 252u8, 185u8, 35u8,
+                            114u8, 199u8, 43u8,
                         ],
                     )
                 }
@@ -12797,11 +12761,11 @@ pub mod api {
                             length_bound,
                         },
                         [
-                            49u8, 15u8, 80u8, 40u8, 96u8, 74u8, 247u8, 114u8,
-                            16u8, 102u8, 155u8, 146u8, 128u8, 226u8, 67u8,
-                            38u8, 24u8, 219u8, 248u8, 128u8, 54u8, 200u8, 48u8,
-                            158u8, 30u8, 156u8, 83u8, 110u8, 225u8, 178u8,
-                            122u8, 33u8,
+                            214u8, 152u8, 165u8, 242u8, 198u8, 117u8, 225u8,
+                            26u8, 112u8, 140u8, 250u8, 216u8, 119u8, 181u8,
+                            168u8, 236u8, 182u8, 128u8, 50u8, 48u8, 238u8,
+                            145u8, 232u8, 112u8, 58u8, 234u8, 53u8, 7u8, 186u8,
+                            201u8, 64u8, 194u8,
                         ],
                     )
                 }
@@ -13094,38 +13058,38 @@ pub mod api {
                             .borrow())
                         ],
                         [
-                            31u8,
-                            252u8,
-                            132u8,
-                            64u8,
-                            117u8,
+                            165u8,
+                            233u8,
+                            44u8,
+                            24u8,
+                            126u8,
+                            247u8,
+                            41u8,
+                            128u8,
+                            198u8,
+                            155u8,
+                            60u8,
+                            255u8,
+                            44u8,
+                            109u8,
                             53u8,
-                            46u8,
-                            108u8,
-                            26u8,
-                            209u8,
-                            197u8,
-                            162u8,
-                            28u8,
-                            14u8,
-                            31u8,
-                            145u8,
-                            194u8,
-                            9u8,
-                            132u8,
-                            162u8,
+                            99u8,
+                            133u8,
+                            55u8,
+                            64u8,
+                            155u8,
+                            1u8,
+                            116u8,
+                            226u8,
+                            141u8,
+                            174u8,
+                            205u8,
+                            214u8,
                             2u8,
-                            153u8,
-                            50u8,
-                            161u8,
-                            147u8,
-                            219u8,
-                            250u8,
-                            190u8,
-                            150u8,
-                            131u8,
-                            136u8,
-                            200u8,
+                            192u8,
+                            79u8,
+                            223u8,
+                            30u8,
                         ],
                     )
                 }
@@ -13144,11 +13108,11 @@ pub mod api {
                         "ProposalOf",
                         Vec::new(),
                         [
-                            31u8, 252u8, 132u8, 64u8, 117u8, 53u8, 46u8, 108u8,
-                            26u8, 209u8, 197u8, 162u8, 28u8, 14u8, 31u8, 145u8,
-                            194u8, 9u8, 132u8, 162u8, 2u8, 153u8, 50u8, 161u8,
-                            147u8, 219u8, 250u8, 190u8, 150u8, 131u8, 136u8,
-                            200u8,
+                            165u8, 233u8, 44u8, 24u8, 126u8, 247u8, 41u8,
+                            128u8, 198u8, 155u8, 60u8, 255u8, 44u8, 109u8,
+                            53u8, 99u8, 133u8, 55u8, 64u8, 155u8, 1u8, 116u8,
+                            226u8, 141u8, 174u8, 205u8, 214u8, 2u8, 192u8,
+                            79u8, 223u8, 30u8,
                         ],
                     )
                 }
@@ -13809,761 +13773,6 @@ pub mod api {
                             26u8, 10u8, 9u8, 98u8, 68u8, 9u8, 178u8, 197u8,
                             113u8, 31u8, 79u8, 200u8, 90u8, 203u8, 100u8, 41u8,
                             145u8,
-                        ],
-                    )
-                }
-            }
-        }
-    }
-    pub mod claims {
-        use super::root_mod;
-        use super::runtime_types;
-        ///The `Error` enum of this pallet.
-        pub type Error = runtime_types::pallet_ecdsa_claims::pallet::Error;
-        ///Contains a variant per dispatchable extrinsic that this pallet has.
-        pub type Call = runtime_types::pallet_ecdsa_claims::pallet::Call;
-        pub mod calls {
-            use super::root_mod;
-            use super::runtime_types;
-            type DispatchError = runtime_types::sp_runtime::DispatchError;
-            pub mod types {
-                use super::runtime_types;
-                #[derive(
-                    ::subxt::ext::codec::Decode,
-                    ::subxt::ext::codec::Encode,
-                    ::subxt::ext::scale_decode::DecodeAsType,
-                    ::subxt::ext::scale_encode::EncodeAsType,
-                    Clone,
-                    Debug,
-                    Eq,
-                    PartialEq,
-                )]
-                #[codec(crate = ::subxt::ext::codec)]
-                #[decode_as_type(
-                    crate_path = ":: subxt :: ext :: scale_decode"
-                )]
-                #[encode_as_type(
-                    crate_path = ":: subxt :: ext :: scale_encode"
-                )]
-                pub struct Claim {
-                    pub dest: ::subxt::utils::AccountId32,
-                    pub ethereum_signature:
-                        runtime_types::pallet_ecdsa_claims::EcdsaSignature,
-                }
-                impl ::subxt::blocks::StaticExtrinsic for Claim {
-                    const PALLET: &'static str = "Claims";
-                    const CALL: &'static str = "claim";
-                }
-                #[derive(
-                    ::subxt::ext::codec::Decode,
-                    ::subxt::ext::codec::Encode,
-                    ::subxt::ext::scale_decode::DecodeAsType,
-                    ::subxt::ext::scale_encode::EncodeAsType,
-                    Clone,
-                    Debug,
-                    Eq,
-                    PartialEq,
-                )]
-                #[codec(crate = ::subxt::ext::codec)]
-                #[decode_as_type(
-                    crate_path = ":: subxt :: ext :: scale_decode"
-                )]
-                #[encode_as_type(
-                    crate_path = ":: subxt :: ext :: scale_encode"
-                )]
-                pub struct MintClaim {
-                    pub who:
-                        runtime_types::pallet_ecdsa_claims::EthereumAddress,
-                    pub value: ::core::primitive::u128,
-                    pub vesting_schedule: ::core::option::Option<(
-                        ::core::primitive::u128,
-                        ::core::primitive::u128,
-                        ::core::primitive::u32,
-                    )>,
-                    pub statement: ::core::option::Option<
-                        runtime_types::pallet_ecdsa_claims::StatementKind,
-                    >,
-                }
-                impl ::subxt::blocks::StaticExtrinsic for MintClaim {
-                    const PALLET: &'static str = "Claims";
-                    const CALL: &'static str = "mint_claim";
-                }
-                #[derive(
-                    ::subxt::ext::codec::Decode,
-                    ::subxt::ext::codec::Encode,
-                    ::subxt::ext::scale_decode::DecodeAsType,
-                    ::subxt::ext::scale_encode::EncodeAsType,
-                    Clone,
-                    Debug,
-                    Eq,
-                    PartialEq,
-                )]
-                #[codec(crate = ::subxt::ext::codec)]
-                #[decode_as_type(
-                    crate_path = ":: subxt :: ext :: scale_decode"
-                )]
-                #[encode_as_type(
-                    crate_path = ":: subxt :: ext :: scale_encode"
-                )]
-                pub struct ClaimAttest {
-                    pub dest: ::subxt::utils::AccountId32,
-                    pub ethereum_signature:
-                        runtime_types::pallet_ecdsa_claims::EcdsaSignature,
-                    pub statement: ::std::vec::Vec<::core::primitive::u8>,
-                }
-                impl ::subxt::blocks::StaticExtrinsic for ClaimAttest {
-                    const PALLET: &'static str = "Claims";
-                    const CALL: &'static str = "claim_attest";
-                }
-                #[derive(
-                    ::subxt::ext::codec::Decode,
-                    ::subxt::ext::codec::Encode,
-                    ::subxt::ext::scale_decode::DecodeAsType,
-                    ::subxt::ext::scale_encode::EncodeAsType,
-                    Clone,
-                    Debug,
-                    Eq,
-                    PartialEq,
-                )]
-                #[codec(crate = ::subxt::ext::codec)]
-                #[decode_as_type(
-                    crate_path = ":: subxt :: ext :: scale_decode"
-                )]
-                #[encode_as_type(
-                    crate_path = ":: subxt :: ext :: scale_encode"
-                )]
-                pub struct Attest {
-                    pub statement: ::std::vec::Vec<::core::primitive::u8>,
-                }
-                impl ::subxt::blocks::StaticExtrinsic for Attest {
-                    const PALLET: &'static str = "Claims";
-                    const CALL: &'static str = "attest";
-                }
-                #[derive(
-                    ::subxt::ext::codec::Decode,
-                    ::subxt::ext::codec::Encode,
-                    ::subxt::ext::scale_decode::DecodeAsType,
-                    ::subxt::ext::scale_encode::EncodeAsType,
-                    Clone,
-                    Debug,
-                    Eq,
-                    PartialEq,
-                )]
-                #[codec(crate = ::subxt::ext::codec)]
-                #[decode_as_type(
-                    crate_path = ":: subxt :: ext :: scale_decode"
-                )]
-                #[encode_as_type(
-                    crate_path = ":: subxt :: ext :: scale_encode"
-                )]
-                pub struct MoveClaim {
-                    pub old:
-                        runtime_types::pallet_ecdsa_claims::EthereumAddress,
-                    pub new:
-                        runtime_types::pallet_ecdsa_claims::EthereumAddress,
-                    pub maybe_preclaim:
-                        ::core::option::Option<::subxt::utils::AccountId32>,
-                }
-                impl ::subxt::blocks::StaticExtrinsic for MoveClaim {
-                    const PALLET: &'static str = "Claims";
-                    const CALL: &'static str = "move_claim";
-                }
-                #[derive(
-                    ::subxt::ext::codec::Decode,
-                    ::subxt::ext::codec::Encode,
-                    ::subxt::ext::scale_decode::DecodeAsType,
-                    ::subxt::ext::scale_encode::EncodeAsType,
-                    Clone,
-                    Debug,
-                    Eq,
-                    PartialEq,
-                )]
-                #[codec(crate = ::subxt::ext::codec)]
-                #[decode_as_type(
-                    crate_path = ":: subxt :: ext :: scale_decode"
-                )]
-                #[encode_as_type(
-                    crate_path = ":: subxt :: ext :: scale_encode"
-                )]
-                pub struct ForceSetExpiryConfig {
-                    pub expiry_block: ::core::primitive::u32,
-                    pub dest: ::subxt::utils::AccountId32,
-                }
-                impl ::subxt::blocks::StaticExtrinsic for ForceSetExpiryConfig {
-                    const PALLET: &'static str = "Claims";
-                    const CALL: &'static str = "force_set_expiry_config";
-                }
-            }
-            pub struct TransactionApi;
-            impl TransactionApi {
-                ///See [`Pallet::claim`].
-                pub fn claim(
-                    &self,
-                    dest: ::subxt::utils::AccountId32,
-                    ethereum_signature: runtime_types::pallet_ecdsa_claims::EcdsaSignature,
-                ) -> ::subxt::tx::Payload<types::Claim> {
-                    ::subxt::tx::Payload::new_static(
-                        "Claims",
-                        "claim",
-                        types::Claim {
-                            dest,
-                            ethereum_signature,
-                        },
-                        [
-                            83u8, 166u8, 82u8, 164u8, 185u8, 116u8, 35u8, 29u8,
-                            60u8, 10u8, 92u8, 61u8, 212u8, 63u8, 236u8, 107u8,
-                            19u8, 110u8, 100u8, 58u8, 154u8, 143u8, 188u8,
-                            153u8, 34u8, 237u8, 60u8, 140u8, 194u8, 135u8,
-                            227u8, 8u8,
-                        ],
-                    )
-                }
-                ///See [`Pallet::mint_claim`].
-                pub fn mint_claim(
-                    &self,
-                    who: runtime_types::pallet_ecdsa_claims::EthereumAddress,
-                    value: ::core::primitive::u128,
-                    vesting_schedule: ::core::option::Option<(
-                        ::core::primitive::u128,
-                        ::core::primitive::u128,
-                        ::core::primitive::u32,
-                    )>,
-                    statement: ::core::option::Option<
-                        runtime_types::pallet_ecdsa_claims::StatementKind,
-                    >,
-                ) -> ::subxt::tx::Payload<types::MintClaim> {
-                    ::subxt::tx::Payload::new_static(
-                        "Claims",
-                        "mint_claim",
-                        types::MintClaim {
-                            who,
-                            value,
-                            vesting_schedule,
-                            statement,
-                        },
-                        [
-                            254u8, 174u8, 70u8, 0u8, 70u8, 79u8, 195u8, 176u8,
-                            196u8, 52u8, 204u8, 219u8, 158u8, 73u8, 158u8,
-                            126u8, 14u8, 37u8, 45u8, 29u8, 249u8, 246u8, 3u8,
-                            40u8, 72u8, 111u8, 213u8, 180u8, 201u8, 139u8,
-                            175u8, 194u8,
-                        ],
-                    )
-                }
-                ///See [`Pallet::claim_attest`].
-                pub fn claim_attest(
-                    &self,
-                    dest: ::subxt::utils::AccountId32,
-                    ethereum_signature: runtime_types::pallet_ecdsa_claims::EcdsaSignature,
-                    statement: ::std::vec::Vec<::core::primitive::u8>,
-                ) -> ::subxt::tx::Payload<types::ClaimAttest> {
-                    ::subxt::tx::Payload::new_static(
-                        "Claims",
-                        "claim_attest",
-                        types::ClaimAttest {
-                            dest,
-                            ethereum_signature,
-                            statement,
-                        },
-                        [
-                            18u8, 79u8, 43u8, 28u8, 88u8, 151u8, 46u8, 15u8,
-                            28u8, 146u8, 210u8, 235u8, 158u8, 64u8, 236u8,
-                            204u8, 89u8, 174u8, 250u8, 114u8, 45u8, 3u8, 17u8,
-                            129u8, 147u8, 69u8, 232u8, 181u8, 71u8, 98u8, 5u8,
-                            244u8,
-                        ],
-                    )
-                }
-                ///See [`Pallet::attest`].
-                pub fn attest(
-                    &self,
-                    statement: ::std::vec::Vec<::core::primitive::u8>,
-                ) -> ::subxt::tx::Payload<types::Attest> {
-                    ::subxt::tx::Payload::new_static(
-                        "Claims",
-                        "attest",
-                        types::Attest { statement },
-                        [
-                            254u8, 56u8, 140u8, 129u8, 227u8, 155u8, 161u8,
-                            107u8, 167u8, 148u8, 167u8, 104u8, 139u8, 174u8,
-                            204u8, 124u8, 126u8, 198u8, 165u8, 61u8, 83u8,
-                            197u8, 242u8, 13u8, 70u8, 153u8, 14u8, 62u8, 214u8,
-                            129u8, 64u8, 93u8,
-                        ],
-                    )
-                }
-                ///See [`Pallet::move_claim`].
-                pub fn move_claim(
-                    &self,
-                    old: runtime_types::pallet_ecdsa_claims::EthereumAddress,
-                    new: runtime_types::pallet_ecdsa_claims::EthereumAddress,
-                    maybe_preclaim: ::core::option::Option<
-                        ::subxt::utils::AccountId32,
-                    >,
-                ) -> ::subxt::tx::Payload<types::MoveClaim> {
-                    ::subxt::tx::Payload::new_static(
-                        "Claims",
-                        "move_claim",
-                        types::MoveClaim {
-                            old,
-                            new,
-                            maybe_preclaim,
-                        },
-                        [
-                            82u8, 63u8, 8u8, 178u8, 205u8, 16u8, 182u8, 216u8,
-                            80u8, 254u8, 48u8, 10u8, 52u8, 159u8, 198u8, 116u8,
-                            164u8, 108u8, 209u8, 193u8, 60u8, 139u8, 241u8,
-                            135u8, 92u8, 103u8, 241u8, 52u8, 103u8, 52u8,
-                            243u8, 0u8,
-                        ],
-                    )
-                }
-                ///See [`Pallet::force_set_expiry_config`].
-                pub fn force_set_expiry_config(
-                    &self,
-                    expiry_block: ::core::primitive::u32,
-                    dest: ::subxt::utils::AccountId32,
-                ) -> ::subxt::tx::Payload<types::ForceSetExpiryConfig>
-                {
-                    ::subxt::tx::Payload::new_static(
-                        "Claims",
-                        "force_set_expiry_config",
-                        types::ForceSetExpiryConfig { expiry_block, dest },
-                        [
-                            162u8, 211u8, 180u8, 76u8, 192u8, 117u8, 104u8,
-                            228u8, 230u8, 243u8, 227u8, 47u8, 177u8, 101u8,
-                            35u8, 41u8, 44u8, 255u8, 249u8, 172u8, 247u8,
-                            248u8, 21u8, 219u8, 125u8, 252u8, 13u8, 7u8, 146u8,
-                            60u8, 57u8, 186u8,
-                        ],
-                    )
-                }
-            }
-        }
-        ///The `Event` enum of this pallet
-        pub type Event = runtime_types::pallet_ecdsa_claims::pallet::Event;
-        pub mod events {
-            use super::runtime_types;
-            #[derive(
-                ::subxt::ext::codec::Decode,
-                ::subxt::ext::codec::Encode,
-                ::subxt::ext::scale_decode::DecodeAsType,
-                ::subxt::ext::scale_encode::EncodeAsType,
-                Clone,
-                Debug,
-                Eq,
-                PartialEq,
-            )]
-            #[codec(crate = ::subxt::ext::codec)]
-            #[decode_as_type(crate_path = ":: subxt :: ext :: scale_decode")]
-            #[encode_as_type(crate_path = ":: subxt :: ext :: scale_encode")]
-            ///Someone claimed some WEBBs.
-            pub struct Claimed {
-                pub who: ::subxt::utils::AccountId32,
-                pub ethereum_address:
-                    runtime_types::pallet_ecdsa_claims::EthereumAddress,
-                pub amount: ::core::primitive::u128,
-            }
-            impl ::subxt::events::StaticEvent for Claimed {
-                const PALLET: &'static str = "Claims";
-                const EVENT: &'static str = "Claimed";
-            }
-        }
-        pub mod storage {
-            use super::runtime_types;
-            pub struct StorageApi;
-            impl StorageApi {
-                pub fn claims(
-                    &self,
-                    _0: impl ::std::borrow::Borrow<
-                        runtime_types::pallet_ecdsa_claims::EthereumAddress,
-                    >,
-                ) -> ::subxt::storage::address::Address<
-                    ::subxt::storage::address::StaticStorageMapKey,
-                    ::core::primitive::u128,
-                    ::subxt::storage::address::Yes,
-                    (),
-                    ::subxt::storage::address::Yes,
-                > {
-                    ::subxt::storage::address::Address::new_static(
-                        "Claims",
-                        "Claims",
-                        vec![
-                            ::subxt::storage::address::make_static_storage_map_key(_0
-                            .borrow())
-                        ],
-                        [
-                            148u8,
-                            115u8,
-                            159u8,
-                            169u8,
-                            36u8,
-                            116u8,
-                            15u8,
-                            108u8,
-                            57u8,
-                            195u8,
-                            226u8,
-                            180u8,
-                            187u8,
-                            112u8,
-                            114u8,
-                            63u8,
-                            3u8,
-                            205u8,
-                            113u8,
-                            141u8,
-                            149u8,
-                            149u8,
-                            118u8,
-                            246u8,
-                            45u8,
-                            245u8,
-                            148u8,
-                            108u8,
-                            22u8,
-                            184u8,
-                            152u8,
-                            132u8,
-                        ],
-                    )
-                }
-                pub fn claims_root(
-                    &self,
-                ) -> ::subxt::storage::address::Address<
-                    ::subxt::storage::address::StaticStorageMapKey,
-                    ::core::primitive::u128,
-                    (),
-                    (),
-                    ::subxt::storage::address::Yes,
-                > {
-                    ::subxt::storage::address::Address::new_static(
-                        "Claims",
-                        "Claims",
-                        Vec::new(),
-                        [
-                            148u8, 115u8, 159u8, 169u8, 36u8, 116u8, 15u8,
-                            108u8, 57u8, 195u8, 226u8, 180u8, 187u8, 112u8,
-                            114u8, 63u8, 3u8, 205u8, 113u8, 141u8, 149u8,
-                            149u8, 118u8, 246u8, 45u8, 245u8, 148u8, 108u8,
-                            22u8, 184u8, 152u8, 132u8,
-                        ],
-                    )
-                }
-                pub fn total(
-                    &self,
-                ) -> ::subxt::storage::address::Address<
-                    ::subxt::storage::address::StaticStorageMapKey,
-                    ::core::primitive::u128,
-                    ::subxt::storage::address::Yes,
-                    ::subxt::storage::address::Yes,
-                    (),
-                > {
-                    ::subxt::storage::address::Address::new_static(
-                        "Claims",
-                        "Total",
-                        vec![],
-                        [
-                            188u8, 31u8, 219u8, 189u8, 49u8, 213u8, 203u8,
-                            89u8, 125u8, 58u8, 232u8, 159u8, 131u8, 155u8,
-                            166u8, 113u8, 99u8, 24u8, 40u8, 242u8, 118u8,
-                            183u8, 108u8, 230u8, 135u8, 150u8, 84u8, 86u8,
-                            118u8, 91u8, 168u8, 62u8,
-                        ],
-                    )
-                }
-                /// Expiry block and account to deposit expired funds
-                pub fn expiry_config(
-                    &self,
-                ) -> ::subxt::storage::address::Address<
-                    ::subxt::storage::address::StaticStorageMapKey,
-                    (::core::primitive::u32, ::subxt::utils::AccountId32),
-                    ::subxt::storage::address::Yes,
-                    (),
-                    (),
-                > {
-                    ::subxt::storage::address::Address::new_static(
-                        "Claims",
-                        "ExpiryConfig",
-                        vec![],
-                        [
-                            80u8, 129u8, 105u8, 115u8, 6u8, 95u8, 124u8, 125u8,
-                            23u8, 145u8, 239u8, 227u8, 228u8, 53u8, 219u8,
-                            20u8, 27u8, 234u8, 85u8, 92u8, 10u8, 11u8, 205u8,
-                            159u8, 54u8, 106u8, 18u8, 240u8, 20u8, 142u8,
-                            199u8, 167u8,
-                        ],
-                    )
-                }
-                /// Vesting schedule for a claim.
-                /// First balance is the total amount that should be held for vesting.
-                /// Second balance is how much should be unlocked per block.
-                /// The block number is when the vesting should start.
-                pub fn vesting(
-                    &self,
-                    _0: impl ::std::borrow::Borrow<
-                        runtime_types::pallet_ecdsa_claims::EthereumAddress,
-                    >,
-                ) -> ::subxt::storage::address::Address<
-                    ::subxt::storage::address::StaticStorageMapKey,
-                    (
-                        ::core::primitive::u128,
-                        ::core::primitive::u128,
-                        ::core::primitive::u32,
-                    ),
-                    ::subxt::storage::address::Yes,
-                    (),
-                    ::subxt::storage::address::Yes,
-                > {
-                    ::subxt::storage::address::Address::new_static(
-                        "Claims",
-                        "Vesting",
-                        vec![
-                            ::subxt::storage::address::make_static_storage_map_key(_0
-                            .borrow())
-                        ],
-                        [
-                            16u8,
-                            107u8,
-                            69u8,
-                            162u8,
-                            210u8,
-                            200u8,
-                            188u8,
-                            185u8,
-                            69u8,
-                            90u8,
-                            209u8,
-                            238u8,
-                            167u8,
-                            173u8,
-                            193u8,
-                            118u8,
-                            58u8,
-                            17u8,
-                            68u8,
-                            136u8,
-                            163u8,
-                            207u8,
-                            34u8,
-                            226u8,
-                            174u8,
-                            199u8,
-                            127u8,
-                            4u8,
-                            225u8,
-                            198u8,
-                            143u8,
-                            180u8,
-                        ],
-                    )
-                }
-                /// Vesting schedule for a claim.
-                /// First balance is the total amount that should be held for vesting.
-                /// Second balance is how much should be unlocked per block.
-                /// The block number is when the vesting should start.
-                pub fn vesting_root(
-                    &self,
-                ) -> ::subxt::storage::address::Address<
-                    ::subxt::storage::address::StaticStorageMapKey,
-                    (
-                        ::core::primitive::u128,
-                        ::core::primitive::u128,
-                        ::core::primitive::u32,
-                    ),
-                    (),
-                    (),
-                    ::subxt::storage::address::Yes,
-                > {
-                    ::subxt::storage::address::Address::new_static(
-                        "Claims",
-                        "Vesting",
-                        Vec::new(),
-                        [
-                            16u8, 107u8, 69u8, 162u8, 210u8, 200u8, 188u8,
-                            185u8, 69u8, 90u8, 209u8, 238u8, 167u8, 173u8,
-                            193u8, 118u8, 58u8, 17u8, 68u8, 136u8, 163u8,
-                            207u8, 34u8, 226u8, 174u8, 199u8, 127u8, 4u8,
-                            225u8, 198u8, 143u8, 180u8,
-                        ],
-                    )
-                }
-                /// The statement kind that must be signed, if any.
-                pub fn signing(
-                    &self,
-                    _0: impl ::std::borrow::Borrow<
-                        runtime_types::pallet_ecdsa_claims::EthereumAddress,
-                    >,
-                ) -> ::subxt::storage::address::Address<
-                    ::subxt::storage::address::StaticStorageMapKey,
-                    runtime_types::pallet_ecdsa_claims::StatementKind,
-                    ::subxt::storage::address::Yes,
-                    (),
-                    ::subxt::storage::address::Yes,
-                > {
-                    ::subxt::storage::address::Address::new_static(
-                        "Claims",
-                        "Signing",
-                        vec![
-                            ::subxt::storage::address::make_static_storage_map_key(_0
-                            .borrow())
-                        ],
-                        [
-                            111u8,
-                            90u8,
-                            178u8,
-                            121u8,
-                            241u8,
-                            28u8,
-                            169u8,
-                            231u8,
-                            61u8,
-                            189u8,
-                            113u8,
-                            207u8,
-                            26u8,
-                            153u8,
-                            189u8,
-                            15u8,
-                            192u8,
-                            25u8,
-                            22u8,
-                            22u8,
-                            124u8,
-                            26u8,
-                            191u8,
-                            39u8,
-                            130u8,
-                            164u8,
-                            34u8,
-                            4u8,
-                            44u8,
-                            91u8,
-                            82u8,
-                            186u8,
-                        ],
-                    )
-                }
-                /// The statement kind that must be signed, if any.
-                pub fn signing_root(
-                    &self,
-                ) -> ::subxt::storage::address::Address<
-                    ::subxt::storage::address::StaticStorageMapKey,
-                    runtime_types::pallet_ecdsa_claims::StatementKind,
-                    (),
-                    (),
-                    ::subxt::storage::address::Yes,
-                > {
-                    ::subxt::storage::address::Address::new_static(
-                        "Claims",
-                        "Signing",
-                        Vec::new(),
-                        [
-                            111u8, 90u8, 178u8, 121u8, 241u8, 28u8, 169u8,
-                            231u8, 61u8, 189u8, 113u8, 207u8, 26u8, 153u8,
-                            189u8, 15u8, 192u8, 25u8, 22u8, 22u8, 124u8, 26u8,
-                            191u8, 39u8, 130u8, 164u8, 34u8, 4u8, 44u8, 91u8,
-                            82u8, 186u8,
-                        ],
-                    )
-                }
-                /// Pre-claimed Ethereum accounts, by the Account ID that they are claimed to.
-                pub fn preclaims(
-                    &self,
-                    _0: impl ::std::borrow::Borrow<::subxt::utils::AccountId32>,
-                ) -> ::subxt::storage::address::Address<
-                    ::subxt::storage::address::StaticStorageMapKey,
-                    runtime_types::pallet_ecdsa_claims::EthereumAddress,
-                    ::subxt::storage::address::Yes,
-                    (),
-                    ::subxt::storage::address::Yes,
-                > {
-                    ::subxt::storage::address::Address::new_static(
-                        "Claims",
-                        "Preclaims",
-                        vec![
-                            ::subxt::storage::address::make_static_storage_map_key(_0
-                            .borrow())
-                        ],
-                        [
-                            154u8,
-                            182u8,
-                            178u8,
-                            76u8,
-                            81u8,
-                            63u8,
-                            87u8,
-                            179u8,
-                            243u8,
-                            104u8,
-                            206u8,
-                            75u8,
-                            114u8,
-                            83u8,
-                            16u8,
-                            233u8,
-                            22u8,
-                            132u8,
-                            207u8,
-                            36u8,
-                            151u8,
-                            179u8,
-                            94u8,
-                            208u8,
-                            210u8,
-                            202u8,
-                            149u8,
-                            248u8,
-                            9u8,
-                            49u8,
-                            140u8,
-                            94u8,
-                        ],
-                    )
-                }
-                /// Pre-claimed Ethereum accounts, by the Account ID that they are claimed to.
-                pub fn preclaims_root(
-                    &self,
-                ) -> ::subxt::storage::address::Address<
-                    ::subxt::storage::address::StaticStorageMapKey,
-                    runtime_types::pallet_ecdsa_claims::EthereumAddress,
-                    (),
-                    (),
-                    ::subxt::storage::address::Yes,
-                > {
-                    ::subxt::storage::address::Address::new_static(
-                        "Claims",
-                        "Preclaims",
-                        Vec::new(),
-                        [
-                            154u8, 182u8, 178u8, 76u8, 81u8, 63u8, 87u8, 179u8,
-                            243u8, 104u8, 206u8, 75u8, 114u8, 83u8, 16u8,
-                            233u8, 22u8, 132u8, 207u8, 36u8, 151u8, 179u8,
-                            94u8, 208u8, 210u8, 202u8, 149u8, 248u8, 9u8, 49u8,
-                            140u8, 94u8,
-                        ],
-                    )
-                }
-            }
-        }
-        pub mod constants {
-            use super::runtime_types;
-            pub struct ConstantsApi;
-            impl ConstantsApi {
-                pub fn prefix(
-                    &self,
-                ) -> ::subxt::constants::Address<
-                    ::std::vec::Vec<::core::primitive::u8>,
-                > {
-                    ::subxt::constants::Address::new_static(
-                        "Claims",
-                        "Prefix",
-                        [
-                            64u8, 190u8, 244u8, 122u8, 87u8, 182u8, 217u8,
-                            16u8, 55u8, 223u8, 128u8, 6u8, 112u8, 30u8, 236u8,
-                            222u8, 153u8, 53u8, 247u8, 102u8, 196u8, 31u8, 6u8,
-                            186u8, 251u8, 209u8, 114u8, 125u8, 213u8, 222u8,
-                            240u8, 8u8,
                         ],
                     )
                 }
@@ -26477,11 +25686,10 @@ pub mod api {
                             call: ::std::boxed::Box::new(call),
                         },
                         [
-                            248u8, 176u8, 111u8, 103u8, 234u8, 102u8, 223u8,
-                            123u8, 104u8, 174u8, 9u8, 183u8, 225u8, 60u8, 91u8,
-                            164u8, 156u8, 110u8, 65u8, 31u8, 58u8, 7u8, 29u8,
-                            175u8, 119u8, 0u8, 143u8, 45u8, 35u8, 64u8, 160u8,
-                            137u8,
+                            111u8, 3u8, 106u8, 240u8, 76u8, 73u8, 252u8, 65u8,
+                            17u8, 40u8, 206u8, 51u8, 73u8, 245u8, 204u8, 147u8,
+                            79u8, 134u8, 193u8, 194u8, 33u8, 159u8, 80u8, 65u8,
+                            53u8, 119u8, 39u8, 35u8, 201u8, 183u8, 15u8, 97u8,
                         ],
                     )
                 }
@@ -26528,11 +25736,11 @@ pub mod api {
                             call: ::std::boxed::Box::new(call),
                         },
                         [
-                            157u8, 172u8, 2u8, 73u8, 152u8, 153u8, 91u8, 236u8,
-                            32u8, 49u8, 8u8, 107u8, 232u8, 65u8, 168u8, 44u8,
-                            149u8, 3u8, 204u8, 157u8, 87u8, 121u8, 234u8,
-                            110u8, 177u8, 87u8, 44u8, 237u8, 162u8, 17u8,
-                            155u8, 137u8,
+                            31u8, 17u8, 192u8, 9u8, 0u8, 150u8, 175u8, 107u8,
+                            193u8, 181u8, 27u8, 174u8, 25u8, 83u8, 28u8, 64u8,
+                            244u8, 75u8, 194u8, 95u8, 163u8, 211u8, 150u8,
+                            142u8, 139u8, 164u8, 6u8, 82u8, 188u8, 225u8, 27u8,
+                            102u8,
                         ],
                     )
                 }
@@ -26576,11 +25784,11 @@ pub mod api {
                             call: ::std::boxed::Box::new(call),
                         },
                         [
-                            233u8, 247u8, 191u8, 250u8, 236u8, 113u8, 98u8,
-                            92u8, 96u8, 231u8, 239u8, 229u8, 217u8, 54u8,
-                            215u8, 59u8, 42u8, 41u8, 172u8, 103u8, 231u8, 78u8,
-                            143u8, 9u8, 243u8, 13u8, 94u8, 214u8, 47u8, 150u8,
-                            181u8, 177u8,
+                            138u8, 177u8, 30u8, 242u8, 41u8, 56u8, 65u8, 30u8,
+                            4u8, 149u8, 25u8, 88u8, 186u8, 134u8, 63u8, 6u8,
+                            61u8, 32u8, 139u8, 193u8, 245u8, 111u8, 118u8,
+                            58u8, 31u8, 115u8, 202u8, 135u8, 97u8, 29u8, 144u8,
+                            80u8,
                         ],
                     )
                 }
@@ -26608,11 +25816,11 @@ pub mod api {
                             call: ::std::boxed::Box::new(call),
                         },
                         [
-                            125u8, 144u8, 247u8, 236u8, 167u8, 120u8, 153u8,
-                            199u8, 187u8, 33u8, 102u8, 20u8, 63u8, 104u8, 91u8,
-                            250u8, 192u8, 85u8, 2u8, 40u8, 10u8, 145u8, 29u8,
-                            167u8, 108u8, 178u8, 166u8, 137u8, 139u8, 204u8,
-                            21u8, 181u8,
+                            169u8, 42u8, 152u8, 115u8, 207u8, 212u8, 27u8,
+                            82u8, 203u8, 167u8, 176u8, 110u8, 87u8, 25u8,
+                            155u8, 43u8, 210u8, 74u8, 94u8, 47u8, 16u8, 179u8,
+                            227u8, 103u8, 12u8, 248u8, 215u8, 19u8, 69u8, 61u8,
+                            118u8, 0u8,
                         ],
                     )
                 }
@@ -29881,11 +29089,10 @@ pub mod api {
                         "batch",
                         types::Batch { calls },
                         [
-                            41u8, 183u8, 176u8, 57u8, 115u8, 209u8, 122u8,
-                            72u8, 112u8, 177u8, 249u8, 185u8, 143u8, 214u8,
-                            9u8, 21u8, 105u8, 90u8, 113u8, 2u8, 28u8, 120u8,
-                            218u8, 88u8, 13u8, 8u8, 81u8, 178u8, 69u8, 9u8,
-                            164u8, 182u8,
+                            15u8, 54u8, 169u8, 69u8, 161u8, 152u8, 77u8, 42u8,
+                            6u8, 233u8, 245u8, 169u8, 182u8, 89u8, 113u8, 14u8,
+                            194u8, 56u8, 171u8, 3u8, 128u8, 27u8, 187u8, 122u8,
+                            109u8, 154u8, 45u8, 27u8, 187u8, 151u8, 26u8, 58u8,
                         ],
                     )
                 }
@@ -29903,11 +29110,11 @@ pub mod api {
                             call: ::std::boxed::Box::new(call),
                         },
                         [
-                            114u8, 162u8, 11u8, 118u8, 197u8, 78u8, 52u8,
-                            146u8, 188u8, 213u8, 139u8, 41u8, 90u8, 60u8, 75u8,
-                            12u8, 176u8, 54u8, 184u8, 197u8, 61u8, 76u8, 185u8,
-                            179u8, 177u8, 129u8, 140u8, 76u8, 177u8, 149u8,
-                            112u8, 253u8,
+                            183u8, 235u8, 82u8, 235u8, 83u8, 160u8, 83u8,
+                            214u8, 152u8, 16u8, 117u8, 87u8, 54u8, 252u8,
+                            102u8, 168u8, 56u8, 107u8, 38u8, 73u8, 84u8, 132u8,
+                            180u8, 82u8, 198u8, 51u8, 128u8, 117u8, 190u8,
+                            193u8, 252u8, 236u8,
                         ],
                     )
                 }
@@ -29923,11 +29130,11 @@ pub mod api {
                         "batch_all",
                         types::BatchAll { calls },
                         [
-                            190u8, 119u8, 76u8, 96u8, 42u8, 238u8, 141u8,
-                            203u8, 132u8, 112u8, 241u8, 218u8, 76u8, 60u8,
-                            157u8, 144u8, 209u8, 109u8, 241u8, 128u8, 61u8,
-                            116u8, 204u8, 35u8, 42u8, 137u8, 125u8, 72u8,
-                            177u8, 78u8, 106u8, 187u8,
+                            211u8, 178u8, 226u8, 58u8, 160u8, 224u8, 146u8,
+                            245u8, 23u8, 188u8, 167u8, 136u8, 145u8, 97u8,
+                            239u8, 217u8, 48u8, 86u8, 213u8, 148u8, 174u8,
+                            196u8, 136u8, 56u8, 168u8, 217u8, 128u8, 116u8,
+                            181u8, 155u8, 48u8, 190u8,
                         ],
                     )
                 }
@@ -29945,10 +29152,11 @@ pub mod api {
                             call: ::std::boxed::Box::new(call),
                         },
                         [
-                            102u8, 50u8, 248u8, 26u8, 21u8, 223u8, 86u8, 170u8,
-                            219u8, 23u8, 46u8, 92u8, 27u8, 51u8, 85u8, 215u8,
-                            4u8, 143u8, 134u8, 195u8, 4u8, 95u8, 93u8, 58u8,
-                            15u8, 194u8, 35u8, 235u8, 72u8, 18u8, 35u8, 181u8,
+                            187u8, 210u8, 144u8, 220u8, 5u8, 65u8, 169u8,
+                            124u8, 22u8, 156u8, 139u8, 87u8, 73u8, 161u8,
+                            183u8, 201u8, 42u8, 32u8, 102u8, 208u8, 110u8,
+                            48u8, 46u8, 59u8, 179u8, 222u8, 242u8, 249u8,
+                            159u8, 217u8, 102u8, 7u8,
                         ],
                     )
                 }
@@ -29964,11 +29172,11 @@ pub mod api {
                         "force_batch",
                         types::ForceBatch { calls },
                         [
-                            199u8, 9u8, 215u8, 21u8, 8u8, 94u8, 234u8, 230u8,
-                            242u8, 1u8, 149u8, 74u8, 253u8, 217u8, 32u8, 182u8,
-                            12u8, 24u8, 159u8, 36u8, 144u8, 165u8, 151u8, 68u8,
-                            124u8, 218u8, 34u8, 109u8, 220u8, 188u8, 41u8,
-                            159u8,
+                            159u8, 100u8, 216u8, 149u8, 185u8, 19u8, 102u8,
+                            160u8, 233u8, 221u8, 44u8, 168u8, 178u8, 89u8,
+                            161u8, 50u8, 206u8, 126u8, 64u8, 237u8, 14u8,
+                            245u8, 1u8, 72u8, 54u8, 62u8, 253u8, 5u8, 13u8,
+                            195u8, 92u8, 134u8,
                         ],
                     )
                 }
@@ -29986,11 +29194,11 @@ pub mod api {
                             weight,
                         },
                         [
-                            17u8, 90u8, 175u8, 209u8, 179u8, 100u8, 254u8,
-                            203u8, 229u8, 243u8, 73u8, 80u8, 168u8, 127u8,
-                            56u8, 193u8, 58u8, 210u8, 193u8, 173u8, 34u8,
-                            161u8, 242u8, 9u8, 33u8, 20u8, 57u8, 126u8, 18u8,
-                            67u8, 220u8, 185u8,
+                            231u8, 163u8, 175u8, 134u8, 41u8, 172u8, 116u8,
+                            122u8, 198u8, 59u8, 33u8, 202u8, 50u8, 197u8,
+                            173u8, 203u8, 161u8, 181u8, 162u8, 77u8, 191u8,
+                            69u8, 227u8, 35u8, 234u8, 242u8, 123u8, 36u8, 40u8,
+                            81u8, 19u8, 114u8,
                         ],
                     )
                 }
@@ -38196,197 +37404,6 @@ pub mod api {
                 }
             }
         }
-        pub mod pallet_ecdsa_claims {
-            use super::runtime_types;
-            pub mod pallet {
-                use super::runtime_types;
-                #[derive(
-                    ::subxt::ext::codec::Decode,
-                    ::subxt::ext::codec::Encode,
-                    ::subxt::ext::scale_decode::DecodeAsType,
-                    ::subxt::ext::scale_encode::EncodeAsType,
-                    Clone,
-                    Debug,
-                    Eq,
-                    PartialEq,
-                )]
-                #[codec(crate = ::subxt::ext::codec)]
-                #[decode_as_type(
-                    crate_path = ":: subxt :: ext :: scale_decode"
-                )]
-                #[encode_as_type(
-                    crate_path = ":: subxt :: ext :: scale_encode"
-                )]
-                ///Contains a variant per dispatchable extrinsic that this pallet has.
-                pub enum Call {
-                    #[codec(index = 0)]
-                    ///See [`Pallet::claim`].
-                    claim {
-                        dest: ::subxt::utils::AccountId32,
-                        ethereum_signature:
-                            runtime_types::pallet_ecdsa_claims::EcdsaSignature,
-                    },
-                    #[codec(index = 1)]
-                    ///See [`Pallet::mint_claim`].
-                    mint_claim {
-                        who:
-                            runtime_types::pallet_ecdsa_claims::EthereumAddress,
-                        value: ::core::primitive::u128,
-                        vesting_schedule: ::core::option::Option<(
-                            ::core::primitive::u128,
-                            ::core::primitive::u128,
-                            ::core::primitive::u32,
-                        )>,
-                        statement: ::core::option::Option<
-                            runtime_types::pallet_ecdsa_claims::StatementKind,
-                        >,
-                    },
-                    #[codec(index = 2)]
-                    ///See [`Pallet::claim_attest`].
-                    claim_attest {
-                        dest: ::subxt::utils::AccountId32,
-                        ethereum_signature:
-                            runtime_types::pallet_ecdsa_claims::EcdsaSignature,
-                        statement: ::std::vec::Vec<::core::primitive::u8>,
-                    },
-                    #[codec(index = 3)]
-                    ///See [`Pallet::attest`].
-                    attest {
-                        statement: ::std::vec::Vec<::core::primitive::u8>,
-                    },
-                    #[codec(index = 4)]
-                    ///See [`Pallet::move_claim`].
-                    move_claim {
-                        old:
-                            runtime_types::pallet_ecdsa_claims::EthereumAddress,
-                        new:
-                            runtime_types::pallet_ecdsa_claims::EthereumAddress,
-                        maybe_preclaim:
-                            ::core::option::Option<::subxt::utils::AccountId32>,
-                    },
-                    #[codec(index = 5)]
-                    ///See [`Pallet::force_set_expiry_config`].
-                    force_set_expiry_config {
-                        expiry_block: ::core::primitive::u32,
-                        dest: ::subxt::utils::AccountId32,
-                    },
-                }
-                #[derive(
-                    ::subxt::ext::codec::Decode,
-                    ::subxt::ext::codec::Encode,
-                    ::subxt::ext::scale_decode::DecodeAsType,
-                    ::subxt::ext::scale_encode::EncodeAsType,
-                    Clone,
-                    Debug,
-                    Eq,
-                    PartialEq,
-                )]
-                #[codec(crate = ::subxt::ext::codec)]
-                #[decode_as_type(
-                    crate_path = ":: subxt :: ext :: scale_decode"
-                )]
-                #[encode_as_type(
-                    crate_path = ":: subxt :: ext :: scale_encode"
-                )]
-                ///The `Error` enum of this pallet.
-                pub enum Error {
-                    #[codec(index = 0)]
-                    ///Invalid Ethereum signature.
-                    InvalidEthereumSignature,
-                    #[codec(index = 1)]
-                    ///Ethereum address has no claim.
-                    SignerHasNoClaim,
-                    #[codec(index = 2)]
-                    ///Account ID sending transaction has no claim.
-                    SenderHasNoClaim,
-                    #[codec(index = 3)]
-                    ///There's not enough in the pot to pay out some unvested amount. Generally implies a
-                    ///logic error.
-                    PotUnderflow,
-                    #[codec(index = 4)]
-                    ///A needed statement was not included.
-                    InvalidStatement,
-                    #[codec(index = 5)]
-                    ///The account already has a vested balance.
-                    VestedBalanceExists,
-                }
-                #[derive(
-                    ::subxt::ext::codec::Decode,
-                    ::subxt::ext::codec::Encode,
-                    ::subxt::ext::scale_decode::DecodeAsType,
-                    ::subxt::ext::scale_encode::EncodeAsType,
-                    Clone,
-                    Debug,
-                    Eq,
-                    PartialEq,
-                )]
-                #[codec(crate = ::subxt::ext::codec)]
-                #[decode_as_type(
-                    crate_path = ":: subxt :: ext :: scale_decode"
-                )]
-                #[encode_as_type(
-                    crate_path = ":: subxt :: ext :: scale_encode"
-                )]
-                ///The `Event` enum of this pallet
-                pub enum Event {
-                    #[codec(index = 0)]
-                    ///Someone claimed some WEBBs.
-                    Claimed {
-                        who: ::subxt::utils::AccountId32,
-                        ethereum_address:
-                            runtime_types::pallet_ecdsa_claims::EthereumAddress,
-                        amount: ::core::primitive::u128,
-                    },
-                }
-            }
-            #[derive(
-                ::subxt::ext::codec::Decode,
-                ::subxt::ext::codec::Encode,
-                ::subxt::ext::scale_decode::DecodeAsType,
-                ::subxt::ext::scale_encode::EncodeAsType,
-                Clone,
-                Debug,
-                Eq,
-                PartialEq,
-            )]
-            #[codec(crate = ::subxt::ext::codec)]
-            #[decode_as_type(crate_path = ":: subxt :: ext :: scale_decode")]
-            #[encode_as_type(crate_path = ":: subxt :: ext :: scale_encode")]
-            pub struct EcdsaSignature(pub [::core::primitive::u8; 65usize]);
-            #[derive(
-                ::subxt::ext::codec::Decode,
-                ::subxt::ext::codec::Encode,
-                ::subxt::ext::scale_decode::DecodeAsType,
-                ::subxt::ext::scale_encode::EncodeAsType,
-                Clone,
-                Debug,
-                Eq,
-                PartialEq,
-            )]
-            #[codec(crate = ::subxt::ext::codec)]
-            #[decode_as_type(crate_path = ":: subxt :: ext :: scale_decode")]
-            #[encode_as_type(crate_path = ":: subxt :: ext :: scale_encode")]
-            pub struct EthereumAddress(pub [::core::primitive::u8; 20usize]);
-            #[derive(
-                ::subxt::ext::codec::Decode,
-                ::subxt::ext::codec::Encode,
-                ::subxt::ext::scale_decode::DecodeAsType,
-                ::subxt::ext::scale_encode::EncodeAsType,
-                Clone,
-                Debug,
-                Eq,
-                PartialEq,
-            )]
-            #[codec(crate = ::subxt::ext::codec)]
-            #[decode_as_type(crate_path = ":: subxt :: ext :: scale_decode")]
-            #[encode_as_type(crate_path = ":: subxt :: ext :: scale_encode")]
-            pub enum StatementKind {
-                #[codec(index = 0)]
-                Regular,
-                #[codec(index = 1)]
-                Saft,
-            }
-        }
         pub mod pallet_election_provider_multi_phase {
             use super::runtime_types;
             pub mod pallet {
@@ -44931,7 +43948,7 @@ pub mod api {
                         ::subxt::utils::AccountId32,
                     >,
                 ),
-                #[codec(index = 35)]
+                #[codec(index = 34)]
                 Ethereum(runtime_types::pallet_ethereum::RawOrigin),
                 #[codec(index = 3)]
                 Void(runtime_types::sp_core::Void),
@@ -44993,52 +44010,50 @@ pub mod api {
                 #[codec(index = 16)]
                 Vesting(runtime_types::pallet_vesting::pallet::Call),
                 #[codec(index = 17)]
-                Claims(runtime_types::pallet_ecdsa_claims::pallet::Call),
-                #[codec(index = 18)]
                 Elections(runtime_types::pallet_elections_phragmen::pallet::Call),
-                #[codec(index = 19)]
+                #[codec(index = 18)]
                 ElectionProviderMultiPhase(
                     runtime_types::pallet_election_provider_multi_phase::pallet::Call,
                 ),
-                #[codec(index = 20)]
+                #[codec(index = 19)]
                 Staking(runtime_types::pallet_staking::pallet::pallet::Call),
-                #[codec(index = 21)]
+                #[codec(index = 20)]
                 Session(runtime_types::pallet_session::pallet::Call),
-                #[codec(index = 23)]
+                #[codec(index = 22)]
                 Treasury(runtime_types::pallet_treasury::pallet::Call),
-                #[codec(index = 24)]
+                #[codec(index = 23)]
                 Bounties(runtime_types::pallet_bounties::pallet::Call),
-                #[codec(index = 25)]
+                #[codec(index = 24)]
                 ChildBounties(runtime_types::pallet_child_bounties::pallet::Call),
-                #[codec(index = 26)]
+                #[codec(index = 25)]
                 BagsList(runtime_types::pallet_bags_list::pallet::Call),
-                #[codec(index = 27)]
+                #[codec(index = 26)]
                 NominationPools(runtime_types::pallet_nomination_pools::pallet::Call),
-                #[codec(index = 28)]
+                #[codec(index = 27)]
                 Scheduler(runtime_types::pallet_scheduler::pallet::Call),
-                #[codec(index = 29)]
+                #[codec(index = 28)]
                 Preimage(runtime_types::pallet_preimage::pallet::Call),
-                #[codec(index = 31)]
+                #[codec(index = 30)]
                 TransactionPause(runtime_types::pallet_transaction_pause::module::Call),
-                #[codec(index = 32)]
+                #[codec(index = 31)]
                 ImOnline(runtime_types::pallet_im_online::pallet::Call),
-                #[codec(index = 33)]
+                #[codec(index = 32)]
                 Identity(runtime_types::pallet_identity::pallet::Call),
-                #[codec(index = 34)]
+                #[codec(index = 33)]
                 Utility(runtime_types::pallet_utility::pallet::Call),
-                #[codec(index = 35)]
+                #[codec(index = 34)]
                 Ethereum(runtime_types::pallet_ethereum::pallet::Call),
-                #[codec(index = 36)]
+                #[codec(index = 35)]
                 EVM(runtime_types::pallet_evm::pallet::Call),
-                #[codec(index = 38)]
+                #[codec(index = 37)]
                 DynamicFee(runtime_types::pallet_dynamic_fee::pallet::Call),
-                #[codec(index = 39)]
+                #[codec(index = 38)]
                 BaseFee(runtime_types::pallet_base_fee::pallet::Call),
-                #[codec(index = 40)]
+                #[codec(index = 39)]
                 HotfixSufficients(
                     runtime_types::pallet_hotfix_sufficients::pallet::Call,
                 ),
-                #[codec(index = 41)]
+                #[codec(index = 40)]
                 Eth2Client(runtime_types::pallet_eth2_light_client::pallet::Call),
             }
             #[derive(
@@ -45086,48 +44101,46 @@ pub mod api {
                 #[codec(index = 16)]
                 Vesting(runtime_types::pallet_vesting::pallet::Event),
                 #[codec(index = 17)]
-                Claims(runtime_types::pallet_ecdsa_claims::pallet::Event),
-                #[codec(index = 18)]
                 Elections(runtime_types::pallet_elections_phragmen::pallet::Event),
-                #[codec(index = 19)]
+                #[codec(index = 18)]
                 ElectionProviderMultiPhase(
                     runtime_types::pallet_election_provider_multi_phase::pallet::Event,
                 ),
-                #[codec(index = 20)]
+                #[codec(index = 19)]
                 Staking(runtime_types::pallet_staking::pallet::pallet::Event),
-                #[codec(index = 21)]
+                #[codec(index = 20)]
                 Session(runtime_types::pallet_session::pallet::Event),
-                #[codec(index = 23)]
+                #[codec(index = 22)]
                 Treasury(runtime_types::pallet_treasury::pallet::Event),
-                #[codec(index = 24)]
+                #[codec(index = 23)]
                 Bounties(runtime_types::pallet_bounties::pallet::Event),
-                #[codec(index = 25)]
+                #[codec(index = 24)]
                 ChildBounties(runtime_types::pallet_child_bounties::pallet::Event),
-                #[codec(index = 26)]
+                #[codec(index = 25)]
                 BagsList(runtime_types::pallet_bags_list::pallet::Event),
-                #[codec(index = 27)]
+                #[codec(index = 26)]
                 NominationPools(runtime_types::pallet_nomination_pools::pallet::Event),
-                #[codec(index = 28)]
+                #[codec(index = 27)]
                 Scheduler(runtime_types::pallet_scheduler::pallet::Event),
-                #[codec(index = 29)]
+                #[codec(index = 28)]
                 Preimage(runtime_types::pallet_preimage::pallet::Event),
-                #[codec(index = 30)]
+                #[codec(index = 29)]
                 Offences(runtime_types::pallet_offences::pallet::Event),
-                #[codec(index = 31)]
+                #[codec(index = 30)]
                 TransactionPause(runtime_types::pallet_transaction_pause::module::Event),
-                #[codec(index = 32)]
+                #[codec(index = 31)]
                 ImOnline(runtime_types::pallet_im_online::pallet::Event),
-                #[codec(index = 33)]
+                #[codec(index = 32)]
                 Identity(runtime_types::pallet_identity::pallet::Event),
-                #[codec(index = 34)]
+                #[codec(index = 33)]
                 Utility(runtime_types::pallet_utility::pallet::Event),
-                #[codec(index = 35)]
+                #[codec(index = 34)]
                 Ethereum(runtime_types::pallet_ethereum::pallet::Event),
-                #[codec(index = 36)]
+                #[codec(index = 35)]
                 EVM(runtime_types::pallet_evm::pallet::Event),
-                #[codec(index = 39)]
+                #[codec(index = 38)]
                 BaseFee(runtime_types::pallet_base_fee::pallet::Event),
-                #[codec(index = 41)]
+                #[codec(index = 40)]
                 Eth2Client(runtime_types::pallet_eth2_light_client::pallet::Event),
             }
             #[derive(
