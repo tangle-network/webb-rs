@@ -3,6 +3,9 @@
 pub mod anchor_handler;
 pub mod erc20_preset_minter_pauser;
 pub mod fungible_token_wrapper;
+pub mod masp_vanchor;
+pub mod masp_vanchor_batch_tree;
+pub mod masp_vanchor_tree;
 pub mod open_variable_anchor;
 pub mod poseidon_hasher;
 pub mod poseidon_t3;

@@ -162,7 +162,7 @@ mod evm {
         parse_and_write_abigen(
             "contracts/protocol-solidity/MultiAssetVAnchorBatchTree.json",
             "src/evm/contract/protocol_solidity/masp_vanchor_batch_tree.rs",
-            "MultiAssetVAnchorBatchTree",
+            "MultiAssetVAnchorBatchTreeContract",
         )
     }
 
@@ -171,7 +171,7 @@ mod evm {
         parse_and_write_abigen(
             "contracts/protocol-solidity/MultiAssetVAnchorTree.json",
             "src/evm/contract/protocol_solidity/masp_vanchor_tree.rs",
-            "MultiAssetVAnchorTree",
+            "MultiAssetVAnchorTreeContract",
         )
     }
 
@@ -180,7 +180,7 @@ mod evm {
         parse_and_write_abigen(
             "contracts/protocol-solidity/MultiAssetVAnchor.json",
             "src/evm/contract/protocol_solidity/masp_vanchor.rs",
-            "MultiAssetVAnchor",
+            "MultiAssetVAnchorContract",
         )
     }
 }
