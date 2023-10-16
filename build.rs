@@ -156,6 +156,33 @@ mod evm {
             "PoseidonHasherContract",
         )
     }
+
+    pub fn build_protocol_solidity_masp_vanchor_batch_tree(
+    ) -> Result<(), Box<dyn Error>> {
+        parse_and_write_abigen(
+            "contracts/protocol-solidity/MultiAssetVAnchorBatchTree.json",
+            "src/evm/contract/protocol_solidity/masp_vanchor_batch_tree.rs",
+            "MultiAssetVAnchorBatchTree",
+        )
+    }
+
+    pub fn build_protocol_solidity_masp_vanchor_tree(
+    ) -> Result<(), Box<dyn Error>> {
+        parse_and_write_abigen(
+            "contracts/protocol-solidity/MultiAssetVAnchorTree.json",
+            "src/evm/contract/protocol_solidity/masp_vanchor_tree.rs",
+            "MultiAssetVAnchorTree",
+        )
+    }
+
+    pub fn build_protocol_solidity_masp_vanchor(
+    ) -> Result<(), Box<dyn Error>> {
+        parse_and_write_abigen(
+            "contracts/protocol-solidity/MultiAssetVAnchor.json",
+            "src/evm/contract/protocol_solidity/masp_vanchor.rs",
+            "MultiAssetVAnchor",
+        )
+    }
 }
 
 #[cfg(feature = "generate-substrate")]
@@ -236,6 +263,10 @@ fn main() -> Result<(), Box<dyn Error>> {
         evm::build_protocol_solidity_poseidon_t4()?;
         evm::build_protocol_solidity_poseidon_t6()?;
         evm::build_protocol_solidity_poseidon_hasher()?;
+        evm::build_protocol_solidity_masp_vanchor_batch_tree()?;
+        evm::build_protocol_solidity_masp_vanchor_tree()?;
+        evm::build_protocol_solidity_masp_vanchor()?;
+
     }
     #[cfg(feature = "generate-substrate")]
     {
