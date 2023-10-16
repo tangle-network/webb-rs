@@ -10,15 +10,906 @@ pub use token_wrapper_contract::*;
     non_camel_case_types
 )]
 pub mod token_wrapper_contract {
-    #[rustfmt::skip]
-    const __ABI: &str = "[{\"inputs\":[{\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\",\"components\":[],\"indexed\":true},{\"internalType\":\"address\",\"name\":\"spender\",\"type\":\"address\",\"components\":[],\"indexed\":true},{\"internalType\":\"uint256\",\"name\":\"value\",\"type\":\"uint256\",\"components\":[],\"indexed\":false}],\"type\":\"event\",\"name\":\"Approval\",\"outputs\":[],\"anonymous\":false},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\",\"components\":[],\"indexed\":false}],\"type\":\"event\",\"name\":\"Paused\",\"outputs\":[],\"anonymous\":false},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"role\",\"type\":\"bytes32\",\"components\":[],\"indexed\":true},{\"internalType\":\"bytes32\",\"name\":\"previousAdminRole\",\"type\":\"bytes32\",\"components\":[],\"indexed\":true},{\"internalType\":\"bytes32\",\"name\":\"newAdminRole\",\"type\":\"bytes32\",\"components\":[],\"indexed\":true}],\"type\":\"event\",\"name\":\"RoleAdminChanged\",\"outputs\":[],\"anonymous\":false},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"role\",\"type\":\"bytes32\",\"components\":[],\"indexed\":true},{\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\",\"components\":[],\"indexed\":true},{\"internalType\":\"address\",\"name\":\"sender\",\"type\":\"address\",\"components\":[],\"indexed\":true}],\"type\":\"event\",\"name\":\"RoleGranted\",\"outputs\":[],\"anonymous\":false},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"role\",\"type\":\"bytes32\",\"components\":[],\"indexed\":true},{\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\",\"components\":[],\"indexed\":true},{\"internalType\":\"address\",\"name\":\"sender\",\"type\":\"address\",\"components\":[],\"indexed\":true}],\"type\":\"event\",\"name\":\"RoleRevoked\",\"outputs\":[],\"anonymous\":false},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"from\",\"type\":\"address\",\"components\":[],\"indexed\":true},{\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\",\"components\":[],\"indexed\":true},{\"internalType\":\"uint256\",\"name\":\"value\",\"type\":\"uint256\",\"components\":[],\"indexed\":false}],\"type\":\"event\",\"name\":\"Transfer\",\"outputs\":[],\"anonymous\":false},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\",\"components\":[],\"indexed\":false}],\"type\":\"event\",\"name\":\"Unpaused\",\"outputs\":[],\"anonymous\":false},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"sender\",\"type\":\"address\",\"components\":[],\"indexed\":true},{\"internalType\":\"address\",\"name\":\"recipient\",\"type\":\"address\",\"components\":[],\"indexed\":true},{\"internalType\":\"address\",\"name\":\"tokenAddress\",\"type\":\"address\",\"components\":[],\"indexed\":true},{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\",\"components\":[],\"indexed\":false}],\"type\":\"event\",\"name\":\"Unwrapping\",\"outputs\":[],\"anonymous\":false},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"sender\",\"type\":\"address\",\"components\":[],\"indexed\":true},{\"internalType\":\"address\",\"name\":\"recipient\",\"type\":\"address\",\"components\":[],\"indexed\":true},{\"internalType\":\"address\",\"name\":\"tokenAddress\",\"type\":\"address\",\"components\":[],\"indexed\":true},{\"internalType\":\"uint256\",\"name\":\"wrappingFee\",\"type\":\"uint256\",\"components\":[],\"indexed\":false},{\"internalType\":\"uint256\",\"name\":\"afterFeeAmount\",\"type\":\"uint256\",\"components\":[],\"indexed\":false}],\"type\":\"event\",\"name\":\"Wrapping\",\"outputs\":[],\"anonymous\":false},{\"inputs\":[],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"DEFAULT_ADMIN_ROLE\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\",\"components\":[]}]},{\"inputs\":[],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"MINTER_ROLE\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\",\"components\":[]}]},{\"inputs\":[],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"PAUSER_ROLE\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\",\"components\":[]}]},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\",\"components\":[]},{\"internalType\":\"address\",\"name\":\"spender\",\"type\":\"address\",\"components\":[]}],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"allowance\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\",\"components\":[]}]},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"spender\",\"type\":\"address\",\"components\":[]},{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\",\"components\":[]}],\"stateMutability\":\"nonpayable\",\"type\":\"function\",\"name\":\"approve\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\",\"components\":[]}]},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\",\"components\":[]}],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"balanceOf\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\",\"components\":[]}]},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\",\"components\":[]}],\"stateMutability\":\"nonpayable\",\"type\":\"function\",\"name\":\"burn\",\"outputs\":[]},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\",\"components\":[]},{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\",\"components\":[]}],\"stateMutability\":\"nonpayable\",\"type\":\"function\",\"name\":\"burnFrom\",\"outputs\":[]},{\"inputs\":[],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"decimals\",\"outputs\":[{\"internalType\":\"uint8\",\"name\":\"\",\"type\":\"uint8\",\"components\":[]}]},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"spender\",\"type\":\"address\",\"components\":[]},{\"internalType\":\"uint256\",\"name\":\"subtractedValue\",\"type\":\"uint256\",\"components\":[]}],\"stateMutability\":\"nonpayable\",\"type\":\"function\",\"name\":\"decreaseAllowance\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\",\"components\":[]}]},{\"inputs\":[],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"feePercentage\",\"outputs\":[{\"internalType\":\"uint16\",\"name\":\"\",\"type\":\"uint16\",\"components\":[]}]},{\"inputs\":[],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"feeRecipient\",\"outputs\":[{\"internalType\":\"address payable\",\"name\":\"\",\"type\":\"address\",\"components\":[]}]},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_deposit\",\"type\":\"uint256\",\"components\":[]}],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"getAmountToWrap\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\",\"components\":[]}]},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_amountToWrap\",\"type\":\"uint256\",\"components\":[]}],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"getFeeFromAmount\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\",\"components\":[]}]},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"role\",\"type\":\"bytes32\",\"components\":[]}],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"getRoleAdmin\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\",\"components\":[]}]},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"role\",\"type\":\"bytes32\",\"components\":[]},{\"internalType\":\"uint256\",\"name\":\"index\",\"type\":\"uint256\",\"components\":[]}],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"getRoleMember\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\",\"components\":[]}]},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"role\",\"type\":\"bytes32\",\"components\":[]}],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"getRoleMemberCount\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\",\"components\":[]}]},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"role\",\"type\":\"bytes32\",\"components\":[]},{\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\",\"components\":[]}],\"stateMutability\":\"nonpayable\",\"type\":\"function\",\"name\":\"grantRole\",\"outputs\":[]},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"role\",\"type\":\"bytes32\",\"components\":[]},{\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\",\"components\":[]}],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"hasRole\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\",\"components\":[]}]},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"spender\",\"type\":\"address\",\"components\":[]},{\"internalType\":\"uint256\",\"name\":\"addedValue\",\"type\":\"uint256\",\"components\":[]}],\"stateMutability\":\"nonpayable\",\"type\":\"function\",\"name\":\"increaseAllowance\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\",\"components\":[]}]},{\"inputs\":[],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"initialized\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\",\"components\":[]}]},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"tokenAddress\",\"type\":\"address\",\"components\":[]}],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"isValidToken\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\",\"components\":[]}]},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\",\"components\":[]},{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\",\"components\":[]}],\"stateMutability\":\"nonpayable\",\"type\":\"function\",\"name\":\"mint\",\"outputs\":[]},{\"inputs\":[],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"name\",\"outputs\":[{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\",\"components\":[]}]},{\"inputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\",\"name\":\"pause\",\"outputs\":[]},{\"inputs\":[],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"paused\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\",\"components\":[]}]},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"role\",\"type\":\"bytes32\",\"components\":[]},{\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\",\"components\":[]}],\"stateMutability\":\"nonpayable\",\"type\":\"function\",\"name\":\"renounceRole\",\"outputs\":[]},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"role\",\"type\":\"bytes32\",\"components\":[]},{\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\",\"components\":[]}],\"stateMutability\":\"nonpayable\",\"type\":\"function\",\"name\":\"revokeRole\",\"outputs\":[]},{\"inputs\":[{\"internalType\":\"bytes4\",\"name\":\"interfaceId\",\"type\":\"bytes4\",\"components\":[]}],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"supportsInterface\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\",\"components\":[]}]},{\"inputs\":[],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"symbol\",\"outputs\":[{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\",\"components\":[]}]},{\"inputs\":[],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"totalSupply\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\",\"components\":[]}]},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\",\"components\":[]},{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\",\"components\":[]}],\"stateMutability\":\"nonpayable\",\"type\":\"function\",\"name\":\"transfer\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\",\"components\":[]}]},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"from\",\"type\":\"address\",\"components\":[]},{\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\",\"components\":[]},{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\",\"components\":[]}],\"stateMutability\":\"nonpayable\",\"type\":\"function\",\"name\":\"transferFrom\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\",\"components\":[]}]},{\"inputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\",\"name\":\"unpause\",\"outputs\":[]},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"tokenAddress\",\"type\":\"address\",\"components\":[]},{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\",\"components\":[]}],\"stateMutability\":\"nonpayable\",\"type\":\"function\",\"name\":\"unwrap\",\"outputs\":[]},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"tokenAddress\",\"type\":\"address\",\"components\":[]},{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\",\"components\":[]},{\"internalType\":\"address\",\"name\":\"recipient\",\"type\":\"address\",\"components\":[]}],\"stateMutability\":\"nonpayable\",\"type\":\"function\",\"name\":\"unwrapAndSendTo\",\"outputs\":[]},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"sender\",\"type\":\"address\",\"components\":[]},{\"internalType\":\"address\",\"name\":\"tokenAddress\",\"type\":\"address\",\"components\":[]},{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\",\"components\":[]}],\"stateMutability\":\"nonpayable\",\"type\":\"function\",\"name\":\"unwrapFor\",\"outputs\":[]},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"tokenAddress\",\"type\":\"address\",\"components\":[]},{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\",\"components\":[]}],\"stateMutability\":\"payable\",\"type\":\"function\",\"name\":\"wrap\",\"outputs\":[]},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"sender\",\"type\":\"address\",\"components\":[]},{\"internalType\":\"address\",\"name\":\"tokenAddress\",\"type\":\"address\",\"components\":[]},{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\",\"components\":[]}],\"stateMutability\":\"payable\",\"type\":\"function\",\"name\":\"wrapFor\",\"outputs\":[]},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"sender\",\"type\":\"address\",\"components\":[]},{\"internalType\":\"address\",\"name\":\"tokenAddress\",\"type\":\"address\",\"components\":[]},{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\",\"components\":[]},{\"internalType\":\"address\",\"name\":\"recipient\",\"type\":\"address\",\"components\":[]}],\"stateMutability\":\"payable\",\"type\":\"function\",\"name\":\"wrapForAndSendTo\",\"outputs\":[]}]";
+    #[allow(deprecated)]
+    fn __abi() -> ::ethers::core::abi::Abi {
+        ::ethers::core::abi::ethabi::Contract {
+            constructor: ::core::option::Option::None,
+            functions: ::core::convert::From::from([
+                (
+                    ::std::borrow::ToOwned::to_owned("DEFAULT_ADMIN_ROLE"),
+                    ::std::vec![
+                        ::ethers::core::abi::ethabi::Function { name :
+                        ::std::borrow::ToOwned::to_owned("DEFAULT_ADMIN_ROLE"), inputs :
+                        ::std::vec![], outputs :
+                        ::std::vec![::ethers::core::abi::ethabi::Param { name :
+                        ::std::string::String::new(), kind :
+                        ::ethers::core::abi::ethabi::ParamType::FixedBytes(32usize),
+                        internal_type :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("bytes32")),
+                        }], constant : ::core::option::Option::None, state_mutability :
+                        ::ethers::core::abi::ethabi::StateMutability::View, }
+                    ],
+                ),
+                (
+                    ::std::borrow::ToOwned::to_owned("MINTER_ROLE"),
+                    ::std::vec![
+                        ::ethers::core::abi::ethabi::Function { name :
+                        ::std::borrow::ToOwned::to_owned("MINTER_ROLE"), inputs :
+                        ::std::vec![], outputs :
+                        ::std::vec![::ethers::core::abi::ethabi::Param { name :
+                        ::std::string::String::new(), kind :
+                        ::ethers::core::abi::ethabi::ParamType::FixedBytes(32usize),
+                        internal_type :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("bytes32")),
+                        }], constant : ::core::option::Option::None, state_mutability :
+                        ::ethers::core::abi::ethabi::StateMutability::View, }
+                    ],
+                ),
+                (
+                    ::std::borrow::ToOwned::to_owned("PAUSER_ROLE"),
+                    ::std::vec![
+                        ::ethers::core::abi::ethabi::Function { name :
+                        ::std::borrow::ToOwned::to_owned("PAUSER_ROLE"), inputs :
+                        ::std::vec![], outputs :
+                        ::std::vec![::ethers::core::abi::ethabi::Param { name :
+                        ::std::string::String::new(), kind :
+                        ::ethers::core::abi::ethabi::ParamType::FixedBytes(32usize),
+                        internal_type :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("bytes32")),
+                        }], constant : ::core::option::Option::None, state_mutability :
+                        ::ethers::core::abi::ethabi::StateMutability::View, }
+                    ],
+                ),
+                (
+                    ::std::borrow::ToOwned::to_owned("allowance"),
+                    ::std::vec![
+                        ::ethers::core::abi::ethabi::Function { name :
+                        ::std::borrow::ToOwned::to_owned("allowance"), inputs :
+                        ::std::vec![::ethers::core::abi::ethabi::Param { name :
+                        ::std::borrow::ToOwned::to_owned("owner"), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Address, internal_type :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("address")),
+                        }, ::ethers::core::abi::ethabi::Param { name :
+                        ::std::borrow::ToOwned::to_owned("spender"), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Address, internal_type :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("address")),
+                        }], outputs : ::std::vec![::ethers::core::abi::ethabi::Param {
+                        name : ::std::string::String::new(), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Uint(256usize),
+                        internal_type :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("uint256")),
+                        }], constant : ::core::option::Option::None, state_mutability :
+                        ::ethers::core::abi::ethabi::StateMutability::View, }
+                    ],
+                ),
+                (
+                    ::std::borrow::ToOwned::to_owned("approve"),
+                    ::std::vec![
+                        ::ethers::core::abi::ethabi::Function { name :
+                        ::std::borrow::ToOwned::to_owned("approve"), inputs :
+                        ::std::vec![::ethers::core::abi::ethabi::Param { name :
+                        ::std::borrow::ToOwned::to_owned("spender"), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Address, internal_type :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("address")),
+                        }, ::ethers::core::abi::ethabi::Param { name :
+                        ::std::borrow::ToOwned::to_owned("amount"), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Uint(256usize),
+                        internal_type :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("uint256")),
+                        }], outputs : ::std::vec![::ethers::core::abi::ethabi::Param {
+                        name : ::std::string::String::new(), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Bool, internal_type :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("bool")),
+                        }], constant : ::core::option::Option::None, state_mutability :
+                        ::ethers::core::abi::ethabi::StateMutability::NonPayable, }
+                    ],
+                ),
+                (
+                    ::std::borrow::ToOwned::to_owned("balanceOf"),
+                    ::std::vec![
+                        ::ethers::core::abi::ethabi::Function { name :
+                        ::std::borrow::ToOwned::to_owned("balanceOf"), inputs :
+                        ::std::vec![::ethers::core::abi::ethabi::Param { name :
+                        ::std::borrow::ToOwned::to_owned("account"), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Address, internal_type :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("address")),
+                        }], outputs : ::std::vec![::ethers::core::abi::ethabi::Param {
+                        name : ::std::string::String::new(), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Uint(256usize),
+                        internal_type :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("uint256")),
+                        }], constant : ::core::option::Option::None, state_mutability :
+                        ::ethers::core::abi::ethabi::StateMutability::View, }
+                    ],
+                ),
+                (
+                    ::std::borrow::ToOwned::to_owned("burn"),
+                    ::std::vec![
+                        ::ethers::core::abi::ethabi::Function { name :
+                        ::std::borrow::ToOwned::to_owned("burn"), inputs :
+                        ::std::vec![::ethers::core::abi::ethabi::Param { name :
+                        ::std::borrow::ToOwned::to_owned("amount"), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Uint(256usize),
+                        internal_type :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("uint256")),
+                        }], outputs : ::std::vec![], constant :
+                        ::core::option::Option::None, state_mutability :
+                        ::ethers::core::abi::ethabi::StateMutability::NonPayable, }
+                    ],
+                ),
+                (
+                    ::std::borrow::ToOwned::to_owned("burnFrom"),
+                    ::std::vec![
+                        ::ethers::core::abi::ethabi::Function { name :
+                        ::std::borrow::ToOwned::to_owned("burnFrom"), inputs :
+                        ::std::vec![::ethers::core::abi::ethabi::Param { name :
+                        ::std::borrow::ToOwned::to_owned("account"), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Address, internal_type :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("address")),
+                        }, ::ethers::core::abi::ethabi::Param { name :
+                        ::std::borrow::ToOwned::to_owned("amount"), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Uint(256usize),
+                        internal_type :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("uint256")),
+                        }], outputs : ::std::vec![], constant :
+                        ::core::option::Option::None, state_mutability :
+                        ::ethers::core::abi::ethabi::StateMutability::NonPayable, }
+                    ],
+                ),
+                (
+                    ::std::borrow::ToOwned::to_owned("decimals"),
+                    ::std::vec![
+                        ::ethers::core::abi::ethabi::Function { name :
+                        ::std::borrow::ToOwned::to_owned("decimals"), inputs :
+                        ::std::vec![], outputs :
+                        ::std::vec![::ethers::core::abi::ethabi::Param { name :
+                        ::std::string::String::new(), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Uint(8usize),
+                        internal_type :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("uint8")),
+                        }], constant : ::core::option::Option::None, state_mutability :
+                        ::ethers::core::abi::ethabi::StateMutability::View, }
+                    ],
+                ),
+                (
+                    ::std::borrow::ToOwned::to_owned("decreaseAllowance"),
+                    ::std::vec![
+                        ::ethers::core::abi::ethabi::Function { name :
+                        ::std::borrow::ToOwned::to_owned("decreaseAllowance"), inputs :
+                        ::std::vec![::ethers::core::abi::ethabi::Param { name :
+                        ::std::borrow::ToOwned::to_owned("spender"), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Address, internal_type :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("address")),
+                        }, ::ethers::core::abi::ethabi::Param { name :
+                        ::std::borrow::ToOwned::to_owned("subtractedValue"), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Uint(256usize),
+                        internal_type :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("uint256")),
+                        }], outputs : ::std::vec![::ethers::core::abi::ethabi::Param {
+                        name : ::std::string::String::new(), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Bool, internal_type :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("bool")),
+                        }], constant : ::core::option::Option::None, state_mutability :
+                        ::ethers::core::abi::ethabi::StateMutability::NonPayable, }
+                    ],
+                ),
+                (
+                    ::std::borrow::ToOwned::to_owned("feePercentage"),
+                    ::std::vec![
+                        ::ethers::core::abi::ethabi::Function { name :
+                        ::std::borrow::ToOwned::to_owned("feePercentage"), inputs :
+                        ::std::vec![], outputs :
+                        ::std::vec![::ethers::core::abi::ethabi::Param { name :
+                        ::std::string::String::new(), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Uint(16usize),
+                        internal_type :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("uint16")),
+                        }], constant : ::core::option::Option::None, state_mutability :
+                        ::ethers::core::abi::ethabi::StateMutability::View, }
+                    ],
+                ),
+                (
+                    ::std::borrow::ToOwned::to_owned("feeRecipient"),
+                    ::std::vec![
+                        ::ethers::core::abi::ethabi::Function { name :
+                        ::std::borrow::ToOwned::to_owned("feeRecipient"), inputs :
+                        ::std::vec![], outputs :
+                        ::std::vec![::ethers::core::abi::ethabi::Param { name :
+                        ::std::string::String::new(), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Address, internal_type :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("address payable")),
+                        }], constant : ::core::option::Option::None, state_mutability :
+                        ::ethers::core::abi::ethabi::StateMutability::View, }
+                    ],
+                ),
+                (
+                    ::std::borrow::ToOwned::to_owned("getAmountToWrap"),
+                    ::std::vec![
+                        ::ethers::core::abi::ethabi::Function { name :
+                        ::std::borrow::ToOwned::to_owned("getAmountToWrap"), inputs :
+                        ::std::vec![::ethers::core::abi::ethabi::Param { name :
+                        ::std::borrow::ToOwned::to_owned("_deposit"), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Uint(256usize),
+                        internal_type :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("uint256")),
+                        }], outputs : ::std::vec![::ethers::core::abi::ethabi::Param {
+                        name : ::std::string::String::new(), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Uint(256usize),
+                        internal_type :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("uint256")),
+                        }], constant : ::core::option::Option::None, state_mutability :
+                        ::ethers::core::abi::ethabi::StateMutability::View, }
+                    ],
+                ),
+                (
+                    ::std::borrow::ToOwned::to_owned("getFeeFromAmount"),
+                    ::std::vec![
+                        ::ethers::core::abi::ethabi::Function { name :
+                        ::std::borrow::ToOwned::to_owned("getFeeFromAmount"), inputs :
+                        ::std::vec![::ethers::core::abi::ethabi::Param { name :
+                        ::std::borrow::ToOwned::to_owned("_amountToWrap"), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Uint(256usize),
+                        internal_type :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("uint256")),
+                        }], outputs : ::std::vec![::ethers::core::abi::ethabi::Param {
+                        name : ::std::string::String::new(), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Uint(256usize),
+                        internal_type :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("uint256")),
+                        }], constant : ::core::option::Option::None, state_mutability :
+                        ::ethers::core::abi::ethabi::StateMutability::View, }
+                    ],
+                ),
+                (
+                    ::std::borrow::ToOwned::to_owned("getRoleAdmin"),
+                    ::std::vec![
+                        ::ethers::core::abi::ethabi::Function { name :
+                        ::std::borrow::ToOwned::to_owned("getRoleAdmin"), inputs :
+                        ::std::vec![::ethers::core::abi::ethabi::Param { name :
+                        ::std::borrow::ToOwned::to_owned("role"), kind :
+                        ::ethers::core::abi::ethabi::ParamType::FixedBytes(32usize),
+                        internal_type :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("bytes32")),
+                        }], outputs : ::std::vec![::ethers::core::abi::ethabi::Param {
+                        name : ::std::string::String::new(), kind :
+                        ::ethers::core::abi::ethabi::ParamType::FixedBytes(32usize),
+                        internal_type :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("bytes32")),
+                        }], constant : ::core::option::Option::None, state_mutability :
+                        ::ethers::core::abi::ethabi::StateMutability::View, }
+                    ],
+                ),
+                (
+                    ::std::borrow::ToOwned::to_owned("getRoleMember"),
+                    ::std::vec![
+                        ::ethers::core::abi::ethabi::Function { name :
+                        ::std::borrow::ToOwned::to_owned("getRoleMember"), inputs :
+                        ::std::vec![::ethers::core::abi::ethabi::Param { name :
+                        ::std::borrow::ToOwned::to_owned("role"), kind :
+                        ::ethers::core::abi::ethabi::ParamType::FixedBytes(32usize),
+                        internal_type :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("bytes32")),
+                        }, ::ethers::core::abi::ethabi::Param { name :
+                        ::std::borrow::ToOwned::to_owned("index"), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Uint(256usize),
+                        internal_type :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("uint256")),
+                        }], outputs : ::std::vec![::ethers::core::abi::ethabi::Param {
+                        name : ::std::string::String::new(), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Address, internal_type :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("address")),
+                        }], constant : ::core::option::Option::None, state_mutability :
+                        ::ethers::core::abi::ethabi::StateMutability::View, }
+                    ],
+                ),
+                (
+                    ::std::borrow::ToOwned::to_owned("getRoleMemberCount"),
+                    ::std::vec![
+                        ::ethers::core::abi::ethabi::Function { name :
+                        ::std::borrow::ToOwned::to_owned("getRoleMemberCount"), inputs :
+                        ::std::vec![::ethers::core::abi::ethabi::Param { name :
+                        ::std::borrow::ToOwned::to_owned("role"), kind :
+                        ::ethers::core::abi::ethabi::ParamType::FixedBytes(32usize),
+                        internal_type :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("bytes32")),
+                        }], outputs : ::std::vec![::ethers::core::abi::ethabi::Param {
+                        name : ::std::string::String::new(), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Uint(256usize),
+                        internal_type :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("uint256")),
+                        }], constant : ::core::option::Option::None, state_mutability :
+                        ::ethers::core::abi::ethabi::StateMutability::View, }
+                    ],
+                ),
+                (
+                    ::std::borrow::ToOwned::to_owned("grantRole"),
+                    ::std::vec![
+                        ::ethers::core::abi::ethabi::Function { name :
+                        ::std::borrow::ToOwned::to_owned("grantRole"), inputs :
+                        ::std::vec![::ethers::core::abi::ethabi::Param { name :
+                        ::std::borrow::ToOwned::to_owned("role"), kind :
+                        ::ethers::core::abi::ethabi::ParamType::FixedBytes(32usize),
+                        internal_type :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("bytes32")),
+                        }, ::ethers::core::abi::ethabi::Param { name :
+                        ::std::borrow::ToOwned::to_owned("account"), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Address, internal_type :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("address")),
+                        }], outputs : ::std::vec![], constant :
+                        ::core::option::Option::None, state_mutability :
+                        ::ethers::core::abi::ethabi::StateMutability::NonPayable, }
+                    ],
+                ),
+                (
+                    ::std::borrow::ToOwned::to_owned("hasRole"),
+                    ::std::vec![
+                        ::ethers::core::abi::ethabi::Function { name :
+                        ::std::borrow::ToOwned::to_owned("hasRole"), inputs :
+                        ::std::vec![::ethers::core::abi::ethabi::Param { name :
+                        ::std::borrow::ToOwned::to_owned("role"), kind :
+                        ::ethers::core::abi::ethabi::ParamType::FixedBytes(32usize),
+                        internal_type :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("bytes32")),
+                        }, ::ethers::core::abi::ethabi::Param { name :
+                        ::std::borrow::ToOwned::to_owned("account"), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Address, internal_type :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("address")),
+                        }], outputs : ::std::vec![::ethers::core::abi::ethabi::Param {
+                        name : ::std::string::String::new(), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Bool, internal_type :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("bool")),
+                        }], constant : ::core::option::Option::None, state_mutability :
+                        ::ethers::core::abi::ethabi::StateMutability::View, }
+                    ],
+                ),
+                (
+                    ::std::borrow::ToOwned::to_owned("increaseAllowance"),
+                    ::std::vec![
+                        ::ethers::core::abi::ethabi::Function { name :
+                        ::std::borrow::ToOwned::to_owned("increaseAllowance"), inputs :
+                        ::std::vec![::ethers::core::abi::ethabi::Param { name :
+                        ::std::borrow::ToOwned::to_owned("spender"), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Address, internal_type :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("address")),
+                        }, ::ethers::core::abi::ethabi::Param { name :
+                        ::std::borrow::ToOwned::to_owned("addedValue"), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Uint(256usize),
+                        internal_type :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("uint256")),
+                        }], outputs : ::std::vec![::ethers::core::abi::ethabi::Param {
+                        name : ::std::string::String::new(), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Bool, internal_type :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("bool")),
+                        }], constant : ::core::option::Option::None, state_mutability :
+                        ::ethers::core::abi::ethabi::StateMutability::NonPayable, }
+                    ],
+                ),
+                (
+                    ::std::borrow::ToOwned::to_owned("initialized"),
+                    ::std::vec![
+                        ::ethers::core::abi::ethabi::Function { name :
+                        ::std::borrow::ToOwned::to_owned("initialized"), inputs :
+                        ::std::vec![], outputs :
+                        ::std::vec![::ethers::core::abi::ethabi::Param { name :
+                        ::std::string::String::new(), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Bool, internal_type :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("bool")),
+                        }], constant : ::core::option::Option::None, state_mutability :
+                        ::ethers::core::abi::ethabi::StateMutability::View, }
+                    ],
+                ),
+                (
+                    ::std::borrow::ToOwned::to_owned("isValidToken"),
+                    ::std::vec![
+                        ::ethers::core::abi::ethabi::Function { name :
+                        ::std::borrow::ToOwned::to_owned("isValidToken"), inputs :
+                        ::std::vec![::ethers::core::abi::ethabi::Param { name :
+                        ::std::borrow::ToOwned::to_owned("tokenAddress"), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Address, internal_type :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("address")),
+                        }], outputs : ::std::vec![::ethers::core::abi::ethabi::Param {
+                        name : ::std::string::String::new(), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Bool, internal_type :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("bool")),
+                        }], constant : ::core::option::Option::None, state_mutability :
+                        ::ethers::core::abi::ethabi::StateMutability::View, }
+                    ],
+                ),
+                (
+                    ::std::borrow::ToOwned::to_owned("mint"),
+                    ::std::vec![
+                        ::ethers::core::abi::ethabi::Function { name :
+                        ::std::borrow::ToOwned::to_owned("mint"), inputs :
+                        ::std::vec![::ethers::core::abi::ethabi::Param { name :
+                        ::std::borrow::ToOwned::to_owned("to"), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Address, internal_type :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("address")),
+                        }, ::ethers::core::abi::ethabi::Param { name :
+                        ::std::borrow::ToOwned::to_owned("amount"), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Uint(256usize),
+                        internal_type :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("uint256")),
+                        }], outputs : ::std::vec![], constant :
+                        ::core::option::Option::None, state_mutability :
+                        ::ethers::core::abi::ethabi::StateMutability::NonPayable, }
+                    ],
+                ),
+                (
+                    ::std::borrow::ToOwned::to_owned("name"),
+                    ::std::vec![
+                        ::ethers::core::abi::ethabi::Function { name :
+                        ::std::borrow::ToOwned::to_owned("name"), inputs : ::std::vec![],
+                        outputs : ::std::vec![::ethers::core::abi::ethabi::Param { name :
+                        ::std::string::String::new(), kind :
+                        ::ethers::core::abi::ethabi::ParamType::String, internal_type :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("string")),
+                        }], constant : ::core::option::Option::None, state_mutability :
+                        ::ethers::core::abi::ethabi::StateMutability::View, }
+                    ],
+                ),
+                (
+                    ::std::borrow::ToOwned::to_owned("pause"),
+                    ::std::vec![
+                        ::ethers::core::abi::ethabi::Function { name :
+                        ::std::borrow::ToOwned::to_owned("pause"), inputs :
+                        ::std::vec![], outputs : ::std::vec![], constant :
+                        ::core::option::Option::None, state_mutability :
+                        ::ethers::core::abi::ethabi::StateMutability::NonPayable, }
+                    ],
+                ),
+                (
+                    ::std::borrow::ToOwned::to_owned("paused"),
+                    ::std::vec![
+                        ::ethers::core::abi::ethabi::Function { name :
+                        ::std::borrow::ToOwned::to_owned("paused"), inputs :
+                        ::std::vec![], outputs :
+                        ::std::vec![::ethers::core::abi::ethabi::Param { name :
+                        ::std::string::String::new(), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Bool, internal_type :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("bool")),
+                        }], constant : ::core::option::Option::None, state_mutability :
+                        ::ethers::core::abi::ethabi::StateMutability::View, }
+                    ],
+                ),
+                (
+                    ::std::borrow::ToOwned::to_owned("renounceRole"),
+                    ::std::vec![
+                        ::ethers::core::abi::ethabi::Function { name :
+                        ::std::borrow::ToOwned::to_owned("renounceRole"), inputs :
+                        ::std::vec![::ethers::core::abi::ethabi::Param { name :
+                        ::std::borrow::ToOwned::to_owned("role"), kind :
+                        ::ethers::core::abi::ethabi::ParamType::FixedBytes(32usize),
+                        internal_type :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("bytes32")),
+                        }, ::ethers::core::abi::ethabi::Param { name :
+                        ::std::borrow::ToOwned::to_owned("account"), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Address, internal_type :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("address")),
+                        }], outputs : ::std::vec![], constant :
+                        ::core::option::Option::None, state_mutability :
+                        ::ethers::core::abi::ethabi::StateMutability::NonPayable, }
+                    ],
+                ),
+                (
+                    ::std::borrow::ToOwned::to_owned("revokeRole"),
+                    ::std::vec![
+                        ::ethers::core::abi::ethabi::Function { name :
+                        ::std::borrow::ToOwned::to_owned("revokeRole"), inputs :
+                        ::std::vec![::ethers::core::abi::ethabi::Param { name :
+                        ::std::borrow::ToOwned::to_owned("role"), kind :
+                        ::ethers::core::abi::ethabi::ParamType::FixedBytes(32usize),
+                        internal_type :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("bytes32")),
+                        }, ::ethers::core::abi::ethabi::Param { name :
+                        ::std::borrow::ToOwned::to_owned("account"), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Address, internal_type :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("address")),
+                        }], outputs : ::std::vec![], constant :
+                        ::core::option::Option::None, state_mutability :
+                        ::ethers::core::abi::ethabi::StateMutability::NonPayable, }
+                    ],
+                ),
+                (
+                    ::std::borrow::ToOwned::to_owned("supportsInterface"),
+                    ::std::vec![
+                        ::ethers::core::abi::ethabi::Function { name :
+                        ::std::borrow::ToOwned::to_owned("supportsInterface"), inputs :
+                        ::std::vec![::ethers::core::abi::ethabi::Param { name :
+                        ::std::borrow::ToOwned::to_owned("interfaceId"), kind :
+                        ::ethers::core::abi::ethabi::ParamType::FixedBytes(4usize),
+                        internal_type :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("bytes4")),
+                        }], outputs : ::std::vec![::ethers::core::abi::ethabi::Param {
+                        name : ::std::string::String::new(), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Bool, internal_type :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("bool")),
+                        }], constant : ::core::option::Option::None, state_mutability :
+                        ::ethers::core::abi::ethabi::StateMutability::View, }
+                    ],
+                ),
+                (
+                    ::std::borrow::ToOwned::to_owned("symbol"),
+                    ::std::vec![
+                        ::ethers::core::abi::ethabi::Function { name :
+                        ::std::borrow::ToOwned::to_owned("symbol"), inputs :
+                        ::std::vec![], outputs :
+                        ::std::vec![::ethers::core::abi::ethabi::Param { name :
+                        ::std::string::String::new(), kind :
+                        ::ethers::core::abi::ethabi::ParamType::String, internal_type :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("string")),
+                        }], constant : ::core::option::Option::None, state_mutability :
+                        ::ethers::core::abi::ethabi::StateMutability::View, }
+                    ],
+                ),
+                (
+                    ::std::borrow::ToOwned::to_owned("totalSupply"),
+                    ::std::vec![
+                        ::ethers::core::abi::ethabi::Function { name :
+                        ::std::borrow::ToOwned::to_owned("totalSupply"), inputs :
+                        ::std::vec![], outputs :
+                        ::std::vec![::ethers::core::abi::ethabi::Param { name :
+                        ::std::string::String::new(), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Uint(256usize),
+                        internal_type :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("uint256")),
+                        }], constant : ::core::option::Option::None, state_mutability :
+                        ::ethers::core::abi::ethabi::StateMutability::View, }
+                    ],
+                ),
+                (
+                    ::std::borrow::ToOwned::to_owned("transfer"),
+                    ::std::vec![
+                        ::ethers::core::abi::ethabi::Function { name :
+                        ::std::borrow::ToOwned::to_owned("transfer"), inputs :
+                        ::std::vec![::ethers::core::abi::ethabi::Param { name :
+                        ::std::borrow::ToOwned::to_owned("to"), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Address, internal_type :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("address")),
+                        }, ::ethers::core::abi::ethabi::Param { name :
+                        ::std::borrow::ToOwned::to_owned("amount"), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Uint(256usize),
+                        internal_type :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("uint256")),
+                        }], outputs : ::std::vec![::ethers::core::abi::ethabi::Param {
+                        name : ::std::string::String::new(), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Bool, internal_type :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("bool")),
+                        }], constant : ::core::option::Option::None, state_mutability :
+                        ::ethers::core::abi::ethabi::StateMutability::NonPayable, }
+                    ],
+                ),
+                (
+                    ::std::borrow::ToOwned::to_owned("transferFrom"),
+                    ::std::vec![
+                        ::ethers::core::abi::ethabi::Function { name :
+                        ::std::borrow::ToOwned::to_owned("transferFrom"), inputs :
+                        ::std::vec![::ethers::core::abi::ethabi::Param { name :
+                        ::std::borrow::ToOwned::to_owned("from"), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Address, internal_type :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("address")),
+                        }, ::ethers::core::abi::ethabi::Param { name :
+                        ::std::borrow::ToOwned::to_owned("to"), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Address, internal_type :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("address")),
+                        }, ::ethers::core::abi::ethabi::Param { name :
+                        ::std::borrow::ToOwned::to_owned("amount"), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Uint(256usize),
+                        internal_type :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("uint256")),
+                        }], outputs : ::std::vec![::ethers::core::abi::ethabi::Param {
+                        name : ::std::string::String::new(), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Bool, internal_type :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("bool")),
+                        }], constant : ::core::option::Option::None, state_mutability :
+                        ::ethers::core::abi::ethabi::StateMutability::NonPayable, }
+                    ],
+                ),
+                (
+                    ::std::borrow::ToOwned::to_owned("unpause"),
+                    ::std::vec![
+                        ::ethers::core::abi::ethabi::Function { name :
+                        ::std::borrow::ToOwned::to_owned("unpause"), inputs :
+                        ::std::vec![], outputs : ::std::vec![], constant :
+                        ::core::option::Option::None, state_mutability :
+                        ::ethers::core::abi::ethabi::StateMutability::NonPayable, }
+                    ],
+                ),
+                (
+                    ::std::borrow::ToOwned::to_owned("unwrap"),
+                    ::std::vec![
+                        ::ethers::core::abi::ethabi::Function { name :
+                        ::std::borrow::ToOwned::to_owned("unwrap"), inputs :
+                        ::std::vec![::ethers::core::abi::ethabi::Param { name :
+                        ::std::borrow::ToOwned::to_owned("tokenAddress"), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Address, internal_type :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("address")),
+                        }, ::ethers::core::abi::ethabi::Param { name :
+                        ::std::borrow::ToOwned::to_owned("amount"), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Uint(256usize),
+                        internal_type :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("uint256")),
+                        }], outputs : ::std::vec![], constant :
+                        ::core::option::Option::None, state_mutability :
+                        ::ethers::core::abi::ethabi::StateMutability::NonPayable, }
+                    ],
+                ),
+                (
+                    ::std::borrow::ToOwned::to_owned("unwrapAndSendTo"),
+                    ::std::vec![
+                        ::ethers::core::abi::ethabi::Function { name :
+                        ::std::borrow::ToOwned::to_owned("unwrapAndSendTo"), inputs :
+                        ::std::vec![::ethers::core::abi::ethabi::Param { name :
+                        ::std::borrow::ToOwned::to_owned("tokenAddress"), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Address, internal_type :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("address")),
+                        }, ::ethers::core::abi::ethabi::Param { name :
+                        ::std::borrow::ToOwned::to_owned("amount"), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Uint(256usize),
+                        internal_type :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("uint256")),
+                        }, ::ethers::core::abi::ethabi::Param { name :
+                        ::std::borrow::ToOwned::to_owned("recipient"), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Address, internal_type :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("address")),
+                        }], outputs : ::std::vec![], constant :
+                        ::core::option::Option::None, state_mutability :
+                        ::ethers::core::abi::ethabi::StateMutability::NonPayable, }
+                    ],
+                ),
+                (
+                    ::std::borrow::ToOwned::to_owned("unwrapFor"),
+                    ::std::vec![
+                        ::ethers::core::abi::ethabi::Function { name :
+                        ::std::borrow::ToOwned::to_owned("unwrapFor"), inputs :
+                        ::std::vec![::ethers::core::abi::ethabi::Param { name :
+                        ::std::borrow::ToOwned::to_owned("sender"), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Address, internal_type :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("address")),
+                        }, ::ethers::core::abi::ethabi::Param { name :
+                        ::std::borrow::ToOwned::to_owned("tokenAddress"), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Address, internal_type :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("address")),
+                        }, ::ethers::core::abi::ethabi::Param { name :
+                        ::std::borrow::ToOwned::to_owned("amount"), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Uint(256usize),
+                        internal_type :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("uint256")),
+                        }], outputs : ::std::vec![], constant :
+                        ::core::option::Option::None, state_mutability :
+                        ::ethers::core::abi::ethabi::StateMutability::NonPayable, }
+                    ],
+                ),
+                (
+                    ::std::borrow::ToOwned::to_owned("wrap"),
+                    ::std::vec![
+                        ::ethers::core::abi::ethabi::Function { name :
+                        ::std::borrow::ToOwned::to_owned("wrap"), inputs :
+                        ::std::vec![::ethers::core::abi::ethabi::Param { name :
+                        ::std::borrow::ToOwned::to_owned("tokenAddress"), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Address, internal_type :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("address")),
+                        }, ::ethers::core::abi::ethabi::Param { name :
+                        ::std::borrow::ToOwned::to_owned("amount"), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Uint(256usize),
+                        internal_type :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("uint256")),
+                        }], outputs : ::std::vec![], constant :
+                        ::core::option::Option::None, state_mutability :
+                        ::ethers::core::abi::ethabi::StateMutability::Payable, }
+                    ],
+                ),
+                (
+                    ::std::borrow::ToOwned::to_owned("wrapFor"),
+                    ::std::vec![
+                        ::ethers::core::abi::ethabi::Function { name :
+                        ::std::borrow::ToOwned::to_owned("wrapFor"), inputs :
+                        ::std::vec![::ethers::core::abi::ethabi::Param { name :
+                        ::std::borrow::ToOwned::to_owned("sender"), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Address, internal_type :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("address")),
+                        }, ::ethers::core::abi::ethabi::Param { name :
+                        ::std::borrow::ToOwned::to_owned("tokenAddress"), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Address, internal_type :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("address")),
+                        }, ::ethers::core::abi::ethabi::Param { name :
+                        ::std::borrow::ToOwned::to_owned("amount"), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Uint(256usize),
+                        internal_type :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("uint256")),
+                        }], outputs : ::std::vec![], constant :
+                        ::core::option::Option::None, state_mutability :
+                        ::ethers::core::abi::ethabi::StateMutability::Payable, }
+                    ],
+                ),
+                (
+                    ::std::borrow::ToOwned::to_owned("wrapForAndSendTo"),
+                    ::std::vec![
+                        ::ethers::core::abi::ethabi::Function { name :
+                        ::std::borrow::ToOwned::to_owned("wrapForAndSendTo"), inputs :
+                        ::std::vec![::ethers::core::abi::ethabi::Param { name :
+                        ::std::borrow::ToOwned::to_owned("sender"), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Address, internal_type :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("address")),
+                        }, ::ethers::core::abi::ethabi::Param { name :
+                        ::std::borrow::ToOwned::to_owned("tokenAddress"), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Address, internal_type :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("address")),
+                        }, ::ethers::core::abi::ethabi::Param { name :
+                        ::std::borrow::ToOwned::to_owned("amount"), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Uint(256usize),
+                        internal_type :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("uint256")),
+                        }, ::ethers::core::abi::ethabi::Param { name :
+                        ::std::borrow::ToOwned::to_owned("recipient"), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Address, internal_type :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("address")),
+                        }], outputs : ::std::vec![], constant :
+                        ::core::option::Option::None, state_mutability :
+                        ::ethers::core::abi::ethabi::StateMutability::Payable, }
+                    ],
+                ),
+            ]),
+            events: ::core::convert::From::from([
+                (
+                    ::std::borrow::ToOwned::to_owned("Approval"),
+                    ::std::vec![
+                        ::ethers::core::abi::ethabi::Event { name :
+                        ::std::borrow::ToOwned::to_owned("Approval"), inputs :
+                        ::std::vec![::ethers::core::abi::ethabi::EventParam { name :
+                        ::std::borrow::ToOwned::to_owned("owner"), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Address, indexed : true,
+                        }, ::ethers::core::abi::ethabi::EventParam { name :
+                        ::std::borrow::ToOwned::to_owned("spender"), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Address, indexed : true,
+                        }, ::ethers::core::abi::ethabi::EventParam { name :
+                        ::std::borrow::ToOwned::to_owned("value"), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Uint(256usize), indexed :
+                        false, }], anonymous : false, }
+                    ],
+                ),
+                (
+                    ::std::borrow::ToOwned::to_owned("Paused"),
+                    ::std::vec![
+                        ::ethers::core::abi::ethabi::Event { name :
+                        ::std::borrow::ToOwned::to_owned("Paused"), inputs :
+                        ::std::vec![::ethers::core::abi::ethabi::EventParam { name :
+                        ::std::borrow::ToOwned::to_owned("account"), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Address, indexed : false,
+                        }], anonymous : false, }
+                    ],
+                ),
+                (
+                    ::std::borrow::ToOwned::to_owned("RoleAdminChanged"),
+                    ::std::vec![
+                        ::ethers::core::abi::ethabi::Event { name :
+                        ::std::borrow::ToOwned::to_owned("RoleAdminChanged"), inputs :
+                        ::std::vec![::ethers::core::abi::ethabi::EventParam { name :
+                        ::std::borrow::ToOwned::to_owned("role"), kind :
+                        ::ethers::core::abi::ethabi::ParamType::FixedBytes(32usize),
+                        indexed : true, }, ::ethers::core::abi::ethabi::EventParam { name
+                        : ::std::borrow::ToOwned::to_owned("previousAdminRole"), kind :
+                        ::ethers::core::abi::ethabi::ParamType::FixedBytes(32usize),
+                        indexed : true, }, ::ethers::core::abi::ethabi::EventParam { name
+                        : ::std::borrow::ToOwned::to_owned("newAdminRole"), kind :
+                        ::ethers::core::abi::ethabi::ParamType::FixedBytes(32usize),
+                        indexed : true, }], anonymous : false, }
+                    ],
+                ),
+                (
+                    ::std::borrow::ToOwned::to_owned("RoleGranted"),
+                    ::std::vec![
+                        ::ethers::core::abi::ethabi::Event { name :
+                        ::std::borrow::ToOwned::to_owned("RoleGranted"), inputs :
+                        ::std::vec![::ethers::core::abi::ethabi::EventParam { name :
+                        ::std::borrow::ToOwned::to_owned("role"), kind :
+                        ::ethers::core::abi::ethabi::ParamType::FixedBytes(32usize),
+                        indexed : true, }, ::ethers::core::abi::ethabi::EventParam { name
+                        : ::std::borrow::ToOwned::to_owned("account"), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Address, indexed : true,
+                        }, ::ethers::core::abi::ethabi::EventParam { name :
+                        ::std::borrow::ToOwned::to_owned("sender"), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Address, indexed : true,
+                        }], anonymous : false, }
+                    ],
+                ),
+                (
+                    ::std::borrow::ToOwned::to_owned("RoleRevoked"),
+                    ::std::vec![
+                        ::ethers::core::abi::ethabi::Event { name :
+                        ::std::borrow::ToOwned::to_owned("RoleRevoked"), inputs :
+                        ::std::vec![::ethers::core::abi::ethabi::EventParam { name :
+                        ::std::borrow::ToOwned::to_owned("role"), kind :
+                        ::ethers::core::abi::ethabi::ParamType::FixedBytes(32usize),
+                        indexed : true, }, ::ethers::core::abi::ethabi::EventParam { name
+                        : ::std::borrow::ToOwned::to_owned("account"), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Address, indexed : true,
+                        }, ::ethers::core::abi::ethabi::EventParam { name :
+                        ::std::borrow::ToOwned::to_owned("sender"), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Address, indexed : true,
+                        }], anonymous : false, }
+                    ],
+                ),
+                (
+                    ::std::borrow::ToOwned::to_owned("Transfer"),
+                    ::std::vec![
+                        ::ethers::core::abi::ethabi::Event { name :
+                        ::std::borrow::ToOwned::to_owned("Transfer"), inputs :
+                        ::std::vec![::ethers::core::abi::ethabi::EventParam { name :
+                        ::std::borrow::ToOwned::to_owned("from"), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Address, indexed : true,
+                        }, ::ethers::core::abi::ethabi::EventParam { name :
+                        ::std::borrow::ToOwned::to_owned("to"), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Address, indexed : true,
+                        }, ::ethers::core::abi::ethabi::EventParam { name :
+                        ::std::borrow::ToOwned::to_owned("value"), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Uint(256usize), indexed :
+                        false, }], anonymous : false, }
+                    ],
+                ),
+                (
+                    ::std::borrow::ToOwned::to_owned("Unpaused"),
+                    ::std::vec![
+                        ::ethers::core::abi::ethabi::Event { name :
+                        ::std::borrow::ToOwned::to_owned("Unpaused"), inputs :
+                        ::std::vec![::ethers::core::abi::ethabi::EventParam { name :
+                        ::std::borrow::ToOwned::to_owned("account"), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Address, indexed : false,
+                        }], anonymous : false, }
+                    ],
+                ),
+                (
+                    ::std::borrow::ToOwned::to_owned("Unwrapping"),
+                    ::std::vec![
+                        ::ethers::core::abi::ethabi::Event { name :
+                        ::std::borrow::ToOwned::to_owned("Unwrapping"), inputs :
+                        ::std::vec![::ethers::core::abi::ethabi::EventParam { name :
+                        ::std::borrow::ToOwned::to_owned("sender"), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Address, indexed : true,
+                        }, ::ethers::core::abi::ethabi::EventParam { name :
+                        ::std::borrow::ToOwned::to_owned("recipient"), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Address, indexed : true,
+                        }, ::ethers::core::abi::ethabi::EventParam { name :
+                        ::std::borrow::ToOwned::to_owned("tokenAddress"), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Address, indexed : true,
+                        }, ::ethers::core::abi::ethabi::EventParam { name :
+                        ::std::borrow::ToOwned::to_owned("amount"), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Uint(256usize), indexed :
+                        false, }], anonymous : false, }
+                    ],
+                ),
+                (
+                    ::std::borrow::ToOwned::to_owned("Wrapping"),
+                    ::std::vec![
+                        ::ethers::core::abi::ethabi::Event { name :
+                        ::std::borrow::ToOwned::to_owned("Wrapping"), inputs :
+                        ::std::vec![::ethers::core::abi::ethabi::EventParam { name :
+                        ::std::borrow::ToOwned::to_owned("sender"), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Address, indexed : true,
+                        }, ::ethers::core::abi::ethabi::EventParam { name :
+                        ::std::borrow::ToOwned::to_owned("recipient"), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Address, indexed : true,
+                        }, ::ethers::core::abi::ethabi::EventParam { name :
+                        ::std::borrow::ToOwned::to_owned("tokenAddress"), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Address, indexed : true,
+                        }, ::ethers::core::abi::ethabi::EventParam { name :
+                        ::std::borrow::ToOwned::to_owned("wrappingFee"), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Uint(256usize), indexed :
+                        false, }, ::ethers::core::abi::ethabi::EventParam { name :
+                        ::std::borrow::ToOwned::to_owned("afterFeeAmount"), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Uint(256usize), indexed :
+                        false, }], anonymous : false, }
+                    ],
+                ),
+            ]),
+            errors: ::std::collections::BTreeMap::new(),
+            receive: false,
+            fallback: false,
+        }
+    }
     ///The parsed JSON ABI of the contract.
     pub static TOKENWRAPPERCONTRACT_ABI: ::ethers::contract::Lazy<
         ::ethers::core::abi::Abi,
-    > = ::ethers::contract::Lazy::new(|| {
-        ::ethers::core::utils::__serde_json::from_str(__ABI)
-            .expect("ABI is always valid")
-    });
+    > = ::ethers::contract::Lazy::new(__abi);
     pub struct TokenWrapperContract<M>(::ethers::contract::Contract<M>);
     impl<M> ::core::clone::Clone for TokenWrapperContract<M> {
         fn clone(&self) -> Self {
@@ -41,7 +932,7 @@ pub mod token_wrapper_contract {
             &self,
             f: &mut ::core::fmt::Formatter<'_>,
         ) -> ::core::fmt::Result {
-            f.debug_tuple(stringify!(TokenWrapperContract))
+            f.debug_tuple(::core::stringify!(TokenWrapperContract))
                 .field(&self.address())
                 .finish()
         }

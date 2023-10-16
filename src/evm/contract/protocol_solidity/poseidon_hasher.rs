@@ -10,15 +10,122 @@ pub use poseidon_hasher_contract::*;
     non_camel_case_types
 )]
 pub mod poseidon_hasher_contract {
-    #[rustfmt::skip]
-    const __ABI: &str = "[{\"inputs\":[{\"internalType\":\"uint256[]\",\"name\":\"array\",\"type\":\"uint256[]\",\"components\":[]}],\"stateMutability\":\"pure\",\"type\":\"function\",\"name\":\"hash11\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\",\"components\":[]}]},{\"inputs\":[{\"internalType\":\"uint256[3]\",\"name\":\"array\",\"type\":\"uint256[3]\",\"components\":[]}],\"stateMutability\":\"pure\",\"type\":\"function\",\"name\":\"hash3\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\",\"components\":[]}]},{\"inputs\":[{\"internalType\":\"uint256[5]\",\"name\":\"array\",\"type\":\"uint256[5]\",\"components\":[]}],\"stateMutability\":\"pure\",\"type\":\"function\",\"name\":\"hash5\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\",\"components\":[]}]},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_left\",\"type\":\"uint256\",\"components\":[]},{\"internalType\":\"uint256\",\"name\":\"_right\",\"type\":\"uint256\",\"components\":[]}],\"stateMutability\":\"pure\",\"type\":\"function\",\"name\":\"hashLeftRight\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\",\"components\":[]}]},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"i\",\"type\":\"uint256\",\"components\":[]}],\"stateMutability\":\"pure\",\"type\":\"function\",\"name\":\"zeros\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\",\"components\":[]}]}]";
+    #[allow(deprecated)]
+    fn __abi() -> ::ethers::core::abi::Abi {
+        ::ethers::core::abi::ethabi::Contract {
+            constructor: ::core::option::Option::None,
+            functions: ::core::convert::From::from([
+                (
+                    ::std::borrow::ToOwned::to_owned("hash11"),
+                    ::std::vec![
+                        ::ethers::core::abi::ethabi::Function { name :
+                        ::std::borrow::ToOwned::to_owned("hash11"), inputs :
+                        ::std::vec![::ethers::core::abi::ethabi::Param { name :
+                        ::std::borrow::ToOwned::to_owned("array"), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Array(::std::boxed::Box::new(::ethers::core::abi::ethabi::ParamType::Uint(256usize))),
+                        internal_type :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("uint256[]")),
+                        }], outputs : ::std::vec![::ethers::core::abi::ethabi::Param {
+                        name : ::std::string::String::new(), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Uint(256usize),
+                        internal_type :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("uint256")),
+                        }], constant : ::core::option::Option::None, state_mutability :
+                        ::ethers::core::abi::ethabi::StateMutability::Pure, }
+                    ],
+                ),
+                (
+                    ::std::borrow::ToOwned::to_owned("hash3"),
+                    ::std::vec![
+                        ::ethers::core::abi::ethabi::Function { name :
+                        ::std::borrow::ToOwned::to_owned("hash3"), inputs :
+                        ::std::vec![::ethers::core::abi::ethabi::Param { name :
+                        ::std::borrow::ToOwned::to_owned("array"), kind :
+                        ::ethers::core::abi::ethabi::ParamType::FixedArray(::std::boxed::Box::new(::ethers::core::abi::ethabi::ParamType::Uint(256usize)),
+                        3usize), internal_type :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("uint256[3]")),
+                        }], outputs : ::std::vec![::ethers::core::abi::ethabi::Param {
+                        name : ::std::string::String::new(), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Uint(256usize),
+                        internal_type :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("uint256")),
+                        }], constant : ::core::option::Option::None, state_mutability :
+                        ::ethers::core::abi::ethabi::StateMutability::Pure, }
+                    ],
+                ),
+                (
+                    ::std::borrow::ToOwned::to_owned("hash5"),
+                    ::std::vec![
+                        ::ethers::core::abi::ethabi::Function { name :
+                        ::std::borrow::ToOwned::to_owned("hash5"), inputs :
+                        ::std::vec![::ethers::core::abi::ethabi::Param { name :
+                        ::std::borrow::ToOwned::to_owned("array"), kind :
+                        ::ethers::core::abi::ethabi::ParamType::FixedArray(::std::boxed::Box::new(::ethers::core::abi::ethabi::ParamType::Uint(256usize)),
+                        5usize), internal_type :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("uint256[5]")),
+                        }], outputs : ::std::vec![::ethers::core::abi::ethabi::Param {
+                        name : ::std::string::String::new(), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Uint(256usize),
+                        internal_type :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("uint256")),
+                        }], constant : ::core::option::Option::None, state_mutability :
+                        ::ethers::core::abi::ethabi::StateMutability::Pure, }
+                    ],
+                ),
+                (
+                    ::std::borrow::ToOwned::to_owned("hashLeftRight"),
+                    ::std::vec![
+                        ::ethers::core::abi::ethabi::Function { name :
+                        ::std::borrow::ToOwned::to_owned("hashLeftRight"), inputs :
+                        ::std::vec![::ethers::core::abi::ethabi::Param { name :
+                        ::std::borrow::ToOwned::to_owned("_left"), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Uint(256usize),
+                        internal_type :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("uint256")),
+                        }, ::ethers::core::abi::ethabi::Param { name :
+                        ::std::borrow::ToOwned::to_owned("_right"), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Uint(256usize),
+                        internal_type :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("uint256")),
+                        }], outputs : ::std::vec![::ethers::core::abi::ethabi::Param {
+                        name : ::std::string::String::new(), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Uint(256usize),
+                        internal_type :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("uint256")),
+                        }], constant : ::core::option::Option::None, state_mutability :
+                        ::ethers::core::abi::ethabi::StateMutability::Pure, }
+                    ],
+                ),
+                (
+                    ::std::borrow::ToOwned::to_owned("zeros"),
+                    ::std::vec![
+                        ::ethers::core::abi::ethabi::Function { name :
+                        ::std::borrow::ToOwned::to_owned("zeros"), inputs :
+                        ::std::vec![::ethers::core::abi::ethabi::Param { name :
+                        ::std::borrow::ToOwned::to_owned("i"), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Uint(256usize),
+                        internal_type :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("uint256")),
+                        }], outputs : ::std::vec![::ethers::core::abi::ethabi::Param {
+                        name : ::std::string::String::new(), kind :
+                        ::ethers::core::abi::ethabi::ParamType::FixedBytes(32usize),
+                        internal_type :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("bytes32")),
+                        }], constant : ::core::option::Option::None, state_mutability :
+                        ::ethers::core::abi::ethabi::StateMutability::Pure, }
+                    ],
+                ),
+            ]),
+            events: ::std::collections::BTreeMap::new(),
+            errors: ::std::collections::BTreeMap::new(),
+            receive: false,
+            fallback: false,
+        }
+    }
     ///The parsed JSON ABI of the contract.
     pub static POSEIDONHASHERCONTRACT_ABI: ::ethers::contract::Lazy<
         ::ethers::core::abi::Abi,
-    > = ::ethers::contract::Lazy::new(|| {
-        ::ethers::core::utils::__serde_json::from_str(__ABI)
-            .expect("ABI is always valid")
-    });
+    > = ::ethers::contract::Lazy::new(__abi);
     pub struct PoseidonHasherContract<M>(::ethers::contract::Contract<M>);
     impl<M> ::core::clone::Clone for PoseidonHasherContract<M> {
         fn clone(&self) -> Self {
@@ -41,7 +148,7 @@ pub mod poseidon_hasher_contract {
             &self,
             f: &mut ::core::fmt::Formatter<'_>,
         ) -> ::core::fmt::Result {
-            f.debug_tuple(stringify!(PoseidonHasherContract))
+            f.debug_tuple(::core::stringify!(PoseidonHasherContract))
                 .field(&self.address())
                 .finish()
         }

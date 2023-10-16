@@ -1,4 +1,4 @@
-pub use v_anchor_tree_contract::*;
+pub use multi_asset_v_anchor_tree::*;
 /// This module was auto-generated with ethers-rs Abigen.
 /// More information at: <https://github.com/gakonst/ethers-rs>
 #[allow(
@@ -9,16 +9,28 @@ pub use v_anchor_tree_contract::*;
     dead_code,
     non_camel_case_types,
 )]
-pub mod v_anchor_tree_contract {
+pub mod multi_asset_v_anchor_tree {
     #[allow(deprecated)]
     fn __abi() -> ::ethers::core::abi::Abi {
         ::ethers::core::abi::ethabi::Contract {
             constructor: ::core::option::Option::Some(::ethers::core::abi::ethabi::Constructor {
                 inputs: ::std::vec![
                     ::ethers::core::abi::ethabi::Param { name :
+                    ::std::borrow::ToOwned::to_owned("_registry"), kind :
+                    ::ethers::core::abi::ethabi::ParamType::Address, internal_type :
+                    ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("contract IRegistry")),
+                    }, ::ethers::core::abi::ethabi::Param { name :
+                    ::std::borrow::ToOwned::to_owned("_proxy"), kind :
+                    ::ethers::core::abi::ethabi::ParamType::Address, internal_type :
+                    ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("contract IMASPProxy")),
+                    }, ::ethers::core::abi::ethabi::Param { name :
                     ::std::borrow::ToOwned::to_owned("_verifier"), kind :
                     ::ethers::core::abi::ethabi::ParamType::Address, internal_type :
                     ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("contract IAnchorVerifier")),
+                    }, ::ethers::core::abi::ethabi::Param { name :
+                    ::std::borrow::ToOwned::to_owned("_swapVerifier"), kind :
+                    ::ethers::core::abi::ethabi::ParamType::Address, internal_type :
+                    ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("contract ISwapVerifier")),
                     }, ::ethers::core::abi::ethabi::Param { name :
                     ::std::borrow::ToOwned::to_owned("_merkleTreeLevels"), kind :
                     ::ethers::core::abi::ethabi::ParamType::Uint(32usize), internal_type
@@ -30,10 +42,6 @@ pub mod v_anchor_tree_contract {
                     ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("contract IHasher")),
                     }, ::ethers::core::abi::ethabi::Param { name :
                     ::std::borrow::ToOwned::to_owned("_handler"), kind :
-                    ::ethers::core::abi::ethabi::ParamType::Address, internal_type :
-                    ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("address")),
-                    }, ::ethers::core::abi::ethabi::Param { name :
-                    ::std::borrow::ToOwned::to_owned("_token"), kind :
                     ::ethers::core::abi::ethabi::ParamType::Address, internal_type :
                     ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("address")),
                     }, ::ethers::core::abi::ethabi::Param { name :
@@ -120,6 +128,21 @@ pub mod v_anchor_tree_contract {
                     ],
                 ),
                 (
+                    ::std::borrow::ToOwned::to_owned("UPDATE_MAX_LENGTH"),
+                    ::std::vec![
+                        ::ethers::core::abi::ethabi::Function { name :
+                        ::std::borrow::ToOwned::to_owned("UPDATE_MAX_LENGTH"), inputs :
+                        ::std::vec![], outputs :
+                        ::std::vec![::ethers::core::abi::ethabi::Param { name :
+                        ::std::string::String::new(), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Uint(32usize),
+                        internal_type :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("uint32")),
+                        }], constant : ::core::option::Option::None, state_mutability :
+                        ::ethers::core::abi::ethabi::StateMutability::View, }
+                    ],
+                ),
+                (
                     ::std::borrow::ToOwned::to_owned("ZERO_VALUE"),
                     ::std::vec![
                         ::ethers::core::abi::ethabi::Function { name :
@@ -135,39 +158,12 @@ pub mod v_anchor_tree_contract {
                     ],
                 ),
                 (
-                    ::std::borrow::ToOwned::to_owned("_executeWrapping"),
-                    ::std::vec![
-                        ::ethers::core::abi::ethabi::Function { name :
-                        ::std::borrow::ToOwned::to_owned("_executeWrapping"), inputs :
-                        ::std::vec![::ethers::core::abi::ethabi::Param { name :
-                        ::std::borrow::ToOwned::to_owned("_fromTokenAddress"), kind :
-                        ::ethers::core::abi::ethabi::ParamType::Address, internal_type :
-                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("address")),
-                        }, ::ethers::core::abi::ethabi::Param { name :
-                        ::std::borrow::ToOwned::to_owned("_toTokenAddress"), kind :
-                        ::ethers::core::abi::ethabi::ParamType::Address, internal_type :
-                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("address")),
-                        }, ::ethers::core::abi::ethabi::Param { name :
-                        ::std::borrow::ToOwned::to_owned("_extAmount"), kind :
-                        ::ethers::core::abi::ethabi::ParamType::Uint(256usize),
-                        internal_type :
-                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("uint256")),
-                        }], outputs : ::std::vec![::ethers::core::abi::ethabi::Param {
-                        name : ::std::string::String::new(), kind :
-                        ::ethers::core::abi::ethabi::ParamType::Uint(256usize),
-                        internal_type :
-                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("uint256")),
-                        }], constant : ::core::option::Option::None, state_mutability :
-                        ::ethers::core::abi::ethabi::StateMutability::Payable, }
-                    ],
-                ),
-                (
                     ::std::borrow::ToOwned::to_owned("_genExtDataHash"),
                     ::std::vec![
                         ::ethers::core::abi::ethabi::Function { name :
                         ::std::borrow::ToOwned::to_owned("_genExtDataHash"), inputs :
                         ::std::vec![::ethers::core::abi::ethabi::Param { name :
-                        ::std::string::String::new(), kind :
+                        ::std::borrow::ToOwned::to_owned("_auxPublicInputs"), kind :
                         ::ethers::core::abi::ethabi::ParamType::Bytes, internal_type :
                         ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("bytes")),
                         }, ::ethers::core::abi::ethabi::Param { name :
@@ -192,33 +188,6 @@ pub mod v_anchor_tree_contract {
                         ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("bytes32")),
                         }], constant : ::core::option::Option::None, state_mutability :
                         ::ethers::core::abi::ethabi::StateMutability::NonPayable, }
-                    ],
-                ),
-                (
-                    ::std::borrow::ToOwned::to_owned("_withdrawAndUnwrap"),
-                    ::std::vec![
-                        ::ethers::core::abi::ethabi::Function { name :
-                        ::std::borrow::ToOwned::to_owned("_withdrawAndUnwrap"), inputs :
-                        ::std::vec![::ethers::core::abi::ethabi::Param { name :
-                        ::std::borrow::ToOwned::to_owned("_fromTokenAddress"), kind :
-                        ::ethers::core::abi::ethabi::ParamType::Address, internal_type :
-                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("address")),
-                        }, ::ethers::core::abi::ethabi::Param { name :
-                        ::std::borrow::ToOwned::to_owned("_toTokenAddress"), kind :
-                        ::ethers::core::abi::ethabi::ParamType::Address, internal_type :
-                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("address")),
-                        }, ::ethers::core::abi::ethabi::Param { name :
-                        ::std::borrow::ToOwned::to_owned("_recipient"), kind :
-                        ::ethers::core::abi::ethabi::ParamType::Address, internal_type :
-                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("address")),
-                        }, ::ethers::core::abi::ethabi::Param { name :
-                        ::std::borrow::ToOwned::to_owned("_minusExtAmount"), kind :
-                        ::ethers::core::abi::ethabi::ParamType::Uint(256usize),
-                        internal_type :
-                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("uint256")),
-                        }], outputs : ::std::vec![], constant :
-                        ::core::option::Option::None, state_mutability :
-                        ::ethers::core::abi::ethabi::StateMutability::Payable, }
                     ],
                 ),
                 (
@@ -284,12 +253,12 @@ pub mod v_anchor_tree_contract {
                     ],
                 ),
                 (
-                    ::std::borrow::ToOwned::to_owned("configureMinimalWithdrawalLimit"),
+                    ::std::borrow::ToOwned::to_owned("configureMinimumWithdrawalLimit"),
                     ::std::vec![
                         ::ethers::core::abi::ethabi::Function { name :
-                        ::std::borrow::ToOwned::to_owned("configureMinimalWithdrawalLimit"),
+                        ::std::borrow::ToOwned::to_owned("configureMinimumWithdrawalLimit"),
                         inputs : ::std::vec![::ethers::core::abi::ethabi::Param { name :
-                        ::std::borrow::ToOwned::to_owned("_minimalWithdrawalAmount"),
+                        ::std::borrow::ToOwned::to_owned("_minimumWithdrawalAmount"),
                         kind : ::ethers::core::abi::ethabi::ParamType::Uint(256usize),
                         internal_type :
                         ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("uint256")),
@@ -550,21 +519,6 @@ pub mod v_anchor_tree_contract {
                     ],
                 ),
                 (
-                    ::std::borrow::ToOwned::to_owned("getProposalNonce"),
-                    ::std::vec![
-                        ::ethers::core::abi::ethabi::Function { name :
-                        ::std::borrow::ToOwned::to_owned("getProposalNonce"), inputs :
-                        ::std::vec![], outputs :
-                        ::std::vec![::ethers::core::abi::ethabi::Param { name :
-                        ::std::string::String::new(), kind :
-                        ::ethers::core::abi::ethabi::ParamType::Uint(256usize),
-                        internal_type :
-                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("uint256")),
-                        }], constant : ::core::option::Option::None, state_mutability :
-                        ::ethers::core::abi::ethabi::StateMutability::View, }
-                    ],
-                ),
-                (
                     ::std::borrow::ToOwned::to_owned("getZeroHash"),
                     ::std::vec![
                         ::ethers::core::abi::ethabi::Function { name :
@@ -659,7 +613,7 @@ pub mod v_anchor_tree_contract {
                         ::ethers::core::abi::ethabi::Function { name :
                         ::std::borrow::ToOwned::to_owned("initialize"), inputs :
                         ::std::vec![::ethers::core::abi::ethabi::Param { name :
-                        ::std::borrow::ToOwned::to_owned("_minimalWithdrawalAmount"),
+                        ::std::borrow::ToOwned::to_owned("_minimumWithdrawalAmount"),
                         kind : ::ethers::core::abi::ethabi::ParamType::Uint(256usize),
                         internal_type :
                         ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("uint256")),
@@ -880,10 +834,10 @@ pub mod v_anchor_tree_contract {
                     ],
                 ),
                 (
-                    ::std::borrow::ToOwned::to_owned("minimalWithdrawalAmount"),
+                    ::std::borrow::ToOwned::to_owned("minimumWithdrawalAmount"),
                     ::std::vec![
                         ::ethers::core::abi::ethabi::Function { name :
-                        ::std::borrow::ToOwned::to_owned("minimalWithdrawalAmount"),
+                        ::std::borrow::ToOwned::to_owned("minimumWithdrawalAmount"),
                         inputs : ::std::vec![], outputs :
                         ::std::vec![::ethers::core::abi::ethabi::Param { name :
                         ::std::string::String::new(), kind :
@@ -952,6 +906,37 @@ pub mod v_anchor_tree_contract {
                     ],
                 ),
                 (
+                    ::std::borrow::ToOwned::to_owned("onERC721Received"),
+                    ::std::vec![
+                        ::ethers::core::abi::ethabi::Function { name :
+                        ::std::borrow::ToOwned::to_owned("onERC721Received"), inputs :
+                        ::std::vec![::ethers::core::abi::ethabi::Param { name :
+                        ::std::borrow::ToOwned::to_owned("operator"), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Address, internal_type :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("address")),
+                        }, ::ethers::core::abi::ethabi::Param { name :
+                        ::std::borrow::ToOwned::to_owned("from"), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Address, internal_type :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("address")),
+                        }, ::ethers::core::abi::ethabi::Param { name :
+                        ::std::borrow::ToOwned::to_owned("tokenId"), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Uint(256usize),
+                        internal_type :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("uint256")),
+                        }, ::ethers::core::abi::ethabi::Param { name :
+                        ::std::borrow::ToOwned::to_owned("data"), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Bytes, internal_type :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("bytes")),
+                        }], outputs : ::std::vec![::ethers::core::abi::ethabi::Param {
+                        name : ::std::string::String::new(), kind :
+                        ::ethers::core::abi::ethabi::ParamType::FixedBytes(4usize),
+                        internal_type :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("bytes4")),
+                        }], constant : ::core::option::Option::None, state_mutability :
+                        ::ethers::core::abi::ethabi::StateMutability::NonPayable, }
+                    ],
+                ),
+                (
                     ::std::borrow::ToOwned::to_owned("outerLevels"),
                     ::std::vec![
                         ::ethers::core::abi::ethabi::Function { name :
@@ -993,9 +978,9 @@ pub mod v_anchor_tree_contract {
                         ::std::vec![], outputs :
                         ::std::vec![::ethers::core::abi::ethabi::Param { name :
                         ::std::string::String::new(), kind :
-                        ::ethers::core::abi::ethabi::ParamType::Uint(256usize),
+                        ::ethers::core::abi::ethabi::ParamType::Uint(32usize),
                         internal_type :
-                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("uint256")),
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("uint32")),
                         }], constant : ::core::option::Option::None, state_mutability :
                         ::ethers::core::abi::ethabi::StateMutability::View, }
                     ],
@@ -1064,6 +1049,20 @@ pub mod v_anchor_tree_contract {
                     ],
                 ),
                 (
+                    ::std::borrow::ToOwned::to_owned("registry"),
+                    ::std::vec![
+                        ::ethers::core::abi::ethabi::Function { name :
+                        ::std::borrow::ToOwned::to_owned("registry"), inputs :
+                        ::std::vec![], outputs :
+                        ::std::vec![::ethers::core::abi::ethabi::Param { name :
+                        ::std::string::String::new(), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Address, internal_type :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("address")),
+                        }], constant : ::core::option::Option::None, state_mutability :
+                        ::ethers::core::abi::ethabi::StateMutability::View, }
+                    ],
+                ),
+                (
                     ::std::borrow::ToOwned::to_owned("roots"),
                     ::std::vec![
                         ::ethers::core::abi::ethabi::Function { name :
@@ -1126,17 +1125,40 @@ pub mod v_anchor_tree_contract {
                     ],
                 ),
                 (
-                    ::std::borrow::ToOwned::to_owned("token"),
+                    ::std::borrow::ToOwned::to_owned("swap"),
                     ::std::vec![
                         ::ethers::core::abi::ethabi::Function { name :
-                        ::std::borrow::ToOwned::to_owned("token"), inputs :
-                        ::std::vec![], outputs :
+                        ::std::borrow::ToOwned::to_owned("swap"), inputs :
                         ::std::vec![::ethers::core::abi::ethabi::Param { name :
-                        ::std::string::String::new(), kind :
-                        ::ethers::core::abi::ethabi::ParamType::Address, internal_type :
-                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("address")),
-                        }], constant : ::core::option::Option::None, state_mutability :
-                        ::ethers::core::abi::ethabi::StateMutability::View, }
+                        ::std::borrow::ToOwned::to_owned("proof"), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Bytes, internal_type :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("bytes")),
+                        }, ::ethers::core::abi::ethabi::Param { name :
+                        ::std::borrow::ToOwned::to_owned("_publicInputs"), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Tuple(::std::vec![::ethers::core::abi::ethabi::ParamType::Bytes,
+                        ::ethers::core::abi::ethabi::ParamType::Uint(256usize),
+                        ::ethers::core::abi::ethabi::ParamType::Uint(256usize),
+                        ::ethers::core::abi::ethabi::ParamType::Uint(256usize),
+                        ::ethers::core::abi::ethabi::ParamType::Uint(256usize),
+                        ::ethers::core::abi::ethabi::ParamType::Uint(256usize),
+                        ::ethers::core::abi::ethabi::ParamType::Uint(256usize),
+                        ::ethers::core::abi::ethabi::ParamType::Uint(256usize),
+                        ::ethers::core::abi::ethabi::ParamType::Uint(256usize)]),
+                        internal_type :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("struct SwapPublicInputs")),
+                        }, ::ethers::core::abi::ethabi::Param { name :
+                        ::std::borrow::ToOwned::to_owned("aliceEncryptions"), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Tuple(::std::vec![::ethers::core::abi::ethabi::ParamType::Bytes,
+                        ::ethers::core::abi::ethabi::ParamType::Bytes]), internal_type :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("struct Encryptions")),
+                        }, ::ethers::core::abi::ethabi::Param { name :
+                        ::std::borrow::ToOwned::to_owned("bobEncryptions"), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Tuple(::std::vec![::ethers::core::abi::ethabi::ParamType::Bytes,
+                        ::ethers::core::abi::ethabi::ParamType::Bytes]), internal_type :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("struct Encryptions")),
+                        }], outputs : ::std::vec![], constant :
+                        ::core::option::Option::None, state_mutability :
+                        ::ethers::core::abi::ethabi::StateMutability::NonPayable, }
                     ],
                 ),
                 (
@@ -1327,7 +1349,7 @@ pub mod v_anchor_tree_contract {
                         ::std::borrow::ToOwned::to_owned("MinWithdrawalLimitUpdated"),
                         inputs : ::std::vec![::ethers::core::abi::ethabi::EventParam {
                         name :
-                        ::std::borrow::ToOwned::to_owned("minimalWithdrawalAmount"), kind
+                        ::std::borrow::ToOwned::to_owned("minimumWithdrawalAmount"), kind
                         : ::ethers::core::abi::ethabi::ParamType::Uint(256usize), indexed
                         : false, }, ::ethers::core::abi::ethabi::EventParam { name :
                         ::std::borrow::ToOwned::to_owned("nonce"), kind :
@@ -1415,34 +1437,34 @@ pub mod v_anchor_tree_contract {
         }
     }
     ///The parsed JSON ABI of the contract.
-    pub static VANCHORTREECONTRACT_ABI: ::ethers::contract::Lazy<
+    pub static MULTIASSETVANCHORTREE_ABI: ::ethers::contract::Lazy<
         ::ethers::core::abi::Abi,
     > = ::ethers::contract::Lazy::new(__abi);
-    pub struct VAnchorTreeContract<M>(::ethers::contract::Contract<M>);
-    impl<M> ::core::clone::Clone for VAnchorTreeContract<M> {
+    pub struct MultiAssetVAnchorTree<M>(::ethers::contract::Contract<M>);
+    impl<M> ::core::clone::Clone for MultiAssetVAnchorTree<M> {
         fn clone(&self) -> Self {
             Self(::core::clone::Clone::clone(&self.0))
         }
     }
-    impl<M> ::core::ops::Deref for VAnchorTreeContract<M> {
+    impl<M> ::core::ops::Deref for MultiAssetVAnchorTree<M> {
         type Target = ::ethers::contract::Contract<M>;
         fn deref(&self) -> &Self::Target {
             &self.0
         }
     }
-    impl<M> ::core::ops::DerefMut for VAnchorTreeContract<M> {
+    impl<M> ::core::ops::DerefMut for MultiAssetVAnchorTree<M> {
         fn deref_mut(&mut self) -> &mut Self::Target {
             &mut self.0
         }
     }
-    impl<M> ::core::fmt::Debug for VAnchorTreeContract<M> {
+    impl<M> ::core::fmt::Debug for MultiAssetVAnchorTree<M> {
         fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-            f.debug_tuple(::core::stringify!(VAnchorTreeContract))
+            f.debug_tuple(::core::stringify!(MultiAssetVAnchorTree))
                 .field(&self.address())
                 .finish()
         }
     }
-    impl<M: ::ethers::providers::Middleware> VAnchorTreeContract<M> {
+    impl<M: ::ethers::providers::Middleware> MultiAssetVAnchorTree<M> {
         /// Creates a new contract instance with the specified `ethers` client at
         /// `address`. The contract derefs to a `ethers::Contract` object.
         pub fn new<T: Into<::ethers::core::types::Address>>(
@@ -1452,7 +1474,7 @@ pub mod v_anchor_tree_contract {
             Self(
                 ::ethers::contract::Contract::new(
                     address.into(),
-                    VANCHORTREECONTRACT_ABI.clone(),
+                    MULTIASSETVANCHORTREE_ABI.clone(),
                     client,
                 ),
             )
@@ -1497,6 +1519,14 @@ pub mod v_anchor_tree_contract {
                 .method_hash([205, 135, 163, 180], ())
                 .expect("method not found (this should never happen)")
         }
+        ///Calls the contract's `UPDATE_MAX_LENGTH` (0xdbc9d395) function
+        pub fn update_max_length(
+            &self,
+        ) -> ::ethers::contract::builders::ContractCall<M, u32> {
+            self.0
+                .method_hash([219, 201, 211, 149], ())
+                .expect("method not found (this should never happen)")
+        }
         ///Calls the contract's `ZERO_VALUE` (0xec732959) function
         pub fn zero_value(
             &self,
@@ -1505,43 +1535,17 @@ pub mod v_anchor_tree_contract {
                 .method_hash([236, 115, 41, 89], ())
                 .expect("method not found (this should never happen)")
         }
-        ///Calls the contract's `_executeWrapping` (0x6338bcbc) function
-        pub fn execute_wrapping(
-            &self,
-            from_token_address: ::ethers::core::types::Address,
-            to_token_address: ::ethers::core::types::Address,
-            ext_amount: ::ethers::core::types::U256,
-        ) -> ::ethers::contract::builders::ContractCall<M, ::ethers::core::types::U256> {
-            self.0
-                .method_hash(
-                    [99, 56, 188, 188],
-                    (from_token_address, to_token_address, ext_amount),
-                )
-                .expect("method not found (this should never happen)")
-        }
         ///Calls the contract's `_genExtDataHash` (0xd384534d) function
         pub fn gen_ext_data_hash(
             &self,
-            p0: ::ethers::core::types::Bytes,
+            aux_public_inputs: ::ethers::core::types::Bytes,
             external_data: CommonExtData,
             encryptions: Encryptions,
         ) -> ::ethers::contract::builders::ContractCall<M, [u8; 32]> {
             self.0
-                .method_hash([211, 132, 83, 77], (p0, external_data, encryptions))
-                .expect("method not found (this should never happen)")
-        }
-        ///Calls the contract's `_withdrawAndUnwrap` (0x509cd41e) function
-        pub fn withdraw_and_unwrap(
-            &self,
-            from_token_address: ::ethers::core::types::Address,
-            to_token_address: ::ethers::core::types::Address,
-            recipient: ::ethers::core::types::Address,
-            minus_ext_amount: ::ethers::core::types::U256,
-        ) -> ::ethers::contract::builders::ContractCall<M, ()> {
-            self.0
                 .method_hash(
-                    [80, 156, 212, 30],
-                    (from_token_address, to_token_address, recipient, minus_ext_amount),
+                    [211, 132, 83, 77],
+                    (aux_public_inputs, external_data, encryptions),
                 )
                 .expect("method not found (this should never happen)")
         }
@@ -1574,14 +1578,14 @@ pub mod v_anchor_tree_contract {
                 .method_hash([140, 131, 43, 19], (maximum_deposit_amount, nonce))
                 .expect("method not found (this should never happen)")
         }
-        ///Calls the contract's `configureMinimalWithdrawalLimit` (0x1f7f99f7) function
-        pub fn configure_minimal_withdrawal_limit(
+        ///Calls the contract's `configureMinimumWithdrawalLimit` (0x0b97e0a8) function
+        pub fn configure_minimum_withdrawal_limit(
             &self,
-            minimal_withdrawal_amount: ::ethers::core::types::U256,
+            minimum_withdrawal_amount: ::ethers::core::types::U256,
             nonce: u32,
         ) -> ::ethers::contract::builders::ContractCall<M, ()> {
             self.0
-                .method_hash([31, 127, 153, 247], (minimal_withdrawal_amount, nonce))
+                .method_hash([11, 151, 224, 168], (minimum_withdrawal_amount, nonce))
                 .expect("method not found (this should never happen)")
         }
         ///Calls the contract's `currentNeighborRootIndex` (0x5d2d766c) function
@@ -1713,14 +1717,6 @@ pub mod v_anchor_tree_contract {
                 .method_hash([14, 183, 96, 111], ())
                 .expect("method not found (this should never happen)")
         }
-        ///Calls the contract's `getProposalNonce` (0x0b27fb9a) function
-        pub fn get_proposal_nonce(
-            &self,
-        ) -> ::ethers::contract::builders::ContractCall<M, ::ethers::core::types::U256> {
-            self.0
-                .method_hash([11, 39, 251, 154], ())
-                .expect("method not found (this should never happen)")
-        }
         ///Calls the contract's `getZeroHash` (0x305e9eac) function
         pub fn get_zero_hash(
             &self,
@@ -1774,13 +1770,13 @@ pub mod v_anchor_tree_contract {
         ///Calls the contract's `initialize` (0xe4a30116) function
         pub fn initialize(
             &self,
-            minimal_withdrawal_amount: ::ethers::core::types::U256,
+            minimum_withdrawal_amount: ::ethers::core::types::U256,
             maximum_deposit_amount: ::ethers::core::types::U256,
         ) -> ::ethers::contract::builders::ContractCall<M, ()> {
             self.0
                 .method_hash(
                     [228, 163, 1, 22],
-                    (minimal_withdrawal_amount, maximum_deposit_amount),
+                    (minimum_withdrawal_amount, maximum_deposit_amount),
                 )
                 .expect("method not found (this should never happen)")
         }
@@ -1884,12 +1880,12 @@ pub mod v_anchor_tree_contract {
                 .method_hash([120, 171, 180, 155], ())
                 .expect("method not found (this should never happen)")
         }
-        ///Calls the contract's `minimalWithdrawalAmount` (0x840b2791) function
-        pub fn minimal_withdrawal_amount(
+        ///Calls the contract's `minimumWithdrawalAmount` (0x2b180646) function
+        pub fn minimum_withdrawal_amount(
             &self,
         ) -> ::ethers::contract::builders::ContractCall<M, ::ethers::core::types::U256> {
             self.0
-                .method_hash([132, 11, 39, 145], ())
+                .method_hash([43, 24, 6, 70], ())
                 .expect("method not found (this should never happen)")
         }
         ///Calls the contract's `neighborRoots` (0x43e7119f) function
@@ -1917,6 +1913,18 @@ pub mod v_anchor_tree_contract {
                 .method_hash([31, 121, 161, 233], p0)
                 .expect("method not found (this should never happen)")
         }
+        ///Calls the contract's `onERC721Received` (0x150b7a02) function
+        pub fn on_erc721_received(
+            &self,
+            operator: ::ethers::core::types::Address,
+            from: ::ethers::core::types::Address,
+            token_id: ::ethers::core::types::U256,
+            data: ::ethers::core::types::Bytes,
+        ) -> ::ethers::contract::builders::ContractCall<M, [u8; 4]> {
+            self.0
+                .method_hash([21, 11, 122, 2], (operator, from, token_id, data))
+                .expect("method not found (this should never happen)")
+        }
         ///Calls the contract's `outerLevels` (0xbfbc0a39) function
         pub fn outer_levels(
             &self,
@@ -1937,7 +1945,7 @@ pub mod v_anchor_tree_contract {
         ///Calls the contract's `proposalNonce` (0xcc3c74a1) function
         pub fn proposal_nonce(
             &self,
-        ) -> ::ethers::contract::builders::ContractCall<M, ::ethers::core::types::U256> {
+        ) -> ::ethers::contract::builders::ContractCall<M, u32> {
             self.0
                 .method_hash([204, 60, 116, 161], ())
                 .expect("method not found (this should never happen)")
@@ -1975,6 +1983,17 @@ pub mod v_anchor_tree_contract {
                 )
                 .expect("method not found (this should never happen)")
         }
+        ///Calls the contract's `registry` (0x7b103999) function
+        pub fn registry(
+            &self,
+        ) -> ::ethers::contract::builders::ContractCall<
+            M,
+            ::ethers::core::types::Address,
+        > {
+            self.0
+                .method_hash([123, 16, 57, 153], ())
+                .expect("method not found (this should never happen)")
+        }
         ///Calls the contract's `roots` (0xc2b40ae4) function
         pub fn roots(
             &self,
@@ -2007,15 +2026,19 @@ pub mod v_anchor_tree_contract {
                 .method_hash([160, 209, 146, 245], (verifier, nonce))
                 .expect("method not found (this should never happen)")
         }
-        ///Calls the contract's `token` (0xfc0c546a) function
-        pub fn token(
+        ///Calls the contract's `swap` (0x236d421d) function
+        pub fn swap(
             &self,
-        ) -> ::ethers::contract::builders::ContractCall<
-            M,
-            ::ethers::core::types::Address,
-        > {
+            proof: ::ethers::core::types::Bytes,
+            public_inputs: SwapPublicInputs,
+            alice_encryptions: Encryptions,
+            bob_encryptions: Encryptions,
+        ) -> ::ethers::contract::builders::ContractCall<M, ()> {
             self.0
-                .method_hash([252, 12, 84, 106], ())
+                .method_hash(
+                    [35, 109, 66, 29],
+                    (proof, public_inputs, alice_encryptions, bob_encryptions),
+                )
                 .expect("method not found (this should never happen)")
         }
         ///Calls the contract's `transact` (0xa38f76e8) function
@@ -2178,13 +2201,13 @@ pub mod v_anchor_tree_contract {
         ) -> ::ethers::contract::builders::Event<
             ::std::sync::Arc<M>,
             M,
-            VAnchorTreeContractEvents,
+            MultiAssetVAnchorTreeEvents,
         > {
             self.0.event_with_filter(::core::default::Default::default())
         }
     }
     impl<M: ::ethers::providers::Middleware> From<::ethers::contract::Contract<M>>
-    for VAnchorTreeContract<M> {
+    for MultiAssetVAnchorTree<M> {
         fn from(contract: ::ethers::contract::Contract<M>) -> Self {
             Self::new(contract.address(), contract.client())
         }
@@ -2283,7 +2306,7 @@ pub mod v_anchor_tree_contract {
         abi = "MinWithdrawalLimitUpdated(uint256,uint32)"
     )]
     pub struct MinWithdrawalLimitUpdatedFilter {
-        pub minimal_withdrawal_amount: ::ethers::core::types::U256,
+        pub minimum_withdrawal_amount: ::ethers::core::types::U256,
         pub nonce: u32,
     }
     #[derive(
@@ -2387,7 +2410,7 @@ pub mod v_anchor_tree_contract {
         Eq,
         Hash
     )]
-    pub enum VAnchorTreeContractEvents {
+    pub enum MultiAssetVAnchorTreeEvents {
         EdgeAdditionFilter(EdgeAdditionFilter),
         EdgeUpdateFilter(EdgeUpdateFilter),
         InsertionFilter(InsertionFilter),
@@ -2399,48 +2422,48 @@ pub mod v_anchor_tree_contract {
         SetHandlerFilter(SetHandlerFilter),
         SetVerifierFilter(SetVerifierFilter),
     }
-    impl ::ethers::contract::EthLogDecode for VAnchorTreeContractEvents {
+    impl ::ethers::contract::EthLogDecode for MultiAssetVAnchorTreeEvents {
         fn decode_log(
             log: &::ethers::core::abi::RawLog,
         ) -> ::core::result::Result<Self, ::ethers::core::abi::Error> {
             if let Ok(decoded) = EdgeAdditionFilter::decode_log(log) {
-                return Ok(VAnchorTreeContractEvents::EdgeAdditionFilter(decoded));
+                return Ok(MultiAssetVAnchorTreeEvents::EdgeAdditionFilter(decoded));
             }
             if let Ok(decoded) = EdgeUpdateFilter::decode_log(log) {
-                return Ok(VAnchorTreeContractEvents::EdgeUpdateFilter(decoded));
+                return Ok(MultiAssetVAnchorTreeEvents::EdgeUpdateFilter(decoded));
             }
             if let Ok(decoded) = InsertionFilter::decode_log(log) {
-                return Ok(VAnchorTreeContractEvents::InsertionFilter(decoded));
+                return Ok(MultiAssetVAnchorTreeEvents::InsertionFilter(decoded));
             }
             if let Ok(decoded) = MaxDepositLimitUpdatedFilter::decode_log(log) {
                 return Ok(
-                    VAnchorTreeContractEvents::MaxDepositLimitUpdatedFilter(decoded),
+                    MultiAssetVAnchorTreeEvents::MaxDepositLimitUpdatedFilter(decoded),
                 );
             }
             if let Ok(decoded) = MinWithdrawalLimitUpdatedFilter::decode_log(log) {
                 return Ok(
-                    VAnchorTreeContractEvents::MinWithdrawalLimitUpdatedFilter(decoded),
+                    MultiAssetVAnchorTreeEvents::MinWithdrawalLimitUpdatedFilter(decoded),
                 );
             }
             if let Ok(decoded) = NewCommitmentFilter::decode_log(log) {
-                return Ok(VAnchorTreeContractEvents::NewCommitmentFilter(decoded));
+                return Ok(MultiAssetVAnchorTreeEvents::NewCommitmentFilter(decoded));
             }
             if let Ok(decoded) = NewNullifierFilter::decode_log(log) {
-                return Ok(VAnchorTreeContractEvents::NewNullifierFilter(decoded));
+                return Ok(MultiAssetVAnchorTreeEvents::NewNullifierFilter(decoded));
             }
             if let Ok(decoded) = PublicKeyFilter::decode_log(log) {
-                return Ok(VAnchorTreeContractEvents::PublicKeyFilter(decoded));
+                return Ok(MultiAssetVAnchorTreeEvents::PublicKeyFilter(decoded));
             }
             if let Ok(decoded) = SetHandlerFilter::decode_log(log) {
-                return Ok(VAnchorTreeContractEvents::SetHandlerFilter(decoded));
+                return Ok(MultiAssetVAnchorTreeEvents::SetHandlerFilter(decoded));
             }
             if let Ok(decoded) = SetVerifierFilter::decode_log(log) {
-                return Ok(VAnchorTreeContractEvents::SetVerifierFilter(decoded));
+                return Ok(MultiAssetVAnchorTreeEvents::SetVerifierFilter(decoded));
             }
             Err(::ethers::core::abi::Error::InvalidData)
         }
     }
-    impl ::core::fmt::Display for VAnchorTreeContractEvents {
+    impl ::core::fmt::Display for MultiAssetVAnchorTreeEvents {
         fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
             match self {
                 Self::EdgeAdditionFilter(element) => {
@@ -2466,54 +2489,54 @@ pub mod v_anchor_tree_contract {
             }
         }
     }
-    impl ::core::convert::From<EdgeAdditionFilter> for VAnchorTreeContractEvents {
+    impl ::core::convert::From<EdgeAdditionFilter> for MultiAssetVAnchorTreeEvents {
         fn from(value: EdgeAdditionFilter) -> Self {
             Self::EdgeAdditionFilter(value)
         }
     }
-    impl ::core::convert::From<EdgeUpdateFilter> for VAnchorTreeContractEvents {
+    impl ::core::convert::From<EdgeUpdateFilter> for MultiAssetVAnchorTreeEvents {
         fn from(value: EdgeUpdateFilter) -> Self {
             Self::EdgeUpdateFilter(value)
         }
     }
-    impl ::core::convert::From<InsertionFilter> for VAnchorTreeContractEvents {
+    impl ::core::convert::From<InsertionFilter> for MultiAssetVAnchorTreeEvents {
         fn from(value: InsertionFilter) -> Self {
             Self::InsertionFilter(value)
         }
     }
     impl ::core::convert::From<MaxDepositLimitUpdatedFilter>
-    for VAnchorTreeContractEvents {
+    for MultiAssetVAnchorTreeEvents {
         fn from(value: MaxDepositLimitUpdatedFilter) -> Self {
             Self::MaxDepositLimitUpdatedFilter(value)
         }
     }
     impl ::core::convert::From<MinWithdrawalLimitUpdatedFilter>
-    for VAnchorTreeContractEvents {
+    for MultiAssetVAnchorTreeEvents {
         fn from(value: MinWithdrawalLimitUpdatedFilter) -> Self {
             Self::MinWithdrawalLimitUpdatedFilter(value)
         }
     }
-    impl ::core::convert::From<NewCommitmentFilter> for VAnchorTreeContractEvents {
+    impl ::core::convert::From<NewCommitmentFilter> for MultiAssetVAnchorTreeEvents {
         fn from(value: NewCommitmentFilter) -> Self {
             Self::NewCommitmentFilter(value)
         }
     }
-    impl ::core::convert::From<NewNullifierFilter> for VAnchorTreeContractEvents {
+    impl ::core::convert::From<NewNullifierFilter> for MultiAssetVAnchorTreeEvents {
         fn from(value: NewNullifierFilter) -> Self {
             Self::NewNullifierFilter(value)
         }
     }
-    impl ::core::convert::From<PublicKeyFilter> for VAnchorTreeContractEvents {
+    impl ::core::convert::From<PublicKeyFilter> for MultiAssetVAnchorTreeEvents {
         fn from(value: PublicKeyFilter) -> Self {
             Self::PublicKeyFilter(value)
         }
     }
-    impl ::core::convert::From<SetHandlerFilter> for VAnchorTreeContractEvents {
+    impl ::core::convert::From<SetHandlerFilter> for MultiAssetVAnchorTreeEvents {
         fn from(value: SetHandlerFilter) -> Self {
             Self::SetHandlerFilter(value)
         }
     }
-    impl ::core::convert::From<SetVerifierFilter> for VAnchorTreeContractEvents {
+    impl ::core::convert::From<SetVerifierFilter> for MultiAssetVAnchorTreeEvents {
         fn from(value: SetVerifierFilter) -> Self {
             Self::SetVerifierFilter(value)
         }
@@ -2593,6 +2616,21 @@ pub mod v_anchor_tree_contract {
     )]
     #[ethcall(name = "ROOT_HISTORY_SIZE", abi = "ROOT_HISTORY_SIZE()")]
     pub struct RootHistorySizeCall;
+    ///Container type for all input parameters for the `UPDATE_MAX_LENGTH` function with signature `UPDATE_MAX_LENGTH()` and selector `0xdbc9d395`
+    #[derive(
+        Clone,
+        ::ethers::contract::EthCall,
+        ::ethers::contract::EthDisplay,
+        serde::Serialize,
+        serde::Deserialize,
+        Default,
+        Debug,
+        PartialEq,
+        Eq,
+        Hash
+    )]
+    #[ethcall(name = "UPDATE_MAX_LENGTH", abi = "UPDATE_MAX_LENGTH()")]
+    pub struct UpdateMaxLengthCall;
     ///Container type for all input parameters for the `ZERO_VALUE` function with signature `ZERO_VALUE()` and selector `0xec732959`
     #[derive(
         Clone,
@@ -2608,28 +2646,6 @@ pub mod v_anchor_tree_contract {
     )]
     #[ethcall(name = "ZERO_VALUE", abi = "ZERO_VALUE()")]
     pub struct ZeroValueCall;
-    ///Container type for all input parameters for the `_executeWrapping` function with signature `_executeWrapping(address,address,uint256)` and selector `0x6338bcbc`
-    #[derive(
-        Clone,
-        ::ethers::contract::EthCall,
-        ::ethers::contract::EthDisplay,
-        serde::Serialize,
-        serde::Deserialize,
-        Default,
-        Debug,
-        PartialEq,
-        Eq,
-        Hash
-    )]
-    #[ethcall(
-        name = "_executeWrapping",
-        abi = "_executeWrapping(address,address,uint256)"
-    )]
-    pub struct ExecuteWrappingCall {
-        pub from_token_address: ::ethers::core::types::Address,
-        pub to_token_address: ::ethers::core::types::Address,
-        pub ext_amount: ::ethers::core::types::U256,
-    }
     ///Container type for all input parameters for the `_genExtDataHash` function with signature `_genExtDataHash(bytes,(address,int256,address,uint256,uint256,address),(bytes,bytes))` and selector `0xd384534d`
     #[derive(
         Clone,
@@ -2648,32 +2664,9 @@ pub mod v_anchor_tree_contract {
         abi = "_genExtDataHash(bytes,(address,int256,address,uint256,uint256,address),(bytes,bytes))"
     )]
     pub struct GenExtDataHashCall {
-        pub p0: ::ethers::core::types::Bytes,
+        pub aux_public_inputs: ::ethers::core::types::Bytes,
         pub external_data: CommonExtData,
         pub encryptions: Encryptions,
-    }
-    ///Container type for all input parameters for the `_withdrawAndUnwrap` function with signature `_withdrawAndUnwrap(address,address,address,uint256)` and selector `0x509cd41e`
-    #[derive(
-        Clone,
-        ::ethers::contract::EthCall,
-        ::ethers::contract::EthDisplay,
-        serde::Serialize,
-        serde::Deserialize,
-        Default,
-        Debug,
-        PartialEq,
-        Eq,
-        Hash
-    )]
-    #[ethcall(
-        name = "_withdrawAndUnwrap",
-        abi = "_withdrawAndUnwrap(address,address,address,uint256)"
-    )]
-    pub struct WithdrawAndUnwrapCall {
-        pub from_token_address: ::ethers::core::types::Address,
-        pub to_token_address: ::ethers::core::types::Address,
-        pub recipient: ::ethers::core::types::Address,
-        pub minus_ext_amount: ::ethers::core::types::U256,
     }
     ///Container type for all input parameters for the `calculatePublicAmount` function with signature `calculatePublicAmount(int256,uint256)` and selector `0x2570b7b4`
     #[derive(
@@ -2732,7 +2725,7 @@ pub mod v_anchor_tree_contract {
         pub maximum_deposit_amount: ::ethers::core::types::U256,
         pub nonce: u32,
     }
-    ///Container type for all input parameters for the `configureMinimalWithdrawalLimit` function with signature `configureMinimalWithdrawalLimit(uint256,uint32)` and selector `0x1f7f99f7`
+    ///Container type for all input parameters for the `configureMinimumWithdrawalLimit` function with signature `configureMinimumWithdrawalLimit(uint256,uint32)` and selector `0x0b97e0a8`
     #[derive(
         Clone,
         ::ethers::contract::EthCall,
@@ -2746,11 +2739,11 @@ pub mod v_anchor_tree_contract {
         Hash
     )]
     #[ethcall(
-        name = "configureMinimalWithdrawalLimit",
-        abi = "configureMinimalWithdrawalLimit(uint256,uint32)"
+        name = "configureMinimumWithdrawalLimit",
+        abi = "configureMinimumWithdrawalLimit(uint256,uint32)"
     )]
-    pub struct ConfigureMinimalWithdrawalLimitCall {
-        pub minimal_withdrawal_amount: ::ethers::core::types::U256,
+    pub struct ConfigureMinimumWithdrawalLimitCall {
+        pub minimum_withdrawal_amount: ::ethers::core::types::U256,
         pub nonce: u32,
     }
     ///Container type for all input parameters for the `currentNeighborRootIndex` function with signature `currentNeighborRootIndex(uint256)` and selector `0x5d2d766c`
@@ -2966,21 +2959,6 @@ pub mod v_anchor_tree_contract {
     )]
     #[ethcall(name = "getNextIndex", abi = "getNextIndex()")]
     pub struct GetNextIndexCall;
-    ///Container type for all input parameters for the `getProposalNonce` function with signature `getProposalNonce()` and selector `0x0b27fb9a`
-    #[derive(
-        Clone,
-        ::ethers::contract::EthCall,
-        ::ethers::contract::EthDisplay,
-        serde::Serialize,
-        serde::Deserialize,
-        Default,
-        Debug,
-        PartialEq,
-        Eq,
-        Hash
-    )]
-    #[ethcall(name = "getProposalNonce", abi = "getProposalNonce()")]
-    pub struct GetProposalNonceCall;
     ///Container type for all input parameters for the `getZeroHash` function with signature `getZeroHash(uint32)` and selector `0x305e9eac`
     #[derive(
         Clone,
@@ -3078,7 +3056,7 @@ pub mod v_anchor_tree_contract {
     )]
     #[ethcall(name = "initialize", abi = "initialize(uint256,uint256)")]
     pub struct InitializeCall {
-        pub minimal_withdrawal_amount: ::ethers::core::types::U256,
+        pub minimum_withdrawal_amount: ::ethers::core::types::U256,
         pub maximum_deposit_amount: ::ethers::core::types::U256,
     }
     ///Container type for all input parameters for the `initialized` function with signature `initialized()` and selector `0x158ef93e`
@@ -3285,7 +3263,7 @@ pub mod v_anchor_tree_contract {
     )]
     #[ethcall(name = "maximumDepositAmount", abi = "maximumDepositAmount()")]
     pub struct MaximumDepositAmountCall;
-    ///Container type for all input parameters for the `minimalWithdrawalAmount` function with signature `minimalWithdrawalAmount()` and selector `0x840b2791`
+    ///Container type for all input parameters for the `minimumWithdrawalAmount` function with signature `minimumWithdrawalAmount()` and selector `0x2b180646`
     #[derive(
         Clone,
         ::ethers::contract::EthCall,
@@ -3298,8 +3276,8 @@ pub mod v_anchor_tree_contract {
         Eq,
         Hash
     )]
-    #[ethcall(name = "minimalWithdrawalAmount", abi = "minimalWithdrawalAmount()")]
-    pub struct MinimalWithdrawalAmountCall;
+    #[ethcall(name = "minimumWithdrawalAmount", abi = "minimumWithdrawalAmount()")]
+    pub struct MinimumWithdrawalAmountCall;
     ///Container type for all input parameters for the `neighborRoots` function with signature `neighborRoots(uint256,uint32)` and selector `0x43e7119f`
     #[derive(
         Clone,
@@ -3345,6 +3323,29 @@ pub mod v_anchor_tree_contract {
     )]
     #[ethcall(name = "nullifierHashes", abi = "nullifierHashes(uint256)")]
     pub struct NullifierHashesCall(pub ::ethers::core::types::U256);
+    ///Container type for all input parameters for the `onERC721Received` function with signature `onERC721Received(address,address,uint256,bytes)` and selector `0x150b7a02`
+    #[derive(
+        Clone,
+        ::ethers::contract::EthCall,
+        ::ethers::contract::EthDisplay,
+        serde::Serialize,
+        serde::Deserialize,
+        Default,
+        Debug,
+        PartialEq,
+        Eq,
+        Hash
+    )]
+    #[ethcall(
+        name = "onERC721Received",
+        abi = "onERC721Received(address,address,uint256,bytes)"
+    )]
+    pub struct OnERC721ReceivedCall {
+        pub operator: ::ethers::core::types::Address,
+        pub from: ::ethers::core::types::Address,
+        pub token_id: ::ethers::core::types::U256,
+        pub data: ::ethers::core::types::Bytes,
+    }
     ///Container type for all input parameters for the `outerLevels` function with signature `outerLevels()` and selector `0xbfbc0a39`
     #[derive(
         Clone,
@@ -3437,6 +3438,21 @@ pub mod v_anchor_tree_contract {
         pub public_inputs: PublicInputs,
         pub encryptions: Encryptions,
     }
+    ///Container type for all input parameters for the `registry` function with signature `registry()` and selector `0x7b103999`
+    #[derive(
+        Clone,
+        ::ethers::contract::EthCall,
+        ::ethers::contract::EthDisplay,
+        serde::Serialize,
+        serde::Deserialize,
+        Default,
+        Debug,
+        PartialEq,
+        Eq,
+        Hash
+    )]
+    #[ethcall(name = "registry", abi = "registry()")]
+    pub struct RegistryCall;
     ///Container type for all input parameters for the `roots` function with signature `roots(uint256)` and selector `0xc2b40ae4`
     #[derive(
         Clone,
@@ -3488,7 +3504,7 @@ pub mod v_anchor_tree_contract {
         pub verifier: ::ethers::core::types::Address,
         pub nonce: u32,
     }
-    ///Container type for all input parameters for the `token` function with signature `token()` and selector `0xfc0c546a`
+    ///Container type for all input parameters for the `swap` function with signature `swap(bytes,(bytes,uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256),(bytes,bytes),(bytes,bytes))` and selector `0x236d421d`
     #[derive(
         Clone,
         ::ethers::contract::EthCall,
@@ -3501,8 +3517,16 @@ pub mod v_anchor_tree_contract {
         Eq,
         Hash
     )]
-    #[ethcall(name = "token", abi = "token()")]
-    pub struct TokenCall;
+    #[ethcall(
+        name = "swap",
+        abi = "swap(bytes,(bytes,uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256),(bytes,bytes),(bytes,bytes))"
+    )]
+    pub struct SwapCall {
+        pub proof: ::ethers::core::types::Bytes,
+        pub public_inputs: SwapPublicInputs,
+        pub alice_encryptions: Encryptions,
+        pub bob_encryptions: Encryptions,
+    }
     ///Container type for all input parameters for the `transact` function with signature `transact(bytes,bytes,(address,int256,address,uint256,uint256,address),(bytes,bytes,uint256[],uint256[2],uint256,uint256),(bytes,bytes))` and selector `0xa38f76e8`
     #[derive(
         Clone,
@@ -3589,20 +3613,19 @@ pub mod v_anchor_tree_contract {
         Eq,
         Hash
     )]
-    pub enum VAnchorTreeContractCalls {
+    pub enum MultiAssetVAnchorTreeCalls {
         EvmChainIdType(EvmChainIdTypeCall),
         FieldSize(FieldSizeCall),
         MaxExtAmount(MaxExtAmountCall),
         MaxFee(MaxFeeCall),
         RootHistorySize(RootHistorySizeCall),
+        UpdateMaxLength(UpdateMaxLengthCall),
         ZeroValue(ZeroValueCall),
-        ExecuteWrapping(ExecuteWrappingCall),
         GenExtDataHash(GenExtDataHashCall),
-        WithdrawAndUnwrap(WithdrawAndUnwrapCall),
         CalculatePublicAmount(CalculatePublicAmountCall),
         Commitments(CommitmentsCall),
         ConfigureMaximumDepositLimit(ConfigureMaximumDepositLimitCall),
-        ConfigureMinimalWithdrawalLimit(ConfigureMinimalWithdrawalLimitCall),
+        ConfigureMinimumWithdrawalLimit(ConfigureMinimumWithdrawalLimitCall),
         CurrentNeighborRootIndex(CurrentNeighborRootIndexCall),
         CurrentRootIndex(CurrentRootIndexCall),
         EdgeExistsForChain(EdgeExistsForChainCall),
@@ -3617,7 +3640,6 @@ pub mod v_anchor_tree_contract {
         GetLatestNeighborRoots(GetLatestNeighborRootsCall),
         GetLevels(GetLevelsCall),
         GetNextIndex(GetNextIndexCall),
-        GetProposalNonce(GetProposalNonceCall),
         GetZeroHash(GetZeroHashCall),
         Handler(HandlerCall),
         HasEdge(HasEdgeCall),
@@ -3636,25 +3658,27 @@ pub mod v_anchor_tree_contract {
         Levels(LevelsCall),
         MaxEdges(MaxEdgesCall),
         MaximumDepositAmount(MaximumDepositAmountCall),
-        MinimalWithdrawalAmount(MinimalWithdrawalAmountCall),
+        MinimumWithdrawalAmount(MinimumWithdrawalAmountCall),
         NeighborRoots(NeighborRootsCall),
         NextIndex(NextIndexCall),
         NullifierHashes(NullifierHashesCall),
+        OnERC721Received(OnERC721ReceivedCall),
         OuterLevels(OuterLevelsCall),
         ParseChainIdFromResourceId(ParseChainIdFromResourceIdCall),
         ProposalNonce(ProposalNonceCall),
         Register(RegisterCall),
         RegisterAndTransact(RegisterAndTransactCall),
+        Registry(RegistryCall),
         Roots(RootsCall),
         SetHandler(SetHandlerCall),
         SetVerifier(SetVerifierCall),
-        Token(TokenCall),
+        Swap(SwapCall),
         Transact(TransactCall),
         UnpackProof(UnpackProofCall),
         UpdateEdge(UpdateEdgeCall),
         Verifier(VerifierCall),
     }
-    impl ::ethers::core::abi::AbiDecode for VAnchorTreeContractCalls {
+    impl ::ethers::core::abi::AbiDecode for MultiAssetVAnchorTreeCalls {
         fn decode(
             data: impl AsRef<[u8]>,
         ) -> ::core::result::Result<Self, ::ethers::core::abi::AbiError> {
@@ -3680,22 +3704,16 @@ pub mod v_anchor_tree_contract {
                 return Ok(Self::RootHistorySize(decoded));
             }
             if let Ok(decoded)
+                = <UpdateMaxLengthCall as ::ethers::core::abi::AbiDecode>::decode(data) {
+                return Ok(Self::UpdateMaxLength(decoded));
+            }
+            if let Ok(decoded)
                 = <ZeroValueCall as ::ethers::core::abi::AbiDecode>::decode(data) {
                 return Ok(Self::ZeroValue(decoded));
             }
             if let Ok(decoded)
-                = <ExecuteWrappingCall as ::ethers::core::abi::AbiDecode>::decode(data) {
-                return Ok(Self::ExecuteWrapping(decoded));
-            }
-            if let Ok(decoded)
                 = <GenExtDataHashCall as ::ethers::core::abi::AbiDecode>::decode(data) {
                 return Ok(Self::GenExtDataHash(decoded));
-            }
-            if let Ok(decoded)
-                = <WithdrawAndUnwrapCall as ::ethers::core::abi::AbiDecode>::decode(
-                    data,
-                ) {
-                return Ok(Self::WithdrawAndUnwrap(decoded));
             }
             if let Ok(decoded)
                 = <CalculatePublicAmountCall as ::ethers::core::abi::AbiDecode>::decode(
@@ -3714,10 +3732,10 @@ pub mod v_anchor_tree_contract {
                 return Ok(Self::ConfigureMaximumDepositLimit(decoded));
             }
             if let Ok(decoded)
-                = <ConfigureMinimalWithdrawalLimitCall as ::ethers::core::abi::AbiDecode>::decode(
+                = <ConfigureMinimumWithdrawalLimitCall as ::ethers::core::abi::AbiDecode>::decode(
                     data,
                 ) {
-                return Ok(Self::ConfigureMinimalWithdrawalLimit(decoded));
+                return Ok(Self::ConfigureMinimumWithdrawalLimit(decoded));
             }
             if let Ok(decoded)
                 = <CurrentNeighborRootIndexCall as ::ethers::core::abi::AbiDecode>::decode(
@@ -3784,12 +3802,6 @@ pub mod v_anchor_tree_contract {
             if let Ok(decoded)
                 = <GetNextIndexCall as ::ethers::core::abi::AbiDecode>::decode(data) {
                 return Ok(Self::GetNextIndex(decoded));
-            }
-            if let Ok(decoded)
-                = <GetProposalNonceCall as ::ethers::core::abi::AbiDecode>::decode(
-                    data,
-                ) {
-                return Ok(Self::GetProposalNonce(decoded));
             }
             if let Ok(decoded)
                 = <GetZeroHashCall as ::ethers::core::abi::AbiDecode>::decode(data) {
@@ -3872,10 +3884,10 @@ pub mod v_anchor_tree_contract {
                 return Ok(Self::MaximumDepositAmount(decoded));
             }
             if let Ok(decoded)
-                = <MinimalWithdrawalAmountCall as ::ethers::core::abi::AbiDecode>::decode(
+                = <MinimumWithdrawalAmountCall as ::ethers::core::abi::AbiDecode>::decode(
                     data,
                 ) {
-                return Ok(Self::MinimalWithdrawalAmount(decoded));
+                return Ok(Self::MinimumWithdrawalAmount(decoded));
             }
             if let Ok(decoded)
                 = <NeighborRootsCall as ::ethers::core::abi::AbiDecode>::decode(data) {
@@ -3888,6 +3900,12 @@ pub mod v_anchor_tree_contract {
             if let Ok(decoded)
                 = <NullifierHashesCall as ::ethers::core::abi::AbiDecode>::decode(data) {
                 return Ok(Self::NullifierHashes(decoded));
+            }
+            if let Ok(decoded)
+                = <OnERC721ReceivedCall as ::ethers::core::abi::AbiDecode>::decode(
+                    data,
+                ) {
+                return Ok(Self::OnERC721Received(decoded));
             }
             if let Ok(decoded)
                 = <OuterLevelsCall as ::ethers::core::abi::AbiDecode>::decode(data) {
@@ -3914,6 +3932,10 @@ pub mod v_anchor_tree_contract {
                 return Ok(Self::RegisterAndTransact(decoded));
             }
             if let Ok(decoded)
+                = <RegistryCall as ::ethers::core::abi::AbiDecode>::decode(data) {
+                return Ok(Self::Registry(decoded));
+            }
+            if let Ok(decoded)
                 = <RootsCall as ::ethers::core::abi::AbiDecode>::decode(data) {
                 return Ok(Self::Roots(decoded));
             }
@@ -3926,8 +3948,8 @@ pub mod v_anchor_tree_contract {
                 return Ok(Self::SetVerifier(decoded));
             }
             if let Ok(decoded)
-                = <TokenCall as ::ethers::core::abi::AbiDecode>::decode(data) {
-                return Ok(Self::Token(decoded));
+                = <SwapCall as ::ethers::core::abi::AbiDecode>::decode(data) {
+                return Ok(Self::Swap(decoded));
             }
             if let Ok(decoded)
                 = <TransactCall as ::ethers::core::abi::AbiDecode>::decode(data) {
@@ -3948,7 +3970,7 @@ pub mod v_anchor_tree_contract {
             Err(::ethers::core::abi::Error::InvalidData.into())
         }
     }
-    impl ::ethers::core::abi::AbiEncode for VAnchorTreeContractCalls {
+    impl ::ethers::core::abi::AbiEncode for MultiAssetVAnchorTreeCalls {
         fn encode(self) -> Vec<u8> {
             match self {
                 Self::EvmChainIdType(element) => {
@@ -3964,16 +3986,13 @@ pub mod v_anchor_tree_contract {
                 Self::RootHistorySize(element) => {
                     ::ethers::core::abi::AbiEncode::encode(element)
                 }
+                Self::UpdateMaxLength(element) => {
+                    ::ethers::core::abi::AbiEncode::encode(element)
+                }
                 Self::ZeroValue(element) => {
                     ::ethers::core::abi::AbiEncode::encode(element)
                 }
-                Self::ExecuteWrapping(element) => {
-                    ::ethers::core::abi::AbiEncode::encode(element)
-                }
                 Self::GenExtDataHash(element) => {
-                    ::ethers::core::abi::AbiEncode::encode(element)
-                }
-                Self::WithdrawAndUnwrap(element) => {
                     ::ethers::core::abi::AbiEncode::encode(element)
                 }
                 Self::CalculatePublicAmount(element) => {
@@ -3985,7 +4004,7 @@ pub mod v_anchor_tree_contract {
                 Self::ConfigureMaximumDepositLimit(element) => {
                     ::ethers::core::abi::AbiEncode::encode(element)
                 }
-                Self::ConfigureMinimalWithdrawalLimit(element) => {
+                Self::ConfigureMinimumWithdrawalLimit(element) => {
                     ::ethers::core::abi::AbiEncode::encode(element)
                 }
                 Self::CurrentNeighborRootIndex(element) => {
@@ -4028,9 +4047,6 @@ pub mod v_anchor_tree_contract {
                     ::ethers::core::abi::AbiEncode::encode(element)
                 }
                 Self::GetNextIndex(element) => {
-                    ::ethers::core::abi::AbiEncode::encode(element)
-                }
-                Self::GetProposalNonce(element) => {
                     ::ethers::core::abi::AbiEncode::encode(element)
                 }
                 Self::GetZeroHash(element) => {
@@ -4077,7 +4093,7 @@ pub mod v_anchor_tree_contract {
                 Self::MaximumDepositAmount(element) => {
                     ::ethers::core::abi::AbiEncode::encode(element)
                 }
-                Self::MinimalWithdrawalAmount(element) => {
+                Self::MinimumWithdrawalAmount(element) => {
                     ::ethers::core::abi::AbiEncode::encode(element)
                 }
                 Self::NeighborRoots(element) => {
@@ -4087,6 +4103,9 @@ pub mod v_anchor_tree_contract {
                     ::ethers::core::abi::AbiEncode::encode(element)
                 }
                 Self::NullifierHashes(element) => {
+                    ::ethers::core::abi::AbiEncode::encode(element)
+                }
+                Self::OnERC721Received(element) => {
                     ::ethers::core::abi::AbiEncode::encode(element)
                 }
                 Self::OuterLevels(element) => {
@@ -4104,6 +4123,9 @@ pub mod v_anchor_tree_contract {
                 Self::RegisterAndTransact(element) => {
                     ::ethers::core::abi::AbiEncode::encode(element)
                 }
+                Self::Registry(element) => {
+                    ::ethers::core::abi::AbiEncode::encode(element)
+                }
                 Self::Roots(element) => ::ethers::core::abi::AbiEncode::encode(element),
                 Self::SetHandler(element) => {
                     ::ethers::core::abi::AbiEncode::encode(element)
@@ -4111,7 +4133,7 @@ pub mod v_anchor_tree_contract {
                 Self::SetVerifier(element) => {
                     ::ethers::core::abi::AbiEncode::encode(element)
                 }
-                Self::Token(element) => ::ethers::core::abi::AbiEncode::encode(element),
+                Self::Swap(element) => ::ethers::core::abi::AbiEncode::encode(element),
                 Self::Transact(element) => {
                     ::ethers::core::abi::AbiEncode::encode(element)
                 }
@@ -4127,7 +4149,7 @@ pub mod v_anchor_tree_contract {
             }
         }
     }
-    impl ::core::fmt::Display for VAnchorTreeContractCalls {
+    impl ::core::fmt::Display for MultiAssetVAnchorTreeCalls {
         fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
             match self {
                 Self::EvmChainIdType(element) => ::core::fmt::Display::fmt(element, f),
@@ -4135,10 +4157,9 @@ pub mod v_anchor_tree_contract {
                 Self::MaxExtAmount(element) => ::core::fmt::Display::fmt(element, f),
                 Self::MaxFee(element) => ::core::fmt::Display::fmt(element, f),
                 Self::RootHistorySize(element) => ::core::fmt::Display::fmt(element, f),
+                Self::UpdateMaxLength(element) => ::core::fmt::Display::fmt(element, f),
                 Self::ZeroValue(element) => ::core::fmt::Display::fmt(element, f),
-                Self::ExecuteWrapping(element) => ::core::fmt::Display::fmt(element, f),
                 Self::GenExtDataHash(element) => ::core::fmt::Display::fmt(element, f),
-                Self::WithdrawAndUnwrap(element) => ::core::fmt::Display::fmt(element, f),
                 Self::CalculatePublicAmount(element) => {
                     ::core::fmt::Display::fmt(element, f)
                 }
@@ -4146,7 +4167,7 @@ pub mod v_anchor_tree_contract {
                 Self::ConfigureMaximumDepositLimit(element) => {
                     ::core::fmt::Display::fmt(element, f)
                 }
-                Self::ConfigureMinimalWithdrawalLimit(element) => {
+                Self::ConfigureMinimumWithdrawalLimit(element) => {
                     ::core::fmt::Display::fmt(element, f)
                 }
                 Self::CurrentNeighborRootIndex(element) => {
@@ -4171,7 +4192,6 @@ pub mod v_anchor_tree_contract {
                 }
                 Self::GetLevels(element) => ::core::fmt::Display::fmt(element, f),
                 Self::GetNextIndex(element) => ::core::fmt::Display::fmt(element, f),
-                Self::GetProposalNonce(element) => ::core::fmt::Display::fmt(element, f),
                 Self::GetZeroHash(element) => ::core::fmt::Display::fmt(element, f),
                 Self::Handler(element) => ::core::fmt::Display::fmt(element, f),
                 Self::HasEdge(element) => ::core::fmt::Display::fmt(element, f),
@@ -4198,12 +4218,13 @@ pub mod v_anchor_tree_contract {
                 Self::MaximumDepositAmount(element) => {
                     ::core::fmt::Display::fmt(element, f)
                 }
-                Self::MinimalWithdrawalAmount(element) => {
+                Self::MinimumWithdrawalAmount(element) => {
                     ::core::fmt::Display::fmt(element, f)
                 }
                 Self::NeighborRoots(element) => ::core::fmt::Display::fmt(element, f),
                 Self::NextIndex(element) => ::core::fmt::Display::fmt(element, f),
                 Self::NullifierHashes(element) => ::core::fmt::Display::fmt(element, f),
+                Self::OnERC721Received(element) => ::core::fmt::Display::fmt(element, f),
                 Self::OuterLevels(element) => ::core::fmt::Display::fmt(element, f),
                 Self::ParseChainIdFromResourceId(element) => {
                     ::core::fmt::Display::fmt(element, f)
@@ -4213,10 +4234,11 @@ pub mod v_anchor_tree_contract {
                 Self::RegisterAndTransact(element) => {
                     ::core::fmt::Display::fmt(element, f)
                 }
+                Self::Registry(element) => ::core::fmt::Display::fmt(element, f),
                 Self::Roots(element) => ::core::fmt::Display::fmt(element, f),
                 Self::SetHandler(element) => ::core::fmt::Display::fmt(element, f),
                 Self::SetVerifier(element) => ::core::fmt::Display::fmt(element, f),
-                Self::Token(element) => ::core::fmt::Display::fmt(element, f),
+                Self::Swap(element) => ::core::fmt::Display::fmt(element, f),
                 Self::Transact(element) => ::core::fmt::Display::fmt(element, f),
                 Self::UnpackProof(element) => ::core::fmt::Display::fmt(element, f),
                 Self::UpdateEdge(element) => ::core::fmt::Display::fmt(element, f),
@@ -4224,324 +4246,327 @@ pub mod v_anchor_tree_contract {
             }
         }
     }
-    impl ::core::convert::From<EvmChainIdTypeCall> for VAnchorTreeContractCalls {
+    impl ::core::convert::From<EvmChainIdTypeCall> for MultiAssetVAnchorTreeCalls {
         fn from(value: EvmChainIdTypeCall) -> Self {
             Self::EvmChainIdType(value)
         }
     }
-    impl ::core::convert::From<FieldSizeCall> for VAnchorTreeContractCalls {
+    impl ::core::convert::From<FieldSizeCall> for MultiAssetVAnchorTreeCalls {
         fn from(value: FieldSizeCall) -> Self {
             Self::FieldSize(value)
         }
     }
-    impl ::core::convert::From<MaxExtAmountCall> for VAnchorTreeContractCalls {
+    impl ::core::convert::From<MaxExtAmountCall> for MultiAssetVAnchorTreeCalls {
         fn from(value: MaxExtAmountCall) -> Self {
             Self::MaxExtAmount(value)
         }
     }
-    impl ::core::convert::From<MaxFeeCall> for VAnchorTreeContractCalls {
+    impl ::core::convert::From<MaxFeeCall> for MultiAssetVAnchorTreeCalls {
         fn from(value: MaxFeeCall) -> Self {
             Self::MaxFee(value)
         }
     }
-    impl ::core::convert::From<RootHistorySizeCall> for VAnchorTreeContractCalls {
+    impl ::core::convert::From<RootHistorySizeCall> for MultiAssetVAnchorTreeCalls {
         fn from(value: RootHistorySizeCall) -> Self {
             Self::RootHistorySize(value)
         }
     }
-    impl ::core::convert::From<ZeroValueCall> for VAnchorTreeContractCalls {
+    impl ::core::convert::From<UpdateMaxLengthCall> for MultiAssetVAnchorTreeCalls {
+        fn from(value: UpdateMaxLengthCall) -> Self {
+            Self::UpdateMaxLength(value)
+        }
+    }
+    impl ::core::convert::From<ZeroValueCall> for MultiAssetVAnchorTreeCalls {
         fn from(value: ZeroValueCall) -> Self {
             Self::ZeroValue(value)
         }
     }
-    impl ::core::convert::From<ExecuteWrappingCall> for VAnchorTreeContractCalls {
-        fn from(value: ExecuteWrappingCall) -> Self {
-            Self::ExecuteWrapping(value)
-        }
-    }
-    impl ::core::convert::From<GenExtDataHashCall> for VAnchorTreeContractCalls {
+    impl ::core::convert::From<GenExtDataHashCall> for MultiAssetVAnchorTreeCalls {
         fn from(value: GenExtDataHashCall) -> Self {
             Self::GenExtDataHash(value)
         }
     }
-    impl ::core::convert::From<WithdrawAndUnwrapCall> for VAnchorTreeContractCalls {
-        fn from(value: WithdrawAndUnwrapCall) -> Self {
-            Self::WithdrawAndUnwrap(value)
-        }
-    }
-    impl ::core::convert::From<CalculatePublicAmountCall> for VAnchorTreeContractCalls {
+    impl ::core::convert::From<CalculatePublicAmountCall>
+    for MultiAssetVAnchorTreeCalls {
         fn from(value: CalculatePublicAmountCall) -> Self {
             Self::CalculatePublicAmount(value)
         }
     }
-    impl ::core::convert::From<CommitmentsCall> for VAnchorTreeContractCalls {
+    impl ::core::convert::From<CommitmentsCall> for MultiAssetVAnchorTreeCalls {
         fn from(value: CommitmentsCall) -> Self {
             Self::Commitments(value)
         }
     }
     impl ::core::convert::From<ConfigureMaximumDepositLimitCall>
-    for VAnchorTreeContractCalls {
+    for MultiAssetVAnchorTreeCalls {
         fn from(value: ConfigureMaximumDepositLimitCall) -> Self {
             Self::ConfigureMaximumDepositLimit(value)
         }
     }
-    impl ::core::convert::From<ConfigureMinimalWithdrawalLimitCall>
-    for VAnchorTreeContractCalls {
-        fn from(value: ConfigureMinimalWithdrawalLimitCall) -> Self {
-            Self::ConfigureMinimalWithdrawalLimit(value)
+    impl ::core::convert::From<ConfigureMinimumWithdrawalLimitCall>
+    for MultiAssetVAnchorTreeCalls {
+        fn from(value: ConfigureMinimumWithdrawalLimitCall) -> Self {
+            Self::ConfigureMinimumWithdrawalLimit(value)
         }
     }
     impl ::core::convert::From<CurrentNeighborRootIndexCall>
-    for VAnchorTreeContractCalls {
+    for MultiAssetVAnchorTreeCalls {
         fn from(value: CurrentNeighborRootIndexCall) -> Self {
             Self::CurrentNeighborRootIndex(value)
         }
     }
-    impl ::core::convert::From<CurrentRootIndexCall> for VAnchorTreeContractCalls {
+    impl ::core::convert::From<CurrentRootIndexCall> for MultiAssetVAnchorTreeCalls {
         fn from(value: CurrentRootIndexCall) -> Self {
             Self::CurrentRootIndex(value)
         }
     }
-    impl ::core::convert::From<EdgeExistsForChainCall> for VAnchorTreeContractCalls {
+    impl ::core::convert::From<EdgeExistsForChainCall> for MultiAssetVAnchorTreeCalls {
         fn from(value: EdgeExistsForChainCall) -> Self {
             Self::EdgeExistsForChain(value)
         }
     }
-    impl ::core::convert::From<EdgeIndexCall> for VAnchorTreeContractCalls {
+    impl ::core::convert::From<EdgeIndexCall> for MultiAssetVAnchorTreeCalls {
         fn from(value: EdgeIndexCall) -> Self {
             Self::EdgeIndex(value)
         }
     }
-    impl ::core::convert::From<EdgeListCall> for VAnchorTreeContractCalls {
+    impl ::core::convert::From<EdgeListCall> for MultiAssetVAnchorTreeCalls {
         fn from(value: EdgeListCall) -> Self {
             Self::EdgeList(value)
         }
     }
-    impl ::core::convert::From<FilledSubtreesCall> for VAnchorTreeContractCalls {
+    impl ::core::convert::From<FilledSubtreesCall> for MultiAssetVAnchorTreeCalls {
         fn from(value: FilledSubtreesCall) -> Self {
             Self::FilledSubtrees(value)
         }
     }
-    impl ::core::convert::From<GetChainIdCall> for VAnchorTreeContractCalls {
+    impl ::core::convert::From<GetChainIdCall> for MultiAssetVAnchorTreeCalls {
         fn from(value: GetChainIdCall) -> Self {
             Self::GetChainId(value)
         }
     }
-    impl ::core::convert::From<GetChainIdTypeCall> for VAnchorTreeContractCalls {
+    impl ::core::convert::From<GetChainIdTypeCall> for MultiAssetVAnchorTreeCalls {
         fn from(value: GetChainIdTypeCall) -> Self {
             Self::GetChainIdType(value)
         }
     }
-    impl ::core::convert::From<GetHasherCall> for VAnchorTreeContractCalls {
+    impl ::core::convert::From<GetHasherCall> for MultiAssetVAnchorTreeCalls {
         fn from(value: GetHasherCall) -> Self {
             Self::GetHasher(value)
         }
     }
-    impl ::core::convert::From<GetLastRootCall> for VAnchorTreeContractCalls {
+    impl ::core::convert::From<GetLastRootCall> for MultiAssetVAnchorTreeCalls {
         fn from(value: GetLastRootCall) -> Self {
             Self::GetLastRoot(value)
         }
     }
-    impl ::core::convert::From<GetLatestNeighborEdgesCall> for VAnchorTreeContractCalls {
+    impl ::core::convert::From<GetLatestNeighborEdgesCall>
+    for MultiAssetVAnchorTreeCalls {
         fn from(value: GetLatestNeighborEdgesCall) -> Self {
             Self::GetLatestNeighborEdges(value)
         }
     }
-    impl ::core::convert::From<GetLatestNeighborRootsCall> for VAnchorTreeContractCalls {
+    impl ::core::convert::From<GetLatestNeighborRootsCall>
+    for MultiAssetVAnchorTreeCalls {
         fn from(value: GetLatestNeighborRootsCall) -> Self {
             Self::GetLatestNeighborRoots(value)
         }
     }
-    impl ::core::convert::From<GetLevelsCall> for VAnchorTreeContractCalls {
+    impl ::core::convert::From<GetLevelsCall> for MultiAssetVAnchorTreeCalls {
         fn from(value: GetLevelsCall) -> Self {
             Self::GetLevels(value)
         }
     }
-    impl ::core::convert::From<GetNextIndexCall> for VAnchorTreeContractCalls {
+    impl ::core::convert::From<GetNextIndexCall> for MultiAssetVAnchorTreeCalls {
         fn from(value: GetNextIndexCall) -> Self {
             Self::GetNextIndex(value)
         }
     }
-    impl ::core::convert::From<GetProposalNonceCall> for VAnchorTreeContractCalls {
-        fn from(value: GetProposalNonceCall) -> Self {
-            Self::GetProposalNonce(value)
-        }
-    }
-    impl ::core::convert::From<GetZeroHashCall> for VAnchorTreeContractCalls {
+    impl ::core::convert::From<GetZeroHashCall> for MultiAssetVAnchorTreeCalls {
         fn from(value: GetZeroHashCall) -> Self {
             Self::GetZeroHash(value)
         }
     }
-    impl ::core::convert::From<HandlerCall> for VAnchorTreeContractCalls {
+    impl ::core::convert::From<HandlerCall> for MultiAssetVAnchorTreeCalls {
         fn from(value: HandlerCall) -> Self {
             Self::Handler(value)
         }
     }
-    impl ::core::convert::From<HasEdgeCall> for VAnchorTreeContractCalls {
+    impl ::core::convert::From<HasEdgeCall> for MultiAssetVAnchorTreeCalls {
         fn from(value: HasEdgeCall) -> Self {
             Self::HasEdge(value)
         }
     }
-    impl ::core::convert::From<HashLeftRightCall> for VAnchorTreeContractCalls {
+    impl ::core::convert::From<HashLeftRightCall> for MultiAssetVAnchorTreeCalls {
         fn from(value: HashLeftRightCall) -> Self {
             Self::HashLeftRight(value)
         }
     }
-    impl ::core::convert::From<HasherCall> for VAnchorTreeContractCalls {
+    impl ::core::convert::From<HasherCall> for MultiAssetVAnchorTreeCalls {
         fn from(value: HasherCall) -> Self {
             Self::Hasher(value)
         }
     }
-    impl ::core::convert::From<InitializeCall> for VAnchorTreeContractCalls {
+    impl ::core::convert::From<InitializeCall> for MultiAssetVAnchorTreeCalls {
         fn from(value: InitializeCall) -> Self {
             Self::Initialize(value)
         }
     }
-    impl ::core::convert::From<InitializedCall> for VAnchorTreeContractCalls {
+    impl ::core::convert::From<InitializedCall> for MultiAssetVAnchorTreeCalls {
         fn from(value: InitializedCall) -> Self {
             Self::Initialized(value)
         }
     }
     impl ::core::convert::From<IsCorrectExecutionChainCall>
-    for VAnchorTreeContractCalls {
+    for MultiAssetVAnchorTreeCalls {
         fn from(value: IsCorrectExecutionChainCall) -> Self {
             Self::IsCorrectExecutionChain(value)
         }
     }
     impl ::core::convert::From<IsCorrectExecutionContextCall>
-    for VAnchorTreeContractCalls {
+    for MultiAssetVAnchorTreeCalls {
         fn from(value: IsCorrectExecutionContextCall) -> Self {
             Self::IsCorrectExecutionContext(value)
         }
     }
-    impl ::core::convert::From<IsKnownNeighborRootCall> for VAnchorTreeContractCalls {
+    impl ::core::convert::From<IsKnownNeighborRootCall> for MultiAssetVAnchorTreeCalls {
         fn from(value: IsKnownNeighborRootCall) -> Self {
             Self::IsKnownNeighborRoot(value)
         }
     }
-    impl ::core::convert::From<IsKnownRootCall> for VAnchorTreeContractCalls {
+    impl ::core::convert::From<IsKnownRootCall> for MultiAssetVAnchorTreeCalls {
         fn from(value: IsKnownRootCall) -> Self {
             Self::IsKnownRoot(value)
         }
     }
-    impl ::core::convert::From<IsSpentCall> for VAnchorTreeContractCalls {
+    impl ::core::convert::From<IsSpentCall> for MultiAssetVAnchorTreeCalls {
         fn from(value: IsSpentCall) -> Self {
             Self::IsSpent(value)
         }
     }
-    impl ::core::convert::From<IsSpentArrayCall> for VAnchorTreeContractCalls {
+    impl ::core::convert::From<IsSpentArrayCall> for MultiAssetVAnchorTreeCalls {
         fn from(value: IsSpentArrayCall) -> Self {
             Self::IsSpentArray(value)
         }
     }
-    impl ::core::convert::From<IsValidRootsCall> for VAnchorTreeContractCalls {
+    impl ::core::convert::From<IsValidRootsCall> for MultiAssetVAnchorTreeCalls {
         fn from(value: IsValidRootsCall) -> Self {
             Self::IsValidRoots(value)
         }
     }
-    impl ::core::convert::From<LastBalanceCall> for VAnchorTreeContractCalls {
+    impl ::core::convert::From<LastBalanceCall> for MultiAssetVAnchorTreeCalls {
         fn from(value: LastBalanceCall) -> Self {
             Self::LastBalance(value)
         }
     }
-    impl ::core::convert::From<LevelsCall> for VAnchorTreeContractCalls {
+    impl ::core::convert::From<LevelsCall> for MultiAssetVAnchorTreeCalls {
         fn from(value: LevelsCall) -> Self {
             Self::Levels(value)
         }
     }
-    impl ::core::convert::From<MaxEdgesCall> for VAnchorTreeContractCalls {
+    impl ::core::convert::From<MaxEdgesCall> for MultiAssetVAnchorTreeCalls {
         fn from(value: MaxEdgesCall) -> Self {
             Self::MaxEdges(value)
         }
     }
-    impl ::core::convert::From<MaximumDepositAmountCall> for VAnchorTreeContractCalls {
+    impl ::core::convert::From<MaximumDepositAmountCall> for MultiAssetVAnchorTreeCalls {
         fn from(value: MaximumDepositAmountCall) -> Self {
             Self::MaximumDepositAmount(value)
         }
     }
-    impl ::core::convert::From<MinimalWithdrawalAmountCall>
-    for VAnchorTreeContractCalls {
-        fn from(value: MinimalWithdrawalAmountCall) -> Self {
-            Self::MinimalWithdrawalAmount(value)
+    impl ::core::convert::From<MinimumWithdrawalAmountCall>
+    for MultiAssetVAnchorTreeCalls {
+        fn from(value: MinimumWithdrawalAmountCall) -> Self {
+            Self::MinimumWithdrawalAmount(value)
         }
     }
-    impl ::core::convert::From<NeighborRootsCall> for VAnchorTreeContractCalls {
+    impl ::core::convert::From<NeighborRootsCall> for MultiAssetVAnchorTreeCalls {
         fn from(value: NeighborRootsCall) -> Self {
             Self::NeighborRoots(value)
         }
     }
-    impl ::core::convert::From<NextIndexCall> for VAnchorTreeContractCalls {
+    impl ::core::convert::From<NextIndexCall> for MultiAssetVAnchorTreeCalls {
         fn from(value: NextIndexCall) -> Self {
             Self::NextIndex(value)
         }
     }
-    impl ::core::convert::From<NullifierHashesCall> for VAnchorTreeContractCalls {
+    impl ::core::convert::From<NullifierHashesCall> for MultiAssetVAnchorTreeCalls {
         fn from(value: NullifierHashesCall) -> Self {
             Self::NullifierHashes(value)
         }
     }
-    impl ::core::convert::From<OuterLevelsCall> for VAnchorTreeContractCalls {
+    impl ::core::convert::From<OnERC721ReceivedCall> for MultiAssetVAnchorTreeCalls {
+        fn from(value: OnERC721ReceivedCall) -> Self {
+            Self::OnERC721Received(value)
+        }
+    }
+    impl ::core::convert::From<OuterLevelsCall> for MultiAssetVAnchorTreeCalls {
         fn from(value: OuterLevelsCall) -> Self {
             Self::OuterLevels(value)
         }
     }
     impl ::core::convert::From<ParseChainIdFromResourceIdCall>
-    for VAnchorTreeContractCalls {
+    for MultiAssetVAnchorTreeCalls {
         fn from(value: ParseChainIdFromResourceIdCall) -> Self {
             Self::ParseChainIdFromResourceId(value)
         }
     }
-    impl ::core::convert::From<ProposalNonceCall> for VAnchorTreeContractCalls {
+    impl ::core::convert::From<ProposalNonceCall> for MultiAssetVAnchorTreeCalls {
         fn from(value: ProposalNonceCall) -> Self {
             Self::ProposalNonce(value)
         }
     }
-    impl ::core::convert::From<RegisterCall> for VAnchorTreeContractCalls {
+    impl ::core::convert::From<RegisterCall> for MultiAssetVAnchorTreeCalls {
         fn from(value: RegisterCall) -> Self {
             Self::Register(value)
         }
     }
-    impl ::core::convert::From<RegisterAndTransactCall> for VAnchorTreeContractCalls {
+    impl ::core::convert::From<RegisterAndTransactCall> for MultiAssetVAnchorTreeCalls {
         fn from(value: RegisterAndTransactCall) -> Self {
             Self::RegisterAndTransact(value)
         }
     }
-    impl ::core::convert::From<RootsCall> for VAnchorTreeContractCalls {
+    impl ::core::convert::From<RegistryCall> for MultiAssetVAnchorTreeCalls {
+        fn from(value: RegistryCall) -> Self {
+            Self::Registry(value)
+        }
+    }
+    impl ::core::convert::From<RootsCall> for MultiAssetVAnchorTreeCalls {
         fn from(value: RootsCall) -> Self {
             Self::Roots(value)
         }
     }
-    impl ::core::convert::From<SetHandlerCall> for VAnchorTreeContractCalls {
+    impl ::core::convert::From<SetHandlerCall> for MultiAssetVAnchorTreeCalls {
         fn from(value: SetHandlerCall) -> Self {
             Self::SetHandler(value)
         }
     }
-    impl ::core::convert::From<SetVerifierCall> for VAnchorTreeContractCalls {
+    impl ::core::convert::From<SetVerifierCall> for MultiAssetVAnchorTreeCalls {
         fn from(value: SetVerifierCall) -> Self {
             Self::SetVerifier(value)
         }
     }
-    impl ::core::convert::From<TokenCall> for VAnchorTreeContractCalls {
-        fn from(value: TokenCall) -> Self {
-            Self::Token(value)
+    impl ::core::convert::From<SwapCall> for MultiAssetVAnchorTreeCalls {
+        fn from(value: SwapCall) -> Self {
+            Self::Swap(value)
         }
     }
-    impl ::core::convert::From<TransactCall> for VAnchorTreeContractCalls {
+    impl ::core::convert::From<TransactCall> for MultiAssetVAnchorTreeCalls {
         fn from(value: TransactCall) -> Self {
             Self::Transact(value)
         }
     }
-    impl ::core::convert::From<UnpackProofCall> for VAnchorTreeContractCalls {
+    impl ::core::convert::From<UnpackProofCall> for MultiAssetVAnchorTreeCalls {
         fn from(value: UnpackProofCall) -> Self {
             Self::UnpackProof(value)
         }
     }
-    impl ::core::convert::From<UpdateEdgeCall> for VAnchorTreeContractCalls {
+    impl ::core::convert::From<UpdateEdgeCall> for MultiAssetVAnchorTreeCalls {
         fn from(value: UpdateEdgeCall) -> Self {
             Self::UpdateEdge(value)
         }
     }
-    impl ::core::convert::From<VerifierCall> for VAnchorTreeContractCalls {
+    impl ::core::convert::From<VerifierCall> for MultiAssetVAnchorTreeCalls {
         fn from(value: VerifierCall) -> Self {
             Self::Verifier(value)
         }
@@ -4616,6 +4641,20 @@ pub mod v_anchor_tree_contract {
         Hash
     )]
     pub struct RootHistorySizeReturn(pub u32);
+    ///Container type for all return fields from the `UPDATE_MAX_LENGTH` function with signature `UPDATE_MAX_LENGTH()` and selector `0xdbc9d395`
+    #[derive(
+        Clone,
+        ::ethers::contract::EthAbiType,
+        ::ethers::contract::EthAbiCodec,
+        serde::Serialize,
+        serde::Deserialize,
+        Default,
+        Debug,
+        PartialEq,
+        Eq,
+        Hash
+    )]
+    pub struct UpdateMaxLengthReturn(pub u32);
     ///Container type for all return fields from the `ZERO_VALUE` function with signature `ZERO_VALUE()` and selector `0xec732959`
     #[derive(
         Clone,
@@ -4630,20 +4669,6 @@ pub mod v_anchor_tree_contract {
         Hash
     )]
     pub struct ZeroValueReturn(pub ::ethers::core::types::U256);
-    ///Container type for all return fields from the `_executeWrapping` function with signature `_executeWrapping(address,address,uint256)` and selector `0x6338bcbc`
-    #[derive(
-        Clone,
-        ::ethers::contract::EthAbiType,
-        ::ethers::contract::EthAbiCodec,
-        serde::Serialize,
-        serde::Deserialize,
-        Default,
-        Debug,
-        PartialEq,
-        Eq,
-        Hash
-    )]
-    pub struct ExecuteWrappingReturn(pub ::ethers::core::types::U256);
     ///Container type for all return fields from the `_genExtDataHash` function with signature `_genExtDataHash(bytes,(address,int256,address,uint256,uint256,address),(bytes,bytes))` and selector `0xd384534d`
     #[derive(
         Clone,
@@ -4889,20 +4914,6 @@ pub mod v_anchor_tree_contract {
         Hash
     )]
     pub struct GetNextIndexReturn(pub u32);
-    ///Container type for all return fields from the `getProposalNonce` function with signature `getProposalNonce()` and selector `0x0b27fb9a`
-    #[derive(
-        Clone,
-        ::ethers::contract::EthAbiType,
-        ::ethers::contract::EthAbiCodec,
-        serde::Serialize,
-        serde::Deserialize,
-        Default,
-        Debug,
-        PartialEq,
-        Eq,
-        Hash
-    )]
-    pub struct GetProposalNonceReturn(pub ::ethers::core::types::U256);
     ///Container type for all return fields from the `getZeroHash` function with signature `getZeroHash(uint32)` and selector `0x305e9eac`
     #[derive(
         Clone,
@@ -5141,7 +5152,7 @@ pub mod v_anchor_tree_contract {
         Hash
     )]
     pub struct MaximumDepositAmountReturn(pub ::ethers::core::types::U256);
-    ///Container type for all return fields from the `minimalWithdrawalAmount` function with signature `minimalWithdrawalAmount()` and selector `0x840b2791`
+    ///Container type for all return fields from the `minimumWithdrawalAmount` function with signature `minimumWithdrawalAmount()` and selector `0x2b180646`
     #[derive(
         Clone,
         ::ethers::contract::EthAbiType,
@@ -5154,7 +5165,7 @@ pub mod v_anchor_tree_contract {
         Eq,
         Hash
     )]
-    pub struct MinimalWithdrawalAmountReturn(pub ::ethers::core::types::U256);
+    pub struct MinimumWithdrawalAmountReturn(pub ::ethers::core::types::U256);
     ///Container type for all return fields from the `neighborRoots` function with signature `neighborRoots(uint256,uint32)` and selector `0x43e7119f`
     #[derive(
         Clone,
@@ -5197,6 +5208,20 @@ pub mod v_anchor_tree_contract {
         Hash
     )]
     pub struct NullifierHashesReturn(pub bool);
+    ///Container type for all return fields from the `onERC721Received` function with signature `onERC721Received(address,address,uint256,bytes)` and selector `0x150b7a02`
+    #[derive(
+        Clone,
+        ::ethers::contract::EthAbiType,
+        ::ethers::contract::EthAbiCodec,
+        serde::Serialize,
+        serde::Deserialize,
+        Default,
+        Debug,
+        PartialEq,
+        Eq,
+        Hash
+    )]
+    pub struct OnERC721ReceivedReturn(pub [u8; 4]);
     ///Container type for all return fields from the `outerLevels` function with signature `outerLevels()` and selector `0xbfbc0a39`
     #[derive(
         Clone,
@@ -5238,7 +5263,21 @@ pub mod v_anchor_tree_contract {
         Eq,
         Hash
     )]
-    pub struct ProposalNonceReturn(pub ::ethers::core::types::U256);
+    pub struct ProposalNonceReturn(pub u32);
+    ///Container type for all return fields from the `registry` function with signature `registry()` and selector `0x7b103999`
+    #[derive(
+        Clone,
+        ::ethers::contract::EthAbiType,
+        ::ethers::contract::EthAbiCodec,
+        serde::Serialize,
+        serde::Deserialize,
+        Default,
+        Debug,
+        PartialEq,
+        Eq,
+        Hash
+    )]
+    pub struct RegistryReturn(pub ::ethers::core::types::Address);
     ///Container type for all return fields from the `roots` function with signature `roots(uint256)` and selector `0xc2b40ae4`
     #[derive(
         Clone,
@@ -5256,20 +5295,6 @@ pub mod v_anchor_tree_contract {
         pub root: ::ethers::core::types::U256,
         pub latest_leafindex: u32,
     }
-    ///Container type for all return fields from the `token` function with signature `token()` and selector `0xfc0c546a`
-    #[derive(
-        Clone,
-        ::ethers::contract::EthAbiType,
-        ::ethers::contract::EthAbiCodec,
-        serde::Serialize,
-        serde::Deserialize,
-        Default,
-        Debug,
-        PartialEq,
-        Eq,
-        Hash
-    )]
-    pub struct TokenReturn(pub ::ethers::core::types::Address);
     ///Container type for all return fields from the `unpackProof` function with signature `unpackProof(uint256[8])` and selector `0xf5ab0dd6`
     #[derive(
         Clone,
@@ -5379,6 +5404,30 @@ pub mod v_anchor_tree_contract {
         pub output_commitments: [::ethers::core::types::U256; 2],
         pub public_amount: ::ethers::core::types::U256,
         pub ext_data_hash: ::ethers::core::types::U256,
+    }
+    ///`SwapPublicInputs(bytes,uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256)`
+    #[derive(
+        Clone,
+        ::ethers::contract::EthAbiType,
+        ::ethers::contract::EthAbiCodec,
+        serde::Serialize,
+        serde::Deserialize,
+        Default,
+        Debug,
+        PartialEq,
+        Eq,
+        Hash
+    )]
+    pub struct SwapPublicInputs {
+        pub roots: ::ethers::core::types::Bytes,
+        pub alice_spend_nullifier: ::ethers::core::types::U256,
+        pub bob_spend_nullifier: ::ethers::core::types::U256,
+        pub swap_chain_id: ::ethers::core::types::U256,
+        pub current_timestamp: ::ethers::core::types::U256,
+        pub alice_change_record: ::ethers::core::types::U256,
+        pub bob_change_record: ::ethers::core::types::U256,
+        pub alice_receive_record: ::ethers::core::types::U256,
+        pub bob_receive_record: ::ethers::core::types::U256,
     }
     ///`Account(address,bytes)`
     #[derive(

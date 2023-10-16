@@ -10,15 +10,1326 @@ pub use v_anchor_contract::*;
     non_camel_case_types
 )]
 pub mod v_anchor_contract {
-    #[rustfmt::skip]
-    const __ABI: &str = "[{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"chainID\",\"type\":\"uint256\",\"components\":[],\"indexed\":false},{\"internalType\":\"uint256\",\"name\":\"latestLeafIndex\",\"type\":\"uint256\",\"components\":[],\"indexed\":false},{\"internalType\":\"uint256\",\"name\":\"merkleRoot\",\"type\":\"uint256\",\"components\":[],\"indexed\":false}],\"type\":\"event\",\"name\":\"EdgeAddition\",\"outputs\":[],\"anonymous\":false},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"chainID\",\"type\":\"uint256\",\"components\":[],\"indexed\":false},{\"internalType\":\"uint256\",\"name\":\"latestLeafIndex\",\"type\":\"uint256\",\"components\":[],\"indexed\":false},{\"internalType\":\"uint256\",\"name\":\"merkleRoot\",\"type\":\"uint256\",\"components\":[],\"indexed\":false}],\"type\":\"event\",\"name\":\"EdgeUpdate\",\"outputs\":[],\"anonymous\":false},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"commitment\",\"type\":\"uint256\",\"components\":[],\"indexed\":true},{\"internalType\":\"uint32\",\"name\":\"leafIndex\",\"type\":\"uint32\",\"components\":[],\"indexed\":false},{\"internalType\":\"uint256\",\"name\":\"timestamp\",\"type\":\"uint256\",\"components\":[],\"indexed\":false},{\"internalType\":\"uint256\",\"name\":\"newMerkleRoot\",\"type\":\"uint256\",\"components\":[],\"indexed\":true}],\"type\":\"event\",\"name\":\"Insertion\",\"outputs\":[],\"anonymous\":false},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"maximumDepositAmount\",\"type\":\"uint256\",\"components\":[],\"indexed\":false},{\"internalType\":\"uint32\",\"name\":\"nonce\",\"type\":\"uint32\",\"components\":[],\"indexed\":false}],\"type\":\"event\",\"name\":\"MaxDepositLimitUpdated\",\"outputs\":[],\"anonymous\":false},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"minimalWithdrawalAmount\",\"type\":\"uint256\",\"components\":[],\"indexed\":false},{\"internalType\":\"uint32\",\"name\":\"nonce\",\"type\":\"uint32\",\"components\":[],\"indexed\":false}],\"type\":\"event\",\"name\":\"MinWithdrawalLimitUpdated\",\"outputs\":[],\"anonymous\":false},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"commitment\",\"type\":\"uint256\",\"components\":[],\"indexed\":false},{\"internalType\":\"uint256\",\"name\":\"subTreeIndex\",\"type\":\"uint256\",\"components\":[],\"indexed\":false},{\"internalType\":\"uint256\",\"name\":\"leafIndex\",\"type\":\"uint256\",\"components\":[],\"indexed\":false},{\"internalType\":\"bytes\",\"name\":\"encryptedOutput\",\"type\":\"bytes\",\"components\":[],\"indexed\":false}],\"type\":\"event\",\"name\":\"NewCommitment\",\"outputs\":[],\"anonymous\":false},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"nullifier\",\"type\":\"uint256\",\"components\":[],\"indexed\":false}],\"type\":\"event\",\"name\":\"NewNullifier\",\"outputs\":[],\"anonymous\":false},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\",\"components\":[],\"indexed\":true},{\"internalType\":\"bytes\",\"name\":\"key\",\"type\":\"bytes\",\"components\":[],\"indexed\":false}],\"type\":\"event\",\"name\":\"PublicKey\",\"outputs\":[],\"anonymous\":false},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"handler\",\"type\":\"address\",\"components\":[],\"indexed\":false},{\"internalType\":\"uint32\",\"name\":\"nonce\",\"type\":\"uint32\",\"components\":[],\"indexed\":false}],\"type\":\"event\",\"name\":\"SetHandler\",\"outputs\":[],\"anonymous\":false},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"verifier\",\"type\":\"address\",\"components\":[],\"indexed\":false},{\"internalType\":\"uint32\",\"name\":\"nonce\",\"type\":\"uint32\",\"components\":[],\"indexed\":false}],\"type\":\"event\",\"name\":\"SetVerifier\",\"outputs\":[],\"anonymous\":false},{\"inputs\":[],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"EVM_CHAIN_ID_TYPE\",\"outputs\":[{\"internalType\":\"bytes2\",\"name\":\"\",\"type\":\"bytes2\",\"components\":[]}]},{\"inputs\":[],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"FIELD_SIZE\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\",\"components\":[]}]},{\"inputs\":[],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"MAX_EXT_AMOUNT\",\"outputs\":[{\"internalType\":\"int256\",\"name\":\"\",\"type\":\"int256\",\"components\":[]}]},{\"inputs\":[],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"MAX_FEE\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\",\"components\":[]}]},{\"inputs\":[],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"ROOT_HISTORY_SIZE\",\"outputs\":[{\"internalType\":\"uint32\",\"name\":\"\",\"type\":\"uint32\",\"components\":[]}]},{\"inputs\":[],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"ZERO_VALUE\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\",\"components\":[]}]},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_fromTokenAddress\",\"type\":\"address\",\"components\":[]},{\"internalType\":\"address\",\"name\":\"_toTokenAddress\",\"type\":\"address\",\"components\":[]},{\"internalType\":\"uint256\",\"name\":\"_extAmount\",\"type\":\"uint256\",\"components\":[]}],\"stateMutability\":\"payable\",\"type\":\"function\",\"name\":\"_executeWrapping\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\",\"components\":[]}]},{\"inputs\":[{\"internalType\":\"bytes\",\"name\":\"\",\"type\":\"bytes\",\"components\":[]},{\"internalType\":\"struct CommonExtData\",\"name\":\"_externalData\",\"type\":\"tuple\",\"components\":[{\"internalType\":\"address\",\"name\":\"recipient\",\"type\":\"address\",\"components\":[]},{\"internalType\":\"int256\",\"name\":\"extAmount\",\"type\":\"int256\",\"components\":[]},{\"internalType\":\"address\",\"name\":\"relayer\",\"type\":\"address\",\"components\":[]},{\"internalType\":\"uint256\",\"name\":\"fee\",\"type\":\"uint256\",\"components\":[]},{\"internalType\":\"uint256\",\"name\":\"refund\",\"type\":\"uint256\",\"components\":[]},{\"internalType\":\"address\",\"name\":\"token\",\"type\":\"address\",\"components\":[]}]},{\"internalType\":\"struct Encryptions\",\"name\":\"_encryptions\",\"type\":\"tuple\",\"components\":[{\"internalType\":\"bytes\",\"name\":\"encryptedOutput1\",\"type\":\"bytes\",\"components\":[]},{\"internalType\":\"bytes\",\"name\":\"encryptedOutput2\",\"type\":\"bytes\",\"components\":[]}]}],\"stateMutability\":\"nonpayable\",\"type\":\"function\",\"name\":\"_genExtDataHash\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\",\"components\":[]}]},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_fromTokenAddress\",\"type\":\"address\",\"components\":[]},{\"internalType\":\"address\",\"name\":\"_toTokenAddress\",\"type\":\"address\",\"components\":[]},{\"internalType\":\"address\",\"name\":\"_recipient\",\"type\":\"address\",\"components\":[]},{\"internalType\":\"uint256\",\"name\":\"_minusExtAmount\",\"type\":\"uint256\",\"components\":[]}],\"stateMutability\":\"payable\",\"type\":\"function\",\"name\":\"_withdrawAndUnwrap\",\"outputs\":[]},{\"inputs\":[{\"internalType\":\"int256\",\"name\":\"_extAmount\",\"type\":\"int256\",\"components\":[]},{\"internalType\":\"uint256\",\"name\":\"_fee\",\"type\":\"uint256\",\"components\":[]}],\"stateMutability\":\"pure\",\"type\":\"function\",\"name\":\"calculatePublicAmount\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\",\"components\":[]}]},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\",\"components\":[]}],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"commitments\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\",\"components\":[]}]},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_maximumDepositAmount\",\"type\":\"uint256\",\"components\":[]},{\"internalType\":\"uint32\",\"name\":\"_nonce\",\"type\":\"uint32\",\"components\":[]}],\"stateMutability\":\"nonpayable\",\"type\":\"function\",\"name\":\"configureMaximumDepositLimit\",\"outputs\":[]},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_minimalWithdrawalAmount\",\"type\":\"uint256\",\"components\":[]},{\"internalType\":\"uint32\",\"name\":\"_nonce\",\"type\":\"uint32\",\"components\":[]}],\"stateMutability\":\"nonpayable\",\"type\":\"function\",\"name\":\"configureMinimalWithdrawalLimit\",\"outputs\":[]},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\",\"components\":[]}],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"currentNeighborRootIndex\",\"outputs\":[{\"internalType\":\"uint32\",\"name\":\"\",\"type\":\"uint32\",\"components\":[]}]},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\",\"components\":[]}],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"edgeExistsForChain\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\",\"components\":[]}]},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\",\"components\":[]}],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"edgeIndex\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\",\"components\":[]}]},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\",\"components\":[]}],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"edgeList\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"chainID\",\"type\":\"uint256\",\"components\":[]},{\"internalType\":\"uint256\",\"name\":\"root\",\"type\":\"uint256\",\"components\":[]},{\"internalType\":\"uint256\",\"name\":\"latestLeafIndex\",\"type\":\"uint256\",\"components\":[]},{\"internalType\":\"bytes32\",\"name\":\"srcResourceID\",\"type\":\"bytes32\",\"components\":[]}]},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\",\"components\":[]}],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"filledSubtrees\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\",\"components\":[]}]},{\"inputs\":[],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"getChainId\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\",\"components\":[]}]},{\"inputs\":[],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"getChainIdType\",\"outputs\":[{\"internalType\":\"uint48\",\"name\":\"\",\"type\":\"uint48\",\"components\":[]}]},{\"inputs\":[],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"getHasher\",\"outputs\":[{\"internalType\":\"contract IHasher\",\"name\":\"\",\"type\":\"address\",\"components\":[]}]},{\"inputs\":[],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"getLastRoot\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\",\"components\":[]}]},{\"inputs\":[],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"getLatestNeighborEdges\",\"outputs\":[{\"internalType\":\"struct Edge[]\",\"name\":\"\",\"type\":\"tuple[]\",\"components\":[{\"internalType\":\"uint256\",\"name\":\"chainID\",\"type\":\"uint256\",\"components\":[]},{\"internalType\":\"uint256\",\"name\":\"root\",\"type\":\"uint256\",\"components\":[]},{\"internalType\":\"uint256\",\"name\":\"latestLeafIndex\",\"type\":\"uint256\",\"components\":[]},{\"internalType\":\"bytes32\",\"name\":\"srcResourceID\",\"type\":\"bytes32\",\"components\":[]}]}]},{\"inputs\":[],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"getLatestNeighborRoots\",\"outputs\":[{\"internalType\":\"uint256[]\",\"name\":\"\",\"type\":\"uint256[]\",\"components\":[]}]},{\"inputs\":[],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"getLevels\",\"outputs\":[{\"internalType\":\"uint32\",\"name\":\"\",\"type\":\"uint32\",\"components\":[]}]},{\"inputs\":[],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"getNextIndex\",\"outputs\":[{\"internalType\":\"uint32\",\"name\":\"\",\"type\":\"uint32\",\"components\":[]}]},{\"inputs\":[],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"getProposalNonce\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\",\"components\":[]}]},{\"inputs\":[{\"internalType\":\"uint32\",\"name\":\"index\",\"type\":\"uint32\",\"components\":[]}],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"getZeroHash\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\",\"components\":[]}]},{\"inputs\":[],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"handler\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\",\"components\":[]}]},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_chainID\",\"type\":\"uint256\",\"components\":[]}],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"hasEdge\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\",\"components\":[]}]},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_left\",\"type\":\"uint256\",\"components\":[]},{\"internalType\":\"uint256\",\"name\":\"_right\",\"type\":\"uint256\",\"components\":[]}],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"hashLeftRight\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\",\"components\":[]}]},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_minimalWithdrawalAmount\",\"type\":\"uint256\",\"components\":[]},{\"internalType\":\"uint256\",\"name\":\"_maximumDepositAmount\",\"type\":\"uint256\",\"components\":[]}],\"stateMutability\":\"nonpayable\",\"type\":\"function\",\"name\":\"initialize\",\"outputs\":[]},{\"inputs\":[],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"initialized\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\",\"components\":[]}]},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"resourceID\",\"type\":\"bytes32\",\"components\":[]}],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"isCorrectExecutionChain\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\",\"components\":[]}]},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"resourceId\",\"type\":\"bytes32\",\"components\":[]}],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"isCorrectExecutionContext\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\",\"components\":[]}]},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_neighborChainID\",\"type\":\"uint256\",\"components\":[]},{\"internalType\":\"uint256\",\"name\":\"_root\",\"type\":\"uint256\",\"components\":[]}],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"isKnownNeighborRoot\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\",\"components\":[]}]},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"root\",\"type\":\"uint256\",\"components\":[]}],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"isKnownRoot\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\",\"components\":[]}]},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_nullifierHash\",\"type\":\"uint256\",\"components\":[]}],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"isSpent\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\",\"components\":[]}]},{\"inputs\":[{\"internalType\":\"uint256[]\",\"name\":\"_nullifierHashes\",\"type\":\"uint256[]\",\"components\":[]}],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"isSpentArray\",\"outputs\":[{\"internalType\":\"bool[]\",\"name\":\"\",\"type\":\"bool[]\",\"components\":[]}]},{\"inputs\":[{\"internalType\":\"uint256[]\",\"name\":\"_roots\",\"type\":\"uint256[]\",\"components\":[]}],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"isValidRoots\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\",\"components\":[]}]},{\"inputs\":[],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"lastBalance\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\",\"components\":[]}]},{\"inputs\":[],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"maxEdges\",\"outputs\":[{\"internalType\":\"uint8\",\"name\":\"\",\"type\":\"uint8\",\"components\":[]}]},{\"inputs\":[],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"maximumDepositAmount\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\",\"components\":[]}]},{\"inputs\":[],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"minimalWithdrawalAmount\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\",\"components\":[]}]},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\",\"components\":[]},{\"internalType\":\"uint32\",\"name\":\"\",\"type\":\"uint32\",\"components\":[]}],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"neighborRoots\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\",\"components\":[]}]},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\",\"components\":[]}],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"nullifierHashes\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\",\"components\":[]}]},{\"inputs\":[],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"outerLevels\",\"outputs\":[{\"internalType\":\"uint32\",\"name\":\"\",\"type\":\"uint32\",\"components\":[]}]},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"_resourceId\",\"type\":\"bytes32\",\"components\":[]}],\"stateMutability\":\"pure\",\"type\":\"function\",\"name\":\"parseChainIdFromResourceId\",\"outputs\":[{\"internalType\":\"uint64\",\"name\":\"\",\"type\":\"uint64\",\"components\":[]}]},{\"inputs\":[],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"proposalNonce\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\",\"components\":[]}]},{\"inputs\":[{\"internalType\":\"struct VAnchorBase.Account\",\"name\":\"_account\",\"type\":\"tuple\",\"components\":[{\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\",\"components\":[]},{\"internalType\":\"bytes\",\"name\":\"keyData\",\"type\":\"bytes\",\"components\":[]}]}],\"stateMutability\":\"nonpayable\",\"type\":\"function\",\"name\":\"register\",\"outputs\":[]},{\"inputs\":[{\"internalType\":\"struct VAnchorBase.Account\",\"name\":\"_account\",\"type\":\"tuple\",\"components\":[{\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\",\"components\":[]},{\"internalType\":\"bytes\",\"name\":\"keyData\",\"type\":\"bytes\",\"components\":[]}]},{\"internalType\":\"bytes\",\"name\":\"_proof\",\"type\":\"bytes\",\"components\":[]},{\"internalType\":\"bytes\",\"name\":\"_auxPublicInputs\",\"type\":\"bytes\",\"components\":[]},{\"internalType\":\"struct CommonExtData\",\"name\":\"_externalData\",\"type\":\"tuple\",\"components\":[{\"internalType\":\"address\",\"name\":\"recipient\",\"type\":\"address\",\"components\":[]},{\"internalType\":\"int256\",\"name\":\"extAmount\",\"type\":\"int256\",\"components\":[]},{\"internalType\":\"address\",\"name\":\"relayer\",\"type\":\"address\",\"components\":[]},{\"internalType\":\"uint256\",\"name\":\"fee\",\"type\":\"uint256\",\"components\":[]},{\"internalType\":\"uint256\",\"name\":\"refund\",\"type\":\"uint256\",\"components\":[]},{\"internalType\":\"address\",\"name\":\"token\",\"type\":\"address\",\"components\":[]}]},{\"internalType\":\"struct PublicInputs\",\"name\":\"_publicInputs\",\"type\":\"tuple\",\"components\":[{\"internalType\":\"bytes\",\"name\":\"roots\",\"type\":\"bytes\",\"components\":[]},{\"internalType\":\"bytes\",\"name\":\"extensionRoots\",\"type\":\"bytes\",\"components\":[]},{\"internalType\":\"uint256[]\",\"name\":\"inputNullifiers\",\"type\":\"uint256[]\",\"components\":[]},{\"internalType\":\"uint256[2]\",\"name\":\"outputCommitments\",\"type\":\"uint256[2]\",\"components\":[]},{\"internalType\":\"uint256\",\"name\":\"publicAmount\",\"type\":\"uint256\",\"components\":[]},{\"internalType\":\"uint256\",\"name\":\"extDataHash\",\"type\":\"uint256\",\"components\":[]}]},{\"internalType\":\"struct Encryptions\",\"name\":\"_encryptions\",\"type\":\"tuple\",\"components\":[{\"internalType\":\"bytes\",\"name\":\"encryptedOutput1\",\"type\":\"bytes\",\"components\":[]},{\"internalType\":\"bytes\",\"name\":\"encryptedOutput2\",\"type\":\"bytes\",\"components\":[]}]}],\"stateMutability\":\"payable\",\"type\":\"function\",\"name\":\"registerAndTransact\",\"outputs\":[]},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\",\"components\":[]}],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"roots\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"root\",\"type\":\"uint256\",\"components\":[]},{\"internalType\":\"uint32\",\"name\":\"latestLeafindex\",\"type\":\"uint32\",\"components\":[]}]},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_handler\",\"type\":\"address\",\"components\":[]},{\"internalType\":\"uint32\",\"name\":\"_nonce\",\"type\":\"uint32\",\"components\":[]}],\"stateMutability\":\"nonpayable\",\"type\":\"function\",\"name\":\"setHandler\",\"outputs\":[]},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_verifier\",\"type\":\"address\",\"components\":[]},{\"internalType\":\"uint32\",\"name\":\"_nonce\",\"type\":\"uint32\",\"components\":[]}],\"stateMutability\":\"nonpayable\",\"type\":\"function\",\"name\":\"setVerifier\",\"outputs\":[]},{\"inputs\":[],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"token\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\",\"components\":[]}]},{\"inputs\":[{\"internalType\":\"bytes\",\"name\":\"_proof\",\"type\":\"bytes\",\"components\":[]},{\"internalType\":\"bytes\",\"name\":\"_auxPublicInputs\",\"type\":\"bytes\",\"components\":[]},{\"internalType\":\"struct CommonExtData\",\"name\":\"_externalData\",\"type\":\"tuple\",\"components\":[{\"internalType\":\"address\",\"name\":\"recipient\",\"type\":\"address\",\"components\":[]},{\"internalType\":\"int256\",\"name\":\"extAmount\",\"type\":\"int256\",\"components\":[]},{\"internalType\":\"address\",\"name\":\"relayer\",\"type\":\"address\",\"components\":[]},{\"internalType\":\"uint256\",\"name\":\"fee\",\"type\":\"uint256\",\"components\":[]},{\"internalType\":\"uint256\",\"name\":\"refund\",\"type\":\"uint256\",\"components\":[]},{\"internalType\":\"address\",\"name\":\"token\",\"type\":\"address\",\"components\":[]}]},{\"internalType\":\"struct PublicInputs\",\"name\":\"_publicInputs\",\"type\":\"tuple\",\"components\":[{\"internalType\":\"bytes\",\"name\":\"roots\",\"type\":\"bytes\",\"components\":[]},{\"internalType\":\"bytes\",\"name\":\"extensionRoots\",\"type\":\"bytes\",\"components\":[]},{\"internalType\":\"uint256[]\",\"name\":\"inputNullifiers\",\"type\":\"uint256[]\",\"components\":[]},{\"internalType\":\"uint256[2]\",\"name\":\"outputCommitments\",\"type\":\"uint256[2]\",\"components\":[]},{\"internalType\":\"uint256\",\"name\":\"publicAmount\",\"type\":\"uint256\",\"components\":[]},{\"internalType\":\"uint256\",\"name\":\"extDataHash\",\"type\":\"uint256\",\"components\":[]}]},{\"internalType\":\"struct Encryptions\",\"name\":\"_encryptions\",\"type\":\"tuple\",\"components\":[{\"internalType\":\"bytes\",\"name\":\"encryptedOutput1\",\"type\":\"bytes\",\"components\":[]},{\"internalType\":\"bytes\",\"name\":\"encryptedOutput2\",\"type\":\"bytes\",\"components\":[]}]}],\"stateMutability\":\"payable\",\"type\":\"function\",\"name\":\"transact\",\"outputs\":[]},{\"inputs\":[{\"internalType\":\"uint256[8]\",\"name\":\"_proof\",\"type\":\"uint256[8]\",\"components\":[]}],\"stateMutability\":\"pure\",\"type\":\"function\",\"name\":\"unpackProof\",\"outputs\":[{\"internalType\":\"uint256[2]\",\"name\":\"\",\"type\":\"uint256[2]\",\"components\":[]},{\"internalType\":\"uint256[2][2]\",\"name\":\"\",\"type\":\"uint256[2][2]\",\"components\":[]},{\"internalType\":\"uint256[2]\",\"name\":\"\",\"type\":\"uint256[2]\",\"components\":[]}]},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_root\",\"type\":\"uint256\",\"components\":[]},{\"internalType\":\"uint32\",\"name\":\"_leafIndex\",\"type\":\"uint32\",\"components\":[]},{\"internalType\":\"bytes32\",\"name\":\"_srcResourceID\",\"type\":\"bytes32\",\"components\":[]}],\"stateMutability\":\"payable\",\"type\":\"function\",\"name\":\"updateEdge\",\"outputs\":[]},{\"inputs\":[],\"stateMutability\":\"view\",\"type\":\"function\",\"name\":\"verifier\",\"outputs\":[{\"internalType\":\"contract IAnchorVerifier\",\"name\":\"\",\"type\":\"address\",\"components\":[]}]}]";
+    #[allow(deprecated)]
+    fn __abi() -> ::ethers::core::abi::Abi {
+        ::ethers::core::abi::ethabi::Contract {
+            constructor: ::core::option::Option::None,
+            functions: ::core::convert::From::from([
+                (
+                    ::std::borrow::ToOwned::to_owned("EVM_CHAIN_ID_TYPE"),
+                    ::std::vec![
+                        ::ethers::core::abi::ethabi::Function { name :
+                        ::std::borrow::ToOwned::to_owned("EVM_CHAIN_ID_TYPE"), inputs :
+                        ::std::vec![], outputs :
+                        ::std::vec![::ethers::core::abi::ethabi::Param { name :
+                        ::std::string::String::new(), kind :
+                        ::ethers::core::abi::ethabi::ParamType::FixedBytes(2usize),
+                        internal_type :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("bytes2")),
+                        }], constant : ::core::option::Option::None, state_mutability :
+                        ::ethers::core::abi::ethabi::StateMutability::View, }
+                    ],
+                ),
+                (
+                    ::std::borrow::ToOwned::to_owned("FIELD_SIZE"),
+                    ::std::vec![
+                        ::ethers::core::abi::ethabi::Function { name :
+                        ::std::borrow::ToOwned::to_owned("FIELD_SIZE"), inputs :
+                        ::std::vec![], outputs :
+                        ::std::vec![::ethers::core::abi::ethabi::Param { name :
+                        ::std::string::String::new(), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Uint(256usize),
+                        internal_type :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("uint256")),
+                        }], constant : ::core::option::Option::None, state_mutability :
+                        ::ethers::core::abi::ethabi::StateMutability::View, }
+                    ],
+                ),
+                (
+                    ::std::borrow::ToOwned::to_owned("MAX_EXT_AMOUNT"),
+                    ::std::vec![
+                        ::ethers::core::abi::ethabi::Function { name :
+                        ::std::borrow::ToOwned::to_owned("MAX_EXT_AMOUNT"), inputs :
+                        ::std::vec![], outputs :
+                        ::std::vec![::ethers::core::abi::ethabi::Param { name :
+                        ::std::string::String::new(), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Int(256usize),
+                        internal_type :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("int256")),
+                        }], constant : ::core::option::Option::None, state_mutability :
+                        ::ethers::core::abi::ethabi::StateMutability::View, }
+                    ],
+                ),
+                (
+                    ::std::borrow::ToOwned::to_owned("MAX_FEE"),
+                    ::std::vec![
+                        ::ethers::core::abi::ethabi::Function { name :
+                        ::std::borrow::ToOwned::to_owned("MAX_FEE"), inputs :
+                        ::std::vec![], outputs :
+                        ::std::vec![::ethers::core::abi::ethabi::Param { name :
+                        ::std::string::String::new(), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Uint(256usize),
+                        internal_type :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("uint256")),
+                        }], constant : ::core::option::Option::None, state_mutability :
+                        ::ethers::core::abi::ethabi::StateMutability::View, }
+                    ],
+                ),
+                (
+                    ::std::borrow::ToOwned::to_owned("ROOT_HISTORY_SIZE"),
+                    ::std::vec![
+                        ::ethers::core::abi::ethabi::Function { name :
+                        ::std::borrow::ToOwned::to_owned("ROOT_HISTORY_SIZE"), inputs :
+                        ::std::vec![], outputs :
+                        ::std::vec![::ethers::core::abi::ethabi::Param { name :
+                        ::std::string::String::new(), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Uint(32usize),
+                        internal_type :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("uint32")),
+                        }], constant : ::core::option::Option::None, state_mutability :
+                        ::ethers::core::abi::ethabi::StateMutability::View, }
+                    ],
+                ),
+                (
+                    ::std::borrow::ToOwned::to_owned("ZERO_VALUE"),
+                    ::std::vec![
+                        ::ethers::core::abi::ethabi::Function { name :
+                        ::std::borrow::ToOwned::to_owned("ZERO_VALUE"), inputs :
+                        ::std::vec![], outputs :
+                        ::std::vec![::ethers::core::abi::ethabi::Param { name :
+                        ::std::string::String::new(), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Uint(256usize),
+                        internal_type :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("uint256")),
+                        }], constant : ::core::option::Option::None, state_mutability :
+                        ::ethers::core::abi::ethabi::StateMutability::View, }
+                    ],
+                ),
+                (
+                    ::std::borrow::ToOwned::to_owned("_executeWrapping"),
+                    ::std::vec![
+                        ::ethers::core::abi::ethabi::Function { name :
+                        ::std::borrow::ToOwned::to_owned("_executeWrapping"), inputs :
+                        ::std::vec![::ethers::core::abi::ethabi::Param { name :
+                        ::std::borrow::ToOwned::to_owned("_fromTokenAddress"), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Address, internal_type :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("address")),
+                        }, ::ethers::core::abi::ethabi::Param { name :
+                        ::std::borrow::ToOwned::to_owned("_toTokenAddress"), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Address, internal_type :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("address")),
+                        }, ::ethers::core::abi::ethabi::Param { name :
+                        ::std::borrow::ToOwned::to_owned("_extAmount"), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Uint(256usize),
+                        internal_type :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("uint256")),
+                        }], outputs : ::std::vec![::ethers::core::abi::ethabi::Param {
+                        name : ::std::string::String::new(), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Uint(256usize),
+                        internal_type :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("uint256")),
+                        }], constant : ::core::option::Option::None, state_mutability :
+                        ::ethers::core::abi::ethabi::StateMutability::Payable, }
+                    ],
+                ),
+                (
+                    ::std::borrow::ToOwned::to_owned("_genExtDataHash"),
+                    ::std::vec![
+                        ::ethers::core::abi::ethabi::Function { name :
+                        ::std::borrow::ToOwned::to_owned("_genExtDataHash"), inputs :
+                        ::std::vec![::ethers::core::abi::ethabi::Param { name :
+                        ::std::string::String::new(), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Bytes, internal_type :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("bytes")),
+                        }, ::ethers::core::abi::ethabi::Param { name :
+                        ::std::borrow::ToOwned::to_owned("_externalData"), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Tuple(::std::vec![::ethers::core::abi::ethabi::ParamType::Address,
+                        ::ethers::core::abi::ethabi::ParamType::Int(256usize),
+                        ::ethers::core::abi::ethabi::ParamType::Address,
+                        ::ethers::core::abi::ethabi::ParamType::Uint(256usize),
+                        ::ethers::core::abi::ethabi::ParamType::Uint(256usize),
+                        ::ethers::core::abi::ethabi::ParamType::Address]), internal_type
+                        :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("struct CommonExtData")),
+                        }, ::ethers::core::abi::ethabi::Param { name :
+                        ::std::borrow::ToOwned::to_owned("_encryptions"), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Tuple(::std::vec![::ethers::core::abi::ethabi::ParamType::Bytes,
+                        ::ethers::core::abi::ethabi::ParamType::Bytes]), internal_type :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("struct Encryptions")),
+                        }], outputs : ::std::vec![::ethers::core::abi::ethabi::Param {
+                        name : ::std::string::String::new(), kind :
+                        ::ethers::core::abi::ethabi::ParamType::FixedBytes(32usize),
+                        internal_type :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("bytes32")),
+                        }], constant : ::core::option::Option::None, state_mutability :
+                        ::ethers::core::abi::ethabi::StateMutability::NonPayable, }
+                    ],
+                ),
+                (
+                    ::std::borrow::ToOwned::to_owned("_withdrawAndUnwrap"),
+                    ::std::vec![
+                        ::ethers::core::abi::ethabi::Function { name :
+                        ::std::borrow::ToOwned::to_owned("_withdrawAndUnwrap"), inputs :
+                        ::std::vec![::ethers::core::abi::ethabi::Param { name :
+                        ::std::borrow::ToOwned::to_owned("_fromTokenAddress"), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Address, internal_type :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("address")),
+                        }, ::ethers::core::abi::ethabi::Param { name :
+                        ::std::borrow::ToOwned::to_owned("_toTokenAddress"), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Address, internal_type :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("address")),
+                        }, ::ethers::core::abi::ethabi::Param { name :
+                        ::std::borrow::ToOwned::to_owned("_recipient"), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Address, internal_type :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("address")),
+                        }, ::ethers::core::abi::ethabi::Param { name :
+                        ::std::borrow::ToOwned::to_owned("_minusExtAmount"), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Uint(256usize),
+                        internal_type :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("uint256")),
+                        }], outputs : ::std::vec![], constant :
+                        ::core::option::Option::None, state_mutability :
+                        ::ethers::core::abi::ethabi::StateMutability::Payable, }
+                    ],
+                ),
+                (
+                    ::std::borrow::ToOwned::to_owned("calculatePublicAmount"),
+                    ::std::vec![
+                        ::ethers::core::abi::ethabi::Function { name :
+                        ::std::borrow::ToOwned::to_owned("calculatePublicAmount"), inputs
+                        : ::std::vec![::ethers::core::abi::ethabi::Param { name :
+                        ::std::borrow::ToOwned::to_owned("_extAmount"), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Int(256usize),
+                        internal_type :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("int256")),
+                        }, ::ethers::core::abi::ethabi::Param { name :
+                        ::std::borrow::ToOwned::to_owned("_fee"), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Uint(256usize),
+                        internal_type :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("uint256")),
+                        }], outputs : ::std::vec![::ethers::core::abi::ethabi::Param {
+                        name : ::std::string::String::new(), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Uint(256usize),
+                        internal_type :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("uint256")),
+                        }], constant : ::core::option::Option::None, state_mutability :
+                        ::ethers::core::abi::ethabi::StateMutability::Pure, }
+                    ],
+                ),
+                (
+                    ::std::borrow::ToOwned::to_owned("commitments"),
+                    ::std::vec![
+                        ::ethers::core::abi::ethabi::Function { name :
+                        ::std::borrow::ToOwned::to_owned("commitments"), inputs :
+                        ::std::vec![::ethers::core::abi::ethabi::Param { name :
+                        ::std::string::String::new(), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Uint(256usize),
+                        internal_type :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("uint256")),
+                        }], outputs : ::std::vec![::ethers::core::abi::ethabi::Param {
+                        name : ::std::string::String::new(), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Bool, internal_type :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("bool")),
+                        }], constant : ::core::option::Option::None, state_mutability :
+                        ::ethers::core::abi::ethabi::StateMutability::View, }
+                    ],
+                ),
+                (
+                    ::std::borrow::ToOwned::to_owned("configureMaximumDepositLimit"),
+                    ::std::vec![
+                        ::ethers::core::abi::ethabi::Function { name :
+                        ::std::borrow::ToOwned::to_owned("configureMaximumDepositLimit"),
+                        inputs : ::std::vec![::ethers::core::abi::ethabi::Param { name :
+                        ::std::borrow::ToOwned::to_owned("_maximumDepositAmount"), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Uint(256usize),
+                        internal_type :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("uint256")),
+                        }, ::ethers::core::abi::ethabi::Param { name :
+                        ::std::borrow::ToOwned::to_owned("_nonce"), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Uint(32usize),
+                        internal_type :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("uint32")),
+                        }], outputs : ::std::vec![], constant :
+                        ::core::option::Option::None, state_mutability :
+                        ::ethers::core::abi::ethabi::StateMutability::NonPayable, }
+                    ],
+                ),
+                (
+                    ::std::borrow::ToOwned::to_owned("configureMinimalWithdrawalLimit"),
+                    ::std::vec![
+                        ::ethers::core::abi::ethabi::Function { name :
+                        ::std::borrow::ToOwned::to_owned("configureMinimalWithdrawalLimit"),
+                        inputs : ::std::vec![::ethers::core::abi::ethabi::Param { name :
+                        ::std::borrow::ToOwned::to_owned("_minimalWithdrawalAmount"),
+                        kind : ::ethers::core::abi::ethabi::ParamType::Uint(256usize),
+                        internal_type :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("uint256")),
+                        }, ::ethers::core::abi::ethabi::Param { name :
+                        ::std::borrow::ToOwned::to_owned("_nonce"), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Uint(32usize),
+                        internal_type :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("uint32")),
+                        }], outputs : ::std::vec![], constant :
+                        ::core::option::Option::None, state_mutability :
+                        ::ethers::core::abi::ethabi::StateMutability::NonPayable, }
+                    ],
+                ),
+                (
+                    ::std::borrow::ToOwned::to_owned("currentNeighborRootIndex"),
+                    ::std::vec![
+                        ::ethers::core::abi::ethabi::Function { name :
+                        ::std::borrow::ToOwned::to_owned("currentNeighborRootIndex"),
+                        inputs : ::std::vec![::ethers::core::abi::ethabi::Param { name :
+                        ::std::string::String::new(), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Uint(256usize),
+                        internal_type :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("uint256")),
+                        }], outputs : ::std::vec![::ethers::core::abi::ethabi::Param {
+                        name : ::std::string::String::new(), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Uint(32usize),
+                        internal_type :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("uint32")),
+                        }], constant : ::core::option::Option::None, state_mutability :
+                        ::ethers::core::abi::ethabi::StateMutability::View, }
+                    ],
+                ),
+                (
+                    ::std::borrow::ToOwned::to_owned("edgeExistsForChain"),
+                    ::std::vec![
+                        ::ethers::core::abi::ethabi::Function { name :
+                        ::std::borrow::ToOwned::to_owned("edgeExistsForChain"), inputs :
+                        ::std::vec![::ethers::core::abi::ethabi::Param { name :
+                        ::std::string::String::new(), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Uint(256usize),
+                        internal_type :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("uint256")),
+                        }], outputs : ::std::vec![::ethers::core::abi::ethabi::Param {
+                        name : ::std::string::String::new(), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Bool, internal_type :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("bool")),
+                        }], constant : ::core::option::Option::None, state_mutability :
+                        ::ethers::core::abi::ethabi::StateMutability::View, }
+                    ],
+                ),
+                (
+                    ::std::borrow::ToOwned::to_owned("edgeIndex"),
+                    ::std::vec![
+                        ::ethers::core::abi::ethabi::Function { name :
+                        ::std::borrow::ToOwned::to_owned("edgeIndex"), inputs :
+                        ::std::vec![::ethers::core::abi::ethabi::Param { name :
+                        ::std::string::String::new(), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Uint(256usize),
+                        internal_type :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("uint256")),
+                        }], outputs : ::std::vec![::ethers::core::abi::ethabi::Param {
+                        name : ::std::string::String::new(), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Uint(256usize),
+                        internal_type :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("uint256")),
+                        }], constant : ::core::option::Option::None, state_mutability :
+                        ::ethers::core::abi::ethabi::StateMutability::View, }
+                    ],
+                ),
+                (
+                    ::std::borrow::ToOwned::to_owned("edgeList"),
+                    ::std::vec![
+                        ::ethers::core::abi::ethabi::Function { name :
+                        ::std::borrow::ToOwned::to_owned("edgeList"), inputs :
+                        ::std::vec![::ethers::core::abi::ethabi::Param { name :
+                        ::std::string::String::new(), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Uint(256usize),
+                        internal_type :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("uint256")),
+                        }], outputs : ::std::vec![::ethers::core::abi::ethabi::Param {
+                        name : ::std::borrow::ToOwned::to_owned("chainID"), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Uint(256usize),
+                        internal_type :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("uint256")),
+                        }, ::ethers::core::abi::ethabi::Param { name :
+                        ::std::borrow::ToOwned::to_owned("root"), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Uint(256usize),
+                        internal_type :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("uint256")),
+                        }, ::ethers::core::abi::ethabi::Param { name :
+                        ::std::borrow::ToOwned::to_owned("latestLeafIndex"), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Uint(256usize),
+                        internal_type :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("uint256")),
+                        }, ::ethers::core::abi::ethabi::Param { name :
+                        ::std::borrow::ToOwned::to_owned("srcResourceID"), kind :
+                        ::ethers::core::abi::ethabi::ParamType::FixedBytes(32usize),
+                        internal_type :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("bytes32")),
+                        }], constant : ::core::option::Option::None, state_mutability :
+                        ::ethers::core::abi::ethabi::StateMutability::View, }
+                    ],
+                ),
+                (
+                    ::std::borrow::ToOwned::to_owned("filledSubtrees"),
+                    ::std::vec![
+                        ::ethers::core::abi::ethabi::Function { name :
+                        ::std::borrow::ToOwned::to_owned("filledSubtrees"), inputs :
+                        ::std::vec![::ethers::core::abi::ethabi::Param { name :
+                        ::std::string::String::new(), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Uint(256usize),
+                        internal_type :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("uint256")),
+                        }], outputs : ::std::vec![::ethers::core::abi::ethabi::Param {
+                        name : ::std::string::String::new(), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Uint(256usize),
+                        internal_type :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("uint256")),
+                        }], constant : ::core::option::Option::None, state_mutability :
+                        ::ethers::core::abi::ethabi::StateMutability::View, }
+                    ],
+                ),
+                (
+                    ::std::borrow::ToOwned::to_owned("getChainId"),
+                    ::std::vec![
+                        ::ethers::core::abi::ethabi::Function { name :
+                        ::std::borrow::ToOwned::to_owned("getChainId"), inputs :
+                        ::std::vec![], outputs :
+                        ::std::vec![::ethers::core::abi::ethabi::Param { name :
+                        ::std::string::String::new(), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Uint(256usize),
+                        internal_type :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("uint256")),
+                        }], constant : ::core::option::Option::None, state_mutability :
+                        ::ethers::core::abi::ethabi::StateMutability::View, }
+                    ],
+                ),
+                (
+                    ::std::borrow::ToOwned::to_owned("getChainIdType"),
+                    ::std::vec![
+                        ::ethers::core::abi::ethabi::Function { name :
+                        ::std::borrow::ToOwned::to_owned("getChainIdType"), inputs :
+                        ::std::vec![], outputs :
+                        ::std::vec![::ethers::core::abi::ethabi::Param { name :
+                        ::std::string::String::new(), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Uint(48usize),
+                        internal_type :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("uint48")),
+                        }], constant : ::core::option::Option::None, state_mutability :
+                        ::ethers::core::abi::ethabi::StateMutability::View, }
+                    ],
+                ),
+                (
+                    ::std::borrow::ToOwned::to_owned("getHasher"),
+                    ::std::vec![
+                        ::ethers::core::abi::ethabi::Function { name :
+                        ::std::borrow::ToOwned::to_owned("getHasher"), inputs :
+                        ::std::vec![], outputs :
+                        ::std::vec![::ethers::core::abi::ethabi::Param { name :
+                        ::std::string::String::new(), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Address, internal_type :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("contract IHasher")),
+                        }], constant : ::core::option::Option::None, state_mutability :
+                        ::ethers::core::abi::ethabi::StateMutability::View, }
+                    ],
+                ),
+                (
+                    ::std::borrow::ToOwned::to_owned("getLastRoot"),
+                    ::std::vec![
+                        ::ethers::core::abi::ethabi::Function { name :
+                        ::std::borrow::ToOwned::to_owned("getLastRoot"), inputs :
+                        ::std::vec![], outputs :
+                        ::std::vec![::ethers::core::abi::ethabi::Param { name :
+                        ::std::string::String::new(), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Uint(256usize),
+                        internal_type :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("uint256")),
+                        }], constant : ::core::option::Option::None, state_mutability :
+                        ::ethers::core::abi::ethabi::StateMutability::View, }
+                    ],
+                ),
+                (
+                    ::std::borrow::ToOwned::to_owned("getLatestNeighborEdges"),
+                    ::std::vec![
+                        ::ethers::core::abi::ethabi::Function { name :
+                        ::std::borrow::ToOwned::to_owned("getLatestNeighborEdges"),
+                        inputs : ::std::vec![], outputs :
+                        ::std::vec![::ethers::core::abi::ethabi::Param { name :
+                        ::std::string::String::new(), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Array(::std::boxed::Box::new(::ethers::core::abi::ethabi::ParamType::Tuple(::std::vec![::ethers::core::abi::ethabi::ParamType::Uint(256usize),
+                        ::ethers::core::abi::ethabi::ParamType::Uint(256usize),
+                        ::ethers::core::abi::ethabi::ParamType::Uint(256usize),
+                        ::ethers::core::abi::ethabi::ParamType::FixedBytes(32usize)]))),
+                        internal_type :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("struct Edge[]")),
+                        }], constant : ::core::option::Option::None, state_mutability :
+                        ::ethers::core::abi::ethabi::StateMutability::View, }
+                    ],
+                ),
+                (
+                    ::std::borrow::ToOwned::to_owned("getLatestNeighborRoots"),
+                    ::std::vec![
+                        ::ethers::core::abi::ethabi::Function { name :
+                        ::std::borrow::ToOwned::to_owned("getLatestNeighborRoots"),
+                        inputs : ::std::vec![], outputs :
+                        ::std::vec![::ethers::core::abi::ethabi::Param { name :
+                        ::std::string::String::new(), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Array(::std::boxed::Box::new(::ethers::core::abi::ethabi::ParamType::Uint(256usize))),
+                        internal_type :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("uint256[]")),
+                        }], constant : ::core::option::Option::None, state_mutability :
+                        ::ethers::core::abi::ethabi::StateMutability::View, }
+                    ],
+                ),
+                (
+                    ::std::borrow::ToOwned::to_owned("getLevels"),
+                    ::std::vec![
+                        ::ethers::core::abi::ethabi::Function { name :
+                        ::std::borrow::ToOwned::to_owned("getLevels"), inputs :
+                        ::std::vec![], outputs :
+                        ::std::vec![::ethers::core::abi::ethabi::Param { name :
+                        ::std::string::String::new(), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Uint(32usize),
+                        internal_type :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("uint32")),
+                        }], constant : ::core::option::Option::None, state_mutability :
+                        ::ethers::core::abi::ethabi::StateMutability::View, }
+                    ],
+                ),
+                (
+                    ::std::borrow::ToOwned::to_owned("getNextIndex"),
+                    ::std::vec![
+                        ::ethers::core::abi::ethabi::Function { name :
+                        ::std::borrow::ToOwned::to_owned("getNextIndex"), inputs :
+                        ::std::vec![], outputs :
+                        ::std::vec![::ethers::core::abi::ethabi::Param { name :
+                        ::std::string::String::new(), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Uint(32usize),
+                        internal_type :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("uint32")),
+                        }], constant : ::core::option::Option::None, state_mutability :
+                        ::ethers::core::abi::ethabi::StateMutability::View, }
+                    ],
+                ),
+                (
+                    ::std::borrow::ToOwned::to_owned("getProposalNonce"),
+                    ::std::vec![
+                        ::ethers::core::abi::ethabi::Function { name :
+                        ::std::borrow::ToOwned::to_owned("getProposalNonce"), inputs :
+                        ::std::vec![], outputs :
+                        ::std::vec![::ethers::core::abi::ethabi::Param { name :
+                        ::std::string::String::new(), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Uint(256usize),
+                        internal_type :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("uint256")),
+                        }], constant : ::core::option::Option::None, state_mutability :
+                        ::ethers::core::abi::ethabi::StateMutability::View, }
+                    ],
+                ),
+                (
+                    ::std::borrow::ToOwned::to_owned("getZeroHash"),
+                    ::std::vec![
+                        ::ethers::core::abi::ethabi::Function { name :
+                        ::std::borrow::ToOwned::to_owned("getZeroHash"), inputs :
+                        ::std::vec![::ethers::core::abi::ethabi::Param { name :
+                        ::std::borrow::ToOwned::to_owned("index"), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Uint(32usize),
+                        internal_type :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("uint32")),
+                        }], outputs : ::std::vec![::ethers::core::abi::ethabi::Param {
+                        name : ::std::string::String::new(), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Uint(256usize),
+                        internal_type :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("uint256")),
+                        }], constant : ::core::option::Option::None, state_mutability :
+                        ::ethers::core::abi::ethabi::StateMutability::View, }
+                    ],
+                ),
+                (
+                    ::std::borrow::ToOwned::to_owned("handler"),
+                    ::std::vec![
+                        ::ethers::core::abi::ethabi::Function { name :
+                        ::std::borrow::ToOwned::to_owned("handler"), inputs :
+                        ::std::vec![], outputs :
+                        ::std::vec![::ethers::core::abi::ethabi::Param { name :
+                        ::std::string::String::new(), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Address, internal_type :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("address")),
+                        }], constant : ::core::option::Option::None, state_mutability :
+                        ::ethers::core::abi::ethabi::StateMutability::View, }
+                    ],
+                ),
+                (
+                    ::std::borrow::ToOwned::to_owned("hasEdge"),
+                    ::std::vec![
+                        ::ethers::core::abi::ethabi::Function { name :
+                        ::std::borrow::ToOwned::to_owned("hasEdge"), inputs :
+                        ::std::vec![::ethers::core::abi::ethabi::Param { name :
+                        ::std::borrow::ToOwned::to_owned("_chainID"), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Uint(256usize),
+                        internal_type :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("uint256")),
+                        }], outputs : ::std::vec![::ethers::core::abi::ethabi::Param {
+                        name : ::std::string::String::new(), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Bool, internal_type :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("bool")),
+                        }], constant : ::core::option::Option::None, state_mutability :
+                        ::ethers::core::abi::ethabi::StateMutability::View, }
+                    ],
+                ),
+                (
+                    ::std::borrow::ToOwned::to_owned("hashLeftRight"),
+                    ::std::vec![
+                        ::ethers::core::abi::ethabi::Function { name :
+                        ::std::borrow::ToOwned::to_owned("hashLeftRight"), inputs :
+                        ::std::vec![::ethers::core::abi::ethabi::Param { name :
+                        ::std::borrow::ToOwned::to_owned("_left"), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Uint(256usize),
+                        internal_type :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("uint256")),
+                        }, ::ethers::core::abi::ethabi::Param { name :
+                        ::std::borrow::ToOwned::to_owned("_right"), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Uint(256usize),
+                        internal_type :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("uint256")),
+                        }], outputs : ::std::vec![::ethers::core::abi::ethabi::Param {
+                        name : ::std::string::String::new(), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Uint(256usize),
+                        internal_type :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("uint256")),
+                        }], constant : ::core::option::Option::None, state_mutability :
+                        ::ethers::core::abi::ethabi::StateMutability::View, }
+                    ],
+                ),
+                (
+                    ::std::borrow::ToOwned::to_owned("initialize"),
+                    ::std::vec![
+                        ::ethers::core::abi::ethabi::Function { name :
+                        ::std::borrow::ToOwned::to_owned("initialize"), inputs :
+                        ::std::vec![::ethers::core::abi::ethabi::Param { name :
+                        ::std::borrow::ToOwned::to_owned("_minimalWithdrawalAmount"),
+                        kind : ::ethers::core::abi::ethabi::ParamType::Uint(256usize),
+                        internal_type :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("uint256")),
+                        }, ::ethers::core::abi::ethabi::Param { name :
+                        ::std::borrow::ToOwned::to_owned("_maximumDepositAmount"), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Uint(256usize),
+                        internal_type :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("uint256")),
+                        }], outputs : ::std::vec![], constant :
+                        ::core::option::Option::None, state_mutability :
+                        ::ethers::core::abi::ethabi::StateMutability::NonPayable, }
+                    ],
+                ),
+                (
+                    ::std::borrow::ToOwned::to_owned("initialized"),
+                    ::std::vec![
+                        ::ethers::core::abi::ethabi::Function { name :
+                        ::std::borrow::ToOwned::to_owned("initialized"), inputs :
+                        ::std::vec![], outputs :
+                        ::std::vec![::ethers::core::abi::ethabi::Param { name :
+                        ::std::string::String::new(), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Bool, internal_type :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("bool")),
+                        }], constant : ::core::option::Option::None, state_mutability :
+                        ::ethers::core::abi::ethabi::StateMutability::View, }
+                    ],
+                ),
+                (
+                    ::std::borrow::ToOwned::to_owned("isCorrectExecutionChain"),
+                    ::std::vec![
+                        ::ethers::core::abi::ethabi::Function { name :
+                        ::std::borrow::ToOwned::to_owned("isCorrectExecutionChain"),
+                        inputs : ::std::vec![::ethers::core::abi::ethabi::Param { name :
+                        ::std::borrow::ToOwned::to_owned("resourceID"), kind :
+                        ::ethers::core::abi::ethabi::ParamType::FixedBytes(32usize),
+                        internal_type :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("bytes32")),
+                        }], outputs : ::std::vec![::ethers::core::abi::ethabi::Param {
+                        name : ::std::string::String::new(), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Bool, internal_type :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("bool")),
+                        }], constant : ::core::option::Option::None, state_mutability :
+                        ::ethers::core::abi::ethabi::StateMutability::View, }
+                    ],
+                ),
+                (
+                    ::std::borrow::ToOwned::to_owned("isCorrectExecutionContext"),
+                    ::std::vec![
+                        ::ethers::core::abi::ethabi::Function { name :
+                        ::std::borrow::ToOwned::to_owned("isCorrectExecutionContext"),
+                        inputs : ::std::vec![::ethers::core::abi::ethabi::Param { name :
+                        ::std::borrow::ToOwned::to_owned("resourceId"), kind :
+                        ::ethers::core::abi::ethabi::ParamType::FixedBytes(32usize),
+                        internal_type :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("bytes32")),
+                        }], outputs : ::std::vec![::ethers::core::abi::ethabi::Param {
+                        name : ::std::string::String::new(), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Bool, internal_type :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("bool")),
+                        }], constant : ::core::option::Option::None, state_mutability :
+                        ::ethers::core::abi::ethabi::StateMutability::View, }
+                    ],
+                ),
+                (
+                    ::std::borrow::ToOwned::to_owned("isKnownNeighborRoot"),
+                    ::std::vec![
+                        ::ethers::core::abi::ethabi::Function { name :
+                        ::std::borrow::ToOwned::to_owned("isKnownNeighborRoot"), inputs :
+                        ::std::vec![::ethers::core::abi::ethabi::Param { name :
+                        ::std::borrow::ToOwned::to_owned("_neighborChainID"), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Uint(256usize),
+                        internal_type :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("uint256")),
+                        }, ::ethers::core::abi::ethabi::Param { name :
+                        ::std::borrow::ToOwned::to_owned("_root"), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Uint(256usize),
+                        internal_type :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("uint256")),
+                        }], outputs : ::std::vec![::ethers::core::abi::ethabi::Param {
+                        name : ::std::string::String::new(), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Bool, internal_type :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("bool")),
+                        }], constant : ::core::option::Option::None, state_mutability :
+                        ::ethers::core::abi::ethabi::StateMutability::View, }
+                    ],
+                ),
+                (
+                    ::std::borrow::ToOwned::to_owned("isKnownRoot"),
+                    ::std::vec![
+                        ::ethers::core::abi::ethabi::Function { name :
+                        ::std::borrow::ToOwned::to_owned("isKnownRoot"), inputs :
+                        ::std::vec![::ethers::core::abi::ethabi::Param { name :
+                        ::std::borrow::ToOwned::to_owned("root"), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Uint(256usize),
+                        internal_type :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("uint256")),
+                        }], outputs : ::std::vec![::ethers::core::abi::ethabi::Param {
+                        name : ::std::string::String::new(), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Bool, internal_type :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("bool")),
+                        }], constant : ::core::option::Option::None, state_mutability :
+                        ::ethers::core::abi::ethabi::StateMutability::View, }
+                    ],
+                ),
+                (
+                    ::std::borrow::ToOwned::to_owned("isSpent"),
+                    ::std::vec![
+                        ::ethers::core::abi::ethabi::Function { name :
+                        ::std::borrow::ToOwned::to_owned("isSpent"), inputs :
+                        ::std::vec![::ethers::core::abi::ethabi::Param { name :
+                        ::std::borrow::ToOwned::to_owned("_nullifierHash"), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Uint(256usize),
+                        internal_type :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("uint256")),
+                        }], outputs : ::std::vec![::ethers::core::abi::ethabi::Param {
+                        name : ::std::string::String::new(), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Bool, internal_type :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("bool")),
+                        }], constant : ::core::option::Option::None, state_mutability :
+                        ::ethers::core::abi::ethabi::StateMutability::View, }
+                    ],
+                ),
+                (
+                    ::std::borrow::ToOwned::to_owned("isSpentArray"),
+                    ::std::vec![
+                        ::ethers::core::abi::ethabi::Function { name :
+                        ::std::borrow::ToOwned::to_owned("isSpentArray"), inputs :
+                        ::std::vec![::ethers::core::abi::ethabi::Param { name :
+                        ::std::borrow::ToOwned::to_owned("_nullifierHashes"), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Array(::std::boxed::Box::new(::ethers::core::abi::ethabi::ParamType::Uint(256usize))),
+                        internal_type :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("uint256[]")),
+                        }], outputs : ::std::vec![::ethers::core::abi::ethabi::Param {
+                        name : ::std::string::String::new(), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Array(::std::boxed::Box::new(::ethers::core::abi::ethabi::ParamType::Bool)),
+                        internal_type :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("bool[]")),
+                        }], constant : ::core::option::Option::None, state_mutability :
+                        ::ethers::core::abi::ethabi::StateMutability::View, }
+                    ],
+                ),
+                (
+                    ::std::borrow::ToOwned::to_owned("isValidRoots"),
+                    ::std::vec![
+                        ::ethers::core::abi::ethabi::Function { name :
+                        ::std::borrow::ToOwned::to_owned("isValidRoots"), inputs :
+                        ::std::vec![::ethers::core::abi::ethabi::Param { name :
+                        ::std::borrow::ToOwned::to_owned("_roots"), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Array(::std::boxed::Box::new(::ethers::core::abi::ethabi::ParamType::Uint(256usize))),
+                        internal_type :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("uint256[]")),
+                        }], outputs : ::std::vec![::ethers::core::abi::ethabi::Param {
+                        name : ::std::string::String::new(), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Bool, internal_type :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("bool")),
+                        }], constant : ::core::option::Option::None, state_mutability :
+                        ::ethers::core::abi::ethabi::StateMutability::View, }
+                    ],
+                ),
+                (
+                    ::std::borrow::ToOwned::to_owned("lastBalance"),
+                    ::std::vec![
+                        ::ethers::core::abi::ethabi::Function { name :
+                        ::std::borrow::ToOwned::to_owned("lastBalance"), inputs :
+                        ::std::vec![], outputs :
+                        ::std::vec![::ethers::core::abi::ethabi::Param { name :
+                        ::std::string::String::new(), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Uint(256usize),
+                        internal_type :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("uint256")),
+                        }], constant : ::core::option::Option::None, state_mutability :
+                        ::ethers::core::abi::ethabi::StateMutability::View, }
+                    ],
+                ),
+                (
+                    ::std::borrow::ToOwned::to_owned("maxEdges"),
+                    ::std::vec![
+                        ::ethers::core::abi::ethabi::Function { name :
+                        ::std::borrow::ToOwned::to_owned("maxEdges"), inputs :
+                        ::std::vec![], outputs :
+                        ::std::vec![::ethers::core::abi::ethabi::Param { name :
+                        ::std::string::String::new(), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Uint(8usize),
+                        internal_type :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("uint8")),
+                        }], constant : ::core::option::Option::None, state_mutability :
+                        ::ethers::core::abi::ethabi::StateMutability::View, }
+                    ],
+                ),
+                (
+                    ::std::borrow::ToOwned::to_owned("maximumDepositAmount"),
+                    ::std::vec![
+                        ::ethers::core::abi::ethabi::Function { name :
+                        ::std::borrow::ToOwned::to_owned("maximumDepositAmount"), inputs
+                        : ::std::vec![], outputs :
+                        ::std::vec![::ethers::core::abi::ethabi::Param { name :
+                        ::std::string::String::new(), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Uint(256usize),
+                        internal_type :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("uint256")),
+                        }], constant : ::core::option::Option::None, state_mutability :
+                        ::ethers::core::abi::ethabi::StateMutability::View, }
+                    ],
+                ),
+                (
+                    ::std::borrow::ToOwned::to_owned("minimalWithdrawalAmount"),
+                    ::std::vec![
+                        ::ethers::core::abi::ethabi::Function { name :
+                        ::std::borrow::ToOwned::to_owned("minimalWithdrawalAmount"),
+                        inputs : ::std::vec![], outputs :
+                        ::std::vec![::ethers::core::abi::ethabi::Param { name :
+                        ::std::string::String::new(), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Uint(256usize),
+                        internal_type :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("uint256")),
+                        }], constant : ::core::option::Option::None, state_mutability :
+                        ::ethers::core::abi::ethabi::StateMutability::View, }
+                    ],
+                ),
+                (
+                    ::std::borrow::ToOwned::to_owned("neighborRoots"),
+                    ::std::vec![
+                        ::ethers::core::abi::ethabi::Function { name :
+                        ::std::borrow::ToOwned::to_owned("neighborRoots"), inputs :
+                        ::std::vec![::ethers::core::abi::ethabi::Param { name :
+                        ::std::string::String::new(), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Uint(256usize),
+                        internal_type :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("uint256")),
+                        }, ::ethers::core::abi::ethabi::Param { name :
+                        ::std::string::String::new(), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Uint(32usize),
+                        internal_type :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("uint32")),
+                        }], outputs : ::std::vec![::ethers::core::abi::ethabi::Param {
+                        name : ::std::string::String::new(), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Uint(256usize),
+                        internal_type :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("uint256")),
+                        }], constant : ::core::option::Option::None, state_mutability :
+                        ::ethers::core::abi::ethabi::StateMutability::View, }
+                    ],
+                ),
+                (
+                    ::std::borrow::ToOwned::to_owned("nullifierHashes"),
+                    ::std::vec![
+                        ::ethers::core::abi::ethabi::Function { name :
+                        ::std::borrow::ToOwned::to_owned("nullifierHashes"), inputs :
+                        ::std::vec![::ethers::core::abi::ethabi::Param { name :
+                        ::std::string::String::new(), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Uint(256usize),
+                        internal_type :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("uint256")),
+                        }], outputs : ::std::vec![::ethers::core::abi::ethabi::Param {
+                        name : ::std::string::String::new(), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Bool, internal_type :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("bool")),
+                        }], constant : ::core::option::Option::None, state_mutability :
+                        ::ethers::core::abi::ethabi::StateMutability::View, }
+                    ],
+                ),
+                (
+                    ::std::borrow::ToOwned::to_owned("outerLevels"),
+                    ::std::vec![
+                        ::ethers::core::abi::ethabi::Function { name :
+                        ::std::borrow::ToOwned::to_owned("outerLevels"), inputs :
+                        ::std::vec![], outputs :
+                        ::std::vec![::ethers::core::abi::ethabi::Param { name :
+                        ::std::string::String::new(), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Uint(32usize),
+                        internal_type :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("uint32")),
+                        }], constant : ::core::option::Option::None, state_mutability :
+                        ::ethers::core::abi::ethabi::StateMutability::View, }
+                    ],
+                ),
+                (
+                    ::std::borrow::ToOwned::to_owned("parseChainIdFromResourceId"),
+                    ::std::vec![
+                        ::ethers::core::abi::ethabi::Function { name :
+                        ::std::borrow::ToOwned::to_owned("parseChainIdFromResourceId"),
+                        inputs : ::std::vec![::ethers::core::abi::ethabi::Param { name :
+                        ::std::borrow::ToOwned::to_owned("_resourceId"), kind :
+                        ::ethers::core::abi::ethabi::ParamType::FixedBytes(32usize),
+                        internal_type :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("bytes32")),
+                        }], outputs : ::std::vec![::ethers::core::abi::ethabi::Param {
+                        name : ::std::string::String::new(), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Uint(64usize),
+                        internal_type :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("uint64")),
+                        }], constant : ::core::option::Option::None, state_mutability :
+                        ::ethers::core::abi::ethabi::StateMutability::Pure, }
+                    ],
+                ),
+                (
+                    ::std::borrow::ToOwned::to_owned("proposalNonce"),
+                    ::std::vec![
+                        ::ethers::core::abi::ethabi::Function { name :
+                        ::std::borrow::ToOwned::to_owned("proposalNonce"), inputs :
+                        ::std::vec![], outputs :
+                        ::std::vec![::ethers::core::abi::ethabi::Param { name :
+                        ::std::string::String::new(), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Uint(256usize),
+                        internal_type :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("uint256")),
+                        }], constant : ::core::option::Option::None, state_mutability :
+                        ::ethers::core::abi::ethabi::StateMutability::View, }
+                    ],
+                ),
+                (
+                    ::std::borrow::ToOwned::to_owned("register"),
+                    ::std::vec![
+                        ::ethers::core::abi::ethabi::Function { name :
+                        ::std::borrow::ToOwned::to_owned("register"), inputs :
+                        ::std::vec![::ethers::core::abi::ethabi::Param { name :
+                        ::std::borrow::ToOwned::to_owned("_account"), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Tuple(::std::vec![::ethers::core::abi::ethabi::ParamType::Address,
+                        ::ethers::core::abi::ethabi::ParamType::Bytes]), internal_type :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("struct VAnchorBase.Account")),
+                        }], outputs : ::std::vec![], constant :
+                        ::core::option::Option::None, state_mutability :
+                        ::ethers::core::abi::ethabi::StateMutability::NonPayable, }
+                    ],
+                ),
+                (
+                    ::std::borrow::ToOwned::to_owned("registerAndTransact"),
+                    ::std::vec![
+                        ::ethers::core::abi::ethabi::Function { name :
+                        ::std::borrow::ToOwned::to_owned("registerAndTransact"), inputs :
+                        ::std::vec![::ethers::core::abi::ethabi::Param { name :
+                        ::std::borrow::ToOwned::to_owned("_account"), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Tuple(::std::vec![::ethers::core::abi::ethabi::ParamType::Address,
+                        ::ethers::core::abi::ethabi::ParamType::Bytes]), internal_type :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("struct VAnchorBase.Account")),
+                        }, ::ethers::core::abi::ethabi::Param { name :
+                        ::std::borrow::ToOwned::to_owned("_proof"), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Bytes, internal_type :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("bytes")),
+                        }, ::ethers::core::abi::ethabi::Param { name :
+                        ::std::borrow::ToOwned::to_owned("_auxPublicInputs"), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Bytes, internal_type :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("bytes")),
+                        }, ::ethers::core::abi::ethabi::Param { name :
+                        ::std::borrow::ToOwned::to_owned("_externalData"), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Tuple(::std::vec![::ethers::core::abi::ethabi::ParamType::Address,
+                        ::ethers::core::abi::ethabi::ParamType::Int(256usize),
+                        ::ethers::core::abi::ethabi::ParamType::Address,
+                        ::ethers::core::abi::ethabi::ParamType::Uint(256usize),
+                        ::ethers::core::abi::ethabi::ParamType::Uint(256usize),
+                        ::ethers::core::abi::ethabi::ParamType::Address]), internal_type
+                        :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("struct CommonExtData")),
+                        }, ::ethers::core::abi::ethabi::Param { name :
+                        ::std::borrow::ToOwned::to_owned("_publicInputs"), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Tuple(::std::vec![::ethers::core::abi::ethabi::ParamType::Bytes,
+                        ::ethers::core::abi::ethabi::ParamType::Bytes,
+                        ::ethers::core::abi::ethabi::ParamType::Array(::std::boxed::Box::new(::ethers::core::abi::ethabi::ParamType::Uint(256usize))),
+                        ::ethers::core::abi::ethabi::ParamType::FixedArray(::std::boxed::Box::new(::ethers::core::abi::ethabi::ParamType::Uint(256usize)),
+                        2usize), ::ethers::core::abi::ethabi::ParamType::Uint(256usize),
+                        ::ethers::core::abi::ethabi::ParamType::Uint(256usize)]),
+                        internal_type :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("struct PublicInputs")),
+                        }, ::ethers::core::abi::ethabi::Param { name :
+                        ::std::borrow::ToOwned::to_owned("_encryptions"), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Tuple(::std::vec![::ethers::core::abi::ethabi::ParamType::Bytes,
+                        ::ethers::core::abi::ethabi::ParamType::Bytes]), internal_type :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("struct Encryptions")),
+                        }], outputs : ::std::vec![], constant :
+                        ::core::option::Option::None, state_mutability :
+                        ::ethers::core::abi::ethabi::StateMutability::Payable, }
+                    ],
+                ),
+                (
+                    ::std::borrow::ToOwned::to_owned("roots"),
+                    ::std::vec![
+                        ::ethers::core::abi::ethabi::Function { name :
+                        ::std::borrow::ToOwned::to_owned("roots"), inputs :
+                        ::std::vec![::ethers::core::abi::ethabi::Param { name :
+                        ::std::string::String::new(), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Uint(256usize),
+                        internal_type :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("uint256")),
+                        }], outputs : ::std::vec![::ethers::core::abi::ethabi::Param {
+                        name : ::std::borrow::ToOwned::to_owned("root"), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Uint(256usize),
+                        internal_type :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("uint256")),
+                        }, ::ethers::core::abi::ethabi::Param { name :
+                        ::std::borrow::ToOwned::to_owned("latestLeafindex"), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Uint(32usize),
+                        internal_type :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("uint32")),
+                        }], constant : ::core::option::Option::None, state_mutability :
+                        ::ethers::core::abi::ethabi::StateMutability::View, }
+                    ],
+                ),
+                (
+                    ::std::borrow::ToOwned::to_owned("setHandler"),
+                    ::std::vec![
+                        ::ethers::core::abi::ethabi::Function { name :
+                        ::std::borrow::ToOwned::to_owned("setHandler"), inputs :
+                        ::std::vec![::ethers::core::abi::ethabi::Param { name :
+                        ::std::borrow::ToOwned::to_owned("_handler"), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Address, internal_type :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("address")),
+                        }, ::ethers::core::abi::ethabi::Param { name :
+                        ::std::borrow::ToOwned::to_owned("_nonce"), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Uint(32usize),
+                        internal_type :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("uint32")),
+                        }], outputs : ::std::vec![], constant :
+                        ::core::option::Option::None, state_mutability :
+                        ::ethers::core::abi::ethabi::StateMutability::NonPayable, }
+                    ],
+                ),
+                (
+                    ::std::borrow::ToOwned::to_owned("setVerifier"),
+                    ::std::vec![
+                        ::ethers::core::abi::ethabi::Function { name :
+                        ::std::borrow::ToOwned::to_owned("setVerifier"), inputs :
+                        ::std::vec![::ethers::core::abi::ethabi::Param { name :
+                        ::std::borrow::ToOwned::to_owned("_verifier"), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Address, internal_type :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("address")),
+                        }, ::ethers::core::abi::ethabi::Param { name :
+                        ::std::borrow::ToOwned::to_owned("_nonce"), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Uint(32usize),
+                        internal_type :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("uint32")),
+                        }], outputs : ::std::vec![], constant :
+                        ::core::option::Option::None, state_mutability :
+                        ::ethers::core::abi::ethabi::StateMutability::NonPayable, }
+                    ],
+                ),
+                (
+                    ::std::borrow::ToOwned::to_owned("token"),
+                    ::std::vec![
+                        ::ethers::core::abi::ethabi::Function { name :
+                        ::std::borrow::ToOwned::to_owned("token"), inputs :
+                        ::std::vec![], outputs :
+                        ::std::vec![::ethers::core::abi::ethabi::Param { name :
+                        ::std::string::String::new(), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Address, internal_type :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("address")),
+                        }], constant : ::core::option::Option::None, state_mutability :
+                        ::ethers::core::abi::ethabi::StateMutability::View, }
+                    ],
+                ),
+                (
+                    ::std::borrow::ToOwned::to_owned("transact"),
+                    ::std::vec![
+                        ::ethers::core::abi::ethabi::Function { name :
+                        ::std::borrow::ToOwned::to_owned("transact"), inputs :
+                        ::std::vec![::ethers::core::abi::ethabi::Param { name :
+                        ::std::borrow::ToOwned::to_owned("_proof"), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Bytes, internal_type :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("bytes")),
+                        }, ::ethers::core::abi::ethabi::Param { name :
+                        ::std::borrow::ToOwned::to_owned("_auxPublicInputs"), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Bytes, internal_type :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("bytes")),
+                        }, ::ethers::core::abi::ethabi::Param { name :
+                        ::std::borrow::ToOwned::to_owned("_externalData"), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Tuple(::std::vec![::ethers::core::abi::ethabi::ParamType::Address,
+                        ::ethers::core::abi::ethabi::ParamType::Int(256usize),
+                        ::ethers::core::abi::ethabi::ParamType::Address,
+                        ::ethers::core::abi::ethabi::ParamType::Uint(256usize),
+                        ::ethers::core::abi::ethabi::ParamType::Uint(256usize),
+                        ::ethers::core::abi::ethabi::ParamType::Address]), internal_type
+                        :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("struct CommonExtData")),
+                        }, ::ethers::core::abi::ethabi::Param { name :
+                        ::std::borrow::ToOwned::to_owned("_publicInputs"), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Tuple(::std::vec![::ethers::core::abi::ethabi::ParamType::Bytes,
+                        ::ethers::core::abi::ethabi::ParamType::Bytes,
+                        ::ethers::core::abi::ethabi::ParamType::Array(::std::boxed::Box::new(::ethers::core::abi::ethabi::ParamType::Uint(256usize))),
+                        ::ethers::core::abi::ethabi::ParamType::FixedArray(::std::boxed::Box::new(::ethers::core::abi::ethabi::ParamType::Uint(256usize)),
+                        2usize), ::ethers::core::abi::ethabi::ParamType::Uint(256usize),
+                        ::ethers::core::abi::ethabi::ParamType::Uint(256usize)]),
+                        internal_type :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("struct PublicInputs")),
+                        }, ::ethers::core::abi::ethabi::Param { name :
+                        ::std::borrow::ToOwned::to_owned("_encryptions"), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Tuple(::std::vec![::ethers::core::abi::ethabi::ParamType::Bytes,
+                        ::ethers::core::abi::ethabi::ParamType::Bytes]), internal_type :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("struct Encryptions")),
+                        }], outputs : ::std::vec![], constant :
+                        ::core::option::Option::None, state_mutability :
+                        ::ethers::core::abi::ethabi::StateMutability::Payable, }
+                    ],
+                ),
+                (
+                    ::std::borrow::ToOwned::to_owned("unpackProof"),
+                    ::std::vec![
+                        ::ethers::core::abi::ethabi::Function { name :
+                        ::std::borrow::ToOwned::to_owned("unpackProof"), inputs :
+                        ::std::vec![::ethers::core::abi::ethabi::Param { name :
+                        ::std::borrow::ToOwned::to_owned("_proof"), kind :
+                        ::ethers::core::abi::ethabi::ParamType::FixedArray(::std::boxed::Box::new(::ethers::core::abi::ethabi::ParamType::Uint(256usize)),
+                        8usize), internal_type :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("uint256[8]")),
+                        }], outputs : ::std::vec![::ethers::core::abi::ethabi::Param {
+                        name : ::std::string::String::new(), kind :
+                        ::ethers::core::abi::ethabi::ParamType::FixedArray(::std::boxed::Box::new(::ethers::core::abi::ethabi::ParamType::Uint(256usize)),
+                        2usize), internal_type :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("uint256[2]")),
+                        }, ::ethers::core::abi::ethabi::Param { name :
+                        ::std::string::String::new(), kind :
+                        ::ethers::core::abi::ethabi::ParamType::FixedArray(::std::boxed::Box::new(::ethers::core::abi::ethabi::ParamType::FixedArray(::std::boxed::Box::new(::ethers::core::abi::ethabi::ParamType::Uint(256usize)),
+                        2usize)), 2usize), internal_type :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("uint256[2][2]")),
+                        }, ::ethers::core::abi::ethabi::Param { name :
+                        ::std::string::String::new(), kind :
+                        ::ethers::core::abi::ethabi::ParamType::FixedArray(::std::boxed::Box::new(::ethers::core::abi::ethabi::ParamType::Uint(256usize)),
+                        2usize), internal_type :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("uint256[2]")),
+                        }], constant : ::core::option::Option::None, state_mutability :
+                        ::ethers::core::abi::ethabi::StateMutability::Pure, }
+                    ],
+                ),
+                (
+                    ::std::borrow::ToOwned::to_owned("updateEdge"),
+                    ::std::vec![
+                        ::ethers::core::abi::ethabi::Function { name :
+                        ::std::borrow::ToOwned::to_owned("updateEdge"), inputs :
+                        ::std::vec![::ethers::core::abi::ethabi::Param { name :
+                        ::std::borrow::ToOwned::to_owned("_root"), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Uint(256usize),
+                        internal_type :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("uint256")),
+                        }, ::ethers::core::abi::ethabi::Param { name :
+                        ::std::borrow::ToOwned::to_owned("_leafIndex"), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Uint(32usize),
+                        internal_type :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("uint32")),
+                        }, ::ethers::core::abi::ethabi::Param { name :
+                        ::std::borrow::ToOwned::to_owned("_srcResourceID"), kind :
+                        ::ethers::core::abi::ethabi::ParamType::FixedBytes(32usize),
+                        internal_type :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("bytes32")),
+                        }], outputs : ::std::vec![], constant :
+                        ::core::option::Option::None, state_mutability :
+                        ::ethers::core::abi::ethabi::StateMutability::Payable, }
+                    ],
+                ),
+                (
+                    ::std::borrow::ToOwned::to_owned("verifier"),
+                    ::std::vec![
+                        ::ethers::core::abi::ethabi::Function { name :
+                        ::std::borrow::ToOwned::to_owned("verifier"), inputs :
+                        ::std::vec![], outputs :
+                        ::std::vec![::ethers::core::abi::ethabi::Param { name :
+                        ::std::string::String::new(), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Address, internal_type :
+                        ::core::option::Option::Some(::std::borrow::ToOwned::to_owned("contract IAnchorVerifier")),
+                        }], constant : ::core::option::Option::None, state_mutability :
+                        ::ethers::core::abi::ethabi::StateMutability::View, }
+                    ],
+                ),
+            ]),
+            events: ::core::convert::From::from([
+                (
+                    ::std::borrow::ToOwned::to_owned("EdgeAddition"),
+                    ::std::vec![
+                        ::ethers::core::abi::ethabi::Event { name :
+                        ::std::borrow::ToOwned::to_owned("EdgeAddition"), inputs :
+                        ::std::vec![::ethers::core::abi::ethabi::EventParam { name :
+                        ::std::borrow::ToOwned::to_owned("chainID"), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Uint(256usize), indexed :
+                        false, }, ::ethers::core::abi::ethabi::EventParam { name :
+                        ::std::borrow::ToOwned::to_owned("latestLeafIndex"), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Uint(256usize), indexed :
+                        false, }, ::ethers::core::abi::ethabi::EventParam { name :
+                        ::std::borrow::ToOwned::to_owned("merkleRoot"), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Uint(256usize), indexed :
+                        false, }], anonymous : false, }
+                    ],
+                ),
+                (
+                    ::std::borrow::ToOwned::to_owned("EdgeUpdate"),
+                    ::std::vec![
+                        ::ethers::core::abi::ethabi::Event { name :
+                        ::std::borrow::ToOwned::to_owned("EdgeUpdate"), inputs :
+                        ::std::vec![::ethers::core::abi::ethabi::EventParam { name :
+                        ::std::borrow::ToOwned::to_owned("chainID"), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Uint(256usize), indexed :
+                        false, }, ::ethers::core::abi::ethabi::EventParam { name :
+                        ::std::borrow::ToOwned::to_owned("latestLeafIndex"), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Uint(256usize), indexed :
+                        false, }, ::ethers::core::abi::ethabi::EventParam { name :
+                        ::std::borrow::ToOwned::to_owned("merkleRoot"), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Uint(256usize), indexed :
+                        false, }], anonymous : false, }
+                    ],
+                ),
+                (
+                    ::std::borrow::ToOwned::to_owned("Insertion"),
+                    ::std::vec![
+                        ::ethers::core::abi::ethabi::Event { name :
+                        ::std::borrow::ToOwned::to_owned("Insertion"), inputs :
+                        ::std::vec![::ethers::core::abi::ethabi::EventParam { name :
+                        ::std::borrow::ToOwned::to_owned("commitment"), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Uint(256usize), indexed :
+                        true, }, ::ethers::core::abi::ethabi::EventParam { name :
+                        ::std::borrow::ToOwned::to_owned("leafIndex"), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Uint(32usize), indexed :
+                        false, }, ::ethers::core::abi::ethabi::EventParam { name :
+                        ::std::borrow::ToOwned::to_owned("timestamp"), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Uint(256usize), indexed :
+                        false, }, ::ethers::core::abi::ethabi::EventParam { name :
+                        ::std::borrow::ToOwned::to_owned("newMerkleRoot"), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Uint(256usize), indexed :
+                        true, }], anonymous : false, }
+                    ],
+                ),
+                (
+                    ::std::borrow::ToOwned::to_owned("MaxDepositLimitUpdated"),
+                    ::std::vec![
+                        ::ethers::core::abi::ethabi::Event { name :
+                        ::std::borrow::ToOwned::to_owned("MaxDepositLimitUpdated"),
+                        inputs : ::std::vec![::ethers::core::abi::ethabi::EventParam {
+                        name : ::std::borrow::ToOwned::to_owned("maximumDepositAmount"),
+                        kind : ::ethers::core::abi::ethabi::ParamType::Uint(256usize),
+                        indexed : false, }, ::ethers::core::abi::ethabi::EventParam {
+                        name : ::std::borrow::ToOwned::to_owned("nonce"), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Uint(32usize), indexed :
+                        false, }], anonymous : false, }
+                    ],
+                ),
+                (
+                    ::std::borrow::ToOwned::to_owned("MinWithdrawalLimitUpdated"),
+                    ::std::vec![
+                        ::ethers::core::abi::ethabi::Event { name :
+                        ::std::borrow::ToOwned::to_owned("MinWithdrawalLimitUpdated"),
+                        inputs : ::std::vec![::ethers::core::abi::ethabi::EventParam {
+                        name :
+                        ::std::borrow::ToOwned::to_owned("minimalWithdrawalAmount"), kind
+                        : ::ethers::core::abi::ethabi::ParamType::Uint(256usize), indexed
+                        : false, }, ::ethers::core::abi::ethabi::EventParam { name :
+                        ::std::borrow::ToOwned::to_owned("nonce"), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Uint(32usize), indexed :
+                        false, }], anonymous : false, }
+                    ],
+                ),
+                (
+                    ::std::borrow::ToOwned::to_owned("NewCommitment"),
+                    ::std::vec![
+                        ::ethers::core::abi::ethabi::Event { name :
+                        ::std::borrow::ToOwned::to_owned("NewCommitment"), inputs :
+                        ::std::vec![::ethers::core::abi::ethabi::EventParam { name :
+                        ::std::borrow::ToOwned::to_owned("commitment"), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Uint(256usize), indexed :
+                        false, }, ::ethers::core::abi::ethabi::EventParam { name :
+                        ::std::borrow::ToOwned::to_owned("subTreeIndex"), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Uint(256usize), indexed :
+                        false, }, ::ethers::core::abi::ethabi::EventParam { name :
+                        ::std::borrow::ToOwned::to_owned("leafIndex"), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Uint(256usize), indexed :
+                        false, }, ::ethers::core::abi::ethabi::EventParam { name :
+                        ::std::borrow::ToOwned::to_owned("encryptedOutput"), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Bytes, indexed : false,
+                        }], anonymous : false, }
+                    ],
+                ),
+                (
+                    ::std::borrow::ToOwned::to_owned("NewNullifier"),
+                    ::std::vec![
+                        ::ethers::core::abi::ethabi::Event { name :
+                        ::std::borrow::ToOwned::to_owned("NewNullifier"), inputs :
+                        ::std::vec![::ethers::core::abi::ethabi::EventParam { name :
+                        ::std::borrow::ToOwned::to_owned("nullifier"), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Uint(256usize), indexed :
+                        false, }], anonymous : false, }
+                    ],
+                ),
+                (
+                    ::std::borrow::ToOwned::to_owned("PublicKey"),
+                    ::std::vec![
+                        ::ethers::core::abi::ethabi::Event { name :
+                        ::std::borrow::ToOwned::to_owned("PublicKey"), inputs :
+                        ::std::vec![::ethers::core::abi::ethabi::EventParam { name :
+                        ::std::borrow::ToOwned::to_owned("owner"), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Address, indexed : true,
+                        }, ::ethers::core::abi::ethabi::EventParam { name :
+                        ::std::borrow::ToOwned::to_owned("key"), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Bytes, indexed : false,
+                        }], anonymous : false, }
+                    ],
+                ),
+                (
+                    ::std::borrow::ToOwned::to_owned("SetHandler"),
+                    ::std::vec![
+                        ::ethers::core::abi::ethabi::Event { name :
+                        ::std::borrow::ToOwned::to_owned("SetHandler"), inputs :
+                        ::std::vec![::ethers::core::abi::ethabi::EventParam { name :
+                        ::std::borrow::ToOwned::to_owned("handler"), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Address, indexed : false,
+                        }, ::ethers::core::abi::ethabi::EventParam { name :
+                        ::std::borrow::ToOwned::to_owned("nonce"), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Uint(32usize), indexed :
+                        false, }], anonymous : false, }
+                    ],
+                ),
+                (
+                    ::std::borrow::ToOwned::to_owned("SetVerifier"),
+                    ::std::vec![
+                        ::ethers::core::abi::ethabi::Event { name :
+                        ::std::borrow::ToOwned::to_owned("SetVerifier"), inputs :
+                        ::std::vec![::ethers::core::abi::ethabi::EventParam { name :
+                        ::std::borrow::ToOwned::to_owned("verifier"), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Address, indexed : false,
+                        }, ::ethers::core::abi::ethabi::EventParam { name :
+                        ::std::borrow::ToOwned::to_owned("nonce"), kind :
+                        ::ethers::core::abi::ethabi::ParamType::Uint(32usize), indexed :
+                        false, }], anonymous : false, }
+                    ],
+                ),
+            ]),
+            errors: ::std::collections::BTreeMap::new(),
+            receive: false,
+            fallback: false,
+        }
+    }
     ///The parsed JSON ABI of the contract.
     pub static VANCHORCONTRACT_ABI: ::ethers::contract::Lazy<
         ::ethers::core::abi::Abi,
-    > = ::ethers::contract::Lazy::new(|| {
-        ::ethers::core::utils::__serde_json::from_str(__ABI)
-            .expect("ABI is always valid")
-    });
+    > = ::ethers::contract::Lazy::new(__abi);
     pub struct VAnchorContract<M>(::ethers::contract::Contract<M>);
     impl<M> ::core::clone::Clone for VAnchorContract<M> {
         fn clone(&self) -> Self {
@@ -41,7 +1352,7 @@ pub mod v_anchor_contract {
             &self,
             f: &mut ::core::fmt::Formatter<'_>,
         ) -> ::core::fmt::Result {
-            f.debug_tuple(stringify!(VAnchorContract))
+            f.debug_tuple(::core::stringify!(VAnchorContract))
                 .field(&self.address())
                 .finish()
         }
