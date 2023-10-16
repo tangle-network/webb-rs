@@ -175,8 +175,8 @@ mod evm {
         )
     }
 
-    pub fn build_protocol_solidity_masp_vanchor(
-    ) -> Result<(), Box<dyn Error>> {
+    pub fn build_protocol_solidity_masp_vanchor() -> Result<(), Box<dyn Error>>
+    {
         parse_and_write_abigen(
             "contracts/protocol-solidity/MultiAssetVAnchor.json",
             "src/evm/contract/protocol_solidity/masp_vanchor.rs",
@@ -266,7 +266,6 @@ fn main() -> Result<(), Box<dyn Error>> {
         evm::build_protocol_solidity_masp_vanchor_batch_tree()?;
         evm::build_protocol_solidity_masp_vanchor_tree()?;
         evm::build_protocol_solidity_masp_vanchor()?;
-
     }
     #[cfg(feature = "generate-substrate")]
     {

@@ -7,7 +7,7 @@ pub use poseidon_hasher_contract::*;
     clippy::upper_case_acronyms,
     clippy::type_complexity,
     dead_code,
-    non_camel_case_types,
+    non_camel_case_types
 )]
 pub mod poseidon_hasher_contract {
     #[allow(deprecated)]
@@ -144,7 +144,10 @@ pub mod poseidon_hasher_contract {
         }
     }
     impl<M> ::core::fmt::Debug for PoseidonHasherContract<M> {
-        fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
+        fn fmt(
+            &self,
+            f: &mut ::core::fmt::Formatter<'_>,
+        ) -> ::core::fmt::Result {
             f.debug_tuple(::core::stringify!(PoseidonHasherContract))
                 .field(&self.address())
                 .finish()
@@ -157,19 +160,20 @@ pub mod poseidon_hasher_contract {
             address: T,
             client: ::std::sync::Arc<M>,
         ) -> Self {
-            Self(
-                ::ethers::contract::Contract::new(
-                    address.into(),
-                    POSEIDONHASHERCONTRACT_ABI.clone(),
-                    client,
-                ),
-            )
+            Self(::ethers::contract::Contract::new(
+                address.into(),
+                POSEIDONHASHERCONTRACT_ABI.clone(),
+                client,
+            ))
         }
         ///Calls the contract's `hash11` (0x8a1a52d2) function
         pub fn hash_11(
             &self,
             array: ::std::vec::Vec<::ethers::core::types::U256>,
-        ) -> ::ethers::contract::builders::ContractCall<M, ::ethers::core::types::U256> {
+        ) -> ::ethers::contract::builders::ContractCall<
+            M,
+            ::ethers::core::types::U256,
+        > {
             self.0
                 .method_hash([138, 26, 82, 210], array)
                 .expect("method not found (this should never happen)")
@@ -178,7 +182,10 @@ pub mod poseidon_hasher_contract {
         pub fn hash_3(
             &self,
             array: [::ethers::core::types::U256; 3],
-        ) -> ::ethers::contract::builders::ContractCall<M, ::ethers::core::types::U256> {
+        ) -> ::ethers::contract::builders::ContractCall<
+            M,
+            ::ethers::core::types::U256,
+        > {
             self.0
                 .method_hash([190, 161, 64, 179], array)
                 .expect("method not found (this should never happen)")
@@ -187,7 +194,10 @@ pub mod poseidon_hasher_contract {
         pub fn hash_5(
             &self,
             array: [::ethers::core::types::U256; 5],
-        ) -> ::ethers::contract::builders::ContractCall<M, ::ethers::core::types::U256> {
+        ) -> ::ethers::contract::builders::ContractCall<
+            M,
+            ::ethers::core::types::U256,
+        > {
             self.0
                 .method_hash([156, 252, 237, 151], array)
                 .expect("method not found (this should never happen)")
@@ -197,7 +207,10 @@ pub mod poseidon_hasher_contract {
             &self,
             left: ::ethers::core::types::U256,
             right: ::ethers::core::types::U256,
-        ) -> ::ethers::contract::builders::ContractCall<M, ::ethers::core::types::U256> {
+        ) -> ::ethers::contract::builders::ContractCall<
+            M,
+            ::ethers::core::types::U256,
+        > {
             self.0
                 .method_hash([91, 185, 57, 149], (left, right))
                 .expect("method not found (this should never happen)")
@@ -212,8 +225,9 @@ pub mod poseidon_hasher_contract {
                 .expect("method not found (this should never happen)")
         }
     }
-    impl<M: ::ethers::providers::Middleware> From<::ethers::contract::Contract<M>>
-    for PoseidonHasherContract<M> {
+    impl<M: ::ethers::providers::Middleware>
+        From<::ethers::contract::Contract<M>> for PoseidonHasherContract<M>
+    {
         fn from(contract: ::ethers::contract::Contract<M>) -> Self {
             Self::new(contract.address(), contract.client())
         }
@@ -229,7 +243,7 @@ pub mod poseidon_hasher_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
     #[ethcall(name = "hash11", abi = "hash11(uint256[])")]
     pub struct Hash11Call {
@@ -246,7 +260,7 @@ pub mod poseidon_hasher_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
     #[ethcall(name = "hash3", abi = "hash3(uint256[3])")]
     pub struct Hash3Call {
@@ -263,7 +277,7 @@ pub mod poseidon_hasher_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
     #[ethcall(name = "hash5", abi = "hash5(uint256[5])")]
     pub struct Hash5Call {
@@ -280,7 +294,7 @@ pub mod poseidon_hasher_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
     #[ethcall(name = "hashLeftRight", abi = "hashLeftRight(uint256,uint256)")]
     pub struct HashLeftRightCall {
@@ -298,7 +312,7 @@ pub mod poseidon_hasher_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
     #[ethcall(name = "zeros", abi = "zeros(uint256)")]
     pub struct ZerosCall {
@@ -313,7 +327,7 @@ pub mod poseidon_hasher_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
     pub enum PoseidonHasherContractCalls {
         Hash11(Hash11Call),
@@ -325,26 +339,34 @@ pub mod poseidon_hasher_contract {
     impl ::ethers::core::abi::AbiDecode for PoseidonHasherContractCalls {
         fn decode(
             data: impl AsRef<[u8]>,
-        ) -> ::core::result::Result<Self, ::ethers::core::abi::AbiError> {
+        ) -> ::core::result::Result<Self, ::ethers::core::abi::AbiError>
+        {
             let data = data.as_ref();
-            if let Ok(decoded)
-                = <Hash11Call as ::ethers::core::abi::AbiDecode>::decode(data) {
+            if let Ok(decoded) =
+                <Hash11Call as ::ethers::core::abi::AbiDecode>::decode(data)
+            {
                 return Ok(Self::Hash11(decoded));
             }
-            if let Ok(decoded)
-                = <Hash3Call as ::ethers::core::abi::AbiDecode>::decode(data) {
+            if let Ok(decoded) =
+                <Hash3Call as ::ethers::core::abi::AbiDecode>::decode(data)
+            {
                 return Ok(Self::Hash3(decoded));
             }
-            if let Ok(decoded)
-                = <Hash5Call as ::ethers::core::abi::AbiDecode>::decode(data) {
+            if let Ok(decoded) =
+                <Hash5Call as ::ethers::core::abi::AbiDecode>::decode(data)
+            {
                 return Ok(Self::Hash5(decoded));
             }
-            if let Ok(decoded)
-                = <HashLeftRightCall as ::ethers::core::abi::AbiDecode>::decode(data) {
+            if let Ok(decoded) =
+                <HashLeftRightCall as ::ethers::core::abi::AbiDecode>::decode(
+                    data,
+                )
+            {
                 return Ok(Self::HashLeftRight(decoded));
             }
-            if let Ok(decoded)
-                = <ZerosCall as ::ethers::core::abi::AbiDecode>::decode(data) {
+            if let Ok(decoded) =
+                <ZerosCall as ::ethers::core::abi::AbiDecode>::decode(data)
+            {
                 return Ok(Self::Zeros(decoded));
             }
             Err(::ethers::core::abi::Error::InvalidData.into())
@@ -353,23 +375,36 @@ pub mod poseidon_hasher_contract {
     impl ::ethers::core::abi::AbiEncode for PoseidonHasherContractCalls {
         fn encode(self) -> Vec<u8> {
             match self {
-                Self::Hash11(element) => ::ethers::core::abi::AbiEncode::encode(element),
-                Self::Hash3(element) => ::ethers::core::abi::AbiEncode::encode(element),
-                Self::Hash5(element) => ::ethers::core::abi::AbiEncode::encode(element),
+                Self::Hash11(element) => {
+                    ::ethers::core::abi::AbiEncode::encode(element)
+                }
+                Self::Hash3(element) => {
+                    ::ethers::core::abi::AbiEncode::encode(element)
+                }
+                Self::Hash5(element) => {
+                    ::ethers::core::abi::AbiEncode::encode(element)
+                }
                 Self::HashLeftRight(element) => {
                     ::ethers::core::abi::AbiEncode::encode(element)
                 }
-                Self::Zeros(element) => ::ethers::core::abi::AbiEncode::encode(element),
+                Self::Zeros(element) => {
+                    ::ethers::core::abi::AbiEncode::encode(element)
+                }
             }
         }
     }
     impl ::core::fmt::Display for PoseidonHasherContractCalls {
-        fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
+        fn fmt(
+            &self,
+            f: &mut ::core::fmt::Formatter<'_>,
+        ) -> ::core::fmt::Result {
             match self {
                 Self::Hash11(element) => ::core::fmt::Display::fmt(element, f),
                 Self::Hash3(element) => ::core::fmt::Display::fmt(element, f),
                 Self::Hash5(element) => ::core::fmt::Display::fmt(element, f),
-                Self::HashLeftRight(element) => ::core::fmt::Display::fmt(element, f),
+                Self::HashLeftRight(element) => {
+                    ::core::fmt::Display::fmt(element, f)
+                }
                 Self::Zeros(element) => ::core::fmt::Display::fmt(element, f),
             }
         }
@@ -410,7 +445,7 @@ pub mod poseidon_hasher_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
     pub struct Hash11Return(pub ::ethers::core::types::U256);
     ///Container type for all return fields from the `hash3` function with signature `hash3(uint256[3])` and selector `0xbea140b3`
@@ -424,7 +459,7 @@ pub mod poseidon_hasher_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
     pub struct Hash3Return(pub ::ethers::core::types::U256);
     ///Container type for all return fields from the `hash5` function with signature `hash5(uint256[5])` and selector `0x9cfced97`
@@ -438,7 +473,7 @@ pub mod poseidon_hasher_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
     pub struct Hash5Return(pub ::ethers::core::types::U256);
     ///Container type for all return fields from the `hashLeftRight` function with signature `hashLeftRight(uint256,uint256)` and selector `0x5bb93995`
@@ -452,7 +487,7 @@ pub mod poseidon_hasher_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
     pub struct HashLeftRightReturn(pub ::ethers::core::types::U256);
     ///Container type for all return fields from the `zeros` function with signature `zeros(uint256)` and selector `0xe8295588`
@@ -466,7 +501,7 @@ pub mod poseidon_hasher_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
     pub struct ZerosReturn(pub [u8; 32]);
 }

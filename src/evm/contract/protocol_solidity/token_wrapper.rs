@@ -7,7 +7,7 @@ pub use token_wrapper_contract::*;
     clippy::upper_case_acronyms,
     clippy::type_complexity,
     dead_code,
-    non_camel_case_types,
+    non_camel_case_types
 )]
 pub mod token_wrapper_contract {
     #[allow(deprecated)]
@@ -928,7 +928,10 @@ pub mod token_wrapper_contract {
         }
     }
     impl<M> ::core::fmt::Debug for TokenWrapperContract<M> {
-        fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
+        fn fmt(
+            &self,
+            f: &mut ::core::fmt::Formatter<'_>,
+        ) -> ::core::fmt::Result {
             f.debug_tuple(::core::stringify!(TokenWrapperContract))
                 .field(&self.address())
                 .finish()
@@ -941,13 +944,11 @@ pub mod token_wrapper_contract {
             address: T,
             client: ::std::sync::Arc<M>,
         ) -> Self {
-            Self(
-                ::ethers::contract::Contract::new(
-                    address.into(),
-                    TOKENWRAPPERCONTRACT_ABI.clone(),
-                    client,
-                ),
-            )
+            Self(::ethers::contract::Contract::new(
+                address.into(),
+                TOKENWRAPPERCONTRACT_ABI.clone(),
+                client,
+            ))
         }
         ///Calls the contract's `DEFAULT_ADMIN_ROLE` (0xa217fddf) function
         pub fn default_admin_role(
@@ -978,7 +979,10 @@ pub mod token_wrapper_contract {
             &self,
             owner: ::ethers::core::types::Address,
             spender: ::ethers::core::types::Address,
-        ) -> ::ethers::contract::builders::ContractCall<M, ::ethers::core::types::U256> {
+        ) -> ::ethers::contract::builders::ContractCall<
+            M,
+            ::ethers::core::types::U256,
+        > {
             self.0
                 .method_hash([221, 98, 237, 62], (owner, spender))
                 .expect("method not found (this should never happen)")
@@ -997,7 +1001,10 @@ pub mod token_wrapper_contract {
         pub fn balance_of(
             &self,
             account: ::ethers::core::types::Address,
-        ) -> ::ethers::contract::builders::ContractCall<M, ::ethers::core::types::U256> {
+        ) -> ::ethers::contract::builders::ContractCall<
+            M,
+            ::ethers::core::types::U256,
+        > {
             self.0
                 .method_hash([112, 160, 130, 49], account)
                 .expect("method not found (this should never happen)")
@@ -1022,7 +1029,9 @@ pub mod token_wrapper_contract {
                 .expect("method not found (this should never happen)")
         }
         ///Calls the contract's `decimals` (0x313ce567) function
-        pub fn decimals(&self) -> ::ethers::contract::builders::ContractCall<M, u8> {
+        pub fn decimals(
+            &self,
+        ) -> ::ethers::contract::builders::ContractCall<M, u8> {
             self.0
                 .method_hash([49, 60, 229, 103], ())
                 .expect("method not found (this should never happen)")
@@ -1060,7 +1069,10 @@ pub mod token_wrapper_contract {
         pub fn get_amount_to_wrap(
             &self,
             deposit: ::ethers::core::types::U256,
-        ) -> ::ethers::contract::builders::ContractCall<M, ::ethers::core::types::U256> {
+        ) -> ::ethers::contract::builders::ContractCall<
+            M,
+            ::ethers::core::types::U256,
+        > {
             self.0
                 .method_hash([150, 205, 77, 254], deposit)
                 .expect("method not found (this should never happen)")
@@ -1069,7 +1081,10 @@ pub mod token_wrapper_contract {
         pub fn get_fee_from_amount(
             &self,
             amount_to_wrap: ::ethers::core::types::U256,
-        ) -> ::ethers::contract::builders::ContractCall<M, ::ethers::core::types::U256> {
+        ) -> ::ethers::contract::builders::ContractCall<
+            M,
+            ::ethers::core::types::U256,
+        > {
             self.0
                 .method_hash([133, 192, 10, 232], amount_to_wrap)
                 .expect("method not found (this should never happen)")
@@ -1100,7 +1115,10 @@ pub mod token_wrapper_contract {
         pub fn get_role_member_count(
             &self,
             role: [u8; 32],
-        ) -> ::ethers::contract::builders::ContractCall<M, ::ethers::core::types::U256> {
+        ) -> ::ethers::contract::builders::ContractCall<
+            M,
+            ::ethers::core::types::U256,
+        > {
             self.0
                 .method_hash([202, 21, 200, 115], role)
                 .expect("method not found (this should never happen)")
@@ -1165,19 +1183,24 @@ pub mod token_wrapper_contract {
         ///Calls the contract's `name` (0x06fdde03) function
         pub fn name(
             &self,
-        ) -> ::ethers::contract::builders::ContractCall<M, ::std::string::String> {
+        ) -> ::ethers::contract::builders::ContractCall<M, ::std::string::String>
+        {
             self.0
                 .method_hash([6, 253, 222, 3], ())
                 .expect("method not found (this should never happen)")
         }
         ///Calls the contract's `pause` (0x8456cb59) function
-        pub fn pause(&self) -> ::ethers::contract::builders::ContractCall<M, ()> {
+        pub fn pause(
+            &self,
+        ) -> ::ethers::contract::builders::ContractCall<M, ()> {
             self.0
                 .method_hash([132, 86, 203, 89], ())
                 .expect("method not found (this should never happen)")
         }
         ///Calls the contract's `paused` (0x5c975abb) function
-        pub fn paused(&self) -> ::ethers::contract::builders::ContractCall<M, bool> {
+        pub fn paused(
+            &self,
+        ) -> ::ethers::contract::builders::ContractCall<M, bool> {
             self.0
                 .method_hash([92, 151, 90, 187], ())
                 .expect("method not found (this should never happen)")
@@ -1214,7 +1237,8 @@ pub mod token_wrapper_contract {
         ///Calls the contract's `symbol` (0x95d89b41) function
         pub fn symbol(
             &self,
-        ) -> ::ethers::contract::builders::ContractCall<M, ::std::string::String> {
+        ) -> ::ethers::contract::builders::ContractCall<M, ::std::string::String>
+        {
             self.0
                 .method_hash([149, 216, 155, 65], ())
                 .expect("method not found (this should never happen)")
@@ -1222,7 +1246,10 @@ pub mod token_wrapper_contract {
         ///Calls the contract's `totalSupply` (0x18160ddd) function
         pub fn total_supply(
             &self,
-        ) -> ::ethers::contract::builders::ContractCall<M, ::ethers::core::types::U256> {
+        ) -> ::ethers::contract::builders::ContractCall<
+            M,
+            ::ethers::core::types::U256,
+        > {
             self.0
                 .method_hash([24, 22, 13, 221], ())
                 .expect("method not found (this should never happen)")
@@ -1249,7 +1276,9 @@ pub mod token_wrapper_contract {
                 .expect("method not found (this should never happen)")
         }
         ///Calls the contract's `unpause` (0x3f4ba83a) function
-        pub fn unpause(&self) -> ::ethers::contract::builders::ContractCall<M, ()> {
+        pub fn unpause(
+            &self,
+        ) -> ::ethers::contract::builders::ContractCall<M, ()> {
             self.0
                 .method_hash([63, 75, 168, 58], ())
                 .expect("method not found (this should never happen)")
@@ -1272,7 +1301,10 @@ pub mod token_wrapper_contract {
             recipient: ::ethers::core::types::Address,
         ) -> ::ethers::contract::builders::ContractCall<M, ()> {
             self.0
-                .method_hash([72, 8, 40, 94], (token_address, amount, recipient))
+                .method_hash(
+                    [72, 8, 40, 94],
+                    (token_address, amount, recipient),
+                )
                 .expect("method not found (this should never happen)")
         }
         ///Calls the contract's `unwrapFor` (0x261c80b6) function
@@ -1283,7 +1315,10 @@ pub mod token_wrapper_contract {
             amount: ::ethers::core::types::U256,
         ) -> ::ethers::contract::builders::ContractCall<M, ()> {
             self.0
-                .method_hash([38, 28, 128, 182], (sender, token_address, amount))
+                .method_hash(
+                    [38, 28, 128, 182],
+                    (sender, token_address, amount),
+                )
                 .expect("method not found (this should never happen)")
         }
         ///Calls the contract's `wrap` (0xbf376c7a) function
@@ -1304,7 +1339,10 @@ pub mod token_wrapper_contract {
             amount: ::ethers::core::types::U256,
         ) -> ::ethers::contract::builders::ContractCall<M, ()> {
             self.0
-                .method_hash([44, 166, 147, 136], (sender, token_address, amount))
+                .method_hash(
+                    [44, 166, 147, 136],
+                    (sender, token_address, amount),
+                )
                 .expect("method not found (this should never happen)")
         }
         ///Calls the contract's `wrapForAndSendTo` (0x7b2e30d6) function
@@ -1335,7 +1373,11 @@ pub mod token_wrapper_contract {
         ///Gets the contract's `Paused` event
         pub fn paused_filter(
             &self,
-        ) -> ::ethers::contract::builders::Event<::std::sync::Arc<M>, M, PausedFilter> {
+        ) -> ::ethers::contract::builders::Event<
+            ::std::sync::Arc<M>,
+            M,
+            PausedFilter,
+        > {
             self.0.event()
         }
         ///Gets the contract's `RoleAdminChanged` event
@@ -1416,11 +1458,13 @@ pub mod token_wrapper_contract {
             M,
             TokenWrapperContractEvents,
         > {
-            self.0.event_with_filter(::core::default::Default::default())
+            self.0
+                .event_with_filter(::core::default::Default::default())
         }
     }
-    impl<M: ::ethers::providers::Middleware> From<::ethers::contract::Contract<M>>
-    for TokenWrapperContract<M> {
+    impl<M: ::ethers::providers::Middleware>
+        From<::ethers::contract::Contract<M>> for TokenWrapperContract<M>
+    {
         fn from(contract: ::ethers::contract::Contract<M>) -> Self {
             Self::new(contract.address(), contract.client())
         }
@@ -1435,7 +1479,7 @@ pub mod token_wrapper_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
     #[ethevent(name = "Approval", abi = "Approval(address,address,uint256)")]
     pub struct ApprovalFilter {
@@ -1455,7 +1499,7 @@ pub mod token_wrapper_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
     #[ethevent(name = "Paused", abi = "Paused(address)")]
     pub struct PausedFilter {
@@ -1471,7 +1515,7 @@ pub mod token_wrapper_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
     #[ethevent(
         name = "RoleAdminChanged",
@@ -1495,9 +1539,12 @@ pub mod token_wrapper_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
-    #[ethevent(name = "RoleGranted", abi = "RoleGranted(bytes32,address,address)")]
+    #[ethevent(
+        name = "RoleGranted",
+        abi = "RoleGranted(bytes32,address,address)"
+    )]
     pub struct RoleGrantedFilter {
         #[ethevent(indexed)]
         pub role: [u8; 32],
@@ -1516,9 +1563,12 @@ pub mod token_wrapper_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
-    #[ethevent(name = "RoleRevoked", abi = "RoleRevoked(bytes32,address,address)")]
+    #[ethevent(
+        name = "RoleRevoked",
+        abi = "RoleRevoked(bytes32,address,address)"
+    )]
     pub struct RoleRevokedFilter {
         #[ethevent(indexed)]
         pub role: [u8; 32],
@@ -1537,7 +1587,7 @@ pub mod token_wrapper_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
     #[ethevent(name = "Transfer", abi = "Transfer(address,address,uint256)")]
     pub struct TransferFilter {
@@ -1557,7 +1607,7 @@ pub mod token_wrapper_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
     #[ethevent(name = "Unpaused", abi = "Unpaused(address)")]
     pub struct UnpausedFilter {
@@ -1573,9 +1623,12 @@ pub mod token_wrapper_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
-    #[ethevent(name = "Unwrapping", abi = "Unwrapping(address,address,address,uint256)")]
+    #[ethevent(
+        name = "Unwrapping",
+        abi = "Unwrapping(address,address,address,uint256)"
+    )]
     pub struct UnwrappingFilter {
         #[ethevent(indexed)]
         pub sender: ::ethers::core::types::Address,
@@ -1595,7 +1648,7 @@ pub mod token_wrapper_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
     #[ethevent(
         name = "Wrapping",
@@ -1620,7 +1673,7 @@ pub mod token_wrapper_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
     pub enum TokenWrapperContractEvents {
         ApprovalFilter(ApprovalFilter),
@@ -1644,13 +1697,19 @@ pub mod token_wrapper_contract {
                 return Ok(TokenWrapperContractEvents::PausedFilter(decoded));
             }
             if let Ok(decoded) = RoleAdminChangedFilter::decode_log(log) {
-                return Ok(TokenWrapperContractEvents::RoleAdminChangedFilter(decoded));
+                return Ok(TokenWrapperContractEvents::RoleAdminChangedFilter(
+                    decoded,
+                ));
             }
             if let Ok(decoded) = RoleGrantedFilter::decode_log(log) {
-                return Ok(TokenWrapperContractEvents::RoleGrantedFilter(decoded));
+                return Ok(TokenWrapperContractEvents::RoleGrantedFilter(
+                    decoded,
+                ));
             }
             if let Ok(decoded) = RoleRevokedFilter::decode_log(log) {
-                return Ok(TokenWrapperContractEvents::RoleRevokedFilter(decoded));
+                return Ok(TokenWrapperContractEvents::RoleRevokedFilter(
+                    decoded,
+                ));
             }
             if let Ok(decoded) = TransferFilter::decode_log(log) {
                 return Ok(TokenWrapperContractEvents::TransferFilter(decoded));
@@ -1659,7 +1718,9 @@ pub mod token_wrapper_contract {
                 return Ok(TokenWrapperContractEvents::UnpausedFilter(decoded));
             }
             if let Ok(decoded) = UnwrappingFilter::decode_log(log) {
-                return Ok(TokenWrapperContractEvents::UnwrappingFilter(decoded));
+                return Ok(TokenWrapperContractEvents::UnwrappingFilter(
+                    decoded,
+                ));
             }
             if let Ok(decoded) = WrappingFilter::decode_log(log) {
                 return Ok(TokenWrapperContractEvents::WrappingFilter(decoded));
@@ -1668,19 +1729,38 @@ pub mod token_wrapper_contract {
         }
     }
     impl ::core::fmt::Display for TokenWrapperContractEvents {
-        fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
+        fn fmt(
+            &self,
+            f: &mut ::core::fmt::Formatter<'_>,
+        ) -> ::core::fmt::Result {
             match self {
-                Self::ApprovalFilter(element) => ::core::fmt::Display::fmt(element, f),
-                Self::PausedFilter(element) => ::core::fmt::Display::fmt(element, f),
+                Self::ApprovalFilter(element) => {
+                    ::core::fmt::Display::fmt(element, f)
+                }
+                Self::PausedFilter(element) => {
+                    ::core::fmt::Display::fmt(element, f)
+                }
                 Self::RoleAdminChangedFilter(element) => {
                     ::core::fmt::Display::fmt(element, f)
                 }
-                Self::RoleGrantedFilter(element) => ::core::fmt::Display::fmt(element, f),
-                Self::RoleRevokedFilter(element) => ::core::fmt::Display::fmt(element, f),
-                Self::TransferFilter(element) => ::core::fmt::Display::fmt(element, f),
-                Self::UnpausedFilter(element) => ::core::fmt::Display::fmt(element, f),
-                Self::UnwrappingFilter(element) => ::core::fmt::Display::fmt(element, f),
-                Self::WrappingFilter(element) => ::core::fmt::Display::fmt(element, f),
+                Self::RoleGrantedFilter(element) => {
+                    ::core::fmt::Display::fmt(element, f)
+                }
+                Self::RoleRevokedFilter(element) => {
+                    ::core::fmt::Display::fmt(element, f)
+                }
+                Self::TransferFilter(element) => {
+                    ::core::fmt::Display::fmt(element, f)
+                }
+                Self::UnpausedFilter(element) => {
+                    ::core::fmt::Display::fmt(element, f)
+                }
+                Self::UnwrappingFilter(element) => {
+                    ::core::fmt::Display::fmt(element, f)
+                }
+                Self::WrappingFilter(element) => {
+                    ::core::fmt::Display::fmt(element, f)
+                }
             }
         }
     }
@@ -1694,7 +1774,9 @@ pub mod token_wrapper_contract {
             Self::PausedFilter(value)
         }
     }
-    impl ::core::convert::From<RoleAdminChangedFilter> for TokenWrapperContractEvents {
+    impl ::core::convert::From<RoleAdminChangedFilter>
+        for TokenWrapperContractEvents
+    {
         fn from(value: RoleAdminChangedFilter) -> Self {
             Self::RoleAdminChangedFilter(value)
         }
@@ -1740,7 +1822,7 @@ pub mod token_wrapper_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
     #[ethcall(name = "DEFAULT_ADMIN_ROLE", abi = "DEFAULT_ADMIN_ROLE()")]
     pub struct DefaultAdminRoleCall;
@@ -1755,7 +1837,7 @@ pub mod token_wrapper_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
     #[ethcall(name = "MINTER_ROLE", abi = "MINTER_ROLE()")]
     pub struct MinterRoleCall;
@@ -1770,7 +1852,7 @@ pub mod token_wrapper_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
     #[ethcall(name = "PAUSER_ROLE", abi = "PAUSER_ROLE()")]
     pub struct PauserRoleCall;
@@ -1785,7 +1867,7 @@ pub mod token_wrapper_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
     #[ethcall(name = "allowance", abi = "allowance(address,address)")]
     pub struct AllowanceCall {
@@ -1803,7 +1885,7 @@ pub mod token_wrapper_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
     #[ethcall(name = "approve", abi = "approve(address,uint256)")]
     pub struct ApproveCall {
@@ -1821,7 +1903,7 @@ pub mod token_wrapper_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
     #[ethcall(name = "balanceOf", abi = "balanceOf(address)")]
     pub struct BalanceOfCall {
@@ -1838,7 +1920,7 @@ pub mod token_wrapper_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
     #[ethcall(name = "burn", abi = "burn(uint256)")]
     pub struct BurnCall {
@@ -1855,7 +1937,7 @@ pub mod token_wrapper_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
     #[ethcall(name = "burnFrom", abi = "burnFrom(address,uint256)")]
     pub struct BurnFromCall {
@@ -1873,7 +1955,7 @@ pub mod token_wrapper_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
     #[ethcall(name = "decimals", abi = "decimals()")]
     pub struct DecimalsCall;
@@ -1888,9 +1970,12 @@ pub mod token_wrapper_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
-    #[ethcall(name = "decreaseAllowance", abi = "decreaseAllowance(address,uint256)")]
+    #[ethcall(
+        name = "decreaseAllowance",
+        abi = "decreaseAllowance(address,uint256)"
+    )]
     pub struct DecreaseAllowanceCall {
         pub spender: ::ethers::core::types::Address,
         pub subtracted_value: ::ethers::core::types::U256,
@@ -1906,7 +1991,7 @@ pub mod token_wrapper_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
     #[ethcall(name = "feePercentage", abi = "feePercentage()")]
     pub struct FeePercentageCall;
@@ -1921,7 +2006,7 @@ pub mod token_wrapper_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
     #[ethcall(name = "feeRecipient", abi = "feeRecipient()")]
     pub struct FeeRecipientCall;
@@ -1936,7 +2021,7 @@ pub mod token_wrapper_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
     #[ethcall(name = "getAmountToWrap", abi = "getAmountToWrap(uint256)")]
     pub struct GetAmountToWrapCall {
@@ -1953,7 +2038,7 @@ pub mod token_wrapper_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
     #[ethcall(name = "getFeeFromAmount", abi = "getFeeFromAmount(uint256)")]
     pub struct GetFeeFromAmountCall {
@@ -1970,7 +2055,7 @@ pub mod token_wrapper_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
     #[ethcall(name = "getRoleAdmin", abi = "getRoleAdmin(bytes32)")]
     pub struct GetRoleAdminCall {
@@ -1987,7 +2072,7 @@ pub mod token_wrapper_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
     #[ethcall(name = "getRoleMember", abi = "getRoleMember(bytes32,uint256)")]
     pub struct GetRoleMemberCall {
@@ -2005,7 +2090,7 @@ pub mod token_wrapper_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
     #[ethcall(name = "getRoleMemberCount", abi = "getRoleMemberCount(bytes32)")]
     pub struct GetRoleMemberCountCall {
@@ -2022,7 +2107,7 @@ pub mod token_wrapper_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
     #[ethcall(name = "grantRole", abi = "grantRole(bytes32,address)")]
     pub struct GrantRoleCall {
@@ -2040,7 +2125,7 @@ pub mod token_wrapper_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
     #[ethcall(name = "hasRole", abi = "hasRole(bytes32,address)")]
     pub struct HasRoleCall {
@@ -2058,9 +2143,12 @@ pub mod token_wrapper_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
-    #[ethcall(name = "increaseAllowance", abi = "increaseAllowance(address,uint256)")]
+    #[ethcall(
+        name = "increaseAllowance",
+        abi = "increaseAllowance(address,uint256)"
+    )]
     pub struct IncreaseAllowanceCall {
         pub spender: ::ethers::core::types::Address,
         pub added_value: ::ethers::core::types::U256,
@@ -2076,7 +2164,7 @@ pub mod token_wrapper_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
     #[ethcall(name = "initialized", abi = "initialized()")]
     pub struct InitializedCall;
@@ -2091,7 +2179,7 @@ pub mod token_wrapper_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
     #[ethcall(name = "isValidToken", abi = "isValidToken(address)")]
     pub struct IsValidTokenCall {
@@ -2108,7 +2196,7 @@ pub mod token_wrapper_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
     #[ethcall(name = "mint", abi = "mint(address,uint256)")]
     pub struct MintCall {
@@ -2126,7 +2214,7 @@ pub mod token_wrapper_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
     #[ethcall(name = "name", abi = "name()")]
     pub struct NameCall;
@@ -2141,7 +2229,7 @@ pub mod token_wrapper_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
     #[ethcall(name = "pause", abi = "pause()")]
     pub struct PauseCall;
@@ -2156,7 +2244,7 @@ pub mod token_wrapper_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
     #[ethcall(name = "paused", abi = "paused()")]
     pub struct PausedCall;
@@ -2171,7 +2259,7 @@ pub mod token_wrapper_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
     #[ethcall(name = "renounceRole", abi = "renounceRole(bytes32,address)")]
     pub struct RenounceRoleCall {
@@ -2189,7 +2277,7 @@ pub mod token_wrapper_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
     #[ethcall(name = "revokeRole", abi = "revokeRole(bytes32,address)")]
     pub struct RevokeRoleCall {
@@ -2207,7 +2295,7 @@ pub mod token_wrapper_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
     #[ethcall(name = "supportsInterface", abi = "supportsInterface(bytes4)")]
     pub struct SupportsInterfaceCall {
@@ -2224,7 +2312,7 @@ pub mod token_wrapper_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
     #[ethcall(name = "symbol", abi = "symbol()")]
     pub struct SymbolCall;
@@ -2239,7 +2327,7 @@ pub mod token_wrapper_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
     #[ethcall(name = "totalSupply", abi = "totalSupply()")]
     pub struct TotalSupplyCall;
@@ -2254,7 +2342,7 @@ pub mod token_wrapper_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
     #[ethcall(name = "transfer", abi = "transfer(address,uint256)")]
     pub struct TransferCall {
@@ -2272,9 +2360,12 @@ pub mod token_wrapper_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
-    #[ethcall(name = "transferFrom", abi = "transferFrom(address,address,uint256)")]
+    #[ethcall(
+        name = "transferFrom",
+        abi = "transferFrom(address,address,uint256)"
+    )]
     pub struct TransferFromCall {
         pub from: ::ethers::core::types::Address,
         pub to: ::ethers::core::types::Address,
@@ -2291,7 +2382,7 @@ pub mod token_wrapper_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
     #[ethcall(name = "unpause", abi = "unpause()")]
     pub struct UnpauseCall;
@@ -2306,7 +2397,7 @@ pub mod token_wrapper_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
     #[ethcall(name = "unwrap", abi = "unwrap(address,uint256)")]
     pub struct UnwrapCall {
@@ -2324,7 +2415,7 @@ pub mod token_wrapper_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
     #[ethcall(
         name = "unwrapAndSendTo",
@@ -2346,7 +2437,7 @@ pub mod token_wrapper_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
     #[ethcall(name = "unwrapFor", abi = "unwrapFor(address,address,uint256)")]
     pub struct UnwrapForCall {
@@ -2365,7 +2456,7 @@ pub mod token_wrapper_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
     #[ethcall(name = "wrap", abi = "wrap(address,uint256)")]
     pub struct WrapCall {
@@ -2383,7 +2474,7 @@ pub mod token_wrapper_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
     #[ethcall(name = "wrapFor", abi = "wrapFor(address,address,uint256)")]
     pub struct WrapForCall {
@@ -2402,7 +2493,7 @@ pub mod token_wrapper_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
     #[ethcall(
         name = "wrapForAndSendTo",
@@ -2423,7 +2514,7 @@ pub mod token_wrapper_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
     pub enum TokenWrapperContractCalls {
         DefaultAdminRole(DefaultAdminRoleCall),
@@ -2470,44 +2561,54 @@ pub mod token_wrapper_contract {
     impl ::ethers::core::abi::AbiDecode for TokenWrapperContractCalls {
         fn decode(
             data: impl AsRef<[u8]>,
-        ) -> ::core::result::Result<Self, ::ethers::core::abi::AbiError> {
+        ) -> ::core::result::Result<Self, ::ethers::core::abi::AbiError>
+        {
             let data = data.as_ref();
-            if let Ok(decoded)
-                = <DefaultAdminRoleCall as ::ethers::core::abi::AbiDecode>::decode(
+            if let Ok(decoded) =
+                <DefaultAdminRoleCall as ::ethers::core::abi::AbiDecode>::decode(
                     data,
-                ) {
+                )
+            {
                 return Ok(Self::DefaultAdminRole(decoded));
             }
-            if let Ok(decoded)
-                = <MinterRoleCall as ::ethers::core::abi::AbiDecode>::decode(data) {
+            if let Ok(decoded) =
+                <MinterRoleCall as ::ethers::core::abi::AbiDecode>::decode(data)
+            {
                 return Ok(Self::MinterRole(decoded));
             }
-            if let Ok(decoded)
-                = <PauserRoleCall as ::ethers::core::abi::AbiDecode>::decode(data) {
+            if let Ok(decoded) =
+                <PauserRoleCall as ::ethers::core::abi::AbiDecode>::decode(data)
+            {
                 return Ok(Self::PauserRole(decoded));
             }
-            if let Ok(decoded)
-                = <AllowanceCall as ::ethers::core::abi::AbiDecode>::decode(data) {
+            if let Ok(decoded) =
+                <AllowanceCall as ::ethers::core::abi::AbiDecode>::decode(data)
+            {
                 return Ok(Self::Allowance(decoded));
             }
-            if let Ok(decoded)
-                = <ApproveCall as ::ethers::core::abi::AbiDecode>::decode(data) {
+            if let Ok(decoded) =
+                <ApproveCall as ::ethers::core::abi::AbiDecode>::decode(data)
+            {
                 return Ok(Self::Approve(decoded));
             }
-            if let Ok(decoded)
-                = <BalanceOfCall as ::ethers::core::abi::AbiDecode>::decode(data) {
+            if let Ok(decoded) =
+                <BalanceOfCall as ::ethers::core::abi::AbiDecode>::decode(data)
+            {
                 return Ok(Self::BalanceOf(decoded));
             }
-            if let Ok(decoded)
-                = <BurnCall as ::ethers::core::abi::AbiDecode>::decode(data) {
+            if let Ok(decoded) =
+                <BurnCall as ::ethers::core::abi::AbiDecode>::decode(data)
+            {
                 return Ok(Self::Burn(decoded));
             }
-            if let Ok(decoded)
-                = <BurnFromCall as ::ethers::core::abi::AbiDecode>::decode(data) {
+            if let Ok(decoded) =
+                <BurnFromCall as ::ethers::core::abi::AbiDecode>::decode(data)
+            {
                 return Ok(Self::BurnFrom(decoded));
             }
-            if let Ok(decoded)
-                = <DecimalsCall as ::ethers::core::abi::AbiDecode>::decode(data) {
+            if let Ok(decoded) =
+                <DecimalsCall as ::ethers::core::abi::AbiDecode>::decode(data)
+            {
                 return Ok(Self::Decimals(decoded));
             }
             if let Ok(decoded)
@@ -2516,30 +2617,46 @@ pub mod token_wrapper_contract {
                 ) {
                 return Ok(Self::DecreaseAllowance(decoded));
             }
-            if let Ok(decoded)
-                = <FeePercentageCall as ::ethers::core::abi::AbiDecode>::decode(data) {
+            if let Ok(decoded) =
+                <FeePercentageCall as ::ethers::core::abi::AbiDecode>::decode(
+                    data,
+                )
+            {
                 return Ok(Self::FeePercentage(decoded));
             }
-            if let Ok(decoded)
-                = <FeeRecipientCall as ::ethers::core::abi::AbiDecode>::decode(data) {
+            if let Ok(decoded) =
+                <FeeRecipientCall as ::ethers::core::abi::AbiDecode>::decode(
+                    data,
+                )
+            {
                 return Ok(Self::FeeRecipient(decoded));
             }
-            if let Ok(decoded)
-                = <GetAmountToWrapCall as ::ethers::core::abi::AbiDecode>::decode(data) {
+            if let Ok(decoded) =
+                <GetAmountToWrapCall as ::ethers::core::abi::AbiDecode>::decode(
+                    data,
+                )
+            {
                 return Ok(Self::GetAmountToWrap(decoded));
             }
-            if let Ok(decoded)
-                = <GetFeeFromAmountCall as ::ethers::core::abi::AbiDecode>::decode(
+            if let Ok(decoded) =
+                <GetFeeFromAmountCall as ::ethers::core::abi::AbiDecode>::decode(
                     data,
-                ) {
+                )
+            {
                 return Ok(Self::GetFeeFromAmount(decoded));
             }
-            if let Ok(decoded)
-                = <GetRoleAdminCall as ::ethers::core::abi::AbiDecode>::decode(data) {
+            if let Ok(decoded) =
+                <GetRoleAdminCall as ::ethers::core::abi::AbiDecode>::decode(
+                    data,
+                )
+            {
                 return Ok(Self::GetRoleAdmin(decoded));
             }
-            if let Ok(decoded)
-                = <GetRoleMemberCall as ::ethers::core::abi::AbiDecode>::decode(data) {
+            if let Ok(decoded) =
+                <GetRoleMemberCall as ::ethers::core::abi::AbiDecode>::decode(
+                    data,
+                )
+            {
                 return Ok(Self::GetRoleMember(decoded));
             }
             if let Ok(decoded)
@@ -2548,12 +2665,14 @@ pub mod token_wrapper_contract {
                 ) {
                 return Ok(Self::GetRoleMemberCount(decoded));
             }
-            if let Ok(decoded)
-                = <GrantRoleCall as ::ethers::core::abi::AbiDecode>::decode(data) {
+            if let Ok(decoded) =
+                <GrantRoleCall as ::ethers::core::abi::AbiDecode>::decode(data)
+            {
                 return Ok(Self::GrantRole(decoded));
             }
-            if let Ok(decoded)
-                = <HasRoleCall as ::ethers::core::abi::AbiDecode>::decode(data) {
+            if let Ok(decoded) =
+                <HasRoleCall as ::ethers::core::abi::AbiDecode>::decode(data)
+            {
                 return Ok(Self::HasRole(decoded));
             }
             if let Ok(decoded)
@@ -2562,36 +2681,50 @@ pub mod token_wrapper_contract {
                 ) {
                 return Ok(Self::IncreaseAllowance(decoded));
             }
-            if let Ok(decoded)
-                = <InitializedCall as ::ethers::core::abi::AbiDecode>::decode(data) {
+            if let Ok(decoded) =
+                <InitializedCall as ::ethers::core::abi::AbiDecode>::decode(
+                    data,
+                )
+            {
                 return Ok(Self::Initialized(decoded));
             }
-            if let Ok(decoded)
-                = <IsValidTokenCall as ::ethers::core::abi::AbiDecode>::decode(data) {
+            if let Ok(decoded) =
+                <IsValidTokenCall as ::ethers::core::abi::AbiDecode>::decode(
+                    data,
+                )
+            {
                 return Ok(Self::IsValidToken(decoded));
             }
-            if let Ok(decoded)
-                = <MintCall as ::ethers::core::abi::AbiDecode>::decode(data) {
+            if let Ok(decoded) =
+                <MintCall as ::ethers::core::abi::AbiDecode>::decode(data)
+            {
                 return Ok(Self::Mint(decoded));
             }
-            if let Ok(decoded)
-                = <NameCall as ::ethers::core::abi::AbiDecode>::decode(data) {
+            if let Ok(decoded) =
+                <NameCall as ::ethers::core::abi::AbiDecode>::decode(data)
+            {
                 return Ok(Self::Name(decoded));
             }
-            if let Ok(decoded)
-                = <PauseCall as ::ethers::core::abi::AbiDecode>::decode(data) {
+            if let Ok(decoded) =
+                <PauseCall as ::ethers::core::abi::AbiDecode>::decode(data)
+            {
                 return Ok(Self::Pause(decoded));
             }
-            if let Ok(decoded)
-                = <PausedCall as ::ethers::core::abi::AbiDecode>::decode(data) {
+            if let Ok(decoded) =
+                <PausedCall as ::ethers::core::abi::AbiDecode>::decode(data)
+            {
                 return Ok(Self::Paused(decoded));
             }
-            if let Ok(decoded)
-                = <RenounceRoleCall as ::ethers::core::abi::AbiDecode>::decode(data) {
+            if let Ok(decoded) =
+                <RenounceRoleCall as ::ethers::core::abi::AbiDecode>::decode(
+                    data,
+                )
+            {
                 return Ok(Self::RenounceRole(decoded));
             }
-            if let Ok(decoded)
-                = <RevokeRoleCall as ::ethers::core::abi::AbiDecode>::decode(data) {
+            if let Ok(decoded) =
+                <RevokeRoleCall as ::ethers::core::abi::AbiDecode>::decode(data)
+            {
                 return Ok(Self::RevokeRole(decoded));
             }
             if let Ok(decoded)
@@ -2600,50 +2733,67 @@ pub mod token_wrapper_contract {
                 ) {
                 return Ok(Self::SupportsInterface(decoded));
             }
-            if let Ok(decoded)
-                = <SymbolCall as ::ethers::core::abi::AbiDecode>::decode(data) {
+            if let Ok(decoded) =
+                <SymbolCall as ::ethers::core::abi::AbiDecode>::decode(data)
+            {
                 return Ok(Self::Symbol(decoded));
             }
-            if let Ok(decoded)
-                = <TotalSupplyCall as ::ethers::core::abi::AbiDecode>::decode(data) {
+            if let Ok(decoded) =
+                <TotalSupplyCall as ::ethers::core::abi::AbiDecode>::decode(
+                    data,
+                )
+            {
                 return Ok(Self::TotalSupply(decoded));
             }
-            if let Ok(decoded)
-                = <TransferCall as ::ethers::core::abi::AbiDecode>::decode(data) {
+            if let Ok(decoded) =
+                <TransferCall as ::ethers::core::abi::AbiDecode>::decode(data)
+            {
                 return Ok(Self::Transfer(decoded));
             }
-            if let Ok(decoded)
-                = <TransferFromCall as ::ethers::core::abi::AbiDecode>::decode(data) {
+            if let Ok(decoded) =
+                <TransferFromCall as ::ethers::core::abi::AbiDecode>::decode(
+                    data,
+                )
+            {
                 return Ok(Self::TransferFrom(decoded));
             }
-            if let Ok(decoded)
-                = <UnpauseCall as ::ethers::core::abi::AbiDecode>::decode(data) {
+            if let Ok(decoded) =
+                <UnpauseCall as ::ethers::core::abi::AbiDecode>::decode(data)
+            {
                 return Ok(Self::Unpause(decoded));
             }
-            if let Ok(decoded)
-                = <UnwrapCall as ::ethers::core::abi::AbiDecode>::decode(data) {
+            if let Ok(decoded) =
+                <UnwrapCall as ::ethers::core::abi::AbiDecode>::decode(data)
+            {
                 return Ok(Self::Unwrap(decoded));
             }
-            if let Ok(decoded)
-                = <UnwrapAndSendToCall as ::ethers::core::abi::AbiDecode>::decode(data) {
+            if let Ok(decoded) =
+                <UnwrapAndSendToCall as ::ethers::core::abi::AbiDecode>::decode(
+                    data,
+                )
+            {
                 return Ok(Self::UnwrapAndSendTo(decoded));
             }
-            if let Ok(decoded)
-                = <UnwrapForCall as ::ethers::core::abi::AbiDecode>::decode(data) {
+            if let Ok(decoded) =
+                <UnwrapForCall as ::ethers::core::abi::AbiDecode>::decode(data)
+            {
                 return Ok(Self::UnwrapFor(decoded));
             }
-            if let Ok(decoded)
-                = <WrapCall as ::ethers::core::abi::AbiDecode>::decode(data) {
+            if let Ok(decoded) =
+                <WrapCall as ::ethers::core::abi::AbiDecode>::decode(data)
+            {
                 return Ok(Self::Wrap(decoded));
             }
-            if let Ok(decoded)
-                = <WrapForCall as ::ethers::core::abi::AbiDecode>::decode(data) {
+            if let Ok(decoded) =
+                <WrapForCall as ::ethers::core::abi::AbiDecode>::decode(data)
+            {
                 return Ok(Self::WrapFor(decoded));
             }
-            if let Ok(decoded)
-                = <WrapForAndSendToCall as ::ethers::core::abi::AbiDecode>::decode(
+            if let Ok(decoded) =
+                <WrapForAndSendToCall as ::ethers::core::abi::AbiDecode>::decode(
                     data,
-                ) {
+                )
+            {
                 return Ok(Self::WrapForAndSendTo(decoded));
             }
             Err(::ethers::core::abi::Error::InvalidData.into())
@@ -2664,11 +2814,15 @@ pub mod token_wrapper_contract {
                 Self::Allowance(element) => {
                     ::ethers::core::abi::AbiEncode::encode(element)
                 }
-                Self::Approve(element) => ::ethers::core::abi::AbiEncode::encode(element),
+                Self::Approve(element) => {
+                    ::ethers::core::abi::AbiEncode::encode(element)
+                }
                 Self::BalanceOf(element) => {
                     ::ethers::core::abi::AbiEncode::encode(element)
                 }
-                Self::Burn(element) => ::ethers::core::abi::AbiEncode::encode(element),
+                Self::Burn(element) => {
+                    ::ethers::core::abi::AbiEncode::encode(element)
+                }
                 Self::BurnFrom(element) => {
                     ::ethers::core::abi::AbiEncode::encode(element)
                 }
@@ -2702,7 +2856,9 @@ pub mod token_wrapper_contract {
                 Self::GrantRole(element) => {
                     ::ethers::core::abi::AbiEncode::encode(element)
                 }
-                Self::HasRole(element) => ::ethers::core::abi::AbiEncode::encode(element),
+                Self::HasRole(element) => {
+                    ::ethers::core::abi::AbiEncode::encode(element)
+                }
                 Self::IncreaseAllowance(element) => {
                     ::ethers::core::abi::AbiEncode::encode(element)
                 }
@@ -2712,10 +2868,18 @@ pub mod token_wrapper_contract {
                 Self::IsValidToken(element) => {
                     ::ethers::core::abi::AbiEncode::encode(element)
                 }
-                Self::Mint(element) => ::ethers::core::abi::AbiEncode::encode(element),
-                Self::Name(element) => ::ethers::core::abi::AbiEncode::encode(element),
-                Self::Pause(element) => ::ethers::core::abi::AbiEncode::encode(element),
-                Self::Paused(element) => ::ethers::core::abi::AbiEncode::encode(element),
+                Self::Mint(element) => {
+                    ::ethers::core::abi::AbiEncode::encode(element)
+                }
+                Self::Name(element) => {
+                    ::ethers::core::abi::AbiEncode::encode(element)
+                }
+                Self::Pause(element) => {
+                    ::ethers::core::abi::AbiEncode::encode(element)
+                }
+                Self::Paused(element) => {
+                    ::ethers::core::abi::AbiEncode::encode(element)
+                }
                 Self::RenounceRole(element) => {
                     ::ethers::core::abi::AbiEncode::encode(element)
                 }
@@ -2725,7 +2889,9 @@ pub mod token_wrapper_contract {
                 Self::SupportsInterface(element) => {
                     ::ethers::core::abi::AbiEncode::encode(element)
                 }
-                Self::Symbol(element) => ::ethers::core::abi::AbiEncode::encode(element),
+                Self::Symbol(element) => {
+                    ::ethers::core::abi::AbiEncode::encode(element)
+                }
                 Self::TotalSupply(element) => {
                     ::ethers::core::abi::AbiEncode::encode(element)
                 }
@@ -2735,16 +2901,24 @@ pub mod token_wrapper_contract {
                 Self::TransferFrom(element) => {
                     ::ethers::core::abi::AbiEncode::encode(element)
                 }
-                Self::Unpause(element) => ::ethers::core::abi::AbiEncode::encode(element),
-                Self::Unwrap(element) => ::ethers::core::abi::AbiEncode::encode(element),
+                Self::Unpause(element) => {
+                    ::ethers::core::abi::AbiEncode::encode(element)
+                }
+                Self::Unwrap(element) => {
+                    ::ethers::core::abi::AbiEncode::encode(element)
+                }
                 Self::UnwrapAndSendTo(element) => {
                     ::ethers::core::abi::AbiEncode::encode(element)
                 }
                 Self::UnwrapFor(element) => {
                     ::ethers::core::abi::AbiEncode::encode(element)
                 }
-                Self::Wrap(element) => ::ethers::core::abi::AbiEncode::encode(element),
-                Self::WrapFor(element) => ::ethers::core::abi::AbiEncode::encode(element),
+                Self::Wrap(element) => {
+                    ::ethers::core::abi::AbiEncode::encode(element)
+                }
+                Self::WrapFor(element) => {
+                    ::ethers::core::abi::AbiEncode::encode(element)
+                }
                 Self::WrapForAndSendTo(element) => {
                     ::ethers::core::abi::AbiEncode::encode(element)
                 }
@@ -2752,50 +2926,107 @@ pub mod token_wrapper_contract {
         }
     }
     impl ::core::fmt::Display for TokenWrapperContractCalls {
-        fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
+        fn fmt(
+            &self,
+            f: &mut ::core::fmt::Formatter<'_>,
+        ) -> ::core::fmt::Result {
             match self {
-                Self::DefaultAdminRole(element) => ::core::fmt::Display::fmt(element, f),
-                Self::MinterRole(element) => ::core::fmt::Display::fmt(element, f),
-                Self::PauserRole(element) => ::core::fmt::Display::fmt(element, f),
-                Self::Allowance(element) => ::core::fmt::Display::fmt(element, f),
+                Self::DefaultAdminRole(element) => {
+                    ::core::fmt::Display::fmt(element, f)
+                }
+                Self::MinterRole(element) => {
+                    ::core::fmt::Display::fmt(element, f)
+                }
+                Self::PauserRole(element) => {
+                    ::core::fmt::Display::fmt(element, f)
+                }
+                Self::Allowance(element) => {
+                    ::core::fmt::Display::fmt(element, f)
+                }
                 Self::Approve(element) => ::core::fmt::Display::fmt(element, f),
-                Self::BalanceOf(element) => ::core::fmt::Display::fmt(element, f),
+                Self::BalanceOf(element) => {
+                    ::core::fmt::Display::fmt(element, f)
+                }
                 Self::Burn(element) => ::core::fmt::Display::fmt(element, f),
-                Self::BurnFrom(element) => ::core::fmt::Display::fmt(element, f),
-                Self::Decimals(element) => ::core::fmt::Display::fmt(element, f),
-                Self::DecreaseAllowance(element) => ::core::fmt::Display::fmt(element, f),
-                Self::FeePercentage(element) => ::core::fmt::Display::fmt(element, f),
-                Self::FeeRecipient(element) => ::core::fmt::Display::fmt(element, f),
-                Self::GetAmountToWrap(element) => ::core::fmt::Display::fmt(element, f),
-                Self::GetFeeFromAmount(element) => ::core::fmt::Display::fmt(element, f),
-                Self::GetRoleAdmin(element) => ::core::fmt::Display::fmt(element, f),
-                Self::GetRoleMember(element) => ::core::fmt::Display::fmt(element, f),
+                Self::BurnFrom(element) => {
+                    ::core::fmt::Display::fmt(element, f)
+                }
+                Self::Decimals(element) => {
+                    ::core::fmt::Display::fmt(element, f)
+                }
+                Self::DecreaseAllowance(element) => {
+                    ::core::fmt::Display::fmt(element, f)
+                }
+                Self::FeePercentage(element) => {
+                    ::core::fmt::Display::fmt(element, f)
+                }
+                Self::FeeRecipient(element) => {
+                    ::core::fmt::Display::fmt(element, f)
+                }
+                Self::GetAmountToWrap(element) => {
+                    ::core::fmt::Display::fmt(element, f)
+                }
+                Self::GetFeeFromAmount(element) => {
+                    ::core::fmt::Display::fmt(element, f)
+                }
+                Self::GetRoleAdmin(element) => {
+                    ::core::fmt::Display::fmt(element, f)
+                }
+                Self::GetRoleMember(element) => {
+                    ::core::fmt::Display::fmt(element, f)
+                }
                 Self::GetRoleMemberCount(element) => {
                     ::core::fmt::Display::fmt(element, f)
                 }
-                Self::GrantRole(element) => ::core::fmt::Display::fmt(element, f),
+                Self::GrantRole(element) => {
+                    ::core::fmt::Display::fmt(element, f)
+                }
                 Self::HasRole(element) => ::core::fmt::Display::fmt(element, f),
-                Self::IncreaseAllowance(element) => ::core::fmt::Display::fmt(element, f),
-                Self::Initialized(element) => ::core::fmt::Display::fmt(element, f),
-                Self::IsValidToken(element) => ::core::fmt::Display::fmt(element, f),
+                Self::IncreaseAllowance(element) => {
+                    ::core::fmt::Display::fmt(element, f)
+                }
+                Self::Initialized(element) => {
+                    ::core::fmt::Display::fmt(element, f)
+                }
+                Self::IsValidToken(element) => {
+                    ::core::fmt::Display::fmt(element, f)
+                }
                 Self::Mint(element) => ::core::fmt::Display::fmt(element, f),
                 Self::Name(element) => ::core::fmt::Display::fmt(element, f),
                 Self::Pause(element) => ::core::fmt::Display::fmt(element, f),
                 Self::Paused(element) => ::core::fmt::Display::fmt(element, f),
-                Self::RenounceRole(element) => ::core::fmt::Display::fmt(element, f),
-                Self::RevokeRole(element) => ::core::fmt::Display::fmt(element, f),
-                Self::SupportsInterface(element) => ::core::fmt::Display::fmt(element, f),
+                Self::RenounceRole(element) => {
+                    ::core::fmt::Display::fmt(element, f)
+                }
+                Self::RevokeRole(element) => {
+                    ::core::fmt::Display::fmt(element, f)
+                }
+                Self::SupportsInterface(element) => {
+                    ::core::fmt::Display::fmt(element, f)
+                }
                 Self::Symbol(element) => ::core::fmt::Display::fmt(element, f),
-                Self::TotalSupply(element) => ::core::fmt::Display::fmt(element, f),
-                Self::Transfer(element) => ::core::fmt::Display::fmt(element, f),
-                Self::TransferFrom(element) => ::core::fmt::Display::fmt(element, f),
+                Self::TotalSupply(element) => {
+                    ::core::fmt::Display::fmt(element, f)
+                }
+                Self::Transfer(element) => {
+                    ::core::fmt::Display::fmt(element, f)
+                }
+                Self::TransferFrom(element) => {
+                    ::core::fmt::Display::fmt(element, f)
+                }
                 Self::Unpause(element) => ::core::fmt::Display::fmt(element, f),
                 Self::Unwrap(element) => ::core::fmt::Display::fmt(element, f),
-                Self::UnwrapAndSendTo(element) => ::core::fmt::Display::fmt(element, f),
-                Self::UnwrapFor(element) => ::core::fmt::Display::fmt(element, f),
+                Self::UnwrapAndSendTo(element) => {
+                    ::core::fmt::Display::fmt(element, f)
+                }
+                Self::UnwrapFor(element) => {
+                    ::core::fmt::Display::fmt(element, f)
+                }
                 Self::Wrap(element) => ::core::fmt::Display::fmt(element, f),
                 Self::WrapFor(element) => ::core::fmt::Display::fmt(element, f),
-                Self::WrapForAndSendTo(element) => ::core::fmt::Display::fmt(element, f),
+                Self::WrapForAndSendTo(element) => {
+                    ::core::fmt::Display::fmt(element, f)
+                }
             }
         }
     }
@@ -2844,7 +3075,9 @@ pub mod token_wrapper_contract {
             Self::Decimals(value)
         }
     }
-    impl ::core::convert::From<DecreaseAllowanceCall> for TokenWrapperContractCalls {
+    impl ::core::convert::From<DecreaseAllowanceCall>
+        for TokenWrapperContractCalls
+    {
         fn from(value: DecreaseAllowanceCall) -> Self {
             Self::DecreaseAllowance(value)
         }
@@ -2879,7 +3112,9 @@ pub mod token_wrapper_contract {
             Self::GetRoleMember(value)
         }
     }
-    impl ::core::convert::From<GetRoleMemberCountCall> for TokenWrapperContractCalls {
+    impl ::core::convert::From<GetRoleMemberCountCall>
+        for TokenWrapperContractCalls
+    {
         fn from(value: GetRoleMemberCountCall) -> Self {
             Self::GetRoleMemberCount(value)
         }
@@ -2894,7 +3129,9 @@ pub mod token_wrapper_contract {
             Self::HasRole(value)
         }
     }
-    impl ::core::convert::From<IncreaseAllowanceCall> for TokenWrapperContractCalls {
+    impl ::core::convert::From<IncreaseAllowanceCall>
+        for TokenWrapperContractCalls
+    {
         fn from(value: IncreaseAllowanceCall) -> Self {
             Self::IncreaseAllowance(value)
         }
@@ -2939,7 +3176,9 @@ pub mod token_wrapper_contract {
             Self::RevokeRole(value)
         }
     }
-    impl ::core::convert::From<SupportsInterfaceCall> for TokenWrapperContractCalls {
+    impl ::core::convert::From<SupportsInterfaceCall>
+        for TokenWrapperContractCalls
+    {
         fn from(value: SupportsInterfaceCall) -> Self {
             Self::SupportsInterface(value)
         }
@@ -3010,7 +3249,7 @@ pub mod token_wrapper_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
     pub struct DefaultAdminRoleReturn(pub [u8; 32]);
     ///Container type for all return fields from the `MINTER_ROLE` function with signature `MINTER_ROLE()` and selector `0xd5391393`
@@ -3024,7 +3263,7 @@ pub mod token_wrapper_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
     pub struct MinterRoleReturn(pub [u8; 32]);
     ///Container type for all return fields from the `PAUSER_ROLE` function with signature `PAUSER_ROLE()` and selector `0xe63ab1e9`
@@ -3038,7 +3277,7 @@ pub mod token_wrapper_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
     pub struct PauserRoleReturn(pub [u8; 32]);
     ///Container type for all return fields from the `allowance` function with signature `allowance(address,address)` and selector `0xdd62ed3e`
@@ -3052,7 +3291,7 @@ pub mod token_wrapper_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
     pub struct AllowanceReturn(pub ::ethers::core::types::U256);
     ///Container type for all return fields from the `approve` function with signature `approve(address,uint256)` and selector `0x095ea7b3`
@@ -3066,7 +3305,7 @@ pub mod token_wrapper_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
     pub struct ApproveReturn(pub bool);
     ///Container type for all return fields from the `balanceOf` function with signature `balanceOf(address)` and selector `0x70a08231`
@@ -3080,7 +3319,7 @@ pub mod token_wrapper_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
     pub struct BalanceOfReturn(pub ::ethers::core::types::U256);
     ///Container type for all return fields from the `decimals` function with signature `decimals()` and selector `0x313ce567`
@@ -3094,7 +3333,7 @@ pub mod token_wrapper_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
     pub struct DecimalsReturn(pub u8);
     ///Container type for all return fields from the `decreaseAllowance` function with signature `decreaseAllowance(address,uint256)` and selector `0xa457c2d7`
@@ -3108,7 +3347,7 @@ pub mod token_wrapper_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
     pub struct DecreaseAllowanceReturn(pub bool);
     ///Container type for all return fields from the `feePercentage` function with signature `feePercentage()` and selector `0xa001ecdd`
@@ -3122,7 +3361,7 @@ pub mod token_wrapper_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
     pub struct FeePercentageReturn(pub u16);
     ///Container type for all return fields from the `feeRecipient` function with signature `feeRecipient()` and selector `0x46904840`
@@ -3136,7 +3375,7 @@ pub mod token_wrapper_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
     pub struct FeeRecipientReturn(pub ::ethers::core::types::Address);
     ///Container type for all return fields from the `getAmountToWrap` function with signature `getAmountToWrap(uint256)` and selector `0x96cd4dfe`
@@ -3150,7 +3389,7 @@ pub mod token_wrapper_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
     pub struct GetAmountToWrapReturn(pub ::ethers::core::types::U256);
     ///Container type for all return fields from the `getFeeFromAmount` function with signature `getFeeFromAmount(uint256)` and selector `0x85c00ae8`
@@ -3164,7 +3403,7 @@ pub mod token_wrapper_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
     pub struct GetFeeFromAmountReturn(pub ::ethers::core::types::U256);
     ///Container type for all return fields from the `getRoleAdmin` function with signature `getRoleAdmin(bytes32)` and selector `0x248a9ca3`
@@ -3178,7 +3417,7 @@ pub mod token_wrapper_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
     pub struct GetRoleAdminReturn(pub [u8; 32]);
     ///Container type for all return fields from the `getRoleMember` function with signature `getRoleMember(bytes32,uint256)` and selector `0x9010d07c`
@@ -3192,7 +3431,7 @@ pub mod token_wrapper_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
     pub struct GetRoleMemberReturn(pub ::ethers::core::types::Address);
     ///Container type for all return fields from the `getRoleMemberCount` function with signature `getRoleMemberCount(bytes32)` and selector `0xca15c873`
@@ -3206,7 +3445,7 @@ pub mod token_wrapper_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
     pub struct GetRoleMemberCountReturn(pub ::ethers::core::types::U256);
     ///Container type for all return fields from the `hasRole` function with signature `hasRole(bytes32,address)` and selector `0x91d14854`
@@ -3220,7 +3459,7 @@ pub mod token_wrapper_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
     pub struct HasRoleReturn(pub bool);
     ///Container type for all return fields from the `increaseAllowance` function with signature `increaseAllowance(address,uint256)` and selector `0x39509351`
@@ -3234,7 +3473,7 @@ pub mod token_wrapper_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
     pub struct IncreaseAllowanceReturn(pub bool);
     ///Container type for all return fields from the `initialized` function with signature `initialized()` and selector `0x158ef93e`
@@ -3248,7 +3487,7 @@ pub mod token_wrapper_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
     pub struct InitializedReturn(pub bool);
     ///Container type for all return fields from the `isValidToken` function with signature `isValidToken(address)` and selector `0xc1876453`
@@ -3262,7 +3501,7 @@ pub mod token_wrapper_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
     pub struct IsValidTokenReturn(pub bool);
     ///Container type for all return fields from the `name` function with signature `name()` and selector `0x06fdde03`
@@ -3276,7 +3515,7 @@ pub mod token_wrapper_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
     pub struct NameReturn(pub ::std::string::String);
     ///Container type for all return fields from the `paused` function with signature `paused()` and selector `0x5c975abb`
@@ -3290,7 +3529,7 @@ pub mod token_wrapper_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
     pub struct PausedReturn(pub bool);
     ///Container type for all return fields from the `supportsInterface` function with signature `supportsInterface(bytes4)` and selector `0x01ffc9a7`
@@ -3304,7 +3543,7 @@ pub mod token_wrapper_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
     pub struct SupportsInterfaceReturn(pub bool);
     ///Container type for all return fields from the `symbol` function with signature `symbol()` and selector `0x95d89b41`
@@ -3318,7 +3557,7 @@ pub mod token_wrapper_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
     pub struct SymbolReturn(pub ::std::string::String);
     ///Container type for all return fields from the `totalSupply` function with signature `totalSupply()` and selector `0x18160ddd`
@@ -3332,7 +3571,7 @@ pub mod token_wrapper_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
     pub struct TotalSupplyReturn(pub ::ethers::core::types::U256);
     ///Container type for all return fields from the `transfer` function with signature `transfer(address,uint256)` and selector `0xa9059cbb`
@@ -3346,7 +3585,7 @@ pub mod token_wrapper_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
     pub struct TransferReturn(pub bool);
     ///Container type for all return fields from the `transferFrom` function with signature `transferFrom(address,address,uint256)` and selector `0x23b872dd`
@@ -3360,7 +3599,7 @@ pub mod token_wrapper_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
     pub struct TransferFromReturn(pub bool);
 }
