@@ -1,5 +1,5 @@
 [package]
-name = "proposal-derive"
+name = "webb-proposal-derive"
 version = "0.1.0"
 edition.workspace = true
 
