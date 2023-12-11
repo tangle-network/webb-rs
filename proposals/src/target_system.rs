@@ -25,6 +25,7 @@
 
 #[cfg(all(not(feature = "std"), feature = "substrate"))]
 use alloc::vec::Vec;
+
 /// `TargetSystem` (26 Bytes)
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
 #[cfg_attr(
@@ -168,6 +169,7 @@ impl From<TargetSystem> for [u8; TargetSystem::LENGTH] {
         target_system.into_bytes()
     }
 }
+
 #[cfg(feature = "substrate")]
 impl Default for TargetSystem {
     fn default() -> Self {

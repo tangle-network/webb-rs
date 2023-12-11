@@ -15,8 +15,17 @@ use crate::ProposalHeader;
 /// │                    │                     │
 /// └────────────────────┴─────────────────────┘
 /// ```
-#[derive(Proposal, Debug, Copy, Clone, PartialEq, Eq, Hash)]
-#[cfg_attr(feature = "std", derive(serde::Serialize, serde::Deserialize))]
+#[derive(
+    Proposal,
+    Debug,
+    Copy,
+    Clone,
+    PartialEq,
+    Eq,
+    Hash,
+    serde::Serialize,
+    serde::Deserialize,
+)]
 #[proposal(
     function_sig = "function setVerifier(address verifier, uint32 nonce)"
 )]

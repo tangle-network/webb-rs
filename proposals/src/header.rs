@@ -5,7 +5,6 @@ use crate::target_system::TargetSystem;
 use core::fmt::Debug;
 use core::fmt::Formatter;
 
-#[cfg(feature = "std")]
 use serde::{Deserialize, Serialize};
 
 /// Proposal Target Function Signature (4 bytes).
@@ -19,8 +18,8 @@ use serde::{Deserialize, Serialize};
         scale_codec::MaxEncodedLen
     )
 )]
-#[cfg_attr(feature = "std", derive(Serialize, Deserialize))]
-#[cfg_attr(feature = "std", serde(transparent))]
+#[derive(Serialize, Deserialize)]
+#[serde(transparent)]
 #[repr(transparent)]
 pub struct FunctionSignature(pub [u8; 4]);
 
@@ -35,7 +34,7 @@ pub struct FunctionSignature(pub [u8; 4]);
         scale_codec::MaxEncodedLen
     )
 )]
-#[cfg_attr(feature = "std", derive(Serialize, Deserialize))]
+#[derive(Serialize, Deserialize)]
 pub struct ResourceId(pub [u8; 32]);
 
 /// Proposal Target Chain and its type (6 bytes).
@@ -49,8 +48,8 @@ pub struct ResourceId(pub [u8; 32]);
         scale_codec::MaxEncodedLen
     )
 )]
-#[cfg_attr(feature = "std", derive(Serialize, Deserialize))]
-#[cfg_attr(feature = "std", serde(tag = "type", content = "id"))]
+#[derive(Serialize, Deserialize)]
+#[serde(tag = "type", content = "id")]
 #[non_exhaustive]
 pub enum TypedChainId {
     /// None chain type.
@@ -87,7 +86,7 @@ pub enum TypedChainId {
 /// ```
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Ord, PartialOrd)]
 #[allow(clippy::module_name_repetitions)]
-#[cfg_attr(feature = "std", derive(Serialize, Deserialize))]
+#[derive(Serialize, Deserialize)]
 pub struct ProposalHeader {
     /// Resource ID of the execution context
     pub resource_id: ResourceId,
@@ -532,7 +531,6 @@ impl Debug for FunctionSignature {
 /// # Errors
 /// This function will return an error if it fails to serialize the
 /// proposal header.
-#[cfg(feature = "std")]
 pub fn serialize<S>(
     header: &ProposalHeader,
     serializer: S,

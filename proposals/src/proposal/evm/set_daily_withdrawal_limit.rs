@@ -16,8 +16,17 @@ use crate::ProposalHeader;
 /// │                    │                           │
 /// └────────────────────┴───────────────────────────┘
 /// ```
-#[derive(Proposal, Debug, Copy, Clone, PartialEq, Eq, Hash)]
-#[cfg_attr(feature = "std", derive(serde::Serialize, serde::Deserialize))]
+#[derive(
+    Proposal,
+    Debug,
+    Copy,
+    Clone,
+    PartialEq,
+    Eq,
+    Hash,
+    serde::Serialize,
+    serde::Deserialize,
+)]
 #[proposal(
     function_sig = "function setDailyWithdrawalLimit(uint256 _limit, uint32 _nonce)"
 )]

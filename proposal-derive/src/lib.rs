@@ -8,6 +8,10 @@ use syn::{
     parse_macro_input, DeriveInput, Fields, Generics, Ident, Lit, LitStr, Token,
 };
 
+#[cfg(not(feature = "std"))]
+#[doc(hidden)]
+extern crate alloc;
+
 /// Args for the proposal derive macro
 struct Args {
     function_sig: LitStr,
@@ -84,6 +88,19 @@ fn derive_proposal_trait(
     };
     let (impl_generics, ty_generics, where_clause) = generics.split_for_impl();
     // Build the output, possibly using quasi-quotation
+    #[cfg(not(feature = "std"))]
+    let to_vec = quote! {
+        fn to_vec(&self) -> alloc::vec::Vec<u8> {
+            crate::to_vec(self).expect("never fails to serialize")
+        }
+    };
+
+    #[cfg(feature = "std")]
+    let to_vec = quote! {
+        fn to_vec(&self) -> Vec<u8> {
+            crate::to_vec(self).expect("never fails to serialize")
+        }
+    };
     let expanded = quote! {
         impl #impl_generics crate::ProposalTrait for #name #ty_generics #where_clause {
             fn header(&self) -> crate::ProposalHeader {
@@ -94,9 +111,7 @@ fn derive_proposal_trait(
                 crate::FunctionSignature(#computed_function_sig)
             }
 
-            fn to_vec(&self) -> Vec<u8> {
-                crate::to_vec(self).expect("never fails to serialize")
-            }
+            #to_vec
         }
     };
 

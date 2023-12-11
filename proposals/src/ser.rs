@@ -1,17 +1,33 @@
 //! Serializer for Webb Proposals Foramt.
 use serde::ser::{self, Serialize};
 
+#[cfg(not(feature = "std"))]
+use alloc::{
+    string::{String, ToString},
+    vec::Vec,
+};
+
 /// Error that can occur during serialization.
-#[derive(Debug, Clone, PartialEq, Eq, thiserror::Error)]
+#[derive(Debug, Clone, PartialEq, Eq)]
 #[non_exhaustive]
 pub enum SerializationError {
     /// Custom error message from [serde].
-    #[error("{0}")]
     Custom(String),
     /// Unsupported type encountered.
-    #[error("Unsupported type")]
     Unspported,
 }
+
+impl core::fmt::Display for SerializationError {
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
+        match self {
+            Self::Custom(msg) => write!(f, "{msg}"),
+            Self::Unspported => write!(f, "Unsupported type"),
+        }
+    }
+}
+
+#[cfg(feature = "std")]
+impl std::error::Error for SerializationError {}
 
 impl ser::Error for SerializationError {
     fn custom<T: core::fmt::Display>(msg: T) -> Self {
