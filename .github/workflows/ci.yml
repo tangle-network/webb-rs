@@ -21,7 +21,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     # Name should be the OS name only (e.g. Linux, macOS, Windows)
     # This is used to generate the badge
-    name: ${{ matrix.os }}-${{ matrix.features }}
+    name: webb crate (${{ matrix.os }})
     steps:
       - uses: actions/checkout@v2
         with:
@@ -52,14 +52,13 @@ jobs:
           - evm,std
           - substrate,std
           - evm
-          - substrate
         test-features:
           - evm,std
           - substrate,std
     runs-on: ${{ matrix.os }}
     # Name should be the OS name only (e.g. Linux, macOS, Windows)
     # This is used to generate the badge
-    name: ${{ matrix.os }}-${{ matrix.features }}
+    name: proposals crate (${{ matrix.os }} with ${{ matrix.features }} / ${{ matrix.test-features }})
     steps:
       - uses: actions/checkout@v2
         with:
