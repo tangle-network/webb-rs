@@ -21,7 +21,7 @@ typed-builder = { version = "0.18", default-features = false, optional = true }
 tiny-keccak = { version = "2.0.2", features = ["keccak"] }
 serde = { workspace = true, optional = true, default-features = false, features = ["alloc", "derive"] }
 hex = { workspace = true, default-features = false, features = ["alloc"] }
-proposal-derive = { version = "0.1.0", path = "../proposal-derive", default-features = false }
+proposal-derive = { version = "0.1.0", package = "webb-proposal-derive", path = "../proposal-derive", default-features = false }
 thiserror = { workspace = true }
 
 [dev-dependencies]
