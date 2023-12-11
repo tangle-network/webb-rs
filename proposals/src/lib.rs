@@ -146,7 +146,5 @@ pub use proposal::*;
 pub use target_system::*;
 pub use traits::*;
 
-#[cfg(feature = "std")]
 pub use de::{from_slice, DeserializationError};
-#[cfg(feature = "std")]
 pub use ser::{to_vec, SerializationError};

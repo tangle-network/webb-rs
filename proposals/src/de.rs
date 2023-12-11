@@ -1,26 +1,41 @@
 //! Deserializer for Webb Proposal binary format.
 
 use serde::de::{self, Deserialize, DeserializeSeed, SeqAccess, Visitor};
-use std::io::Cursor;
-use std::io::Read;
+
+#[cfg(not(feature = "std"))]
+use alloc::string::{String, ToString};
 
 /// Errors that can occur during deserialization.
-#[derive(Debug, Clone, PartialEq, Eq, thiserror::Error)]
+#[derive(Debug, Clone, PartialEq, Eq)]
 #[non_exhaustive]
 pub enum DeserializationError {
     /// Custom error message from [serde].
-    #[error("{0}")]
     Custom(String),
     /// Unsupported type encountered.
-    #[error("Unsupported type")]
     Unspported,
     /// Reached end of input unexpectedly.
-    #[error("Unexpected end of input")]
     Eof,
     /// Invalid bool value.
-    #[error("Invalid bool value")]
     InvalidBool,
 }
+
+impl core::fmt::Display for DeserializationError {
+    fn fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result {
+        match self {
+            DeserializationError::Custom(msg) => write!(f, "{msg}"),
+            DeserializationError::Unspported => {
+                write!(f, "Unsupported type encountered")
+            }
+            DeserializationError::Eof => write!(f, "Unexpected end of input"),
+            DeserializationError::InvalidBool => {
+                write!(f, "Invalid bool value")
+            }
+        }
+    }
+}
+
+#[cfg(feature = "std")]
+impl std::error::Error for DeserializationError {}
 
 impl de::Error for DeserializationError {
     fn custom<T: core::fmt::Display>(msg: T) -> Self {
@@ -28,14 +43,42 @@ impl de::Error for DeserializationError {
     }
 }
 
+struct SliceReader<'storage> {
+    slice: &'storage [u8],
+}
+
+impl<'storage> SliceReader<'storage> {
+    /// Constructs a slice reader
+    fn new(bytes: &'storage [u8]) -> SliceReader<'storage> {
+        SliceReader { slice: bytes }
+    }
+
+    fn get_ref(&self) -> &'storage [u8] {
+        self.slice
+    }
+
+    fn get_byte_array<const N: usize>(
+        &mut self,
+    ) -> Result<[u8; N], DeserializationError> {
+        if N > self.slice.len() {
+            return Err(DeserializationError::Eof);
+        }
+        let (read_slice, remaining) = self.slice.split_at(N);
+        self.slice = remaining;
+        let mut array = [0u8; N];
+        array.copy_from_slice(read_slice);
+        Ok(array)
+    }
+}
+
 struct Deserializer<'de> {
-    input: Cursor<&'de [u8]>,
+    input: SliceReader<'de>,
 }
 
 impl<'de> Deserializer<'de> {
     fn from_bytes(input: &'de [u8]) -> Self {
         Deserializer {
-            input: Cursor::new(input),
+            input: SliceReader::new(input),
         }
     }
 }
@@ -49,12 +92,7 @@ where
     T: Deserialize<'a>,
 {
     let mut deserializer = Deserializer::from_bytes(s);
-    let t = T::deserialize(&mut deserializer)?;
-    if deserializer.input.get_ref().is_empty() {
-        return Err(DeserializationError::Eof);
-    }
-
-    Ok(t)
+    T::deserialize(&mut deserializer).map_err(Into::into)
 }
 
 macro_rules! impl_nums {
@@ -67,11 +105,9 @@ macro_rules! impl_nums {
         where
             V: Visitor<'de>,
         {
-            let mut bytes = [0u8; core::mem::size_of::<$ty>()];
             // Read bytes from input
-            self.input
-                .read_exact(&mut bytes)
-                .map_err(|_| DeserializationError::Eof)?;
+            const N: usize = core::mem::size_of::<$ty>();
+            let bytes = self.input.get_byte_array::<N>()?;
             let value = <$ty>::from_be_bytes(bytes);
             visitor.$visitor_method(value)
         }
@@ -120,10 +156,7 @@ impl<'de, 'a> de::Deserializer<'de> for &'a mut Deserializer<'de> {
     {
         // 0 = false, 1 = true
         // Read one byte
-        let mut byte = [0u8; 1];
-        self.input
-            .read_exact(&mut byte)
-            .map_err(|_| DeserializationError::Eof)?;
+        let byte = self.input.get_byte_array::<1>()?;
         match byte[0] {
             0 => visitor.visit_bool(false),
             1 => visitor.visit_bool(true),

@@ -14,14 +14,14 @@ on:
   workflow_dispatch:
 
 jobs:
-  ci:
+  webb:
     strategy:
       matrix:
         os: [ubuntu-latest, macos-latest]
     runs-on: ${{ matrix.os }}
     # Name should be the OS name only (e.g. Linux, macOS, Windows)
     # This is used to generate the badge
-    name: ${{ matrix.os }}
+    name: webb crate (${{ matrix.os }})
     steps:
       - uses: actions/checkout@v2
         with:
@@ -40,12 +40,43 @@ jobs:
       - name: Check Metadata generation
         run: cargo build --features generate-substrate,generate-contracts
       - name: Tests
-        run: cargo test --all
-      - name: EVM Proposals
-        run: cargo build -p webb-proposals --no-default-features --features evm,std
-      - name: Substrate Proposals
-        run: cargo build -p webb-proposals --no-default-features --features substrate,std
-      - name: Ink! Proposals
-        run: cargo build -p webb-proposals --no-default-features --features ink,std
+        run: cargo test -p webb
       - name: Rustdoc build
-        run: cargo doc --no-deps --all-features
+        run: cargo doc -p webb --no-deps --all-features
+
+  proposals:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+        features:
+          - evm,std
+          - substrate,std
+          - evm
+        test-features:
+          - evm,std
+          - substrate,std
+    runs-on: ${{ matrix.os }}
+    # Name should be the OS name only (e.g. Linux, macOS, Windows)
+    # This is used to generate the badge
+    name: proposals crate (${{ matrix.os }} with ${{ matrix.features }} / ${{ matrix.test-features }})
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 50
+      - name: Cache Cargo
+        uses: actions/cache@v2
+        with:
+          path: |
+            ~/.cargo/registry
+            ~/.cargo/git
+            ~/.cargo/bin
+            target
+          key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
+      - name: Install Mold Linker
+        uses: rui314/setup-mold@v1
+      - name: Build
+        run: cargo build -p webb-proposals --no-default-features --features ${{ matrix.features }}
+      - name: Tests
+        run: cargo test -p webb-proposals --no-default-features --features ${{ matrix.test-features }}
+      - name: Rustdoc
+        run: cargo doc -p webb-proposals --no-deps --no-default-features --features ${{ matrix.features }}

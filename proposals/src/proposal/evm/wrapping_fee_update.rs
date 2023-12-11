@@ -20,8 +20,17 @@ use crate::ProposalHeader;
 /// The wrapping fee percentage is a number between 0 and 10000.
 ///
 /// For example, a fee of `42.20%` is encoded as `4220`.
-#[derive(Proposal, Debug, Copy, Clone, PartialEq, Eq, Hash)]
-#[cfg_attr(feature = "std", derive(serde::Serialize, serde::Deserialize))]
+#[derive(
+    Proposal,
+    Debug,
+    Copy,
+    Clone,
+    PartialEq,
+    Eq,
+    Hash,
+    serde::Serialize,
+    serde::Deserialize,
+)]
 #[proposal(
     function_sig = "function setFee(uint16 _feePercentage, uint32 _nonce)"
 )]

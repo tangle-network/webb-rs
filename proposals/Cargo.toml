@@ -1,6 +1,6 @@
 [package]
 name = "webb-proposals"
-version = "0.7.0"
+version = "0.8.0"
 description = "Webb Protocol Proposals Specification & Implementation (part of webb-rs SDK)"
 categories = ["encoding", "no-std"]
 keywords = ["webb", "proposals", "protocol", "blockchain"]
@@ -17,22 +17,24 @@ scale-codec = { package = 'parity-scale-codec', version = '3.0.0', default-featu
 scale-info = { version = "2.1.1", default-features = false, optional = true }
 frame-support = { default-features = false, git = "https://github.com/paritytech/polkadot-sdk", branch = "release-polkadot-v1.1.0", optional = true }
 num-traits = { version = "0.2.15", default-features = false }
-typed-builder = { version = "0.15", default-features = false, optional = true }
+typed-builder = { version = "0.18", default-features = false, optional = true }
 tiny-keccak = { version = "2.0.2", features = ["keccak"] }
-serde = { workspace = true, optional = true }
-hex = { workspace = true }
-proposal-derive = { path = "../proposal-derive" }
+serde = { workspace = true, optional = true, default-features = false, features = ["alloc", "derive"] }
+hex = { workspace = true, default-features = false, features = ["alloc"] }
+proposal-derive = { path = "../proposal-derive", default-features = false }
 thiserror = { workspace = true }
+sp-runtime-interface ={ default-features = false, git = "https://github.com/paritytech/polkadot-sdk", branch = "release-polkadot-v1.1.0", optional = true }
 
 [dev-dependencies]
 hex-literal = "0.4"
 hex = { workspace = true }
-toml = { version = "0.7.2" }
+toml = { version = "0.8" }
+serde = { workspace = true, default-features = false, features = ["alloc"] }
 
 [features]
 default = ["std", "evm", "substrate", "scale", "ink"]
-std = ["scale-codec/std", "scale-info/std", "num-traits/std", "serde", "hex/std", "frame-support/std"]
+std = ["scale-codec/std", "scale-info/std", "num-traits/std", "serde/std", "hex/std", "frame-support/std", "proposal-derive/std"]
 scale = ["scale-codec", "scale-info/derive"]
-evm = []
+evm = ["serde"]
 substrate = ["scale", "typed-builder", "frame-support", "serde"]
 ink = ["scale", "typed-builder"]

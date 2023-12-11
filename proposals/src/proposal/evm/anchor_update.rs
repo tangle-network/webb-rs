@@ -16,8 +16,17 @@ use proposal_derive::Proposal;
 /// │                    │                 │                     │
 /// └────────────────────┴─────────────────┴─────────────────────┘
 /// ```
-#[derive(Proposal, Debug, Copy, Clone, PartialEq, Eq, Hash)]
-#[cfg_attr(feature = "std", derive(serde::Serialize, serde::Deserialize))]
+#[derive(
+    Proposal,
+    Debug,
+    Copy,
+    Clone,
+    PartialEq,
+    Eq,
+    Hash,
+    serde::Serialize,
+    serde::Deserialize,
+)]
 #[proposal(
     function_sig = "function updateEdge(uint256 root, uint32 latestLeafIndex, bytes32 srcResourceID)"
 )]

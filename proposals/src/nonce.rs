@@ -1,7 +1,6 @@
 use core::ops::{Add, Mul};
 use num_traits::{Bounded, CheckedMul, One, Saturating, Zero};
 
-#[cfg(feature = "std")]
 use serde::{Deserialize, Serialize};
 
 /// Proposal Nonce (4 bytes).
@@ -15,8 +14,8 @@ use serde::{Deserialize, Serialize};
         scale_codec::MaxEncodedLen,
     )
 )]
-#[cfg_attr(feature = "std", derive(Serialize, Deserialize))]
-#[cfg_attr(feature = "std", serde(transparent))]
+#[derive(Serialize, Deserialize)]
+#[serde(transparent)]
 #[repr(transparent)]
 pub struct Nonce(pub u32);
 
@@ -27,6 +26,7 @@ impl Add for Nonce {
         Nonce(self.0 + rhs.0)
     }
 }
+
 impl Mul for Nonce {
     type Output = Self;
 

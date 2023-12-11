@@ -16,8 +16,17 @@ use proposal_derive::Proposal;
 /// └────────────────────┴─────────────────────────┘
 /// ```
 
-#[derive(Proposal, Debug, Copy, Clone, PartialEq, Eq, Hash)]
-#[cfg_attr(feature = "std", derive(serde::Serialize, serde::Deserialize))]
+#[derive(
+    Proposal,
+    Debug,
+    Copy,
+    Clone,
+    PartialEq,
+    Eq,
+    Hash,
+    serde::Serialize,
+    serde::Deserialize,
+)]
 #[proposal(
     function_sig = "function setFee(uint16 _feePercentage, uint32 _nonce)"
 )]
