@@ -10,6 +10,8 @@ use webb::evm::contract::protocol_solidity::{
     treasury::TreasuryContract, treasury_handler::TreasuryHandlerContract,
 };
 use webb::evm::ethers;
+use webb::evm::ethers::signers::Signer;
+use webb::evm::ethers::utils::{Anvil, AnvilInstance};
 use webb_proposals::TypedChainId;
 
 use crate::errors::Result;
@@ -21,91 +23,79 @@ type SignerEthersClient = ethers::middleware::SignerMiddleware<
 >;
 
 pub struct LocalEvmChain {
-    typed_chain_id: TypedChainId,
+    chain_id: u32,
     name: String,
     client: Arc<SignerEthersClient>,
-    anvil_node_handle: anvil::NodeHandle,
-    anvil_eth_api: anvil::eth::EthApi,
-    account_generator: anvil::AccountGenerator,
+    anvil_node_handle: AnvilInstance,
 }
 
 impl LocalEvmChain {
-    pub async fn new(chain_id: u32, name: String) -> Self {
-        let typed_chain_id = TypedChainId::Evm(chain_id);
-        let (anvil_eth_api, anvil_node_handle, account_generator) =
-            Self::spawn_anvil_node(typed_chain_id, None).await;
-        let signer =
-            anvil_node_handle.dev_wallets().next().expect("dev wallet");
-        let client =
-            SignerEthersClient::new(anvil_node_handle.http_provider(), signer);
+    pub fn new(chain_id: u32, name: String) -> Self {
+        let anvil_node_handle = Self::spawn_anvil_node(chain_id, None);
+        let secret_key = anvil_node_handle.keys()[0].clone();
+        let signer = ethers::signers::LocalWallet::from(secret_key)
+            .with_chain_id(chain_id);
+        let provider =
+            ethers::providers::Provider::<ethers::providers::Http>::try_from(
+                anvil_node_handle.endpoint(),
+            )
+            .unwrap();
+        let client = SignerEthersClient::new(provider, signer);
         // start the node
         Self {
-            typed_chain_id,
+            chain_id,
             name,
             client: Arc::new(client),
             anvil_node_handle,
-            anvil_eth_api,
-            account_generator,
         }
     }
 
-    pub async fn new_with_chain_state(
+    pub fn new_with_chain_state(
         chain_id: u32,
         name: String,
-        state: anvil::eth::backend::db::SerializableState,
+        state_path: &std::path::Path,
     ) -> Self {
-        let typed_chain_id = TypedChainId::Evm(chain_id);
-        let (anvil_eth_api, anvil_node_handle, account_generator) =
-            Self::spawn_anvil_node(typed_chain_id, Some(state)).await;
-        let signer =
-            anvil_node_handle.dev_wallets().next().expect("dev wallet");
-        let client =
-            SignerEthersClient::new(anvil_node_handle.http_provider(), signer);
+        let anvil_node_handle =
+            Self::spawn_anvil_node(chain_id, Some(state_path));
+        let secret_key = anvil_node_handle.keys()[0].clone();
+        let signer = ethers::signers::LocalWallet::from(secret_key)
+            .with_chain_id(chain_id);
+        let provider =
+            ethers::providers::Provider::<ethers::providers::Http>::try_from(
+                anvil_node_handle.endpoint(),
+            )
+            .unwrap();
+        let client = SignerEthersClient::new(provider, signer);
         Self {
-            typed_chain_id,
+            chain_id,
             name,
             client: Arc::new(client),
             anvil_node_handle,
-            anvil_eth_api,
-            account_generator,
         }
     }
 
-    pub fn chain_id(&self) -> TypedChainId {
-        self.typed_chain_id
+    pub fn chain_id(&self) -> u32 {
+        self.chain_id
     }
 
     pub fn name(&self) -> &str {
         &self.name
     }
 
-    pub fn anvil_eth_api(&self) -> anvil::eth::EthApi {
-        self.anvil_eth_api.clone()
+    pub fn keys(&self) -> &[ethers::core::k256::SecretKey] {
+        self.anvil_node_handle.keys()
     }
 
-    pub fn account_generator(&self) -> anvil::AccountGenerator {
-        self.account_generator.clone()
+    pub fn addresses(&self) -> &[ethers::types::Address] {
+        self.anvil_node_handle.addresses()
     }
 
     pub fn client(&self) -> Arc<SignerEthersClient> {
         self.client.clone()
     }
 
-    pub async fn node_state(
-        &self,
-    ) -> anvil::eth::backend::db::SerializableState {
-        self.anvil_eth_api
-            .serialized_state()
-            .await
-            .expect("valid state")
-    }
-
-    pub fn shutdown(mut self) {
-        let maybe_signal =
-            Option::take(self.anvil_node_handle.shutdown_signal_mut());
-        if let Some(signal) = maybe_signal {
-            signal.fire().expect("signal fired");
-        }
+    pub fn shutdown(self) {
+        drop(self.anvil_node_handle);
     }
 
     /// Deploy a new ERC20 token.
@@ -259,28 +249,19 @@ impl LocalEvmChain {
         .await
     }
 
-    async fn spawn_anvil_node(
-        typed_chain_id: TypedChainId,
-        state: Option<anvil::eth::backend::db::SerializableState>,
-    ) -> (
-        anvil::eth::EthApi,
-        anvil::NodeHandle,
-        anvil::AccountGenerator,
-    ) {
-        let generator = anvil::AccountGenerator::new(20)
-            .chain_id(typed_chain_id.underlying_chain_id());
-        let config = anvil::NodeConfig::default()
-            .with_tracing(false)
-            .silent()
-            .with_chain_id(Some(typed_chain_id.underlying_chain_id()))
-            .with_port(crate::random_port::random_port())
-            .with_account_generator(generator.clone())
-            .with_init_state(state)
-            .with_genesis_balance(
-                ethers::utils::parse_ether(1000).expect("valid ether"),
-            );
-        let (anvil_eth_api, anvil_node_handle) = anvil::spawn(config).await;
-        (anvil_eth_api, anvil_node_handle, generator)
+    fn spawn_anvil_node(
+        chain_id: u32,
+        state_path: Option<&std::path::Path>,
+    ) -> AnvilInstance {
+        let mut anvil = Anvil::new()
+            .port(crate::random_port::random_port())
+            .chain_id(chain_id)
+            .arg("--accounts")
+            .arg("20");
+        if let Some(state) = state_path {
+            // TODO support loading state
+        }
+        anvil.spawn()
     }
 }
 
@@ -292,7 +273,7 @@ mod tests {
 
     #[tokio::test]
     async fn should_be_able_to_deploy_token() -> Result<()> {
-        let chain = LocalEvmChain::new(5001, String::from("Hermes")).await;
+        let chain = LocalEvmChain::new(1337, String::from("Hermes"));
         let token = chain
             .deploy_token(String::from("Test"), String::from("TST"))
             .await?;
@@ -306,7 +287,7 @@ mod tests {
 
     #[tokio::test]
     async fn should_be_able_to_deploy_hasher() -> Result<()> {
-        let chain = LocalEvmChain::new(5001, String::from("Hermes")).await;
+        let chain = LocalEvmChain::new(5001, String::from("Hermes"));
         let hasher = chain.deploy_poseidon_hasher().await?;
         let hash = hasher
             .hash_left_right(U256::from(1), U256::from(2))
@@ -321,22 +302,27 @@ mod tests {
     }
 
     #[tokio::test]
+    #[ignore = "Anvil does not support this yet"]
     async fn should_load_old_state() -> Result<()> {
-        let chain = LocalEvmChain::new(5001, String::from("Hermes")).await;
+        let tmp = tempfile::tempdir()?;
+        let state = tmp.path().join("state.json");
+        let chain = LocalEvmChain::new_with_chain_state(
+            5001,
+            String::from("Hermes"),
+            &state,
+        );
         let token = chain
             .deploy_token(String::from("Test"), String::from("TST"))
             .await?;
         let name = token.name().call().await?;
         assert_eq!(name, "Test");
-        let state = chain.node_state().await;
         chain.shutdown();
 
         let chain = LocalEvmChain::new_with_chain_state(
             5001,
             String::from("Hermes"),
-            state,
-        )
-        .await;
+            &state,
+        );
         let token = ERC20PresetMinterPauserContract::new(
             token.address(),
             chain.client(),
