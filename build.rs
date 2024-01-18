@@ -28,8 +28,8 @@ mod evm {
         Ok(())
     }
 
-    pub fn build_protocol_solidity_vanchor_verifier() -> Result<(), Box<dyn Error>>
-    {
+    pub fn build_protocol_solidity_vanchor_verifier(
+    ) -> Result<(), Box<dyn Error>> {
         parse_and_write_abigen(
             "contracts/protocol-solidity/VAnchorVerifier.json",
             "src/evm/contract/protocol_solidity/vanchor_verifier.rs",
@@ -45,7 +45,6 @@ mod evm {
             "Verifier2x2Contract",
         )
     }
-
 
     pub fn build_protocol_solidity_verifier_2_16() -> Result<(), Box<dyn Error>>
     {
@@ -64,7 +63,6 @@ mod evm {
             "Verifier8x2Contract",
         )
     }
-
 
     pub fn build_protocol_solidity_verifier_8_16() -> Result<(), Box<dyn Error>>
     {

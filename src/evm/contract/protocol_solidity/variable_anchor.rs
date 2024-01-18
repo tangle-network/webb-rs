@@ -7,7 +7,7 @@ pub use v_anchor_contract::*;
     clippy::upper_case_acronyms,
     clippy::type_complexity,
     dead_code,
-    non_camel_case_types,
+    non_camel_case_types
 )]
 pub mod v_anchor_contract {
     #[allow(deprecated)]
@@ -2182,9 +2182,9 @@ pub mod v_anchor_contract {
         }
     }
     ///The parsed JSON ABI of the contract.
-    pub static VANCHORCONTRACT_ABI: ::ethers::contract::Lazy<::ethers::core::abi::Abi> = ::ethers::contract::Lazy::new(
-        __abi,
-    );
+    pub static VANCHORCONTRACT_ABI: ::ethers::contract::Lazy<
+        ::ethers::core::abi::Abi,
+    > = ::ethers::contract::Lazy::new(__abi);
     pub struct VAnchorContract<M>(::ethers::contract::Contract<M>);
     impl<M> ::core::clone::Clone for VAnchorContract<M> {
         fn clone(&self) -> Self {
@@ -2203,7 +2203,10 @@ pub mod v_anchor_contract {
         }
     }
     impl<M> ::core::fmt::Debug for VAnchorContract<M> {
-        fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
+        fn fmt(
+            &self,
+            f: &mut ::core::fmt::Formatter<'_>,
+        ) -> ::core::fmt::Result {
             f.debug_tuple(::core::stringify!(VAnchorContract))
                 .field(&self.address())
                 .finish()
@@ -2216,13 +2219,11 @@ pub mod v_anchor_contract {
             address: T,
             client: ::std::sync::Arc<M>,
         ) -> Self {
-            Self(
-                ::ethers::contract::Contract::new(
-                    address.into(),
-                    VANCHORCONTRACT_ABI.clone(),
-                    client,
-                ),
-            )
+            Self(::ethers::contract::Contract::new(
+                address.into(),
+                VANCHORCONTRACT_ABI.clone(),
+                client,
+            ))
         }
         ///Calls the contract's `EVM_CHAIN_ID_TYPE` (0x8b7e8782) function
         pub fn evm_chain_id_type(
@@ -2235,7 +2236,10 @@ pub mod v_anchor_contract {
         ///Calls the contract's `FIELD_SIZE` (0x414a37ba) function
         pub fn field_size(
             &self,
-        ) -> ::ethers::contract::builders::ContractCall<M, ::ethers::core::types::U256> {
+        ) -> ::ethers::contract::builders::ContractCall<
+            M,
+            ::ethers::core::types::U256,
+        > {
             self.0
                 .method_hash([65, 74, 55, 186], ())
                 .expect("method not found (this should never happen)")
@@ -2243,7 +2247,10 @@ pub mod v_anchor_contract {
         ///Calls the contract's `MAX_EXT_AMOUNT` (0x7fe24ffe) function
         pub fn max_ext_amount(
             &self,
-        ) -> ::ethers::contract::builders::ContractCall<M, ::ethers::core::types::I256> {
+        ) -> ::ethers::contract::builders::ContractCall<
+            M,
+            ::ethers::core::types::I256,
+        > {
             self.0
                 .method_hash([127, 226, 79, 254], ())
                 .expect("method not found (this should never happen)")
@@ -2251,7 +2258,10 @@ pub mod v_anchor_contract {
         ///Calls the contract's `MAX_FEE` (0xbc063e1a) function
         pub fn max_fee(
             &self,
-        ) -> ::ethers::contract::builders::ContractCall<M, ::ethers::core::types::U256> {
+        ) -> ::ethers::contract::builders::ContractCall<
+            M,
+            ::ethers::core::types::U256,
+        > {
             self.0
                 .method_hash([188, 6, 62, 26], ())
                 .expect("method not found (this should never happen)")
@@ -2267,7 +2277,10 @@ pub mod v_anchor_contract {
         ///Calls the contract's `ZERO_VALUE` (0xec732959) function
         pub fn zero_value(
             &self,
-        ) -> ::ethers::contract::builders::ContractCall<M, ::ethers::core::types::U256> {
+        ) -> ::ethers::contract::builders::ContractCall<
+            M,
+            ::ethers::core::types::U256,
+        > {
             self.0
                 .method_hash([236, 115, 41, 89], ())
                 .expect("method not found (this should never happen)")
@@ -2278,7 +2291,10 @@ pub mod v_anchor_contract {
             from_token_address: ::ethers::core::types::Address,
             to_token_address: ::ethers::core::types::Address,
             ext_amount: ::ethers::core::types::U256,
-        ) -> ::ethers::contract::builders::ContractCall<M, ::ethers::core::types::U256> {
+        ) -> ::ethers::contract::builders::ContractCall<
+            M,
+            ::ethers::core::types::U256,
+        > {
             self.0
                 .method_hash(
                     [99, 56, 188, 188],
@@ -2294,7 +2310,10 @@ pub mod v_anchor_contract {
             encryptions: Encryptions,
         ) -> ::ethers::contract::builders::ContractCall<M, [u8; 32]> {
             self.0
-                .method_hash([211, 132, 83, 77], (p0, external_data, encryptions))
+                .method_hash(
+                    [211, 132, 83, 77],
+                    (p0, external_data, encryptions),
+                )
                 .expect("method not found (this should never happen)")
         }
         ///Calls the contract's `_withdrawAndUnwrap` (0x509cd41e) function
@@ -2308,7 +2327,12 @@ pub mod v_anchor_contract {
             self.0
                 .method_hash(
                     [80, 156, 212, 30],
-                    (from_token_address, to_token_address, recipient, minus_ext_amount),
+                    (
+                        from_token_address,
+                        to_token_address,
+                        recipient,
+                        minus_ext_amount,
+                    ),
                 )
                 .expect("method not found (this should never happen)")
         }
@@ -2317,7 +2341,10 @@ pub mod v_anchor_contract {
             &self,
             ext_amount: ::ethers::core::types::I256,
             fee: ::ethers::core::types::U256,
-        ) -> ::ethers::contract::builders::ContractCall<M, ::ethers::core::types::U256> {
+        ) -> ::ethers::contract::builders::ContractCall<
+            M,
+            ::ethers::core::types::U256,
+        > {
             self.0
                 .method_hash([37, 112, 183, 180], (ext_amount, fee))
                 .expect("method not found (this should never happen)")
@@ -2338,7 +2365,10 @@ pub mod v_anchor_contract {
             nonce: u32,
         ) -> ::ethers::contract::builders::ContractCall<M, ()> {
             self.0
-                .method_hash([140, 131, 43, 19], (maximum_deposit_amount, nonce))
+                .method_hash(
+                    [140, 131, 43, 19],
+                    (maximum_deposit_amount, nonce),
+                )
                 .expect("method not found (this should never happen)")
         }
         ///Calls the contract's `configureMinimalWithdrawalLimit` (0x1f7f99f7) function
@@ -2348,7 +2378,10 @@ pub mod v_anchor_contract {
             nonce: u32,
         ) -> ::ethers::contract::builders::ContractCall<M, ()> {
             self.0
-                .method_hash([31, 127, 153, 247], (minimal_withdrawal_amount, nonce))
+                .method_hash(
+                    [31, 127, 153, 247],
+                    (minimal_withdrawal_amount, nonce),
+                )
                 .expect("method not found (this should never happen)")
         }
         ///Calls the contract's `currentNeighborRootIndex` (0x5d2d766c) function
@@ -2373,7 +2406,10 @@ pub mod v_anchor_contract {
         pub fn edge_index(
             &self,
             p0: ::ethers::core::types::U256,
-        ) -> ::ethers::contract::builders::ContractCall<M, ::ethers::core::types::U256> {
+        ) -> ::ethers::contract::builders::ContractCall<
+            M,
+            ::ethers::core::types::U256,
+        > {
             self.0
                 .method_hash([231, 14, 168, 124], p0)
                 .expect("method not found (this should never happen)")
@@ -2399,7 +2435,10 @@ pub mod v_anchor_contract {
         pub fn filled_subtrees(
             &self,
             p0: ::ethers::core::types::U256,
-        ) -> ::ethers::contract::builders::ContractCall<M, ::ethers::core::types::U256> {
+        ) -> ::ethers::contract::builders::ContractCall<
+            M,
+            ::ethers::core::types::U256,
+        > {
             self.0
                 .method_hash([241, 120, 228, 124], p0)
                 .expect("method not found (this should never happen)")
@@ -2407,7 +2446,10 @@ pub mod v_anchor_contract {
         ///Calls the contract's `getChainId` (0x3408e470) function
         pub fn get_chain_id(
             &self,
-        ) -> ::ethers::contract::builders::ContractCall<M, ::ethers::core::types::U256> {
+        ) -> ::ethers::contract::builders::ContractCall<
+            M,
+            ::ethers::core::types::U256,
+        > {
             self.0
                 .method_hash([52, 8, 228, 112], ())
                 .expect("method not found (this should never happen)")
@@ -2434,7 +2476,10 @@ pub mod v_anchor_contract {
         ///Calls the contract's `getLastRoot` (0xba70f757) function
         pub fn get_last_root(
             &self,
-        ) -> ::ethers::contract::builders::ContractCall<M, ::ethers::core::types::U256> {
+        ) -> ::ethers::contract::builders::ContractCall<
+            M,
+            ::ethers::core::types::U256,
+        > {
             self.0
                 .method_hash([186, 112, 247, 87], ())
                 .expect("method not found (this should never happen)")
@@ -2442,7 +2487,8 @@ pub mod v_anchor_contract {
         ///Calls the contract's `getLatestNeighborEdges` (0x8c0d34d8) function
         pub fn get_latest_neighbor_edges(
             &self,
-        ) -> ::ethers::contract::builders::ContractCall<M, ::std::vec::Vec<Edge>> {
+        ) -> ::ethers::contract::builders::ContractCall<M, ::std::vec::Vec<Edge>>
+        {
             self.0
                 .method_hash([140, 13, 52, 216], ())
                 .expect("method not found (this should never happen)")
@@ -2459,7 +2505,9 @@ pub mod v_anchor_contract {
                 .expect("method not found (this should never happen)")
         }
         ///Calls the contract's `getLevels` (0x0c394a60) function
-        pub fn get_levels(&self) -> ::ethers::contract::builders::ContractCall<M, u32> {
+        pub fn get_levels(
+            &self,
+        ) -> ::ethers::contract::builders::ContractCall<M, u32> {
             self.0
                 .method_hash([12, 57, 74, 96], ())
                 .expect("method not found (this should never happen)")
@@ -2475,7 +2523,10 @@ pub mod v_anchor_contract {
         ///Calls the contract's `getProposalNonce` (0x0b27fb9a) function
         pub fn get_proposal_nonce(
             &self,
-        ) -> ::ethers::contract::builders::ContractCall<M, ::ethers::core::types::U256> {
+        ) -> ::ethers::contract::builders::ContractCall<
+            M,
+            ::ethers::core::types::U256,
+        > {
             self.0
                 .method_hash([11, 39, 251, 154], ())
                 .expect("method not found (this should never happen)")
@@ -2484,7 +2535,10 @@ pub mod v_anchor_contract {
         pub fn get_zero_hash(
             &self,
             index: u32,
-        ) -> ::ethers::contract::builders::ContractCall<M, ::ethers::core::types::U256> {
+        ) -> ::ethers::contract::builders::ContractCall<
+            M,
+            ::ethers::core::types::U256,
+        > {
             self.0
                 .method_hash([48, 94, 158, 172], index)
                 .expect("method not found (this should never happen)")
@@ -2514,7 +2568,10 @@ pub mod v_anchor_contract {
             &self,
             left: ::ethers::core::types::U256,
             right: ::ethers::core::types::U256,
-        ) -> ::ethers::contract::builders::ContractCall<M, ::ethers::core::types::U256> {
+        ) -> ::ethers::contract::builders::ContractCall<
+            M,
+            ::ethers::core::types::U256,
+        > {
             self.0
                 .method_hash([91, 185, 57, 149], (left, right))
                 .expect("method not found (this should never happen)")
@@ -2590,7 +2647,8 @@ pub mod v_anchor_contract {
         pub fn is_spent_array(
             &self,
             nullifier_hashes: ::std::vec::Vec<::ethers::core::types::U256>,
-        ) -> ::ethers::contract::builders::ContractCall<M, ::std::vec::Vec<bool>> {
+        ) -> ::ethers::contract::builders::ContractCall<M, ::std::vec::Vec<bool>>
+        {
             self.0
                 .method_hash([234, 101, 186, 73], nullifier_hashes)
                 .expect("method not found (this should never happen)")
@@ -2607,13 +2665,18 @@ pub mod v_anchor_contract {
         ///Calls the contract's `lastBalance` (0x8f1c56bd) function
         pub fn last_balance(
             &self,
-        ) -> ::ethers::contract::builders::ContractCall<M, ::ethers::core::types::U256> {
+        ) -> ::ethers::contract::builders::ContractCall<
+            M,
+            ::ethers::core::types::U256,
+        > {
             self.0
                 .method_hash([143, 28, 86, 189], ())
                 .expect("method not found (this should never happen)")
         }
         ///Calls the contract's `maxEdges` (0x71523c32) function
-        pub fn max_edges(&self) -> ::ethers::contract::builders::ContractCall<M, u8> {
+        pub fn max_edges(
+            &self,
+        ) -> ::ethers::contract::builders::ContractCall<M, u8> {
             self.0
                 .method_hash([113, 82, 60, 50], ())
                 .expect("method not found (this should never happen)")
@@ -2621,7 +2684,10 @@ pub mod v_anchor_contract {
         ///Calls the contract's `maximumDepositAmount` (0x78abb49b) function
         pub fn maximum_deposit_amount(
             &self,
-        ) -> ::ethers::contract::builders::ContractCall<M, ::ethers::core::types::U256> {
+        ) -> ::ethers::contract::builders::ContractCall<
+            M,
+            ::ethers::core::types::U256,
+        > {
             self.0
                 .method_hash([120, 171, 180, 155], ())
                 .expect("method not found (this should never happen)")
@@ -2629,7 +2695,10 @@ pub mod v_anchor_contract {
         ///Calls the contract's `minimalWithdrawalAmount` (0x840b2791) function
         pub fn minimal_withdrawal_amount(
             &self,
-        ) -> ::ethers::contract::builders::ContractCall<M, ::ethers::core::types::U256> {
+        ) -> ::ethers::contract::builders::ContractCall<
+            M,
+            ::ethers::core::types::U256,
+        > {
             self.0
                 .method_hash([132, 11, 39, 145], ())
                 .expect("method not found (this should never happen)")
@@ -2639,7 +2708,10 @@ pub mod v_anchor_contract {
             &self,
             p0: ::ethers::core::types::U256,
             p1: u32,
-        ) -> ::ethers::contract::builders::ContractCall<M, ::ethers::core::types::U256> {
+        ) -> ::ethers::contract::builders::ContractCall<
+            M,
+            ::ethers::core::types::U256,
+        > {
             self.0
                 .method_hash([67, 231, 17, 159], (p0, p1))
                 .expect("method not found (this should never happen)")
@@ -2673,7 +2745,10 @@ pub mod v_anchor_contract {
         ///Calls the contract's `proposalNonce` (0xcc3c74a1) function
         pub fn proposal_nonce(
             &self,
-        ) -> ::ethers::contract::builders::ContractCall<M, ::ethers::core::types::U256> {
+        ) -> ::ethers::contract::builders::ContractCall<
+            M,
+            ::ethers::core::types::U256,
+        > {
             self.0
                 .method_hash([204, 60, 116, 161], ())
                 .expect("method not found (this should never happen)")
@@ -2766,7 +2841,13 @@ pub mod v_anchor_contract {
             self.0
                 .method_hash(
                     [163, 143, 118, 232],
-                    (proof, aux_public_inputs, external_data, public_inputs, encryptions),
+                    (
+                        proof,
+                        aux_public_inputs,
+                        external_data,
+                        public_inputs,
+                        encryptions,
+                    ),
                 )
                 .expect("method not found (this should never happen)")
         }
@@ -2794,7 +2875,10 @@ pub mod v_anchor_contract {
             src_resource_id: [u8; 32],
         ) -> ::ethers::contract::builders::ContractCall<M, ()> {
             self.0
-                .method_hash([193, 146, 47, 158], (root, leaf_index, src_resource_id))
+                .method_hash(
+                    [193, 146, 47, 158],
+                    (root, leaf_index, src_resource_id),
+                )
                 .expect("method not found (this should never happen)")
         }
         ///Calls the contract's `verifier` (0x2b7ac3f3) function
@@ -2916,11 +3000,13 @@ pub mod v_anchor_contract {
             M,
             VAnchorContractEvents,
         > {
-            self.0.event_with_filter(::core::default::Default::default())
+            self.0
+                .event_with_filter(::core::default::Default::default())
         }
     }
-    impl<M: ::ethers::providers::Middleware> From<::ethers::contract::Contract<M>>
-    for VAnchorContract<M> {
+    impl<M: ::ethers::providers::Middleware>
+        From<::ethers::contract::Contract<M>> for VAnchorContract<M>
+    {
         fn from(contract: ::ethers::contract::Contract<M>) -> Self {
             Self::new(contract.address(), contract.client())
         }
@@ -2935,9 +3021,12 @@ pub mod v_anchor_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
-    #[ethevent(name = "EdgeAddition", abi = "EdgeAddition(uint256,uint256,uint256)")]
+    #[ethevent(
+        name = "EdgeAddition",
+        abi = "EdgeAddition(uint256,uint256,uint256)"
+    )]
     pub struct EdgeAdditionFilter {
         pub chain_id: ::ethers::core::types::U256,
         pub latest_leaf_index: ::ethers::core::types::U256,
@@ -2953,9 +3042,12 @@ pub mod v_anchor_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
-    #[ethevent(name = "EdgeUpdate", abi = "EdgeUpdate(uint256,uint256,uint256)")]
+    #[ethevent(
+        name = "EdgeUpdate",
+        abi = "EdgeUpdate(uint256,uint256,uint256)"
+    )]
     pub struct EdgeUpdateFilter {
         pub chain_id: ::ethers::core::types::U256,
         pub latest_leaf_index: ::ethers::core::types::U256,
@@ -2971,9 +3063,12 @@ pub mod v_anchor_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
-    #[ethevent(name = "Insertion", abi = "Insertion(uint256,uint32,uint256,uint256)")]
+    #[ethevent(
+        name = "Insertion",
+        abi = "Insertion(uint256,uint32,uint256,uint256)"
+    )]
     pub struct InsertionFilter {
         #[ethevent(indexed)]
         pub commitment: ::ethers::core::types::U256,
@@ -2992,7 +3087,7 @@ pub mod v_anchor_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
     #[ethevent(
         name = "MaxDepositLimitUpdated",
@@ -3012,7 +3107,7 @@ pub mod v_anchor_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
     #[ethevent(
         name = "MinWithdrawalLimitUpdated",
@@ -3032,7 +3127,7 @@ pub mod v_anchor_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
     #[ethevent(
         name = "NewCommitment",
@@ -3054,7 +3149,7 @@ pub mod v_anchor_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
     #[ethevent(name = "NewNullifier", abi = "NewNullifier(uint256)")]
     pub struct NewNullifierFilter {
@@ -3070,7 +3165,7 @@ pub mod v_anchor_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
     #[ethevent(name = "PublicKey", abi = "PublicKey(address,bytes)")]
     pub struct PublicKeyFilter {
@@ -3088,7 +3183,7 @@ pub mod v_anchor_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
     #[ethevent(name = "SetHandler", abi = "SetHandler(address,uint32)")]
     pub struct SetHandlerFilter {
@@ -3105,7 +3200,7 @@ pub mod v_anchor_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
     #[ethevent(name = "SetVerifier", abi = "SetVerifier(address,uint32)")]
     pub struct SetVerifierFilter {
@@ -3121,7 +3216,7 @@ pub mod v_anchor_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
     pub enum VAnchorContractEvents {
         EdgeAdditionFilter(EdgeAdditionFilter),
@@ -3149,11 +3244,19 @@ pub mod v_anchor_contract {
                 return Ok(VAnchorContractEvents::InsertionFilter(decoded));
             }
             if let Ok(decoded) = MaxDepositLimitUpdatedFilter::decode_log(log) {
-                return Ok(VAnchorContractEvents::MaxDepositLimitUpdatedFilter(decoded));
-            }
-            if let Ok(decoded) = MinWithdrawalLimitUpdatedFilter::decode_log(log) {
                 return Ok(
-                    VAnchorContractEvents::MinWithdrawalLimitUpdatedFilter(decoded),
+                    VAnchorContractEvents::MaxDepositLimitUpdatedFilter(
+                        decoded,
+                    ),
+                );
+            }
+            if let Ok(decoded) =
+                MinWithdrawalLimitUpdatedFilter::decode_log(log)
+            {
+                return Ok(
+                    VAnchorContractEvents::MinWithdrawalLimitUpdatedFilter(
+                        decoded,
+                    ),
                 );
             }
             if let Ok(decoded) = NewCommitmentFilter::decode_log(log) {
@@ -3175,13 +3278,20 @@ pub mod v_anchor_contract {
         }
     }
     impl ::core::fmt::Display for VAnchorContractEvents {
-        fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
+        fn fmt(
+            &self,
+            f: &mut ::core::fmt::Formatter<'_>,
+        ) -> ::core::fmt::Result {
             match self {
                 Self::EdgeAdditionFilter(element) => {
                     ::core::fmt::Display::fmt(element, f)
                 }
-                Self::EdgeUpdateFilter(element) => ::core::fmt::Display::fmt(element, f),
-                Self::InsertionFilter(element) => ::core::fmt::Display::fmt(element, f),
+                Self::EdgeUpdateFilter(element) => {
+                    ::core::fmt::Display::fmt(element, f)
+                }
+                Self::InsertionFilter(element) => {
+                    ::core::fmt::Display::fmt(element, f)
+                }
                 Self::MaxDepositLimitUpdatedFilter(element) => {
                     ::core::fmt::Display::fmt(element, f)
                 }
@@ -3194,9 +3304,15 @@ pub mod v_anchor_contract {
                 Self::NewNullifierFilter(element) => {
                     ::core::fmt::Display::fmt(element, f)
                 }
-                Self::PublicKeyFilter(element) => ::core::fmt::Display::fmt(element, f),
-                Self::SetHandlerFilter(element) => ::core::fmt::Display::fmt(element, f),
-                Self::SetVerifierFilter(element) => ::core::fmt::Display::fmt(element, f),
+                Self::PublicKeyFilter(element) => {
+                    ::core::fmt::Display::fmt(element, f)
+                }
+                Self::SetHandlerFilter(element) => {
+                    ::core::fmt::Display::fmt(element, f)
+                }
+                Self::SetVerifierFilter(element) => {
+                    ::core::fmt::Display::fmt(element, f)
+                }
             }
         }
     }
@@ -3215,13 +3331,16 @@ pub mod v_anchor_contract {
             Self::InsertionFilter(value)
         }
     }
-    impl ::core::convert::From<MaxDepositLimitUpdatedFilter> for VAnchorContractEvents {
+    impl ::core::convert::From<MaxDepositLimitUpdatedFilter>
+        for VAnchorContractEvents
+    {
         fn from(value: MaxDepositLimitUpdatedFilter) -> Self {
             Self::MaxDepositLimitUpdatedFilter(value)
         }
     }
     impl ::core::convert::From<MinWithdrawalLimitUpdatedFilter>
-    for VAnchorContractEvents {
+        for VAnchorContractEvents
+    {
         fn from(value: MinWithdrawalLimitUpdatedFilter) -> Self {
             Self::MinWithdrawalLimitUpdatedFilter(value)
         }
@@ -3262,7 +3381,7 @@ pub mod v_anchor_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
     #[ethcall(name = "EVM_CHAIN_ID_TYPE", abi = "EVM_CHAIN_ID_TYPE()")]
     pub struct EvmChainIdTypeCall;
@@ -3277,7 +3396,7 @@ pub mod v_anchor_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
     #[ethcall(name = "FIELD_SIZE", abi = "FIELD_SIZE()")]
     pub struct FieldSizeCall;
@@ -3292,7 +3411,7 @@ pub mod v_anchor_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
     #[ethcall(name = "MAX_EXT_AMOUNT", abi = "MAX_EXT_AMOUNT()")]
     pub struct MaxExtAmountCall;
@@ -3307,7 +3426,7 @@ pub mod v_anchor_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
     #[ethcall(name = "MAX_FEE", abi = "MAX_FEE()")]
     pub struct MaxFeeCall;
@@ -3322,7 +3441,7 @@ pub mod v_anchor_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
     #[ethcall(name = "ROOT_HISTORY_SIZE", abi = "ROOT_HISTORY_SIZE()")]
     pub struct RootHistorySizeCall;
@@ -3337,7 +3456,7 @@ pub mod v_anchor_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
     #[ethcall(name = "ZERO_VALUE", abi = "ZERO_VALUE()")]
     pub struct ZeroValueCall;
@@ -3352,7 +3471,7 @@ pub mod v_anchor_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
     #[ethcall(
         name = "_executeWrapping",
@@ -3374,7 +3493,7 @@ pub mod v_anchor_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
     #[ethcall(
         name = "_genExtDataHash",
@@ -3396,7 +3515,7 @@ pub mod v_anchor_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
     #[ethcall(
         name = "_withdrawAndUnwrap",
@@ -3419,7 +3538,7 @@ pub mod v_anchor_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
     #[ethcall(
         name = "calculatePublicAmount",
@@ -3440,7 +3559,7 @@ pub mod v_anchor_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
     #[ethcall(name = "commitments", abi = "commitments(uint256)")]
     pub struct CommitmentsCall(pub ::ethers::core::types::U256);
@@ -3455,7 +3574,7 @@ pub mod v_anchor_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
     #[ethcall(
         name = "configureMaximumDepositLimit",
@@ -3476,7 +3595,7 @@ pub mod v_anchor_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
     #[ethcall(
         name = "configureMinimalWithdrawalLimit",
@@ -3497,7 +3616,7 @@ pub mod v_anchor_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
     #[ethcall(
         name = "currentNeighborRootIndex",
@@ -3515,7 +3634,7 @@ pub mod v_anchor_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
     #[ethcall(name = "edgeExistsForChain", abi = "edgeExistsForChain(uint256)")]
     pub struct EdgeExistsForChainCall(pub ::ethers::core::types::U256);
@@ -3530,7 +3649,7 @@ pub mod v_anchor_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
     #[ethcall(name = "edgeIndex", abi = "edgeIndex(uint256)")]
     pub struct EdgeIndexCall(pub ::ethers::core::types::U256);
@@ -3545,7 +3664,7 @@ pub mod v_anchor_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
     #[ethcall(name = "edgeList", abi = "edgeList(uint256)")]
     pub struct EdgeListCall(pub ::ethers::core::types::U256);
@@ -3560,7 +3679,7 @@ pub mod v_anchor_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
     #[ethcall(name = "filledSubtrees", abi = "filledSubtrees(uint256)")]
     pub struct FilledSubtreesCall(pub ::ethers::core::types::U256);
@@ -3575,7 +3694,7 @@ pub mod v_anchor_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
     #[ethcall(name = "getChainId", abi = "getChainId()")]
     pub struct GetChainIdCall;
@@ -3590,7 +3709,7 @@ pub mod v_anchor_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
     #[ethcall(name = "getChainIdType", abi = "getChainIdType()")]
     pub struct GetChainIdTypeCall;
@@ -3605,7 +3724,7 @@ pub mod v_anchor_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
     #[ethcall(name = "getHasher", abi = "getHasher()")]
     pub struct GetHasherCall;
@@ -3620,7 +3739,7 @@ pub mod v_anchor_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
     #[ethcall(name = "getLastRoot", abi = "getLastRoot()")]
     pub struct GetLastRootCall;
@@ -3635,9 +3754,12 @@ pub mod v_anchor_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
-    #[ethcall(name = "getLatestNeighborEdges", abi = "getLatestNeighborEdges()")]
+    #[ethcall(
+        name = "getLatestNeighborEdges",
+        abi = "getLatestNeighborEdges()"
+    )]
     pub struct GetLatestNeighborEdgesCall;
     ///Container type for all input parameters for the `getLatestNeighborRoots` function with signature `getLatestNeighborRoots()` and selector `0x1e627617`
     #[derive(
@@ -3650,9 +3772,12 @@ pub mod v_anchor_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
-    #[ethcall(name = "getLatestNeighborRoots", abi = "getLatestNeighborRoots()")]
+    #[ethcall(
+        name = "getLatestNeighborRoots",
+        abi = "getLatestNeighborRoots()"
+    )]
     pub struct GetLatestNeighborRootsCall;
     ///Container type for all input parameters for the `getLevels` function with signature `getLevels()` and selector `0x0c394a60`
     #[derive(
@@ -3665,7 +3790,7 @@ pub mod v_anchor_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
     #[ethcall(name = "getLevels", abi = "getLevels()")]
     pub struct GetLevelsCall;
@@ -3680,7 +3805,7 @@ pub mod v_anchor_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
     #[ethcall(name = "getNextIndex", abi = "getNextIndex()")]
     pub struct GetNextIndexCall;
@@ -3695,7 +3820,7 @@ pub mod v_anchor_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
     #[ethcall(name = "getProposalNonce", abi = "getProposalNonce()")]
     pub struct GetProposalNonceCall;
@@ -3710,7 +3835,7 @@ pub mod v_anchor_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
     #[ethcall(name = "getZeroHash", abi = "getZeroHash(uint32)")]
     pub struct GetZeroHashCall {
@@ -3727,7 +3852,7 @@ pub mod v_anchor_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
     #[ethcall(name = "handler", abi = "handler()")]
     pub struct HandlerCall;
@@ -3742,7 +3867,7 @@ pub mod v_anchor_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
     #[ethcall(name = "hasEdge", abi = "hasEdge(uint256)")]
     pub struct HasEdgeCall {
@@ -3759,7 +3884,7 @@ pub mod v_anchor_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
     #[ethcall(name = "hashLeftRight", abi = "hashLeftRight(uint256,uint256)")]
     pub struct HashLeftRightCall {
@@ -3777,7 +3902,7 @@ pub mod v_anchor_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
     #[ethcall(name = "initialize", abi = "initialize(uint256,uint256)")]
     pub struct InitializeCall {
@@ -3795,7 +3920,7 @@ pub mod v_anchor_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
     #[ethcall(name = "initialized", abi = "initialized()")]
     pub struct InitializedCall;
@@ -3810,7 +3935,7 @@ pub mod v_anchor_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
     #[ethcall(
         name = "isCorrectExecutionChain",
@@ -3830,7 +3955,7 @@ pub mod v_anchor_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
     #[ethcall(
         name = "isCorrectExecutionContext",
@@ -3850,7 +3975,7 @@ pub mod v_anchor_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
     #[ethcall(
         name = "isKnownNeighborRoot",
@@ -3871,7 +3996,7 @@ pub mod v_anchor_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
     #[ethcall(name = "isKnownRoot", abi = "isKnownRoot(uint256)")]
     pub struct IsKnownRootCall {
@@ -3888,7 +4013,7 @@ pub mod v_anchor_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
     #[ethcall(name = "isSpent", abi = "isSpent(uint256)")]
     pub struct IsSpentCall {
@@ -3905,7 +4030,7 @@ pub mod v_anchor_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
     #[ethcall(name = "isSpentArray", abi = "isSpentArray(uint256[])")]
     pub struct IsSpentArrayCall {
@@ -3922,7 +4047,7 @@ pub mod v_anchor_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
     #[ethcall(name = "isValidRoots", abi = "isValidRoots(uint256[])")]
     pub struct IsValidRootsCall {
@@ -3939,7 +4064,7 @@ pub mod v_anchor_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
     #[ethcall(name = "lastBalance", abi = "lastBalance()")]
     pub struct LastBalanceCall;
@@ -3954,7 +4079,7 @@ pub mod v_anchor_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
     #[ethcall(name = "maxEdges", abi = "maxEdges()")]
     pub struct MaxEdgesCall;
@@ -3969,7 +4094,7 @@ pub mod v_anchor_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
     #[ethcall(name = "maximumDepositAmount", abi = "maximumDepositAmount()")]
     pub struct MaximumDepositAmountCall;
@@ -3984,9 +4109,12 @@ pub mod v_anchor_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
-    #[ethcall(name = "minimalWithdrawalAmount", abi = "minimalWithdrawalAmount()")]
+    #[ethcall(
+        name = "minimalWithdrawalAmount",
+        abi = "minimalWithdrawalAmount()"
+    )]
     pub struct MinimalWithdrawalAmountCall;
     ///Container type for all input parameters for the `neighborRoots` function with signature `neighborRoots(uint256,uint32)` and selector `0x43e7119f`
     #[derive(
@@ -3999,7 +4127,7 @@ pub mod v_anchor_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
     #[ethcall(name = "neighborRoots", abi = "neighborRoots(uint256,uint32)")]
     pub struct NeighborRootsCall(pub ::ethers::core::types::U256, pub u32);
@@ -4014,7 +4142,7 @@ pub mod v_anchor_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
     #[ethcall(name = "nullifierHashes", abi = "nullifierHashes(uint256)")]
     pub struct NullifierHashesCall(pub ::ethers::core::types::U256);
@@ -4029,7 +4157,7 @@ pub mod v_anchor_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
     #[ethcall(name = "outerLevels", abi = "outerLevels()")]
     pub struct OuterLevelsCall;
@@ -4044,7 +4172,7 @@ pub mod v_anchor_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
     #[ethcall(
         name = "parseChainIdFromResourceId",
@@ -4064,7 +4192,7 @@ pub mod v_anchor_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
     #[ethcall(name = "proposalNonce", abi = "proposalNonce()")]
     pub struct ProposalNonceCall;
@@ -4079,7 +4207,7 @@ pub mod v_anchor_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
     #[ethcall(name = "register", abi = "register((address,bytes))")]
     pub struct RegisterCall {
@@ -4096,7 +4224,7 @@ pub mod v_anchor_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
     #[ethcall(
         name = "registerAndTransact",
@@ -4121,7 +4249,7 @@ pub mod v_anchor_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
     #[ethcall(name = "roots", abi = "roots(uint256)")]
     pub struct RootsCall(pub ::ethers::core::types::U256);
@@ -4136,7 +4264,7 @@ pub mod v_anchor_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
     #[ethcall(name = "setHandler", abi = "setHandler(address,uint32)")]
     pub struct SetHandlerCall {
@@ -4154,7 +4282,7 @@ pub mod v_anchor_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
     #[ethcall(name = "setVerifier", abi = "setVerifier(address,uint32)")]
     pub struct SetVerifierCall {
@@ -4172,7 +4300,7 @@ pub mod v_anchor_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
     #[ethcall(name = "token", abi = "token()")]
     pub struct TokenCall;
@@ -4187,7 +4315,7 @@ pub mod v_anchor_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
     #[ethcall(
         name = "transact",
@@ -4211,7 +4339,7 @@ pub mod v_anchor_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
     #[ethcall(name = "unpackProof", abi = "unpackProof(uint256[8])")]
     pub struct UnpackProofCall {
@@ -4228,7 +4356,7 @@ pub mod v_anchor_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
     #[ethcall(name = "updateEdge", abi = "updateEdge(uint256,uint32,bytes32)")]
     pub struct UpdateEdgeCall {
@@ -4247,7 +4375,7 @@ pub mod v_anchor_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
     #[ethcall(name = "verifier", abi = "verifier()")]
     pub struct VerifierCall;
@@ -4260,7 +4388,7 @@ pub mod v_anchor_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
     pub enum VAnchorContractCalls {
         EvmChainIdType(EvmChainIdTypeCall),
@@ -4326,46 +4454,57 @@ pub mod v_anchor_contract {
     impl ::ethers::core::abi::AbiDecode for VAnchorContractCalls {
         fn decode(
             data: impl AsRef<[u8]>,
-        ) -> ::core::result::Result<Self, ::ethers::core::abi::AbiError> {
+        ) -> ::core::result::Result<Self, ::ethers::core::abi::AbiError>
+        {
             let data = data.as_ref();
-            if let Ok(decoded) = <EvmChainIdTypeCall as ::ethers::core::abi::AbiDecode>::decode(
-                data,
-            ) {
+            if let Ok(decoded) =
+                <EvmChainIdTypeCall as ::ethers::core::abi::AbiDecode>::decode(
+                    data,
+                )
+            {
                 return Ok(Self::EvmChainIdType(decoded));
             }
-            if let Ok(decoded) = <FieldSizeCall as ::ethers::core::abi::AbiDecode>::decode(
-                data,
-            ) {
+            if let Ok(decoded) =
+                <FieldSizeCall as ::ethers::core::abi::AbiDecode>::decode(data)
+            {
                 return Ok(Self::FieldSize(decoded));
             }
-            if let Ok(decoded) = <MaxExtAmountCall as ::ethers::core::abi::AbiDecode>::decode(
-                data,
-            ) {
+            if let Ok(decoded) =
+                <MaxExtAmountCall as ::ethers::core::abi::AbiDecode>::decode(
+                    data,
+                )
+            {
                 return Ok(Self::MaxExtAmount(decoded));
             }
-            if let Ok(decoded) = <MaxFeeCall as ::ethers::core::abi::AbiDecode>::decode(
-                data,
-            ) {
+            if let Ok(decoded) =
+                <MaxFeeCall as ::ethers::core::abi::AbiDecode>::decode(data)
+            {
                 return Ok(Self::MaxFee(decoded));
             }
-            if let Ok(decoded) = <RootHistorySizeCall as ::ethers::core::abi::AbiDecode>::decode(
-                data,
-            ) {
+            if let Ok(decoded) =
+                <RootHistorySizeCall as ::ethers::core::abi::AbiDecode>::decode(
+                    data,
+                )
+            {
                 return Ok(Self::RootHistorySize(decoded));
             }
-            if let Ok(decoded) = <ZeroValueCall as ::ethers::core::abi::AbiDecode>::decode(
-                data,
-            ) {
+            if let Ok(decoded) =
+                <ZeroValueCall as ::ethers::core::abi::AbiDecode>::decode(data)
+            {
                 return Ok(Self::ZeroValue(decoded));
             }
-            if let Ok(decoded) = <ExecuteWrappingCall as ::ethers::core::abi::AbiDecode>::decode(
-                data,
-            ) {
+            if let Ok(decoded) =
+                <ExecuteWrappingCall as ::ethers::core::abi::AbiDecode>::decode(
+                    data,
+                )
+            {
                 return Ok(Self::ExecuteWrapping(decoded));
             }
-            if let Ok(decoded) = <GenExtDataHashCall as ::ethers::core::abi::AbiDecode>::decode(
-                data,
-            ) {
+            if let Ok(decoded) =
+                <GenExtDataHashCall as ::ethers::core::abi::AbiDecode>::decode(
+                    data,
+                )
+            {
                 return Ok(Self::GenExtDataHash(decoded));
             }
             if let Ok(decoded) = <WithdrawAndUnwrapCall as ::ethers::core::abi::AbiDecode>::decode(
@@ -4378,9 +4517,11 @@ pub mod v_anchor_contract {
             ) {
                 return Ok(Self::CalculatePublicAmount(decoded));
             }
-            if let Ok(decoded) = <CommitmentsCall as ::ethers::core::abi::AbiDecode>::decode(
-                data,
-            ) {
+            if let Ok(decoded) =
+                <CommitmentsCall as ::ethers::core::abi::AbiDecode>::decode(
+                    data,
+                )
+            {
                 return Ok(Self::Commitments(decoded));
             }
             if let Ok(decoded) = <ConfigureMaximumDepositLimitCall as ::ethers::core::abi::AbiDecode>::decode(
@@ -4403,39 +4544,45 @@ pub mod v_anchor_contract {
             ) {
                 return Ok(Self::EdgeExistsForChain(decoded));
             }
-            if let Ok(decoded) = <EdgeIndexCall as ::ethers::core::abi::AbiDecode>::decode(
-                data,
-            ) {
+            if let Ok(decoded) =
+                <EdgeIndexCall as ::ethers::core::abi::AbiDecode>::decode(data)
+            {
                 return Ok(Self::EdgeIndex(decoded));
             }
-            if let Ok(decoded) = <EdgeListCall as ::ethers::core::abi::AbiDecode>::decode(
-                data,
-            ) {
+            if let Ok(decoded) =
+                <EdgeListCall as ::ethers::core::abi::AbiDecode>::decode(data)
+            {
                 return Ok(Self::EdgeList(decoded));
             }
-            if let Ok(decoded) = <FilledSubtreesCall as ::ethers::core::abi::AbiDecode>::decode(
-                data,
-            ) {
+            if let Ok(decoded) =
+                <FilledSubtreesCall as ::ethers::core::abi::AbiDecode>::decode(
+                    data,
+                )
+            {
                 return Ok(Self::FilledSubtrees(decoded));
             }
-            if let Ok(decoded) = <GetChainIdCall as ::ethers::core::abi::AbiDecode>::decode(
-                data,
-            ) {
+            if let Ok(decoded) =
+                <GetChainIdCall as ::ethers::core::abi::AbiDecode>::decode(data)
+            {
                 return Ok(Self::GetChainId(decoded));
             }
-            if let Ok(decoded) = <GetChainIdTypeCall as ::ethers::core::abi::AbiDecode>::decode(
-                data,
-            ) {
+            if let Ok(decoded) =
+                <GetChainIdTypeCall as ::ethers::core::abi::AbiDecode>::decode(
+                    data,
+                )
+            {
                 return Ok(Self::GetChainIdType(decoded));
             }
-            if let Ok(decoded) = <GetHasherCall as ::ethers::core::abi::AbiDecode>::decode(
-                data,
-            ) {
+            if let Ok(decoded) =
+                <GetHasherCall as ::ethers::core::abi::AbiDecode>::decode(data)
+            {
                 return Ok(Self::GetHasher(decoded));
             }
-            if let Ok(decoded) = <GetLastRootCall as ::ethers::core::abi::AbiDecode>::decode(
-                data,
-            ) {
+            if let Ok(decoded) =
+                <GetLastRootCall as ::ethers::core::abi::AbiDecode>::decode(
+                    data,
+                )
+            {
                 return Ok(Self::GetLastRoot(decoded));
             }
             if let Ok(decoded) = <GetLatestNeighborEdgesCall as ::ethers::core::abi::AbiDecode>::decode(
@@ -4448,49 +4595,59 @@ pub mod v_anchor_contract {
             ) {
                 return Ok(Self::GetLatestNeighborRoots(decoded));
             }
-            if let Ok(decoded) = <GetLevelsCall as ::ethers::core::abi::AbiDecode>::decode(
-                data,
-            ) {
+            if let Ok(decoded) =
+                <GetLevelsCall as ::ethers::core::abi::AbiDecode>::decode(data)
+            {
                 return Ok(Self::GetLevels(decoded));
             }
-            if let Ok(decoded) = <GetNextIndexCall as ::ethers::core::abi::AbiDecode>::decode(
-                data,
-            ) {
+            if let Ok(decoded) =
+                <GetNextIndexCall as ::ethers::core::abi::AbiDecode>::decode(
+                    data,
+                )
+            {
                 return Ok(Self::GetNextIndex(decoded));
             }
-            if let Ok(decoded) = <GetProposalNonceCall as ::ethers::core::abi::AbiDecode>::decode(
-                data,
-            ) {
+            if let Ok(decoded) =
+                <GetProposalNonceCall as ::ethers::core::abi::AbiDecode>::decode(
+                    data,
+                )
+            {
                 return Ok(Self::GetProposalNonce(decoded));
             }
-            if let Ok(decoded) = <GetZeroHashCall as ::ethers::core::abi::AbiDecode>::decode(
-                data,
-            ) {
+            if let Ok(decoded) =
+                <GetZeroHashCall as ::ethers::core::abi::AbiDecode>::decode(
+                    data,
+                )
+            {
                 return Ok(Self::GetZeroHash(decoded));
             }
-            if let Ok(decoded) = <HandlerCall as ::ethers::core::abi::AbiDecode>::decode(
-                data,
-            ) {
+            if let Ok(decoded) =
+                <HandlerCall as ::ethers::core::abi::AbiDecode>::decode(data)
+            {
                 return Ok(Self::Handler(decoded));
             }
-            if let Ok(decoded) = <HasEdgeCall as ::ethers::core::abi::AbiDecode>::decode(
-                data,
-            ) {
+            if let Ok(decoded) =
+                <HasEdgeCall as ::ethers::core::abi::AbiDecode>::decode(data)
+            {
                 return Ok(Self::HasEdge(decoded));
             }
-            if let Ok(decoded) = <HashLeftRightCall as ::ethers::core::abi::AbiDecode>::decode(
-                data,
-            ) {
+            if let Ok(decoded) =
+                <HashLeftRightCall as ::ethers::core::abi::AbiDecode>::decode(
+                    data,
+                )
+            {
                 return Ok(Self::HashLeftRight(decoded));
             }
-            if let Ok(decoded) = <InitializeCall as ::ethers::core::abi::AbiDecode>::decode(
-                data,
-            ) {
+            if let Ok(decoded) =
+                <InitializeCall as ::ethers::core::abi::AbiDecode>::decode(data)
+            {
                 return Ok(Self::Initialize(decoded));
             }
-            if let Ok(decoded) = <InitializedCall as ::ethers::core::abi::AbiDecode>::decode(
-                data,
-            ) {
+            if let Ok(decoded) =
+                <InitializedCall as ::ethers::core::abi::AbiDecode>::decode(
+                    data,
+                )
+            {
                 return Ok(Self::Initialized(decoded));
             }
             if let Ok(decoded) = <IsCorrectExecutionChainCall as ::ethers::core::abi::AbiDecode>::decode(
@@ -4508,34 +4665,42 @@ pub mod v_anchor_contract {
             ) {
                 return Ok(Self::IsKnownNeighborRoot(decoded));
             }
-            if let Ok(decoded) = <IsKnownRootCall as ::ethers::core::abi::AbiDecode>::decode(
-                data,
-            ) {
+            if let Ok(decoded) =
+                <IsKnownRootCall as ::ethers::core::abi::AbiDecode>::decode(
+                    data,
+                )
+            {
                 return Ok(Self::IsKnownRoot(decoded));
             }
-            if let Ok(decoded) = <IsSpentCall as ::ethers::core::abi::AbiDecode>::decode(
-                data,
-            ) {
+            if let Ok(decoded) =
+                <IsSpentCall as ::ethers::core::abi::AbiDecode>::decode(data)
+            {
                 return Ok(Self::IsSpent(decoded));
             }
-            if let Ok(decoded) = <IsSpentArrayCall as ::ethers::core::abi::AbiDecode>::decode(
-                data,
-            ) {
+            if let Ok(decoded) =
+                <IsSpentArrayCall as ::ethers::core::abi::AbiDecode>::decode(
+                    data,
+                )
+            {
                 return Ok(Self::IsSpentArray(decoded));
             }
-            if let Ok(decoded) = <IsValidRootsCall as ::ethers::core::abi::AbiDecode>::decode(
-                data,
-            ) {
+            if let Ok(decoded) =
+                <IsValidRootsCall as ::ethers::core::abi::AbiDecode>::decode(
+                    data,
+                )
+            {
                 return Ok(Self::IsValidRoots(decoded));
             }
-            if let Ok(decoded) = <LastBalanceCall as ::ethers::core::abi::AbiDecode>::decode(
-                data,
-            ) {
+            if let Ok(decoded) =
+                <LastBalanceCall as ::ethers::core::abi::AbiDecode>::decode(
+                    data,
+                )
+            {
                 return Ok(Self::LastBalance(decoded));
             }
-            if let Ok(decoded) = <MaxEdgesCall as ::ethers::core::abi::AbiDecode>::decode(
-                data,
-            ) {
+            if let Ok(decoded) =
+                <MaxEdgesCall as ::ethers::core::abi::AbiDecode>::decode(data)
+            {
                 return Ok(Self::MaxEdges(decoded));
             }
             if let Ok(decoded) = <MaximumDepositAmountCall as ::ethers::core::abi::AbiDecode>::decode(
@@ -4548,19 +4713,25 @@ pub mod v_anchor_contract {
             ) {
                 return Ok(Self::MinimalWithdrawalAmount(decoded));
             }
-            if let Ok(decoded) = <NeighborRootsCall as ::ethers::core::abi::AbiDecode>::decode(
-                data,
-            ) {
+            if let Ok(decoded) =
+                <NeighborRootsCall as ::ethers::core::abi::AbiDecode>::decode(
+                    data,
+                )
+            {
                 return Ok(Self::NeighborRoots(decoded));
             }
-            if let Ok(decoded) = <NullifierHashesCall as ::ethers::core::abi::AbiDecode>::decode(
-                data,
-            ) {
+            if let Ok(decoded) =
+                <NullifierHashesCall as ::ethers::core::abi::AbiDecode>::decode(
+                    data,
+                )
+            {
                 return Ok(Self::NullifierHashes(decoded));
             }
-            if let Ok(decoded) = <OuterLevelsCall as ::ethers::core::abi::AbiDecode>::decode(
-                data,
-            ) {
+            if let Ok(decoded) =
+                <OuterLevelsCall as ::ethers::core::abi::AbiDecode>::decode(
+                    data,
+                )
+            {
                 return Ok(Self::OuterLevels(decoded));
             }
             if let Ok(decoded) = <ParseChainIdFromResourceIdCall as ::ethers::core::abi::AbiDecode>::decode(
@@ -4568,14 +4739,16 @@ pub mod v_anchor_contract {
             ) {
                 return Ok(Self::ParseChainIdFromResourceId(decoded));
             }
-            if let Ok(decoded) = <ProposalNonceCall as ::ethers::core::abi::AbiDecode>::decode(
-                data,
-            ) {
+            if let Ok(decoded) =
+                <ProposalNonceCall as ::ethers::core::abi::AbiDecode>::decode(
+                    data,
+                )
+            {
                 return Ok(Self::ProposalNonce(decoded));
             }
-            if let Ok(decoded) = <RegisterCall as ::ethers::core::abi::AbiDecode>::decode(
-                data,
-            ) {
+            if let Ok(decoded) =
+                <RegisterCall as ::ethers::core::abi::AbiDecode>::decode(data)
+            {
                 return Ok(Self::Register(decoded));
             }
             if let Ok(decoded) = <RegisterAndTransactCall as ::ethers::core::abi::AbiDecode>::decode(
@@ -4583,44 +4756,48 @@ pub mod v_anchor_contract {
             ) {
                 return Ok(Self::RegisterAndTransact(decoded));
             }
-            if let Ok(decoded) = <RootsCall as ::ethers::core::abi::AbiDecode>::decode(
-                data,
-            ) {
+            if let Ok(decoded) =
+                <RootsCall as ::ethers::core::abi::AbiDecode>::decode(data)
+            {
                 return Ok(Self::Roots(decoded));
             }
-            if let Ok(decoded) = <SetHandlerCall as ::ethers::core::abi::AbiDecode>::decode(
-                data,
-            ) {
+            if let Ok(decoded) =
+                <SetHandlerCall as ::ethers::core::abi::AbiDecode>::decode(data)
+            {
                 return Ok(Self::SetHandler(decoded));
             }
-            if let Ok(decoded) = <SetVerifierCall as ::ethers::core::abi::AbiDecode>::decode(
-                data,
-            ) {
+            if let Ok(decoded) =
+                <SetVerifierCall as ::ethers::core::abi::AbiDecode>::decode(
+                    data,
+                )
+            {
                 return Ok(Self::SetVerifier(decoded));
             }
-            if let Ok(decoded) = <TokenCall as ::ethers::core::abi::AbiDecode>::decode(
-                data,
-            ) {
+            if let Ok(decoded) =
+                <TokenCall as ::ethers::core::abi::AbiDecode>::decode(data)
+            {
                 return Ok(Self::Token(decoded));
             }
-            if let Ok(decoded) = <TransactCall as ::ethers::core::abi::AbiDecode>::decode(
-                data,
-            ) {
+            if let Ok(decoded) =
+                <TransactCall as ::ethers::core::abi::AbiDecode>::decode(data)
+            {
                 return Ok(Self::Transact(decoded));
             }
-            if let Ok(decoded) = <UnpackProofCall as ::ethers::core::abi::AbiDecode>::decode(
-                data,
-            ) {
+            if let Ok(decoded) =
+                <UnpackProofCall as ::ethers::core::abi::AbiDecode>::decode(
+                    data,
+                )
+            {
                 return Ok(Self::UnpackProof(decoded));
             }
-            if let Ok(decoded) = <UpdateEdgeCall as ::ethers::core::abi::AbiDecode>::decode(
-                data,
-            ) {
+            if let Ok(decoded) =
+                <UpdateEdgeCall as ::ethers::core::abi::AbiDecode>::decode(data)
+            {
                 return Ok(Self::UpdateEdge(decoded));
             }
-            if let Ok(decoded) = <VerifierCall as ::ethers::core::abi::AbiDecode>::decode(
-                data,
-            ) {
+            if let Ok(decoded) =
+                <VerifierCall as ::ethers::core::abi::AbiDecode>::decode(data)
+            {
                 return Ok(Self::Verifier(decoded));
             }
             Err(::ethers::core::abi::Error::InvalidData.into())
@@ -4638,7 +4815,9 @@ pub mod v_anchor_contract {
                 Self::MaxExtAmount(element) => {
                     ::ethers::core::abi::AbiEncode::encode(element)
                 }
-                Self::MaxFee(element) => ::ethers::core::abi::AbiEncode::encode(element),
+                Self::MaxFee(element) => {
+                    ::ethers::core::abi::AbiEncode::encode(element)
+                }
                 Self::RootHistorySize(element) => {
                     ::ethers::core::abi::AbiEncode::encode(element)
                 }
@@ -4711,8 +4890,12 @@ pub mod v_anchor_contract {
                 Self::GetZeroHash(element) => {
                     ::ethers::core::abi::AbiEncode::encode(element)
                 }
-                Self::Handler(element) => ::ethers::core::abi::AbiEncode::encode(element),
-                Self::HasEdge(element) => ::ethers::core::abi::AbiEncode::encode(element),
+                Self::Handler(element) => {
+                    ::ethers::core::abi::AbiEncode::encode(element)
+                }
+                Self::HasEdge(element) => {
+                    ::ethers::core::abi::AbiEncode::encode(element)
+                }
                 Self::HashLeftRight(element) => {
                     ::ethers::core::abi::AbiEncode::encode(element)
                 }
@@ -4734,7 +4917,9 @@ pub mod v_anchor_contract {
                 Self::IsKnownRoot(element) => {
                     ::ethers::core::abi::AbiEncode::encode(element)
                 }
-                Self::IsSpent(element) => ::ethers::core::abi::AbiEncode::encode(element),
+                Self::IsSpent(element) => {
+                    ::ethers::core::abi::AbiEncode::encode(element)
+                }
                 Self::IsSpentArray(element) => {
                     ::ethers::core::abi::AbiEncode::encode(element)
                 }
@@ -4774,14 +4959,18 @@ pub mod v_anchor_contract {
                 Self::RegisterAndTransact(element) => {
                     ::ethers::core::abi::AbiEncode::encode(element)
                 }
-                Self::Roots(element) => ::ethers::core::abi::AbiEncode::encode(element),
+                Self::Roots(element) => {
+                    ::ethers::core::abi::AbiEncode::encode(element)
+                }
                 Self::SetHandler(element) => {
                     ::ethers::core::abi::AbiEncode::encode(element)
                 }
                 Self::SetVerifier(element) => {
                     ::ethers::core::abi::AbiEncode::encode(element)
                 }
-                Self::Token(element) => ::ethers::core::abi::AbiEncode::encode(element),
+                Self::Token(element) => {
+                    ::ethers::core::abi::AbiEncode::encode(element)
+                }
                 Self::Transact(element) => {
                     ::ethers::core::abi::AbiEncode::encode(element)
                 }
@@ -4798,21 +4987,42 @@ pub mod v_anchor_contract {
         }
     }
     impl ::core::fmt::Display for VAnchorContractCalls {
-        fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
+        fn fmt(
+            &self,
+            f: &mut ::core::fmt::Formatter<'_>,
+        ) -> ::core::fmt::Result {
             match self {
-                Self::EvmChainIdType(element) => ::core::fmt::Display::fmt(element, f),
-                Self::FieldSize(element) => ::core::fmt::Display::fmt(element, f),
-                Self::MaxExtAmount(element) => ::core::fmt::Display::fmt(element, f),
+                Self::EvmChainIdType(element) => {
+                    ::core::fmt::Display::fmt(element, f)
+                }
+                Self::FieldSize(element) => {
+                    ::core::fmt::Display::fmt(element, f)
+                }
+                Self::MaxExtAmount(element) => {
+                    ::core::fmt::Display::fmt(element, f)
+                }
                 Self::MaxFee(element) => ::core::fmt::Display::fmt(element, f),
-                Self::RootHistorySize(element) => ::core::fmt::Display::fmt(element, f),
-                Self::ZeroValue(element) => ::core::fmt::Display::fmt(element, f),
-                Self::ExecuteWrapping(element) => ::core::fmt::Display::fmt(element, f),
-                Self::GenExtDataHash(element) => ::core::fmt::Display::fmt(element, f),
-                Self::WithdrawAndUnwrap(element) => ::core::fmt::Display::fmt(element, f),
+                Self::RootHistorySize(element) => {
+                    ::core::fmt::Display::fmt(element, f)
+                }
+                Self::ZeroValue(element) => {
+                    ::core::fmt::Display::fmt(element, f)
+                }
+                Self::ExecuteWrapping(element) => {
+                    ::core::fmt::Display::fmt(element, f)
+                }
+                Self::GenExtDataHash(element) => {
+                    ::core::fmt::Display::fmt(element, f)
+                }
+                Self::WithdrawAndUnwrap(element) => {
+                    ::core::fmt::Display::fmt(element, f)
+                }
                 Self::CalculatePublicAmount(element) => {
                     ::core::fmt::Display::fmt(element, f)
                 }
-                Self::Commitments(element) => ::core::fmt::Display::fmt(element, f),
+                Self::Commitments(element) => {
+                    ::core::fmt::Display::fmt(element, f)
+                }
                 Self::ConfigureMaximumDepositLimit(element) => {
                     ::core::fmt::Display::fmt(element, f)
                 }
@@ -4825,28 +5035,56 @@ pub mod v_anchor_contract {
                 Self::EdgeExistsForChain(element) => {
                     ::core::fmt::Display::fmt(element, f)
                 }
-                Self::EdgeIndex(element) => ::core::fmt::Display::fmt(element, f),
-                Self::EdgeList(element) => ::core::fmt::Display::fmt(element, f),
-                Self::FilledSubtrees(element) => ::core::fmt::Display::fmt(element, f),
-                Self::GetChainId(element) => ::core::fmt::Display::fmt(element, f),
-                Self::GetChainIdType(element) => ::core::fmt::Display::fmt(element, f),
-                Self::GetHasher(element) => ::core::fmt::Display::fmt(element, f),
-                Self::GetLastRoot(element) => ::core::fmt::Display::fmt(element, f),
+                Self::EdgeIndex(element) => {
+                    ::core::fmt::Display::fmt(element, f)
+                }
+                Self::EdgeList(element) => {
+                    ::core::fmt::Display::fmt(element, f)
+                }
+                Self::FilledSubtrees(element) => {
+                    ::core::fmt::Display::fmt(element, f)
+                }
+                Self::GetChainId(element) => {
+                    ::core::fmt::Display::fmt(element, f)
+                }
+                Self::GetChainIdType(element) => {
+                    ::core::fmt::Display::fmt(element, f)
+                }
+                Self::GetHasher(element) => {
+                    ::core::fmt::Display::fmt(element, f)
+                }
+                Self::GetLastRoot(element) => {
+                    ::core::fmt::Display::fmt(element, f)
+                }
                 Self::GetLatestNeighborEdges(element) => {
                     ::core::fmt::Display::fmt(element, f)
                 }
                 Self::GetLatestNeighborRoots(element) => {
                     ::core::fmt::Display::fmt(element, f)
                 }
-                Self::GetLevels(element) => ::core::fmt::Display::fmt(element, f),
-                Self::GetNextIndex(element) => ::core::fmt::Display::fmt(element, f),
-                Self::GetProposalNonce(element) => ::core::fmt::Display::fmt(element, f),
-                Self::GetZeroHash(element) => ::core::fmt::Display::fmt(element, f),
+                Self::GetLevels(element) => {
+                    ::core::fmt::Display::fmt(element, f)
+                }
+                Self::GetNextIndex(element) => {
+                    ::core::fmt::Display::fmt(element, f)
+                }
+                Self::GetProposalNonce(element) => {
+                    ::core::fmt::Display::fmt(element, f)
+                }
+                Self::GetZeroHash(element) => {
+                    ::core::fmt::Display::fmt(element, f)
+                }
                 Self::Handler(element) => ::core::fmt::Display::fmt(element, f),
                 Self::HasEdge(element) => ::core::fmt::Display::fmt(element, f),
-                Self::HashLeftRight(element) => ::core::fmt::Display::fmt(element, f),
-                Self::Initialize(element) => ::core::fmt::Display::fmt(element, f),
-                Self::Initialized(element) => ::core::fmt::Display::fmt(element, f),
+                Self::HashLeftRight(element) => {
+                    ::core::fmt::Display::fmt(element, f)
+                }
+                Self::Initialize(element) => {
+                    ::core::fmt::Display::fmt(element, f)
+                }
+                Self::Initialized(element) => {
+                    ::core::fmt::Display::fmt(element, f)
+                }
                 Self::IsCorrectExecutionChain(element) => {
                     ::core::fmt::Display::fmt(element, f)
                 }
@@ -4856,37 +5094,69 @@ pub mod v_anchor_contract {
                 Self::IsKnownNeighborRoot(element) => {
                     ::core::fmt::Display::fmt(element, f)
                 }
-                Self::IsKnownRoot(element) => ::core::fmt::Display::fmt(element, f),
+                Self::IsKnownRoot(element) => {
+                    ::core::fmt::Display::fmt(element, f)
+                }
                 Self::IsSpent(element) => ::core::fmt::Display::fmt(element, f),
-                Self::IsSpentArray(element) => ::core::fmt::Display::fmt(element, f),
-                Self::IsValidRoots(element) => ::core::fmt::Display::fmt(element, f),
-                Self::LastBalance(element) => ::core::fmt::Display::fmt(element, f),
-                Self::MaxEdges(element) => ::core::fmt::Display::fmt(element, f),
+                Self::IsSpentArray(element) => {
+                    ::core::fmt::Display::fmt(element, f)
+                }
+                Self::IsValidRoots(element) => {
+                    ::core::fmt::Display::fmt(element, f)
+                }
+                Self::LastBalance(element) => {
+                    ::core::fmt::Display::fmt(element, f)
+                }
+                Self::MaxEdges(element) => {
+                    ::core::fmt::Display::fmt(element, f)
+                }
                 Self::MaximumDepositAmount(element) => {
                     ::core::fmt::Display::fmt(element, f)
                 }
                 Self::MinimalWithdrawalAmount(element) => {
                     ::core::fmt::Display::fmt(element, f)
                 }
-                Self::NeighborRoots(element) => ::core::fmt::Display::fmt(element, f),
-                Self::NullifierHashes(element) => ::core::fmt::Display::fmt(element, f),
-                Self::OuterLevels(element) => ::core::fmt::Display::fmt(element, f),
+                Self::NeighborRoots(element) => {
+                    ::core::fmt::Display::fmt(element, f)
+                }
+                Self::NullifierHashes(element) => {
+                    ::core::fmt::Display::fmt(element, f)
+                }
+                Self::OuterLevels(element) => {
+                    ::core::fmt::Display::fmt(element, f)
+                }
                 Self::ParseChainIdFromResourceId(element) => {
                     ::core::fmt::Display::fmt(element, f)
                 }
-                Self::ProposalNonce(element) => ::core::fmt::Display::fmt(element, f),
-                Self::Register(element) => ::core::fmt::Display::fmt(element, f),
+                Self::ProposalNonce(element) => {
+                    ::core::fmt::Display::fmt(element, f)
+                }
+                Self::Register(element) => {
+                    ::core::fmt::Display::fmt(element, f)
+                }
                 Self::RegisterAndTransact(element) => {
                     ::core::fmt::Display::fmt(element, f)
                 }
                 Self::Roots(element) => ::core::fmt::Display::fmt(element, f),
-                Self::SetHandler(element) => ::core::fmt::Display::fmt(element, f),
-                Self::SetVerifier(element) => ::core::fmt::Display::fmt(element, f),
+                Self::SetHandler(element) => {
+                    ::core::fmt::Display::fmt(element, f)
+                }
+                Self::SetVerifier(element) => {
+                    ::core::fmt::Display::fmt(element, f)
+                }
                 Self::Token(element) => ::core::fmt::Display::fmt(element, f),
-                Self::Transact(element) => ::core::fmt::Display::fmt(element, f),
-                Self::UnpackProof(element) => ::core::fmt::Display::fmt(element, f),
-                Self::UpdateEdge(element) => ::core::fmt::Display::fmt(element, f),
-                Self::Verifier(element) => ::core::fmt::Display::fmt(element, f),
+                Self::Transact(element) => {
+                    ::core::fmt::Display::fmt(element, f)
+                }
+                Self::UnpackProof(element) => {
+                    ::core::fmt::Display::fmt(element, f)
+                }
+                Self::UpdateEdge(element) => {
+                    ::core::fmt::Display::fmt(element, f)
+                }
+                Self::Verifier(element) => {
+                    ::core::fmt::Display::fmt(element, f)
+                }
             }
         }
     }
@@ -4946,18 +5216,22 @@ pub mod v_anchor_contract {
         }
     }
     impl ::core::convert::From<ConfigureMaximumDepositLimitCall>
-    for VAnchorContractCalls {
+        for VAnchorContractCalls
+    {
         fn from(value: ConfigureMaximumDepositLimitCall) -> Self {
             Self::ConfigureMaximumDepositLimit(value)
         }
     }
     impl ::core::convert::From<ConfigureMinimalWithdrawalLimitCall>
-    for VAnchorContractCalls {
+        for VAnchorContractCalls
+    {
         fn from(value: ConfigureMinimalWithdrawalLimitCall) -> Self {
             Self::ConfigureMinimalWithdrawalLimit(value)
         }
     }
-    impl ::core::convert::From<CurrentNeighborRootIndexCall> for VAnchorContractCalls {
+    impl ::core::convert::From<CurrentNeighborRootIndexCall>
+        for VAnchorContractCalls
+    {
         fn from(value: CurrentNeighborRootIndexCall) -> Self {
             Self::CurrentNeighborRootIndex(value)
         }
@@ -5002,12 +5276,16 @@ pub mod v_anchor_contract {
             Self::GetLastRoot(value)
         }
     }
-    impl ::core::convert::From<GetLatestNeighborEdgesCall> for VAnchorContractCalls {
+    impl ::core::convert::From<GetLatestNeighborEdgesCall>
+        for VAnchorContractCalls
+    {
         fn from(value: GetLatestNeighborEdgesCall) -> Self {
             Self::GetLatestNeighborEdges(value)
         }
     }
-    impl ::core::convert::From<GetLatestNeighborRootsCall> for VAnchorContractCalls {
+    impl ::core::convert::From<GetLatestNeighborRootsCall>
+        for VAnchorContractCalls
+    {
         fn from(value: GetLatestNeighborRootsCall) -> Self {
             Self::GetLatestNeighborRoots(value)
         }
@@ -5057,12 +5335,16 @@ pub mod v_anchor_contract {
             Self::Initialized(value)
         }
     }
-    impl ::core::convert::From<IsCorrectExecutionChainCall> for VAnchorContractCalls {
+    impl ::core::convert::From<IsCorrectExecutionChainCall>
+        for VAnchorContractCalls
+    {
         fn from(value: IsCorrectExecutionChainCall) -> Self {
             Self::IsCorrectExecutionChain(value)
         }
     }
-    impl ::core::convert::From<IsCorrectExecutionContextCall> for VAnchorContractCalls {
+    impl ::core::convert::From<IsCorrectExecutionContextCall>
+        for VAnchorContractCalls
+    {
         fn from(value: IsCorrectExecutionContextCall) -> Self {
             Self::IsCorrectExecutionContext(value)
         }
@@ -5107,7 +5389,9 @@ pub mod v_anchor_contract {
             Self::MaximumDepositAmount(value)
         }
     }
-    impl ::core::convert::From<MinimalWithdrawalAmountCall> for VAnchorContractCalls {
+    impl ::core::convert::From<MinimalWithdrawalAmountCall>
+        for VAnchorContractCalls
+    {
         fn from(value: MinimalWithdrawalAmountCall) -> Self {
             Self::MinimalWithdrawalAmount(value)
         }
@@ -5127,7 +5411,9 @@ pub mod v_anchor_contract {
             Self::OuterLevels(value)
         }
     }
-    impl ::core::convert::From<ParseChainIdFromResourceIdCall> for VAnchorContractCalls {
+    impl ::core::convert::From<ParseChainIdFromResourceIdCall>
+        for VAnchorContractCalls
+    {
         fn from(value: ParseChainIdFromResourceIdCall) -> Self {
             Self::ParseChainIdFromResourceId(value)
         }
@@ -5198,7 +5484,7 @@ pub mod v_anchor_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
     pub struct EvmChainIdTypeReturn(pub [u8; 2]);
     ///Container type for all return fields from the `FIELD_SIZE` function with signature `FIELD_SIZE()` and selector `0x414a37ba`
@@ -5212,7 +5498,7 @@ pub mod v_anchor_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
     pub struct FieldSizeReturn(pub ::ethers::core::types::U256);
     ///Container type for all return fields from the `MAX_EXT_AMOUNT` function with signature `MAX_EXT_AMOUNT()` and selector `0x7fe24ffe`
@@ -5226,7 +5512,7 @@ pub mod v_anchor_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
     pub struct MaxExtAmountReturn(pub ::ethers::core::types::I256);
     ///Container type for all return fields from the `MAX_FEE` function with signature `MAX_FEE()` and selector `0xbc063e1a`
@@ -5240,7 +5526,7 @@ pub mod v_anchor_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
     pub struct MaxFeeReturn(pub ::ethers::core::types::U256);
     ///Container type for all return fields from the `ROOT_HISTORY_SIZE` function with signature `ROOT_HISTORY_SIZE()` and selector `0xcd87a3b4`
@@ -5254,7 +5540,7 @@ pub mod v_anchor_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
     pub struct RootHistorySizeReturn(pub u32);
     ///Container type for all return fields from the `ZERO_VALUE` function with signature `ZERO_VALUE()` and selector `0xec732959`
@@ -5268,7 +5554,7 @@ pub mod v_anchor_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
     pub struct ZeroValueReturn(pub ::ethers::core::types::U256);
     ///Container type for all return fields from the `_executeWrapping` function with signature `_executeWrapping(address,address,uint256)` and selector `0x6338bcbc`
@@ -5282,7 +5568,7 @@ pub mod v_anchor_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
     pub struct ExecuteWrappingReturn(pub ::ethers::core::types::U256);
     ///Container type for all return fields from the `_genExtDataHash` function with signature `_genExtDataHash(bytes,(address,int256,address,uint256,uint256,address),(bytes,bytes))` and selector `0xd384534d`
@@ -5296,7 +5582,7 @@ pub mod v_anchor_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
     pub struct GenExtDataHashReturn(pub [u8; 32]);
     ///Container type for all return fields from the `calculatePublicAmount` function with signature `calculatePublicAmount(int256,uint256)` and selector `0x2570b7b4`
@@ -5310,7 +5596,7 @@ pub mod v_anchor_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
     pub struct CalculatePublicAmountReturn(pub ::ethers::core::types::U256);
     ///Container type for all return fields from the `commitments` function with signature `commitments(uint256)` and selector `0x49ce8997`
@@ -5324,7 +5610,7 @@ pub mod v_anchor_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
     pub struct CommitmentsReturn(pub bool);
     ///Container type for all return fields from the `currentNeighborRootIndex` function with signature `currentNeighborRootIndex(uint256)` and selector `0x5d2d766c`
@@ -5338,7 +5624,7 @@ pub mod v_anchor_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
     pub struct CurrentNeighborRootIndexReturn(pub u32);
     ///Container type for all return fields from the `edgeExistsForChain` function with signature `edgeExistsForChain(uint256)` and selector `0xfa731687`
@@ -5352,7 +5638,7 @@ pub mod v_anchor_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
     pub struct EdgeExistsForChainReturn(pub bool);
     ///Container type for all return fields from the `edgeIndex` function with signature `edgeIndex(uint256)` and selector `0xe70ea87c`
@@ -5366,7 +5652,7 @@ pub mod v_anchor_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
     pub struct EdgeIndexReturn(pub ::ethers::core::types::U256);
     ///Container type for all return fields from the `edgeList` function with signature `edgeList(uint256)` and selector `0xdbc916b8`
@@ -5380,7 +5666,7 @@ pub mod v_anchor_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
     pub struct EdgeListReturn {
         pub chain_id: ::ethers::core::types::U256,
@@ -5399,7 +5685,7 @@ pub mod v_anchor_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
     pub struct FilledSubtreesReturn(pub ::ethers::core::types::U256);
     ///Container type for all return fields from the `getChainId` function with signature `getChainId()` and selector `0x3408e470`
@@ -5413,7 +5699,7 @@ pub mod v_anchor_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
     pub struct GetChainIdReturn(pub ::ethers::core::types::U256);
     ///Container type for all return fields from the `getChainIdType` function with signature `getChainIdType()` and selector `0x4c830cbd`
@@ -5427,7 +5713,7 @@ pub mod v_anchor_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
     pub struct GetChainIdTypeReturn(pub u64);
     ///Container type for all return fields from the `getHasher` function with signature `getHasher()` and selector `0xea495db0`
@@ -5441,7 +5727,7 @@ pub mod v_anchor_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
     pub struct GetHasherReturn(pub ::ethers::core::types::Address);
     ///Container type for all return fields from the `getLastRoot` function with signature `getLastRoot()` and selector `0xba70f757`
@@ -5455,7 +5741,7 @@ pub mod v_anchor_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
     pub struct GetLastRootReturn(pub ::ethers::core::types::U256);
     ///Container type for all return fields from the `getLatestNeighborEdges` function with signature `getLatestNeighborEdges()` and selector `0x8c0d34d8`
@@ -5469,7 +5755,7 @@ pub mod v_anchor_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
     pub struct GetLatestNeighborEdgesReturn(pub ::std::vec::Vec<Edge>);
     ///Container type for all return fields from the `getLatestNeighborRoots` function with signature `getLatestNeighborRoots()` and selector `0x1e627617`
@@ -5483,7 +5769,7 @@ pub mod v_anchor_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
     pub struct GetLatestNeighborRootsReturn(
         pub ::std::vec::Vec<::ethers::core::types::U256>,
@@ -5499,7 +5785,7 @@ pub mod v_anchor_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
     pub struct GetLevelsReturn(pub u32);
     ///Container type for all return fields from the `getNextIndex` function with signature `getNextIndex()` and selector `0x0eb7606f`
@@ -5513,7 +5799,7 @@ pub mod v_anchor_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
     pub struct GetNextIndexReturn(pub u32);
     ///Container type for all return fields from the `getProposalNonce` function with signature `getProposalNonce()` and selector `0x0b27fb9a`
@@ -5527,7 +5813,7 @@ pub mod v_anchor_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
     pub struct GetProposalNonceReturn(pub ::ethers::core::types::U256);
     ///Container type for all return fields from the `getZeroHash` function with signature `getZeroHash(uint32)` and selector `0x305e9eac`
@@ -5541,7 +5827,7 @@ pub mod v_anchor_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
     pub struct GetZeroHashReturn(pub ::ethers::core::types::U256);
     ///Container type for all return fields from the `handler` function with signature `handler()` and selector `0xc80916d4`
@@ -5555,7 +5841,7 @@ pub mod v_anchor_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
     pub struct HandlerReturn(pub ::ethers::core::types::Address);
     ///Container type for all return fields from the `hasEdge` function with signature `hasEdge(uint256)` and selector `0x92156311`
@@ -5569,7 +5855,7 @@ pub mod v_anchor_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
     pub struct HasEdgeReturn(pub bool);
     ///Container type for all return fields from the `hashLeftRight` function with signature `hashLeftRight(uint256,uint256)` and selector `0x5bb93995`
@@ -5583,7 +5869,7 @@ pub mod v_anchor_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
     pub struct HashLeftRightReturn(pub ::ethers::core::types::U256);
     ///Container type for all return fields from the `initialized` function with signature `initialized()` and selector `0x158ef93e`
@@ -5597,7 +5883,7 @@ pub mod v_anchor_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
     pub struct InitializedReturn(pub bool);
     ///Container type for all return fields from the `isCorrectExecutionChain` function with signature `isCorrectExecutionChain(bytes32)` and selector `0x830b2f57`
@@ -5611,7 +5897,7 @@ pub mod v_anchor_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
     pub struct IsCorrectExecutionChainReturn(pub bool);
     ///Container type for all return fields from the `isCorrectExecutionContext` function with signature `isCorrectExecutionContext(bytes32)` and selector `0xf5fc3d6b`
@@ -5625,7 +5911,7 @@ pub mod v_anchor_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
     pub struct IsCorrectExecutionContextReturn(pub bool);
     ///Container type for all return fields from the `isKnownNeighborRoot` function with signature `isKnownNeighborRoot(uint256,uint256)` and selector `0x3bfa8d7a`
@@ -5639,7 +5925,7 @@ pub mod v_anchor_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
     pub struct IsKnownNeighborRootReturn(pub bool);
     ///Container type for all return fields from the `isKnownRoot` function with signature `isKnownRoot(uint256)` and selector `0xa6232a93`
@@ -5653,7 +5939,7 @@ pub mod v_anchor_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
     pub struct IsKnownRootReturn(pub bool);
     ///Container type for all return fields from the `isSpent` function with signature `isSpent(uint256)` and selector `0x5a129efe`
@@ -5667,7 +5953,7 @@ pub mod v_anchor_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
     pub struct IsSpentReturn(pub bool);
     ///Container type for all return fields from the `isSpentArray` function with signature `isSpentArray(uint256[])` and selector `0xea65ba49`
@@ -5681,7 +5967,7 @@ pub mod v_anchor_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
     pub struct IsSpentArrayReturn(pub ::std::vec::Vec<bool>);
     ///Container type for all return fields from the `isValidRoots` function with signature `isValidRoots(uint256[])` and selector `0xb75e6798`
@@ -5695,7 +5981,7 @@ pub mod v_anchor_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
     pub struct IsValidRootsReturn(pub bool);
     ///Container type for all return fields from the `lastBalance` function with signature `lastBalance()` and selector `0x8f1c56bd`
@@ -5709,7 +5995,7 @@ pub mod v_anchor_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
     pub struct LastBalanceReturn(pub ::ethers::core::types::U256);
     ///Container type for all return fields from the `maxEdges` function with signature `maxEdges()` and selector `0x71523c32`
@@ -5723,7 +6009,7 @@ pub mod v_anchor_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
     pub struct MaxEdgesReturn(pub u8);
     ///Container type for all return fields from the `maximumDepositAmount` function with signature `maximumDepositAmount()` and selector `0x78abb49b`
@@ -5737,7 +6023,7 @@ pub mod v_anchor_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
     pub struct MaximumDepositAmountReturn(pub ::ethers::core::types::U256);
     ///Container type for all return fields from the `minimalWithdrawalAmount` function with signature `minimalWithdrawalAmount()` and selector `0x840b2791`
@@ -5751,7 +6037,7 @@ pub mod v_anchor_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
     pub struct MinimalWithdrawalAmountReturn(pub ::ethers::core::types::U256);
     ///Container type for all return fields from the `neighborRoots` function with signature `neighborRoots(uint256,uint32)` and selector `0x43e7119f`
@@ -5765,7 +6051,7 @@ pub mod v_anchor_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
     pub struct NeighborRootsReturn(pub ::ethers::core::types::U256);
     ///Container type for all return fields from the `nullifierHashes` function with signature `nullifierHashes(uint256)` and selector `0x1f79a1e9`
@@ -5779,7 +6065,7 @@ pub mod v_anchor_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
     pub struct NullifierHashesReturn(pub bool);
     ///Container type for all return fields from the `outerLevels` function with signature `outerLevels()` and selector `0xbfbc0a39`
@@ -5793,7 +6079,7 @@ pub mod v_anchor_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
     pub struct OuterLevelsReturn(pub u32);
     ///Container type for all return fields from the `parseChainIdFromResourceId` function with signature `parseChainIdFromResourceId(bytes32)` and selector `0xc2230d6e`
@@ -5807,7 +6093,7 @@ pub mod v_anchor_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
     pub struct ParseChainIdFromResourceIdReturn(pub u64);
     ///Container type for all return fields from the `proposalNonce` function with signature `proposalNonce()` and selector `0xcc3c74a1`
@@ -5821,7 +6107,7 @@ pub mod v_anchor_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
     pub struct ProposalNonceReturn(pub ::ethers::core::types::U256);
     ///Container type for all return fields from the `roots` function with signature `roots(uint256)` and selector `0xc2b40ae4`
@@ -5835,7 +6121,7 @@ pub mod v_anchor_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
     pub struct RootsReturn {
         pub root: ::ethers::core::types::U256,
@@ -5852,7 +6138,7 @@ pub mod v_anchor_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
     pub struct TokenReturn(pub ::ethers::core::types::Address);
     ///Container type for all return fields from the `unpackProof` function with signature `unpackProof(uint256[8])` and selector `0xf5ab0dd6`
@@ -5866,7 +6152,7 @@ pub mod v_anchor_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
     pub struct UnpackProofReturn(
         pub [::ethers::core::types::U256; 2],
@@ -5884,7 +6170,7 @@ pub mod v_anchor_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
     pub struct VerifierReturn(pub ::ethers::core::types::Address);
     ///`CommonExtData(address,int256,address,uint256,uint256,address)`
@@ -5898,7 +6184,7 @@ pub mod v_anchor_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
     pub struct CommonExtData {
         pub recipient: ::ethers::core::types::Address,
@@ -5919,7 +6205,7 @@ pub mod v_anchor_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
     pub struct Edge {
         pub chain_id: ::ethers::core::types::U256,
@@ -5938,7 +6224,7 @@ pub mod v_anchor_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
     pub struct Encryptions {
         pub encrypted_output_1: ::ethers::core::types::Bytes,
@@ -5955,7 +6241,7 @@ pub mod v_anchor_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
     pub struct PublicInputs {
         pub roots: ::ethers::core::types::Bytes,
@@ -5976,7 +6262,7 @@ pub mod v_anchor_contract {
         Debug,
         PartialEq,
         Eq,
-        Hash
+        Hash,
     )]
     pub struct Account {
         pub owner: ::ethers::core::types::Address,
