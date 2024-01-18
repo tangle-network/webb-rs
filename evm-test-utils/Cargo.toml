@@ -14,6 +14,7 @@ homepage = { workspace = true }
 
 [dependencies]
 futures = "0.3"
+nix = { version = "0.27", features = ["signal"] }
 hex = { workspace = true }
 webb-proposals = { path = "../proposals", default-features = false, features = ["std", "evm"] }
 webb = { path = "../", default-features = false, features = ["evm-runtime"] }

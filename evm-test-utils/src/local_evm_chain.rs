@@ -1,5 +1,6 @@
 use std::sync::Arc;
 
+use crate::anvil::{Anvil, AnvilInstance};
 use futures::prelude::*;
 use webb::evm::contract::protocol_solidity::{
     anchor_handler::AnchorHandlerContract,
@@ -11,8 +12,6 @@ use webb::evm::contract::protocol_solidity::{
 };
 use webb::evm::ethers;
 use webb::evm::ethers::signers::Signer;
-use webb::evm::ethers::utils::{Anvil, AnvilInstance};
-use webb_proposals::TypedChainId;
 
 use crate::errors::Result;
 
@@ -53,10 +52,10 @@ impl LocalEvmChain {
     pub fn new_with_chain_state(
         chain_id: u32,
         name: String,
-        state_path: &std::path::Path,
+        state_dir: &std::path::Path,
     ) -> Self {
         let anvil_node_handle =
-            Self::spawn_anvil_node(chain_id, Some(state_path));
+            Self::spawn_anvil_node(chain_id, Some(state_dir));
         let secret_key = anvil_node_handle.keys()[0].clone();
         let signer = ethers::signers::LocalWallet::from(secret_key)
             .with_chain_id(chain_id);
@@ -251,16 +250,23 @@ impl LocalEvmChain {
 
     fn spawn_anvil_node(
         chain_id: u32,
-        state_path: Option<&std::path::Path>,
+        state_dir: Option<&std::path::Path>,
     ) -> AnvilInstance {
         let mut anvil = Anvil::new()
             .port(crate::random_port::random_port())
             .chain_id(chain_id)
             .arg("--accounts")
             .arg("20");
-        if let Some(state) = state_path {
-            // TODO support loading state
-        }
+        if let Some(p) = state_dir {
+            anvil = anvil
+                .arg("--dump-state")
+                .arg(p.to_string_lossy())
+                .arg("--state-interval")
+                .arg("1");
+            if p.join("state.json").exists() {
+                anvil = anvil.arg("--load-state").arg(p.to_string_lossy());
+            };
+        };
         anvil.spawn()
     }
 }
@@ -302,14 +308,16 @@ mod tests {
     }
 
     #[tokio::test]
-    #[ignore = "Anvil does not support this yet"]
     async fn should_load_old_state() -> Result<()> {
-        let tmp = tempfile::tempdir()?;
-        let state = tmp.path().join("state.json");
+        let state = tempfile::Builder::new()
+            .prefix("evm-test-utils")
+            .tempdir()?;
+        assert!(state.path().is_dir());
+
         let chain = LocalEvmChain::new_with_chain_state(
             5001,
             String::from("Hermes"),
-            &state,
+            state.path(),
         );
         let token = chain
             .deploy_token(String::from("Test"), String::from("TST"))
@@ -317,11 +325,10 @@ mod tests {
         let name = token.name().call().await?;
         assert_eq!(name, "Test");
         chain.shutdown();
-
         let chain = LocalEvmChain::new_with_chain_state(
             5001,
             String::from("Hermes"),
-            &state,
+            state.path(),
         );
         let token = ERC20PresetMinterPauserContract::new(
             token.address(),
