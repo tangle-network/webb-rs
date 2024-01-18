@@ -2,6 +2,9 @@ use std::sync::Arc;
 
 use crate::anvil::{Anvil, AnvilInstance};
 use futures::prelude::*;
+use webb::evm::contract::protocol_solidity::vanchor_encode_inputs::VAnchorEncodeInputsContract;
+use webb::evm::contract::protocol_solidity::vanchor_tree_factory;
+use webb::evm::contract::protocol_solidity::variable_anchor_tree::VAnchorTreeContract;
 use webb::evm::contract::protocol_solidity::{
     anchor_handler::AnchorHandlerContract,
     erc20_preset_minter_pauser::ERC20PresetMinterPauserContract,
@@ -248,6 +251,44 @@ impl LocalEvmChain {
         .await
     }
 
+    /// Deploy a new VAnchorTree.
+    ///
+    /// # Errors
+    ///
+    /// This function will return an error if the deployment fails.
+    pub async fn deploy_vanchor_tree(
+        &self,
+        verifier: ethers::types::Address,
+        merkle_tree_levels: u32,
+        hasher: ethers::types::Address,
+        handler: ethers::types::Address,
+        token: ethers::types::Address,
+        max_edges: u8,
+    ) -> Result<VAnchorTreeContract<SignerEthersClient>> {
+        let client = self.client.clone();
+        let vanchor_encode_inputs =
+            VAnchorEncodeInputsContract::deploy(client.clone(), ())?
+                .confirmations(0usize)
+                .send()
+                .await?;
+        let contract = vanchor_tree_factory::create(
+            vanchor_encode_inputs.address(),
+            client.clone(),
+        )?
+        .deploy((
+            verifier,
+            merkle_tree_levels,
+            hasher,
+            handler,
+            token,
+            max_edges,
+        ))?
+        .confirmations(0usize)
+        .send()
+        .await?;
+        Ok(VAnchorTreeContract::new(contract.address(), client))
+    }
+
     fn spawn_anvil_node(
         chain_id: u32,
         state_dir: Option<&std::path::Path>,
@@ -296,6 +337,43 @@ mod tests {
         let chain = LocalEvmChain::new(5001, String::from("Hermes"));
         let hasher = chain.deploy_poseidon_hasher().await?;
         let hash = hasher
+            .hash_left_right(U256::from(1), U256::from(2))
+            .call()
+            .await?;
+        let expected_result = U256::from_str_radix(
+            "115cc0f5e7d690413df64c6b9662e9cf2a3617f2743245519e19607a4417189a",
+            16,
+        );
+        assert_eq!(hash, expected_result.unwrap());
+        Ok(())
+    }
+
+    #[tokio::test]
+    async fn should_be_able_to_deploy_vanchor_tree() -> Result<()> {
+        let chain = LocalEvmChain::new(5001, String::from("Hermes"));
+        let initial_governor = ethers::types::Address::zero();
+        let bridge = chain.deploy_signature_bridge(initial_governor, 0).await?;
+        let verifier = ethers::types::Address::zero();
+        let merkle_tree_levels = 30;
+        let hasher = chain.deploy_poseidon_hasher().await?;
+        let handler = chain
+            .deploy_anchor_handler(bridge.address(), vec![], vec![])
+            .await?;
+        let token = chain
+            .deploy_token(String::from("Test"), String::from("TST"))
+            .await?;
+        let vanchor = chain
+            .deploy_vanchor_tree(
+                verifier,
+                merkle_tree_levels,
+                hasher.address(),
+                handler.address(),
+                token.address(),
+                2,
+            )
+            .await?;
+        // hasher on the vanchor tree should be the same as the one we deployed
+        let hash = vanchor
             .hash_left_right(U256::from(1), U256::from(2))
             .call()
             .await?;

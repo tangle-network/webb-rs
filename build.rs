@@ -54,6 +54,15 @@ mod evm {
         )
     }
 
+    pub fn build_protocol_solidity_vanchor_encode_inputs(
+    ) -> Result<(), Box<dyn Error>> {
+        parse_and_write_abigen(
+            "contracts/protocol-solidity/VAnchorEncodeInputs.json",
+            "src/evm/contract/protocol_solidity/vanchor_encode_inputs.rs",
+            "VAnchorEncodeInputsContract",
+        )
+    }
+
     pub fn build_protocol_solidity_anchor_handler() -> Result<(), Box<dyn Error>>
     {
         parse_and_write_abigen(
@@ -251,6 +260,7 @@ fn main() -> Result<(), Box<dyn Error>> {
         evm::build_protocol_solidity_vanchor_base()?;
         evm::build_protocol_solidity_vanchor()?;
         evm::build_protocol_solidity_vanchor_tree()?;
+        evm::build_protocol_solidity_vanchor_encode_inputs()?;
         evm::build_protocol_solidity_anchor_handler()?;
         evm::build_protocol_solidity_signature_bridge()?;
         evm::build_protocol_solidity_token_wrapper()?;
