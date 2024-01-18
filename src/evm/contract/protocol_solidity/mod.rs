@@ -18,8 +18,13 @@ pub mod treasury;
 pub mod treasury_handler;
 pub mod vanchor_base;
 pub mod vanchor_encode_inputs;
+pub mod vanchor_verifier;
 pub mod variable_anchor;
 pub mod variable_anchor_tree;
+pub mod verifier_2_16;
+pub mod verifier_2_2;
+pub mod verifier_8_16;
+pub mod verifier_8_2;
 
 pub mod poseidon_hasher_factory {
     use std::sync::Arc;

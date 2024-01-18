@@ -4,7 +4,12 @@ use crate::anvil::{Anvil, AnvilInstance};
 use futures::prelude::*;
 use webb::evm::contract::protocol_solidity::vanchor_encode_inputs::VAnchorEncodeInputsContract;
 use webb::evm::contract::protocol_solidity::vanchor_tree_factory;
+use webb::evm::contract::protocol_solidity::vanchor_verifier::VAnchorVerifierContract;
 use webb::evm::contract::protocol_solidity::variable_anchor_tree::VAnchorTreeContract;
+use webb::evm::contract::protocol_solidity::verifier_2_16::Verifier2x16Contract;
+use webb::evm::contract::protocol_solidity::verifier_2_2::Verifier2x2Contract;
+use webb::evm::contract::protocol_solidity::verifier_8_16::Verifier8x16Contract;
+use webb::evm::contract::protocol_solidity::verifier_8_2::Verifier8x2Contract;
 use webb::evm::contract::protocol_solidity::{
     anchor_handler::AnchorHandlerContract,
     erc20_preset_minter_pauser::ERC20PresetMinterPauserContract,
@@ -172,6 +177,35 @@ impl LocalEvmChain {
             self.client.clone(),
         );
         Ok(hasher)
+    }
+
+    pub async fn deploy_vanchor_verifier(
+        &self,
+    ) -> Result<VAnchorVerifierContract<SignerEthersClient>> {
+        let v22 = Verifier2x2Contract::deploy(self.client(), ())?
+            .confirmations(0usize)
+            .send()
+            .await?;
+        let v216 = Verifier2x16Contract::deploy(self.client(), ())?
+            .confirmations(0usize)
+            .send()
+            .await?;
+        let v82 = Verifier8x2Contract::deploy(self.client(), ())?
+            .confirmations(0usize)
+            .send()
+            .await?;
+        let v816 = Verifier8x16Contract::deploy(self.client(), ())?
+            .confirmations(0usize)
+            .send()
+            .await?;
+        VAnchorVerifierContract::deploy(
+            self.client(),
+            (v22.address(), v216.address(), v82.address(), v816.address()),
+        )?
+        .confirmations(0usize)
+        .send()
+        .map_err(Into::into)
+        .await
     }
 
     /// Deploy a new Anchor Handler.
@@ -353,7 +387,7 @@ mod tests {
         let chain = LocalEvmChain::new(5001, String::from("Hermes"));
         let initial_governor = ethers::types::Address::zero();
         let bridge = chain.deploy_signature_bridge(initial_governor, 0).await?;
-        let verifier = ethers::types::Address::zero();
+        let verifier = chain.deploy_vanchor_verifier().await?;
         let merkle_tree_levels = 30;
         let hasher = chain.deploy_poseidon_hasher().await?;
         let handler = chain
@@ -364,7 +398,7 @@ mod tests {
             .await?;
         let vanchor = chain
             .deploy_vanchor_tree(
-                verifier,
+                verifier.address(),
                 merkle_tree_levels,
                 hasher.address(),
                 handler.address(),

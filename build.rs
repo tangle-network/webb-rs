@@ -28,6 +28,53 @@ mod evm {
         Ok(())
     }
 
+    pub fn build_protocol_solidity_vanchor_verifier() -> Result<(), Box<dyn Error>>
+    {
+        parse_and_write_abigen(
+            "contracts/protocol-solidity/VAnchorVerifier.json",
+            "src/evm/contract/protocol_solidity/vanchor_verifier.rs",
+            "VAnchorVerifierContract",
+        )
+    }
+
+    pub fn build_protocol_solidity_verifier_2_2() -> Result<(), Box<dyn Error>>
+    {
+        parse_and_write_abigen(
+            "contracts/protocol-solidity/Verifier2_2.json",
+            "src/evm/contract/protocol_solidity/verifier_2_2.rs",
+            "Verifier2x2Contract",
+        )
+    }
+
+
+    pub fn build_protocol_solidity_verifier_2_16() -> Result<(), Box<dyn Error>>
+    {
+        parse_and_write_abigen(
+            "contracts/protocol-solidity/Verifier2_16.json",
+            "src/evm/contract/protocol_solidity/verifier_2_16.rs",
+            "Verifier2x16Contract",
+        )
+    }
+
+    pub fn build_protocol_solidity_verifier_8_2() -> Result<(), Box<dyn Error>>
+    {
+        parse_and_write_abigen(
+            "contracts/protocol-solidity/Verifier8_2.json",
+            "src/evm/contract/protocol_solidity/verifier_8_2.rs",
+            "Verifier8x2Contract",
+        )
+    }
+
+
+    pub fn build_protocol_solidity_verifier_8_16() -> Result<(), Box<dyn Error>>
+    {
+        parse_and_write_abigen(
+            "contracts/protocol-solidity/Verifier8_16.json",
+            "src/evm/contract/protocol_solidity/verifier_8_16.rs",
+            "Verifier8x16Contract",
+        )
+    }
+
     pub fn build_protocol_solidity_vanchor_base() -> Result<(), Box<dyn Error>>
     {
         parse_and_write_abigen(
@@ -259,6 +306,11 @@ fn main() -> Result<(), Box<dyn Error>> {
     {
         evm::build_protocol_solidity_vanchor_base()?;
         evm::build_protocol_solidity_vanchor()?;
+        evm::build_protocol_solidity_vanchor_verifier()?;
+        evm::build_protocol_solidity_verifier_2_2()?;
+        evm::build_protocol_solidity_verifier_2_16()?;
+        evm::build_protocol_solidity_verifier_8_2()?;
+        evm::build_protocol_solidity_verifier_8_16()?;
         evm::build_protocol_solidity_vanchor_tree()?;
         evm::build_protocol_solidity_vanchor_encode_inputs()?;
         evm::build_protocol_solidity_anchor_handler()?;
