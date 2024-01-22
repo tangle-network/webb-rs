@@ -64,7 +64,7 @@ impl TrieProver {
             proof,
         );
 
-        return hex::encode(verification_result) == hex::encode(receipt_data);
+        hex::encode(verification_result) == hex::encode(receipt_data)
     }
 
     pub fn keccak_256(data: &[u8]) -> [u8; 32] {
