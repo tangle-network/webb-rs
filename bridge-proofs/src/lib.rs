@@ -37,17 +37,17 @@ mod tests {
         let proof = provider
             .get_proof(
                 NameOrAddress::Address(address_bytes.into()),
-                vec![H256(slot_bytes.into())],
+                vec![H256(slot_bytes)],
                 Some(BlockId::Hash(latest_block_hash)),
             )
             .await
             .unwrap();
         println!("Got proof: {}", serde_json::to_string(&proof).unwrap());
 
-        let storage_hash = (&proof).storage_hash;
+        let storage_hash = (proof).storage_hash;
 
-        let first_storage_proof = &(&proof).storage_proof[0].proof;
-        let first_storage_key = &(&proof).storage_proof[0].key;
+        let first_storage_proof = &(proof).storage_proof[0].proof;
+        let first_storage_key = &(proof).storage_proof[0].key;
 
         TrieProver::verify_trie_proof(
             EthTypeH256::from(storage_hash.as_fixed_bytes()),
