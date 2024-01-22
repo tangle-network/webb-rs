@@ -28,6 +28,14 @@ mod evm {
         Ok(())
     }
 
+    pub fn build_protocol_dkg_signing_rules() -> Result<(), Box<dyn Error>> {
+        parse_and_write_abigen(
+            "contracts/protocol-dkg/SigningRules.json",
+            "src/evm/contract/protocol_dkg/signing_rules.rs",
+            "SigningRulesContract",
+        )
+    }
+
     pub fn build_protocol_solidity_vanchor_base() -> Result<(), Box<dyn Error>>
     {
         parse_and_write_abigen(
@@ -248,6 +256,7 @@ mod substrate {
 fn main() -> Result<(), Box<dyn Error>> {
     #[cfg(feature = "generate-contracts")]
     {
+        evm::build_protocol_dkg_signing_rules()?;
         evm::build_protocol_solidity_vanchor_base()?;
         evm::build_protocol_solidity_vanchor()?;
         evm::build_protocol_solidity_vanchor_tree()?;
