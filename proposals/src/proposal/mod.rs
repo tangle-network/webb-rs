@@ -12,7 +12,7 @@ use frame_support::{pallet_prelude::Get, BoundedVec};
 #[allow(clippy::module_name_repetitions)]
 pub trait ProposalTrait {
     /// Get the function signature.
-    fn function_sig() -> crate::FunctionSignature;
+    fn function_sig(&self) -> crate::FunctionSignature;
     /// Get the proposal header.
     fn header(&self) -> crate::ProposalHeader;
     /// Convert the proposal into bytes.
@@ -26,7 +26,8 @@ pub trait ProposalTrait {
     feature = "scale",
     derive(scale_info::TypeInfo, scale_codec::Encode, scale_codec::Decode,)
 )]
-// only derive `MaxEncodedLen` if both `scale` and `substrate` features are enabled
+// only derive `MaxEncodedLen` if both `scale` and `substrate` features are
+// enabled
 #[cfg_attr(
     all(feature = "scale", feature = "substrate"),
     derive(scale_codec::MaxEncodedLen)
@@ -119,7 +120,8 @@ pub enum ProposalKind {
     FeeRecipientUpdate,
     /// Toggles whether or not the native token is allowed to be wrapped.
     SetNativeAllowed,
-    /// Set daily withdrawal limit proposal for changing the daily withdrawal limits.
+    /// Set daily withdrawal limit proposal for changing the daily withdrawal
+    /// limits.
     SetDailyWithdrawalLimit,
 }
 

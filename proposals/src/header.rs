@@ -541,8 +541,9 @@ where
     serializer.serialize_bytes(&header.to_bytes())
 }
 
-/// Serde `deserialize_with` function to deserialize [`ProposalHeader`] efficiently.
-/// This function will deserialize the [`ProposalHeader`] by reading bytes from the input.
+/// Serde `deserialize_with` function to deserialize [`ProposalHeader`]
+/// efficiently. This function will deserialize the [`ProposalHeader`] by
+/// reading bytes from the input.
 ///
 /// This function can be used with either of the following Serde attributes:
 /// * `#[serde(deserialize_with = "webb_proposals::header::deserialize")]`
@@ -560,8 +561,8 @@ where
 /// ```
 /// # Errors
 /// This function will return an error if it fails to deserialize the
-/// proposal header. For example, if the input is not a valid proposal header or no
-/// enough bytes are available.
+/// proposal header. For example, if the input is not a valid proposal header or
+/// no enough bytes are available.
 pub fn deserialize<'de, D>(deserializer: D) -> Result<ProposalHeader, D::Error>
 where
     D: serde::Deserializer<'de>,

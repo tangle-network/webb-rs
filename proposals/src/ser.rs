@@ -326,7 +326,8 @@ fn test_struct_ser() {
     }
 
     let rid = crate::ResourceId::from([1u8; 32]);
-    let header = ProposalHeader::new(rid, MyProposal::function_sig(), Nonce(1));
+    let function_signature = crate::FunctionSignature::from([1u8; 4]);
+    let header = ProposalHeader::new(rid, function_signature, Nonce(1));
     let proposal = MyProposal {
         header,
         a: 1,
@@ -339,7 +340,7 @@ fn test_struct_ser() {
     let bytes = to_vec(&proposal).unwrap();
     let expected = hex_literal::hex! {
         "0101010101010101010101010101010101010101010101010101010101010101" // rid
-        "99372321" // function sig
+        "01010101" // function sig
         "00000001" // nonce
         "01" // a
         "0002" // b

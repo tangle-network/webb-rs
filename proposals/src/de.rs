@@ -410,7 +410,7 @@ fn test_struct_de() {
     let proposal: MyProposal = from_slice(&bytes).unwrap();
 
     let rid = crate::ResourceId::from([1u8; 32]);
-    let header = ProposalHeader::new(rid, MyProposal::function_sig(), Nonce(1));
+    let header = ProposalHeader::new(rid, proposal.function_sig(), Nonce(1));
     let expected = MyProposal {
         header,
         a: 1,
