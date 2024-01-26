@@ -525,8 +525,9 @@ pub mod signing_rules_contract {
         }
     }
     impl<M: ::ethers::providers::Middleware> SigningRulesContract<M> {
-        /// Creates a new contract instance with the specified `ethers` client at
-        /// `address`. The contract derefs to a `ethers::Contract` object.
+        /// Creates a new contract instance with the specified `ethers` client
+        /// at `address`. The contract derefs to a `ethers::Contract`
+        /// object.
         pub fn new<T: Into<::ethers::core::types::Address>>(
             address: T,
             client: ::std::sync::Arc<M>,
@@ -586,7 +587,8 @@ pub mod signing_rules_contract {
                 .method_hash([208, 121, 102, 27], p0)
                 .expect("method not found (this should never happen)")
         }
-        ///Calls the contract's `calculatePhase1ProposalId` (0xd020a66f) function
+        ///Calls the contract's `calculatePhase1ProposalId` (0xd020a66f)
+        /// function
         pub fn calculate_phase_1_proposal_id(
             &self,
             phase_1_job_id: [u8; 32],
@@ -642,7 +644,8 @@ pub mod signing_rules_contract {
                 .method_hash([169, 182, 45, 141], phase_2_job_hash)
                 .expect("method not found (this should never happen)")
         }
-        ///Calls the contract's `getProposalYesVotesTotal` (0x1b35b0cc) function
+        ///Calls the contract's `getProposalYesVotesTotal` (0x1b35b0cc)
+        /// function
         pub fn get_proposal_yes_votes_total(
             &self,
             phase_2_job_hash: [u8; 32],
@@ -702,7 +705,8 @@ pub mod signing_rules_contract {
                 .method_hash([28, 186, 91, 4], phase_1_proposal_id)
                 .expect("method not found (this should never happen)")
         }
-        ///Calls the contract's `submitGovernanceProposal` (0x6f85e71a) function
+        ///Calls the contract's `submitGovernanceProposal` (0x6f85e71a)
+        /// function
         pub fn submit_governance_proposal(
             &self,
             phase_1_job_id: [u8; 32],
@@ -955,7 +959,8 @@ pub mod signing_rules_contract {
             Self::ProposalVoteFilter(value)
         }
     }
-    ///Container type for all input parameters for the `MAX_VOTERS` function with signature `MAX_VOTERS()` and selector `0x3ceed692`
+    ///Container type for all input parameters for the `MAX_VOTERS` function
+    /// with signature `MAX_VOTERS()` and selector `0x3ceed692`
     #[derive(
         Clone,
         ::ethers::contract::EthCall,
@@ -970,7 +975,8 @@ pub mod signing_rules_contract {
     )]
     #[ethcall(name = "MAX_VOTERS", abi = "MAX_VOTERS()")]
     pub struct MaxVotersCall;
-    ///Container type for all input parameters for the `_proposals` function with signature `_proposals(bytes32)` and selector `0xf2e2af94`
+    ///Container type for all input parameters for the `_proposals` function
+    /// with signature `_proposals(bytes32)` and selector `0xf2e2af94`
     #[derive(
         Clone,
         ::ethers::contract::EthCall,
@@ -985,7 +991,9 @@ pub mod signing_rules_contract {
     )]
     #[ethcall(name = "_proposals", abi = "_proposals(bytes32)")]
     pub struct ProposalsCall(pub [u8; 32]);
-    ///Container type for all input parameters for the `adminSetForwarder` function with signature `adminSetForwarder(bytes32,address,bool)` and selector `0xa72cd030`
+    ///Container type for all input parameters for the `adminSetForwarder`
+    /// function with signature `adminSetForwarder(bytes32,address,bool)` and
+    /// selector `0xa72cd030`
     #[derive(
         Clone,
         ::ethers::contract::EthCall,
@@ -1007,7 +1015,8 @@ pub mod signing_rules_contract {
         pub forwarder: ::ethers::core::types::Address,
         pub valid: bool,
     }
-    ///Container type for all input parameters for the `admins` function with signature `admins(bytes32)` and selector `0xd079661b`
+    ///Container type for all input parameters for the `admins` function with
+    /// signature `admins(bytes32)` and selector `0xd079661b`
     #[derive(
         Clone,
         ::ethers::contract::EthCall,
@@ -1022,7 +1031,9 @@ pub mod signing_rules_contract {
     )]
     #[ethcall(name = "admins", abi = "admins(bytes32)")]
     pub struct AdminsCall(pub [u8; 32]);
-    ///Container type for all input parameters for the `calculatePhase1ProposalId` function with signature `calculatePhase1ProposalId(bytes32,bytes)` and selector `0xd020a66f`
+    ///Container type for all input parameters for the
+    /// `calculatePhase1ProposalId` function with signature
+    /// `calculatePhase1ProposalId(bytes32,bytes)` and selector `0xd020a66f`
     #[derive(
         Clone,
         ::ethers::contract::EthCall,
@@ -1043,7 +1054,9 @@ pub mod signing_rules_contract {
         pub phase_1_job_id: [u8; 32],
         pub phase_1_job_details: ::ethers::core::types::Bytes,
     }
-    ///Container type for all input parameters for the `calculatePhase2JobHash` function with signature `calculatePhase2JobHash(bytes32,bytes)` and selector `0xa0a0c516`
+    ///Container type for all input parameters for the `calculatePhase2JobHash`
+    /// function with signature `calculatePhase2JobHash(bytes32,bytes)` and
+    /// selector `0xa0a0c516`
     #[derive(
         Clone,
         ::ethers::contract::EthCall,
@@ -1064,7 +1077,8 @@ pub mod signing_rules_contract {
         pub proposal_id: [u8; 32],
         pub phase_2_job_details: ::ethers::core::types::Bytes,
     }
-    ///Container type for all input parameters for the `expiry` function with signature `expiry(bytes32)` and selector `0xd2ec5fca`
+    ///Container type for all input parameters for the `expiry` function with
+    /// signature `expiry(bytes32)` and selector `0xd2ec5fca`
     #[derive(
         Clone,
         ::ethers::contract::EthCall,
@@ -1079,7 +1093,9 @@ pub mod signing_rules_contract {
     )]
     #[ethcall(name = "expiry", abi = "expiry(bytes32)")]
     pub struct ExpiryCall(pub [u8; 32]);
-    ///Container type for all input parameters for the `getProposalState` function with signature `getProposalState(bytes32)` and selector `0x0a704f48`
+    ///Container type for all input parameters for the `getProposalState`
+    /// function with signature `getProposalState(bytes32)` and selector
+    /// `0x0a704f48`
     #[derive(
         Clone,
         ::ethers::contract::EthCall,
@@ -1096,7 +1112,9 @@ pub mod signing_rules_contract {
     pub struct GetProposalStateCall {
         pub phase_2_job_hash: [u8; 32],
     }
-    ///Container type for all input parameters for the `getProposalYesVotes` function with signature `getProposalYesVotes(bytes32)` and selector `0xa9b62d8d`
+    ///Container type for all input parameters for the `getProposalYesVotes`
+    /// function with signature `getProposalYesVotes(bytes32)` and selector
+    /// `0xa9b62d8d`
     #[derive(
         Clone,
         ::ethers::contract::EthCall,
@@ -1116,7 +1134,9 @@ pub mod signing_rules_contract {
     pub struct GetProposalYesVotesCall {
         pub phase_2_job_hash: [u8; 32],
     }
-    ///Container type for all input parameters for the `getProposalYesVotesTotal` function with signature `getProposalYesVotesTotal(bytes32)` and selector `0x1b35b0cc`
+    ///Container type for all input parameters for the
+    /// `getProposalYesVotesTotal` function with signature
+    /// `getProposalYesVotesTotal(bytes32)` and selector `0x1b35b0cc`
     #[derive(
         Clone,
         ::ethers::contract::EthCall,
@@ -1136,7 +1156,9 @@ pub mod signing_rules_contract {
     pub struct GetProposalYesVotesTotalCall {
         pub phase_2_job_hash: [u8; 32],
     }
-    ///Container type for all input parameters for the `initialize` function with signature `initialize(bytes32,bytes,uint8,bool,address[],uint40)` and selector `0xdf1a3f3a`
+    ///Container type for all input parameters for the `initialize` function
+    /// with signature `initialize(bytes32,bytes,uint8,bool,address[],uint40)`
+    /// and selector `0xdf1a3f3a`
     #[derive(
         Clone,
         ::ethers::contract::EthCall,
@@ -1161,7 +1183,8 @@ pub mod signing_rules_contract {
         pub voters: ::std::vec::Vec<::ethers::core::types::Address>,
         pub expiry: u64,
     }
-    ///Container type for all input parameters for the `initialized` function with signature `initialized()` and selector `0x158ef93e`
+    ///Container type for all input parameters for the `initialized` function
+    /// with signature `initialized()` and selector `0x158ef93e`
     #[derive(
         Clone,
         ::ethers::contract::EthCall,
@@ -1176,7 +1199,9 @@ pub mod signing_rules_contract {
     )]
     #[ethcall(name = "initialized", abi = "initialized()")]
     pub struct InitializedCall;
-    ///Container type for all input parameters for the `isValidForwarder` function with signature `isValidForwarder(bytes32,address)` and selector `0x22b87b97`
+    ///Container type for all input parameters for the `isValidForwarder`
+    /// function with signature `isValidForwarder(bytes32,address)` and selector
+    /// `0x22b87b97`
     #[derive(
         Clone,
         ::ethers::contract::EthCall,
@@ -1197,7 +1222,8 @@ pub mod signing_rules_contract {
         pub [u8; 32],
         pub ::ethers::core::types::Address,
     );
-    ///Container type for all input parameters for the `refreshVoters` function with signature `refreshVoters(bytes32)` and selector `0x1cba5b04`
+    ///Container type for all input parameters for the `refreshVoters` function
+    /// with signature `refreshVoters(bytes32)` and selector `0x1cba5b04`
     #[derive(
         Clone,
         ::ethers::contract::EthCall,
@@ -1214,7 +1240,10 @@ pub mod signing_rules_contract {
     pub struct RefreshVotersCall {
         pub phase_1_proposal_id: [u8; 32],
     }
-    ///Container type for all input parameters for the `submitGovernanceProposal` function with signature `submitGovernanceProposal(bytes32,bytes,bytes)` and selector `0x6f85e71a`
+    ///Container type for all input parameters for the
+    /// `submitGovernanceProposal` function with signature
+    /// `submitGovernanceProposal(bytes32,bytes,bytes)` and selector
+    /// `0x6f85e71a`
     #[derive(
         Clone,
         ::ethers::contract::EthCall,
@@ -1236,7 +1265,8 @@ pub mod signing_rules_contract {
         pub phase_1_job_details: ::ethers::core::types::Bytes,
         pub phase_2_job_details: ::ethers::core::types::Bytes,
     }
-    ///Container type for all input parameters for the `threshold` function with signature `threshold(bytes32)` and selector `0x25605b6d`
+    ///Container type for all input parameters for the `threshold` function
+    /// with signature `threshold(bytes32)` and selector `0x25605b6d`
     #[derive(
         Clone,
         ::ethers::contract::EthCall,
@@ -1251,7 +1281,8 @@ pub mod signing_rules_contract {
     )]
     #[ethcall(name = "threshold", abi = "threshold(bytes32)")]
     pub struct ThresholdCall(pub [u8; 32]);
-    ///Container type for all input parameters for the `useDemocracy` function with signature `useDemocracy(bytes32)` and selector `0xcf108ab9`
+    ///Container type for all input parameters for the `useDemocracy` function
+    /// with signature `useDemocracy(bytes32)` and selector `0xcf108ab9`
     #[derive(
         Clone,
         ::ethers::contract::EthCall,
@@ -1266,7 +1297,8 @@ pub mod signing_rules_contract {
     )]
     #[ethcall(name = "useDemocracy", abi = "useDemocracy(bytes32)")]
     pub struct UseDemocracyCall(pub [u8; 32]);
-    ///Container type for all input parameters for the `useValidators` function with signature `useValidators(bytes32)` and selector `0xbc20f44e`
+    ///Container type for all input parameters for the `useValidators` function
+    /// with signature `useValidators(bytes32)` and selector `0xbc20f44e`
     #[derive(
         Clone,
         ::ethers::contract::EthCall,
@@ -1281,7 +1313,9 @@ pub mod signing_rules_contract {
     )]
     #[ethcall(name = "useValidators", abi = "useValidators(bytes32)")]
     pub struct UseValidatorsCall(pub [u8; 32]);
-    ///Container type for all input parameters for the `voteProposal` function with signature `voteProposal(bytes32,bytes,bytes)` and selector `0x2d1ef7f6`
+    ///Container type for all input parameters for the `voteProposal` function
+    /// with signature `voteProposal(bytes32,bytes,bytes)` and selector
+    /// `0x2d1ef7f6`
     #[derive(
         Clone,
         ::ethers::contract::EthCall,
@@ -1300,7 +1334,8 @@ pub mod signing_rules_contract {
         pub phase_1_job_details: ::ethers::core::types::Bytes,
         pub phase_2_job_details: ::ethers::core::types::Bytes,
     }
-    ///Container type for all input parameters for the `voters` function with signature `voters(bytes32,uint256)` and selector `0xef67b8ed`
+    ///Container type for all input parameters for the `voters` function with
+    /// signature `voters(bytes32,uint256)` and selector `0xef67b8ed`
     #[derive(
         Clone,
         ::ethers::contract::EthCall,
@@ -1718,7 +1753,8 @@ pub mod signing_rules_contract {
             Self::Voters(value)
         }
     }
-    ///Container type for all return fields from the `MAX_VOTERS` function with signature `MAX_VOTERS()` and selector `0x3ceed692`
+    ///Container type for all return fields from the `MAX_VOTERS` function with
+    /// signature `MAX_VOTERS()` and selector `0x3ceed692`
     #[derive(
         Clone,
         ::ethers::contract::EthAbiType,
@@ -1732,7 +1768,8 @@ pub mod signing_rules_contract {
         Hash,
     )]
     pub struct MaxVotersReturn(pub ::ethers::core::types::U256);
-    ///Container type for all return fields from the `_proposals` function with signature `_proposals(bytes32)` and selector `0xf2e2af94`
+    ///Container type for all return fields from the `_proposals` function with
+    /// signature `_proposals(bytes32)` and selector `0xf2e2af94`
     #[derive(
         Clone,
         ::ethers::contract::EthAbiType,
@@ -1751,7 +1788,8 @@ pub mod signing_rules_contract {
         pub yes_votes_total: u8,
         pub proposed_block: u64,
     }
-    ///Container type for all return fields from the `admins` function with signature `admins(bytes32)` and selector `0xd079661b`
+    ///Container type for all return fields from the `admins` function with
+    /// signature `admins(bytes32)` and selector `0xd079661b`
     #[derive(
         Clone,
         ::ethers::contract::EthAbiType,
@@ -1765,7 +1803,9 @@ pub mod signing_rules_contract {
         Hash,
     )]
     pub struct AdminsReturn(pub ::ethers::core::types::Address);
-    ///Container type for all return fields from the `calculatePhase1ProposalId` function with signature `calculatePhase1ProposalId(bytes32,bytes)` and selector `0xd020a66f`
+    ///Container type for all return fields from the
+    /// `calculatePhase1ProposalId` function with signature
+    /// `calculatePhase1ProposalId(bytes32,bytes)` and selector `0xd020a66f`
     #[derive(
         Clone,
         ::ethers::contract::EthAbiType,
@@ -1779,7 +1819,9 @@ pub mod signing_rules_contract {
         Hash,
     )]
     pub struct CalculatePhase1ProposalIdReturn(pub [u8; 32]);
-    ///Container type for all return fields from the `calculatePhase2JobHash` function with signature `calculatePhase2JobHash(bytes32,bytes)` and selector `0xa0a0c516`
+    ///Container type for all return fields from the `calculatePhase2JobHash`
+    /// function with signature `calculatePhase2JobHash(bytes32,bytes)` and
+    /// selector `0xa0a0c516`
     #[derive(
         Clone,
         ::ethers::contract::EthAbiType,
@@ -1793,7 +1835,8 @@ pub mod signing_rules_contract {
         Hash,
     )]
     pub struct CalculatePhase2JobHashReturn(pub [u8; 32]);
-    ///Container type for all return fields from the `expiry` function with signature `expiry(bytes32)` and selector `0xd2ec5fca`
+    ///Container type for all return fields from the `expiry` function with
+    /// signature `expiry(bytes32)` and selector `0xd2ec5fca`
     #[derive(
         Clone,
         ::ethers::contract::EthAbiType,
@@ -1807,7 +1850,9 @@ pub mod signing_rules_contract {
         Hash,
     )]
     pub struct ExpiryReturn(pub u64);
-    ///Container type for all return fields from the `getProposalState` function with signature `getProposalState(bytes32)` and selector `0x0a704f48`
+    ///Container type for all return fields from the `getProposalState`
+    /// function with signature `getProposalState(bytes32)` and selector
+    /// `0x0a704f48`
     #[derive(
         Clone,
         ::ethers::contract::EthAbiType,
@@ -1821,7 +1866,9 @@ pub mod signing_rules_contract {
         Hash,
     )]
     pub struct GetProposalStateReturn(pub u8);
-    ///Container type for all return fields from the `getProposalYesVotes` function with signature `getProposalYesVotes(bytes32)` and selector `0xa9b62d8d`
+    ///Container type for all return fields from the `getProposalYesVotes`
+    /// function with signature `getProposalYesVotes(bytes32)` and selector
+    /// `0xa9b62d8d`
     #[derive(
         Clone,
         ::ethers::contract::EthAbiType,
@@ -1835,7 +1882,9 @@ pub mod signing_rules_contract {
         Hash,
     )]
     pub struct GetProposalYesVotesReturn(pub ::ethers::core::types::U256);
-    ///Container type for all return fields from the `getProposalYesVotesTotal` function with signature `getProposalYesVotesTotal(bytes32)` and selector `0x1b35b0cc`
+    ///Container type for all return fields from the `getProposalYesVotesTotal`
+    /// function with signature `getProposalYesVotesTotal(bytes32)` and selector
+    /// `0x1b35b0cc`
     #[derive(
         Clone,
         ::ethers::contract::EthAbiType,
@@ -1849,7 +1898,8 @@ pub mod signing_rules_contract {
         Hash,
     )]
     pub struct GetProposalYesVotesTotalReturn(pub u8);
-    ///Container type for all return fields from the `initialized` function with signature `initialized()` and selector `0x158ef93e`
+    ///Container type for all return fields from the `initialized` function
+    /// with signature `initialized()` and selector `0x158ef93e`
     #[derive(
         Clone,
         ::ethers::contract::EthAbiType,
@@ -1863,7 +1913,9 @@ pub mod signing_rules_contract {
         Hash,
     )]
     pub struct InitializedReturn(pub bool);
-    ///Container type for all return fields from the `isValidForwarder` function with signature `isValidForwarder(bytes32,address)` and selector `0x22b87b97`
+    ///Container type for all return fields from the `isValidForwarder`
+    /// function with signature `isValidForwarder(bytes32,address)` and selector
+    /// `0x22b87b97`
     #[derive(
         Clone,
         ::ethers::contract::EthAbiType,
@@ -1877,7 +1929,8 @@ pub mod signing_rules_contract {
         Hash,
     )]
     pub struct IsValidForwarderReturn(pub bool);
-    ///Container type for all return fields from the `threshold` function with signature `threshold(bytes32)` and selector `0x25605b6d`
+    ///Container type for all return fields from the `threshold` function with
+    /// signature `threshold(bytes32)` and selector `0x25605b6d`
     #[derive(
         Clone,
         ::ethers::contract::EthAbiType,
@@ -1891,7 +1944,8 @@ pub mod signing_rules_contract {
         Hash,
     )]
     pub struct ThresholdReturn(pub u8);
-    ///Container type for all return fields from the `useDemocracy` function with signature `useDemocracy(bytes32)` and selector `0xcf108ab9`
+    ///Container type for all return fields from the `useDemocracy` function
+    /// with signature `useDemocracy(bytes32)` and selector `0xcf108ab9`
     #[derive(
         Clone,
         ::ethers::contract::EthAbiType,
@@ -1905,7 +1959,8 @@ pub mod signing_rules_contract {
         Hash,
     )]
     pub struct UseDemocracyReturn(pub bool);
-    ///Container type for all return fields from the `useValidators` function with signature `useValidators(bytes32)` and selector `0xbc20f44e`
+    ///Container type for all return fields from the `useValidators` function
+    /// with signature `useValidators(bytes32)` and selector `0xbc20f44e`
     #[derive(
         Clone,
         ::ethers::contract::EthAbiType,
@@ -1919,7 +1974,8 @@ pub mod signing_rules_contract {
         Hash,
     )]
     pub struct UseValidatorsReturn(pub bool);
-    ///Container type for all return fields from the `voters` function with signature `voters(bytes32,uint256)` and selector `0xef67b8ed`
+    ///Container type for all return fields from the `voters` function with
+    /// signature `voters(bytes32,uint256)` and selector `0xef67b8ed`
     #[derive(
         Clone,
         ::ethers::contract::EthAbiType,
