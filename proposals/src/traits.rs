@@ -17,4 +17,3 @@ impl<E> OnSignedProposal<E> for () {
         Ok(())
     }
 }
-

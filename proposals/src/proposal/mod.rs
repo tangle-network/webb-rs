@@ -101,9 +101,6 @@ pub enum ProposalKind {
     SetDailyWithdrawalLimit,
 }
 
-
-
-
 impl Proposal {
     /// Returns the proposal data
     #[must_use]
