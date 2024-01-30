@@ -49,11 +49,11 @@ jobs:
       matrix:
         os: [ubuntu-latest, macos-latest]
         features:
-          - evm,std
+          - evm,std,scale
           - substrate,std
           - evm
         test-features:
-          - evm,std
+          - evm,std,scale
           - substrate,std
     runs-on: ${{ matrix.os }}
     # Name should be the OS name only (e.g. Linux, macOS, Windows)
