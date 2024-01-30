@@ -169,7 +169,7 @@ mod test
             "000000000000aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa010000000001"
         );
         let proposal = Proposal::Unsigned { 
-            kind: ProposalKind::AnchorCreate,
+            kind: ProposalKind::AnchorUpdate,
             data: anchor_update_proposa_bytes.to_vec() 
         };
 
@@ -179,6 +179,7 @@ mod test
         assert_eq!(decoded_proposal.kind(), proposal.kind());
         assert_eq!(decoded_proposal.data(), proposal.data());
         assert_eq!(decoded_proposal.is_unsigned(), true);
+        assert_eq!(decoded_proposal.is_anchor_update_proposal(), true);
     }
 
 
