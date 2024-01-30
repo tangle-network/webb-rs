@@ -144,43 +144,39 @@ impl Proposal {
     }
 
     /// Returns a boolean indicating if proposal is AnchorUpdate kind.
-    pub fn is_anchor_update_proposal(&self)-> bool{
-        match self.kind()  {
+    pub fn is_anchor_update_proposal(&self) -> bool {
+        match self.kind() {
             ProposalKind::AnchorUpdate => true,
-            _=> false
+            _ => false,
         }
     }
-
 }
 
 #[cfg(test)]
-mod test 
-{   
-    use scale_codec::{Encode, Decode};
+mod test {
     use crate::{Proposal, ProposalKind};
+    use scale_codec::{Decode, Encode};
 
-    
     #[test]
-    pub fn test_decode_proposal_from_bytes(){
+    pub fn test_decode_proposal_from_bytes() {
         let anchor_update_proposa_bytes = hex_literal::hex!(
             "000000000000aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa010000000004"
             "cafebabe00000001000102030405060708090a0b0c0d"
             "0e0f101112131415161718191a1b1c1d1e1f"
             "000000000000aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa010000000001"
         );
-        let proposal = Proposal::Unsigned { 
+        let proposal = Proposal::Unsigned {
             kind: ProposalKind::AnchorUpdate,
-            data: anchor_update_proposa_bytes.to_vec() 
+            data: anchor_update_proposa_bytes.to_vec(),
         };
 
         let proposal_bytes = proposal.encode();
 
-        let decoded_proposal = Proposal::decode(&mut proposal_bytes.as_slice()).unwrap();
+        let decoded_proposal =
+            Proposal::decode(&mut proposal_bytes.as_slice()).unwrap();
         assert_eq!(decoded_proposal.kind(), proposal.kind());
         assert_eq!(decoded_proposal.data(), proposal.data());
         assert_eq!(decoded_proposal.is_unsigned(), true);
         assert_eq!(decoded_proposal.is_anchor_update_proposal(), true);
     }
-
-
 }
