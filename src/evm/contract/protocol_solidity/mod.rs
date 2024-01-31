@@ -17,7 +17,14 @@ pub mod token_wrapper_handler;
 pub mod treasury;
 pub mod treasury_handler;
 pub mod vanchor_base;
+pub mod vanchor_encode_inputs;
+pub mod vanchor_verifier;
 pub mod variable_anchor;
+pub mod variable_anchor_tree;
+pub mod verifier_2_16;
+pub mod verifier_2_2;
+pub mod verifier_8_16;
+pub mod verifier_8_2;
 
 pub mod poseidon_hasher_factory {
     use std::sync::Arc;
@@ -55,6 +62,58 @@ pub mod poseidon_hasher_factory {
                 ("contracts/hashers/Poseidon.sol:PoseidonT4", t4),
                 ("contracts/hashers/Poseidon.sol:PoseidonT6", t6),
             ]);
+        }
+        let bytecode = bytecode_unlinked.bytecode.ok_or_else(|| {
+            std::io::Error::new(std::io::ErrorKind::Other, "missing bytecode")
+        })?;
+        debug_assert!(
+            bytecode.object.is_bytecode(),
+            "bytecode is not fully linked"
+        );
+        let raw_bytecode = bytecode.object.into_bytes().ok_or_else(|| {
+            std::io::Error::new(
+                std::io::ErrorKind::Other,
+                "bytecode is not fully linked",
+            )
+        })?;
+        let factory = ContractFactory::new(abi, raw_bytecode, client);
+        Ok(factory)
+    }
+}
+
+pub mod vanchor_tree_factory {
+    use std::sync::Arc;
+
+    use ethers::prelude::*;
+    use ethers::solc::artifacts::ContractBytecode;
+
+    use super::variable_anchor_tree::VANCHORTREECONTRACT_ABI;
+
+    fn contract_bytecode() -> std::io::Result<ContractBytecode> {
+        const ARTIFACT: &str = include_str!(
+            "../../../../contracts/protocol-solidity/VAnchorTree.json"
+        );
+        let artifact = serde_json::from_str::<HardhatArtifact>(&ARTIFACT)
+            .map_err(|e| std::io::Error::new(std::io::ErrorKind::Other, e))?;
+        let contract = artifact.into_contract_bytecode();
+        let bytecode: ContractBytecode = contract.into();
+        Ok(bytecode)
+    }
+
+    pub fn create<M>(
+        vanchor_encode_inputs: Address,
+        client: Arc<M>,
+    ) -> std::io::Result<ContractFactory<M>>
+    where
+        M: Middleware,
+    {
+        let abi = VANCHORTREECONTRACT_ABI.clone();
+        let mut bytecode_unlinked = contract_bytecode()?;
+        if let Some(ref mut bytecode) = bytecode_unlinked.bytecode {
+            bytecode.link_all_fully_qualified([(
+                "contracts/libs/VAnchorEncodeInputs.sol:VAnchorEncodeInputs",
+                vanchor_encode_inputs,
+            )]);
         }
         let bytecode = bytecode_unlinked.bytecode.ok_or_else(|| {
             std::io::Error::new(std::io::ErrorKind::Other, "missing bytecode")
