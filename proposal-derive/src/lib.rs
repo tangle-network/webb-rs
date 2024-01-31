@@ -107,7 +107,7 @@ fn derive_proposal_trait(
                 self.header
             }
 
-            fn function_sig() -> crate::FunctionSignature {
+            fn function_sig(&self) -> crate::FunctionSignature {
                 crate::FunctionSignature(#computed_function_sig)
             }
 
