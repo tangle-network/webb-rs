@@ -70,6 +70,8 @@ mod evm {
             "contracts/protocol-solidity/Verifier8_16.json",
             "src/evm/contract/protocol_solidity/verifier_8_16.rs",
             "Verifier8x16Contract",
+        )
+    }
     pub fn build_protocol_dkg_signing_rules() -> Result<(), Box<dyn Error>> {
         parse_and_write_abigen(
             "contracts/protocol-dkg/SigningRules.json",
