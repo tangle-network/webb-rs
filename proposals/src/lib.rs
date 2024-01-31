@@ -144,6 +144,7 @@ pub use header::*;
 pub use nonce::*;
 pub use proposal::*;
 pub use target_system::*;
+#[cfg(feature = "substrate")]
 pub use traits::*;
 
 pub use de::{from_slice, DeserializationError};
