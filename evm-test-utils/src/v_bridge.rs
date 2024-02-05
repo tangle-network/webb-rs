@@ -77,7 +77,7 @@ impl<M> VAnchorBridgeDeployment<M> {
             let treasury =
                 chain.deploy_treasury(treasury_handler.address()).await?;
 
-            // Set treasury handler
+            // Step5 Set treasury handler with singature.
             let bridge_target_system = TargetSystem::ContractAddress(
                 bridge.address().to_fixed_bytes(),
             );
@@ -109,6 +109,9 @@ impl<M> VAnchorBridgeDeployment<M> {
                     signature.to_vec().into(),
                 )
                 .await?;
+
+            // Step6 Deploy poseidon hasher contract.
+            let poseidon_hasher = chain.deploy_poseidon_hasher().await?;
         }
 
         Ok(())
