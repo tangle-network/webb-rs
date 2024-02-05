@@ -22,8 +22,9 @@ use webb::evm::contract::protocol_solidity::{
 };
 use webb::evm::ethers;
 use webb::evm::ethers::signers::Signer;
+use webb::evm::ethers::types::U256;
 
-use crate::errors::Result;
+use crate::errors::{self, Result};
 
 type EthersClient = ethers::providers::Provider<ethers::providers::Http>;
 type SignerEthersClient = ethers::middleware::SignerMiddleware<
@@ -166,15 +167,34 @@ impl LocalEvmChain {
         &self,
         name: String,
         symbol: String,
+        fee_percentage: u16,
+        fee_recipient: ethers::types::Address,
+        token_handler: ethers::types::Address,
+        limit: U256,
+        is_native_allowed: bool,
+        admin: ethers::types::Address,
     ) -> Result<FungibleTokenWrapperContract<SignerEthersClient>> {
-        FungibleTokenWrapperContract::deploy(
+        let contract = FungibleTokenWrapperContract::deploy(
             self.client.clone(),
             (name, symbol),
         )?
         .confirmations(0usize)
         .send()
-        .map_err(Into::into)
-        .await
+        .await?;
+
+        contract
+            .initialize(
+                fee_percentage,
+                fee_recipient,
+                token_handler,
+                limit,
+                is_native_allowed,
+                admin,
+            )
+            .call()
+            .await?;
+
+        Ok(contract)
     }
 
     /// Deploy a new Signature Bridge.

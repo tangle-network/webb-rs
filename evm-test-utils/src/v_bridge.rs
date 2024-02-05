@@ -7,7 +7,8 @@ use webb::evm::{
     ethers::{
         contract::EthCall,
         signers::{LocalWallet, Signer},
-        types::Address,
+        types::{Address, U256},
+        utils::keccak256,
     },
 };
 
@@ -141,6 +142,12 @@ impl VAnchorBridgeDeployment {
                 .deploy_fungible_token_wrapper(
                     token_config.name,
                     token_config.symbol,
+                    0,
+                    treasury.address(),
+                    token_wrapper_handler.address(),
+                    10000000000000000000000000u128.into(),
+                    false,
+                    deployer.address(),
                 )
                 .await?;
 
@@ -156,6 +163,12 @@ impl VAnchorBridgeDeployment {
                     fungible_token_wrapper.address(),
                     self.max_edges,
                 )
+                .await?;
+
+            let role = keccak256(b"MINTER_ROLE");
+            fungible_token_wrapper
+                .grant_role(role, vanchor.address())
+                .call()
                 .await?;
         }
 
