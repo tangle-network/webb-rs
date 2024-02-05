@@ -13,8 +13,9 @@ use webb::evm::{
 
 use crate::errors::{self, Result};
 use webb_proposals::{
-    evm::SetTreasuryHandlerProposal, FunctionSignature, Nonce, ProposalHeader,
-    ProposalTrait, ResourceId, TargetSystem, TypedChainId,
+    evm::{RegisterFungibleTokenProposal, SetTreasuryHandlerProposal},
+    FunctionSignature, Nonce, ProposalHeader, ProposalTrait, ResourceId,
+    TargetSystem, TypedChainId,
 };
 
 #[derive(Clone, Debug, typed_builder::TypedBuilder)]
@@ -47,10 +48,12 @@ pub struct VAnchorBridgeDeployment {
     pub vanchor_inputs: HashMap<TypedChainId, Address>,
     pub deployers: HashMap<TypedChainId, LocalWallet>,
     pub initial_governors: HashMap<TypedChainId, Address>,
+    pub max_edges: u8,
 }
 
 impl VAnchorBridgeDeployment {
     pub async fn deploy_variable_anchor_bridge(&self) -> Result<()> {
+        let merkle_tree_levels = 30;
         for chain in &self.chains {
             let chain_id = chain.chain_id();
             let typed_chain_id = TypedChainId::Evm(chain_id);
@@ -138,6 +141,20 @@ impl VAnchorBridgeDeployment {
                 .deploy_fungible_token_wrapper(
                     token_config.name,
                     token_config.symbol,
+                )
+                .await?;
+
+            // TODO: Set fungible token resource with signature.
+
+            // Deploy vanchor tree contract.
+            let vanchor = chain
+                .deploy_vanchor_tree(
+                    verifier.address(),
+                    merkle_tree_levels,
+                    poseidon_hasher.address(),
+                    anchor_handler.address(),
+                    fungible_token_wrapper.address(),
+                    self.max_edges,
                 )
                 .await?;
         }
