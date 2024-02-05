@@ -2,6 +2,7 @@ use std::sync::Arc;
 
 use crate::anvil::{Anvil, AnvilInstance};
 use futures::prelude::*;
+use webb::evm::contract::protocol_solidity::fungible_token_wrapper::FungibleTokenWrapperContract;
 use webb::evm::contract::protocol_solidity::token_wrapper_handler::TokenWrapperHandlerContract;
 use webb::evm::contract::protocol_solidity::vanchor_encode_inputs::VAnchorEncodeInputsContract;
 use webb::evm::contract::protocol_solidity::vanchor_tree_factory;
@@ -149,6 +150,26 @@ impl LocalEvmChain {
                 initial_r_ids,
                 initial_contract_addresses,
             ),
+        )?
+        .confirmations(0usize)
+        .send()
+        .map_err(Into::into)
+        .await
+    }
+
+    /// Deploy fungible token wrapper contract.
+    ///
+    /// # Errors
+    ///
+    /// This function will return an error if the deployment fails.
+    pub async fn deploy_fungible_token_wrapper(
+        &self,
+        name: String,
+        symbol: String,
+    ) -> Result<FungibleTokenWrapperContract<SignerEthersClient>> {
+        FungibleTokenWrapperContract::deploy(
+            self.client.clone(),
+            (name, symbol),
         )?
         .confirmations(0usize)
         .send()
