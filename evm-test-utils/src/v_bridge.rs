@@ -115,6 +115,11 @@ impl<M> VAnchorBridgeDeployment<M> {
 
             // Step7 Deploy verifier contract.
             let verifier = chain.deploy_vanchor_verifier().await?;
+
+            // Step8 Deploy token wrapper handler contract.
+            let token_wrapper_handler = chain
+                .deploy_token_wrapper_handler(bridge.address(), vec![], vec![])
+                .await?;
         }
 
         Ok(())

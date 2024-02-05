@@ -2,6 +2,7 @@ use std::sync::Arc;
 
 use crate::anvil::{Anvil, AnvilInstance};
 use futures::prelude::*;
+use webb::evm::contract::protocol_solidity::token_wrapper_handler::TokenWrapperHandlerContract;
 use webb::evm::contract::protocol_solidity::vanchor_encode_inputs::VAnchorEncodeInputsContract;
 use webb::evm::contract::protocol_solidity::vanchor_tree_factory;
 use webb::evm::contract::protocol_solidity::vanchor_verifier::VAnchorVerifierContract;
@@ -118,6 +119,36 @@ impl LocalEvmChain {
         ERC20PresetMinterPauserContract::deploy(
             self.client.clone(),
             (name, symbol),
+        )?
+        .confirmations(0usize)
+        .send()
+        .map_err(Into::into)
+        .await
+    }
+
+    /// Deploy Token wrapper handler.
+    ///
+    /// # Errors
+    ///
+    /// This function will return an error if the deployment fails.
+    pub async fn deploy_token_wrapper_handler(
+        &self,
+        bridge_contract_address: ethers::types::Address,
+        initial_resource_ids: Vec<webb_proposals::ResourceId>,
+        initial_contract_addresses: Vec<ethers::types::Address>,
+    ) -> Result<TokenWrapperHandlerContract<SignerEthersClient>> {
+        let initial_r_ids = initial_resource_ids
+            .iter()
+            .map(webb_proposals::ResourceId::to_bytes)
+            .collect::<Vec<_>>();
+
+        TokenWrapperHandlerContract::deploy(
+            self.client.clone(),
+            (
+                bridge_contract_address,
+                initial_r_ids,
+                initial_contract_addresses,
+            ),
         )?
         .confirmations(0usize)
         .send()
