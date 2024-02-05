@@ -242,7 +242,7 @@ impl LocalEvmChain {
     /// # Errors
     ///
     /// This function will return an error if the deployment fails.
-    pub async fn deploy_tresury_handler(
+    pub async fn deploy_treasury_handler(
         &self,
         bridge_contract_address: ethers::types::Address,
         initial_resource_ids: Vec<webb_proposals::ResourceId>,
@@ -271,7 +271,7 @@ impl LocalEvmChain {
     /// # Errors
     ///
     /// This function will return an error if the deployment fails.
-    pub async fn deploy_tresury(
+    pub async fn deploy_treasury(
         &self,
         treasury_handler_contract_address: ethers::types::Address,
     ) -> Result<TreasuryContract<SignerEthersClient>> {

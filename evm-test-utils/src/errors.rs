@@ -2,6 +2,9 @@ use webb::evm::ethers;
 
 #[derive(Debug, thiserror::Error)]
 pub enum Error {
+    /// Generic error.
+    #[error("{}", _0)]
+    Generic(&'static str),
     /// IO error.
     #[error(transparent)]
     Io(#[from] std::io::Error),
@@ -24,6 +27,12 @@ pub enum Error {
             >,
         >,
     ),
+    /// Initial Governor not defined for given chain
+    #[error("Initial Governor not defined for: {:?}", chain_id)]
+    NoInitialGovernor {
+        /// The chain id of the bridge.
+        chain_id: u32,
+    },
 }
 
 pub type Result<T> = std::result::Result<T, Error>;
