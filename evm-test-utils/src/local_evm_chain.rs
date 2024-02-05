@@ -370,6 +370,8 @@ impl LocalEvmChain {
         handler: ethers::types::Address,
         token: ethers::types::Address,
         max_edges: u8,
+        minimal_withdrawal_amount: ethers::types::U256,
+        maximum_deposit_amount: ethers::types::U256,
     ) -> Result<VAnchorTreeContract<SignerEthersClient>> {
         let client = self.client.clone();
         let vanchor_encode_inputs =
@@ -392,7 +394,14 @@ impl LocalEvmChain {
         .confirmations(0usize)
         .send()
         .await?;
-        Ok(VAnchorTreeContract::new(contract.address(), client))
+
+        let contract = VAnchorTreeContract::new(contract.address(), client);
+
+        contract
+            .initialize(minimal_withdrawal_amount, maximum_deposit_amount)
+            .call()
+            .await?;
+        Ok(contract)
     }
 
     fn spawn_anvil_node(
@@ -476,6 +485,8 @@ mod tests {
                 handler.address(),
                 token.address(),
                 2,
+                0.into(),
+                u64::MAX.into(),
             )
             .await?;
         // hasher on the vanchor tree should be the same as the one we deployed

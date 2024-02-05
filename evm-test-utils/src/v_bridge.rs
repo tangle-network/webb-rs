@@ -1,22 +1,19 @@
 use std::collections::HashMap;
 
 use webb::evm::{
-    contract::protocol_solidity::{
-        fungible_token_wrapper::FungibleTokenWrapperContract, signature_bridge,
-    },
+    contract::protocol_solidity::signature_bridge,
     ethers::{
         contract::EthCall,
         signers::{LocalWallet, Signer},
-        types::{Address, U256},
+        types::Address,
         utils::keccak256,
     },
 };
 
 use crate::errors::{self, Result};
 use webb_proposals::{
-    evm::{RegisterFungibleTokenProposal, SetTreasuryHandlerProposal},
-    FunctionSignature, Nonce, ProposalHeader, ProposalTrait, ResourceId,
-    TargetSystem, TypedChainId,
+    evm::SetTreasuryHandlerProposal, FunctionSignature, Nonce, ProposalHeader,
+    ProposalTrait, ResourceId, TargetSystem, TypedChainId,
 };
 
 #[derive(Clone, Debug, typed_builder::TypedBuilder)]
@@ -162,6 +159,8 @@ impl VAnchorBridgeDeployment {
                     anchor_handler.address(),
                     fungible_token_wrapper.address(),
                     self.max_edges,
+                    0.into(),
+                    10000000000000000000000000u128.into(),
                 )
                 .await?;
 
