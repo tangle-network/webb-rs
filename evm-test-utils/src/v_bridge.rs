@@ -2,15 +2,19 @@ use std::collections::HashMap;
 
 use webb::evm::{
     contract::protocol_solidity::{
-        erc20_preset_minter_pauser::ERC20PresetMinterPauserContract,
         fungible_token_wrapper::FungibleTokenWrapperContract, signature_bridge,
     },
-    ethers::{contract::EthCall, signers::LocalWallet, types::Address},
+    ethers::{
+        contract::EthCall,
+        signers::{LocalWallet, Signer},
+        types::Address,
+    },
 };
 
 use crate::errors::{self, Result};
 use webb_proposals::{
-    FunctionSignature, ResourceId, TargetSystem, TypedChainId,
+    evm::SetTreasuryHandlerProposal, FunctionSignature, Nonce, ProposalHeader,
+    ProposalTrait, ResourceId, TargetSystem, TypedChainId,
 };
 
 #[derive(Clone, Debug, typed_builder::TypedBuilder)]
@@ -44,6 +48,11 @@ impl<M> VAnchorBridgeDeployment<M> {
             let chain_id = chain.chain_id();
             let typed_chain_id = TypedChainId::Evm(chain_id);
 
+            let deployer = self
+                .deployers
+                .get(&typed_chain_id)
+                .ok_or_else(|| errors::Error::NoDeployer { chain_id })?;
+
             let initial_governor = self
                 .initial_governors
                 .get(&typed_chain_id)
@@ -69,24 +78,37 @@ impl<M> VAnchorBridgeDeployment<M> {
                 chain.deploy_treasury(treasury_handler.address()).await?;
 
             // Set treasury handler
-            let target_system = TargetSystem::ContractAddress(
-                treasury_handler.address().to_fixed_bytes(),
+            let bridge_target_system = TargetSystem::ContractAddress(
+                bridge.address().to_fixed_bytes(),
             );
-            let resource = ResourceId::new(target_system, typed_chain_id);
-            let function_signature_bytes =
-                signature_bridge::AdminSetResourceWithSignatureCall::selector()
+            let resource_id =
+                ResourceId::new(bridge_target_system, typed_chain_id);
+            let function_sig_bytes =
+                signature_bridge::ExecuteProposalWithSignatureCall::selector()
                     .to_vec();
             let mut buf = [0u8; 4];
-            buf.copy_from_slice(&function_signature_bytes);
-            let function_signature = FunctionSignature::from(buf);
-            bridge.admin_set_resource_with_signature(
-                resource_id,
-                function_sig,
-                nonce,
-                new_resource_id,
-                handler_address,
-                sig,
-            )
+            buf.copy_from_slice(&function_sig_bytes);
+            let function_sig = FunctionSignature::from(buf);
+            let nonce = bridge
+                .proposal_nonce()
+                .await?
+                .checked_add(1u64.into())
+                .unwrap_or_default();
+            let nonce = Nonce(nonce.as_u32());
+            let header = ProposalHeader::new(resource_id, function_sig, nonce);
+            let proposal = SetTreasuryHandlerProposal::new(
+                header,
+                treasury_handler.address().into(),
+            );
+
+            let signature = deployer.sign_message(proposal.to_vec()).await?;
+
+            bridge
+                .execute_proposal_with_signature(
+                    proposal.to_vec().into(),
+                    signature.to_vec().into(),
+                )
+                .await?;
         }
 
         Ok(())

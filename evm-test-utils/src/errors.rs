@@ -1,4 +1,4 @@
-use webb::evm::ethers;
+use webb::evm::ethers::{self, signers::WalletError};
 
 #[derive(Debug, thiserror::Error)]
 pub enum Error {
@@ -27,9 +27,19 @@ pub enum Error {
             >,
         >,
     ),
+    /// Wallet error.
+    #[error(transparent)]
+    WalletError(#[from] WalletError),
     /// Initial Governor not defined for given chain
     #[error("Initial Governor not defined for: {:?}", chain_id)]
     NoInitialGovernor {
+        /// The chain id of the bridge.
+        chain_id: u32,
+    },
+
+    /// Deployer not set for given chain
+    #[error("Deployer wallet not set for: {:?}", chain_id)]
+    NoDeployer {
         /// The chain id of the bridge.
         chain_id: u32,
     },
