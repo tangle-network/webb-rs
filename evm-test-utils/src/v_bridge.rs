@@ -112,6 +112,9 @@ impl<M> VAnchorBridgeDeployment<M> {
 
             // Step6 Deploy poseidon hasher contract.
             let poseidon_hasher = chain.deploy_poseidon_hasher().await?;
+
+            // Step7 Deploy verifier contract.
+            let verifier = chain.deploy_vanchor_verifier().await?;
         }
 
         Ok(())
