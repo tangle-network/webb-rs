@@ -24,7 +24,7 @@ use webb::evm::ethers;
 use webb::evm::ethers::signers::Signer;
 use webb::evm::ethers::types::U256;
 
-use crate::errors::{self, Result};
+use crate::errors::Result;
 
 type EthersClient = ethers::providers::Provider<ethers::providers::Http>;
 type SignerEthersClient = ethers::middleware::SignerMiddleware<

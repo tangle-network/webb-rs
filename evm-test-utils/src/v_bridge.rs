@@ -161,7 +161,42 @@ impl<'a> VAnchorBridgeDeployment<'a> {
                 )
                 .await?;
 
-            // TODO: Set fungible token resource with signature.
+            // Set fungible token resource with signature.
+            let fungible_token_target_system = TargetSystem::ContractAddress(
+                fungible_token_wrapper.address().to_fixed_bytes(),
+            );
+            let new_resource_id =
+                ResourceId::new(fungible_token_target_system, typed_chain_id);
+            let bridge_nonce = bridge
+                .proposal_nonce()
+                .await?
+                .checked_add(1u64.into())
+                .unwrap_or_default();
+            let nonce = Nonce(bridge_nonce.as_u32());
+
+            let mut unsigned_data = Vec::new();
+            unsigned_data.extend_from_slice(&resource_id.to_bytes());
+            unsigned_data.extend_from_slice(&function_sig.to_bytes());
+            unsigned_data.extend_from_slice(&nonce.to_bytes());
+            unsigned_data.extend_from_slice(&new_resource_id.to_bytes());
+            unsigned_data.extend_from_slice(
+                &token_wrapper_handler.address().to_fixed_bytes(),
+            );
+
+            let hashed_data: H256 = keccak256(&unsigned_data).into();
+            let signature = deployer.sign_hash(hashed_data)?;
+
+            bridge
+                .admin_set_resource_with_signature(
+                    resource_id.into(),
+                    function_sig.into(),
+                    nonce.into(),
+                    new_resource_id.into(),
+                    token_wrapper_handler.address(),
+                    signature.to_vec().into(),
+                )
+                .call()
+                .await?;
 
             // Deploy vanchor tree contract.
             let vanchor = chain
@@ -203,14 +238,10 @@ mod tests {
         let wallet1 =
             LocalWallet::new(&mut thread_rng()).with_chain_id(5001u32);
         deployers.insert(TypedChainId::Evm(5001), wallet1.clone());
-        let wallet2 =
-            LocalWallet::new(&mut thread_rng()).with_chain_id(5002u32);
-        deployers.insert(TypedChainId::Evm(5002), wallet2.clone());
 
         let mut initial_governors: HashMap<TypedChainId, Address> =
             HashMap::new();
         initial_governors.insert(TypedChainId::Evm(5001), wallet1.address());
-        initial_governors.insert(TypedChainId::Evm(5002), wallet2.address());
 
         let v_bridge = VAnchorBridgeDeployment::builder()
             .chains(chains)
@@ -222,6 +253,5 @@ mod tests {
         v_bridge.deploy_variable_anchor_bridge().await.unwrap();
 
         hermes.shutdown();
-        assert_eq!(1, 2);
     }
 }
