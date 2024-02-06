@@ -2,6 +2,8 @@ use std::sync::Arc;
 
 use crate::anvil::{Anvil, AnvilInstance};
 use futures::prelude::*;
+use webb::evm::contract::protocol_solidity::fungible_token_wrapper::FungibleTokenWrapperContract;
+use webb::evm::contract::protocol_solidity::token_wrapper_handler::TokenWrapperHandlerContract;
 use webb::evm::contract::protocol_solidity::vanchor_encode_inputs::VAnchorEncodeInputsContract;
 use webb::evm::contract::protocol_solidity::vanchor_tree_factory;
 use webb::evm::contract::protocol_solidity::vanchor_verifier::VAnchorVerifierContract;
@@ -19,7 +21,8 @@ use webb::evm::contract::protocol_solidity::{
     treasury::TreasuryContract, treasury_handler::TreasuryHandlerContract,
 };
 use webb::evm::ethers;
-use webb::evm::ethers::signers::Signer;
+use webb::evm::ethers::signers::{LocalWallet, Signer};
+use webb::evm::ethers::types::U256;
 
 use crate::errors::Result;
 
@@ -37,11 +40,18 @@ pub struct LocalEvmChain {
 }
 
 impl LocalEvmChain {
-    pub fn new(chain_id: u32, name: String) -> Self {
+    pub fn new(
+        chain_id: u32,
+        name: String,
+        wallet: Option<LocalWallet>,
+    ) -> Self {
         let anvil_node_handle = Self::spawn_anvil_node(chain_id, None);
         let secret_key = anvil_node_handle.keys()[0].clone();
-        let signer = ethers::signers::LocalWallet::from(secret_key)
-            .with_chain_id(chain_id);
+        let signer = match wallet {
+            Some(wallet) => wallet,
+            None => ethers::signers::LocalWallet::from(secret_key)
+                .with_chain_id(chain_id),
+        };
         let provider =
             ethers::providers::Provider::<ethers::providers::Http>::try_from(
                 anvil_node_handle.endpoint(),
@@ -60,13 +70,17 @@ impl LocalEvmChain {
     pub fn new_with_chain_state(
         chain_id: u32,
         name: String,
+        wallet: Option<LocalWallet>,
         state_dir: &std::path::Path,
     ) -> Self {
         let anvil_node_handle =
             Self::spawn_anvil_node(chain_id, Some(state_dir));
         let secret_key = anvil_node_handle.keys()[0].clone();
-        let signer = ethers::signers::LocalWallet::from(secret_key)
-            .with_chain_id(chain_id);
+        let signer = match wallet {
+            Some(wallet) => wallet,
+            None => ethers::signers::LocalWallet::from(secret_key)
+                .with_chain_id(chain_id),
+        };
         let provider =
             ethers::providers::Provider::<ethers::providers::Http>::try_from(
                 anvil_node_handle.endpoint(),
@@ -123,6 +137,75 @@ impl LocalEvmChain {
         .send()
         .map_err(Into::into)
         .await
+    }
+
+    /// Deploy Token wrapper handler.
+    ///
+    /// # Errors
+    ///
+    /// This function will return an error if the deployment fails.
+    pub async fn deploy_token_wrapper_handler(
+        &self,
+        bridge_contract_address: ethers::types::Address,
+        initial_resource_ids: Vec<webb_proposals::ResourceId>,
+        initial_contract_addresses: Vec<ethers::types::Address>,
+    ) -> Result<TokenWrapperHandlerContract<SignerEthersClient>> {
+        let initial_r_ids = initial_resource_ids
+            .iter()
+            .map(webb_proposals::ResourceId::to_bytes)
+            .collect::<Vec<_>>();
+
+        TokenWrapperHandlerContract::deploy(
+            self.client.clone(),
+            (
+                bridge_contract_address,
+                initial_r_ids,
+                initial_contract_addresses,
+            ),
+        )?
+        .confirmations(0usize)
+        .send()
+        .map_err(Into::into)
+        .await
+    }
+
+    /// Deploy fungible token wrapper contract.
+    ///
+    /// # Errors
+    ///
+    /// This function will return an error if the deployment fails.
+    pub async fn deploy_fungible_token_wrapper(
+        &self,
+        name: String,
+        symbol: String,
+        fee_percentage: u16,
+        fee_recipient: ethers::types::Address,
+        token_handler: ethers::types::Address,
+        limit: U256,
+        is_native_allowed: bool,
+        admin: ethers::types::Address,
+    ) -> Result<FungibleTokenWrapperContract<SignerEthersClient>> {
+        let contract = FungibleTokenWrapperContract::deploy(
+            self.client.clone(),
+            (name, symbol),
+        )?
+        .confirmations(0usize)
+        .send()
+        .await?;
+
+        contract
+            .initialize(
+                fee_percentage,
+                fee_recipient,
+                token_handler,
+                limit,
+                is_native_allowed,
+                admin,
+            )
+            .call()
+            .await?;
+
+        Ok(contract)
     }
 
     /// Deploy a new Signature Bridge.
@@ -242,7 +325,7 @@ impl LocalEvmChain {
     /// # Errors
     ///
     /// This function will return an error if the deployment fails.
-    pub async fn deploy_tresury_handler(
+    pub async fn deploy_treasury_handler(
         &self,
         bridge_contract_address: ethers::types::Address,
         initial_resource_ids: Vec<webb_proposals::ResourceId>,
@@ -271,7 +354,7 @@ impl LocalEvmChain {
     /// # Errors
     ///
     /// This function will return an error if the deployment fails.
-    pub async fn deploy_tresury(
+    pub async fn deploy_treasury(
         &self,
         treasury_handler_contract_address: ethers::types::Address,
     ) -> Result<TreasuryContract<SignerEthersClient>> {
@@ -298,6 +381,8 @@ impl LocalEvmChain {
         handler: ethers::types::Address,
         token: ethers::types::Address,
         max_edges: u8,
+        minimal_withdrawal_amount: ethers::types::U256,
+        maximum_deposit_amount: ethers::types::U256,
     ) -> Result<VAnchorTreeContract<SignerEthersClient>> {
         let client = self.client.clone();
         let vanchor_encode_inputs =
@@ -320,7 +405,14 @@ impl LocalEvmChain {
         .confirmations(0usize)
         .send()
         .await?;
-        Ok(VAnchorTreeContract::new(contract.address(), client))
+
+        let contract = VAnchorTreeContract::new(contract.address(), client);
+
+        contract
+            .initialize(minimal_withdrawal_amount, maximum_deposit_amount)
+            .call()
+            .await?;
+        Ok(contract)
     }
 
     fn spawn_anvil_node(
@@ -354,7 +446,7 @@ mod tests {
 
     #[tokio::test]
     async fn should_be_able_to_deploy_token() -> Result<()> {
-        let chain = LocalEvmChain::new(1337, String::from("Hermes"));
+        let chain = LocalEvmChain::new(1337, String::from("Hermes"), None);
         let token = chain
             .deploy_token(String::from("Test"), String::from("TST"))
             .await?;
@@ -368,7 +460,7 @@ mod tests {
 
     #[tokio::test]
     async fn should_be_able_to_deploy_hasher() -> Result<()> {
-        let chain = LocalEvmChain::new(5001, String::from("Hermes"));
+        let chain = LocalEvmChain::new(5001, String::from("Hermes"), None);
         let hasher = chain.deploy_poseidon_hasher().await?;
         let hash = hasher
             .hash_left_right(U256::from(1), U256::from(2))
@@ -384,7 +476,7 @@ mod tests {
 
     #[tokio::test]
     async fn should_be_able_to_deploy_vanchor_tree() -> Result<()> {
-        let chain = LocalEvmChain::new(5001, String::from("Hermes"));
+        let chain = LocalEvmChain::new(5001, String::from("Hermes"), None);
         let initial_governor = ethers::types::Address::zero();
         let bridge = chain.deploy_signature_bridge(initial_governor, 0).await?;
         let verifier = chain.deploy_vanchor_verifier().await?;
@@ -404,6 +496,8 @@ mod tests {
                 handler.address(),
                 token.address(),
                 2,
+                0.into(),
+                u64::MAX.into(),
             )
             .await?;
         // hasher on the vanchor tree should be the same as the one we deployed
@@ -429,6 +523,7 @@ mod tests {
         let chain = LocalEvmChain::new_with_chain_state(
             5001,
             String::from("Hermes"),
+            None,
             state.path(),
         );
         let token = chain
@@ -440,6 +535,7 @@ mod tests {
         let chain = LocalEvmChain::new_with_chain_state(
             5001,
             String::from("Hermes"),
+            None,
             state.path(),
         );
         let token = ERC20PresetMinterPauserContract::new(

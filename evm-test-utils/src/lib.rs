@@ -7,5 +7,5 @@ mod deployement_args;
 mod errors;
 mod local_evm_chain;
 mod random_port;
-
+mod v_bridge;
 pub use local_evm_chain::LocalEvmChain;
