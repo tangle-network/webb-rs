@@ -21,7 +21,7 @@ use webb::evm::contract::protocol_solidity::{
     treasury::TreasuryContract, treasury_handler::TreasuryHandlerContract,
 };
 use webb::evm::ethers;
-use webb::evm::ethers::signers::Signer;
+use webb::evm::ethers::signers::{LocalWallet, Signer};
 use webb::evm::ethers::types::U256;
 
 use crate::errors::Result;
@@ -40,11 +40,18 @@ pub struct LocalEvmChain {
 }
 
 impl LocalEvmChain {
-    pub fn new(chain_id: u32, name: String) -> Self {
+    pub fn new(
+        chain_id: u32,
+        name: String,
+        wallet: Option<LocalWallet>,
+    ) -> Self {
         let anvil_node_handle = Self::spawn_anvil_node(chain_id, None);
         let secret_key = anvil_node_handle.keys()[0].clone();
-        let signer = ethers::signers::LocalWallet::from(secret_key)
-            .with_chain_id(chain_id);
+        let signer = match wallet {
+            Some(wallet) => wallet,
+            None => ethers::signers::LocalWallet::from(secret_key)
+                .with_chain_id(chain_id),
+        };
         let provider =
             ethers::providers::Provider::<ethers::providers::Http>::try_from(
                 anvil_node_handle.endpoint(),
@@ -63,13 +70,17 @@ impl LocalEvmChain {
     pub fn new_with_chain_state(
         chain_id: u32,
         name: String,
+        wallet: Option<LocalWallet>,
         state_dir: &std::path::Path,
     ) -> Self {
         let anvil_node_handle =
             Self::spawn_anvil_node(chain_id, Some(state_dir));
         let secret_key = anvil_node_handle.keys()[0].clone();
-        let signer = ethers::signers::LocalWallet::from(secret_key)
-            .with_chain_id(chain_id);
+        let signer = match wallet {
+            Some(wallet) => wallet,
+            None => ethers::signers::LocalWallet::from(secret_key)
+                .with_chain_id(chain_id),
+        };
         let provider =
             ethers::providers::Provider::<ethers::providers::Http>::try_from(
                 anvil_node_handle.endpoint(),
@@ -435,7 +446,7 @@ mod tests {
 
     #[tokio::test]
     async fn should_be_able_to_deploy_token() -> Result<()> {
-        let chain = LocalEvmChain::new(1337, String::from("Hermes"));
+        let chain = LocalEvmChain::new(1337, String::from("Hermes"), None);
         let token = chain
             .deploy_token(String::from("Test"), String::from("TST"))
             .await?;
@@ -449,7 +460,7 @@ mod tests {
 
     #[tokio::test]
     async fn should_be_able_to_deploy_hasher() -> Result<()> {
-        let chain = LocalEvmChain::new(5001, String::from("Hermes"));
+        let chain = LocalEvmChain::new(5001, String::from("Hermes"), None);
         let hasher = chain.deploy_poseidon_hasher().await?;
         let hash = hasher
             .hash_left_right(U256::from(1), U256::from(2))
@@ -465,7 +476,7 @@ mod tests {
 
     #[tokio::test]
     async fn should_be_able_to_deploy_vanchor_tree() -> Result<()> {
-        let chain = LocalEvmChain::new(5001, String::from("Hermes"));
+        let chain = LocalEvmChain::new(5001, String::from("Hermes"), None);
         let initial_governor = ethers::types::Address::zero();
         let bridge = chain.deploy_signature_bridge(initial_governor, 0).await?;
         let verifier = chain.deploy_vanchor_verifier().await?;
@@ -512,6 +523,7 @@ mod tests {
         let chain = LocalEvmChain::new_with_chain_state(
             5001,
             String::from("Hermes"),
+            None,
             state.path(),
         );
         let token = chain
@@ -523,6 +535,7 @@ mod tests {
         let chain = LocalEvmChain::new_with_chain_state(
             5001,
             String::from("Hermes"),
+            None,
             state.path(),
         );
         let token = ERC20PresetMinterPauserContract::new(
