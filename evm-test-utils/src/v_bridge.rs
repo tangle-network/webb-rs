@@ -5,15 +5,14 @@ use webb::evm::{
     ethers::{
         contract::EthCall,
         signers::{LocalWallet, Signer},
-        types::Address,
+        types::{Address, H256},
         utils::keccak256,
     },
 };
 
 use crate::errors::{self, Result};
 use webb_proposals::{
-    evm::SetTreasuryHandlerProposal, FunctionSignature, Nonce, ProposalHeader,
-    ProposalTrait, ResourceId, TargetSystem, TypedChainId,
+    FunctionSignature, Nonce, ResourceId, TargetSystem, TypedChainId,
 };
 
 #[derive(Clone, Debug, typed_builder::TypedBuilder)]
@@ -39,17 +38,16 @@ pub struct ZkComponents {
 }
 
 #[derive(typed_builder::TypedBuilder)]
-pub struct VAnchorBridgeDeployment {
-    pub chains: Vec<crate::LocalEvmChain>,
+pub struct VAnchorBridgeDeployment<'a> {
+    pub chains: Vec<&'a crate::LocalEvmChain>,
     #[builder(default)]
     pub token_configs: HashMap<TypedChainId, TokenConfig>,
-    pub vanchor_inputs: HashMap<TypedChainId, Address>,
     pub deployers: HashMap<TypedChainId, LocalWallet>,
     pub initial_governors: HashMap<TypedChainId, Address>,
     pub max_edges: u8,
 }
 
-impl VAnchorBridgeDeployment {
+impl<'a> VAnchorBridgeDeployment<'a> {
     pub async fn deploy_variable_anchor_bridge(&self) -> Result<()> {
         let merkle_tree_levels = 30;
         for chain in &self.chains {
@@ -73,33 +71,39 @@ impl VAnchorBridgeDeployment {
                 .unwrap_or_else(TokenConfig::default)
                 .into();
 
-            // Step1 Deploy signature bridge contract
+            // Deploy signature bridge contract
             let bridge = chain
                 .deploy_signature_bridge(initial_governor.to_owned(), 1)
                 .await?;
 
-            // Step2 Deploy anchor handler contract
+            // Deploy anchor handler contract
             let anchor_handler = chain
                 .deploy_anchor_handler(bridge.address(), vec![], vec![])
                 .await?;
 
-            // Step3 Deploy treasury handler contract
+            // Deploy treasury handler and treasury contract
             let treasury_handler = chain
                 .deploy_treasury_handler(bridge.address(), vec![], vec![])
                 .await?;
 
-            // Step4 Deploy treasury contract
             let treasury =
                 chain.deploy_treasury(treasury_handler.address()).await?;
 
-            // Step5 Set treasury handler with singature.
+            // Set treasury handler with singature.
+            let treasury_target_system = TargetSystem::ContractAddress(
+                treasury.address().to_fixed_bytes(),
+            );
             let bridge_target_system = TargetSystem::ContractAddress(
                 bridge.address().to_fixed_bytes(),
             );
             let resource_id =
                 ResourceId::new(bridge_target_system, typed_chain_id);
+
+            let new_resource_id =
+                ResourceId::new(treasury_target_system, typed_chain_id);
+
             let function_sig_bytes =
-                signature_bridge::ExecuteProposalWithSignatureCall::selector()
+                signature_bridge::AdminSetResourceWithSignatureCall::selector()
                     .to_vec();
             let mut buf = [0u8; 4];
             buf.copy_from_slice(&function_sig_bytes);
@@ -110,19 +114,28 @@ impl VAnchorBridgeDeployment {
                 .checked_add(1u64.into())
                 .unwrap_or_default();
             let nonce = Nonce(nonce.as_u32());
-            let header = ProposalHeader::new(resource_id, function_sig, nonce);
-            let proposal = SetTreasuryHandlerProposal::new(
-                header,
-                treasury_handler.address().into(),
+            let mut unsigned_data = Vec::new();
+            unsigned_data.extend_from_slice(&resource_id.to_bytes());
+            unsigned_data.extend_from_slice(&function_sig.to_bytes());
+            unsigned_data.extend_from_slice(&nonce.to_bytes());
+            unsigned_data.extend_from_slice(&new_resource_id.to_bytes());
+            unsigned_data.extend_from_slice(
+                &treasury_handler.address().to_fixed_bytes(),
             );
 
-            let signature = deployer.sign_message(proposal.to_vec()).await?;
+            let hashed_data: H256 = keccak256(&unsigned_data).into();
+            let signature = deployer.sign_hash(hashed_data)?;
 
             bridge
-                .execute_proposal_with_signature(
-                    proposal.to_vec().into(),
+                .admin_set_resource_with_signature(
+                    resource_id.into(),
+                    function_sig.into(),
+                    nonce.into(),
+                    new_resource_id.into(),
+                    treasury_handler.address(),
                     signature.to_vec().into(),
                 )
+                .call()
                 .await?;
 
             let poseidon_hasher = chain.deploy_poseidon_hasher().await?;
@@ -172,5 +185,43 @@ impl VAnchorBridgeDeployment {
         }
 
         Ok(())
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use webb::evm::ethers::core::rand::thread_rng;
+
+    use crate::LocalEvmChain;
+
+    use super::*;
+    #[tokio::test]
+    async fn test_deploy_all_contracts() {
+        let hermes = LocalEvmChain::new(5001, String::from("Hermes"));
+        let chains = vec![&hermes];
+        let mut deployers: HashMap<TypedChainId, LocalWallet> = HashMap::new();
+        let wallet1 =
+            LocalWallet::new(&mut thread_rng()).with_chain_id(5001u32);
+        deployers.insert(TypedChainId::Evm(5001), wallet1.clone());
+        let wallet2 =
+            LocalWallet::new(&mut thread_rng()).with_chain_id(5002u32);
+        deployers.insert(TypedChainId::Evm(5002), wallet2.clone());
+
+        let mut initial_governors: HashMap<TypedChainId, Address> =
+            HashMap::new();
+        initial_governors.insert(TypedChainId::Evm(5001), wallet1.address());
+        initial_governors.insert(TypedChainId::Evm(5002), wallet2.address());
+
+        let v_bridge = VAnchorBridgeDeployment::builder()
+            .chains(chains)
+            .deployers(deployers)
+            .max_edges(2)
+            .initial_governors(initial_governors)
+            .build();
+
+        v_bridge.deploy_variable_anchor_bridge().await.unwrap();
+
+        hermes.shutdown();
+        assert_eq!(1, 2);
     }
 }

@@ -1,4 +1,4 @@
-use webb::evm::ethers::{self, signers::WalletError};
+use webb::evm::ethers::{self, signers::WalletError, types::SignatureError};
 
 #[derive(Debug, thiserror::Error)]
 pub enum Error {
@@ -30,6 +30,9 @@ pub enum Error {
     /// Wallet error.
     #[error(transparent)]
     WalletError(#[from] WalletError),
+    /// Signature error.
+    #[error(transparent)]
+    SignatureError(#[from] SignatureError),
     /// Initial Governor not defined for given chain
     #[error("Initial Governor not defined for: {:?}", chain_id)]
     NoInitialGovernor {
