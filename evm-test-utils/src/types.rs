@@ -48,8 +48,8 @@ impl ExtData {
     pub fn into_abi_token(&self) -> Token {
         Token::Tuple(vec![
             Token::Address(self.recipient),
-            Token::Address(self.relayer),
             self.ext_amount.into_abi_token(),
+            Token::Address(self.relayer),
             Token::Uint(self.fee),
             Token::Uint(self.refund),
             Token::Address(self.token),

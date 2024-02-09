@@ -1,6 +1,8 @@
 #[cfg(test)]
 mod tests {
     use std::fs::File;
+    use std::path::Path;
+    use std::str::FromStr;
 
     use ark_circom::read_zkey;
     use ark_ff::{BigInteger, PrimeField};
@@ -8,6 +10,7 @@ mod tests {
     use webb::evm::contract::protocol_solidity::variable_anchor_tree::{
         CommonExtData, Encryptions, PublicInputs,
     };
+    use webb::evm::ethers::abi::AbiEncode;
     use webb::evm::ethers::contract::ContractError;
     use webb::evm::ethers::core::rand::thread_rng;
 
@@ -16,12 +19,13 @@ mod tests {
     use crate::utils::{
         deconstruct_public_inputs_el, setup_utxos, setup_vanchor_circuit,
     };
+    use crate::v_bridge::VAnchorBridgeInfo;
     use crate::{
         v_bridge::{TokenConfig, VAnchorBridgeDeploymentConfig},
         LocalEvmChain,
     };
     use circom_proving::types::Proof as SolidityProof;
-    use webb::evm::ethers::types::U256;
+    use webb::evm::ethers::types::{H160, U256};
     use webb::evm::{
         contract::protocol_solidity::{
             vanchor_base::VAnchorBaseContract,
@@ -54,6 +58,7 @@ mod tests {
         // Deploy Hermes chain.
         let hermes_chain =
             LocalEvmChain::new(5001, String::from("Hermes"), None);
+
         let secret_key = hermes_chain.keys()[0].clone();
         let deployer_wallet1 =
             LocalWallet::from(secret_key).with_chain_id(5001u32);
@@ -123,10 +128,12 @@ mod tests {
         let neighbor_roots =
             vanchor.get_latest_neighbor_roots().call().await.unwrap();
 
+        let ext_data_hash_be = U256::from_big_endian(&ext_data_hash.0);
+
         let (proof, public_inputs) = setup_vanchor_circuit(
             public_amount,
             typed_source_chain_id,
-            ext_data_hash.0.to_vec(),
+            ext_data_hash_be,
             input_utxos,
             output_utxos.clone(),
             root,
@@ -185,7 +192,7 @@ mod tests {
                 proof_bytes.into(),
                 [0u8; 32].into(),
                 common_ext_data,
-                public_inputs,
+                public_inputs.clone(),
                 encryptions,
             )
             .call()

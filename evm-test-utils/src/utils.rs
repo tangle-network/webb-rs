@@ -273,7 +273,7 @@ pub fn setup_vanchor_circuit(
     // Metadata inputs
     public_amount: i128,
     chain_id: u64,
-    ext_data_hash: Vec<u8>,
+    ext_data_hash: U256,
     in_utxos: [Utxo<Bn254Fr>; NUM_UTXOS],
     out_utxos: [Utxo<Bn254Fr>; NUM_UTXOS],
     root: U256,
@@ -355,8 +355,10 @@ pub fn setup_vanchor_circuit(
         )]
     };
 
+    let mut ext_data_be_bytes = [0u8; 32];
+    ext_data_hash.to_big_endian(&mut ext_data_be_bytes);
     let ext_data_hash_as_vec =
-        vec![BigInt::from_bytes_be(Sign::Plus, &ext_data_hash)];
+        vec![BigInt::from_bytes_be(Sign::Plus, &ext_data_be_bytes)];
     let mut input_nullifier_as_vec = Vec::new();
     let mut output_commitment_as_vec = Vec::new();
     for i in 0..NUM_UTXOS {
