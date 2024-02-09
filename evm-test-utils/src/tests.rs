@@ -3,6 +3,7 @@ mod tests {
     use ark_ff::{BigInteger, PrimeField};
     use webb::evm::ethers::core::rand::thread_rng;
 
+    use webb::evm::ethers::types::U256;
     use webb::evm::{
         contract::protocol_solidity::{
             vanchor_base::VAnchorBaseContract,
@@ -14,6 +15,7 @@ mod tests {
         },
     };
 
+    use crate::types::ExtData;
     use crate::utils::setup_utxos;
     use crate::{
         v_bridge::{TokenConfig, VAnchorBridgeDeploymentConfig},
@@ -25,6 +27,10 @@ mod tests {
         let token_config = TokenConfig::default();
         let receiver_wallet =
             LocalWallet::new(&mut thread_rng()).with_chain_id(5002u32);
+
+        let relayer_Wallet =
+            LocalWallet::new(&mut thread_rng()).with_chain_id(5001u32);
+
         // Deploy Hermes chain.
         let hermes_chain =
             LocalEvmChain::new(5001, String::from("Hermes"), None);
@@ -49,12 +55,15 @@ mod tests {
         );
 
         let sender = deployer_wallet1.address();
-        let receiver = receiver_wallet.address();
+        let recipient = receiver_wallet.address();
+        let relayer = relayer_Wallet.address();
         let typed_source_chain_id = hermes_chain.typed_chain_id();
         let types_target_chain_id = hermes_chain.typed_chain_id();
         let ext_amount = 10_i128;
-        let public_amount = 10_i128;
-        let fee = 0_i128;
+        let public_amount: U256 = 10_u128.into();
+        let fee: U256 = 0_u128.into();
+        let refund: U256 = 0_u128.into();
+        let token = hermes_bridge.fungible_token_wrapper;
 
         let input_chain_ids = [typed_source_chain_id, types_target_chain_id];
         let input_amounts = [0, 0];
@@ -68,10 +77,23 @@ mod tests {
         let output_utxos =
             setup_utxos(output_chain_ids, output_amount, Some(output_indices));
 
-        let encrypted_commitment1 =
+        let encrypted_output1 =
             output_utxos[0].commitment.into_repr().to_bytes_be();
-        let encrypted_commitment2 =
+        let encrypted_output2 =
             output_utxos[1].commitment.into_repr().to_bytes_be();
+
+        let ext_data = ExtData::builder()
+            .recipient(recipient)
+            .relayer(relayer)
+            .ext_amount(ext_amount)
+            .fee(fee)
+            .refund(refund)
+            .token(token)
+            .encrypted_output1(encrypted_output1)
+            .encrypted_output2(encrypted_output2)
+            .build();
+
+        let ext_data_hash = ext_data.hash();
 
         // Shutdown chains.
         hermes_chain.shutdown();
