@@ -32,7 +32,7 @@ documentation = { workspace = true }
 homepage = { workspace = true }
 
 [workspace]
-members = [".", "proposals", "proposal-derive", "bridge-proofs", "evm-test-utils"]
+members = [".", "proposals", "proposal-derive", "bridge-proofs", "evm-test-utils", "circom-proving"]
 
 [dependencies]
 # Substrate crates.
