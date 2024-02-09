@@ -17,6 +17,8 @@ use thiserror::Error;
 use wasmer::{Module, Store};
 // use ark_std::vec::Vec;
 
+pub mod types;
+
 #[derive(Error, Debug)]
 pub enum ProofError {
     #[error("Error reading circuit key: {0}")]
