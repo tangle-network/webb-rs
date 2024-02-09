@@ -223,8 +223,6 @@ impl VAnchorBridgeDeploymentConfig {
 
 #[cfg(test)]
 mod tests {
-    use webb::evm::ethers::core::rand::thread_rng;
-
     use crate::LocalEvmChain;
 
     use super::*;

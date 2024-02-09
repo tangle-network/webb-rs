@@ -1,6 +1,5 @@
 use webb::evm::ethers::{
-    abi::{encode, AbiEncode, Address, Bytes, Int, Token, Uint},
-    core::k256::U256,
+    abi::{encode, AbiEncode, Address, Bytes, Token, Uint},
     types::H256,
     utils::keccak256,
 };
@@ -64,4 +63,11 @@ impl ExtData {
         let encoded_data = encode(&[self.into_abi_token()]);
         keccak256(encoded_data).into()
     }
+}
+
+impl IntoAbiToken for ExtData {
+    fn into_abi_token(&self) -> Token {
+        self.into_abi_token()
+    }
+
 }

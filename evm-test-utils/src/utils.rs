@@ -1,5 +1,8 @@
 use ark_std::{collections::BTreeMap, rand::rngs::OsRng};
+use circom_proving::verify_proof;
 use core::fmt::Debug;
+use num_traits::Zero;
+use webb::evm::ethers::types::{H256, U256};
 
 use ark_ff::{BigInteger, PrimeField};
 
@@ -266,6 +269,7 @@ pub fn setup_utxos(
     [utxo1, utxo2]
 }
 
+
 pub fn setup_vanchor_circuit(
     // Metadata inputs
     public_amount: i128,
@@ -273,7 +277,8 @@ pub fn setup_vanchor_circuit(
     ext_data_hash: Vec<u8>,
     in_utxos: [Utxo<Bn254Fr>; NUM_UTXOS],
     out_utxos: [Utxo<Bn254Fr>; NUM_UTXOS],
-    custom_roots: Option<[Vec<u8>; ANCHOR_CT]>,
+    root: U256,
+    neighbor_roots: [U256; ANCHOR_CT - 1],
     leaves: Vec<Vec<u8>>,
     circom_params: &(ProvingKey<Bn254>, ConstraintMatrices<Bn254Fr>),
     #[cfg(not(target_arch = "wasm32"))] wc: &Mutex<WitnessCalculator>,
@@ -289,34 +294,51 @@ pub fn setup_vanchor_circuit(
 
     let mut in_leaves: BTreeMap<u64, Vec<Vec<u8>>> = BTreeMap::new();
     in_leaves.insert(chain_id, leaves);
+
     let in_indices = [
         in_utxos[0].get_index().unwrap(),
         in_utxos[1].get_index().unwrap(),
     ];
 
-    // This allows us to pass zero roots for initial transaction
-    let (mut in_root_set, in_paths) = {
-        let params3 = setup_params::<Bn254Fr>(curve, 5, 3);
-        let poseidon3 = Poseidon::new(params3);
-        let (tree, _) = setup_tree_and_create_path::<
-            Bn254Fr,
-            Poseidon<Bn254Fr>,
-            TREE_DEPTH,
-        >(&poseidon3, &leaves_f, 0, &DEFAULT_LEAF)
-        .unwrap();
-        let in_paths: Vec<_> = in_indices
-            .iter()
-            .map(|i| tree.generate_membership_proof(*i))
-            .collect();
-        (
-            [(); ANCHOR_CT].map(|_| tree.root().into_repr().to_bytes_be()),
-            in_paths,
-        )
-    };
+    let params3 = setup_params::<Bn254Fr>(curve, 5, 3);
+    let poseidon3 = Poseidon::new(params3);
+    let (tree, _) = setup_tree_and_create_path::<
+        Bn254Fr,
+        Poseidon<Bn254Fr>,
+        TREE_DEPTH,
+    >(&poseidon3, &leaves_f, 0, &DEFAULT_LEAF)
+    .unwrap();
 
-    if custom_roots.is_some() {
-        in_root_set = custom_roots.unwrap();
-    }
+    let in_paths: Vec<_> = in_indices
+        .iter()
+        .map(|i| tree.generate_membership_proof(*i))
+        .collect();
+
+    let roots_f: [Bn254Fr; ANCHOR_CT] = vec![if root != U256::zero() {
+        let mut be_bytes = [0u8; 32];
+        root.to_big_endian(&mut be_bytes);
+        Bn254Fr::from_be_bytes_mod_order(&be_bytes)
+    } else {
+        tree.root()
+    }]
+    .iter()
+    .chain(
+        neighbor_roots
+            .iter()
+            .map(|r| {
+                let mut be_bytes = [0u8; 32];
+                r.to_big_endian(&mut be_bytes);
+                Bn254Fr::from_be_bytes_mod_order(&be_bytes)
+            })
+            .collect::<Vec<Bn254Fr>>()
+            .iter(),
+    )
+    .cloned()
+    .collect::<Vec<Bn254Fr>>()
+    .try_into()
+    .unwrap();
+
+    let in_root_set = roots_f.map(|x| x.into_repr().to_bytes_be());
 
     let params4 = setup_params::<Bn254Fr>(Curve::Bn254, 5, 4);
     let nullifier_hasher = Poseidon::<Bn254Fr> { params: params4 };
@@ -450,11 +472,65 @@ pub fn setup_vanchor_circuit(
 
     let public_inputs = &full_assignment[1..num_inputs];
 
+    let did_proof_work =
+        verify_proof(&circom_params.0.vk, &proof, public_inputs.to_vec())
+            .unwrap();
+    assert!(did_proof_work);
+
     (proof, public_inputs.to_vec())
 }
 
-pub fn truncate_and_pad(t: &[u8]) -> Vec<u8> {
-    let mut truncated_bytes = t[..20].to_vec();
-    truncated_bytes.extend_from_slice(&[0u8; 12]);
-    truncated_bytes
+pub fn deconstruct_public_inputs(
+	public_inputs: &Vec<Bn254Fr>,
+) -> (
+	Bn254Fr,      // Chain Id
+	Bn254Fr,      // Public amount
+	Vec<Bn254Fr>, // Roots
+	Vec<Bn254Fr>, // Input tx Nullifiers
+	Vec<Bn254Fr>, // Output tx commitments
+	Bn254Fr,      // External data hash
+) {
+	let public_amount = public_inputs[0];
+	let ext_data_hash = public_inputs[1];
+	let nullifiers = public_inputs[2..4].to_vec();
+	let commitments = public_inputs[4..6].to_vec();
+	let chain_id = public_inputs[6];
+	let root_set = public_inputs[7..9].to_vec();
+	(chain_id, public_amount, root_set, nullifiers, commitments, ext_data_hash)
 }
+
+pub fn deconstruct_public_inputs_el(
+	public_inputs_f: &Vec<Bn254Fr>,
+) -> (
+	u64,        // Chain Id
+	U256,       // Public amount
+	Vec<U256>,  // Roots
+	Vec<U256>,  // Input tx Nullifiers
+	[U256;2],   // Output tx commitments
+	U256,       // External data hash
+
+) {
+    let (chain_id, public_amount, roots, nullifiers, commitments, ext_data_hash) =
+        deconstruct_public_inputs(public_inputs_f);
+    let chain_id_el = U256::from_big_endian(&chain_id.into_repr().to_bytes_be());
+    let public_amount_el = U256::from_big_endian(&public_amount.into_repr().to_bytes_be());
+    let root_set_el = roots
+        .iter()
+        .map(|x| U256::from_big_endian(&x.into_repr().to_bytes_be()))
+        .collect();
+    let nullifiers_el = nullifiers
+        .iter()
+        .map(|x| U256::from_big_endian(&x.into_repr().to_bytes_be()))
+        .collect();
+	let commitments_el: [U256;2] = commitments
+		.iter()
+		.map(|x| U256::from_big_endian(&x.into_repr().to_bytes_be()))
+		.collect::<Vec<U256>>()
+        .try_into() // Try to convert Vec<U256> to [U256; 2]
+        .expect("Failed to convert Vec<U256> to [U256; 2]");
+	let ext_data_hash_el = U256::from_big_endian(&ext_data_hash.into_repr().to_bytes_be());
+	(chain_id_el.as_u64(), public_amount_el, root_set_el, nullifiers_el, commitments_el, ext_data_hash_el)
+}
+
+
+
