@@ -3,3 +3,7 @@ node_modules
 .DS_STORE
 Cargo.lock
 .direnv
+.dvc
+
+solidity-fixtures
+chain-state
