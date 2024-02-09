@@ -69,5 +69,4 @@ impl IntoAbiToken for ExtData {
     fn into_abi_token(&self) -> Token {
         self.into_abi_token()
     }
-
 }

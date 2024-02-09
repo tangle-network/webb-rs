@@ -269,7 +269,6 @@ pub fn setup_utxos(
     [utxo1, utxo2]
 }
 
-
 pub fn setup_vanchor_circuit(
     // Metadata inputs
     public_amount: i128,
@@ -481,39 +480,53 @@ pub fn setup_vanchor_circuit(
 }
 
 pub fn deconstruct_public_inputs(
-	public_inputs: &Vec<Bn254Fr>,
+    public_inputs: &Vec<Bn254Fr>,
 ) -> (
-	Bn254Fr,      // Chain Id
-	Bn254Fr,      // Public amount
-	Vec<Bn254Fr>, // Roots
-	Vec<Bn254Fr>, // Input tx Nullifiers
-	Vec<Bn254Fr>, // Output tx commitments
-	Bn254Fr,      // External data hash
+    Bn254Fr,      // Chain Id
+    Bn254Fr,      // Public amount
+    Vec<Bn254Fr>, // Roots
+    Vec<Bn254Fr>, // Input tx Nullifiers
+    Vec<Bn254Fr>, // Output tx commitments
+    Bn254Fr,      // External data hash
 ) {
-	let public_amount = public_inputs[0];
-	let ext_data_hash = public_inputs[1];
-	let nullifiers = public_inputs[2..4].to_vec();
-	let commitments = public_inputs[4..6].to_vec();
-	let chain_id = public_inputs[6];
-	let root_set = public_inputs[7..9].to_vec();
-	(chain_id, public_amount, root_set, nullifiers, commitments, ext_data_hash)
+    let public_amount = public_inputs[0];
+    let ext_data_hash = public_inputs[1];
+    let nullifiers = public_inputs[2..4].to_vec();
+    let commitments = public_inputs[4..6].to_vec();
+    let chain_id = public_inputs[6];
+    let root_set = public_inputs[7..9].to_vec();
+    (
+        chain_id,
+        public_amount,
+        root_set,
+        nullifiers,
+        commitments,
+        ext_data_hash,
+    )
 }
 
 pub fn deconstruct_public_inputs_el(
-	public_inputs_f: &Vec<Bn254Fr>,
+    public_inputs_f: &Vec<Bn254Fr>,
 ) -> (
-	u64,        // Chain Id
-	U256,       // Public amount
-	Vec<U256>,  // Roots
-	Vec<U256>,  // Input tx Nullifiers
-	[U256;2],   // Output tx commitments
-	U256,       // External data hash
-
+    u64,       // Chain Id
+    U256,      // Public amount
+    Vec<U256>, // Roots
+    Vec<U256>, // Input tx Nullifiers
+    [U256; 2], // Output tx commitments
+    U256,      // External data hash
 ) {
-    let (chain_id, public_amount, roots, nullifiers, commitments, ext_data_hash) =
-        deconstruct_public_inputs(public_inputs_f);
-    let chain_id_el = U256::from_big_endian(&chain_id.into_repr().to_bytes_be());
-    let public_amount_el = U256::from_big_endian(&public_amount.into_repr().to_bytes_be());
+    let (
+        chain_id,
+        public_amount,
+        roots,
+        nullifiers,
+        commitments,
+        ext_data_hash,
+    ) = deconstruct_public_inputs(public_inputs_f);
+    let chain_id_el =
+        U256::from_big_endian(&chain_id.into_repr().to_bytes_be());
+    let public_amount_el =
+        U256::from_big_endian(&public_amount.into_repr().to_bytes_be());
     let root_set_el = roots
         .iter()
         .map(|x| U256::from_big_endian(&x.into_repr().to_bytes_be()))
@@ -522,15 +535,20 @@ pub fn deconstruct_public_inputs_el(
         .iter()
         .map(|x| U256::from_big_endian(&x.into_repr().to_bytes_be()))
         .collect();
-	let commitments_el: [U256;2] = commitments
-		.iter()
-		.map(|x| U256::from_big_endian(&x.into_repr().to_bytes_be()))
-		.collect::<Vec<U256>>()
+    let commitments_el: [U256; 2] = commitments
+        .iter()
+        .map(|x| U256::from_big_endian(&x.into_repr().to_bytes_be()))
+        .collect::<Vec<U256>>()
         .try_into() // Try to convert Vec<U256> to [U256; 2]
         .expect("Failed to convert Vec<U256> to [U256; 2]");
-	let ext_data_hash_el = U256::from_big_endian(&ext_data_hash.into_repr().to_bytes_be());
-	(chain_id_el.as_u64(), public_amount_el, root_set_el, nullifiers_el, commitments_el, ext_data_hash_el)
+    let ext_data_hash_el =
+        U256::from_big_endian(&ext_data_hash.into_repr().to_bytes_be());
+    (
+        chain_id_el.as_u64(),
+        public_amount_el,
+        root_set_el,
+        nullifiers_el,
+        commitments_el,
+        ext_data_hash_el,
+    )
 }
-
-
-

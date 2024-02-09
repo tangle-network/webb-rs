@@ -5,10 +5,22 @@ mod tests {
     use ark_circom::read_zkey;
     use ark_ff::{BigInteger, PrimeField};
     use circom_proving::circom_from_folder;
-    use webb::evm::contract::protocol_solidity::variable_anchor_tree::{CommonExtData, PublicInputs, Encryptions};
+    use webb::evm::contract::protocol_solidity::variable_anchor_tree::{
+        CommonExtData, Encryptions, PublicInputs,
+    };
     use webb::evm::ethers::contract::ContractError;
     use webb::evm::ethers::core::rand::thread_rng;
 
+    use crate::errors;
+    use crate::types::ExtData;
+    use crate::utils::{
+        deconstruct_public_inputs_el, setup_utxos, setup_vanchor_circuit,
+    };
+    use crate::{
+        v_bridge::{TokenConfig, VAnchorBridgeDeploymentConfig},
+        LocalEvmChain,
+    };
+    use circom_proving::types::Proof as SolidityProof;
     use webb::evm::ethers::types::U256;
     use webb::evm::{
         contract::protocol_solidity::{
@@ -19,14 +31,6 @@ mod tests {
             contract::{Contract, ContractInstance},
             signers::{LocalWallet, Signer},
         },
-    };
-    use circom_proving::types::Proof as SolidityProof;
-    use crate::errors;
-    use crate::types::ExtData;
-    use crate::utils::{deconstruct_public_inputs_el, setup_utxos, setup_vanchor_circuit};
-    use crate::{
-        v_bridge::{TokenConfig, VAnchorBridgeDeploymentConfig},
-        LocalEvmChain,
     };
 
     #[tokio::test]
@@ -118,7 +122,7 @@ mod tests {
         let root = vanchor.get_last_root().call().await.unwrap();
         let neighbor_roots =
             vanchor.get_latest_neighbor_roots().call().await.unwrap();
-        
+
         let (proof, public_inputs) = setup_vanchor_circuit(
             public_amount,
             typed_source_chain_id,
@@ -133,22 +137,27 @@ mod tests {
         );
 
         let solidity_proof = SolidityProof::try_from(proof).unwrap();
-		let proof_bytes = solidity_proof.encode().unwrap();
-        
+        let proof_bytes = solidity_proof.encode().unwrap();
 
-        let common_ext_data = CommonExtData { 
-            recipient, 
+        let common_ext_data = CommonExtData {
+            recipient,
             ext_amount: ext_data.ext_amount.into(),
             relayer,
             fee: ext_data.fee.into(),
             refund,
-            token 
+            token,
         };
 
         // Deconstructing public inputs
-		let (_chain_id, public_amount, root_set, nullifiers, commitments, ext_data_hash) =
-        deconstruct_public_inputs_el(&public_inputs);
-        
+        let (
+            _chain_id,
+            public_amount,
+            root_set,
+            nullifiers,
+            commitments,
+            ext_data_hash,
+        ) = deconstruct_public_inputs_el(&public_inputs);
+
         let flattened_root: Vec<u8> = root_set
             .iter()
             .flat_map(|x| {
@@ -157,34 +166,39 @@ mod tests {
                 be_bytes
             })
             .collect();
-        let public_inputs = PublicInputs { 
+        let public_inputs = PublicInputs {
             roots: flattened_root.into(),
             extension_roots: b"0x".to_vec().into(),
             input_nullifiers: nullifiers,
             output_commitments: commitments,
             public_amount,
-            ext_data_hash
+            ext_data_hash,
         };
 
         let encryptions = Encryptions {
             encrypted_output_1: encrypted_output1.into(),
-            encrypted_output_2: encrypted_output2.into()
+            encrypted_output_2: encrypted_output2.into(),
         };
-    
-        let maybe_result = vanchor.transact(
-            proof_bytes.into(),
-            [0u8;32].into(),
-            common_ext_data,
-            public_inputs,
-            encryptions
-        ).call().await;
+
+        let maybe_result = vanchor
+            .transact(
+                proof_bytes.into(),
+                [0u8; 32].into(),
+                common_ext_data,
+                public_inputs,
+                encryptions,
+            )
+            .call()
+            .await;
 
         match maybe_result {
             Ok(result) => {
                 println!("Transaction successful: {:?}", result);
             }
             Err(err) => {
-                let desc = err.decode_revert::<String>().unwrap_or_else(|| format!("{:?}", err));
+                let desc = err
+                    .decode_revert::<String>()
+                    .unwrap_or_else(|| format!("{:?}", err));
 
                 println!("Transaction failed: {:?}", desc);
             }
