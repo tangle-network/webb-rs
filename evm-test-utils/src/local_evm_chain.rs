@@ -23,6 +23,7 @@ use webb::evm::contract::protocol_solidity::{
 use webb::evm::ethers;
 use webb::evm::ethers::signers::{LocalWallet, Signer};
 use webb::evm::ethers::types::U256;
+use webb_proposals::TypedChainId;
 
 use crate::errors::Result;
 
@@ -97,6 +98,11 @@ impl LocalEvmChain {
 
     pub fn chain_id(&self) -> u32 {
         self.chain_id
+    }
+
+    /// Returns typed EVM chain id
+    pub fn typed_chain_id(&self) -> u64 {
+        TypedChainId::Evm(self.chain_id).chain_id()
     }
 
     pub fn name(&self) -> &str {

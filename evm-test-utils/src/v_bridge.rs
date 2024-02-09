@@ -231,10 +231,12 @@ mod tests {
     #[tokio::test]
     async fn test_deploy_all_contracts() {
         let token_config = TokenConfig::default();
-        let deployer_wallet1 =
-            LocalWallet::new(&mut thread_rng()).with_chain_id(5001u32);
         let hermes_chain =
             LocalEvmChain::new(5001, String::from("Hermes"), None);
+        let secret_key = hermes_chain.keys()[0].clone();
+        let deployer_wallet1 =
+            LocalWallet::from(secret_key).with_chain_id(5001u32);
+
         let hermes_bridge_config = VAnchorBridgeDeploymentConfig::builder()
             .deployer(deployer_wallet1)
             .token_config(token_config)
