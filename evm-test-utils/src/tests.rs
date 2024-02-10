@@ -1,59 +1,45 @@
 #[cfg(test)]
 mod tests {
-    use std::fs::File;
-    use std::path::Path;
-    use std::str::FromStr;
-
     use ark_circom::read_zkey;
     use ark_ff::{BigInteger, PrimeField};
     use circom_proving::circom_from_folder;
+    use std::fs::File;
+    use std::path::Path;
+    use webb::evm::contract::protocol_solidity::fungible_token_wrapper::FungibleTokenWrapperContract;
     use webb::evm::contract::protocol_solidity::variable_anchor_tree::{
         CommonExtData, Encryptions, PublicInputs,
     };
-    use webb::evm::ethers::abi::AbiEncode;
-    use webb::evm::ethers::contract::ContractError;
     use webb::evm::ethers::core::rand::thread_rng;
+    use webb::evm::ethers::utils::parse_ether;
 
-    use crate::errors;
     use crate::types::ExtData;
     use crate::utils::{
         deconstruct_public_inputs_el, setup_utxos, setup_vanchor_circuit,
     };
-    use crate::v_bridge::VAnchorBridgeInfo;
     use crate::{
         v_bridge::{TokenConfig, VAnchorBridgeDeploymentConfig},
         LocalEvmChain,
     };
     use circom_proving::types::Proof as SolidityProof;
-    use webb::evm::ethers::types::{H160, U256};
+    use webb::evm::ethers::types::U256;
     use webb::evm::{
-        contract::protocol_solidity::{
-            vanchor_base::VAnchorBaseContract,
-            variable_anchor_tree::VAnchorTreeContract,
-        },
-        ethers::{
-            contract::{Contract, ContractInstance},
-            signers::{LocalWallet, Signer},
-        },
+        contract::protocol_solidity::variable_anchor_tree::VAnchorTreeContract,
+        ethers::signers::{LocalWallet, Signer},
     };
 
     #[tokio::test]
     async fn test_vanchor_deposit() {
-        let path_2_2 = "/Users/salman01zz/Webb-Tools/webb-rs/solidity-fixtures/vanchor_2/2/circuit_final.zkey";
+        // Get fixtures
+        let path_2_2 = "../solidity-fixtures/vanchor_2/2/circuit_final.zkey";
         let mut file_2_2 = File::open(path_2_2).unwrap();
         let params_2_2 = read_zkey(&mut file_2_2).unwrap();
 
         let wasm_2_2_path =
-            "/Users/salman01zz/Webb-Tools/webb-rs/solidity-fixtures/vanchor_2/2/poseidon_vanchor_2_2.wasm";
+            "../solidity-fixtures/vanchor_2/2/poseidon_vanchor_2_2.wasm";
 
         let wc_2_2 = circom_from_folder(wasm_2_2_path);
 
         let token_config = TokenConfig::default();
-        let receiver_wallet =
-            LocalWallet::new(&mut thread_rng()).with_chain_id(5002u32);
-
-        let relayer_Wallet =
-            LocalWallet::new(&mut thread_rng()).with_chain_id(5001u32);
 
         // Deploy Hermes chain.
         let hermes_chain =
@@ -66,22 +52,47 @@ mod tests {
         let hermes_bridge_config = VAnchorBridgeDeploymentConfig::builder()
             .deployer(deployer_wallet1.clone())
             .token_config(token_config.clone())
-            .max_edges(2)
+            .max_edges(1)
             .build();
         let hermes_bridge = hermes_bridge_config
             .deploy_variable_anchor_bridge(&hermes_chain)
             .await
             .unwrap();
 
-        // create vanchor
+        println!("Hermes bridge deployed: {:?}", hermes_bridge);
+
+        // Vanchor instance on hermes chain
         let vanchor = VAnchorTreeContract::new(
             hermes_bridge.vanchor,
             hermes_chain.client(),
         );
 
-        let sender = deployer_wallet1.address();
-        let recipient = receiver_wallet.address();
-        let relayer = relayer_Wallet.address();
+        let fungible_token_wrapper = FungibleTokenWrapperContract::new(
+            hermes_bridge.fungible_token_wrapper,
+            hermes_chain.client(),
+        );
+
+        // Approve token spending on vanchor.
+        fungible_token_wrapper
+            .approve(vanchor.address(), parse_ether(1000).unwrap())
+            .send()
+            .await
+            .unwrap();
+
+        // Mint tokens on wallet.
+        fungible_token_wrapper
+            .mint(deployer_wallet1.address(), parse_ether(1000).unwrap())
+            .send()
+            .await
+            .unwrap();
+
+        let recipient_wallet =
+            LocalWallet::new(&mut thread_rng()).with_chain_id(5002u32);
+        let relayer_wallet =
+            LocalWallet::new(&mut thread_rng()).with_chain_id(5001u32);
+
+        let recipient = recipient_wallet.address();
+        let relayer = relayer_wallet.address();
         let typed_source_chain_id = hermes_chain.typed_chain_id();
         let types_target_chain_id = hermes_chain.typed_chain_id();
         let ext_amount = 10_i128;
@@ -187,7 +198,7 @@ mod tests {
             encrypted_output_2: encrypted_output2.into(),
         };
 
-        let maybe_result = vanchor
+        vanchor
             .transact(
                 proof_bytes.into(),
                 [0u8; 32].into(),
@@ -195,21 +206,9 @@ mod tests {
                 public_inputs.clone(),
                 encryptions,
             )
-            .call()
-            .await;
-
-        match maybe_result {
-            Ok(result) => {
-                println!("Transaction successful: {:?}", result);
-            }
-            Err(err) => {
-                let desc = err
-                    .decode_revert::<String>()
-                    .unwrap_or_else(|| format!("{:?}", err));
-
-                println!("Transaction failed: {:?}", desc);
-            }
-        }
+            .send()
+            .await
+            .unwrap();
 
         // Shutdown chains.
         hermes_chain.shutdown();
