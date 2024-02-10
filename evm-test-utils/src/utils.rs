@@ -1,10 +1,11 @@
+use ark_ec::bn::Bn;
 use ark_std::{collections::BTreeMap, rand::rngs::OsRng};
 use circom_proving::verify_proof;
 use core::fmt::Debug;
 use num_traits::Zero;
 use webb::evm::ethers::types::{H256, U256};
 
-use ark_ff::{BigInteger, PrimeField};
+use ark_ff::{BigInteger, Fp256, PrimeField};
 
 use arkworks_native_gadgets::poseidon::Poseidon;
 pub use arkworks_setups::common::{
@@ -17,8 +18,8 @@ use arkworks_setups::{
     Curve, MixerProver, VAnchorProver,
 };
 
-use ark_bn254::{Bn254, Fr};
-use ark_circom::WitnessCalculator;
+use ark_bn254::{Bn254, Fr, FrParameters};
+use ark_circom::{read_zkey, WitnessCalculator};
 use ark_groth16::{
     create_proof_with_reduction_and_matrices, prepare_verifying_key,
     verify_proof as ark_verify_proof, Proof as ArkProof, ProvingKey,
@@ -27,7 +28,11 @@ use ark_groth16::{
 use ark_relations::r1cs::ConstraintMatrices;
 use ark_std::{rand::thread_rng, vec::Vec, UniformRand};
 use num_bigint::BigInt;
-use std::sync::Mutex;
+use std::{
+    fs::File,
+    path::{Path, PathBuf},
+    sync::Mutex,
+};
 
 type Bn254Fr = ark_bn254::Fr;
 
@@ -553,4 +558,37 @@ pub fn deconstruct_public_inputs_el(
         commitments_el,
         ext_data_hash_el,
     )
+}
+
+pub fn get_git_root_path() -> PathBuf {
+    let git_root = std::process::Command::new("git")
+        .args(["rev-parse", "--show-toplevel"])
+        .output()
+        .expect("Failed to get git root")
+        .stdout;
+    let git_root = std::str::from_utf8(&git_root)
+        .expect("Failed to parse git root")
+        .trim()
+        .to_string();
+    PathBuf::from(&git_root)
+}
+
+pub fn vanchor_2_2_fixtures() -> (
+    (
+        ProvingKey<Bn<ark_bn254::Parameters>>,
+        ConstraintMatrices<Fp256<FrParameters>>,
+    ),
+    &'static std::sync::Mutex<WitnessCalculator>,
+) {
+    let git_root = get_git_root_path();
+    let path_2_2 =
+        git_root.join("solidity-fixtures/vanchor_2/2/circuit_final.zkey");
+
+    let mut file_2_2 = File::open(path_2_2).unwrap();
+    let params_2_2 = read_zkey(&mut file_2_2).unwrap();
+
+    let wasm_2_2_path = git_root
+        .join("solidity-fixtures/vanchor_2/2/poseidon_vanchor_2_2.wasm");
+    let wc_2_2 = circom_from_folder(wasm_2_2_path.to_str().unwrap());
+    (params_2_2, wc_2_2)
 }

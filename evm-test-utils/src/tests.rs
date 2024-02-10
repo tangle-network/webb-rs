@@ -14,7 +14,8 @@ mod tests {
 
     use crate::types::ExtData;
     use crate::utils::{
-        deconstruct_public_inputs_el, setup_utxos, setup_vanchor_circuit,
+        deconstruct_public_inputs_el, get_git_root_path, setup_utxos,
+        setup_vanchor_circuit, vanchor_2_2_fixtures,
     };
     use crate::{
         v_bridge::{TokenConfig, VAnchorBridgeDeploymentConfig},
@@ -30,15 +31,7 @@ mod tests {
     #[tokio::test]
     async fn test_vanchor_deposit() {
         // Get fixtures
-        let path_2_2 = "../solidity-fixtures/vanchor_2/2/circuit_final.zkey";
-        let mut file_2_2 = File::open(path_2_2).unwrap();
-        let params_2_2 = read_zkey(&mut file_2_2).unwrap();
-
-        let wasm_2_2_path =
-            "../solidity-fixtures/vanchor_2/2/poseidon_vanchor_2_2.wasm";
-
-        let wc_2_2 = circom_from_folder(wasm_2_2_path);
-
+        let (params_2_2, wc_2_2) = vanchor_2_2_fixtures();
         let token_config = TokenConfig::default();
 
         // Deploy Hermes chain.
