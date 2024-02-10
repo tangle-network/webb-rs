@@ -106,5 +106,12 @@ jobs:
         uses: rui314/setup-mold@v1
       - name: Install Foundry
         uses: foundry-rs/foundry-toolchain@v1
+
+      - name: Download fixtures
+        run: |
+          mkdir -p ./solidity-fixtures/vanchor_2/2
+          curl -L -o ./solidity-fixtures/vanchor_2/2/poseidon_vanchor_2_2.wasm https://dapp-fixtures.s3.amazonaws.com/develop/vanchor_2/2/poseidon_vanchor_2_2.wasm
+          curl -L -o ./solidity-fixtures/vanchor_2/2/circuit_final.zkey https://dapp-fixtures.s3.amazonaws.com/develop/vanchor_2/2/circuit_final.zkey
+
       - name: Tests
         run: cargo test -p webb-evm-test-utils
