@@ -1,9 +1,13 @@
 use webb::evm::{
-    contract::protocol_solidity::signature_bridge,
+    contract::protocol_solidity::{
+        signature_bridge,
+        variable_anchor::{v_anchor_contract, VAnchorContract},
+        variable_anchor_tree,
+    },
     ethers::{
         contract::EthCall,
         signers::{LocalWallet, Signer},
-        types::{Address, H256},
+        types::{Address, H256, U256},
         utils::keccak256,
     },
 };
@@ -125,8 +129,15 @@ impl VAnchorBridgeDeploymentConfig {
                 treasury_handler.address(),
                 signature.to_vec().into(),
             )
+            .send()
+            .await?;
+
+        let treasury_handler_on_chain = bridge
+            .resource_id_to_handler_address(new_resource_id.into())
             .call()
             .await?;
+
+        assert_eq!(treasury_handler_on_chain, treasury_handler.address());
 
         let poseidon_hasher = chain.deploy_poseidon_hasher().await?;
 
@@ -185,8 +196,18 @@ impl VAnchorBridgeDeploymentConfig {
                 token_wrapper_handler.address(),
                 signature.to_vec().into(),
             )
+            .send()
+            .await?;
+
+        let token_wrapper_handler_on_chain = bridge
+            .resource_id_to_handler_address(new_resource_id.to_bytes())
             .call()
             .await?;
+
+        assert_eq!(
+            token_wrapper_handler_on_chain,
+            token_wrapper_handler.address()
+        );
 
         // Deploy vanchor tree contract.
         let vanchor = chain
@@ -205,7 +226,7 @@ impl VAnchorBridgeDeploymentConfig {
         let role = keccak256(b"MINTER_ROLE");
         fungible_token_wrapper
             .grant_role(role, vanchor.address())
-            .call()
+            .send()
             .await?;
 
         let bridge_info = VAnchorBridgeInfo::builder()
