@@ -229,6 +229,49 @@ impl VAnchorBridgeDeploymentConfig {
             .send()
             .await?;
 
+        // Set anchor handler with signature.
+        let vanchor_resource_id = ResourceId::new(
+            TargetSystem::ContractAddress(vanchor.address().to_fixed_bytes()),
+            typed_chain_id,
+        );
+
+        let bridge_nonce = bridge
+            .proposal_nonce()
+            .await?
+            .checked_add(1u64.into())
+            .unwrap_or_default();
+        let nonce = Nonce(bridge_nonce.as_u32());
+
+        let mut unsigned_data = Vec::new();
+        unsigned_data.extend_from_slice(&resource_id.to_bytes());
+        unsigned_data.extend_from_slice(&function_sig.to_bytes());
+        unsigned_data.extend_from_slice(&nonce.to_bytes());
+        unsigned_data.extend_from_slice(&vanchor_resource_id.to_bytes());
+        unsigned_data
+            .extend_from_slice(&anchor_handler.address().to_fixed_bytes());
+
+        let hashed_data: H256 = keccak256(&unsigned_data).into();
+        let signature = self.deployer.sign_hash(hashed_data)?;
+
+        bridge
+            .admin_set_resource_with_signature(
+                resource_id.into(),
+                function_sig.into(),
+                nonce.into(),
+                vanchor_resource_id.into(),
+                anchor_handler.address(),
+                signature.to_vec().into(),
+            )
+            .send()
+            .await?;
+
+        let v_handler_address_on_chain = bridge
+            .resource_id_to_handler_address(vanchor_resource_id.to_bytes())
+            .call()
+            .await?;
+
+        assert_eq!(v_handler_address_on_chain, anchor_handler.address());
+
         let bridge_info = VAnchorBridgeInfo::builder()
             .bridge(bridge.address())
             .vanchor(vanchor.address())
