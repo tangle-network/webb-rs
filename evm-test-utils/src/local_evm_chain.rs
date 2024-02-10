@@ -416,7 +416,7 @@ impl LocalEvmChain {
 
         contract
             .initialize(minimal_withdrawal_amount, maximum_deposit_amount)
-            .call()
+            .send()
             .await?;
         Ok(contract)
     }

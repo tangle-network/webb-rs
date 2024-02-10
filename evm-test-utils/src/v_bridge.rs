@@ -272,6 +272,46 @@ impl VAnchorBridgeDeploymentConfig {
 
         assert_eq!(v_handler_address_on_chain, anchor_handler.address());
 
+        // Configure maximum deposit limit.
+
+        let token_denomination = 1000000000000000000_u128; // 1 ether
+        let max_deposit_amount: U256 = (token_denomination * 1_000_000).into();
+        let min_withdrawal_limit = U256::zero();
+
+        let function_sig_bytes =
+            v_anchor_contract::ConfigureMaximumDepositLimitCall::selector()
+                .to_vec();
+        let mut buf = [0u8; 4];
+        buf.copy_from_slice(&function_sig_bytes);
+        let function_sig = FunctionSignature::from(buf);
+
+        let mut max_deposit_amount_bytes = [0u8; 32];
+        max_deposit_amount.to_big_endian(&mut max_deposit_amount_bytes);
+
+        let nonce = vanchor
+            .proposal_nonce()
+            .await?
+            .checked_add(1u64.into())
+            .unwrap_or_default();
+        let nonce = Nonce(nonce.as_u32());
+
+        let mut unsigned_data = Vec::new();
+        unsigned_data.extend_from_slice(&vanchor_resource_id.to_bytes());
+        unsigned_data.extend_from_slice(&function_sig.to_bytes());
+        unsigned_data.extend_from_slice(&nonce.to_bytes());
+        unsigned_data.extend_from_slice(&max_deposit_amount_bytes);
+
+        let hashed_data: H256 = keccak256(&unsigned_data).into();
+        let signature = self.deployer.sign_hash(hashed_data)?;
+
+        bridge
+            .execute_proposal_with_signature(
+                unsigned_data.into(),
+                signature.to_vec().into(),
+            )
+            .send()
+            .await?;
+
         let bridge_info = VAnchorBridgeInfo::builder()
             .bridge(bridge.address())
             .vanchor(vanchor.address())
