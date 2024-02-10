@@ -312,6 +312,41 @@ impl VAnchorBridgeDeploymentConfig {
             .send()
             .await?;
 
+        // Configure minimal withdrawal limit.
+
+        let function_sig_bytes =
+            v_anchor_contract::ConfigureMinimalWithdrawalLimitCall::selector()
+                .to_vec();
+        buf.copy_from_slice(&function_sig_bytes);
+        let function_sig = FunctionSignature::from(buf);
+
+        let mut min_withdrawl_limit_bytes = [0u8; 32];
+        min_withdrawal_limit.to_big_endian(&mut min_withdrawl_limit_bytes);
+
+        let nonce = vanchor
+            .proposal_nonce()
+            .await?
+            .checked_add(1u64.into())
+            .unwrap_or_default();
+        let nonce = Nonce(nonce.as_u32());
+
+        let mut unsigned_data = Vec::new();
+        unsigned_data.extend_from_slice(&vanchor_resource_id.to_bytes());
+        unsigned_data.extend_from_slice(&function_sig.to_bytes());
+        unsigned_data.extend_from_slice(&nonce.to_bytes());
+        unsigned_data.extend_from_slice(&min_withdrawl_limit_bytes);
+
+        let hashed_data: H256 = keccak256(&unsigned_data).into();
+        let signature = self.deployer.sign_hash(hashed_data)?;
+
+        bridge
+            .execute_proposal_with_signature(
+                unsigned_data.into(),
+                signature.to_vec().into(),
+            )
+            .send()
+            .await?;
+
         let bridge_info = VAnchorBridgeInfo::builder()
             .bridge(bridge.address())
             .vanchor(vanchor.address())
