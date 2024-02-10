@@ -1,8 +1,6 @@
 use webb::evm::{
     contract::protocol_solidity::{
-        signature_bridge,
-        variable_anchor::{v_anchor_contract, VAnchorContract},
-        variable_anchor_tree,
+        signature_bridge, variable_anchor::v_anchor_contract,
     },
     ethers::{
         contract::EthCall,

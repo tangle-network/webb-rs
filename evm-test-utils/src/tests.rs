@@ -1,28 +1,24 @@
 #[cfg(test)]
 mod tests {
-    use ark_circom::read_zkey;
     use ark_ff::{BigInteger, PrimeField};
-    use circom_proving::circom_from_folder;
-    use std::fs::File;
-    use std::path::Path;
     use webb::evm::contract::protocol_solidity::fungible_token_wrapper::FungibleTokenWrapperContract;
     use webb::evm::contract::protocol_solidity::variable_anchor_tree::{
         CommonExtData, Encryptions, PublicInputs,
     };
     use webb::evm::ethers::core::rand::thread_rng;
-    use webb::evm::ethers::utils::parse_ether;
+    use webb::evm::ethers::utils::{keccak256, parse_ether};
 
-    use crate::types::ExtData;
+    use crate::types::{ExtData, IntoAbiToken};
     use crate::utils::{
-        deconstruct_public_inputs_el, get_git_root_path, setup_utxos,
-        setup_vanchor_circuit, vanchor_2_2_fixtures,
+        deconstruct_public_inputs_el, setup_utxos, setup_vanchor_circuit,
+        vanchor_2_2_fixtures,
     };
     use crate::{
         v_bridge::{TokenConfig, VAnchorBridgeDeploymentConfig},
         LocalEvmChain,
     };
     use circom_proving::types::Proof as SolidityProof;
-    use webb::evm::ethers::types::U256;
+    use webb::evm::ethers::types::{H256, U256};
     use webb::evm::{
         contract::protocol_solidity::variable_anchor_tree::VAnchorTreeContract,
         ethers::signers::{LocalWallet, Signer},
@@ -127,7 +123,7 @@ mod tests {
             .encrypted_output2(encrypted_output2.clone())
             .build();
 
-        let ext_data_hash = ext_data.hash();
+        let ext_data_hash: H256 = keccak256(ext_data.encode_abi_token()).into();
         let root = vanchor.get_last_root().call().await.unwrap();
         let neighbor_roots =
             vanchor.get_latest_neighbor_roots().call().await.unwrap();
