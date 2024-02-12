@@ -71,16 +71,17 @@ impl InstanceVerifier for CircomVerifierBn254 {
         proof_bytes: &[u8],
         vk_bytes: &[u8],
     ) -> Result<bool, Error> {
-        let public_input_field_elts =
-            match to_field_elements::<Fr>(public_inp_bytes) {
-                Ok(v) => v,
-                Err(e) => {
-                    println!(
-					"Failed to convert public input bytes to field elements: {e:?}",
+        let public_input_field_elts = match to_field_elements::<Fr>(
+            public_inp_bytes,
+        ) {
+            Ok(v) => v,
+            Err(e) => {
+                println!(
+                        "Failed to convert public input bytes to field elements: {e:?}",
 				);
-                    return Err(e);
-                }
-            };
+                return Err(e);
+            }
+        };
         let vk = match ArkVerifyingKey::deserialize(vk_bytes) {
             Ok(v) => v,
             Err(e) => {
