@@ -1,9 +1,11 @@
 use webb::evm::{
-    contract::protocol_solidity::signature_bridge,
+    contract::protocol_solidity::{
+        signature_bridge, variable_anchor::v_anchor_contract,
+    },
     ethers::{
         contract::EthCall,
         signers::{LocalWallet, Signer},
-        types::{Address, H256},
+        types::{Address, H256, U256},
         utils::keccak256,
     },
 };
@@ -125,8 +127,15 @@ impl VAnchorBridgeDeploymentConfig {
                 treasury_handler.address(),
                 signature.to_vec().into(),
             )
+            .send()
+            .await?;
+
+        let treasury_handler_on_chain = bridge
+            .resource_id_to_handler_address(new_resource_id.into())
             .call()
             .await?;
+
+        assert_eq!(treasury_handler_on_chain, treasury_handler.address());
 
         let poseidon_hasher = chain.deploy_poseidon_hasher().await?;
 
@@ -185,8 +194,18 @@ impl VAnchorBridgeDeploymentConfig {
                 token_wrapper_handler.address(),
                 signature.to_vec().into(),
             )
+            .send()
+            .await?;
+
+        let token_wrapper_handler_on_chain = bridge
+            .resource_id_to_handler_address(new_resource_id.to_bytes())
             .call()
             .await?;
+
+        assert_eq!(
+            token_wrapper_handler_on_chain,
+            token_wrapper_handler.address()
+        );
 
         // Deploy vanchor tree contract.
         let vanchor = chain
@@ -205,7 +224,125 @@ impl VAnchorBridgeDeploymentConfig {
         let role = keccak256(b"MINTER_ROLE");
         fungible_token_wrapper
             .grant_role(role, vanchor.address())
+            .send()
+            .await?;
+
+        // Set anchor handler with signature.
+        let vanchor_resource_id = ResourceId::new(
+            TargetSystem::ContractAddress(vanchor.address().to_fixed_bytes()),
+            typed_chain_id,
+        );
+
+        let bridge_nonce = bridge
+            .proposal_nonce()
+            .await?
+            .checked_add(1u64.into())
+            .unwrap_or_default();
+        let nonce = Nonce(bridge_nonce.as_u32());
+
+        let mut unsigned_data = Vec::new();
+        unsigned_data.extend_from_slice(&resource_id.to_bytes());
+        unsigned_data.extend_from_slice(&function_sig.to_bytes());
+        unsigned_data.extend_from_slice(&nonce.to_bytes());
+        unsigned_data.extend_from_slice(&vanchor_resource_id.to_bytes());
+        unsigned_data
+            .extend_from_slice(&anchor_handler.address().to_fixed_bytes());
+
+        let hashed_data: H256 = keccak256(&unsigned_data).into();
+        let signature = self.deployer.sign_hash(hashed_data)?;
+
+        bridge
+            .admin_set_resource_with_signature(
+                resource_id.into(),
+                function_sig.into(),
+                nonce.into(),
+                vanchor_resource_id.into(),
+                anchor_handler.address(),
+                signature.to_vec().into(),
+            )
+            .send()
+            .await?;
+
+        let v_handler_address_on_chain = bridge
+            .resource_id_to_handler_address(vanchor_resource_id.to_bytes())
             .call()
+            .await?;
+
+        assert_eq!(v_handler_address_on_chain, anchor_handler.address());
+
+        // Configure maximum deposit limit.
+
+        let token_denomination = 1000000000000000000_u128; // 1 ether
+        let max_deposit_amount: U256 = (token_denomination * 1_000_000).into();
+        let min_withdrawal_limit = U256::zero();
+
+        let function_sig_bytes =
+            v_anchor_contract::ConfigureMaximumDepositLimitCall::selector()
+                .to_vec();
+        let mut buf = [0u8; 4];
+        buf.copy_from_slice(&function_sig_bytes);
+        let function_sig = FunctionSignature::from(buf);
+
+        let mut max_deposit_amount_bytes = [0u8; 32];
+        max_deposit_amount.to_big_endian(&mut max_deposit_amount_bytes);
+
+        let nonce = vanchor
+            .proposal_nonce()
+            .await?
+            .checked_add(1u64.into())
+            .unwrap_or_default();
+        let nonce = Nonce(nonce.as_u32());
+
+        let mut unsigned_data = Vec::new();
+        unsigned_data.extend_from_slice(&vanchor_resource_id.to_bytes());
+        unsigned_data.extend_from_slice(&function_sig.to_bytes());
+        unsigned_data.extend_from_slice(&nonce.to_bytes());
+        unsigned_data.extend_from_slice(&max_deposit_amount_bytes);
+
+        let hashed_data: H256 = keccak256(&unsigned_data).into();
+        let signature = self.deployer.sign_hash(hashed_data)?;
+
+        bridge
+            .execute_proposal_with_signature(
+                unsigned_data.into(),
+                signature.to_vec().into(),
+            )
+            .send()
+            .await?;
+
+        // Configure minimal withdrawal limit.
+
+        let function_sig_bytes =
+            v_anchor_contract::ConfigureMinimalWithdrawalLimitCall::selector()
+                .to_vec();
+        buf.copy_from_slice(&function_sig_bytes);
+        let function_sig = FunctionSignature::from(buf);
+
+        let mut min_withdrawl_limit_bytes = [0u8; 32];
+        min_withdrawal_limit.to_big_endian(&mut min_withdrawl_limit_bytes);
+
+        let nonce = vanchor
+            .proposal_nonce()
+            .await?
+            .checked_add(1u64.into())
+            .unwrap_or_default();
+        let nonce = Nonce(nonce.as_u32());
+
+        let mut unsigned_data = Vec::new();
+        unsigned_data.extend_from_slice(&vanchor_resource_id.to_bytes());
+        unsigned_data.extend_from_slice(&function_sig.to_bytes());
+        unsigned_data.extend_from_slice(&nonce.to_bytes());
+        unsigned_data.extend_from_slice(&min_withdrawl_limit_bytes);
+
+        let hashed_data: H256 = keccak256(&unsigned_data).into();
+        let signature = self.deployer.sign_hash(hashed_data)?;
+
+        bridge
+            .execute_proposal_with_signature(
+                unsigned_data.into(),
+                signature.to_vec().into(),
+            )
+            .send()
             .await?;
 
         let bridge_info = VAnchorBridgeInfo::builder()
@@ -223,18 +360,18 @@ impl VAnchorBridgeDeploymentConfig {
 
 #[cfg(test)]
 mod tests {
-    use webb::evm::ethers::core::rand::thread_rng;
-
     use crate::LocalEvmChain;
 
     use super::*;
     #[tokio::test]
     async fn test_deploy_all_contracts() {
         let token_config = TokenConfig::default();
-        let deployer_wallet1 =
-            LocalWallet::new(&mut thread_rng()).with_chain_id(5001u32);
         let hermes_chain =
             LocalEvmChain::new(5001, String::from("Hermes"), None);
+        let secret_key = hermes_chain.keys()[0].clone();
+        let deployer_wallet1 =
+            LocalWallet::from(secret_key).with_chain_id(5001u32);
+
         let hermes_bridge_config = VAnchorBridgeDeploymentConfig::builder()
             .deployer(deployer_wallet1)
             .token_config(token_config)
