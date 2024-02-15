@@ -312,7 +312,8 @@ impl TryFrom<Proof> for ArkProof<Bn254> {
     }
 }
 
-// Helper for converting a PrimeField to its U256 representation for Ethereum compatibility
+// Helper for converting a PrimeField to its U256 representation for Ethereum
+// compatibility
 fn u256_to_point<F: PrimeField>(point: U256) -> Result<F, Error> {
     let mut buf = [0; 32];
     point.to_little_endian(&mut buf);
@@ -321,8 +322,8 @@ fn u256_to_point<F: PrimeField>(point: U256) -> Result<F, Error> {
     F::from_repr(bigint).ok_or_else(|| CircomError::InvalidProofBytes.into())
 }
 
-// Helper for converting a PrimeField to its U256 representation for Ethereum compatibility
-// (U256 reads data as big endian)
+// Helper for converting a PrimeField to its U256 representation for Ethereum
+// compatibility (U256 reads data as big endian)
 fn point_to_u256<F: PrimeField>(point: F) -> Result<U256, Error> {
     let point = point.into_repr();
     let point_bytes = point.to_bytes_be();

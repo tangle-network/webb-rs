@@ -171,19 +171,22 @@ impl Anvil {
         self
     }
 
-    /// Sets the mnemonic which will be used when the `anvil` instance is launched.
+    /// Sets the mnemonic which will be used when the `anvil` instance is
+    /// launched.
     pub fn mnemonic<T: Into<String>>(mut self, mnemonic: T) -> Self {
         self.mnemonic = Some(mnemonic.into());
         self
     }
 
-    /// Sets the block-time in seconds which will be used when the `anvil` instance is launched.
+    /// Sets the block-time in seconds which will be used when the `anvil`
+    /// instance is launched.
     pub fn block_time<T: Into<u64>>(mut self, block_time: T) -> Self {
         self.block_time = Some(block_time.into());
         self
     }
 
-    /// Sets the `fork-block-number` which will be used in addition to [`Self::fork`].
+    /// Sets the `fork-block-number` which will be used in addition to
+    /// [`Self::fork`].
     ///
     /// **Note:** if set, then this requires `fork` to be set as well
     pub fn fork_block_number<T: Into<u64>>(
@@ -194,9 +197,9 @@ impl Anvil {
         self
     }
 
-    /// Sets the `fork` argument to fork from another currently running Ethereum client
-    /// at a given block. Input should be the HTTP location and port of the other client,
-    /// e.g. `http://localhost:8545`. You can optionally specify the block to fork from
+    /// Sets the `fork` argument to fork from another currently running Ethereum
+    /// client at a given block. Input should be the HTTP location and port
+    /// of the other client, e.g. `http://localhost:8545`. You can optionally specify the block to fork from
     /// using an @ sign: `http://localhost:8545@1599200`
     pub fn fork<T: Into<String>>(mut self, fork: T) -> Self {
         self.fork = Some(fork.into());
@@ -221,7 +224,8 @@ impl Anvil {
         self
     }
 
-    /// Sets the timeout which will be used when the `anvil` instance is launched.
+    /// Sets the timeout which will be used when the `anvil` instance is
+    /// launched.
     pub fn timeout<T: Into<u64>>(mut self, timeout: T) -> Self {
         self.timeout = Some(timeout.into());
         self
