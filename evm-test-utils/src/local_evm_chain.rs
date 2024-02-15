@@ -41,18 +41,11 @@ pub struct LocalEvmChain {
 }
 
 impl LocalEvmChain {
-    pub fn new(
-        chain_id: u32,
-        name: String,
-        wallet: Option<LocalWallet>,
-    ) -> Self {
-        let anvil_node_handle = Self::spawn_anvil_node(chain_id, None);
+    pub fn new(chain_id: u32, name: String, port: Option<u16>) -> Self {
+        let anvil_node_handle = Self::spawn_anvil_node(chain_id, None, port);
         let secret_key = anvil_node_handle.keys()[0].clone();
-        let signer = match wallet {
-            Some(wallet) => wallet,
-            None => ethers::signers::LocalWallet::from(secret_key)
-                .with_chain_id(chain_id),
-        };
+        let signer = ethers::signers::LocalWallet::from(secret_key)
+            .with_chain_id(chain_id);
         let provider =
             ethers::providers::Provider::<ethers::providers::Http>::try_from(
                 anvil_node_handle.endpoint(),
@@ -71,17 +64,14 @@ impl LocalEvmChain {
     pub fn new_with_chain_state(
         chain_id: u32,
         name: String,
-        wallet: Option<LocalWallet>,
         state_dir: &std::path::Path,
+        port: Option<u16>,
     ) -> Self {
         let anvil_node_handle =
-            Self::spawn_anvil_node(chain_id, Some(state_dir));
+            Self::spawn_anvil_node(chain_id, Some(state_dir), port);
         let secret_key = anvil_node_handle.keys()[0].clone();
-        let signer = match wallet {
-            Some(wallet) => wallet,
-            None => ethers::signers::LocalWallet::from(secret_key)
-                .with_chain_id(chain_id),
-        };
+        let signer = ethers::signers::LocalWallet::from(secret_key)
+            .with_chain_id(chain_id);
         let provider =
             ethers::providers::Provider::<ethers::providers::Http>::try_from(
                 anvil_node_handle.endpoint(),
@@ -119,6 +109,16 @@ impl LocalEvmChain {
 
     pub fn client(&self) -> Arc<SignerEthersClient> {
         self.client.clone()
+    }
+
+    /// Returns the HTTP endpoint of this instance
+    pub fn endpoint(&self) -> String {
+        self.anvil_node_handle.endpoint()
+    }
+
+    /// Returns the Websocket endpoint of this instance
+    pub fn ws_endpoint(&self) -> String {
+        self.anvil_node_handle.ws_endpoint()
     }
 
     pub fn shutdown(self) {
@@ -424,9 +424,15 @@ impl LocalEvmChain {
     fn spawn_anvil_node(
         chain_id: u32,
         state_dir: Option<&std::path::Path>,
+        port: Option<u16>,
     ) -> AnvilInstance {
+        let port = if port.is_some() {
+            port.unwrap()
+        } else {
+            crate::random_port::random_port()
+        };
         let mut anvil = Anvil::new()
-            .port(crate::random_port::random_port())
+            .port(port)
             .chain_id(chain_id)
             .arg("--accounts")
             .arg("20");
@@ -452,7 +458,8 @@ mod tests {
 
     #[tokio::test]
     async fn should_be_able_to_deploy_token() -> Result<()> {
-        let chain = LocalEvmChain::new(1337, String::from("Hermes"), None);
+        let chain =
+            LocalEvmChain::new(1337, String::from("Hermes"), Some(9955u16));
         let token = chain
             .deploy_token(String::from("Test"), String::from("TST"))
             .await?;
@@ -529,8 +536,8 @@ mod tests {
         let chain = LocalEvmChain::new_with_chain_state(
             5001,
             String::from("Hermes"),
-            None,
             state.path(),
+            None,
         );
         let token = chain
             .deploy_token(String::from("Test"), String::from("TST"))
@@ -541,8 +548,8 @@ mod tests {
         let chain = LocalEvmChain::new_with_chain_state(
             5001,
             String::from("Hermes"),
-            None,
             state.path(),
+            None,
         );
         let token = ERC20PresetMinterPauserContract::new(
             token.address(),

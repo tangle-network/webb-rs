@@ -23,6 +23,7 @@ thiserror = { workspace = true }
 typed-builder = { version = "0.15", default-features = false }
 scale-codec = { package = 'parity-scale-codec', version = '3.0.0', default-features = false, features = ["derive", "max-encoded-len"] }
 tempfile = "^3.3"
+serde = { workspace = true }
 
 # arkworks related deps
 ark-bls12-381 = { version = "^0.3.0", default-features = false, features = ["curve"] }

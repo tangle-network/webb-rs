@@ -12,8 +12,8 @@ mod tests {
 
     use crate::types::{ExtData, IntoAbiToken};
     use crate::utils::{
-        deconstruct_public_inputs_el, setup_utxos, setup_vanchor_circuit,
-        vanchor_2_2_fixtures,
+        deconstruct_public_inputs_el, get_git_root_path, setup_utxos,
+        setup_vanchor_circuit, vanchor_2_2_fixtures,
     };
     use crate::v_bridge::VAnchorBridgeInfo;
     use crate::LocalEvmChain;
@@ -27,17 +27,21 @@ mod tests {
     #[tokio::test]
     async fn test_vanchor_deposit() {
         // Get fixtures
-        let (params_2_2, wc_2_2) = vanchor_2_2_fixtures();
+        let fixture_path = get_git_root_path().join("solidity-fixtures");
+        let (params_2_2, wc_2_2) = vanchor_2_2_fixtures(&fixture_path);
+
+        let chain_state_path = get_git_root_path()
+            .join(format!("chain-state/{}/state.json", "hermes"));
 
         let tmp_dir = tempfile::TempDir::with_prefix("hermes").unwrap();
         let hermes_chain_state = tmp_dir.path();
-        crate::utils::copy_saved_state("hermes", hermes_chain_state);
+        crate::utils::copy_saved_state(&chain_state_path, hermes_chain_state);
         // Deploy Hermes chain.
         let hermes_chain = LocalEvmChain::new_with_chain_state(
             5001,
             String::from("Hermes"),
-            None,
             hermes_chain_state,
+            Some(8545u16),
         );
 
         let secret_key = hermes_chain.keys()[0].clone();
