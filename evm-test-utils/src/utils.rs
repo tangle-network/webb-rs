@@ -457,32 +457,28 @@ pub fn get_git_root_path() -> PathBuf {
     PathBuf::from(&git_root)
 }
 
-pub fn vanchor_2_2_fixtures() -> (
+pub fn vanchor_2_2_fixtures(
+    fixture_path: &Path,
+) -> (
     (
         ProvingKey<Bn<ark_bn254::Parameters>>,
         ConstraintMatrices<Fp256<FrParameters>>,
     ),
     &'static std::sync::Mutex<WitnessCalculator>,
 ) {
-    let git_root = get_git_root_path();
-    let path_2_2 =
-        git_root.join("solidity-fixtures/vanchor_2/2/circuit_final.zkey");
+    let path_2_2 = fixture_path.join("vanchor_2/2/circuit_final.zkey");
 
     let mut file_2_2 = File::open(path_2_2).unwrap();
     let params_2_2 = read_zkey(&mut file_2_2).unwrap();
 
-    let wasm_2_2_path = git_root
-        .join("solidity-fixtures/vanchor_2/2/poseidon_vanchor_2_2.wasm");
+    let wasm_2_2_path =
+        fixture_path.join("vanchor_2/2/poseidon_vanchor_2_2.wasm");
     let wc_2_2 = circom_from_folder(wasm_2_2_path.to_str().unwrap());
     (params_2_2, wc_2_2)
 }
 
 // Copies saved state from source to destination path.
-pub fn copy_saved_state(chain: &str, destination_path: &Path) {
-    let git_root = get_git_root_path();
-    let chain_state_path =
-        git_root.join(format!("chain-state/{}/state.json", chain));
-
+pub fn copy_saved_state(chain_state_path: &Path, destination_path: &Path) {
     std::fs::copy(chain_state_path, destination_path.join("state.json"))
         .unwrap();
 }
