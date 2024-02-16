@@ -1,4 +1,6 @@
+use serde::{Deserialize, Serialize};
 use webb::evm::ethers::abi::{encode, AbiEncode, Address, Bytes, Token, Uint};
+use webb::evm::ethers::types::U256;
 
 #[allow(clippy::wrong_self_convention)]
 pub trait IntoAbiToken {
@@ -10,7 +12,18 @@ pub trait IntoAbiToken {
     }
 }
 
-#[derive(Clone, Debug, typed_builder::TypedBuilder)]
+#[derive(Clone, Debug, Serialize, Deserialize)]
+pub struct ProofData {
+    pub proof: Bytes,
+    pub roots: Bytes,
+    pub extension_roots: Bytes,
+    pub input_nullifiers: Vec<U256>,
+    pub output_commitments: [U256; 2],
+    pub public_amount: U256,
+    pub ext_data_hash: U256,
+}
+
+#[derive(Clone, Debug, Serialize, Deserialize, typed_builder::TypedBuilder)]
 pub struct ExtData {
     pub recipient: Address,
     pub relayer: Address,
