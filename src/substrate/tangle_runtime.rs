@@ -779,8 +779,8 @@ pub mod api {
                             runtime_types::tangle_primitives::jobs::RpcResponseJobsData<
                                 ::subxt::utils::AccountId32,
                                 ::core::primitive::u64,
-                                runtime_types::tangle_testnet_runtime::MaxParticipants,
-                                runtime_types::tangle_testnet_runtime::MaxSubmissionLen,
+                                runtime_types::tangle_primitives::jobs::MaxParticipants,
+                                runtime_types::tangle_primitives::jobs::MaxSubmissionLen,
                             >,
                         >,
                     >,
@@ -818,8 +818,8 @@ pub mod api {
                         runtime_types::tangle_primitives::jobs::RpcResponseJobsData<
                             ::subxt::utils::AccountId32,
                             ::core::primitive::u64,
-                            runtime_types::tangle_testnet_runtime::MaxParticipants,
-                            runtime_types::tangle_testnet_runtime::MaxSubmissionLen,
+                            runtime_types::tangle_primitives::jobs::MaxParticipants,
+                            runtime_types::tangle_primitives::jobs::MaxSubmissionLen,
                         >,
                     >,
                 >{
@@ -856,12 +856,12 @@ pub mod api {
                         runtime_types::tangle_primitives::jobs::PhaseResult<
                             ::subxt::utils::AccountId32,
                             ::core::primitive::u64,
-                            runtime_types::tangle_testnet_runtime::MaxParticipants,
-                            runtime_types::tangle_testnet_runtime::MaxKeyLen,
-                            runtime_types::tangle_testnet_runtime::MaxDataLen,
-                            runtime_types::tangle_testnet_runtime::MaxSignatureLen,
-                            runtime_types::tangle_testnet_runtime::MaxSubmissionLen,
-                            runtime_types::tangle_testnet_runtime::MaxProofLen,
+                            runtime_types::tangle_primitives::jobs::MaxParticipants,
+                            runtime_types::tangle_primitives::jobs::MaxKeyLen,
+                            runtime_types::tangle_primitives::jobs::MaxDataLen,
+                            runtime_types::tangle_primitives::jobs::MaxSignatureLen,
+                            runtime_types::tangle_primitives::jobs::MaxSubmissionLen,
+                            runtime_types::tangle_primitives::jobs::MaxProofLen,
                         >,
                     >,
                 >{
@@ -898,6 +898,32 @@ pub mod api {
                             142u8, 254u8, 248u8, 126u8, 7u8, 240u8, 109u8,
                             187u8, 148u8, 117u8, 56u8, 6u8, 134u8, 161u8,
                             165u8, 103u8, 54u8,
+                        ],
+                    )
+                }
+                /// Queries restaker's role key
+                ///
+                ///  # Returns
+                ///  Role key
+                pub fn query_restaker_role_key(
+                    &self,
+                    address: ::subxt::utils::AccountId32,
+                ) -> ::subxt::runtime_api::Payload<
+                    types::QueryRestakerRoleKey,
+                    ::core::option::Option<
+                        ::std::vec::Vec<::core::primitive::u8>,
+                    >,
+                > {
+                    ::subxt::runtime_api::Payload::new_static(
+                        "JobsApi",
+                        "query_restaker_role_key",
+                        types::QueryRestakerRoleKey { address },
+                        [
+                            189u8, 30u8, 31u8, 46u8, 133u8, 107u8, 195u8, 96u8,
+                            225u8, 120u8, 190u8, 6u8, 35u8, 123u8, 132u8,
+                            228u8, 252u8, 82u8, 81u8, 90u8, 110u8, 69u8, 231u8,
+                            101u8, 32u8, 174u8, 150u8, 172u8, 169u8, 54u8,
+                            114u8, 211u8,
                         ],
                     )
                 }
@@ -986,6 +1012,26 @@ pub mod api {
                     crate_path = ":: subxt :: ext :: scale_encode"
                 )]
                 pub struct QueryNextJobId {}
+                #[derive(
+                    ::subxt::ext::codec::Decode,
+                    ::subxt::ext::codec::Encode,
+                    ::subxt::ext::scale_decode::DecodeAsType,
+                    ::subxt::ext::scale_encode::EncodeAsType,
+                    Clone,
+                    Debug,
+                    Eq,
+                    PartialEq,
+                )]
+                #[codec(crate = ::subxt::ext::codec)]
+                #[decode_as_type(
+                    crate_path = ":: subxt :: ext :: scale_decode"
+                )]
+                #[encode_as_type(
+                    crate_path = ":: subxt :: ext :: scale_encode"
+                )]
+                pub struct QueryRestakerRoleKey {
+                    pub address: ::subxt::utils::AccountId32,
+                }
             }
         }
         pub mod ethereum_runtime_rpc_api {
@@ -3664,10 +3710,10 @@ pub mod api {
             .hash();
         runtime_metadata_hash
             == [
-                226u8, 124u8, 59u8, 137u8, 242u8, 165u8, 159u8, 201u8, 187u8,
-                232u8, 62u8, 112u8, 113u8, 20u8, 139u8, 93u8, 222u8, 104u8,
-                255u8, 35u8, 221u8, 95u8, 232u8, 119u8, 37u8, 14u8, 26u8,
-                223u8, 32u8, 160u8, 43u8, 84u8,
+                44u8, 39u8, 246u8, 113u8, 240u8, 75u8, 24u8, 186u8, 66u8, 86u8,
+                45u8, 88u8, 83u8, 148u8, 170u8, 230u8, 186u8, 161u8, 193u8,
+                102u8, 218u8, 65u8, 75u8, 54u8, 93u8, 232u8, 6u8, 188u8, 26u8,
+                6u8, 97u8, 196u8,
             ]
     }
     pub mod system {
@@ -5206,11 +5252,11 @@ pub mod api {
                             call: ::std::boxed::Box::new(call),
                         },
                         [
-                            119u8, 115u8, 171u8, 254u8, 157u8, 77u8, 95u8,
-                            140u8, 201u8, 59u8, 65u8, 193u8, 104u8, 58u8, 4u8,
-                            108u8, 130u8, 10u8, 180u8, 185u8, 9u8, 145u8,
-                            154u8, 36u8, 80u8, 228u8, 15u8, 19u8, 219u8, 121u8,
-                            228u8, 69u8,
+                            154u8, 146u8, 207u8, 31u8, 80u8, 61u8, 119u8,
+                            187u8, 229u8, 50u8, 168u8, 226u8, 230u8, 207u8,
+                            23u8, 209u8, 49u8, 144u8, 135u8, 160u8, 171u8,
+                            170u8, 35u8, 94u8, 162u8, 75u8, 9u8, 7u8, 220u8,
+                            201u8, 17u8, 41u8,
                         ],
                     )
                 }
@@ -5229,11 +5275,11 @@ pub mod api {
                             weight,
                         },
                         [
-                            132u8, 79u8, 111u8, 121u8, 223u8, 145u8, 35u8,
-                            115u8, 73u8, 158u8, 136u8, 72u8, 219u8, 219u8,
-                            101u8, 87u8, 136u8, 144u8, 71u8, 66u8, 35u8, 40u8,
-                            56u8, 90u8, 0u8, 91u8, 155u8, 148u8, 32u8, 165u8,
-                            125u8, 77u8,
+                            56u8, 89u8, 107u8, 80u8, 98u8, 142u8, 111u8, 18u8,
+                            68u8, 212u8, 30u8, 40u8, 56u8, 103u8, 16u8, 33u8,
+                            190u8, 186u8, 248u8, 14u8, 215u8, 232u8, 5u8,
+                            199u8, 54u8, 202u8, 105u8, 100u8, 103u8, 237u8,
+                            28u8, 9u8,
                         ],
                     )
                 }
@@ -5275,11 +5321,11 @@ pub mod api {
                             call: ::std::boxed::Box::new(call),
                         },
                         [
-                            113u8, 227u8, 102u8, 194u8, 13u8, 145u8, 34u8,
-                            229u8, 121u8, 146u8, 7u8, 32u8, 36u8, 212u8, 168u8,
-                            80u8, 30u8, 197u8, 12u8, 228u8, 205u8, 147u8,
-                            189u8, 190u8, 34u8, 57u8, 169u8, 218u8, 177u8,
-                            75u8, 244u8, 206u8,
+                            179u8, 217u8, 137u8, 9u8, 180u8, 158u8, 245u8,
+                            252u8, 38u8, 176u8, 240u8, 172u8, 59u8, 215u8,
+                            74u8, 215u8, 85u8, 232u8, 177u8, 158u8, 25u8, 67u8,
+                            160u8, 47u8, 220u8, 97u8, 93u8, 254u8, 24u8, 135u8,
+                            100u8, 111u8,
                         ],
                     )
                 }
@@ -11350,11 +11396,11 @@ pub mod api {
                             length_bound,
                         },
                         [
-                            189u8, 36u8, 204u8, 198u8, 21u8, 22u8, 59u8, 183u8,
-                            69u8, 231u8, 199u8, 195u8, 235u8, 200u8, 72u8,
-                            208u8, 154u8, 197u8, 171u8, 2u8, 205u8, 110u8,
-                            71u8, 128u8, 32u8, 65u8, 12u8, 160u8, 113u8, 83u8,
-                            203u8, 196u8,
+                            139u8, 110u8, 19u8, 77u8, 73u8, 140u8, 162u8,
+                            202u8, 221u8, 80u8, 252u8, 146u8, 134u8, 140u8,
+                            84u8, 100u8, 26u8, 97u8, 212u8, 119u8, 190u8, 7u8,
+                            84u8, 214u8, 5u8, 177u8, 168u8, 116u8, 106u8,
+                            236u8, 199u8, 90u8,
                         ],
                     )
                 }
@@ -11374,11 +11420,11 @@ pub mod api {
                             length_bound,
                         },
                         [
-                            140u8, 252u8, 200u8, 147u8, 74u8, 224u8, 182u8,
-                            146u8, 221u8, 16u8, 247u8, 33u8, 159u8, 94u8,
-                            163u8, 12u8, 208u8, 220u8, 68u8, 213u8, 31u8,
-                            153u8, 115u8, 111u8, 45u8, 111u8, 228u8, 141u8,
-                            158u8, 248u8, 219u8, 58u8,
+                            22u8, 120u8, 96u8, 218u8, 175u8, 89u8, 66u8, 175u8,
+                            152u8, 220u8, 93u8, 70u8, 153u8, 69u8, 116u8,
+                            250u8, 95u8, 170u8, 188u8, 125u8, 29u8, 194u8,
+                            243u8, 102u8, 34u8, 103u8, 106u8, 157u8, 228u8,
+                            155u8, 147u8, 187u8,
                         ],
                     )
                 }
@@ -11673,38 +11719,38 @@ pub mod api {
                             ),
                         ],
                         [
-                            130u8,
-                            109u8,
-                            224u8,
-                            158u8,
-                            23u8,
-                            216u8,
-                            134u8,
-                            253u8,
-                            27u8,
-                            39u8,
-                            142u8,
-                            54u8,
-                            129u8,
-                            29u8,
-                            232u8,
-                            72u8,
-                            95u8,
-                            38u8,
-                            185u8,
+                            78u8,
+                            112u8,
+                            241u8,
+                            178u8,
                             86u8,
-                            47u8,
-                            28u8,
                             75u8,
-                            223u8,
-                            102u8,
-                            200u8,
-                            25u8,
-                            87u8,
-                            134u8,
                             159u8,
-                            204u8,
-                            153u8,
+                            115u8,
+                            4u8,
+                            22u8,
+                            192u8,
+                            242u8,
+                            237u8,
+                            158u8,
+                            10u8,
+                            184u8,
+                            47u8,
+                            221u8,
+                            174u8,
+                            80u8,
+                            89u8,
+                            219u8,
+                            242u8,
+                            201u8,
+                            205u8,
+                            185u8,
+                            227u8,
+                            202u8,
+                            255u8,
+                            123u8,
+                            97u8,
+                            213u8,
                         ],
                     )
                 }
@@ -11723,11 +11769,11 @@ pub mod api {
                         "ProposalOf",
                         Vec::new(),
                         [
-                            130u8, 109u8, 224u8, 158u8, 23u8, 216u8, 134u8,
-                            253u8, 27u8, 39u8, 142u8, 54u8, 129u8, 29u8, 232u8,
-                            72u8, 95u8, 38u8, 185u8, 86u8, 47u8, 28u8, 75u8,
-                            223u8, 102u8, 200u8, 25u8, 87u8, 134u8, 159u8,
-                            204u8, 153u8,
+                            78u8, 112u8, 241u8, 178u8, 86u8, 75u8, 159u8,
+                            115u8, 4u8, 22u8, 192u8, 242u8, 237u8, 158u8, 10u8,
+                            184u8, 47u8, 221u8, 174u8, 80u8, 89u8, 219u8,
+                            242u8, 201u8, 205u8, 185u8, 227u8, 202u8, 255u8,
+                            123u8, 97u8, 213u8,
                         ],
                     )
                 }
@@ -24395,11 +24441,10 @@ pub mod api {
                             call: ::std::boxed::Box::new(call),
                         },
                         [
-                            194u8, 130u8, 57u8, 167u8, 122u8, 77u8, 84u8,
-                            137u8, 223u8, 131u8, 169u8, 167u8, 29u8, 161u8,
-                            135u8, 175u8, 7u8, 236u8, 18u8, 35u8, 228u8, 51u8,
-                            228u8, 125u8, 143u8, 112u8, 74u8, 219u8, 1u8, 83u8,
-                            58u8, 13u8,
+                            90u8, 226u8, 27u8, 219u8, 197u8, 23u8, 71u8, 174u8,
+                            9u8, 114u8, 101u8, 26u8, 194u8, 254u8, 216u8, 80u8,
+                            96u8, 48u8, 84u8, 232u8, 232u8, 87u8, 6u8, 91u8,
+                            44u8, 216u8, 71u8, 191u8, 33u8, 91u8, 151u8, 91u8,
                         ],
                     )
                 }
@@ -24446,11 +24491,11 @@ pub mod api {
                             call: ::std::boxed::Box::new(call),
                         },
                         [
-                            21u8, 19u8, 23u8, 209u8, 10u8, 23u8, 57u8, 7u8,
-                            121u8, 50u8, 180u8, 176u8, 160u8, 166u8, 211u8,
-                            147u8, 111u8, 20u8, 179u8, 244u8, 193u8, 66u8,
-                            183u8, 119u8, 14u8, 42u8, 179u8, 98u8, 179u8, 16u8,
-                            15u8, 140u8,
+                            43u8, 171u8, 248u8, 207u8, 183u8, 78u8, 246u8,
+                            58u8, 29u8, 83u8, 67u8, 174u8, 127u8, 68u8, 164u8,
+                            143u8, 233u8, 187u8, 221u8, 184u8, 188u8, 56u8,
+                            229u8, 150u8, 77u8, 181u8, 229u8, 65u8, 235u8,
+                            135u8, 32u8, 225u8,
                         ],
                     )
                 }
@@ -24494,11 +24539,11 @@ pub mod api {
                             call: ::std::boxed::Box::new(call),
                         },
                         [
-                            73u8, 158u8, 159u8, 179u8, 202u8, 41u8, 9u8, 93u8,
-                            55u8, 79u8, 34u8, 36u8, 35u8, 54u8, 10u8, 63u8,
-                            149u8, 62u8, 203u8, 119u8, 28u8, 108u8, 137u8,
-                            148u8, 208u8, 201u8, 121u8, 91u8, 214u8, 157u8,
-                            107u8, 20u8,
+                            229u8, 96u8, 16u8, 160u8, 4u8, 241u8, 234u8, 206u8,
+                            84u8, 146u8, 27u8, 233u8, 17u8, 170u8, 185u8,
+                            203u8, 74u8, 119u8, 150u8, 203u8, 196u8, 183u8,
+                            16u8, 255u8, 52u8, 169u8, 220u8, 244u8, 141u8,
+                            54u8, 70u8, 160u8,
                         ],
                     )
                 }
@@ -24526,11 +24571,11 @@ pub mod api {
                             call: ::std::boxed::Box::new(call),
                         },
                         [
-                            173u8, 94u8, 236u8, 143u8, 156u8, 165u8, 246u8,
-                            128u8, 174u8, 54u8, 178u8, 58u8, 73u8, 218u8,
-                            115u8, 122u8, 7u8, 247u8, 189u8, 57u8, 170u8,
-                            196u8, 6u8, 147u8, 242u8, 131u8, 100u8, 42u8, 44u8,
-                            180u8, 7u8, 71u8,
+                            250u8, 66u8, 204u8, 169u8, 140u8, 215u8, 217u8,
+                            59u8, 180u8, 108u8, 126u8, 243u8, 87u8, 159u8,
+                            158u8, 141u8, 95u8, 73u8, 242u8, 31u8, 243u8, 90u8,
+                            155u8, 241u8, 72u8, 81u8, 223u8, 91u8, 214u8, 19u8,
+                            148u8, 219u8,
                         ],
                     )
                 }
@@ -27816,11 +27861,11 @@ pub mod api {
                         "batch",
                         types::Batch { calls },
                         [
-                            151u8, 82u8, 240u8, 102u8, 36u8, 33u8, 175u8,
-                            195u8, 64u8, 138u8, 182u8, 13u8, 113u8, 33u8,
-                            161u8, 46u8, 110u8, 229u8, 202u8, 252u8, 46u8,
-                            76u8, 107u8, 237u8, 103u8, 174u8, 107u8, 68u8,
-                            119u8, 206u8, 147u8, 157u8,
+                            155u8, 18u8, 118u8, 113u8, 33u8, 214u8, 173u8,
+                            150u8, 51u8, 149u8, 251u8, 252u8, 17u8, 245u8,
+                            57u8, 230u8, 140u8, 208u8, 107u8, 250u8, 52u8,
+                            31u8, 14u8, 93u8, 254u8, 177u8, 248u8, 61u8, 10u8,
+                            17u8, 5u8, 36u8,
                         ],
                     )
                 }
@@ -27838,11 +27883,11 @@ pub mod api {
                             call: ::std::boxed::Box::new(call),
                         },
                         [
-                            100u8, 33u8, 228u8, 58u8, 254u8, 109u8, 202u8,
-                            124u8, 246u8, 191u8, 161u8, 251u8, 51u8, 226u8,
-                            13u8, 18u8, 19u8, 255u8, 132u8, 59u8, 9u8, 38u8,
-                            145u8, 68u8, 60u8, 189u8, 20u8, 176u8, 75u8, 160u8,
-                            136u8, 38u8,
+                            169u8, 78u8, 224u8, 4u8, 19u8, 230u8, 143u8, 77u8,
+                            130u8, 145u8, 116u8, 45u8, 187u8, 238u8, 202u8,
+                            234u8, 228u8, 80u8, 243u8, 90u8, 111u8, 93u8,
+                            246u8, 99u8, 111u8, 154u8, 70u8, 18u8, 23u8, 150u8,
+                            100u8, 71u8,
                         ],
                     )
                 }
@@ -27858,11 +27903,11 @@ pub mod api {
                         "batch_all",
                         types::BatchAll { calls },
                         [
-                            90u8, 228u8, 232u8, 25u8, 44u8, 133u8, 116u8,
-                            176u8, 89u8, 57u8, 37u8, 56u8, 182u8, 50u8, 120u8,
-                            16u8, 89u8, 115u8, 52u8, 131u8, 170u8, 216u8,
-                            242u8, 12u8, 130u8, 252u8, 229u8, 163u8, 23u8,
-                            100u8, 156u8, 0u8,
+                            204u8, 53u8, 224u8, 45u8, 191u8, 90u8, 4u8, 79u8,
+                            60u8, 69u8, 141u8, 159u8, 225u8, 245u8, 227u8,
+                            244u8, 232u8, 130u8, 74u8, 159u8, 110u8, 220u8,
+                            4u8, 13u8, 191u8, 253u8, 236u8, 208u8, 60u8, 47u8,
+                            26u8, 251u8,
                         ],
                     )
                 }
@@ -27880,11 +27925,11 @@ pub mod api {
                             call: ::std::boxed::Box::new(call),
                         },
                         [
-                            83u8, 10u8, 173u8, 234u8, 30u8, 225u8, 151u8,
-                            169u8, 5u8, 177u8, 241u8, 233u8, 71u8, 4u8, 198u8,
-                            195u8, 29u8, 7u8, 171u8, 186u8, 22u8, 57u8, 201u8,
-                            249u8, 230u8, 18u8, 105u8, 115u8, 183u8, 1u8,
-                            218u8, 144u8,
+                            32u8, 251u8, 126u8, 79u8, 219u8, 149u8, 24u8,
+                            158u8, 97u8, 128u8, 165u8, 24u8, 209u8, 187u8,
+                            113u8, 195u8, 195u8, 178u8, 6u8, 185u8, 36u8,
+                            218u8, 8u8, 84u8, 83u8, 20u8, 13u8, 50u8, 246u8,
+                            5u8, 125u8, 12u8,
                         ],
                     )
                 }
@@ -27900,11 +27945,11 @@ pub mod api {
                         "force_batch",
                         types::ForceBatch { calls },
                         [
-                            131u8, 43u8, 235u8, 127u8, 109u8, 118u8, 169u8,
-                            203u8, 95u8, 130u8, 64u8, 49u8, 102u8, 5u8, 116u8,
-                            12u8, 84u8, 0u8, 93u8, 233u8, 124u8, 167u8, 135u8,
-                            162u8, 116u8, 236u8, 253u8, 116u8, 108u8, 126u8,
-                            208u8, 129u8,
+                            155u8, 68u8, 152u8, 120u8, 92u8, 226u8, 211u8,
+                            108u8, 208u8, 155u8, 170u8, 171u8, 205u8, 18u8,
+                            3u8, 110u8, 71u8, 197u8, 101u8, 50u8, 250u8, 29u8,
+                            103u8, 14u8, 196u8, 121u8, 189u8, 155u8, 156u8,
+                            85u8, 1u8, 84u8,
                         ],
                     )
                 }
@@ -27922,11 +27967,11 @@ pub mod api {
                             weight,
                         },
                         [
-                            41u8, 162u8, 227u8, 78u8, 245u8, 9u8, 151u8, 77u8,
-                            152u8, 211u8, 226u8, 22u8, 246u8, 158u8, 183u8,
-                            47u8, 4u8, 240u8, 204u8, 235u8, 15u8, 44u8, 70u8,
-                            206u8, 120u8, 207u8, 47u8, 157u8, 169u8, 210u8,
-                            39u8, 150u8,
+                            165u8, 64u8, 194u8, 170u8, 104u8, 199u8, 142u8,
+                            22u8, 137u8, 5u8, 181u8, 54u8, 172u8, 179u8, 204u8,
+                            26u8, 226u8, 173u8, 66u8, 117u8, 101u8, 192u8,
+                            25u8, 87u8, 44u8, 18u8, 230u8, 87u8, 238u8, 88u8,
+                            148u8, 32u8,
                         ],
                     )
                 }
@@ -28247,11 +28292,11 @@ pub mod api {
                             call: ::std::boxed::Box::new(call),
                         },
                         [
-                            178u8, 99u8, 94u8, 130u8, 163u8, 169u8, 90u8,
-                            128u8, 11u8, 17u8, 131u8, 133u8, 20u8, 223u8,
-                            114u8, 213u8, 230u8, 112u8, 51u8, 23u8, 46u8,
-                            189u8, 227u8, 46u8, 29u8, 126u8, 90u8, 221u8,
-                            244u8, 56u8, 1u8, 246u8,
+                            58u8, 75u8, 224u8, 190u8, 6u8, 255u8, 21u8, 118u8,
+                            242u8, 143u8, 77u8, 171u8, 11u8, 70u8, 81u8, 151u8,
+                            158u8, 221u8, 170u8, 86u8, 85u8, 135u8, 232u8,
+                            164u8, 117u8, 106u8, 221u8, 214u8, 244u8, 59u8,
+                            14u8, 124u8,
                         ],
                     )
                 }
@@ -28281,11 +28326,11 @@ pub mod api {
                             max_weight,
                         },
                         [
-                            115u8, 97u8, 94u8, 243u8, 134u8, 20u8, 37u8, 86u8,
-                            112u8, 183u8, 118u8, 128u8, 150u8, 221u8, 110u8,
-                            33u8, 187u8, 169u8, 135u8, 84u8, 132u8, 99u8, 59u8,
-                            158u8, 232u8, 248u8, 42u8, 221u8, 80u8, 76u8,
-                            217u8, 160u8,
+                            54u8, 213u8, 149u8, 98u8, 23u8, 201u8, 227u8,
+                            169u8, 127u8, 235u8, 70u8, 222u8, 41u8, 117u8,
+                            193u8, 19u8, 6u8, 197u8, 187u8, 139u8, 199u8,
+                            133u8, 16u8, 187u8, 32u8, 236u8, 148u8, 238u8,
+                            84u8, 240u8, 47u8, 64u8,
                         ],
                     )
                 }
@@ -32170,6 +32215,8 @@ pub mod api {
                 )]
                 pub struct CreateProfile {
                     pub profile: runtime_types::pallet_roles::profile::Profile,
+                    pub max_active_services:
+                        ::core::option::Option<::core::primitive::u32>,
                 }
                 impl ::subxt::blocks::StaticExtrinsic for CreateProfile {
                     const PALLET: &'static str = "Roles";
@@ -32323,18 +32370,24 @@ pub mod api {
                 pub fn create_profile(
                     &self,
                     profile: runtime_types::pallet_roles::profile::Profile,
+                    max_active_services: ::core::option::Option<
+                        ::core::primitive::u32,
+                    >,
                 ) -> ::subxt::tx::Payload<types::CreateProfile>
                 {
                     ::subxt::tx::Payload::new_static(
                         "Roles",
                         "create_profile",
-                        types::CreateProfile { profile },
+                        types::CreateProfile {
+                            profile,
+                            max_active_services,
+                        },
                         [
-                            37u8, 158u8, 44u8, 3u8, 122u8, 3u8, 73u8, 50u8,
-                            216u8, 69u8, 173u8, 146u8, 107u8, 9u8, 160u8, 88u8,
-                            19u8, 63u8, 215u8, 163u8, 55u8, 132u8, 104u8, 15u8,
-                            67u8, 188u8, 15u8, 252u8, 169u8, 244u8, 246u8,
-                            246u8,
+                            127u8, 239u8, 243u8, 197u8, 40u8, 102u8, 111u8,
+                            67u8, 21u8, 78u8, 182u8, 113u8, 150u8, 125u8, 73u8,
+                            240u8, 226u8, 101u8, 10u8, 22u8, 114u8, 101u8,
+                            167u8, 163u8, 105u8, 243u8, 216u8, 164u8, 73u8,
+                            58u8, 74u8, 33u8,
                         ],
                     )
                 }
@@ -32706,38 +32759,38 @@ pub mod api {
                             ),
                         ],
                         [
-                            243u8,
-                            170u8,
-                            185u8,
-                            139u8,
-                            221u8,
-                            96u8,
-                            176u8,
-                            210u8,
-                            119u8,
+                            202u8,
+                            39u8,
+                            6u8,
+                            95u8,
                             5u8,
-                            11u8,
-                            10u8,
-                            161u8,
-                            35u8,
-                            233u8,
-                            121u8,
-                            82u8,
-                            103u8,
-                            32u8,
-                            60u8,
-                            19u8,
-                            158u8,
-                            214u8,
-                            117u8,
-                            101u8,
-                            131u8,
-                            68u8,
-                            18u8,
-                            191u8,
-                            102u8,
+                            12u8,
+                            5u8,
+                            168u8,
                             205u8,
-                            188u8,
+                            246u8,
+                            186u8,
+                            224u8,
+                            179u8,
+                            189u8,
+                            241u8,
+                            163u8,
+                            93u8,
+                            237u8,
+                            205u8,
+                            63u8,
+                            227u8,
+                            51u8,
+                            146u8,
+                            3u8,
+                            33u8,
+                            113u8,
+                            84u8,
+                            107u8,
+                            67u8,
+                            111u8,
+                            149u8,
+                            25u8,
                         ],
                     )
                 }
@@ -32756,11 +32809,11 @@ pub mod api {
                         "Ledger",
                         Vec::new(),
                         [
-                            243u8, 170u8, 185u8, 139u8, 221u8, 96u8, 176u8,
-                            210u8, 119u8, 5u8, 11u8, 10u8, 161u8, 35u8, 233u8,
-                            121u8, 82u8, 103u8, 32u8, 60u8, 19u8, 158u8, 214u8,
-                            117u8, 101u8, 131u8, 68u8, 18u8, 191u8, 102u8,
-                            205u8, 188u8,
+                            202u8, 39u8, 6u8, 95u8, 5u8, 12u8, 5u8, 168u8,
+                            205u8, 246u8, 186u8, 224u8, 179u8, 189u8, 241u8,
+                            163u8, 93u8, 237u8, 205u8, 63u8, 227u8, 51u8,
+                            146u8, 3u8, 33u8, 113u8, 84u8, 107u8, 67u8, 111u8,
+                            149u8, 25u8,
                         ],
                     )
                 }
@@ -33064,8 +33117,8 @@ pub mod api {
                     pub job: runtime_types::tangle_primitives::jobs::JobSubmission<
                         ::subxt::utils::AccountId32,
                         ::core::primitive::u64,
-                        runtime_types::tangle_testnet_runtime::MaxParticipants,
-                        runtime_types::tangle_testnet_runtime::MaxSubmissionLen,
+                        runtime_types::tangle_primitives::jobs::MaxParticipants,
+                        runtime_types::tangle_primitives::jobs::MaxSubmissionLen,
                     >,
                 }
                 impl ::subxt::blocks::StaticExtrinsic for SubmitJob {
@@ -33093,11 +33146,11 @@ pub mod api {
                     pub role_type: runtime_types::tangle_primitives::roles::RoleType,
                     pub job_id: ::core::primitive::u64,
                     pub result: runtime_types::tangle_primitives::jobs::JobResult<
-                        runtime_types::tangle_testnet_runtime::MaxParticipants,
-                        runtime_types::tangle_testnet_runtime::MaxKeyLen,
-                        runtime_types::tangle_testnet_runtime::MaxSignatureLen,
-                        runtime_types::tangle_testnet_runtime::MaxDataLen,
-                        runtime_types::tangle_testnet_runtime::MaxProofLen,
+                        runtime_types::tangle_primitives::jobs::MaxParticipants,
+                        runtime_types::tangle_primitives::jobs::MaxKeyLen,
+                        runtime_types::tangle_primitives::jobs::MaxSignatureLen,
+                        runtime_types::tangle_primitives::jobs::MaxDataLen,
+                        runtime_types::tangle_primitives::jobs::MaxProofLen,
                     >,
                 }
                 impl ::subxt::blocks::StaticExtrinsic for SubmitJobResult {
@@ -33241,8 +33294,8 @@ pub mod api {
                     job: runtime_types::tangle_primitives::jobs::JobSubmission<
                         ::subxt::utils::AccountId32,
                         ::core::primitive::u64,
-                        runtime_types::tangle_testnet_runtime::MaxParticipants,
-                        runtime_types::tangle_testnet_runtime::MaxSubmissionLen,
+                        runtime_types::tangle_primitives::jobs::MaxParticipants,
+                        runtime_types::tangle_primitives::jobs::MaxSubmissionLen,
                     >,
                 ) -> ::subxt::tx::Payload<types::SubmitJob> {
                     ::subxt::tx::Payload::new_static(
@@ -33264,11 +33317,11 @@ pub mod api {
                     role_type: runtime_types::tangle_primitives::roles::RoleType,
                     job_id: ::core::primitive::u64,
                     result: runtime_types::tangle_primitives::jobs::JobResult<
-                        runtime_types::tangle_testnet_runtime::MaxParticipants,
-                        runtime_types::tangle_testnet_runtime::MaxKeyLen,
-                        runtime_types::tangle_testnet_runtime::MaxSignatureLen,
-                        runtime_types::tangle_testnet_runtime::MaxDataLen,
-                        runtime_types::tangle_testnet_runtime::MaxProofLen,
+                        runtime_types::tangle_primitives::jobs::MaxParticipants,
+                        runtime_types::tangle_primitives::jobs::MaxKeyLen,
+                        runtime_types::tangle_primitives::jobs::MaxSignatureLen,
+                        runtime_types::tangle_primitives::jobs::MaxDataLen,
+                        runtime_types::tangle_primitives::jobs::MaxProofLen,
                     >,
                 ) -> ::subxt::tx::Payload<types::SubmitJobResult>
                 {
@@ -33392,11 +33445,10 @@ pub mod api {
                         "submit_misbehavior",
                         types::SubmitMisbehavior { misbehavior },
                         [
-                            17u8, 187u8, 104u8, 105u8, 53u8, 213u8, 94u8, 42u8,
-                            7u8, 175u8, 146u8, 110u8, 54u8, 185u8, 145u8, 66u8,
-                            87u8, 149u8, 148u8, 232u8, 195u8, 139u8, 34u8,
-                            226u8, 139u8, 198u8, 223u8, 120u8, 50u8, 148u8,
-                            254u8, 93u8,
+                            128u8, 227u8, 25u8, 107u8, 195u8, 70u8, 49u8, 97u8,
+                            251u8, 0u8, 244u8, 223u8, 86u8, 87u8, 99u8, 70u8,
+                            57u8, 37u8, 220u8, 230u8, 119u8, 50u8, 218u8, 39u8,
+                            188u8, 2u8, 18u8, 85u8, 164u8, 54u8, 190u8, 61u8,
                         ],
                     )
                 }
@@ -33422,15 +33474,13 @@ pub mod api {
             ///A new job has been submitted
             pub struct JobSubmitted {
                 pub job_id: ::core::primitive::u64,
-                pub role_type:
-                    runtime_types::tangle_primitives::roles::RoleType,
-                pub details:
-                    runtime_types::tangle_primitives::jobs::JobSubmission<
-                        ::subxt::utils::AccountId32,
-                        ::core::primitive::u64,
-                        runtime_types::tangle_testnet_runtime::MaxParticipants,
-                        runtime_types::tangle_testnet_runtime::MaxSubmissionLen,
-                    >,
+                pub role_type: runtime_types::tangle_primitives::roles::RoleType,
+                pub details: runtime_types::tangle_primitives::jobs::JobSubmission<
+                    ::subxt::utils::AccountId32,
+                    ::core::primitive::u64,
+                    runtime_types::tangle_primitives::jobs::MaxParticipants,
+                    runtime_types::tangle_primitives::jobs::MaxSubmissionLen,
+                >,
             }
             impl ::subxt::events::StaticEvent for JobSubmitted {
                 const PALLET: &'static str = "Jobs";
@@ -33486,7 +33536,6 @@ pub mod api {
             use super::runtime_types;
             pub struct StorageApi;
             impl StorageApi {
-                /// The paused transaction map
                 pub fn submitted_jobs(
                     &self,
                     _0: impl ::std::borrow::Borrow<
@@ -33499,13 +33548,13 @@ pub mod api {
                         ::subxt::utils::AccountId32,
                         ::core::primitive::u64,
                         ::core::primitive::u128,
-                        runtime_types::tangle_testnet_runtime::MaxParticipants,
-                        runtime_types::tangle_testnet_runtime::MaxSubmissionLen,
+                        runtime_types::tangle_primitives::jobs::MaxParticipants,
+                        runtime_types::tangle_primitives::jobs::MaxSubmissionLen,
                     >,
                     ::subxt::storage::address::Yes,
                     (),
                     ::subxt::storage::address::Yes,
-                > {
+                >{
                     ::subxt::storage::address::Address::new_static(
                         "Jobs",
                         "SubmittedJobs",
@@ -33553,7 +33602,6 @@ pub mod api {
                         ],
                     )
                 }
-                /// The paused transaction map
                 pub fn submitted_jobs_root(
                     &self,
                 ) -> ::subxt::storage::address::Address<
@@ -33562,13 +33610,13 @@ pub mod api {
                         ::subxt::utils::AccountId32,
                         ::core::primitive::u64,
                         ::core::primitive::u128,
-                        runtime_types::tangle_testnet_runtime::MaxParticipants,
-                        runtime_types::tangle_testnet_runtime::MaxSubmissionLen,
+                        runtime_types::tangle_primitives::jobs::MaxParticipants,
+                        runtime_types::tangle_primitives::jobs::MaxSubmissionLen,
                     >,
                     (),
                     (),
                     ::subxt::storage::address::Yes,
-                > {
+                >{
                     ::subxt::storage::address::Address::new_static(
                         "Jobs",
                         "SubmittedJobs",
@@ -33669,17 +33717,17 @@ pub mod api {
                     runtime_types::tangle_primitives::jobs::PhaseResult<
                         ::subxt::utils::AccountId32,
                         ::core::primitive::u64,
-                        runtime_types::tangle_testnet_runtime::MaxParticipants,
-                        runtime_types::tangle_testnet_runtime::MaxKeyLen,
-                        runtime_types::tangle_testnet_runtime::MaxDataLen,
-                        runtime_types::tangle_testnet_runtime::MaxSignatureLen,
-                        runtime_types::tangle_testnet_runtime::MaxSubmissionLen,
-                        runtime_types::tangle_testnet_runtime::MaxProofLen,
+                        runtime_types::tangle_primitives::jobs::MaxParticipants,
+                        runtime_types::tangle_primitives::jobs::MaxKeyLen,
+                        runtime_types::tangle_primitives::jobs::MaxDataLen,
+                        runtime_types::tangle_primitives::jobs::MaxSignatureLen,
+                        runtime_types::tangle_primitives::jobs::MaxSubmissionLen,
+                        runtime_types::tangle_primitives::jobs::MaxProofLen,
                     >,
                     ::subxt::storage::address::Yes,
                     (),
                     ::subxt::storage::address::Yes,
-                > {
+                >{
                     ::subxt::storage::address::Address::new_static(
                         "Jobs",
                         "KnownResults",
@@ -33734,17 +33782,17 @@ pub mod api {
                     runtime_types::tangle_primitives::jobs::PhaseResult<
                         ::subxt::utils::AccountId32,
                         ::core::primitive::u64,
-                        runtime_types::tangle_testnet_runtime::MaxParticipants,
-                        runtime_types::tangle_testnet_runtime::MaxKeyLen,
-                        runtime_types::tangle_testnet_runtime::MaxDataLen,
-                        runtime_types::tangle_testnet_runtime::MaxSignatureLen,
-                        runtime_types::tangle_testnet_runtime::MaxSubmissionLen,
-                        runtime_types::tangle_testnet_runtime::MaxProofLen,
+                        runtime_types::tangle_primitives::jobs::MaxParticipants,
+                        runtime_types::tangle_primitives::jobs::MaxKeyLen,
+                        runtime_types::tangle_primitives::jobs::MaxDataLen,
+                        runtime_types::tangle_primitives::jobs::MaxSignatureLen,
+                        runtime_types::tangle_primitives::jobs::MaxSubmissionLen,
+                        runtime_types::tangle_primitives::jobs::MaxProofLen,
                     >,
                     (),
                     (),
                     ::subxt::storage::address::Yes,
-                > {
+                >{
                     ::subxt::storage::address::Address::new_static(
                         "Jobs",
                         "KnownResults",
@@ -38804,6 +38852,66 @@ pub mod api {
                     ///This error is returned when the Mod Proof is valid
                     ///but the caller claims it is invalid.
                     ValidModProof,
+                    #[codec(index = 25)]
+                    ///------------------------------------------------------------ ///
+                    ///                        FROST ERRORS                         ///
+                    ///------------------------------------------------------------ ///
+                    ///Valid FROST signature share
+                    ValidFrostSignatureShare,
+                    #[codec(index = 26)]
+                    ///Invalid FROST message serialization
+                    InvalidFrostMessageSerialization,
+                    #[codec(index = 27)]
+                    ///Invalid FROST message deserialization
+                    InvalidFrostMessageDeserialization,
+                    #[codec(index = 28)]
+                    ///Invalid identifier deserialization
+                    InvalidIdentifierDeserialization,
+                    #[codec(index = 29)]
+                    ///Valid FROST signature error for a misbehavior report
+                    ValidFrostSignature,
+                    #[codec(index = 30)]
+                    ///Unknown identifier
+                    UnknownIdentifier,
+                    #[codec(index = 31)]
+                    ///Duplicate identifier
+                    DuplicateIdentifier,
+                    #[codec(index = 32)]
+                    ///Incorrect number of identifiers
+                    IncorrectNumberOfIdentifiers,
+                    #[codec(index = 33)]
+                    ///Identifier derivation not supported
+                    IdentifierDerivationNotSupported,
+                    #[codec(index = 34)]
+                    ///Malformed signature
+                    MalformedFrostSignature,
+                    #[codec(index = 35)]
+                    ///Invalid FROST signature
+                    InvalidFrostSignature,
+                    #[codec(index = 36)]
+                    ///Invalid FROST signature share
+                    InvalidFrostSignatureShare,
+                    #[codec(index = 37)]
+                    ///Invalid FROST signature scheme
+                    InvalidFrostSignatureScheme,
+                    #[codec(index = 38)]
+                    ///Malformed FROST verifying key
+                    MalformedFrostVerifyingKey,
+                    #[codec(index = 39)]
+                    ///Malformed FROST signing key
+                    MalformedFrostSigningKey,
+                    #[codec(index = 40)]
+                    ///Missing FROST commitment
+                    MissingFrostCommitment,
+                    #[codec(index = 41)]
+                    ///Invalid FROST commitment
+                    IdentityCommitment,
+                    #[codec(index = 42)]
+                    ///FROST Field scalar error
+                    FrostFieldError,
+                    #[codec(index = 43)]
+                    ///FROST Group element error
+                    FrostGroupError,
                 }
                 #[derive(
                     ::subxt::ext::codec::Decode,
@@ -41130,8 +41238,8 @@ pub mod api {
                         job: runtime_types::tangle_primitives::jobs::JobSubmission<
                             ::subxt::utils::AccountId32,
                             ::core::primitive::u64,
-                            runtime_types::tangle_testnet_runtime::MaxParticipants,
-                            runtime_types::tangle_testnet_runtime::MaxSubmissionLen,
+                            runtime_types::tangle_primitives::jobs::MaxParticipants,
+                            runtime_types::tangle_primitives::jobs::MaxSubmissionLen,
                         >,
                     },
                     #[codec(index = 1)]
@@ -41140,11 +41248,11 @@ pub mod api {
                         role_type: runtime_types::tangle_primitives::roles::RoleType,
                         job_id: ::core::primitive::u64,
                         result: runtime_types::tangle_primitives::jobs::JobResult<
-                            runtime_types::tangle_testnet_runtime::MaxParticipants,
-                            runtime_types::tangle_testnet_runtime::MaxKeyLen,
-                            runtime_types::tangle_testnet_runtime::MaxSignatureLen,
-                            runtime_types::tangle_testnet_runtime::MaxDataLen,
-                            runtime_types::tangle_testnet_runtime::MaxProofLen,
+                            runtime_types::tangle_primitives::jobs::MaxParticipants,
+                            runtime_types::tangle_primitives::jobs::MaxKeyLen,
+                            runtime_types::tangle_primitives::jobs::MaxSignatureLen,
+                            runtime_types::tangle_primitives::jobs::MaxDataLen,
+                            runtime_types::tangle_primitives::jobs::MaxProofLen,
                         >,
                     },
                     #[codec(index = 2)]
@@ -41278,8 +41386,8 @@ pub mod api {
                         details: runtime_types::tangle_primitives::jobs::JobSubmission<
                             ::subxt::utils::AccountId32,
                             ::core::primitive::u64,
-                            runtime_types::tangle_testnet_runtime::MaxParticipants,
-                            runtime_types::tangle_testnet_runtime::MaxSubmissionLen,
+                            runtime_types::tangle_primitives::jobs::MaxParticipants,
+                            runtime_types::tangle_primitives::jobs::MaxSubmissionLen,
                         >,
                     },
                     #[codec(index = 1)]
@@ -42488,6 +42596,8 @@ pub mod api {
                     ///See [`Pallet::create_profile`].
                     create_profile {
                         profile: runtime_types::pallet_roles::profile::Profile,
+                        max_active_services:
+                            ::core::option::Option<::core::primitive::u32>,
                     },
                     #[codec(index = 1)]
                     ///See [`Pallet::update_profile`].
@@ -42815,6 +42925,7 @@ pub mod api {
                     pub claimed_rewards: runtime_types::bounded_collections::bounded_vec::BoundedVec<
                         ::core::primitive::u32,
                     >,
+                    pub max_active_services: ::core::primitive::u32,
                 }
                 #[derive(
                     ::subxt::ext::codec::Decode,
@@ -47598,6 +47709,114 @@ pub mod api {
                 #[encode_as_type(
                     crate_path = ":: subxt :: ext :: scale_encode"
                 )]
+                pub struct MaxDataLen;
+                #[derive(
+                    ::subxt::ext::codec::Decode,
+                    ::subxt::ext::codec::Encode,
+                    ::subxt::ext::scale_decode::DecodeAsType,
+                    ::subxt::ext::scale_encode::EncodeAsType,
+                    Clone,
+                    Debug,
+                    Eq,
+                    PartialEq,
+                )]
+                #[codec(crate = ::subxt::ext::codec)]
+                #[decode_as_type(
+                    crate_path = ":: subxt :: ext :: scale_decode"
+                )]
+                #[encode_as_type(
+                    crate_path = ":: subxt :: ext :: scale_encode"
+                )]
+                pub struct MaxKeyLen;
+                #[derive(
+                    ::subxt::ext::codec::Decode,
+                    ::subxt::ext::codec::Encode,
+                    ::subxt::ext::scale_decode::DecodeAsType,
+                    ::subxt::ext::scale_encode::EncodeAsType,
+                    Clone,
+                    Debug,
+                    Eq,
+                    PartialEq,
+                )]
+                #[codec(crate = ::subxt::ext::codec)]
+                #[decode_as_type(
+                    crate_path = ":: subxt :: ext :: scale_decode"
+                )]
+                #[encode_as_type(
+                    crate_path = ":: subxt :: ext :: scale_encode"
+                )]
+                pub struct MaxParticipants;
+                #[derive(
+                    ::subxt::ext::codec::Decode,
+                    ::subxt::ext::codec::Encode,
+                    ::subxt::ext::scale_decode::DecodeAsType,
+                    ::subxt::ext::scale_encode::EncodeAsType,
+                    Clone,
+                    Debug,
+                    Eq,
+                    PartialEq,
+                )]
+                #[codec(crate = ::subxt::ext::codec)]
+                #[decode_as_type(
+                    crate_path = ":: subxt :: ext :: scale_decode"
+                )]
+                #[encode_as_type(
+                    crate_path = ":: subxt :: ext :: scale_encode"
+                )]
+                pub struct MaxProofLen;
+                #[derive(
+                    ::subxt::ext::codec::Decode,
+                    ::subxt::ext::codec::Encode,
+                    ::subxt::ext::scale_decode::DecodeAsType,
+                    ::subxt::ext::scale_encode::EncodeAsType,
+                    Clone,
+                    Debug,
+                    Eq,
+                    PartialEq,
+                )]
+                #[codec(crate = ::subxt::ext::codec)]
+                #[decode_as_type(
+                    crate_path = ":: subxt :: ext :: scale_decode"
+                )]
+                #[encode_as_type(
+                    crate_path = ":: subxt :: ext :: scale_encode"
+                )]
+                pub struct MaxSignatureLen;
+                #[derive(
+                    ::subxt::ext::codec::Decode,
+                    ::subxt::ext::codec::Encode,
+                    ::subxt::ext::scale_decode::DecodeAsType,
+                    ::subxt::ext::scale_encode::EncodeAsType,
+                    Clone,
+                    Debug,
+                    Eq,
+                    PartialEq,
+                )]
+                #[codec(crate = ::subxt::ext::codec)]
+                #[decode_as_type(
+                    crate_path = ":: subxt :: ext :: scale_decode"
+                )]
+                #[encode_as_type(
+                    crate_path = ":: subxt :: ext :: scale_encode"
+                )]
+                pub struct MaxSubmissionLen;
+                #[derive(
+                    ::subxt::ext::codec::Decode,
+                    ::subxt::ext::codec::Encode,
+                    ::subxt::ext::scale_decode::DecodeAsType,
+                    ::subxt::ext::scale_encode::EncodeAsType,
+                    Clone,
+                    Debug,
+                    Eq,
+                    PartialEq,
+                )]
+                #[codec(crate = ::subxt::ext::codec)]
+                #[decode_as_type(
+                    crate_path = ":: subxt :: ext :: scale_decode"
+                )]
+                #[encode_as_type(
+                    crate_path = ":: subxt :: ext :: scale_encode"
+                )]
                 pub struct PhaseResult<_0, _1, _2, _3, _4, _5, _6, _7> {
                     pub owner: _0,
                     pub result:
@@ -47779,8 +47998,8 @@ pub mod api {
                     pub enum KeyRefreshAborted {
                         #[codec(index = 0)]
                         InvalidDecommitment {
-                            round1: runtime_types::tangle_primitives::misbehavior::dfns_cggmp21::SignedRoundMessage,
-                            round2: runtime_types::tangle_primitives::misbehavior::dfns_cggmp21::SignedRoundMessage,
+                            round1: runtime_types::tangle_primitives::misbehavior::SignedRoundMessage,
+                            round2: runtime_types::tangle_primitives::misbehavior::SignedRoundMessage,
                         },
                         #[codec(index = 1)]
                         InvalidSchnorrProof,
@@ -47788,15 +48007,15 @@ pub mod api {
                         InvalidModProof {
                             reason: runtime_types::tangle_primitives::misbehavior::dfns_cggmp21::InvalidProofReason,
                             round2: ::std::vec::Vec<
-                                runtime_types::tangle_primitives::misbehavior::dfns_cggmp21::SignedRoundMessage,
+                                runtime_types::tangle_primitives::misbehavior::SignedRoundMessage,
                             >,
-                            round3: runtime_types::tangle_primitives::misbehavior::dfns_cggmp21::SignedRoundMessage,
+                            round3: runtime_types::tangle_primitives::misbehavior::SignedRoundMessage,
                         },
                         #[codec(index = 3)]
                         InvalidFacProof,
                         #[codec(index = 4)]
                         InvalidRingPedersenParameters {
-                            round2: runtime_types::tangle_primitives::misbehavior::dfns_cggmp21::SignedRoundMessage,
+                            round2: runtime_types::tangle_primitives::misbehavior::SignedRoundMessage,
                         },
                         #[codec(index = 5)]
                         InvalidX,
@@ -47827,47 +48046,25 @@ pub mod api {
                     pub enum KeygenAborted {
                         #[codec(index = 0)]
                         InvalidDecommitment {
-                            round1: runtime_types::tangle_primitives::misbehavior::dfns_cggmp21::SignedRoundMessage,
-                            round2a: runtime_types::tangle_primitives::misbehavior::dfns_cggmp21::SignedRoundMessage,
+                            round1: runtime_types::tangle_primitives::misbehavior::SignedRoundMessage,
+                            round2a: runtime_types::tangle_primitives::misbehavior::SignedRoundMessage,
                         },
                         #[codec(index = 1)]
                         InvalidSchnorrProof {
                             round2a: ::std::vec::Vec<
-                                runtime_types::tangle_primitives::misbehavior::dfns_cggmp21::SignedRoundMessage,
+                                runtime_types::tangle_primitives::misbehavior::SignedRoundMessage,
                             >,
-                            round3: runtime_types::tangle_primitives::misbehavior::dfns_cggmp21::SignedRoundMessage,
+                            round3: runtime_types::tangle_primitives::misbehavior::SignedRoundMessage,
                         },
                         #[codec(index = 2)]
                         FeldmanVerificationFailed {
-                            round2a: runtime_types::tangle_primitives::misbehavior::dfns_cggmp21::SignedRoundMessage,
-                            round2b: runtime_types::tangle_primitives::misbehavior::dfns_cggmp21::SignedRoundMessage,
+                            round2a: runtime_types::tangle_primitives::misbehavior::SignedRoundMessage,
+                            round2b: runtime_types::tangle_primitives::misbehavior::SignedRoundMessage,
                         },
                         #[codec(index = 3)]
                         InvalidDataSize {
-                            round2a: runtime_types::tangle_primitives::misbehavior::dfns_cggmp21::SignedRoundMessage,
+                            round2a: runtime_types::tangle_primitives::misbehavior::SignedRoundMessage,
                         },
-                    }
-                    #[derive(
-                        ::subxt::ext::codec::Decode,
-                        ::subxt::ext::codec::Encode,
-                        ::subxt::ext::scale_decode::DecodeAsType,
-                        ::subxt::ext::scale_encode::EncodeAsType,
-                        Clone,
-                        Debug,
-                        Eq,
-                        PartialEq,
-                    )]
-                    #[codec(crate = ::subxt::ext::codec)]
-                    #[decode_as_type(
-                        crate_path = ":: subxt :: ext :: scale_decode"
-                    )]
-                    #[encode_as_type(
-                        crate_path = ":: subxt :: ext :: scale_encode"
-                    )]
-                    pub struct SignedRoundMessage {
-                        pub sender: ::core::primitive::u16,
-                        pub message: ::std::vec::Vec<::core::primitive::u8>,
-                        pub signature: ::std::vec::Vec<::core::primitive::u8>,
                     }
                     #[derive(
                         ::subxt::ext::codec::Decode,
@@ -47897,6 +48094,100 @@ pub mod api {
                         MismatchedDelta,
                     }
                 }
+                pub mod zcash_frost {
+                    use super::runtime_types;
+                    #[derive(
+                        ::subxt::ext::codec::Decode,
+                        ::subxt::ext::codec::Encode,
+                        ::subxt::ext::scale_decode::DecodeAsType,
+                        ::subxt::ext::scale_encode::EncodeAsType,
+                        Clone,
+                        Debug,
+                        Eq,
+                        PartialEq,
+                    )]
+                    #[codec(crate = ::subxt::ext::codec)]
+                    #[decode_as_type(
+                        crate_path = ":: subxt :: ext :: scale_decode"
+                    )]
+                    #[encode_as_type(
+                        crate_path = ":: subxt :: ext :: scale_encode"
+                    )]
+                    pub enum KeygenAborted {
+                        #[codec(index = 0)]
+                        InvalidProofOfKnowledge {
+                            round1: runtime_types::tangle_primitives::misbehavior::SignedRoundMessage,
+                        },
+                        #[codec(index = 1)]
+                        InvalidSecretShare {
+                            round1: runtime_types::tangle_primitives::misbehavior::SignedRoundMessage,
+                            round2: runtime_types::tangle_primitives::misbehavior::SignedRoundMessage,
+                        },
+                    }
+                    #[derive(
+                        ::subxt::ext::codec::Decode,
+                        ::subxt::ext::codec::Encode,
+                        ::subxt::ext::scale_decode::DecodeAsType,
+                        ::subxt::ext::scale_encode::EncodeAsType,
+                        Clone,
+                        Debug,
+                        Eq,
+                        PartialEq,
+                    )]
+                    #[codec(crate = ::subxt::ext::codec)]
+                    #[decode_as_type(
+                        crate_path = ":: subxt :: ext :: scale_decode"
+                    )]
+                    #[encode_as_type(
+                        crate_path = ":: subxt :: ext :: scale_encode"
+                    )]
+                    pub enum SigningAborted {
+                        #[codec(index = 0)]
+                        InvalidSignatureShare {
+                            round1: ::std::vec::Vec<
+                                runtime_types::tangle_primitives::misbehavior::SignedRoundMessage,
+                            >,
+                            round2: ::std::vec::Vec<
+                                runtime_types::tangle_primitives::misbehavior::SignedRoundMessage,
+                            >,
+                        },
+                    }
+                    #[derive(
+                        ::subxt::ext::codec::Decode,
+                        ::subxt::ext::codec::Encode,
+                        ::subxt::ext::scale_decode::DecodeAsType,
+                        ::subxt::ext::scale_encode::EncodeAsType,
+                        Clone,
+                        Debug,
+                        Eq,
+                        PartialEq,
+                    )]
+                    #[codec(crate = ::subxt::ext::codec)]
+                    #[decode_as_type(
+                        crate_path = ":: subxt :: ext :: scale_decode"
+                    )]
+                    #[encode_as_type(
+                        crate_path = ":: subxt :: ext :: scale_encode"
+                    )]
+                    pub enum ZCashFrostJustification {
+                        #[codec(index = 0)]
+                        Keygen {
+                            participants: ::std::vec::Vec<
+                                [::core::primitive::u8; 33usize],
+                            >,
+                            t: ::core::primitive::u16,
+                            reason: runtime_types::tangle_primitives::misbehavior::zcash_frost::KeygenAborted,
+                        },
+                        #[codec(index = 1)]
+                        Signing {
+                            participants: ::std::vec::Vec<
+                                [::core::primitive::u8; 33usize],
+                            >,
+                            t: ::core::primitive::u16,
+                            reason: runtime_types::tangle_primitives::misbehavior::zcash_frost::SigningAborted,
+                        },
+                    }
+                }
                 #[derive(
                     ::subxt::ext::codec::Decode,
                     ::subxt::ext::codec::Encode,
@@ -47918,6 +48209,10 @@ pub mod api {
                     #[codec(index = 0)]
                     DfnsCGGMP21(
                         runtime_types::tangle_primitives::misbehavior::dfns_cggmp21::DfnsCGGMP21Justification,
+                    ),
+                    #[codec(index = 1)]
+                    ZCashFrost(
+                        runtime_types::tangle_primitives::misbehavior::zcash_frost::ZCashFrostJustification,
                     ),
                 }
                 #[derive(
@@ -47969,6 +48264,28 @@ pub mod api {
                     pub offender: [::core::primitive::u8; 33usize],
                     pub job_id: ::core::primitive::u64,
                     pub justification: runtime_types::tangle_primitives::misbehavior::MisbehaviorJustification,
+                }
+                #[derive(
+                    ::subxt::ext::codec::Decode,
+                    ::subxt::ext::codec::Encode,
+                    ::subxt::ext::scale_decode::DecodeAsType,
+                    ::subxt::ext::scale_encode::EncodeAsType,
+                    Clone,
+                    Debug,
+                    Eq,
+                    PartialEq,
+                )]
+                #[codec(crate = ::subxt::ext::codec)]
+                #[decode_as_type(
+                    crate_path = ":: subxt :: ext :: scale_decode"
+                )]
+                #[encode_as_type(
+                    crate_path = ":: subxt :: ext :: scale_encode"
+                )]
+                pub struct SignedRoundMessage {
+                    pub sender: ::core::primitive::u16,
+                    pub message: ::std::vec::Vec<::core::primitive::u8>,
+                    pub signature: ::std::vec::Vec<::core::primitive::u8>,
                 }
                 #[derive(
                     ::subxt::ext::codec::Decode,
@@ -48120,90 +48437,6 @@ pub mod api {
                     pub role: runtime_types::tangle_crypto_primitives::crypto::Public,
                 }
             }
-            #[derive(
-                ::subxt::ext::codec::Decode,
-                ::subxt::ext::codec::Encode,
-                ::subxt::ext::scale_decode::DecodeAsType,
-                ::subxt::ext::scale_encode::EncodeAsType,
-                Clone,
-                Debug,
-                Eq,
-                PartialEq,
-            )]
-            #[codec(crate = ::subxt::ext::codec)]
-            #[decode_as_type(crate_path = ":: subxt :: ext :: scale_decode")]
-            #[encode_as_type(crate_path = ":: subxt :: ext :: scale_encode")]
-            pub struct MaxDataLen;
-            #[derive(
-                ::subxt::ext::codec::Decode,
-                ::subxt::ext::codec::Encode,
-                ::subxt::ext::scale_decode::DecodeAsType,
-                ::subxt::ext::scale_encode::EncodeAsType,
-                Clone,
-                Debug,
-                Eq,
-                PartialEq,
-            )]
-            #[codec(crate = ::subxt::ext::codec)]
-            #[decode_as_type(crate_path = ":: subxt :: ext :: scale_decode")]
-            #[encode_as_type(crate_path = ":: subxt :: ext :: scale_encode")]
-            pub struct MaxKeyLen;
-            #[derive(
-                ::subxt::ext::codec::Decode,
-                ::subxt::ext::codec::Encode,
-                ::subxt::ext::scale_decode::DecodeAsType,
-                ::subxt::ext::scale_encode::EncodeAsType,
-                Clone,
-                Debug,
-                Eq,
-                PartialEq,
-            )]
-            #[codec(crate = ::subxt::ext::codec)]
-            #[decode_as_type(crate_path = ":: subxt :: ext :: scale_decode")]
-            #[encode_as_type(crate_path = ":: subxt :: ext :: scale_encode")]
-            pub struct MaxParticipants;
-            #[derive(
-                ::subxt::ext::codec::Decode,
-                ::subxt::ext::codec::Encode,
-                ::subxt::ext::scale_decode::DecodeAsType,
-                ::subxt::ext::scale_encode::EncodeAsType,
-                Clone,
-                Debug,
-                Eq,
-                PartialEq,
-            )]
-            #[codec(crate = ::subxt::ext::codec)]
-            #[decode_as_type(crate_path = ":: subxt :: ext :: scale_decode")]
-            #[encode_as_type(crate_path = ":: subxt :: ext :: scale_encode")]
-            pub struct MaxProofLen;
-            #[derive(
-                ::subxt::ext::codec::Decode,
-                ::subxt::ext::codec::Encode,
-                ::subxt::ext::scale_decode::DecodeAsType,
-                ::subxt::ext::scale_encode::EncodeAsType,
-                Clone,
-                Debug,
-                Eq,
-                PartialEq,
-            )]
-            #[codec(crate = ::subxt::ext::codec)]
-            #[decode_as_type(crate_path = ":: subxt :: ext :: scale_decode")]
-            #[encode_as_type(crate_path = ":: subxt :: ext :: scale_encode")]
-            pub struct MaxSignatureLen;
-            #[derive(
-                ::subxt::ext::codec::Decode,
-                ::subxt::ext::codec::Encode,
-                ::subxt::ext::scale_decode::DecodeAsType,
-                ::subxt::ext::scale_encode::EncodeAsType,
-                Clone,
-                Debug,
-                Eq,
-                PartialEq,
-            )]
-            #[codec(crate = ::subxt::ext::codec)]
-            #[decode_as_type(crate_path = ":: subxt :: ext :: scale_decode")]
-            #[encode_as_type(crate_path = ":: subxt :: ext :: scale_encode")]
-            pub struct MaxSubmissionLen;
             #[derive(
                 ::subxt::ext::codec::Decode,
                 ::subxt::ext::codec::Encode,
