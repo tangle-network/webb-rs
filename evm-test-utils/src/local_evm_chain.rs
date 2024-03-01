@@ -21,7 +21,7 @@ use webb::evm::contract::protocol_solidity::{
     treasury::TreasuryContract, treasury_handler::TreasuryHandlerContract,
 };
 use webb::evm::ethers;
-use webb::evm::ethers::signers::{LocalWallet, Signer};
+use webb::evm::ethers::signers::Signer;
 use webb::evm::ethers::types::U256;
 use webb_proposals::TypedChainId;
 
