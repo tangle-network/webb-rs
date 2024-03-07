@@ -10,5 +10,3 @@
 
 #[cfg(feature = "evm-runtime")]
 pub mod evm;
-#[cfg(feature = "substrate-runtime")]
-pub mod substrate;

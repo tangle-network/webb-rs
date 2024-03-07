@@ -38,7 +38,7 @@ jobs:
       - name: Install Mold Linker
         uses: rui314/setup-mold@v1
       - name: Check Metadata generation
-        run: cargo build --features generate-substrate,generate-contracts
+        run: cargo build --features generate-contracts
       - name: Tests
         run: cargo test -p webb
       - name: Rustdoc build
@@ -50,11 +50,9 @@ jobs:
         os: [ubuntu-latest, macos-latest]
         features:
           - evm,std,scale
-          - substrate,std
           - evm
         test-features:
           - evm,std,scale
-          - substrate,std
     runs-on: ${{ matrix.os }}
     # Name should be the OS name only (e.g. Linux, macOS, Windows)
     # This is used to generate the badge
