@@ -1,2 +1,2 @@
 #![allow(clippy::all, clippy::exhaustive_enums)]
-pub mod signing_rules;
+pub mod votable_signing_rules;
