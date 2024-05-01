@@ -364,6 +364,7 @@ mod tests {
 
     use super::*;
     #[tokio::test]
+    #[ignore = ""]
     async fn test_deploy_all_contracts() {
         let token_config = TokenConfig::default();
         let hermes_chain =

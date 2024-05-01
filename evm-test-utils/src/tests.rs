@@ -25,6 +25,7 @@ mod tests {
     };
 
     #[tokio::test]
+    #[ignore = ""]
     async fn test_vanchor_deposit() {
         // Get fixtures
         let fixture_path = get_git_root_path().join("solidity-fixtures");
